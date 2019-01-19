@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE44C06F-4B5E-4F9F-9D34-B7EBBDCEE964}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FBXpert</RootNamespace>
+    <AssemblyName>FBXpert</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>IDE1006</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FBXpert.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BasicClassLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\BasicClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicFormClassLibrary, Version=2015.1.30.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\BasicFormClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DBBasicClassLibrary">
+      <HintPath>..\..\SELibraries\Lib\DBBasicClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtendedXmlSerializer, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtendedXmlSerializer.2.1.1\lib\net45\ExtendedXmlSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>..\..\SELibraries\lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="fastJSON, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FastJson\output\net40\fastJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport, Version=2018.1.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net Trial\Framework 4.0\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=2018.1.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net Trial\Framework 4.0\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="FBXDesigns">
+      <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=6.4.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.6.4.0\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FormularUtils">
+      <HintPath>..\..\SELibraries\Lib\FormularUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a" />
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageLibrary, Version=2016.9.19.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\MessageLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.TransactSql.ScriptDom.14.0.3811.1\lib\net40\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="NullableComboBox, Version=2016.6.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\NullableComboBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SECaptionEditBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\SECaptionEditBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SEHotSpot, Version=2015.11.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\SEHotSpot.dll</HintPath>
+    </Reference>
+    <Reference Include="SELibraries, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\SELibraries.dll</HintPath>
+    </Reference>
+    <Reference Include="SEListBox, Version=2017.11.6.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\SEListBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SpezialfilterBox">
+      <HintPath>..\..\SELibraries\Lib\SpezialfilterBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Interactive, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.3.1.1\lib\net45\System.Interactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XMLEditSimpleForm, Version=2016.11.25.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibraries\Lib\XMLEditSimpleForm.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataClasses\ChecksClass.cs" />
+    <Compile Include="DataClasses\ContextMenusClass.cs" />
+    <Compile Include="DataClasses\DatabaseDesignClass.cs" />
+    <Compile Include="DataClasses\DBDataTypes.cs" />
+    <Compile Include="DataClasses\DependencyClass.cs" />
+    <Compile Include="DataClasses\ExportClass.cs" />
+    <Compile Include="DataClasses\NotNullsClass.cs" />
+    <Compile Include="DataClasses\PrimayrKeyClass.cs" />
+    <Compile Include="DataClasses\SQLPatterns.cs" />
+    <Compile Include="DataClasses\UniquesClass.cs" />
+    <Compile Include="DesignDatabase\DesignerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignDatabase\DesignerForm.Designer.cs">
+      <DependentUpon>DesignerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesignDatabase\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignDatabase\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesignReport\ReportDesignClass.cs" />
+    <Compile Include="DatabaseCompare\DatabaseCompareForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatabaseCompare\DatabaseCompareForm.Designer.cs">
+      <DependentUpon>DatabaseCompareForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesignSourceCode\XMLDesignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignSourceCode\XMLDesignForm.Designer.cs">
+      <DependentUpon>XMLDesignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
+    <Compile Include="Globals\DomainSQLStatementsClass.cs" />
+    <Compile Include="Globals\ErrorCodes.cs" />
+    <Compile Include="Globals\IndexSQLStatementsClass.cs" />
+    <Compile Include="Globals\SQLStatementsBase.cs" />
+    <Compile Include="Globals\WorkerClass.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SonstForms\BinariesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\BinariesForm.designer.cs">
+      <DependentUpon>BinariesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\CopyrightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\CopyrightForm.Designer.cs">
+      <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\ConstraintsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\ConstraintsForm.Designer.cs">
+      <DependentUpon>ConstraintsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\CreateNewTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\CreateNewTableForm.Designer.cs">
+      <DependentUpon>CreateNewTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\EventsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\EventsForm.Designer.cs">
+      <DependentUpon>EventsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\FieldForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\FieldForm.Designer.cs">
+      <DependentUpon>FieldForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\FunctionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\FunctionForm.Designer.cs">
+      <DependentUpon>FunctionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\IndexForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\IndexForm.Designer.cs">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\NotNullForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\NotNullForm.Designer.cs">
+      <DependentUpon>NotNullForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\ReplicationDesignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\ReplicationDesignForm.Designer.cs">
+      <DependentUpon>ReplicationDesignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\TriggerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\TriggerForm.Designer.cs">
+      <DependentUpon>TriggerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\UserDefinedFunctionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\UserDefinedFunctionForm.Designer.cs">
+      <DependentUpon>UserDefinedFunctionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValuesEditForms\BlobEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValuesEditForms\BlobEditForm.Designer.cs">
+      <DependentUpon>BlobEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XMLTree\XMLTreeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XMLTree\XMLTreeForm.designer.cs">
+      <DependentUpon>XMLTreeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\Constants.cs" />
+    <Compile Include="Globals\StaticFunctionsClass.cs" />
+    <Compile Include="Languages\Language.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.de.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Languages\Language.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.en.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Languages\Language.pt.Designer.cs">
+      <DependentUpon>Language.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Languages\Language.ja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.ja.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="MiscClasses\AutocompleteClass.cs" />
+    <Compile Include="ProgressClockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressClockForm.Designer.cs">
+      <DependentUpon>ProgressClockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\AppSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\AppSettingsForm.Designer.cs">
+      <DependentUpon>AppSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\BackupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\BackupForm.Designer.cs">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\DatabaseStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\DatabaseStatisticsForm.Designer.cs">
+      <DependentUpon>DatabaseStatisticsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\HelpInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\HelpInfoForm.Designer.cs">
+      <DependentUpon>HelpInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\SaveFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\SaveFileForm.Designer.cs">
+      <DependentUpon>SaveFileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\UUIDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\UUIDForm.Designer.cs">
+      <DependentUpon>UUIDForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\FBXInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\FBXInfo.Designer.cs">
+      <DependentUpon>FBXInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses\CreateDLLClass.cs" />
+    <Compile Include="SonstForms\DatabaseConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\DatabaseConfigForm.Designer.cs">
+      <DependentUpon>DatabaseConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses\CommandClass.cs" />
+    <Compile Include="DataClasses\ConstraintsClass.cs" />
+    <Compile Include="DataClasses\DatabaseinfoClass.cs" />
+    <Compile Include="DataClasses\EncodingClass.cs" />
+    <Compile Include="DataClasses\ForgeignKeyClass.cs" />
+    <Compile Include="DataClasses\SQLStatements.cs" />
+    <Compile Include="DataClasses\TypesClass.cs" />
+    <Compile Include="SonstForms\EXPORTDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\EXPORTDataForm.Designer.cs">
+      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\AppSettingsClass.cs" />
+    <Compile Include="DataClasses\DataClassFactory.cs" />
+    <Compile Include="DataClasses\DataObjectClass.cs" />
+    <Compile Include="DataClasses\DefaultClass.cs" />
+    <Compile Include="DataClasses\DevelopmentClass.cs" />
+    <Compile Include="DataClasses\DomainClass.cs" />
+    <Compile Include="DataClasses\EnumClass.cs" />
+    <Compile Include="DataClasses\FunctionsClass.cs" />
+    <Compile Include="DataClasses\GeneratorClass.cs" />
+    <Compile Include="DataClasses\IndexClass.cs" />
+    <Compile Include="DataClasses\ProcedureClass.cs" />
+    <Compile Include="DataClasses\RoleClass.cs" />
+    <Compile Include="SQLView\SQLScriptingClass.cs" />
+    <Compile Include="DataClasses\TriggerClass.cs" />
+    <Compile Include="DataClasses\TypeClass.cs" />
+    <Compile Include="TableItemForms\ForeignKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\ForeignKeyForm.Designer.cs">
+      <DependentUpon>ForeignKeyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\PrimaryKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\PrimaryKeyForm.Designer.cs">
+      <DependentUpon>PrimaryKeyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\ProcedureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\ProcedureForm.Designer.cs">
+      <DependentUpon>ProcedureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValuesEditForms\DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValuesEditForms\DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBExplorer.Designer.cs">
+      <DependentUpon>DBExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\DBMonitoringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\DBMonitoringForm.Designer.cs">
+      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globals\DBHandlingClass.cs" />
+    <Compile Include="Globals\DBRegistrationClass.cs" />
+    <Compile Include="DesignReport\ReportDesignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignReport\ReportDesignForm.Designer.cs">
+      <DependentUpon>ReportDesignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLView\ScriptingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLView\ScriptingForm.Designer.cs">
+      <DependentUpon>ScriptingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\DomainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\DomainForm.Designer.cs">
+      <DependentUpon>DomainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FBXpertMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FBXpertMainForm.Designer.cs">
+      <DependentUpon>FBXpertMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\GeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\GeneratorForm.Designer.cs">
+      <DependentUpon>GeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesEditForms\SelectDefaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValuesEditForms\SelectDefaultForm.Designer.cs">
+      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLView\SQLViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLView\SQLViewForm.designer.cs">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLView\SQLViewLastRunClass.cs" />
+    <Compile Include="Globals\DatabaseDefinitions.cs" />
+    <Compile Include="Globals\StaticPaintClass.cs" />
+    <Compile Include="Globals\StaticTreeClass.cs" />
+    <Compile Include="Globals\StaticVariablesClass.cs" />
+    <Compile Include="DataClasses\TableClass.cs" />
+    <Compile Include="DataClasses\TableFieldClass.cs" />
+    <Compile Include="TableItemForms\TableFieldForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\TableFieldForm.Designer.cs">
+      <DependentUpon>TableFieldForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses\ViewClass.cs" />
+    <Compile Include="TableItemForms\TABLEManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\TABLEManageForm.Designer.cs">
+      <DependentUpon>TABLEManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableItemForms\VIEWManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\VIEWManageForm.Designer.cs">
+      <DependentUpon>VIEWManageForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DesignDatabase\DesignerForm.resx">
+      <DependentUpon>DesignerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesignDatabase\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseCompare\DatabaseCompareForm.resx">
+      <DependentUpon>DatabaseCompareForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesignSourceCode\XMLDesignForm.resx">
+      <DependentUpon>XMLDesignForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\BinariesForm.resx">
+      <DependentUpon>BinariesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\CopyrightForm.resx">
+      <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\ConstraintsForm.resx">
+      <DependentUpon>ConstraintsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\CreateNewTableForm.resx">
+      <DependentUpon>CreateNewTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\FieldForm.resx">
+      <DependentUpon>FieldForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\FunctionForm.resx">
+      <DependentUpon>FunctionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\IndexForm.resx">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\NotNullForm.resx">
+      <DependentUpon>NotNullForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\ReplicationDesignForm.resx">
+      <DependentUpon>ReplicationDesignForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\UserDefinedFunctionForm.resx">
+      <DependentUpon>UserDefinedFunctionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValuesEditForms\BlobEditForm.resx">
+      <DependentUpon>BlobEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XMLTree\XMLTreeForm.resx">
+      <DependentUpon>XMLTreeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Language.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Language.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.en.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Language.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.pt.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Language.ja.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.ja.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressClockForm.resx">
+      <DependentUpon>ProgressClockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\AppSettingsForm.resx">
+      <DependentUpon>AppSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\BackupForm.resx">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\DatabaseStatisticsForm.resx">
+      <DependentUpon>DatabaseStatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\HelpInfoForm.resx">
+      <DependentUpon>HelpInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\SaveFileForm.resx">
+      <DependentUpon>SaveFileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\UUIDForm.resx">
+      <DependentUpon>UUIDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\FBXInfo.resx">
+      <DependentUpon>FBXInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\DatabaseConfigForm.resx">
+      <DependentUpon>DatabaseConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\ForeignKeyForm.resx">
+      <DependentUpon>ForeignKeyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\PrimaryKeyForm.resx">
+      <DependentUpon>PrimaryKeyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\ProcedureForm.resx">
+      <DependentUpon>ProcedureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValuesEditForms\DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBExplorer.resx">
+      <DependentUpon>DBExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\DBMonitoringForm.resx">
+      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\EXPORTDataForm.resx">
+      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesignReport\ReportDesignForm.resx">
+      <DependentUpon>ReportDesignForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLView\ScriptingForm.resx">
+      <DependentUpon>ScriptingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\DomainForm.resx">
+      <DependentUpon>DomainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FBXpertMainForm.resx">
+      <DependentUpon>FBXpertMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\GeneratorForm.resx">
+      <DependentUpon>GeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ValuesEditForms\SelectDefaultForm.resx">
+      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLView\SQLViewForm.resx">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\TableFieldForm.resx">
+      <DependentUpon>TableFieldForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\TABLEManageForm.resx">
+      <DependentUpon>TABLEManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\VIEWManageForm.resx">
+      <DependentUpon>VIEWManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh_2_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh_2_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_gn_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_plus_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_closed_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_open_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\on_gn_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_gr_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_gn_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_gn32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_gn22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn32x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_add_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_information_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_information_lightning_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_gn24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_blue24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_text_direction_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_text_direction_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seewp_ge22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seewp_bl24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more_2_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_less32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system_search_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_arrow_r_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_erase_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-down-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media_playlist_repeat_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media_playlist_repeat_light_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\josejorge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fbxpert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fbxpert.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FBXpert.ico" />
+    <None Include="Resources\console2_x32.png" />
+    <None Include="Resources\console_x32.png" />
+    <None Include="Resources\console_x24.png" />
+    <None Include="Resources\camera_photo_flash_32.png" />
+    <None Include="Resources\camera_photo_32.png" />
+    <None Include="Resources\Table_select_x32.png" />
+    <None Include="Resources\Table_x32.png" />
+    <None Include="Resources\NULL_blue_x24.png" />
+    <None Include="Resources\documents_blue_x321.png" />
+    <None Include="Resources\bin_x24.png" />
+    <None Include="Resources\PDF_blue_32x.png" />
+    <None Include="Resources\PDF_32x.png" />
+    <None Include="images\FBXpertBackground.png" />
+    <None Include="Resources\database_replication_x24.png" />
+    <None Include="Resources\font_x242.png" />
+    <None Include="Resources\view_blue_x32.png" />
+    <None Include="Resources\floppy2_x24.png" />
+    <None Include="Resources\floppy_x24.png" />
+    <None Include="Resources\data_import_gn_x24.png" />
+    <None Include="Resources\data_import_blue_x24.png" />
+    <None Include="Resources\edit_plus_x24.png" />
+    <None Include="Resources\edit_plus_gray_x24.png" />
+    <None Include="Resources\printer_32x.png" />
+    <None Include="Resources\printer_2_32x.png" />
+    <None Include="Resources\documents_blue_x32.png" />
+    <None Include="Resources\documents_32x.png" />
+    <None Include="Resources\edit_XML_blue_x32.png" />
+    <None Include="Resources\edit_XML_blue_x24.png" />
+    <None Include="Resources\edit_select_all_x32.png" />
+    <None Include="Resources\edit_select_all_blue_x32.png" />
+    <None Include="Resources\document_x24.png" />
+    <None Include="Resources\document_blue_x24.png" />
+    <None Include="Resources\help_browser_22x.png" />
+    <None Include="Resources\help_browser_blue_22x.png" />
+    <None Include="Resources\help_browser_blue_32x.png" />
+    <None Include="Resources\help_browser_32x.png" />
+    <None Include="Resources\go_previous32x.png" />
+    <None Include="Resources\go_previous22x.png" />
+    <None Include="Resources\go_left_blue32x.png" />
+    <None Include="Resources\go_left_blue22x.png" />
+    <None Include="Resources\format_indent_more22x.png" />
+    <None Include="Resources\format_indent_more_2_22x.png" />
+    <None Include="Resources\go_up_gn22x1.png" />
+    <None Include="Resources\go_up_blue22x1.png" />
+    <None Include="Resources\go_down22x.png" />
+    <None Include="Resources\go_down_blue_22x.png" />
+    <None Include="Resources\lupe24x.png" />
+    <None Include="Resources\lupe2_24x.png" />
+    <None Include="Resources\jp.png" />
+    <None Include="Resources\gb.png" />
+    <None Include="Resources\de.png" />
+    <None Include="Resources\applications_system_blue_32x2.png" />
+    <None Include="Resources\applications_system2.png" />
+    <None Include="Resources\windows_lightblue_x22.png" />
+    <None Include="Resources\info_22x1.png" />
+    <None Include="Resources\preferences_system_x24.png" />
+    <None Include="Resources\go_up_gn22x.png" />
+    <None Include="Resources\go_up_blue22x.png" />
+    <None Include="Resources\data_export_gn_x241.png" />
+    <None Include="Resources\graph_24x.png" />
+    <None Include="Resources\applications-execute-script_22x2.png" />
+    <None Include="Resources\SQL_blue_x241.png" />
+    <None Include="Resources\SQL_x32.png" />
+    <None Include="Resources\SQL_blue_x321.png" />
+    <None Include="Resources\SQL_blue_x32.png" />
+    <None Include="Resources\applications_system_blue_32x1.png" />
+    <None Include="Resources\applications_system1.png" />
+    <None Include="Resources\N1_blue_x24.png" />
+    <None Include="Resources\N0_blue_x24.png" />
+    <None Include="Resources\appointment_new_24.png" />
+    <None Include="Resources\font_x241.png" />
+    <None Include="Resources\calendar01_22x.png" />
+    <None Include="Resources\font2_x241.png" />
+    <None Include="Resources\font2_x24.png" />
+    <None Include="Resources\font_x24.png" />
+    <None Include="Resources\applications-execute-script_22x1.png" />
+    <None Include="Resources\applications_system_blue_x22.png" />
+    <None Include="Resources\minus_gn32x.png" />
+    <None Include="Resources\minus_blau32x.png" />
+    <None Include="Resources\format_indent_more24x.png" />
+    <None Include="Resources\format_indent_more_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.de.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.en.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.ja.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.pt.resx</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

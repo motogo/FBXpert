@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="rtfCommands.Text" xml:space="preserve">
+    <value>usage:    isql [options] [&lt;database&gt;]
+        -a(ll)                  extract metadata incl. legacy non-SQL tables
+        -b(ail)                 bail on errors (set bail on)
+        -c(ache) &lt;num&gt;          number of cache buffers
+        -ch(arset) &lt;charset&gt;    connection charset (set names)
+        -d(atabase) &lt;database&gt;  database name to put in script creation
+        -f(etch_password)       fetch password from file
+        -e(cho)                 echo commands (set echo on)
+        -ex(tract)              extract metadata
+        -i(nput) &lt;file&gt;         input file (set input)
+        -m(erge)                merge standard error
+        -m2                     merge diagnostic
+        -n(oautocommit)         no autocommit DDL (set autoddl off)
+        -nod(btriggers)         do not run database triggers
+        -now(arnings)           do not show warnings
+        -o(utput) &lt;file&gt;        output file (set output)
+        -pag(elength) &lt;size&gt;    page length
+        -p(assword) &lt;password&gt;  connection password
+        -q(uiet)                do not show the message "Use CONNECT..."
+        -r(ole) &lt;role&gt;          role name
+        -r2 &lt;role&gt;              role (uses quoted identifier)
+        -s(qldialect) &lt;dialect&gt; SQL dialect (set sql dialect)
+        -t(erminator) &lt;term&gt;    command terminator (set term)
+        -u(ser) &lt;user&gt;          user name
+        -x                      extract metadata
+        -z                      show program and server version</value>
+  </data>
+  <data name="rtbGFIXArguments.Text" xml:space="preserve">
+    <value>-activate       activate shadow file for database usage
+-attach         shutdown new database attachments
+-buffers        set page buffers &lt;n&gt;
+-commit         commit transaction &lt;tr / all&gt;
+-cache          shutdown cache manager
+-full           validate record fragments (-v)
+-force          force database shutdown
+-fetch_password fetch_password from file
+-housekeeping   set sweep interval &lt;n&gt;
+-ignore         ignore checksum errors
+-kill           kill all unavailable shadow files
+-list           show limbo transactions
+-mend           prepare corrupt database for backup
+-mode           read_only or read_write
+-no_update      read-only validation (-v)
+-online         database online &lt;single / multi / normal&gt;
+-prompt         prompt for commit/rollback (-l)
+-password       default password
+-rollback       rollback transaction &lt;tr / all&gt;
+-sql_dialect    set database dialect n
+-sweep          force garbage collection
+-shut           shutdown &lt;full / single / multi&gt;
+-two_phase      perform automated two-phase recovery
+-tran           shutdown transaction startup
+-use            use full or reserve space for versions
+ -user           default user name
+ -validate       validate database structure
+ -write          write synchronously or asynchronously
+ -z              print software version number</value>
+  </data>
+  <data name="fctGFIXOutput.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdGYXN0Q29sb3JlZFRleHRCb3gsIFZlcnNpb249Mi4xNi4yMS4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWZiOGFhMTJiOTk0ZWY2MWIMAwAAAFFTeXN0
+        ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
+        PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACJGYXN0Q29sb3JlZFRleHRCb3hOUy5TZXJ2aWNlQ29sb3JzBgAA
+        ACg8Q29sbGFwc2VNYXJrZXJGb3JlQ29sb3I+a19fQmFja2luZ0ZpZWxkKDxDb2xsYXBzZU1hcmtlckJh
+        Y2tDb2xvcj5rX19CYWNraW5nRmllbGQqPENvbGxhcHNlTWFya2VyQm9yZGVyQ29sb3I+a19fQmFja2lu
+        Z0ZpZWxkJjxFeHBhbmRNYXJrZXJGb3JlQ29sb3I+a19fQmFja2luZ0ZpZWxkJjxFeHBhbmRNYXJrZXJC
+        YWNrQ29sb3I+a19fQmFja2luZ0ZpZWxkKDxFeHBhbmRNYXJrZXJCb3JkZXJDb2xvcj5rX19CYWNraW5n
+        RmllbGQEBAQEBAQUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAFFN5c3RlbS5EcmF3aW5nLkNvbG9yAwAA
+        ABRTeXN0ZW0uRHJhd2luZy5Db2xvcgMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAFFN5c3RlbS5E
+        cmF3aW5nLkNvbG9yAwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgMAAAACAAAABfz///8UU3lzdGVtLkRy
+        YXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcDAAAACgAAAAAA
+        AAAAlgABAAH7/////P///woAAAAAAAAAAKQAAQAB+v////z///8KAAAAAAAAAACWAAEAAfn////8////
+        CgAAAAAAAAAAjQABAAH4/////P///woAAAAAAAAAAKQAAQAB9/////z///8KAAAAAAAAAACWAAEACw==
+</value>
+  </data>
+  <data name="rtbGSTATArgument.Text" xml:space="preserve">
+    <value>-a      analyze data and index pages
+-d      analyze data pages
+-h      analyze header page ONLY
+-i      analyze index leaf pages
+-s      analyze system relations in addition to user tables
+-u      username
+-p      password
+-fetch  fetch password from file
+-r      analyze average record and version length
+-t      tablename &lt;tablename2...&gt; (case sensitive)
+-z      display version number
+option -t accepts several table names only if used after &lt;database&gt;</value>
+  </data>
+  <data name="fctGSTATOutput.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdGYXN0Q29sb3JlZFRleHRCb3gsIFZlcnNpb249Mi4xNi4yMS4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWZiOGFhMTJiOTk0ZWY2MWIMAwAAAFFTeXN0
+        ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
+        PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACJGYXN0Q29sb3JlZFRleHRCb3hOUy5TZXJ2aWNlQ29sb3JzBgAA
+        ACg8Q29sbGFwc2VNYXJrZXJGb3JlQ29sb3I+a19fQmFja2luZ0ZpZWxkKDxDb2xsYXBzZU1hcmtlckJh
+        Y2tDb2xvcj5rX19CYWNraW5nRmllbGQqPENvbGxhcHNlTWFya2VyQm9yZGVyQ29sb3I+a19fQmFja2lu
+        Z0ZpZWxkJjxFeHBhbmRNYXJrZXJGb3JlQ29sb3I+a19fQmFja2luZ0ZpZWxkJjxFeHBhbmRNYXJrZXJC
+        YWNrQ29sb3I+a19fQmFja2luZ0ZpZWxkKDxFeHBhbmRNYXJrZXJCb3JkZXJDb2xvcj5rX19CYWNraW5n
+        RmllbGQEBAQEBAQUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAFFN5c3RlbS5EcmF3aW5nLkNvbG9yAwAA
+        ABRTeXN0ZW0uRHJhd2luZy5Db2xvcgMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAFFN5c3RlbS5E
+        cmF3aW5nLkNvbG9yAwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgMAAAACAAAABfz///8UU3lzdGVtLkRy
+        YXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJBwcDAAAACgAAAAAA
+        AAAAlgABAAH7/////P///woAAAAAAAAAAKQAAQAB+v////z///8KAAAAAAAAAACWAAEAAfn////8////
+        CgAAAAAAAAAAjQABAAH4/////P///woAAAAAAAAAAKQAAQAB9/////z///8KAAAAAAAAAACWAAEACw==
+</value>
+  </data>
+  <data name="rtbGBAKArguments.Text" xml:space="preserve">
+    <value>gbak:legal switches are:
+        -B(ACKUP_DATABASE)    backup database to file
+        -C(REATE_DATABASE)    create database from backup file (restore)
+        -R(ECREATE_DATABASE) [O(VERWRITE)] create (or replace if OVERWRITE used)
+                                database from backup file (restore)
+        -REP(LACE_DATABASE)   replace database from backup file (restore)
+
+gbak:backup options are:
+        -CO(NVERT)            backup external files as tables
+        -E(XPAND)             no data compression
+        -FA(CTOR)             blocking factor
+        -G(ARBAGE_COLLECT)    inhibit garbage collection
+        -IG(NORE)             ignore bad checksums
+        -L(IMBO)              ignore transactions in limbo
+        -NOD(BTRIGGERS)       do not run database triggers
+        -NT                   Non-Transportable backup file format
+        -OL(D_DESCRIPTIONS)   save old style metadata descriptions
+        -T(RANSPORTABLE)      transportable backup -- data in XDR format
+
+gbak:restore options are:
+        -BU(FFERS)            override page buffers default
+        -FIX_FSS_D(ATA)       fix malformed UNICODE_FSS data
+        -FIX_FSS_M(ETADATA)   fix malformed UNICODE_FSS metadata
+        -I(NACTIVE)           deactivate indexes during restore
+        -K(ILL)               restore without creating shadows
+        -MO(DE) &lt;access&gt;      "read_only" or "read_write" access
+        -N(O_VALIDITY)        do not restore database validity conditions
+        -O(NE_AT_A_TIME)      restore one table at a time
+        -P(AGE_SIZE)          override default page size
+        -USE_(ALL_SPACE)      do not reserve space for record versions
+
+gbak:general options are:
+        -FE(TCH_PASSWORD)     fetch password from file
+        -M(ETA_DATA)          backup or restore metadata only
+        -PAS(SWORD)           Firebird password
+        -RO(LE)               Firebird SQL role
+        -SE(RVICE)            use services manager
+        -USER                 Firebird user name
+        -V(ERIFY)             report each action taken
+        -Y  &lt;path&gt;            redirect/suppress status message output
+        -Z                    print version number</value>
+  </data>
+  <metadata name="ofdFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 17</value>
+  </metadata>
+</root>

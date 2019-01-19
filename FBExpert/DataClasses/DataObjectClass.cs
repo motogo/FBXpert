@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections;
+
+namespace FBExpert.DataClasses
+{
+    public class DataObjectClass : ICloneable, IEnumerable
+    {
+        private string _name;
+        public DataObjectClass()
+        {
+        
+        }
+        public DataObjectClass(string name)
+        {
+            Name = name;
+        }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                if(_name.Length <= 0)
+                {
+                    Console.WriteLine("");
+                }
+            }
+        }
+        public override string ToString()
+        {
+            return Name;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

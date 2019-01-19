@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>DatabaseError</value>
+  </data>
+  <data name="DatabaseExceptionCaption" xml:space="preserve">
+    <value>Datenbank Fehler</value>
+  </data>
+  <data name="DeleteDatabaseRegistration" xml:space="preserve">
+    <value>DeleteDatabaseRegistration</value>
+  </data>
+  <data name="DoYouWantDeleteDatabaseRegistration" xml:space="preserve">
+    <value>Möchten Sie wirklich die Datenbank Definition löschen</value>
+  </data>
+  <data name="ErrorWhileOpeningDatabase" xml:space="preserve">
+    <value>Fehler beim Öffnen der Datebank:{0}</value>
+  </data>
+  <data name="NOTIFICATIONS" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="SHOWWINDOWS" xml:space="preserve">
+    <value>Fenster</value>
+  </data>
+  <data name="test" xml:space="preserve">
+    <value>TestIt</value>
+  </data>
+  <data name="UTILITIES" xml:space="preserve">
+    <value>Werkzeuge</value>
+  </data>
+  <data name="DATABASES" xml:space="preserve">
+    <value>Datenbanken</value>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Nachrichten</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="CodeAttributesChanged" xml:space="preserve">
+    <value>Sourcecode Erzeugung, Attribute wurden geändert.{0}Möchten Sie den Code neu erzeugen.</value>
+  </data>
+  <data name="CodeAttributesChangedCaption" xml:space="preserve">
+    <value>Sourcecode Attribute geändert</value>
+  </data>
+  <data name="CANCEL_READING" xml:space="preserve">
+    <value>Lesen abbrechen</value>
+  </data>
+  <data name="DATA" xml:space="preserve">
+    <value>Daten</value>
+  </data>
+  <data name="DEPENDENCIES_FROM" xml:space="preserve">
+    <value>Abhängigkeiten von</value>
+  </data>
+  <data name="DEPENDENCIES_TO" xml:space="preserve">
+    <value>Abhängigkeiten nach</value>
+  </data>
+  <data name="EXPORT" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="EXPORT_DATA" xml:space="preserve">
+    <value>Daten exportieren</value>
+  </data>
+  <data name="EXPORT_TO_FILE" xml:space="preserve">
+    <value>Export in Datei</value>
+  </data>
+  <data name="EXPORT_TO_SCREEN" xml:space="preserve">
+    <value>Auf Bildschirm exportieren</value>
+  </data>
+  <data name="FIELDS" xml:space="preserve">
+    <value>Felder</value>
+  </data>
+  <data name="FILE" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="MAX_ROWS" xml:space="preserve">
+    <value>Max. Zeilen</value>
+  </data>
+  <data name="MESSAGES" xml:space="preserve">
+    <value>Meldungen</value>
+  </data>
+  <data name="REFRESH" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="ADD_FIELD" xml:space="preserve">
+    <value>Feld hinzufügen</value>
+  </data>
+  <data name="ADD_INDEX" xml:space="preserve">
+    <value>Index hinzufügen</value>
+  </data>
+  <data name="DROP_FIELD" xml:space="preserve">
+    <value>Feld entfernen</value>
+  </data>
+  <data name="DROP_INDEX" xml:space="preserve">
+    <value>Index entfernen</value>
+  </data>
+  <data name="EDIT_FIELD" xml:space="preserve">
+    <value>Feld bearbeiten</value>
+  </data>
+  <data name="EDIT_INDEX" xml:space="preserve">
+    <value>Index bearbeiten</value>
+  </data>
+  <data name="EXECUTE_SQL" xml:space="preserve">
+    <value>SQL ausführen</value>
+  </data>
+  <data name="INSERT" xml:space="preserve">
+    <value>INSERT</value>
+  </data>
+  <data name="INSERT_UPDATE" xml:space="preserve">
+    <value>INSERT/UPDATE</value>
+  </data>
+  <data name="INSERT_UPDATE_TYPE" xml:space="preserve">
+    <value>Art Insert/Update</value>
+  </data>
+  <data name="LOAD_SQL" xml:space="preserve">
+    <value>SQL Text laden</value>
+  </data>
+  <data name="SAVE_SQL" xml:space="preserve">
+    <value>SQL Text speichern</value>
+  </data>
+  <data name="UPDATE" xml:space="preserve">
+    <value>UPDATE</value>
+  </data>
+  <data name="ERRORS" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="ExceptionCaption" xml:space="preserve">
+    <value>Programmfehler</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Source:{0}{2},Message:{1}</value>
+  </data>
+  <data name="FileExistsCaption" xml:space="preserve">
+    <value>Datei extstiert bereits</value>
+  </data>
+  <data name="ReportDataFilesExists" xml:space="preserve">
+    <value>Einer oder beide Datendateien zur Erzeugung des Report existieren bereits.{2}Datendatei:{0}{2}Schemadatei:{1}{2}Möchten SIe diese bei Aufruf des Reports überschreiben ?</value>
+  </data>
+  <data name="FileNotExistsCaption" xml:space="preserve">
+    <value>Datei existiert nicht</value>
+  </data>
+  <data name="ReportDataFilesNotExists" xml:space="preserve">
+    <value>Einer oder beide Datendateien zur Erzeugung des Report existiert nicht.{2}Datendatei:{0}{2}Schemadatei:{1}{2}Report kann nicht zu editieren aufgerufen werden ?</value>
+  </data>
+  <data name="ReportFileNotExists" xml:space="preserve">
+    <value>Die Reportdate {0} existiert nicht.{1}Der Report kann nicht zum Bearbeiten galden werden.</value>
+  </data>
+  <data name="NoSqlDatasForReport" xml:space="preserve">
+    <value>Report kann ohne SQL Datenobjekte nicht erstelt werden</value>
+  </data>
+  <data name="NoSqlDatasForReportCaption" xml:space="preserve">
+    <value>Keine SQL Anweisungen</value>
+  </data>
+  <data name="DatabaseExistsCaption" xml:space="preserve">
+    <value>Datenbank existiert</value>
+  </data>
+  <data name="OverrideExistingDatabase" xml:space="preserve">
+    <value>Die Datenbank {0} existiert bereis.{1}Möchten Sie diese überschreiben ?</value>
+  </data>
+  <data name="CannotLoadDatabaseConfiguration" xml:space="preserve">
+    <value>Datenbank Konfigurationen konnten nicht geladen werden</value>
+  </data>
+  <data name="DatabaseConfigurationCaption" xml:space="preserve">
+    <value>Datenbank Konfiguration</value>
+  </data>
+  <data name="CLEAR_ENTRIES" xml:space="preserve">
+    <value>Inhalte löschen</value>
+  </data>
+  <data name="CreateSourcecode" xml:space="preserve">
+    <value>Sourcecode erzeugen</value>
+  </data>
+  <data name="FoundLines" xml:space="preserve">
+    <value>Gefundene Zeilen</value>
+  </data>
+  <data name="MESSAGES_INFO_ERROR" xml:space="preserve">
+    <value>Infos:{0} Fehler:{1}</value>
+  </data>
+  <data name="PROGRESS" xml:space="preserve">
+    <value>Fortschritt</value>
+  </data>
+  <data name="SEARCH" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="SourcecodePath" xml:space="preserve">
+    <value>Speicherort des Sourcecodes</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Aktion abbrechen</value>
+  </data>
+  <data name="ReportDataFilesExisits" xml:space="preserve">
+    <value>Report Datendatei existiert bereits, möchten Sie diese überschreiben</value>
+  </data>
+  <data name="StartDefinitionChange" xml:space="preserve">
+    <value>Möchten Sie die gespeicherte Definition {0}{1}als neue Startdefinition verwenden </value>
+  </data>
+  <data name="StartDefinitionChangeCaption" xml:space="preserve">
+    <value>Startdefinition anpassen</value>
+  </data>
+  <data name="CLOSE_APPLICATION" xml:space="preserve">
+    <value>Anwendung schliessen</value>
+  </data>
+  <data name="LoadDatabaseDefinitions" xml:space="preserve">
+    <value>Datenbankdefinitionen laden</value>
+  </data>
+  <data name="RefeshDatabases" xml:space="preserve">
+    <value>Datenbanken neu einlesen</value>
+  </data>
+  <data name="SaveDatabaseDefinitions" xml:space="preserve">
+    <value>Datenbankdefinitionen speichern</value>
+  </data>
+  <data name="CHOOSE_CLIENT_LIBRARY" xml:space="preserve">
+    <value>Wähle Client Bibliothek</value>
+  </data>
+  <data name="CLOSE_FORM" xml:space="preserve">
+    <value>Formular schliessen</value>
+  </data>
+  <data name="OBJECTS" xml:space="preserve">
+    <value>Objekte</value>
+  </data>
+  <data name="SELECT_DATABASE" xml:space="preserve">
+    <value>Datenbank wählen</value>
+  </data>
+  <data name="UPDATE_CHANGES" xml:space="preserve">
+    <value>Änderungen speichern</value>
+  </data>
+  <data name="IndexDeleted" xml:space="preserve">
+    <value>Index {0} in Datenbank {1} wurde gelöscht.</value>
+  </data>
+  <data name="IndexDeletedTitle" xml:space="preserve">
+    <value>Index löschen</value>
+  </data>
+  <data name="IndexNotDeleted" xml:space="preserve">
+    <value>Index {0} in Datenbank {1} konnte nicht gelöscht werden.</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FileNotExists" xml:space="preserve">
+    <value>Die Datei {0} existiert nicht</value>
+  </data>
+  <data name="FilterFor" xml:space="preserve">
+    <value>Filterkriterium</value>
+  </data>
+  <data name="DatabaseFileExistsNoCreate" xml:space="preserve">
+    <value>Database File exsistiert und kann nur im Replace Modus zurückgespielt werden.</value>
+  </data>
+  <data name="ConstraintDeleted" xml:space="preserve">
+    <value>Constraint {0} in Datenbank {1} wurde gelöscht.</value>
+  </data>
+  <data name="ConstraintDeletedTitle" xml:space="preserve">
+    <value>Constraint löschen</value>
+  </data>
+  <data name="ConstraintNotDeleted" xml:space="preserve">
+    <value>Constraint {0} in Datenbank {1} konnte nicht gelöscht werden.</value>
+  </data>
+</root>
