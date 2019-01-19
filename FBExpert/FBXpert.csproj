@@ -870,6 +870,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\edit_undo.png" />
+    <None Include="Resources\edit_undo_blue_x22.png" />
+    <None Include="Resources\NoGo_22.png" />
+    <None Include="Resources\table_blue_x24.png" />
     <None Include="Resources\console2_x32.png" />
     <None Include="Resources\console_x32.png" />
     <None Include="Resources\console_x24.png" />

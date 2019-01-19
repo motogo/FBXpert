@@ -613,6 +613,26 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap edit_undo {
+            get {
+                object obj = ResourceManager.GetObject("edit_undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_undo_blue_x22 {
+            get {
+                object obj = ResourceManager.GetObject("edit_undo_blue_x22", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_XML_blue_x24 {
             get {
                 object obj = ResourceManager.GetObject("edit_XML_blue_x24", resourceCulture);
@@ -1203,6 +1223,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NoGo_22 {
+            get {
+                object obj = ResourceManager.GetObject("NoGo_22", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NULL_blue_x24 {
             get {
                 object obj = ResourceManager.GetObject("NULL_blue_x24", resourceCulture);
@@ -1436,6 +1466,16 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap system_search_blue_22x {
             get {
                 object obj = ResourceManager.GetObject("system_search_blue_22x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap table_blue_x24 {
+            get {
+                object obj = ResourceManager.GetObject("table_blue_x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

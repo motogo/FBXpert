@@ -213,35 +213,33 @@ namespace FBXpert
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
             var riFailure = riList.Find(x=>x.commandDone = false);      
             var riOk = riList.Find(x=>x.commandDone = true);      
-            if(riOk != null)
-            {
-           var sb = new StringBuilder();
-            messages_count++;
-            if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0) sb.Append($@"Errors ({error_count})");           
-
-
-            fctMessages.CurrentLineColor = System.Drawing.Color.Blue;
-            //fctMessages.AppendText(k.Meldung);            
-            tabPageMessages.Text = sb.ToString();
-            fctMessages.ScrollLeft();
-            }
-
+            var sb = new StringBuilder();
             if(riFailure != null)
-            {
-                var sb = new StringBuilder();
-             messages_count++;
-            if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0) sb.Append($@"Errors ({error_count})");           
-
-
-            fctMessages.CurrentLineColor = System.Drawing.Color.Blue;
-           // fctMessages.AppendText(k.Meldung);            
-            tabPageMessages.Text = sb.ToString();
-            fctMessages.ScrollLeft();
+            {                
+                messages_count++;
+                if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
+                if (error_count > 0)    sb.Append($@"Errors ({error_count})");           
             }
-
-           // lblUsedMs.Text = ri.costs.ToString();
+            
+            long costs = 0;
+            foreach(var ri in riList)
+            {
+                if(ri.commandDone) 
+                {
+                    fctMessages.CurrentLineColor = System.Drawing.Color.Blue;
+                    fctMessages.AppendText($@"done {ri.lastSQL}");            
+                }
+                else  
+                {
+                    fctMessages.CurrentLineColor = System.Drawing.Color.Red;
+                    fctMessages.AppendText($@"not done {ri.lastSQL}");            
+                }
+                costs+=ri.costs;
+            }
+            
+            tabPageMessages.Text = sb.ToString();
+            fctMessages.ScrollLeft();            
+            lblUsedMs.Text = costs.ToString();
         }
     }
 }
