@@ -41,7 +41,8 @@ namespace SQLView
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_upper = new System.Windows.Forms.Panel();
-            this.hsClose = new SeControlsLib.HotSpot();
+            this.gnUsedTime = new System.Windows.Forms.GroupBox();
+            this.txtUsedTime = new System.Windows.Forms.TextBox();
             this.cbTestlauf = new System.Windows.Forms.CheckBox();
             this.cbHistory = new System.Windows.Forms.CheckBox();
             this.cbErrors = new System.Windows.Forms.CheckBox();
@@ -52,20 +53,8 @@ namespace SQLView
             this.pnlSQLCenter = new System.Windows.Forms.Panel();
             this.txtSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.cmsSQLText = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiDDLCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDDLPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiLastCommand = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiInsertLastSuccessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiExecuteLastSucessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSQLUpper = new System.Windows.Forms.Panel();
-            this.hsBreak = new SeControlsLib.HotSpot();
-            this.hsReplaceText = new SeControlsLib.HotSpot();
-            this.hsSaveSQL = new SeControlsLib.HotSpot();
-            this.hsLoadSQL = new SeControlsLib.HotSpot();
-            this.hsRunSQLfromFile = new SeControlsLib.HotSpot();
-            this.hsClearText = new SeControlsLib.HotSpot();
-            this.hsRunSQL = new SeControlsLib.HotSpot();
             this.gbEncoding = new System.Windows.Forms.GroupBox();
             this.cbEncoding = new System.Windows.Forms.ComboBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -76,32 +65,22 @@ namespace SQLView
             this.Table = new System.Data.DataTable();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlResultUpper = new System.Windows.Forms.Panel();
             this.gbRowHeight = new System.Windows.Forms.GroupBox();
             this.txtRowHeight = new System.Windows.Forms.TextBox();
             this.cbRowManually = new System.Windows.Forms.CheckBox();
-            this.hsSaveDataset = new SeControlsLib.HotSpot();
             this.gbEditMode = new System.Windows.Forms.GroupBox();
             this.cbEditMode = new System.Windows.Forms.CheckBox();
             this.gbNavigator = new System.Windows.Forms.GroupBox();
             this.bnTableContent = new System.Windows.Forms.BindingNavigator(this.components);
             this.bnTableContentCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bnTableContentDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bnTableContentMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bnTableContentMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bnTableContentSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bnTableContentPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bnTableContentSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bnTableContentMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bnTableContentMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bnTableContentSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.gbUsedMilliseconds = new System.Windows.Forms.GroupBox();
             this.lblUsedMs = new System.Windows.Forms.Label();
@@ -110,32 +89,26 @@ namespace SQLView
             this.rtfMELDUNG = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbMeldAutoclear = new System.Windows.Forms.CheckBox();
-            this.hsClearInfo = new SeControlsLib.HotSpot();
             this.cbAutoScroll = new System.Windows.Forms.CheckBox();
             this.tabERRORS = new System.Windows.Forms.TabPage();
             this.pnlErrorUpper = new System.Windows.Forms.Panel();
             this.rtfERRORS = new System.Windows.Forms.RichTextBox();
             this.pnlErrorsUpper = new System.Windows.Forms.Panel();
             this.cbAutoSrcollErr = new System.Windows.Forms.CheckBox();
-            this.hsClearErrorAll = new SeControlsLib.HotSpot();
             this.cbErrAutoclear = new System.Windows.Forms.CheckBox();
             this.tabHistory = new System.Windows.Forms.TabPage();
             this.pnlHistoryCenter = new System.Windows.Forms.Panel();
             this.tabControlHistory = new System.Windows.Forms.TabControl();
             this.tabPageSucceeded = new System.Windows.Forms.TabPage();
             this.clbHISTORY = new System.Windows.Forms.CheckedListBox();
+            this.cmsHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPageFailedHistory = new System.Windows.Forms.TabPage();
             this.clbFAILED_HISTORY = new System.Windows.Forms.CheckedListBox();
             this.pnlHistoryUpper = new System.Windows.Forms.Panel();
-            this.hsCrearAllFailed = new SeControlsLib.HotSpot();
-            this.hsClearHistoryAll = new SeControlsLib.HotSpot();
-            this.hsClearHistorySelected = new SeControlsLib.HotSpot();
-            this.hsExecuteHistorySelected = new SeControlsLib.HotSpot();
             this.tabRelpacelist = new System.Windows.Forms.TabPage();
             this.pnlReplacesCenter = new System.Windows.Forms.Panel();
             this.rtbReplace = new System.Windows.Forms.RichTextBox();
             this.pnlRelpacesUpper = new System.Windows.Forms.Panel();
-            this.hsLoadListReplaces = new SeControlsLib.HotSpot();
             this.tabOptionen = new System.Windows.Forms.TabPage();
             this.cbClearListBeforeExcecute = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -143,7 +116,6 @@ namespace SQLView
             this.txtErrIntervall = new SEFormsControlLibrary.SECaptionEditBox();
             this.txtLogFile = new SEFormsControlLibrary.SECaptionEditBox();
             this.secSERVERNAME = new SEFormsControlLibrary.SECaptionEditBox();
-            this.hsRefreshConfig = new SeControlsLib.HotSpot();
             this.txtMeldIntervall = new SEFormsControlLibrary.SECaptionEditBox();
             this.txtMeldLogFilePath = new SEFormsControlLibrary.SECaptionEditBox();
             this.secDATABASEPATH = new SEFormsControlLibrary.SECaptionEditBox();
@@ -151,7 +123,6 @@ namespace SQLView
             this.rbErrInsert = new System.Windows.Forms.RadioButton();
             this.rbErrAppend = new System.Windows.Forms.RadioButton();
             this.gbMeldungDirection = new System.Windows.Forms.GroupBox();
-            this.btnLoadMeld = new System.Windows.Forms.Button();
             this.rbMeldInsert = new System.Windows.Forms.RadioButton();
             this.rbMeldAppend = new System.Windows.Forms.RadioButton();
             this.tabPagePlan = new System.Windows.Forms.TabPage();
@@ -164,13 +135,9 @@ namespace SQLView
             this.tabPageXML = new System.Windows.Forms.TabPage();
             this.fctXMLData = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlXMLDataUpper = new System.Windows.Forms.Panel();
-            this.hsSaveXML = new SeControlsLib.HotSpot();
-            this.hsRefreshXMLData = new SeControlsLib.HotSpot();
             this.tabPageXMLScheme = new System.Windows.Forms.TabPage();
             this.fctXMLScheme = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlXMLScheme = new System.Windows.Forms.Panel();
-            this.hsSaveXMLScheme = new SeControlsLib.HotSpot();
-            this.hsRefreshXMLScheme = new SeControlsLib.HotSpot();
             this.tabPagePerformance = new System.Windows.Forms.TabPage();
             this.gbPerformance = new System.Windows.Forms.GroupBox();
             this.lvPerformance = new System.Windows.Forms.ListView();
@@ -183,8 +150,6 @@ namespace SQLView
             this.colDELETES = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCONFLICTS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.hotSpot1 = new SeControlsLib.HotSpot();
-            this.hsRefreshPerformance = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.sfdSQL = new System.Windows.Forms.SaveFileDialog();
             this.helpMain = new System.Windows.Forms.HelpProvider();
@@ -192,10 +157,50 @@ namespace SQLView
             this.fbdLog = new System.Windows.Forms.FolderBrowserDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogXML = new System.Windows.Forms.SaveFileDialog();
-            this.cmsHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDDLCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDDLPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLastCommand = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsertLastSuccessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExecuteLastSucessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
+            this.hsBreak = new SeControlsLib.HotSpot();
+            this.hsReplaceText = new SeControlsLib.HotSpot();
+            this.hsSaveSQL = new SeControlsLib.HotSpot();
+            this.hsLoadSQL = new SeControlsLib.HotSpot();
+            this.hsRunSQLfromFile = new SeControlsLib.HotSpot();
+            this.hsClearText = new SeControlsLib.HotSpot();
+            this.hsRunSQL = new SeControlsLib.HotSpot();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.hsSaveDataset = new SeControlsLib.HotSpot();
+            this.bnTableContentDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bnTableContentMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bnTableContentMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bnTableContentMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bnTableContentMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.hsClearInfo = new SeControlsLib.HotSpot();
+            this.hsClearErrorAll = new SeControlsLib.HotSpot();
             this.tsmiSortASC = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSortDESC = new System.Windows.Forms.ToolStripMenuItem();
+            this.hsCrearAllFailed = new SeControlsLib.HotSpot();
+            this.hsClearHistoryAll = new SeControlsLib.HotSpot();
+            this.hsClearHistorySelected = new SeControlsLib.HotSpot();
+            this.hsExecuteHistorySelected = new SeControlsLib.HotSpot();
+            this.hsLoadListReplaces = new SeControlsLib.HotSpot();
+            this.hsRefreshConfig = new SeControlsLib.HotSpot();
+            this.btnLoadMeld = new System.Windows.Forms.Button();
+            this.hsSaveXML = new SeControlsLib.HotSpot();
+            this.hsRefreshXMLData = new SeControlsLib.HotSpot();
+            this.hsSaveXMLScheme = new SeControlsLib.HotSpot();
+            this.hsRefreshXMLScheme = new SeControlsLib.HotSpot();
+            this.hotSpot1 = new SeControlsLib.HotSpot();
+            this.hsRefreshPerformance = new SeControlsLib.HotSpot();
+            this.hsPageRefresh = new SeControlsLib.HotSpot();
+            this.hsClose = new SeControlsLib.HotSpot();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.pnl_upper.SuspendLayout();
+            this.gnUsedTime.SuspendLayout();
             this.pnl_center.SuspendLayout();
             this.tcSQLCONTROL.SuspendLayout();
             this.tabSQLTEXT.SuspendLayout();
@@ -228,6 +233,7 @@ namespace SQLView
             this.pnlHistoryCenter.SuspendLayout();
             this.tabControlHistory.SuspendLayout();
             this.tabPageSucceeded.SuspendLayout();
+            this.cmsHistory.SuspendLayout();
             this.tabPageFailedHistory.SuspendLayout();
             this.pnlHistoryUpper.SuspendLayout();
             this.tabRelpacelist.SuspendLayout();
@@ -252,13 +258,14 @@ namespace SQLView
             this.tabPagePerformance.SuspendLayout();
             this.gbPerformance.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.cmsHistory.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_upper
             // 
             this.pnl_upper.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnl_upper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_upper.Controls.Add(this.hsPageRefresh);
+            this.pnl_upper.Controls.Add(this.gnUsedTime);
             this.pnl_upper.Controls.Add(this.hsClose);
             this.pnl_upper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_upper.Location = new System.Drawing.Point(0, 0);
@@ -266,52 +273,26 @@ namespace SQLView
             this.pnl_upper.Size = new System.Drawing.Size(908, 40);
             this.pnl_upper.TabIndex = 0;
             // 
-            // hsClose
+            // gnUsedTime
             // 
-            this.hsClose.BackColor = System.Drawing.Color.Transparent;
-            this.hsClose.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsClose.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsClose.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsClose.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsClose.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsClose.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsClose.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsClose.FlatAppearance.BorderSize = 0;
-            this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
-            this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
-            this.hsClose.ImageToggleOnSelect = true;
-            this.hsClose.Location = new System.Drawing.Point(0, 0);
-            this.hsClose.Marked = false;
-            this.hsClose.MarkedColor = System.Drawing.Color.Teal;
-            this.hsClose.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsClose.MarkedText = "";
-            this.hsClose.MarkMode = false;
-            this.hsClose.Name = "hsClose";
-            this.hsClose.NonMarkedText = "";
-            this.hsClose.Size = new System.Drawing.Size(45, 38);
-            this.hsClose.TabIndex = 26;
-            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsClose.ToolTipActive = false;
-            this.hsClose.ToolTipAutomaticDelay = 500;
-            this.hsClose.ToolTipAutoPopDelay = 5000;
-            this.hsClose.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsClose.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsClose.ToolTipFor4ContextMenu = true;
-            this.hsClose.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsClose.ToolTipInitialDelay = 500;
-            this.hsClose.ToolTipIsBallon = false;
-            this.hsClose.ToolTipOwnerDraw = false;
-            this.hsClose.ToolTipReshowDelay = 100;
-            this.hsClose.ToolTipShowAlways = false;
-            this.hsClose.ToolTipText = "";
-            this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsClose.ToolTipTitle = "";
-            this.hsClose.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsClose.UseVisualStyleBackColor = false;
-            this.hsClose.Click += new System.EventHandler(this.hsClose_Click);
+            this.gnUsedTime.Controls.Add(this.txtUsedTime);
+            this.gnUsedTime.Location = new System.Drawing.Point(395, -1);
+            this.gnUsedTime.Name = "gnUsedTime";
+            this.gnUsedTime.Size = new System.Drawing.Size(116, 41);
+            this.gnUsedTime.TabIndex = 27;
+            this.gnUsedTime.TabStop = false;
+            this.gnUsedTime.Text = "Used time";
+            // 
+            // txtUsedTime
+            // 
+            this.txtUsedTime.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
+            this.txtUsedTime.Name = "txtUsedTime";
+            this.txtUsedTime.ReadOnly = true;
+            this.txtUsedTime.Size = new System.Drawing.Size(110, 20);
+            this.txtUsedTime.TabIndex = 0;
+            this.txtUsedTime.Text = "0";
             // 
             // cbTestlauf
             // 
@@ -477,6 +458,1184 @@ namespace SQLView
             this.cmsSQLText.Size = new System.Drawing.Size(248, 120);
             this.cmsSQLText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSQLText_ItemClicked);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(244, 6);
+            // 
+            // pnlSQLUpper
+            // 
+            this.pnlSQLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlSQLUpper.Controls.Add(this.hsBreak);
+            this.pnlSQLUpper.Controls.Add(this.hsReplaceText);
+            this.pnlSQLUpper.Controls.Add(this.hsSaveSQL);
+            this.pnlSQLUpper.Controls.Add(this.hsLoadSQL);
+            this.pnlSQLUpper.Controls.Add(this.hsRunSQLfromFile);
+            this.pnlSQLUpper.Controls.Add(this.hsClearText);
+            this.pnlSQLUpper.Controls.Add(this.hsRunSQL);
+            this.pnlSQLUpper.Controls.Add(this.cbTestlauf);
+            this.pnlSQLUpper.Controls.Add(this.gbEncoding);
+            this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSQLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlSQLUpper.Name = "pnlSQLUpper";
+            this.pnlSQLUpper.Size = new System.Drawing.Size(892, 45);
+            this.pnlSQLUpper.TabIndex = 27;
+            // 
+            // gbEncoding
+            // 
+            this.gbEncoding.BackColor = System.Drawing.SystemColors.Control;
+            this.gbEncoding.Controls.Add(this.cbEncoding);
+            this.gbEncoding.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbEncoding.Location = new System.Drawing.Point(766, 0);
+            this.gbEncoding.Name = "gbEncoding";
+            this.gbEncoding.Size = new System.Drawing.Size(122, 41);
+            this.gbEncoding.TabIndex = 25;
+            this.gbEncoding.TabStop = false;
+            this.gbEncoding.Text = "Encoding DB";
+            // 
+            // cbEncoding
+            // 
+            this.cbEncoding.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEncoding.FormattingEnabled = true;
+            this.cbEncoding.Items.AddRange(new object[] {
+            "NONE",
+            "UTF8"});
+            this.cbEncoding.Location = new System.Drawing.Point(3, 16);
+            this.cbEncoding.Name = "cbEncoding";
+            this.cbEncoding.Size = new System.Drawing.Size(116, 21);
+            this.cbEncoding.TabIndex = 34;
+            this.cbEncoding.Text = "UTF8";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(3, 617);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(892, 10);
+            this.progressBar1.TabIndex = 24;
+            // 
+            // tabRESULT
+            // 
+            this.tabRESULT.Controls.Add(this.dgvResults);
+            this.tabRESULT.Controls.Add(this.bindingNavigator1);
+            this.tabRESULT.Controls.Add(this.pnlResultUpper);
+            this.tabRESULT.Controls.Add(this.panel3);
+            this.tabRESULT.ImageIndex = 14;
+            this.tabRESULT.Location = new System.Drawing.Point(4, 23);
+            this.tabRESULT.Name = "tabRESULT";
+            this.tabRESULT.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRESULT.Size = new System.Drawing.Size(898, 630);
+            this.tabRESULT.TabIndex = 1;
+            this.tabRESULT.Text = "Results grid";
+            this.tabRESULT.UseVisualStyleBackColor = true;
+            // 
+            // dgvResults
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvResults.AutoGenerateColumns = false;
+            this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
+            this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.DataSource = this.bindingSource1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResults.EnableHeadersVisualStyles = false;
+            this.dgvResults.Location = new System.Drawing.Point(3, 50);
+            this.dgvResults.MultiSelect = false;
+            this.dgvResults.Name = "dgvResults";
+            this.dgvResults.ReadOnly = true;
+            this.dgvResults.RowHeadersVisible = false;
+            this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvResults.ShowCellErrors = false;
+            this.dgvResults.ShowRowErrors = false;
+            this.dgvResults.Size = new System.Drawing.Size(892, 552);
+            this.dgvResults.TabIndex = 16;
+            this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvResults_CellPainting);
+            this.dgvResults.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResults_DataError);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.dataSet1;
+            this.bindingSource1.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "NewDataSet";
+            this.dataSet1.Tables.AddRange(new System.Data.DataTable[] {
+            this.Table});
+            // 
+            // Table
+            // 
+            this.Table.TableName = "Table";
+            // 
+            // bindingNavigator1
+            // 
+            this.bindingNavigator1.AddNewItem = null;
+            this.bindingNavigator1.BindingSource = this.bindingSource1;
+            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigator1.DeleteItem = null;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2});
+            this.bindingNavigator1.Location = new System.Drawing.Point(3, 602);
+            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator1.Size = new System.Drawing.Size(892, 25);
+            this.bindingNavigator1.TabIndex = 2;
+            this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(44, 22);
+            this.bindingNavigatorCountItem.Text = "von {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Die Gesamtanzahl der Elemente.";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "1";
+            this.bindingNavigatorPositionItem.ToolTipText = "Aktuelle Position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // pnlResultUpper
+            // 
+            this.pnlResultUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlResultUpper.Controls.Add(this.gbRowHeight);
+            this.pnlResultUpper.Controls.Add(this.hsSaveDataset);
+            this.pnlResultUpper.Controls.Add(this.gbEditMode);
+            this.pnlResultUpper.Controls.Add(this.gbNavigator);
+            this.pnlResultUpper.Controls.Add(this.gbUsedMilliseconds);
+            this.pnlResultUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlResultUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlResultUpper.Name = "pnlResultUpper";
+            this.pnlResultUpper.Size = new System.Drawing.Size(892, 47);
+            this.pnlResultUpper.TabIndex = 25;
+            // 
+            // gbRowHeight
+            // 
+            this.gbRowHeight.Controls.Add(this.txtRowHeight);
+            this.gbRowHeight.Controls.Add(this.cbRowManually);
+            this.gbRowHeight.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbRowHeight.Location = new System.Drawing.Point(612, 0);
+            this.gbRowHeight.Name = "gbRowHeight";
+            this.gbRowHeight.Size = new System.Drawing.Size(79, 43);
+            this.gbRowHeight.TabIndex = 35;
+            this.gbRowHeight.TabStop = false;
+            this.gbRowHeight.Text = "Row height";
+            // 
+            // txtRowHeight
+            // 
+            this.txtRowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRowHeight.Location = new System.Drawing.Point(29, 16);
+            this.txtRowHeight.Name = "txtRowHeight";
+            this.txtRowHeight.Size = new System.Drawing.Size(47, 20);
+            this.txtRowHeight.TabIndex = 30;
+            this.txtRowHeight.TextChanged += new System.EventHandler(this.txtRowHeight_TextChanged);
+            this.txtRowHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRowHeight_KeyDown);
+            // 
+            // cbRowManually
+            // 
+            this.cbRowManually.Checked = true;
+            this.cbRowManually.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRowManually.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cbRowManually.Location = new System.Drawing.Point(3, 16);
+            this.cbRowManually.Name = "cbRowManually";
+            this.cbRowManually.Size = new System.Drawing.Size(26, 24);
+            this.cbRowManually.TabIndex = 29;
+            this.cbRowManually.UseVisualStyleBackColor = true;
+            this.cbRowManually.CheckedChanged += new System.EventHandler(this.cbRowManually_CheckedChanged);
+            // 
+            // gbEditMode
+            // 
+            this.gbEditMode.Controls.Add(this.cbEditMode);
+            this.gbEditMode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbEditMode.Location = new System.Drawing.Point(448, 0);
+            this.gbEditMode.Name = "gbEditMode";
+            this.gbEditMode.Size = new System.Drawing.Size(76, 43);
+            this.gbEditMode.TabIndex = 34;
+            this.gbEditMode.TabStop = false;
+            this.gbEditMode.Text = "Edit mode";
+            // 
+            // cbEditMode
+            // 
+            this.cbEditMode.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbEditMode.Checked = true;
+            this.cbEditMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEditMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEditMode.Location = new System.Drawing.Point(3, 16);
+            this.cbEditMode.Name = "cbEditMode";
+            this.cbEditMode.Size = new System.Drawing.Size(70, 24);
+            this.cbEditMode.TabIndex = 29;
+            this.cbEditMode.UseVisualStyleBackColor = true;
+            this.cbEditMode.CheckedChanged += new System.EventHandler(this.cbEditMode_CheckedChanged);
+            // 
+            // gbNavigator
+            // 
+            this.gbNavigator.Controls.Add(this.bnTableContent);
+            this.gbNavigator.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbNavigator.Location = new System.Drawing.Point(126, 0);
+            this.gbNavigator.Name = "gbNavigator";
+            this.gbNavigator.Size = new System.Drawing.Size(322, 43);
+            this.gbNavigator.TabIndex = 33;
+            this.gbNavigator.TabStop = false;
+            this.gbNavigator.Text = "Navigator";
+            // 
+            // bnTableContent
+            // 
+            this.bnTableContent.AddNewItem = null;
+            this.bnTableContent.BindingSource = this.bindingSource1;
+            this.bnTableContent.CountItem = this.bnTableContentCountItem;
+            this.bnTableContent.DeleteItem = this.bnTableContentDeleteItem;
+            this.bnTableContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bnTableContent.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.bnTableContent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bnTableContentMoveFirstItem,
+            this.bnTableContentMovePreviousItem,
+            this.bnTableContentSeparator,
+            this.bnTableContentPositionItem,
+            this.bnTableContentCountItem,
+            this.bnTableContentSeparator1,
+            this.bnTableContentMoveNextItem,
+            this.bnTableContentMoveLastItem,
+            this.bnTableContentSeparator2,
+            this.bnTableContentDeleteItem});
+            this.bnTableContent.Location = new System.Drawing.Point(3, 16);
+            this.bnTableContent.MoveFirstItem = this.bnTableContentMoveFirstItem;
+            this.bnTableContent.MoveLastItem = this.bnTableContentMoveLastItem;
+            this.bnTableContent.MoveNextItem = this.bnTableContentMoveNextItem;
+            this.bnTableContent.MovePreviousItem = this.bnTableContentMovePreviousItem;
+            this.bnTableContent.Name = "bnTableContent";
+            this.bnTableContent.PositionItem = this.bnTableContentPositionItem;
+            this.bnTableContent.Size = new System.Drawing.Size(316, 24);
+            this.bnTableContent.TabIndex = 26;
+            this.bnTableContent.Text = "bindingNavigator1";
+            // 
+            // bnTableContentCountItem
+            // 
+            this.bnTableContentCountItem.Name = "bnTableContentCountItem";
+            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 21);
+            this.bnTableContentCountItem.Text = "von {0}";
+            this.bnTableContentCountItem.ToolTipText = "Total number of items";
+            // 
+            // bnTableContentSeparator
+            // 
+            this.bnTableContentSeparator.Name = "bnTableContentSeparator";
+            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 24);
+            // 
+            // bnTableContentPositionItem
+            // 
+            this.bnTableContentPositionItem.AccessibleName = "Position";
+            this.bnTableContentPositionItem.AutoSize = false;
+            this.bnTableContentPositionItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bnTableContentPositionItem.Name = "bnTableContentPositionItem";
+            this.bnTableContentPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bnTableContentPositionItem.Text = "1";
+            this.bnTableContentPositionItem.ToolTipText = "Current position";
+            // 
+            // bnTableContentSeparator1
+            // 
+            this.bnTableContentSeparator1.Name = "bnTableContentSeparator1";
+            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 24);
+            // 
+            // bnTableContentSeparator2
+            // 
+            this.bnTableContentSeparator2.Name = "bnTableContentSeparator2";
+            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 24);
+            // 
+            // gbUsedMilliseconds
+            // 
+            this.gbUsedMilliseconds.Controls.Add(this.lblUsedMs);
+            this.gbUsedMilliseconds.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbUsedMilliseconds.Location = new System.Drawing.Point(0, 0);
+            this.gbUsedMilliseconds.Name = "gbUsedMilliseconds";
+            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 43);
+            this.gbUsedMilliseconds.TabIndex = 31;
+            this.gbUsedMilliseconds.TabStop = false;
+            this.gbUsedMilliseconds.Text = "Costs in milliseconds";
+            // 
+            // lblUsedMs
+            // 
+            this.lblUsedMs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUsedMs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsedMs.Location = new System.Drawing.Point(3, 16);
+            this.lblUsedMs.Name = "lblUsedMs";
+            this.lblUsedMs.Size = new System.Drawing.Size(120, 24);
+            this.lblUsedMs.TabIndex = 0;
+            this.lblUsedMs.Text = "0";
+            this.lblUsedMs.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tabMELDUNG
+            // 
+            this.tabMELDUNG.BackColor = System.Drawing.SystemColors.Control;
+            this.tabMELDUNG.Controls.Add(this.pnlInfoCenter);
+            this.tabMELDUNG.Controls.Add(this.panel1);
+            this.tabMELDUNG.ImageKey = "info_blue_22x.png";
+            this.tabMELDUNG.Location = new System.Drawing.Point(4, 23);
+            this.tabMELDUNG.Name = "tabMELDUNG";
+            this.tabMELDUNG.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMELDUNG.Size = new System.Drawing.Size(898, 630);
+            this.tabMELDUNG.TabIndex = 2;
+            this.tabMELDUNG.Text = "Messagens";
+            // 
+            // pnlInfoCenter
+            // 
+            this.pnlInfoCenter.Controls.Add(this.rtfMELDUNG);
+            this.pnlInfoCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlInfoCenter.Location = new System.Drawing.Point(3, 50);
+            this.pnlInfoCenter.Name = "pnlInfoCenter";
+            this.pnlInfoCenter.Size = new System.Drawing.Size(892, 577);
+            this.pnlInfoCenter.TabIndex = 25;
+            // 
+            // rtfMELDUNG
+            // 
+            this.rtfMELDUNG.BackColor = System.Drawing.SystemColors.Info;
+            this.rtfMELDUNG.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtfMELDUNG.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtfMELDUNG.Location = new System.Drawing.Point(0, 0);
+            this.rtfMELDUNG.Name = "rtfMELDUNG";
+            this.rtfMELDUNG.Size = new System.Drawing.Size(892, 577);
+            this.rtfMELDUNG.TabIndex = 0;
+            this.rtfMELDUNG.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.cbMeldAutoclear);
+            this.panel1.Controls.Add(this.hsClearInfo);
+            this.panel1.Controls.Add(this.cbAutoScroll);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(892, 47);
+            this.panel1.TabIndex = 24;
+            // 
+            // cbMeldAutoclear
+            // 
+            this.cbMeldAutoclear.AutoSize = true;
+            this.cbMeldAutoclear.Checked = true;
+            this.cbMeldAutoclear.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbMeldAutoclear.Location = new System.Drawing.Point(178, 16);
+            this.cbMeldAutoclear.Name = "cbMeldAutoclear";
+            this.cbMeldAutoclear.Size = new System.Drawing.Size(71, 17);
+            this.cbMeldAutoclear.TabIndex = 22;
+            this.cbMeldAutoclear.Text = "Autoclear";
+            this.cbMeldAutoclear.UseVisualStyleBackColor = true;
+            // 
+            // cbAutoScroll
+            // 
+            this.cbAutoScroll.AutoSize = true;
+            this.cbAutoScroll.Checked = true;
+            this.cbAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoScroll.Location = new System.Drawing.Point(100, 16);
+            this.cbAutoScroll.Name = "cbAutoScroll";
+            this.cbAutoScroll.Size = new System.Drawing.Size(72, 17);
+            this.cbAutoScroll.TabIndex = 19;
+            this.cbAutoScroll.Text = "Autoscroll";
+            this.cbAutoScroll.UseVisualStyleBackColor = true;
+            // 
+            // tabERRORS
+            // 
+            this.tabERRORS.BackColor = System.Drawing.SystemColors.Control;
+            this.tabERRORS.Controls.Add(this.pnlErrorUpper);
+            this.tabERRORS.Controls.Add(this.pnlErrorsUpper);
+            this.tabERRORS.ImageIndex = 11;
+            this.tabERRORS.Location = new System.Drawing.Point(4, 23);
+            this.tabERRORS.Name = "tabERRORS";
+            this.tabERRORS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabERRORS.Size = new System.Drawing.Size(898, 630);
+            this.tabERRORS.TabIndex = 4;
+            this.tabERRORS.Text = "Errors";
+            // 
+            // pnlErrorUpper
+            // 
+            this.pnlErrorUpper.Controls.Add(this.rtfERRORS);
+            this.pnlErrorUpper.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlErrorUpper.Location = new System.Drawing.Point(3, 50);
+            this.pnlErrorUpper.Name = "pnlErrorUpper";
+            this.pnlErrorUpper.Size = new System.Drawing.Size(892, 577);
+            this.pnlErrorUpper.TabIndex = 24;
+            // 
+            // rtfERRORS
+            // 
+            this.rtfERRORS.BackColor = System.Drawing.SystemColors.Info;
+            this.rtfERRORS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtfERRORS.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtfERRORS.Location = new System.Drawing.Point(0, 0);
+            this.rtfERRORS.Name = "rtfERRORS";
+            this.rtfERRORS.Size = new System.Drawing.Size(892, 577);
+            this.rtfERRORS.TabIndex = 1;
+            this.rtfERRORS.Text = "";
+            // 
+            // pnlErrorsUpper
+            // 
+            this.pnlErrorsUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlErrorsUpper.Controls.Add(this.cbAutoSrcollErr);
+            this.pnlErrorsUpper.Controls.Add(this.hsClearErrorAll);
+            this.pnlErrorsUpper.Controls.Add(this.cbErrAutoclear);
+            this.pnlErrorsUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlErrorsUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlErrorsUpper.Name = "pnlErrorsUpper";
+            this.pnlErrorsUpper.Size = new System.Drawing.Size(892, 47);
+            this.pnlErrorsUpper.TabIndex = 23;
+            // 
+            // cbAutoSrcollErr
+            // 
+            this.cbAutoSrcollErr.AutoSize = true;
+            this.cbAutoSrcollErr.Checked = true;
+            this.cbAutoSrcollErr.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAutoSrcollErr.Location = new System.Drawing.Point(202, 24);
+            this.cbAutoSrcollErr.Name = "cbAutoSrcollErr";
+            this.cbAutoSrcollErr.Size = new System.Drawing.Size(72, 17);
+            this.cbAutoSrcollErr.TabIndex = 20;
+            this.cbAutoSrcollErr.Text = "Autoscroll";
+            this.cbAutoSrcollErr.UseVisualStyleBackColor = true;
+            // 
+            // cbErrAutoclear
+            // 
+            this.cbErrAutoclear.AutoSize = true;
+            this.cbErrAutoclear.Checked = true;
+            this.cbErrAutoclear.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbErrAutoclear.Location = new System.Drawing.Point(125, 24);
+            this.cbErrAutoclear.Name = "cbErrAutoclear";
+            this.cbErrAutoclear.Size = new System.Drawing.Size(71, 17);
+            this.cbErrAutoclear.TabIndex = 21;
+            this.cbErrAutoclear.Text = "Autoclear";
+            this.cbErrAutoclear.UseVisualStyleBackColor = true;
+            // 
+            // tabHistory
+            // 
+            this.tabHistory.BackColor = System.Drawing.SystemColors.Control;
+            this.tabHistory.Controls.Add(this.pnlHistoryCenter);
+            this.tabHistory.Controls.Add(this.pnlHistoryUpper);
+            this.tabHistory.ImageIndex = 13;
+            this.tabHistory.Location = new System.Drawing.Point(4, 23);
+            this.tabHistory.Name = "tabHistory";
+            this.tabHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHistory.Size = new System.Drawing.Size(898, 630);
+            this.tabHistory.TabIndex = 3;
+            this.tabHistory.Text = "History";
+            // 
+            // pnlHistoryCenter
+            // 
+            this.pnlHistoryCenter.Controls.Add(this.tabControlHistory);
+            this.pnlHistoryCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlHistoryCenter.Location = new System.Drawing.Point(3, 52);
+            this.pnlHistoryCenter.Name = "pnlHistoryCenter";
+            this.pnlHistoryCenter.Size = new System.Drawing.Size(892, 575);
+            this.pnlHistoryCenter.TabIndex = 24;
+            // 
+            // tabControlHistory
+            // 
+            this.tabControlHistory.Controls.Add(this.tabPageSucceeded);
+            this.tabControlHistory.Controls.Add(this.tabPageFailedHistory);
+            this.tabControlHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlHistory.Location = new System.Drawing.Point(0, 0);
+            this.tabControlHistory.Name = "tabControlHistory";
+            this.tabControlHistory.SelectedIndex = 0;
+            this.tabControlHistory.Size = new System.Drawing.Size(892, 575);
+            this.tabControlHistory.TabIndex = 1;
+            // 
+            // tabPageSucceeded
+            // 
+            this.tabPageSucceeded.Controls.Add(this.clbHISTORY);
+            this.tabPageSucceeded.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSucceeded.Name = "tabPageSucceeded";
+            this.tabPageSucceeded.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSucceeded.Size = new System.Drawing.Size(884, 549);
+            this.tabPageSucceeded.TabIndex = 0;
+            this.tabPageSucceeded.Text = "commands succeded";
+            this.tabPageSucceeded.UseVisualStyleBackColor = true;
+            // 
+            // clbHISTORY
+            // 
+            this.clbHISTORY.CheckOnClick = true;
+            this.clbHISTORY.ContextMenuStrip = this.cmsHistory;
+            this.clbHISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clbHISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clbHISTORY.FormattingEnabled = true;
+            this.clbHISTORY.HorizontalScrollbar = true;
+            this.clbHISTORY.Location = new System.Drawing.Point(3, 3);
+            this.clbHISTORY.Name = "clbHISTORY";
+            this.clbHISTORY.ScrollAlwaysVisible = true;
+            this.clbHISTORY.Size = new System.Drawing.Size(878, 543);
+            this.clbHISTORY.TabIndex = 0;
+            this.clbHISTORY.DoubleClick += new System.EventHandler(this.clbHISTORY_DoubleClick);
+            // 
+            // cmsHistory
+            // 
+            this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSortASC,
+            this.tsmiSortDESC});
+            this.cmsHistory.Name = "cmsHistory";
+            this.cmsHistory.Size = new System.Drawing.Size(160, 48);
+            this.cmsHistory.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsHistory_ItemClicked);
+            // 
+            // tabPageFailedHistory
+            // 
+            this.tabPageFailedHistory.Controls.Add(this.clbFAILED_HISTORY);
+            this.tabPageFailedHistory.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFailedHistory.Name = "tabPageFailedHistory";
+            this.tabPageFailedHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFailedHistory.Size = new System.Drawing.Size(884, 549);
+            this.tabPageFailedHistory.TabIndex = 1;
+            this.tabPageFailedHistory.Text = "failed commands";
+            this.tabPageFailedHistory.UseVisualStyleBackColor = true;
+            // 
+            // clbFAILED_HISTORY
+            // 
+            this.clbFAILED_HISTORY.CheckOnClick = true;
+            this.clbFAILED_HISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clbFAILED_HISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clbFAILED_HISTORY.FormattingEnabled = true;
+            this.clbFAILED_HISTORY.HorizontalScrollbar = true;
+            this.clbFAILED_HISTORY.Location = new System.Drawing.Point(3, 3);
+            this.clbFAILED_HISTORY.Name = "clbFAILED_HISTORY";
+            this.clbFAILED_HISTORY.ScrollAlwaysVisible = true;
+            this.clbFAILED_HISTORY.Size = new System.Drawing.Size(878, 543);
+            this.clbFAILED_HISTORY.TabIndex = 1;
+            this.clbFAILED_HISTORY.DoubleClick += new System.EventHandler(this.clbFAILED_HISTORY_DoubleClick);
+            // 
+            // pnlHistoryUpper
+            // 
+            this.pnlHistoryUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlHistoryUpper.Controls.Add(this.hsCrearAllFailed);
+            this.pnlHistoryUpper.Controls.Add(this.hsClearHistoryAll);
+            this.pnlHistoryUpper.Controls.Add(this.hsClearHistorySelected);
+            this.pnlHistoryUpper.Controls.Add(this.hsExecuteHistorySelected);
+            this.pnlHistoryUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHistoryUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlHistoryUpper.Name = "pnlHistoryUpper";
+            this.pnlHistoryUpper.Size = new System.Drawing.Size(892, 49);
+            this.pnlHistoryUpper.TabIndex = 23;
+            // 
+            // tabRelpacelist
+            // 
+            this.tabRelpacelist.BackColor = System.Drawing.SystemColors.Control;
+            this.tabRelpacelist.Controls.Add(this.pnlReplacesCenter);
+            this.tabRelpacelist.Controls.Add(this.pnlRelpacesUpper);
+            this.tabRelpacelist.ImageIndex = 12;
+            this.tabRelpacelist.Location = new System.Drawing.Point(4, 23);
+            this.tabRelpacelist.Name = "tabRelpacelist";
+            this.tabRelpacelist.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRelpacelist.Size = new System.Drawing.Size(898, 630);
+            this.tabRelpacelist.TabIndex = 5;
+            this.tabRelpacelist.Text = "Replaces";
+            // 
+            // pnlReplacesCenter
+            // 
+            this.pnlReplacesCenter.Controls.Add(this.rtbReplace);
+            this.pnlReplacesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlReplacesCenter.Location = new System.Drawing.Point(3, 51);
+            this.pnlReplacesCenter.Name = "pnlReplacesCenter";
+            this.pnlReplacesCenter.Size = new System.Drawing.Size(892, 576);
+            this.pnlReplacesCenter.TabIndex = 5;
+            // 
+            // rtbReplace
+            // 
+            this.rtbReplace.AcceptsTab = true;
+            this.rtbReplace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbReplace.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbReplace.Location = new System.Drawing.Point(0, 0);
+            this.rtbReplace.Name = "rtbReplace";
+            this.rtbReplace.Size = new System.Drawing.Size(892, 576);
+            this.rtbReplace.TabIndex = 2;
+            this.rtbReplace.Text = "";
+            // 
+            // pnlRelpacesUpper
+            // 
+            this.pnlRelpacesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlRelpacesUpper.Controls.Add(this.hsLoadListReplaces);
+            this.pnlRelpacesUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRelpacesUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlRelpacesUpper.Name = "pnlRelpacesUpper";
+            this.pnlRelpacesUpper.Size = new System.Drawing.Size(892, 48);
+            this.pnlRelpacesUpper.TabIndex = 4;
+            // 
+            // tabOptionen
+            // 
+            this.tabOptionen.BackColor = System.Drawing.SystemColors.Control;
+            this.tabOptionen.Controls.Add(this.cbClearListBeforeExcecute);
+            this.tabOptionen.Controls.Add(this.groupBox3);
+            this.tabOptionen.Controls.Add(this.gbKonfig);
+            this.tabOptionen.Controls.Add(this.gpErrorausgabe);
+            this.tabOptionen.Controls.Add(this.gbMeldungDirection);
+            this.tabOptionen.ImageIndex = 3;
+            this.tabOptionen.Location = new System.Drawing.Point(4, 23);
+            this.tabOptionen.Name = "tabOptionen";
+            this.tabOptionen.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOptionen.Size = new System.Drawing.Size(898, 630);
+            this.tabOptionen.TabIndex = 6;
+            this.tabOptionen.Text = "Options";
+            // 
+            // cbClearListBeforeExcecute
+            // 
+            this.cbClearListBeforeExcecute.AutoSize = true;
+            this.cbClearListBeforeExcecute.BackColor = System.Drawing.Color.Transparent;
+            this.cbClearListBeforeExcecute.Checked = true;
+            this.cbClearListBeforeExcecute.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbClearListBeforeExcecute.Location = new System.Drawing.Point(170, 250);
+            this.cbClearListBeforeExcecute.Name = "cbClearListBeforeExcecute";
+            this.cbClearListBeforeExcecute.Size = new System.Drawing.Size(144, 17);
+            this.cbClearListBeforeExcecute.TabIndex = 28;
+            this.cbClearListBeforeExcecute.Text = "Clear lists before execute";
+            this.cbClearListBeforeExcecute.UseVisualStyleBackColor = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbHistory);
+            this.groupBox3.Controls.Add(this.cbErrors);
+            this.groupBox3.Controls.Add(this.cbMeldungen);
+            this.groupBox3.Location = new System.Drawing.Point(7, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(151, 132);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Listenausgaben";
+            // 
+            // gbKonfig
+            // 
+            this.gbKonfig.Controls.Add(this.txtErrIntervall);
+            this.gbKonfig.Controls.Add(this.txtLogFile);
+            this.gbKonfig.Controls.Add(this.secSERVERNAME);
+            this.gbKonfig.Controls.Add(this.hsRefreshConfig);
+            this.gbKonfig.Controls.Add(this.txtMeldIntervall);
+            this.gbKonfig.Controls.Add(this.txtMeldLogFilePath);
+            this.gbKonfig.Controls.Add(this.secDATABASEPATH);
+            this.gbKonfig.Location = new System.Drawing.Point(600, 6);
+            this.gbKonfig.Name = "gbKonfig";
+            this.gbKonfig.Size = new System.Drawing.Size(405, 219);
+            this.gbKonfig.TabIndex = 2;
+            this.gbKonfig.TabStop = false;
+            this.gbKonfig.Text = "Konfiguration";
+            // 
+            // txtErrIntervall
+            // 
+            this.txtErrIntervall.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtErrIntervall.Caption = "Clear Intervall Errors";
+            this.helpMain.SetHelpString(this.txtErrIntervall, "100");
+            this.txtErrIntervall.Inhalt = "100";
+            this.txtErrIntervall.Location = new System.Drawing.Point(18, 190);
+            this.txtErrIntervall.Name = "txtErrIntervall";
+            this.helpMain.SetShowHelp(this.txtErrIntervall, true);
+            this.txtErrIntervall.Size = new System.Drawing.Size(235, 25);
+            this.txtErrIntervall.TabIndex = 3;
+            // 
+            // txtLogFile
+            // 
+            this.txtLogFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLogFile.Caption = "Logfile Name Alerts";
+            this.txtLogFile.Inhalt = "FertProcApp.txt";
+            this.txtLogFile.Location = new System.Drawing.Point(18, 128);
+            this.txtLogFile.Name = "txtLogFile";
+            this.txtLogFile.Size = new System.Drawing.Size(235, 25);
+            this.txtLogFile.TabIndex = 19;
+            // 
+            // secSERVERNAME
+            // 
+            this.secSERVERNAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.secSERVERNAME.Caption = "Servername";
+            this.secSERVERNAME.Inhalt = "";
+            this.secSERVERNAME.Location = new System.Drawing.Point(18, 69);
+            this.secSERVERNAME.Name = "secSERVERNAME";
+            this.secSERVERNAME.Size = new System.Drawing.Size(263, 22);
+            this.secSERVERNAME.TabIndex = 2;
+            // 
+            // txtMeldIntervall
+            // 
+            this.txtMeldIntervall.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMeldIntervall.Caption = "Clear Intervall Alerts";
+            this.txtMeldIntervall.Inhalt = "100";
+            this.txtMeldIntervall.Location = new System.Drawing.Point(18, 159);
+            this.txtMeldIntervall.Name = "txtMeldIntervall";
+            this.txtMeldIntervall.Size = new System.Drawing.Size(235, 25);
+            this.txtMeldIntervall.TabIndex = 2;
+            // 
+            // txtMeldLogFilePath
+            // 
+            this.txtMeldLogFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMeldLogFilePath.Caption = "Logfile Path Alerts";
+            this.txtMeldLogFilePath.Inhalt = "E:\\Temp";
+            this.txtMeldLogFilePath.Location = new System.Drawing.Point(18, 97);
+            this.txtMeldLogFilePath.Name = "txtMeldLogFilePath";
+            this.txtMeldLogFilePath.Size = new System.Drawing.Size(372, 25);
+            this.txtMeldLogFilePath.TabIndex = 3;
+            // 
+            // secDATABASEPATH
+            // 
+            this.secDATABASEPATH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.secDATABASEPATH.Caption = "Database";
+            this.secDATABASEPATH.Inhalt = "";
+            this.secDATABASEPATH.Location = new System.Drawing.Point(18, 45);
+            this.secDATABASEPATH.Name = "secDATABASEPATH";
+            this.secDATABASEPATH.Size = new System.Drawing.Size(263, 22);
+            this.secDATABASEPATH.TabIndex = 0;
+            // 
+            // gpErrorausgabe
+            // 
+            this.gpErrorausgabe.Controls.Add(this.rbErrInsert);
+            this.gpErrorausgabe.Controls.Add(this.rbErrAppend);
+            this.gpErrorausgabe.Location = new System.Drawing.Point(164, 144);
+            this.gpErrorausgabe.Name = "gpErrorausgabe";
+            this.gpErrorausgabe.Size = new System.Drawing.Size(430, 81);
+            this.gpErrorausgabe.TabIndex = 1;
+            this.gpErrorausgabe.TabStop = false;
+            this.gpErrorausgabe.Text = "List of errors";
+            // 
+            // rbErrInsert
+            // 
+            this.rbErrInsert.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.rbErrInsert.AutoSize = true;
+            this.rbErrInsert.Location = new System.Drawing.Point(6, 19);
+            this.rbErrInsert.Name = "rbErrInsert";
+            this.rbErrInsert.Size = new System.Drawing.Size(84, 17);
+            this.rbErrInsert.TabIndex = 1;
+            this.rbErrInsert.Text = "On top of list";
+            this.rbErrInsert.UseVisualStyleBackColor = true;
+            // 
+            // rbErrAppend
+            // 
+            this.rbErrAppend.AutoSize = true;
+            this.rbErrAppend.Checked = true;
+            this.rbErrAppend.Location = new System.Drawing.Point(6, 42);
+            this.rbErrAppend.Name = "rbErrAppend";
+            this.rbErrAppend.Size = new System.Drawing.Size(101, 17);
+            this.rbErrAppend.TabIndex = 0;
+            this.rbErrAppend.TabStop = true;
+            this.rbErrAppend.Text = "On bottom of list";
+            this.rbErrAppend.UseVisualStyleBackColor = true;
+            // 
+            // gbMeldungDirection
+            // 
+            this.gbMeldungDirection.Controls.Add(this.btnLoadMeld);
+            this.gbMeldungDirection.Controls.Add(this.rbMeldInsert);
+            this.gbMeldungDirection.Controls.Add(this.rbMeldAppend);
+            this.gbMeldungDirection.Location = new System.Drawing.Point(164, 6);
+            this.gbMeldungDirection.Name = "gbMeldungDirection";
+            this.gbMeldungDirection.Size = new System.Drawing.Size(430, 132);
+            this.gbMeldungDirection.TabIndex = 0;
+            this.gbMeldungDirection.TabStop = false;
+            this.gbMeldungDirection.Text = "List of alerts";
+            // 
+            // rbMeldInsert
+            // 
+            this.rbMeldInsert.AutoSize = true;
+            this.rbMeldInsert.Location = new System.Drawing.Point(6, 19);
+            this.rbMeldInsert.Name = "rbMeldInsert";
+            this.rbMeldInsert.Size = new System.Drawing.Size(84, 17);
+            this.rbMeldInsert.TabIndex = 1;
+            this.rbMeldInsert.Text = "On top of list";
+            this.rbMeldInsert.UseVisualStyleBackColor = true;
+            // 
+            // rbMeldAppend
+            // 
+            this.rbMeldAppend.AutoSize = true;
+            this.rbMeldAppend.Checked = true;
+            this.rbMeldAppend.Location = new System.Drawing.Point(6, 42);
+            this.rbMeldAppend.Name = "rbMeldAppend";
+            this.rbMeldAppend.Size = new System.Drawing.Size(101, 17);
+            this.rbMeldAppend.TabIndex = 0;
+            this.rbMeldAppend.TabStop = true;
+            this.rbMeldAppend.Text = "On bottom of list";
+            this.rbMeldAppend.UseVisualStyleBackColor = true;
+            // 
+            // tabPagePlan
+            // 
+            this.tabPagePlan.Controls.Add(this.pnlPlanCenter);
+            this.tabPagePlan.Controls.Add(this.pnlPlanLower);
+            this.tabPagePlan.Controls.Add(this.pnlPlanUpper);
+            this.tabPagePlan.ImageIndex = 16;
+            this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePlan.Name = "tabPagePlan";
+            this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePlan.Size = new System.Drawing.Size(898, 630);
+            this.tabPagePlan.TabIndex = 7;
+            this.tabPagePlan.Text = "Plan";
+            this.tabPagePlan.UseVisualStyleBackColor = true;
+            // 
+            // pnlPlanCenter
+            // 
+            this.pnlPlanCenter.Controls.Add(this.fctPlan);
+            this.pnlPlanCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPlanCenter.Location = new System.Drawing.Point(3, 51);
+            this.pnlPlanCenter.Name = "pnlPlanCenter";
+            this.pnlPlanCenter.Size = new System.Drawing.Size(892, 528);
+            this.pnlPlanCenter.TabIndex = 7;
+            // 
+            // fctPlan
+            // 
+            this.fctPlan.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctPlan.AutoIndentCharsPatterns = "";
+            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.fctPlan.BackBrush = null;
+            this.fctPlan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctPlan.CharHeight = 14;
+            this.fctPlan.CharWidth = 8;
+            this.fctPlan.CommentPrefix = "--";
+            this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctPlan.IsReplaceMode = false;
+            this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctPlan.LeftBracket = '(';
+            this.fctPlan.Location = new System.Drawing.Point(0, 0);
+            this.fctPlan.Name = "fctPlan";
+            this.fctPlan.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctPlan.RightBracket = ')';
+            this.fctPlan.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctPlan.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctPlan.ServiceColors")));
+            this.fctPlan.Size = new System.Drawing.Size(892, 528);
+            this.fctPlan.TabIndex = 0;
+            this.fctPlan.Text = "fastColoredTextBox1";
+            this.fctPlan.Zoom = 100;
+            // 
+            // pnlPlanLower
+            // 
+            this.pnlPlanLower.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlPlanLower.Location = new System.Drawing.Point(3, 579);
+            this.pnlPlanLower.Name = "pnlPlanLower";
+            this.pnlPlanLower.Size = new System.Drawing.Size(892, 48);
+            this.pnlPlanLower.TabIndex = 6;
+            // 
+            // pnlPlanUpper
+            // 
+            this.pnlPlanUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlPlanUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlPlanUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPlanUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlPlanUpper.Name = "pnlPlanUpper";
+            this.pnlPlanUpper.Size = new System.Drawing.Size(892, 48);
+            this.pnlPlanUpper.TabIndex = 5;
+            // 
+            // tabPageExport
+            // 
+            this.tabPageExport.Controls.Add(this.tabControlExport);
+            this.tabPageExport.ImageIndex = 15;
+            this.tabPageExport.Location = new System.Drawing.Point(4, 23);
+            this.tabPageExport.Name = "tabPageExport";
+            this.tabPageExport.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageExport.Size = new System.Drawing.Size(898, 630);
+            this.tabPageExport.TabIndex = 8;
+            this.tabPageExport.Text = "Export";
+            this.tabPageExport.UseVisualStyleBackColor = true;
+            // 
+            // tabControlExport
+            // 
+            this.tabControlExport.Controls.Add(this.tabPageXML);
+            this.tabControlExport.Controls.Add(this.tabPageXMLScheme);
+            this.tabControlExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlExport.Location = new System.Drawing.Point(3, 3);
+            this.tabControlExport.Name = "tabControlExport";
+            this.tabControlExport.SelectedIndex = 0;
+            this.tabControlExport.Size = new System.Drawing.Size(892, 624);
+            this.tabControlExport.TabIndex = 0;
+            // 
+            // tabPageXML
+            // 
+            this.tabPageXML.Controls.Add(this.fctXMLData);
+            this.tabPageXML.Controls.Add(this.pnlXMLDataUpper);
+            this.tabPageXML.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXML.Name = "tabPageXML";
+            this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageXML.Size = new System.Drawing.Size(884, 598);
+            this.tabPageXML.TabIndex = 0;
+            this.tabPageXML.Text = "XML-Data";
+            this.tabPageXML.UseVisualStyleBackColor = true;
+            // 
+            // fctXMLData
+            // 
+            this.fctXMLData.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctXMLData.AutoIndentCharsPatterns = "";
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLData.BackBrush = null;
+            this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctXMLData.CharHeight = 14;
+            this.fctXMLData.CharWidth = 8;
+            this.fctXMLData.CommentPrefix = "--";
+            this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLData.IsReplaceMode = false;
+            this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctXMLData.LeftBracket = '(';
+            this.fctXMLData.Location = new System.Drawing.Point(3, 51);
+            this.fctXMLData.Name = "fctXMLData";
+            this.fctXMLData.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctXMLData.RightBracket = ')';
+            this.fctXMLData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctXMLData.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLData.ServiceColors")));
+            this.fctXMLData.Size = new System.Drawing.Size(878, 544);
+            this.fctXMLData.TabIndex = 7;
+            this.fctXMLData.Zoom = 100;
+            // 
+            // pnlXMLDataUpper
+            // 
+            this.pnlXMLDataUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlXMLDataUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLDataUpper.Controls.Add(this.hsSaveXML);
+            this.pnlXMLDataUpper.Controls.Add(this.hsRefreshXMLData);
+            this.pnlXMLDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLDataUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLDataUpper.Name = "pnlXMLDataUpper";
+            this.pnlXMLDataUpper.Size = new System.Drawing.Size(878, 48);
+            this.pnlXMLDataUpper.TabIndex = 6;
+            // 
+            // tabPageXMLScheme
+            // 
+            this.tabPageXMLScheme.Controls.Add(this.fctXMLScheme);
+            this.tabPageXMLScheme.Controls.Add(this.pnlXMLScheme);
+            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXMLScheme.Name = "tabPageXMLScheme";
+            this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageXMLScheme.Size = new System.Drawing.Size(884, 598);
+            this.tabPageXMLScheme.TabIndex = 1;
+            this.tabPageXMLScheme.Text = "XML-Schema";
+            this.tabPageXMLScheme.UseVisualStyleBackColor = true;
+            // 
+            // fctXMLScheme
+            // 
+            this.fctXMLScheme.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctXMLScheme.AutoIndentCharsPatterns = "";
+            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLScheme.BackBrush = null;
+            this.fctXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctXMLScheme.CharHeight = 14;
+            this.fctXMLScheme.CharWidth = 8;
+            this.fctXMLScheme.CommentPrefix = "--";
+            this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLScheme.IsReplaceMode = false;
+            this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctXMLScheme.LeftBracket = '(';
+            this.fctXMLScheme.Location = new System.Drawing.Point(3, 51);
+            this.fctXMLScheme.Name = "fctXMLScheme";
+            this.fctXMLScheme.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctXMLScheme.RightBracket = ')';
+            this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
+            this.fctXMLScheme.Size = new System.Drawing.Size(878, 544);
+            this.fctXMLScheme.TabIndex = 9;
+            this.fctXMLScheme.Zoom = 100;
+            // 
+            // pnlXMLScheme
+            // 
+            this.pnlXMLScheme.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLScheme.Controls.Add(this.hsSaveXMLScheme);
+            this.pnlXMLScheme.Controls.Add(this.hsRefreshXMLScheme);
+            this.pnlXMLScheme.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLScheme.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLScheme.Name = "pnlXMLScheme";
+            this.pnlXMLScheme.Size = new System.Drawing.Size(878, 48);
+            this.pnlXMLScheme.TabIndex = 8;
+            // 
+            // tabPagePerformance
+            // 
+            this.tabPagePerformance.Controls.Add(this.gbPerformance);
+            this.tabPagePerformance.Controls.Add(this.panel2);
+            this.tabPagePerformance.ImageIndex = 16;
+            this.tabPagePerformance.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePerformance.Name = "tabPagePerformance";
+            this.tabPagePerformance.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePerformance.Size = new System.Drawing.Size(898, 630);
+            this.tabPagePerformance.TabIndex = 9;
+            this.tabPagePerformance.Text = "Performance";
+            this.tabPagePerformance.UseVisualStyleBackColor = true;
+            // 
+            // gbPerformance
+            // 
+            this.gbPerformance.Controls.Add(this.lvPerformance);
+            this.gbPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbPerformance.Location = new System.Drawing.Point(3, 51);
+            this.gbPerformance.Name = "gbPerformance";
+            this.gbPerformance.Size = new System.Drawing.Size(892, 576);
+            this.gbPerformance.TabIndex = 8;
+            this.gbPerformance.TabStop = false;
+            // 
+            // lvPerformance
+            // 
+            this.lvPerformance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colSQL,
+            this.colMEMUSAGE,
+            this.colSEQ_READS,
+            this.colINX_READS,
+            this.colINSERTS,
+            this.colUPDATES,
+            this.colDELETES,
+            this.colCONFLICTS});
+            this.lvPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvPerformance.GridLines = true;
+            this.lvPerformance.Location = new System.Drawing.Point(3, 16);
+            this.lvPerformance.Name = "lvPerformance";
+            this.lvPerformance.Size = new System.Drawing.Size(886, 557);
+            this.lvPerformance.TabIndex = 0;
+            this.lvPerformance.UseCompatibleStateImageBehavior = false;
+            this.lvPerformance.View = System.Windows.Forms.View.Details;
+            // 
+            // colSQL
+            // 
+            this.colSQL.Text = "SQL Text";
+            this.colSQL.Width = 500;
+            // 
+            // colMEMUSAGE
+            // 
+            this.colMEMUSAGE.Text = "Mem usage";
+            this.colMEMUSAGE.Width = 100;
+            // 
+            // colSEQ_READS
+            // 
+            this.colSEQ_READS.Text = "seq reads";
+            this.colSEQ_READS.Width = 100;
+            // 
+            // colINX_READS
+            // 
+            this.colINX_READS.Text = "index reads";
+            this.colINX_READS.Width = 100;
+            // 
+            // colINSERTS
+            // 
+            this.colINSERTS.Text = "inserts";
+            // 
+            // colUPDATES
+            // 
+            this.colUPDATES.Text = "updates";
+            // 
+            // colDELETES
+            // 
+            this.colDELETES.Text = "deletes";
+            // 
+            // colCONFLICTS
+            // 
+            this.colCONFLICTS.Text = "write conflicts";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.hotSpot1);
+            this.panel2.Controls.Add(this.hsRefreshPerformance);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(892, 48);
+            this.panel2.TabIndex = 7;
+            // 
+            // ilTabControl
+            // 
+            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
+            this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
+            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
+            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
+            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
+            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
+            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
+            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
+            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
+            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
+            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
+            this.ilTabControl.Images.SetKeyName(10, "edit_XML_blue_x24.png");
+            this.ilTabControl.Images.SetKeyName(11, "info_red22x.png");
+            this.ilTabControl.Images.SetKeyName(12, "media_playlist_repeat_blue_x22.png");
+            this.ilTabControl.Images.SetKeyName(13, "dictionary_blue_32X.png");
+            this.ilTabControl.Images.SetKeyName(14, "Table_x24.png");
+            this.ilTabControl.Images.SetKeyName(15, "format_indent_more_24x.png");
+            this.ilTabControl.Images.SetKeyName(16, "graph_32x.png");
+            // 
+            // sfdSQL
+            // 
+            this.sfdSQL.DefaultExt = "*.sql";
+            this.sfdSQL.Filter = "SQL-Dateien|*.sql|Alle Dateien|*.*";
+            this.sfdSQL.Title = "Save SQL Script";
+            // 
+            // helpMain
+            // 
+            this.helpMain.HelpNamespace = "C:\\Projekte\\HerzogApp\\Help\\HerzogApp.chm";
+            // 
+            // ofdLog
+            // 
+            this.ofdLog.FileName = "openFileDialog1";
+            // 
+            // ofdSQL
+            // 
+            this.ofdSQL.DefaultExt = "*.sql";
+            this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
+            this.ofdSQL.Title = "Load SQL Script";
+            // 
+            // saveFileDialogXML
+            // 
+            this.saveFileDialogXML.DefaultExt = "*.xml";
+            this.saveFileDialogXML.Filter = "XML|*.xml|XLS|*.xls|All|*.*";
+            this.saveFileDialogXML.Title = "Save XML";
+            // 
             // tsmiDDLCopyToClipboard
             // 
             this.tsmiDDLCopyToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
@@ -490,11 +1649,6 @@ namespace SQLView
             this.tsmiDDLPaste.Name = "tsmiDDLPaste";
             this.tsmiDDLPaste.Size = new System.Drawing.Size(247, 22);
             this.tsmiDDLPaste.Text = "Paste";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(244, 6);
             // 
             // tsmiLastCommand
             // 
@@ -517,24 +1671,6 @@ namespace SQLView
             this.tsmiExecuteLastSucessfullCommand.Name = "tsmiExecuteLastSucessfullCommand";
             this.tsmiExecuteLastSucessfullCommand.Size = new System.Drawing.Size(247, 22);
             this.tsmiExecuteLastSucessfullCommand.Text = "Execute last sucessfull command";
-            // 
-            // pnlSQLUpper
-            // 
-            this.pnlSQLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlSQLUpper.Controls.Add(this.hsBreak);
-            this.pnlSQLUpper.Controls.Add(this.hsReplaceText);
-            this.pnlSQLUpper.Controls.Add(this.hsSaveSQL);
-            this.pnlSQLUpper.Controls.Add(this.hsLoadSQL);
-            this.pnlSQLUpper.Controls.Add(this.hsRunSQLfromFile);
-            this.pnlSQLUpper.Controls.Add(this.hsClearText);
-            this.pnlSQLUpper.Controls.Add(this.hsRunSQL);
-            this.pnlSQLUpper.Controls.Add(this.cbTestlauf);
-            this.pnlSQLUpper.Controls.Add(this.gbEncoding);
-            this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSQLUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlSQLUpper.Name = "pnlSQLUpper";
-            this.pnlSQLUpper.Size = new System.Drawing.Size(892, 45);
-            this.pnlSQLUpper.TabIndex = 27;
             // 
             // hsBreak
             // 
@@ -879,135 +2015,6 @@ namespace SQLView
             this.hsRunSQL.UseVisualStyleBackColor = false;
             this.hsRunSQL.Click += new System.EventHandler(this.hsRunSQL_Click);
             // 
-            // gbEncoding
-            // 
-            this.gbEncoding.BackColor = System.Drawing.SystemColors.Control;
-            this.gbEncoding.Controls.Add(this.cbEncoding);
-            this.gbEncoding.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbEncoding.Location = new System.Drawing.Point(766, 0);
-            this.gbEncoding.Name = "gbEncoding";
-            this.gbEncoding.Size = new System.Drawing.Size(122, 41);
-            this.gbEncoding.TabIndex = 25;
-            this.gbEncoding.TabStop = false;
-            this.gbEncoding.Text = "Encoding DB";
-            // 
-            // cbEncoding
-            // 
-            this.cbEncoding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEncoding.FormattingEnabled = true;
-            this.cbEncoding.Items.AddRange(new object[] {
-            "NONE",
-            "UTF8"});
-            this.cbEncoding.Location = new System.Drawing.Point(3, 16);
-            this.cbEncoding.Name = "cbEncoding";
-            this.cbEncoding.Size = new System.Drawing.Size(116, 21);
-            this.cbEncoding.TabIndex = 34;
-            this.cbEncoding.Text = "UTF8";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(3, 617);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(892, 10);
-            this.progressBar1.TabIndex = 24;
-            // 
-            // tabRESULT
-            // 
-            this.tabRESULT.Controls.Add(this.dgvResults);
-            this.tabRESULT.Controls.Add(this.bindingNavigator1);
-            this.tabRESULT.Controls.Add(this.pnlResultUpper);
-            this.tabRESULT.ImageIndex = 14;
-            this.tabRESULT.Location = new System.Drawing.Point(4, 23);
-            this.tabRESULT.Name = "tabRESULT";
-            this.tabRESULT.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRESULT.Size = new System.Drawing.Size(898, 630);
-            this.tabRESULT.TabIndex = 1;
-            this.tabRESULT.Text = "Results grid";
-            this.tabRESULT.UseVisualStyleBackColor = true;
-            // 
-            // dgvResults
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvResults.AutoGenerateColumns = false;
-            this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
-            this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResults.DataSource = this.bindingSource1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(3, 50);
-            this.dgvResults.MultiSelect = false;
-            this.dgvResults.Name = "dgvResults";
-            this.dgvResults.ReadOnly = true;
-            this.dgvResults.RowHeadersVisible = false;
-            this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.ShowCellErrors = false;
-            this.dgvResults.ShowRowErrors = false;
-            this.dgvResults.Size = new System.Drawing.Size(892, 552);
-            this.dgvResults.TabIndex = 16;
-            this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvResults_CellPainting);
-            this.dgvResults.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResults_DataError);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.dataSet1;
-            this.bindingSource1.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "NewDataSet";
-            this.dataSet1.Tables.AddRange(new System.Data.DataTable[] {
-            this.Table});
-            // 
-            // Table
-            // 
-            this.Table.TableName = "Table";
-            // 
-            // bindingNavigator1
-            // 
-            this.bindingNavigator1.AddNewItem = null;
-            this.bindingNavigator1.BindingSource = this.bindingSource1;
-            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(3, 602);
-            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigator1.Name = "bindingNavigator1";
-            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(892, 25);
-            this.bindingNavigator1.TabIndex = 2;
-            this.bindingNavigator1.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(44, 22);
-            this.bindingNavigatorCountItem.Text = "von {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Die Gesamtanzahl der Elemente.";
-            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1026,25 +2033,6 @@ namespace SQLView
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Vorherige verschieben";
             // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "1";
-            this.bindingNavigatorPositionItem.ToolTipText = "Aktuelle Position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1062,59 +2050,6 @@ namespace SQLView
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Letzte verschieben";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // pnlResultUpper
-            // 
-            this.pnlResultUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlResultUpper.Controls.Add(this.gbRowHeight);
-            this.pnlResultUpper.Controls.Add(this.hsSaveDataset);
-            this.pnlResultUpper.Controls.Add(this.gbEditMode);
-            this.pnlResultUpper.Controls.Add(this.gbNavigator);
-            this.pnlResultUpper.Controls.Add(this.gbUsedMilliseconds);
-            this.pnlResultUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlResultUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlResultUpper.Name = "pnlResultUpper";
-            this.pnlResultUpper.Size = new System.Drawing.Size(892, 47);
-            this.pnlResultUpper.TabIndex = 25;
-            // 
-            // gbRowHeight
-            // 
-            this.gbRowHeight.Controls.Add(this.txtRowHeight);
-            this.gbRowHeight.Controls.Add(this.cbRowManually);
-            this.gbRowHeight.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbRowHeight.Location = new System.Drawing.Point(612, 0);
-            this.gbRowHeight.Name = "gbRowHeight";
-            this.gbRowHeight.Size = new System.Drawing.Size(79, 43);
-            this.gbRowHeight.TabIndex = 35;
-            this.gbRowHeight.TabStop = false;
-            this.gbRowHeight.Text = "Row height";
-            // 
-            // txtRowHeight
-            // 
-            this.txtRowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRowHeight.Location = new System.Drawing.Point(29, 16);
-            this.txtRowHeight.Name = "txtRowHeight";
-            this.txtRowHeight.Size = new System.Drawing.Size(47, 20);
-            this.txtRowHeight.TabIndex = 30;
-            this.txtRowHeight.TextChanged += new System.EventHandler(this.txtRowHeight_TextChanged);
-            this.txtRowHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRowHeight_KeyDown);
-            // 
-            // cbRowManually
-            // 
-            this.cbRowManually.Checked = true;
-            this.cbRowManually.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRowManually.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cbRowManually.Location = new System.Drawing.Point(3, 16);
-            this.cbRowManually.Name = "cbRowManually";
-            this.cbRowManually.Size = new System.Drawing.Size(26, 24);
-            this.cbRowManually.TabIndex = 29;
-            this.cbRowManually.UseVisualStyleBackColor = true;
-            this.cbRowManually.CheckedChanged += new System.EventHandler(this.cbRowManually_CheckedChanged);
             // 
             // hsSaveDataset
             // 
@@ -1165,78 +2100,6 @@ namespace SQLView
             this.hsSaveDataset.UseVisualStyleBackColor = false;
             this.hsSaveDataset.Click += new System.EventHandler(this.hsSaveDataset_Click);
             // 
-            // gbEditMode
-            // 
-            this.gbEditMode.Controls.Add(this.cbEditMode);
-            this.gbEditMode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbEditMode.Location = new System.Drawing.Point(448, 0);
-            this.gbEditMode.Name = "gbEditMode";
-            this.gbEditMode.Size = new System.Drawing.Size(76, 43);
-            this.gbEditMode.TabIndex = 34;
-            this.gbEditMode.TabStop = false;
-            this.gbEditMode.Text = "Edit mode";
-            // 
-            // cbEditMode
-            // 
-            this.cbEditMode.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbEditMode.Checked = true;
-            this.cbEditMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbEditMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEditMode.Location = new System.Drawing.Point(3, 16);
-            this.cbEditMode.Name = "cbEditMode";
-            this.cbEditMode.Size = new System.Drawing.Size(70, 24);
-            this.cbEditMode.TabIndex = 29;
-            this.cbEditMode.UseVisualStyleBackColor = true;
-            this.cbEditMode.CheckedChanged += new System.EventHandler(this.cbEditMode_CheckedChanged);
-            // 
-            // gbNavigator
-            // 
-            this.gbNavigator.Controls.Add(this.bnTableContent);
-            this.gbNavigator.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbNavigator.Location = new System.Drawing.Point(126, 0);
-            this.gbNavigator.Name = "gbNavigator";
-            this.gbNavigator.Size = new System.Drawing.Size(322, 43);
-            this.gbNavigator.TabIndex = 33;
-            this.gbNavigator.TabStop = false;
-            this.gbNavigator.Text = "Navigator";
-            // 
-            // bnTableContent
-            // 
-            this.bnTableContent.AddNewItem = null;
-            this.bnTableContent.BindingSource = this.bindingSource1;
-            this.bnTableContent.CountItem = this.bnTableContentCountItem;
-            this.bnTableContent.DeleteItem = this.bnTableContentDeleteItem;
-            this.bnTableContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bnTableContent.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.bnTableContent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bnTableContentMoveFirstItem,
-            this.bnTableContentMovePreviousItem,
-            this.bnTableContentSeparator,
-            this.bnTableContentPositionItem,
-            this.bnTableContentCountItem,
-            this.bnTableContentSeparator1,
-            this.bnTableContentMoveNextItem,
-            this.bnTableContentMoveLastItem,
-            this.bnTableContentSeparator2,
-            this.bnTableContentDeleteItem});
-            this.bnTableContent.Location = new System.Drawing.Point(3, 16);
-            this.bnTableContent.MoveFirstItem = this.bnTableContentMoveFirstItem;
-            this.bnTableContent.MoveLastItem = this.bnTableContentMoveLastItem;
-            this.bnTableContent.MoveNextItem = this.bnTableContentMoveNextItem;
-            this.bnTableContent.MovePreviousItem = this.bnTableContentMovePreviousItem;
-            this.bnTableContent.Name = "bnTableContent";
-            this.bnTableContent.PositionItem = this.bnTableContentPositionItem;
-            this.bnTableContent.Size = new System.Drawing.Size(316, 24);
-            this.bnTableContent.TabIndex = 26;
-            this.bnTableContent.Text = "bindingNavigator1";
-            // 
-            // bnTableContentCountItem
-            // 
-            this.bnTableContentCountItem.Name = "bnTableContentCountItem";
-            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 21);
-            this.bnTableContentCountItem.Text = "von {0}";
-            this.bnTableContentCountItem.ToolTipText = "Total number of items";
-            // 
             // bnTableContentDeleteItem
             // 
             this.bnTableContentDeleteItem.AutoSize = false;
@@ -1266,26 +2129,6 @@ namespace SQLView
             this.bnTableContentMovePreviousItem.Size = new System.Drawing.Size(24, 21);
             this.bnTableContentMovePreviousItem.Text = "Move previous";
             // 
-            // bnTableContentSeparator
-            // 
-            this.bnTableContentSeparator.Name = "bnTableContentSeparator";
-            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 24);
-            // 
-            // bnTableContentPositionItem
-            // 
-            this.bnTableContentPositionItem.AccessibleName = "Position";
-            this.bnTableContentPositionItem.AutoSize = false;
-            this.bnTableContentPositionItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.bnTableContentPositionItem.Name = "bnTableContentPositionItem";
-            this.bnTableContentPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bnTableContentPositionItem.Text = "1";
-            this.bnTableContentPositionItem.ToolTipText = "Current position";
-            // 
-            // bnTableContentSeparator1
-            // 
-            this.bnTableContentSeparator1.Name = "bnTableContentSeparator1";
-            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 24);
-            // 
             // bnTableContentMoveNextItem
             // 
             this.bnTableContentMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1303,90 +2146,6 @@ namespace SQLView
             this.bnTableContentMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bnTableContentMoveLastItem.Size = new System.Drawing.Size(24, 21);
             this.bnTableContentMoveLastItem.Text = "Move last";
-            // 
-            // bnTableContentSeparator2
-            // 
-            this.bnTableContentSeparator2.Name = "bnTableContentSeparator2";
-            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 24);
-            // 
-            // gbUsedMilliseconds
-            // 
-            this.gbUsedMilliseconds.Controls.Add(this.lblUsedMs);
-            this.gbUsedMilliseconds.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbUsedMilliseconds.Location = new System.Drawing.Point(0, 0);
-            this.gbUsedMilliseconds.Name = "gbUsedMilliseconds";
-            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 43);
-            this.gbUsedMilliseconds.TabIndex = 31;
-            this.gbUsedMilliseconds.TabStop = false;
-            this.gbUsedMilliseconds.Text = "Costs in milliseconds";
-            // 
-            // lblUsedMs
-            // 
-            this.lblUsedMs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblUsedMs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsedMs.Location = new System.Drawing.Point(3, 16);
-            this.lblUsedMs.Name = "lblUsedMs";
-            this.lblUsedMs.Size = new System.Drawing.Size(120, 24);
-            this.lblUsedMs.TabIndex = 0;
-            this.lblUsedMs.Text = "0";
-            this.lblUsedMs.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // tabMELDUNG
-            // 
-            this.tabMELDUNG.BackColor = System.Drawing.SystemColors.Control;
-            this.tabMELDUNG.Controls.Add(this.pnlInfoCenter);
-            this.tabMELDUNG.Controls.Add(this.panel1);
-            this.tabMELDUNG.ImageKey = "info_blue_22x.png";
-            this.tabMELDUNG.Location = new System.Drawing.Point(4, 23);
-            this.tabMELDUNG.Name = "tabMELDUNG";
-            this.tabMELDUNG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMELDUNG.Size = new System.Drawing.Size(898, 630);
-            this.tabMELDUNG.TabIndex = 2;
-            this.tabMELDUNG.Text = "Messagens";
-            // 
-            // pnlInfoCenter
-            // 
-            this.pnlInfoCenter.Controls.Add(this.rtfMELDUNG);
-            this.pnlInfoCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlInfoCenter.Location = new System.Drawing.Point(3, 50);
-            this.pnlInfoCenter.Name = "pnlInfoCenter";
-            this.pnlInfoCenter.Size = new System.Drawing.Size(892, 577);
-            this.pnlInfoCenter.TabIndex = 25;
-            // 
-            // rtfMELDUNG
-            // 
-            this.rtfMELDUNG.BackColor = System.Drawing.SystemColors.Info;
-            this.rtfMELDUNG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtfMELDUNG.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtfMELDUNG.Location = new System.Drawing.Point(0, 0);
-            this.rtfMELDUNG.Name = "rtfMELDUNG";
-            this.rtfMELDUNG.Size = new System.Drawing.Size(892, 577);
-            this.rtfMELDUNG.TabIndex = 0;
-            this.rtfMELDUNG.Text = "";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.cbMeldAutoclear);
-            this.panel1.Controls.Add(this.hsClearInfo);
-            this.panel1.Controls.Add(this.cbAutoScroll);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(892, 47);
-            this.panel1.TabIndex = 24;
-            // 
-            // cbMeldAutoclear
-            // 
-            this.cbMeldAutoclear.AutoSize = true;
-            this.cbMeldAutoclear.Checked = true;
-            this.cbMeldAutoclear.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbMeldAutoclear.Location = new System.Drawing.Point(178, 16);
-            this.cbMeldAutoclear.Name = "cbMeldAutoclear";
-            this.cbMeldAutoclear.Size = new System.Drawing.Size(71, 17);
-            this.cbMeldAutoclear.TabIndex = 22;
-            this.cbMeldAutoclear.Text = "Autoclear";
-            this.cbMeldAutoclear.UseVisualStyleBackColor = true;
             // 
             // hsClearInfo
             // 
@@ -1437,75 +2196,6 @@ namespace SQLView
             this.hsClearInfo.UseVisualStyleBackColor = false;
             this.hsClearInfo.Click += new System.EventHandler(this.hsClearInfo_Click);
             // 
-            // cbAutoScroll
-            // 
-            this.cbAutoScroll.AutoSize = true;
-            this.cbAutoScroll.Checked = true;
-            this.cbAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoScroll.Location = new System.Drawing.Point(100, 16);
-            this.cbAutoScroll.Name = "cbAutoScroll";
-            this.cbAutoScroll.Size = new System.Drawing.Size(72, 17);
-            this.cbAutoScroll.TabIndex = 19;
-            this.cbAutoScroll.Text = "Autoscroll";
-            this.cbAutoScroll.UseVisualStyleBackColor = true;
-            // 
-            // tabERRORS
-            // 
-            this.tabERRORS.BackColor = System.Drawing.SystemColors.Control;
-            this.tabERRORS.Controls.Add(this.pnlErrorUpper);
-            this.tabERRORS.Controls.Add(this.pnlErrorsUpper);
-            this.tabERRORS.ImageIndex = 11;
-            this.tabERRORS.Location = new System.Drawing.Point(4, 23);
-            this.tabERRORS.Name = "tabERRORS";
-            this.tabERRORS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabERRORS.Size = new System.Drawing.Size(898, 630);
-            this.tabERRORS.TabIndex = 4;
-            this.tabERRORS.Text = "Errors";
-            // 
-            // pnlErrorUpper
-            // 
-            this.pnlErrorUpper.Controls.Add(this.rtfERRORS);
-            this.pnlErrorUpper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlErrorUpper.Location = new System.Drawing.Point(3, 50);
-            this.pnlErrorUpper.Name = "pnlErrorUpper";
-            this.pnlErrorUpper.Size = new System.Drawing.Size(892, 577);
-            this.pnlErrorUpper.TabIndex = 24;
-            // 
-            // rtfERRORS
-            // 
-            this.rtfERRORS.BackColor = System.Drawing.SystemColors.Info;
-            this.rtfERRORS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtfERRORS.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtfERRORS.Location = new System.Drawing.Point(0, 0);
-            this.rtfERRORS.Name = "rtfERRORS";
-            this.rtfERRORS.Size = new System.Drawing.Size(892, 577);
-            this.rtfERRORS.TabIndex = 1;
-            this.rtfERRORS.Text = "";
-            // 
-            // pnlErrorsUpper
-            // 
-            this.pnlErrorsUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlErrorsUpper.Controls.Add(this.cbAutoSrcollErr);
-            this.pnlErrorsUpper.Controls.Add(this.hsClearErrorAll);
-            this.pnlErrorsUpper.Controls.Add(this.cbErrAutoclear);
-            this.pnlErrorsUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlErrorsUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlErrorsUpper.Name = "pnlErrorsUpper";
-            this.pnlErrorsUpper.Size = new System.Drawing.Size(892, 47);
-            this.pnlErrorsUpper.TabIndex = 23;
-            // 
-            // cbAutoSrcollErr
-            // 
-            this.cbAutoSrcollErr.AutoSize = true;
-            this.cbAutoSrcollErr.Checked = true;
-            this.cbAutoSrcollErr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoSrcollErr.Location = new System.Drawing.Point(202, 24);
-            this.cbAutoSrcollErr.Name = "cbAutoSrcollErr";
-            this.cbAutoSrcollErr.Size = new System.Drawing.Size(72, 17);
-            this.cbAutoSrcollErr.TabIndex = 20;
-            this.cbAutoSrcollErr.Text = "Autoscroll";
-            this.cbAutoSrcollErr.UseVisualStyleBackColor = true;
-            // 
             // hsClearErrorAll
             // 
             this.hsClearErrorAll.BackColor = System.Drawing.Color.Transparent;
@@ -1555,114 +2245,19 @@ namespace SQLView
             this.hsClearErrorAll.UseVisualStyleBackColor = false;
             this.hsClearErrorAll.Click += new System.EventHandler(this.hsClearErrorAll_Click);
             // 
-            // cbErrAutoclear
+            // tsmiSortASC
             // 
-            this.cbErrAutoclear.AutoSize = true;
-            this.cbErrAutoclear.Checked = true;
-            this.cbErrAutoclear.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbErrAutoclear.Location = new System.Drawing.Point(125, 24);
-            this.cbErrAutoclear.Name = "cbErrAutoclear";
-            this.cbErrAutoclear.Size = new System.Drawing.Size(71, 17);
-            this.cbErrAutoclear.TabIndex = 21;
-            this.cbErrAutoclear.Text = "Autoclear";
-            this.cbErrAutoclear.UseVisualStyleBackColor = true;
+            this.tsmiSortASC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.tsmiSortASC.Name = "tsmiSortASC";
+            this.tsmiSortASC.Size = new System.Drawing.Size(159, 22);
+            this.tsmiSortASC.Text = "Sort ascending";
             // 
-            // tabHistory
+            // tsmiSortDESC
             // 
-            this.tabHistory.BackColor = System.Drawing.SystemColors.Control;
-            this.tabHistory.Controls.Add(this.pnlHistoryCenter);
-            this.tabHistory.Controls.Add(this.pnlHistoryUpper);
-            this.tabHistory.ImageIndex = 13;
-            this.tabHistory.Location = new System.Drawing.Point(4, 23);
-            this.tabHistory.Name = "tabHistory";
-            this.tabHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHistory.Size = new System.Drawing.Size(898, 630);
-            this.tabHistory.TabIndex = 3;
-            this.tabHistory.Text = "History";
-            // 
-            // pnlHistoryCenter
-            // 
-            this.pnlHistoryCenter.Controls.Add(this.tabControlHistory);
-            this.pnlHistoryCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlHistoryCenter.Location = new System.Drawing.Point(3, 52);
-            this.pnlHistoryCenter.Name = "pnlHistoryCenter";
-            this.pnlHistoryCenter.Size = new System.Drawing.Size(892, 575);
-            this.pnlHistoryCenter.TabIndex = 24;
-            // 
-            // tabControlHistory
-            // 
-            this.tabControlHistory.Controls.Add(this.tabPageSucceeded);
-            this.tabControlHistory.Controls.Add(this.tabPageFailedHistory);
-            this.tabControlHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlHistory.Location = new System.Drawing.Point(0, 0);
-            this.tabControlHistory.Name = "tabControlHistory";
-            this.tabControlHistory.SelectedIndex = 0;
-            this.tabControlHistory.Size = new System.Drawing.Size(892, 575);
-            this.tabControlHistory.TabIndex = 1;
-            // 
-            // tabPageSucceeded
-            // 
-            this.tabPageSucceeded.Controls.Add(this.clbHISTORY);
-            this.tabPageSucceeded.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSucceeded.Name = "tabPageSucceeded";
-            this.tabPageSucceeded.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSucceeded.Size = new System.Drawing.Size(884, 549);
-            this.tabPageSucceeded.TabIndex = 0;
-            this.tabPageSucceeded.Text = "commands succeded";
-            this.tabPageSucceeded.UseVisualStyleBackColor = true;
-            // 
-            // clbHISTORY
-            // 
-            this.clbHISTORY.CheckOnClick = true;
-            this.clbHISTORY.ContextMenuStrip = this.cmsHistory;
-            this.clbHISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbHISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbHISTORY.FormattingEnabled = true;
-            this.clbHISTORY.HorizontalScrollbar = true;
-            this.clbHISTORY.Location = new System.Drawing.Point(3, 3);
-            this.clbHISTORY.Name = "clbHISTORY";
-            this.clbHISTORY.ScrollAlwaysVisible = true;
-            this.clbHISTORY.Size = new System.Drawing.Size(878, 543);
-            this.clbHISTORY.TabIndex = 0;
-            this.clbHISTORY.DoubleClick += new System.EventHandler(this.clbHISTORY_DoubleClick);
-            // 
-            // tabPageFailedHistory
-            // 
-            this.tabPageFailedHistory.Controls.Add(this.clbFAILED_HISTORY);
-            this.tabPageFailedHistory.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFailedHistory.Name = "tabPageFailedHistory";
-            this.tabPageFailedHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFailedHistory.Size = new System.Drawing.Size(884, 549);
-            this.tabPageFailedHistory.TabIndex = 1;
-            this.tabPageFailedHistory.Text = "failed commands";
-            this.tabPageFailedHistory.UseVisualStyleBackColor = true;
-            // 
-            // clbFAILED_HISTORY
-            // 
-            this.clbFAILED_HISTORY.CheckOnClick = true;
-            this.clbFAILED_HISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbFAILED_HISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbFAILED_HISTORY.FormattingEnabled = true;
-            this.clbFAILED_HISTORY.HorizontalScrollbar = true;
-            this.clbFAILED_HISTORY.Location = new System.Drawing.Point(3, 3);
-            this.clbFAILED_HISTORY.Name = "clbFAILED_HISTORY";
-            this.clbFAILED_HISTORY.ScrollAlwaysVisible = true;
-            this.clbFAILED_HISTORY.Size = new System.Drawing.Size(878, 543);
-            this.clbFAILED_HISTORY.TabIndex = 1;
-            this.clbFAILED_HISTORY.DoubleClick += new System.EventHandler(this.clbFAILED_HISTORY_DoubleClick);
-            // 
-            // pnlHistoryUpper
-            // 
-            this.pnlHistoryUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlHistoryUpper.Controls.Add(this.hsCrearAllFailed);
-            this.pnlHistoryUpper.Controls.Add(this.hsClearHistoryAll);
-            this.pnlHistoryUpper.Controls.Add(this.hsClearHistorySelected);
-            this.pnlHistoryUpper.Controls.Add(this.hsExecuteHistorySelected);
-            this.pnlHistoryUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHistoryUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlHistoryUpper.Name = "pnlHistoryUpper";
-            this.pnlHistoryUpper.Size = new System.Drawing.Size(892, 49);
-            this.pnlHistoryUpper.TabIndex = 23;
+            this.tsmiSortDESC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.tsmiSortDESC.Name = "tsmiSortDESC";
+            this.tsmiSortDESC.Size = new System.Drawing.Size(159, 22);
+            this.tsmiSortDESC.Text = "Sort descending";
             // 
             // hsCrearAllFailed
             // 
@@ -1860,49 +2455,6 @@ namespace SQLView
             this.hsExecuteHistorySelected.UseVisualStyleBackColor = false;
             this.hsExecuteHistorySelected.Click += new System.EventHandler(this.hsExecuteHistorySelected_Click);
             // 
-            // tabRelpacelist
-            // 
-            this.tabRelpacelist.BackColor = System.Drawing.SystemColors.Control;
-            this.tabRelpacelist.Controls.Add(this.pnlReplacesCenter);
-            this.tabRelpacelist.Controls.Add(this.pnlRelpacesUpper);
-            this.tabRelpacelist.ImageIndex = 12;
-            this.tabRelpacelist.Location = new System.Drawing.Point(4, 23);
-            this.tabRelpacelist.Name = "tabRelpacelist";
-            this.tabRelpacelist.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRelpacelist.Size = new System.Drawing.Size(898, 630);
-            this.tabRelpacelist.TabIndex = 5;
-            this.tabRelpacelist.Text = "Replaces";
-            // 
-            // pnlReplacesCenter
-            // 
-            this.pnlReplacesCenter.Controls.Add(this.rtbReplace);
-            this.pnlReplacesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlReplacesCenter.Location = new System.Drawing.Point(3, 51);
-            this.pnlReplacesCenter.Name = "pnlReplacesCenter";
-            this.pnlReplacesCenter.Size = new System.Drawing.Size(892, 576);
-            this.pnlReplacesCenter.TabIndex = 5;
-            // 
-            // rtbReplace
-            // 
-            this.rtbReplace.AcceptsTab = true;
-            this.rtbReplace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbReplace.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbReplace.Location = new System.Drawing.Point(0, 0);
-            this.rtbReplace.Name = "rtbReplace";
-            this.rtbReplace.Size = new System.Drawing.Size(892, 576);
-            this.rtbReplace.TabIndex = 2;
-            this.rtbReplace.Text = "";
-            // 
-            // pnlRelpacesUpper
-            // 
-            this.pnlRelpacesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlRelpacesUpper.Controls.Add(this.hsLoadListReplaces);
-            this.pnlRelpacesUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRelpacesUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlRelpacesUpper.Name = "pnlRelpacesUpper";
-            this.pnlRelpacesUpper.Size = new System.Drawing.Size(892, 48);
-            this.pnlRelpacesUpper.TabIndex = 4;
-            // 
             // hsLoadListReplaces
             // 
             this.hsLoadListReplaces.BackColor = System.Drawing.Color.Transparent;
@@ -1952,95 +2504,6 @@ namespace SQLView
             this.hsLoadListReplaces.UseVisualStyleBackColor = false;
             this.hsLoadListReplaces.Click += new System.EventHandler(this.hsLoadListReplaces_Click);
             // 
-            // tabOptionen
-            // 
-            this.tabOptionen.BackColor = System.Drawing.SystemColors.Control;
-            this.tabOptionen.Controls.Add(this.cbClearListBeforeExcecute);
-            this.tabOptionen.Controls.Add(this.groupBox3);
-            this.tabOptionen.Controls.Add(this.gbKonfig);
-            this.tabOptionen.Controls.Add(this.gpErrorausgabe);
-            this.tabOptionen.Controls.Add(this.gbMeldungDirection);
-            this.tabOptionen.ImageIndex = 3;
-            this.tabOptionen.Location = new System.Drawing.Point(4, 23);
-            this.tabOptionen.Name = "tabOptionen";
-            this.tabOptionen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOptionen.Size = new System.Drawing.Size(898, 630);
-            this.tabOptionen.TabIndex = 6;
-            this.tabOptionen.Text = "Options";
-            // 
-            // cbClearListBeforeExcecute
-            // 
-            this.cbClearListBeforeExcecute.AutoSize = true;
-            this.cbClearListBeforeExcecute.BackColor = System.Drawing.Color.Transparent;
-            this.cbClearListBeforeExcecute.Checked = true;
-            this.cbClearListBeforeExcecute.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbClearListBeforeExcecute.Location = new System.Drawing.Point(170, 250);
-            this.cbClearListBeforeExcecute.Name = "cbClearListBeforeExcecute";
-            this.cbClearListBeforeExcecute.Size = new System.Drawing.Size(144, 17);
-            this.cbClearListBeforeExcecute.TabIndex = 28;
-            this.cbClearListBeforeExcecute.Text = "Clear lists before execute";
-            this.cbClearListBeforeExcecute.UseVisualStyleBackColor = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbHistory);
-            this.groupBox3.Controls.Add(this.cbErrors);
-            this.groupBox3.Controls.Add(this.cbMeldungen);
-            this.groupBox3.Location = new System.Drawing.Point(7, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(151, 132);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Listenausgaben";
-            // 
-            // gbKonfig
-            // 
-            this.gbKonfig.Controls.Add(this.txtErrIntervall);
-            this.gbKonfig.Controls.Add(this.txtLogFile);
-            this.gbKonfig.Controls.Add(this.secSERVERNAME);
-            this.gbKonfig.Controls.Add(this.hsRefreshConfig);
-            this.gbKonfig.Controls.Add(this.txtMeldIntervall);
-            this.gbKonfig.Controls.Add(this.txtMeldLogFilePath);
-            this.gbKonfig.Controls.Add(this.secDATABASEPATH);
-            this.gbKonfig.Location = new System.Drawing.Point(600, 6);
-            this.gbKonfig.Name = "gbKonfig";
-            this.gbKonfig.Size = new System.Drawing.Size(405, 219);
-            this.gbKonfig.TabIndex = 2;
-            this.gbKonfig.TabStop = false;
-            this.gbKonfig.Text = "Konfiguration";
-            // 
-            // txtErrIntervall
-            // 
-            this.txtErrIntervall.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtErrIntervall.Caption = "Clear Intervall Errors";
-            this.helpMain.SetHelpString(this.txtErrIntervall, "100");
-            this.txtErrIntervall.Inhalt = "100";
-            this.txtErrIntervall.Location = new System.Drawing.Point(18, 190);
-            this.txtErrIntervall.Name = "txtErrIntervall";
-            this.helpMain.SetShowHelp(this.txtErrIntervall, true);
-            this.txtErrIntervall.Size = new System.Drawing.Size(235, 25);
-            this.txtErrIntervall.TabIndex = 3;
-            // 
-            // txtLogFile
-            // 
-            this.txtLogFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLogFile.Caption = "Logfile Name Alerts";
-            this.txtLogFile.Inhalt = "FertProcApp.txt";
-            this.txtLogFile.Location = new System.Drawing.Point(18, 128);
-            this.txtLogFile.Name = "txtLogFile";
-            this.txtLogFile.Size = new System.Drawing.Size(235, 25);
-            this.txtLogFile.TabIndex = 19;
-            // 
-            // secSERVERNAME
-            // 
-            this.secSERVERNAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.secSERVERNAME.Caption = "Servername";
-            this.secSERVERNAME.Inhalt = "";
-            this.secSERVERNAME.Location = new System.Drawing.Point(18, 69);
-            this.secSERVERNAME.Name = "secSERVERNAME";
-            this.secSERVERNAME.Size = new System.Drawing.Size(263, 22);
-            this.secSERVERNAME.TabIndex = 2;
-            // 
             // hsRefreshConfig
             // 
             this.hsRefreshConfig.BackColor = System.Drawing.Color.Transparent;
@@ -2087,82 +2550,6 @@ namespace SQLView
             this.hsRefreshConfig.UseVisualStyleBackColor = true;
             this.hsRefreshConfig.Click += new System.EventHandler(this.hsRefreshConfig_Click);
             // 
-            // txtMeldIntervall
-            // 
-            this.txtMeldIntervall.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMeldIntervall.Caption = "Clear Intervall Alerts";
-            this.txtMeldIntervall.Inhalt = "100";
-            this.txtMeldIntervall.Location = new System.Drawing.Point(18, 159);
-            this.txtMeldIntervall.Name = "txtMeldIntervall";
-            this.txtMeldIntervall.Size = new System.Drawing.Size(235, 25);
-            this.txtMeldIntervall.TabIndex = 2;
-            // 
-            // txtMeldLogFilePath
-            // 
-            this.txtMeldLogFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMeldLogFilePath.Caption = "Logfile Path Alerts";
-            this.txtMeldLogFilePath.Inhalt = "E:\\Temp";
-            this.txtMeldLogFilePath.Location = new System.Drawing.Point(18, 97);
-            this.txtMeldLogFilePath.Name = "txtMeldLogFilePath";
-            this.txtMeldLogFilePath.Size = new System.Drawing.Size(372, 25);
-            this.txtMeldLogFilePath.TabIndex = 3;
-            // 
-            // secDATABASEPATH
-            // 
-            this.secDATABASEPATH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.secDATABASEPATH.Caption = "Database";
-            this.secDATABASEPATH.Inhalt = "";
-            this.secDATABASEPATH.Location = new System.Drawing.Point(18, 45);
-            this.secDATABASEPATH.Name = "secDATABASEPATH";
-            this.secDATABASEPATH.Size = new System.Drawing.Size(263, 22);
-            this.secDATABASEPATH.TabIndex = 0;
-            // 
-            // gpErrorausgabe
-            // 
-            this.gpErrorausgabe.Controls.Add(this.rbErrInsert);
-            this.gpErrorausgabe.Controls.Add(this.rbErrAppend);
-            this.gpErrorausgabe.Location = new System.Drawing.Point(164, 144);
-            this.gpErrorausgabe.Name = "gpErrorausgabe";
-            this.gpErrorausgabe.Size = new System.Drawing.Size(430, 81);
-            this.gpErrorausgabe.TabIndex = 1;
-            this.gpErrorausgabe.TabStop = false;
-            this.gpErrorausgabe.Text = "List of errors";
-            // 
-            // rbErrInsert
-            // 
-            this.rbErrInsert.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.rbErrInsert.AutoSize = true;
-            this.rbErrInsert.Location = new System.Drawing.Point(6, 19);
-            this.rbErrInsert.Name = "rbErrInsert";
-            this.rbErrInsert.Size = new System.Drawing.Size(84, 17);
-            this.rbErrInsert.TabIndex = 1;
-            this.rbErrInsert.Text = "On top of list";
-            this.rbErrInsert.UseVisualStyleBackColor = true;
-            // 
-            // rbErrAppend
-            // 
-            this.rbErrAppend.AutoSize = true;
-            this.rbErrAppend.Checked = true;
-            this.rbErrAppend.Location = new System.Drawing.Point(6, 42);
-            this.rbErrAppend.Name = "rbErrAppend";
-            this.rbErrAppend.Size = new System.Drawing.Size(101, 17);
-            this.rbErrAppend.TabIndex = 0;
-            this.rbErrAppend.TabStop = true;
-            this.rbErrAppend.Text = "On bottom of list";
-            this.rbErrAppend.UseVisualStyleBackColor = true;
-            // 
-            // gbMeldungDirection
-            // 
-            this.gbMeldungDirection.Controls.Add(this.btnLoadMeld);
-            this.gbMeldungDirection.Controls.Add(this.rbMeldInsert);
-            this.gbMeldungDirection.Controls.Add(this.rbMeldAppend);
-            this.gbMeldungDirection.Location = new System.Drawing.Point(164, 6);
-            this.gbMeldungDirection.Name = "gbMeldungDirection";
-            this.gbMeldungDirection.Size = new System.Drawing.Size(430, 132);
-            this.gbMeldungDirection.TabIndex = 0;
-            this.gbMeldungDirection.TabStop = false;
-            this.gbMeldungDirection.Text = "List of alerts";
-            // 
             // btnLoadMeld
             // 
             this.btnLoadMeld.FlatAppearance.BorderSize = 0;
@@ -2175,190 +2562,6 @@ namespace SQLView
             this.btnLoadMeld.TabIndex = 18;
             this.btnLoadMeld.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnLoadMeld.Click += new System.EventHandler(this.btnLoadMeld_Click);
-            // 
-            // rbMeldInsert
-            // 
-            this.rbMeldInsert.AutoSize = true;
-            this.rbMeldInsert.Location = new System.Drawing.Point(6, 19);
-            this.rbMeldInsert.Name = "rbMeldInsert";
-            this.rbMeldInsert.Size = new System.Drawing.Size(84, 17);
-            this.rbMeldInsert.TabIndex = 1;
-            this.rbMeldInsert.Text = "On top of list";
-            this.rbMeldInsert.UseVisualStyleBackColor = true;
-            // 
-            // rbMeldAppend
-            // 
-            this.rbMeldAppend.AutoSize = true;
-            this.rbMeldAppend.Checked = true;
-            this.rbMeldAppend.Location = new System.Drawing.Point(6, 42);
-            this.rbMeldAppend.Name = "rbMeldAppend";
-            this.rbMeldAppend.Size = new System.Drawing.Size(101, 17);
-            this.rbMeldAppend.TabIndex = 0;
-            this.rbMeldAppend.TabStop = true;
-            this.rbMeldAppend.Text = "On bottom of list";
-            this.rbMeldAppend.UseVisualStyleBackColor = true;
-            // 
-            // tabPagePlan
-            // 
-            this.tabPagePlan.Controls.Add(this.pnlPlanCenter);
-            this.tabPagePlan.Controls.Add(this.pnlPlanLower);
-            this.tabPagePlan.Controls.Add(this.pnlPlanUpper);
-            this.tabPagePlan.ImageIndex = 16;
-            this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
-            this.tabPagePlan.Name = "tabPagePlan";
-            this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePlan.Size = new System.Drawing.Size(898, 630);
-            this.tabPagePlan.TabIndex = 7;
-            this.tabPagePlan.Text = "Plan";
-            this.tabPagePlan.UseVisualStyleBackColor = true;
-            // 
-            // pnlPlanCenter
-            // 
-            this.pnlPlanCenter.Controls.Add(this.fctPlan);
-            this.pnlPlanCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPlanCenter.Location = new System.Drawing.Point(3, 51);
-            this.pnlPlanCenter.Name = "pnlPlanCenter";
-            this.pnlPlanCenter.Size = new System.Drawing.Size(892, 528);
-            this.pnlPlanCenter.TabIndex = 7;
-            // 
-            // fctPlan
-            // 
-            this.fctPlan.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctPlan.AutoIndentCharsPatterns = "";
-            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(154, 14);
-            this.fctPlan.BackBrush = null;
-            this.fctPlan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctPlan.CharHeight = 14;
-            this.fctPlan.CharWidth = 8;
-            this.fctPlan.CommentPrefix = "--";
-            this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.fctPlan.IsReplaceMode = false;
-            this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctPlan.LeftBracket = '(';
-            this.fctPlan.Location = new System.Drawing.Point(0, 0);
-            this.fctPlan.Name = "fctPlan";
-            this.fctPlan.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctPlan.RightBracket = ')';
-            this.fctPlan.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctPlan.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctPlan.ServiceColors")));
-            this.fctPlan.Size = new System.Drawing.Size(892, 528);
-            this.fctPlan.TabIndex = 0;
-            this.fctPlan.Text = "fastColoredTextBox1";
-            this.fctPlan.Zoom = 100;
-            // 
-            // pnlPlanLower
-            // 
-            this.pnlPlanLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlPlanLower.Location = new System.Drawing.Point(3, 579);
-            this.pnlPlanLower.Name = "pnlPlanLower";
-            this.pnlPlanLower.Size = new System.Drawing.Size(892, 48);
-            this.pnlPlanLower.TabIndex = 6;
-            // 
-            // pnlPlanUpper
-            // 
-            this.pnlPlanUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pnlPlanUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlPlanUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPlanUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlPlanUpper.Name = "pnlPlanUpper";
-            this.pnlPlanUpper.Size = new System.Drawing.Size(892, 48);
-            this.pnlPlanUpper.TabIndex = 5;
-            // 
-            // tabPageExport
-            // 
-            this.tabPageExport.Controls.Add(this.tabControlExport);
-            this.tabPageExport.ImageIndex = 15;
-            this.tabPageExport.Location = new System.Drawing.Point(4, 23);
-            this.tabPageExport.Name = "tabPageExport";
-            this.tabPageExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExport.Size = new System.Drawing.Size(898, 630);
-            this.tabPageExport.TabIndex = 8;
-            this.tabPageExport.Text = "Export";
-            this.tabPageExport.UseVisualStyleBackColor = true;
-            // 
-            // tabControlExport
-            // 
-            this.tabControlExport.Controls.Add(this.tabPageXML);
-            this.tabControlExport.Controls.Add(this.tabPageXMLScheme);
-            this.tabControlExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlExport.Location = new System.Drawing.Point(3, 3);
-            this.tabControlExport.Name = "tabControlExport";
-            this.tabControlExport.SelectedIndex = 0;
-            this.tabControlExport.Size = new System.Drawing.Size(892, 624);
-            this.tabControlExport.TabIndex = 0;
-            // 
-            // tabPageXML
-            // 
-            this.tabPageXML.Controls.Add(this.fctXMLData);
-            this.tabPageXML.Controls.Add(this.pnlXMLDataUpper);
-            this.tabPageXML.Location = new System.Drawing.Point(4, 22);
-            this.tabPageXML.Name = "tabPageXML";
-            this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXML.Size = new System.Drawing.Size(884, 598);
-            this.tabPageXML.TabIndex = 0;
-            this.tabPageXML.Text = "XML-Data";
-            this.tabPageXML.UseVisualStyleBackColor = true;
-            // 
-            // fctXMLData
-            // 
-            this.fctXMLData.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
-            this.fctXMLData.BackBrush = null;
-            this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctXMLData.CharHeight = 14;
-            this.fctXMLData.CharWidth = 8;
-            this.fctXMLData.CommentPrefix = "--";
-            this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLData.IsReplaceMode = false;
-            this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctXMLData.LeftBracket = '(';
-            this.fctXMLData.Location = new System.Drawing.Point(3, 51);
-            this.fctXMLData.Name = "fctXMLData";
-            this.fctXMLData.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctXMLData.RightBracket = ')';
-            this.fctXMLData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctXMLData.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLData.ServiceColors")));
-            this.fctXMLData.Size = new System.Drawing.Size(878, 544);
-            this.fctXMLData.TabIndex = 7;
-            this.fctXMLData.Zoom = 100;
-            // 
-            // pnlXMLDataUpper
-            // 
-            this.pnlXMLDataUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pnlXMLDataUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlXMLDataUpper.Controls.Add(this.hsSaveXML);
-            this.pnlXMLDataUpper.Controls.Add(this.hsRefreshXMLData);
-            this.pnlXMLDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXMLDataUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlXMLDataUpper.Name = "pnlXMLDataUpper";
-            this.pnlXMLDataUpper.Size = new System.Drawing.Size(878, 48);
-            this.pnlXMLDataUpper.TabIndex = 6;
             // 
             // hsSaveXML
             // 
@@ -2456,66 +2659,6 @@ namespace SQLView
             this.hsRefreshXMLData.UseVisualStyleBackColor = false;
             this.hsRefreshXMLData.Click += new System.EventHandler(this.hsRefreshXMLData_Click);
             // 
-            // tabPageXMLScheme
-            // 
-            this.tabPageXMLScheme.Controls.Add(this.fctXMLScheme);
-            this.tabPageXMLScheme.Controls.Add(this.pnlXMLScheme);
-            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
-            this.tabPageXMLScheme.Name = "tabPageXMLScheme";
-            this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXMLScheme.Size = new System.Drawing.Size(884, 598);
-            this.tabPageXMLScheme.TabIndex = 1;
-            this.tabPageXMLScheme.Text = "XML-Schema";
-            this.tabPageXMLScheme.UseVisualStyleBackColor = true;
-            // 
-            // fctXMLScheme
-            // 
-            this.fctXMLScheme.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctXMLScheme.AutoIndentCharsPatterns = "";
-            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(2, 14);
-            this.fctXMLScheme.BackBrush = null;
-            this.fctXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctXMLScheme.CharHeight = 14;
-            this.fctXMLScheme.CharWidth = 8;
-            this.fctXMLScheme.CommentPrefix = "--";
-            this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLScheme.IsReplaceMode = false;
-            this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctXMLScheme.LeftBracket = '(';
-            this.fctXMLScheme.Location = new System.Drawing.Point(3, 51);
-            this.fctXMLScheme.Name = "fctXMLScheme";
-            this.fctXMLScheme.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctXMLScheme.RightBracket = ')';
-            this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
-            this.fctXMLScheme.Size = new System.Drawing.Size(878, 544);
-            this.fctXMLScheme.TabIndex = 9;
-            this.fctXMLScheme.Zoom = 100;
-            // 
-            // pnlXMLScheme
-            // 
-            this.pnlXMLScheme.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pnlXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlXMLScheme.Controls.Add(this.hsSaveXMLScheme);
-            this.pnlXMLScheme.Controls.Add(this.hsRefreshXMLScheme);
-            this.pnlXMLScheme.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXMLScheme.Location = new System.Drawing.Point(3, 3);
-            this.pnlXMLScheme.Name = "pnlXMLScheme";
-            this.pnlXMLScheme.Size = new System.Drawing.Size(878, 48);
-            this.pnlXMLScheme.TabIndex = 8;
-            // 
             // hsSaveXMLScheme
             // 
             this.hsSaveXMLScheme.BackColor = System.Drawing.Color.Transparent;
@@ -2612,97 +2755,6 @@ namespace SQLView
             this.hsRefreshXMLScheme.UseVisualStyleBackColor = false;
             this.hsRefreshXMLScheme.Click += new System.EventHandler(this.hsRefreshXMLScheme_Click);
             // 
-            // tabPagePerformance
-            // 
-            this.tabPagePerformance.Controls.Add(this.gbPerformance);
-            this.tabPagePerformance.Controls.Add(this.panel2);
-            this.tabPagePerformance.ImageIndex = 16;
-            this.tabPagePerformance.Location = new System.Drawing.Point(4, 23);
-            this.tabPagePerformance.Name = "tabPagePerformance";
-            this.tabPagePerformance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePerformance.Size = new System.Drawing.Size(898, 630);
-            this.tabPagePerformance.TabIndex = 9;
-            this.tabPagePerformance.Text = "Performance";
-            this.tabPagePerformance.UseVisualStyleBackColor = true;
-            // 
-            // gbPerformance
-            // 
-            this.gbPerformance.Controls.Add(this.lvPerformance);
-            this.gbPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbPerformance.Location = new System.Drawing.Point(3, 51);
-            this.gbPerformance.Name = "gbPerformance";
-            this.gbPerformance.Size = new System.Drawing.Size(892, 576);
-            this.gbPerformance.TabIndex = 8;
-            this.gbPerformance.TabStop = false;
-            // 
-            // lvPerformance
-            // 
-            this.lvPerformance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colSQL,
-            this.colMEMUSAGE,
-            this.colSEQ_READS,
-            this.colINX_READS,
-            this.colINSERTS,
-            this.colUPDATES,
-            this.colDELETES,
-            this.colCONFLICTS});
-            this.lvPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvPerformance.GridLines = true;
-            this.lvPerformance.Location = new System.Drawing.Point(3, 16);
-            this.lvPerformance.Name = "lvPerformance";
-            this.lvPerformance.Size = new System.Drawing.Size(886, 557);
-            this.lvPerformance.TabIndex = 0;
-            this.lvPerformance.UseCompatibleStateImageBehavior = false;
-            this.lvPerformance.View = System.Windows.Forms.View.Details;
-            // 
-            // colSQL
-            // 
-            this.colSQL.Text = "SQL Text";
-            this.colSQL.Width = 500;
-            // 
-            // colMEMUSAGE
-            // 
-            this.colMEMUSAGE.Text = "Mem usage";
-            this.colMEMUSAGE.Width = 100;
-            // 
-            // colSEQ_READS
-            // 
-            this.colSEQ_READS.Text = "seq reads";
-            this.colSEQ_READS.Width = 100;
-            // 
-            // colINX_READS
-            // 
-            this.colINX_READS.Text = "index reads";
-            this.colINX_READS.Width = 100;
-            // 
-            // colINSERTS
-            // 
-            this.colINSERTS.Text = "inserts";
-            // 
-            // colUPDATES
-            // 
-            this.colUPDATES.Text = "updates";
-            // 
-            // colDELETES
-            // 
-            this.colDELETES.Text = "deletes";
-            // 
-            // colCONFLICTS
-            // 
-            this.colCONFLICTS.Text = "write conflicts";
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.hotSpot1);
-            this.panel2.Controls.Add(this.hsRefreshPerformance);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(892, 48);
-            this.panel2.TabIndex = 7;
-            // 
             // hotSpot1
             // 
             this.hotSpot1.BackColor = System.Drawing.Color.Transparent;
@@ -2798,76 +2850,110 @@ namespace SQLView
             this.hsRefreshPerformance.UseVisualStyleBackColor = false;
             this.hsRefreshPerformance.Click += new System.EventHandler(this.hsRefreshPerformance_Click);
             // 
-            // ilTabControl
+            // hsPageRefresh
             // 
-            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
-            this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
-            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
-            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
-            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
-            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
-            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
-            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
-            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
-            this.ilTabControl.Images.SetKeyName(10, "edit_XML_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(11, "info_red22x.png");
-            this.ilTabControl.Images.SetKeyName(12, "media_playlist_repeat_blue_x22.png");
-            this.ilTabControl.Images.SetKeyName(13, "dictionary_blue_32X.png");
-            this.ilTabControl.Images.SetKeyName(14, "Table_x24.png");
-            this.ilTabControl.Images.SetKeyName(15, "format_indent_more_24x.png");
-            this.ilTabControl.Images.SetKeyName(16, "graph_32x.png");
+            this.hsPageRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.hsPageRefresh.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsPageRefresh.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsPageRefresh.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsPageRefresh.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsPageRefresh.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsPageRefresh.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsPageRefresh.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsPageRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsPageRefresh.FlatAppearance.BorderSize = 0;
+            this.hsPageRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsPageRefresh.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsPageRefresh.Image = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hsPageRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsPageRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.hsPageRefresh.ImageToggleOnSelect = true;
+            this.hsPageRefresh.Location = new System.Drawing.Point(817, 0);
+            this.hsPageRefresh.Marked = false;
+            this.hsPageRefresh.MarkedColor = System.Drawing.Color.Teal;
+            this.hsPageRefresh.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsPageRefresh.MarkedText = "";
+            this.hsPageRefresh.MarkMode = false;
+            this.hsPageRefresh.Name = "hsPageRefresh";
+            this.hsPageRefresh.NonMarkedText = "Refresh";
+            this.hsPageRefresh.Size = new System.Drawing.Size(89, 38);
+            this.hsPageRefresh.TabIndex = 28;
+            this.hsPageRefresh.Text = "Refresh";
+            this.hsPageRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsPageRefresh.ToolTipActive = false;
+            this.hsPageRefresh.ToolTipAutomaticDelay = 500;
+            this.hsPageRefresh.ToolTipAutoPopDelay = 5000;
+            this.hsPageRefresh.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsPageRefresh.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsPageRefresh.ToolTipFor4ContextMenu = true;
+            this.hsPageRefresh.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsPageRefresh.ToolTipInitialDelay = 500;
+            this.hsPageRefresh.ToolTipIsBallon = false;
+            this.hsPageRefresh.ToolTipOwnerDraw = false;
+            this.hsPageRefresh.ToolTipReshowDelay = 100;
+            this.hsPageRefresh.ToolTipShowAlways = false;
+            this.hsPageRefresh.ToolTipText = "";
+            this.hsPageRefresh.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsPageRefresh.ToolTipTitle = "";
+            this.hsPageRefresh.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsPageRefresh.UseVisualStyleBackColor = false;
+            this.hsPageRefresh.Click += new System.EventHandler(this.hsPageRefresh_Click);
             // 
-            // sfdSQL
+            // hsClose
             // 
-            this.sfdSQL.DefaultExt = "*.sql";
-            this.sfdSQL.Filter = "SQL-Dateien|*.sql|Alle Dateien|*.*";
-            this.sfdSQL.Title = "Save SQL Script";
+            this.hsClose.BackColor = System.Drawing.Color.Transparent;
+            this.hsClose.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClose.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClose.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClose.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClose.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClose.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClose.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClose.FlatAppearance.BorderSize = 0;
+            this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
+            this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
+            this.hsClose.ImageToggleOnSelect = true;
+            this.hsClose.Location = new System.Drawing.Point(0, 0);
+            this.hsClose.Marked = false;
+            this.hsClose.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClose.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClose.MarkedText = "";
+            this.hsClose.MarkMode = false;
+            this.hsClose.Name = "hsClose";
+            this.hsClose.NonMarkedText = "";
+            this.hsClose.Size = new System.Drawing.Size(45, 38);
+            this.hsClose.TabIndex = 26;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClose.ToolTipActive = false;
+            this.hsClose.ToolTipAutomaticDelay = 500;
+            this.hsClose.ToolTipAutoPopDelay = 5000;
+            this.hsClose.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClose.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClose.ToolTipFor4ContextMenu = true;
+            this.hsClose.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClose.ToolTipInitialDelay = 500;
+            this.hsClose.ToolTipIsBallon = false;
+            this.hsClose.ToolTipOwnerDraw = false;
+            this.hsClose.ToolTipReshowDelay = 100;
+            this.hsClose.ToolTipShowAlways = false;
+            this.hsClose.ToolTipText = "";
+            this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsClose.ToolTipTitle = "";
+            this.hsClose.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClose.UseVisualStyleBackColor = false;
+            this.hsClose.Click += new System.EventHandler(this.hsClose_Click);
             // 
-            // helpMain
+            // panel3
             // 
-            this.helpMain.HelpNamespace = "C:\\Projekte\\HerzogApp\\Help\\HerzogApp.chm";
-            // 
-            // ofdLog
-            // 
-            this.ofdLog.FileName = "openFileDialog1";
-            // 
-            // ofdSQL
-            // 
-            this.ofdSQL.DefaultExt = "*.sql";
-            this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
-            this.ofdSQL.Title = "Load SQL Script";
-            // 
-            // saveFileDialogXML
-            // 
-            this.saveFileDialogXML.DefaultExt = "*.xml";
-            this.saveFileDialogXML.Filter = "XML|*.xml|XLS|*.xls|All|*.*";
-            this.saveFileDialogXML.Title = "Save XML";
-            // 
-            // cmsHistory
-            // 
-            this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSortASC,
-            this.tsmiSortDESC});
-            this.cmsHistory.Name = "cmsHistory";
-            this.cmsHistory.Size = new System.Drawing.Size(181, 70);
-            this.cmsHistory.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsHistory_ItemClicked);
-            // 
-            // tsmiSortASC
-            // 
-            this.tsmiSortASC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.tsmiSortASC.Name = "tsmiSortASC";
-            this.tsmiSortASC.Size = new System.Drawing.Size(180, 22);
-            this.tsmiSortASC.Text = "Sort ascending";
-            // 
-            // tsmiSortDESC
-            // 
-            this.tsmiSortDESC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.tsmiSortDESC.Name = "tsmiSortDESC";
-            this.tsmiSortDESC.Size = new System.Drawing.Size(180, 22);
-            this.tsmiSortDESC.Text = "Sort descending";
+            this.panel3.BackgroundImage = global::FBXpert.Properties.Resources.waiting2;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel3.Location = new System.Drawing.Point(299, 128);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(230, 220);
+            this.panel3.TabIndex = 26;
             // 
             // SQLViewForm1
             // 
@@ -2885,6 +2971,8 @@ namespace SQLView
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SQLViewForm_FormClosing);
             this.Load += new System.EventHandler(this.SQLViewForm_Load);
             this.pnl_upper.ResumeLayout(false);
+            this.gnUsedTime.ResumeLayout(false);
+            this.gnUsedTime.PerformLayout();
             this.pnl_center.ResumeLayout(false);
             this.tcSQLCONTROL.ResumeLayout(false);
             this.tabSQLTEXT.ResumeLayout(false);
@@ -2924,6 +3012,7 @@ namespace SQLView
             this.pnlHistoryCenter.ResumeLayout(false);
             this.tabControlHistory.ResumeLayout(false);
             this.tabPageSucceeded.ResumeLayout(false);
+            this.cmsHistory.ResumeLayout(false);
             this.tabPageFailedHistory.ResumeLayout(false);
             this.pnlHistoryUpper.ResumeLayout(false);
             this.tabRelpacelist.ResumeLayout(false);
@@ -2952,7 +3041,6 @@ namespace SQLView
             this.tabPagePerformance.ResumeLayout(false);
             this.gbPerformance.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.cmsHistory.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3112,5 +3200,9 @@ namespace SQLView
         private ContextMenuStrip cmsHistory;
         private ToolStripMenuItem tsmiSortASC;
         private ToolStripMenuItem tsmiSortDESC;
+        private GroupBox gnUsedTime;
+        private TextBox txtUsedTime;
+        private SeControlsLib.HotSpot hsPageRefresh;
+        private Panel panel3;
     }
 }

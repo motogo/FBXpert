@@ -52,6 +52,15 @@ namespace FBXpert
             this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gbConnectionType = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtBackupSourceDatabasePath = new System.Windows.Forms.TextBox();
+            this.rbEmbedded = new System.Windows.Forms.RadioButton();
+            this.gbServer = new System.Windows.Forms.GroupBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
+            this.rbRemote = new System.Windows.Forms.RadioButton();
+            this.rbLocal = new System.Windows.Forms.RadioButton();
+            this.cbUseLocalhost = new System.Windows.Forms.CheckBox();
             this.cbBackupExpand = new System.Windows.Forms.CheckBox();
             this.cbBackupOldDescriptions = new System.Windows.Forms.CheckBox();
             this.cbBackupLimbo = new System.Windows.Forms.CheckBox();
@@ -113,15 +122,6 @@ namespace FBXpert
             this.ofdBackup = new System.Windows.Forms.OpenFileDialog();
             this.ofdRestore = new System.Windows.Forms.OpenFileDialog();
             this.ofdRestoreFromDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.cbUseLocalhost = new System.Windows.Forms.CheckBox();
-            this.gbConnectionType = new System.Windows.Forms.GroupBox();
-            this.rbEmbedded = new System.Windows.Forms.RadioButton();
-            this.gbServer = new System.Windows.Forms.GroupBox();
-            this.txtServer = new System.Windows.Forms.TextBox();
-            this.rbRemote = new System.Windows.Forms.RadioButton();
-            this.rbLocal = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtBackupSourceDatabasePath = new System.Windows.Forms.TextBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -130,6 +130,9 @@ namespace FBXpert
             this.gbBackupLog.SuspendLayout();
             this.gbBackupOptions.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.gbConnectionType.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.gbServer.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.gbBackupLocation.SuspendLayout();
             this.pnlFieldUpper.SuspendLayout();
@@ -150,9 +153,6 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
-            this.gbConnectionType.SuspendLayout();
-            this.gbServer.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -203,6 +203,7 @@ namespace FBXpert
             this.hsClose.NonMarkedText = "";
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -214,7 +215,6 @@ namespace FBXpert
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -380,6 +380,104 @@ namespace FBXpert
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             // 
+            // gbConnectionType
+            // 
+            this.gbConnectionType.Controls.Add(this.groupBox2);
+            this.gbConnectionType.Controls.Add(this.rbEmbedded);
+            this.gbConnectionType.Controls.Add(this.gbServer);
+            this.gbConnectionType.Controls.Add(this.rbRemote);
+            this.gbConnectionType.Controls.Add(this.rbLocal);
+            this.gbConnectionType.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gbConnectionType.Location = new System.Drawing.Point(3, 217);
+            this.gbConnectionType.Name = "gbConnectionType";
+            this.gbConnectionType.Size = new System.Drawing.Size(605, 144);
+            this.gbConnectionType.TabIndex = 24;
+            this.gbConnectionType.TabStop = false;
+            this.gbConnectionType.Text = "Database Connectiontype";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtBackupSourceDatabasePath);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox2.Location = new System.Drawing.Point(3, 100);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(599, 41);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Databasepath";
+            // 
+            // txtBackupSourceDatabasePath
+            // 
+            this.txtBackupSourceDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBackupSourceDatabasePath.Location = new System.Drawing.Point(3, 16);
+            this.txtBackupSourceDatabasePath.Name = "txtBackupSourceDatabasePath";
+            this.txtBackupSourceDatabasePath.Size = new System.Drawing.Size(593, 20);
+            this.txtBackupSourceDatabasePath.TabIndex = 1;
+            // 
+            // rbEmbedded
+            // 
+            this.rbEmbedded.AutoSize = true;
+            this.rbEmbedded.Location = new System.Drawing.Point(18, 67);
+            this.rbEmbedded.Name = "rbEmbedded";
+            this.rbEmbedded.Size = new System.Drawing.Size(76, 17);
+            this.rbEmbedded.TabIndex = 8;
+            this.rbEmbedded.TabStop = true;
+            this.rbEmbedded.Text = "Embedded";
+            this.rbEmbedded.UseVisualStyleBackColor = true;
+            this.rbEmbedded.CheckedChanged += new System.EventHandler(this.rbEmbedded_CheckedChanged);
+            // 
+            // gbServer
+            // 
+            this.gbServer.Controls.Add(this.txtServer);
+            this.gbServer.Location = new System.Drawing.Point(101, 43);
+            this.gbServer.Name = "gbServer";
+            this.gbServer.Size = new System.Drawing.Size(199, 41);
+            this.gbServer.TabIndex = 7;
+            this.gbServer.TabStop = false;
+            this.gbServer.Text = "Server";
+            // 
+            // txtServer
+            // 
+            this.txtServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtServer.Location = new System.Drawing.Point(3, 16);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(193, 20);
+            this.txtServer.TabIndex = 1;
+            // 
+            // rbRemote
+            // 
+            this.rbRemote.AutoSize = true;
+            this.rbRemote.Location = new System.Drawing.Point(18, 43);
+            this.rbRemote.Name = "rbRemote";
+            this.rbRemote.Size = new System.Drawing.Size(62, 17);
+            this.rbRemote.TabIndex = 2;
+            this.rbRemote.TabStop = true;
+            this.rbRemote.Text = "Remote";
+            this.rbRemote.UseVisualStyleBackColor = true;
+            this.rbRemote.CheckedChanged += new System.EventHandler(this.rbRemote_CheckedChanged);
+            // 
+            // rbLocal
+            // 
+            this.rbLocal.AutoSize = true;
+            this.rbLocal.Location = new System.Drawing.Point(18, 19);
+            this.rbLocal.Name = "rbLocal";
+            this.rbLocal.Size = new System.Drawing.Size(51, 17);
+            this.rbLocal.TabIndex = 1;
+            this.rbLocal.TabStop = true;
+            this.rbLocal.Text = "Local";
+            this.rbLocal.UseVisualStyleBackColor = true;
+            this.rbLocal.CheckedChanged += new System.EventHandler(this.rbLocal_CheckedChanged);
+            // 
+            // cbUseLocalhost
+            // 
+            this.cbUseLocalhost.AutoSize = true;
+            this.cbUseLocalhost.Location = new System.Drawing.Point(187, 194);
+            this.cbUseLocalhost.Name = "cbUseLocalhost";
+            this.cbUseLocalhost.Size = new System.Drawing.Size(132, 17);
+            this.cbUseLocalhost.TabIndex = 23;
+            this.cbUseLocalhost.Text = "Use localhost account";
+            this.cbUseLocalhost.UseVisualStyleBackColor = true;
+            // 
             // cbBackupExpand
             // 
             this.cbBackupExpand.AutoSize = true;
@@ -469,6 +567,7 @@ namespace FBXpert
             this.hsAddBackupFile.NonMarkedText = "";
             this.hsAddBackupFile.Size = new System.Drawing.Size(45, 32);
             this.hsAddBackupFile.TabIndex = 11;
+            this.hsAddBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddBackupFile.ToolTipActive = false;
             this.hsAddBackupFile.ToolTipAutomaticDelay = 500;
             this.hsAddBackupFile.ToolTipAutoPopDelay = 5000;
@@ -480,7 +579,6 @@ namespace FBXpert
             this.hsAddBackupFile.ToolTipIsBallon = false;
             this.hsAddBackupFile.ToolTipOwnerDraw = false;
             this.hsAddBackupFile.ToolTipReshowDelay = 100;
-            
             this.hsAddBackupFile.ToolTipShowAlways = false;
             this.hsAddBackupFile.ToolTipText = "";
             this.hsAddBackupFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -566,6 +664,7 @@ namespace FBXpert
             this.hsRemoveBackupFile.NonMarkedText = "";
             this.hsRemoveBackupFile.Size = new System.Drawing.Size(45, 32);
             this.hsRemoveBackupFile.TabIndex = 12;
+            this.hsRemoveBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveBackupFile.ToolTipActive = false;
             this.hsRemoveBackupFile.ToolTipAutomaticDelay = 500;
             this.hsRemoveBackupFile.ToolTipAutoPopDelay = 5000;
@@ -577,7 +676,6 @@ namespace FBXpert
             this.hsRemoveBackupFile.ToolTipIsBallon = false;
             this.hsRemoveBackupFile.ToolTipOwnerDraw = false;
             this.hsRemoveBackupFile.ToolTipReshowDelay = 100;
-            
             this.hsRemoveBackupFile.ToolTipShowAlways = false;
             this.hsRemoveBackupFile.ToolTipText = "";
             this.hsRemoveBackupFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -634,6 +732,7 @@ namespace FBXpert
             this.hsLoadBackupFile.NonMarkedText = "";
             this.hsLoadBackupFile.Size = new System.Drawing.Size(29, 29);
             this.hsLoadBackupFile.TabIndex = 3;
+            this.hsLoadBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadBackupFile.ToolTipActive = false;
             this.hsLoadBackupFile.ToolTipAutomaticDelay = 500;
             this.hsLoadBackupFile.ToolTipAutoPopDelay = 5000;
@@ -645,7 +744,6 @@ namespace FBXpert
             this.hsLoadBackupFile.ToolTipIsBallon = false;
             this.hsLoadBackupFile.ToolTipOwnerDraw = false;
             this.hsLoadBackupFile.ToolTipReshowDelay = 100;
-            
             this.hsLoadBackupFile.ToolTipShowAlways = false;
             this.hsLoadBackupFile.ToolTipText = "";
             this.hsLoadBackupFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -706,7 +804,6 @@ namespace FBXpert
             this.hsBackup.ToolTipIsBallon = false;
             this.hsBackup.ToolTipOwnerDraw = false;
             this.hsBackup.ToolTipReshowDelay = 100;
-            
             this.hsBackup.ToolTipShowAlways = false;
             this.hsBackup.ToolTipText = "";
             this.hsBackup.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -982,6 +1079,7 @@ namespace FBXpert
             this.hsAddRestoreFile.NonMarkedText = "";
             this.hsAddRestoreFile.Size = new System.Drawing.Size(45, 32);
             this.hsAddRestoreFile.TabIndex = 11;
+            this.hsAddRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddRestoreFile.ToolTipActive = false;
             this.hsAddRestoreFile.ToolTipAutomaticDelay = 500;
             this.hsAddRestoreFile.ToolTipAutoPopDelay = 5000;
@@ -993,7 +1091,6 @@ namespace FBXpert
             this.hsAddRestoreFile.ToolTipIsBallon = false;
             this.hsAddRestoreFile.ToolTipOwnerDraw = false;
             this.hsAddRestoreFile.ToolTipReshowDelay = 100;
-            
             this.hsAddRestoreFile.ToolTipShowAlways = false;
             this.hsAddRestoreFile.ToolTipText = "";
             this.hsAddRestoreFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1028,6 +1125,7 @@ namespace FBXpert
             this.hsRemoveRestoreFile.NonMarkedText = "";
             this.hsRemoveRestoreFile.Size = new System.Drawing.Size(45, 32);
             this.hsRemoveRestoreFile.TabIndex = 12;
+            this.hsRemoveRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveRestoreFile.ToolTipActive = false;
             this.hsRemoveRestoreFile.ToolTipAutomaticDelay = 500;
             this.hsRemoveRestoreFile.ToolTipAutoPopDelay = 5000;
@@ -1039,7 +1137,6 @@ namespace FBXpert
             this.hsRemoveRestoreFile.ToolTipIsBallon = false;
             this.hsRemoveRestoreFile.ToolTipOwnerDraw = false;
             this.hsRemoveRestoreFile.ToolTipReshowDelay = 100;
-            
             this.hsRemoveRestoreFile.ToolTipShowAlways = false;
             this.hsRemoveRestoreFile.ToolTipText = "";
             this.hsRemoveRestoreFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1096,6 +1193,7 @@ namespace FBXpert
             this.hsLoadRestoreFile.NonMarkedText = "";
             this.hsLoadRestoreFile.Size = new System.Drawing.Size(29, 29);
             this.hsLoadRestoreFile.TabIndex = 3;
+            this.hsLoadRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadRestoreFile.ToolTipActive = false;
             this.hsLoadRestoreFile.ToolTipAutomaticDelay = 500;
             this.hsLoadRestoreFile.ToolTipAutoPopDelay = 5000;
@@ -1107,7 +1205,6 @@ namespace FBXpert
             this.hsLoadRestoreFile.ToolTipIsBallon = false;
             this.hsLoadRestoreFile.ToolTipOwnerDraw = false;
             this.hsLoadRestoreFile.ToolTipReshowDelay = 100;
-            
             this.hsLoadRestoreFile.ToolTipShowAlways = false;
             this.hsLoadRestoreFile.ToolTipText = "";
             this.hsLoadRestoreFile.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1222,6 +1319,7 @@ namespace FBXpert
             this.hotSpot1.NonMarkedText = "";
             this.hotSpot1.Size = new System.Drawing.Size(29, 19);
             this.hotSpot1.TabIndex = 3;
+            this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hotSpot1.ToolTipActive = false;
             this.hotSpot1.ToolTipAutomaticDelay = 500;
             this.hotSpot1.ToolTipAutoPopDelay = 5000;
@@ -1233,7 +1331,6 @@ namespace FBXpert
             this.hotSpot1.ToolTipIsBallon = false;
             this.hotSpot1.ToolTipOwnerDraw = false;
             this.hotSpot1.ToolTipReshowDelay = 100;
-            
             this.hotSpot1.ToolTipShowAlways = false;
             this.hotSpot1.ToolTipText = "";
             this.hotSpot1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1283,7 +1380,6 @@ namespace FBXpert
             this.hsRestore.ToolTipIsBallon = false;
             this.hsRestore.ToolTipOwnerDraw = false;
             this.hsRestore.ToolTipReshowDelay = 100;
-            
             this.hsRestore.ToolTipShowAlways = false;
             this.hsRestore.ToolTipText = "";
             this.hsRestore.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1316,6 +1412,8 @@ namespace FBXpert
             // 
             // ofdRestore
             // 
+            this.ofdRestore.CheckFileExists = false;
+            this.ofdRestore.CheckPathExists = false;
             this.ofdRestore.FileName = "openFileDialog2";
             // 
             // ofdRestoreFromDatabase
@@ -1323,104 +1421,6 @@ namespace FBXpert
             this.ofdRestoreFromDatabase.DefaultExt = "*.fdb";
             this.ofdRestoreFromDatabase.Filter = "*.fdb|Firebird DB|*.*|All";
             this.ofdRestoreFromDatabase.Multiselect = true;
-            // 
-            // cbUseLocalhost
-            // 
-            this.cbUseLocalhost.AutoSize = true;
-            this.cbUseLocalhost.Location = new System.Drawing.Point(187, 194);
-            this.cbUseLocalhost.Name = "cbUseLocalhost";
-            this.cbUseLocalhost.Size = new System.Drawing.Size(132, 17);
-            this.cbUseLocalhost.TabIndex = 23;
-            this.cbUseLocalhost.Text = "Use localhost account";
-            this.cbUseLocalhost.UseVisualStyleBackColor = true;
-            // 
-            // gbConnectionType
-            // 
-            this.gbConnectionType.Controls.Add(this.groupBox2);
-            this.gbConnectionType.Controls.Add(this.rbEmbedded);
-            this.gbConnectionType.Controls.Add(this.gbServer);
-            this.gbConnectionType.Controls.Add(this.rbRemote);
-            this.gbConnectionType.Controls.Add(this.rbLocal);
-            this.gbConnectionType.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbConnectionType.Location = new System.Drawing.Point(3, 217);
-            this.gbConnectionType.Name = "gbConnectionType";
-            this.gbConnectionType.Size = new System.Drawing.Size(605, 144);
-            this.gbConnectionType.TabIndex = 24;
-            this.gbConnectionType.TabStop = false;
-            this.gbConnectionType.Text = "Database Connectiontype";
-            // 
-            // rbEmbedded
-            // 
-            this.rbEmbedded.AutoSize = true;
-            this.rbEmbedded.Location = new System.Drawing.Point(18, 67);
-            this.rbEmbedded.Name = "rbEmbedded";
-            this.rbEmbedded.Size = new System.Drawing.Size(76, 17);
-            this.rbEmbedded.TabIndex = 8;
-            this.rbEmbedded.TabStop = true;
-            this.rbEmbedded.Text = "Embedded";
-            this.rbEmbedded.UseVisualStyleBackColor = true;
-            this.rbEmbedded.CheckedChanged += new System.EventHandler(this.rbEmbedded_CheckedChanged);
-            // 
-            // gbServer
-            // 
-            this.gbServer.Controls.Add(this.txtServer);
-            this.gbServer.Location = new System.Drawing.Point(101, 43);
-            this.gbServer.Name = "gbServer";
-            this.gbServer.Size = new System.Drawing.Size(199, 41);
-            this.gbServer.TabIndex = 7;
-            this.gbServer.TabStop = false;
-            this.gbServer.Text = "Server";
-            // 
-            // txtServer
-            // 
-            this.txtServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtServer.Location = new System.Drawing.Point(3, 16);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(193, 20);
-            this.txtServer.TabIndex = 1;
-            // 
-            // rbRemote
-            // 
-            this.rbRemote.AutoSize = true;
-            this.rbRemote.Location = new System.Drawing.Point(18, 43);
-            this.rbRemote.Name = "rbRemote";
-            this.rbRemote.Size = new System.Drawing.Size(62, 17);
-            this.rbRemote.TabIndex = 2;
-            this.rbRemote.TabStop = true;
-            this.rbRemote.Text = "Remote";
-            this.rbRemote.UseVisualStyleBackColor = true;
-            this.rbRemote.CheckedChanged += new System.EventHandler(this.rbRemote_CheckedChanged);
-            // 
-            // rbLocal
-            // 
-            this.rbLocal.AutoSize = true;
-            this.rbLocal.Location = new System.Drawing.Point(18, 19);
-            this.rbLocal.Name = "rbLocal";
-            this.rbLocal.Size = new System.Drawing.Size(51, 17);
-            this.rbLocal.TabIndex = 1;
-            this.rbLocal.TabStop = true;
-            this.rbLocal.Text = "Local";
-            this.rbLocal.UseVisualStyleBackColor = true;
-            this.rbLocal.CheckedChanged += new System.EventHandler(this.rbLocal_CheckedChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtBackupSourceDatabasePath);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 100);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 41);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Databasepath";
-            // 
-            // txtBackupSourceDatabasePath
-            // 
-            this.txtBackupSourceDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBackupSourceDatabasePath.Location = new System.Drawing.Point(3, 16);
-            this.txtBackupSourceDatabasePath.Name = "txtBackupSourceDatabasePath";
-            this.txtBackupSourceDatabasePath.Size = new System.Drawing.Size(593, 20);
-            this.txtBackupSourceDatabasePath.TabIndex = 1;
             // 
             // BackupForm
             // 
@@ -1444,6 +1444,12 @@ namespace FBXpert
             this.gbBackupOptions.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.gbConnectionType.ResumeLayout(false);
+            this.gbConnectionType.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.gbServer.ResumeLayout(false);
+            this.gbServer.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.gbBackupLocation.ResumeLayout(false);
@@ -1471,12 +1477,6 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).EndInit();
-            this.gbConnectionType.ResumeLayout(false);
-            this.gbConnectionType.PerformLayout();
-            this.gbServer.ResumeLayout(false);
-            this.gbServer.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }

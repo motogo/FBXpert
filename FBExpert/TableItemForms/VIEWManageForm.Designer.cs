@@ -55,7 +55,6 @@ namespace FBExpert
             this.dsViewContent = new System.Data.DataSet();
             this.Table = new System.Data.DataTable();
             this.pnlDataUpper = new System.Windows.Forms.Panel();
-            this.hsRefreshData = new SeControlsLib.HotSpot();
             this.gbBnView = new System.Windows.Forms.GroupBox();
             this.bnView = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -70,6 +69,7 @@ namespace FBExpert
             this.cbCAuto = new System.Windows.Forms.CheckBox();
             this.sfbViewData = new SeControlsLib.SpezialfilterBox();
             this.hsCancelGettingData = new SeControlsLib.HotSpot();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabDDL = new System.Windows.Forms.TabPage();
             this.pnlDDL_CENTER = new System.Windows.Forms.Panel();
             this.fctDLL = new FastColoredTextBoxNS.FastColoredTextBox();
@@ -123,6 +123,8 @@ namespace FBExpert
             this.hsRefreshExportData = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.gnUsedTime = new System.Windows.Forms.GroupBox();
+            this.txtUsedTime = new System.Windows.Forms.TextBox();
             this.gbMaxAllowedErrors = new System.Windows.Forms.GroupBox();
             this.txtMaxAllowedErrors = new System.Windows.Forms.TextBox();
             this.gbMaxRows = new System.Windows.Forms.GroupBox();
@@ -173,6 +175,7 @@ namespace FBExpert
             this.gbExportFile.SuspendLayout();
             this.gbInsertUpdate.SuspendLayout();
             this.pnlUpper.SuspendLayout();
+            this.gnUsedTime.SuspendLayout();
             this.gbMaxAllowedErrors.SuspendLayout();
             this.gbMaxRows.SuspendLayout();
             this.pnlCenter.SuspendLayout();
@@ -280,6 +283,7 @@ namespace FBExpert
             // 
             this.tabPageDATA.Controls.Add(this.dgvResults);
             this.tabPageDATA.Controls.Add(this.pnlDataUpper);
+            this.tabPageDATA.Controls.Add(this.panel1);
             this.tabPageDATA.ImageIndex = 6;
             this.tabPageDATA.Location = new System.Drawing.Point(4, 23);
             this.tabPageDATA.Name = "tabPageDATA";
@@ -340,7 +344,6 @@ namespace FBExpert
             // 
             this.pnlDataUpper.BackColor = System.Drawing.SystemColors.Control;
             this.pnlDataUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlDataUpper.Controls.Add(this.hsRefreshData);
             this.pnlDataUpper.Controls.Add(this.gbBnView);
             this.pnlDataUpper.Controls.Add(this.cbCAuto);
             this.pnlDataUpper.Controls.Add(this.sfbViewData);
@@ -350,54 +353,6 @@ namespace FBExpert
             this.pnlDataUpper.Name = "pnlDataUpper";
             this.pnlDataUpper.Size = new System.Drawing.Size(1261, 40);
             this.pnlDataUpper.TabIndex = 18;
-            // 
-            // hsRefreshData
-            // 
-            this.hsRefreshData.BackColor = System.Drawing.Color.Transparent;
-            this.hsRefreshData.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshData.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshData.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsRefreshData.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsRefreshData.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsRefreshData.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsRefreshData.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsRefreshData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsRefreshData.FlatAppearance.BorderSize = 0;
-            this.hsRefreshData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsRefreshData.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsRefreshData.Image = global::FBXpert.Properties.Resources.view_refresh22x;
-            this.hsRefreshData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsRefreshData.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.hsRefreshData.ImageToggleOnSelect = false;
-            this.hsRefreshData.Location = new System.Drawing.Point(1027, 0);
-            this.hsRefreshData.Marked = false;
-            this.hsRefreshData.MarkedColor = System.Drawing.Color.Teal;
-            this.hsRefreshData.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsRefreshData.MarkedText = "";
-            this.hsRefreshData.MarkMode = false;
-            this.hsRefreshData.Name = "hsRefreshData";
-            this.hsRefreshData.NonMarkedText = "Refresh Datas";
-            this.hsRefreshData.Size = new System.Drawing.Size(127, 36);
-            this.hsRefreshData.TabIndex = 31;
-            this.hsRefreshData.Text = "Refresh Datas";
-            this.hsRefreshData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsRefreshData.ToolTipActive = false;
-            this.hsRefreshData.ToolTipAutomaticDelay = 500;
-            this.hsRefreshData.ToolTipAutoPopDelay = 5000;
-            this.hsRefreshData.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsRefreshData.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsRefreshData.ToolTipFor4ContextMenu = true;
-            this.hsRefreshData.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsRefreshData.ToolTipInitialDelay = 500;
-            this.hsRefreshData.ToolTipIsBallon = false;
-            this.hsRefreshData.ToolTipOwnerDraw = false;
-            this.hsRefreshData.ToolTipReshowDelay = 100;
-            this.hsRefreshData.ToolTipShowAlways = false;
-            this.hsRefreshData.ToolTipText = "";
-            this.hsRefreshData.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsRefreshData.ToolTipTitle = "";
-            this.hsRefreshData.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsRefreshData.UseVisualStyleBackColor = false;
             // 
             // gbBnView
             // 
@@ -589,6 +544,15 @@ namespace FBExpert
             this.hsCancelGettingData.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsCancelGettingData.UseVisualStyleBackColor = false;
             this.hsCancelGettingData.Click += new System.EventHandler(this.hsCancelGettingData_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::FBXpert.Properties.Resources.waiting2;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Location = new System.Drawing.Point(474, 78);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(230, 220);
+            this.panel1.TabIndex = 20;
             // 
             // tabDDL
             // 
@@ -1277,6 +1241,7 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';
@@ -1613,6 +1578,7 @@ namespace FBExpert
             // pnlUpper
             // 
             this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlUpper.Controls.Add(this.gnUsedTime);
             this.pnlUpper.Controls.Add(this.gbMaxAllowedErrors);
             this.pnlUpper.Controls.Add(this.gbMaxRows);
             this.pnlUpper.Controls.Add(this.lblTableName);
@@ -1623,6 +1589,27 @@ namespace FBExpert
             this.pnlUpper.Name = "pnlUpper";
             this.pnlUpper.Size = new System.Drawing.Size(1275, 40);
             this.pnlUpper.TabIndex = 1;
+            // 
+            // gnUsedTime
+            // 
+            this.gnUsedTime.Controls.Add(this.txtUsedTime);
+            this.gnUsedTime.Location = new System.Drawing.Point(339, -1);
+            this.gnUsedTime.Name = "gnUsedTime";
+            this.gnUsedTime.Size = new System.Drawing.Size(116, 41);
+            this.gnUsedTime.TabIndex = 6;
+            this.gnUsedTime.TabStop = false;
+            this.gnUsedTime.Text = "Used time";
+            // 
+            // txtUsedTime
+            // 
+            this.txtUsedTime.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
+            this.txtUsedTime.Name = "txtUsedTime";
+            this.txtUsedTime.ReadOnly = true;
+            this.txtUsedTime.Size = new System.Drawing.Size(110, 20);
+            this.txtUsedTime.TabIndex = 0;
+            this.txtUsedTime.Text = "0";
             // 
             // gbMaxAllowedErrors
             // 
@@ -1898,6 +1885,8 @@ namespace FBExpert
             this.gbInsertUpdate.PerformLayout();
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
+            this.gnUsedTime.ResumeLayout(false);
+            this.gnUsedTime.PerformLayout();
             this.gbMaxAllowedErrors.ResumeLayout(false);
             this.gbMaxAllowedErrors.PerformLayout();
             this.gbMaxRows.ResumeLayout(false);
@@ -2002,9 +1991,11 @@ namespace FBExpert
         private System.Windows.Forms.ProgressBar pbExport;
         private System.ComponentModel.BackgroundWorker bwExport;
         private System.Windows.Forms.GroupBox gbBnView;
-        private SeControlsLib.HotSpot hsRefreshData;
         private System.Windows.Forms.GroupBox gbMaxAllowedErrors;
         private System.Windows.Forms.TextBox txtMaxAllowedErrors;
         private System.Windows.Forms.CheckBox cbPretty;
+        private System.Windows.Forms.GroupBox gnUsedTime;
+        private System.Windows.Forms.TextBox txtUsedTime;
+        private System.Windows.Forms.Panel panel1;
     }
 }

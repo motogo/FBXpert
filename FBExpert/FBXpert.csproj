@@ -194,6 +194,7 @@
     <Compile Include="DesignSourceCode\XMLDesignForm.Designer.cs">
       <DependentUpon>XMLDesignForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
     <Compile Include="Globals\DomainSQLStatementsClass.cs" />
     <Compile Include="Globals\ErrorCodes.cs" />
@@ -870,6 +871,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\waiting2.jpg" />
+    <None Include="Resources\waiting1.jpg" />
+    <None Include="Resources\waiting.jpg" />
     <None Include="Resources\edit_undo.png" />
     <None Include="Resources\edit_undo_blue_x22.png" />
     <None Include="Resources\NoGo_22.png" />

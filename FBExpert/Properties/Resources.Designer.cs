@@ -1103,16 +1103,6 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap josejorge {
-            get {
-                object obj = ResourceManager.GetObject("josejorge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap jp {
             get {
                 object obj = ResourceManager.GetObject("jp", resourceCulture);
@@ -1546,6 +1536,16 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap view_refresh32x {
             get {
                 object obj = ResourceManager.GetObject("view_refresh32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waiting2 {
+            get {
+                object obj = ResourceManager.GetObject("waiting2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

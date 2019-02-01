@@ -229,7 +229,8 @@ namespace FBXpert
             var dbReg = (DBRegistrationClass)nd.Tag;
 
             try
-            {            
+            {        
+                nd.ToolTipText = $@"{dbReg.Server}:{dbReg.DatabasePath}";
                 NotificationsForm.Instance().SetTitle(DevelopmentClass.Instance().GetDBInfo(dbReg, "Notifications "));
                 NotificationsForm.Instance().SetMDIForm(MdiParent);
                 NotificationsForm.Instance().Show(Left + Width + 16, 64);
@@ -301,6 +302,7 @@ namespace FBXpert
                 {
                     nd.ImageIndex = (int)eImageIndex.DATABASE_INACTIVE;
                 }
+                nd.ToolTipText = $@"{dbr.Server}:{dbr.DatabasePath}";
                 treeView1.Nodes.Add(nd);                
             }
             NotifiesClass.Instance().Notify.RaiseInfo("Database configurations loaded", "KEY");
@@ -378,6 +380,7 @@ namespace FBXpert
            
             NotificationsForm.Instance().SetLeft = Width + 16;
             pnlUpper.Select();
+            ExtensionMethods.DoubleBuffered(treeView1,true);
         }
 
         private void ToolStripTextBox_MouseLeave(object sender, EventArgs e)

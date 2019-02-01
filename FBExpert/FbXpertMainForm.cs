@@ -252,8 +252,10 @@ namespace FBXpert
             LanguageClass.Instance().InitFile(this,$@"{Application.StartupPath}\Languages\","Language",".","de");
             LanguageClass.Instance().OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
             LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
-             
-            Text = $@"FBXpert V {Assembly.GetAssembly(GetType()).GetName().Version}";
+            string vers = BasicClassLibrary.Globals.GetAppVersion(this);
+            string appname = BasicClassLibrary.Globals.GetAppName(this);
+            Text = $@"{appname} V {vers}";
+
             Application.DoEvents();
             var cf = FBXInfo.Instance();
             cf.MdiParent = this;

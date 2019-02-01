@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using Enums;
 using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
@@ -37,6 +38,8 @@ namespace FBXpert
             this.MdiParent = parent;
             BearbeitenMode = mode;
             _dbReg = dbReg;
+            cbFields.Items.Clear();
+            lvFields.Items.Clear();
             if(mode == eBearbeiten.eInsert)
             {
                 IndexName = "NEW_INDEX_INX1";
@@ -54,9 +57,9 @@ namespace FBXpert
             _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;
             
             _tables = tables;
+            
             TableObject = StaticTreeClass.GetTableObjectForIndexForm(_dbReg, TableName);   
-            cbFields.Items.Clear();
-            lvFields.Items.Clear();
+            
             DataFilled = true;
         }
         
@@ -77,7 +80,7 @@ namespace FBXpert
             _tables = tables;
         
             lvFields.Items.Clear();
-            lvFields.Items.Clear();
+            
             txtIndexName.Text = IndexName.Trim();
             DataFilled = true;
         }
@@ -90,7 +93,7 @@ namespace FBXpert
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0)    sb.Append($@"Errors ({error_count})");
 
-            fctMessages.AppendText("INFO  " + k.Meldung);
+            fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -99,10 +102,10 @@ namespace FBXpert
         {
             StringBuilder sb = new StringBuilder();
             error_count++;
-            if (messages_count > 0) sb.Append("Messages (" + (messages_count).ToString() + ") ");
-            if (error_count > 0) sb.Append("Errors (" + (error_count).ToString() + ")");
+            if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
-            fctMessages.AppendText("ERROR " + k.Meldung);
+            fctMessages.AppendText($@"ERROR {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -150,8 +153,8 @@ namespace FBXpert
                 sb.Append($@"ALTER TABLE {TableName} ADD PRIMARY KEY");                
                 string fieldStr = GetFields();
                                 
-                if(rbSortAscending.Checked) fieldStr+= $@" {StaticVariablesClass.ASCStr}";
-                if(rbSortDescending.Checked) fieldStr+= $@" {StaticVariablesClass.DECStr}";
+                if(rbSortAscending.Checked)  fieldStr+= $@" {EnumHelper.GetDescription(eSort.ASC)}";
+                if(rbSortDescending.Checked) fieldStr+= $@" {EnumHelper.GetDescription(eSort.DESC)}";
                 fieldStr+=";";
                 sb.Append(fieldStr);
             }
@@ -162,8 +165,8 @@ namespace FBXpert
                 {
                     sb.Append($@"{StaticVariablesClass.UNIQUEStr} ");
                 }
-                if(rbSortAscending.Checked) sb.Append($@"{StaticVariablesClass.ASCStr} ");
-                else if(rbSortDescending.Checked) sb.Append($@"{StaticVariablesClass.DECStr} ");
+                if(rbSortAscending.Checked) sb.Append($@"{EnumHelper.GetDescription(eSort.ASC)} ");
+                else if(rbSortDescending.Checked) sb.Append($@"{EnumHelper.GetDescription(eSort.DESC)} ");
 
                 sb.Append("INDEX ");
                 sb.Append(txtIndexName.Text.Trim());
@@ -200,16 +203,16 @@ namespace FBXpert
                 bool Active = false;
                 FbCommand fcmd = new FbCommand(cmd_index, con);
                 var dread = fcmd.ExecuteReader();
-                lvFields.Items.Clear();
+                
                 if (dread.HasRows)
                 {
                     while (dread.Read())
                     {
-                        TableName = dread.GetValue(0).ToString().Trim();
+                        TableName       = dread.GetValue(0).ToString().Trim();
                         indexColumnName = dread.GetValue(2).ToString().Trim();
-                        Unique = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
-                        Active = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0)!=1;
-                        IndexType = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
+                        Unique          = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
+                        Active          = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0)!=1;
+                        IndexType       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
                         cbUnique.Checked = Unique > 0;
                         ckActive.Checked = Active;
                         if(IndexType < 0) rbSortNothing.Checked= true;
@@ -218,8 +221,8 @@ namespace FBXpert
                         string[] lv = new string[1];
                         lv[0] = indexColumnName;
                         if(this.oldIndexColumnName != indexColumnName)
-                        {
-                            ListViewItem lvi = new ListViewItem(lv);
+                        {                            
+                            ListViewItem lvi = new ListViewItem(indexColumnName);
                             lvFields.Items.Add(lvi);
                             this.oldIndexColumnName = indexColumnName;
                         }                                            
@@ -252,7 +255,7 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             
             sb.Append("DROP INDEX ");
-            sb.Append(oldIndexColumnName+";"+Environment.NewLine);
+            sb.Append($@"{oldIndexColumnName};{Environment.NewLine}");
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}");
 
             if (ckPrimary.Checked)
@@ -260,8 +263,8 @@ namespace FBXpert
                 sb.Append($@"ALTER TABLE {TableName} ADD PRIMARY KEY ");
                 
                 string fieldStr = GetFields();                
-                if(rbSortAscending.Checked) fieldStr  += $@" {StaticVariablesClass.ASCStr}";
-                if(rbSortDescending.Checked) fieldStr += $@" {StaticVariablesClass.DECStr}";
+                if(rbSortAscending.Checked) fieldStr  += $@" {EnumHelper.GetDescription(eSort.ASC)}";
+                if(rbSortDescending.Checked) fieldStr += $@" {EnumHelper.GetDescription(eSort.DESC)}";
                 fieldStr+=";";
                 sb.Append(fieldStr);
             }
@@ -318,8 +321,7 @@ namespace FBXpert
             DataFilled = true;
             MakeSQL();
             ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
-            
+            ac.RefreshAutocompleteForDatabase();            
         }
        
         public void ShowCaptions()

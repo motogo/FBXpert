@@ -475,10 +475,7 @@ namespace FBExpert
             {
                fctSQL.AppendText($@"{str}");
             }
-        }
-        
-       
-
+        }               
         
         public void FillCombos()
         {
@@ -514,7 +511,7 @@ namespace FBExpert
             FieldObject.Domain.Precision = 3;
             FieldObject.Domain.NotNull = false;
             FieldObject.IsPrimary = false;
-            FieldObject.PK_ConstraintName = TableObject.primary_constraint.Name;
+            FieldObject.PK_ConstraintName = TableObject.primary_constraint?.Name;
             FieldObject.Position = 0; //keine Position
             FieldObject.Description = string.Empty;
             FieldObject.DefaultValue = string.Empty;
@@ -525,15 +522,13 @@ namespace FBExpert
         public void EditToObject()
         {
             FieldObject = new TableFieldClass();
-            FieldObject.Name        = txtFieldName.Text.Trim();
-            FieldObject.Position    = StaticFunctionsClass.ToIntDef(txtPosition.Text,OrgFieldObject.Position);            
-            //FieldObject.CharSet     = cbCharSet.Text;
-            //FieldObject.Collate     = cbCollate.Text;            
-            FieldObject.Domain.Precision   = StaticFunctionsClass.ToIntDef(txtPrecisionLength.Text,OrgFieldObject.Domain.Precision);
-            FieldObject.Domain.Scale       = StaticFunctionsClass.ToIntDef(txtScale.Text,OrgFieldObject.Domain.Scale);
-            FieldObject.Description = fctDescription.Text;            
-            FieldObject.IsPrimary   = cbPrimaryKey.Checked;
-            FieldObject.PK_ConstraintName = txtPK.Text;
+            FieldObject.Name                = txtFieldName.Text.Trim();
+            FieldObject.Position            = StaticFunctionsClass.ToIntDef(txtPosition.Text,OrgFieldObject.Position);                                  
+            FieldObject.Domain.Precision    = StaticFunctionsClass.ToIntDef(txtPrecisionLength.Text,OrgFieldObject.Domain.Precision);
+            FieldObject.Domain.Scale        = StaticFunctionsClass.ToIntDef(txtScale.Text,OrgFieldObject.Domain.Scale);
+            FieldObject.Description         = fctDescription.Text;            
+            FieldObject.IsPrimary           = cbPrimaryKey.Checked;
+            FieldObject.PK_ConstraintName   = txtPK.Text;
             FieldObject.Domain.FieldType    = StaticVariablesClass.ConvertRawNameToRawType(cbFieldTypes.Text);
             FieldObject.Domain.CharSet      = cbCharSet.Text.Trim();
             FieldObject.Domain.NotNull      = cbNotNull.Checked;
@@ -553,7 +548,7 @@ namespace FBExpert
             txtLength.Text          = FieldObject.Domain.Length.ToString();
             txtScale.Text           = FieldObject.Domain.Scale.ToString();
             txtPrecisionLength.Text = FieldObject.Domain.Precision.ToString();
-            txtPK.Text              = string.IsNullOrEmpty(FieldObject.PK_ConstraintName) ? TableObject.primary_constraint.Name : FieldObject.PK_ConstraintName;
+            txtPK.Text              = string.IsNullOrEmpty(FieldObject.PK_ConstraintName) ? TableObject.primary_constraint?.Name : FieldObject.PK_ConstraintName;
             cbDOMAIN.Text           = FieldObject.Domain.Name;
             cbFieldTypes.Text       = StaticVariablesClass.ConvertRawTypeToRawName(FieldObject.Domain.FieldType);
             fctDescription.Text     = FieldObject.Description;
@@ -566,9 +561,7 @@ namespace FBExpert
         {
             if (this.Left < DbExplorerForm.Instance().Width + 16) this.Left = DbExplorerForm.Instance().Width + 16;                                    
             DataFilled              = false;                       
-            //FillCombos();
             
-
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
             {                                                
                 dsDependencies.Clear();                
@@ -647,36 +640,31 @@ namespace FBExpert
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL();            
         }
 
         private void cbCharSet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL();            
         }
 
         private void cbCollate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL();            
         }
 
         private void txtPrecisionLength_TextChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL();            
         }
 
         private void txtScale_TextChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL();            
         }
               
@@ -739,21 +727,23 @@ namespace FBExpert
 
         private void cbPrimaryKey_CheckedChanged(object sender, EventArgs e)
         {
+            txtPK.Visible = false;
             if (!DataFilled) return;            
             
             if((cbPrimaryKey.Checked)&&(!cbNotNull.Checked))
             {
-                cbNotNull.Checked = true;
+                cbNotNull.Checked = true;                
             }
-            else
+
+            if(cbPrimaryKey.Checked)
             {
+               txtPK.Visible = true;
+               if((cbPrimaryKey.Checked)&&(string.IsNullOrEmpty(txtPK.Text)))
+               {
+                    txtPK.Text = (string.IsNullOrEmpty(FieldObject.PK_ConstraintName)) ? $@"PK_{FieldObject.TableName}" : FieldObject.PK_ConstraintName;                    
+               }
                MakeSQL();            
             }
-        }
-
-        private void cbUnique_CheckedChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void hotSpot1_Click(object sender, EventArgs e)
@@ -772,11 +762,6 @@ namespace FBExpert
         {
             if(!DataFilled) return;                        
             MakeSQL();            
-        }
-
-        private void cbUnique_TextChanged(object sender, EventArgs e)
-        {
-           
         }
        
         private void fctDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -799,11 +784,6 @@ namespace FBExpert
             df.Show();
         }
 
-        private void cbUSEAlwaysDomain_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
             if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
@@ -818,36 +798,26 @@ namespace FBExpert
 
         private void rbUseDOMAIN_CheckedChanged(object sender, EventArgs e)
         {
-            if (!DataFilled) return;
-            
-            
+            if (!DataFilled) return;                        
             SetVisible();
             MakeSQL();            
         }
 
         private void txtBlobSize_TextChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL(); 
         }
 
         private void cbBlobType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;            
-            
+            if (!DataFilled || !rbUseFIELDTYPE.Checked) return;                        
             MakeSQL(); 
         }
-
-        private void ckPosition_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void ckPosition_CheckedChanged(object sender, EventArgs e)
         {
-            if (!DataFilled) return;            
-            
+            if (!DataFilled) return;                        
             MakeSQL();  
         }
 

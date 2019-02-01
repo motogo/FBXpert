@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using Enums;
 using FBExpert.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
@@ -71,6 +72,8 @@ namespace FBExpert
         private bool _tableChanged      = false;
 
         List<string> exportList = new List<string>();
+
+        Stopwatch stopwatch = new Stopwatch();
 
         public void SetMDIParent(Form parent)
         {
@@ -527,7 +530,7 @@ namespace FBExpert
             }
             if(_pkColumnName.Length > 0)
             {
-                sb.Append($@" ORDER BY {_pkColumnName} ASC");
+                sb.Append($@" ORDER BY {_pkColumnName} {EnumHelper.GetDescription(eSort.ASC)}");
             }
             
             string cmd = $@"{sb.ToString()};";
@@ -888,6 +891,7 @@ namespace FBExpert
         private void RefreshAll()
         {
             DataFilled = false;
+            dgvResults.Visible = false;
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
             tabPageFIELDS.Text = $@"Fields ({RefreshFields().ToString()})";
@@ -1339,7 +1343,7 @@ namespace FBExpert
 
         private void hsRefreshAll_Click_1(object sender, EventArgs e)
         {
-            RefreshAll();
+            RefreshFields();            
         }
 
         private void hsDropField_Click(object sender, EventArgs e)
@@ -1407,6 +1411,7 @@ namespace FBExpert
         
         private void bwGetData_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            string timedone = stopwatch.ElapsedMilliseconds.ToString();
             bsTableContent.DataSource = dsTableContent;
             dgvResults.DataSource = bsTableContent;
             hsRefreshData.Enabled = true;
@@ -1416,6 +1421,11 @@ namespace FBExpert
             bsTableContent.DataMember = "Table";
             tabPageDATA.Text = $@"Data ({dsTableContent.Tables[0].Rows.Count})";    
             sfbTableData.SetDataColumns(dgvResults.Columns);
+            dgvResults.ResumeLayout(false);
+            dgvResults.Visible = true;
+            stopwatch.Stop();
+            timedone += $@" / {stopwatch.ElapsedMilliseconds}";
+            txtUsedTime.Text = timedone;
         }
 
         private void bwGetData_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -1425,6 +1435,10 @@ namespace FBExpert
 
         private void bwGetData_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {   
+            
+            stopwatch.Restart();
+            ExtensionMethods.DoubleBuffered(dgvResults,true);
+            dgvResults.SuspendLayout();
             sfbTableData.SQLVorfilterCmd = $@"SELECT {_cmd}";
             RefreshDatas(_cmd);           
         }

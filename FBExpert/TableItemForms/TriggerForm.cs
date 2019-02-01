@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using Enums;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
@@ -78,7 +79,7 @@ namespace FBXpert
         public bool MakeSQLNew()
         {            
             string active = TriggerObject.Active ? "ACTIVE" : "DEACTIVE";
-            string triggerTypeStr = StaticVariablesClass.GetTriggerTypeStr(TriggerObject.Type);
+            string triggerTypeStr = EnumHelper.GetDescription(TriggerObject.Type); // StaticVariablesClass.GetTriggerTypeStr(TriggerObject.Type);
 
             SQLScript.Clear();
             StringBuilder sb = new StringBuilder();
@@ -115,7 +116,7 @@ namespace FBXpert
             var sb = new StringBuilder();
             
             string active = OrgTriggerObject.Active ? "ACTIVE" : "DEACTIVE";
-            string triggerTypeStr = StaticVariablesClass.GetTriggerTypeStr(OrgTriggerObject.Type);
+            string triggerTypeStr = EnumHelper.GetDescription(OrgTriggerObject.Type); //StaticVariablesClass.GetTriggerTypeStr(OrgTriggerObject.Type);
             
             SQLScript.Add($@"DROP TRIGGER {OrgTriggerObject.Name};");
             SQLScript.Add($@"{SQLPatterns.Commit}{Environment.NewLine}");

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -356,12 +357,13 @@ namespace FBExpert
         WorkerClass GetDataWorker = new WorkerClass();
         public void RefreshAll()
         {
+            dgvResults.Visible = false;
             bsViewContent.DataMember = null;
             int rf = RefreshFields();
             _cmd = MakeFieldsCmd();
             
             bsViewContent.DataMember = null;          
-            hsRefreshData.Enabled = false;
+            
             sfbViewData.Enabled = false;
             Application.DoEvents();
             GetDataWorker.CancelGettingData();
@@ -376,8 +378,8 @@ namespace FBExpert
                 }
                 int rd = RefreshDependenciesTo();
             
-                tabPageDependenciesTo.Text = "Dependencies (" + rd.ToString() + ")";
-                tabPageFIELDS.Text = "Fields (" + rf.ToString() + ")";
+                tabPageDependenciesTo.Text = $@"Dependencies ({rd})";
+                tabPageFIELDS.Text = $@"Fields ({rf})";
 
                 RefreshDLL();
                 ShowCaptions();
@@ -533,8 +535,16 @@ namespace FBExpert
             fctCREATEINSERTSQL.OpenFile(ofdSQL.FileName);               
         }
 
+        
+
+
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
+        {      
+            
+            ExtensionMethods.DoubleBuffered(dgvResults,true);    
+            dgvResults.SuspendLayout();
+
+            stopwatch.Restart();
             RefreshDatas(_cmd);
         }
 
@@ -545,6 +555,8 @@ namespace FBExpert
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            string utime = stopwatch.ElapsedMilliseconds.ToString();
+            stopwatch.Restart();
             bsViewContent.DataSource = dsViewContent;
             if (bsViewContent.DataMember != null)
             {
@@ -552,17 +564,20 @@ namespace FBExpert
                 tabPageDATA.Text = $@"Data ({dsViewContent.Tables[0].Rows.Count.ToString()})";
             }
             
-            dgvResults.DataSource = bsViewContent;
-            hsRefreshData.Enabled = true;
+            dgvResults.DataSource = bsViewContent;            
             sfbViewData.Enabled = true;
-            
+            dgvResults.ResumeLayout(false);
+            dgvResults.Visible = true;
+            stopwatch.Stop(); 
+            utime+= $@" / {stopwatch.ElapsedMilliseconds}";
+            txtUsedTime.Text = utime;
         }
         private void hsCancelGettingData_Click(object sender, EventArgs e)
         {
             GetDataWorker.CancelGettingData();
         }
         
-
+        Stopwatch stopwatch = new Stopwatch();
         private void cbAlterView_CheckedChanged(object sender, EventArgs e)
         {
             RefreshDLL();
@@ -864,5 +879,7 @@ namespace FBExpert
         {
             RefreshDLL();
         }
+
+        
     }
 }

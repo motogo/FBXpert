@@ -27,9 +27,7 @@ namespace FBXpert
         {
             Close();
         }
-        
-        
-
+                
         private void BackupForm_Load(object sender, EventArgs e)
         {            
             ShowCaptions();
@@ -38,12 +36,11 @@ namespace FBXpert
 
         public void ShowCaptions()
         {
-            lblCaption.Text = "Database Backup/Restore:" + DBReg.Alias;
+            lblCaption.Text = $@"Database Backup/Restore:{DBReg.Alias}";
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Backup/Restore");
         }
 
         DBRegistrationClass _dbReg = null;
-
 
         public override void DataToEdit()
         {            
@@ -53,7 +50,7 @@ namespace FBXpert
             if(DBReg.ConnectionType == eConnectionType.embedded)
             {                
                 rbEmbedded.Checked = true;
-                 txtServer.Text = "";
+                txtServer.Text = "";
             }
             else if(DBReg.ConnectionType == eConnectionType.localhost)
             {
@@ -66,7 +63,6 @@ namespace FBXpert
                 txtServer.Text = DBReg.Server;
             }
         }
-
 
         private DBRegistrationClass EditToData()
         {                       
@@ -86,7 +82,6 @@ namespace FBXpert
             }
             return _dbReg;
         }
-
 
         private void hsBackup_Click(object sender, EventArgs e)
         {            
@@ -207,9 +202,6 @@ namespace FBXpert
             
             var lf = new List<FirebirdSql.Data.Services.FbBackupFile>();
 
-
-
-
             for (int i = 0; i < lvRestore.Items.Count; i++)
             {
                 ListViewItem lvi = lvRestore.Items[i];
@@ -312,7 +304,7 @@ namespace FBXpert
         {
             ofdRestore.InitialDirectory = DBReg.DatabasePath;
             ofdRestore.Title = "Restore to...";
-            
+            ofdRestore.FileName = "Database.fbd";
             if (ofdRestore.ShowDialog() == DialogResult.OK)
             {
                 txtRestoreLocation.Text = ofdRestore.FileName;
@@ -321,8 +313,7 @@ namespace FBXpert
 
         private void hotSpot1_Click(object sender, EventArgs e)
         {
-            ofdRestoreFromDatabase.InitialDirectory = DBReg.DatabasePath;
-            
+            ofdRestoreFromDatabase.InitialDirectory = DBReg.DatabasePath;            
             ofdRestoreFromDatabase.Title = "Restore from Database";
             
             if (ofdRestoreFromDatabase.ShowDialog() == DialogResult.OK)
@@ -343,14 +334,12 @@ namespace FBXpert
 
         private void rbLocal_CheckedChanged(object sender, EventArgs e)
         {
-            rbCheckedChanged();
-            
+            rbCheckedChanged();            
         }
 
         private void rbRemote_CheckedChanged(object sender, EventArgs e)
         {
-            rbCheckedChanged();
-            
+            rbCheckedChanged();            
         }
         private void rbCheckedChanged()
         {
@@ -375,8 +364,7 @@ namespace FBXpert
 
         private void rbEmbedded_CheckedChanged(object sender, EventArgs e)
         {
-            rbCheckedChanged();
-            
+            rbCheckedChanged();            
         }
     }  
 }

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using FBXpert.DataClasses;
+using MessageLibrary;
 using System.Text;
 using System.Windows.Forms;
-using FBXpert.DataClasses;
-using MessageLibrary;
 
 namespace FBXpert.Globals
 {
@@ -14,7 +13,7 @@ namespace FBXpert.Globals
         {
             return ft ? "*" : "";
         }
-                       
+         /*              
         public static string GetConstraintTypeStr(eConstraintType ct)
         {
             switch (ct)
@@ -28,7 +27,8 @@ namespace FBXpert.Globals
             }
             return string.Empty;
         }
-
+        */
+        /*
         public static string GetTriggerTypeStr(eTriggerType ct)
         {
             switch (ct)
@@ -64,7 +64,7 @@ namespace FBXpert.Globals
             }
             return string.Empty;
         }
-
+        */
         public static eConstraintType GetConstraintType(string ct)
         {
             switch (ct.ToUpper())
@@ -95,28 +95,13 @@ namespace FBXpert.Globals
             {
                 case "LONG":
                     return "INTEGER"; //HE
-                    switch (length)
-                    {
-                        case 4: return "INTEGER";
-                    }
-
-                    break;
+                    
                 case "INT64":
                     return "BIGINT"; //HE
-                    switch (length)
-                    {
-                        case 8: return "BIGINT";
-                    }
-
-                    break;
+                    
                 case "TIMESTAMP":
                     return "TIMESTAMP"; //HE
-                    switch (length)
-                    {
-                        case 8: return "TIMESTAMP";
-                    }
-
-                    break;
+                    
                 case "TIME":
                     return "TIME";
                 default:
@@ -126,11 +111,7 @@ namespace FBXpert.Globals
                     }
                     else if (name == "DOUBLE")
                     {
-                        return "DOUBLE PRECISION"; //HE
-                        switch (length)
-                        {
-                            case 8: return "DOUBLE PRECISION";
-                        }
+                        return "DOUBLE PRECISION"; //HE                    
                     }
                     else if (name == "DATE")
                     {
@@ -155,7 +136,7 @@ namespace FBXpert.Globals
 
                     break;
             }
-            NotifiesClass.Instance().AddToERROR("Datatype:"+name+" not defined !!! (StaticVariables->ConvertType)");
+            NotifiesClass.Instance().AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertType)");
             return "UNDEFINED";
         }
 
@@ -459,8 +440,8 @@ namespace FBXpert.Globals
         public static readonly string CommentEnd = "*/";
         public static readonly string Collation = "NONE";
         public static readonly string NullStr = "null";
-        public static readonly string ASCStr = "ASCENDING";
-        public static readonly string DECStr = "DESCENDING";
+        //public static readonly string ASCStr = "ASCENDING";
+        //public static readonly string DECStr = "DESCENDING";
         public static readonly string UNIQUEStr = "UNIQUE";
         public static readonly string CREATEStr = "CREATE";
 

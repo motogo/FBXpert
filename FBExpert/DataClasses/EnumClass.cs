@@ -10,9 +10,8 @@ namespace FBXpert.DataClasses
     public enum eTableType { withoutsystem = 0, system = 1 };
     public enum eObjectState { none = 0, is_checked = 1 };
     public enum eCreateMode { create = 0, recreate = 1, drop = 2 };
-    public enum eSourceCodePrimaryKeyType{GeneratorInteger=0, UUID=1, none=2 };
-  //  public enum eColorDesigns { Gray, Earth, Space, NoDesign };
-    
+    public enum eSourceCodePrimaryKeyType{GeneratorInteger=0, UUID=1, GUID=2, HEXGUID=3, none=4 };
+      
     public enum eDependencies
     {
         [EnumDescription("Table")]
@@ -44,19 +43,21 @@ namespace FBXpert.DataClasses
         [EnumDescription("NONE")]
         NONE =16
     };
+
     public enum eSort
     {
-        [EnumDescription("Ascending")]
-        ASC =0,
-        [EnumDescription("Descending")]
-        DESC =1,
-        [EnumDescription("None")]
-        NONE =2
+        [EnumDescription("ASCENDING")]
+        ASC = 0,
+        [EnumDescription("DESCENDING")]
+        DESC = 1,
+        [EnumDescription("NONE")]
+        NONE = 2
     };
+
     public enum eConstraintType
     {
         [EnumDescription("NONE")]
-        NONE =0,
+        NONE = 0,
         [EnumDescription("UNIQUE")]
         UNIQUE = 1,
         [EnumDescription("NOT NULL")]

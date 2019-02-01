@@ -2,6 +2,7 @@ using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
+using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
@@ -13,6 +14,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -171,7 +173,7 @@ namespace SQLView
             ThreadStart ts = new ThreadStart(ExecSql);
             Thread th = new Thread(ts);
             th.Start();
-            while (th.ThreadState == ThreadState.Stopped)
+            while (th.ThreadState == System.Threading.ThreadState.Stopped)
             {
                 Thread.Sleep(100);
             }
@@ -534,6 +536,8 @@ namespace SQLView
         }
         private SQLCommandsReturnInfoClass RunSQL(HistoryMode hMode)
         {
+            ExtensionMethods.DoubleBuffered(dgvResults,true);
+            dgvResults.SuspendLayout();
             UserStart();
             _obcmd.Clear();
             _obcmd.AddRange(txtSQL.Lines);
@@ -543,6 +547,7 @@ namespace SQLView
               tcSQLCONTROL.SelectedTab = tabRESULT;
             }
             UserBreak();
+            dgvResults.ResumeLayout(false);
             return ri;
         }
 
@@ -757,11 +762,14 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             UserActionClass.Instance().UserAction = UserActionType.none; Close();
         }
         private void hsRunSQL_Click(object sender, EventArgs e)
-        {
-            ExecuteSQL(_history);
+        {            
+            ExecuteSQL(_history);            
         }
+        Stopwatch stopwatch = new Stopwatch();
         private void ExecuteSQL(HistoryMode hMode)
         {
+            dgvResults.Visible = false; 
+            stopwatch.Restart();
             DoInfoNotifications = true;
             if(cbClearListBeforeExcecute.Checked)
             {
@@ -782,9 +790,12 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 MemoryusagePerStatement();
             }
+            stopwatch.Stop();
+            txtUsedTime.Text = stopwatch.ElapsedMilliseconds.ToString();
             EditMode(cbEditMode.Checked);   
             tabRESULT.Text = $@"Results ({dgvResults.Rows.Count})";
             tabHistory.Text = $@"History ({clbHISTORY.Items.Count})";
+            dgvResults.Visible = true; 
         }
 
         private void hsClearText_Click(object sender, EventArgs e)
@@ -1083,6 +1094,11 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     tabPageSucceeded.Text = "commands succeded DESC";
                 }
             }
+        }
+
+        private void hsPageRefresh_Click(object sender, EventArgs e)
+        {            
+            ExecuteSQL(_history);            
         }
     }
 }
