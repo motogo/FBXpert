@@ -14,10 +14,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FBExpert
@@ -33,7 +31,7 @@ namespace FBExpert
         ViewClass ViewObject = null;
         StreamWriter sw = null;
         NotifiesList Notifies = new NotifiesList();
-        AutocompleteClass ac = null;
+        //AutocompleteClass ac = null;
         int messages_count = 0;
         int error_count = 0;
         NotifiesClass _localNofity = new NotifiesClass();
@@ -42,6 +40,7 @@ namespace FBExpert
         bool writefile = false;
         int pi = 0;
         string filename = string.Empty;
+        List<string> exportList = new List<string>();
         public VIEWManageForm(Form parent, DBRegistrationClass drc, TreeNode tnSelected)
         {
             InitializeComponent();
@@ -50,16 +49,13 @@ namespace FBExpert
             ViewClass viewObject = (ViewClass)tnSelected.Tag;
 
             _localNofity.NotifyType = eNotifyType.ErrorWithoutMessage;
-            _localNofity.AllowErrors = false;
-                
-            
+            _localNofity.AllowErrors = false;                            
             _localNofity.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(MeldungRaised);
             _localNofity.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
-            //Notifies.AddNotify(localNofity,"VIEWManageForm");
-            //Notifies.AddNotify(NotifiesClass.Instance(),"GLOBAL");
+            
             TnSelected = tnSelected;
             ViewObject = (ViewClass)tnSelected.Tag;
-            InitMessages();
+            
             
             DBReg = drc;
             txtMaxRows.Text = DBReg.MaxRowsForSelect.ToString();
@@ -68,6 +64,14 @@ namespace FBExpert
             this.GetDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.GetDataWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+        }
+
+        AutocompleteClass ac;
+
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctCREATEINSERTSQL, DBReg);
+            ac.RefreshAutocompleteForDatabase(tables,null,null);
         }
 
         public void RefreshLanguageText()
@@ -104,22 +108,9 @@ namespace FBExpert
             Close();
         }
 
-
-        public void InitMessages()
-        {
-            
-        }
-
         public void ShowCaptions()
         {
-            if (ViewObject != null)
-            {
-                lblTableName.Text = "View: " + ViewObject.Name;
-            }
-            else
-            {
-                lblTableName.Text = "View";
-            }
+            lblTableName.Text = (ViewObject != null) ? $@"View: {ViewObject.Name}" : "View";            
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Manage Views");
         }
 
@@ -161,13 +152,11 @@ namespace FBExpert
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con );
                 ds.Fill(dsDependencies);
-                con.Close();
-               
+                con.Close();               
             }
             catch(Exception ex)
-            {
-                
-              NotifiesClass.Instance().AddToERROR(BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr() + " ViewManagerForm->RefreshDependenciesTo->" + ex.Message);
+            {                
+              NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} ViewManagerForm->RefreshDependenciesTo->{ex.Message}");
             }
             bsDependencies.DataMember = "Table";
 
@@ -176,8 +165,7 @@ namespace FBExpert
         }
 
         public int RefreshDependenciesFrom()
-        {            
-      
+        {                  
             dsDependencies.Clear();
             dgvDependencies.AutoGenerateColumns = true;
             string cmd_index = SQLStatementsClass.Instance().GetViewManagerDependenciesFROM(DBReg.Version, ViewObject.Name);
@@ -190,14 +178,12 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-
-                NotifiesClass.Instance().AddToERROR(BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr() + " ViewManagerForm->RefreshDependenciesFrom->" + ex.Message);
+                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} ViewManagerForm->RefreshDependenciesFrom->{ex.Message}");
             }
             bsDependencies.DataMember = "Table";
-
             return dsDependencies.Tables[0].Rows.Count;
-
         }
+
         public int RefreshFields()
         {
             if (string.IsNullOrEmpty(ViewObject.Name)) return lvFields.Items.Count;
@@ -215,14 +201,11 @@ namespace FBExpert
                 if (dread.HasRows)
                 {                       
                     while (dread.Read())
-                    {                            
-                        object ob = dread.GetValue(0);
-                        object ob_field_position = dread.GetValue(1);
-
-                        string fieldstr = ob.ToString();
-                        string posstr = ob_field_position.ToString();
-                        string typename = dread.GetValue(3).ToString();
-                        string typelength = dread.GetValue(4).ToString();
+                    {                                                    
+                        string fieldstr     =  dread.GetValue(0).ToString();
+                        string posstr       = dread.GetValue(1).ToString();
+                        string typename     = dread.GetValue(3).ToString();
+                        string typelength   = dread.GetValue(4).ToString();
 
                         vf = new ViewFieldClass()
                         {
@@ -263,7 +246,7 @@ namespace FBExpert
                 sb.Append(obarr.Name);
             }
 
-            sb.Append(" FROM " + ViewObject.Name);
+            sb.Append($@" FROM {ViewObject.Name}");
             sfbViewData.SQLKonjunktion = "WHERE";
             string SCmd = sfbViewData.SQLCmd;
             if (SCmd.Length > 0)
@@ -406,11 +389,11 @@ namespace FBExpert
             }
             RefreshLanguageText();
             fctMessages.Clear();
-            ac = new AutocompleteClass(fctCREATEINSERTSQL, DBReg);
-            ac.RefreshAutocompleteForView(ViewObject.Name);
+            
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);            
             RefreshAll();
+           // DBReg.AutocompleteSetTextobjectForDatabase(fctCREATEINSERTSQL);
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -443,13 +426,10 @@ namespace FBExpert
 
         private void hsSave_Click(object sender, EventArgs e)
         {
-            if(saveSQLFile.ShowDialog() != DialogResult.OK) return;
-            
+            if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
             fctCREATEINSERTSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);               
         }
-
         
-
         private void hsRunStatement_ClickAsync(object sender, EventArgs e)
         {            
             GetDataWorker.CancelGettingData();
@@ -463,7 +443,6 @@ namespace FBExpert
                 return;
             }
             SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(),"Cancelling getting Data failed","Timeout for cancelling getting Data has arrived (5000 ms)");
-
         }
 
         private void DoCreateAlter(IList<string> cmd,DBRegistrationClass DBReg, NotifiesClass _localNofity, string Name)
@@ -535,15 +514,23 @@ namespace FBExpert
             fctCREATEINSERTSQL.OpenFile(ofdSQL.FileName);               
         }
 
-        
-
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {      
-            
-            ExtensionMethods.DoubleBuffered(dgvResults,true);    
+        private void DeactivateGrid()
+        {
+            ExtensionMethods.DoubleBuffered(dgvResults,true);
             dgvResults.SuspendLayout();
+            Cursor.Current = Cursors.WaitCursor;
+        }
 
+        private void ActivateGrid()
+        {            
+            dgvResults.ResumeLayout(false);
+            dgvResults.Visible = true;
+            Cursor.Current = Cursors.Default;            
+        }
+        
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {                  
+            DeactivateGrid();     
             stopwatch.Restart();
             RefreshDatas(_cmd);
         }
@@ -566,8 +553,8 @@ namespace FBExpert
             
             dgvResults.DataSource = bsViewContent;            
             sfbViewData.Enabled = true;
-            dgvResults.ResumeLayout(false);
-            dgvResults.Visible = true;
+            
+            ActivateGrid();
             stopwatch.Stop(); 
             utime+= $@" / {stopwatch.ElapsedMilliseconds}";
             txtUsedTime.Text = utime;
@@ -618,10 +605,7 @@ namespace FBExpert
         {
             if (e.KeyData == (Keys.K | Keys.Control))
             {
-                if (ac != null)
-                {
-                    ac.Show();
-                }
+                if(ac != null) ac.Show();                
                 e.Handled = true;
             }
         }       
@@ -630,8 +614,7 @@ namespace FBExpert
         {
             if (bwExport.IsBusy) return;
             
-
-            pbExport.Value = 0;
+            pbExport.Value   = 0;
             pbExport.Minimum = 0;
             pbExport.Maximum = dsViewContent.Tables[0].Rows.Count;
             fcbExport.Clear();
@@ -685,8 +668,8 @@ namespace FBExpert
                 bool whre = (bool)row.Cells["colExportWhere"].Value;
                 if (!act && !whre) continue;
                 
-                if (fcol) cols.Append(row.Cells["ColExportFieldName"].Value.ToString());
-                else      cols.Append("," + row.Cells["ColExportFieldName"].Value.ToString());
+                if (fcol) cols.Append($@"{row.Cells["ColExportFieldName"].Value}");
+                else      cols.Append($@",{row.Cells["ColExportFieldName"].Value}");
                 fcol = false;                   
             }
 
@@ -723,7 +706,7 @@ namespace FBExpert
                     if (str.Domain.FieldType.StartsWith("VAR") || str.Domain.FieldType.StartsWith("TIME") || str.Domain.FieldType.StartsWith("DATE"))
                     {
                         if (valuestr.Length <= 0) scmd = "null";
-                        else scmd = "'" + valuestr + "'";
+                        else scmd = $@"'{valuestr}'";
                     }
                     else
                     {
@@ -737,7 +720,7 @@ namespace FBExpert
                     }
                     else
                     {
-                        sb.Append(", " + scmd);
+                        sb.Append($@", {scmd}");
                     }
                     first = false;                       
                 }
@@ -792,7 +775,7 @@ namespace FBExpert
                         }
                         else
                         {
-                            sb.Append(", " + scmd);
+                            sb.Append($@", {scmd}");
                         }
                         first = false;
                     }
@@ -848,7 +831,7 @@ namespace FBExpert
                 pbExport.Value = pi;
             }
         }
-        List<string> exportList = new List<string>();
+        
         private void bwExport_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             if (writefile)
@@ -866,7 +849,7 @@ namespace FBExpert
                 fcbExport.EndUpdate();
             }
 
-            pbExport.Value = 0;
+            pbExport.Value   = 0;
             pbExport.Minimum = 0;
             pbExport.Maximum = 0;
 
@@ -878,8 +861,6 @@ namespace FBExpert
         private void cbPretty_CheckedChanged(object sender, EventArgs e)
         {
             RefreshDLL();
-        }
-
-        
+        }        
     }
 }

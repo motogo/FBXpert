@@ -22,7 +22,7 @@ namespace FBExpert
     {
        
         DBRegistrationClass _dbReg = null;
-        AutocompleteClass ac = null;
+        //AutocompleteClass ac = null;
         NotifiesClass _localNotify = new NotifiesClass();
         int messages_count = 0;
         int error_count = 0;
@@ -222,21 +222,24 @@ namespace FBExpert
         
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
-            ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            
             RefreshLanguageText();
             Restart();
+            
+            
         }
-
+        AutocompleteClass ac;
+        public void SetAutocompeteObjects(List<TableClass> tables, Dictionary<string,SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.RefreshAutocompleteForDatabase(tables,systemtables,views);
+        }
                
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == (Keys.K | Keys.Control))
             {
-                if (ac != null)
-                {
-                    ac.Show();
-                }
+                if(ac != null) ac.Show();
                 e.Handled = true;
             }
         }

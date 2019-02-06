@@ -375,4 +375,7 @@
   <data name="ConstraintNotDeleted" xml:space="preserve">
     <value>Constraint {0} in Datenbank {1} konnte nicht gelöscht werden.</value>
   </data>
+  <data name="EVENTS_TRACKING" xml:space="preserve">
+    <value>Ereignissaufzeichnung</value>
+  </data>
 </root>

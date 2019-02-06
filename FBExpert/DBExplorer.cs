@@ -23,6 +23,8 @@ namespace FBXpert
     {
         public NotifiesClass DbExlorerNotify = new NotifiesClass();               
         private List<TableClass> _actTables = new List<TableClass>();
+        private Dictionary<string,ViewClass> _actViews = new Dictionary<string,ViewClass>();
+        private Dictionary<string,SystemTableClass> _actSystemTables = new Dictionary<string,SystemTableClass>();
         
         private ProgressClockForm _pc;
         private TreeNode _actRegNode;
@@ -243,7 +245,7 @@ namespace FBXpert
                 }
             
                 var tb = StaticTreeClass.RefreshNonSystemTables(dbReg, nd);            
-                StaticTreeClass.RefreshAllViews(dbReg, nd);
+                _actViews = StaticTreeClass.RefreshAllViews(dbReg, nd);
 
                 if (tb != null)
                 {
@@ -262,7 +264,7 @@ namespace FBXpert
                     StaticTreeClass.RefreshRoles(dbReg, nd);                                                
                 }
 
-                StaticTreeClass.RefreshSystemTables(dbReg, nd);
+               _actSystemTables = StaticTreeClass.RefreshSystemTables(dbReg, nd);
           
                 if (NotifiesClass.Instance().AllowInfos)
                 {
@@ -272,6 +274,9 @@ namespace FBXpert
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
                 SetCmsForDatabase(true);
+                
+               // dbReg.GetAutocomplete(_actTables,_actSystemTables, _actViews);
+                
             }
             catch (Exception e)
             {
@@ -455,13 +460,24 @@ namespace FBXpert
              if (tnn == typeof(ViewClass))
              {
                  var tmf = new VIEWManageForm(MdiParent, drc, tn);
+                 tmf.SetAutocompeteObjects(_actTables);
                  tmf.Show();
              }
-             else if (tnn == typeof(TableClass) || tnn == typeof(SystemTableClass) )
+             else if (tnn == typeof(TableClass))
              {                        
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
                  var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
+                 tmf.SetAutocompeteObjects(_actTables,null);
+                 tmf.Show();
+                 Cursor = Cursors.Default;
+             }
+             else if (tnn == typeof(SystemTableClass))
+             {                        
+                 Cursor = Cursors.WaitCursor;
+                 Application.DoEvents();
+                 var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
+                 tmf.SetAutocompeteObjects(null,_actSystemTables);
                  tmf.Show();
                  Cursor = Cursors.Default;
              }
@@ -1013,7 +1029,8 @@ namespace FBXpert
 
         private void SqlExplorer(DBRegistrationClass drc, List<TableClass> actTables)
         {                                   
-            var sf = new SQLViewForm1(drc, actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);                  
+            var sf = new SQLViewForm1(drc, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);          
+            sf.SetAutocompeteObjects(_actTables);
             sf.Show();            
         }
 
@@ -1155,6 +1172,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiEventsTracker)
             {
                EventsForm ev = new EventsForm(MdiParent, dbReg);
+               ev.SetAutocompeteObjects(_actTables,_actSystemTables,_actViews);
                ev.Show();
             
             }
@@ -1182,6 +1200,7 @@ namespace FBXpert
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
                 var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
+                tmf.SetAutocompeteObjects(_actTables,null);
                 tmf.Show();
                 Cursor = Cursors.Default;
             }
@@ -1192,6 +1211,7 @@ namespace FBXpert
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
                 var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
+                tmf.SetAutocompeteObjects(null,_actSystemTables);
                 tmf.Show();
                 Cursor = Cursors.Default;
             }
@@ -1269,6 +1289,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiEditView)
             {                            
                 var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
+                tmf.SetAutocompeteObjects(_actTables);
                 tmf.Show();                                
             }
             else if (e.ClickedItem == tsmiEditForeignKeys)

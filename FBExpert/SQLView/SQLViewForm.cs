@@ -35,17 +35,17 @@ namespace SQLView
         private int _cmdDone = 0;
         private int _cmdError = 0;        
 	    private readonly NotifiesList _localNotifies = new NotifiesList();
-	    private AutocompleteClass _ac = null;        
+	    //private AutocompleteClass _ac = null;        
         private bool _testlauf = true;
 	    private readonly List<string> _obcmd = new List<string>();        
-        private List<TableClass> _actTables = null;
+        
         eSort _lastSort = eSort.DESC;
 
-        public SQLViewForm1(DBRegistrationClass ca, List<TableClass> actTables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
+        public SQLViewForm1(DBRegistrationClass ca,  Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
             MdiParent = mdiParent;
             _dbReg = ca;
-            _actTables = actTables;
+            
             _appDesign = appDesign;
             _developDesign = developDesign;
             InitializeComponent();
@@ -62,7 +62,8 @@ namespace SQLView
             ClearDevelopDesign(_developDesign);
             SetDesign(_appDesign);
             cbTestlauf.Checked = testMode;
-            cbTestlauf.Visible = testMode;            
+            cbTestlauf.Visible = testMode;     
+            
         }
            
         void Meldungen()
@@ -393,15 +394,21 @@ namespace SQLView
             Testlauf();
             EditMode(cbEditMode.Checked);
             Text = DevelopmentClass.Instance().GetDBInfo(_dbReg,"SQLView for ");
-            _ac = new AutocompleteClass(txtSQL, _dbReg);
-            _ac.RefreshAutocompleteForDatabase();
+           
             hsBreak.Enabled = false;
 
             int n = LoadHistory(_lastSort);
                         
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
-            SetEncoding();            
+            SetEncoding();   
+            
+        }
+        AutocompleteClass ac;
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(txtSQL, _dbReg);
+            ac.RefreshAutocompleteForDatabase(tables,null,null);
         }
 
         private int LoadHistory(eSort sort)
@@ -534,10 +541,22 @@ namespace SQLView
                 txtSQL.AppendText(st+Environment.NewLine);
             }
         }
-        private SQLCommandsReturnInfoClass RunSQL(HistoryMode hMode)
+
+        private void DeactivateGrid()
         {
             ExtensionMethods.DoubleBuffered(dgvResults,true);
             dgvResults.SuspendLayout();
+            Cursor.Current = Cursors.WaitCursor;
+        }
+        private void ActivateGrid()
+        {
+            dgvResults.ResumeLayout(false);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private SQLCommandsReturnInfoClass RunSQL(HistoryMode hMode)
+        {
+            DeactivateGrid();
             UserStart();
             _obcmd.Clear();
             _obcmd.AddRange(txtSQL.Lines);
@@ -547,7 +566,7 @@ namespace SQLView
               tcSQLCONTROL.SelectedTab = tabRESULT;
             }
             UserBreak();
-            dgvResults.ResumeLayout(false);
+            ActivateGrid();
             return ri;
         }
 
@@ -1002,7 +1021,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void txtSQL_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyData != (Keys.K | Keys.Control)) return;
-            _ac?.Show();
+            if(ac != null) ac.Show();
             e.Handled = true;
         }
 
@@ -1019,7 +1038,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             dgvResults.AllowUserToAddRows    = enabled;
             dgvResults.AllowUserToDeleteRows = enabled;
             dgvResults.SelectionMode = (enabled) ? DataGridViewSelectionMode.CellSelect : DataGridViewSelectionMode.FullRowSelect;
-            hsSaveDataset.Enabled    = enabled;
+            hsUpdateDataset.Enabled    = enabled;
             bnTableContentDeleteItem.Enabled = enabled;              
         }
 

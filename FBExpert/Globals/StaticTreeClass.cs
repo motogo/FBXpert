@@ -2043,7 +2043,7 @@ namespace FBExpert
             return tn;
         }
 
-        public static TreeNode RefreshSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
+        public static Dictionary<string,SystemTableClass> RefreshSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
         {
             TreeNode tables = null;
             var nd = StaticTreeClass.FindPrevDBNode(ndx);
@@ -2420,7 +2420,7 @@ namespace FBExpert
                 n++;
             }
             tn.Text = $@"System Tables ({n})";
-            return tn;
+            return tableList; //tn;
         }
 
         public static TreeNode RefreshView(DBRegistrationClass DBReg, TreeNode ndx)
@@ -2471,7 +2471,7 @@ namespace FBExpert
         /// <param name="DBRegx"></param>
         /// <param name="ndx"></param>
         /// <returns></returns>
-        public static TreeNode RefreshAllViews(DBRegistrationClass DBRegx, TreeNode ndx)
+        public static Dictionary<string,ViewClass> RefreshAllViews(DBRegistrationClass DBRegx, TreeNode ndx)
         {
             TreeNode tables = null;
             
@@ -2726,7 +2726,7 @@ namespace FBExpert
                 n++;
             }
             tn.Text = "Views (" + n.ToString() + ")";
-            return tn;
+            return allviews;
         }
 
 
@@ -4183,8 +4183,8 @@ namespace FBExpert
                                 Console.WriteLine();
                             }
                         }
-                        tfc.Description = tfc.Domain.DefaultValue.Substring(14);
-                        tfc.Domain.Description = tfc.Domain.DefaultValue.Substring(15);
+                        tfc.Description = dread.GetValue(14).ToString().Trim(); //tfc.Domain.DefaultValue.Substring(14);
+                        tfc.Domain.Description = dread.GetValue(14).ToString().Trim(); //tfc.Domain.DefaultValue.Substring(15);
                         if((tfc.Description.Length > 0)||(tfc.Domain.Description.Length > 0))
                         {
                             Console.WriteLine();

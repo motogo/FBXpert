@@ -529,6 +529,9 @@
     <EmbeddedResource Include="TableItemForms\CreateNewTableForm.resx">
       <DependentUpon>CreateNewTableForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\EventsForm.resx">
+      <DependentUpon>EventsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\FieldForm.resx">
       <DependentUpon>FieldForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -128,7 +128,6 @@ namespace FBExpert
             this.gbMaxAllowedErrors = new System.Windows.Forms.GroupBox();
             this.txtMaxAllowedErrors = new System.Windows.Forms.TextBox();
             this.gbMaxRows = new System.Windows.Forms.GroupBox();
-            this.hsRefreshMaxRows = new SeControlsLib.HotSpot();
             this.txtMaxRows = new System.Windows.Forms.TextBox();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsPageRefresh = new SeControlsLib.HotSpot();
@@ -1598,11 +1597,11 @@ namespace FBExpert
             this.gnUsedTime.Size = new System.Drawing.Size(116, 41);
             this.gnUsedTime.TabIndex = 6;
             this.gnUsedTime.TabStop = false;
-            this.gnUsedTime.Text = "Used time";
+            this.gnUsedTime.Text = "Used time (ms)";
             // 
             // txtUsedTime
             // 
-            this.txtUsedTime.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtUsedTime.BackColor = System.Drawing.SystemColors.Info;
             this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
             this.txtUsedTime.Name = "txtUsedTime";
@@ -1614,7 +1613,7 @@ namespace FBExpert
             // gbMaxAllowedErrors
             // 
             this.gbMaxAllowedErrors.Controls.Add(this.txtMaxAllowedErrors);
-            this.gbMaxAllowedErrors.Location = new System.Drawing.Point(502, 0);
+            this.gbMaxAllowedErrors.Location = new System.Drawing.Point(462, 0);
             this.gbMaxAllowedErrors.Name = "gbMaxAllowedErrors";
             this.gbMaxAllowedErrors.Size = new System.Drawing.Size(116, 41);
             this.gbMaxAllowedErrors.TabIndex = 5;
@@ -1632,69 +1631,20 @@ namespace FBExpert
             // 
             // gbMaxRows
             // 
-            this.gbMaxRows.Controls.Add(this.hsRefreshMaxRows);
             this.gbMaxRows.Controls.Add(this.txtMaxRows);
-            this.gbMaxRows.Location = new System.Drawing.Point(692, 0);
+            this.gbMaxRows.Location = new System.Drawing.Point(585, 0);
             this.gbMaxRows.Name = "gbMaxRows";
-            this.gbMaxRows.Size = new System.Drawing.Size(146, 41);
+            this.gbMaxRows.Size = new System.Drawing.Size(110, 41);
             this.gbMaxRows.TabIndex = 4;
             this.gbMaxRows.TabStop = false;
             this.gbMaxRows.Text = "Max Rows";
             // 
-            // hsRefreshMaxRows
-            // 
-            this.hsRefreshMaxRows.BackColor = System.Drawing.Color.Transparent;
-            this.hsRefreshMaxRows.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshMaxRows.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshMaxRows.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsRefreshMaxRows.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsRefreshMaxRows.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsRefreshMaxRows.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsRefreshMaxRows.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsRefreshMaxRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsRefreshMaxRows.FlatAppearance.BorderSize = 0;
-            this.hsRefreshMaxRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsRefreshMaxRows.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsRefreshMaxRows.Image = global::FBXpert.Properties.Resources.view_refresh22x;
-            this.hsRefreshMaxRows.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hsRefreshMaxRows.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.hsRefreshMaxRows.ImageToggleOnSelect = false;
-            this.hsRefreshMaxRows.Location = new System.Drawing.Point(112, 16);
-            this.hsRefreshMaxRows.Marked = false;
-            this.hsRefreshMaxRows.MarkedColor = System.Drawing.Color.Teal;
-            this.hsRefreshMaxRows.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsRefreshMaxRows.MarkedText = "";
-            this.hsRefreshMaxRows.MarkMode = false;
-            this.hsRefreshMaxRows.Name = "hsRefreshMaxRows";
-            this.hsRefreshMaxRows.NonMarkedText = "";
-            this.hsRefreshMaxRows.Size = new System.Drawing.Size(31, 22);
-            this.hsRefreshMaxRows.TabIndex = 4;
-            this.hsRefreshMaxRows.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsRefreshMaxRows.ToolTipActive = false;
-            this.hsRefreshMaxRows.ToolTipAutomaticDelay = 500;
-            this.hsRefreshMaxRows.ToolTipAutoPopDelay = 5000;
-            this.hsRefreshMaxRows.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsRefreshMaxRows.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsRefreshMaxRows.ToolTipFor4ContextMenu = true;
-            this.hsRefreshMaxRows.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsRefreshMaxRows.ToolTipInitialDelay = 500;
-            this.hsRefreshMaxRows.ToolTipIsBallon = false;
-            this.hsRefreshMaxRows.ToolTipOwnerDraw = false;
-            this.hsRefreshMaxRows.ToolTipReshowDelay = 100;
-            this.hsRefreshMaxRows.ToolTipShowAlways = false;
-            this.hsRefreshMaxRows.ToolTipText = "";
-            this.hsRefreshMaxRows.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsRefreshMaxRows.ToolTipTitle = "";
-            this.hsRefreshMaxRows.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsRefreshMaxRows.UseVisualStyleBackColor = false;
-            this.hsRefreshMaxRows.Click += new System.EventHandler(this.hsRefreshMaxRows_Click);
-            // 
             // txtMaxRows
             // 
-            this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMaxRows.Location = new System.Drawing.Point(3, 16);
             this.txtMaxRows.Name = "txtMaxRows";
-            this.txtMaxRows.Size = new System.Drawing.Size(100, 20);
+            this.txtMaxRows.Size = new System.Drawing.Size(104, 20);
             this.txtMaxRows.TabIndex = 0;
             this.txtMaxRows.Text = "2000";
             // 
@@ -1967,7 +1917,6 @@ namespace FBExpert
         private System.Windows.Forms.CheckBox cbCAuto;
         private SeControlsLib.HotSpot hotSpot1;
         private System.Windows.Forms.GroupBox gbMaxRows;
-        private SeControlsLib.HotSpot hsRefreshMaxRows;
         private System.Windows.Forms.TextBox txtMaxRows;
         private System.Windows.Forms.TabPage tabPageExport;
         private System.Windows.Forms.Panel pnlExportDataUpper;

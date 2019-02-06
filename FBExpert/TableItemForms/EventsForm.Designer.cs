@@ -54,7 +54,6 @@ namespace FBExpert
             this.tabControlText = new System.Windows.Forms.TabControl();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.gbSQL = new System.Windows.Forms.GroupBox();
-            this.fctSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlSQLUpper = new System.Windows.Forms.Panel();
             this.hsLoadTRACKING = new SeControlsLib.HotSpot();
             this.hsSaveTRACKING = new SeControlsLib.HotSpot();
@@ -66,6 +65,7 @@ namespace FBExpert
             this.hotSpot3 = new SeControlsLib.HotSpot();
             this.saveTRACKINGFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdTRACKING = new System.Windows.Forms.OpenFileDialog();
+            this.fctSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlEvents.SuspendLayout();
@@ -81,11 +81,11 @@ namespace FBExpert
             this.tabControlText.SuspendLayout();
             this.tabPageEvents.SuspendLayout();
             this.gbSQL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.pnlSQLUpper.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
             this.pnlMessagesUpper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -505,44 +505,6 @@ namespace FBExpert
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
             // 
-            // fctSQL
-            // 
-            this.fctSQL.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctSQL.AutoIndentCharsPatterns = "";
-            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(25, 12);
-            this.fctSQL.BackBrush = null;
-            this.fctSQL.BackColor = System.Drawing.SystemColors.Info;
-            this.fctSQL.CharHeight = 12;
-            this.fctSQL.CharWidth = 7;
-            this.fctSQL.CommentPrefix = "--";
-            this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSQL.Font = new System.Drawing.Font("Courier New", 8.25F);
-            this.fctSQL.IsReplaceMode = false;
-            this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctSQL.LeftBracket = '(';
-            this.fctSQL.Location = new System.Drawing.Point(3, 16);
-            this.fctSQL.Name = "fctSQL";
-            this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctSQL.RightBracket = ')';
-            this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
-            this.fctSQL.Size = new System.Drawing.Size(799, 429);
-            this.fctSQL.TabIndex = 0;
-            this.fctSQL.Zoom = 100;
-            this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
-            // 
             // pnlSQLUpper
             // 
             this.pnlSQLUpper.BackColor = System.Drawing.Color.LightGray;
@@ -655,25 +617,9 @@ namespace FBExpert
             // 
             // ilTabControl
             // 
-            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
+            this.ilTabControl.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ilTabControl.ImageSize = new System.Drawing.Size(16, 16);
             this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
-            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
-            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
-            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
-            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
-            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
-            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
-            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
-            this.ilTabControl.Images.SetKeyName(10, "format_indent_more_24x.png");
-            this.ilTabControl.Images.SetKeyName(11, "foreign_keys_x22.png");
-            this.ilTabControl.Images.SetKeyName(12, "ok_gn22x.png");
-            this.ilTabControl.Images.SetKeyName(13, "check_constraint_x22.png");
-            this.ilTabControl.Images.SetKeyName(14, "N1_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(15, "primary_keys_x22.png");
-            this.ilTabControl.Images.SetKeyName(16, "media_playlist_shuffle_x32.png");
             // 
             // pnlFieldUpper
             // 
@@ -721,7 +667,6 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -730,7 +675,7 @@ namespace FBExpert
             this.fctMessages.Paddings = new System.Windows.Forms.Padding(0);
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
+            this.fctMessages.ServiceColors = null;
             this.fctMessages.Size = new System.Drawing.Size(1226, 524);
             this.fctMessages.TabIndex = 30;
             this.fctMessages.Zoom = 100;
@@ -803,6 +748,40 @@ namespace FBExpert
             this.ofdTRACKING.Filter = "Event Tracking|*.trk|All|*.*";
             this.ofdTRACKING.Title = "Load Eventtracking";
             // 
+            // fctSQL
+            // 
+            this.fctSQL.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.fctSQL.BackBrush = null;
+            this.fctSQL.BackColor = System.Drawing.SystemColors.Info;
+            this.fctSQL.CharHeight = 14;
+            this.fctSQL.CharWidth = 8;
+            this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctSQL.IsReplaceMode = false;
+            this.fctSQL.Location = new System.Drawing.Point(3, 16);
+            this.fctSQL.Name = "fctSQL";
+            this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
+            this.fctSQL.Size = new System.Drawing.Size(799, 429);
+            this.fctSQL.TabIndex = 0;
+            this.fctSQL.Text = "fastColoredTextBox1";
+            this.fctSQL.Zoom = 100;
+            this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
+            // 
             // EventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -810,7 +789,6 @@ namespace FBExpert
             this.ClientSize = new System.Drawing.Size(1240, 636);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlUpper);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EventsForm";
             this.Text = "3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EventsForm_FormClosing);
@@ -831,11 +809,11 @@ namespace FBExpert
             this.tabControlText.ResumeLayout(false);
             this.tabPageEvents.ResumeLayout(false);
             this.gbSQL.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.pnlSQLUpper.ResumeLayout(false);
             this.tabPageMessages.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
             this.pnlMessagesUpper.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -854,7 +832,6 @@ namespace FBExpert
         private System.Windows.Forms.TabControl tabControlText;
         private System.Windows.Forms.TabPage tabPageEvents;
         private System.Windows.Forms.GroupBox gbSQL;
-        private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
         private System.Windows.Forms.Panel pnlFieldUpper;
         private System.Windows.Forms.TabPage tabPageMessages;
         private FastColoredTextBoxNS.FastColoredTextBox fctMessages;
@@ -875,5 +852,6 @@ namespace FBExpert
         private SeControlsLib.HotSpot hsAddField;
         private System.Windows.Forms.ComboBox cbEvents;
         private SeControlsLib.HotSpot hsTracking;
+        private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
     }
 }

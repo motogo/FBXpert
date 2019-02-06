@@ -32,7 +32,7 @@ namespace FBExpert
         private DBRegistrationClass _dbReg          = null;
         private readonly NotifiesClass _localNotify = null;
 
-        private AutocompleteClass _autoComplete = null;
+        //private AutocompleteClass _autoComplete = null;
         private int _messagesCount              = 0;
         private int _errorCount                 = 0;
 
@@ -110,6 +110,16 @@ namespace FBExpert
             this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetData_RunWorkerCompleted);
         }
         WorkerClass GetDataWorker = new WorkerClass();
+
+        AutocompleteClass ac;
+
+        public void SetAutocompeteObjects(List<TableClass> tables,Dictionary<string,SystemTableClass> systemtables)
+        {
+            ac = new AutocompleteClass(fctTableCreateDLL, _dbReg);
+            ac.RefreshAutocompleteForDatabase(tables,systemtables,null);
+        }
+
+
         public void RefreshLanguageText()
         {
             hsPageRefresh.Text           = LanguageClass.Instance().GetString("REFRESH");
@@ -984,12 +994,10 @@ namespace FBExpert
             cbCharSet.Visible = cbExportToFile.Checked;
 
             fctMessages.Clear();
-            _autoComplete = new AutocompleteClass(fctTableCreateDLL, _dbReg);
-            _autoComplete.RefreshAutocompleteForTable(_tableObject.Name);
-
+            
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);            
-            RefreshAll();
+            RefreshAll();            
         }
 
         public void SelectID()
@@ -1421,8 +1429,8 @@ namespace FBExpert
             bsTableContent.DataMember = "Table";
             tabPageDATA.Text = $@"Data ({dsTableContent.Tables[0].Rows.Count})";    
             sfbTableData.SetDataColumns(dgvResults.Columns);
-            dgvResults.ResumeLayout(false);
-            dgvResults.Visible = true;
+            
+            ActivateGrid();
             stopwatch.Stop();
             timedone += $@" / {stopwatch.ElapsedMilliseconds}";
             txtUsedTime.Text = timedone;
@@ -1433,11 +1441,25 @@ namespace FBExpert
             tabPageDATA.Text = e.UserState.ToString();
         }
 
+        private void DeactivateGrid()
+        {
+            ExtensionMethods.DoubleBuffered(dgvResults,true);
+            dgvResults.SuspendLayout();
+            Cursor.Current = Cursors.WaitCursor;
+        }
+
+        private void ActivateGrid()
+        {            
+            dgvResults.ResumeLayout(false);
+            dgvResults.Visible = true;
+            Cursor.Current = Cursors.Default;
+        }
+
         private void bwGetData_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {   
             
             stopwatch.Restart();
-            ExtensionMethods.DoubleBuffered(dgvResults,true);
+            DeactivateGrid();
             dgvResults.SuspendLayout();
             sfbTableData.SQLVorfilterCmd = $@"SELECT {_cmd}";
             RefreshDatas(_cmd);           
@@ -1497,71 +1519,25 @@ namespace FBExpert
                 newRect = new Rectangle(e.CellBounds.X + 1,
                     e.CellBounds.Y + 1, e.CellBounds.Width - 4,
                     e.CellBounds.Height - 4);
-
                 
-
                 using (Brush gridBrush = new SolidBrush(this.dgvResults.GridColor),backColorBrush = new SolidBrush(e.CellStyle.BackColor))
                 {
                     using (Pen gridLinePen = new Pen(gridBrush))
                     {         
-                         e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+                        e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
                         if ((e.ColumnIndex == dgvResults.CurrentCell.ColumnIndex) && (e.RowIndex == dgvResults.CurrentCell.RowIndex))
-                        {
-                            /*
-                             Rectangle newRect2 = new Rectangle(1,e.CellBounds.Y + 1, 200, e. e.CellBounds.Height - 4);
-                                                        
-                                
-                             Brush selBrush1 = new SolidBrush(Color.Blue);
-                             e.Graphics.FillRectangle(selBrush1, newRect2);
-                             */
-
-                            e.PaintBackground(e.CellBounds,true);
-                            
-                            /*
-                            Brush selBrush = new SolidBrush(Color.LightBlue);
-                            e.Graphics.FillRectangle(selBrush, e.CellBounds);
-                            */
+                        {                            
+                            e.PaintBackground(e.CellBounds,true);                           
                         } 
-                        /*
-                        else
-                        {
-                            e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
-                        }
-                        */
-
+                        
                         e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left,
                             e.CellBounds.Bottom - 1, e.CellBounds.Right - 1,
                             e.CellBounds.Bottom - 1);
                         e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1,
                             e.CellBounds.Top, e.CellBounds.Right - 1,
                             e.CellBounds.Bottom);
-
-                        /*
-                        if ((dgvResults.CurrentCell.RowIndex == 0) && (dgvResults.CurrentCell.ColumnIndex == 4) && (dgvResults.CurrentCell.Selected))
-                        {                           
-                            string s = os;                            
-                        }
-                        */
+                        
                         e.PaintContent(e.CellBounds);
-
-                        /*
-                        if (os == "System.DBNull")
-                        {
-
-                            e.Graphics.DrawString("<null>", e.CellStyle.Font,
-                                                           Brushes.Red, e.CellBounds.X + 2,
-                                                           e.CellBounds.Y + 2, StringFormat.GenericDefault);
-
-                        }
-                        else
-                        {
-                            
-                            e.Graphics.DrawString(vs, e.CellStyle.Font,
-                                 Brushes.Black, e.CellBounds.X + 2,
-                                e.CellBounds.Y + 2, StringFormat.GenericDefault);
-                                
-                        }
-                        */
                         e.Handled = true;
                     }
                 }                   
@@ -1584,9 +1560,7 @@ namespace FBExpert
                     dgvResults.CurrentCell.Value = dgvResults.CurrentCell.DefaultNewRowValue;
                 }
                 else
-                {
-                    //var cell = dgvResults.CurrentCell;
-                    //var cs = cell.Style;                    
+                {                                      
                     if (IsNullable(dgvResults.Columns[dgvResults.CurrentCell.ColumnIndex].Name))
                     {
                         dgvResults.CurrentCell.Value = System.DBNull.Value;
@@ -1935,8 +1909,8 @@ namespace FBExpert
 
         private void fctTableCreateDLL_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyData != (Keys.K | Keys.Control))|| (_autoComplete == null)) return;                                                           
-            _autoComplete.Show();               
+            if ((e.KeyData != (Keys.K | Keys.Control))) return;                                                           
+            if(ac != null) ac.Show();              
             e.Handled = true;               
         }
         

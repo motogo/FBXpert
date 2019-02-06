@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using DBBasicClassLibrary;
+using FastColoredTextBoxNS;
+using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 
 namespace FBXpert.Globals
@@ -31,7 +34,11 @@ namespace FBXpert.Globals
         public CodeSettingsClass CodeSettings;        
         private ErrorCodes ErrorCodes = null;
         private TreeNode _treeNode;
-     
+
+       
+        
+
+        
 
         public DBRegistrationClass()
         {
@@ -44,6 +51,7 @@ namespace FBXpert.Globals
             this.ErrorCodes = new ErrorCodes();
             string pf = $@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\ErrorCodes{this.Version}.txt";
             this.ErrorCodes.Load(pf);
+           
         }
 
         public ErrorCodes GetErrorCodes()
