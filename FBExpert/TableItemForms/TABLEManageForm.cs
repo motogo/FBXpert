@@ -116,7 +116,11 @@ namespace FBExpert
         public void SetAutocompeteObjects(List<TableClass> tables,Dictionary<string,SystemTableClass> systemtables)
         {
             ac = new AutocompleteClass(fctTableCreateDLL, _dbReg);
-            ac.RefreshAutocompleteForDatabase(tables,systemtables,null);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
+            ac.AddAutocompleteForSystemtables(systemtables);
+            
         }
 
 
@@ -744,7 +748,7 @@ namespace FBExpert
                 _constraintObject.ConstraintType = eConstraintType.CHECK;
             }
             
-            var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject, _dbReg,_constraintObject);
+            var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
             tff.RegisterNotify(InfoRaised);
             tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
             tff.Show();
@@ -842,7 +846,7 @@ namespace FBExpert
             if(tabControlConstraints.SelectedTab == tabPagePrimaryKeys)
             {
                 _constraintObject = _tableObject.primary_constraint;
-                var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _dbReg, _constraintObject);
+                var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject,_actTables, _dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.RegisterNotify(InfoRaised);
                 tff.Show();              
@@ -852,7 +856,7 @@ namespace FBExpert
                 UniquesClass uc = null;
                 _tableObject.uniques_constraints.TryGetValue(SelectedUniqueConstraintName,out uc);
                 _constraintObject = uc;
-                 var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _dbReg, _constraintObject);
+                 var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _actTables,_dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.RegisterNotify(InfoRaised);
                 tff.Show();                
@@ -880,7 +884,7 @@ namespace FBExpert
                 ConstraintsClass uc = null;
                 _tableObject.check_constraints.TryGetValue(SelectedCheckConstraintName,out uc);
                 _constraintObject = uc;
-                var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _dbReg, _constraintObject);
+                var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _actTables,_dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.RegisterNotify(InfoRaised);
                 tff.Show();                

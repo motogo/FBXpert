@@ -308,12 +308,15 @@ namespace FBXpert
 
         private void TextChanged(object sender, EventArgs e)
         {
-            if(!FormEvents.IsActive(sender,"TextChanged")) return;
-            MakeSQL();
+            TextChanged();
         }
 
+        private void TextChanged()
+        {
+            if(!FormEvents.IsActive(this,"TextChanged")) return;
+            MakeSQL();
+        }
         
-
         private void Create()
         {                          
             var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
@@ -357,6 +360,16 @@ namespace FBXpert
         {
             if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
             fctSQL.OpenFile(ofdSQL.FileName); 
+        }
+
+        private void fctGenDescription_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fctSQL_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+           
         }
     }
 }

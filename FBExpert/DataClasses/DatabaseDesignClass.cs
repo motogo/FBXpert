@@ -19,7 +19,7 @@ namespace FBXpert.DataClasses
         public Dictionary<string,ViewClass> Views;
     }
 
-    public enum eCodePrimaryFieldType {GenID=0, GenGUID=1, GenGUIDHEX=2, GenOID=3};
+    public enum eCodePrimaryFieldType {GenID=0, GenGUID=1, GenGUIDHEX=2, GenOID=3, GenUUID=4};
 
     public class CodeCreateAttributes
     {
@@ -1859,6 +1859,10 @@ namespace FBXpert.DataClasses
             if(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenGUID)
             {
                 newIdMethod = "GetNewGUID()";
+            }
+            else if(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenUUID)
+            {
+                newIdMethod = "GetNewUUID()";
             }
             else if(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenOID)
             {

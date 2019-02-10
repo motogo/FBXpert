@@ -30,15 +30,17 @@ namespace FBXpert
        
         string _newTableName = String.Empty;
         TableClass _tableObject;
+        List<TableClass> _tables = null;
         bool DataFilled = false;        
         public List<string> SQLScript = new List<string>();
       
-        public ConstraintsForm(Form parent, TableClass tableObject, DBRegistrationClass dbReg, ConstraintsClass constraintObject)
+        public ConstraintsForm(Form parent, TableClass tableObject,List<TableClass> tables, DBRegistrationClass dbReg, ConstraintsClass constraintObject)
         {
             InitializeComponent();
             this.MdiParent = parent;
             
             _dbReg = dbReg;
+            _tables = tables;
                                                           
             
                 _constraintObject = constraintObject;
@@ -359,11 +361,17 @@ namespace FBXpert
             OldConstraintName = txtConstraintName.Text.Trim();
             NewConstraintName = OldConstraintName;            
             MakeSQL();
-            ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            SetAutocompeteObjects(_tables);
         }
        
-        
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddProcedureCommands();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);                        
+        }
 
         private void hsNEWClick(object sender, EventArgs e)
         {

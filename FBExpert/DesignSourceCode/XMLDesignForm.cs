@@ -204,7 +204,7 @@ namespace FBXpert.SonstForms
             fbdSourcePath.SelectedPath         = _dbReg.CodeSettings.SourceCodeOutputPath;
             txtSourceCodePath.Text             = _dbReg.CodeSettings.SourceCodeOutputPath;
             rbGenerateInrWithGenerator.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger;
-            rbGenerateGUID.Checked             = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID;
+            rbGenerateGUID.Checked             = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID;
             txtDBNamespace.Text                = _dbReg.CodeSettings.SourceCodeNamespace;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
@@ -430,8 +430,9 @@ namespace FBXpert.SonstForms
         private void XMLDesignForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _dbReg.CodeSettings.SourceCodeOutputPath = txtSourceCodePath.Text;
-            if(rbGenerateInrWithGenerator.Checked) _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
-            if(rbGenerateGUID.Checked)             _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.UUID;
+            if(rbGenerateInrWithGenerator.Checked)      _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
+            else if(rbGenerateGUID.Checked)             _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GUID;
+            else if(rbGUIDHEXGeneration.Checked)        _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
             _dbReg.CodeSettings.SourceCodeNamespace = txtDBNamespace.Text;
         }
 

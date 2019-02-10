@@ -107,10 +107,21 @@ namespace FBExpert
             _dbReg.SkipForSelect = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
             _dbReg.MaxRowsForSelect = StaticFunctionsClass.ToLongDef(txtTableMaxRows.Text, 0);
             _dbReg.ClientLibrary = txtClientLibrary.Text;
-            _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
-            if(rbGenerateUUID.Checked)
+            if(rbGenerateDBGenerator.Checked)
+            {             
+                _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
+            }
+            else if(rbGenerateGUID.Checked)
+            {             
+                _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GUID;
+            }
+            else if(rbGenerateUUID.Checked)
             {             
                 _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.UUID;
+            }
+            else if(rbGenerateHEXGUID.Checked)
+            {             
+                _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
             }
 
             _dbReg.CodeSettings.SourceCodeNamespace = txtDBNamespace.Text;
@@ -196,14 +207,15 @@ namespace FBExpert
            
             SetServerUIVisiblies();
             
-            txtConnectioString.Text = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            txtConnectionString.Text = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
             if(_dbReg.CodeSettings == null) _dbReg.CodeSettings = new CodeSettingsClass();
             
             txtDBNamespace.Text = _dbReg.CodeSettings.SourceCodeNamespace;
             txtSourcecodeOutputPath.Text = _dbReg.CodeSettings.SourceCodeOutputPath;
           
-            if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger) rbGenerateInrWithGenerator.Checked = true;
-            else if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID) rbGenerateUUID.Checked = true;
+            if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger)  rbGenerateDBGenerator.Checked = true;
+            else if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID)         rbGenerateGUID.Checked = true;
+            else if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID)      rbGenerateHEXGUID.Checked = true;
           
             DoEvent = true;
         }
@@ -347,53 +359,18 @@ namespace FBExpert
             SetServerDatas();
             SetServerUIVisiblies();
             string connectionString = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
-            txtConnectioString.Text = connectionString;
+            txtConnectionString.Text = connectionString;
             _connectionDataChanged = true;
         }
 
-        public void GetLifetime()
-        {
-             
-            var con = new FbConnection(txtConnectioString.Text);
-            
-            con.Open();
-            try
-            {
-                /*
-                string cmd = "select current_date+(current_timestamp-mon$creation_date)+429496729/mon$next_transaction livetime from mon$database;";
-                */
-                string cmd = "select mon$next_transaction livetime from mon$database;";
-                var fcmd = new FbCommand(cmd, con);
-                var dread = fcmd.ExecuteReader();
-                if (dread.HasRows)
-                {
-                    while (dread.Read())
-                    {
-                        txtLifetime.Text = dread.GetValue(0).ToString().Trim();
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            con.Close();
-        }
+        
         private void hsConnect_Click(object sender, EventArgs e)
         {
             pnlConnectState.BackColor = System.Drawing.Color.Yellow;
-            EditToData();
-            /*
-            if (rbEmbedded.Checked)
-            {               
-                _dbReg.Server = "";                             
-            }
-            */
-            //SetServerDatas();
-
+            EditToData();            
             try
             {
-                GetLifetime();
+                AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text);
                 pnlConnectState.BackColor = System.Drawing.Color.Green;
             }
             catch(Exception ex)
@@ -632,6 +609,18 @@ namespace FBExpert
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hsSourcecodeFolder_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = _dbReg.CodeSettings.SourceCodeOutputPath;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtSourcecodeOutputPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void hsCreate_Click(object sender, EventArgs e)
         {
 
         }

@@ -54,6 +54,12 @@ namespace FBXpert.Globals
            
         }
 
+        private bool isOpen = false;
+        public bool IsOpen()
+        {
+            return isOpen;
+        }
+
         public ErrorCodes GetErrorCodes()
         {
             return ErrorCodes;

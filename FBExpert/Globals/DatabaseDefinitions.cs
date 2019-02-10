@@ -117,6 +117,7 @@ namespace FBExpert
                     if (string.IsNullOrEmpty(dbr.InitialTerminator)) dbr.InitialTerminator = StaticVariablesClass.InitialTerminator;
                     if (string.IsNullOrEmpty(dbr.AlternativeTerminator)) dbr.AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
                     if (string.IsNullOrEmpty(dbr.SingleLineComment)) dbr.SingleLineComment = StaticVariablesClass.SingleLineComment;
+                  //  if(dbr.CodeSettings.SourceCodePrimaryKeyType == FBXpert.DataClasses.eSourceCodePrimaryKeyType.UUID) dbr.CodeSettings.SourceCodePrimaryKeyType = FBXpert.DataClasses.eSourceCodePrimaryKeyType.GUID;
                 }
                 
                 if (PF.Reason == null) PF.Reason = "none";

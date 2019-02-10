@@ -66,7 +66,7 @@ namespace FBXpert
             this.hsLoadSQL = new SeControlsLib.HotSpot();
             this.hsSaveSQL = new SeControlsLib.HotSpot();
             this.hsCreate = new SeControlsLib.HotSpot();
-            this.tabProcedureDefinition = new System.Windows.Forms.TabPage();
+            this.tabTriggerDefinition = new System.Windows.Forms.TabPage();
             this.spcProcedureSQL = new System.Windows.Forms.SplitContainer();
             this.gbProcedureDefinitionSQL = new System.Windows.Forms.GroupBox();
             this.fcbTriggerDefinitionSQL = new FastColoredTextBoxNS.FastColoredTextBox();
@@ -110,7 +110,7 @@ namespace FBXpert
             this.gbSQL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.pnlSQLUpper.SuspendLayout();
-            this.tabProcedureDefinition.SuspendLayout();
+            this.tabTriggerDefinition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcProcedureSQL)).BeginInit();
             this.spcProcedureSQL.Panel2.SuspendLayout();
             this.spcProcedureSQL.SuspendLayout();
@@ -301,9 +301,9 @@ namespace FBXpert
             this.fctGenDescription.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctGenDescription.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGenDescription.ServiceColors")));
             this.fctGenDescription.Size = new System.Drawing.Size(276, 264);
-            this.fctGenDescription.TabIndex = 7;
+            this.fctGenDescription.TabIndex = 8;
             this.fctGenDescription.Zoom = 100;
-            this.fctGenDescription.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.TextChanged);
+            this.fctGenDescription.Load += new System.EventHandler(this.fctGenDescription_Load);
             // 
             // pnlProcedureAttributesUpper
             // 
@@ -358,7 +358,6 @@ namespace FBXpert
             this.gbTriggerName.TabIndex = 0;
             this.gbTriggerName.TabStop = false;
             this.gbTriggerName.Text = "Trigger name";
-            
             // 
             // txtTriggerName
             // 
@@ -453,7 +452,6 @@ namespace FBXpert
             this.gbPosition.TabIndex = 17;
             this.gbPosition.TabStop = false;
             this.gbPosition.Text = "Position";
-            
             // 
             // txtGenValue
             // 
@@ -468,7 +466,7 @@ namespace FBXpert
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageSQL);
-            this.tabControl1.Controls.Add(this.tabProcedureDefinition);
+            this.tabControl1.Controls.Add(this.tabTriggerDefinition);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -514,16 +512,16 @@ namespace FBXpert
         '\'',
         '\''};
             this.fctSQL.AutoIndentCharsPatterns = "";
-            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(25, 12);
+            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(0, 14);
             this.fctSQL.BackBrush = null;
-            this.fctSQL.BackColor = System.Drawing.SystemColors.Info;
-            this.fctSQL.CharHeight = 12;
-            this.fctSQL.CharWidth = 7;
+            this.fctSQL.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctSQL.CharHeight = 14;
+            this.fctSQL.CharWidth = 8;
             this.fctSQL.CommentPrefix = "--";
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSQL.Font = new System.Drawing.Font("Courier New", 8.25F);
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -534,9 +532,10 @@ namespace FBXpert
             this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
             this.fctSQL.Size = new System.Drawing.Size(956, 445);
-            this.fctSQL.TabIndex = 0;
+            this.fctSQL.TabIndex = 4;
+            this.fctSQL.WordWrap = true;
             this.fctSQL.Zoom = 100;
-            this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
+            this.fctSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.fctSQL_TextChanged);
             // 
             // pnlSQLUpper
             // 
@@ -698,17 +697,17 @@ namespace FBXpert
             this.hsCreate.UseVisualStyleBackColor = false;
             this.hsCreate.Click += new System.EventHandler(this.hsCreate_Click);
             // 
-            // tabProcedureDefinition
+            // tabTriggerDefinition
             // 
-            this.tabProcedureDefinition.Controls.Add(this.spcProcedureSQL);
-            this.tabProcedureDefinition.ImageIndex = 8;
-            this.tabProcedureDefinition.Location = new System.Drawing.Point(4, 22);
-            this.tabProcedureDefinition.Name = "tabProcedureDefinition";
-            this.tabProcedureDefinition.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProcedureDefinition.Size = new System.Drawing.Size(968, 510);
-            this.tabProcedureDefinition.TabIndex = 1;
-            this.tabProcedureDefinition.Text = "Procedure Definition";
-            this.tabProcedureDefinition.UseVisualStyleBackColor = true;
+            this.tabTriggerDefinition.Controls.Add(this.spcProcedureSQL);
+            this.tabTriggerDefinition.ImageIndex = 8;
+            this.tabTriggerDefinition.Location = new System.Drawing.Point(4, 22);
+            this.tabTriggerDefinition.Name = "tabTriggerDefinition";
+            this.tabTriggerDefinition.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTriggerDefinition.Size = new System.Drawing.Size(968, 510);
+            this.tabTriggerDefinition.TabIndex = 1;
+            this.tabTriggerDefinition.Text = "Trigger Definition";
+            this.tabTriggerDefinition.UseVisualStyleBackColor = true;
             // 
             // spcProcedureSQL
             // 
@@ -748,7 +747,7 @@ namespace FBXpert
         '\'',
         '\''};
             this.fcbTriggerDefinitionSQL.AutoIndentCharsPatterns = "";
-            this.fcbTriggerDefinitionSQL.AutoScrollMinSize = new System.Drawing.Size(2, 12);
+            this.fcbTriggerDefinitionSQL.AutoScrollMinSize = new System.Drawing.Size(25, 12);
             this.fcbTriggerDefinitionSQL.BackBrush = null;
             this.fcbTriggerDefinitionSQL.BackColor = System.Drawing.SystemColors.Info;
             this.fcbTriggerDefinitionSQL.CharHeight = 12;
@@ -766,7 +765,7 @@ namespace FBXpert
             this.fcbTriggerDefinitionSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.fcbTriggerDefinitionSQL.RightBracket = ')';
             this.fcbTriggerDefinitionSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fcbTriggerDefinitionSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbTriggerDefinitionSQL.ServiceColors")));
+            this.fcbTriggerDefinitionSQL.ServiceColors = null;
             this.fcbTriggerDefinitionSQL.Size = new System.Drawing.Size(644, 485);
             this.fcbTriggerDefinitionSQL.TabIndex = 0;
             this.fcbTriggerDefinitionSQL.Zoom = 100;
@@ -829,7 +828,6 @@ namespace FBXpert
             this.hsSave.ToolTipTitle = "";
             this.hsSave.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsSave.UseVisualStyleBackColor = false;
-            
             // 
             // tabPageDependencies
             // 
@@ -900,7 +898,6 @@ namespace FBXpert
             this.pnlDependenciesUpper.Name = "pnlDependenciesUpper";
             this.pnlDependenciesUpper.Size = new System.Drawing.Size(1262, 40);
             this.pnlDependenciesUpper.TabIndex = 21;
-            
             // 
             // hsRefreshDependencies
             // 
@@ -986,6 +983,7 @@ namespace FBXpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -994,7 +992,7 @@ namespace FBXpert
             this.fctMessages.Paddings = new System.Windows.Forms.Padding(0);
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
+            this.fctMessages.ServiceColors = null;
             this.fctMessages.Size = new System.Drawing.Size(1262, 536);
             this.fctMessages.TabIndex = 30;
             this.fctMessages.Zoom = 100;
@@ -1060,20 +1058,9 @@ namespace FBXpert
             // 
             // ilTabControl
             // 
-            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
+            this.ilTabControl.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ilTabControl.ImageSize = new System.Drawing.Size(16, 16);
             this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
-            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
-            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
-            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
-            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
-            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
-            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
-            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
-            this.ilTabControl.Images.SetKeyName(10, "format_indent_more_24x.png");
-            this.ilTabControl.Images.SetKeyName(11, "media_playlist_shuffle_x32.png");
             // 
             // dsDependenciesFrom
             // 
@@ -1107,7 +1094,6 @@ namespace FBXpert
             this.ClientSize = new System.Drawing.Size(1276, 651);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlUpper);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TriggerForm";
             this.Text = "TriggerForm";
             this.Load += new System.EventHandler(this.TriggerForm_Load);
@@ -1137,7 +1123,7 @@ namespace FBXpert
             this.gbSQL.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.pnlSQLUpper.ResumeLayout(false);
-            this.tabProcedureDefinition.ResumeLayout(false);
+            this.tabTriggerDefinition.ResumeLayout(false);
             this.spcProcedureSQL.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcProcedureSQL)).EndInit();
             this.spcProcedureSQL.ResumeLayout(false);
@@ -1173,7 +1159,6 @@ namespace FBXpert
         private System.Windows.Forms.GroupBox gbTriggerName;
         private System.Windows.Forms.TextBox txtTriggerName;
         private System.Windows.Forms.GroupBox gbDescription;
-        private FastColoredTextBoxNS.FastColoredTextBox fctGenDescription;
         private System.Windows.Forms.Panel pnlFieldUpper;
         private SeControlsLib.HotSpot hsSave;
         private System.Windows.Forms.TabPage tabPageDependencies;
@@ -1203,8 +1188,7 @@ namespace FBXpert
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageSQL;
         private System.Windows.Forms.GroupBox gbSQL;
-        private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
-        private System.Windows.Forms.TabPage tabProcedureDefinition;
+        private System.Windows.Forms.TabPage tabTriggerDefinition;
         private System.Windows.Forms.SplitContainer spcProcedureSQL;
         private System.Windows.Forms.GroupBox gbProcedureDefinitionSQL;
         private FastColoredTextBoxNS.FastColoredTextBox fcbTriggerDefinitionSQL;
@@ -1217,5 +1201,7 @@ namespace FBXpert
         private SeControlsLib.HotSpot hsSaveSQL;
         private System.Windows.Forms.SaveFileDialog saveSQLFile;
         private System.Windows.Forms.OpenFileDialog ofdSQL;
+        private FastColoredTextBoxNS.FastColoredTextBox fctGenDescription;
+        private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
     }
 }

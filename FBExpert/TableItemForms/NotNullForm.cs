@@ -33,14 +33,15 @@ namespace FBXpert
         ContextMenuStrip CmGroup=null;
         TreeNode Tn=null;
         NotNullsClass NotNullObject = null;
-        List<TableClass> Tables = new List<TableClass>();
+        List<TableClass> _tables = new List<TableClass>();
         TableClass OrgTable = null;
-        public NotNullForm(Form parent,  DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cmGroup, ContextMenuStrip cm)
+        public NotNullForm(Form parent,  DBRegistrationClass dbReg,List<TableClass> tables ,TreeNode tn, ContextMenuStrip cmGroup, ContextMenuStrip cm)
         {
             InitializeComponent();
             this.MdiParent = parent;
             
             _dbReg = dbReg;
+            _tables = tables;
             Cm = cm;
             CmGroup = cmGroup;
             Tn = tn;
@@ -67,7 +68,7 @@ namespace FBXpert
                 NotNullObject.TableName = OrgTable.Name;
             }
 
-            Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+           // _tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
 
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
@@ -215,7 +216,7 @@ namespace FBXpert
         {
            
             cbTable.Items.Clear();
-            cbTable.Items.AddRange(Tables.ToArray());
+            cbTable.Items.AddRange(_tables.ToArray());
 
            
             cbTable.Text = NotNullObject.TableName;
@@ -255,11 +256,17 @@ namespace FBXpert
             
             //RefreshDependenciesTo();
             MakeSQL();
-            ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            SetAutocompeteObjects(_tables);
         }
 
-       
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddProcedureCommands();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);                        
+        }
 
         private void fctGenDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {

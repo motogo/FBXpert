@@ -738,9 +738,9 @@ namespace FBExpert
             if(cbPrimaryKey.Checked)
             {
                txtPK.Visible = true;
-               if((cbPrimaryKey.Checked)&&(string.IsNullOrEmpty(txtPK.Text)))
+               if(string.IsNullOrEmpty(txtPK.Text))
                {
-                    txtPK.Text = (string.IsNullOrEmpty(FieldObject.PK_ConstraintName)) ? $@"PK_{FieldObject.TableName}" : FieldObject.PK_ConstraintName;                    
+                    txtPK.Text = string.IsNullOrEmpty(FieldObject.PK_ConstraintName) ? $@"PK_{FieldObject.TableName}" : FieldObject.PK_ConstraintName;                    
                }
                MakeSQL();            
             }

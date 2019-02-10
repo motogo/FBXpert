@@ -28,12 +28,14 @@ namespace FBExpert
         int error_count = 0;
         TreeNode Tn = null;
         ContextMenuStrip Cm = null;
+        List<TableClass> _tables = null;
 
-        public DomainForm(Form parent, DBRegistrationClass dbReg,  TreeNode tn, ContextMenuStrip cm)
+        public DomainForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, TreeNode tn, ContextMenuStrip cm)
         {
             InitializeComponent();
             this.MdiParent = parent;
             _dbReg = dbReg;
+            _tables = tables;
             DomainClass tc = (DomainClass)tn.Tag;     
             if(tc == null)
             {
@@ -374,9 +376,18 @@ namespace FBExpert
             AddExcamples();
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
-            ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            SetAutocompeteObjects(_tables);
            
+        }
+
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            
+            ac.AddAutocompleteForTables(tables);
+            
         }
 
         public void AddExcamples()

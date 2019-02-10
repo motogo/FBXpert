@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
 using System.Collections.Generic;
@@ -39,13 +40,37 @@ namespace FBXpert.Globals
              if(string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
         }
+
+        public static string GetLifetime(string cnString)
+        {             
+            var con = new FbConnection(cnString);            
+            
+            string lifetimeText = string.Empty;
+            try
+            {     
+                con.Open();
+                string cmd = "select mon$next_transaction livetime from mon$database;";
+                var fcmd = new FbCommand(cmd, con);
+                fcmd.CommandTimeout = 10;
+                var dread = fcmd.ExecuteReader();
+                if (dread.HasRows)
+                {
+                    while (dread.Read())
+                    {
+                        lifetimeText = dread.GetValue(0).ToString().Trim();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            con.Close();
+            return lifetimeText;
+        }
         
         public static string GetFormattedInfo(string info, string message)
-        {
-            /*
-            if(string.IsNullOrEmpty(message)) return $@"{StaticFunctionsClass.DateTimeNowStr()}  {info}";
-            return $@"{StaticFunctionsClass.DateTimeNowStr()}  {info}{Environment.NewLine}    ->msg:{message}";
-            */
+        {            
             if(string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
 

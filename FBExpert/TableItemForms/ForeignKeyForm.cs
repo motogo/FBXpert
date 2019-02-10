@@ -19,7 +19,7 @@ namespace FBXpert
         ForeignKeyClass ForeignKeyObject = null;
         DBRegistrationClass _dbReg = null;
         
-        List<TableClass> Tables = null;
+        List<TableClass> _tables = null;
         
         NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
@@ -32,7 +32,7 @@ namespace FBXpert
         {
             InitializeComponent();
             this.MdiParent = parent;       
-            Tables = tables;
+            _tables = tables;
             
             if (foreignKeys == null)
             {
@@ -307,8 +307,8 @@ namespace FBXpert
 
         public override void DataToEdit()
         {            
-            TableClass destTable = Tables.Find(x => x.Name == ForeignKeyObject.DestTableName);
-            TableClass sourceTable = Tables.Find(x => x.Name == ForeignKeyObject.SourceTableName);
+            TableClass destTable = _tables.Find(x => x.Name == ForeignKeyObject.DestTableName);
+            TableClass sourceTable = _tables.Find(x => x.Name == ForeignKeyObject.SourceTableName);
             FillDestFields(ForeignKeyObject.DestTableName);
             FillSourceFields(ForeignKeyObject.SourceTableName);
             //GetSourceFieldsFromTableObject(ForeignKeyObject.SourceTableName);
@@ -353,7 +353,7 @@ namespace FBXpert
             cbDestinationTableFields.Items.Clear();
             if (DestTableName.Length > 0)
             {
-                TableClass DestTab = Tables.Find(x=>x.Name == DestTableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
+                TableClass DestTab = _tables.Find(x=>x.Name == DestTableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
                 Dictionary<string,TableFieldClass> DestFds = DestTab.Fields;                                
                 foreach (TableFieldClass dstr in  DestFds.Values)
                 {                  
@@ -370,7 +370,7 @@ namespace FBXpert
             cbSourceTableFields.Items.Clear();
             if (TableName.Length > 0)
             {
-                TableClass Tab = Tables.Find(x => x.Name == TableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
+                TableClass Tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
                 var Fds = Tab.Fields;
                 foreach (TableFieldClass dstr in Fds.Values)
                 {                  
@@ -398,9 +398,9 @@ namespace FBXpert
             cbSourceTable.Items.Clear();
             cbDestinationTable.SelectedIndex = -1;
             cbSourceTable.SelectedIndex = -1;
-            if (Tables != null)
+            if (_tables != null)
             {
-                foreach (TableClass table in Tables)
+                foreach (TableClass table in _tables)
                 {
                     cbDestinationTable.Items.Add(table);
                     cbSourceTable.Items.Add(table);
@@ -448,10 +448,10 @@ namespace FBXpert
             UpdateForeignKeyObject();            
             old_constraint_name = ForeignKeyObject.Name;                      
             SetEnables();
-            DataToEdit();
-            
-            ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            DataToEdit();                        
+
+            SetAutocompeteObjects(_tables);
+
             DataFilled = true;
             if(!string.IsNullOrEmpty(TableName)) 
             {
@@ -459,7 +459,15 @@ namespace FBXpert
             }
             MakeSQL();
             splitContainer1.SplitterDistance = 500;
-            txtConstraintName.Enabled = !(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);
+            txtConstraintName.Enabled = !(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);            
+        }
+
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
             
         }
 
@@ -560,7 +568,7 @@ namespace FBXpert
         public ForeignKeyClass GetFK(string fkname)
         {
             if (fkname.Length <= 0) return null;
-            foreach(TableClass tb in Tables)
+            foreach(TableClass tb in _tables)
             {
                 if (tb.ForeignKeys == null) continue;                
                 if(!tb.ForeignKeys.ContainsKey(fkname)) continue;                

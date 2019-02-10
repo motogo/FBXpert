@@ -53,6 +53,7 @@ namespace FBExpert.DataClasses
         public string GetDBInfo(DBRegistrationClass dbReg, string formname)
         {           
             if (dbReg == null) return formname + "  Database:null";
+            
             return $"{formname} DB:{dbReg.Alias} ({dbReg.Server}:{dbReg.DatabasePath})";            
         }
     }

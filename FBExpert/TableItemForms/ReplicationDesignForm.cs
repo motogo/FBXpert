@@ -23,18 +23,14 @@ namespace FBXpert
         string TableName = string.Empty;
         int messages_count = 0;
         int error_count = 0;
-        NotifiesClass _localNotify = new NotifiesClass();
-        AutocompleteClass ac = null;
-        
-        
-        
-           
+        NotifiesClass _localNotify = new NotifiesClass();                                
+        List<TableClass> _tables = null;
 
-        public ReplicationDesignForm(Form parent, DBRegistrationClass dbReg)
+        public ReplicationDesignForm(Form parent, List<TableClass> tables, DBRegistrationClass dbReg)
         {
             InitializeComponent();
             this.MdiParent = parent;
-            
+            _tables = tables;
             _dbReg = dbReg;                             
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;                                    
@@ -119,8 +115,16 @@ namespace FBXpert
          
             //RefreshDependenciesTo();
             MakeSQL();
+            SetAutocompeteObjects(_tables);
+        }
+        AutocompleteClass ac = null;
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
             ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();
+            ac.CreateAutocompleteForDatabase();
+            ac.AddProcedureCommands();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);                        
         }
        
         public void ShowCaptions()

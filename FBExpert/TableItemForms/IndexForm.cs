@@ -320,8 +320,16 @@ namespace FBXpert
             oldIndexColumnName = txtIndexName.Text.Trim();
             DataFilled = true;
             MakeSQL();
+            SetAutocompeteObjects(_tables);
+        }
+
+        
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
             ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase();            
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);            
         }
        
         public void ShowCaptions()

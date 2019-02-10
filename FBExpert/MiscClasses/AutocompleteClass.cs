@@ -355,6 +355,12 @@ namespace FBXpert.MiscClasses
             };
         }
 
+
+        public void AddProcedureCommands()
+        {
+            words.AddRange(ProcedureSqlCommands());
+        }
+
         public void RefreshAutocompleteForDatabase(List<TableClass> tables, Dictionary<string,SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
         {
             //create autocomplete popup menu
@@ -392,6 +398,84 @@ namespace FBXpert.MiscClasses
             //size of popupmenu
             _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
             _popupMenu.Items.Width = 400;
+        }
+
+        public void CreateAutocompleteForDatabase(FastColoredTextBox txt, DBRegistrationClass dbReg)
+        {
+            //create autocomplete popup menu            
+            _dbReg = dbReg;
+            _txtBox = txt;
+            _popupMenu = new AutocompleteMenu(_txtBox)            
+            {
+                MinFragmentLength = 1
+            };
+            
+            words = new List<string>();
+                                   
+            _popupMenu.SearchPattern = @"[\w\.$]";
+            _popupMenu.Items.SetAutocompleteItems(words);
+            _popupMenu.AllowTabKey = true;
+
+            //size of popupmenu
+            _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
+            _popupMenu.Items.Width = 400;
+        }
+        public void CreateAutocompleteForDatabase()
+        {
+            //create autocomplete popup menu            
+            
+            _popupMenu = new AutocompleteMenu(_txtBox)            
+            {
+                MinFragmentLength = 1
+            };
+            
+            words = new List<string>();
+                                   
+            _popupMenu.SearchPattern = @"[\w\.$]";
+            _popupMenu.Items.SetAutocompleteItems(words);
+            _popupMenu.AllowTabKey = true;
+
+            //size of popupmenu
+            _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
+            _popupMenu.Items.Width = 400;
+        }
+
+        public void AddAutocompleteForSQL()
+        { 
+             words.AddRange(SqlCommands());
+        }
+
+        public void AddAutocompleteForSystemtables(Dictionary<string,SystemTableClass> systemtables)
+        {           
+            if(systemtables != null) words.AddRange(DatabaseSystemTables(systemtables));                      
+        }
+
+        public void AddAutocompleteForViews(Dictionary<string,ViewClass> views)
+        {                        
+            if(views != null)
+            {
+                words.AddRange(DatabaseViews(views));            
+                words.AddRange(DatabaseViewFields(views));
+            }            
+        }
+
+        public void AddAutocompleteForTables(List<TableClass> tables)
+        {            
+            if(tables != null)
+            {
+                actTables = new Dictionary<string, TableClass>();
+                foreach(var table in tables)
+                {
+                    actTables.Add(table.Name,table);
+                }
+            }
+                       
+            if(actTables != null) 
+            {
+                words.AddRange(DatabaseTables(actTables));            
+                words.AddRange(DatabaseTableFields(actTables));
+            }
+                                   
         }
         public void RefreshNewAutocompleteForTable(string tablename)
         {

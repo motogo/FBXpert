@@ -82,7 +82,7 @@ namespace FBXpert
         private void SetCmsForDatabase(bool open)
         {
             tsmiStatistics.Enabled = open;
-            tsmiSQLExplorer.Enabled = open;
+            //tsmiSQLExplorer.Enabled = open;
            // tsmiSQLScriptExplorer.Enabled = open;
             tsmiCreateXMLDesign.Enabled = open;
             tsmiDatabaseDesigner.Enabled = open;
@@ -491,13 +491,13 @@ namespace FBXpert
              }
              else if (tnn == typeof(ProcedureClass))
              {
-                 var tmf = new ProcedureForm(MdiParent, drc, tn, cmsProcedure,EditStateClass.eBearbeiten.eEdit);
+                 var tmf = new ProcedureForm(MdiParent, drc,_actTables, tn, cmsProcedure,EditStateClass.eBearbeiten.eEdit);
                  
                  tmf.Show();
              }
              else if (tnn == typeof(FunctionClass))
              {
-                 var tmf = new FunctionForm(MdiParent, drc, tn, cmsFunctions,EditStateClass.eBearbeiten.eEdit);
+                 var tmf = new FunctionForm(MdiParent, drc,_actTables, tn, cmsFunctions,EditStateClass.eBearbeiten.eEdit);
                  
                  tmf.Show();
              }
@@ -517,7 +517,7 @@ namespace FBXpert
              }
              else if (tnn == typeof(DomainClass))
              {                        
-                 var tmf = new DomainForm(MdiParent, drc, tn, cmsDomains)
+                 var tmf = new DomainForm(MdiParent, drc, _actTables, tn, cmsDomains)
                  {
                      BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                  };
@@ -554,7 +554,7 @@ namespace FBXpert
             }
             else if (tnn == typeof(NotNullsClass))
             {                        
-               var cf = new NotNullForm(MdiParent, drc, tn, cmsConstrainsGroup,cmsConstraints)
+               var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
                };
@@ -580,7 +580,7 @@ namespace FBXpert
              }
              else if (tnn4 == typeof(DomainClass))
              {                        
-                 var tmf = new DomainForm(MdiParent, drc, tn, cmsDomains)
+                 var tmf = new DomainForm(MdiParent, drc, _actTables, tn, cmsDomains)
                  {
                      BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                  };
@@ -634,7 +634,7 @@ namespace FBXpert
             }
             else if (tnn == typeof(DomainClass))
             {                        
-                var tmf = new DomainForm(MdiParent, drc, tn, cmsDomains)
+                var tmf = new DomainForm(MdiParent, drc,  _actTables,tn, cmsDomains)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
@@ -657,7 +657,7 @@ namespace FBXpert
             }
             else if (tnn == typeof(NotNullsClass))
             {                        
-               var cf = new NotNullForm(MdiParent, drc, tn, cmsConstrainsGroup,cmsConstraints)
+               var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
                };
@@ -1029,8 +1029,7 @@ namespace FBXpert
 
         private void SqlExplorer(DBRegistrationClass drc, List<TableClass> actTables)
         {                                   
-            var sf = new SQLViewForm1(drc, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);          
-            sf.SetAutocompeteObjects(_actTables);
+            var sf = new SQLViewForm1(drc, _actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);                      
             sf.Show();            
         }
 
@@ -1062,7 +1061,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem ==  tsmiReplicationDesigner)
             {
-                var frm = new ReplicationDesignForm(FbXpertMainForm.Instance(), dbReg);
+                var frm = new ReplicationDesignForm(FbXpertMainForm.Instance(), _actTables, dbReg);
                 frm.Show();
             }
             else if (e.ClickedItem == tsmiCompareDatabase)
@@ -1166,15 +1165,13 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiIDBBinaries)
             {
                BinariesForm bf = new BinariesForm(MdiParent, dbReg);
-               bf.Show();
-            
+               bf.Show();            
             }
             else if (e.ClickedItem == tsmiEventsTracker)
             {
                EventsForm ev = new EventsForm(MdiParent, dbReg);
                ev.SetAutocompeteObjects(_actTables,_actSystemTables,_actViews);
-               ev.Show();
-            
+               ev.Show();            
             }
         }
        
@@ -1225,24 +1222,22 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiEditIndices)
             {                            
-                var tff = new IndexForm(MdiParent, _tnSelected.Text, dbReg, _actTables,EditStateClass.eBearbeiten.eEdit);
-                
+                var tff = new IndexForm(MdiParent, _tnSelected.Text, dbReg, _actTables,EditStateClass.eBearbeiten.eEdit);                
                 tff.Show();                            
             }
             else if(e.ClickedItem == tsmiNewIndex)
             {
-                var tff = new IndexForm(MdiParent, string.Empty, dbReg, _actTables,EditStateClass.eBearbeiten.eInsert);
-                
+                var tff = new IndexForm(MdiParent, string.Empty, dbReg, _actTables,EditStateClass.eBearbeiten.eInsert);                
                 tff.Show();                            
             }            
             else if (e.ClickedItem == tsmiEditProcedure)
             {                            
-                var tmf = new ProcedureForm(MdiParent, dbReg, _tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eEdit);                
+                var tmf = new ProcedureForm(MdiParent, dbReg,_actTables, _tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eEdit);                
                 tmf.Show();                            
             }
             else if (e.ClickedItem == tsmiEditFunction)
             {                            
-                var tmf = new FunctionForm(MdiParent, dbReg, _tnSelected, cmsFunctions,EditStateClass.eBearbeiten.eEdit);                
+                var tmf = new FunctionForm(MdiParent, dbReg,_actTables, _tnSelected, cmsFunctions,EditStateClass.eBearbeiten.eEdit);                
                 tmf.Show();                         
             }
             else if (e.ClickedItem == tsmiEditUserDefinedFunctions)
@@ -1252,7 +1247,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiEditDomain)
             {                            
-                var tmf = new DomainForm(MdiParent, dbReg, _tnSelected, cmsDomains)
+                var tmf = new DomainForm(MdiParent, dbReg, _actTables, _tnSelected, cmsDomains)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
@@ -1270,7 +1265,7 @@ namespace FBXpert
             {                           
                 var constraintObject = _tnSelected.Tag as ConstraintsClass;
                 TableClass tableObject = (TableClass) StaticTreeClass.FindPrevTableNode(_tnSelected).Tag;
-                var cf = new ConstraintsForm(MdiParent, tableObject,dbReg, constraintObject)
+                var cf = new ConstraintsForm(MdiParent, tableObject, _actTables,dbReg, constraintObject)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
@@ -1520,7 +1515,7 @@ namespace FBXpert
             {
                 var gc = new ProcedureClass();
                 _tnSelected.Tag = gc;
-                var tmf = new ProcedureForm(MdiParent, dbReg, _tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eInsert);
+                var tmf = new ProcedureForm(MdiParent, dbReg,_actTables, _tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eInsert);
                 
                 tmf.Show();
             }
@@ -1528,14 +1523,14 @@ namespace FBXpert
             {
                 var gc = new FunctionClass();
                 _tnSelected.Tag = gc;
-                var tmf = new FunctionForm(MdiParent, dbReg, _tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eInsert);
+                var tmf = new FunctionForm(MdiParent, dbReg, _actTables,_tnSelected, cmsProcedure,EditStateClass.eBearbeiten.eInsert);
                 
                 tmf.Show();
             }
             else if (e.ClickedItem == tsmiNewConstraint)
             {     
                 TableClass tableObject = (TableClass) StaticTreeClass.FindPrevTableNode(_tnSelected).Tag;
-                var tmf = new ConstraintsForm(MdiParent,tableObject, dbReg, null)
+                var tmf = new ConstraintsForm(MdiParent,tableObject,_actTables, dbReg, null)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eInsert
                 };
@@ -1552,7 +1547,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiNewDomain)
             {
                  _tnSelected.Tag = null;
-                var tmf = new DomainForm(MdiParent, dbReg, _tnSelected, cmsDomains)
+                var tmf = new DomainForm(MdiParent, dbReg, _actTables, _tnSelected, cmsDomains)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eInsert
                 };

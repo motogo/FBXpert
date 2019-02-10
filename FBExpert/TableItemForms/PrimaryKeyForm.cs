@@ -316,9 +316,18 @@ namespace FBXpert
             DataToEdit();
             _oldIndexName = txtPKName.Text.Trim();
             MakeSQL();
-            _ac = new AutocompleteClass(fctSQL, _dbReg);
-            _ac.RefreshAutocompleteForDatabase();
+            SetAutocompeteObjects(_tables);
             _dataFilled = true;
+        }
+
+        AutocompleteClass ac = null;
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddProcedureCommands();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);                        
         }
 
         public void ShowCaptions()

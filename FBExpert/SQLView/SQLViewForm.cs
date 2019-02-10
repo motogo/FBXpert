@@ -30,7 +30,8 @@ namespace SQLView
 	    private SQLCommandsClass _sqLcommand = null;        
         private eColorDesigns _appDesign = eColorDesigns.Gray;
         private eColorDesigns _developDesign = eColorDesigns.Gray;
-	    private readonly DBRegistrationClass _dbReg = null;
+	    private readonly DBRegistrationClass _dbRegOrg = null;
+        private readonly DBRegistrationClass _dbrRegLocal = null;
         private string _cmd = string.Empty;
         private int _cmdDone = 0;
         private int _cmdError = 0;        
@@ -38,23 +39,26 @@ namespace SQLView
 	    //private AutocompleteClass _ac = null;        
         private bool _testlauf = true;
 	    private readonly List<string> _obcmd = new List<string>();        
-        
+        List<TableClass> _tables = null;
         eSort _lastSort = eSort.DESC;
 
-        public SQLViewForm1(DBRegistrationClass ca,  Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
+        public SQLViewForm1(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
             MdiParent = mdiParent;
-            _dbReg = ca;
-            
+            _dbRegOrg = ca;
+              
+            _dbrRegLocal = _dbRegOrg.Clone();
+            _tables = tables;
+
             _appDesign = appDesign;
             _developDesign = developDesign;
             InitializeComponent();
-
+           
             var nf = new NotifiesClass();
             nf.gaugeNotify.OnRaiseGaugeHandler += new NotifyGauge.RaiseGaugeHandler(GaugeRaised);
             _localNotifies.AddNotify(nf,"SQLViewForm");
             _localNotifies.AddNotify(NotifiesClass.Instance(),"GLOBAL");
-            _sqLcommand = new SQLCommandsClass(_dbReg,_localNotifies.Find("SQLViewForm"));     
+            _sqLcommand = new SQLCommandsClass(_dbrRegLocal,_localNotifies.Find("SQLViewForm"));     
             tabPageSucceeded.Text = "commands succeded DESC";
             Meldungen();
             Errors();                        
@@ -261,7 +265,7 @@ namespace SQLView
             dataSet1.Clear();
             dgvResults.AutoGenerateColumns = true;
             string term = GetTerm(cmds);
-            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);            
+            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);            
             var ri  = _sqLcommand.ExecuteCommandsAddToDataset(dataSet1,cmds,true);
             dataSet1 = ri.dataSet;            
             AddToHistory(toHistory,cmds);            
@@ -286,6 +290,7 @@ namespace SQLView
             if(txtSQL.Text.Length <= 0) return new SQLCommandsReturnInfoClass();
          
             _sqLcommand.SetEncoding(cbEncoding.Text);
+           
             var ri  = _sqLcommand.ExecuteCommandWithGlobalConnection(txtSQL.Lines);
             lblUsedMs.Text = ri.costs.ToString();
             dataSet1 = ri.dataSet;
@@ -387,14 +392,51 @@ namespace SQLView
         }
         string lastSuccessfulCommand = string.Empty;
         string lastCommand = string.Empty;
+
+        public void TestOpen(string databaseString)
+        {
+
+          //  ConnectionClass cc = ConnectionPoolClass.Instance().GetConnection(GlobalsCon.MainCon);
+          //  ConnectionAttributes ca = cc.ConnAtt;
+            
+          
+
+            int inx1 = txtDatabase.Text.IndexOf("\\");
+            int inx2 = txtDatabase.Text.IndexOf("//");
+            int inx = txtDatabase.Text.IndexOf(":");
+
+            string server = ((inx1 < inx)||inx2>=0) ? txtDatabase.Text.Substring(0,inx): "localhost";
+            if(inx2>=0) server = server.Replace("//","");
+            if(inx1 < inx)
+            {
+                while(server.StartsWith("\\"))
+                {
+                    server = server.Substring(1);
+                }
+            }
+            string path = txtDatabase.Text.Substring(inx+1);
+
+            _sqLcommand.ReplaceConnection(server,path);        
+            _dbrRegLocal.Server = server;
+            _dbrRegLocal.DatabasePath = path;
+            string connectionString = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
+            string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString);
+            hsLifeTime.ToolTipActive = true;
+            hsLifeTime.ToolTipText = connectionString;
+            hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);           
+            hsLifeTime.Text = lifeTime;
+        }
+
+      
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
             txtSQL.Clear();            
             UserStart();
             Testlauf();
             EditMode(cbEditMode.Checked);
-            Text = DevelopmentClass.Instance().GetDBInfo(_dbReg,"SQLView for ");
-           
+            this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
+            txtDatabase.Text =  _dbrRegLocal.GetDatabasepfad(); 
+            TestOpen(txtDatabase.Text);
             hsBreak.Enabled = false;
 
             int n = LoadHistory(_lastSort);
@@ -402,13 +444,15 @@ namespace SQLView
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
             SetEncoding();   
-            
+            SetAutocompeteObjects(_tables);
         }
         AutocompleteClass ac;
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
-            ac = new AutocompleteClass(txtSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase(tables,null,null);
+            ac = new AutocompleteClass(txtSQL, _dbRegOrg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);            
         }
 
         private int LoadHistory(eSort sort)
@@ -585,9 +629,9 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         public void MemoryusagePerStatement()
         {
             lvPerformance.Items.Clear();
-            if(_dbReg.Version < eDBVersion.FB3_32)
+            if(_dbrRegLocal.Version < eDBVersion.FB3_32)
             {
-                lvPerformance.Items.Add($@"{Environment.NewLine}No performance for database {_dbReg.Alias} V{_dbReg.Version} available !!!");
+                lvPerformance.Items.Add($@"{Environment.NewLine}No performance for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
                 return;
             }
             var scmd = new StringBuilder();
@@ -634,13 +678,13 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         public void RefreshPLAN()
         {          
             fctPlan.Clear();
-            if(_dbReg.Version < eDBVersion.FB3_32)
+            if(_dbrRegLocal.Version < eDBVersion.FB3_32)
             {
-                fctPlan.AppendText($@"{Environment.NewLine}No plan for database {_dbReg.Alias} V{_dbReg.Version} available !!!");
+                fctPlan.AppendText($@"{Environment.NewLine}No plan for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
                 return;
             }
 
-            var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+            var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
             string sql = txtSQL.Text.Trim();
             if(sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
             
@@ -690,7 +734,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             progressBar1.Value = 0;
             progressBar1.Maximum = (int)fi.Length;
             hsBreak.Enabled = true;
-            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbRegOrg);
             string[] strarr = File.ReadAllLines(fi.FullName);
             var sb = new StringBuilder();
 
@@ -720,7 +764,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         
         private void SetEncoding()
         {            
-            int inx = cbEncoding.FindString(_dbReg.CharSet);
+            int inx = cbEncoding.FindString(_dbrRegLocal.CharSet);
             cbEncoding.SelectedIndex = inx;                        
         }
 
@@ -800,7 +844,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             _cmd = ri.lastSQL;
             if (ri.lastCommandType == SQLCommandType.select)
             {
-                if (_dbReg.Version >= eDBVersion.FB3_32)
+                if (_dbrRegLocal.Version >= eDBVersion.FB3_32)
                 {
                     RefreshPLAN();
                 }
@@ -883,7 +927,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 DataSet dsUpdate = dataSet1.GetChanges(DataRowState.Modified);
                 DataSet dsInsert = dataSet1.GetChanges(DataRowState.Added);
                 DataSet dsDeleted = dataSet1.GetChanges(DataRowState.Deleted);
-                string constr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+                string constr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
                 var cn = new FbConnection(constr);
                 string cm1 = _cmd;
                 var da = new FbDataAdapter(cm1, cn);
@@ -1020,9 +1064,11 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void txtSQL_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (e.KeyData != (Keys.K | Keys.Control)) return;
-            if(ac != null) ac.Show();
-            e.Handled = true;
+            if (e.KeyData == (Keys.K | Keys.Control)) 
+            {
+                if(ac != null) ac.Show();
+                e.Handled = true;
+            }
         }
 
         private void cbEditMode_CheckedChanged(object sender, EventArgs e)
@@ -1118,6 +1164,19 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void hsPageRefresh_Click(object sender, EventArgs e)
         {            
             ExecuteSQL(_history);            
+        }
+
+        private void hsLifeTime_Click(object sender, EventArgs e)
+        {
+            
+          
+           
+            TestOpen(txtDatabase.Text);
+        }
+
+        private void txtDatabase_TextChanged(object sender, EventArgs e)
+        {
+            hsLifeTime.Marked = false;
         }
     }
 }

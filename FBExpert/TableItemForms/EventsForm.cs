@@ -232,7 +232,11 @@ namespace FBExpert
         public void SetAutocompeteObjects(List<TableClass> tables, Dictionary<string,SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
         {
             ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForDatabase(tables,systemtables,views);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
+            ac.AddAutocompleteForSystemtables(systemtables);
+            ac.AddAutocompleteForViews(views);
         }
                
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)

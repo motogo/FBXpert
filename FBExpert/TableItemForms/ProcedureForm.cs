@@ -26,14 +26,15 @@ namespace FBXpert
         private int _messagesCount = 0;
         private int _errorCount = 0;
         private bool _doEvents = false;
+        List<TableClass> _tables = null;
 
-        public ProcedureForm(Form parent, DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cm, StateClasses.EditStateClass.eBearbeiten mode)
+        public ProcedureForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, TreeNode tn, ContextMenuStrip cm, StateClasses.EditStateClass.eBearbeiten mode)
         {
             InitializeComponent();
             this.MdiParent = parent;
             _tn = tn;
             _cm = cm;
-           
+            _tables = tables;
             try
             {                
                 BearbeitenMode = mode;
@@ -186,8 +187,16 @@ namespace FBXpert
             DataToEdit();            
             SetEnables();            
             MakeSQL();
-            _ac = new AutocompleteClass(fctSQL, _dbReg);
-            _ac.RefreshAutocompleteForProcedure();
+            SetAutocompeteObjects(_tables);
+        }
+        AutocompleteClass ac = null;
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(fctSQL, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddProcedureCommands();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);                        
         }
             
         public void ShowCaptions()

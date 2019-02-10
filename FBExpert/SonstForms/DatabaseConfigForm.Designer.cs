@@ -40,7 +40,7 @@ namespace FBExpert
             this.tabBasicConf = new System.Windows.Forms.TabPage();
             this.pnlCenterBasicConf = new System.Windows.Forms.Panel();
             this.gbConnectionString = new System.Windows.Forms.GroupBox();
-            this.txtConnectioString = new System.Windows.Forms.TextBox();
+            this.txtConnectionString = new System.Windows.Forms.TextBox();
             this.gbClientLibrary = new System.Windows.Forms.GroupBox();
             this.hsLoadClientLib = new SeControlsLib.HotSpot();
             this.txtClientLibrary = new System.Windows.Forms.TextBox();
@@ -88,11 +88,14 @@ namespace FBExpert
             this.pnlSouceControlCenter = new System.Windows.Forms.Panel();
             this.gbSourceCodeOutputPath = new System.Windows.Forms.GroupBox();
             this.txtSourcecodeOutputPath = new System.Windows.Forms.TextBox();
+            this.hsSourcecodeFolder = new SeControlsLib.HotSpot();
             this.gbDBNamespace = new System.Windows.Forms.GroupBox();
             this.txtDBNamespace = new System.Windows.Forms.TextBox();
             this.gbPrimaryFieldType = new System.Windows.Forms.GroupBox();
-            this.rbGenerateInrWithGenerator = new System.Windows.Forms.RadioButton();
             this.rbGenerateUUID = new System.Windows.Forms.RadioButton();
+            this.rbGenerateHEXGUID = new System.Windows.Forms.RadioButton();
+            this.rbGenerateDBGenerator = new System.Windows.Forms.RadioButton();
+            this.rbGenerateGUID = new System.Windows.Forms.RadioButton();
             this.gbSetTerm = new System.Windows.Forms.GroupBox();
             this.lblToReplaceSetTerm = new System.Windows.Forms.Label();
             this.txtAlternativeSetTermCharacter = new System.Windows.Forms.TextBox();
@@ -113,6 +116,12 @@ namespace FBExpert
             this.hsCreate = new SeControlsLib.HotSpot();
             this.gbAttributesUpper = new System.Windows.Forms.GroupBox();
             this.gbVersion = new System.Windows.Forms.GroupBox();
+            this.rb4_64 = new System.Windows.Forms.RadioButton();
+            this.rb4_32 = new System.Windows.Forms.RadioButton();
+            this.rb3_64 = new System.Windows.Forms.RadioButton();
+            this.rb3_32 = new System.Windows.Forms.RadioButton();
+            this.rb25_64 = new System.Windows.Forms.RadioButton();
+            this.rb25_32 = new System.Windows.Forms.RadioButton();
             this.gbLivettime = new System.Windows.Forms.GroupBox();
             this.txtLifetime = new System.Windows.Forms.TextBox();
             this.gbDatenbankAlias = new System.Windows.Forms.GroupBox();
@@ -124,12 +133,6 @@ namespace FBExpert
             this.pnlUpper = new System.Windows.Forms.Panel();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsClose = new SeControlsLib.HotSpot();
-            this.rb25_32 = new System.Windows.Forms.RadioButton();
-            this.rb25_64 = new System.Windows.Forms.RadioButton();
-            this.rb3_32 = new System.Windows.Forms.RadioButton();
-            this.rb3_64 = new System.Windows.Forms.RadioButton();
-            this.rb4_32 = new System.Windows.Forms.RadioButton();
-            this.rb4_64 = new System.Windows.Forms.RadioButton();
             this.pnlCenter.SuspendLayout();
             this.tabcontrolConfig.SuspendLayout();
             this.tabBasicConf.SuspendLayout();
@@ -339,7 +342,7 @@ namespace FBExpert
             // 
             // gbConnectionString
             // 
-            this.gbConnectionString.Controls.Add(this.txtConnectioString);
+            this.gbConnectionString.Controls.Add(this.txtConnectionString);
             this.gbConnectionString.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbConnectionString.Location = new System.Drawing.Point(0, 301);
             this.gbConnectionString.Name = "gbConnectionString";
@@ -350,14 +353,14 @@ namespace FBExpert
             // 
             // txtConnectioString
             // 
-            this.txtConnectioString.BackColor = System.Drawing.SystemColors.Info;
-            this.txtConnectioString.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtConnectioString.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConnectioString.Location = new System.Drawing.Point(3, 16);
-            this.txtConnectioString.Multiline = true;
-            this.txtConnectioString.Name = "txtConnectioString";
-            this.txtConnectioString.Size = new System.Drawing.Size(835, 112);
-            this.txtConnectioString.TabIndex = 1;
+            this.txtConnectionString.BackColor = System.Drawing.SystemColors.Info;
+            this.txtConnectionString.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtConnectionString.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConnectionString.Location = new System.Drawing.Point(3, 16);
+            this.txtConnectionString.Multiline = true;
+            this.txtConnectionString.Name = "txtConnectioString";
+            this.txtConnectionString.Size = new System.Drawing.Size(835, 112);
+            this.txtConnectionString.TabIndex = 1;
             // 
             // gbClientLibrary
             // 
@@ -823,7 +826,7 @@ namespace FBExpert
             this.tabXPertUsedAttributes.Location = new System.Drawing.Point(4, 22);
             this.tabXPertUsedAttributes.Name = "tabXPertUsedAttributes";
             this.tabXPertUsedAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXPertUsedAttributes.Size = new System.Drawing.Size(847, 461);
+            this.tabXPertUsedAttributes.Size = new System.Drawing.Size(847, 438);
             this.tabXPertUsedAttributes.TabIndex = 1;
             this.tabXPertUsedAttributes.Text = "FBXpert attributes";
             this.tabXPertUsedAttributes.UseVisualStyleBackColor = true;
@@ -835,7 +838,7 @@ namespace FBExpert
             this.pnlAttributesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAttributesCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlAttributesCenter.Name = "pnlAttributesCenter";
-            this.pnlAttributesCenter.Size = new System.Drawing.Size(841, 455);
+            this.pnlAttributesCenter.Size = new System.Drawing.Size(841, 432);
             this.pnlAttributesCenter.TabIndex = 0;
             // 
             // panel3
@@ -850,7 +853,7 @@ namespace FBExpert
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(841, 455);
+            this.panel3.Size = new System.Drawing.Size(841, 432);
             this.panel3.TabIndex = 16;
             // 
             // gbTableMaxRows
@@ -980,7 +983,7 @@ namespace FBExpert
             this.tabPageSourceControl.Location = new System.Drawing.Point(4, 22);
             this.tabPageSourceControl.Name = "tabPageSourceControl";
             this.tabPageSourceControl.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSourceControl.Size = new System.Drawing.Size(847, 461);
+            this.tabPageSourceControl.Size = new System.Drawing.Size(847, 438);
             this.tabPageSourceControl.TabIndex = 2;
             this.tabPageSourceControl.Text = "Sourcecode control";
             this.tabPageSourceControl.UseVisualStyleBackColor = true;
@@ -995,15 +998,16 @@ namespace FBExpert
             this.pnlSouceControlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSouceControlCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlSouceControlCenter.Name = "pnlSouceControlCenter";
-            this.pnlSouceControlCenter.Size = new System.Drawing.Size(841, 455);
+            this.pnlSouceControlCenter.Size = new System.Drawing.Size(841, 432);
             this.pnlSouceControlCenter.TabIndex = 1;
             // 
             // gbSourceCodeOutputPath
             // 
             this.gbSourceCodeOutputPath.Controls.Add(this.txtSourcecodeOutputPath);
-            this.gbSourceCodeOutputPath.Location = new System.Drawing.Point(19, 257);
+            this.gbSourceCodeOutputPath.Controls.Add(this.hsSourcecodeFolder);
+            this.gbSourceCodeOutputPath.Location = new System.Drawing.Point(19, 161);
             this.gbSourceCodeOutputPath.Name = "gbSourceCodeOutputPath";
-            this.gbSourceCodeOutputPath.Size = new System.Drawing.Size(376, 46);
+            this.gbSourceCodeOutputPath.Size = new System.Drawing.Size(724, 46);
             this.gbSourceCodeOutputPath.TabIndex = 12;
             this.gbSourceCodeOutputPath.TabStop = false;
             this.gbSourceCodeOutputPath.Text = "Sourcecode Output Path";
@@ -1014,16 +1018,64 @@ namespace FBExpert
             this.txtSourcecodeOutputPath.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSourcecodeOutputPath.Location = new System.Drawing.Point(3, 16);
             this.txtSourcecodeOutputPath.Name = "txtSourcecodeOutputPath";
-            this.txtSourcecodeOutputPath.Size = new System.Drawing.Size(370, 20);
+            this.txtSourcecodeOutputPath.Size = new System.Drawing.Size(676, 20);
             this.txtSourcecodeOutputPath.TabIndex = 0;
             this.txtSourcecodeOutputPath.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // hsSourcecodeFolder
+            // 
+            this.hsSourcecodeFolder.BackColor = System.Drawing.Color.Transparent;
+            this.hsSourcecodeFolder.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSourcecodeFolder.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSourcecodeFolder.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSourcecodeFolder.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSourcecodeFolder.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSourcecodeFolder.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSourcecodeFolder.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSourcecodeFolder.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSourcecodeFolder.FlatAppearance.BorderSize = 0;
+            this.hsSourcecodeFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSourcecodeFolder.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSourcecodeFolder.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsSourcecodeFolder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsSourcecodeFolder.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsSourcecodeFolder.ImageToggleOnSelect = true;
+            this.hsSourcecodeFolder.Location = new System.Drawing.Point(679, 16);
+            this.hsSourcecodeFolder.Marked = false;
+            this.hsSourcecodeFolder.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSourcecodeFolder.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSourcecodeFolder.MarkedText = "";
+            this.hsSourcecodeFolder.MarkMode = false;
+            this.hsSourcecodeFolder.Name = "hsSourcecodeFolder";
+            this.hsSourcecodeFolder.NonMarkedText = "Clone";
+            this.hsSourcecodeFolder.Size = new System.Drawing.Size(42, 27);
+            this.hsSourcecodeFolder.TabIndex = 5;
+            this.hsSourcecodeFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSourcecodeFolder.ToolTipActive = false;
+            this.hsSourcecodeFolder.ToolTipAutomaticDelay = 500;
+            this.hsSourcecodeFolder.ToolTipAutoPopDelay = 5000;
+            this.hsSourcecodeFolder.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSourcecodeFolder.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSourcecodeFolder.ToolTipFor4ContextMenu = true;
+            this.hsSourcecodeFolder.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSourcecodeFolder.ToolTipInitialDelay = 500;
+            this.hsSourcecodeFolder.ToolTipIsBallon = false;
+            this.hsSourcecodeFolder.ToolTipOwnerDraw = false;
+            this.hsSourcecodeFolder.ToolTipReshowDelay = 100;
+            this.hsSourcecodeFolder.ToolTipShowAlways = false;
+            this.hsSourcecodeFolder.ToolTipText = "";
+            this.hsSourcecodeFolder.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSourcecodeFolder.ToolTipTitle = "";
+            this.hsSourcecodeFolder.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSourcecodeFolder.UseVisualStyleBackColor = false;
+            this.hsSourcecodeFolder.Click += new System.EventHandler(this.hsSourcecodeFolder_Click);
             // 
             // gbDBNamespace
             // 
             this.gbDBNamespace.Controls.Add(this.txtDBNamespace);
-            this.gbDBNamespace.Location = new System.Drawing.Point(19, 205);
+            this.gbDBNamespace.Location = new System.Drawing.Point(19, 76);
             this.gbDBNamespace.Name = "gbDBNamespace";
-            this.gbDBNamespace.Size = new System.Drawing.Size(206, 46);
+            this.gbDBNamespace.Size = new System.Drawing.Size(182, 46);
             this.gbDBNamespace.TabIndex = 11;
             this.gbDBNamespace.TabStop = false;
             this.gbDBNamespace.Text = "Namespace";
@@ -1034,42 +1086,64 @@ namespace FBExpert
             this.txtDBNamespace.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBNamespace.Location = new System.Drawing.Point(3, 16);
             this.txtDBNamespace.Name = "txtDBNamespace";
-            this.txtDBNamespace.Size = new System.Drawing.Size(200, 20);
+            this.txtDBNamespace.Size = new System.Drawing.Size(176, 20);
             this.txtDBNamespace.TabIndex = 0;
             this.txtDBNamespace.Text = "ProjectDatas";
             // 
             // gbPrimaryFieldType
             // 
-            this.gbPrimaryFieldType.Controls.Add(this.rbGenerateInrWithGenerator);
             this.gbPrimaryFieldType.Controls.Add(this.rbGenerateUUID);
-            this.gbPrimaryFieldType.Location = new System.Drawing.Point(22, 95);
+            this.gbPrimaryFieldType.Controls.Add(this.rbGenerateHEXGUID);
+            this.gbPrimaryFieldType.Controls.Add(this.rbGenerateDBGenerator);
+            this.gbPrimaryFieldType.Controls.Add(this.rbGenerateGUID);
+            this.gbPrimaryFieldType.Location = new System.Drawing.Point(210, 26);
             this.gbPrimaryFieldType.Name = "gbPrimaryFieldType";
-            this.gbPrimaryFieldType.Size = new System.Drawing.Size(206, 92);
+            this.gbPrimaryFieldType.Size = new System.Drawing.Size(291, 129);
             this.gbPrimaryFieldType.TabIndex = 10;
             this.gbPrimaryFieldType.TabStop = false;
             this.gbPrimaryFieldType.Text = "FieldType primary field";
             // 
-            // rbGenerateInrWithGenerator
-            // 
-            this.rbGenerateInrWithGenerator.AutoSize = true;
-            this.rbGenerateInrWithGenerator.Checked = true;
-            this.rbGenerateInrWithGenerator.Location = new System.Drawing.Point(12, 28);
-            this.rbGenerateInrWithGenerator.Name = "rbGenerateInrWithGenerator";
-            this.rbGenerateInrWithGenerator.Size = new System.Drawing.Size(128, 17);
-            this.rbGenerateInrWithGenerator.TabIndex = 1;
-            this.rbGenerateInrWithGenerator.TabStop = true;
-            this.rbGenerateInrWithGenerator.Text = "Integer with generator";
-            this.rbGenerateInrWithGenerator.UseVisualStyleBackColor = true;
-            // 
             // rbGenerateUUID
             // 
             this.rbGenerateUUID.AutoSize = true;
-            this.rbGenerateUUID.Location = new System.Drawing.Point(12, 51);
+            this.rbGenerateUUID.Location = new System.Drawing.Point(12, 90);
             this.rbGenerateUUID.Name = "rbGenerateUUID";
-            this.rbGenerateUUID.Size = new System.Drawing.Size(157, 17);
-            this.rbGenerateUUID.TabIndex = 0;
-            this.rbGenerateUUID.Text = "String with UUID generation";
+            this.rbGenerateUUID.Size = new System.Drawing.Size(202, 17);
+            this.rbGenerateUUID.TabIndex = 14;
+            this.rbGenerateUUID.Text = "String with UUID generation (64 char)";
             this.rbGenerateUUID.UseVisualStyleBackColor = true;
+            // 
+            // rbGenerateHEXGUID
+            // 
+            this.rbGenerateHEXGUID.AutoSize = true;
+            this.rbGenerateHEXGUID.Location = new System.Drawing.Point(12, 67);
+            this.rbGenerateHEXGUID.Name = "rbGenerateHEXGUID";
+            this.rbGenerateHEXGUID.Size = new System.Drawing.Size(224, 17);
+            this.rbGenerateHEXGUID.TabIndex = 13;
+            this.rbGenerateHEXGUID.Text = "String with HEXGUID generation (32 char)";
+            this.rbGenerateHEXGUID.UseVisualStyleBackColor = true;
+            // 
+            // rbGenerateDBGenerator
+            // 
+            this.rbGenerateDBGenerator.AutoSize = true;
+            this.rbGenerateDBGenerator.Checked = true;
+            this.rbGenerateDBGenerator.Location = new System.Drawing.Point(12, 22);
+            this.rbGenerateDBGenerator.Name = "rbGenerateDBGenerator";
+            this.rbGenerateDBGenerator.Size = new System.Drawing.Size(128, 17);
+            this.rbGenerateDBGenerator.TabIndex = 1;
+            this.rbGenerateDBGenerator.TabStop = true;
+            this.rbGenerateDBGenerator.Text = "Integer with generator";
+            this.rbGenerateDBGenerator.UseVisualStyleBackColor = true;
+            // 
+            // rbGenerateGUID
+            // 
+            this.rbGenerateGUID.AutoSize = true;
+            this.rbGenerateGUID.Location = new System.Drawing.Point(12, 43);
+            this.rbGenerateGUID.Name = "rbGenerateGUID";
+            this.rbGenerateGUID.Size = new System.Drawing.Size(202, 17);
+            this.rbGenerateGUID.TabIndex = 0;
+            this.rbGenerateGUID.Text = "String with GUID generation (64 char)";
+            this.rbGenerateGUID.UseVisualStyleBackColor = true;
             // 
             // gbSetTerm
             // 
@@ -1106,7 +1180,7 @@ namespace FBExpert
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
             this.tabMisc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMisc.Size = new System.Drawing.Size(847, 461);
+            this.tabMisc.Size = new System.Drawing.Size(847, 438);
             this.tabMisc.TabIndex = 3;
             this.tabMisc.Text = "Misc";
             this.tabMisc.UseVisualStyleBackColor = true;
@@ -1120,7 +1194,7 @@ namespace FBExpert
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMisc.Location = new System.Drawing.Point(3, 3);
             this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(841, 455);
+            this.pnlMisc.Size = new System.Drawing.Size(841, 432);
             this.pnlMisc.TabIndex = 2;
             // 
             // groupBox1
@@ -1328,7 +1402,7 @@ namespace FBExpert
             this.tabCreateSQL.Location = new System.Drawing.Point(4, 22);
             this.tabCreateSQL.Name = "tabCreateSQL";
             this.tabCreateSQL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCreateSQL.Size = new System.Drawing.Size(847, 461);
+            this.tabCreateSQL.Size = new System.Drawing.Size(847, 438);
             this.tabCreateSQL.TabIndex = 4;
             this.tabCreateSQL.Text = "SQL";
             this.tabCreateSQL.UseVisualStyleBackColor = true;
@@ -1346,21 +1420,20 @@ namespace FBExpert
         '\"',
         '\'',
         '\''};
-            this.fcbSQLCreate.AutoScrollMinSize = new System.Drawing.Size(666, 14);
+            this.fcbSQLCreate.AutoScrollMinSize = new System.Drawing.Size(691, 14);
             this.fcbSQLCreate.BackBrush = null;
             this.fcbSQLCreate.CharHeight = 14;
             this.fcbSQLCreate.CharWidth = 8;
             this.fcbSQLCreate.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbSQLCreate.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbSQLCreate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fcbSQLCreate.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbSQLCreate.IsReplaceMode = false;
             this.fcbSQLCreate.Location = new System.Drawing.Point(3, 35);
             this.fcbSQLCreate.Name = "fcbSQLCreate";
             this.fcbSQLCreate.Paddings = new System.Windows.Forms.Padding(0);
             this.fcbSQLCreate.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbSQLCreate.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbSQLCreate.ServiceColors")));
-            this.fcbSQLCreate.Size = new System.Drawing.Size(841, 423);
+            this.fcbSQLCreate.Size = new System.Drawing.Size(841, 400);
             this.fcbSQLCreate.TabIndex = 0;
             this.fcbSQLCreate.Text = "CREATE DATABASE \'C:\\Temp\\Test.db\' page_size 8192 user \'SYSDBA\' password \'masterke" +
     "y\'";
@@ -1421,6 +1494,7 @@ namespace FBExpert
             this.hsCreate.ToolTipTitle = "";
             this.hsCreate.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsCreate.UseVisualStyleBackColor = false;
+            this.hsCreate.Click += new System.EventHandler(this.hsCreate_Click);
             // 
             // gbAttributesUpper
             // 
@@ -1450,6 +1524,72 @@ namespace FBExpert
             this.gbVersion.TabIndex = 11;
             this.gbVersion.TabStop = false;
             this.gbVersion.Text = "Version";
+            // 
+            // rb4_64
+            // 
+            this.rb4_64.AutoSize = true;
+            this.rb4_64.Location = new System.Drawing.Point(16, 136);
+            this.rb4_64.Name = "rb4_64";
+            this.rb4_64.Size = new System.Drawing.Size(57, 17);
+            this.rb4_64.TabIndex = 5;
+            this.rb4_64.TabStop = true;
+            this.rb4_64.Text = "4 64bit";
+            this.rb4_64.UseVisualStyleBackColor = true;
+            // 
+            // rb4_32
+            // 
+            this.rb4_32.AutoSize = true;
+            this.rb4_32.Location = new System.Drawing.Point(16, 113);
+            this.rb4_32.Name = "rb4_32";
+            this.rb4_32.Size = new System.Drawing.Size(57, 17);
+            this.rb4_32.TabIndex = 4;
+            this.rb4_32.TabStop = true;
+            this.rb4_32.Text = "4 32bit";
+            this.rb4_32.UseVisualStyleBackColor = true;
+            // 
+            // rb3_64
+            // 
+            this.rb3_64.AutoSize = true;
+            this.rb3_64.Location = new System.Drawing.Point(15, 90);
+            this.rb3_64.Name = "rb3_64";
+            this.rb3_64.Size = new System.Drawing.Size(57, 17);
+            this.rb3_64.TabIndex = 3;
+            this.rb3_64.TabStop = true;
+            this.rb3_64.Text = "3 64bit";
+            this.rb3_64.UseVisualStyleBackColor = true;
+            // 
+            // rb3_32
+            // 
+            this.rb3_32.AutoSize = true;
+            this.rb3_32.Location = new System.Drawing.Point(15, 67);
+            this.rb3_32.Name = "rb3_32";
+            this.rb3_32.Size = new System.Drawing.Size(57, 17);
+            this.rb3_32.TabIndex = 2;
+            this.rb3_32.TabStop = true;
+            this.rb3_32.Text = "3 32bit";
+            this.rb3_32.UseVisualStyleBackColor = true;
+            // 
+            // rb25_64
+            // 
+            this.rb25_64.AutoSize = true;
+            this.rb25_64.Location = new System.Drawing.Point(15, 44);
+            this.rb25_64.Name = "rb25_64";
+            this.rb25_64.Size = new System.Drawing.Size(66, 17);
+            this.rb25_64.TabIndex = 1;
+            this.rb25_64.TabStop = true;
+            this.rb25_64.Text = "2.5 64bit";
+            this.rb25_64.UseVisualStyleBackColor = true;
+            // 
+            // rb25_32
+            // 
+            this.rb25_32.AutoSize = true;
+            this.rb25_32.Location = new System.Drawing.Point(15, 21);
+            this.rb25_32.Name = "rb25_32";
+            this.rb25_32.Size = new System.Drawing.Size(66, 17);
+            this.rb25_32.TabIndex = 0;
+            this.rb25_32.TabStop = true;
+            this.rb25_32.Text = "2.5 32bit";
+            this.rb25_32.UseVisualStyleBackColor = true;
             // 
             // gbLivettime
             // 
@@ -1620,72 +1760,6 @@ namespace FBExpert
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click_1);
             // 
-            // rb25_32
-            // 
-            this.rb25_32.AutoSize = true;
-            this.rb25_32.Location = new System.Drawing.Point(15, 21);
-            this.rb25_32.Name = "rb25_32";
-            this.rb25_32.Size = new System.Drawing.Size(66, 17);
-            this.rb25_32.TabIndex = 0;
-            this.rb25_32.TabStop = true;
-            this.rb25_32.Text = "2.5 32bit";
-            this.rb25_32.UseVisualStyleBackColor = true;
-            // 
-            // rb25_64
-            // 
-            this.rb25_64.AutoSize = true;
-            this.rb25_64.Location = new System.Drawing.Point(15, 44);
-            this.rb25_64.Name = "rb25_64";
-            this.rb25_64.Size = new System.Drawing.Size(66, 17);
-            this.rb25_64.TabIndex = 1;
-            this.rb25_64.TabStop = true;
-            this.rb25_64.Text = "2.5 64bit";
-            this.rb25_64.UseVisualStyleBackColor = true;
-            // 
-            // rb3_32
-            // 
-            this.rb3_32.AutoSize = true;
-            this.rb3_32.Location = new System.Drawing.Point(15, 67);
-            this.rb3_32.Name = "rb3_32";
-            this.rb3_32.Size = new System.Drawing.Size(57, 17);
-            this.rb3_32.TabIndex = 2;
-            this.rb3_32.TabStop = true;
-            this.rb3_32.Text = "3 32bit";
-            this.rb3_32.UseVisualStyleBackColor = true;
-            // 
-            // rb3_64
-            // 
-            this.rb3_64.AutoSize = true;
-            this.rb3_64.Location = new System.Drawing.Point(15, 90);
-            this.rb3_64.Name = "rb3_64";
-            this.rb3_64.Size = new System.Drawing.Size(57, 17);
-            this.rb3_64.TabIndex = 3;
-            this.rb3_64.TabStop = true;
-            this.rb3_64.Text = "3 64bit";
-            this.rb3_64.UseVisualStyleBackColor = true;
-            // 
-            // rb4_32
-            // 
-            this.rb4_32.AutoSize = true;
-            this.rb4_32.Location = new System.Drawing.Point(16, 113);
-            this.rb4_32.Name = "rb4_32";
-            this.rb4_32.Size = new System.Drawing.Size(57, 17);
-            this.rb4_32.TabIndex = 4;
-            this.rb4_32.TabStop = true;
-            this.rb4_32.Text = "4 32bit";
-            this.rb4_32.UseVisualStyleBackColor = true;
-            // 
-            // rb4_64
-            // 
-            this.rb4_64.AutoSize = true;
-            this.rb4_64.Location = new System.Drawing.Point(16, 136);
-            this.rb4_64.Name = "rb4_64";
-            this.rb4_64.Size = new System.Drawing.Size(57, 17);
-            this.rb4_64.TabIndex = 5;
-            this.rb4_64.TabStop = true;
-            this.rb4_64.Text = "4 64bit";
-            this.rb4_64.UseVisualStyleBackColor = true;
-            // 
             // DatabaseConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1845,7 +1919,7 @@ namespace FBExpert
         private System.Windows.Forms.TextBox txtClientLibrary;
         private SeControlsLib.HotSpot hsChangeFullPath;
         private System.Windows.Forms.GroupBox gbConnectionString;
-        private System.Windows.Forms.TextBox txtConnectioString;
+        private System.Windows.Forms.TextBox txtConnectionString;
         private SeControlsLib.HotSpot hsLoadClientLib;
         private System.Windows.Forms.GroupBox gbVersion;
         private System.Windows.Forms.GroupBox gbTableMaxRows;
@@ -1859,8 +1933,8 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gbDBNamespace;
         private System.Windows.Forms.TextBox txtDBNamespace;
         private System.Windows.Forms.GroupBox gbPrimaryFieldType;
-        private System.Windows.Forms.RadioButton rbGenerateInrWithGenerator;
-        private System.Windows.Forms.RadioButton rbGenerateUUID;
+        private System.Windows.Forms.RadioButton rbGenerateDBGenerator;
+        private System.Windows.Forms.RadioButton rbGenerateGUID;
         private System.Windows.Forms.GroupBox gbSourceCodeOutputPath;
         private System.Windows.Forms.TextBox txtSourcecodeOutputPath;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1872,5 +1946,8 @@ namespace FBExpert
         private System.Windows.Forms.RadioButton rb3_32;
         private System.Windows.Forms.RadioButton rb25_64;
         private System.Windows.Forms.RadioButton rb25_32;
+        private System.Windows.Forms.RadioButton rbGenerateHEXGUID;
+        private SeControlsLib.HotSpot hsSourcecodeFolder;
+        private System.Windows.Forms.RadioButton rbGenerateUUID;
     }
 }

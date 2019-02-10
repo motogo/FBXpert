@@ -547,6 +547,9 @@
     <EmbeddedResource Include="TableItemForms\ReplicationDesignForm.resx">
       <DependentUpon>ReplicationDesignForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\TriggerForm.resx">
+      <DependentUpon>TriggerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\UserDefinedFunctionForm.resx">
       <DependentUpon>UserDefinedFunctionForm.cs</DependentUpon>
     </EmbeddedResource>

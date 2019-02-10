@@ -46,9 +46,9 @@ namespace FBXpert.DataClasses
 
     public enum eSort
     {
-        [EnumDescription("ASCENDING")]
+        [EnumDescription("ASC")]
         ASC = 0,
-        [EnumDescription("DESCENDING")]
+        [EnumDescription("DESC")]
         DESC = 1,
         [EnumDescription("NONE")]
         NONE = 2

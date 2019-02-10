@@ -71,7 +71,9 @@ namespace FBExpert
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
             ac = new AutocompleteClass(fctCREATEINSERTSQL, DBReg);
-            ac.RefreshAutocompleteForDatabase(tables,null,null);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);            
         }
 
         public void RefreshLanguageText()

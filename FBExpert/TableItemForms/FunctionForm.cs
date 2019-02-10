@@ -21,15 +21,17 @@ namespace FBXpert
         TreeNode Tn = null;
         ContextMenuStrip Cm = null;
         NotifiesClass _localNotify = new NotifiesClass();
+        List<TableClass> _tables = null;
         int messages_count = 0;
         int error_count = 0;
         bool DoEvents = false;
-        public FunctionForm(Form parent, DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cm,StateClasses.EditStateClass.eBearbeiten mode)
+        public FunctionForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, TreeNode tn, ContextMenuStrip cm,StateClasses.EditStateClass.eBearbeiten mode)
         {
             InitializeComponent();
             this.MdiParent = parent;
             Cm = cm;
             Tn = tn;
+            _tables = tables;
             
             try
             {
@@ -176,8 +178,16 @@ namespace FBXpert
             DataToEdit();
             SetEnables();            
             MakeSQL();
+            SetAutocompeteObjects(_tables);
+        }
+
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
             ac = new AutocompleteClass(fctSQL, _dbReg);
-            ac.RefreshAutocompleteForFunction();
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
+            
         }
 
         public void ShowCaptions()
