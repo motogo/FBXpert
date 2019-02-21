@@ -52,10 +52,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SELibraries\Lib\MessageLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="SEHotSpot, Version=2015.11.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\XMLEdit\XMLEditSimple\bin\Debug\SEHotSpot.dll</HintPath>
-    </Reference>
     <Reference Include="SEListBox, Version=2017.11.6.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SELibraries\Lib\SEListBox.dll</HintPath>
