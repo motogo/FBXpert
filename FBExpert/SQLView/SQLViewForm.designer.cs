@@ -175,6 +175,12 @@ namespace SQLView
             this.tabPageXML = new System.Windows.Forms.TabPage();
             this.fctXMLData = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlXMLDataUpper = new System.Windows.Forms.Panel();
+            this.ckExportToScreen = new System.Windows.Forms.CheckBox();
+            this.ckExportToFile = new System.Windows.Forms.CheckBox();
+            this.hsExportHTML = new SeControlsLib.HotSpot();
+            this.gbCSVSeperator = new System.Windows.Forms.GroupBox();
+            this.cbCSVSeperator = new System.Windows.Forms.ComboBox();
+            this.hsExportCSV = new SeControlsLib.HotSpot();
             this.hsSaveXML = new SeControlsLib.HotSpot();
             this.hsRefreshXMLData = new SeControlsLib.HotSpot();
             this.tabPageXMLScheme = new System.Windows.Forms.TabPage();
@@ -204,6 +210,7 @@ namespace SQLView
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogXML = new System.Windows.Forms.SaveFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
             this.pnl_upper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
@@ -258,6 +265,7 @@ namespace SQLView
             this.tabPageXML.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLData)).BeginInit();
             this.pnlXMLDataUpper.SuspendLayout();
+            this.gbCSVSeperator.SuspendLayout();
             this.tabPageXMLScheme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLScheme)).BeginInit();
             this.pnlXMLScheme.SuspendLayout();
@@ -1866,7 +1874,7 @@ namespace SQLView
             this.tabPageFailedHistory.Location = new System.Drawing.Point(4, 22);
             this.tabPageFailedHistory.Name = "tabPageFailedHistory";
             this.tabPageFailedHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFailedHistory.Size = new System.Drawing.Size(884, 549);
+            this.tabPageFailedHistory.Size = new System.Drawing.Size(971, 549);
             this.tabPageFailedHistory.TabIndex = 1;
             this.tabPageFailedHistory.Text = "failed commands";
             this.tabPageFailedHistory.UseVisualStyleBackColor = true;
@@ -1881,7 +1889,7 @@ namespace SQLView
             this.clbFAILED_HISTORY.Location = new System.Drawing.Point(3, 3);
             this.clbFAILED_HISTORY.Name = "clbFAILED_HISTORY";
             this.clbFAILED_HISTORY.ScrollAlwaysVisible = true;
-            this.clbFAILED_HISTORY.Size = new System.Drawing.Size(878, 543);
+            this.clbFAILED_HISTORY.Size = new System.Drawing.Size(965, 543);
             this.clbFAILED_HISTORY.TabIndex = 1;
             this.clbFAILED_HISTORY.DoubleClick += new System.EventHandler(this.clbFAILED_HISTORY_DoubleClick);
             // 
@@ -2559,7 +2567,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -2585,6 +2593,11 @@ namespace SQLView
             // 
             this.pnlXMLDataUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.pnlXMLDataUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLDataUpper.Controls.Add(this.ckExportToScreen);
+            this.pnlXMLDataUpper.Controls.Add(this.ckExportToFile);
+            this.pnlXMLDataUpper.Controls.Add(this.hsExportHTML);
+            this.pnlXMLDataUpper.Controls.Add(this.gbCSVSeperator);
+            this.pnlXMLDataUpper.Controls.Add(this.hsExportCSV);
             this.pnlXMLDataUpper.Controls.Add(this.hsSaveXML);
             this.pnlXMLDataUpper.Controls.Add(this.hsRefreshXMLData);
             this.pnlXMLDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2592,6 +2605,151 @@ namespace SQLView
             this.pnlXMLDataUpper.Name = "pnlXMLDataUpper";
             this.pnlXMLDataUpper.Size = new System.Drawing.Size(965, 48);
             this.pnlXMLDataUpper.TabIndex = 6;
+            // 
+            // ckExportToScreen
+            // 
+            this.ckExportToScreen.AutoSize = true;
+            this.ckExportToScreen.Location = new System.Drawing.Point(608, 21);
+            this.ckExportToScreen.Name = "ckExportToScreen";
+            this.ckExportToScreen.Size = new System.Drawing.Size(103, 17);
+            this.ckExportToScreen.TabIndex = 38;
+            this.ckExportToScreen.Text = "Export to screen";
+            this.ckExportToScreen.UseVisualStyleBackColor = true;
+            // 
+            // ckExportToFile
+            // 
+            this.ckExportToFile.AutoSize = true;
+            this.ckExportToFile.Checked = true;
+            this.ckExportToFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckExportToFile.Location = new System.Drawing.Point(498, 21);
+            this.ckExportToFile.Name = "ckExportToFile";
+            this.ckExportToFile.Size = new System.Drawing.Size(84, 17);
+            this.ckExportToFile.TabIndex = 37;
+            this.ckExportToFile.Text = "Export to file";
+            this.ckExportToFile.UseVisualStyleBackColor = true;
+            // 
+            // hsExportHTML
+            // 
+            this.hsExportHTML.BackColor = System.Drawing.Color.Transparent;
+            this.hsExportHTML.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsExportHTML.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsExportHTML.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsExportHTML.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsExportHTML.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsExportHTML.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsExportHTML.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsExportHTML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsExportHTML.FlatAppearance.BorderSize = 0;
+            this.hsExportHTML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportHTML.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsExportHTML.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
+            this.hsExportHTML.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsExportHTML.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
+            this.hsExportHTML.ImageToggleOnSelect = true;
+            this.hsExportHTML.Location = new System.Drawing.Point(349, 0);
+            this.hsExportHTML.Marked = false;
+            this.hsExportHTML.MarkedColor = System.Drawing.Color.Teal;
+            this.hsExportHTML.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsExportHTML.MarkedText = "";
+            this.hsExportHTML.MarkMode = false;
+            this.hsExportHTML.Name = "hsExportHTML";
+            this.hsExportHTML.NonMarkedText = "Export as HTML";
+            this.hsExportHTML.Size = new System.Drawing.Size(111, 44);
+            this.hsExportHTML.TabIndex = 36;
+            this.hsExportHTML.Text = "Export as HTML";
+            this.hsExportHTML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsExportHTML.ToolTipActive = false;
+            this.hsExportHTML.ToolTipAutomaticDelay = 500;
+            this.hsExportHTML.ToolTipAutoPopDelay = 5000;
+            this.hsExportHTML.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsExportHTML.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsExportHTML.ToolTipFor4ContextMenu = true;
+            this.hsExportHTML.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsExportHTML.ToolTipInitialDelay = 500;
+            this.hsExportHTML.ToolTipIsBallon = false;
+            this.hsExportHTML.ToolTipOwnerDraw = false;
+            this.hsExportHTML.ToolTipReshowDelay = 100;
+            this.hsExportHTML.ToolTipShowAlways = false;
+            this.hsExportHTML.ToolTipText = "";
+            this.hsExportHTML.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsExportHTML.ToolTipTitle = "";
+            this.hsExportHTML.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsExportHTML.UseVisualStyleBackColor = false;
+            this.hsExportHTML.Click += new System.EventHandler(this.hsExportHTML_Click);
+            // 
+            // gbCSVSeperator
+            // 
+            this.gbCSVSeperator.Controls.Add(this.cbCSVSeperator);
+            this.gbCSVSeperator.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbCSVSeperator.Location = new System.Drawing.Point(222, 0);
+            this.gbCSVSeperator.Name = "gbCSVSeperator";
+            this.gbCSVSeperator.Size = new System.Drawing.Size(127, 44);
+            this.gbCSVSeperator.TabIndex = 35;
+            this.gbCSVSeperator.TabStop = false;
+            this.gbCSVSeperator.Text = "CSV Seperator";
+            // 
+            // cbCSVSeperator
+            // 
+            this.cbCSVSeperator.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cbCSVSeperator.FormattingEnabled = true;
+            this.cbCSVSeperator.Items.AddRange(new object[] {
+            ";",
+            ",",
+            "#"});
+            this.cbCSVSeperator.Location = new System.Drawing.Point(3, 16);
+            this.cbCSVSeperator.Name = "cbCSVSeperator";
+            this.cbCSVSeperator.Size = new System.Drawing.Size(32, 21);
+            this.cbCSVSeperator.TabIndex = 34;
+            this.cbCSVSeperator.Text = ";";
+            // 
+            // hsExportCSV
+            // 
+            this.hsExportCSV.BackColor = System.Drawing.Color.Transparent;
+            this.hsExportCSV.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsExportCSV.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsExportCSV.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsExportCSV.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsExportCSV.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsExportCSV.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsExportCSV.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsExportCSV.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsExportCSV.FlatAppearance.BorderSize = 0;
+            this.hsExportCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportCSV.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsExportCSV.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
+            this.hsExportCSV.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsExportCSV.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
+            this.hsExportCSV.ImageToggleOnSelect = true;
+            this.hsExportCSV.Location = new System.Drawing.Point(111, 0);
+            this.hsExportCSV.Marked = false;
+            this.hsExportCSV.MarkedColor = System.Drawing.Color.Teal;
+            this.hsExportCSV.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsExportCSV.MarkedText = "";
+            this.hsExportCSV.MarkMode = false;
+            this.hsExportCSV.Name = "hsExportCSV";
+            this.hsExportCSV.NonMarkedText = "Export as CSV";
+            this.hsExportCSV.Size = new System.Drawing.Size(111, 44);
+            this.hsExportCSV.TabIndex = 33;
+            this.hsExportCSV.Text = "Export as CSV";
+            this.hsExportCSV.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsExportCSV.ToolTipActive = false;
+            this.hsExportCSV.ToolTipAutomaticDelay = 500;
+            this.hsExportCSV.ToolTipAutoPopDelay = 5000;
+            this.hsExportCSV.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsExportCSV.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsExportCSV.ToolTipFor4ContextMenu = true;
+            this.hsExportCSV.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsExportCSV.ToolTipInitialDelay = 500;
+            this.hsExportCSV.ToolTipIsBallon = false;
+            this.hsExportCSV.ToolTipOwnerDraw = false;
+            this.hsExportCSV.ToolTipReshowDelay = 100;
+            this.hsExportCSV.ToolTipShowAlways = false;
+            this.hsExportCSV.ToolTipText = "";
+            this.hsExportCSV.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsExportCSV.ToolTipTitle = "";
+            this.hsExportCSV.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsExportCSV.UseVisualStyleBackColor = false;
+            this.hsExportCSV.Click += new System.EventHandler(this.hsExportCSV_Click);
             // 
             // hsSaveXML
             // 
@@ -2696,7 +2854,7 @@ namespace SQLView
             this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
             this.tabPageXMLScheme.Name = "tabPageXMLScheme";
             this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXMLScheme.Size = new System.Drawing.Size(884, 598);
+            this.tabPageXMLScheme.Size = new System.Drawing.Size(971, 598);
             this.tabPageXMLScheme.TabIndex = 1;
             this.tabPageXMLScheme.Text = "XML-Schema";
             this.tabPageXMLScheme.UseVisualStyleBackColor = true;
@@ -2733,7 +2891,7 @@ namespace SQLView
             this.fctXMLScheme.RightBracket = ')';
             this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
-            this.fctXMLScheme.Size = new System.Drawing.Size(878, 544);
+            this.fctXMLScheme.Size = new System.Drawing.Size(965, 544);
             this.fctXMLScheme.TabIndex = 9;
             this.fctXMLScheme.Zoom = 100;
             // 
@@ -2746,7 +2904,7 @@ namespace SQLView
             this.pnlXMLScheme.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlXMLScheme.Location = new System.Drawing.Point(3, 3);
             this.pnlXMLScheme.Name = "pnlXMLScheme";
-            this.pnlXMLScheme.Size = new System.Drawing.Size(878, 48);
+            this.pnlXMLScheme.Size = new System.Drawing.Size(965, 48);
             this.pnlXMLScheme.TabIndex = 8;
             // 
             // hsSaveXMLScheme
@@ -2815,7 +2973,7 @@ namespace SQLView
             this.hsRefreshXMLScheme.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshXMLScheme.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.hsRefreshXMLScheme.ImageToggleOnSelect = true;
-            this.hsRefreshXMLScheme.Location = new System.Drawing.Point(829, 0);
+            this.hsRefreshXMLScheme.Location = new System.Drawing.Point(916, 0);
             this.hsRefreshXMLScheme.Marked = false;
             this.hsRefreshXMLScheme.MarkedColor = System.Drawing.Color.Teal;
             this.hsRefreshXMLScheme.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -3079,6 +3237,12 @@ namespace SQLView
             this.saveFileDialogXML.Filter = "XML|*.xml|XLS|*.xls|All|*.*";
             this.saveFileDialogXML.Title = "Save XML";
             // 
+            // saveFileDialogCSV
+            // 
+            this.saveFileDialogCSV.DefaultExt = "*.xml";
+            this.saveFileDialogCSV.Filter = "CSV|*.csv|XLS|*.xls|All|*.*";
+            this.saveFileDialogCSV.Title = "Save CSV";
+            // 
             // SQLViewForm1
             // 
             this.ClientSize = new System.Drawing.Size(995, 699);
@@ -3161,6 +3325,8 @@ namespace SQLView
             this.tabPageXML.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLData)).EndInit();
             this.pnlXMLDataUpper.ResumeLayout(false);
+            this.pnlXMLDataUpper.PerformLayout();
+            this.gbCSVSeperator.ResumeLayout(false);
             this.tabPageXMLScheme.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLScheme)).EndInit();
             this.pnlXMLScheme.ResumeLayout(false);
@@ -3335,5 +3501,12 @@ namespace SQLView
         private SeControlsLib.HotSpot hsLoadDatabasePath;
         private FolderBrowserDialog fbdPath;
         private SeControlsLib.HotSpot hsLifeTime;
+        private SeControlsLib.HotSpot hsExportCSV;
+        private SaveFileDialog saveFileDialogCSV;
+        private GroupBox gbCSVSeperator;
+        private ComboBox cbCSVSeperator;
+        private SeControlsLib.HotSpot hsExportHTML;
+        private CheckBox ckExportToScreen;
+        private CheckBox ckExportToFile;
     }
 }

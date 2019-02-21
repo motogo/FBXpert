@@ -237,6 +237,7 @@ namespace FBExpert
             ac.AddAutocompleteForTables(tables);
             ac.AddAutocompleteForSystemtables(systemtables);
             ac.AddAutocompleteForViews(views);
+            ac.Activate();
         }
                
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)

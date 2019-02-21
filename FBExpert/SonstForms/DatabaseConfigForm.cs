@@ -99,9 +99,11 @@ namespace FBExpert
             _dbReg.Pooling = cbPooling.Checked;
             _dbReg.MaxPoolSize = StaticFunctionsClass.ToIntDef(txtMaxPoolSize.Text, 15);
             _dbReg.MinPoolSize = StaticFunctionsClass.ToIntDef(txtMinPoolSize.Text, 0);
-            _dbReg.ConnectionLifetime = StaticFunctionsClass.ToIntDef(txtConnectionLifetime.Text, 0);
-            _dbReg.InitialScriptingPath = txtDefaultScriptPath.Text;
-            _dbReg.InitialReportPath = txtDefaultReportPath.Text;
+            _dbReg.ConnectionLifetime       = StaticFunctionsClass.ToIntDef(txtConnectionLifetime.Text, 0);
+            _dbReg.InitialScriptingPath     = txtDefaultScriptPath.Text;
+            _dbReg.InitialReportPath        = txtDefaultReportPath.Text;
+            _dbReg.InitialExportPath        = txtDefaultExportPath.Text;
+
             _dbReg.InitialTerminator = ";";
             _dbReg.AlternativeTerminator = txtAlternativeSetTermCharacter.Text;
             _dbReg.SkipForSelect = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
@@ -126,6 +128,7 @@ namespace FBExpert
 
             _dbReg.CodeSettings.SourceCodeNamespace = txtDBNamespace.Text;
             _dbReg.CodeSettings.SourceCodeOutputPath = txtSourcecodeOutputPath.Text;
+            
         }
 
         public void SetServerDatas()
@@ -623,6 +626,13 @@ namespace FBExpert
         private void hsCreate_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void hsLoadDefaultExports_Click(object sender, EventArgs e)
+        {
+             fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtDefaultExportPath.Text = fbdPath.SelectedPath;
         }
     }
 }

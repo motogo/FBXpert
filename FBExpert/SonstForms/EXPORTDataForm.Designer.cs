@@ -32,29 +32,29 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EXPORTDataForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTableExports = new System.Windows.Forms.TabPage();
             this.gbTableFields = new System.Windows.Forms.GroupBox();
@@ -67,9 +67,9 @@ namespace FBExpert
             this.pnlTableUpper = new System.Windows.Forms.Panel();
             this.hsUncheckAlltables = new SeControlsLib.HotSpot();
             this.hsCheckAllTables = new SeControlsLib.HotSpot();
-            this.hsExportTable = new SeControlsLib.HotSpot();
             this.tabExtExports = new System.Windows.Forms.TabPage();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
+            this.hsExportTable = new SeControlsLib.HotSpot();
             this.cmsEXPORTData = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEXPORTDataCopyToCLipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEXPORTDataPasteFromClipboard = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,15 +92,16 @@ namespace FBExpert
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.gbFileExport = new System.Windows.Forms.GroupBox();
-            this.pnlSpaceFileFolder = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.gbFileName = new System.Windows.Forms.GroupBox();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.gbDirectory = new System.Windows.Forms.GroupBox();
+            this.hsExportFolder = new SeControlsLib.HotSpot();
+            this.txtExportDirectory = new System.Windows.Forms.TextBox();
             this.gbFolder = new System.Windows.Forms.GroupBox();
             this.hotSpot2 = new SeControlsLib.HotSpot();
             this.hsLastFolder = new SeControlsLib.HotSpot();
             this.gbCharset = new System.Windows.Forms.GroupBox();
             this.cbCharSet = new System.Windows.Forms.ComboBox();
-            this.gbFileName = new System.Windows.Forms.GroupBox();
-            this.txtFileName = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDataExports = new System.Windows.Forms.TabPage();
             this.pnlTableRight = new System.Windows.Forms.Panel();
@@ -162,10 +163,8 @@ namespace FBExpert
             this.pnlOnjectExportAttributes = new System.Windows.Forms.Panel();
             this.pnlStructureAttributesUpper = new System.Windows.Forms.Panel();
             this.selExportStructureList = new SEListBox.SEListBox();
-            this.pnlUpperExportStructureObjects = new System.Windows.Forms.Panel();
-            this.hotSpot15 = new SeControlsLib.HotSpot();
-            this.hotSpot14 = new SeControlsLib.HotSpot();
             this.setExportStructureAttributes = new System.Windows.Forms.GroupBox();
+            this.ckWriteFileForEVeryObject = new System.Windows.Forms.CheckBox();
             this.cbStructureCommit = new System.Windows.Forms.CheckBox();
             this.cbStructureConnectiionStatement = new System.Windows.Forms.CheckBox();
             this.hsExportStructure = new SeControlsLib.HotSpot();
@@ -175,6 +174,9 @@ namespace FBExpert
             this.rbRECREATEObject = new System.Windows.Forms.RadioButton();
             this.cbViewObjectScript = new System.Windows.Forms.CheckBox();
             this.cbObjectExportToFile = new System.Windows.Forms.CheckBox();
+            this.pnlUpperExportStructureObjects = new System.Windows.Forms.Panel();
+            this.hotSpot15 = new SeControlsLib.HotSpot();
+            this.hotSpot14 = new SeControlsLib.HotSpot();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bsTableContent = new System.Windows.Forms.BindingSource(this.components);
@@ -199,10 +201,10 @@ namespace FBExpert
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.gbFileExport.SuspendLayout();
-            this.pnlSpaceFileFolder.SuspendLayout();
+            this.gbFileName.SuspendLayout();
+            this.gbDirectory.SuspendLayout();
             this.gbFolder.SuspendLayout();
             this.gbCharset.SuspendLayout();
-            this.gbFileName.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDataExports.SuspendLayout();
             this.pnlTableRight.SuspendLayout();
@@ -234,9 +236,9 @@ namespace FBExpert
             this.panel7.SuspendLayout();
             this.pnlOnjectExportAttributes.SuspendLayout();
             this.pnlStructureAttributesUpper.SuspendLayout();
-            this.pnlUpperExportStructureObjects.SuspendLayout();
             this.setExportStructureAttributes.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.pnlUpperExportStructureObjects.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsTableContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsTableContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).BeginInit();
@@ -285,7 +287,7 @@ namespace FBExpert
             // selFields
             // 
             this.selFields.AllowMultipleChecks = true;
-            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle23;
+            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selFields.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selFields.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selFields.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -299,7 +301,7 @@ namespace FBExpert
             this.selFields.IDVisible = false;
             this.selFields.IDWith = 32;
             this.selFields.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle24;
+            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.selFields.Location = new System.Drawing.Point(3, 58);
             this.selFields.Name = "selFields";
             this.selFields.SelectedIndex = -1;
@@ -368,7 +370,6 @@ namespace FBExpert
             this.hsUncheckAllTableFields.ToolTipIsBallon = false;
             this.hsUncheckAllTableFields.ToolTipOwnerDraw = false;
             this.hsUncheckAllTableFields.ToolTipReshowDelay = 100;
-            
             this.hsUncheckAllTableFields.ToolTipShowAlways = false;
             this.hsUncheckAllTableFields.ToolTipText = "";
             this.hsUncheckAllTableFields.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -418,7 +419,6 @@ namespace FBExpert
             this.hsCheckAllTableFields.ToolTipIsBallon = false;
             this.hsCheckAllTableFields.ToolTipOwnerDraw = false;
             this.hsCheckAllTableFields.ToolTipReshowDelay = 100;
-            
             this.hsCheckAllTableFields.ToolTipShowAlways = false;
             this.hsCheckAllTableFields.ToolTipText = "";
             this.hsCheckAllTableFields.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -443,7 +443,7 @@ namespace FBExpert
             // selTables
             // 
             this.selTables.AllowMultipleChecks = true;
-            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle25;
+            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
             this.selTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selTables.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selTables.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -457,7 +457,7 @@ namespace FBExpert
             this.selTables.IDVisible = false;
             this.selTables.IDWith = 32;
             this.selTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle26;
+            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
             this.selTables.Location = new System.Drawing.Point(3, 58);
             this.selTables.Name = "selTables";
             this.selTables.SelectedIndex = -1;
@@ -473,7 +473,6 @@ namespace FBExpert
             this.selTables.Title = "gbMain";
             this.selTables.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             this.selTables.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selTables_SelectItem);
-            this.selTables.ItemCheckChanged += new SEListBox.SEListBox.CheckItemEventHandler(this.selTables_ItemCheckChanged);
             // 
             // pnlTableUpper
             // 
@@ -526,7 +525,6 @@ namespace FBExpert
             this.hsUncheckAlltables.ToolTipIsBallon = false;
             this.hsUncheckAlltables.ToolTipOwnerDraw = false;
             this.hsUncheckAlltables.ToolTipReshowDelay = 100;
-            
             this.hsUncheckAlltables.ToolTipShowAlways = false;
             this.hsUncheckAlltables.ToolTipText = "";
             this.hsUncheckAlltables.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -576,7 +574,6 @@ namespace FBExpert
             this.hsCheckAllTables.ToolTipIsBallon = false;
             this.hsCheckAllTables.ToolTipOwnerDraw = false;
             this.hsCheckAllTables.ToolTipReshowDelay = 100;
-            
             this.hsCheckAllTables.ToolTipShowAlways = false;
             this.hsCheckAllTables.ToolTipText = "";
             this.hsCheckAllTables.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -584,6 +581,32 @@ namespace FBExpert
             this.hsCheckAllTables.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsCheckAllTables.UseVisualStyleBackColor = false;
             this.hsCheckAllTables.Click += new System.EventHandler(this.hsCheckAllTables_Click);
+            // 
+            // tabExtExports
+            // 
+            this.tabExtExports.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tabExtExports.Location = new System.Drawing.Point(4, 23);
+            this.tabExtExports.Name = "tabExtExports";
+            this.tabExtExports.Padding = new System.Windows.Forms.Padding(3);
+            this.tabExtExports.Size = new System.Drawing.Size(456, 543);
+            this.tabExtExports.TabIndex = 1;
+            this.tabExtExports.Text = "Extended exports";
+            // 
+            // ilTabControl
+            // 
+            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
+            this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
+            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
+            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
+            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
+            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
+            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
+            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
+            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
+            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
+            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
+            this.ilTabControl.Images.SetKeyName(10, "format_indent_more_24x.png");
             // 
             // hsExportTable
             // 
@@ -625,7 +648,6 @@ namespace FBExpert
             this.hsExportTable.ToolTipIsBallon = false;
             this.hsExportTable.ToolTipOwnerDraw = false;
             this.hsExportTable.ToolTipReshowDelay = 100;
-            
             this.hsExportTable.ToolTipShowAlways = false;
             this.hsExportTable.ToolTipText = "";
             this.hsExportTable.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -633,32 +655,6 @@ namespace FBExpert
             this.hsExportTable.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsExportTable.UseVisualStyleBackColor = false;
             this.hsExportTable.Click += new System.EventHandler(this.hsExport_Click);
-            // 
-            // tabExtExports
-            // 
-            this.tabExtExports.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tabExtExports.Location = new System.Drawing.Point(4, 23);
-            this.tabExtExports.Name = "tabExtExports";
-            this.tabExtExports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExtExports.Size = new System.Drawing.Size(456, 543);
-            this.tabExtExports.TabIndex = 1;
-            this.tabExtExports.Text = "Extended exports";
-            // 
-            // ilTabControl
-            // 
-            this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
-            this.ilTabControl.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilTabControl.Images.SetKeyName(0, "go_previous22x.png");
-            this.ilTabControl.Images.SetKeyName(1, "go_next_blue24x.png");
-            this.ilTabControl.Images.SetKeyName(2, "document_blue_x32.png");
-            this.ilTabControl.Images.SetKeyName(3, "preferences-system.png");
-            this.ilTabControl.Images.SetKeyName(4, "view-sort-descending_x24.png");
-            this.ilTabControl.Images.SetKeyName(5, "SQL_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(6, "database_gr_24x.png");
-            this.ilTabControl.Images.SetKeyName(7, "help_about_blue_x22.png");
-            this.ilTabControl.Images.SetKeyName(8, "table_blue_x24.png");
-            this.ilTabControl.Images.SetKeyName(9, "info_blue_22x.png");
-            this.ilTabControl.Images.SetKeyName(10, "format_indent_more_24x.png");
             // 
             // cmsEXPORTData
             // 
@@ -815,6 +811,7 @@ namespace FBExpert
             this.hsRefresh.NonMarkedText = "";
             this.hsRefresh.Size = new System.Drawing.Size(45, 44);
             this.hsRefresh.TabIndex = 1;
+            this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRefresh.ToolTipActive = false;
             this.hsRefresh.ToolTipAutomaticDelay = 500;
             this.hsRefresh.ToolTipAutoPopDelay = 5000;
@@ -826,7 +823,6 @@ namespace FBExpert
             this.hsRefresh.ToolTipIsBallon = false;
             this.hsRefresh.ToolTipOwnerDraw = false;
             this.hsRefresh.ToolTipReshowDelay = 100;
-            
             this.hsRefresh.ToolTipShowAlways = false;
             this.hsRefresh.ToolTipText = "";
             this.hsRefresh.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -861,6 +857,7 @@ namespace FBExpert
             this.hsClose.NonMarkedText = "";
             this.hsClose.Size = new System.Drawing.Size(45, 44);
             this.hsClose.TabIndex = 0;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -872,7 +869,6 @@ namespace FBExpert
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -902,9 +898,9 @@ namespace FBExpert
             // 
             // gbFileExport
             // 
-            this.gbFileExport.Controls.Add(this.pnlSpaceFileFolder);
-            this.gbFileExport.Controls.Add(this.gbFolder);
             this.gbFileExport.Controls.Add(this.gbFileName);
+            this.gbFileExport.Controls.Add(this.gbDirectory);
+            this.gbFileExport.Controls.Add(this.gbFolder);
             this.gbFileExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbFileExport.Location = new System.Drawing.Point(822, 0);
             this.gbFileExport.Name = "gbFileExport";
@@ -912,24 +908,92 @@ namespace FBExpert
             this.gbFileExport.TabIndex = 15;
             this.gbFileExport.TabStop = false;
             // 
-            // pnlSpaceFileFolder
+            // gbFileName
             // 
-            this.pnlSpaceFileFolder.Controls.Add(this.treeView1);
-            this.pnlSpaceFileFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSpaceFileFolder.Location = new System.Drawing.Point(3, 70);
-            this.pnlSpaceFileFolder.Name = "pnlSpaceFileFolder";
-            this.pnlSpaceFileFolder.Size = new System.Drawing.Size(468, 489);
-            this.pnlSpaceFileFolder.TabIndex = 14;
+            this.gbFileName.Controls.Add(this.txtFileName);
+            this.gbFileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbFileName.Location = new System.Drawing.Point(3, 116);
+            this.gbFileName.Name = "gbFileName";
+            this.gbFileName.Size = new System.Drawing.Size(468, 45);
+            this.gbFileName.TabIndex = 1;
+            this.gbFileName.TabStop = false;
+            this.gbFileName.Text = "File Name";
             // 
-            // treeView1
+            // txtFileName
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(468, 489);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
+            this.txtFileName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtFileName.Location = new System.Drawing.Point(3, 22);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.Size = new System.Drawing.Size(462, 20);
+            this.txtFileName.TabIndex = 4;
+            this.txtFileName.Text = "structure_out.sql";
+            // 
+            // gbDirectory
+            // 
+            this.gbDirectory.Controls.Add(this.hsExportFolder);
+            this.gbDirectory.Controls.Add(this.txtExportDirectory);
+            this.gbDirectory.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbDirectory.Location = new System.Drawing.Point(3, 70);
+            this.gbDirectory.Name = "gbDirectory";
+            this.gbDirectory.Size = new System.Drawing.Size(468, 46);
+            this.gbDirectory.TabIndex = 14;
+            this.gbDirectory.TabStop = false;
+            this.gbDirectory.Text = "Directory Name";
+            // 
+            // hsExportFolder
+            // 
+            this.hsExportFolder.BackColor = System.Drawing.Color.Transparent;
+            this.hsExportFolder.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsExportFolder.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsExportFolder.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsExportFolder.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsExportFolder.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsExportFolder.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsExportFolder.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsExportFolder.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsExportFolder.FlatAppearance.BorderSize = 0;
+            this.hsExportFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportFolder.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsExportFolder.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsExportFolder.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsExportFolder.ImageToggleOnSelect = true;
+            this.hsExportFolder.Location = new System.Drawing.Point(420, 16);
+            this.hsExportFolder.Marked = false;
+            this.hsExportFolder.MarkedColor = System.Drawing.Color.Teal;
+            this.hsExportFolder.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsExportFolder.MarkedText = "";
+            this.hsExportFolder.MarkMode = false;
+            this.hsExportFolder.Name = "hsExportFolder";
+            this.hsExportFolder.NonMarkedText = "";
+            this.hsExportFolder.Size = new System.Drawing.Size(45, 27);
+            this.hsExportFolder.TabIndex = 7;
+            this.hsExportFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsExportFolder.ToolTipActive = false;
+            this.hsExportFolder.ToolTipAutomaticDelay = 500;
+            this.hsExportFolder.ToolTipAutoPopDelay = 5000;
+            this.hsExportFolder.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsExportFolder.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsExportFolder.ToolTipFor4ContextMenu = true;
+            this.hsExportFolder.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsExportFolder.ToolTipInitialDelay = 500;
+            this.hsExportFolder.ToolTipIsBallon = false;
+            this.hsExportFolder.ToolTipOwnerDraw = false;
+            this.hsExportFolder.ToolTipReshowDelay = 100;
+            this.hsExportFolder.ToolTipShowAlways = false;
+            this.hsExportFolder.ToolTipText = "";
+            this.hsExportFolder.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsExportFolder.ToolTipTitle = "";
+            this.hsExportFolder.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsExportFolder.UseVisualStyleBackColor = false;
+            this.hsExportFolder.Click += new System.EventHandler(this.hsExportFolder_Click);
+            // 
+            // txtExportDirectory
+            // 
+            this.txtExportDirectory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtExportDirectory.Location = new System.Drawing.Point(3, 16);
+            this.txtExportDirectory.Name = "txtExportDirectory";
+            this.txtExportDirectory.Size = new System.Drawing.Size(411, 20);
+            this.txtExportDirectory.TabIndex = 4;
             // 
             // gbFolder
             // 
@@ -970,6 +1034,7 @@ namespace FBExpert
             this.hotSpot2.NonMarkedText = "";
             this.hotSpot2.Size = new System.Drawing.Size(45, 21);
             this.hotSpot2.TabIndex = 7;
+            this.hotSpot2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hotSpot2.ToolTipActive = false;
             this.hotSpot2.ToolTipAutomaticDelay = 500;
             this.hotSpot2.ToolTipAutoPopDelay = 5000;
@@ -981,14 +1046,12 @@ namespace FBExpert
             this.hotSpot2.ToolTipIsBallon = false;
             this.hotSpot2.ToolTipOwnerDraw = false;
             this.hotSpot2.ToolTipReshowDelay = 100;
-            
             this.hotSpot2.ToolTipShowAlways = false;
             this.hotSpot2.ToolTipText = "";
             this.hotSpot2.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
             this.hotSpot2.ToolTipTitle = "";
             this.hotSpot2.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hotSpot2.UseVisualStyleBackColor = false;
-            this.hotSpot2.Click += new System.EventHandler(this.hotSpot2_Click);
             // 
             // hsLastFolder
             // 
@@ -1016,6 +1079,7 @@ namespace FBExpert
             this.hsLastFolder.NonMarkedText = "";
             this.hsLastFolder.Size = new System.Drawing.Size(45, 21);
             this.hsLastFolder.TabIndex = 6;
+            this.hsLastFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLastFolder.ToolTipActive = false;
             this.hsLastFolder.ToolTipAutomaticDelay = 500;
             this.hsLastFolder.ToolTipAutoPopDelay = 5000;
@@ -1027,14 +1091,12 @@ namespace FBExpert
             this.hsLastFolder.ToolTipIsBallon = false;
             this.hsLastFolder.ToolTipOwnerDraw = false;
             this.hsLastFolder.ToolTipReshowDelay = 100;
-            
             this.hsLastFolder.ToolTipShowAlways = false;
             this.hsLastFolder.ToolTipText = "";
             this.hsLastFolder.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
             this.hsLastFolder.ToolTipTitle = "";
             this.hsLastFolder.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsLastFolder.UseVisualStyleBackColor = false;
-            this.hsLastFolder.Click += new System.EventHandler(this.hsLastFolder_Click);
             // 
             // gbCharset
             // 
@@ -1054,25 +1116,6 @@ namespace FBExpert
             this.cbCharSet.Name = "cbCharSet";
             this.cbCharSet.Size = new System.Drawing.Size(194, 21);
             this.cbCharSet.TabIndex = 0;
-            // 
-            // gbFileName
-            // 
-            this.gbFileName.Controls.Add(this.txtFileName);
-            this.gbFileName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbFileName.Location = new System.Drawing.Point(3, 559);
-            this.gbFileName.Name = "gbFileName";
-            this.gbFileName.Size = new System.Drawing.Size(468, 40);
-            this.gbFileName.TabIndex = 1;
-            this.gbFileName.TabStop = false;
-            this.gbFileName.Text = "File";
-            // 
-            // txtFileName
-            // 
-            this.txtFileName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtFileName.Location = new System.Drawing.Point(3, 17);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(462, 20);
-            this.txtFileName.TabIndex = 4;
             // 
             // tabControl1
             // 
@@ -1249,7 +1292,7 @@ namespace FBExpert
             // selStructureTables
             // 
             this.selStructureTables.AllowMultipleChecks = true;
-            this.selStructureTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle27;
+            this.selStructureTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle5;
             this.selStructureTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selStructureTables.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selStructureTables.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1263,7 +1306,7 @@ namespace FBExpert
             this.selStructureTables.IDVisible = false;
             this.selStructureTables.IDWith = 32;
             this.selStructureTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selStructureTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle28;
+            this.selStructureTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle6;
             this.selStructureTables.Location = new System.Drawing.Point(3, 58);
             this.selStructureTables.Name = "selStructureTables";
             this.selStructureTables.SelectedIndex = -1;
@@ -1331,7 +1374,6 @@ namespace FBExpert
             this.hsUnselectStructureObjects.ToolTipIsBallon = false;
             this.hsUnselectStructureObjects.ToolTipOwnerDraw = false;
             this.hsUnselectStructureObjects.ToolTipReshowDelay = 100;
-            
             this.hsUnselectStructureObjects.ToolTipShowAlways = false;
             this.hsUnselectStructureObjects.ToolTipText = "";
             this.hsUnselectStructureObjects.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1381,7 +1423,6 @@ namespace FBExpert
             this.hsSelectStructureObjects.ToolTipIsBallon = false;
             this.hsSelectStructureObjects.ToolTipOwnerDraw = false;
             this.hsSelectStructureObjects.ToolTipReshowDelay = 100;
-            
             this.hsSelectStructureObjects.ToolTipShowAlways = false;
             this.hsSelectStructureObjects.ToolTipText = "";
             this.hsSelectStructureObjects.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1415,7 +1456,7 @@ namespace FBExpert
             // selStructureViews
             // 
             this.selStructureViews.AllowMultipleChecks = true;
-            this.selStructureViews.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle29;
+            this.selStructureViews.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle7;
             this.selStructureViews.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selStructureViews.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selStructureViews.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1429,7 +1470,7 @@ namespace FBExpert
             this.selStructureViews.IDVisible = false;
             this.selStructureViews.IDWith = 32;
             this.selStructureViews.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selStructureViews.ListEntriesDefaultCellStyle = dataGridViewCellStyle30;
+            this.selStructureViews.ListEntriesDefaultCellStyle = dataGridViewCellStyle8;
             this.selStructureViews.Location = new System.Drawing.Point(3, 58);
             this.selStructureViews.Name = "selStructureViews";
             this.selStructureViews.SelectedIndex = -1;
@@ -1496,7 +1537,6 @@ namespace FBExpert
             this.hsUnselectAllViews.ToolTipIsBallon = false;
             this.hsUnselectAllViews.ToolTipOwnerDraw = false;
             this.hsUnselectAllViews.ToolTipReshowDelay = 100;
-            
             this.hsUnselectAllViews.ToolTipShowAlways = false;
             this.hsUnselectAllViews.ToolTipText = "";
             this.hsUnselectAllViews.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1546,7 +1586,6 @@ namespace FBExpert
             this.hsSelectAllViews.ToolTipIsBallon = false;
             this.hsSelectAllViews.ToolTipOwnerDraw = false;
             this.hsSelectAllViews.ToolTipReshowDelay = 100;
-            
             this.hsSelectAllViews.ToolTipShowAlways = false;
             this.hsSelectAllViews.ToolTipText = "";
             this.hsSelectAllViews.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1582,7 +1621,7 @@ namespace FBExpert
             // selIndeces
             // 
             this.selIndeces.AllowMultipleChecks = true;
-            this.selIndeces.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle31;
+            this.selIndeces.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle9;
             this.selIndeces.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selIndeces.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selIndeces.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1596,7 +1635,7 @@ namespace FBExpert
             this.selIndeces.IDVisible = false;
             this.selIndeces.IDWith = 32;
             this.selIndeces.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selIndeces.ListEntriesDefaultCellStyle = dataGridViewCellStyle32;
+            this.selIndeces.ListEntriesDefaultCellStyle = dataGridViewCellStyle10;
             this.selIndeces.Location = new System.Drawing.Point(3, 58);
             this.selIndeces.Name = "selIndeces";
             this.selIndeces.SelectedIndex = -1;
@@ -1663,7 +1702,6 @@ namespace FBExpert
             this.hotSpot1.ToolTipIsBallon = false;
             this.hotSpot1.ToolTipOwnerDraw = false;
             this.hotSpot1.ToolTipReshowDelay = 100;
-            
             this.hotSpot1.ToolTipShowAlways = false;
             this.hotSpot1.ToolTipText = "";
             this.hotSpot1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1713,7 +1751,6 @@ namespace FBExpert
             this.hotSpot5.ToolTipIsBallon = false;
             this.hotSpot5.ToolTipOwnerDraw = false;
             this.hotSpot5.ToolTipReshowDelay = 100;
-            
             this.hotSpot5.ToolTipShowAlways = false;
             this.hotSpot5.ToolTipText = "";
             this.hotSpot5.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1737,7 +1774,7 @@ namespace FBExpert
             // selDomains
             // 
             this.selDomains.AllowMultipleChecks = true;
-            this.selDomains.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle33;
+            this.selDomains.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle11;
             this.selDomains.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selDomains.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selDomains.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1751,7 +1788,7 @@ namespace FBExpert
             this.selDomains.IDVisible = false;
             this.selDomains.IDWith = 32;
             this.selDomains.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selDomains.ListEntriesDefaultCellStyle = dataGridViewCellStyle34;
+            this.selDomains.ListEntriesDefaultCellStyle = dataGridViewCellStyle12;
             this.selDomains.Location = new System.Drawing.Point(3, 58);
             this.selDomains.Name = "selDomains";
             this.selDomains.SelectedIndex = -1;
@@ -1818,7 +1855,6 @@ namespace FBExpert
             this.hotSpot3.ToolTipIsBallon = false;
             this.hotSpot3.ToolTipOwnerDraw = false;
             this.hotSpot3.ToolTipReshowDelay = 100;
-            
             this.hotSpot3.ToolTipShowAlways = false;
             this.hotSpot3.ToolTipText = "";
             this.hotSpot3.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1868,7 +1904,6 @@ namespace FBExpert
             this.hotSpot4.ToolTipIsBallon = false;
             this.hotSpot4.ToolTipOwnerDraw = false;
             this.hotSpot4.ToolTipReshowDelay = 100;
-            
             this.hotSpot4.ToolTipShowAlways = false;
             this.hotSpot4.ToolTipText = "";
             this.hotSpot4.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1904,7 +1939,7 @@ namespace FBExpert
             // selTriggerStructure
             // 
             this.selTriggerStructure.AllowMultipleChecks = true;
-            this.selTriggerStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle35;
+            this.selTriggerStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle13;
             this.selTriggerStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selTriggerStructure.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selTriggerStructure.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1918,7 +1953,7 @@ namespace FBExpert
             this.selTriggerStructure.IDVisible = false;
             this.selTriggerStructure.IDWith = 32;
             this.selTriggerStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selTriggerStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle36;
+            this.selTriggerStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle14;
             this.selTriggerStructure.Location = new System.Drawing.Point(3, 58);
             this.selTriggerStructure.Name = "selTriggerStructure";
             this.selTriggerStructure.SelectedIndex = -1;
@@ -1985,7 +2020,6 @@ namespace FBExpert
             this.hotSpot8.ToolTipIsBallon = false;
             this.hotSpot8.ToolTipOwnerDraw = false;
             this.hotSpot8.ToolTipReshowDelay = 100;
-            
             this.hotSpot8.ToolTipShowAlways = false;
             this.hotSpot8.ToolTipText = "";
             this.hotSpot8.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2034,7 +2068,6 @@ namespace FBExpert
             this.hotSpot9.ToolTipIsBallon = false;
             this.hotSpot9.ToolTipOwnerDraw = false;
             this.hotSpot9.ToolTipReshowDelay = 100;
-            
             this.hotSpot9.ToolTipShowAlways = false;
             this.hotSpot9.ToolTipText = "";
             this.hotSpot9.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2057,7 +2090,7 @@ namespace FBExpert
             // selGenerators
             // 
             this.selGenerators.AllowMultipleChecks = true;
-            this.selGenerators.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle37;
+            this.selGenerators.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle15;
             this.selGenerators.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selGenerators.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selGenerators.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -2071,7 +2104,7 @@ namespace FBExpert
             this.selGenerators.IDVisible = false;
             this.selGenerators.IDWith = 32;
             this.selGenerators.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selGenerators.ListEntriesDefaultCellStyle = dataGridViewCellStyle38;
+            this.selGenerators.ListEntriesDefaultCellStyle = dataGridViewCellStyle16;
             this.selGenerators.Location = new System.Drawing.Point(3, 58);
             this.selGenerators.Name = "selGenerators";
             this.selGenerators.SelectedIndex = -1;
@@ -2138,7 +2171,6 @@ namespace FBExpert
             this.hotSpot6.ToolTipIsBallon = false;
             this.hotSpot6.ToolTipOwnerDraw = false;
             this.hotSpot6.ToolTipReshowDelay = 100;
-            
             this.hotSpot6.ToolTipShowAlways = false;
             this.hotSpot6.ToolTipText = "";
             this.hotSpot6.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2188,7 +2220,6 @@ namespace FBExpert
             this.hotSpot7.ToolTipIsBallon = false;
             this.hotSpot7.ToolTipOwnerDraw = false;
             this.hotSpot7.ToolTipReshowDelay = 100;
-            
             this.hotSpot7.ToolTipShowAlways = false;
             this.hotSpot7.ToolTipText = "";
             this.hotSpot7.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2224,7 +2255,7 @@ namespace FBExpert
             // selFunctionsStructure
             // 
             this.selFunctionsStructure.AllowMultipleChecks = true;
-            this.selFunctionsStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle39;
+            this.selFunctionsStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle17;
             this.selFunctionsStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selFunctionsStructure.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selFunctionsStructure.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -2238,7 +2269,7 @@ namespace FBExpert
             this.selFunctionsStructure.IDVisible = false;
             this.selFunctionsStructure.IDWith = 32;
             this.selFunctionsStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selFunctionsStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle40;
+            this.selFunctionsStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle18;
             this.selFunctionsStructure.Location = new System.Drawing.Point(3, 58);
             this.selFunctionsStructure.Name = "selFunctionsStructure";
             this.selFunctionsStructure.SelectedIndex = -1;
@@ -2305,7 +2336,6 @@ namespace FBExpert
             this.hotSpot12.ToolTipIsBallon = false;
             this.hotSpot12.ToolTipOwnerDraw = false;
             this.hotSpot12.ToolTipReshowDelay = 100;
-            
             this.hotSpot12.ToolTipShowAlways = false;
             this.hotSpot12.ToolTipText = "";
             this.hotSpot12.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2354,7 +2384,6 @@ namespace FBExpert
             this.hotSpot13.ToolTipIsBallon = false;
             this.hotSpot13.ToolTipOwnerDraw = false;
             this.hotSpot13.ToolTipReshowDelay = 100;
-            
             this.hotSpot13.ToolTipShowAlways = false;
             this.hotSpot13.ToolTipText = "";
             this.hotSpot13.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2377,7 +2406,7 @@ namespace FBExpert
             // selProceduresStructure
             // 
             this.selProceduresStructure.AllowMultipleChecks = true;
-            this.selProceduresStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle41;
+            this.selProceduresStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle19;
             this.selProceduresStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selProceduresStructure.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selProceduresStructure.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -2391,7 +2420,7 @@ namespace FBExpert
             this.selProceduresStructure.IDVisible = false;
             this.selProceduresStructure.IDWith = 32;
             this.selProceduresStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selProceduresStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle42;
+            this.selProceduresStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle20;
             this.selProceduresStructure.Location = new System.Drawing.Point(3, 58);
             this.selProceduresStructure.Name = "selProceduresStructure";
             this.selProceduresStructure.SelectedIndex = -1;
@@ -2458,7 +2487,6 @@ namespace FBExpert
             this.hotSpot10.ToolTipIsBallon = false;
             this.hotSpot10.ToolTipOwnerDraw = false;
             this.hotSpot10.ToolTipReshowDelay = 100;
-          
             this.hotSpot10.ToolTipShowAlways = false;
             this.hotSpot10.ToolTipText = "";
             this.hotSpot10.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2507,7 +2535,6 @@ namespace FBExpert
             this.hotSpot11.ToolTipIsBallon = false;
             this.hotSpot11.ToolTipOwnerDraw = false;
             this.hotSpot11.ToolTipReshowDelay = 100;
-            
             this.hotSpot11.ToolTipShowAlways = false;
             this.hotSpot11.ToolTipText = "";
             this.hotSpot11.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2539,9 +2566,9 @@ namespace FBExpert
             // selExportStructureList
             // 
             this.selExportStructureList.AllowMultipleChecks = true;
-            dataGridViewCellStyle43.BackColor = System.Drawing.Color.AntiqueWhite;
-            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.Color.AntiqueWhite;
-            this.selExportStructureList.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.AntiqueWhite;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.AntiqueWhite;
+            this.selExportStructureList.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle21;
             this.selExportStructureList.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selExportStructureList.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selExportStructureList.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -2555,7 +2582,7 @@ namespace FBExpert
             this.selExportStructureList.IDVisible = false;
             this.selExportStructureList.IDWith = 32;
             this.selExportStructureList.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selExportStructureList.ListEntriesDefaultCellStyle = dataGridViewCellStyle44;
+            this.selExportStructureList.ListEntriesDefaultCellStyle = dataGridViewCellStyle22;
             this.selExportStructureList.Location = new System.Drawing.Point(0, 0);
             this.selExportStructureList.Name = "selExportStructureList";
             this.selExportStructureList.SelectedIndex = -1;
@@ -2571,116 +2598,9 @@ namespace FBExpert
             this.selExportStructureList.Title = "Objects to export";
             this.selExportStructureList.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
-            // pnlUpperExportStructureObjects
-            // 
-            this.pnlUpperExportStructureObjects.Controls.Add(this.hotSpot15);
-            this.pnlUpperExportStructureObjects.Controls.Add(this.hotSpot14);
-            this.pnlUpperExportStructureObjects.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperExportStructureObjects.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpperExportStructureObjects.Name = "pnlUpperExportStructureObjects";
-            this.pnlUpperExportStructureObjects.Size = new System.Drawing.Size(395, 83);
-            this.pnlUpperExportStructureObjects.TabIndex = 19;
-            // 
-            // hotSpot15
-            // 
-            this.hotSpot15.BackColor = System.Drawing.Color.Transparent;
-            this.hotSpot15.BackColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot15.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot15.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hotSpot15.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hotSpot15.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hotSpot15.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hotSpot15.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hotSpot15.FlatAppearance.BorderSize = 0;
-            this.hotSpot15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hotSpot15.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hotSpot15.Image = global::FBXpert.Properties.Resources.cross_red_x22;
-            this.hotSpot15.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hotSpot15.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
-            this.hotSpot15.ImageToggleOnSelect = true;
-            this.hotSpot15.Location = new System.Drawing.Point(104, 41);
-            this.hotSpot15.Marked = false;
-            this.hotSpot15.MarkedColor = System.Drawing.Color.Teal;
-            this.hotSpot15.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hotSpot15.MarkedText = "";
-            this.hotSpot15.MarkMode = false;
-            this.hotSpot15.Name = "hotSpot15";
-            this.hotSpot15.NonMarkedText = "Uncheck all";
-            this.hotSpot15.Size = new System.Drawing.Size(96, 42);
-            this.hotSpot15.TabIndex = 18;
-            this.hotSpot15.Text = "Uncheck all";
-            this.hotSpot15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hotSpot15.ToolTipActive = false;
-            this.hotSpot15.ToolTipAutomaticDelay = 500;
-            this.hotSpot15.ToolTipAutoPopDelay = 5000;
-            this.hotSpot15.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hotSpot15.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hotSpot15.ToolTipFor4ContextMenu = true;
-            this.hotSpot15.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hotSpot15.ToolTipInitialDelay = 500;
-            this.hotSpot15.ToolTipIsBallon = false;
-            this.hotSpot15.ToolTipOwnerDraw = false;
-            this.hotSpot15.ToolTipReshowDelay = 100;
-            
-            this.hotSpot15.ToolTipShowAlways = false;
-            this.hotSpot15.ToolTipText = "";
-            this.hotSpot15.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hotSpot15.ToolTipTitle = "";
-            this.hotSpot15.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hotSpot15.UseVisualStyleBackColor = false;
-            this.hotSpot15.Click += new System.EventHandler(this.hotSpot15_Click);
-            // 
-            // hotSpot14
-            // 
-            this.hotSpot14.BackColor = System.Drawing.Color.Transparent;
-            this.hotSpot14.BackColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot14.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot14.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hotSpot14.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hotSpot14.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hotSpot14.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hotSpot14.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hotSpot14.FlatAppearance.BorderSize = 0;
-            this.hotSpot14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hotSpot14.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hotSpot14.Image = global::FBXpert.Properties.Resources.ok_gn22x;
-            this.hotSpot14.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hotSpot14.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
-            this.hotSpot14.ImageToggleOnSelect = true;
-            this.hotSpot14.Location = new System.Drawing.Point(2, 41);
-            this.hotSpot14.Marked = false;
-            this.hotSpot14.MarkedColor = System.Drawing.Color.Teal;
-            this.hotSpot14.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hotSpot14.MarkedText = "";
-            this.hotSpot14.MarkMode = false;
-            this.hotSpot14.Name = "hotSpot14";
-            this.hotSpot14.NonMarkedText = "Check all";
-            this.hotSpot14.Size = new System.Drawing.Size(96, 42);
-            this.hotSpot14.TabIndex = 17;
-            this.hotSpot14.Text = "Check all";
-            this.hotSpot14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hotSpot14.ToolTipActive = false;
-            this.hotSpot14.ToolTipAutomaticDelay = 500;
-            this.hotSpot14.ToolTipAutoPopDelay = 5000;
-            this.hotSpot14.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hotSpot14.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hotSpot14.ToolTipFor4ContextMenu = true;
-            this.hotSpot14.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hotSpot14.ToolTipInitialDelay = 500;
-            this.hotSpot14.ToolTipIsBallon = false;
-            this.hotSpot14.ToolTipOwnerDraw = false;
-            this.hotSpot14.ToolTipReshowDelay = 100;
-            
-            this.hotSpot14.ToolTipShowAlways = false;
-            this.hotSpot14.ToolTipText = "";
-            this.hotSpot14.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hotSpot14.ToolTipTitle = "";
-            this.hotSpot14.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hotSpot14.UseVisualStyleBackColor = false;
-            this.hotSpot14.Click += new System.EventHandler(this.hotSpot14_Click);
-            // 
             // setExportStructureAttributes
             // 
+            this.setExportStructureAttributes.Controls.Add(this.ckWriteFileForEVeryObject);
             this.setExportStructureAttributes.Controls.Add(this.cbStructureCommit);
             this.setExportStructureAttributes.Controls.Add(this.cbStructureConnectiionStatement);
             this.setExportStructureAttributes.Controls.Add(this.hsExportStructure);
@@ -2695,6 +2615,16 @@ namespace FBExpert
             this.setExportStructureAttributes.TabIndex = 16;
             this.setExportStructureAttributes.TabStop = false;
             this.setExportStructureAttributes.Text = "Export attributes";
+            // 
+            // ckWriteFileForEVeryObject
+            // 
+            this.ckWriteFileForEVeryObject.AutoSize = true;
+            this.ckWriteFileForEVeryObject.Location = new System.Drawing.Point(11, 230);
+            this.ckWriteFileForEVeryObject.Name = "ckWriteFileForEVeryObject";
+            this.ckWriteFileForEVeryObject.Size = new System.Drawing.Size(143, 17);
+            this.ckWriteFileForEVeryObject.TabIndex = 19;
+            this.ckWriteFileForEVeryObject.Text = "Write file for every object";
+            this.ckWriteFileForEVeryObject.UseVisualStyleBackColor = true;
             // 
             // cbStructureCommit
             // 
@@ -2756,7 +2686,6 @@ namespace FBExpert
             this.hsExportStructure.ToolTipIsBallon = false;
             this.hsExportStructure.ToolTipOwnerDraw = false;
             this.hsExportStructure.ToolTipReshowDelay = 100;
-            
             this.hsExportStructure.ToolTipShowAlways = false;
             this.hsExportStructure.ToolTipText = "";
             this.hsExportStructure.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -2830,6 +2759,112 @@ namespace FBExpert
             this.cbObjectExportToFile.Text = "Export to file";
             this.cbObjectExportToFile.UseVisualStyleBackColor = true;
             // 
+            // pnlUpperExportStructureObjects
+            // 
+            this.pnlUpperExportStructureObjects.Controls.Add(this.hotSpot15);
+            this.pnlUpperExportStructureObjects.Controls.Add(this.hotSpot14);
+            this.pnlUpperExportStructureObjects.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUpperExportStructureObjects.Location = new System.Drawing.Point(0, 0);
+            this.pnlUpperExportStructureObjects.Name = "pnlUpperExportStructureObjects";
+            this.pnlUpperExportStructureObjects.Size = new System.Drawing.Size(395, 83);
+            this.pnlUpperExportStructureObjects.TabIndex = 19;
+            // 
+            // hotSpot15
+            // 
+            this.hotSpot15.BackColor = System.Drawing.Color.Transparent;
+            this.hotSpot15.BackColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot15.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot15.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hotSpot15.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hotSpot15.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hotSpot15.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hotSpot15.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hotSpot15.FlatAppearance.BorderSize = 0;
+            this.hotSpot15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot15.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hotSpot15.Image = global::FBXpert.Properties.Resources.cross_red_x22;
+            this.hotSpot15.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hotSpot15.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
+            this.hotSpot15.ImageToggleOnSelect = true;
+            this.hotSpot15.Location = new System.Drawing.Point(104, 41);
+            this.hotSpot15.Marked = false;
+            this.hotSpot15.MarkedColor = System.Drawing.Color.Teal;
+            this.hotSpot15.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hotSpot15.MarkedText = "";
+            this.hotSpot15.MarkMode = false;
+            this.hotSpot15.Name = "hotSpot15";
+            this.hotSpot15.NonMarkedText = "Uncheck all";
+            this.hotSpot15.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot15.TabIndex = 18;
+            this.hotSpot15.Text = "Uncheck all";
+            this.hotSpot15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hotSpot15.ToolTipActive = false;
+            this.hotSpot15.ToolTipAutomaticDelay = 500;
+            this.hotSpot15.ToolTipAutoPopDelay = 5000;
+            this.hotSpot15.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hotSpot15.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hotSpot15.ToolTipFor4ContextMenu = true;
+            this.hotSpot15.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hotSpot15.ToolTipInitialDelay = 500;
+            this.hotSpot15.ToolTipIsBallon = false;
+            this.hotSpot15.ToolTipOwnerDraw = false;
+            this.hotSpot15.ToolTipReshowDelay = 100;
+            this.hotSpot15.ToolTipShowAlways = false;
+            this.hotSpot15.ToolTipText = "";
+            this.hotSpot15.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hotSpot15.ToolTipTitle = "";
+            this.hotSpot15.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hotSpot15.UseVisualStyleBackColor = false;
+            this.hotSpot15.Click += new System.EventHandler(this.hotSpot15_Click);
+            // 
+            // hotSpot14
+            // 
+            this.hotSpot14.BackColor = System.Drawing.Color.Transparent;
+            this.hotSpot14.BackColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot14.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot14.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hotSpot14.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hotSpot14.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hotSpot14.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hotSpot14.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hotSpot14.FlatAppearance.BorderSize = 0;
+            this.hotSpot14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot14.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hotSpot14.Image = global::FBXpert.Properties.Resources.ok_gn22x;
+            this.hotSpot14.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hotSpot14.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
+            this.hotSpot14.ImageToggleOnSelect = true;
+            this.hotSpot14.Location = new System.Drawing.Point(2, 41);
+            this.hotSpot14.Marked = false;
+            this.hotSpot14.MarkedColor = System.Drawing.Color.Teal;
+            this.hotSpot14.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hotSpot14.MarkedText = "";
+            this.hotSpot14.MarkMode = false;
+            this.hotSpot14.Name = "hotSpot14";
+            this.hotSpot14.NonMarkedText = "Check all";
+            this.hotSpot14.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot14.TabIndex = 17;
+            this.hotSpot14.Text = "Check all";
+            this.hotSpot14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hotSpot14.ToolTipActive = false;
+            this.hotSpot14.ToolTipAutomaticDelay = 500;
+            this.hotSpot14.ToolTipAutoPopDelay = 5000;
+            this.hotSpot14.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hotSpot14.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hotSpot14.ToolTipFor4ContextMenu = true;
+            this.hotSpot14.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hotSpot14.ToolTipInitialDelay = 500;
+            this.hotSpot14.ToolTipIsBallon = false;
+            this.hotSpot14.ToolTipOwnerDraw = false;
+            this.hotSpot14.ToolTipReshowDelay = 100;
+            this.hotSpot14.ToolTipShowAlways = false;
+            this.hotSpot14.ToolTipText = "";
+            this.hotSpot14.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hotSpot14.ToolTipTitle = "";
+            this.hotSpot14.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hotSpot14.UseVisualStyleBackColor = false;
+            this.hotSpot14.Click += new System.EventHandler(this.hotSpot14_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
@@ -2901,11 +2936,12 @@ namespace FBExpert
             this.pnlUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.gbFileExport.ResumeLayout(false);
-            this.pnlSpaceFileFolder.ResumeLayout(false);
-            this.gbFolder.ResumeLayout(false);
-            this.gbCharset.ResumeLayout(false);
             this.gbFileName.ResumeLayout(false);
             this.gbFileName.PerformLayout();
+            this.gbDirectory.ResumeLayout(false);
+            this.gbDirectory.PerformLayout();
+            this.gbFolder.ResumeLayout(false);
+            this.gbCharset.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabDataExports.ResumeLayout(false);
             this.pnlTableRight.ResumeLayout(false);
@@ -2939,11 +2975,11 @@ namespace FBExpert
             this.panel7.ResumeLayout(false);
             this.pnlOnjectExportAttributes.ResumeLayout(false);
             this.pnlStructureAttributesUpper.ResumeLayout(false);
-            this.pnlUpperExportStructureObjects.ResumeLayout(false);
             this.setExportStructureAttributes.ResumeLayout(false);
             this.setExportStructureAttributes.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.pnlUpperExportStructureObjects.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsTableContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsTableContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).EndInit();
@@ -3002,9 +3038,6 @@ namespace FBExpert
         private System.Windows.Forms.SaveFileDialog sfdFile;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.GroupBox gbFolder;
-       
-        private System.Windows.Forms.Panel pnlSpaceFileFolder;
-        private System.Windows.Forms.TreeView treeView1;
         private SeControlsLib.HotSpot hsLastFolder;
         private System.Windows.Forms.ImageList imageList1;
         private SeControlsLib.HotSpot hotSpot2;
@@ -3083,5 +3116,9 @@ namespace FBExpert
         private SeControlsLib.HotSpot hotSpot14;
         private System.Windows.Forms.Panel pnlUpperExportStructureObjects;
         private SeControlsLib.HotSpot hotSpot15;
+        private System.Windows.Forms.CheckBox ckWriteFileForEVeryObject;
+        private System.Windows.Forms.GroupBox gbDirectory;
+        private SeControlsLib.HotSpot hsExportFolder;
+        private System.Windows.Forms.TextBox txtExportDirectory;
     }
 }

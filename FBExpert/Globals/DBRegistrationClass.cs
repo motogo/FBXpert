@@ -19,6 +19,7 @@ namespace FBXpert.Globals
         
         public string InitialScriptingPath      = StaticVariablesClass.ScriptPath;
         public string InitialReportPath         = StaticVariablesClass.ReportPath;
+        public string InitialExportPath         = StaticVariablesClass.ExportPath;
         public string InitialTerminator         = StaticVariablesClass.InitialTerminator;
         public string AlternativeTerminator     = StaticVariablesClass.AlternativeTerminator;
         public string SingleLineComment         = StaticVariablesClass.SingleLineComment;

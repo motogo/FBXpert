@@ -387,7 +387,7 @@ namespace FBExpert
             ac.AddAutocompleteForSQL();
             
             ac.AddAutocompleteForTables(tables);
-            
+            ac.Activate();
         }
 
         public void AddExcamples()

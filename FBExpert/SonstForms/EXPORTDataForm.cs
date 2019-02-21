@@ -231,15 +231,22 @@ namespace FBExpert
             ew.alltables.Clear();
             ew.AktDBReg = DBReg;
             ew.ShowScripting = cbViewInScript.Checked;
-            ew.WriteToFile   = cbExportToFile.Checked;
-
-            if (ew.WriteToFile)
+            if(ckWriteFileForEVeryObject.Checked)
+            {
+              ew.WriteToFile = eSQLFileWriteMode.seperated;
+            }
+            else if(cbObjectExportToFile.Checked)
+            {
+              ew.WriteToFile = eSQLFileWriteMode.all;
+            }
+            
+            if (ew.WriteToFile != eSQLFileWriteMode.none)
             {
                 if ((txtFileName.Text.IndexOf(".", StringComparison.Ordinal)) < 0) txtFileName.Text += ".sql";
-                var di = ActFolder.Tag as DirectoryInfo;
-                ew.SQLFileInfo = new FileInfo(di?.FullName + "\\" + txtFileName.Text);
+                
+                ew.SQLFileInfo = new FileInfo(txtExportDirectory.Text + "\\" + txtFileName.Text);
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
-            }
+            }            
             else
             {
                 ew.SQLFileInfo = null;
@@ -333,24 +340,26 @@ namespace FBExpert
             gbFolder.Enabled = cbExportToFile.Checked;
             gbFileName.Enabled = cbExportToFile.Checked;
             gbCharset.Enabled = cbExportToFile.Checked;
+            /*
             if(cbExportToFile.Checked)
             {
                 ListDirectory(treeView1, "D:\\");
 
                 treeView1.ExpandAll();
             }
+            */
         }
         
         private void hsFileSelect_Click(object sender, EventArgs e)
         {
-            var di = ActFolder.Tag as DirectoryInfo;
-            sfdFile.InitialDirectory = di.FullName;
+           
+           // sfdFile.InitialDirectory = di.FullName;
             if (sfdFile.ShowDialog() == DialogResult.OK)
             {
                 txtFileName.Text = sfdFile.FileName;
             }
         }
-
+        /*
         private void ListDirectory(TreeView treeView, string path)
         {
             treeView.Nodes.Clear();
@@ -363,7 +372,8 @@ namespace FBExpert
             treeView.ImageList = imageList1;
             treeView.Nodes.Add(tn);
         }
-
+        */
+        /*
         private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo, int deep)
         {
             var directoryNode = new TreeNode(directoryInfo.Name);
@@ -404,10 +414,12 @@ namespace FBExpert
             }
             return directoryNode;
         }
-        
+        */
+        /*
         TreeNode LastFolder = null;
         TreeNode ActFolder = null;
-      
+        */
+        /*
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (treeView1.SelectedNode == null) return;            
@@ -446,7 +458,7 @@ namespace FBExpert
                 ActFolder = treeView1.SelectedNode;
             }
         }
-
+        */
         private void hsSelectStructureObjects_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
@@ -502,19 +514,31 @@ namespace FBExpert
 
             ew.AktDBReg             = DBReg;
             ew.ShowScripting        = cbViewObjectScript.Checked;
-            ew.WriteToFile          = cbObjectExportToFile.Checked;
+            ew.WriteToFile = eSQLFileWriteMode.none;
+
+            if(ckWriteFileForEVeryObject.Checked)
+            {
+              ew.WriteToFile = eSQLFileWriteMode.seperated;
+            }
+            else if(cbObjectExportToFile.Checked)
+            {
+              ew.WriteToFile = eSQLFileWriteMode.all;
+            }
+
             ew.CommitAfterStatement = cbStructureCommit.Checked;
             ew.CreateConnectionStatement = cbStructureConnectiionStatement.Checked;
             ew.CreateDatabaseStatement   = cbStructureCreateDatabaseStatement.Checked;
             ew.CreateMode = (rbCREATEObject.Checked) ? eCreateMode.create : eCreateMode.recreate;
-                      
-            if (ew.WriteToFile)
+            
+            
+                 
+            if (ew.WriteToFile != eSQLFileWriteMode.none)
             {
                 if ((txtFileName.Text.IndexOf(".")) < 0) txtFileName.Text += ".sql";
-                var di = ActFolder.Tag as DirectoryInfo;
-                ew.SQLFileInfo = new FileInfo(di.FullName + "\\" + txtFileName.Text);
+                
+                ew.SQLFileInfo = new FileInfo(txtExportDirectory.Text + "\\" + txtFileName.Text);
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
-            }
+            }                        
             else
             {
                 ew.SQLFileInfo = null;
@@ -585,7 +609,11 @@ namespace FBExpert
             }
 
             ew.WaitForWorker();
-            ew.MakeScript();
+
+            if(ew.ShowScripting)
+            {
+              ew.MakeScript();
+            }
             NotificationsForm.Instance().Close();
             
         }
@@ -865,6 +893,14 @@ namespace FBExpert
             Thread.Sleep(20);
             Application.DoEvents();
             selExportStructureList.ClearChecks();      
+        }
+
+        private void hsExportFolder_Click(object sender, EventArgs e)
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtExportDirectory.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }

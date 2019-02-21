@@ -50,11 +50,11 @@ namespace FBXpert
             this.hsSaveSQL = new SeControlsLib.HotSpot();
             this.hsCreate = new SeControlsLib.HotSpot();
             this.pnlFields = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbSorting = new System.Windows.Forms.ComboBox();
+            this.gbTables = new System.Windows.Forms.GroupBox();
+            this.cbTables = new System.Windows.Forms.ComboBox();
             this.ckActive = new System.Windows.Forms.CheckBox();
-            this.gbSortDirection = new System.Windows.Forms.GroupBox();
-            this.rbSortDescending = new System.Windows.Forms.RadioButton();
-            this.rbSortAscending = new System.Windows.Forms.RadioButton();
-            this.rbSortNothing = new System.Windows.Forms.RadioButton();
             this.ckPrimary = new System.Windows.Forms.CheckBox();
             this.gbFieldList = new System.Windows.Forms.GroupBox();
             this.lvFields = new System.Windows.Forms.ListView();
@@ -87,8 +87,6 @@ namespace FBXpert
             this.bsDependenciesFrom = new System.Windows.Forms.BindingSource(this.components);
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
-            this.gbTables = new System.Windows.Forms.GroupBox();
-            this.cbTables = new System.Windows.Forms.ComboBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -99,7 +97,8 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.pnlSQLUpper.SuspendLayout();
             this.pnlFields.SuspendLayout();
-            this.gbSortDirection.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.gbTables.SuspendLayout();
             this.gbFieldList.SuspendLayout();
             this.gbFields.SuspendLayout();
             this.gbGenDescription.SuspendLayout();
@@ -118,7 +117,6 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
-            this.gbTables.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -218,7 +216,7 @@ namespace FBXpert
             this.tabPageFieldEdit.ImageIndex = 8;
             this.tabPageFieldEdit.Location = new System.Drawing.Point(4, 23);
             this.tabPageFieldEdit.Name = "tabPageFieldEdit";
-            this.tabPageFieldEdit.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageFieldEdit.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageFieldEdit.Size = new System.Drawing.Size(1111, 570);
             this.tabPageFieldEdit.TabIndex = 0;
             this.tabPageFieldEdit.Text = "Field Edit";
@@ -240,9 +238,9 @@ namespace FBXpert
             this.pnlSQL.Controls.Add(this.gbSQL);
             this.pnlSQL.Controls.Add(this.pnlSQLUpper);
             this.pnlSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSQL.Location = new System.Drawing.Point(468, 0);
+            this.pnlSQL.Location = new System.Drawing.Point(593, 0);
             this.pnlSQL.Name = "pnlSQL";
-            this.pnlSQL.Size = new System.Drawing.Size(637, 524);
+            this.pnlSQL.Size = new System.Drawing.Size(512, 524);
             this.pnlSQL.TabIndex = 22;
             // 
             // gbSQL
@@ -251,7 +249,7 @@ namespace FBXpert
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSQL.Location = new System.Drawing.Point(0, 40);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(637, 484);
+            this.gbSQL.Size = new System.Drawing.Size(512, 484);
             this.gbSQL.TabIndex = 9;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
@@ -279,7 +277,6 @@ namespace FBXpert
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -289,7 +286,7 @@ namespace FBXpert
             this.fctSQL.RightBracket = ')';
             this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
-            this.fctSQL.Size = new System.Drawing.Size(631, 465);
+            this.fctSQL.Size = new System.Drawing.Size(506, 465);
             this.fctSQL.TabIndex = 1;
             this.fctSQL.Zoom = 100;
             // 
@@ -302,7 +299,7 @@ namespace FBXpert
             this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSQLUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlSQLUpper.Name = "pnlSQLUpper";
-            this.pnlSQLUpper.Size = new System.Drawing.Size(637, 40);
+            this.pnlSQLUpper.Size = new System.Drawing.Size(512, 40);
             this.pnlSQLUpper.TabIndex = 2;
             // 
             // hsLoadSQL
@@ -454,9 +451,9 @@ namespace FBXpert
             // 
             // pnlFields
             // 
+            this.pnlFields.Controls.Add(this.groupBox2);
             this.pnlFields.Controls.Add(this.gbTables);
             this.pnlFields.Controls.Add(this.ckActive);
-            this.pnlFields.Controls.Add(this.gbSortDirection);
             this.pnlFields.Controls.Add(this.ckPrimary);
             this.pnlFields.Controls.Add(this.gbFieldList);
             this.pnlFields.Controls.Add(this.gbFields);
@@ -466,70 +463,63 @@ namespace FBXpert
             this.pnlFields.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlFields.Location = new System.Drawing.Point(0, 0);
             this.pnlFields.Name = "pnlFields";
-            this.pnlFields.Size = new System.Drawing.Size(468, 524);
+            this.pnlFields.Size = new System.Drawing.Size(593, 524);
             this.pnlFields.TabIndex = 21;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbSorting);
+            this.groupBox2.Location = new System.Drawing.Point(211, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(103, 41);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Sorting";
+            // 
+            // cbSorting
+            // 
+            this.cbSorting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbSorting.FormattingEnabled = true;
+            this.cbSorting.Items.AddRange(new object[] {
+            "ASC",
+            "DESC"});
+            this.cbSorting.Location = new System.Drawing.Point(3, 16);
+            this.cbSorting.Name = "cbSorting";
+            this.cbSorting.Size = new System.Drawing.Size(97, 21);
+            this.cbSorting.TabIndex = 1;
+            // 
+            // gbTables
+            // 
+            this.gbTables.Controls.Add(this.cbTables);
+            this.gbTables.Location = new System.Drawing.Point(5, 50);
+            this.gbTables.Name = "gbTables";
+            this.gbTables.Size = new System.Drawing.Size(197, 46);
+            this.gbTables.TabIndex = 24;
+            this.gbTables.TabStop = false;
+            this.gbTables.Text = "Tables";
+            // 
+            // cbTables
+            // 
+            this.cbTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbTables.FormattingEnabled = true;
+            this.cbTables.Location = new System.Drawing.Point(3, 16);
+            this.cbTables.Name = "cbTables";
+            this.cbTables.Size = new System.Drawing.Size(191, 21);
+            this.cbTables.TabIndex = 19;
+            this.cbTables.SelectedIndexChanged += new System.EventHandler(this.cbTables_SelectedIndexChanged);
             // 
             // ckActive
             // 
             this.ckActive.AutoSize = true;
-            this.ckActive.Location = new System.Drawing.Point(126, 177);
+            this.ckActive.Checked = true;
+            this.ckActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckActive.Location = new System.Drawing.Point(320, 23);
             this.ckActive.Name = "ckActive";
             this.ckActive.Size = new System.Drawing.Size(56, 17);
             this.ckActive.TabIndex = 23;
             this.ckActive.Text = "Active";
             this.ckActive.UseVisualStyleBackColor = true;
-            // 
-            // gbSortDirection
-            // 
-            this.gbSortDirection.Controls.Add(this.rbSortDescending);
-            this.gbSortDirection.Controls.Add(this.rbSortAscending);
-            this.gbSortDirection.Controls.Add(this.rbSortNothing);
-            this.gbSortDirection.Location = new System.Drawing.Point(5, 159);
-            this.gbSortDirection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gbSortDirection.Name = "gbSortDirection";
-            this.gbSortDirection.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gbSortDirection.Size = new System.Drawing.Size(89, 81);
-            this.gbSortDirection.TabIndex = 22;
-            this.gbSortDirection.TabStop = false;
-            this.gbSortDirection.Text = "Sortdirection";
-            // 
-            // rbSortDescending
-            // 
-            this.rbSortDescending.AutoSize = true;
-            this.rbSortDescending.Location = new System.Drawing.Point(4, 61);
-            this.rbSortDescending.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rbSortDescending.Name = "rbSortDescending";
-            this.rbSortDescending.Size = new System.Drawing.Size(50, 17);
-            this.rbSortDescending.TabIndex = 25;
-            this.rbSortDescending.Text = "Desc";
-            this.rbSortDescending.UseVisualStyleBackColor = true;
-            this.rbSortDescending.CheckedChanged += new System.EventHandler(this.rbSort_CheckedChanged);
-            // 
-            // rbSortAscending
-            // 
-            this.rbSortAscending.AutoSize = true;
-            this.rbSortAscending.Location = new System.Drawing.Point(4, 39);
-            this.rbSortAscending.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rbSortAscending.Name = "rbSortAscending";
-            this.rbSortAscending.Size = new System.Drawing.Size(75, 17);
-            this.rbSortAscending.TabIndex = 24;
-            this.rbSortAscending.Text = "Ascending";
-            this.rbSortAscending.UseVisualStyleBackColor = true;
-            this.rbSortAscending.CheckedChanged += new System.EventHandler(this.rbSort_CheckedChanged);
-            // 
-            // rbSortNothing
-            // 
-            this.rbSortNothing.AutoSize = true;
-            this.rbSortNothing.Checked = true;
-            this.rbSortNothing.Location = new System.Drawing.Point(4, 17);
-            this.rbSortNothing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rbSortNothing.Name = "rbSortNothing";
-            this.rbSortNothing.Size = new System.Drawing.Size(51, 17);
-            this.rbSortNothing.TabIndex = 23;
-            this.rbSortNothing.TabStop = true;
-            this.rbSortNothing.Text = "None";
-            this.rbSortNothing.UseVisualStyleBackColor = true;
-            this.rbSortNothing.CheckedChanged += new System.EventHandler(this.rbSort_CheckedChanged);
+            this.ckActive.CheckedChanged += new System.EventHandler(this.ckActive_CheckedChanged);
             // 
             // ckPrimary
             // 
@@ -545,9 +535,9 @@ namespace FBXpert
             // gbFieldList
             // 
             this.gbFieldList.Controls.Add(this.lvFields);
-            this.gbFieldList.Location = new System.Drawing.Point(270, 103);
+            this.gbFieldList.Location = new System.Drawing.Point(407, 6);
             this.gbFieldList.Name = "gbFieldList";
-            this.gbFieldList.Size = new System.Drawing.Size(170, 230);
+            this.gbFieldList.Size = new System.Drawing.Size(180, 346);
             this.gbFieldList.TabIndex = 19;
             this.gbFieldList.TabStop = false;
             this.gbFieldList.Text = "Index->Fields";
@@ -566,7 +556,7 @@ namespace FBXpert
             listViewItem1});
             this.lvFields.Location = new System.Drawing.Point(3, 16);
             this.lvFields.Name = "lvFields";
-            this.lvFields.Size = new System.Drawing.Size(164, 211);
+            this.lvFields.Size = new System.Drawing.Size(174, 327);
             this.lvFields.TabIndex = 2;
             this.lvFields.UseCompatibleStateImageBehavior = false;
             this.lvFields.View = System.Windows.Forms.View.Details;
@@ -582,7 +572,7 @@ namespace FBXpert
             this.gbFields.Controls.Add(this.hsRemoveField);
             this.gbFields.Controls.Add(this.hsAddField);
             this.gbFields.Controls.Add(this.cbFields);
-            this.gbFields.Location = new System.Drawing.Point(3, 101);
+            this.gbFields.Location = new System.Drawing.Point(5, 102);
             this.gbFields.Name = "gbFields";
             this.gbFields.Size = new System.Drawing.Size(245, 46);
             this.gbFields.TabIndex = 18;
@@ -697,7 +687,7 @@ namespace FBXpert
             this.gbGenDescription.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbGenDescription.Location = new System.Drawing.Point(0, 358);
             this.gbGenDescription.Name = "gbGenDescription";
-            this.gbGenDescription.Size = new System.Drawing.Size(468, 166);
+            this.gbGenDescription.Size = new System.Drawing.Size(593, 166);
             this.gbGenDescription.TabIndex = 11;
             this.gbGenDescription.TabStop = false;
             this.gbGenDescription.Text = "Gen Description";
@@ -715,7 +705,7 @@ namespace FBXpert
         '\"',
         '\'',
         '\''};
-            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctGenDescription.BackBrush = null;
             this.fctGenDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctGenDescription.CharHeight = 14;
@@ -723,13 +713,14 @@ namespace FBXpert
             this.fctGenDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctGenDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctGenDescription.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctGenDescription.IsReplaceMode = false;
             this.fctGenDescription.Location = new System.Drawing.Point(3, 16);
             this.fctGenDescription.Name = "fctGenDescription";
             this.fctGenDescription.Paddings = new System.Windows.Forms.Padding(0);
             this.fctGenDescription.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctGenDescription.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGenDescription.ServiceColors")));
-            this.fctGenDescription.Size = new System.Drawing.Size(462, 147);
+            this.fctGenDescription.Size = new System.Drawing.Size(587, 147);
             this.fctGenDescription.TabIndex = 7;
             this.fctGenDescription.Zoom = 100;
             this.fctGenDescription.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.fctGenDescription_TextChanged);
@@ -748,7 +739,7 @@ namespace FBXpert
             // gbInxName
             // 
             this.gbInxName.Controls.Add(this.txtIndexName);
-            this.gbInxName.Location = new System.Drawing.Point(3, 50);
+            this.gbInxName.Location = new System.Drawing.Point(5, 6);
             this.gbInxName.Name = "gbInxName";
             this.gbInxName.Size = new System.Drawing.Size(200, 45);
             this.gbInxName.TabIndex = 0;
@@ -831,8 +822,8 @@ namespace FBXpert
             this.tabPageDependencies.ImageIndex = 16;
             this.tabPageDependencies.Location = new System.Drawing.Point(4, 23);
             this.tabPageDependencies.Name = "tabPageDependencies";
-            this.tabPageDependencies.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPageDependencies.Size = new System.Drawing.Size(1111, 519);
+            this.tabPageDependencies.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDependencies.Size = new System.Drawing.Size(1111, 570);
             this.tabPageDependencies.TabIndex = 1;
             this.tabPageDependencies.Text = "Dependencies";
             this.tabPageDependencies.UseVisualStyleBackColor = true;
@@ -865,7 +856,7 @@ namespace FBXpert
             this.dgvDependenciesTo.ReadOnly = true;
             this.dgvDependenciesTo.RowHeadersVisible = false;
             this.dgvDependenciesTo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDependenciesTo.Size = new System.Drawing.Size(1105, 476);
+            this.dgvDependenciesTo.Size = new System.Drawing.Size(1105, 527);
             this.dgvDependenciesTo.TabIndex = 22;
             // 
             // bsDependenciesTo
@@ -946,8 +937,8 @@ namespace FBXpert
             this.tabPageMessages.ImageIndex = 9;
             this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
             this.tabPageMessages.Name = "tabPageMessages";
-            this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPageMessages.Size = new System.Drawing.Size(1111, 519);
+            this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMessages.Size = new System.Drawing.Size(1111, 570);
             this.tabPageMessages.TabIndex = 2;
             this.tabPageMessages.Text = "Messages";
             this.tabPageMessages.UseVisualStyleBackColor = true;
@@ -975,6 +966,7 @@ namespace FBXpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -984,7 +976,7 @@ namespace FBXpert
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
-            this.fctMessages.Size = new System.Drawing.Size(1105, 476);
+            this.fctMessages.Size = new System.Drawing.Size(1105, 527);
             this.fctMessages.TabIndex = 28;
             this.fctMessages.Zoom = 100;
             // 
@@ -1091,25 +1083,6 @@ namespace FBXpert
             // 
             this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
             // 
-            // gbTables
-            // 
-            this.gbTables.Controls.Add(this.cbTables);
-            this.gbTables.Location = new System.Drawing.Point(3, 3);
-            this.gbTables.Name = "gbTables";
-            this.gbTables.Size = new System.Drawing.Size(245, 46);
-            this.gbTables.TabIndex = 24;
-            this.gbTables.TabStop = false;
-            this.gbTables.Text = "Tables";
-            // 
-            // cbTables
-            // 
-            this.cbTables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbTables.FormattingEnabled = true;
-            this.cbTables.Location = new System.Drawing.Point(3, 16);
-            this.cbTables.Name = "cbTables";
-            this.cbTables.Size = new System.Drawing.Size(239, 21);
-            this.cbTables.TabIndex = 19;
-            // 
             // IndexForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1133,8 +1106,8 @@ namespace FBXpert
             this.pnlSQLUpper.ResumeLayout(false);
             this.pnlFields.ResumeLayout(false);
             this.pnlFields.PerformLayout();
-            this.gbSortDirection.ResumeLayout(false);
-            this.gbSortDirection.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.gbTables.ResumeLayout(false);
             this.gbFieldList.ResumeLayout(false);
             this.gbFields.ResumeLayout(false);
             this.gbGenDescription.ResumeLayout(false);
@@ -1154,7 +1127,6 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).EndInit();
-            this.gbTables.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1208,12 +1180,10 @@ namespace FBXpert
         private System.Windows.Forms.SaveFileDialog saveSQLFile;
         private System.Windows.Forms.OpenFileDialog ofdSQL;
         private System.Windows.Forms.CheckBox ckPrimary;
-        private System.Windows.Forms.GroupBox gbSortDirection;
-        private System.Windows.Forms.RadioButton rbSortDescending;
-        private System.Windows.Forms.RadioButton rbSortAscending;
-        private System.Windows.Forms.RadioButton rbSortNothing;
         private System.Windows.Forms.CheckBox ckActive;
         private System.Windows.Forms.GroupBox gbTables;
         private System.Windows.Forms.ComboBox cbTables;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox cbSorting;
     }
 }

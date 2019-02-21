@@ -266,6 +266,7 @@ namespace FBXpert
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);                        
+            ac.Activate();
         }
 
         private void fctGenDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)

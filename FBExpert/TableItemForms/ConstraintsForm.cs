@@ -370,7 +370,8 @@ namespace FBXpert
             ac.CreateAutocompleteForDatabase();
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);                        
+            ac.AddAutocompleteForTables(tables);   
+            ac.Activate();
         }
 
         private void hsNEWClick(object sender, EventArgs e)

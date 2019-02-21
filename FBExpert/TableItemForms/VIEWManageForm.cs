@@ -73,7 +73,8 @@ namespace FBExpert
             ac = new AutocompleteClass(fctCREATEINSERTSQL, DBReg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);            
+            ac.AddAutocompleteForTables(tables);       
+            ac.Activate();
         }
 
         public void RefreshLanguageText()

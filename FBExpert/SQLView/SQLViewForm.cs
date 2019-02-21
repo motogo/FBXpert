@@ -452,7 +452,8 @@ namespace SQLView
             ac = new AutocompleteClass(txtSQL, _dbRegOrg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);            
+            ac.AddAutocompleteForTables(tables);   
+            ac.Activate();
         }
 
         private int LoadHistory(eSort sort)
@@ -1177,6 +1178,152 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void txtDatabase_TextChanged(object sender, EventArgs e)
         {
             hsLifeTime.Marked = false;
+        }
+
+
+        private void exportToHtml(string filename)   
+        {   
+            var sb = new StringBuilder();   
+            sb.Append("<html >");   
+            sb.Append("<head>");   
+            sb.Append("</head>");   
+            sb.Append("<body>");   
+            sb.Append("<table border='1px' cellpadding='1' cellspacing='1' bgcolor='lightyellow' style='font-family:Garamond; font-size:smaller'>");      
+            sb.Append("<tr >");   
+            foreach (DataColumn myColumn in dataSet1.Tables[0].Columns)   
+            {   
+                sb.Append("<td >");   
+                sb.Append(myColumn.ColumnName);   
+                sb.Append("</td>");   
+   
+            }   
+            sb.Append("</tr>");         
+            foreach (DataRow myRow in dataSet1.Tables[0].Rows)   
+            {      
+                sb.Append("<tr >");   
+                foreach (DataColumn myColumn in dataSet1.Tables[0].Columns)   
+                {   
+                    sb.Append("<td >");   
+                    sb.Append(myRow[myColumn.ColumnName].ToString());   
+                    sb.Append("</td>");   
+   
+                }   
+                sb.Append("</tr>");   
+            }   
+   
+            //Close tags.   
+            sb.Append("</table>");   
+            sb.Append("</body>");   
+            sb.Append("</html>");   
+   
+            if(ckExportToScreen.Checked)
+            {
+               fctXMLData.Clear();
+               fctXMLData.Language = FastColoredTextBoxNS.Language.HTML;
+               fctXMLData.AppendText(sb.ToString());
+            }
+            if(ckExportToFile.Checked)
+            File.WriteAllText(filename, sb.ToString()); 
+   
+        }  
+
+
+        public static string WriteCSV(string input, char seperator)
+        {
+            try
+            {
+                if (input == null)
+                    return string.Empty;
+ 
+                bool containsQuote = false;
+                bool containsComma = false;
+                int len = input.Length;
+                for (int i = 0; i < len && (containsComma == false || containsQuote == false); i++)
+                {
+                    char ch = input[i];
+                    if (ch == '"')
+                        containsQuote = true;
+                    else if (ch == seperator)
+                        containsComma = true;
+                }
+ 
+                // test test test;te"s"t2  
+                // test;"test;te""s""t2";
+
+                // test test testte"s"t2  
+                // test;test;te"s"t2;
+
+                if (containsQuote && containsComma)
+                    input = input.Replace("\"", "\"\"");
+ 
+                if (containsComma)
+                    return "\"" + input + "\"";
+                else
+                    return input;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private void exportCSV(string filename, char seperator)
+        {
+            var sb = new StringBuilder();
+            DataTable dt = dataSet1.Tables[0];
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (DataColumn dc in dt.Columns)
+                    sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");
+                sb.Remove(sb.Length - 1, 1);
+                sb.AppendLine();
+            }
+            if(ckExportToScreen.Checked)
+            {
+               fctXMLData.Clear();
+               fctXMLData.Language = FastColoredTextBoxNS.Language.Custom;
+               fctXMLData.AppendText(sb.ToString());
+            }
+            if(ckExportToFile.Checked)
+            File.WriteAllText(filename, sb.ToString());            
+        }
+
+        private void hsExportCSV_Click(object sender, EventArgs e)
+        {            
+            if(ckExportToFile.Checked)
+            {
+                saveFileDialogCSV.DefaultExt = ".csv";
+                saveFileDialogCSV.Filter = "CSV|*.csv|All|*.*";
+                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                if(saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+                {
+                    string s = cbCSVSeperator.Text.Trim();
+                    exportCSV(saveFileDialogCSV.FileName,s[0]);
+                }
+            }
+            else
+            {
+                string s = cbCSVSeperator.Text.Trim();
+                exportCSV("",s[0]);
+            }
+        }
+
+        private void hsExportHTML_Click(object sender, EventArgs e)
+        {
+            if(ckExportToFile.Checked)
+            {
+                saveFileDialogCSV.DefaultExt = ".html";
+                saveFileDialogCSV.Filter = "HTML|*.html|All|*.*";
+                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                if(saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+                {                
+                    exportToHtml(saveFileDialogCSV.FileName);
+                }
+            }
+            else
+            {
+                exportToHtml("");
+            }
         }
     }
 }

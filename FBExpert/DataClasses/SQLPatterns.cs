@@ -66,6 +66,8 @@ namespace FBXpert.SQLStatements
         public static string DeactivateIndexPattern = $@"ALTER INDEX {IndexKey} INACTIVE;";       
         
         public static string DropConstraintPattern = $@"DROP CONSTRAINT {ConstraintKey};";
+
+        public static string DropColumnPattern = $@"ALTER TABLE {TableKey} DROP {ColumnKey};";
                                                   
         public static string Commit = "COMMIT;";
         public static string SetTermStart = "SET TERM ^ ;";

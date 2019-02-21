@@ -22,15 +22,19 @@ namespace FBXpert
     {
         
         DBRegistrationClass _dbReg = null;
-        string IndexName = string.Empty;
-        string TableName = string.Empty;
+        
+       
         int messages_count = 0;
         int error_count = 0;
         NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
-        TableClass TableObject;
-        string NewIndexName = string.Empty;
-        string OldIndexName = string.Empty;
+        TableClass _orgTableObject;
+        TableClass _tableObject;
+        IndexClass _orgIndexObject = null;
+        IndexClass _indexObject = null;
+        bool _indexActiveChanged = false;
+        
+        
         List<TableClass> _tables = null;
         public IndexForm(Form parent, string indexName,  DBRegistrationClass dbReg, List<TableClass> tables, eBearbeiten mode)
         {
@@ -40,49 +44,72 @@ namespace FBXpert
             _dbReg = dbReg;
             cbFields.Items.Clear();
             lvFields.Items.Clear();
+            
+            string TableName = string.Empty;
             if(mode == eBearbeiten.eInsert)
             {
-                IndexName = "NEW_INDEX_INX1";
-                NewIndexName = "NEW_INDEX_INX1";
+                
+                
                 TableName = tables[0].Name;
+                
+                _orgIndexObject = new IndexClass();
+                _orgIndexObject.Name = "NEW_INDEX_INX1";
+                _orgIndexObject.IsActive = true;
             }
             else
             {
-                IndexName = indexName;
-                NewIndexName = indexName;
+                
+                
                 TableName = RefreshIndicesAndGetTablename();
+                _tableObject.Indices.TryGetValue(indexName,out _orgIndexObject);
+
             }
-            
+            _indexObject    = _orgIndexObject;
+            _indexActiveChanged = false;
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;
             
             _tables = tables;
             
-            TableObject = StaticTreeClass.GetTableObjectForIndexForm(_dbReg, TableName);   
+            _tableObject = StaticTreeClass.GetTableObjectForIndexForm(_dbReg, TableName);              
+            _orgTableObject = _tableObject;
             
-            DataFilled = true;
+            FillSortingToCombo();
+            _dataFilled = true;
+        }
+
+        private void cbSorting_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_dataFilled) return;
+            var es = (eSort)cbSorting.Items[cbSorting.SelectedIndex];
+            _tableObject.primary_constraint.Sorting = es;
+            MakeSQL();
         }
         
-        public IndexForm(Form parent, TableClass tableObject,  DBRegistrationClass dbReg, List<TableClass> tables, eBearbeiten mode )
+        public IndexForm(Form parent, TableClass tableObject,  DBRegistrationClass dbReg, List<TableClass> tables)
         {
             InitializeComponent();
             this.MdiParent = parent;
-            BearbeitenMode = mode;
+            BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             _dbReg = dbReg;
-                      
-            IndexName = $@"{tableObject.Name}_inx1";
-            NewIndexName = $@"{tableObject.Name}_inx1";
+                                  
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;
-            TableName = tableObject.Name;
-            TableObject = tableObject;
-            DataFilled = true;
+            _orgTableObject = tableObject;
+            _tableObject = tableObject;
+                                                                           
+            _orgIndexObject = new IndexClass();
+            _orgIndexObject.Name = $@"{tableObject.Name}_inx1";
+            _orgIndexObject.IsActive = true;
+            
+            _dataFilled = true;
             _tables = tables;
+            _indexActiveChanged = false;
         
             lvFields.Items.Clear();
             
-            txtIndexName.Text = IndexName.Trim();
-            DataFilled = true;
+            txtIndexName.Text = _indexObject.Name.Trim();
+            _dataFilled = true;
         }
 
                
@@ -109,10 +136,19 @@ namespace FBXpert
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
-
+        public void EnableButtons()
+        {
+            bool sqlok = (lvFields.Items.Count > 0) &&
+                         (!string.IsNullOrEmpty(cbTables.Text)) &&
+                         (!string.IsNullOrEmpty(txtIndexName.Text));
+            
+            hsCreate.Enabled = sqlok;
+           
+        }
 
         public void MakeSQL()
         {
+            EnableButtons();
             ShowCaptions();
             Application.DoEvents();
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
@@ -122,8 +158,7 @@ namespace FBXpert
             else
             {
                 MakeSQLNew();
-            }
-            ShowCaptions();
+            }            
         }
 
         public string GetFields()
@@ -150,11 +185,11 @@ namespace FBXpert
             
             if (ckPrimary.Checked)
             {
-                sb.Append($@"ALTER TABLE {TableName} ADD PRIMARY KEY");                
+                sb.Append($@"ALTER TABLE {_tableObject.Name} ADD PRIMARY KEY");                
                 string fieldStr = GetFields();
-                                
-                if(rbSortAscending.Checked)  fieldStr+= $@" {EnumHelper.GetDescription(eSort.ASC)}";
-                if(rbSortDescending.Checked) fieldStr+= $@" {EnumHelper.GetDescription(eSort.DESC)}";
+                if(((eSort)cbSorting.SelectedItem) != eSort.NONE)                
+                    fieldStr+= $@" {EnumHelper.GetDescription((eSort)cbSorting.SelectedItem)}";
+                
                 fieldStr+=";";
                 sb.Append(fieldStr);
             }
@@ -165,13 +200,13 @@ namespace FBXpert
                 {
                     sb.Append($@"{StaticVariablesClass.UNIQUEStr} ");
                 }
-                if(rbSortAscending.Checked) sb.Append($@"{EnumHelper.GetDescription(eSort.ASC)} ");
-                else if(rbSortDescending.Checked) sb.Append($@"{EnumHelper.GetDescription(eSort.DESC)} ");
-
+                if(((eSort)cbSorting.SelectedItem) != eSort.NONE)
+                    sb.Append($@"{EnumHelper.GetDescription((eSort)cbSorting.SelectedItem)} ");
+                
                 sb.Append("INDEX ");
                 sb.Append(txtIndexName.Text.Trim());
                 sb.Append(" ON ");
-                sb.Append(TableName);
+                sb.Append(_tableObject.Name);
                                 
                 string fieldStr = GetFields();                
                 sb.Append(fieldStr);                                
@@ -181,13 +216,21 @@ namespace FBXpert
             SQLToUI();
         }
 
-        bool DataFilled = false;
+        bool _dataFilled = false;
+        
+        public void FillSortingToCombo()
+        {
+            cbSorting.Items.Clear();
+            cbSorting.Items.Add(eSort.ASC);
+            cbSorting.Items.Add(eSort.DESC);
+            cbSorting.SelectedIndex = 0;
+        }
 
         public string RefreshIndicesAndGetTablename()
         {
-            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, IndexName.Trim());
-            DataFilled = false;
-            txtIndexName.Text = IndexName.Trim();
+            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, _indexObject.Name.Trim());
+            _dataFilled = false;
+            txtIndexName.Text = _indexObject.Name.Trim();
             string TableName = string.Empty;
             try
             {
@@ -215,9 +258,11 @@ namespace FBXpert
                         IndexType       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
                         cbUnique.Checked = Unique > 0;
                         ckActive.Checked = Active;
-                        if(IndexType < 0) rbSortNothing.Checked= true;
-                        else if(IndexType == 0) rbSortAscending.Checked= true;
-                        else if(IndexType == 1) rbSortDescending.Checked= true;
+
+                        if(IndexType < 0)   cbSorting.SelectedItem = eSort.NONE;
+                        else if(IndexType == 0) cbSorting.SelectedItem = eSort.ASC;
+                        else if(IndexType == 1) cbSorting.SelectedItem = eSort.DESC;
+                        
                         string[] lv = new string[1];
                         lv[0] = indexColumnName;
                         if(this.oldIndexColumnName != indexColumnName)
@@ -227,7 +272,7 @@ namespace FBXpert
                             this.oldIndexColumnName = indexColumnName;
                         }                                            
                     }
-                    DataFilled = true;
+                    _dataFilled = true;
                 }
                 con.Close();                
             }
@@ -260,11 +305,14 @@ namespace FBXpert
 
             if (ckPrimary.Checked)
             {
-                sb.Append($@"ALTER TABLE {TableName} ADD PRIMARY KEY ");
+                sb.Append($@"ALTER TABLE {_tableObject.Name} ADD PRIMARY KEY ");
                 
-                string fieldStr = GetFields();                
-                if(rbSortAscending.Checked) fieldStr  += $@" {EnumHelper.GetDescription(eSort.ASC)}";
-                if(rbSortDescending.Checked) fieldStr += $@" {EnumHelper.GetDescription(eSort.DESC)}";
+                string fieldStr = GetFields();       
+                
+                if(((eSort)cbSorting.SelectedItem) != eSort.NONE)                
+                    fieldStr+= $@" {EnumHelper.GetDescription((eSort)cbSorting.SelectedItem)}";
+
+                
                 fieldStr+=";";
                 sb.Append(fieldStr);
             }
@@ -275,12 +323,15 @@ namespace FBXpert
                 {
                     sb.Append("UNIQUE ");
                 }
-                if(rbSortAscending.Checked) sb.Append("ASCENDIG ");
-                else if(rbSortDescending.Checked) sb.Append("DESCENDING ");
+                
+                if(((eSort)cbSorting.SelectedItem) != eSort.NONE)                
+                    sb.Append($@"{EnumHelper.GetDescription((eSort)cbSorting.SelectedItem)} ");
+
+                
                 sb.Append("INDEX ");
-                sb.Append(NewIndexName);
+                sb.Append(_indexObject.Name);
                 sb.Append(" ON ");
-                sb.Append(TableName);  
+                sb.Append(_tableObject.Name);  
                 
                 string fieldStr = GetFields();                
                 sb.Append(fieldStr);                   
@@ -288,19 +339,29 @@ namespace FBXpert
             }
             SQLScript.Add(sb.ToString());
             SQLScript.Add($@"{SQLPatterns.Commit}");
+            if(_indexActiveChanged)
+            {
+                SQLScript.Add($@"{SQLPatterns.ActivateIndexPattern.Replace(SQLPatterns.IndexKey,_indexObject.Name)}");
+                SQLScript.Add($@"{SQLPatterns.Commit}");
+            }
             SQLToUI();
         }
+
+        
 
         private void hsClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         public override void DataToEdit()
         {
+            DataToCBFields();
+        }
+        public void DataToCBFields()
+        {
            cbFields.Items.Clear();
-           if(TableObject== null) return;
-           foreach (TableFieldClass field in  TableObject.Fields.Values)
+           if(_tableObject== null) return;
+           foreach (TableFieldClass field in  _tableObject.Fields.Values)
            {
                 cbFields.Items.Add(field);
            }
@@ -312,17 +373,16 @@ namespace FBXpert
         
         private void IndexForm_Load(object sender, EventArgs e)
         {    
-            DataFilled = false;
+            _dataFilled = false;
             cbTables.Items.Clear();
             cbTables.Items.AddRange(_tables.ToArray());
-            cbTables.Text = TableObject.Name;
+            cbTables.Text = _tableObject.Name;
             DataToEdit();
             oldIndexColumnName = txtIndexName.Text.Trim();
-            DataFilled = true;
+            _dataFilled = true;
             MakeSQL();
             SetAutocompeteObjects(_tables);
         }
-
         
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
@@ -330,17 +390,18 @@ namespace FBXpert
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);            
+            ac.Activate();
         }
        
         public void ShowCaptions()
         {
-            lblIndexName.Text = $@"Index:{NewIndexName}";
+            lblIndexName.Text = $@"Index:{_indexObject.Name}";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Index");
         }
 
         private void fctGenDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            if (DataFilled)
+            if (_dataFilled)
                 MakeSQL();
         }
 
@@ -357,6 +418,8 @@ namespace FBXpert
         private void hotSpot2_Click(object sender, EventArgs e)
         {
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
+            ckActive.Checked = true;
+            _indexActiveChanged = false;
             MakeSQL();
         }
 
@@ -370,12 +433,13 @@ namespace FBXpert
             var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             var riList      = _sql.ExecuteCommands(fctSQL.Lines);             
             var riFailure   = riList.Find(x=>x.commandDone = false);                                    
-            oldIndexColumnName = NewIndexName;
-            if (DataFilled) MakeSQL();
+            oldIndexColumnName = _indexObject.Name;
+            
+            if (_dataFilled) MakeSQL();
            
             string info = (riFailure==null) 
-                ? $@"Index {_dbReg.Alias}->{NewIndexName} updated." 
-                : $@"Index {_dbReg.Alias}->{NewIndexName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
+                ? $@"Index {_dbReg.Alias}->{_indexObject.Name} updated." 
+                : $@"Index {_dbReg.Alias}->{_indexObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
                                             
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");  
@@ -383,7 +447,7 @@ namespace FBXpert
 
         private void hsAddField_Click(object sender, EventArgs e)
         {
-            if (!DataFilled) return;
+            if (!_dataFilled) return;
             String fieldName = cbFields.SelectedItem.ToString();
             ListViewItem lvi = new ListViewItem(fieldName);
             ListViewItem lvifind = lvFields.FindItemWithText(fieldName);
@@ -394,7 +458,7 @@ namespace FBXpert
 
         private void hsRemoveField_Click(object sender, EventArgs e)
         {
-            if (!DataFilled) return;
+            if (!_dataFilled) return;
             String fieldName = cbFields.SelectedItem.ToString();
             ListViewItem lvi = new ListViewItem(fieldName);
             ListViewItem lvifind = lvFields.FindItemWithText(fieldName);
@@ -405,14 +469,14 @@ namespace FBXpert
         
         private void txtIndexName_TextChanged(object sender, EventArgs e)
         {
-            NewIndexName = txtIndexName.Text.Trim();
-            if (DataFilled)
+            _indexObject.Name = txtIndexName.Text.Trim();
+            if (_dataFilled)
                 MakeSQL();
         }
 
         private void cbUnique_CheckedChanged(object sender, EventArgs e)
         {
-            if (DataFilled)
+            if (_dataFilled)
                 MakeSQL();
         }
 
@@ -430,18 +494,35 @@ namespace FBXpert
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
             if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName); 
+                fctSQL.OpenFile(ofdSQL.FileName); 
         }
 
         private void cbPrimary_CheckedChanged(object sender, EventArgs e)
         {
-             if (DataFilled)
+             if (_dataFilled)
                 MakeSQL();
         }
 
         private void rbSort_CheckedChanged(object sender, EventArgs e)
         {
-             if (DataFilled)
+             if (_dataFilled)
+                MakeSQL();
+        }
+
+        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(_dataFilled)
+            {
+                _tableObject = (TableClass) cbTables.SelectedItem;
+                DataToCBFields();
+                lvFields.Items.Clear();
+                MakeSQL();
+            }
+        }
+
+        private void ckActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_dataFilled)
                 MakeSQL();
         }
     }

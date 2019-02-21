@@ -468,7 +468,7 @@ namespace FBXpert
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);
-            
+            ac.Activate();
         }
 
         public void ShowCaptions()

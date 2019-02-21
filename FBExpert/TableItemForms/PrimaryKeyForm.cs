@@ -121,7 +121,7 @@ namespace FBXpert
                 _tableObject.primary_constraint = new PrimaryKeyClass();
             }
             _tableObject.primary_constraint.Name = txtPKName.Text;
-            _tableObject.primary_constraint.IndexName = txtIndexName.Text;
+            _tableObject.primary_constraint.IndexName = txtPKName.Text;
             _tableObject.primary_constraint.FieldNames.Clear();
             eSort es = (eSort)cbSorting.Items[cbSorting.SelectedIndex];
             _tableObject.primary_constraint.Sorting = es;
@@ -154,7 +154,7 @@ namespace FBXpert
 
             sb.Append("ALTER TABLE ");
             sb.Append(_tableObject.Name);
-            sb.Append(" ADD CONSTRAINT " + _tableObject.primary_constraint.Name + " PRIMARY KEY (");
+            sb.Append($@" ADD CONSTRAINT {_tableObject.primary_constraint.Name} PRIMARY KEY (");
 
             bool firstdone = false;
             foreach (string st in _tableObject.primary_constraint.FieldNames.Values)
@@ -300,8 +300,8 @@ namespace FBXpert
 
         public override void DataToEdit()
         {
-           txtPKName.Text       = _tableObject.primary_constraint.Name;
-           txtIndexName.Text    = _tableObject.primary_constraint.IndexName;
+           txtPKName.Text   = _tableObject.primary_constraint.Name;
+           textBox1.Text    = _tableObject.primary_constraint.IndexName;
                                  
            if(cbFields.Items.Count > 0) cbFields.SelectedIndex = 0;
            
@@ -328,6 +328,7 @@ namespace FBXpert
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);                        
+            ac.Activate();
         }
 
         public void ShowCaptions()
@@ -435,13 +436,7 @@ namespace FBXpert
             MakeSQL();
         }
             
-        private void txtIndexName_TextChanged(object sender, EventArgs e)
-        {
-            if (!_dataFilled) return;
-            _tableObject.primary_constraint.IndexName = txtIndexName.Text;
-            MakeSQL();
-        }
-
+        
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)
         {
             

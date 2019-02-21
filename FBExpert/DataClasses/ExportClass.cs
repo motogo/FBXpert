@@ -405,8 +405,8 @@ namespace FBXpert.DataClasses
         private List<string> _allFunctionContent = null;
         private List<string> _allFunctionDefinitionContent = null;
 
-        public FileInfo SQLFileInfo = null;
-        public bool WriteToFile = false;
+        public FileInfo SQLFileInfo = null;        
+        public eSQLFileWriteMode WriteToFile = eSQLFileWriteMode.none;
         public bool ShowScripting = true;
         public bool CommitAfterStatement = false;
         public bool CreateConnectionStatement = false;
@@ -471,14 +471,14 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunTableDataWorkerCompleted);
 
             NotificationsForm.Instance().Show();
-            if (WriteToFile)
+            if (WriteToFile != eSQLFileWriteMode.none)
             {
                 if (SQLFileInfo != null)
                 {
-                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLFileInfo.FullName}");
-                    _sw = new StreamWriter(SQLFileInfo.FullName, false, CharSet.encoding);
+                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLFileInfo.FullName}");                    
                 }
-            }           
+            } 
+            
             _bgw.RunWorkerAsync(allobjects);               
         }
 
@@ -544,13 +544,22 @@ namespace FBXpert.DataClasses
                 }
                 
 
-                if(WriteToFile)
+                if(WriteToFile   != eSQLFileWriteMode.none)
                 {
                     try
                     {
+                        if(WriteToFile == eSQLFileWriteMode.seperated)
+                        {
+                            _sw = null;
+                            _sw = new StreamWriter(SQLFileInfo.DirectoryName+"\\"+str+".sql", false, CharSet.encoding);
+                        }
                         foreach (string wstr in _allTableContent)
                         {
                             _sw.WriteLine(wstr);
+                        }
+                        if(WriteToFile == eSQLFileWriteMode.seperated)
+                        {
+                            if(_sw != null) _sw.Close();
                         }
                     }
                     catch(Exception ex)
@@ -588,10 +597,9 @@ namespace FBXpert.DataClasses
         private void bgw_RunTableDataWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             //NotificationsForm.Instance().Close();
-            if (WriteToFile)
+            if (WriteToFile != eSQLFileWriteMode.none)
             {
-                if(_sw != null)
-                _sw.Close();
+                if(_sw != null) _sw.Close();
                 _localNotify?.AddToINFO(_allTableContent.Count.ToString() + " lines written to file");                
             }
 
@@ -720,16 +728,16 @@ namespace FBXpert.DataClasses
             if(_allTriggerContent != null)
             {
                 foreach (string str in _allTriggerContent)
-            {
-               sc.AppendSql(str + Environment.NewLine);
-            }
+                {
+                   sc.AppendSql(str + Environment.NewLine);
+                }
             }
                     
             if(_allViewContent != null)
             {
                 foreach (string str in _allViewContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                   sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
@@ -752,6 +760,156 @@ namespace FBXpert.DataClasses
 
             sc.EndUpdate();  
         }
+
+        public void MakeFiles()
+        {
+            var sc = new ScriptingForm(AktDBReg);
+            sc.BeginUpdate();
+            sc.Show();
+            Application.DoEvents();
+            int n = 0;
+            sc.ClearSql();
+             
+            //Domains
+            //Generators
+            //StoredProcedures Head
+            //Tables
+            //Views
+            //PrimaryKeys
+            //ForeignKeys
+            //Indicies
+            //SET TERM ^ ;
+            //Triggers
+            //SET TERM ; ^
+            //SET TERM ^ ;
+            //StoredProcedure
+            //SET TERM ; ^
+            //Descriptions-Comments
+
+
+            if(_allDatabaseContent != null)
+            {
+                foreach (string str in _allDatabaseContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+            if(_allDomainContent != null)
+            {
+                foreach (string str in _allDomainContent)
+            {
+                  sc.AppendSql(str + Environment.NewLine);
+            }
+            }   
+            if(_allGeneratorContent != null)
+            {
+                foreach (string str in _allGeneratorContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+
+            if(_allFunctionDefinitionContent != null)
+            {
+                foreach (string str in _allFunctionDefinitionContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+
+            if(_allProcedureDefinitionContent != null)
+            {
+                foreach (string str in _allProcedureDefinitionContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+
+            if(_allTableContent != null)
+            {
+                foreach (string str in _allTableContent)
+                {
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        if (str.EndsWith(Environment.NewLine))
+                        {
+                            sc.AppendSql(str);
+                        }
+                        else
+                        {
+                            sc.AppendSql(str + Environment.NewLine);
+                        }
+                    }
+                    else
+                    {
+                        sc.AppendSql(Environment.NewLine);
+                    }
+                    n++;
+                    if (n > 1000)
+                    {
+                        Application.DoEvents();
+                        n = 0;
+                    }
+                }
+            }
+            if(_allPKConstraintsContent != null)
+            {
+                foreach (string str in _allPKConstraintsContent)
+            {
+                    sc.AppendSql(str + Environment.NewLine);
+            }
+            }
+            if(_allFKConstraintsContent != null)
+            {
+                foreach (string str in _allFKConstraintsContent)
+            {
+                    sc.AppendSql(str + Environment.NewLine);
+            }
+            }
+            if(_allIndexContent != null)
+            {
+                foreach (string str in _allIndexContent)
+            {
+                   sc.AppendSql(str + Environment.NewLine);
+            }
+            }
+            if(_allTriggerContent != null)
+            {
+                foreach (string str in _allTriggerContent)
+                {
+                   sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+                    
+            if(_allViewContent != null)
+            {
+                foreach (string str in _allViewContent)
+                {
+                   sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+
+            if(_allFunctionContent != null)
+            {
+                foreach (string str in _allFunctionContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+            
+            if(_allProcedureContent != null)
+            {
+                foreach (string str in _allProcedureContent)
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
+            }
+            
+
+            sc.EndUpdate();  
+        }
+
+
         #region TableStructure
         public void StartworkerGetTableStructure(List<TableClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
         {        
@@ -792,22 +950,13 @@ namespace FBXpert.DataClasses
             {
                 alltables.Add(itm.Name,itm);
             }
-            //Dictionary<string,TableClass> alltables = e.Argument as Dictionary<string,TableClass>;
-            
             
             _allTableContent = new List<string>();         
             int n = 0;
            
-            var tlst = StaticTreeClass.GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement);                               
+            var tlst = StaticTreeClass.GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding);                                           
             _bgw.ReportProgress(n++, tlst);    
-            /*
-            var dbReg = e.Argument as DBRegistrationClass;
-            var alltables = e.Argument as List<ViewClass>;
-            _allViewContent = new List<string>();                       
-            var vlst = StaticTreeClass.GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement);
-            if(vlst != null) _bgw.ReportProgress(1, vlst);
-            */
-
+            
         }
 
         private void bgw_ProgressGetTableStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -852,7 +1001,7 @@ namespace FBXpert.DataClasses
             var dbReg = e.Argument as DBRegistrationClass;
             var alltables = e.Argument as List<ViewClass>;
             _allViewContent = new List<string>();                       
-            var vlst = StaticTreeClass.GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement);
+            var vlst = StaticTreeClass.GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding);            
             if(vlst != null) _bgw.ReportProgress(1, vlst);
         }
 
@@ -863,28 +1012,7 @@ namespace FBXpert.DataClasses
 
         private void bgw_RunWorkerGetViewStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL view structure {_allViewContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allViewContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allViewContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+            
         }
 
         #region DatabaseStructure
@@ -987,7 +1115,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var obj = e.Argument as Dictionary<string,PrimaryKeyClass>;
             _allPKConstraintsContent = new List<string>();            
-            var tlst = StaticTreeClass.GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1053,7 +1181,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var obj = e.Argument as Dictionary<string,ForeignKeyClass>;
             _allFKConstraintsContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1120,7 +1248,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allIndeces = e.Argument as Dictionary<string,IndexClass>;
             _allIndexContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1187,7 +1315,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allTriggers = e.Argument as Dictionary<string,TriggerClass>;
             _allTriggerContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1254,7 +1382,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true);
+            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1305,7 +1433,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false);
+            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1357,7 +1485,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true);
+            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1408,7 +1536,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false);
+            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1460,7 +1588,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allDomain = e.Argument as Dictionary<string,DomainClass>;
             _allDomainContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1527,7 +1655,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allGenerator = e.Argument as Dictionary<string,GeneratorClass>;
             _allGeneratorContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement);
+            var tlst = StaticTreeClass.GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 

@@ -48,8 +48,6 @@ namespace FBXpert
             this.hsSaveSQL = new SeControlsLib.HotSpot();
             this.hsCreate = new SeControlsLib.HotSpot();
             this.pnlFIelds = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtIndexName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbSorting = new System.Windows.Forms.ComboBox();
             this.gbFieldList = new System.Windows.Forms.GroupBox();
@@ -85,6 +83,7 @@ namespace FBXpert
             this.bsDependenciesFrom = new System.Windows.Forms.BindingSource(this.components);
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -94,7 +93,6 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.pnlSQLUpper.SuspendLayout();
             this.pnlFIelds.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbFieldList.SuspendLayout();
             this.gbSourceTable.SuspendLayout();
@@ -165,6 +163,7 @@ namespace FBXpert
             this.hsClose.NonMarkedText = "";
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -176,7 +175,6 @@ namespace FBXpert
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -266,6 +264,7 @@ namespace FBXpert
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -334,7 +333,6 @@ namespace FBXpert
             this.hsLoadSQL.ToolTipIsBallon = false;
             this.hsLoadSQL.ToolTipOwnerDraw = false;
             this.hsLoadSQL.ToolTipReshowDelay = 100;
-            
             this.hsLoadSQL.ToolTipShowAlways = false;
             this.hsLoadSQL.ToolTipText = "";
             this.hsLoadSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -384,7 +382,6 @@ namespace FBXpert
             this.hsSaveSQL.ToolTipIsBallon = false;
             this.hsSaveSQL.ToolTipOwnerDraw = false;
             this.hsSaveSQL.ToolTipReshowDelay = 100;
-            
             this.hsSaveSQL.ToolTipShowAlways = false;
             this.hsSaveSQL.ToolTipText = "";
             this.hsSaveSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -420,6 +417,7 @@ namespace FBXpert
             this.hsCreate.NonMarkedText = "";
             this.hsCreate.Size = new System.Drawing.Size(45, 36);
             this.hsCreate.TabIndex = 1;
+            this.hsCreate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsCreate.ToolTipActive = false;
             this.hsCreate.ToolTipAutomaticDelay = 500;
             this.hsCreate.ToolTipAutoPopDelay = 5000;
@@ -431,7 +429,6 @@ namespace FBXpert
             this.hsCreate.ToolTipIsBallon = false;
             this.hsCreate.ToolTipOwnerDraw = false;
             this.hsCreate.ToolTipReshowDelay = 100;
-            
             this.hsCreate.ToolTipShowAlways = false;
             this.hsCreate.ToolTipText = "";
             this.hsCreate.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -442,7 +439,7 @@ namespace FBXpert
             // 
             // pnlFIelds
             // 
-            this.pnlFIelds.Controls.Add(this.groupBox1);
+            this.pnlFIelds.Controls.Add(this.textBox1);
             this.pnlFIelds.Controls.Add(this.groupBox2);
             this.pnlFIelds.Controls.Add(this.gbFieldList);
             this.pnlFIelds.Controls.Add(this.gbSourceTable);
@@ -455,25 +452,6 @@ namespace FBXpert
             this.pnlFIelds.Name = "pnlFIelds";
             this.pnlFIelds.Size = new System.Drawing.Size(489, 473);
             this.pnlFIelds.TabIndex = 22;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtIndexName);
-            this.groupBox1.Location = new System.Drawing.Point(10, 186);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 39);
-            this.groupBox1.TabIndex = 23;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Index Name";
-            // 
-            // txtIndexName
-            // 
-            this.txtIndexName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtIndexName.Location = new System.Drawing.Point(3, 16);
-            this.txtIndexName.Name = "txtIndexName";
-            this.txtIndexName.Size = new System.Drawing.Size(194, 20);
-            this.txtIndexName.TabIndex = 0;
-            this.txtIndexName.TextChanged += new System.EventHandler(this.txtIndexName_TextChanged);
             // 
             // groupBox2
             // 
@@ -490,8 +468,8 @@ namespace FBXpert
             this.cbSorting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbSorting.FormattingEnabled = true;
             this.cbSorting.Items.AddRange(new object[] {
-            "ASCENDING",
-            "DESCENDING"});
+            "ASC",
+            "DESC"});
             this.cbSorting.Location = new System.Drawing.Point(3, 16);
             this.cbSorting.Name = "cbSorting";
             this.cbSorting.Size = new System.Drawing.Size(97, 21);
@@ -535,7 +513,7 @@ namespace FBXpert
             // gbSourceTable
             // 
             this.gbSourceTable.Controls.Add(this.cbSourceTable);
-            this.gbSourceTable.Location = new System.Drawing.Point(4, 58);
+            this.gbSourceTable.Location = new System.Drawing.Point(5, 51);
             this.gbSourceTable.Name = "gbSourceTable";
             this.gbSourceTable.Size = new System.Drawing.Size(202, 41);
             this.gbSourceTable.TabIndex = 21;
@@ -584,6 +562,7 @@ namespace FBXpert
             this.fctGenDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctGenDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctGenDescription.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctGenDescription.IsReplaceMode = false;
             this.fctGenDescription.Location = new System.Drawing.Point(3, 16);
             this.fctGenDescription.Name = "fctGenDescription";
@@ -634,6 +613,7 @@ namespace FBXpert
             this.hsRemoveField.NonMarkedText = "";
             this.hsRemoveField.Size = new System.Drawing.Size(45, 27);
             this.hsRemoveField.TabIndex = 21;
+            this.hsRemoveField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveField.ToolTipActive = false;
             this.hsRemoveField.ToolTipAutomaticDelay = 500;
             this.hsRemoveField.ToolTipAutoPopDelay = 5000;
@@ -645,7 +625,6 @@ namespace FBXpert
             this.hsRemoveField.ToolTipIsBallon = false;
             this.hsRemoveField.ToolTipOwnerDraw = false;
             this.hsRemoveField.ToolTipReshowDelay = 100;
-            
             this.hsRemoveField.ToolTipShowAlways = false;
             this.hsRemoveField.ToolTipText = "";
             this.hsRemoveField.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -681,6 +660,7 @@ namespace FBXpert
             this.hsAddField.NonMarkedText = "";
             this.hsAddField.Size = new System.Drawing.Size(45, 27);
             this.hsAddField.TabIndex = 20;
+            this.hsAddField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddField.ToolTipActive = false;
             this.hsAddField.ToolTipAutomaticDelay = 500;
             this.hsAddField.ToolTipAutoPopDelay = 5000;
@@ -692,7 +672,6 @@ namespace FBXpert
             this.hsAddField.ToolTipIsBallon = false;
             this.hsAddField.ToolTipOwnerDraw = false;
             this.hsAddField.ToolTipReshowDelay = 100;
-            
             this.hsAddField.ToolTipShowAlways = false;
             this.hsAddField.ToolTipText = "";
             this.hsAddField.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -768,6 +747,7 @@ namespace FBXpert
             this.hsMakeSQL.NonMarkedText = "";
             this.hsMakeSQL.Size = new System.Drawing.Size(45, 36);
             this.hsMakeSQL.TabIndex = 2;
+            this.hsMakeSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsMakeSQL.ToolTipActive = false;
             this.hsMakeSQL.ToolTipAutomaticDelay = 500;
             this.hsMakeSQL.ToolTipAutoPopDelay = 5000;
@@ -779,7 +759,6 @@ namespace FBXpert
             this.hsMakeSQL.ToolTipIsBallon = false;
             this.hsMakeSQL.ToolTipOwnerDraw = false;
             this.hsMakeSQL.ToolTipReshowDelay = 100;
-            
             this.hsMakeSQL.ToolTipShowAlways = false;
             this.hsMakeSQL.ToolTipText = "";
             this.hsMakeSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -829,7 +808,6 @@ namespace FBXpert
             this.hotSpot2.ToolTipIsBallon = false;
             this.hotSpot2.ToolTipOwnerDraw = false;
             this.hotSpot2.ToolTipReshowDelay = 100;
-            
             this.hotSpot2.ToolTipShowAlways = false;
             this.hotSpot2.ToolTipText = "";
             this.hotSpot2.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -934,6 +912,7 @@ namespace FBXpert
             this.hsRefreshDependencies.NonMarkedText = "";
             this.hsRefreshDependencies.Size = new System.Drawing.Size(45, 37);
             this.hsRefreshDependencies.TabIndex = 2;
+            this.hsRefreshDependencies.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRefreshDependencies.ToolTipActive = false;
             this.hsRefreshDependencies.ToolTipAutomaticDelay = 500;
             this.hsRefreshDependencies.ToolTipAutoPopDelay = 5000;
@@ -945,7 +924,6 @@ namespace FBXpert
             this.hsRefreshDependencies.ToolTipIsBallon = false;
             this.hsRefreshDependencies.ToolTipOwnerDraw = false;
             this.hsRefreshDependencies.ToolTipReshowDelay = 100;
-            
             this.hsRefreshDependencies.ToolTipShowAlways = false;
             this.hsRefreshDependencies.ToolTipText = "";
             this.hsRefreshDependencies.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -989,6 +967,7 @@ namespace FBXpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1039,6 +1018,7 @@ namespace FBXpert
             this.hotSpot3.NonMarkedText = "";
             this.hotSpot3.Size = new System.Drawing.Size(45, 37);
             this.hotSpot3.TabIndex = 2;
+            this.hotSpot3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hotSpot3.ToolTipActive = false;
             this.hotSpot3.ToolTipAutomaticDelay = 500;
             this.hotSpot3.ToolTipAutoPopDelay = 5000;
@@ -1050,7 +1030,6 @@ namespace FBXpert
             this.hotSpot3.ToolTipIsBallon = false;
             this.hotSpot3.ToolTipOwnerDraw = false;
             this.hotSpot3.ToolTipReshowDelay = 100;
-            
             this.hotSpot3.ToolTipShowAlways = false;
             this.hotSpot3.ToolTipText = "";
             this.hotSpot3.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1105,6 +1084,13 @@ namespace FBXpert
             // 
             this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(57, 215);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(213, 20);
+            this.textBox1.TabIndex = 23;
+            // 
             // PrimaryKeyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1126,8 +1112,7 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.pnlSQLUpper.ResumeLayout(false);
             this.pnlFIelds.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.pnlFIelds.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.gbFieldList.ResumeLayout(false);
             this.gbSourceTable.ResumeLayout(false);
@@ -1197,8 +1182,6 @@ namespace FBXpert
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cbSorting;
         private System.Windows.Forms.Label lblTableName;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtIndexName;
         private SeControlsLib.HotSpot hsMakeSQL;
         private System.Windows.Forms.SaveFileDialog saveSQLFile;
         private System.Windows.Forms.OpenFileDialog ofdSQL;
@@ -1206,5 +1189,6 @@ namespace FBXpert
         private SeControlsLib.HotSpot hsCreate;
         private SeControlsLib.HotSpot hsLoadSQL;
         private SeControlsLib.HotSpot hsSaveSQL;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

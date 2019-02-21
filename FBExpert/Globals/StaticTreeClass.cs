@@ -10,7 +10,9 @@ using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -2938,17 +2940,18 @@ namespace FBExpert
             return allcontent;
         }
       */
-        public static List<string> GetAllTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TableClass> alltables, eCreateMode cmode, bool commit)
+        public static List<string> GetAllTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TableClass> alltables, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
                    
             string infoStr =  $@"/* ********* Tables structures for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                
             
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
 
-            if((alltables==null)||(alltables.Count <= 0)) return SQL;
+            if((alltables==null)||(alltables.Count <= 0)) return SQLAll;
             /*
             AddIndexObjects_To_ListOfTableObjects(DBReg, alltables, eTableType.withoutsystem);            
             AddForeignKeyObjects_To_ListOfTableObjects(DBReg, alltables, eTableType.withoutsystem);
@@ -2965,14 +2968,15 @@ namespace FBExpert
                 if (dataObject.GetType() != typeof(TableClass)) continue;
                 
                 var tableObject = dataObject as TableClass;
+                SQLSep.Clear();
                 if (tableObject.State == CheckState.Checked)
                 {
                     infoStr = $@"/* ********* Table {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
 
                     
                     string sql = FBXpert.CreateDLLClass.CreateTabelDLL(tableObject, cmode);
@@ -2983,46 +2987,56 @@ namespace FBExpert
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql + ";"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql + ";"));
                     }
                                                             
                     if (commit)
                     {
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                        
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                        
+                    }
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }                
             }
-            SQL.Add(Environment.NewLine);
-            return SQL;
+            SQLAll.Add(Environment.NewLine);
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
         
 
-        public static List<string> GetAllPKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,PrimaryKeyClass> primarykeys, eCreateMode cmode, bool commit)
+        public static List<string> GetAllPKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,PrimaryKeyClass> primarykeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {            
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
             
             string infoStr = $@"/* ********* Primary keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((primarykeys == null)||(primarykeys.Count <= 0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if((primarykeys == null)||(primarykeys.Count <= 0)) return SQLSep;
 
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (var dataObject in primarykeys.Values)
                 {
                     if (dataObject.GetType() != typeof(PrimaryKeyClass)) continue;
-                    
+                    SQLSep.Clear();
                     var constraintObject = dataObject as PrimaryKeyClass;
                     
                     infoStr = $@"/* ********* Primary key {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterTabelPrimaryKeyConstraintDLL(constraintObject, eCreateMode.drop);
                     if (sql.EndsWith(Environment.NewLine))
@@ -3031,8 +3045,8 @@ namespace FBExpert
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
                     
 
@@ -3043,31 +3057,37 @@ namespace FBExpert
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (commit)
                     {
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                        
-                    }                                        
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                        
+                    }
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
                 }
-                SQL.Add(Environment.NewLine);
+                SQLSep.Add(Environment.NewLine);
             }
 
             if ((cmode == eCreateMode.create) || (cmode == eCreateMode.recreate))
             {
                 foreach (var dataObject in primarykeys.Values)
                 {
-                    if (dataObject.GetType() != typeof(PrimaryKeyClass)) continue;                    
+                    if (dataObject.GetType() != typeof(PrimaryKeyClass)) continue;   
+                    SQLSep.Clear();
                     var constraintObject = dataObject;
                     
                     infoStr = $@"/* ********* Primary key {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterTabelPrimaryKeyConstraintDLL(constraintObject, eCreateMode.create);
                     if (sql.EndsWith(Environment.NewLine))
@@ -3076,46 +3096,56 @@ namespace FBExpert
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (commit)
                     {
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
-                    }                                        
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
+                    }  
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
-            
-            return SQL;
+
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllFKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,ForeignKeyClass> allForeignKeys, eCreateMode cmode, bool commit)
+        public static List<string> GetAllFKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,ForeignKeyClass> allForeignKeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {            
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
             
             string infoStr = $@"/* ********* Foreign keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((allForeignKeys == null)||(allForeignKeys.Count<=0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if((allForeignKeys == null)||(allForeignKeys.Count<=0)) return SQLSep;
 
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (var dataObject in allForeignKeys.Values)
                 {
                     if (dataObject.GetType() != typeof(ForeignKeyClass)) continue;
-                    
+                    SQLSep.Clear();
                     var constraintObject = dataObject as ForeignKeyClass;                    
                     {
                         infoStr = $@"/* ********* Foreign key {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                        SQL.Add(Environment.NewLine);                
-                        SQL.Add(GetInfoHeader(infoStr.Length));
-                        SQL.Add(infoStr);
-                        SQL.Add(GetInfoHeader(infoStr.Length));            
-                        SQL.Add(Environment.NewLine);
+                        SQLSep.Add(Environment.NewLine);                
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));
+                        SQLSep.Add(infoStr);
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                        SQLSep.Add(Environment.NewLine);
 
 
                         string sql = FBXpert.CreateDLLClass.CreateAlterTabelForeignKeyConstraintDLL(constraintObject, eCreateMode.drop);
@@ -3125,8 +3155,8 @@ namespace FBExpert
                         }
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
 
@@ -3137,26 +3167,34 @@ namespace FBExpert
 
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
-                        if (!commit) continue;                        
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                                                   
+                        if (commit) 
+                        {
+                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");         
+                        }
+
+                        SQLAll.AddRange(SQLSep);
+                        if(fileWrite == eSQLFileWriteMode.seperated)
+                        {
+                            File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        }
                     }                       
                 }
-                SQL.Add(Environment.NewLine);
+                SQLSep.Add(Environment.NewLine);
             }
 
-            if ((cmode != eCreateMode.create) && (cmode != eCreateMode.recreate))  return SQL;
+            if ((cmode != eCreateMode.create) && (cmode != eCreateMode.recreate))  return SQLSep;
             
             foreach (var dataObject in allForeignKeys.Values)
             {
                 if (dataObject.GetType() != typeof(ForeignKeyClass)) continue;
-                
+                SQLSep.Clear();
                 var constraintObject = dataObject as ForeignKeyClass;                      
                 {
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);
                     //sqllist.Add(Environment.NewLine);
                     //sqllist.Add("/* ********* " + constraintObject.Name + " ********** */");
                     //sqllist.Add(Environment.NewLine);
@@ -3168,42 +3206,56 @@ namespace FBExpert
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
-                    if (!commit) continue;                    
-                    SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                    if (commit)
+                    {
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}"); 
+                    }
+                    
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
                 }                   
             }
-            SQL.Add(Environment.NewLine);   
-            return SQL;
+            SQLAll.Add(Environment.NewLine);   
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllDomainAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,DomainClass> alldomains, eCreateMode cmode, bool commit)
+        public static List<string> GetAllDomainAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,DomainClass> alldomains, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
            
             string infoStr = $@"/* ********* Domains structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((alldomains==null)||(alldomains.Count <= 0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if((alldomains==null)||(alldomains.Count <= 0)) return SQLAll;
 
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (DomainClass dataObject in alldomains.Values)
                 {
+                    SQLSep.Clear();
                     if (dataObject.GetType() == typeof(DomainClass))
                     {
                         var constraintObject = dataObject as DomainClass;
                         infoStr = $@"/* ********* Domain {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                        SQL.Add(Environment.NewLine);                
-                        SQL.Add(GetInfoHeader(infoStr.Length));
-                        SQL.Add(infoStr);
-                        SQL.Add(GetInfoHeader(infoStr.Length));            
-                        SQL.Add(Environment.NewLine);
+                        SQLSep.Add(Environment.NewLine);                
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));
+                        SQLSep.Add(infoStr);
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                        SQLSep.Add(Environment.NewLine);
 
 
                         string sql = FBXpert.CreateDLLClass.CreateAlterDomainDLL(constraintObject, eCreateMode.drop);
@@ -3213,8 +3265,8 @@ namespace FBExpert
                         }
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
 
@@ -3225,48 +3277,57 @@ namespace FBExpert
 
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
                         if (commit)
                         {
-                            SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
                         }
-                    }                    
+                    }   
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
-            
-            return SQL;
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllGeneratorAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,GeneratorClass> allgenerators, eCreateMode cmode, bool commit)
+        public static List<string> GetAllGeneratorAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,GeneratorClass> allgenerators, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
            
             string infoStr = $@"/* ********* Generators structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
 
-            if((allgenerators==null)||(allgenerators.Count <= 0)) return SQL;
+            if((allgenerators==null)||(allgenerators.Count <= 0)) return SQLSep;
 
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (GeneratorClass dataObject in allgenerators.Values)
                 {
                     if (dataObject.GetType() != typeof(GeneratorClass)) continue;
-                    
+                    SQLSep.Clear();
                     var constraintObject = dataObject as GeneratorClass;
                     
                     infoStr = $@"/* ********* Generator {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterGeneratorDLL(constraintObject, eCreateMode.drop);
                     if (sql.EndsWith(Environment.NewLine))
@@ -3275,8 +3336,8 @@ namespace FBExpert
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (sql.EndsWith(Environment.NewLine))
@@ -3286,16 +3347,21 @@ namespace FBExpert
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (commit)
                     {
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
-                    }                                            
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                    }   
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
+                    SQLAll.AddRange(SQLSep); 
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
 
             if ((cmode == eCreateMode.create) || (cmode == eCreateMode.recreate))
@@ -3303,15 +3369,15 @@ namespace FBExpert
                 foreach (GeneratorClass dataObject in allgenerators.Values)
                 {
                     if (dataObject.GetType() != typeof(GeneratorClass)) continue;
-                    
+                    SQLSep.Clear();
                     var constraintObject = dataObject as GeneratorClass;
                     
                     infoStr = $@"/* ********* Generator {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterGeneratorDLL(constraintObject, eCreateMode.create);
                     if (sql.EndsWith(Environment.NewLine))
@@ -3320,46 +3386,55 @@ namespace FBExpert
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (commit)
                     {
-                        SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                        SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
                     }                        
-                    
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
+                    SQLAll.AddRange(SQLSep); 
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
-            
-            return SQL;
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllIndecesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,IndexClass> allindeces, eCreateMode cmode, bool commit)
+        public static List<string> GetAllIndecesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,IndexClass> allindeces, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
-            var SQL = new List<string>();            
+            var SQLSep = new List<string>();            
+            var SQLAll = new List<string>();            
             string infoStr = $@"/* ********* Indecies structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((allindeces==null)||(allindeces.Count <= 0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if((allindeces==null)||(allindeces.Count <= 0)) return SQLAll;
 
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (IndexClass dataObject in allindeces.Values)
                 {
+                    SQLSep.Clear();
                     if (dataObject.GetType() == typeof(DomainClass))
                     {
                         IndexClass indexObject = dataObject as IndexClass;
                         
                         infoStr = $@"/* ********* Index {dataObject.Name} structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                        SQL.Add(Environment.NewLine);                
-                        SQL.Add(GetInfoHeader(infoStr.Length));
-                        SQL.Add(infoStr);
-                        SQL.Add(GetInfoHeader(infoStr.Length));            
-                        SQL.Add(Environment.NewLine);
+                        SQLSep.Add(Environment.NewLine);                
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));
+                        SQLSep.Add(infoStr);
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                        SQLSep.Add(Environment.NewLine);
 
                         string sql = FBXpert.CreateDLLClass.CreateAlterIndecesDLL(indexObject, eCreateMode.drop);
                         if (sql.EndsWith(Environment.NewLine))
@@ -3368,8 +3443,8 @@ namespace FBExpert
                         }
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
 
@@ -3380,33 +3455,39 @@ namespace FBExpert
 
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
                         if (commit)
                         {
-                            SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
-                        }                        
+                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                        }      
+                        if(fileWrite == eSQLFileWriteMode.seperated)
+                        {
+                            File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        }
+                        SQLAll.AddRange(SQLSep); 
                     }
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
 
             if ((cmode == eCreateMode.create) || (cmode == eCreateMode.recreate))
             {
                 foreach (IndexClass dataObject in allindeces.Values)
                 {
+                    SQLSep.Clear();
                     if (dataObject.GetType() == typeof(IndexClass))
                     {
                         IndexClass indexObject = dataObject as IndexClass;
                         
                         infoStr = $@"/* ********* Index {dataObject.Name} structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                        SQL.Add(Environment.NewLine);                
-                        SQL.Add(GetInfoHeader(infoStr.Length));
-                        SQL.Add(infoStr);
-                        SQL.Add(GetInfoHeader(infoStr.Length));            
-                        SQL.Add(Environment.NewLine);
+                        SQLSep.Add(Environment.NewLine);                
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));
+                        SQLSep.Add(infoStr);
+                        SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                        SQLSep.Add(Environment.NewLine);
 
                         string sql = FBXpert.CreateDLLClass.CreateAlterIndecesDLL(indexObject, eCreateMode.create);
                         if (sql.EndsWith(Environment.NewLine))
@@ -3415,35 +3496,44 @@ namespace FBExpert
                         }
                         if (!string.IsNullOrEmpty(sql))
                         {
-                            if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                            else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                            if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                            else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                         }
 
                         if (commit)
                         {
-                            SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
                         }                        
                     }
+                    if(fileWrite == eSQLFileWriteMode.seperated)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    }
+                    SQLAll.AddRange(SQLSep); 
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
-            
-            return SQL;
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllTriggersAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TriggerClass> alltriggers, eCreateMode cmode, bool commit)
+        public static List<string> GetAllTriggersAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TriggerClass> alltriggers, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             //Systemflag = 0 für TableTriggers
             //Systemflag = 4 für Systemtable Triggers
             
-            var SQL = new List<string>();
+            var SQLSep = new List<string>();
+            var SQLAll = new List<string>();
             
             string infoStr = $@"/* ********* Triggers structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((alltriggers == null)||(alltriggers.Count <= 0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if((alltriggers == null)||(alltriggers.Count <= 0)) return SQLSep;
             if ((cmode == eCreateMode.drop) || (cmode == eCreateMode.recreate))
             {
                 foreach (TriggerClass dataObject in alltriggers.Values)
@@ -3451,13 +3541,13 @@ namespace FBExpert
                     if (dataObject.GetType() != typeof(TriggerClass)) continue;
                     
                     var constraintObject = dataObject as TriggerClass;
-                    
+                    SQLSep.Clear();
                     infoStr = $@"/* ********* Trigger {dataObject.Name} structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQL.Add(Environment.NewLine);                
-                    SQL.Add(GetInfoHeader(infoStr.Length));
-                    SQL.Add(infoStr);
-                    SQL.Add(GetInfoHeader(infoStr.Length));            
-                    SQL.Add(Environment.NewLine);
+                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
+                    SQLSep.Add(infoStr);
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(Environment.NewLine);
                    
                     string sql = FBXpert.CreateDLLClass.CreateAlterTriggerDLL(constraintObject, eCreateMode.drop);
                     if (sql.EndsWith(Environment.NewLine))
@@ -3467,8 +3557,8 @@ namespace FBExpert
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
                     if (sql.EndsWith(Environment.NewLine))
@@ -3478,30 +3568,34 @@ namespace FBExpert
 
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                        else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                        if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                        else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                     }
 
-                    if (!commit) continue;                    
-                    SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                                                                              
+                    if (commit) SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");  
+                    SQLAll.AddRange(SQLSep);
+                    if(fileWrite == eSQLFileWriteMode.all)
+                    {
+                        File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                    }
                 }
-                SQL.Add(Environment.NewLine);
+                SQLAll.Add(Environment.NewLine);
             }
 
-            if ((cmode != eCreateMode.create) && (cmode != eCreateMode.recreate)) return SQL;
+            if ((cmode != eCreateMode.create) && (cmode != eCreateMode.recreate)) return SQLSep;
             
             foreach (TriggerClass dataObject in alltriggers.Values)
             {
                 if (dataObject.GetType() != typeof(TriggerClass)) continue;
                 
                 TriggerClass indexObject = dataObject as TriggerClass;
-                
+                SQLSep.Clear();
                 infoStr = $@"/* ********* Trigger {dataObject.Name} structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                SQL.Add(Environment.NewLine);                
-                SQL.Add(GetInfoHeader(infoStr.Length));
-                SQL.Add(infoStr);
-                SQL.Add(GetInfoHeader(infoStr.Length));            
-                SQL.Add(Environment.NewLine);
+                SQLSep.Add(Environment.NewLine);                
+                SQLSep.Add(GetInfoHeader(infoStr.Length));
+                SQLSep.Add(infoStr);
+                SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                SQLSep.Add(Environment.NewLine);
 
                 string sql = FBXpert.CreateDLLClass.CreateAlterTriggerDLL(indexObject, eCreateMode.create);
                 if (sql.EndsWith(Environment.NewLine))
@@ -3510,58 +3604,82 @@ namespace FBExpert
                 }
                 if (!string.IsNullOrEmpty(sql))
                 {
-                    if (sql.EndsWith(";")) SQL.Add(SQLStatementsClass.Instance().FormatSQL(sql));
-                    else SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
+                    if (sql.EndsWith(";")) SQLSep.Add(SQLStatementsClass.Instance().FormatSQL(sql));
+                    else SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{sql};"));
                 }
 
-                if (!commit) continue;
-                SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                                                                                     
+                if (commit) SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                                                                                     
+                SQLAll.AddRange(SQLSep);
+                
+                if(fileWrite == eSQLFileWriteMode.seperated)
+                {
+                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                }
             }
-            SQL.Add(Environment.NewLine);  
-            return SQL;
+            SQLAll.Add(Environment.NewLine);  
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
-
-        public static List<string> GetAllViewsAlterInsertSQL(DBRegistrationClass DBRegx, List<ViewClass> alltables, bool commit)
+        
+        public static List<string> GetAllViewsAlterInsertSQL(DBRegistrationClass DBRegx, List<ViewClass> alltables, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
-            var SQL = new List<string>();                    
+            var SQLAll = new List<string>();                    
+            var SQLSep = new List<string>();   
                     
             string infoStr = $@"/* ********* Views structures for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
                             
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if((alltables == null)||(alltables.Count <= 0)) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            
+            if((alltables == null)||(alltables.Count <= 0)) return SQLAll;
             
             foreach (ViewClass dataObject in alltables)
             {
                 if (dataObject.GetType() != typeof(ViewClass)) continue;
-                
+                if(fileWrite == eSQLFileWriteMode.seperated) 
+                {    
+                    SQLSep.Clear();   
+                }
                 var vc = dataObject as ViewClass;
-
+              
                 if (vc.State != CheckState.Checked) continue;
                 
                 infoStr = $@"/* ********* View {vc.Name} structure for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                SQL.Add(Environment.NewLine);                
-                SQL.Add(GetInfoHeader(infoStr.Length));
-                SQL.Add(infoStr);
-                SQL.Add(GetInfoHeader(infoStr.Length));            
-                SQL.Add(Environment.NewLine);
-               
+                SQLSep.Add(Environment.NewLine);                
+                SQLSep.Add(GetInfoHeader(infoStr.Length));
+                SQLSep.Add(infoStr);
+                SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                SQLSep.Add(Environment.NewLine);
+                               
                 if (vc.CREATEINSERT_SQL.EndsWith(Environment.NewLine))
                 {
                     vc.CREATEINSERT_SQL = vc.CREATEINSERT_SQL.Remove(vc.CREATEINSERT_SQL.Length - 2);
                 }
-                SQL.Add(SQLStatementsClass.Instance().FormatSQL($@"{vc.CREATEINSERT_SQL};"));
+                
+                SQLSep.Add(SQLStatementsClass.Instance().FormatSQL($@"{vc.CREATEINSERT_SQL};"));
+               
 
-                if(!commit) continue;
-                SQL.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                                                                                     
+                if(commit) SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");    
+                if(fileWrite == eSQLFileWriteMode.seperated)
+                {
+                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                }
+                SQLAll.AddRange(SQLSep);                
+            }    
+
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
-            SQL.Add(Environment.NewLine);
-            return SQL;
+            return SQLAll;
         }
 
-        public static List<string> GetAllFunctionAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,FunctionClass> allfunctions, eCreateMode createMode, bool commit, bool complete)
+        public static List<string> GetAllFunctionAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,FunctionClass> allfunctions, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {     
             /*            
             DECLARE EXTERNAL FUNCTION SUBSTR
@@ -3572,46 +3690,69 @@ namespace FBExpert
                 ENTRY_POINT 'IB_UDF_substr' MODULE_NAME 'ib_udf';
             */
             
-            var SQL = new List<string>();                    
+            var SQLSep = new List<string>();                    
+            var SQLAll = new List<string>();  
                     
             string infoStr = complete 
                 ? $@"/* ********* Functions structures for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */" 
                 : $@"/* ********* Functionss definitions for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
             
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(Environment.NewLine);
-            if (allfunctions.Count <= 0) return SQL;                                    
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(Environment.NewLine);
+
+            if (allfunctions.Count <= 0) return SQLAll;                                    
             
             foreach (var dataObject in allfunctions.Values)
             {
-                if (dataObject.GetType() != typeof(FunctionClass)) continue;                
-                SQL.AddRange(MakeSQLAlterFunction(dataObject,dataObject,complete));
+                if (dataObject.GetType() != typeof(FunctionClass)) continue;   
+                SQLSep.Clear();
+                SQLSep.AddRange(MakeSQLAlterFunction(dataObject,dataObject,complete));
+                SQLAll.AddRange(SQLSep);
+                if(fileWrite == eSQLFileWriteMode.seperated)
+                {
+                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                }
             }
-            SQL.Add(Environment.NewLine);
-            return SQL;
+            SQLAll.Add(Environment.NewLine);
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
-        public static List<string> GetAllProcedureAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,ProcedureClass> allprocedures, eCreateMode createMode, bool commit, bool complete)
+        public static List<string> GetAllProcedureAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,ProcedureClass> allprocedures, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {           
-            var SQL = new List<string>();                                                    
+            var SQLSep = new List<string>();                                                    
+            var SQLAll = new List<string>();            
             string infoStr = complete 
                 ? $@"/* ********* Procedures structure for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */" 
                 : $@"/* ********* Procedures definition for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
             
-            SQL.Add(GetInfoHeader(infoStr.Length));
-            SQL.Add(infoStr);
-            SQL.Add(GetInfoHeader(infoStr.Length));            
-            SQL.Add(Environment.NewLine);
-            if (allprocedures.Count <= 0) return SQL;
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
+            SQLAll.Add(infoStr);
+            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(Environment.NewLine);
+            if (allprocedures.Count <= 0) return SQLAll;
             foreach (var dataObject in allprocedures.Values)
             {
-                if (dataObject.GetType() != typeof(ProcedureClass)) continue;                
-                SQL.AddRange(MakeSQLAlterProcedure(dataObject,dataObject,complete));
+                if (dataObject.GetType() != typeof(ProcedureClass)) continue;  
+                SQLSep.Clear();
+                SQLSep.AddRange(MakeSQLAlterProcedure(dataObject,dataObject,complete));
+                SQLAll.AddRange(SQLSep);
+                if(fileWrite == eSQLFileWriteMode.seperated)
+                {
+                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                }
             }
-            SQL.Add(Environment.NewLine);
-            return SQL;
+            SQLAll.Add(Environment.NewLine);
+            if(fileWrite == eSQLFileWriteMode.all)
+            {
+                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+            }
+            return SQLAll;
         }
 
 

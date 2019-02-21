@@ -120,7 +120,7 @@ namespace FBExpert
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);
             ac.AddAutocompleteForSystemtables(systemtables);
-            
+            ac.Activate();
         }
 
 
@@ -710,7 +710,7 @@ namespace FBExpert
 
         private void AddIndex()
         {
-            var tff = new IndexForm(FbXpertMainForm.Instance(), _tableObject, _dbReg, _actTables,StateClasses.EditStateClass.eBearbeiten.eInsert);
+            var tff = new IndexForm(FbXpertMainForm.Instance(), _tableObject, _dbReg, _actTables);
             tff.RegisterNotify(InfoRaised);
             
             tff.Show();

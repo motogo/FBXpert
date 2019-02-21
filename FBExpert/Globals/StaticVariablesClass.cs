@@ -430,7 +430,7 @@ namespace FBXpert.Globals
         public const string DependenciesFromProceduresKeyStr = "DEPENDENCYFROMPROCEDURES";
         public const string DependenciesFromProceduresKeyGroupStr = "DEPENDENCYFROMPROCEDURES_GROUP";
 
-
+        public static readonly string ExportPath = Application.StartupPath + "\\exports";
         public static readonly string ScriptPath = Application.StartupPath + "\\scripts";
         public static readonly string ReportPath = Application.StartupPath + "\\reports";
         public static readonly string InitialTerminator = ";";
@@ -440,8 +440,7 @@ namespace FBXpert.Globals
         public static readonly string CommentEnd = "*/";
         public static readonly string Collation = "NONE";
         public static readonly string NullStr = "null";
-        //public static readonly string ASCStr = "ASCENDING";
-        //public static readonly string DECStr = "DESCENDING";
+        
         public static readonly string UNIQUEStr = "UNIQUE";
         public static readonly string CREATEStr = "CREATE";
 

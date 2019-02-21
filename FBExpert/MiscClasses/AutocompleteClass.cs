@@ -440,6 +440,11 @@ namespace FBXpert.MiscClasses
             _popupMenu.Items.Width = 400;
         }
 
+        public void Activate()
+        {
+              _popupMenu.Items.SetAutocompleteItems(words);
+        }
+
         public void AddAutocompleteForSQL()
         { 
              words.AddRange(SqlCommands());
