@@ -9,6 +9,7 @@ namespace FBXpert.DataClasses
        // public TableClass Table;
        // public string FieldName;
         public string DestTableName;
+        public bool IsActive;
         public Dictionary<string,FieldClass> SourceFields = new Dictionary<string, FieldClass>();
         public Dictionary<string,FieldClass> DestFields = new Dictionary<string, FieldClass>();
     }

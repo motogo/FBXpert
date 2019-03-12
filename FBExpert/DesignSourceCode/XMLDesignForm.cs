@@ -93,9 +93,9 @@ namespace FBXpert.SonstForms
         
         public void RefreshXml()
         {
-            _ddc.Tables = StaticTreeClass.GetAllTableObjectsComplete(_dbReg);
-            _ddc.Views  = StaticTreeClass.GetViewObjects(_dbReg);
-            StaticTreeClass.GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
+            _ddc.Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(_dbReg);
+            _ddc.Views  = StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            StaticTreeClass.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
             _ddc.Database = _dbReg;
             var fs = new FileStream(Application.StartupPath + "\\temp\\tmp.xml", FileMode.Create);
             var serializer = new ConfigurationContainer().Create();

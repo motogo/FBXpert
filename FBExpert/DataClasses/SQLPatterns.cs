@@ -61,10 +61,12 @@ namespace FBXpert.SQLStatements
             
         public static string DropIndexPattern = $@"DROP INDEX {IndexKey};";            
         
-        public static string ActivateIndexPattern = $@"ALTER INDEX {IndexKey} ACTIVE;";            
-        
-        public static string DeactivateIndexPattern = $@"ALTER INDEX {IndexKey} INACTIVE;";       
-        
+        public static string ActivateIndexPattern = $@"ALTER INDEX {IndexKey} ACTIVE;";
+        public static string ActivateFKPattern = ActivateIndexPattern;
+
+        public static string DeactivateIndexPattern = $@"ALTER INDEX {IndexKey} INACTIVE;";
+        public static string DeactivateFKPattern = DeactivateIndexPattern;
+
         public static string DropConstraintPattern = $@"DROP CONSTRAINT {ConstraintKey};";
 
         public static string DropColumnPattern = $@"ALTER TABLE {TableKey} DROP {ColumnKey};";

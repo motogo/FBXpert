@@ -18,16 +18,29 @@ using System.Windows.Forms;
 
 namespace FBExpert
 {
-    public static class StaticTreeClass
+    public class StaticTreeClass : object
     {
         enum eTableTypes { SystemTables, UserdefinedTables, AllTables };
-
-        public static Color Active   = Color.Blue;        
-        public static Color Inactive = Color.Red;
+        public  string TypeName = "Stat0icTreeClass";
+        public  Color Active   = Color.Blue;        
+        public  Color Inactive = Color.Red;
+        public  Color ActiveHasConstraint = Color.DarkCyan;
+        public  Color InactiveHasConstraint = Color.OrangeRed;
 
         static ContextMenuStrip cmnull = new ContextMenuStrip();
+        private static StaticTreeClass _instance;       
+        private static readonly object _lock_this = new object();
+        public static StaticTreeClass Instance()
+        {
+            if (_instance != null) return (_instance);
+            lock (_lock_this)
+            {
+               _instance = new StaticTreeClass();                        
+            }
+            return (_instance);
+        }
 
-        public static IEnumerable<TreeNode> GetNodeBranch(TreeNode node)
+        public IEnumerable<TreeNode> GetNodeBranch(TreeNode node)
         {
             yield return node;
             foreach (TreeNode child in node.Nodes)
@@ -35,7 +48,7 @@ namespace FBExpert
                     yield return childChild;
         }
         
-        public static TreeNode FindNode(TreeNode nd, string name)
+        public TreeNode FindNode(TreeNode nd, string name)
         {            
             foreach(TreeNode n in nd.Nodes)
             {               
@@ -47,7 +60,7 @@ namespace FBExpert
             return null;
         }
 
-        public static TreeNode FindPrevDBNode(TreeNode nd)
+        public TreeNode FindPrevDBNode(TreeNode nd)
         {
             TreeNode n = nd;
             while(n != null)
@@ -66,7 +79,7 @@ namespace FBExpert
             return null;
         }
 
-        public static TreeNode FindPrevTableNode(TreeNode nd)
+        public TreeNode FindPrevTableNode(TreeNode nd)
         {
             TreeNode n = nd;
             while (n != null)
@@ -85,7 +98,7 @@ namespace FBExpert
             return null;
         }
 
-        public static TreeNode FindPrevTableGroupNode(TreeNode nd)
+        public TreeNode FindPrevTableGroupNode(TreeNode nd)
         {
             TreeNode n = nd;
             while (n != null)
@@ -97,7 +110,7 @@ namespace FBExpert
             return null;
         }
 
-        public static TreeNode FindNextTableNode(TreeNode nd)
+        public TreeNode FindNextTableNode(TreeNode nd)
         {
             TreeNode n = nd;
             while (n != null)
@@ -119,7 +132,7 @@ namespace FBExpert
 
 
         //Durchsucht alle Knoten von nd und gibt den Erstgefundenen mit dem Namen 'name' zurück.
-        public static TreeNode FindFirstNodeInAllNodes(TreeNode nd, string name)
+        public TreeNode FindFirstNodeInAllNodes(TreeNode nd, string name)
         {
             if(nd == null) return null;
             var allNodes = nd.Nodes.Cast<TreeNode>().SelectMany(GetNodeBranch);
@@ -134,7 +147,7 @@ namespace FBExpert
         }
 
         //Entfernt den entsprechenden Gruppenknoten wenn vorhanden und baut ihn neu auf, aus den Informationen der bereits vorhandenen Tablenodes
-        private static void RemoveNodes(TreeNode node)
+        private void RemoveNodes(TreeNode node)
         {
             for (int i = node.Nodes.Count - 1; i >= 0; i--)
             {
@@ -142,14 +155,14 @@ namespace FBExpert
             }
         }
        
-        public static object Enviroment { get; private set; }
+        public object Enviroment { get; private set; }
                 
-        private static int CompareString(TreeNode x, TreeNode y)
+        private int CompareString(TreeNode x, TreeNode y)
         {
             return x.Text.CompareTo(y.Text);            
         }
 
-        public static void MakeTODependenciesNodesForAll(Dictionary<string,DependencyClass> DependenciesTO, List<TreeNode> dependencyTO_list_Node)
+        public void MakeTODependenciesNodesForAll(Dictionary<string,DependencyClass> DependenciesTO, List<TreeNode> dependencyTO_list_Node)
         {
             if (DependenciesTO != null)
             {
@@ -210,10 +223,10 @@ namespace FBExpert
     #region REFRESH_NODES_FROM_TABLES
         
 
-        public static void RefreshPrimaryKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshPrimaryKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             bool newnode = false;
             if (group_node != null)
@@ -241,11 +254,11 @@ namespace FBExpert
             if(newnode) nd.Nodes.Add(akt_group_node);
         }
   
-        public static void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
 
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             bool newnode = false;
             if (group_node != null)
@@ -257,7 +270,8 @@ namespace FBExpert
             else
             {
                 newnode = true;
-                akt_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr);                
+                akt_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr);     
+                
             }
 
             var fk_list = new List<TreeNode>();
@@ -266,7 +280,9 @@ namespace FBExpert
                 if (tc.ForeignKeys == null) continue;                
                 foreach (var fc in tc.ForeignKeys.Values)
                 {
-                    TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,fc.Name,fc);                        
+                    TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,fc.Name,fc);     
+                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+                    tablen.ToolTipText = $@"This index has key to {fc.SourceTableName}";
                     fk_list.Add(tablen);
                 }                   
             }
@@ -276,7 +292,7 @@ namespace FBExpert
             if(newnode)  nd.Nodes.Add(akt_group_node);
         }
         
-        public static void RefreshConstraintsFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshConstraintsFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
             /*
             constaraints
@@ -286,8 +302,8 @@ namespace FBExpert
                ------------checks
             */
 
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             TreeNode akt_group_node;
             bool newnode = false;
@@ -377,10 +393,10 @@ namespace FBExpert
             akt_group_node.Collapse();
         }
 
-        public static void RefreshTriggersFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshTriggersFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             TreeNode akt_group_node;
             bool newnode = false;
@@ -415,11 +431,11 @@ namespace FBExpert
             if(newnode) nd.Nodes.Add(akt_group_node);                   
         }
 
-        public static void RefreshDependenciesFromTableNodes(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshDependenciesFromTableNodes(DBRegistrationClass DBReg, TreeNode nd)
         {           
                 
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             
             var dependencies_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesKeyGroupStr);
             var dependencies_Tables_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesTablesKeyGroupStr);
@@ -519,13 +535,14 @@ namespace FBExpert
 
         }
 
-        private static IndexClass GetIndexObject(FbDataReader dread)
+        private IndexClass GetIndexObject(FbDataReader dread)
         {
              var tfc = DataClassFactory.GetDataClass(StaticVariablesClass.IndicesKeyStr) as IndexClass;
             
              tfc.RelationName    = dread.GetValue(0).ToString().Trim();
              tfc.Name            = dread.GetValue(1).ToString().Trim();            
-             string fld          = dread.GetValue(2).ToString().Trim();             
+             string fld          = dread.GetValue(2).ToString().Trim();    
+             string constraintName = dread.GetValue(6).ToString().Trim();    
              int un              = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
              int inactive        = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 1);
              int index_type      = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), -1);
@@ -534,12 +551,14 @@ namespace FBExpert
              else tfc.SortDirection = eSort.NONE;
              tfc.Unique          = un == 1;
              tfc.IsActive        = inactive == 0;
+             tfc.ConstraintName = constraintName;
+             tfc.HasPrimaryConstraint = constraintName.ToUpper().Contains("PRIMARY KEY");
              if(fld != null)  tfc.RelationFields.Add(fld,new FieldClass(fld));
              return tfc;
         }
 
 
-        public static Dictionary<string,IndexClass> GetIndecesObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,IndexClass> GetIndecesObjects(DBRegistrationClass DBReg)
         {
             var indeces = new Dictionary<string,IndexClass>();
 
@@ -551,7 +570,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllIndeces->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllIndeces->{DBReg}", ex));                 
                 return indeces;
             }
 
@@ -574,7 +593,12 @@ namespace FBExpert
                             
                             newKey = dread.GetValue(1).ToString().Trim();                           
                             string FieldName = dread.GetValue(2).ToString().Trim();                           
-                                                                              
+                           // string ConstraintType = dread.GetValue(6).ToString().Trim();      
+                           // if(ConstraintType.ToUpper().Contains("PRIMARY KEY")) continue;                                                 
+                           // if(ConstraintType.Length > 0) 
+                           // {
+                           //     continue;    
+                           // }
                             if(oldKey != newKey)
                             { 
                                 //Neuer Index oder erster Index (first loop)
@@ -607,19 +631,19 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("RefreshIndeces->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndeces->dread==null"));
                 }                
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("RefreshIndeces->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndeces->Connection not open"));
             }
             return indeces;
         }
 
         
         //Holt alle Indecies der Datenbank und fügt diese in einen Tree-Konten an        
-        public static Dictionary<string,IndexClass> AddIndexObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
+        public Dictionary<string,IndexClass> AddIndexObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
         {                           
             string fields_cmd = IndexSQLStatementsClass.Instance().GetAllIndicies(DBReg.Version,eTableType.withoutsystem);                        
             TableClass tableObject = null;
@@ -647,6 +671,7 @@ namespace FBExpert
                         newTableKey = dread.GetValue(0).ToString().Trim();
                         newIndexKey = dread.GetValue(1).ToString().Trim();   
                         newFieldKey = dread.GetValue(2).ToString().Trim();  
+                          
                         if(newIndexKey.ToUpper().Contains("TESTT"))
                         {
                             Console.WriteLine();
@@ -671,6 +696,7 @@ namespace FBExpert
                         if(oldIndexKey != newIndexKey)
                         { 
                            tfc = GetIndexObject(dread);
+
                            oldIndexKey = newIndexKey;
                            oldFieldKey = newFieldKey;
                         }
@@ -691,7 +717,7 @@ namespace FBExpert
                         }
                         catch (Exception ex)
                         {
-                            NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddIndexObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{eTableType.withoutsystem.ToString()}) -> Indices.Add", ex));                                                                                         
+                            NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()}) -> Indices.Add", ex));                                                                                         
                         }
                     }
                 }
@@ -699,7 +725,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddIndexObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                                                                                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                                                                                         
             }
             finally
             {
@@ -708,7 +734,7 @@ namespace FBExpert
             return tableObject.Indices;
         }
         
-        public static void AddIndexObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
+        public void AddIndexObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
         {
             string fields_cmd = string.Empty;
            
@@ -767,7 +793,7 @@ namespace FBExpert
                         }
                         catch (Exception ex)
                         {
-                            NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddIndexObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{eTableType.system.ToString()}) -> Indices.Add", ex));                                                                                         
+                            NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system.ToString()}) -> Indices.Add", ex));                                                                                         
                         }
                     }
                 }
@@ -775,7 +801,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddIndexObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{eTableType.system.ToString()})", ex));                                                                                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system.ToString()})", ex));                                                                                         
             }
             finally
             {
@@ -784,7 +810,7 @@ namespace FBExpert
         }
         
         //Holt alle Indeces für die dem Knoten nd übergeordneten Table
-        public static void RefreshTableIndicesFromOneTable(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshTableIndicesFromOneTable(DBRegistrationClass DBReg, TreeNode nd)
         {
             var tnn = FindPrevTableNode(nd);
             if(tnn == null) return;
@@ -799,7 +825,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshTableIndicesFromOneTable({DBReg.Alias},node:{nd.Name})", ex));                                                                                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshTableIndicesFromOneTable({DBReg},node:{nd.Name})", ex));                                                                                         
                 return;
             }
 
@@ -834,14 +860,14 @@ namespace FBExpert
                             tn.Nodes.Add(tablen);
                             n++;
                         }
-                        tn.Text = "Indices (" + n.ToString() + ")";
+                        tn.Text = $@"Indices ({n})";
                         
                     }
                     dread.Close();
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->StaticTreeClass->RefreshIndices->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndices->dread==null"));
                 }
 
                 con.Close();
@@ -849,15 +875,15 @@ namespace FBExpert
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->StaticTreeClass->RefreshIndices->ConnectionName not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndices->ConnectionName not open"));
             }
         }
 
         //Liest alle Indicies únd erzeugt den TreeGroupNode Indeces und Restauriert die indeces der TableNodes
-        public static void RefreshAllIndicies(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshAllIndicies(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
            
             Dictionary<string,IndexClass> indecies = GetIndecesObjects(DBReg);
 
@@ -878,10 +904,19 @@ namespace FBExpert
             var inx_list = new List<TreeNode>();
                         
             foreach (var fc in indecies.Values)
-            {                
+            {           
+               
                 Type tp = fc.GetType();
+                
                 var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, fc.Name, fc);
-                tablen.ForeColor = fc.IsActive ? StaticTreeClass.Active : StaticTreeClass.Inactive;
+                tablen.ToolTipText = string.Empty;
+                tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+                if(fc.ConstraintName.Length > 0) 
+                {
+                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().ActiveHasConstraint : StaticTreeClass.Instance().InactiveHasConstraint;
+                    
+                    tablen.ToolTipText = $@"This index has {fc.ConstraintName} to {fc.RelationName}";
+                }
                 inx_list.Add(tablen);
                 TableClass tc = Tables.Find(X=>X.Name == fc.RelationName);
                 if(tc != null)
@@ -900,8 +935,8 @@ namespace FBExpert
         /*
         public static void RefreshAllIndiciesFromAllTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
-            var Tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             bool newnode = false;
             if (group_node != null)
@@ -927,7 +962,7 @@ namespace FBExpert
                     }
                     Type tp = fc.GetType();
                     var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, fc.Name, fc);
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Active : StaticTreeClass.Inactive;
+                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
                     inx_list.Add(tablen);
                 }
             }
@@ -943,7 +978,7 @@ namespace FBExpert
  
 
 
-        public static void RefreshDomains(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshDomains(DBRegistrationClass DBReg,  TreeNode nd)
         {            
             string cmd = DomainSQLStatementsClass.Instance().RefreshNonSystemDomains(DBReg.Version);          
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -953,7 +988,7 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshDomains->{DBReg.Alias}", ex));                                            
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->{DBReg}", ex));                                            
                 return;
             }
 
@@ -1015,18 +1050,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("RefreshDomains->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->dreade==null"));
                 }
                 con.Close();
                 nd.Expand();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("RefreshDomains->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->Connection not open"));
             }
         }
 
-        public static void RefreshForeignKeys(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshForeignKeys(DBRegistrationClass DBReg, TreeNode nd)
         {            
             var tn = FindNode(nd, StaticVariablesClass.ForeignKeyGroupStr);
             var tablenode = FindPrevTableNode(nd);
@@ -1042,7 +1077,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshForeignKeys->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshForeignKeys->{DBReg}", ex));                 
                 return;
             }
 
@@ -1070,8 +1105,15 @@ namespace FBExpert
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.ForeignKeyStr) as ForeignKeyClass;
                             tc.Name = dread.GetValue(0).ToString().Trim();
-                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,tc.Name,tc);
+
+                            int inactive = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);                            
+                            tc.IsActive = inactive == 0;
                             
+                            
+                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,tc.Name,tc);
+                            tablen.ForeColor = tc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+
+
                             tn.Nodes.Add(tablen);
                             n++;
                         }
@@ -1081,18 +1123,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->StaticTreeClass->RefreshForeignKeys->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshForeignKeys->dread==null"));
                 }
                 con.Close();
                 nd.Expand();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->StaticTreeClass->RefreshForeignKeys->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshForeignKeys->Connection not open"));
             }
         }
 
-        public static int RefreshConstraintItems(eConstraintType ctyp, DBRegistrationClass DBReg, TreeNode nd, string tableName)
+        public int RefreshConstraintItems(eConstraintType ctyp, DBRegistrationClass DBReg, TreeNode nd, string tableName)
         {
             string cmd = string.Empty;
                        
@@ -1116,7 +1158,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshConstraintItems->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshConstraintItems->{DBReg}", ex));                 
                 return 0;
             }
             int n = 0;
@@ -1192,19 +1234,19 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshConstraintItems->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshConstraintItems->dread==null"));
                 }
                 con.Close();
                 nd.Expand();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshConstraintItems->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshConstraintItems->Connection not open"));
             }
             return n;
         }
 
-        public static void RefreshConstraints(DBRegistrationClass DBReg, TreeNode nconstr)
+        public void RefreshConstraints(DBRegistrationClass DBReg, TreeNode nconstr)
         {
             var tablenode = FindPrevTableNode(nconstr);
             var tc = (TableClass)tablenode.Tag;
@@ -1225,7 +1267,7 @@ namespace FBExpert
             tn.Collapse();
         }
 
-        public static void RefreshProcedures(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshProcedures(DBRegistrationClass DBReg,  TreeNode nd)
         {            
             TreeNode tn = FindNode(nd, StaticVariablesClass.ProceduresKeyGroupStr);
             if (tn == null)
@@ -1242,7 +1284,7 @@ namespace FBExpert
             nd.Expand();           
         }
 
-        public static void RefreshProceduresItems(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshProceduresItems(DBRegistrationClass DBReg,  TreeNode nd)
         {
             NotifiesClass.Instance().AddToINFO($@"Refresh Procedures for {DBReg.Alias}",eInfoLevel.few);
             var allprocedures = GetProcedureObjects(DBReg);
@@ -1254,7 +1296,7 @@ namespace FBExpert
             nd.Text = $@"Procedures ({allprocedures.Count})";
         }
         
-        public static void RefreshProceduresItemsOld(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshProceduresItemsOld(DBRegistrationClass DBReg,  TreeNode nd)
         {
             String cmd = SQLStatementsClass.Instance().RefreshProcedureItems(DBReg.Version);     
 
@@ -1265,7 +1307,7 @@ namespace FBExpert
             }
             catch
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->{DBReg.Alias}->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->{DBReg}->Connection not open"));
                 return;
             }
 
@@ -1337,7 +1379,7 @@ namespace FBExpert
                             }
                             else
                             {
-                                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->dread2==null");
+                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread2==null"));
                             }
                         }
                         nd.Text = $@"Procedures ({n})";
@@ -1345,7 +1387,7 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread==null"));
                 }
                 
                 dread.Close();
@@ -1353,11 +1395,11 @@ namespace FBExpert
             }            
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->Connections not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->Connections not open"));
             }         
         }
 
-        public static void RefreshInternalFunctions(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshInternalFunctions(DBRegistrationClass DBReg, TreeNode nd)
         {
             TreeNode tn = FindNode(nd, StaticVariablesClass.FunctionsKeyGroupStr);
             if (tn == null)
@@ -1375,7 +1417,7 @@ namespace FBExpert
             nd.Expand();
         }
 
-        public static void RefreshInternalFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshInternalFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
         {
             NotifiesClass.Instance().AddToINFO($@"Refresh Functions for {DBReg.Alias}",eInfoLevel.few);
             var allObjects = GetInternalFunctionObjects(DBReg);
@@ -1387,7 +1429,7 @@ namespace FBExpert
             nd.Text = $@"Functions ({allObjects.Count})";            
         }
 
-         public static void RefreshUserDefinedFunctions(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshUserDefinedFunctions(DBRegistrationClass DBReg, TreeNode nd)
         {
             TreeNode tn = FindNode(nd, StaticVariablesClass.UserDefinedFunctionsKeyGroupStr);
             if (tn == null)
@@ -1404,7 +1446,7 @@ namespace FBExpert
             nd.Expand();
         }
 
-        public static void RefreshUserDefinedFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshUserDefinedFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
         {
             NotifiesClass.Instance().AddToINFO($@"Refresh user defined functions for {DBReg.Alias}",eInfoLevel.few);
             var allObjects = GetUserDefinedFunctionObjects(DBReg);
@@ -1416,7 +1458,7 @@ namespace FBExpert
             nd.Text = $@"User defined functions ({allObjects.Count})";            
         }
 
-        public static void RefreshTriggers(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshTriggers(DBRegistrationClass DBReg,  TreeNode nd)
         {
             //Systemflag = 0 für TableTriggers
             //Systemflag = 4 für Systemtable Triggers
@@ -1430,7 +1472,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshTriggers->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshTriggers->{DBReg}", ex));                 
                 return;
             }
 
@@ -1475,7 +1517,7 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshTriggers->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshTriggers->dread==null"));
                 }
                 
                 con.Close();
@@ -1483,11 +1525,11 @@ namespace FBExpert
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshTriggers->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshTriggers->Connection not open"));
             }
         }
         
-        public static void RefreshRoles(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshRoles(DBRegistrationClass DBReg,  TreeNode nd)
         {       
             NotifiesClass.Instance().AddToINFO($@"Refresh Roles for {DBReg.Alias}",eInfoLevel.few);
             string cmd = SQLStatementsClass.Instance().RefreshRoles(DBReg.Version);
@@ -1499,7 +1541,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshRoles->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshRoles->{DBReg}", ex));                 
                 return;
             }
 
@@ -1540,18 +1582,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshRoles->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshRoles->dread==null"));
                 }
                 con.Close();
                 nd.Expand();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshRoles->ConnectionName not open {DBReg.Alias}");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshRoles->ConnectionName not open {DBReg}"));
             }
         }
 
-        public static void RefreshGenerators(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshGenerators(DBRegistrationClass DBReg,  TreeNode nd)
         {           
             var tn = FindNode(nd, StaticVariablesClass.GeneratorsKeyGroupStr);
             if (tn == null)
@@ -1570,7 +1612,7 @@ namespace FBExpert
             nd.Expand();
         }
 
-        public static void RefreshGeneratorsItems(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshGeneratorsItems(DBRegistrationClass DBReg, TreeNode nd)
         {            
             NotifiesClass.Instance().AddToINFO($@"Refresh Generators for {DBReg.Alias}",eInfoLevel.few);
             string cmd = SQLStatementsClass.Instance().RefreshNonSystemGeneratorsItems(DBReg.Version);
@@ -1581,7 +1623,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshGeneratorsItems->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshGeneratorsItems->{DBReg}", ex));                 
                 return;
             }
 
@@ -1635,24 +1677,24 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"RefreshGegeratorsItems->{DBReg.Alias}", "dread==null")); 
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshGegeratorsItems->{DBReg}", "dread==null")); 
                     
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshGenertorsItems->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshGenertorsItems->Connection not open"));
             }            
         }
                 
-        public static TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode TableGroupNode, string TableName)
+        public TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode TableGroupNode, string TableName)
         {
             var tablenode = FindNode(TableGroupNode, TableName);
             return RefreshTable(DBReg, tablenode);
         }
 
-        public static TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode tableNode)
+        public TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode tableNode)
         {          
             
             var fieldgroup_node = FindNode(tableNode, StaticVariablesClass.FieldsKeyGroupStr);
@@ -1678,10 +1720,10 @@ namespace FBExpert
             return fieldgroup_node;
         }
         
-        public static TreeNode RefreshNonSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
+        public TreeNode RefreshNonSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
         {
             TreeNode tables = null;                      
-            var nd = StaticTreeClass.FindPrevDBNode(ndx);
+            var nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);
             
             var DBReg = (DBRegistrationClass)nd.Tag;
 
@@ -2045,10 +2087,10 @@ namespace FBExpert
             return tn;
         }
 
-        public static Dictionary<string,SystemTableClass> RefreshSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
+        public Dictionary<string,SystemTableClass> RefreshSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
         {
             TreeNode tables = null;
-            var nd = StaticTreeClass.FindPrevDBNode(ndx);
+            var nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);
             var tn = FindNode(nd, StaticVariablesClass.SystemTablesKeyGroupStr);
 
             var DBReg = (DBRegistrationClass)nd.Tag;
@@ -2089,7 +2131,7 @@ namespace FBExpert
             GetSystemTableConstraintsObjects(eConstraintType.PRIMARYKEY, tableList, DBReg);
             GetSystemTableConstraintsObjects(eConstraintType.NOTNULL, tableList, DBReg);
             AddCheckConstraintsObjects_To_ListOfSystemTableObjects(tableList, DBReg, eTableType.system);
-            AddDepednenciesTOObjects_To_ListOfSystemTableObjects(DBReg, tableList, eDependencies.TABLE);
+            AddDependenciesTOObjects_To_ListOfSystemTableObjects(DBReg, tableList, eDependencies.TABLE);
             AddDepednenciesFROMObjects_To_ListOfSystemTableObjects(DBReg, tableList, eDependencies.TABLE);
 
 
@@ -2425,9 +2467,9 @@ namespace FBExpert
             return tableList; //tn;
         }
 
-        public static TreeNode RefreshView(DBRegistrationClass DBReg, TreeNode ndx)
+        public TreeNode RefreshView(DBRegistrationClass DBReg, TreeNode ndx)
         {
-           // TreeNode nd = StaticTreeClass.FindPrevDBNode(ndx);
+           // TreeNode nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);
             TreeNode fieldgroup_node = FindNode(ndx,StaticVariablesClass.FieldsKeyGroupStr);
             if (ndx.Tag != null)
             {
@@ -2456,12 +2498,12 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeCLass->RefreshView->wrong object->{ndx.Tag.GetType().Name}");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshView->wrong object->{ndx.Tag.GetType().Name}"));
                 }
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("RefreshView->wrong object->null");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshView->wrong object->null"));
             }
             return fieldgroup_node;
         }
@@ -2473,11 +2515,11 @@ namespace FBExpert
         /// <param name="DBRegx"></param>
         /// <param name="ndx"></param>
         /// <returns></returns>
-        public static Dictionary<string,ViewClass> RefreshAllViews(DBRegistrationClass DBRegx, TreeNode ndx)
+        public Dictionary<string,ViewClass> RefreshAllViews(DBRegistrationClass DBRegx, TreeNode ndx)
         {
             TreeNode tables = null;
             
-            TreeNode nd = StaticTreeClass.FindPrevDBNode(ndx);            
+            TreeNode nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);            
             DBRegistrationClass DBReg = (DBRegistrationClass)nd.Tag;
 
             TreeNode tn = FindNode(nd, StaticVariablesClass.ViewsKeyGroupStr);
@@ -2510,7 +2552,7 @@ namespace FBExpert
             string oldTableName = string.Empty;
             int n = 0;
                       
-            GetAllDepednenciesOn(DBReg, allviews, eDependencies.VIEW);
+            GetAllDependenciesOn(DBReg, allviews, eDependencies.VIEW);
             GetAllDepednenciesFROM(DBReg, allviews, eDependencies.VIEW);
             
             foreach (var tc in allviews.Values)
@@ -2732,7 +2774,7 @@ namespace FBExpert
         }
 
 
-        public static void MakeNode(TreeNode nd, List<DataObjectClass> obj, string name)
+        public void MakeNode(TreeNode nd, List<DataObjectClass> obj, string name)
         {
             foreach (var fld in obj)
             {
@@ -2742,7 +2784,7 @@ namespace FBExpert
             }
         }
 
-        public static void UpdateTableNodes(TreeNode tableNode, TableClass TableObject, DBRegistrationClass dbReg)
+        public void UpdateTableNodes(TreeNode tableNode, TableClass TableObject, DBRegistrationClass dbReg)
         {
             UpdateTableFieldNodes(tableNode, TableObject,dbReg);
             UpdateTableForeignKeyNodes(tableNode, TableObject,dbReg);
@@ -2751,7 +2793,7 @@ namespace FBExpert
             UpdateNotNullConstraintNodes(tableNode, TableObject,dbReg);
         }
 
-        public static TreeNode UpdateTableFieldNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
+        public TreeNode UpdateTableFieldNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
         {
             var group_node = FindNode(tableNode, StaticVariablesClass.FieldsKeyGroupStr);
             if ((group_node != null)&&(tcc.Fields != null))
@@ -2779,7 +2821,7 @@ namespace FBExpert
             return tableNode;
         }
 
-        public static TreeNode UpdateTableForeignKeyNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
+        public TreeNode UpdateTableForeignKeyNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
         {
             var group_node = FindNode(tableNode, StaticVariablesClass.ForeignKeyGroupStr);
             if ((group_node != null)&&(tcc.ForeignKeys!=null))
@@ -2805,7 +2847,7 @@ namespace FBExpert
             return tableNode;
         }
 
-        public static TreeNode UpdateTableIndeciesNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
+        public TreeNode UpdateTableIndeciesNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
         {
             var group_node = FindNode(tableNode, StaticVariablesClass.IndicesKeyGroupStr);
             if ((group_node != null) && (tcc.Indices != null))
@@ -2831,7 +2873,7 @@ namespace FBExpert
             return tableNode;
         }
 
-        public static TreeNode UpdateTableTriggerNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
+        public TreeNode UpdateTableTriggerNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
         {
             var group_node = FindNode(tableNode, StaticVariablesClass.TriggersKeyGroupStr);
             if ((group_node != null) && (tcc.Triggers != null))
@@ -2857,7 +2899,7 @@ namespace FBExpert
             return tableNode;
         }
 
-        public static TreeNode UpdateNotNullConstraintNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
+        public TreeNode UpdateNotNullConstraintNodes(TreeNode tableNode, TableClass tcc, DBRegistrationClass dbReg)
         {
             TreeNode nd = null;
             for(int i = 0; i < tableNode.Nodes.Count; i++)               
@@ -2895,7 +2937,7 @@ namespace FBExpert
             return tableNode;
         }
 
-        public static bool CancelReading = false;
+        public bool CancelReading = false;
 
         /// <summary>
         /// Sucht und ersetzt einen vorhandenen Knoten der TableGroup aus der aktuellen Struktur der Datenbank
@@ -2908,7 +2950,7 @@ namespace FBExpert
 
         #region Make SQL for Objects
 
-        public static string GetInfoHeader(int len)
+        public string GetInfoHeader(int len)
         {
             string istr = "*******************************************************************************************************************************************************************************************************************";
             return $@"/{istr.Substring(0,len-2)}/";
@@ -2919,7 +2961,7 @@ namespace FBExpert
             var allcontent = new List<string>();
             var ec = new ExportClass();
             ec.Init(DBReg,NotifiesClass.Instance());
-            var alltables = StaticTreeClass.GetAllTableObjects(DBReg);
+            var alltables = StaticTreeClass.Instance().GetAllTableObjects(DBReg);
             foreach (var tableObject in alltables.Values)
             {
                 if (tableObject.State != CheckState.Checked) continue;
@@ -2940,7 +2982,7 @@ namespace FBExpert
             return allcontent;
         }
       */
-        public static List<string> GetAllTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TableClass> alltables, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TableClass> alltables, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
@@ -2952,17 +2994,7 @@ namespace FBExpert
             SQLAll.Add(GetInfoHeader(infoStr.Length));
 
             if((alltables==null)||(alltables.Count <= 0)) return SQLAll;
-            /*
-            AddIndexObjects_To_ListOfTableObjects(DBReg, alltables, eTableType.withoutsystem);            
-            AddForeignKeyObjects_To_ListOfTableObjects(DBReg, alltables, eTableType.withoutsystem);
-            AddTriggerObjects_To_ListOfTableObjects(DBReg, alltables, eTableType.withoutsystem);
-            AddConstraintsObjects_To_ListOfTableObjects(eConstraintType.UNIQUE, alltables, DBReg, eTableType.withoutsystem);
-            AddConstraintsObjects_To_ListOfTableObjects(eConstraintType.PRIMARYKEY, alltables, DBReg, eTableType.withoutsystem);
-            AddConstraintsObjects_To_ListOfTableObjects(eConstraintType.NOTNULL, alltables, DBReg, eTableType.withoutsystem);
-            AddCheckConstraintsObjects_To_ListOfTableObjects(alltables, DBReg, eTableType.withoutsystem);
-            AddDepednenciesTOObjects_To_ListOfTableObjects(DBReg, alltables, eDependencies.TABLE);
-            AddDepednenciesFROMObjects_To_ListOfTableObjects(DBReg, alltables, eDependencies.TABLE);
-            */            
+                      
             foreach (var dataObject in alltables.Values)
             {
                 if (dataObject.GetType() != typeof(TableClass)) continue;
@@ -2998,20 +3030,20 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }                
             }
             SQLAll.Add(Environment.NewLine);
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
         
 
-        public static List<string> GetAllPKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,PrimaryKeyClass> primarykeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllPKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,PrimaryKeyClass> primarykeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {            
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
@@ -3068,7 +3100,7 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }
                 SQLSep.Add(Environment.NewLine);
@@ -3107,7 +3139,7 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }
                 SQLAll.Add(Environment.NewLine);
@@ -3115,12 +3147,12 @@ namespace FBExpert
 
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllFKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,ForeignKeyClass> allForeignKeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllFKTablesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,ForeignKeyClass> allForeignKeys, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {            
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
@@ -3179,7 +3211,7 @@ namespace FBExpert
                         SQLAll.AddRange(SQLSep);
                         if(fileWrite == eSQLFileWriteMode.seperated)
                         {
-                            File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                            WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                         }
                     }                       
                 }
@@ -3218,19 +3250,19 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }                   
             }
             SQLAll.Add(Environment.NewLine);   
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllDomainAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,DomainClass> alldomains, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllDomainAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,DomainClass> alldomains, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
@@ -3289,19 +3321,19 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                 }
                 SQLAll.Add(Environment.NewLine);
             }
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllGeneratorAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,GeneratorClass> allgenerators, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllGeneratorAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,GeneratorClass> allgenerators, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
@@ -3357,7 +3389,7 @@ namespace FBExpert
                     }   
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                     SQLAll.AddRange(SQLSep); 
                 }
@@ -3396,7 +3428,7 @@ namespace FBExpert
                     }                        
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                     SQLAll.AddRange(SQLSep); 
                 }
@@ -3404,12 +3436,12 @@ namespace FBExpert
             }
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllIndecesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,IndexClass> allindeces, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllIndecesAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,IndexClass> allindeces, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             var SQLSep = new List<string>();            
             var SQLAll = new List<string>();            
@@ -3465,7 +3497,7 @@ namespace FBExpert
                         }      
                         if(fileWrite == eSQLFileWriteMode.seperated)
                         {
-                            File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                            WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                         }
                         SQLAll.AddRange(SQLSep); 
                     }
@@ -3507,7 +3539,7 @@ namespace FBExpert
                     }
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                     }
                     SQLAll.AddRange(SQLSep); 
                 }
@@ -3515,12 +3547,12 @@ namespace FBExpert
             }
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllTriggersAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TriggerClass> alltriggers, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllTriggersAlterInsertSQL(DBRegistrationClass DBReg, Dictionary<string,TriggerClass> alltriggers, eCreateMode cmode, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             //Systemflag = 0 für TableTriggers
             //Systemflag = 4 für Systemtable Triggers
@@ -3576,7 +3608,7 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.all)
                     {
-                        File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                        WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
                     }
                 }
                 SQLAll.Add(Environment.NewLine);
@@ -3613,18 +3645,18 @@ namespace FBExpert
                 
                 if(fileWrite == eSQLFileWriteMode.seperated)
                 {
-                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                 }
             }
             SQLAll.Add(Environment.NewLine);  
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
         
-        public static List<string> GetAllViewsAlterInsertSQL(DBRegistrationClass DBRegx, List<ViewClass> alltables, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllViewsAlterInsertSQL(DBRegistrationClass DBRegx, List<ViewClass> alltables, bool commit, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {
             var SQLAll = new List<string>();                    
             var SQLSep = new List<string>();   
@@ -3640,13 +3672,10 @@ namespace FBExpert
             
             foreach (ViewClass dataObject in alltables)
             {
-                if (dataObject.GetType() != typeof(ViewClass)) continue;
-                if(fileWrite == eSQLFileWriteMode.seperated) 
-                {    
-                    SQLSep.Clear();   
-                }
-                var vc = dataObject as ViewClass;
-              
+                if (dataObject.GetType() != typeof(ViewClass)) continue;                   
+                SQLSep.Clear();   
+                
+                var vc = dataObject as ViewClass;              
                 if (vc.State != CheckState.Checked) continue;
                 
                 infoStr = $@"/* ********* View {vc.Name} structure for {DBRegx.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
@@ -3667,19 +3696,31 @@ namespace FBExpert
                 if(commit) SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");    
                 if(fileWrite == eSQLFileWriteMode.seperated)
                 {
-                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                 }
                 SQLAll.AddRange(SQLSep);                
             }    
 
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllFunctionAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,FunctionClass> allfunctions, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public void WriteFile(string fn, List<string> lines, Encoding enc)
+        {
+            try
+            {
+                File.WriteAllLines(fn,lines,enc);            
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        public List<string> GetAllFunctionAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,FunctionClass> allfunctions, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {     
             /*            
             DECLARE EXTERNAL FUNCTION SUBSTR
@@ -3712,18 +3753,18 @@ namespace FBExpert
                 SQLAll.AddRange(SQLSep);
                 if(fileWrite == eSQLFileWriteMode.seperated)
                 {
-                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                 }
             }
             SQLAll.Add(Environment.NewLine);
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
-        public static List<string> GetAllProcedureAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,ProcedureClass> allprocedures, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
+        public List<string> GetAllProcedureAlterInsertSQL(DBRegistrationClass DBRegx, Dictionary<string,ProcedureClass> allprocedures, eCreateMode createMode, bool commit, bool complete, string directoryName, string fileName,eSQLFileWriteMode fileWrite, Encoding enc)
         {           
             var SQLSep = new List<string>();                                                    
             var SQLAll = new List<string>();            
@@ -3744,19 +3785,19 @@ namespace FBExpert
                 SQLAll.AddRange(SQLSep);
                 if(fileWrite == eSQLFileWriteMode.seperated)
                 {
-                    File.WriteAllLines(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                    WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
                 }
             }
             SQLAll.Add(Environment.NewLine);
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                File.WriteAllLines(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
             }
             return SQLAll;
         }
 
 
-        private static List<string> AddSQLProcedureGrants(List<string> SQLScript, StringBuilder sbs,ProcedureClass ProcedureObject)
+        private List<string> AddSQLProcedureGrants(List<string> SQLScript, StringBuilder sbs,ProcedureClass ProcedureObject)
         {
             //Grants
 
@@ -3787,7 +3828,7 @@ namespace FBExpert
             return SQLScript;
         }
 
-        private static List<string> AddSQLFunctionGrants(List<string> SQLScript, StringBuilder sbs,FunctionClass FunctionObject)
+        private List<string> AddSQLFunctionGrants(List<string> SQLScript, StringBuilder sbs,FunctionClass FunctionObject)
         {
             //Grants
 
@@ -3820,7 +3861,7 @@ namespace FBExpert
             return SQLScript;
         }
 
-        public static List<string> MakeSQLCreateProcedure(ProcedureClass ProcedureObject, bool complete)
+        public List<string> MakeSQLCreateProcedure(ProcedureClass ProcedureObject, bool complete)
         {            
             var SQLScript = new List<string>();
             var SQL = new StringBuilder();
@@ -3902,7 +3943,7 @@ namespace FBExpert
             return SQLScript;
         }
 
-        public static List<string> MakeSQLAlterProcedure(ProcedureClass ProcedureObject,ProcedureClass OldProcedureObject, bool complete)
+        public List<string> MakeSQLAlterProcedure(ProcedureClass ProcedureObject,ProcedureClass OldProcedureObject, bool complete)
         {           
             var SQLScript = new List<string>();
             string infoStr =  $@"/* ********* Create/alter for procedure {ProcedureObject.Name.Trim()} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                
@@ -3989,7 +4030,7 @@ namespace FBExpert
             return SQLScript;
         }
 
-        public static List<string> MakeSQLCreateFunction(FunctionClass FunctionObject, bool complete)
+        public List<string> MakeSQLCreateFunction(FunctionClass FunctionObject, bool complete)
         {            
             var SQLScript = new List<string>();
             var SQL = new StringBuilder();
@@ -4053,7 +4094,7 @@ namespace FBExpert
             return SQLScript;
         }
         
-        public static List<string> MakeSQLAlterFunction(FunctionClass FunctionObject, FunctionClass OldFunctionObject, bool complete)
+        public List<string> MakeSQLAlterFunction(FunctionClass FunctionObject, FunctionClass OldFunctionObject, bool complete)
         {      
              
 
@@ -4149,7 +4190,7 @@ namespace FBExpert
             return SQLScript;
         }
 
-        public static List<string> MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionClass FunctionObject, UserDefinedFunctionClass OldFunctionObject, bool complete)
+        public List<string> MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionClass FunctionObject, UserDefinedFunctionClass OldFunctionObject, bool complete)
         {      
             /*
             DECLARE EXTERNAL FUNCTION SUBSTR
@@ -4223,7 +4264,7 @@ namespace FBExpert
         #endregion
 
         
-        public static List<TableClass> GetTableObjectsFromNode(TreeNode nd)
+        public List<TableClass> GetTableObjectsFromNode(TreeNode nd)
         {
             List<TableClass> table = new List<TableClass>();
             if (nd != null)
@@ -4236,7 +4277,7 @@ namespace FBExpert
             return table;
         }
 
-        public static Dictionary<string,TableClass> GetDictionaryOfTableObjectsFromNode(TreeNode nd)
+        public Dictionary<string,TableClass> GetDictionaryOfTableObjectsFromNode(TreeNode nd)
         {
             Dictionary<string,TableClass> table = new Dictionary<string,TableClass>();
             if (nd != null)
@@ -4250,7 +4291,7 @@ namespace FBExpert
         }
         
 
-        public static TableClass GetTableObjectForIndexForm(DBRegistrationClass DBReg, string TableName)
+        public TableClass GetTableObjectForIndexForm(DBRegistrationClass DBReg, string TableName)
         {
             if (string.IsNullOrEmpty(TableName)) return null;
             
@@ -4264,13 +4305,13 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetTableObjectForIndex->{DBReg.Alias}", ex));                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetTableObjectForIndexForm->{DBReg}", ex));                         
             }
                
             return null;
         }
 
-        public static TableClass GetTableObjectFromName(DBRegistrationClass DBReg, string TableName)
+        public TableClass GetTableObjectFromName(DBRegistrationClass DBReg, string TableName)
         {
             string fieldsCmd = SQLStatementsClass.Instance().GetTableFields(DBReg.Version, TableName);
             var tableObject = new TableClass
@@ -4337,7 +4378,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetTableObjectFromName->{DBReg.Alias}", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetTableObjectFromName->{DBReg}", ex));                     
             }
             finally
             {
@@ -4346,7 +4387,7 @@ namespace FBExpert
             return tableObject;
         }
 
-        public static TableClass GetTableObject(DBRegistrationClass DBReg, TableClass tc)
+        public TableClass GetTableObject(DBRegistrationClass DBReg, TableClass tc)
         {
             var fields = new List<TableFieldClass>();
             
@@ -4408,7 +4449,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetTableObject({DBReg.Alias},{tc.Name})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetTableObject({DBReg},{tc.Name})", ex));                     
             }
             finally
             {
@@ -4418,7 +4459,7 @@ namespace FBExpert
             return TableObject;
         }
 
-        public static List<string> GetDatabaseStatistics(DBRegistrationClass DBReg)
+        public List<string> GetDatabaseStatistics(DBRegistrationClass DBReg)
         {
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             var data = new List<string>();
@@ -4516,7 +4557,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetDatabaseStatistics({DBReg.Alias})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetDatabaseStatistics({DBReg})", ex));                     
             }
             finally
             {
@@ -4526,7 +4567,7 @@ namespace FBExpert
         }
 
 
-        public static Dictionary<string,TableClass> GetAllTableObjectsComplete(DBRegistrationClass DBReg)
+        public Dictionary<string,TableClass> GetAllTableObjectsComplete(DBRegistrationClass DBReg)
         {
             var tableList = GetAllTableObjects(DBReg);
       
@@ -4541,13 +4582,13 @@ namespace FBExpert
             AddConstraintsObjects_To_ListOfTableObjects(eConstraintType.PRIMARYKEY, tableList, DBReg, eTableType.withoutsystem);
             AddConstraintsObjects_To_ListOfTableObjects(eConstraintType.NOTNULL, tableList, DBReg, eTableType.withoutsystem);
             AddCheckConstraintsObjects_To_ListOfTableObjects(tableList, DBReg, eTableType.withoutsystem);
-            AddDepednenciesTOObjects_To_ListOfTableObjects(DBReg, tableList, eDependencies.TABLE);
-            AddDepednenciesFROMObjects_To_ListOfTableObjects(DBReg, tableList, eDependencies.TABLE);
+            AddDependenciesTOObjects_To_ListOfTableObjects(DBReg, tableList, eDependencies.TABLE);
+            AddDependenciesFROMObjects_To_ListOfTableObjects(DBReg, tableList, eDependencies.TABLE);
             return tableList;
         }
 
 
-        public static Dictionary<string,TableClass> GetAllTableObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,TableClass> GetAllTableObjects(DBRegistrationClass DBReg)
         {
             var fields = new List<TableFieldClass>();
             var TableObject = new TableClass();
@@ -4621,7 +4662,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTableObjects({DBReg.Alias})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableObjects({DBReg})", ex));                     
             }
             finally
             {
@@ -4630,7 +4671,7 @@ namespace FBExpert
             return tables;
         }
 
-        public static Dictionary<string,SystemTableClass> GetSystemTableObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,SystemTableClass> GetSystemTableObjects(DBRegistrationClass DBReg)
         {
             var fields = new Dictionary<string, TableFieldClass>();
             var tables = new Dictionary<string,SystemTableClass>();
@@ -4703,7 +4744,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetSytsemTableObjects({DBReg.Alias})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetSystemTableObjects({DBReg})", ex));                     
             }
             finally
             {
@@ -4714,7 +4755,7 @@ namespace FBExpert
         }
 
         
-        public static Dictionary<string,FunctionClass> GetInternalFunctionObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,FunctionClass> GetInternalFunctionObjects(DBRegistrationClass DBReg)
         {
             String cmd = SQLStatementsClass.Instance().RefreshInternalFunctionsItems(DBReg.Version);     
             var allfunctions = new Dictionary<string,FunctionClass>();
@@ -4725,7 +4766,7 @@ namespace FBExpert
             }
             catch
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->GetInternalFunctionObjects->{DBReg.Alias}->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetInternalFunctionObjects->{DBReg}->Connection not open"));
                 return allfunctions;
             }
 
@@ -4799,31 +4840,31 @@ namespace FBExpert
                                 }
                                 else
                                 {
-                                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->GetInternalFunctionObjects->dread2==null");
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetInternalFunctionObjects->dread2==null"));
                                 }
                             }            
                         }
                     }
                     else
                     {
-                        NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->GetInternalFunctionObjects->dread==null");
+                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetInternalFunctionObjects->dread==null"));
                     }
                     dread.Close();
                 }
                 catch(Exception ex)
                 {
-                      NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->GetInternalFunctionObjects->msg:{ex.Message}");
+                      NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetInternalFunctionObjects->msg:{ex.Message}"));
                 }                                
                 con.Close();
             }            
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->GetInternalFunctionObjects->Connections not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetInternalFunctionObjects->Connections not open"));
             }
             return allfunctions;
         }
 
-        public static Dictionary<string,UserDefinedFunctionClass> GetUserDefinedFunctionObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,UserDefinedFunctionClass> GetUserDefinedFunctionObjects(DBRegistrationClass DBReg)
         {
             String cmd = SQLStatementsClass.Instance().RefreshUserDefinedFunctionsItems(DBReg.Version);     
             var allfunctions = new  Dictionary<string,UserDefinedFunctionClass>();
@@ -4836,7 +4877,7 @@ namespace FBExpert
             }
             catch
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshUserDefinedFunctionsItems->{DBReg.Alias}->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshUserDefinedFunctionsItems->{DBReg}->Connection not open"));
                 return allfunctions;
             }
 
@@ -4909,31 +4950,31 @@ namespace FBExpert
                                 }
                                 else
                                 {
-                                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshFunctionsItems->dread2==null");
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionsItems->dread2==null"));
                                 }
                             }                        
                         }
                     }
                     else
                     {
-                        NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshFunctionsItems->dread==null");
+                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionsItems->dread==null"));
                     }                
                     dread.Close();
                 }
                 catch(Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshFunctionsItems->msg:{ex.Message}");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionsItems->msg:{ex.Message}"));
                 }
                 con.Close();
             }            
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshFunctionsItems->Connections not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionsItems->Connections not open"));
             }
             return allfunctions;
         }
 
-        public static Dictionary<string,TriggerClass> GetTriggerObjects(DBRegistrationClass DBReg, string TableName)
+        public Dictionary<string,TriggerClass> GetTriggerObjects(DBRegistrationClass DBReg, string TableName)
         {
             var triggers = new Dictionary<string,TriggerClass>();
            
@@ -4961,7 +5002,7 @@ namespace FBExpert
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetTriggerObjects({DBReg.Alias},{TableName})", ex));                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetTriggerObjects({DBReg},{TableName})", ex));                         
                 }
                 finally
                 {
@@ -4971,7 +5012,7 @@ namespace FBExpert
             return triggers;
         }
 
-        public static Dictionary<string,ConstraintsClass> GetCheckConstraintsObjects(string TableName, DBRegistrationClass DBReg)
+        public Dictionary<string,ConstraintsClass> GetCheckConstraintsObjects(string TableName, DBRegistrationClass DBReg)
         {
             var constraints = new Dictionary<string,ConstraintsClass>();
             string cmd = ConstraintsSQLStatementsClass.Instance().GetTableCheckConstraints(DBReg.Version,  TableName);
@@ -4982,7 +5023,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetCheckConstraintsObjects({TableName},{DBReg.Alias})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetCheckConstraintsObjects({TableName},{DBReg})", ex));                     
                 con.Close();
                 return constraints;
             }
@@ -5013,18 +5054,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetCheckConstraintsObjects->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetCheckConstraintsObjects->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetCheckConstraintsObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetCheckConstraintsObjects->Connection not open"));
             }
             return constraints;
         }
 
-        public static Dictionary<string,TableFieldClass> GetFieldObjects(DBRegistrationClass DBReg, string TableName)
+        public Dictionary<string,TableFieldClass> GetFieldObjects(DBRegistrationClass DBReg, string TableName)
         {
             var fields = new Dictionary<string, TableFieldClass>();
 
@@ -5087,7 +5128,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetTableFieldObjects({DBReg.Alias},{TableName}", ex));                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetTableFieldObjects({DBReg},{TableName}", ex));                         
             }
             finally
             {
@@ -5098,7 +5139,7 @@ namespace FBExpert
         }
 
 
-        public static TreeNode GetRegNode(TreeNode tn)
+        public TreeNode GetRegNode(TreeNode tn)
         {
             if (tn == null) return null;
             while (tn.Level > 0)
@@ -5109,7 +5150,7 @@ namespace FBExpert
             return typ == typeof(DBRegistrationClass) ? tn : null;
         }
         
-        public static Dictionary<string,ViewClass> GetViewObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,ViewClass> GetViewObjects(DBRegistrationClass DBReg)
         {
             var allviews = new Dictionary<string,ViewClass>();
 
@@ -5121,7 +5162,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetViewObjects({DBReg.Alias})", ex));                                                                                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObjects({DBReg})", ex));                                                                                         
                 con.Close();
                 return null;
             }
@@ -5280,18 +5321,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetViewObjects->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObjects->dread==null"));
                 }
                 con.Close();               
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetViewObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObjects->Connection not open"));
             }
             return allviews;
         }
         
-        public static Dictionary<string,DomainClass> GetDomainObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,DomainClass> GetDomainObjects(DBRegistrationClass DBReg)
         {
             var domains = new Dictionary<string,DomainClass>();
            
@@ -5303,7 +5344,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {                
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllDomains->{DBReg.Alias}", ex)); 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDomains->{DBReg}", ex)); 
                 return domains;
             }
 
@@ -5351,7 +5392,7 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("RefreshDomains->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->dreade==null"));
                 }
 
                 cmd = DomainSQLStatementsClass.Instance().RefreshSystemDomains(DBReg.Version);
@@ -5383,20 +5424,20 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("RefreshDomains->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->dread==null"));
                 }
                 con.Close();                
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("RefreshDomains->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshDomains->Connection not open"));
             }
             return domains;
         }
         
   
         
-        public static Dictionary<string,TriggerClass> GetTriggerObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,TriggerClass> GetTriggerObjects(DBRegistrationClass DBReg)
         {
             var trigger = new Dictionary<string,TriggerClass>();
 
@@ -5408,7 +5449,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTriggers->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTriggers->{DBReg}", ex));                 
                 return trigger;
             }
 
@@ -5443,17 +5484,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"GetAllTriggers({DBReg})->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTriggers({DBReg})->dread==null"));
                 }
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"GetAllTriggers({DBReg})->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTriggers({DBReg})->Connection not open"));
             }
             return trigger;
         }
         
-        public static Dictionary<string,GeneratorClass> GetGeneratorObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,GeneratorClass> GetGeneratorObjects(DBRegistrationClass DBReg)
         {
             var generator = new Dictionary<string,GeneratorClass>();
             string cmd = SQLStatementsClass.Instance().RefreshNonSystemGeneratorsItems(DBReg.Version);
@@ -5464,7 +5505,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllGenerators->{DBReg.Alias}", ex));                 
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllGenerators->{DBReg}", ex));                 
                 return generator;
             }
 
@@ -5516,18 +5557,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshGenertorsItems->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshGenertorsItems->dread==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshGenertorsItems->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshGenertorsItems->Connection not open"));
             }
             return generator;
         }
         
-        public static Dictionary<string,ProcedureClass> GetProcedureObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,ProcedureClass> GetProcedureObjects(DBRegistrationClass DBReg)
         {
             string cmd = SQLStatementsClass.Instance().RefreshProcedureItems(DBReg.Version);
             var procedures = new Dictionary<string,ProcedureClass>();
@@ -5538,7 +5579,7 @@ namespace FBExpert
             }
             catch
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->{DBReg.Alias}->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->{DBReg}->Connection not open"));
                 return procedures;
             }
 
@@ -5611,14 +5652,14 @@ namespace FBExpert
                             }
                             else
                             {
-                                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->dread2==null");
+                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread2==null"));
                             }
                         }                        
                     }
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread==null"));
                 }
                 
                 dread.Close();
@@ -5626,14 +5667,14 @@ namespace FBExpert
             }            
             else
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->StaticTreeClass->RefreshProceduresItems->Connections not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->Connections not open"));
             }
 
             return procedures;
         }
 
 
-        public static string GetBLOBData(DBRegistrationClass DBReg, string cmd)
+        public string GetBLOBData(DBRegistrationClass DBReg, string cmd)
         {                        
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -5665,7 +5706,7 @@ namespace FBExpert
         }
 
 
-        public static void ReadPKFields(FbDataReader dread, Dictionary<string,string> FieldNames, string tableName, string pkName, string pkField)
+        public void ReadPKFields(FbDataReader dread, Dictionary<string,string> FieldNames, string tableName, string pkName, string pkField)
         {
             string TableName = tableName;
             string PKField = pkField;
@@ -5691,7 +5732,7 @@ namespace FBExpert
             }
         }
         
-        public static void GetAllTablePrimaryKeyObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
+        public void GetAllTablePrimaryKeyObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
         {           
                 string fields_cmd = SQLStatementsClass.Instance().GetAllTablePrimaryKeys(DBReg.Version);
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5748,7 +5789,7 @@ namespace FBExpert
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTablePrimaryObjects({DBReg.Alias},List<TableClass>", ex));                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTablePrimaryObjects({DBReg},List<TableClass>", ex));                         
                 }
                 finally
                 {
@@ -5756,7 +5797,7 @@ namespace FBExpert
                 }                        
         }
            
-        public static void AddForeignKeyObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
+        public void AddForeignKeyObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
         {             
             string fields_cmd = SQLStatementsClass.Instance().GetAllTableForeignKeys(DBReg.Version,eTableType.withoutsystem);            
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5772,16 +5813,18 @@ namespace FBExpert
                     while (dread.Read())
                     {
                         string TableName                   = dread.GetValue(0).ToString().Trim();
-                        string FieldName                   = dread.GetValue(3).ToString().Trim();
-                        string Description                 = dread.GetValue(4).ToString().Trim();
-                        string ForeignKeyName              = dread.GetValue(6).ToString().Trim();
-                        string MatchOption                 = dread.GetValue(7).ToString().Trim();
-                        string UpdateRule                  = dread.GetValue(8).ToString().Trim();
-                        string DeleteRule                  = dread.GetValue(9).ToString().Trim();
-                        string DestTableName               = dread.GetValue(10).ToString().Trim();
-                        string DestConstraintName          = dread.GetValue(11).ToString().Trim();
-                        string DestConstraintTyp           = dread.GetValue(12).ToString().Trim();
-                        string DestConstraintFieldName     = dread.GetValue(13).ToString().Trim();
+                        int inactive                       = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);
+                        string gFKName                     = dread.GetValue(2).ToString().Trim();
+                        string FieldName                   = dread.GetValue(4).ToString().Trim();
+                        string Description                 = dread.GetValue(5).ToString().Trim();
+                        string ForeignKeyName              = dread.GetValue(7).ToString().Trim();
+                        string MatchOption                 = dread.GetValue(8).ToString().Trim();
+                        string UpdateRule                  = dread.GetValue(9).ToString().Trim();
+                        string DeleteRule                  = dread.GetValue(10).ToString().Trim();
+                        string DestTableName               = dread.GetValue(11).ToString().Trim();
+                        string DestConstraintName          = dread.GetValue(12).ToString().Trim();
+                        string DestConstraintTyp           = dread.GetValue(13).ToString().Trim();
+                        string DestConstraintFieldName     = dread.GetValue(14).ToString().Trim();
 
                         if (oldTableName != TableName)
                         {
@@ -5793,11 +5836,11 @@ namespace FBExpert
 
                         var tfc = new ForeignKeyClass
                         {
-                            Name = dread.GetValue(1).ToString().Trim(),
+                            Name = gFKName,
                             SourceTableName = TableName,
                             DestTableName = DestTableName
                         };
-                        
+                        tfc.IsActive = inactive == 0;
                         tfc.SourceFields.Add(FieldName,new FieldClass(FieldName));
                         tfc.DestFields.Add(DestConstraintFieldName,new FieldClass(DestConstraintFieldName));                        
                         tableObject?.ForeignKeys.Add(tfc.Name,tfc);                        
@@ -5806,7 +5849,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTableForeignKeyObjects({DBReg.Alias},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableForeignKeyObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                     
             }
             finally
             {
@@ -5814,7 +5857,7 @@ namespace FBExpert
             }
         }
 
-        public static void AddForeignKeyObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
+        public void AddForeignKeyObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
         {             
             string fields_cmd = SQLStatementsClass.Instance().GetAllTableForeignKeys(DBReg.Version,eTableType.system);            
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5830,16 +5873,18 @@ namespace FBExpert
                     while (dread.Read())
                     {
                         string TableName                   = dread.GetValue(0).ToString().Trim();
-                        string FieldName                   = dread.GetValue(3).ToString().Trim();
-                        string Description                 = dread.GetValue(4).ToString().Trim();
-                        string ForeignKeyName              = dread.GetValue(6).ToString().Trim();
-                        string MatchOption                 = dread.GetValue(7).ToString().Trim();
-                        string UpdateRule                  = dread.GetValue(8).ToString().Trim();
-                        string DeleteRule                  = dread.GetValue(9).ToString().Trim();
-                        string DestTableName               = dread.GetValue(10).ToString().Trim();
-                        string DestConstraintName          = dread.GetValue(11).ToString().Trim();
-                        string DestConstraintTyp           = dread.GetValue(12).ToString().Trim();
-                        string DestConstraintFieldName     = dread.GetValue(13).ToString().Trim();
+                        int inactive                       = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);
+                        string FKName                      = dread.GetValue(2).ToString().Trim();
+                        string FieldName                   = dread.GetValue(4).ToString().Trim();
+                        string Description                 = dread.GetValue(5).ToString().Trim();
+                        string ForeignKeyName              = dread.GetValue(7).ToString().Trim();
+                        string MatchOption                 = dread.GetValue(8).ToString().Trim();
+                        string UpdateRule                  = dread.GetValue(9).ToString().Trim();
+                        string DeleteRule                  = dread.GetValue(10).ToString().Trim();
+                        string DestTableName               = dread.GetValue(11).ToString().Trim();
+                        string DestConstraintName          = dread.GetValue(12).ToString().Trim();
+                        string DestConstraintTyp           = dread.GetValue(13).ToString().Trim();
+                        string DestConstraintFieldName     = dread.GetValue(14).ToString().Trim();
 
                         if (oldTableName != TableName)
                         {
@@ -5851,11 +5896,11 @@ namespace FBExpert
 
                         var tfc = new ForeignKeyClass
                         {
-                            Name = dread.GetValue(1).ToString().Trim(),
+                            Name = FKName,
                             SourceTableName = TableName,
                             DestTableName = DestTableName
                         };
-                        
+                        tfc.IsActive = inactive == 0;
                         tfc.SourceFields.Add(FieldName,new FieldClass(FieldName));
                         tfc.DestFields.Add(DestConstraintFieldName,new FieldClass(DestConstraintFieldName));                        
                         tableObject?.ForeignKeys.Add(tfc.Name,tfc);                        
@@ -5864,7 +5909,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTableForeignKeyObjects({DBReg.Alias},List<TableClass>,{eTableType.system.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableForeignKeyObjects({DBReg},List<TableClass>,{eTableType.system.ToString()})", ex));                     
             }
             finally
             {
@@ -5872,7 +5917,7 @@ namespace FBExpert
             }
         }
                               
-        public static void AddTriggerObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
+        public void AddTriggerObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
         {            
             string fields_cmd = SQLStatementsClass.Instance().GetAllTableTriggersNonSystemTables(DBReg.Version);                   
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5920,14 +5965,14 @@ namespace FBExpert
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddTriggerObjectsToListOfTabelObjects({DBReg.Alias},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddTriggerObjectsToListOfTabelObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                         
                 }
                 finally
                 {
                     con.Close();
                 }
         }
-        public static Dictionary<string,TriggerClass> GetAllTriggerObjects(DBRegistrationClass DBReg)
+        public Dictionary<string,TriggerClass> GetAllTriggerObjects(DBRegistrationClass DBReg)
         {            
             string fields_cmd = SQLStatementsClass.Instance().GetAllTableTriggersNonSystemTables(DBReg.Version);                   
             var triggers = new Dictionary<string, TriggerClass>();
@@ -5957,7 +6002,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllTriggerObjects({DBReg.Alias})", ex));                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTriggerObjects({DBReg})", ex));                         
             }
             finally
             {
@@ -5968,7 +6013,7 @@ namespace FBExpert
         
         
         
-        public static void AddTriggerObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
+        public void AddTriggerObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
         {           
             string fields_cmd = SQLStatementsClass.Instance().GetAllTableTriggersSystemTables(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -6014,7 +6059,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddTriggerObjectsToListOfTabelObjects({DBReg.Alias},List<TableClass>,{eTableType.system.ToString()})", ex));                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddTriggerObjectsToListOfTabelObjects({DBReg},List<TableClass>,{eTableType.system.ToString()})", ex));                         
             }
             finally
             {
@@ -6022,7 +6067,7 @@ namespace FBExpert
             }
         }
         
-        public static void AddConstraintsObjects_To_ListOfTableObjects(eConstraintType ctyp, Dictionary<string,TableClass> tc, DBRegistrationClass DBReg, eTableType tabletype)
+        public void AddConstraintsObjects_To_ListOfTableObjects(eConstraintType ctyp, Dictionary<string,TableClass> tc, DBRegistrationClass DBReg, eTableType tabletype)
         {
 
             string cmd = string.Empty; 
@@ -6048,7 +6093,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddContraintsObjectsToListOfTyableObjects({ctyp.ToString()},List<TableClass>,{DBReg.Alias},{tabletype.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddContraintsObjectsToListOfTyableObjects({ctyp.ToString()},List<TableClass>,{DBReg},{tabletype.ToString()})", ex));                     
                 con.Close();
                 return;
             }
@@ -6075,7 +6120,7 @@ namespace FBExpert
                                 tcc = tc.FirstOrDefault(X => X.Value.Name == TableName).Value;
                                 if (tcc == null)
                                 {
-                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddConstraintsObjects_To_ListOfTableObjects->TableNotFound->{TableName},{DBReg.Alias},{tabletype.ToString()})",TableName));                     
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddConstraintsObjects_To_ListOfTableObjects->TableNotFound->{TableName},{DBReg},{tabletype.ToString()})",TableName));                     
                                     continue;
                                 }
                                 if ((ctyp == eConstraintType.UNIQUE)&&(tcc.uniques_constraints==null))
@@ -6130,7 +6175,7 @@ namespace FBExpert
                                     }
                                     catch (Exception ex)
                                     {
-                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddConstraintsObjects_To_ListOfTableObjects->uniques_constraints.Add,{DBReg.Alias},{tabletype.ToString()})", ex));                     
+                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddConstraintsObjects_To_ListOfTableObjects->uniques_constraints.Add,{DBReg},{tabletype.ToString()})", ex));                     
                                     }
                                 }                                                                    
                             }
@@ -6154,7 +6199,7 @@ namespace FBExpert
                                     }
                                     catch (Exception ex)
                                     {
-                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddConstraintsObjects_To_ListOfTableObjects->notnulls_constraints.Add,{DBReg.Alias},{tabletype.ToString()})", ex));                     
+                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddConstraintsObjects_To_ListOfTableObjects->notnulls_constraints.Add,{DBReg},{tabletype.ToString()})", ex));                     
                                     }
 
                                 }
@@ -6166,17 +6211,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableConstraintsObjects->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableConstraintsObjects->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableConstraintsObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableConstraintsObjects->Connection not open"));
             }            
         }
        
-        public static void GetSystemTableConstraintsObjects(eConstraintType ctyp, Dictionary<string,SystemTableClass> tc, DBRegistrationClass DBReg)
+        public void GetSystemTableConstraintsObjects(eConstraintType ctyp, Dictionary<string,SystemTableClass> tc, DBRegistrationClass DBReg)
         {
 
             string cmd = ConstraintsSQLStatementsClass.Instance().GetSystemTableConstraintsByType(DBReg.Version, ctyp);
@@ -6187,7 +6232,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetSystemTableCOnstraintsObjects({ctyp.ToString()},List<tableClass>,{DBReg.Alias})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetSystemTableCOnstraintsObjects({ctyp.ToString()},List<tableClass>,{DBReg})", ex));                     
                 con.Close();
                 return;
             }
@@ -6279,17 +6324,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetSystemTableConstraintsObjects->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetSystemTableConstraintsObjects->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetSystemTableConstraintsObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetSystemTableConstraintsObjects->Connection not open"));
             }
         }
         
-        public static void AddCheckConstraintsObjects_To_ListOfTableObjects(Dictionary<string,TableClass> tc,DBRegistrationClass DBReg, eTableType tabletype)
+        public void AddCheckConstraintsObjects_To_ListOfTableObjects(Dictionary<string,TableClass> tc,DBRegistrationClass DBReg, eTableType tabletype)
         {
             string cmd = string.Empty;
             switch (tabletype)
@@ -6312,7 +6357,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddCheckConstraintsObjects_To_ListOfTableObjects(List<TableClass>,{DBReg.Alias},{tabletype.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddCheckConstraintsObjects_To_ListOfTableObjects(List<TableClass>,{DBReg},{tabletype.ToString()})", ex));                     
                 con.Close();
                 return;
             }
@@ -6360,7 +6405,7 @@ namespace FBExpert
                             }
                             catch(Exception ex)
                             {
-                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddCheckConstraintsObjects_To_ListOfTableObjects({TableName},{DBReg.Alias})->check_constraints.Add", ex));         
+                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddCheckConstraintsObjects_To_ListOfTableObjects({TableName},{DBReg})->check_constraints.Add", ex));         
                             }
                             n++;
                         }
@@ -6369,18 +6414,18 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableCheckConstraintsObjects->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableCheckConstraintsObjects->dreade==null"));
                 }
                 con.Close();
 
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableCheckConstraintsObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableCheckConstraintsObjects->Connection not open"));
             }
             
         }
-        public static void AddCheckConstraintsObjects_To_ListOfSystemTableObjects(Dictionary<string,SystemTableClass> tc,DBRegistrationClass DBReg, eTableType tabletype)
+        public void AddCheckConstraintsObjects_To_ListOfSystemTableObjects(Dictionary<string,SystemTableClass> tc,DBRegistrationClass DBReg, eTableType tabletype)
         {
             string cmd = string.Empty;
             switch (tabletype)
@@ -6403,7 +6448,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddCheckConstraintsObjects_To_ListOfTableObjects(List<TableClass>,{DBReg.Alias},{tabletype.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddCheckConstraintsObjects_To_ListOfTableObjects(List<TableClass>,{DBReg},{tabletype.ToString()})", ex));                     
                 con.Close();
                 return;
             }
@@ -6451,7 +6496,7 @@ namespace FBExpert
                             }
                             catch(Exception ex)
                             {
-                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddCheckConstraintsObjects_To_ListOfTableObjects({TableName},{DBReg.Alias})->check_constraints.Add", ex));         
+                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddCheckConstraintsObjects_To_ListOfTableObjects({TableName},{DBReg})->check_constraints.Add", ex));         
                             }
                             n++;
                         }
@@ -6460,20 +6505,20 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableCheckConstraintsObjects->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableCheckConstraintsObjects->dreade==null"));
                 }
                 con.Close();
 
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllTableCheckConstraintsObjects->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTableCheckConstraintsObjects->Connection not open"));
             }
             
         }
 
                
-        public static void AddDepednenciesTOObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc, eDependencies typ)
+        public void AddDependenciesTOObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc, eDependencies typ)
         {
             
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesON(DBReg.Version, typ);
@@ -6484,7 +6529,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesTOObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{typ.ToString()})->con.Open()", ex));     
                 
                 con.Close();
                 return;
@@ -6569,12 +6614,16 @@ namespace FBExpert
                                     }
                                     if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesTO_Procedures.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Procedures.Add(tcs.Name,tcs);
+                                        string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                        if (!tcc.DependenciesTO_Procedures.ContainsKey(key))
+                                            tcc.DependenciesTO_Procedures.Add(key,tcs);
+                                        else
+                                            NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}"));  
                                     }
                                 }
                                 catch(Exception ex)
                                 {
-                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesTOObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})->DepentenciesX.Add->{deptyp}", ex));  
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}", ex));  
                                 }
                             }
                             n++;
@@ -6584,17 +6633,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->Connection not open"));
             }
         }
 
-        public static void AddDepednenciesTOObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc, eDependencies typ)
+        public void AddDependenciesTOObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc, eDependencies typ)
         {
             
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesON(DBReg.Version, typ);
@@ -6605,7 +6654,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesTOObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfSystemTableObjects({DBReg},List<TableClass>,{typ.ToString()})->con.Open()", ex));     
                 
                 con.Close();
                 return;
@@ -6690,12 +6739,15 @@ namespace FBExpert
                                     }
                                     if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesTO_Procedures.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Procedures.Add(tcs.Name,tcs);
+                                        string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                        if (!tcc.DependenciesTO_Procedures.ContainsKey(key))
+                                          tcc.DependenciesTO_Procedures.Add(key,tcs);
+                                       else NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfSystemTableObjects({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}", ""));  
                                     }
                                 }
                                 catch(Exception ex)
                                 {
-                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesTOObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})->DepentenciesX.Add->{deptyp}", ex));  
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDependenciesTOObjects_To_ListOfSystemTableObjects({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}", ex));  
                                 }
                             }
                             n++;
@@ -6705,17 +6757,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->Connection not open"));
             }
         }
 
-        public static void GetAllDepednenciesOn(DBRegistrationClass DBReg, Dictionary<string,ViewClass> tc, eDependencies typ)
+        public void GetAllDependenciesOn(DBRegistrationClass DBReg, Dictionary<string,ViewClass> tc, eDependencies typ)
         {
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesON(DBReg.Version, typ);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -6725,7 +6777,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllDepednenciesOn({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDependenciesOn({DBReg},List<TableClass>,{typ.ToString()})->con.Open()", ex));                     
                 con.Close();
                 return;
             }
@@ -6812,12 +6864,17 @@ namespace FBExpert
 
                                     if (deptyp == eDependencies.PROCEDURE)
                                     {
-                                        tcc.DependenciesTO_Procedures.Add(tcs.Name,tcs);
+                                        string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                        
+                                        if (!tcc.DependenciesTO_Procedures.ContainsKey(key))
+                                          tcc.DependenciesTO_Procedures.Add(key, tcs);
+                                        else
+                                          NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDependenciesOn({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}->{key} already exists",""));  
                                     }
                                 }
                                 catch(Exception ex)
                                 {
-                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesTOObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})->DepentenciesX.Add->{deptyp}", ex));  
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDependenciesOn({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}", ex));  
                                 }
                             }
                             n++;
@@ -6827,17 +6884,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesOn->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesOn->Connection not open"));
             }
         }
         
-        public static void AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc, eDependencies typ)
+        public void AddDependenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc, eDependencies typ)
         {           
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesFROM(DBReg.Version, typ);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -6847,7 +6904,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));                                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{typ.ToString()})", ex));                                     
                 con.Close();
                 return;
             }
@@ -6933,7 +6990,11 @@ namespace FBExpert
                                 }
                                 if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesFROM_Procedures.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Procedures.Add(tcs.Name,tcs);
+                                    string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                    if (!tcc.DependenciesFROM_Procedures.ContainsKey(key))
+                                       tcc.DependenciesFROM_Procedures.Add(key,tcs);
+                                     else
+                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg}, List<TableClass> tc, eDependencies typ)->dread==null"));
                                 }
                             }
                             n++;
@@ -6943,17 +7004,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg}, List<TableClass> tc, eDependencies typ)->dread==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg}, List<TableClass> tc, eDependencies typ)->Connection not open"));
             }
         }
 
-        public static void AddDepednenciesFROMObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc, eDependencies typ)
+        public void AddDepednenciesFROMObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc, eDependencies typ)
         {           
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesFROM(DBReg.Version, typ);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -6963,7 +7024,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));                                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{typ.ToString()})", ex));                                     
                 con.Close();
                 return;
             }
@@ -6985,10 +7046,10 @@ namespace FBExpert
                         SystemTableClass tcc = null;
                         while (dread.Read())
                         {
-                            TableName = dread.GetValue(1).ToString().Trim();
-                            DependObjectName = dread.GetValue(0).ToString().Trim();
-                            FieldName = dread.GetValue(2).ToString().Trim();
-                            var deptyp = (eDependencies)StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), (int)eDependencies.NONE);
+                            TableName           = dread.GetValue(1).ToString().Trim();
+                            DependObjectName    = dread.GetValue(0).ToString().Trim();
+                            FieldName           = dread.GetValue(2).ToString().Trim();
+                            var deptyp          = (eDependencies)StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), (int)eDependencies.NONE);
 
 
                             if (oldDependObjectName != DependObjectName)
@@ -7049,7 +7110,11 @@ namespace FBExpert
                                 }
                                 if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesFROM_Procedures.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Procedures.Add(tcs.Name,tcs);
+                                    string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                    if (!tcc.DependenciesFROM_Procedures.ContainsKey(key))
+                                    tcc.DependenciesFROM_Procedures.Add(key,tcs);
+                                     else
+                                     NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->dread==null"));
                                 }
                             }
                             n++;
@@ -7059,17 +7124,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg}, List<TableClass> tc, eDependencies typ)->dread==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects({DBReg}, List<TableClass> tc, eDependencies typ)->Connection not open"));
             }
         }
 
-        public static void GetAllDepednenciesFROM(DBRegistrationClass DBReg, Dictionary<string,ViewClass> tc, eDependencies typ)
+        public void GetAllDepednenciesFROM(DBRegistrationClass DBReg, Dictionary<string,ViewClass> tc, eDependencies typ)
         {
             string cmd = SQLStatementsClass.Instance().GetAllDependenciesON(DBReg.Version, typ);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -7079,7 +7144,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetAllDepednenciesFROM({DBReg.Alias},List<TableClass>,{typ.ToString()})", ex));                                                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesFROM({DBReg},List<TableClass>,{typ.ToString()})->con.Open()", ex));                                                     
                 con.Close();
                 return;
             }
@@ -7164,7 +7229,11 @@ namespace FBExpert
 
                                 if (deptyp == eDependencies.PROCEDURE)
                                 {
-                                    tcc.DependenciesFROM_Procedures.Add(tcs.Name,tcs);
+                                    string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
+                                    if (!tcc.DependenciesFROM_Procedures.ContainsKey(key))
+                                        tcc.DependenciesFROM_Procedures.Add(key, tcs);
+                                    else
+                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDependenciesFROM({DBReg},List<TableClass>,{typ.ToString()})->Dependencies.Add->{deptyp}->{key} already exists", ""));
                                 }
                             }
                             n++;
@@ -7174,17 +7243,17 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesFROM->dreade==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesFROM->dreade==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetAllDepednenciesFROM->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllDepednenciesFROM->Connection not open"));
             }
         }
 
-        public static Dictionary<string,ViewFieldClass> GetViewFieldObjects(DBRegistrationClass DBReg, string ViewName)
+        public Dictionary<string,ViewFieldClass> GetViewFieldObjects(DBRegistrationClass DBReg, string ViewName)
         {
             var fields = new Dictionary<string,ViewFieldClass>();
             if (!string.IsNullOrEmpty(ViewName))
@@ -7228,7 +7297,7 @@ namespace FBExpert
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetViewFieldObjects({DBReg.Alias},{ViewName})", ex));                                                                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewFieldObjects({DBReg},{ViewName})", ex));                                                                         
                 }
                 finally
                 {
@@ -7238,7 +7307,7 @@ namespace FBExpert
             return fields;
         }
 
-        public static void FillViewObject(DBRegistrationClass DBReg, ViewClass View)
+        public void FillViewObject(DBRegistrationClass DBReg, ViewClass View)
         {
             var fields = new List<ViewFieldClass>();
             View.Fields.Clear();
@@ -7293,7 +7362,7 @@ namespace FBExpert
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"FillViewObject({DBReg.Alias},{View?.Name})", ex));                                                                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->FillViewObject({DBReg},{View?.Name})", ex));                                                                         
                 }
                 finally
                 {
@@ -7302,7 +7371,7 @@ namespace FBExpert
             }            
         }
         
-        public static ViewClass GetViewObject(DBRegistrationClass DBReg, string viewname)
+        public ViewClass GetViewObject(DBRegistrationClass DBReg, string viewname)
         {
             var new_view = new ViewClass();
 
@@ -7314,7 +7383,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"GetViewObject({DBReg.Alias},{viewname})", ex));                                                                                         
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObject({DBReg},{viewname})", ex));                                                                                         
                 con.Close();
                 return null;
             }
@@ -7426,13 +7495,13 @@ namespace FBExpert
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetViewObject->" + viewname+"->dread==null");
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObject->{viewname}->dread==null"));
                 }
                 con.Close();
             }
             else
             {
-                NotifiesClass.Instance().AddToERROR("StaticTreeClass->GetViewObject->" + viewname+"->Connection not open");
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetViewObject->{viewname}->Connection not open"));
             }
             return new_view;
         }

@@ -263,7 +263,7 @@ namespace FBExpert
        
         public void FillCombos()
         {
-            var domains = StaticTreeClass.GetDomainObjects(_dbReg);
+            var domains = StaticTreeClass.Instance().GetDomainObjects(_dbReg);
             cbDOMAIN.Items.Clear();
             foreach(DomainClass domain in domains.Values)
             {

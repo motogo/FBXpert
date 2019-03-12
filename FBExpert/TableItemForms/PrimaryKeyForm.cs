@@ -290,7 +290,7 @@ namespace FBXpert
             string TableName = _tableObject.Name;
             cbFields.Items.Clear();
             if (string.IsNullOrEmpty(TableName)) return;
-            var tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
+            var tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
             var fields = tab.Fields;
             foreach (var dstr in fields.Values)
             {

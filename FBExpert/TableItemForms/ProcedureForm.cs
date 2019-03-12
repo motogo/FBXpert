@@ -105,7 +105,7 @@ namespace FBXpert
         {            
             var SQLScript = new List<string>();
             SQLScript.Clear();            
-            SQLScript = StaticTreeClass.MakeSQLCreateProcedure(_procedureObject,true);
+            SQLScript = StaticTreeClass.Instance().MakeSQLCreateProcedure(_procedureObject,true);
             SQLToUI(SQLScript);  
             return SQLScript.Count;
         }
@@ -123,7 +123,7 @@ namespace FBXpert
         {           
             var SQLScript = new List<string>();
             SQLScript.Clear();            
-            SQLScript = StaticTreeClass.MakeSQLAlterProcedure(_procedureObject,_procedureObjectOld, true);
+            SQLScript = StaticTreeClass.Instance().MakeSQLAlterProcedure(_procedureObject,_procedureObjectOld, true);
             SQLToUI(SQLScript);
             return SQLScript.Count;
         }

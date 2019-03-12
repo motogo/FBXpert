@@ -60,7 +60,7 @@ namespace FBXpert
             {
                 
                 
-                TableName = RefreshIndicesAndGetTablename();
+                TableName = RefreshIndicesAndGetTablename(_orgIndexObject);
                 _tableObject.Indices.TryGetValue(indexName,out _orgIndexObject);
 
             }
@@ -71,7 +71,38 @@ namespace FBXpert
             
             _tables = tables;
             
-            _tableObject = StaticTreeClass.GetTableObjectForIndexForm(_dbReg, TableName);              
+            _tableObject = StaticTreeClass.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
+            _orgTableObject = _tableObject;
+            
+            FillSortingToCombo();
+            _dataFilled = true;
+        }
+
+        public IndexForm(Form parent, IndexClass indexObject,  DBRegistrationClass dbReg, List<TableClass> tables)
+        {
+            InitializeComponent();
+            this.MdiParent = parent;
+            BearbeitenMode = eBearbeiten.eEdit;
+            _dbReg = dbReg;
+            cbFields.Items.Clear();
+            lvFields.Items.Clear();
+            _indexObject     = indexObject;
+            _orgIndexObject  = indexObject;
+            
+                                                
+            var TableName = RefreshIndicesAndGetTablename(_orgIndexObject);
+
+            _tableObject = tables.Find(X=>X.Name == TableName);
+
+           // _tableObject.Indices.TryGetValue(_orgIndexObject.Name,out _orgIndexObject);
+                       
+            _indexActiveChanged = false;
+            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
+            _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;
+            
+            _tables = tables;
+            
+           // _tableObject = StaticTreeClass.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
             _orgTableObject = _tableObject;
             
             FillSortingToCombo();
@@ -101,14 +132,15 @@ namespace FBXpert
             _orgIndexObject = new IndexClass();
             _orgIndexObject.Name = $@"{tableObject.Name}_inx1";
             _orgIndexObject.IsActive = true;
+            _indexObject = _orgIndexObject;
             
-            _dataFilled = true;
             _tables = tables;
             _indexActiveChanged = false;
         
             lvFields.Items.Clear();
             
             txtIndexName.Text = _indexObject.Name.Trim();
+            FillSortingToCombo();
             _dataFilled = true;
         }
 
@@ -226,7 +258,7 @@ namespace FBXpert
             cbSorting.SelectedIndex = 0;
         }
 
-        public string RefreshIndicesAndGetTablename()
+        public string RefreshIndicesAndGetTablename(IndexClass _indexObject)
         {
             string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, _indexObject.Name.Trim());
             _dataFilled = false;
@@ -523,6 +555,12 @@ namespace FBXpert
         private void ckActive_CheckedChanged(object sender, EventArgs e)
         {
             if (_dataFilled)
+                MakeSQL();
+        }
+
+        private void cbSorting_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+             if (_dataFilled)
                 MakeSQL();
         }
     }

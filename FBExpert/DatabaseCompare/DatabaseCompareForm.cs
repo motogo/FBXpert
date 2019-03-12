@@ -88,11 +88,11 @@ namespace FBXpert.SonstForms
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.GetAllTableObjectsComplete(db),
-                Views  = StaticTreeClass.GetViewObjects(db)
+                Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(db),
+                Views  = StaticTreeClass.Instance().GetViewObjects(db)
             };
-            var generators = StaticTreeClass.GetGeneratorObjects(db);
-            var procedures = StaticTreeClass.GetProcedureObjects(db);
+            var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
+            var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
             
                 
             slbDbObjects1.ClearItems();
@@ -124,12 +124,12 @@ namespace FBXpert.SonstForms
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.GetAllTableObjectsComplete(db),
-                Views  = StaticTreeClass.GetViewObjects(db)                
+                Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(db),
+                Views  = StaticTreeClass.Instance().GetViewObjects(db)                
             };
 
-            var generators = StaticTreeClass.GetGeneratorObjects(db);
-            var procedures = StaticTreeClass.GetProcedureObjects(db);
+            var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
+            var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
                        
             slbDbObjects2.ClearItems();
             foreach (var tc in ddc.Tables.Values)

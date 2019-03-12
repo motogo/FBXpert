@@ -25,6 +25,10 @@ namespace FBXpert.Globals
 
     public static class AppStaticFunctionsClass
     {        
+        public static string GetFormattedError(string info)
+        {
+            return GetFormattedError(info, string.Empty);
+        }
 
         public static string GetFormattedError(string info, Exception ex)
         {
@@ -32,12 +36,8 @@ namespace FBXpert.Globals
         }
 
         public static string GetFormattedError(string info, string message)
-        {
-            /*
-            if(string.IsNullOrEmpty(message)) return $@"{StaticFunctionsClass.DateTimeNowStr()}  {info}";
-            return $@"{StaticFunctionsClass.DateTimeNowStr()}  {info}{Environment.NewLine}    ->msg:{message}";
-            */
-             if(string.IsNullOrEmpty(message)) return $@"{info}";
+        {            
+            if(string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
         }
 

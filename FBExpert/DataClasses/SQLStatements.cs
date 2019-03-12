@@ -501,6 +501,7 @@ namespace FBXpert.DataClasses
             sb.Append("SELECT ");
             
             sb.Append("RDB$INDICES.RDB$RELATION_NAME,");
+            sb.Append("RDB$INDICES.RDB$INDEX_INACTIVE,");
             sb.Append("fkc.rdb$constraint_name as Constraint_Name,");
             sb.Append("fkc.RDB$CONSTRAINT_TYPE as Constraint_Type,");
             sb.Append("ISF.rdb$field_name as FieldName,");

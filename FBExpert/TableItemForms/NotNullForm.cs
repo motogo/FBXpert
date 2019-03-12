@@ -46,9 +46,9 @@ namespace FBXpert
             CmGroup = cmGroup;
             Tn = tn;
             
-            TreeNode t = StaticTreeClass.FindPrevDBNode(Tn);
-            TreeNode orgTableNode = StaticTreeClass.FindPrevTableNode(Tn);
-            TreeNode TableNode = StaticTreeClass.FindFirstNodeInAllNodes(t,StaticVariablesClass.CommonTablesKeyGroupStr);
+            TreeNode t = StaticTreeClass.Instance().FindPrevDBNode(Tn);
+            TreeNode orgTableNode = StaticTreeClass.Instance().FindPrevTableNode(Tn);
+            TreeNode TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(t,StaticVariablesClass.CommonTablesKeyGroupStr);
 
             //Bei insert 
             if (Tn.Tag == null)
@@ -68,7 +68,7 @@ namespace FBXpert
                 NotNullObject.TableName = OrgTable.Name;
             }
 
-           // _tables = StaticTreeClass.GetTableObjectsFromNode(TableNode);
+           // _tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;

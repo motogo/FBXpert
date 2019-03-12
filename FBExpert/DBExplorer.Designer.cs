@@ -35,166 +35,170 @@
             this.imlTree = new System.Windows.Forms.ImageList(this.components);
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tstDatabase = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.tstConfiguration = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiEditDatabaseConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCloneDatabaseConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiNewDatabaseConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteDatabaseRegistration = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tstSQL = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiSQLScriptExplorer = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSQLExplorer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tstDesigners = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiCreateXMLDesign = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDatabaseDesigner = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiReportDesigner = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiReplicationDesigner = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCompareDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tstStatistics = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiStatistics = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEventsTracker = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiActiveConnections = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tstDatas = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiBackUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiExportData = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiIDBBinaries = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlUpper = new System.Windows.Forms.Panel();
-            this.hsRefreshDB = new SeControlsLib.HotSpot();
-            this.hsDatabaseDefinitionSave = new SeControlsLib.HotSpot();
-            this.hsLoadDefinition = new SeControlsLib.HotSpot();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.pnlLower = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.cmsGeneratorsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsGenerator = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsProcedure = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsProcedureGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsTable = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsIndices = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsFunctions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsTriggers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsDomains = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsFunctionGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsTriggerGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsTableGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsViewGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsDomainsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsIndicedGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsRolesGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsForeignKeysGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsForeignKeys = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsConstraints = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsConstrainsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsPrimaryKeyGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsPrimaryKeys = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ofdLoadDefinition = new System.Windows.Forms.OpenFileDialog();
+            this.sfdSaveDefinition = new System.Windows.Forms.SaveFileDialog();
+            this.cmsSystemTableGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsSystemTable = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSystemTablesSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsUserDefinedFunctions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsUserDefinedFunctionGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.hsRefreshDB = new SeControlsLib.HotSpot();
+            this.hsDatabaseDefinitionSave = new SeControlsLib.HotSpot();
+            this.hsLoadDefinition = new SeControlsLib.HotSpot();
+            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEditDatabaseConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCloneDatabaseConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewDatabaseConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteDatabaseRegistration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSQLScriptExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSQLExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCreateXMLDesign = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDatabaseDesigner = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReportDesigner = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReplicationDesigner = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCompareDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiStatistics = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEventsTracker = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiActiveConnections = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiBackUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExportData = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiIDBBinaries = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewGeneratorInGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllGenerators = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshGenerators = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsGenerator = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditGenerator = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropGenerator = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshGenerator = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsProcedure = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditProcedure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropProcedure = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshProcedure = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsProcedureGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewProcedureGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllProcedures = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshProcedures = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsTable = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiRefreshTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiEditTable = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditView = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropView = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditRole = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropRole = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsIndices = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditIndices = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropIndex = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiActivateIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeactivateIndex = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsFunctions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditFunction = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropFunction = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshFunction = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsTriggers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditTrigger = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropTrigger = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDomains = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditDomain = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropDomain = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsFunctionGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewFunctionGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllFunctions = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshFunctions = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsTriggerGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewTrigger = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllTriggers = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsTableGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewTable = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllTables = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefreshAllTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsViewGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewView = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllViews = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefreshViews = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiAlterCreateViewSQL = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDomainsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewDomain = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllDomains = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsIndicedGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewIndices = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllIndices = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiActivateAllIndeces = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeactivateAllIndeces = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiRecreateAllIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefreshIndeces = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsRolesGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewRole = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllRoles = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsForeignKeysGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiForeignKeyNew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllForeignKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiActivcateAllFK = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefreshForeignKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsForeignKeys = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditForeignKeys = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropForeignKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsConstraints = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiActivateFK = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEditConstraint = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropConstraint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tmsiRefreshConstraint = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsConstrainsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewConstraint = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDroppAllConstraints = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshConstraints = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsPrimaryKeyGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewPrimaryKey = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllPrimaryKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshPrimaryKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsPrimaryKeys = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditPrimaryKey = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropPrimaryKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.ofdLoadDefinition = new System.Windows.Forms.OpenFileDialog();
-            this.sfdSaveDefinition = new System.Windows.Forms.SaveFileDialog();
-            this.cmsSystemTableGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsSystemTable = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiRefreshSystemTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSystemTablesSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiOpenSystemTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsUserDefinedFunctions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEditUserDefinedFunctions = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsUserDefinedFunctionGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRecreateIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -325,7 +329,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(253, 722);
+            this.cmsDatabase.Size = new System.Drawing.Size(253, 700);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -345,38 +349,10 @@
             this.tstDatabase.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstDatabase.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
             // 
-            // tsmiOpen
-            // 
-            this.tsmiOpen.Image = global::FBXpert.Properties.Resources.on_gn_24x;
-            this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(252, 26);
-            this.tsmiOpen.Text = "Open";
-            // 
-            // tsmiClose
-            // 
-            this.tsmiClose.Image = global::FBXpert.Properties.Resources.cross_red_x20;
-            this.tsmiClose.Name = "tsmiClose";
-            this.tsmiClose.Size = new System.Drawing.Size(252, 26);
-            this.tsmiClose.Text = "Close";
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(249, 6);
-            // 
-            // tsmiMoveUp
-            // 
-            this.tsmiMoveUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
-            this.tsmiMoveUp.Name = "tsmiMoveUp";
-            this.tsmiMoveUp.Size = new System.Drawing.Size(252, 26);
-            this.tsmiMoveUp.Text = "Move up";
-            // 
-            // tsmiMoveDown
-            // 
-            this.tsmiMoveDown.Image = global::FBXpert.Properties.Resources.go_down22x;
-            this.tsmiMoveDown.Name = "tsmiMoveDown";
-            this.tsmiMoveDown.Size = new System.Drawing.Size(252, 26);
-            this.tsmiMoveDown.Text = "Move down";
             // 
             // toolStripSeparator20
             // 
@@ -398,34 +374,6 @@
             this.tstConfiguration.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstConfiguration.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
             // 
-            // tsmiEditDatabaseConfig
-            // 
-            this.tsmiEditDatabaseConfig.Image = global::FBXpert.Properties.Resources.database_gr_24x;
-            this.tsmiEditDatabaseConfig.Name = "tsmiEditDatabaseConfig";
-            this.tsmiEditDatabaseConfig.Size = new System.Drawing.Size(252, 26);
-            this.tsmiEditDatabaseConfig.Text = "Edit Database Configuration";
-            // 
-            // tsmiCloneDatabaseConfiguration
-            // 
-            this.tsmiCloneDatabaseConfiguration.Image = global::FBXpert.Properties.Resources.database_add;
-            this.tsmiCloneDatabaseConfiguration.Name = "tsmiCloneDatabaseConfiguration";
-            this.tsmiCloneDatabaseConfiguration.Size = new System.Drawing.Size(252, 26);
-            this.tsmiCloneDatabaseConfiguration.Text = "Clone Database Configuration";
-            // 
-            // tsmiNewDatabaseConfig
-            // 
-            this.tsmiNewDatabaseConfig.Image = global::FBXpert.Properties.Resources.database_add_24x;
-            this.tsmiNewDatabaseConfig.Name = "tsmiNewDatabaseConfig";
-            this.tsmiNewDatabaseConfig.Size = new System.Drawing.Size(252, 26);
-            this.tsmiNewDatabaseConfig.Text = "New Database Configuration";
-            // 
-            // tsmiDeleteDatabaseRegistration
-            // 
-            this.tsmiDeleteDatabaseRegistration.Image = global::FBXpert.Properties.Resources.database_erase_24;
-            this.tsmiDeleteDatabaseRegistration.Name = "tsmiDeleteDatabaseRegistration";
-            this.tsmiDeleteDatabaseRegistration.Size = new System.Drawing.Size(252, 26);
-            this.tsmiDeleteDatabaseRegistration.Text = "Delete Database Configuration";
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -445,20 +393,6 @@
             this.tstSQL.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tstSQL.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstSQL.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
-            // 
-            // tsmiSQLScriptExplorer
-            // 
-            this.tsmiSQLScriptExplorer.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
-            this.tsmiSQLScriptExplorer.Name = "tsmiSQLScriptExplorer";
-            this.tsmiSQLScriptExplorer.Size = new System.Drawing.Size(252, 26);
-            this.tsmiSQLScriptExplorer.Text = "Script-Explorer";
-            // 
-            // tsmiSQLExplorer
-            // 
-            this.tsmiSQLExplorer.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
-            this.tsmiSQLExplorer.Name = "tsmiSQLExplorer";
-            this.tsmiSQLExplorer.Size = new System.Drawing.Size(252, 26);
-            this.tsmiSQLExplorer.Text = "SQL-Explorer";
             // 
             // toolStripSeparator1
             // 
@@ -480,41 +414,6 @@
             this.tstDesigners.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstDesigners.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
             // 
-            // tsmiCreateXMLDesign
-            // 
-            this.tsmiCreateXMLDesign.Image = global::FBXpert.Properties.Resources.document_blue_x32;
-            this.tsmiCreateXMLDesign.Name = "tsmiCreateXMLDesign";
-            this.tsmiCreateXMLDesign.Size = new System.Drawing.Size(252, 26);
-            this.tsmiCreateXMLDesign.Text = "XML and Sourcecode designer";
-            // 
-            // tsmiDatabaseDesigner
-            // 
-            this.tsmiDatabaseDesigner.Image = global::FBXpert.Properties.Resources.applications_system_blue_x22;
-            this.tsmiDatabaseDesigner.Name = "tsmiDatabaseDesigner";
-            this.tsmiDatabaseDesigner.Size = new System.Drawing.Size(252, 26);
-            this.tsmiDatabaseDesigner.Text = "Database designer";
-            // 
-            // tsmiReportDesigner
-            // 
-            this.tsmiReportDesigner.Image = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
-            this.tsmiReportDesigner.Name = "tsmiReportDesigner";
-            this.tsmiReportDesigner.Size = new System.Drawing.Size(252, 26);
-            this.tsmiReportDesigner.Text = "Report designer";
-            // 
-            // tsmiReplicationDesigner
-            // 
-            this.tsmiReplicationDesigner.Image = global::FBXpert.Properties.Resources.database_replication_x24;
-            this.tsmiReplicationDesigner.Name = "tsmiReplicationDesigner";
-            this.tsmiReplicationDesigner.Size = new System.Drawing.Size(252, 26);
-            this.tsmiReplicationDesigner.Text = "Replication designer";
-            // 
-            // tsmiCompareDatabase
-            // 
-            this.tsmiCompareDatabase.Image = global::FBXpert.Properties.Resources.view_blue_x32;
-            this.tsmiCompareDatabase.Name = "tsmiCompareDatabase";
-            this.tsmiCompareDatabase.Size = new System.Drawing.Size(252, 26);
-            this.tsmiCompareDatabase.Text = "Compare database";
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -534,27 +433,6 @@
             this.tstStatistics.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tstStatistics.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstStatistics.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
-            // 
-            // tsmiStatistics
-            // 
-            this.tsmiStatistics.Image = global::FBXpert.Properties.Resources.graph_24x;
-            this.tsmiStatistics.Name = "tsmiStatistics";
-            this.tsmiStatistics.Size = new System.Drawing.Size(252, 26);
-            this.tsmiStatistics.Text = "Statistics";
-            // 
-            // tsmiEventsTracker
-            // 
-            this.tsmiEventsTracker.Image = global::FBXpert.Properties.Resources.graph_24x;
-            this.tsmiEventsTracker.Name = "tsmiEventsTracker";
-            this.tsmiEventsTracker.Size = new System.Drawing.Size(252, 26);
-            this.tsmiEventsTracker.Text = "Eventstracker";
-            // 
-            // tsmiActiveConnections
-            // 
-            this.tsmiActiveConnections.Image = global::FBXpert.Properties.Resources.system_search_blue_22x;
-            this.tsmiActiveConnections.Name = "tsmiActiveConnections";
-            this.tsmiActiveConnections.Size = new System.Drawing.Size(252, 26);
-            this.tsmiActiveConnections.Text = "Active Connections / Monitoring";
             // 
             // toolStripSeparator5
             // 
@@ -578,31 +456,10 @@
             this.tstDatas.MouseEnter += new System.EventHandler(this.ToolStripTextBox_MouseEnter);
             this.tstDatas.MouseLeave += new System.EventHandler(this.ToolStripTextBox_MouseLeave);
             // 
-            // tsmiBackUp
-            // 
-            this.tsmiBackUp.Image = global::FBXpert.Properties.Resources.database_arrow_r_x24;
-            this.tsmiBackUp.Name = "tsmiBackUp";
-            this.tsmiBackUp.Size = new System.Drawing.Size(252, 26);
-            this.tsmiBackUp.Text = "Backup/Restore";
-            // 
-            // tsmiExportData
-            // 
-            this.tsmiExportData.Image = global::FBXpert.Properties.Resources.data_export_gn_x24;
-            this.tsmiExportData.Name = "tsmiExportData";
-            this.tsmiExportData.Size = new System.Drawing.Size(252, 26);
-            this.tsmiExportData.Text = "Export data";
-            // 
             // toolStripSeparator21
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
             this.toolStripSeparator21.Size = new System.Drawing.Size(249, 6);
-            // 
-            // tsmiIDBBinaries
-            // 
-            this.tsmiIDBBinaries.Image = global::FBXpert.Properties.Resources.console_x24;
-            this.tsmiIDBBinaries.Name = "tsmiIDBBinaries";
-            this.tsmiIDBBinaries.Size = new System.Drawing.Size(252, 26);
-            this.tsmiIDBBinaries.Text = "FB Binaries";
             // 
             // pnlUpper
             // 
@@ -615,6 +472,446 @@
             this.pnlUpper.Name = "pnlUpper";
             this.pnlUpper.Size = new System.Drawing.Size(260, 42);
             this.pnlUpper.TabIndex = 1;
+            // 
+            // pnlCenter
+            // 
+            this.pnlCenter.Controls.Add(this.gbDatabases);
+            this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCenter.Location = new System.Drawing.Point(0, 42);
+            this.pnlCenter.Name = "pnlCenter";
+            this.pnlCenter.Size = new System.Drawing.Size(260, 437);
+            this.pnlCenter.TabIndex = 2;
+            // 
+            // pnlLower
+            // 
+            this.pnlLower.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlLower.Controls.Add(this.statusStrip1);
+            this.pnlLower.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlLower.Location = new System.Drawing.Point(0, 479);
+            this.pnlLower.Name = "pnlLower";
+            this.pnlLower.Size = new System.Drawing.Size(260, 21);
+            this.pnlLower.TabIndex = 3;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, -1);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(260, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // cmsGeneratorsGroup
+            // 
+            this.cmsGeneratorsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsGeneratorsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewGeneratorInGroup,
+            this.tsmiDropAllGenerators,
+            this.toolStripSeparator13,
+            this.tsmiRefreshGenerators});
+            this.cmsGeneratorsGroup.Name = "contextMenuStrip1";
+            this.cmsGeneratorsGroup.Size = new System.Drawing.Size(179, 88);
+            this.cmsGeneratorsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(175, 6);
+            // 
+            // cmsGenerator
+            // 
+            this.cmsGenerator.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsGenerator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditGenerator,
+            this.tsmiDropGenerator,
+            this.toolStripSeparator14,
+            this.tsmiRefreshGenerator});
+            this.cmsGenerator.Name = "contextMenuStrip1";
+            this.cmsGenerator.Size = new System.Drawing.Size(172, 88);
+            this.cmsGenerator.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(168, 6);
+            // 
+            // cmsProcedure
+            // 
+            this.cmsProcedure.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsProcedure.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditProcedure,
+            this.tsmiDropProcedure,
+            this.toolStripSeparator12,
+            this.tsmiRefreshProcedure});
+            this.cmsProcedure.Name = "contextMenuStrip1";
+            this.cmsProcedure.Size = new System.Drawing.Size(175, 88);
+            this.cmsProcedure.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(171, 6);
+            // 
+            // cmsProcedureGroup
+            // 
+            this.cmsProcedureGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsProcedureGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewProcedureGroup,
+            this.tsmiDropAllProcedures,
+            this.toolStripSeparator11,
+            this.tsmiRefreshProcedures});
+            this.cmsProcedureGroup.Name = "contextMenuStrip1";
+            this.cmsProcedureGroup.Size = new System.Drawing.Size(182, 88);
+            this.cmsProcedureGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(178, 6);
+            // 
+            // cmsTable
+            // 
+            this.cmsTable.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRefreshTable,
+            this.toolStripSeparator7,
+            this.tsmiEditTable,
+            this.tsmiDropTable});
+            this.cmsTable.Name = "contextMenuStrip1";
+            this.cmsTable.Size = new System.Drawing.Size(149, 88);
+            this.cmsTable.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cmsView
+            // 
+            this.cmsView.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditView,
+            this.tsmiDropView});
+            this.cmsView.Name = "contextMenuStrip1";
+            this.cmsView.Size = new System.Drawing.Size(132, 56);
+            this.cmsView.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsRoles
+            // 
+            this.cmsRoles.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditRole,
+            this.tsmiDropRole});
+            this.cmsRoles.Name = "contextMenuStrip1";
+            this.cmsRoles.Size = new System.Drawing.Size(128, 56);
+            this.cmsRoles.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsIndices
+            // 
+            this.cmsIndices.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsIndices.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditIndices,
+            this.tsmiNewIndex,
+            this.tsmiDropIndex,
+            this.toolStripSeparator22,
+            this.tsmiActivateIndex,
+            this.tsmiDeactivateIndex,
+            this.tsmiRecreateIndex});
+            this.cmsIndices.Name = "contextMenuStrip1";
+            this.cmsIndices.Size = new System.Drawing.Size(222, 166);
+            this.cmsIndices.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            this.toolStripSeparator22.Size = new System.Drawing.Size(218, 6);
+            // 
+            // cmsFunctions
+            // 
+            this.cmsFunctions.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsFunctions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditFunction,
+            this.tsmiDropFunction,
+            this.toolStripSeparator9,
+            this.tsmiRefreshFunction});
+            this.cmsFunctions.Name = "contextMenuStrip1";
+            this.cmsFunctions.Size = new System.Drawing.Size(153, 88);
+            this.cmsFunctions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cmsTriggers
+            // 
+            this.cmsTriggers.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsTriggers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditTrigger,
+            this.tsmiDropTrigger});
+            this.cmsTriggers.Name = "contextMenuStrip1";
+            this.cmsTriggers.Size = new System.Drawing.Size(143, 56);
+            this.cmsTriggers.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsDomains
+            // 
+            this.cmsDomains.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsDomains.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditDomain,
+            this.tsmiDropDomain});
+            this.cmsDomains.Name = "contextMenuStrip1";
+            this.cmsDomains.Size = new System.Drawing.Size(149, 56);
+            this.cmsDomains.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsFunctionGroup
+            // 
+            this.cmsFunctionGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsFunctionGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewFunctionGroup,
+            this.tsmiDropAllFunctions,
+            this.toolStripSeparator10,
+            this.tsmiRefreshFunctions});
+            this.cmsFunctionGroup.Name = "contextMenuStrip1";
+            this.cmsFunctionGroup.Size = new System.Drawing.Size(173, 88);
+            this.cmsFunctionGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(169, 6);
+            // 
+            // cmsTriggerGroup
+            // 
+            this.cmsTriggerGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsTriggerGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewTrigger,
+            this.tsmiDropAllTriggers});
+            this.cmsTriggerGroup.Name = "contextMenuStrip1";
+            this.cmsTriggerGroup.Size = new System.Drawing.Size(163, 56);
+            // 
+            // cmsTableGroup
+            // 
+            this.cmsTableGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsTableGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewTable,
+            this.tsmiDropAllTables,
+            this.tsmiRefreshAllTables,
+            this.toolStripSeparator19});
+            this.cmsTableGroup.Name = "contextMenuStrip1";
+            this.cmsTableGroup.Size = new System.Drawing.Size(167, 88);
+            this.cmsTableGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(163, 6);
+            // 
+            // cmsViewGroup
+            // 
+            this.cmsViewGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsViewGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewView,
+            this.tsmiDropAllViews,
+            this.tsmiRefreshViews,
+            this.toolStripSeparator18,
+            this.tsmiAlterCreateViewSQL});
+            this.cmsViewGroup.Name = "contextMenuStrip1";
+            this.cmsViewGroup.Size = new System.Drawing.Size(167, 114);
+            this.cmsViewGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(163, 6);
+            // 
+            // cmsDomainsGroup
+            // 
+            this.cmsDomainsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsDomainsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewDomain,
+            this.tsmiDropAllDomains});
+            this.cmsDomainsGroup.Name = "contextMenuStrip1";
+            this.cmsDomainsGroup.Size = new System.Drawing.Size(169, 56);
+            this.cmsDomainsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // cmsIndicedGroup
+            // 
+            this.cmsIndicedGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsIndicedGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewIndices,
+            this.tsmiDropAllIndices,
+            this.tsmiActivateAllIndeces,
+            this.tsmiDeactivateAllIndeces,
+            this.tsmiRecreateAllIndex,
+            this.toolStripSeparator15,
+            this.tsmiRefreshIndeces});
+            this.cmsIndicedGroup.Name = "contextMenuStrip1";
+            this.cmsIndicedGroup.Size = new System.Drawing.Size(246, 166);
+            this.cmsIndicedGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(242, 6);
+            // 
+            // cmsRolesGroup
+            // 
+            this.cmsRolesGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsRolesGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewRole,
+            this.tsmiDropAllRoles});
+            this.cmsRolesGroup.Name = "contextMenuStrip1";
+            this.cmsRolesGroup.Size = new System.Drawing.Size(148, 56);
+            // 
+            // cmsForeignKeysGroup
+            // 
+            this.cmsForeignKeysGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsForeignKeysGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiForeignKeyNew,
+            this.tsmiDropAllForeignKeys,
+            this.tsmiActivcateAllFK,
+            this.toolStripSeparator6,
+            this.tsmiRefreshForeignKey});
+            this.cmsForeignKeysGroup.Name = "contextMenuStrip1";
+            this.cmsForeignKeysGroup.Size = new System.Drawing.Size(187, 114);
+            this.cmsForeignKeysGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(183, 6);
+            // 
+            // cmsForeignKeys
+            // 
+            this.cmsForeignKeys.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsForeignKeys.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditForeignKeys,
+            this.tsmiDropForeignKey,
+            this.tsmiActivateFK});
+            this.cmsForeignKeys.Name = "contextMenuStrip1";
+            this.cmsForeignKeys.Size = new System.Drawing.Size(170, 82);
+            this.cmsForeignKeys.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsConstraints
+            // 
+            this.cmsConstraints.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsConstraints.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditConstraint,
+            this.tsmiDropConstraint,
+            this.toolStripSeparator17,
+            this.tmsiRefreshConstraint});
+            this.cmsConstraints.Name = "contextMenuStrip1";
+            this.cmsConstraints.Size = new System.Drawing.Size(182, 88);
+            this.cmsConstraints.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(178, 6);
+            // 
+            // cmsConstrainsGroup
+            // 
+            this.cmsConstrainsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsConstrainsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewConstraint,
+            this.tsmiDroppAllConstraints,
+            this.toolStripSeparator16,
+            this.tsmiRefreshConstraints});
+            this.cmsConstrainsGroup.Name = "contextMenuStrip1";
+            this.cmsConstrainsGroup.Size = new System.Drawing.Size(181, 88);
+            this.cmsConstrainsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(177, 6);
+            // 
+            // cmsPrimaryKeyGroup
+            // 
+            this.cmsPrimaryKeyGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsPrimaryKeyGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewPrimaryKey,
+            this.tsmiDropAllPrimaryKeys,
+            this.toolStripSeparator8,
+            this.tsmiRefreshPrimaryKeys});
+            this.cmsPrimaryKeyGroup.Name = "contextMenuStrip1";
+            this.cmsPrimaryKeyGroup.Size = new System.Drawing.Size(190, 88);
+            this.cmsPrimaryKeyGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
+            // 
+            // cmsPrimaryKeys
+            // 
+            this.cmsPrimaryKeys.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsPrimaryKeys.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditPrimaryKey,
+            this.tsmiDropPrimaryKey});
+            this.cmsPrimaryKeys.Name = "contextMenuStrip1";
+            this.cmsPrimaryKeys.Size = new System.Drawing.Size(171, 56);
+            this.cmsPrimaryKeys.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // ofdLoadDefinition
+            // 
+            this.ofdLoadDefinition.DefaultExt = "*.XML";
+            this.ofdLoadDefinition.Filter = "XML definitions|*.XML|All|*.*";
+            // 
+            // sfdSaveDefinition
+            // 
+            this.sfdSaveDefinition.DefaultExt = "*.XML";
+            this.sfdSaveDefinition.Filter = "XML definition|*.XML|All|*.*";
+            // 
+            // cmsSystemTableGroup
+            // 
+            this.cmsSystemTableGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsSystemTableGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3});
+            this.cmsSystemTableGroup.Name = "contextMenuStrip1";
+            this.cmsSystemTableGroup.Size = new System.Drawing.Size(207, 30);
+            // 
+            // cmsSystemTable
+            // 
+            this.cmsSystemTable.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsSystemTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRefreshSystemTable,
+            this.tsmiSystemTablesSeparator1,
+            this.tsmiOpenSystemTable});
+            this.cmsSystemTable.Name = "contextMenuStrip1";
+            this.cmsSystemTable.Size = new System.Drawing.Size(187, 62);
+            this.cmsSystemTable.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // tsmiSystemTablesSeparator1
+            // 
+            this.tsmiSystemTablesSeparator1.Name = "tsmiSystemTablesSeparator1";
+            this.tsmiSystemTablesSeparator1.Size = new System.Drawing.Size(183, 6);
+            // 
+            // cmsUserDefinedFunctions
+            // 
+            this.cmsUserDefinedFunctions.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsUserDefinedFunctions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditUserDefinedFunctions});
+            this.cmsUserDefinedFunctions.Name = "cmsUserDefinedFunctions";
+            this.cmsUserDefinedFunctions.Size = new System.Drawing.Size(124, 30);
+            this.cmsUserDefinedFunctions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // cmsUserDefinedFunctionGroup
+            // 
+            this.cmsUserDefinedFunctionGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsUserDefinedFunctionGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5});
+            this.cmsUserDefinedFunctionGroup.Name = "cmsUserDefinedFunctionGroup";
+            this.cmsUserDefinedFunctionGroup.Size = new System.Drawing.Size(151, 30);
+            this.cmsUserDefinedFunctionGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // hsRefreshDB
             // 
@@ -757,53 +1054,152 @@
             this.hsLoadDefinition.UseVisualStyleBackColor = false;
             this.hsLoadDefinition.Click += new System.EventHandler(this.hsLoadDefinition_Click);
             // 
-            // pnlCenter
+            // tsmiOpen
             // 
-            this.pnlCenter.Controls.Add(this.gbDatabases);
-            this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 42);
-            this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(260, 437);
-            this.pnlCenter.TabIndex = 2;
+            this.tsmiOpen.Image = global::FBXpert.Properties.Resources.on_gn_24x;
+            this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.Size = new System.Drawing.Size(252, 26);
+            this.tsmiOpen.Text = "Open";
             // 
-            // pnlLower
+            // tsmiClose
             // 
-            this.pnlLower.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlLower.Controls.Add(this.statusStrip1);
-            this.pnlLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlLower.Location = new System.Drawing.Point(0, 479);
-            this.pnlLower.Name = "pnlLower";
-            this.pnlLower.Size = new System.Drawing.Size(260, 21);
-            this.pnlLower.TabIndex = 3;
+            this.tsmiClose.Image = global::FBXpert.Properties.Resources.cross_red_x20;
+            this.tsmiClose.Name = "tsmiClose";
+            this.tsmiClose.Size = new System.Drawing.Size(252, 26);
+            this.tsmiClose.Text = "Close";
             // 
-            // statusStrip1
+            // tsmiMoveUp
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, -1);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(260, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
+            this.tsmiMoveUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
+            this.tsmiMoveUp.Name = "tsmiMoveUp";
+            this.tsmiMoveUp.Size = new System.Drawing.Size(252, 26);
+            this.tsmiMoveUp.Text = "Move up";
             // 
-            // toolStripStatusLabel1
+            // tsmiMoveDown
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.tsmiMoveDown.Image = global::FBXpert.Properties.Resources.go_down22x;
+            this.tsmiMoveDown.Name = "tsmiMoveDown";
+            this.tsmiMoveDown.Size = new System.Drawing.Size(252, 26);
+            this.tsmiMoveDown.Text = "Move down";
             // 
-            // cmsGeneratorsGroup
+            // tsmiEditDatabaseConfig
             // 
-            this.cmsGeneratorsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsGeneratorsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewGeneratorInGroup,
-            this.tsmiDropAllGenerators,
-            this.toolStripSeparator13,
-            this.tsmiRefreshGenerators});
-            this.cmsGeneratorsGroup.Name = "contextMenuStrip1";
-            this.cmsGeneratorsGroup.Size = new System.Drawing.Size(179, 88);
-            this.cmsGeneratorsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
+            this.tsmiEditDatabaseConfig.Image = global::FBXpert.Properties.Resources.database_gr_24x;
+            this.tsmiEditDatabaseConfig.Name = "tsmiEditDatabaseConfig";
+            this.tsmiEditDatabaseConfig.Size = new System.Drawing.Size(252, 26);
+            this.tsmiEditDatabaseConfig.Text = "Edit Database Configuration";
+            // 
+            // tsmiCloneDatabaseConfiguration
+            // 
+            this.tsmiCloneDatabaseConfiguration.Image = global::FBXpert.Properties.Resources.database_add;
+            this.tsmiCloneDatabaseConfiguration.Name = "tsmiCloneDatabaseConfiguration";
+            this.tsmiCloneDatabaseConfiguration.Size = new System.Drawing.Size(252, 26);
+            this.tsmiCloneDatabaseConfiguration.Text = "Clone Database Configuration";
+            // 
+            // tsmiNewDatabaseConfig
+            // 
+            this.tsmiNewDatabaseConfig.Image = global::FBXpert.Properties.Resources.database_add_24x;
+            this.tsmiNewDatabaseConfig.Name = "tsmiNewDatabaseConfig";
+            this.tsmiNewDatabaseConfig.Size = new System.Drawing.Size(252, 26);
+            this.tsmiNewDatabaseConfig.Text = "New Database Configuration";
+            // 
+            // tsmiDeleteDatabaseRegistration
+            // 
+            this.tsmiDeleteDatabaseRegistration.Image = global::FBXpert.Properties.Resources.database_erase_24;
+            this.tsmiDeleteDatabaseRegistration.Name = "tsmiDeleteDatabaseRegistration";
+            this.tsmiDeleteDatabaseRegistration.Size = new System.Drawing.Size(252, 26);
+            this.tsmiDeleteDatabaseRegistration.Text = "Delete Database Configuration";
+            // 
+            // tsmiSQLScriptExplorer
+            // 
+            this.tsmiSQLScriptExplorer.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
+            this.tsmiSQLScriptExplorer.Name = "tsmiSQLScriptExplorer";
+            this.tsmiSQLScriptExplorer.Size = new System.Drawing.Size(252, 26);
+            this.tsmiSQLScriptExplorer.Text = "Script-Explorer";
+            // 
+            // tsmiSQLExplorer
+            // 
+            this.tsmiSQLExplorer.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
+            this.tsmiSQLExplorer.Name = "tsmiSQLExplorer";
+            this.tsmiSQLExplorer.Size = new System.Drawing.Size(252, 26);
+            this.tsmiSQLExplorer.Text = "SQL-Explorer";
+            // 
+            // tsmiCreateXMLDesign
+            // 
+            this.tsmiCreateXMLDesign.Image = global::FBXpert.Properties.Resources.document_blue_x32;
+            this.tsmiCreateXMLDesign.Name = "tsmiCreateXMLDesign";
+            this.tsmiCreateXMLDesign.Size = new System.Drawing.Size(252, 26);
+            this.tsmiCreateXMLDesign.Text = "XML and Sourcecode designer";
+            // 
+            // tsmiDatabaseDesigner
+            // 
+            this.tsmiDatabaseDesigner.Image = global::FBXpert.Properties.Resources.applications_system_blue_x22;
+            this.tsmiDatabaseDesigner.Name = "tsmiDatabaseDesigner";
+            this.tsmiDatabaseDesigner.Size = new System.Drawing.Size(252, 26);
+            this.tsmiDatabaseDesigner.Text = "Database designer";
+            // 
+            // tsmiReportDesigner
+            // 
+            this.tsmiReportDesigner.Image = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
+            this.tsmiReportDesigner.Name = "tsmiReportDesigner";
+            this.tsmiReportDesigner.Size = new System.Drawing.Size(252, 26);
+            this.tsmiReportDesigner.Text = "Report designer";
+            // 
+            // tsmiReplicationDesigner
+            // 
+            this.tsmiReplicationDesigner.Image = global::FBXpert.Properties.Resources.database_replication_x24;
+            this.tsmiReplicationDesigner.Name = "tsmiReplicationDesigner";
+            this.tsmiReplicationDesigner.Size = new System.Drawing.Size(252, 26);
+            this.tsmiReplicationDesigner.Text = "Replication designer";
+            // 
+            // tsmiCompareDatabase
+            // 
+            this.tsmiCompareDatabase.Image = global::FBXpert.Properties.Resources.view_blue_x32;
+            this.tsmiCompareDatabase.Name = "tsmiCompareDatabase";
+            this.tsmiCompareDatabase.Size = new System.Drawing.Size(252, 26);
+            this.tsmiCompareDatabase.Text = "Compare database";
+            // 
+            // tsmiStatistics
+            // 
+            this.tsmiStatistics.Image = global::FBXpert.Properties.Resources.graph_24x;
+            this.tsmiStatistics.Name = "tsmiStatistics";
+            this.tsmiStatistics.Size = new System.Drawing.Size(252, 26);
+            this.tsmiStatistics.Text = "Statistics";
+            // 
+            // tsmiEventsTracker
+            // 
+            this.tsmiEventsTracker.Image = global::FBXpert.Properties.Resources.graph_24x;
+            this.tsmiEventsTracker.Name = "tsmiEventsTracker";
+            this.tsmiEventsTracker.Size = new System.Drawing.Size(252, 26);
+            this.tsmiEventsTracker.Text = "Eventstracker";
+            // 
+            // tsmiActiveConnections
+            // 
+            this.tsmiActiveConnections.Image = global::FBXpert.Properties.Resources.system_search_blue_22x;
+            this.tsmiActiveConnections.Name = "tsmiActiveConnections";
+            this.tsmiActiveConnections.Size = new System.Drawing.Size(252, 26);
+            this.tsmiActiveConnections.Text = "Active Connections / Monitoring";
+            // 
+            // tsmiBackUp
+            // 
+            this.tsmiBackUp.Image = global::FBXpert.Properties.Resources.database_arrow_r_x24;
+            this.tsmiBackUp.Name = "tsmiBackUp";
+            this.tsmiBackUp.Size = new System.Drawing.Size(252, 26);
+            this.tsmiBackUp.Text = "Backup/Restore";
+            // 
+            // tsmiExportData
+            // 
+            this.tsmiExportData.Image = global::FBXpert.Properties.Resources.data_export_gn_x24;
+            this.tsmiExportData.Name = "tsmiExportData";
+            this.tsmiExportData.Size = new System.Drawing.Size(252, 26);
+            this.tsmiExportData.Text = "Export data";
+            // 
+            // tsmiIDBBinaries
+            // 
+            this.tsmiIDBBinaries.Image = global::FBXpert.Properties.Resources.console_x24;
+            this.tsmiIDBBinaries.Name = "tsmiIDBBinaries";
+            this.tsmiIDBBinaries.Size = new System.Drawing.Size(252, 26);
+            this.tsmiIDBBinaries.Text = "FB Binaries";
             // 
             // tsmiNewGeneratorInGroup
             // 
@@ -819,29 +1215,12 @@
             this.tsmiDropAllGenerators.Size = new System.Drawing.Size(178, 26);
             this.tsmiDropAllGenerators.Text = "Drop all generators";
             // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(175, 6);
-            // 
             // tsmiRefreshGenerators
             // 
             this.tsmiRefreshGenerators.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshGenerators.Name = "tsmiRefreshGenerators";
             this.tsmiRefreshGenerators.Size = new System.Drawing.Size(178, 26);
             this.tsmiRefreshGenerators.Text = "Refresh generator";
-            // 
-            // cmsGenerator
-            // 
-            this.cmsGenerator.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsGenerator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditGenerator,
-            this.tsmiDropGenerator,
-            this.toolStripSeparator14,
-            this.tsmiRefreshGenerator});
-            this.cmsGenerator.Name = "contextMenuStrip1";
-            this.cmsGenerator.Size = new System.Drawing.Size(172, 88);
-            this.cmsGenerator.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditGenerator
             // 
@@ -857,29 +1236,12 @@
             this.tsmiDropGenerator.Size = new System.Drawing.Size(171, 26);
             this.tsmiDropGenerator.Text = "Drop generator";
             // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(168, 6);
-            // 
             // tsmiRefreshGenerator
             // 
             this.tsmiRefreshGenerator.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshGenerator.Name = "tsmiRefreshGenerator";
             this.tsmiRefreshGenerator.Size = new System.Drawing.Size(171, 26);
             this.tsmiRefreshGenerator.Text = "Refresh generator";
-            // 
-            // cmsProcedure
-            // 
-            this.cmsProcedure.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsProcedure.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditProcedure,
-            this.tsmiDropProcedure,
-            this.toolStripSeparator12,
-            this.tsmiRefreshProcedure});
-            this.cmsProcedure.Name = "contextMenuStrip1";
-            this.cmsProcedure.Size = new System.Drawing.Size(175, 88);
-            this.cmsProcedure.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditProcedure
             // 
@@ -895,29 +1257,12 @@
             this.tsmiDropProcedure.Size = new System.Drawing.Size(174, 26);
             this.tsmiDropProcedure.Text = "Drop procedure";
             // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(171, 6);
-            // 
             // tsmiRefreshProcedure
             // 
             this.tsmiRefreshProcedure.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshProcedure.Name = "tsmiRefreshProcedure";
             this.tsmiRefreshProcedure.Size = new System.Drawing.Size(174, 26);
             this.tsmiRefreshProcedure.Text = "Refresh procedure";
-            // 
-            // cmsProcedureGroup
-            // 
-            this.cmsProcedureGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsProcedureGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewProcedureGroup,
-            this.tsmiDropAllProcedures,
-            this.toolStripSeparator11,
-            this.tsmiRefreshProcedures});
-            this.cmsProcedureGroup.Name = "contextMenuStrip1";
-            this.cmsProcedureGroup.Size = new System.Drawing.Size(182, 88);
-            this.cmsProcedureGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewProcedureGroup
             // 
@@ -933,11 +1278,6 @@
             this.tsmiDropAllProcedures.Size = new System.Drawing.Size(181, 26);
             this.tsmiDropAllProcedures.Text = "Drop all procedures";
             // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(178, 6);
-            // 
             // tsmiRefreshProcedures
             // 
             this.tsmiRefreshProcedures.Image = global::FBXpert.Properties.Resources.view_refresh22x;
@@ -945,29 +1285,12 @@
             this.tsmiRefreshProcedures.Size = new System.Drawing.Size(181, 26);
             this.tsmiRefreshProcedures.Text = "Refresh procedures";
             // 
-            // cmsTable
-            // 
-            this.cmsTable.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRefreshTable,
-            this.toolStripSeparator7,
-            this.tsmiEditTable,
-            this.tsmiDropTable});
-            this.cmsTable.Name = "contextMenuStrip1";
-            this.cmsTable.Size = new System.Drawing.Size(149, 88);
-            this.cmsTable.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
-            // 
             // tsmiRefreshTable
             // 
             this.tsmiRefreshTable.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshTable.Name = "tsmiRefreshTable";
             this.tsmiRefreshTable.Size = new System.Drawing.Size(148, 26);
             this.tsmiRefreshTable.Text = "Refresh Table";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
             // 
             // tsmiEditTable
             // 
@@ -983,16 +1306,6 @@
             this.tsmiDropTable.Size = new System.Drawing.Size(148, 26);
             this.tsmiDropTable.Text = "Drop table";
             // 
-            // cmsView
-            // 
-            this.cmsView.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditView,
-            this.tsmiDropView});
-            this.cmsView.Name = "contextMenuStrip1";
-            this.cmsView.Size = new System.Drawing.Size(132, 56);
-            this.cmsView.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
-            // 
             // tsmiEditView
             // 
             this.tsmiEditView.Image = global::FBXpert.Properties.Resources.format_text_direction_x22;
@@ -1006,16 +1319,6 @@
             this.tsmiDropView.Name = "tsmiDropView";
             this.tsmiDropView.Size = new System.Drawing.Size(131, 26);
             this.tsmiDropView.Text = "Drop view";
-            // 
-            // cmsRoles
-            // 
-            this.cmsRoles.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditRole,
-            this.tsmiDropRole});
-            this.cmsRoles.Name = "contextMenuStrip1";
-            this.cmsRoles.Size = new System.Drawing.Size(128, 56);
-            this.cmsRoles.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditRole
             // 
@@ -1031,71 +1334,40 @@
             this.tsmiDropRole.Size = new System.Drawing.Size(127, 26);
             this.tsmiDropRole.Text = "Drop role";
             // 
-            // cmsIndices
-            // 
-            this.cmsIndices.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsIndices.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditIndices,
-            this.tsmiNewIndex,
-            this.tsmiDropIndex,
-            this.toolStripSeparator22,
-            this.tsmiActivateIndex,
-            this.tsmiDeactivateIndex});
-            this.cmsIndices.Name = "contextMenuStrip1";
-            this.cmsIndices.Size = new System.Drawing.Size(165, 140);
-            this.cmsIndices.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
-            // 
             // tsmiEditIndices
             // 
             this.tsmiEditIndices.Image = global::FBXpert.Properties.Resources.format_text_direction_x22;
             this.tsmiEditIndices.Name = "tsmiEditIndices";
-            this.tsmiEditIndices.Size = new System.Drawing.Size(164, 26);
+            this.tsmiEditIndices.Size = new System.Drawing.Size(221, 26);
             this.tsmiEditIndices.Text = "Edit index";
             // 
             // tsmiNewIndex
             // 
             this.tsmiNewIndex.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.tsmiNewIndex.Name = "tsmiNewIndex";
-            this.tsmiNewIndex.Size = new System.Drawing.Size(164, 26);
+            this.tsmiNewIndex.Size = new System.Drawing.Size(221, 26);
             this.tsmiNewIndex.Text = "New Index";
             // 
             // tsmiDropIndex
             // 
             this.tsmiDropIndex.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiDropIndex.Name = "tsmiDropIndex";
-            this.tsmiDropIndex.Size = new System.Drawing.Size(164, 26);
+            this.tsmiDropIndex.Size = new System.Drawing.Size(221, 26);
             this.tsmiDropIndex.Text = "Drop index";
-            // 
-            // toolStripSeparator22
-            // 
-            this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(161, 6);
             // 
             // tsmiActivateIndex
             // 
             this.tsmiActivateIndex.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.tsmiActivateIndex.Name = "tsmiActivateIndex";
-            this.tsmiActivateIndex.Size = new System.Drawing.Size(164, 26);
+            this.tsmiActivateIndex.Size = new System.Drawing.Size(221, 26);
             this.tsmiActivateIndex.Text = "Activate index";
             // 
             // tsmiDeactivateIndex
             // 
             this.tsmiDeactivateIndex.Image = global::FBXpert.Properties.Resources.NoGo_22;
             this.tsmiDeactivateIndex.Name = "tsmiDeactivateIndex";
-            this.tsmiDeactivateIndex.Size = new System.Drawing.Size(164, 26);
+            this.tsmiDeactivateIndex.Size = new System.Drawing.Size(221, 26);
             this.tsmiDeactivateIndex.Text = "Deactivate index";
-            // 
-            // cmsFunctions
-            // 
-            this.cmsFunctions.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsFunctions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditFunction,
-            this.tsmiDropFunction,
-            this.toolStripSeparator9,
-            this.tsmiRefreshFunction});
-            this.cmsFunctions.Name = "contextMenuStrip1";
-            this.cmsFunctions.Size = new System.Drawing.Size(153, 88);
-            this.cmsFunctions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditFunction
             // 
@@ -1111,27 +1383,12 @@
             this.tsmiDropFunction.Size = new System.Drawing.Size(152, 26);
             this.tsmiDropFunction.Text = "Drop function";
             // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(149, 6);
-            // 
             // tsmiRefreshFunction
             // 
             this.tsmiRefreshFunction.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshFunction.Name = "tsmiRefreshFunction";
             this.tsmiRefreshFunction.Size = new System.Drawing.Size(152, 26);
             this.tsmiRefreshFunction.Text = "Refresh";
-            // 
-            // cmsTriggers
-            // 
-            this.cmsTriggers.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsTriggers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditTrigger,
-            this.tsmiDropTrigger});
-            this.cmsTriggers.Name = "contextMenuStrip1";
-            this.cmsTriggers.Size = new System.Drawing.Size(143, 56);
-            this.cmsTriggers.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditTrigger
             // 
@@ -1147,16 +1404,6 @@
             this.tsmiDropTrigger.Size = new System.Drawing.Size(142, 26);
             this.tsmiDropTrigger.Text = "Drop trigger";
             // 
-            // cmsDomains
-            // 
-            this.cmsDomains.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsDomains.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditDomain,
-            this.tsmiDropDomain});
-            this.cmsDomains.Name = "contextMenuStrip1";
-            this.cmsDomains.Size = new System.Drawing.Size(149, 56);
-            this.cmsDomains.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
-            // 
             // tsmiEditDomain
             // 
             this.tsmiEditDomain.Image = global::FBXpert.Properties.Resources.format_text_direction_x22;
@@ -1170,18 +1417,6 @@
             this.tsmiDropDomain.Name = "tsmiDropDomain";
             this.tsmiDropDomain.Size = new System.Drawing.Size(148, 26);
             this.tsmiDropDomain.Text = "Drop domain";
-            // 
-            // cmsFunctionGroup
-            // 
-            this.cmsFunctionGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsFunctionGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewFunctionGroup,
-            this.tsmiDropAllFunctions,
-            this.toolStripSeparator10,
-            this.tsmiRefreshFunctions});
-            this.cmsFunctionGroup.Name = "contextMenuStrip1";
-            this.cmsFunctionGroup.Size = new System.Drawing.Size(173, 88);
-            this.cmsFunctionGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewFunctionGroup
             // 
@@ -1197,26 +1432,12 @@
             this.tsmiDropAllFunctions.Size = new System.Drawing.Size(172, 26);
             this.tsmiDropAllFunctions.Text = "Drop all functions";
             // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(169, 6);
-            // 
             // tsmiRefreshFunctions
             // 
             this.tsmiRefreshFunctions.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshFunctions.Name = "tsmiRefreshFunctions";
             this.tsmiRefreshFunctions.Size = new System.Drawing.Size(172, 26);
             this.tsmiRefreshFunctions.Text = "Refresh functions";
-            // 
-            // cmsTriggerGroup
-            // 
-            this.cmsTriggerGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsTriggerGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewTrigger,
-            this.tsmiDropAllTriggers});
-            this.cmsTriggerGroup.Name = "contextMenuStrip1";
-            this.cmsTriggerGroup.Size = new System.Drawing.Size(163, 56);
             // 
             // tsmiNewTrigger
             // 
@@ -1231,18 +1452,6 @@
             this.tsmiDropAllTriggers.Name = "tsmiDropAllTriggers";
             this.tsmiDropAllTriggers.Size = new System.Drawing.Size(162, 26);
             this.tsmiDropAllTriggers.Text = "Drop all triggers";
-            // 
-            // cmsTableGroup
-            // 
-            this.cmsTableGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsTableGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewTable,
-            this.tsmiDropAllTables,
-            this.tsmiRefreshAllTables,
-            this.toolStripSeparator19});
-            this.cmsTableGroup.Name = "contextMenuStrip1";
-            this.cmsTableGroup.Size = new System.Drawing.Size(167, 88);
-            this.cmsTableGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewTable
             // 
@@ -1265,24 +1474,6 @@
             this.tsmiRefreshAllTables.Size = new System.Drawing.Size(166, 26);
             this.tsmiRefreshAllTables.Text = "Refresh all tables";
             // 
-            // toolStripSeparator19
-            // 
-            this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(163, 6);
-            // 
-            // cmsViewGroup
-            // 
-            this.cmsViewGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsViewGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewView,
-            this.tsmiDropAllViews,
-            this.tsmiRefreshViews,
-            this.toolStripSeparator18,
-            this.tsmiAlterCreateViewSQL});
-            this.cmsViewGroup.Name = "contextMenuStrip1";
-            this.cmsViewGroup.Size = new System.Drawing.Size(167, 114);
-            this.cmsViewGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
-            // 
             // tsmiNewView
             // 
             this.tsmiNewView.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
@@ -1304,27 +1495,12 @@
             this.tsmiRefreshViews.Size = new System.Drawing.Size(166, 26);
             this.tsmiRefreshViews.Text = "Refresh views";
             // 
-            // toolStripSeparator18
-            // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(163, 6);
-            // 
             // tsmiAlterCreateViewSQL
             // 
             this.tsmiAlterCreateViewSQL.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
             this.tsmiAlterCreateViewSQL.Name = "tsmiAlterCreateViewSQL";
             this.tsmiAlterCreateViewSQL.Size = new System.Drawing.Size(166, 26);
             this.tsmiAlterCreateViewSQL.Text = "Alter-Create SQL";
-            // 
-            // cmsDomainsGroup
-            // 
-            this.cmsDomainsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsDomainsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewDomain,
-            this.tsmiDropAllDomains});
-            this.cmsDomainsGroup.Name = "contextMenuStrip1";
-            this.cmsDomainsGroup.Size = new System.Drawing.Size(169, 56);
-            this.cmsDomainsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewDomain
             // 
@@ -1340,68 +1516,47 @@
             this.tsmiDropAllDomains.Size = new System.Drawing.Size(168, 26);
             this.tsmiDropAllDomains.Text = "Drop all domains";
             // 
-            // cmsIndicedGroup
-            // 
-            this.cmsIndicedGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsIndicedGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewIndices,
-            this.tsmiDropAllIndices,
-            this.tsmiActivateAllIndeces,
-            this.tsmiDeactivateAllIndeces,
-            this.toolStripSeparator15,
-            this.tsmiRefreshIndeces});
-            this.cmsIndicedGroup.Name = "contextMenuStrip1";
-            this.cmsIndicedGroup.Size = new System.Drawing.Size(189, 140);
-            this.cmsIndicedGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
-            // 
             // tsmiNewIndices
             // 
             this.tsmiNewIndices.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
             this.tsmiNewIndices.Name = "tsmiNewIndices";
-            this.tsmiNewIndices.Size = new System.Drawing.Size(188, 26);
+            this.tsmiNewIndices.Size = new System.Drawing.Size(245, 26);
             this.tsmiNewIndices.Text = "New indices";
             // 
             // tsmiDropAllIndices
             // 
             this.tsmiDropAllIndices.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiDropAllIndices.Name = "tsmiDropAllIndices";
-            this.tsmiDropAllIndices.Size = new System.Drawing.Size(188, 26);
+            this.tsmiDropAllIndices.Size = new System.Drawing.Size(245, 26);
             this.tsmiDropAllIndices.Text = "Drop all indices";
             // 
             // tsmiActivateAllIndeces
             // 
             this.tsmiActivateAllIndeces.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.tsmiActivateAllIndeces.Name = "tsmiActivateAllIndeces";
-            this.tsmiActivateAllIndeces.Size = new System.Drawing.Size(188, 26);
+            this.tsmiActivateAllIndeces.Size = new System.Drawing.Size(245, 26);
             this.tsmiActivateAllIndeces.Text = "Activate all indices";
             // 
             // tsmiDeactivateAllIndeces
             // 
             this.tsmiDeactivateAllIndeces.Image = global::FBXpert.Properties.Resources.NoGo_22;
             this.tsmiDeactivateAllIndeces.Name = "tsmiDeactivateAllIndeces";
-            this.tsmiDeactivateAllIndeces.Size = new System.Drawing.Size(188, 26);
+            this.tsmiDeactivateAllIndeces.Size = new System.Drawing.Size(245, 26);
             this.tsmiDeactivateAllIndeces.Text = "Deactivate all indices";
             // 
-            // toolStripSeparator15
+            // tsmiRecreateAllIndex
             // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(185, 6);
+            this.tsmiRecreateAllIndex.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x221;
+            this.tsmiRecreateAllIndex.Name = "tsmiRecreateAllIndex";
+            this.tsmiRecreateAllIndex.Size = new System.Drawing.Size(245, 26);
+            this.tsmiRecreateAllIndex.Text = "Recreate and activate all indices";
             // 
             // tsmiRefreshIndeces
             // 
             this.tsmiRefreshIndeces.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshIndeces.Name = "tsmiRefreshIndeces";
-            this.tsmiRefreshIndeces.Size = new System.Drawing.Size(188, 26);
+            this.tsmiRefreshIndeces.Size = new System.Drawing.Size(245, 26);
             this.tsmiRefreshIndeces.Text = "Refresh indices";
-            // 
-            // cmsRolesGroup
-            // 
-            this.cmsRolesGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsRolesGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewRole,
-            this.tsmiDropAllRoles});
-            this.cmsRolesGroup.Name = "contextMenuStrip1";
-            this.cmsRolesGroup.Size = new System.Drawing.Size(148, 56);
             // 
             // tsmiNewRole
             // 
@@ -1417,18 +1572,6 @@
             this.tsmiDropAllRoles.Size = new System.Drawing.Size(147, 26);
             this.tsmiDropAllRoles.Text = "Drop all roles";
             // 
-            // cmsForeignKeysGroup
-            // 
-            this.cmsForeignKeysGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsForeignKeysGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiForeignKeyNew,
-            this.tsmiDropAllForeignKeys,
-            this.toolStripSeparator6,
-            this.tsmiRefreshForeignKey});
-            this.cmsForeignKeysGroup.Name = "contextMenuStrip1";
-            this.cmsForeignKeysGroup.Size = new System.Drawing.Size(187, 88);
-            this.cmsForeignKeysGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
-            // 
             // tsmiForeignKeyNew
             // 
             this.tsmiForeignKeyNew.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
@@ -1443,10 +1586,12 @@
             this.tsmiDropAllForeignKeys.Size = new System.Drawing.Size(186, 26);
             this.tsmiDropAllForeignKeys.Text = "Drop all foreign keys";
             // 
-            // toolStripSeparator6
+            // tsmiActivcateAllFK
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(183, 6);
+            this.tsmiActivcateAllFK.Image = global::FBXpert.Properties.Resources.ok_gn22x;
+            this.tsmiActivcateAllFK.Name = "tsmiActivcateAllFK";
+            this.tsmiActivcateAllFK.Size = new System.Drawing.Size(186, 26);
+            this.tsmiActivcateAllFK.Text = "Activate all FKs";
             // 
             // tsmiRefreshForeignKey
             // 
@@ -1454,16 +1599,6 @@
             this.tsmiRefreshForeignKey.Name = "tsmiRefreshForeignKey";
             this.tsmiRefreshForeignKey.Size = new System.Drawing.Size(186, 26);
             this.tsmiRefreshForeignKey.Text = "Refresh foreign keys";
-            // 
-            // cmsForeignKeys
-            // 
-            this.cmsForeignKeys.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsForeignKeys.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditForeignKeys,
-            this.tsmiDropForeignKey});
-            this.cmsForeignKeys.Name = "contextMenuStrip1";
-            this.cmsForeignKeys.Size = new System.Drawing.Size(170, 56);
-            this.cmsForeignKeys.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditForeignKeys
             // 
@@ -1479,17 +1614,12 @@
             this.tsmiDropForeignKey.Size = new System.Drawing.Size(169, 26);
             this.tsmiDropForeignKey.Text = "Drop Foreign Key";
             // 
-            // cmsConstraints
+            // tsmiActivateFK
             // 
-            this.cmsConstraints.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsConstraints.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditConstraint,
-            this.tsmiDropConstraint,
-            this.toolStripSeparator17,
-            this.tmsiRefreshConstraint});
-            this.cmsConstraints.Name = "contextMenuStrip1";
-            this.cmsConstraints.Size = new System.Drawing.Size(182, 88);
-            this.cmsConstraints.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            this.tsmiActivateFK.Image = global::FBXpert.Properties.Resources.ok_gn22x;
+            this.tsmiActivateFK.Name = "tsmiActivateFK";
+            this.tsmiActivateFK.Size = new System.Drawing.Size(169, 26);
+            this.tsmiActivateFK.Text = "Activate FK";
             // 
             // tsmiEditConstraint
             // 
@@ -1505,29 +1635,12 @@
             this.tsmiDropConstraint.Size = new System.Drawing.Size(181, 26);
             this.tsmiDropConstraint.Text = "Drop constraint";
             // 
-            // toolStripSeparator17
-            // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(178, 6);
-            // 
             // tmsiRefreshConstraint
             // 
             this.tmsiRefreshConstraint.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tmsiRefreshConstraint.Name = "tmsiRefreshConstraint";
             this.tmsiRefreshConstraint.Size = new System.Drawing.Size(181, 26);
             this.tmsiRefreshConstraint.Text = "Refresh constraint x";
-            // 
-            // cmsConstrainsGroup
-            // 
-            this.cmsConstrainsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsConstrainsGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewConstraint,
-            this.tsmiDroppAllConstraints,
-            this.toolStripSeparator16,
-            this.tsmiRefreshConstraints});
-            this.cmsConstrainsGroup.Name = "contextMenuStrip1";
-            this.cmsConstrainsGroup.Size = new System.Drawing.Size(181, 88);
-            this.cmsConstrainsGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewConstraint
             // 
@@ -1543,29 +1656,12 @@
             this.tsmiDroppAllConstraints.Size = new System.Drawing.Size(180, 26);
             this.tsmiDroppAllConstraints.Text = "Drop all constraints";
             // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(177, 6);
-            // 
             // tsmiRefreshConstraints
             // 
             this.tsmiRefreshConstraints.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshConstraints.Name = "tsmiRefreshConstraints";
             this.tsmiRefreshConstraints.Size = new System.Drawing.Size(180, 26);
             this.tsmiRefreshConstraints.Text = "Refresh contraints";
-            // 
-            // cmsPrimaryKeyGroup
-            // 
-            this.cmsPrimaryKeyGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsPrimaryKeyGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewPrimaryKey,
-            this.tsmiDropAllPrimaryKeys,
-            this.toolStripSeparator8,
-            this.tsmiRefreshPrimaryKeys});
-            this.cmsPrimaryKeyGroup.Name = "contextMenuStrip1";
-            this.cmsPrimaryKeyGroup.Size = new System.Drawing.Size(190, 88);
-            this.cmsPrimaryKeyGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewPrimaryKey
             // 
@@ -1581,27 +1677,12 @@
             this.tsmiDropAllPrimaryKeys.Size = new System.Drawing.Size(189, 26);
             this.tsmiDropAllPrimaryKeys.Text = "Drop all primary keys";
             // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
-            // 
             // tsmiRefreshPrimaryKeys
             // 
             this.tsmiRefreshPrimaryKeys.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshPrimaryKeys.Name = "tsmiRefreshPrimaryKeys";
             this.tsmiRefreshPrimaryKeys.Size = new System.Drawing.Size(189, 26);
             this.tsmiRefreshPrimaryKeys.Text = "Refresh";
-            // 
-            // cmsPrimaryKeys
-            // 
-            this.cmsPrimaryKeys.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsPrimaryKeys.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditPrimaryKey,
-            this.tsmiDropPrimaryKey});
-            this.cmsPrimaryKeys.Name = "contextMenuStrip1";
-            this.cmsPrimaryKeys.Size = new System.Drawing.Size(171, 56);
-            this.cmsPrimaryKeys.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditPrimaryKey
             // 
@@ -1617,41 +1698,12 @@
             this.tsmiDropPrimaryKey.Size = new System.Drawing.Size(170, 26);
             this.tsmiDropPrimaryKey.Text = "Drop Primary Key";
             // 
-            // ofdLoadDefinition
-            // 
-            this.ofdLoadDefinition.DefaultExt = "*.XML";
-            this.ofdLoadDefinition.Filter = "XML definitions|*.XML|All|*.*";
-            // 
-            // sfdSaveDefinition
-            // 
-            this.sfdSaveDefinition.DefaultExt = "*.XML";
-            this.sfdSaveDefinition.Filter = "XML definition|*.XML|All|*.*";
-            // 
-            // cmsSystemTableGroup
-            // 
-            this.cmsSystemTableGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsSystemTableGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3});
-            this.cmsSystemTableGroup.Name = "contextMenuStrip1";
-            this.cmsSystemTableGroup.Size = new System.Drawing.Size(207, 30);
-            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(206, 26);
             this.toolStripMenuItem3.Text = "Refresh all system tables";
-            // 
-            // cmsSystemTable
-            // 
-            this.cmsSystemTable.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsSystemTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRefreshSystemTable,
-            this.tsmiSystemTablesSeparator1,
-            this.tsmiOpenSystemTable});
-            this.cmsSystemTable.Name = "contextMenuStrip1";
-            this.cmsSystemTable.Size = new System.Drawing.Size(187, 62);
-            this.cmsSystemTable.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiRefreshSystemTable
             // 
@@ -1660,26 +1712,12 @@
             this.tsmiRefreshSystemTable.Size = new System.Drawing.Size(186, 26);
             this.tsmiRefreshSystemTable.Text = "Refresh system table";
             // 
-            // tsmiSystemTablesSeparator1
-            // 
-            this.tsmiSystemTablesSeparator1.Name = "tsmiSystemTablesSeparator1";
-            this.tsmiSystemTablesSeparator1.Size = new System.Drawing.Size(183, 6);
-            // 
             // tsmiOpenSystemTable
             // 
             this.tsmiOpenSystemTable.Image = global::FBXpert.Properties.Resources.table_blue_x24;
             this.tsmiOpenSystemTable.Name = "tsmiOpenSystemTable";
             this.tsmiOpenSystemTable.Size = new System.Drawing.Size(186, 26);
             this.tsmiOpenSystemTable.Text = "Open system table";
-            // 
-            // cmsUserDefinedFunctions
-            // 
-            this.cmsUserDefinedFunctions.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsUserDefinedFunctions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditUserDefinedFunctions});
-            this.cmsUserDefinedFunctions.Name = "cmsUserDefinedFunctions";
-            this.cmsUserDefinedFunctions.Size = new System.Drawing.Size(124, 30);
-            this.cmsUserDefinedFunctions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
             // 
             // tsmiEditUserDefinedFunctions
             // 
@@ -1688,21 +1726,19 @@
             this.tsmiEditUserDefinedFunctions.Size = new System.Drawing.Size(123, 26);
             this.tsmiEditUserDefinedFunctions.Text = "Edit UDF";
             // 
-            // cmsUserDefinedFunctionGroup
-            // 
-            this.cmsUserDefinedFunctionGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsUserDefinedFunctionGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5});
-            this.cmsUserDefinedFunctionGroup.Name = "cmsUserDefinedFunctionGroup";
-            this.cmsUserDefinedFunctionGroup.Size = new System.Drawing.Size(151, 30);
-            this.cmsUserDefinedFunctionGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
-            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(150, 26);
             this.toolStripMenuItem5.Text = "Refresh UDF\'s";
+            // 
+            // tsmiRecreateIndex
+            // 
+            this.tsmiRecreateIndex.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x22;
+            this.tsmiRecreateIndex.Name = "tsmiRecreateIndex";
+            this.tsmiRecreateIndex.Size = new System.Drawing.Size(221, 26);
+            this.tsmiRecreateIndex.Text = "Recreate and activate index";
             // 
             // DbExplorerForm
             // 
@@ -1928,5 +1964,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiNewIndex;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private System.Windows.Forms.ToolStripMenuItem tsmiEventsTracker;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActivcateAllFK;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActivateFK;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRecreateAllIndex;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRecreateIndex;
     }
 }

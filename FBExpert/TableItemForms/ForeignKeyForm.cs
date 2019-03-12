@@ -353,7 +353,7 @@ namespace FBXpert
             cbDestinationTableFields.Items.Clear();
             if (DestTableName.Length > 0)
             {
-                TableClass DestTab = _tables.Find(x=>x.Name == DestTableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
+                TableClass DestTab = _tables.Find(x=>x.Name == DestTableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
                 Dictionary<string,TableFieldClass> DestFds = DestTab.Fields;                                
                 foreach (TableFieldClass dstr in  DestFds.Values)
                 {                  
@@ -370,7 +370,7 @@ namespace FBXpert
             cbSourceTableFields.Items.Clear();
             if (TableName.Length > 0)
             {
-                TableClass Tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.GetTableObjectFromName(DRC, DestTableName);
+                TableClass Tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
                 var Fds = Tab.Fields;
                 foreach (TableFieldClass dstr in Fds.Values)
                 {                  
@@ -384,7 +384,7 @@ namespace FBXpert
             cbSourceTableFields.Items.Clear();
             if (SourceTableName.Length > 0)
             {
-                var DestFds = StaticTreeClass.GetTableObjectFromName(_dbReg, SourceTableName).Fields;
+                var DestFds = StaticTreeClass.Instance().GetTableObjectFromName(_dbReg, SourceTableName).Fields;
                 foreach (TableFieldClass dstr in DestFds.Values)
                 {                    
                     cbSourceTableFields.Items.Add(dstr.Name);                    

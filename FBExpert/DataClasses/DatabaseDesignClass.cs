@@ -66,6 +66,21 @@ namespace FBXpert.DataClasses
             return fvar;
         }
 
+        public string ToStringMethod2(FieldClass field)
+        {
+            string fvar = "{"+field.Name+"}";
+            var ltype = TypeConvert.ToLogicalType(field.Domain);
+            if (ltype == eLogicalType.TIMESTAMP)
+            {
+                fvar = "{"+field.Name + ".ToShortDateString()} {"+field.Name + ".ToLongTimeString()}";
+            }
+            else if (ltype == eLogicalType.DATE)
+            {
+                fvar = "{"+field.Name + ".ToShortDateString()}";
+            }
+            return fvar;
+        }
+
         public string CreateToKeyStringMethod(int lvl, DataObjectClass obj)
         {
             var sb = new StringBuilder();
@@ -150,10 +165,11 @@ namespace FBXpert.DataClasses
 
                 foreach (var field in table.Fields.Values)
                 {
-                    string fvar = ToStringMethod(field);
+                    string fvar = ToStringMethod2(field);
 
                     sb.Append(Format(lvl+3,"                                case eTDataClass." + field.Name + ":" + Nl));
-                    sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember(first + " + fvar + " + last, DisplayMemberData.Format[i]));" + Nl));
+                    //sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember(first + " + fvar + " + last, DisplayMemberData.Format[i]));" + Nl));
+                    sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember($@\"{first}" + fvar + "{last}\", DisplayMemberData.Format[i]));" + Nl));
                     sb.Append(Format(lvl+6,"                                break;" + Nl));
                 }
 
@@ -194,10 +210,11 @@ namespace FBXpert.DataClasses
 
                 foreach (var field in table.Fields.Values)
                 {
-                    string fvar = ToStringMethod(field);
+                    string fvar = ToStringMethod2(field);
 
                     sb.Append(Format(lvl+3,"                                case eTDataClass." + field.Name + ":" + Nl));
-                    sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember(first + " + fvar + " + last, DisplayMemberData.Format[i]));" + Nl));
+                    //sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember(first + " + fvar + " + last, DisplayMemberData.Format[i]));" + Nl));
+                    sb.Append(Format(lvl+6,"                                txt.Append(DisplayMemberData.FormatMember($@\"{first}" + fvar + "{last}\", DisplayMemberData.Format[i]));" + Nl));
                     sb.Append(Format(lvl+6,"                                break;" + Nl));
                 }
                 sb.Append(Format(lvl+2,"                            }" + Nl));
@@ -855,6 +872,31 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+1, "        Search_DEFAULT(defKeyField, code, true);" + Nl));
             sb.Append(Format(lvl, "        }" + Nl));
             sb.Append(Nl);
+
+
+           sb.Append(Format(lvl, "        public override void Search(string sql, bool check)" + Nl));
+           sb.Append(Format(lvl, "        {" + Nl));
+           sb.Append(Format(lvl+1, "            if (DATA.ReadNewTableData(sql) > 0)" + Nl));
+           sb.Append(Format(lvl+1, "            {" + Nl));
+           sb.Append(Format(lvl+2, "                if (DATA.SetFirstData())" + Nl));
+           sb.Append(Format(lvl+2, "                {" + Nl));
+           sb.Append(Format(lvl+3, "                    var defData = (TSTATUSClass.TDataClass)DATA.CurrentData;" + Nl));
+           sb.Append(Format(lvl+3, "                    if (check)" + Nl));
+           sb.Append(Format(lvl+3, "                    {" + Nl));
+           sb.Append(Format(lvl+4, "                        SearchAndCheck_ID(defData.Item.ID);" + Nl));
+           sb.Append(Format(lvl+3, "                    }" + Nl));
+           sb.Append(Format(lvl+3, "                    else" + Nl));
+           sb.Append(Format(lvl+3, "                    {" + Nl));
+           sb.Append(Format(lvl+4, "                        Search_ID(defData.Item.ID);" + Nl));
+           sb.Append(Format(lvl+3, "                    }" + Nl));
+           sb.Append(Format(lvl+2, "                }" + Nl));
+           sb.Append(Format(lvl+1, "            }" + Nl));
+           sb.Append(Format(lvl+1, "            else" + Nl));
+           sb.Append(Format(lvl+1, "            {" + Nl));
+           sb.Append(Format(lvl+2, "                ComboBoxObject.SelectedIndex = -1;" + Nl));
+           sb.Append(Format(lvl+1, "            }" + Nl));
+           sb.Append(Format(lvl, "        }" + Nl));
+
             sb.Append(Format(lvl, "        public void Search_DEFAULT(string defKeyField, bool check)" + Nl));
             sb.Append(Format(lvl, "        {" + Nl));            
             sb.Append(Format(lvl+1, "        if (DATA.ReadNewTableData(defKeyField + \" = 1\") > 0)" + Nl));

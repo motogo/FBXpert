@@ -214,7 +214,7 @@ namespace FBExpert
 
         private void EventsForm_Load(object sender, EventArgs e)
         {
-            triggers = StaticTreeClass.GetAllTriggerObjects(_dbReg);
+            triggers = StaticTreeClass.Instance().GetAllTriggerObjects(_dbReg);
             lvEvents.Items.Clear();
             SetCombo();
             LoadUserDesign();

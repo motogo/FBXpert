@@ -160,9 +160,6 @@
   <data name="go_left_blue22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_left_blue22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minus_blue24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus_blue24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="gb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -171,9 +168,6 @@
   </data>
   <data name="help_about_blue_x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help_about_blue_x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder_open_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_open_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="database_replication_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\database_replication_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,8 +187,11 @@
   <data name="info_22x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info_22x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documents_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\documents_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dialog_information_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dialog_information_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minus_blue24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus_blue24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="camera_photo_flash_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\camera_photo_flash_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,8 +274,8 @@
   <data name="help_browser_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help_browser_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="database_gr_24x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\database_gr_24x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="database_arrow_r_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database_arrow_r_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SQL_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SQL_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,20 +304,20 @@
   <data name="windows_lightblue_x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windows_lightblue_x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="plus_gn32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plus_gn32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="go_next32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_next32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minus_gn24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus_gn24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="go_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="plus_blue32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus_blue32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_open_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_open_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="documents_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documents_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="help_browser_blue_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help_browser_blue_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -330,6 +327,9 @@
   </data>
   <data name="database_add_24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\database_add_24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go_down_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\go-down-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="info_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -451,6 +451,9 @@
   <data name="data_import_gn_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\data_import_gn_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="database_gr_24x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database_gr_24x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="plus_blue22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus_blue22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -469,8 +472,8 @@
   <data name="seewp_bl24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seewp_bl24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="printer_2_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printer_2_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="plus_gn32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\plus_gn32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="go_up_blue22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_up_blue22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -480,9 +483,6 @@
   </data>
   <data name="document_blue_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document_blue_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="database_arrow_r_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\database_arrow_r_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="documents_blue_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documents_blue_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -501,6 +501,9 @@
   </data>
   <data name="dialog_information_lightning_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dialog_information_lightning_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_2_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer_2_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="floppy2_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\floppy2_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -526,9 +529,6 @@
   <data name="go_previous32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_previous32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document_blue_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_blue_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="de" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\de.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -541,8 +541,8 @@
   <data name="go_up_blue22x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_up_blue22x1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="applications_execute_script_blue_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\applications-execute-script_blue_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="minus_gn24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus_gn24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bin_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bin_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -556,6 +556,9 @@
   <data name="calendar01_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calendar01_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="waiting2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\waiting2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="format_indent_more_2_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\format_indent_more_2_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -565,13 +568,13 @@
   <data name="N0_blue_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\N0_blue_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="go_down_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\go-down-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="document_blue_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document_blue_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dialog_information_x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dialog_information_x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="applications_execute_script_blue_22x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\applications-execute-script_blue_22x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waiting2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\waiting2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="media_playlist_repeat_blue_x221" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\media_playlist_repeat_blue_x221.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

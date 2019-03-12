@@ -99,7 +99,7 @@ namespace FBXpert
         }
         private void RefreshStatistics()
         {
-            List<string> data = StaticTreeClass.GetDatabaseStatistics(dbReg);
+            List<string> data = StaticTreeClass.Instance().GetDatabaseStatistics(dbReg);
             rtbInfo.Clear();
             info.Clear();
             info.Append(pre);

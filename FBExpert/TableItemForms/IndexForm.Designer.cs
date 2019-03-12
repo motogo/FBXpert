@@ -277,6 +277,7 @@ namespace FBXpert
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -487,6 +488,7 @@ namespace FBXpert
             this.cbSorting.Name = "cbSorting";
             this.cbSorting.Size = new System.Drawing.Size(97, 21);
             this.cbSorting.TabIndex = 1;
+            this.cbSorting.SelectedIndexChanged += new System.EventHandler(this.cbSorting_SelectedIndexChanged_1);
             // 
             // gbTables
             // 
@@ -705,7 +707,7 @@ namespace FBXpert
         '\"',
         '\'',
         '\''};
-            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctGenDescription.BackBrush = null;
             this.fctGenDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctGenDescription.CharHeight = 14;
@@ -713,7 +715,6 @@ namespace FBXpert
             this.fctGenDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctGenDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctGenDescription.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctGenDescription.IsReplaceMode = false;
             this.fctGenDescription.Location = new System.Drawing.Point(3, 16);
             this.fctGenDescription.Name = "fctGenDescription";
@@ -966,7 +967,6 @@ namespace FBXpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';

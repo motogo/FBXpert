@@ -202,7 +202,7 @@ namespace FBExpert
         {
             if ((_dbReg != null) && (!string.IsNullOrEmpty(_tnSelected.Text)))
             {                
-                StaticTreeClass.UpdateTableNodes(_tnSelected, _tableObject, _dbReg);                
+                StaticTreeClass.Instance().UpdateTableNodes(_tnSelected, _tableObject, _dbReg);                
             }
             
             Close();
@@ -867,7 +867,7 @@ namespace FBExpert
                 _tableObject.ForeignKeys.TryGetValue(SelectedFKConstraintName,out uc);
                 _constraintObject = uc;
 
-                Dictionary<string,TableClass> allTables = StaticTreeClass.GetAllTableObjectsComplete(_dbReg);
+                Dictionary<string,TableClass> allTables = StaticTreeClass.Instance().GetAllTableObjectsComplete(_dbReg);
 
                 var _tables = new List<TableClass>();
                 foreach(var tab in allTables.Values)

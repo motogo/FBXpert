@@ -405,7 +405,9 @@ namespace FBXpert.DataClasses
         private List<string> _allFunctionContent = null;
         private List<string> _allFunctionDefinitionContent = null;
 
-        public FileInfo SQLFileInfo = null;        
+        //public FileInfo SQLFileInfo = null;    
+        public string SQLFileName = string.Empty;
+        public string SQLDirectoryName = string.Empty;
         public eSQLFileWriteMode WriteToFile = eSQLFileWriteMode.none;
         public bool ShowScripting = true;
         public bool CommitAfterStatement = false;
@@ -454,11 +456,12 @@ namespace FBXpert.DataClasses
         }
 
         #region TableData
-        public void StartworkerGetTableData(List<TableClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetTableData(List<TableClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {   
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; 
+            SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -473,9 +476,9 @@ namespace FBXpert.DataClasses
             NotificationsForm.Instance().Show();
             if (WriteToFile != eSQLFileWriteMode.none)
             {
-                if (SQLFileInfo != null)
+                if (SQLDirectoryName != null)
                 {
-                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLFileInfo.FullName}");                    
+                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLDirectoryName}");                    
                 }
             } 
             
@@ -551,7 +554,7 @@ namespace FBXpert.DataClasses
                         if(WriteToFile == eSQLFileWriteMode.seperated)
                         {
                             _sw = null;
-                            _sw = new StreamWriter(SQLFileInfo.DirectoryName+"\\"+str+".sql", false, CharSet.encoding);
+                            _sw = new StreamWriter(SQLDirectoryName+"\\"+str+".sql", false, CharSet.encoding);
                         }
                         foreach (string wstr in _allTableContent)
                         {
@@ -911,11 +914,11 @@ namespace FBXpert.DataClasses
 
 
         #region TableStructure
-        public void StartworkerGetTableStructure(List<TableClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetTableStructure(List<TableClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {        
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -932,9 +935,9 @@ namespace FBXpert.DataClasses
             {
                 NotifiesClass.Instance().AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
             
-                if (SQLFileInfo != null)
+                if (SQLDirectoryName != null)
                 {
-                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLFileInfo.FullName}");
+                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
                 } 
             }
             _bgw.RunWorkerAsync(allobjects);            
@@ -954,7 +957,7 @@ namespace FBXpert.DataClasses
             _allTableContent = new List<string>();         
             int n = 0;
            
-            var tlst = StaticTreeClass.GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding);                                           
+            var tlst = StaticTreeClass.Instance().GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);                                           
             _bgw.ReportProgress(n++, tlst);    
             
         }
@@ -971,27 +974,11 @@ namespace FBXpert.DataClasses
         private void bgw_RunWorkerGetTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
            // NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+            if (WriteToFile != eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");
-                File.WriteAllLines(SQLFileInfo.FullName, _allTableContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");               
             }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allTableContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+            
             _bgw.CancelAsync();
         }
         #endregion
@@ -1001,7 +988,7 @@ namespace FBXpert.DataClasses
             var dbReg = e.Argument as DBRegistrationClass;
             var alltables = e.Argument as List<ViewClass>;
             _allViewContent = new List<string>();                       
-            var vlst = StaticTreeClass.GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding);            
+            var vlst = StaticTreeClass.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);            
             if(vlst != null) _bgw.ReportProgress(1, vlst);
         }
 
@@ -1016,11 +1003,11 @@ namespace FBXpert.DataClasses
         }
 
         #region DatabaseStructure
-        public void StartworkerGetDatabaseStructure(DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetDatabaseStructure(DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {        
            
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1028,18 +1015,17 @@ namespace FBXpert.DataClasses
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            this._bgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoGetDatabaseStructureWork);
-            this._bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetDatabaseStructureChanged);
-            this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDatabaseStructureCompleted);
+            this._bgw.DoWork                += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoGetDatabaseStructureWork);
+            this._bgw.ProgressChanged       += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetDatabaseStructureChanged);
+            this._bgw.RunWorkerCompleted    += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDatabaseStructureCompleted);
 
             NotificationsForm.Instance().Show();
             if (NotifiesClass.Instance().AllowInfos)
             {
-                NotifiesClass.Instance().AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");
-            
-                if (SQLFileInfo != null)
+                NotifiesClass.Instance().AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
+                if (WriteToFile == eSQLFileWriteMode.all)
                 {
-                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLFileInfo.FullName}");
+                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
                 }
             }
             _bgw.RunWorkerAsync();            
@@ -1061,9 +1047,7 @@ namespace FBXpert.DataClasses
             {
                 _allDatabaseContent.Add($@"/* ********* Connect Database for {AktDBReg.Alias} ********** */{Environment.NewLine}");
                 _allDatabaseContent.Add($@"CONNECT '{dbReg.Server}:{dbReg.DatabasePath}' USER '{dbReg.User}' PASSWORD '{dbReg.Password}';");
-            }
-            
-            
+            }                        
         }
 
         private void bgw_ProgressGetDatabaseStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -1072,12 +1056,10 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetDatabaseStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {           
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");
-                File.WriteAllLines(SQLFileInfo.FullName, _allDatabaseContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");                
             }
             
             _bgw.CancelAsync();
@@ -1085,11 +1067,11 @@ namespace FBXpert.DataClasses
         #endregion
 
         #region PKTableStructure
-        public void StartworkerGetPKTableStructure(Dictionary<string,PrimaryKeyClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetPKTableStructure(Dictionary<string,PrimaryKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1115,7 +1097,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var obj = e.Argument as Dictionary<string,PrimaryKeyClass>;
             _allPKConstraintsContent = new List<string>();            
-            var tlst = StaticTreeClass.GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1126,38 +1108,21 @@ namespace FBXpert.DataClasses
 
         private void bgw_RunWorkerGetPKTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            //NotificationsForm.Instance().Close();
-            
-            if (SQLFileInfo != null)
+           
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL primary key structure {_allPKConstraintsContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allPKConstraintsContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allPKConstraintsContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL primary key structure {_allPKConstraintsContent.Count} lines to {SQLDirectoryName}");
+                
+            }           
         }
         #endregion
 
         #region FKTableStructure
-        public void StartworkerGetFKTableStructure(Dictionary<string,ForeignKeyClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetFKTableStructure(Dictionary<string,ForeignKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1181,7 +1146,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var obj = e.Argument as Dictionary<string,ForeignKeyClass>;
             _allFKConstraintsContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1191,38 +1156,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFKTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO("Writing SQL foreign key structure " + _allFKConstraintsContent.Count.ToString() + " lines to file "+SQLFileInfo.FullName);
-                File.WriteAllLines(SQLFileInfo.FullName, _allFKConstraintsContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allFKConstraintsContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL foreign key structure {_allFKConstraintsContent.Count} lines to {SQLDirectoryName}");            
+            }            
         }
         #endregion
 
         #region IndexStructure
-        public void StartworkerGetIndecesStructure(Dictionary<string,IndexClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetIndecesStructure(Dictionary<string,IndexClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1248,7 +1195,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allIndeces = e.Argument as Dictionary<string,IndexClass>;
             _allIndexContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1258,38 +1205,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetIndecesStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {           
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO("Writing SQL index structure " + _allIndexContent.Count.ToString() + " lines to file " + SQLFileInfo.FullName);
-                File.WriteAllLines(SQLFileInfo.FullName,_allIndexContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allIndexContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL index structure {_allIndexContent.Count} lines to {SQLDirectoryName}");                
+            }            
         }
         #endregion
 
         #region TriggerStructure
-        public void StartworkerGetTriggerStructure(Dictionary<string,TriggerClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetTriggerStructure(Dictionary<string,TriggerClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1315,7 +1244,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allTriggers = e.Argument as Dictionary<string,TriggerClass>;
             _allTriggerContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1325,38 +1254,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetTriggerStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allIndexContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allTriggerContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLDirectoryName}");                
+            }            
         }
         #endregion
 
         #region ProcedureStructure
-        public void StartworkerGetProcedureStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetProcedureStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1382,7 +1293,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1392,22 +1303,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetProcedureStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allProcedureContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
 
         #region ProcedureDefinitionStructure
-        public void StartworkerGetProcedureDefinitionStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetProcedureDefinitionStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1433,7 +1342,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1443,23 +1352,21 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetProcedureDefinitionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allProcedureDefinitionContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLDirectoryName}");                
             }            
         }
         #endregion
 
 
         #region FunctionStructure
-        public void StartworkerGetFunctionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetFunctionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1485,7 +1392,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1495,22 +1402,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFunctionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allFunctionContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
 
         #region FunctionDefinitionStructure
-        public void StartworkerGetFunctionDefinitionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetFunctionDefinitionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1536,7 +1441,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1546,22 +1451,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFunctionDefinitionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to file {SQLFileInfo.FullName}");
-                File.WriteAllLines(SQLFileInfo.FullName, _allFunctionDefinitionContent);
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
         
         #region DomainStructure
-        public void StartworkerGetDomainStructure(Dictionary<string,DomainClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetDomainStructure(Dictionary<string,DomainClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1588,7 +1491,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allDomain = e.Argument as Dictionary<string,DomainClass>;
             _allDomainContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1598,38 +1501,20 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetDomainStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO("Writing SQL domain structure " + _allDomainContent.Count.ToString() + " lines to file " + SQLFileInfo.FullName);
-                File.WriteAllLines(SQLFileInfo.FullName, _allDomainContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allDomainContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
-            }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL domain structure {_allDomainContent.Count} lines to file {SQLDirectoryName}");                
+            }            
         }
         #endregion
 
         #region DomainStructure
-        public void StartworkerGetGeneratorStructure(Dictionary<string,GeneratorClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetGeneratorStructure(Dictionary<string,GeneratorClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+            SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
 
             this._bgw = new System.ComponentModel.BackgroundWorker
@@ -1655,7 +1540,7 @@ namespace FBXpert.DataClasses
             var dbReg = AktDBReg;
             var allGenerator = e.Argument as Dictionary<string,GeneratorClass>;
             _allGeneratorContent = new List<string>();
-            var tlst = StaticTreeClass.GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLFileInfo.DirectoryName,SQLFileInfo.Name,WriteToFile,CharSet.encoding); 
+            var tlst = StaticTreeClass.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1665,38 +1550,22 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetGeneratorStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            //NotificationsForm.Instance().Close();
-            if (SQLFileInfo != null)
+        {            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO("Writing SQL generator structure " + _allGeneratorContent.Count.ToString() + " lines to file " + SQLFileInfo.FullName);
-                File.WriteAllLines(SQLFileInfo.FullName, _allGeneratorContent);
-            }
-            else
-            {
-                /*
-                if (_scriptForm == null)
-                {
-                    _scriptForm = new ScriptingForm(AktDBReg);
-                }
-                _scriptForm.BeginUpdate();
-                _scriptForm.Show();
-                foreach (string str in _allGeneratorContent)
-                {
-                    _scriptForm.AppendSql(str + Environment.NewLine);
-                }
-                _scriptForm.EndUpdate();
-                */
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL generator structure {_allGeneratorContent.Count} lines to {SQLDirectoryName}");         
             }
         }
         #endregion
 
         #region ViewStructure
-        public void StartworkerGetViewStructure(List<ViewClass> allobjects, DBRegistrationClass DBReg, FileInfo sqlFileInfo)
+        public void StartworkerGetViewStructure(List<ViewClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
             if(allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLFileInfo = sqlFileInfo;
+           
+            SQLDirectoryName = sqlDirectoryName;
+            SQLFileName = sqlFileName;
 
             WaitForWorker();
 

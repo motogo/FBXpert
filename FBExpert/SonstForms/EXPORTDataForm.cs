@@ -50,15 +50,15 @@ namespace FBExpert
                              
             DBReg = drc;
             
-            var viewobjects = StaticTreeClass.GetViewObjects(DBReg);
-            var tableObjects = StaticTreeClass.GetAllTableObjectsComplete(DBReg);
-            var domainObjects = StaticTreeClass.GetDomainObjects(DBReg);
-            var generatorObjects = StaticTreeClass.GetGeneratorObjects(DBReg);
-            var indecesObjects = StaticTreeClass.GetIndecesObjects(DBReg);
-            var triggerObjects = StaticTreeClass.GetTriggerObjects(DBReg);
-            //var procedureObjects = StaticTreeClass.GetAllProcedureObjects(DBReg);
-            var procedureObjects = StaticTreeClass.GetProcedureObjects(DBReg);
-            var functionObjects = StaticTreeClass.GetInternalFunctionObjects(DBReg);
+            var viewobjects = StaticTreeClass.Instance().GetViewObjects(DBReg);
+            var tableObjects = StaticTreeClass.Instance().GetAllTableObjectsComplete(DBReg);
+            var domainObjects = StaticTreeClass.Instance().GetDomainObjects(DBReg);
+            var generatorObjects = StaticTreeClass.Instance().GetGeneratorObjects(DBReg);
+            var indecesObjects = StaticTreeClass.Instance().GetIndecesObjects(DBReg);
+            var triggerObjects = StaticTreeClass.Instance().GetTriggerObjects(DBReg);
+            //var procedureObjects = StaticTreeClass.Instance().GetAllProcedureObjects(DBReg);
+            var procedureObjects = StaticTreeClass.Instance().GetProcedureObjects(DBReg);
+            var functionObjects = StaticTreeClass.Instance().GetInternalFunctionObjects(DBReg);
             if (tableObjects.Count <= 0) return;
            
             foreach (var tc in tableObjects.Values)
@@ -244,12 +244,14 @@ namespace FBExpert
             {
                 if ((txtFileName.Text.IndexOf(".", StringComparison.Ordinal)) < 0) txtFileName.Text += ".sql";
                 
-                ew.SQLFileInfo = new FileInfo(txtExportDirectory.Text + "\\" + txtFileName.Text);
+                ew.SQLDirectoryName = txtExportDirectory.Text;
+                ew.SQLFileName = txtFileName.Text;
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
             }            
             else
             {
-                ew.SQLFileInfo = null;
+                ew.SQLDirectoryName = string.Empty;
+                ew.SQLFileName = string.Empty;
             }
 
           
@@ -262,7 +264,7 @@ namespace FBExpert
                 ew.alltables.Add(tc);                                    
             }
           
-            ew.StartworkerGetTableData(ew.alltables, DBReg, ew.SQLFileInfo);
+            ew.StartworkerGetTableData(ew.alltables, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
         }
         
         private void EXPORTDataForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -472,11 +474,7 @@ namespace FBExpert
             Application.DoEvents();
             selStructureTables.ClearChecks();            
         }
-
         
-
-
-
         private void hsExportStructure_Click(object sender, EventArgs e)
         {
             var ew = new ExportWorkers(NotifiesClass.Instance())
@@ -514,7 +512,9 @@ namespace FBExpert
 
             ew.AktDBReg             = DBReg;
             ew.ShowScripting        = cbViewObjectScript.Checked;
-            ew.WriteToFile = eSQLFileWriteMode.none;
+            ew.WriteToFile          = eSQLFileWriteMode.none;
+            ew.SQLDirectoryName     = string.Empty;
+            ew.SQLFileName          = string.Empty;
 
             if(ckWriteFileForEVeryObject.Checked)
             {
@@ -525,86 +525,78 @@ namespace FBExpert
               ew.WriteToFile = eSQLFileWriteMode.all;
             }
 
-            ew.CommitAfterStatement = cbStructureCommit.Checked;
-            ew.CreateConnectionStatement = cbStructureConnectiionStatement.Checked;
-            ew.CreateDatabaseStatement   = cbStructureCreateDatabaseStatement.Checked;
-            ew.CreateMode = (rbCREATEObject.Checked) ? eCreateMode.create : eCreateMode.recreate;
-            
-            
-                 
+            ew.CommitAfterStatement         = cbStructureCommit.Checked;
+            ew.CreateConnectionStatement    = cbStructureConnectiionStatement.Checked;
+            ew.CreateDatabaseStatement      = cbStructureCreateDatabaseStatement.Checked;
+            ew.CreateMode                   = (rbCREATEObject.Checked) ? eCreateMode.create : eCreateMode.recreate;
+                                         
             if (ew.WriteToFile != eSQLFileWriteMode.none)
             {
                 if ((txtFileName.Text.IndexOf(".")) < 0) txtFileName.Text += ".sql";
                 
-                ew.SQLFileInfo = new FileInfo(txtExportDirectory.Text + "\\" + txtFileName.Text);
+                ew.SQLDirectoryName = txtExportDirectory.Text;
+                ew.SQLFileName = txtFileName.Text;
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
             }                        
-            else
-            {
-                ew.SQLFileInfo = null;
-            }
-
-
             
-            ew.StartworkerGetDatabaseStructure(DBReg, ew.SQLFileInfo);
+            
+            ew.StartworkerGetDatabaseStructure(DBReg, ew.SQLDirectoryName, ew.SQLFileName);
 
             foreach (var itm in selExportStructureList.CheckedItemDatasNotNulls)
-            {
-                //if ((itm.Check != CheckState.Checked)||(itm.Object == null)) continue;
-                
+            {                
                 if (itm.Object.GetType() == typeof(TableClass))
                 {                    
                     ew.alltables.AddRange(ExportTableStructure(ew));
-                    ew.StartworkerGetTableStructure(ew.alltables, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetTableStructure(ew.alltables, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(ViewClass))
                 {
                     ew.allviews.AddRange(ExportViewStructure(ew));
-                    ew.StartworkerGetViewStructure(ew.allviews, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetViewStructure(ew.allviews, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(PrimaryKeyClass))
                 {
                     ExportPKTableStructure(ew);
-                    ew.StartworkerGetPKTableStructure(ew.allPKConstraints, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetPKTableStructure(ew.allPKConstraints, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(ForeignKeyClass))
                 {
                     ExportFKTableStructure(ew);
-                    ew.StartworkerGetFKTableStructure(ew.allFKConstraints, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetFKTableStructure(ew.allFKConstraints, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(DomainClass))
                 {
                     ExportDomainStructure(ew);
-                    ew.StartworkerGetDomainStructure(ew.allDomains, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetDomainStructure(ew.allDomains, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(GeneratorClass))
                 {
                     ExportGeneratorStructure(ew);
-                    ew.StartworkerGetGeneratorStructure(ew.allGenerator, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetGeneratorStructure(ew.allGenerator, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(IndexClass))
                 {
                     ExportIndecesStructure(ew);
-                    ew.StartworkerGetIndecesStructure(ew.allIndeces, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetIndecesStructure(ew.allIndeces, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
                 else if (itm.Object.GetType() == typeof(TriggerClass))
                 {
                     ExportTriggerStructure(ew);
-                    ew.StartworkerGetTriggerStructure(ew.allTrigger, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetTriggerStructure(ew.allTrigger, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }                                
                 else if (itm.Object.GetType() == typeof(ProcedureClass))
                 {
                     ExportProcedureStructure(ew);
-                    ew.StartworkerGetProcedureDefinitionStructure(ew.allProcedures, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetProcedureDefinitionStructure(ew.allProcedures, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                    
-                    ew.StartworkerGetProcedureStructure(ew.allProcedures, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetProcedureStructure(ew.allProcedures, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 } 
                 else if (itm.Object.GetType() == typeof(FunctionClass))
                 {
                     ExportFunctionStructure(ew);
-                    ew.StartworkerGetFunctionDefinitionStructure(ew.allFunctions, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetFunctionDefinitionStructure(ew.allFunctions, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                    
-                    ew.StartworkerGetFunctionStructure(ew.allFunctions, DBReg, ew.SQLFileInfo);
+                    ew.StartworkerGetFunctionStructure(ew.allFunctions, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
             }
 

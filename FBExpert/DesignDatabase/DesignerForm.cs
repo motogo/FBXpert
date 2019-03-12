@@ -368,7 +368,7 @@ namespace FBXDesigns
 
         private void hsZoomDesingMinus_Click(object sender, EventArgs e)
         {
-           pbDesign.Width /= 2;
+            pbDesign.Width /= 2;
             pbDesign.Height /= 2;
         }
 

@@ -96,11 +96,11 @@ namespace FBXpert
         {            
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
             {
-                SQLScript = StaticTreeClass.MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true);
+                SQLScript = StaticTreeClass.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true);
             }
             else
             {
-                SQLScript = StaticTreeClass.MakeSQLCreateFunction(FunctionObject,true);
+                SQLScript = StaticTreeClass.Instance().MakeSQLCreateFunction(FunctionObject,true);
             }
             SQLToUI(SQLScript);
             ShowCaptions();

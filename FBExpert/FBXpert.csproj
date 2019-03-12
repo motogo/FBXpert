@@ -877,6 +877,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\media_playlist_repeat_blue_x221.png" />
     <None Include="Resources\waiting2.jpg" />
     <None Include="Resources\waiting1.jpg" />
     <None Include="Resources\waiting.jpg" />

@@ -71,7 +71,7 @@ namespace FBXpert
 
         public void MakeSQL()
         {                        
-            SQLScript = StaticTreeClass.MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject,OldUserDefinedFunctionObject,true);            
+            SQLScript = StaticTreeClass.Instance().MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject,OldUserDefinedFunctionObject,true);            
             SQLToUI(SQLScript);
             ShowCaptions();
            
