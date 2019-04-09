@@ -18,7 +18,7 @@ using FBXpert.SQLStatements;
 
 namespace FBXpert
 {
-    public partial class NotNullForm : IEditForm
+    public partial class UniqueForm : IEditForm
     {
         
         DBRegistrationClass _dbReg = null;
@@ -35,7 +35,7 @@ namespace FBXpert
         NotNullsClass NotNullObject = null;
         List<TableClass> _tables = new List<TableClass>();
         TableClass OrgTable = null;
-        public NotNullForm(Form parent,  DBRegistrationClass dbReg,List<TableClass> tables , NotNullsClass notnullObject, ContextMenuStrip cmGroup, ContextMenuStrip cm)
+        public UniqueForm(Form parent,  DBRegistrationClass dbReg,List<TableClass> tables , NotNullsClass notnullObject, ContextMenuStrip cmGroup, ContextMenuStrip cm)
         {
             InitializeComponent();
             this.MdiParent = parent;
@@ -163,7 +163,7 @@ namespace FBXpert
             }
             catch (Exception ex)
             {
-              _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->NotNullForm->RefreshIndices()->" + ex.Message);
+              _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->UniqueForm->RefreshIndices()->" + ex.Message);
             }
            
 
@@ -238,7 +238,7 @@ namespace FBXpert
 
         string OldConstraintName = string.Empty;
         
-        private void NotNullForm_Load(object sender, EventArgs e)
+        private void UniqueForm_Load(object sender, EventArgs e)
         {
             DataToEdit();
             OldConstraintName = txtConstraintName.Text.Trim();

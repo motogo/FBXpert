@@ -78,7 +78,7 @@ namespace FBXpert
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0)    sb.Append($@"Errors ({error_count})");
-
+           
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();

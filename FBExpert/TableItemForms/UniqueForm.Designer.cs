@@ -2,7 +2,7 @@
 
 namespace FBXpert
 {
-    partial class NotNullForm : BasicEditFormClass
+    partial class UniqueForm : BasicEditFormClass
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace FBXpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotNullForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UniqueForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -1164,7 +1164,7 @@ namespace FBXpert
             this.hsRefreshInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsRefreshInfo.UseVisualStyleBackColor = false;
             // 
-            // NotNullForm
+            // UniqueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1172,9 +1172,9 @@ namespace FBXpert
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlUpper);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "NotNullForm";
-            this.Text = "NotNullForm";
-            this.Load += new System.EventHandler(this.NotNullForm_Load);
+            this.Name = "UniqueForm";
+            this.Text = "UniqueForm";
+            this.Load += new System.EventHandler(this.UniqueForm_Load);
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);

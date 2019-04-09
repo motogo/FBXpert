@@ -559,12 +559,16 @@ namespace FBXpert
 
             }
             else if (tnn == typeof(NotNullsClass))
-            {                        
-               var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
-               {
+            {    
+                var obj = _tnSelected.Tag as NotNullsClass;
+               // TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
+               //TableClass tableObject = _actTables.Find(X=>X.Name == obj.TableName);
+               // var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
+                var cf = new NotNullForm(MdiParent, drc, _actTables, obj, cmsConstrainsGroup,cmsConstraints)              
+                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
-               };
-               cf.Show();  
+                };
+                cf.Show();  
             }            
         }
         
@@ -662,8 +666,11 @@ namespace FBXpert
 
             }
             else if (tnn == typeof(NotNullsClass))
-            {                        
-               var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
+            {     
+                var obj = _tnSelected.Tag as NotNullsClass;
+                //TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
+                var cf = new NotNullForm(MdiParent, drc, _actTables, obj, cmsConstrainsGroup,cmsConstraints)
+               //var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
                };
@@ -1004,11 +1011,17 @@ namespace FBXpert
             }
             else if (tnn == typeof(NotNullsClass))
             {                                
-                
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                  cmsNotNulls.Show(cmsLeft,cmsTop);
+                }
             }
             else if (tnn == typeof(NotNullsGroupClass))
             {                                
-                
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                  cmsNotNullsGroup.Show(cmsLeft,cmsTop);
+                }
             }
             else if (tnn == typeof(SystemTableGroupClass))
             {                                
@@ -1049,6 +1062,30 @@ namespace FBXpert
             {
                 if (treeView1.SelectedNode == null) return;
                 CloseDatabase(tnReg);
+            }
+            else if(e.ClickedItem == tsmiCloseAll)
+            {
+                if (treeView1.SelectedNode == null) return;
+                foreach(TreeNode nd in treeView1.Nodes)
+                {
+                    if (nd.Tag.GetType() == typeof(DBRegistrationClass))
+                    {                        
+                        CloseDatabase(nd);
+                    }
+                }
+            }
+            else if (e.ClickedItem == tsmiOpenAll)
+            {
+                if (treeView1.SelectedNode == null) return;
+                cmsDatabase.Close();
+                foreach (TreeNode nd in treeView1.Nodes)
+                {
+                    if (nd.Tag.GetType() == typeof(DBRegistrationClass))
+                    {
+                        Application.DoEvents();
+                        ReadDatabaseMetadata(nd);
+                    }
+                }                                
             }
             else if (e.ClickedItem == tsmiOpen)
             {
@@ -1276,6 +1313,18 @@ namespace FBXpert
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
                 cf.Show();                            
+            }
+            else if (e.ClickedItem ==  tsmiEditNotNull)
+            {                           
+               var obj = _tnSelected.Tag as NotNullsClass;
+                //TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
+                //TableClass tableObject = _actTables.Find(X=>X.Name == obj.TableName);
+               var cf = new NotNullForm(MdiParent, dbReg, _actTables,obj, cmsConstrainsGroup,cmsConstraints)
+               {
+                   BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
+               };
+               cf.Show();  
+                                        
             }
             else if (e.ClickedItem == tsmiEditPrimaryKey)
             {                                                

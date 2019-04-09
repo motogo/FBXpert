@@ -538,6 +538,42 @@ namespace FBXpert.DataClasses
          
             return sb.ToString();
         }
+
+        public string GetForeignKey(eDBVersion version, string foreignKey)
+        {
+            var sb = new StringBuilder();
+            sb.Append("SELECT ");
+            
+            sb.Append("RDB$INDICES.RDB$RELATION_NAME,");
+            sb.Append("RDB$INDICES.RDB$INDEX_INACTIVE,");
+            sb.Append("fkc.rdb$constraint_name as Constraint_Name,");
+            sb.Append("fkc.RDB$CONSTRAINT_TYPE as Constraint_Type,");
+            sb.Append("ISF.rdb$field_name as FieldName,");
+            sb.Append("RDB$INDICES.RDB$DESCRIPTION as Index_Description,");
+            sb.Append("(RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) AS Field_Position,");
+            sb.Append("RDB$INDICES.RDB$FOREIGN_KEY as ForeignKey,");
+            sb.Append("RDB$REF_CONSTRAINTS.RDB$MATCH_OPTION,");
+            sb.Append("RDB$REF_CONSTRAINTS.RDB$UPDATE_RULE,RDB$REF_CONSTRAINTS.RDB$DELETE_RULE,");
+            sb.Append("pkc.rdb$relation_name as dest_TableName,");
+            sb.Append("pkc.rdb$constraint_name as dest_Constraint_Name,");
+            sb.Append("pkc.RDB$CONSTRAINT_TYPE as dest_Constraint_Type,");
+            sb.Append("ISP.rdb$field_name as dest_fieldname ");
+
+            sb.Append("FROM RDB$INDEX_SEGMENTS ");
+            sb.Append("LEFT JOIN RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            sb.Append("LEFT JOIN RDB$RELATION_CONSTRAINTS fkc ON fkc.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            sb.Append("LEFT JOIN RDB$REF_CONSTRAINTS ON RDB$REF_CONSTRAINTS.RDB$CONSTRAINT_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            sb.Append("LEFT JOIN RDB$RELATION_CONSTRAINTS pkc ON pkc.RDB$INDEX_NAME = RDB$INDICES.RDB$FOREIGN_KEY ");
+            sb.Append("LEFT JOIN RDB$INDEX_SEGMENTS ISF ON fkc.rdb$index_name = ISF.rdb$index_name ");
+            sb.Append("LEFT JOIN RDB$INDEX_SEGMENTS ISP ON pkc.rdb$index_name = ISP.rdb$index_name ");
+           
+             string  cmd = $@"WHERE UPPER(fkc.rdb$constraint_name) = '{foreignKey.ToUpper()}' AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
+            
+            sb.Append(cmd);
+            sb.Append("ORDER BY RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
+         
+            return sb.ToString();
+        }
        
         public string GetTableTriggers(string tableName)
         {

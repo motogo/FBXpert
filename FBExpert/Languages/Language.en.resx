@@ -249,4 +249,19 @@
   <data name="DatabaseFileExistsNoCreate" xml:space="preserve">
     <value>Database File exsis only replace mode for restore possible</value>
   </data>
+  <data name="DATETIME" xml:space="preserve">
+    <value>Datetime</value>
+  </data>
+  <data name="DBALIAS" xml:space="preserve">
+    <value>Database alias</value>
+  </data>
+  <data name="FAILED" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="SQL" xml:space="preserve">
+    <value>SQL</value>
+  </data>
+  <data name="SUCCEEDED" xml:space="preserve">
+    <value>Succeeded</value>
+  </data>
 </root>

@@ -92,7 +92,7 @@ namespace FBXpert.SQLStatements
         {                   
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT RDB$INDICES.RDB$INDEX_NAME AS Index_Name ,RDB$INDICES.rdb$unique_flag AS Unique_Flag,RDB$INDICES.rdb$index_inactive AS Inactive_Flag ");
-            sb.Append("FROM RDB$INDEX_SEGMENTS");
+            sb.Append("FROM RDB$INDEX_SEGMENTS ");
             sb.Append("JOIN RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append("LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"WHERE UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName}' ");
@@ -115,6 +115,22 @@ namespace FBXpert.SQLStatements
             string str = (tableType == eTableType.system) 
                 ? "WHERE RDB$INDICES.RDB$SYSTEM_FLAG > 0 AND RDB$INDICES.RDB$FOREIGN_KEY IS NULL "
                 : "WHERE RDB$INDICES.RDB$SYSTEM_FLAG = 0 AND RDB$INDICES.RDB$FOREIGN_KEY IS NULL ";
+            sb.Append(str);            
+            sb.Append("GROUP BY RDB$INDICES.RDB$RELATION_NAME,RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$index_type,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive,RDB$INDICES.rdb$index_type,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE ");
+            sb.Append("ORDER BY RDB$INDICES.RDB$RELATION_NAME, RDB$INDICES.RDB$INDEX_NAME;");
+            return sb.ToString();           
+        }
+
+        public string GetAllIndiciesWithoutRefConstraints(eDBVersion version, eTableType tableType)
+        {
+            var sb = new StringBuilder();
+            sb.Append("SELECT RDB$INDICES.RDB$RELATION_NAME, RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive,RDB$INDICES.rdb$index_type,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE ");
+            sb.Append("FROM RDB$INDEX_SEGMENTS JOIN RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            sb.Append("LEFT JOIN RDB$RELATION_FIELDS ON RDB$RELATION_FIELDS.rdb$field_position = (RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) AND RDB$INDEX_SEGMENTS.RDB$FIELD_NAME = RDB$RELATION_FIELDS.rdb$field_name ");
+            sb.Append("LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            string str = (tableType == eTableType.system) 
+                ? "WHERE RDB$INDICES.RDB$SYSTEM_FLAG > 0 AND RDB$INDICES.RDB$FOREIGN_KEY IS NULL AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE IS NULL "
+                : "WHERE RDB$INDICES.RDB$SYSTEM_FLAG = 0 AND RDB$INDICES.RDB$FOREIGN_KEY IS NULL AND RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE IS NULL ";
             sb.Append(str);            
             sb.Append("GROUP BY RDB$INDICES.RDB$RELATION_NAME,RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$index_type,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive,RDB$INDICES.rdb$index_type,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE ");
             sb.Append("ORDER BY RDB$INDICES.RDB$RELATION_NAME, RDB$INDICES.RDB$INDEX_NAME;");

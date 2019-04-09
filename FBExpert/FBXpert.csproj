@@ -269,6 +269,12 @@
     <Compile Include="TableItemForms\TriggerForm.Designer.cs">
       <DependentUpon>TriggerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableItemForms\UniqueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableItemForms\UniqueForm.Designer.cs">
+      <DependentUpon>UniqueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableItemForms\UserDefinedFunctionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -549,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\TriggerForm.resx">
       <DependentUpon>TriggerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableItemForms\UniqueForm.resx">
+      <DependentUpon>UniqueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\UserDefinedFunctionForm.resx">
       <DependentUpon>UserDefinedFunctionForm.cs</DependentUpon>
@@ -877,6 +886,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\up_down32x.png" />
+    <None Include="Resources\down_up32x.png" />
     <None Include="Resources\media_playlist_repeat_blue_x221.png" />
     <None Include="Resources\waiting2.jpg" />
     <None Include="Resources\waiting1.jpg" />

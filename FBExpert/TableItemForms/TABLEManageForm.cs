@@ -11,6 +11,7 @@ using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using MessageLibrary;
+using StateClasses;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -736,22 +737,37 @@ namespace FBExpert
             {
                 _constraintObject.Name = $@"PK_{_tableObject.Name}_NEW";
                 _constraintObject.ConstraintType = eConstraintType.PRIMARYKEY;
+                
+                var cf = new PrimaryKeyForm(MdiParent, _actTables, _tableObject,  _dbReg)
+                {
+                    BearbeitenMode = EditStateClass.eBearbeiten.eInsert
+                };
+                cf.Show();  
+                _indexChanged = true;
+                return;
             }
             else if(tabControlConstraints.SelectedTab == tabPageUniques)
             {
                 _constraintObject.Name = $@"UN_{_tableObject.Name}_NEW";
                 _constraintObject.ConstraintType = eConstraintType.UNIQUE;
+                var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
+            tff.RegisterNotify(InfoRaised);
+            tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
+            tff.Show();
             }
             else if(tabControlConstraints.SelectedTab == tabPageChecks)
             {
                 _constraintObject.Name = $@"CK_{_tableObject.Name}_NEW";
                 _constraintObject.ConstraintType = eConstraintType.CHECK;
-            }
-            
-            var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
+                var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
             tff.RegisterNotify(InfoRaised);
             tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
             tff.Show();
+            }
+            
+            
+
+            
             _indexChanged = true;
         }
 
@@ -1448,6 +1464,7 @@ namespace FBExpert
         private void DeactivateGrid()
         {
             ExtensionMethods.DoubleBuffered(dgvResults,true);
+            //dgvResults.Visible = false;
             dgvResults.SuspendLayout();
             Cursor.Current = Cursors.WaitCursor;
         }
@@ -1495,7 +1512,7 @@ namespace FBExpert
                 DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadAllTables,$@"Proc:{this.Name}"); 
             }
 
-            _localNotify.Notify.OnRaiseInfoHandler -= new NotifyInfos.RaiseNotifyHandler(InfoRaised);
+            _localNotify.Notify.OnRaiseInfoHandler  -= new NotifyInfos.RaiseNotifyHandler(InfoRaised);
             _localNotify.Notify.OnRaiseErrorHandler -= new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
         }
         
@@ -1506,8 +1523,8 @@ namespace FBExpert
             {
               x.MinimumHeight = rh;
             }
-
-            if(dgvResults.SelectionMode == DataGridViewSelectionMode.FullRowSelect) return;
+            if (dgvResults.CurrentCell == null) return;
+            if (dgvResults.SelectionMode == DataGridViewSelectionMode.FullRowSelect) return;
             try
             { 
                 Rectangle newRect;
@@ -1518,7 +1535,7 @@ namespace FBExpert
                 if (e.Value == null || e.RowIndex < 0) return;
                 
                 string vs = e.Value.ToString();
-                object o = e.Value;
+                object o  = e.Value;
                 string os = o.GetType().ToString();
                 newRect = new Rectangle(e.CellBounds.X + 1,
                     e.CellBounds.Y + 1, e.CellBounds.Width - 4,
@@ -2021,6 +2038,11 @@ namespace FBExpert
             {
                 cbRowManually.Checked = true;
             }
+        }
+
+        private void dgvResults_Resize(object sender, EventArgs e)
+        {            
+            ActivateGrid();
         }
     }
 }

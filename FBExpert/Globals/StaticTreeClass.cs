@@ -109,6 +109,17 @@ namespace FBExpert
             }
             return null;
         }
+        public TreeNode FindPrevFKGroupNode(TreeNode nd)
+        {
+            TreeNode n = nd;
+            while (n != null)
+            {
+                object obj = n.Tag;                                    
+                if (obj?.GetType().Name == "ForeignKeyGroupClass") return n;                                    
+                n = n.Parent;
+            }
+            return null;
+        }
 
         public TreeNode FindNextTableNode(TreeNode nd)
         {
@@ -254,18 +265,27 @@ namespace FBExpert
             if(newnode) nd.Nodes.Add(akt_group_node);
         }
   
-        public void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode _tnSelected)
         {
 
             var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             bool newnode = false;
-            if (group_node != null)
-            {                
-                RemoveNodes(group_node);
-                akt_group_node = group_node;
-                akt_group_node.Text = "Foreign Keys";
+            if (_tnSelected != null)
+            {      
+                var group_node = StaticTreeClass.Instance().FindPrevFKGroupNode(_tnSelected);  
+                if(group_node != null)
+                {
+                    RemoveNodes(group_node);
+                    akt_group_node = group_node;
+                    akt_group_node.Text = "Foreign Keys";
+                }
+                else
+                {
+                    newnode = true;
+                    akt_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr);     
+                }
             }
             else
             {
@@ -593,12 +613,85 @@ namespace FBExpert
                             
                             newKey = dread.GetValue(1).ToString().Trim();                           
                             string FieldName = dread.GetValue(2).ToString().Trim();                           
-                           // string ConstraintType = dread.GetValue(6).ToString().Trim();      
-                           // if(ConstraintType.ToUpper().Contains("PRIMARY KEY")) continue;                                                 
-                           // if(ConstraintType.Length > 0) 
-                           // {
-                           //     continue;    
-                           // }
+                           
+                            if(oldKey != newKey)
+                            { 
+                                //Neuer Index oder erster Index (first loop)
+                                if(tc != null)
+                                {
+                                    indeces.Add(tc.Name,tc);
+                                }
+                                
+                                tc = GetIndexObject(dread);
+                                
+                                oldKey = newKey;
+                            }
+                            else
+                            {
+                                tc.RelationFields.Add(FieldName, new FieldClass(FieldName));
+                            }
+                                                                                                                                           
+                            n++;
+                        }
+                        
+                        if((oldKey == newKey)&&(!string.IsNullOrEmpty(oldKey)))
+                        {                                 
+                            if(tc != null)
+                            {
+                                indeces.Add(tc.Name,tc);
+                            }                            
+                        }
+                    }
+                    dread.Close();
+                }
+                else
+                {
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndeces->dread==null"));
+                }                
+            }
+            else
+            {
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshIndeces->Connection not open"));
+            }
+            return indeces;
+        }
+
+        public Dictionary<string,IndexClass> GetIndecesObjectsWithoutRefConstraints(DBRegistrationClass DBReg)
+        {
+            var indeces = new Dictionary<string,IndexClass>();
+
+            string cmd = IndexSQLStatementsClass.Instance().GetAllIndiciesWithoutRefConstraints(DBReg.Version,eTableType.withoutsystem); //  .RefreshNonSystemIndicies(DBReg.Version);
+            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            try
+            {
+                con.Open();
+            }
+            catch (Exception ex)
+            {
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllIndeces->{DBReg}", ex));                 
+                return indeces;
+            }
+
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                var fcmd = new FbCommand(cmd, con);
+                var dread = fcmd.ExecuteReader();
+
+                if (dread != null)
+                {
+                    if (dread.HasRows)
+                    {
+                        int n = 0;
+                        string oldKey = string.Empty;
+                        string newKey = string.Empty;                                                                 
+                        IndexClass tc = null;
+
+                        while (dread.Read())
+                        {        
+                            
+                            newKey = dread.GetValue(1).ToString().Trim();                           
+                            string FieldName = dread.GetValue(2).ToString().Trim();                           
+                           
                             if(oldKey != newKey)
                             { 
                                 //Neuer Index oder erster Index (first loop)
@@ -1065,6 +1158,9 @@ namespace FBExpert
         {            
             var tn = FindNode(nd, StaticVariablesClass.ForeignKeyGroupStr);
             var tablenode = FindPrevTableNode(nd);
+
+            
+
             var table = (TableClass)tablenode.Tag;
             
             //string cmd = SQLStatementsClass.Instance().GetTableForeignKeys(DBReg.Version, table.Name);
@@ -1104,8 +1200,8 @@ namespace FBExpert
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.ForeignKeyStr) as ForeignKeyClass;
-                            tc.Name = dread.GetValue(0).ToString().Trim();
-
+                            tc.Name = dread.GetValue(2).ToString().Trim(); //ForeignKeyName
+                             
                             int inactive = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);                            
                             tc.IsActive = inactive == 0;
                             

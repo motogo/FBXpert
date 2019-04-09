@@ -55,8 +55,8 @@ namespace FBXpert
         {
             StringBuilder sb = new StringBuilder();
             messages_count++;
-            if (messages_count > 0) sb.Append("Messages (" + (messages_count).ToString() + ") ");
-            if (error_count > 0) sb.Append("Errors (" + (error_count).ToString() + ")");
+            if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
+            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
 
             fctMessages.AppendText("INFO  " + k.Meldung);
             tabPageMessages.Text = sb.ToString();
@@ -67,10 +67,10 @@ namespace FBXpert
         {
             StringBuilder sb = new StringBuilder();
             error_count++;
-            if (messages_count > 0) sb.Append("Messages (" + (messages_count).ToString() + ") ");
-            if (error_count > 0) sb.Append("Errors (" + (error_count).ToString() + ")");
-
-            fctMessages.AppendText("ERROR " + k.Meldung);
+            if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
+            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            fctMessages.AppendText($@"ERROR {errStr}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -156,6 +156,17 @@ namespace FBXpert
                 sb.Append(" USING INDEX " + txtIndexName.Text.Trim());
             }
             */
+            if(!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
+            {
+                if(!(ForeignKeyObject.Sorting == eSort.ASC))
+                {
+                    sb.Append($@"){Environment.NewLine}USING {ForeignKeyObject.Sorting} INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
+                }
+                else
+                {
+                    sb.Append($@"){Environment.NewLine}USING INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
+                }
+            }
             sb.Append(";");
             StringBuilder sbs = new StringBuilder();
             sb.Append(Environment.NewLine);
@@ -214,6 +225,20 @@ namespace FBXpert
                 sb.Append("USING INDEX "+  txtIndexName.Text.Trim());
             }
             */
+
+            if(!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
+            {
+                if(!(ForeignKeyObject.Sorting == eSort.ASC))
+                {
+                    sb.Append($@"){Environment.NewLine}USING {ForeignKeyObject.Sorting} INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
+                }
+                else
+                {
+                    sb.Append($@"){Environment.NewLine}USING INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
+                }
+            }
+
+
             sb.Append(";");
 
             StringBuilder sbs = new StringBuilder();           
@@ -241,26 +266,10 @@ namespace FBXpert
         }
 
         public void FillPrimaryKey()
-        {
-            cbPrimaryKey.Items.Clear();
-            TableClass tb = (TableClass)cbDestinationTable.SelectedItem;
-            
-            if (tb?.primary_constraint != null)
-            {
-                /*
-                foreach (ConstraintsClass pk in tb.primary_constraints)
-                {
-                    cbPrimaryKey.Items.Add(pk);
-                }
-                if (cbPrimaryKey.Items.Count > 0)
-                {
-                    cbPrimaryKey.SelectedIndex = 0;
-                }
-                */
-                cbPrimaryKey.Items.Add(tb.primary_constraint);
-                if(cbPrimaryKey.Items.Count > 0) cbPrimaryKey.SelectedIndex = 0;
-                else cbPrimaryKey.SelectedIndex = -1;
-            }
+        {           
+            TableClass tb = (TableClass)cbDestinationTable.SelectedItem;            
+            txtPrimaryKey.Text = (tb?.primary_constraint != null) ? tb.primary_constraint.Name : string.Empty;
+            txtIndexName.Text  = (tb?.primary_constraint != null) ? tb.primary_constraint.IndexName : string.Empty;
         }
 
         public void UpdateDestFieldList()
@@ -515,7 +524,7 @@ namespace FBXpert
             string info = (riFailure==null) 
                 ? $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} updated." 
                 : $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadForeignKeys,$@"->Proc:{Name}->Create");
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadAllForeignKeys,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
 
 
@@ -657,8 +666,7 @@ namespace FBXpert
 
         private void cbPrimaryKey_SelectedIndexChanged(object sender, EventArgs e)
         {
-           ConstraintsClass pk = cbPrimaryKey.SelectedItem as ConstraintsClass;
-           txtIndexName.Text = pk.IndexName;
+           
         }
 
         private void txtIndexName_TextChanged(object sender, EventArgs e)

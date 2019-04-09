@@ -13,6 +13,7 @@ using MessageLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -41,17 +42,18 @@ namespace SQLView
 	    private readonly List<string> _obcmd = new List<string>();        
         List<TableClass> _tables = null;
         eSort _lastSort = eSort.DESC;
+        string lastSuccessfulCommand = string.Empty;
+        string lastCommand = string.Empty;
+        AutocompleteClass ac;
 
         public SQLViewForm1(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
-            MdiParent = mdiParent;
-            _dbRegOrg = ca;
-              
-            _dbrRegLocal = _dbRegOrg.Clone();
-            _tables = tables;
-
-            _appDesign = appDesign;
-            _developDesign = developDesign;
+            MdiParent       = mdiParent;
+            _dbRegOrg       = ca;              
+            _dbrRegLocal    = _dbRegOrg.Clone();
+            _tables         = tables;
+            _appDesign      = appDesign;
+            _developDesign  = developDesign;
             InitializeComponent();
            
             var nf = new NotifiesClass();
@@ -59,18 +61,36 @@ namespace SQLView
             _localNotifies.AddNotify(nf,"SQLViewForm");
             _localNotifies.AddNotify(NotifiesClass.Instance(),"GLOBAL");
             _sqLcommand = new SQLCommandsClass(_dbrRegLocal,_localNotifies.Find("SQLViewForm"));     
-            tabPageSucceeded.Text = "commands succeded DESC";
+            tabPageSucceededHistory.Text = "commands succeded DESC";
             Meldungen();
             Errors();                        
             History();                     
             ClearDevelopDesign(_developDesign);
             SetDesign(_appDesign);
             cbTestlauf.Checked = testMode;
-            cbTestlauf.Visible = testMode;     
-            
+            cbTestlauf.Visible = testMode;
+            LanguageChanged();
+            LanguageClass.Instance().OnRaiseLanguageChangedHandler += OnRaiseLanguageChangedHandler;
         }
-           
-        void Meldungen()
+                 
+        private void OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
+        {
+            LanguageChanged();
+        }
+
+        private void LanguageChanged()
+        {
+            SUCC_SQL.HeaderText             = LanguageClass.Instance().GetString("SQL");
+            SUCC_RUNDATE.HeaderText         = LanguageClass.Instance().GetString("DATETIME");
+            SUCC_DBREG.HeaderText           = LanguageClass.Instance().GetString("DBALIAS");
+            FAIL_SQL.HeaderText             = LanguageClass.Instance().GetString("SQL");
+            FAIL_RUNDATE.HeaderText         = LanguageClass.Instance().GetString("DATETIME");
+            FAIL_DBREG.HeaderText           = LanguageClass.Instance().GetString("DBALIAS");
+            tabPageFailedHistory.Text       = LanguageClass.Instance().GetString("FAILED");
+            tabPageSucceededHistory.Text    = LanguageClass.Instance().GetString("SUCCEEDED");
+        }
+
+    void Meldungen()
         {
             var nf = _localNotifies.Find("SQLViewForm");
             if (nf == null) return;            
@@ -137,10 +157,10 @@ namespace SQLView
         {
             _cmdError++;
             tabERRORS.Text = $@"Errors ({_cmdError})";
-
-            if ((txtErrIntervall.Inhalt.Length > 0)&&(cbErrAutoclear.Checked))
+            int? inhalt = StaticFunctionsClass.ToIntDef(txtErrIntervall.Inhalt,null);
+            if ((inhalt != null) && (cbErrAutoclear.Checked))
             {
-                if (rtfERRORS.Lines.Length > Int32.Parse(txtErrIntervall.Inhalt))
+                if (rtfERRORS.Lines.Length > inhalt.Value)
                 {
                     rtfERRORS.Clear();
                 }
@@ -208,38 +228,46 @@ namespace SQLView
             return(term);
         }
         
-        private void AddToHistory(HistoryMode toHistory,string cmd)
+        private bool AddToHistory(HistoryMode toHistory,string cmd)
         {
-            if (toHistory != HistoryMode.AddToHistory)  return;            
-            if(!clbHISTORY.Items.Contains(cmd)) 
-            {
-                if(_lastSort == eSort.DESC)
-                {
-                    clbHISTORY.Items.Insert(0,cmd);    
-                }
-                else
-                {
-                    clbHISTORY.Items.Add(cmd);    
-                }
+            if (toHistory != HistoryMode.AddToHistory)  return false;      
+            
+            DataRow dr = dtSUCCESS.NewRow();
+            dr.ItemArray = new object[] {DateTime.Now,cmd,_dbRegOrg.Alias };
+
+            try
+            { 
+                dtSUCCESS.Rows.Add(dr);
+                dtSUCCESS.AcceptChanges();
+                lastSuccessfulCommand = cmd;
+                lastCommand = cmd;
+                return true;
             }
-            lastSuccessfulCommand = cmd;
+            catch
+            {
+
+            }
+                        
             lastCommand = cmd;
+            return false;
         }
-        private void AddToFailedHistory(HistoryMode toHistory, string cmd)
+        private bool AddToFailedHistory(HistoryMode toHistory, string cmd)
         {
-            if (toHistory != HistoryMode.AddToHistory) return;            
-            if (!clbFAILED_HISTORY.Items.Contains(cmd)) 
-            {
-                if(_lastSort == eSort.DESC)
-                {
-                    clbFAILED_HISTORY.Items.Insert(0,cmd);       
-                }
-                else
-                {
-                    clbFAILED_HISTORY.Items.Add(cmd);    
-                }    
+            if (toHistory != HistoryMode.AddToHistory) return false;
+            DataRow dr = dtFAILED.NewRow();
+            dr.ItemArray = new object[] { DateTime.Now, cmd, _dbRegOrg.Alias };
+            try
+            { 
+                dtFAILED.Rows.Add(dr);
+                dtFAILED.AcceptChanges();            
+                lastCommand = cmd;
+                return true;
             }
-            lastCommand = cmd;
+            catch
+            {
+
+            }
+            return false;
         }
 
         private void AddToHistory(HistoryMode toHistory, string[] cmds)
@@ -267,8 +295,15 @@ namespace SQLView
             string term = GetTerm(cmds);
             string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);            
             var ri  = _sqLcommand.ExecuteCommandsAddToDataset(dataSet1,cmds,true);
-            dataSet1 = ri.dataSet;            
-            AddToHistory(toHistory,cmds);            
+            if(ri.commandDone)
+            {
+                AddToHistory(toHistory, cmds);
+            }
+            else
+            {
+                AddToFailedHistory(toHistory, cmds);
+            }
+            dataSet1 = ri.dataSet;                                   
             bindingSource1.DataMember = "Table";            
         }
         
@@ -292,20 +327,6 @@ namespace SQLView
             _sqLcommand.SetEncoding(cbEncoding.Text);
            
             var ri  = _sqLcommand.ExecuteCommandWithGlobalConnection(txtSQL.Lines);
-            lblUsedMs.Text = ri.costs.ToString();
-            dataSet1 = ri.dataSet;
-           
-            if(dataSet1?.Tables.Count > 0)
-            {           
-                bindingSource1.DataSource = dataSet1;
-                bindingSource1.DataMember = "Table";
-            }
-            else if (ri.lastCommandType == SQLCommandType.select)
-            {
-                NotifiesClass.Instance().AddToERROR("SQLViewForm->ExecSql->No datas selected");
-                _localNotifies?.AddToERROR("SQLViewForm->ExecSql->No datas selected");
-            }
-
             if (ri.commandDone)
             {
                 AddToHistory(toHistory, ri.lastSQL);
@@ -314,6 +335,32 @@ namespace SQLView
             {
                 AddToFailedHistory(toHistory, ri.lastSQL);
             }
+
+            lblUsedMs.Text = ri.costs.ToString();
+            dataSet1 = ri.dataSet;
+           
+            if(dataSet1?.Tables.Count > 0)
+            {  
+                if(ckShowResults.Checked)
+                {
+                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected");
+                    _localNotifies?.AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected");
+                    bindingSource1.DataSource = dataSet1;
+                    bindingSource1.DataMember = "Table";
+
+                }
+                else
+                {
+                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected, but not visible in results");
+                    _localNotifies?.AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected, but not visible in results");
+                }
+            }
+            else if (ri.lastCommandType == SQLCommandType.select)
+            {
+                NotifiesClass.Instance().AddToERROR("SQLViewForm->ExecSql->No datas selected");
+                _localNotifies?.AddToERROR("SQLViewForm->ExecSql->No datas selected");
+            }
+                        
             return ri;        
         }
         private void LoadSQL()
@@ -370,36 +417,8 @@ namespace SQLView
             txtSQL.SaveToFile(sfdSQL.FileName,Encoding.UTF8);                               
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            dataSet1.AcceptChanges();
-        }
-
-        private void clbHISTORY_DoubleClick(object sender, EventArgs e)
-        {
-           txtSQL.Clear();
-           UserStartReady();            
-           txtSQL.AppendText(clbHISTORY.Items[clbHISTORY.SelectedIndex].ToString().Trim()+ Environment.NewLine);           
-           tcSQLCONTROL.SelectedTab = tabSQLTEXT;           
-        }
-
-        private void clbFAILED_HISTORY_DoubleClick(object sender, EventArgs e)
-        {
-            txtSQL.Clear();
-            UserStartReady();            
-            txtSQL.AppendText(clbFAILED_HISTORY.Items[clbFAILED_HISTORY.SelectedIndex].ToString().Trim() + Environment.NewLine);            
-            tcSQLCONTROL.SelectedTab = tabSQLTEXT;
-        }
-        string lastSuccessfulCommand = string.Empty;
-        string lastCommand = string.Empty;
-
         public void TestOpen(string databaseString)
         {
-
-          //  ConnectionClass cc = ConnectionPoolClass.Instance().GetConnection(GlobalsCon.MainCon);
-          //  ConnectionAttributes ca = cc.ConnAtt;
-            
-          
 
             int inx1 = txtDatabase.Text.IndexOf("\\");
             int inx2 = txtDatabase.Text.IndexOf("//");
@@ -426,8 +445,6 @@ namespace SQLView
             hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);           
             hsLifeTime.Text = lifeTime;
         }
-
-      
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
             txtSQL.Clear();            
@@ -439,14 +456,14 @@ namespace SQLView
             TestOpen(txtDatabase.Text);
             hsBreak.Enabled = false;
 
-            int n = LoadHistory(_lastSort);
+            LoadHistory(_lastSort);
                         
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
             SetEncoding();   
             SetAutocompeteObjects(_tables);
         }
-        AutocompleteClass ac;
+        
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
             ac = new AutocompleteClass(txtSQL, _dbRegOrg);
@@ -456,37 +473,27 @@ namespace SQLView
             ac.Activate();
         }
 
-        private int LoadHistory(eSort sort)
+        private void LoadHistory(eSort sort)
         {
-            clbHISTORY.Items.Clear();
-            var fi = new FileInfo($@"{Application.StartupPath}\SQLHistory.txt");
-            if (fi.Exists)
-            {
-                var rt = new RichTextBox();
-                rt.LoadFile(fi.FullName,RichTextBoxStreamType.PlainText);
-                foreach (string str in rt.Lines)
-                {
-                    if(str.Length <= 0) continue;
-                    if(sort == eSort.DESC) clbHISTORY.Items.Insert(0,str); 
-                    else clbHISTORY.Items.Add(str);                                        
-                } 
-                
-                if(clbHISTORY.Items.Count > 0)
-                {
-                    lastSuccessfulCommand = (sort == eSort.DESC) 
-                        ? clbHISTORY.Items[0].ToString() 
-                        : clbHISTORY.Items[clbHISTORY.Items.Count-1].ToString();
-                    lastCommand = lastSuccessfulCommand;
-                }
-                return clbHISTORY.Items.Count;
+            dsHistory.Clear();
+            try
+            { 
+                dsHistory.ReadXml($@"{Application.StartupPath}\SQL\SQLHistory.xml");   
+                dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Descending);
             }
-            return 0;
+            catch
+            {
+
+            }
         }
 
         private void ExecuteHistorySelected()
         {
-            txtSQL.Clear();            
-            txtSQL.AppendText($@"{clbHISTORY.Items[clbHISTORY.SelectedIndex]}{Environment.NewLine}");            
+            txtSQL.Clear();
+            DataGridViewRow dr = dgViewHistorySuccess.SelectedRows[0];
+            string sql = dr.Cells["SUCC_SQL"].Value.ToString();
+
+            txtSQL.AppendText($@"{sql}{Environment.NewLine}");            
             tcSQLCONTROL.SelectedTab = tabSQLTEXT;
             ExecSql(HistoryMode.NoHistory);
             tcSQLCONTROL.SelectedTab = tabRESULT;        
@@ -494,34 +501,9 @@ namespace SQLView
 
         private void SQLViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var rt = new RichTextBox();            
-            if(_lastSort == eSort.DESC)
-            {
-                for(int i = clbHISTORY.Items.Count-1; i >= 0; i--)           
-                {
-                    string str = clbHISTORY.Items[i].ToString();
-                    rt.AppendText($@"{str}{Environment.NewLine}");
-                }  
-            }
-            else
-            {
-                for(int i = 0; i < clbHISTORY.Items.Count; i++)           
-                {
-                    string str = clbHISTORY.Items[i].ToString();
-                    rt.AppendText($@"{str}{Environment.NewLine}");
-                }
-            }
-
-            rt.SaveFile(Application.StartupPath+"\\SQLHistory.txt",RichTextBoxStreamType.PlainText);            
-            rt = new RichTextBox();
-
-            for (int i = 0; i < clbFAILED_HISTORY.Items.Count; i++)
-            {
-                string str = clbFAILED_HISTORY.Items[i].ToString();
-                rt.AppendText($@"{str}{Environment.NewLine}");
-            }
-            rt.SaveFile(Application.StartupPath + "\\SQLHistoryFailed.txt", RichTextBoxStreamType.PlainText);
-
+           
+            dsHistory.WriteXml($@"{Application.StartupPath}\SQL\SQLHistory.xml");
+            
             _localNotifies.ClearAllEvents("SQLViewForm");            
             this.WindowState = FormWindowState.Normal;
         }
@@ -538,19 +520,7 @@ namespace SQLView
             if (!file.EndOfStream) return file.ReadLine();            
             return (null);
         }
-        
-        private object[] leseAll(System.IO.StreamReader file)
-        {
-            int counter = 0;
-            string line;
-            var al = new ArrayList();
-            while ((line = file.ReadLine()) != null) 
-            {
-                al.Add(line);
-                counter++;
-            }
-            return (al.ToArray());
-        }
+               
         private void FillScript()
         {
             string strcmd;
@@ -858,7 +828,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             txtUsedTime.Text = stopwatch.ElapsedMilliseconds.ToString();
             EditMode(cbEditMode.Checked);   
             tabRESULT.Text = $@"Results ({dgvResults.Rows.Count})";
-            tabHistory.Text = $@"History ({clbHISTORY.Items.Count})";
+            tabHistory.Text = $@"History ({dgViewHistorySuccess.RowCount}/{dgViewHistoryFailed.RowCount})";
             dgvResults.Visible = true; 
         }
 
@@ -895,13 +865,13 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         }
 
         private void hsExecuteHistorySelected_Click(object sender, EventArgs e)
-        {
+        {            
             ExecuteHistorySelected();
         }
 
         private void hsClearHistoryAll_Click(object sender, EventArgs e)
         {
-            clbHISTORY.Items.Clear();
+           dtSUCCESS.Clear();
         }
 
         private void hsClearErrorAll_Click(object sender, EventArgs e)
@@ -1047,22 +1017,9 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void hsCrearAllFailed_Click(object sender, EventArgs e)
         {
-            clbFAILED_HISTORY.Items.Clear();
+            dtFAILED.Clear();
         }
-
-        private void hsClearHistorySelected_Click(object sender, EventArgs e)
-        {
-            for (int i = clbHISTORY.Items.Count; i > 0; i--)
-            {
-                if (clbHISTORY.GetItemChecked(i - 1)) clbHISTORY.Items.RemoveAt(i - 1);
-            }
-
-            for (int i = clbFAILED_HISTORY.Items.Count; i > 0; i--)
-            {
-                if (clbFAILED_HISTORY.GetItemChecked(i - 1)) clbFAILED_HISTORY.Items.RemoveAt(i - 1);
-            }
-        }
-
+       
         private void txtSQL_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyData == (Keys.K | Keys.Control)) 
@@ -1129,15 +1086,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void Sort()
         {
-            object[] obj = new object[clbHISTORY.Items.Count];
-            clbHISTORY.BeginUpdate();
-            clbHISTORY.Items.CopyTo(obj,0);
-            clbHISTORY.Items.Clear();
-            foreach(object ob in obj)
-            {
-                clbHISTORY.Items.Insert(0,ob);
-            }
-            clbHISTORY.EndUpdate();
+           
         }
 
         private void cmsHistory_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -1148,7 +1097,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 {
                     Sort();
                     _lastSort = eSort.ASC;
-                    tabPageSucceeded.Text = "commands succeded ASC";
+                    tabPageSucceededHistory.Text = "commands succeded ASC";
                 }                
             }
             else if(e.ClickedItem == tsmiSortDESC)
@@ -1157,7 +1106,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 {
                     Sort();
                     _lastSort = eSort.DESC;
-                    tabPageSucceeded.Text = "commands succeded DESC";
+                    tabPageSucceededHistory.Text = "commands succeded DESC";
                 }
             }
         }
@@ -1267,25 +1216,78 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
         }
 
-        private void exportCSV(string filename, char seperator)
-        {
-            var sb = new StringBuilder();
+        private async void exportCSV(string filename, char seperator)
+        {            
             DataTable dt = dataSet1.Tables[0];
-            foreach (DataRow dr in dt.Rows)
-            {
-                foreach (DataColumn dc in dt.Columns)
-                    sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");
-                sb.Remove(sb.Length - 1, 1);
-                sb.AppendLine();
-            }
-            if(ckExportToScreen.Checked)
-            {
-               fctXMLData.Clear();
-               fctXMLData.Language = FastColoredTextBoxNS.Language.Custom;
-               fctXMLData.AppendText(sb.ToString());
-            }
+            fctXMLData.Clear();
+            fctXMLData.Language = FastColoredTextBoxNS.Language.Custom;
+            bool first = true;
             if(ckExportToFile.Checked)
-            File.WriteAllText(filename, sb.ToString());            
+            {
+                using (StreamWriter writer = File.CreateText(filename))
+                {                    
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var sb = new StringBuilder();
+                        if(first)
+                        {
+                            foreach (DataColumn dc in dt.Columns)
+                            {                            
+                                sb.Append($@"{WriteCSV(dc.ColumnName,seperator)}{seperator}");                                                                                    
+                            }
+                            sb.Remove(sb.Length - 1, 1);
+                            
+                            await writer.WriteLineAsync(sb.ToString());
+                            if(ckExportToScreen.Checked)
+                            {
+                                 fctXMLData.AppendText(sb.ToString());
+                            }
+                            first = false;
+                            sb = new StringBuilder();
+                        }
+
+                        foreach (DataColumn dc in dt.Columns)
+                        {                            
+                            sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");                                                                                    
+                        }
+                        sb.Remove(sb.Length - 1, 1);
+                        
+                        await writer.WriteLineAsync(sb.ToString());
+                        if(ckExportToScreen.Checked)
+                        {
+                             fctXMLData.AppendText(sb.ToString());
+                        }
+                    }
+                }
+            }
+            else if(ckExportToScreen.Checked)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var sb = new StringBuilder();
+                    if(first)
+                    {
+                        foreach (DataColumn dc in dt.Columns)
+                        {                            
+                            sb.Append($@"{WriteCSV(dc.ColumnName,seperator)}{seperator}");                                                                                    
+                        }
+                        sb.Remove(sb.Length - 1, 1);
+                        sb.AppendLine();
+                        fctXMLData.AppendText(sb.ToString());
+                        first = false;
+                        sb = new StringBuilder();
+                    }
+
+                    foreach (DataColumn dc in dt.Columns)
+                    {                        
+                        sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");                                                                      
+                    }
+                    sb.Remove(sb.Length - 1, 1);
+                    sb.AppendLine();
+                    fctXMLData.AppendText(sb.ToString());
+                }
+            }
+            
         }
 
         private void hsExportCSV_Click(object sender, EventArgs e)
@@ -1323,6 +1325,45 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             else
             {
                 exportToHtml("");
+            }
+        }
+
+        private void DgViewHistorySuccess_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtSQL.Clear();
+            UserStartReady();
+            DataGridViewRow dr = dgViewHistorySuccess.SelectedRows[0];
+            string sql = dr.Cells["SUCC_SQL"].Value.ToString();
+
+            txtSQL.AppendText($@"{sql.Trim()}{Environment.NewLine}");
+            tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+        }
+
+        private void HsSort_Click(object sender, EventArgs e)
+        {
+            if(tabControlHistory.SelectedTab == tabPageSucceededHistory)
+            { 
+                SUCC_RUNDATE.SortMode = DataGridViewColumnSortMode.Programmatic;
+                if (dgViewHistorySuccess.SortOrder == SortOrder.Ascending)
+                {             
+                    dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Descending);                
+                }
+                else
+                {                
+                    dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Ascending);
+                } 
+            }
+            else
+            {
+                FAIL_RUNDATE.SortMode = DataGridViewColumnSortMode.Programmatic;
+                if (dgViewHistoryFailed.SortOrder == SortOrder.Ascending)
+                {
+                    dgViewHistoryFailed.Sort(FAIL_RUNDATE, ListSortDirection.Descending);                
+                }
+                else
+                {
+                    dgViewHistoryFailed.Sort(FAIL_RUNDATE, ListSortDirection.Ascending);
+                }
             }
         }
     }

@@ -40,6 +40,11 @@ namespace SQLView
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLViewForm1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_upper = new System.Windows.Forms.Panel();
             this.hsLifeTime = new SeControlsLib.HotSpot();
             this.gbDatabase = new System.Windows.Forms.GroupBox();
@@ -66,6 +71,7 @@ namespace SQLView
             this.tsmiInsertLastSuccessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExecuteLastSucessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSQLUpper = new System.Windows.Forms.Panel();
+            this.ckShowResults = new System.Windows.Forms.CheckBox();
             this.hsBreak = new SeControlsLib.HotSpot();
             this.hsReplaceText = new SeControlsLib.HotSpot();
             this.hsSaveSQL = new SeControlsLib.HotSpot();
@@ -130,17 +136,27 @@ namespace SQLView
             this.tabHistory = new System.Windows.Forms.TabPage();
             this.pnlHistoryCenter = new System.Windows.Forms.Panel();
             this.tabControlHistory = new System.Windows.Forms.TabControl();
-            this.tabPageSucceeded = new System.Windows.Forms.TabPage();
-            this.clbHISTORY = new System.Windows.Forms.CheckedListBox();
-            this.cmsHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiSortASC = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSortDESC = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageSucceededHistory = new System.Windows.Forms.TabPage();
+            this.dgViewHistorySuccess = new System.Windows.Forms.DataGridView();
+            this.bsHistory = new System.Windows.Forms.BindingSource(this.components);
+            this.dsHistory = new System.Data.DataSet();
+            this.dtSUCCESS = new System.Data.DataTable();
+            this.colSUCC_RUNDATE = new System.Data.DataColumn();
+            this.colSUCC_SQL = new System.Data.DataColumn();
+            this.colSUCC_DBREG = new System.Data.DataColumn();
+            this.dtFAILED = new System.Data.DataTable();
+            this.colFAIL_RUNDATE = new System.Data.DataColumn();
+            this.colFAIL_SQL = new System.Data.DataColumn();
+            this.colFAIL_DBREG = new System.Data.DataColumn();
             this.tabPageFailedHistory = new System.Windows.Forms.TabPage();
-            this.clbFAILED_HISTORY = new System.Windows.Forms.CheckedListBox();
+            this.dgViewHistoryFailed = new System.Windows.Forms.DataGridView();
+            this.FAIL_RUNDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FAIL_SQL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FAIL_DBREG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHistoryUpper = new System.Windows.Forms.Panel();
+            this.hsSort = new SeControlsLib.HotSpot();
             this.hsCrearAllFailed = new SeControlsLib.HotSpot();
             this.hsClearHistoryAll = new SeControlsLib.HotSpot();
-            this.hsClearHistorySelected = new SeControlsLib.HotSpot();
             this.hsExecuteHistorySelected = new SeControlsLib.HotSpot();
             this.tabRelpacelist = new System.Windows.Forms.TabPage();
             this.pnlReplacesCenter = new System.Windows.Forms.Panel();
@@ -203,6 +219,9 @@ namespace SQLView
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.hsRefreshPerformance = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
+            this.cmsHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSortASC = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSortDESC = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdSQL = new System.Windows.Forms.SaveFileDialog();
             this.helpMain = new System.Windows.Forms.HelpProvider();
             this.ofdLog = new System.Windows.Forms.OpenFileDialog();
@@ -211,6 +230,9 @@ namespace SQLView
             this.saveFileDialogXML = new System.Windows.Forms.SaveFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
+            this.SUCC_RUNDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SUCC_SQL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SUCC_DBREG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl_upper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
@@ -245,9 +267,14 @@ namespace SQLView
             this.tabHistory.SuspendLayout();
             this.pnlHistoryCenter.SuspendLayout();
             this.tabControlHistory.SuspendLayout();
-            this.tabPageSucceeded.SuspendLayout();
-            this.cmsHistory.SuspendLayout();
+            this.tabPageSucceededHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewHistorySuccess)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtSUCCESS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFAILED)).BeginInit();
             this.tabPageFailedHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewHistoryFailed)).BeginInit();
             this.pnlHistoryUpper.SuspendLayout();
             this.tabRelpacelist.SuspendLayout();
             this.pnlReplacesCenter.SuspendLayout();
@@ -272,6 +299,7 @@ namespace SQLView
             this.tabPagePerformance.SuspendLayout();
             this.gbPerformance.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.cmsHistory.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_upper
@@ -530,9 +558,9 @@ namespace SQLView
             this.cbTestlauf.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbTestlauf.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbTestlauf.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.cbTestlauf.Location = new System.Drawing.Point(792, 0);
+            this.cbTestlauf.Location = new System.Drawing.Point(779, 0);
             this.cbTestlauf.Name = "cbTestlauf";
-            this.cbTestlauf.Size = new System.Drawing.Size(61, 41);
+            this.cbTestlauf.Size = new System.Drawing.Size(74, 41);
             this.cbTestlauf.TabIndex = 24;
             this.cbTestlauf.Text = "Testlauf";
             this.cbTestlauf.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -730,6 +758,7 @@ namespace SQLView
             // pnlSQLUpper
             // 
             this.pnlSQLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlSQLUpper.Controls.Add(this.ckShowResults);
             this.pnlSQLUpper.Controls.Add(this.hsBreak);
             this.pnlSQLUpper.Controls.Add(this.hsReplaceText);
             this.pnlSQLUpper.Controls.Add(this.hsSaveSQL);
@@ -744,6 +773,22 @@ namespace SQLView
             this.pnlSQLUpper.Name = "pnlSQLUpper";
             this.pnlSQLUpper.Size = new System.Drawing.Size(979, 45);
             this.pnlSQLUpper.TabIndex = 27;
+            // 
+            // ckShowResults
+            // 
+            this.ckShowResults.BackColor = System.Drawing.Color.Transparent;
+            this.ckShowResults.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckShowResults.Checked = true;
+            this.ckShowResults.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckShowResults.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ckShowResults.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ckShowResults.Location = new System.Drawing.Point(673, 0);
+            this.ckShowResults.Name = "ckShowResults";
+            this.ckShowResults.Size = new System.Drawing.Size(106, 41);
+            this.ckShowResults.TabIndex = 34;
+            this.ckShowResults.Text = "Show Results";
+            this.ckShowResults.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ckShowResults.UseVisualStyleBackColor = false;
             // 
             // hsBreak
             // 
@@ -1810,7 +1855,7 @@ namespace SQLView
             // 
             // tabControlHistory
             // 
-            this.tabControlHistory.Controls.Add(this.tabPageSucceeded);
+            this.tabControlHistory.Controls.Add(this.tabPageSucceededHistory);
             this.tabControlHistory.Controls.Add(this.tabPageFailedHistory);
             this.tabControlHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlHistory.Location = new System.Drawing.Point(0, 0);
@@ -1821,56 +1866,121 @@ namespace SQLView
             // 
             // tabPageSucceeded
             // 
-            this.tabPageSucceeded.Controls.Add(this.clbHISTORY);
-            this.tabPageSucceeded.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSucceeded.Name = "tabPageSucceeded";
-            this.tabPageSucceeded.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSucceeded.Size = new System.Drawing.Size(971, 549);
-            this.tabPageSucceeded.TabIndex = 0;
-            this.tabPageSucceeded.Text = "commands succeded";
-            this.tabPageSucceeded.UseVisualStyleBackColor = true;
+            this.tabPageSucceededHistory.Controls.Add(this.dgViewHistorySuccess);
+            this.tabPageSucceededHistory.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSucceededHistory.Name = "tabPageSucceeded";
+            this.tabPageSucceededHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSucceededHistory.Size = new System.Drawing.Size(971, 549);
+            this.tabPageSucceededHistory.TabIndex = 0;
+            this.tabPageSucceededHistory.Text = "commands succeded";
+            this.tabPageSucceededHistory.UseVisualStyleBackColor = true;
             // 
-            // clbHISTORY
+            // dgViewHistorySuccess
             // 
-            this.clbHISTORY.CheckOnClick = true;
-            this.clbHISTORY.ContextMenuStrip = this.cmsHistory;
-            this.clbHISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbHISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbHISTORY.FormattingEnabled = true;
-            this.clbHISTORY.HorizontalScrollbar = true;
-            this.clbHISTORY.Location = new System.Drawing.Point(3, 3);
-            this.clbHISTORY.Name = "clbHISTORY";
-            this.clbHISTORY.ScrollAlwaysVisible = true;
-            this.clbHISTORY.Size = new System.Drawing.Size(965, 543);
-            this.clbHISTORY.TabIndex = 0;
-            this.clbHISTORY.DoubleClick += new System.EventHandler(this.clbHISTORY_DoubleClick);
+            this.dgViewHistorySuccess.AllowUserToAddRows = false;
+            this.dgViewHistorySuccess.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewHistorySuccess.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgViewHistorySuccess.AutoGenerateColumns = false;
+            this.dgViewHistorySuccess.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgViewHistorySuccess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgViewHistorySuccess.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SUCC_RUNDATE,
+            this.SUCC_SQL,
+            this.SUCC_DBREG});
+            this.dgViewHistorySuccess.DataMember = "dtSUCCESS";
+            this.dgViewHistorySuccess.DataSource = this.bsHistory;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgViewHistorySuccess.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgViewHistorySuccess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgViewHistorySuccess.Location = new System.Drawing.Point(3, 3);
+            this.dgViewHistorySuccess.MultiSelect = false;
+            this.dgViewHistorySuccess.Name = "dgViewHistorySuccess";
+            this.dgViewHistorySuccess.RowHeadersVisible = false;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewHistorySuccess.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgViewHistorySuccess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgViewHistorySuccess.Size = new System.Drawing.Size(965, 543);
+            this.dgViewHistorySuccess.TabIndex = 1;
+            this.dgViewHistorySuccess.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DgViewHistorySuccess_MouseDoubleClick);
             // 
-            // cmsHistory
+            // bsHistory
             // 
-            this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSortASC,
-            this.tsmiSortDESC});
-            this.cmsHistory.Name = "cmsHistory";
-            this.cmsHistory.Size = new System.Drawing.Size(160, 48);
-            this.cmsHistory.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsHistory_ItemClicked);
+            this.bsHistory.DataSource = this.dsHistory;
+            this.bsHistory.Position = 0;
             // 
-            // tsmiSortASC
+            // dsHistory
             // 
-            this.tsmiSortASC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.tsmiSortASC.Name = "tsmiSortASC";
-            this.tsmiSortASC.Size = new System.Drawing.Size(159, 22);
-            this.tsmiSortASC.Text = "Sort ascending";
+            this.dsHistory.DataSetName = "NewDataSet";
+            this.dsHistory.Tables.AddRange(new System.Data.DataTable[] {
+            this.dtSUCCESS,
+            this.dtFAILED});
             // 
-            // tsmiSortDESC
+            // dtSUCCESS
             // 
-            this.tsmiSortDESC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.tsmiSortDESC.Name = "tsmiSortDESC";
-            this.tsmiSortDESC.Size = new System.Drawing.Size(159, 22);
-            this.tsmiSortDESC.Text = "Sort descending";
+            this.dtSUCCESS.Columns.AddRange(new System.Data.DataColumn[] {
+            this.colSUCC_RUNDATE,
+            this.colSUCC_SQL,
+            this.colSUCC_DBREG});
+            this.dtSUCCESS.Constraints.AddRange(new System.Data.Constraint[] {
+            new System.Data.UniqueConstraint("Constraint1", new string[] {
+                        "SQL"}, true)});
+            this.dtSUCCESS.PrimaryKey = new System.Data.DataColumn[] {
+        this.colSUCC_SQL};
+            this.dtSUCCESS.TableName = "dtSUCCESS";
+            // 
+            // colSUCC_RUNDATE
+            // 
+            this.colSUCC_RUNDATE.ColumnName = "RUNDATE";
+            this.colSUCC_RUNDATE.DataType = typeof(System.DateTime);
+            // 
+            // colSUCC_SQL
+            // 
+            this.colSUCC_SQL.AllowDBNull = false;
+            this.colSUCC_SQL.ColumnName = "SQL";
+            // 
+            // colSUCC_DBREG
+            // 
+            this.colSUCC_DBREG.ColumnName = "DBREG";
+            // 
+            // dtFAILED
+            // 
+            this.dtFAILED.Columns.AddRange(new System.Data.DataColumn[] {
+            this.colFAIL_RUNDATE,
+            this.colFAIL_SQL,
+            this.colFAIL_DBREG});
+            this.dtFAILED.Constraints.AddRange(new System.Data.Constraint[] {
+            new System.Data.UniqueConstraint("Constraint1", new string[] {
+                        "SQL"}, true)});
+            this.dtFAILED.PrimaryKey = new System.Data.DataColumn[] {
+        this.colFAIL_SQL};
+            this.dtFAILED.TableName = "dtFAILED";
+            // 
+            // colFAIL_RUNDATE
+            // 
+            this.colFAIL_RUNDATE.ColumnName = "RUNDATE";
+            this.colFAIL_RUNDATE.DataType = typeof(System.DateTime);
+            // 
+            // colFAIL_SQL
+            // 
+            this.colFAIL_SQL.AllowDBNull = false;
+            this.colFAIL_SQL.ColumnName = "SQL";
+            // 
+            // colFAIL_DBREG
+            // 
+            this.colFAIL_DBREG.ColumnName = "DBREG";
             // 
             // tabPageFailedHistory
             // 
-            this.tabPageFailedHistory.Controls.Add(this.clbFAILED_HISTORY);
+            this.tabPageFailedHistory.Controls.Add(this.dgViewHistoryFailed);
             this.tabPageFailedHistory.Location = new System.Drawing.Point(4, 22);
             this.tabPageFailedHistory.Name = "tabPageFailedHistory";
             this.tabPageFailedHistory.Padding = new System.Windows.Forms.Padding(3);
@@ -1879,32 +1989,117 @@ namespace SQLView
             this.tabPageFailedHistory.Text = "failed commands";
             this.tabPageFailedHistory.UseVisualStyleBackColor = true;
             // 
-            // clbFAILED_HISTORY
+            // dgViewHistoryFailed
             // 
-            this.clbFAILED_HISTORY.CheckOnClick = true;
-            this.clbFAILED_HISTORY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbFAILED_HISTORY.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbFAILED_HISTORY.FormattingEnabled = true;
-            this.clbFAILED_HISTORY.HorizontalScrollbar = true;
-            this.clbFAILED_HISTORY.Location = new System.Drawing.Point(3, 3);
-            this.clbFAILED_HISTORY.Name = "clbFAILED_HISTORY";
-            this.clbFAILED_HISTORY.ScrollAlwaysVisible = true;
-            this.clbFAILED_HISTORY.Size = new System.Drawing.Size(965, 543);
-            this.clbFAILED_HISTORY.TabIndex = 1;
-            this.clbFAILED_HISTORY.DoubleClick += new System.EventHandler(this.clbFAILED_HISTORY_DoubleClick);
+            this.dgViewHistoryFailed.AllowUserToAddRows = false;
+            this.dgViewHistoryFailed.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewHistoryFailed.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgViewHistoryFailed.AutoGenerateColumns = false;
+            this.dgViewHistoryFailed.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgViewHistoryFailed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgViewHistoryFailed.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FAIL_RUNDATE,
+            this.FAIL_SQL,
+            this.FAIL_DBREG});
+            this.dgViewHistoryFailed.DataMember = "dtFAILED";
+            this.dgViewHistoryFailed.DataSource = this.bsHistory;
+            this.dgViewHistoryFailed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgViewHistoryFailed.Location = new System.Drawing.Point(3, 3);
+            this.dgViewHistoryFailed.Name = "dgViewHistoryFailed";
+            this.dgViewHistoryFailed.RowHeadersVisible = false;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewHistoryFailed.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgViewHistoryFailed.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgViewHistoryFailed.Size = new System.Drawing.Size(965, 543);
+            this.dgViewHistoryFailed.TabIndex = 2;
+            // 
+            // FAIL_RUNDATE
+            // 
+            this.FAIL_RUNDATE.DataPropertyName = "RUNDATE";
+            this.FAIL_RUNDATE.Frozen = true;
+            this.FAIL_RUNDATE.HeaderText = "RUNDATE";
+            this.FAIL_RUNDATE.Name = "FAIL_RUNDATE";
+            this.FAIL_RUNDATE.ReadOnly = true;
+            this.FAIL_RUNDATE.Width = 85;
+            // 
+            // FAIL_SQL
+            // 
+            this.FAIL_SQL.DataPropertyName = "SQL";
+            this.FAIL_SQL.HeaderText = "SQL";
+            this.FAIL_SQL.Name = "FAIL_SQL";
+            this.FAIL_SQL.Width = 53;
+            // 
+            // FAIL_DBREG
+            // 
+            this.FAIL_DBREG.DataPropertyName = "DBREG";
+            this.FAIL_DBREG.HeaderText = "DBREG";
+            this.FAIL_DBREG.Name = "FAIL_DBREG";
+            this.FAIL_DBREG.ReadOnly = true;
+            this.FAIL_DBREG.Width = 70;
             // 
             // pnlHistoryUpper
             // 
             this.pnlHistoryUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlHistoryUpper.Controls.Add(this.hsSort);
             this.pnlHistoryUpper.Controls.Add(this.hsCrearAllFailed);
             this.pnlHistoryUpper.Controls.Add(this.hsClearHistoryAll);
-            this.pnlHistoryUpper.Controls.Add(this.hsClearHistorySelected);
             this.pnlHistoryUpper.Controls.Add(this.hsExecuteHistorySelected);
             this.pnlHistoryUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHistoryUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlHistoryUpper.Name = "pnlHistoryUpper";
             this.pnlHistoryUpper.Size = new System.Drawing.Size(979, 49);
             this.pnlHistoryUpper.TabIndex = 23;
+            // 
+            // hsSort
+            // 
+            this.hsSort.BackColor = System.Drawing.Color.Transparent;
+            this.hsSort.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSort.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSort.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSort.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSort.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSort.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSort.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsSort.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSort.FlatAppearance.BorderSize = 0;
+            this.hsSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSort.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSort.Image = global::FBXpert.Properties.Resources.down_up32x;
+            this.hsSort.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsSort.ImageHover = global::FBXpert.Properties.Resources.up_down32x;
+            this.hsSort.ImageToggleOnSelect = true;
+            this.hsSort.Location = new System.Drawing.Point(328, 0);
+            this.hsSort.Marked = false;
+            this.hsSort.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSort.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSort.MarkedText = "";
+            this.hsSort.MarkMode = false;
+            this.hsSort.Name = "hsSort";
+            this.hsSort.NonMarkedText = "";
+            this.hsSort.Size = new System.Drawing.Size(66, 45);
+            this.hsSort.TabIndex = 32;
+            this.hsSort.Text = "Sort";
+            this.hsSort.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSort.ToolTipActive = false;
+            this.hsSort.ToolTipAutomaticDelay = 500;
+            this.hsSort.ToolTipAutoPopDelay = 5000;
+            this.hsSort.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSort.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSort.ToolTipFor4ContextMenu = true;
+            this.hsSort.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSort.ToolTipInitialDelay = 500;
+            this.hsSort.ToolTipIsBallon = false;
+            this.hsSort.ToolTipOwnerDraw = false;
+            this.hsSort.ToolTipReshowDelay = 100;
+            this.hsSort.ToolTipShowAlways = false;
+            this.hsSort.ToolTipText = "";
+            this.hsSort.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSort.ToolTipTitle = "";
+            this.hsSort.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSort.UseVisualStyleBackColor = false;
+            this.hsSort.Click += new System.EventHandler(this.HsSort_Click);
             // 
             // hsCrearAllFailed
             // 
@@ -1924,7 +2119,7 @@ namespace SQLView
             this.hsCrearAllFailed.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsCrearAllFailed.ImageHover = global::FBXpert.Properties.Resources.document_blue_x32;
             this.hsCrearAllFailed.ImageToggleOnSelect = true;
-            this.hsCrearAllFailed.Location = new System.Drawing.Point(334, 0);
+            this.hsCrearAllFailed.Location = new System.Drawing.Point(209, 0);
             this.hsCrearAllFailed.Marked = false;
             this.hsCrearAllFailed.MarkedColor = System.Drawing.Color.Teal;
             this.hsCrearAllFailed.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1973,7 +2168,7 @@ namespace SQLView
             this.hsClearHistoryAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsClearHistoryAll.ImageHover = global::FBXpert.Properties.Resources.document_blue_x32;
             this.hsClearHistoryAll.ImageToggleOnSelect = true;
-            this.hsClearHistoryAll.Location = new System.Drawing.Point(215, 0);
+            this.hsClearHistoryAll.Location = new System.Drawing.Point(90, 0);
             this.hsClearHistoryAll.Marked = false;
             this.hsClearHistoryAll.MarkedColor = System.Drawing.Color.Teal;
             this.hsClearHistoryAll.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2003,55 +2198,6 @@ namespace SQLView
             this.hsClearHistoryAll.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsClearHistoryAll.UseVisualStyleBackColor = false;
             this.hsClearHistoryAll.Click += new System.EventHandler(this.hsClearHistoryAll_Click);
-            // 
-            // hsClearHistorySelected
-            // 
-            this.hsClearHistorySelected.BackColor = System.Drawing.Color.Transparent;
-            this.hsClearHistorySelected.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsClearHistorySelected.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsClearHistorySelected.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsClearHistorySelected.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsClearHistorySelected.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsClearHistorySelected.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsClearHistorySelected.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsClearHistorySelected.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsClearHistorySelected.FlatAppearance.BorderSize = 0;
-            this.hsClearHistorySelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsClearHistorySelected.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsClearHistorySelected.Image = global::FBXpert.Properties.Resources.documents_32x;
-            this.hsClearHistorySelected.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsClearHistorySelected.ImageHover = global::FBXpert.Properties.Resources.document_blue_x32;
-            this.hsClearHistorySelected.ImageToggleOnSelect = true;
-            this.hsClearHistorySelected.Location = new System.Drawing.Point(90, 0);
-            this.hsClearHistorySelected.Marked = false;
-            this.hsClearHistorySelected.MarkedColor = System.Drawing.Color.Teal;
-            this.hsClearHistorySelected.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsClearHistorySelected.MarkedText = "";
-            this.hsClearHistorySelected.MarkMode = false;
-            this.hsClearHistorySelected.Name = "hsClearHistorySelected";
-            this.hsClearHistorySelected.NonMarkedText = "Clear all checked";
-            this.hsClearHistorySelected.Size = new System.Drawing.Size(125, 45);
-            this.hsClearHistorySelected.TabIndex = 29;
-            this.hsClearHistorySelected.Text = "Clear all checked";
-            this.hsClearHistorySelected.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsClearHistorySelected.ToolTipActive = false;
-            this.hsClearHistorySelected.ToolTipAutomaticDelay = 500;
-            this.hsClearHistorySelected.ToolTipAutoPopDelay = 5000;
-            this.hsClearHistorySelected.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsClearHistorySelected.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsClearHistorySelected.ToolTipFor4ContextMenu = true;
-            this.hsClearHistorySelected.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsClearHistorySelected.ToolTipInitialDelay = 500;
-            this.hsClearHistorySelected.ToolTipIsBallon = false;
-            this.hsClearHistorySelected.ToolTipOwnerDraw = false;
-            this.hsClearHistorySelected.ToolTipReshowDelay = 100;
-            this.hsClearHistorySelected.ToolTipShowAlways = false;
-            this.hsClearHistorySelected.ToolTipText = "";
-            this.hsClearHistorySelected.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsClearHistorySelected.ToolTipTitle = "";
-            this.hsClearHistorySelected.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsClearHistorySelected.UseVisualStyleBackColor = false;
-            this.hsClearHistorySelected.Click += new System.EventHandler(this.hsClearHistorySelected_Click);
             // 
             // hsExecuteHistorySelected
             // 
@@ -2567,7 +2713,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -3211,6 +3357,29 @@ namespace SQLView
             this.ilTabControl.Images.SetKeyName(15, "format_indent_more_24x.png");
             this.ilTabControl.Images.SetKeyName(16, "graph_32x.png");
             // 
+            // cmsHistory
+            // 
+            this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSortASC,
+            this.tsmiSortDESC});
+            this.cmsHistory.Name = "cmsHistory";
+            this.cmsHistory.Size = new System.Drawing.Size(160, 48);
+            this.cmsHistory.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsHistory_ItemClicked);
+            // 
+            // tsmiSortASC
+            // 
+            this.tsmiSortASC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.tsmiSortASC.Name = "tsmiSortASC";
+            this.tsmiSortASC.Size = new System.Drawing.Size(159, 22);
+            this.tsmiSortASC.Text = "Sort ascending";
+            // 
+            // tsmiSortDESC
+            // 
+            this.tsmiSortDESC.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.tsmiSortDESC.Name = "tsmiSortDESC";
+            this.tsmiSortDESC.Size = new System.Drawing.Size(159, 22);
+            this.tsmiSortDESC.Text = "Sort descending";
+            // 
             // sfdSQL
             // 
             this.sfdSQL.DefaultExt = "*.sql";
@@ -3242,6 +3411,30 @@ namespace SQLView
             this.saveFileDialogCSV.DefaultExt = "*.xml";
             this.saveFileDialogCSV.Filter = "CSV|*.csv|XLS|*.xls|All|*.*";
             this.saveFileDialogCSV.Title = "Save CSV";
+            // 
+            // SUCC_RUNDATE
+            // 
+            this.SUCC_RUNDATE.DataPropertyName = "RUNDATE";
+            this.SUCC_RUNDATE.Frozen = true;
+            this.SUCC_RUNDATE.HeaderText = "RUNDATE";
+            this.SUCC_RUNDATE.Name = "SUCC_RUNDATE";
+            this.SUCC_RUNDATE.ReadOnly = true;
+            this.SUCC_RUNDATE.Width = 85;
+            // 
+            // SUCC_SQL
+            // 
+            this.SUCC_SQL.DataPropertyName = "SQL";
+            this.SUCC_SQL.HeaderText = "SQL";
+            this.SUCC_SQL.Name = "SUCC_SQL";
+            this.SUCC_SQL.Width = 53;
+            // 
+            // SUCC_DBREG
+            // 
+            this.SUCC_DBREG.DataPropertyName = "DBREG";
+            this.SUCC_DBREG.HeaderText = "DBREG";
+            this.SUCC_DBREG.Name = "SUCC_DBREG";
+            this.SUCC_DBREG.ReadOnly = true;
+            this.SUCC_DBREG.Width = 70;
             // 
             // SQLViewForm1
             // 
@@ -3301,9 +3494,14 @@ namespace SQLView
             this.tabHistory.ResumeLayout(false);
             this.pnlHistoryCenter.ResumeLayout(false);
             this.tabControlHistory.ResumeLayout(false);
-            this.tabPageSucceeded.ResumeLayout(false);
-            this.cmsHistory.ResumeLayout(false);
+            this.tabPageSucceededHistory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewHistorySuccess)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtSUCCESS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFAILED)).EndInit();
             this.tabPageFailedHistory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewHistoryFailed)).EndInit();
             this.pnlHistoryUpper.ResumeLayout(false);
             this.tabRelpacelist.ResumeLayout(false);
             this.pnlReplacesCenter.ResumeLayout(false);
@@ -3333,6 +3531,7 @@ namespace SQLView
             this.tabPagePerformance.ResumeLayout(false);
             this.gbPerformance.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.cmsHistory.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3348,7 +3547,6 @@ namespace SQLView
         private TabPage tabMELDUNG;
         private RichTextBox rtfMELDUNG;
         private TabPage tabHistory;
-        private CheckedListBox clbHISTORY;
         private SaveFileDialog sfdSQL;
         private HelpProvider helpMain;
         private TabPage tabERRORS;
@@ -3400,7 +3598,6 @@ namespace SQLView
         private SeControlsLib.HotSpot hsClearInfo;
         private Panel pnlInfoCenter;
         private Panel pnlHistoryUpper;
-        private SeControlsLib.HotSpot hsClearHistorySelected;
         private SeControlsLib.HotSpot hsExecuteHistorySelected;
         private SeControlsLib.HotSpot hsClearHistoryAll;
         private Panel pnlHistoryCenter;
@@ -3461,9 +3658,8 @@ namespace SQLView
         private ColumnHeader colDELETES;
         private ColumnHeader colCONFLICTS;
         private TabControl tabControlHistory;
-        private TabPage tabPageSucceeded;
+        private TabPage tabPageSucceededHistory;
         private TabPage tabPageFailedHistory;
-        private CheckedListBox clbFAILED_HISTORY;
         private SeControlsLib.HotSpot hsCrearAllFailed;
         private GroupBox gbUsedMilliseconds;
         private Label lblUsedMs;
@@ -3508,5 +3704,25 @@ namespace SQLView
         private SeControlsLib.HotSpot hsExportHTML;
         private CheckBox ckExportToScreen;
         private CheckBox ckExportToFile;
+        private CheckBox ckShowResults;
+        private DataGridView dgViewHistorySuccess;
+        private BindingSource bsHistory;
+        private System.Data.DataSet dsHistory;
+        private System.Data.DataTable dtSUCCESS;
+        private System.Data.DataColumn colSUCC_RUNDATE;
+        private System.Data.DataColumn colSUCC_SQL;
+        private System.Data.DataColumn colSUCC_DBREG;
+        private System.Data.DataTable dtFAILED;
+        private System.Data.DataColumn colFAIL_RUNDATE;
+        private System.Data.DataColumn colFAIL_SQL;
+        private System.Data.DataColumn colFAIL_DBREG;
+        private DataGridView dgViewHistoryFailed;
+        private DataGridViewTextBoxColumn FAIL_RUNDATE;
+        private DataGridViewTextBoxColumn FAIL_SQL;
+        private DataGridViewTextBoxColumn FAIL_DBREG;
+        private SeControlsLib.HotSpot hsSort;
+        private DataGridViewTextBoxColumn SUCC_RUNDATE;
+        private DataGridViewTextBoxColumn SUCC_SQL;
+        private DataGridViewTextBoxColumn SUCC_DBREG;
     }
 }

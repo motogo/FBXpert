@@ -28,6 +28,7 @@ namespace FBXpert
         private string _newIndexName = string.Empty;
 
         public List<string> SQLScript = new List<string>();
+        
 
         public PrimaryKeyForm(Form parent, List<TableClass> tables, TableClass tableObject, DBRegistrationClass dbReg)
         {
@@ -49,6 +50,17 @@ namespace FBXpert
                 };
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             }
+            else if(tableObject.primary_constraint == null)
+            {
+                //Tabelle hatte noch keine PK
+                tableObject.primary_constraint = new PrimaryKeyClass
+                {
+                    Name = "NEW_PK",
+                    FieldNames = new Dictionary<string,string> {{"ID","ID"}},
+                    Sorting = eSort.ASC
+                };
+                BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
+            }
             else
             {                
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
@@ -58,6 +70,9 @@ namespace FBXpert
             _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
             
             _tables = tables;
+
+
+           
             FillTablesToCombo();                        
             FillSortingToCombo();
             FillTableFieldsToCombo();
@@ -81,10 +96,10 @@ namespace FBXpert
         {
             StringBuilder sb = new StringBuilder();
             _messagesCount++;
-            if (_messagesCount > 0) sb.Append("Messages (" + (_messagesCount).ToString() + ") ");
-            if (_errorCount > 0)    sb.Append("Errors (" + (_errorCount).ToString() + ")");
+            if (_messagesCount > 0) sb.Append($@"Messages ({_messagesCount}) ");
+            if (_errorCount > 0)    sb.Append($@"Errors ({_errorCount})");
 
-            fctMessages.AppendText("INFO  " + k.Meldung);
+            fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -93,10 +108,10 @@ namespace FBXpert
         {
             var sb = new StringBuilder();
             _errorCount++;
-            if (_messagesCount > 0) sb.Append("Messages (" + (_messagesCount).ToString() + ") ");
-            if (_errorCount > 0) sb.Append("Errors (" + (_errorCount).ToString() + ")");
+            if (_messagesCount > 0) sb.Append($@"Messages ({_messagesCount}) ");
+            if (_errorCount > 0)    sb.Append($@"Errors ({_errorCount})");
 
-            fctMessages.AppendText("ERROR " + k.Meldung);
+            fctMessages.AppendText($@"ERROR {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -152,9 +167,7 @@ namespace FBXpert
             USING INDEX PK_TABTEILUNG
             */
 
-            sb.Append("ALTER TABLE ");
-            sb.Append(_tableObject.Name);
-            sb.Append($@" ADD CONSTRAINT {_tableObject.primary_constraint.Name} PRIMARY KEY (");
+            sb.Append($@"ALTER TABLE {_tableObject.Name} ADD CONSTRAINT {_tableObject.primary_constraint.Name} PRIMARY KEY (");
 
             bool firstdone = false;
             foreach (string st in _tableObject.primary_constraint.FieldNames.Values)
@@ -166,20 +179,21 @@ namespace FBXpert
                 sb.Append(st);
                 firstdone = true;
             }
-
-            if (_tableObject.primary_constraint.Sorting != eSort.ASC)
+            if(!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
             {
-                sb.Append(")" + Environment.NewLine + "USING " + _tableObject.primary_constraint.Sorting.ToString() + " INDEX " + _tableObject.primary_constraint.IndexName + ";" + Environment.NewLine);
+                if(!(_tableObject.primary_constraint.Sorting == eSort.ASC))
+                {
+                    sb.Append($@"){Environment.NewLine}USING {_tableObject.primary_constraint.Sorting} INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
+                }
+                else
+                {
+                    sb.Append($@"){Environment.NewLine}USING INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
+                }
             }
-            else
-            {
-                sb.Append(")" + Environment.NewLine + " USING INDEX " + _tableObject.primary_constraint.IndexName + ";" + Environment.NewLine);
-            }            
-
             if (!string.IsNullOrEmpty(_tableObject.primary_constraint.Description))
             {
                 sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}{Environment.NewLine}");
-                sb.Append("COMMENT ON INDEX " + _tableObject.primary_constraint.IndexName + " IS '" + _tableObject.primary_constraint.Description+"'");
+                sb.Append($@"COMMENT ON INDEX {_tableObject.primary_constraint.IndexName} IS '{_tableObject.primary_constraint.Description}'");
             }
             SQLScript.Add(sb.ToString());
             SQLScript.Add($@"{SQLPatterns.Commit}");
@@ -200,14 +214,10 @@ namespace FBXpert
             USING DESCENDING INDEX PK_TACTION
             */
 
-            sb.Append("ALTER TABLE ");
-            sb.Append(_tableObject.Name);
-            sb.Append(" DROP CONSTRAINT " + _tableObject.primary_constraint.Name + ";"+Environment.NewLine);
+            sb.Append($@"ALTER TABLE {_tableObject.Name} DROP CONSTRAINT {_tableObject.primary_constraint.Name};{Environment.NewLine}");
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}{Environment.NewLine}");
 
-            sb.Append("ALTER TABLE ");
-            sb.Append(_tableObject.Name);
-            sb.Append(" ADD CONSTRAINT "+ _tableObject.primary_constraint.Name + " PRIMARY KEY (");
+            sb.Append($@"ALTER TABLE {_tableObject.Name} ADD CONSTRAINT {_tableObject.primary_constraint.Name} PRIMARY KEY (");
             
             bool firstdone = false;
             foreach(string  st in _tableObject.primary_constraint.FieldNames.Values)
@@ -220,19 +230,21 @@ namespace FBXpert
                 firstdone = true;
             }
             
-            if(!(_tableObject.primary_constraint.Sorting == eSort.ASC))
+            if(!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
             {
-                sb.Append(")"+Environment.NewLine+"USING " + _tableObject.primary_constraint.Sorting + " INDEX " + _tableObject.primary_constraint.IndexName + ";" + Environment.NewLine);
+                if(!(_tableObject.primary_constraint.Sorting == eSort.ASC))
+                {
+                    sb.Append($@"){Environment.NewLine}USING {_tableObject.primary_constraint.Sorting} INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
+                }
+                else
+                {
+                    sb.Append($@"){Environment.NewLine}USING INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
+                }
             }
-            else
-            {
-                sb.Append(")" + Environment.NewLine + "USING INDEX " + _tableObject.primary_constraint.IndexName + ";" + Environment.NewLine);
-            }
-
             if (!string.IsNullOrEmpty(_tableObject.primary_constraint.Description))
             {
                 sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}{Environment.NewLine}");
-                sb.Append("COMMENT ON INDEX "+_tableObject.primary_constraint.IndexName+" IS '" + _tableObject.primary_constraint.Description + "'");
+                sb.Append($@"COMMENT ON INDEX {_tableObject.primary_constraint.IndexName} IS '{_tableObject.primary_constraint.Description}'");
             }
 
             SQLScript.Add(sb.ToString());
@@ -266,6 +278,7 @@ namespace FBXpert
             cbSorting.Items.Add(eSort.DESC);
         }
 
+        
         public void FillTablesToCombo()
         {
             cbSourceTable.Items.Clear();
@@ -277,7 +290,8 @@ namespace FBXpert
             if (cbSourceTable.Items.Count <= 0) return;
             if (!string.IsNullOrEmpty(_tableObject.Name))
             {
-                cbSourceTable.SelectedItem = _tableObject;
+                int inx = cbSourceTable.FindStringExact(_tableObject.Name);
+                cbSourceTable.SelectedIndex = inx; 
             }
             else
             {
@@ -301,10 +315,9 @@ namespace FBXpert
         public override void DataToEdit()
         {
            txtPKName.Text   = _tableObject.primary_constraint.Name;
-           textBox1.Text    = _tableObject.primary_constraint.IndexName;
-                                 
-           if(cbFields.Items.Count > 0) cbFields.SelectedIndex = 0;
-           
+           txtUsingIndex.Text = _tableObject.primary_constraint.IndexName;
+                                                      
+           if(cbFields.Items.Count > 0) cbFields.SelectedIndex = 0;           
            cbSorting.SelectedItem  = _tableObject.primary_constraint.Sorting;
                        
            FillObjectToConstraintFields();
@@ -333,14 +346,7 @@ namespace FBXpert
 
         public void ShowCaptions()
         {
-            if (_tableObject.primary_constraint != null)
-            {
-                lblTableName.Text = "Primary Index: " + _tableObject.primary_constraint.Name;
-            }
-            else
-            {
-                lblTableName.Text = "Primary Index";
-            }
+            lblTableName.Text = (_tableObject.primary_constraint != null) ? $@"Primary Index: {_tableObject.primary_constraint.Name}" : "Primary Index";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Primary Index");
         }
 
@@ -359,12 +365,7 @@ namespace FBXpert
             int inx = cbFields.FindString(lvi.Text);
             cbFields.SelectedIndex = inx;
         }
-
-        private void hotSpot2_Click(object sender, EventArgs e)
-        {
-           
-        }
-
+        
         private void Create()
         {
             var dataSet1 = new DataSet();
@@ -435,13 +436,7 @@ namespace FBXpert
             _tableObject.primary_constraint.Name = txtPKName.Text;
             MakeSQL();
         }
-            
-        
-        private void fctSQL_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
-
+                    
         private void hsCreate_Click(object sender, EventArgs e)
         {
              Create();
@@ -461,6 +456,13 @@ namespace FBXpert
             {
                fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
             }
+        }
+        
+        private void txtUsingIndex_TextChanged(object sender, EventArgs e)
+        {
+            if (!_dataFilled) return;
+            _tableObject.primary_constraint.IndexName = txtUsingIndex.Text;
+            MakeSQL();
         }
     }
 }

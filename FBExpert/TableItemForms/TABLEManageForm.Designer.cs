@@ -31,25 +31,25 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TABLEManageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageFIELDS = new System.Windows.Forms.TabPage();
             this.pnlTableFieldCenter = new System.Windows.Forms.Panel();
@@ -201,10 +201,6 @@ namespace FBExpert
             this.tsmiEXPORTDataCopyToCLipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEXPORTDataPasteFromClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.dgExportGrid = new System.Windows.Forms.DataGridView();
-            this.colPOS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColExportFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExportActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colExportWhere = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlExportBottom = new System.Windows.Forms.Panel();
             this.pbExport = new System.Windows.Forms.ProgressBar();
             this.pnlExportDataUpper = new System.Windows.Forms.Panel();
@@ -237,6 +233,10 @@ namespace FBExpert
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bwExport = new System.ComponentModel.BackgroundWorker();
+            this.colPOS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColExportFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExportActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colExportWhere = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageFIELDS.SuspendLayout();
             this.pnlTableFieldCenter.SuspendLayout();
@@ -398,8 +398,8 @@ namespace FBExpert
             this.lvFields.FullRowSelect = true;
             this.lvFields.GridLines = true;
             this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.lvFields.Location = new System.Drawing.Point(0, 0);
             this.lvFields.Name = "lvFields";
             this.lvFields.Size = new System.Drawing.Size(1293, 500);
@@ -724,21 +724,21 @@ namespace FBExpert
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle45.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle45;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsTableContent;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.NullValue = "<null>";
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle46.NullValue = "<null>";
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle46;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvResults.EnableHeadersVisualStyles = false;
@@ -755,6 +755,7 @@ namespace FBExpert
             this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dgvResults.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             this.dgvResults.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResults_DataError);
+            this.dgvResults.Resize += new System.EventHandler(this.dgvResults_Resize);
             // 
             // cmdDATA
             // 
@@ -1747,21 +1748,21 @@ namespace FBExpert
             // 
             this.dgvPrimaryKeys.AllowUserToAddRows = false;
             this.dgvPrimaryKeys.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvPrimaryKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.Khaki;
+            this.dgvPrimaryKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             this.dgvPrimaryKeys.AutoGenerateColumns = false;
             this.dgvPrimaryKeys.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPrimaryKeys.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPrimaryKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrimaryKeys.DataSource = this.bsPrimaryKeys;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPrimaryKeys.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPrimaryKeys.DefaultCellStyle = dataGridViewCellStyle32;
             this.dgvPrimaryKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPrimaryKeys.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvPrimaryKeys.EnableHeadersVisualStyles = false;
@@ -1770,7 +1771,7 @@ namespace FBExpert
             this.dgvPrimaryKeys.Name = "dgvPrimaryKeys";
             this.dgvPrimaryKeys.ReadOnly = true;
             this.dgvPrimaryKeys.RowHeadersVisible = false;
-            this.dgvPrimaryKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvPrimaryKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrimaryKeys.Size = new System.Drawing.Size(1142, 478);
             this.dgvPrimaryKeys.TabIndex = 18;
             // 
@@ -1817,21 +1818,21 @@ namespace FBExpert
             // 
             this.dgvForeignKeys.AllowUserToAddRows = false;
             this.dgvForeignKeys.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.Khaki;
-            this.dgvForeignKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle47.BackColor = System.Drawing.Color.Khaki;
+            this.dgvForeignKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle47;
             this.dgvForeignKeys.AutoGenerateColumns = false;
             this.dgvForeignKeys.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvForeignKeys.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvForeignKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvForeignKeys.DataSource = this.bsForeignKeys;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvForeignKeys.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvForeignKeys.DefaultCellStyle = dataGridViewCellStyle48;
             this.dgvForeignKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvForeignKeys.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvForeignKeys.EnableHeadersVisualStyles = false;
@@ -1840,7 +1841,7 @@ namespace FBExpert
             this.dgvForeignKeys.Name = "dgvForeignKeys";
             this.dgvForeignKeys.ReadOnly = true;
             this.dgvForeignKeys.RowHeadersVisible = false;
-            this.dgvForeignKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvForeignKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvForeignKeys.Size = new System.Drawing.Size(1142, 479);
             this.dgvForeignKeys.TabIndex = 20;
             // 
@@ -1887,21 +1888,21 @@ namespace FBExpert
             // 
             this.dgvUniques.AllowUserToAddRows = false;
             this.dgvUniques.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Khaki;
-            this.dgvUniques.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.Khaki;
+            this.dgvUniques.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
             this.dgvUniques.AutoGenerateColumns = false;
             this.dgvUniques.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvUniques.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvUniques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUniques.DataSource = this.bsUniques;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUniques.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle50.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUniques.DefaultCellStyle = dataGridViewCellStyle50;
             this.dgvUniques.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUniques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvUniques.EnableHeadersVisualStyles = false;
@@ -1910,7 +1911,7 @@ namespace FBExpert
             this.dgvUniques.Name = "dgvUniques";
             this.dgvUniques.ReadOnly = true;
             this.dgvUniques.RowHeadersVisible = false;
-            this.dgvUniques.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvUniques.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUniques.Size = new System.Drawing.Size(1142, 479);
             this.dgvUniques.TabIndex = 20;
             // 
@@ -1957,21 +1958,21 @@ namespace FBExpert
             // 
             this.dgvChecks.AllowUserToAddRows = false;
             this.dgvChecks.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.Khaki;
-            this.dgvChecks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle51.BackColor = System.Drawing.Color.Khaki;
+            this.dgvChecks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle51;
             this.dgvChecks.AutoGenerateColumns = false;
             this.dgvChecks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvChecks.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvChecks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChecks.DataSource = this.bsChecks;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChecks.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle52.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChecks.DefaultCellStyle = dataGridViewCellStyle52;
             this.dgvChecks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvChecks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvChecks.EnableHeadersVisualStyles = false;
@@ -1980,7 +1981,7 @@ namespace FBExpert
             this.dgvChecks.Name = "dgvChecks";
             this.dgvChecks.ReadOnly = true;
             this.dgvChecks.RowHeadersVisible = false;
-            this.dgvChecks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvChecks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvChecks.Size = new System.Drawing.Size(1142, 479);
             this.dgvChecks.TabIndex = 20;
             // 
@@ -2058,21 +2059,21 @@ namespace FBExpert
             // 
             this.dgvIndicies.AllowUserToAddRows = false;
             this.dgvIndicies.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Khaki;
-            this.dgvIndicies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.Khaki;
+            this.dgvIndicies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle53;
             this.dgvIndicies.AutoGenerateColumns = false;
             this.dgvIndicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvIndicies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvIndicies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvIndicies.DataSource = this.bsIndicies;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvIndicies.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle54.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle54.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvIndicies.DefaultCellStyle = dataGridViewCellStyle54;
             this.dgvIndicies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIndicies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvIndicies.EnableHeadersVisualStyles = false;
@@ -2081,7 +2082,7 @@ namespace FBExpert
             this.dgvIndicies.Name = "dgvIndicies";
             this.dgvIndicies.ReadOnly = true;
             this.dgvIndicies.RowHeadersVisible = false;
-            this.dgvIndicies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvIndicies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIndicies.Size = new System.Drawing.Size(1293, 509);
             this.dgvIndicies.TabIndex = 19;
             // 
@@ -2278,21 +2279,21 @@ namespace FBExpert
             // 
             this.dgvDependenciesTo.AllowUserToAddRows = false;
             this.dgvDependenciesTo.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle55.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle55;
             this.dgvDependenciesTo.AutoGenerateColumns = false;
             this.dgvDependenciesTo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependenciesTo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependenciesTo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependenciesTo.DataSource = this.bsDependenciesTo;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle56.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle56.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle56;
             this.dgvDependenciesTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesTo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesTo.EnableHeadersVisualStyles = false;
@@ -2397,21 +2398,21 @@ namespace FBExpert
             // 
             this.dgvDependenciesFrom.AllowUserToAddRows = false;
             this.dgvDependenciesFrom.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependenciesFrom.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependenciesFrom.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle57;
             this.dgvDependenciesFrom.AutoGenerateColumns = false;
             this.dgvDependenciesFrom.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependenciesFrom.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependenciesFrom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependenciesFrom.DataSource = this.bsDependenciesFrom;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependenciesFrom.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle58.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependenciesFrom.DefaultCellStyle = dataGridViewCellStyle58;
             this.dgvDependenciesFrom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesFrom.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesFrom.EnableHeadersVisualStyles = false;
@@ -2663,9 +2664,9 @@ namespace FBExpert
             this.pnlExportCenter.Controls.Add(this.fcbExport);
             this.pnlExportCenter.Controls.Add(this.dgExportGrid);
             this.pnlExportCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExportCenter.Location = new System.Drawing.Point(3, 43);
+            this.pnlExportCenter.Location = new System.Drawing.Point(3, 45);
             this.pnlExportCenter.Name = "pnlExportCenter";
-            this.pnlExportCenter.Size = new System.Drawing.Size(1293, 491);
+            this.pnlExportCenter.Size = new System.Drawing.Size(1293, 489);
             this.pnlExportCenter.TabIndex = 3;
             // 
             // fcbExport
@@ -2682,7 +2683,7 @@ namespace FBExpert
         '\'',
         '\''};
             this.fcbExport.AutoIndentCharsPatterns = "";
-            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fcbExport.BackBrush = null;
             this.fcbExport.CharHeight = 14;
             this.fcbExport.CharWidth = 8;
@@ -2701,7 +2702,7 @@ namespace FBExpert
             this.fcbExport.RightBracket = ')';
             this.fcbExport.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbExport.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbExport.ServiceColors")));
-            this.fcbExport.Size = new System.Drawing.Size(1024, 491);
+            this.fcbExport.Size = new System.Drawing.Size(1024, 489);
             this.fcbExport.TabIndex = 1;
             this.fcbExport.Zoom = 100;
             // 
@@ -2743,36 +2744,8 @@ namespace FBExpert
             this.dgExportGrid.Location = new System.Drawing.Point(0, 0);
             this.dgExportGrid.Name = "dgExportGrid";
             this.dgExportGrid.RowHeadersVisible = false;
-            this.dgExportGrid.Size = new System.Drawing.Size(269, 491);
+            this.dgExportGrid.Size = new System.Drawing.Size(269, 489);
             this.dgExportGrid.TabIndex = 3;
-            // 
-            // colPOS
-            // 
-            this.colPOS.HeaderText = "Pos";
-            this.colPOS.Name = "colPOS";
-            this.colPOS.Width = 40;
-            // 
-            // ColExportFieldName
-            // 
-            this.ColExportFieldName.HeaderText = "Field";
-            this.ColExportFieldName.Name = "ColExportFieldName";
-            this.ColExportFieldName.Width = 160;
-            // 
-            // colExportActive
-            // 
-            this.colExportActive.HeaderText = "E";
-            this.colExportActive.Name = "colExportActive";
-            this.colExportActive.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colExportActive.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colExportActive.Width = 24;
-            // 
-            // colExportWhere
-            // 
-            this.colExportWhere.HeaderText = "W";
-            this.colExportWhere.Name = "colExportWhere";
-            this.colExportWhere.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colExportWhere.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colExportWhere.Width = 24;
             // 
             // pnlExportBottom
             // 
@@ -2804,7 +2777,7 @@ namespace FBExpert
             this.pnlExportDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExportDataUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlExportDataUpper.Name = "pnlExportDataUpper";
-            this.pnlExportDataUpper.Size = new System.Drawing.Size(1293, 40);
+            this.pnlExportDataUpper.Size = new System.Drawing.Size(1293, 42);
             this.pnlExportDataUpper.TabIndex = 2;
             // 
             // gbExportFile
@@ -2814,7 +2787,7 @@ namespace FBExpert
             this.gbExportFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbExportFile.Location = new System.Drawing.Point(389, 0);
             this.gbExportFile.Name = "gbExportFile";
-            this.gbExportFile.Size = new System.Drawing.Size(326, 36);
+            this.gbExportFile.Size = new System.Drawing.Size(326, 38);
             this.gbExportFile.TabIndex = 22;
             this.gbExportFile.TabStop = false;
             this.gbExportFile.Text = "File";
@@ -2823,9 +2796,9 @@ namespace FBExpert
             // 
             this.cbCharSet.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbCharSet.FormattingEnabled = true;
-            this.cbCharSet.Location = new System.Drawing.Point(148, 16);
+            this.cbCharSet.Location = new System.Drawing.Point(114, 16);
             this.cbCharSet.Name = "cbCharSet";
-            this.cbCharSet.Size = new System.Drawing.Size(175, 21);
+            this.cbCharSet.Size = new System.Drawing.Size(209, 21);
             this.cbCharSet.TabIndex = 12;
             // 
             // cbExportToFile
@@ -2833,7 +2806,7 @@ namespace FBExpert
             this.cbExportToFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbExportToFile.Location = new System.Drawing.Point(3, 16);
             this.cbExportToFile.Name = "cbExportToFile";
-            this.cbExportToFile.Size = new System.Drawing.Size(133, 17);
+            this.cbExportToFile.Size = new System.Drawing.Size(105, 19);
             this.cbExportToFile.TabIndex = 11;
             this.cbExportToFile.Text = "Export to file";
             this.cbExportToFile.UseVisualStyleBackColor = true;
@@ -2846,7 +2819,7 @@ namespace FBExpert
             this.cbExportToScreen.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbExportToScreen.Location = new System.Drawing.Point(240, 0);
             this.cbExportToScreen.Name = "cbExportToScreen";
-            this.cbExportToScreen.Size = new System.Drawing.Size(149, 36);
+            this.cbExportToScreen.Size = new System.Drawing.Size(149, 38);
             this.cbExportToScreen.TabIndex = 12;
             this.cbExportToScreen.Text = "Export to screen";
             this.cbExportToScreen.UseVisualStyleBackColor = true;
@@ -2859,7 +2832,7 @@ namespace FBExpert
             this.gbInsertUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbInsertUpdate.Location = new System.Drawing.Point(826, 0);
             this.gbInsertUpdate.Name = "gbInsertUpdate";
-            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 36);
+            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 38);
             this.gbInsertUpdate.TabIndex = 10;
             this.gbInsertUpdate.TabStop = false;
             this.gbInsertUpdate.Text = "FieldType of statments";
@@ -2922,7 +2895,7 @@ namespace FBExpert
             this.hsCancelExport.MarkMode = false;
             this.hsCancelExport.Name = "hsCancelExport";
             this.hsCancelExport.NonMarkedText = "Cancel reading";
-            this.hsCancelExport.Size = new System.Drawing.Size(140, 36);
+            this.hsCancelExport.Size = new System.Drawing.Size(140, 38);
             this.hsCancelExport.TabIndex = 21;
             this.hsCancelExport.Text = "Cancel reading";
             this.hsCancelExport.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2971,7 +2944,7 @@ namespace FBExpert
             this.hsExportData.MarkMode = false;
             this.hsExportData.Name = "hsExportData";
             this.hsExportData.NonMarkedText = "Export";
-            this.hsExportData.Size = new System.Drawing.Size(100, 36);
+            this.hsExportData.Size = new System.Drawing.Size(100, 38);
             this.hsExportData.TabIndex = 9;
             this.hsExportData.Text = "Export";
             this.hsExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3020,7 +2993,7 @@ namespace FBExpert
             this.hsRefreshExportData.MarkMode = false;
             this.hsRefreshExportData.Name = "hsRefreshExportData";
             this.hsRefreshExportData.NonMarkedText = "Refresh Data";
-            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 36);
+            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 38);
             this.hsRefreshExportData.TabIndex = 3;
             this.hsRefreshExportData.Text = "Refresh Data";
             this.hsRefreshExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3361,6 +3334,35 @@ namespace FBExpert
             this.bwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExport_ProgressChanged);
             this.bwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExport_RunWorkerCompleted);
             // 
+            // colPOS
+            // 
+            this.colPOS.HeaderText = "Pos";
+            this.colPOS.Name = "colPOS";
+            this.colPOS.Width = 40;
+            // 
+            // ColExportFieldName
+            // 
+            this.ColExportFieldName.HeaderText = "Field";
+            this.ColExportFieldName.Name = "ColExportFieldName";
+            this.ColExportFieldName.Width = 180;
+            // 
+            // colExportActive
+            // 
+            this.colExportActive.HeaderText = "act";
+            this.colExportActive.Name = "colExportActive";
+            this.colExportActive.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colExportActive.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colExportActive.Width = 24;
+            // 
+            // colExportWhere
+            // 
+            this.colExportWhere.HeaderText = "W";
+            this.colExportWhere.Name = "colExportWhere";
+            this.colExportWhere.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colExportWhere.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colExportWhere.Visible = false;
+            this.colExportWhere.Width = 24;
+            // 
             // TABLEManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3619,10 +3621,6 @@ namespace FBExpert
         private SeControlsLib.HotSpot hsCancelExport;
         private System.Windows.Forms.GroupBox gbExportFile;
         private System.Windows.Forms.ComboBox cbCharSet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPOS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColExportFieldName;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colExportActive;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colExportWhere;
         private System.Windows.Forms.ContextMenuStrip cmsEXPORTData;
         private System.Windows.Forms.ToolStripMenuItem tsmiEXPORTDataCopyToCLipboard;
         private System.Windows.Forms.ToolStripMenuItem tsmiEXPORTDataPasteFromClipboard;
@@ -3664,5 +3662,9 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gnUsedTime;
         private System.Windows.Forms.TextBox txtUsedTime;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPOS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColExportFieldName;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colExportActive;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colExportWhere;
     }
 }

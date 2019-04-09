@@ -57,10 +57,9 @@ namespace FBXpert
                 _orgIndexObject.IsActive = true;
             }
             else
-            {
-                
-                
-                TableName = RefreshIndicesAndGetTablename(_orgIndexObject);
+            {                                
+                TableName = RefreshIndicesAndGetTablename(indexName);
+                _tableObject = tables.Find(X=>X.Name == TableName);
                 _tableObject.Indices.TryGetValue(indexName,out _orgIndexObject);
 
             }
@@ -90,7 +89,7 @@ namespace FBXpert
             _orgIndexObject  = indexObject;
             
                                                 
-            var TableName = RefreshIndicesAndGetTablename(_orgIndexObject);
+            var TableName = RefreshIndicesAndGetTablename(_orgIndexObject.Name);
 
             _tableObject = tables.Find(X=>X.Name == TableName);
 
@@ -130,7 +129,7 @@ namespace FBXpert
             _tableObject = tableObject;
                                                                            
             _orgIndexObject = new IndexClass();
-            _orgIndexObject.Name = $@"{tableObject.Name}_inx1";
+            _orgIndexObject.Name = $@"{tableObject.Name}_INX";
             _orgIndexObject.IsActive = true;
             _indexObject = _orgIndexObject;
             
@@ -139,7 +138,7 @@ namespace FBXpert
         
             lvFields.Items.Clear();
             
-            txtIndexName.Text = _indexObject.Name.Trim();
+            txtIndexName.Text = MakeNewIndexName();
             FillSortingToCombo();
             _dataFilled = true;
         }
@@ -163,8 +162,9 @@ namespace FBXpert
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0) sb.Append($@"Errors ({error_count})");
-
-            fctMessages.AppendText($@"ERROR {k.Meldung}");
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            fctMessages.AppendText($@"ERROR {errStr}");
+            
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -241,7 +241,8 @@ namespace FBXpert
                 sb.Append(_tableObject.Name);
                                 
                 string fieldStr = GetFields();                
-                sb.Append(fieldStr);                                
+                sb.Append(fieldStr);
+                sb.Append(";");
             }
             SQLScript.Add(sb.ToString());
             SQLScript.Add($@"{SQLPatterns.Commit}");
@@ -258,11 +259,11 @@ namespace FBXpert
             cbSorting.SelectedIndex = 0;
         }
 
-        public string RefreshIndicesAndGetTablename(IndexClass _indexObject)
+        public string RefreshIndicesAndGetTablename(string _indexObjectName)
         {
-            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, _indexObject.Name.Trim());
+            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, _indexObjectName.Trim());
             _dataFilled = false;
-            txtIndexName.Text = _indexObject.Name.Trim();
+            txtIndexName.Text = _indexObjectName.Trim();
             string TableName = string.Empty;
             try
             {
@@ -447,11 +448,30 @@ namespace FBXpert
             }            
         }
 
+        public string MakeNewIndexName()
+        {
+            string inxStr = _indexObject.Name.Trim();
+            int lastn = 1;
+            int i = 0;
+            for(i = inxStr.Length-1; i >= 0; i--)
+            {
+                string s = inxStr.Substring(i);
+                int n = StaticFunctionsClass.ToIntDef(s, -1);
+                if(n < 0) break;
+                lastn = n+1;
+            }
+            string newStr = inxStr.Substring(0,i+1)+lastn.ToString();
+            return newStr;
+        }
+
         private void hotSpot2_Click(object sender, EventArgs e)
         {
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             ckActive.Checked = true;
             _indexActiveChanged = false;
+            lvFields.Items.Clear();
+            _indexObject = _orgIndexObject;
+            txtIndexName.Text = MakeNewIndexName();
             MakeSQL();
         }
 
@@ -501,9 +521,9 @@ namespace FBXpert
         
         private void txtIndexName_TextChanged(object sender, EventArgs e)
         {
-            _indexObject.Name = txtIndexName.Text.Trim();
-            if (_dataFilled)
-                MakeSQL();
+            if (!_dataFilled) return;
+            _indexObject.Name = txtIndexName.Text.Trim();            
+            MakeSQL();
         }
 
         private void cbUnique_CheckedChanged(object sender, EventArgs e)

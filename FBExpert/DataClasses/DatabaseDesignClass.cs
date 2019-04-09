@@ -880,7 +880,7 @@ namespace FBXpert.DataClasses
            sb.Append(Format(lvl+1, "            {" + Nl));
            sb.Append(Format(lvl+2, "                if (DATA.SetFirstData())" + Nl));
            sb.Append(Format(lvl+2, "                {" + Nl));
-           sb.Append(Format(lvl+3, "                    var defData = (TSTATUSClass.TDataClass)DATA.CurrentData;" + Nl));
+           sb.Append(Format(lvl+3, "                    var defData = ("+tc.Name+"Class.TDataClass)DATA.CurrentData;" + Nl));
            sb.Append(Format(lvl+3, "                    if (check)" + Nl));
            sb.Append(Format(lvl+3, "                    {" + Nl));
            sb.Append(Format(lvl+4, "                        SearchAndCheck_ID(defData.Item.ID);" + Nl));
