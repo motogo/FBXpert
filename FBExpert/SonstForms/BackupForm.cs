@@ -45,18 +45,13 @@ namespace FBXpert
         public override void DataToEdit()
         {            
             txtRestoreDetinationDatabasePath.Text = DBReg.DatabasePath;
-            txtBackupSourceDatabasePath.Text = DBReg.GetDatabasepfad();
+            txtBackupSourceDatabasePath.Text = DBReg.GetFullDatabasePath();
 
             if(DBReg.ConnectionType == eConnectionType.embedded)
             {                
                 rbEmbedded.Checked = true;
                 txtServer.Text = "";
-            }
-            else if(DBReg.ConnectionType == eConnectionType.localhost)
-            {
-                rbLocal.Checked = true;
-                txtServer.Text = "localhost";
-            }
+            }            
             else
             {
                 rbRemote.Checked = true;
@@ -359,7 +354,7 @@ namespace FBXpert
                 txtServer.Text = "localhost";
             }
             EditToData();
-            txtBackupSourceDatabasePath.Text = _dbReg.GetDatabasepfad();
+            txtBackupSourceDatabasePath.Text = _dbReg.GetFullDatabasePath();
         }
 
         private void rbEmbedded_CheckedChanged(object sender, EventArgs e)

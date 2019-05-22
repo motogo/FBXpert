@@ -37,6 +37,9 @@
             this.tstDatabase = new System.Windows.Forms.ToolStripTextBox();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpenAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCloseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,9 +210,6 @@
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCloseAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiOpenAll = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -308,11 +308,11 @@
             this.cmsDatabase.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tstDatabase,
-            this.tsmiOpenAll,
-            this.tsmiCloseAll,
-            this.toolStripSeparator24,
             this.tsmiOpen,
             this.tsmiClose,
+            this.toolStripSeparator24,
+            this.tsmiOpenAll,
+            this.tsmiCloseAll,
             this.toolStripSeparator3,
             this.tsmiMoveUp,
             this.tsmiMoveDown,
@@ -345,7 +345,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(253, 780);
+            this.cmsDatabase.Size = new System.Drawing.Size(307, 780);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -369,6 +369,7 @@
             // 
             this.tsmiOpen.Image = global::FBXpert.Properties.Resources.on_gn_24x;
             this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.tsmiOpen.Size = new System.Drawing.Size(252, 26);
             this.tsmiOpen.Text = "Open";
             // 
@@ -376,8 +377,32 @@
             // 
             this.tsmiClose.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiClose.Name = "tsmiClose";
+            this.tsmiClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.tsmiClose.Size = new System.Drawing.Size(252, 26);
             this.tsmiClose.Text = "Close";
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            this.toolStripSeparator24.Size = new System.Drawing.Size(249, 6);
+            // 
+            // tsmiOpenAll
+            // 
+            this.tsmiOpenAll.Image = global::FBXpert.Properties.Resources.on_gn_24x;
+            this.tsmiOpenAll.Name = "tsmiOpenAll";
+            this.tsmiOpenAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.tsmiOpenAll.Size = new System.Drawing.Size(306, 26);
+            this.tsmiOpenAll.Text = "Open all Databases";
+            // 
+            // tsmiCloseAll
+            // 
+            this.tsmiCloseAll.Image = global::FBXpert.Properties.Resources.cross_blue_x22;
+            this.tsmiCloseAll.Name = "tsmiCloseAll";
+            this.tsmiCloseAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.tsmiCloseAll.Size = new System.Drawing.Size(306, 26);
+            this.tsmiCloseAll.Text = "Close all Databases";
             // 
             // toolStripSeparator3
             // 
@@ -388,6 +413,7 @@
             // 
             this.tsmiMoveUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.tsmiMoveUp.Name = "tsmiMoveUp";
+            this.tsmiMoveUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
             this.tsmiMoveUp.Size = new System.Drawing.Size(252, 26);
             this.tsmiMoveUp.Text = "Move up";
             // 
@@ -395,6 +421,7 @@
             // 
             this.tsmiMoveDown.Image = global::FBXpert.Properties.Resources.go_down22x;
             this.tsmiMoveDown.Name = "tsmiMoveDown";
+            this.tsmiMoveDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
             this.tsmiMoveDown.Size = new System.Drawing.Size(252, 26);
             this.tsmiMoveDown.Text = "Move down";
             // 
@@ -1817,25 +1844,6 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
-            // 
-            // tsmiCloseAll
-            // 
-            this.tsmiCloseAll.Image = global::FBXpert.Properties.Resources.cross_blue_x22;
-            this.tsmiCloseAll.Name = "tsmiCloseAll";
-            this.tsmiCloseAll.Size = new System.Drawing.Size(252, 26);
-            this.tsmiCloseAll.Text = "Close all Databases";
-            // 
-            // toolStripSeparator24
-            // 
-            this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(249, 6);
-            // 
-            // tsmiOpenAll
-            // 
-            this.tsmiOpenAll.Image = global::FBXpert.Properties.Resources.on_gn_24x;
-            this.tsmiOpenAll.Name = "tsmiOpenAll";
-            this.tsmiOpenAll.Size = new System.Drawing.Size(252, 26);
-            this.tsmiOpenAll.Text = "Open all Databases";
             // 
             // DbExplorerForm
             // 

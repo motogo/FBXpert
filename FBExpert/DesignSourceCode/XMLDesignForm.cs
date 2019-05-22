@@ -203,8 +203,12 @@ namespace FBXpert.SonstForms
             hsSeach.Enabled = txtSearchCode.TextLength > 0;           
             fbdSourcePath.SelectedPath         = _dbReg.CodeSettings.SourceCodeOutputPath;
             txtSourceCodePath.Text             = _dbReg.CodeSettings.SourceCodeOutputPath;
+            
             rbGenerateInrWithGenerator.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger;
             rbGenerateGUID.Checked             = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID;
+            rbGenerateOID.Checked              = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID;
+            rbGUIDHEXGeneration.Checked        = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID;
+
             txtDBNamespace.Text                = _dbReg.CodeSettings.SourceCodeNamespace;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)

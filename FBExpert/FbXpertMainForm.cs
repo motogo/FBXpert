@@ -197,11 +197,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiDatabasRegistration)
             {
-                var cfg = new DatabaseConfigForm(Instance(), ActRegistrationObject)
-                {
-                    Cloned = false
-                };
-                cfg.SetBearbeitenMode(EditStateClass.eBearbeiten.eEdit);
+                var cfg = new DatabaseConfigForm(Instance(), ActRegistrationObject, DbExplorerForm.Instance().GetTree(), DbExplorerForm.Instance().GetTree().Nodes.Count, EditStateClass.eBearbeiten.eEdit);                
                 cfg.Show();
             }
             else if(e.ClickedItem == tsmiGerman)

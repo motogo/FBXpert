@@ -452,7 +452,7 @@ namespace SQLView
             Testlauf();
             EditMode(cbEditMode.Checked);
             this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
-            txtDatabase.Text =  _dbrRegLocal.GetDatabasepfad(); 
+            txtDatabase.Text =  _dbrRegLocal.GetFullDatabasePath(); 
             TestOpen(txtDatabase.Text);
             hsBreak.Enabled = false;
 

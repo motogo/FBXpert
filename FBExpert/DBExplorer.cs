@@ -52,10 +52,9 @@ namespace FBXpert
 
         private void LanguageChanged()
         {
-            gbDatabases.Text = LanguageClass.Instance().GetString("DATABASES");            
-            
-            hsLoadDefinition.ToolTipText = LanguageClass.Instance().GetString("LoadDatabaseDefinitions");        
-            hsDatabaseDefinitionSave.ToolTipText = LanguageClass.Instance().GetString("SaveDatabaseDefinitions");                         
+            gbDatabases.Text                        = LanguageClass.Instance().GetString("DATABASES");                        
+            hsLoadDefinition.ToolTipText            = LanguageClass.Instance().GetString("LoadDatabaseDefinitions");        
+            hsDatabaseDefinitionSave.ToolTipText    = LanguageClass.Instance().GetString("SaveDatabaseDefinitions");                         
         }
         
         public static DbExplorerForm Instance()
@@ -81,12 +80,10 @@ namespace FBXpert
 
         private void SetCmsForDatabase(bool open)
         {
-            tsmiStatistics.Enabled = open;
-            //tsmiSQLExplorer.Enabled = open;
-           // tsmiSQLScriptExplorer.Enabled = open;
-            tsmiCreateXMLDesign.Enabled = open;
-            tsmiDatabaseDesigner.Enabled = open;
-            tsmiReportDesigner.Enabled = open;
+            tsmiStatistics.Enabled          = open;           
+            tsmiCreateXMLDesign.Enabled     = open;
+            tsmiDatabaseDesigner.Enabled    = open;
+            tsmiReportDesigner.Enabled      = open;
         }
 
         private void NotifyInf_DBExplorer(object sender, MessageEventArgs k)
@@ -174,8 +171,7 @@ namespace FBXpert
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadTable)
-            {
-                //HE
+            {                
                 var nd = StaticTreeClass.Instance().FindPrevTableNode(_tnSelected);
                 if(nd != null)
                 {                    
@@ -231,8 +227,9 @@ namespace FBXpert
             var dbReg = (DBRegistrationClass)nd.Tag;
 
             try
-            {        
-                nd.ToolTipText = $@"{dbReg.Server}:{dbReg.DatabasePath}";
+            {
+                nd.ToolTipText = dbReg.GetFullDatabasePath();
+
                 NotificationsForm.Instance().SetTitle(DevelopmentClass.Instance().GetDBInfo(dbReg, "Notifications "));
                 NotificationsForm.Instance().SetMDIForm(MdiParent);
                 NotificationsForm.Instance().Show(Left + Width + 16, 64);
@@ -273,10 +270,7 @@ namespace FBXpert
             
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
-                SetCmsForDatabase(true);
-                
-               // dbReg.GetAutocomplete(_actTables,_actSystemTables, _actViews);
-                
+                SetCmsForDatabase(true);                
             }
             catch (Exception e)
             {
@@ -307,7 +301,7 @@ namespace FBXpert
                 {
                     nd.ImageIndex = (int)eImageIndex.DATABASE_INACTIVE;
                 }
-                nd.ToolTipText = $@"{dbr.Server}:{dbr.DatabasePath}";
+                nd.ToolTipText = dbr.GetFullDatabasePath();
                 treeView1.Nodes.Add(nd);                
             }
             NotifiesClass.Instance().Notify.RaiseInfo("Database configurations loaded", "KEY");
@@ -327,7 +321,6 @@ namespace FBXpert
                 foreach (TreeNode nd in treeView1.Nodes)
                 {
                     var dbr = (DBRegistrationClass) nd.Tag;
-
                     if (dbr == null || !dbr.Active) continue;
                     ReadDatabaseMetadata(nd);
                 }
@@ -347,14 +340,8 @@ namespace FBXpert
             {                
                 var nd = DataClassFactory.GetNewNode(StaticVariablesClass.DatabaseKeyStr,dbr.Alias,dbr);        
                 dbr.SetNode(nd);
-                if (dbr.Active)
-                {
-                    nd.ImageIndex = (int) eImageIndex.DATABASE_ACTIVE;
-                }
-                else
-                {
-                    nd.ImageIndex = (int) eImageIndex.DATABASE_INACTIVE;
-                }
+                nd.ImageIndex = (dbr.Active) ?  (int) eImageIndex.DATABASE_ACTIVE :  (int) eImageIndex.DATABASE_INACTIVE;
+                
                 treeView1.Nodes.Add(nd);
                 if (dbr.Active)
                 {
@@ -385,11 +372,9 @@ namespace FBXpert
         }
       
         private void DBExplorer_Load(object sender, EventArgs e)
-        {
-        
+        {        
             Dock = DockStyle.Left;                                   
-            Application.DoEvents();
-           
+            Application.DoEvents();           
             NotificationsForm.Instance().SetLeft = Width + 16;
             pnlUpper.Select();
             ExtensionMethods.DoubleBuffered(treeView1,true);
@@ -404,36 +389,33 @@ namespace FBXpert
         {
            ((ToolStripTextBox) sender).Enabled = false;            
         }
-
         
-
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (_tnSelected == null) return;
             if(e.Button != MouseButtons.Left) return;
             
-                switch (_tnSelected.Level)
-                {
-                    case 0:
-                        ebene0dblClick(_tnSelected);                                            
-                        break;
-                    case 1:
-                        //Console.WriteLine();
-                        break;
-                    case 2:
-                        ebene2dblClick(_tnSelected);
-                        break;
-                    case 3:
-                        ebene3dblClick(_tnSelected);                    
-                        break;                   
-                    case 4:
-                        ebene4dblClick(_tnSelected);
-                        break;                
-                    case 5:
-                        ebene5dblClick(_tnSelected);
-                        break;
-                }
-            
+            switch (_tnSelected.Level)
+            {
+                case 0:
+                    ebene0dblClick(_tnSelected);                                            
+                    break;
+                case 1:
+                    //Console.WriteLine();
+                    break;
+                case 2:
+                    ebene2dblClick(_tnSelected);
+                    break;
+                case 3:
+                    ebene3dblClick(_tnSelected);                    
+                    break;                   
+                case 4:
+                    ebene4dblClick(_tnSelected);
+                    break;                
+                case 5:
+                    ebene5dblClick(_tnSelected);
+                    break;
+            }            
         }
 
         private void ebene0dblClick(TreeNode tn)
@@ -459,8 +441,6 @@ namespace FBXpert
              var drc = (DBRegistrationClass)tn.Parent.Parent.Tag;
              FbXpertMainForm.Instance().ActRegistrationObject = drc;                    
              if ((drc == null) || (tn.Tag == null) || (string.IsNullOrEmpty(tn.Text))) return;
-
-
              this.Cursor = Cursors.WaitCursor;
 
              var tnn = tn.Tag.GetType();
@@ -547,23 +527,17 @@ namespace FBXpert
 
             var tnn = tn.Tag.GetType();
             if (tnn == typeof(PrimaryKeyClass))
-            {
-                
-                var fktable = _actTables.Find(fc => fc.primary_constraint?.Name == tn.Text);
-            
+            {                
+                var fktable = _actTables.Find(fc => fc.primary_constraint?.Name == tn.Text);            
                 var cf = new PrimaryKeyForm(MdiParent, _actTables, fktable,  drc)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
                 cf.Show();                            
-
             }
             else if (tnn == typeof(NotNullsClass))
             {    
-                var obj = _tnSelected.Tag as NotNullsClass;
-               // TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
-               //TableClass tableObject = _actTables.Find(X=>X.Name == obj.TableName);
-               // var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
+                var obj = _tnSelected.Tag as NotNullsClass;               
                 var cf = new NotNullForm(MdiParent, drc, _actTables, obj, cmsConstrainsGroup,cmsConstraints)              
                 {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
@@ -574,55 +548,55 @@ namespace FBXpert
         
         private void ebene4dblClick(TreeNode tn)
         {
-             if(tn?.Parent?.Parent?.Parent?.Parent?.Tag == null) return;
-             var drc = (DBRegistrationClass)tn.Parent.Parent.Parent.Parent.Tag;
-             FbXpertMainForm.Instance().ActRegistrationObject = drc;                    
-             if ((drc == null) || (tn.Tag == null) || (string.IsNullOrEmpty(tn.Text))) return;
+            if(tn?.Parent?.Parent?.Parent?.Parent?.Tag == null) return;
+            var drc = (DBRegistrationClass)tn.Parent.Parent.Parent.Parent.Tag;
+            FbXpertMainForm.Instance().ActRegistrationObject = drc;                    
+            if ((drc == null) || (tn.Tag == null) || (string.IsNullOrEmpty(tn.Text))) return;
 
-             var tnn4 = tn.Tag.GetType();
-             if (tnn4 == typeof(TriggerClass))
-             {                        
-                 var tmf = new TriggerForm(MdiParent, drc, tn, cmsTriggers, _actTables)
-                 {
-                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
-                 };
-                 tmf.Show();
-             }
-             else if (tnn4 == typeof(DomainClass))
-             {                        
-                 var tmf = new DomainForm(MdiParent, drc, _actTables, tn, cmsDomains)
-                 {
-                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
-                 };
-                 tmf.Show();
-             }
-             else if (tnn4 == typeof(IndexClass))
-             {
-                 var tff = new IndexForm(MdiParent, (IndexClass) tn.Tag, drc,_actTables);
-                 
-                 tff.Show(); 
-             }
-             else if (tnn4 == typeof(PrimaryKeyClass))
-             {                        
-                 var fktable = _actTables.Find(fc => fc.primary_constraint?.Name == tn.Text);                    
-                 var cf = new PrimaryKeyForm(MdiParent, _actTables, fktable,  drc)
-                 {
-                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
-                 };
-                 cf.Show();                            
-             }
-             else if (tnn4 == typeof(TableFieldClass))
-            {
-                var table = _actTables.Find(fc => fc.Name == tn.Parent.Parent.Text);  
-                if(table != null)
+            var tnn4 = tn.Tag.GetType();
+            if (tnn4 == typeof(TriggerClass))
+            {                        
+                var tmf = new TriggerForm(MdiParent, drc, tn, cmsTriggers, _actTables)
                 {
-                    TableFieldClass field = null;
-                    table.Fields.TryGetValue(tn.Text,out field);
-                    if (field == null) return;            
-                    var tff = new FieldForm(drc,FbXpertMainForm.Instance(), _tnSelected.Parent.Parent, field, null,EditStateClass.eBearbeiten.eEdit);
-                    tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
-                    tff.Show();                               
-                }
+                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit
+                };
+                tmf.Show();
+            }
+            else if (tnn4 == typeof(DomainClass))
+            {                        
+                var tmf = new DomainForm(MdiParent, drc, _actTables, tn, cmsDomains)
+                {
+                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit
+                };
+                tmf.Show();
+            }
+            else if (tnn4 == typeof(IndexClass))
+            {
+                var tff = new IndexForm(MdiParent, (IndexClass) tn.Tag, drc,_actTables);
+                
+                tff.Show(); 
+            }
+            else if (tnn4 == typeof(PrimaryKeyClass))
+            {                        
+                var fktable = _actTables.Find(fc => fc.primary_constraint?.Name == tn.Text);                    
+                var cf = new PrimaryKeyForm(MdiParent, _actTables, fktable,  drc)
+                {
+                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit
+                };
+                cf.Show();                            
+            }
+            else if (tnn4 == typeof(TableFieldClass))
+            {
+               var table = _actTables.Find(fc => fc.Name == tn.Parent.Parent.Text);  
+               if(table != null)
+               {
+                   TableFieldClass field = null;
+                   table.Fields.TryGetValue(tn.Text,out field);
+                   if (field == null) return;            
+                   var tff = new FieldForm(drc,FbXpertMainForm.Instance(), _tnSelected.Parent.Parent, field, null,EditStateClass.eBearbeiten.eEdit);
+                   tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
+                   tff.Show();                               
+               }
             }
         }
         
@@ -663,18 +637,15 @@ namespace FBXpert
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
                 cf.Show();                            
-
             }
             else if (tnn == typeof(NotNullsClass))
             {     
-                var obj = _tnSelected.Tag as NotNullsClass;
-                //TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
-                var cf = new NotNullForm(MdiParent, drc, _actTables, obj, cmsConstrainsGroup,cmsConstraints)
-               //var cf = new NotNullForm(MdiParent, drc,_actTables,  tn, cmsConstrainsGroup,cmsConstraints)
-               {
+                var obj = _tnSelected.Tag as NotNullsClass;                
+                var cf = new NotNullForm(MdiParent, drc, _actTables, obj, cmsConstrainsGroup,cmsConstraints)               
+                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
-               };
-               cf.Show();  
+                };
+                cf.Show();  
             }
         }
 
@@ -682,12 +653,7 @@ namespace FBXpert
         {            
           if(!FbXpertMainForm.FormOnClosing) FbXpertMainForm.Instance().Close();
         }
-        
-        private void hsRefresh_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-       
+               
         public void SetUiDatabaseClosed()
         {
             tsmiCreateXMLDesign.Enabled = false;
@@ -715,13 +681,12 @@ namespace FBXpert
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             _tnSelected = e.Node;
-
             if (e.Node?.Tag == null) return;
             int cmsLeft = this.Left+this.Width+4;
-            int cmsTop = Cursor.Position.Y;            
-            
+            int cmsTop  = Cursor.Position.Y;                        
             var tnn = e.Node.Tag.GetType();
             var t = StaticTreeClass.Instance().FindPrevDBNode(e.Node);
+
             if (tnn == typeof(DBRegistrationClass))
             {                
                 SetActTableNode(t, StaticVariablesClass.CommonTablesKeyGroupStr);    
@@ -751,7 +716,7 @@ namespace FBXpert
             else if (tnn == typeof(TriggerClass))
             {                
                 SetActTableNode(t, StaticVariablesClass.CommonTablesKeyGroupStr);    
-                TriggerClass vc = (TriggerClass)_tnSelected.Tag;
+                var vc = (TriggerClass)_tnSelected.Tag;
                 FbXpertMainForm.Instance().ActTriggerObject = vc;
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
@@ -803,10 +768,8 @@ namespace FBXpert
                 }
             }
             else if (tnn == typeof(UserDefinedFunctionClass))
-            {                
-                
-                var vc = (UserDefinedFunctionClass)_tnSelected.Tag;
-                
+            {                                
+                var vc = (UserDefinedFunctionClass)_tnSelected.Tag;                
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                    cmsUserDefinedFunctions.Show(cmsLeft,cmsTop);
@@ -814,8 +777,7 @@ namespace FBXpert
             }
             else if (tnn == typeof(UserDefinedFunctionGroupClass))
             {                
-                var vc = (UserDefinedFunctionGroupClass)_tnSelected.Tag;
-                
+                var vc = (UserDefinedFunctionGroupClass)_tnSelected.Tag;                
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                     cmsUserDefinedFunctionGroup.Show(cmsLeft,cmsTop);
@@ -1024,20 +986,23 @@ namespace FBXpert
                 }
             }
             else if (tnn == typeof(SystemTableGroupClass))
-            {                                
-                //SetActTableNode(_tnSelected.Parent, StaticVariablesClass.SystemTablesKeyGroupStr);    
+            {                                                
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                    cmsSystemTableGroup.Show(cmsLeft,cmsTop);
                 }
             }
             
-            if (tnn != typeof(DBRegistrationClass))
+            if (!DatabaseDefinitions.Instance().IsRegistration(e.Node))
             {
                _actRegNode = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
             }
         }
+
         
+
+        
+
         public void SetActTableNode(TreeNode parent, string keyStr)
         {            
             var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
@@ -1062,36 +1027,39 @@ namespace FBXpert
             {
                 if (treeView1.SelectedNode == null) return;
                 CloseDatabase(tnReg);
+                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
             }
             else if(e.ClickedItem == tsmiCloseAll)
-            {
-                if (treeView1.SelectedNode == null) return;
-                foreach(TreeNode nd in treeView1.Nodes)
+            {                
+                cmsDatabase.Close();
+                foreach (TreeNode nd in treeView1.Nodes)
                 {
-                    if (nd.Tag.GetType() == typeof(DBRegistrationClass))
+                    if (DatabaseDefinitions.Instance().IsRegistration(nd))
                     {                        
                         CloseDatabase(nd);
                     }
                 }
+                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiOpenAll)
-            {
-                if (treeView1.SelectedNode == null) return;
+            {                
                 cmsDatabase.Close();
                 foreach (TreeNode nd in treeView1.Nodes)
-                {
-                    if (nd.Tag.GetType() == typeof(DBRegistrationClass))
+                {                    
+                    if(DatabaseDefinitions.Instance().IsRegistration(nd))
                     {
                         Application.DoEvents();
                         ReadDatabaseMetadata(nd);
                     }
-                }                                
+                }
+                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiOpen)
             {
                 cmsDatabase.Close();
                 Application.DoEvents();
                 ReadDatabaseMetadata(tnReg);
+                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiStatistics)
             {
@@ -1114,19 +1082,12 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiEditDatabaseConfig)
             {
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), dbReg)
-                {
-                    Cloned = false
-                };
-                cfg.SetBearbeitenMode(EditStateClass.eBearbeiten.eEdit);
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), dbReg, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eEdit);                             
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiNewDatabaseConfig)
-            {
-                var drc = new DBRegistrationClass();
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), drc);
-
-                cfg.SetBearbeitenMode(EditStateClass.eBearbeiten.eInsert);
+            {                
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), null, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eInsert);                
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiCloneDatabaseConfiguration)
@@ -1134,12 +1095,7 @@ namespace FBXpert
                 var drc = dbReg.Clone(); 
                 drc.Alias = $@"{drc.Alias}_clone{(DateTime.Now.Ticks/10000)}";
                                 
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), drc)
-                {
-                    Cloned = true
-                };
-
-                cfg.SetBearbeitenMode(EditStateClass.eBearbeiten.eEdit);
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), drc, treeView1, drc.Position, EditStateClass.eBearbeiten.eInsert);                                
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiSQLScriptExplorer)
@@ -1166,15 +1122,14 @@ namespace FBXpert
                 CloseContextMenuString(sender);
 
                 object[] p = { dbReg.Alias, dbReg.Server, dbReg.DatabasePath, Environment.NewLine };
-                if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DeleteDatabaseRegistration","DoYouWantDeleteDatabaseRegistration", FormStartPosition.CenterScreen,
+                if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DeleteDatabaseRegistration", "DoYouWantDeleteDatabaseRegistration", FormStartPosition.CenterScreen,
                         SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Exclamation, null, p) != SEDialogResult.Yes) return;
-                if (!DatabaseDefinitions.Instance().DeleteDB(dbReg.Alias)) return;
-                if (dbReg.DatabasePath.Length <= 0) return;
-
+                
                 CloseDatabase(treeView1.SelectedNode);
                 treeView1.SelectedNode.Tag = null;
                 treeView1.SelectedNode.Remove();
-                DatabaseDefinitions.Instance().SerializeCurrent("Database deleted");
+                DatabaseDefinitions.Instance().Rebuild(treeView1);
+                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;                
             }
             else if (e.ClickedItem == tsmiDatabaseDesigner)
             {
@@ -1197,13 +1152,11 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiMoveUp)
             {
-                DatabaseDefinitions.Instance().MoveUp(tnReg);                
-                MakeDatabaseTree(true);
+                DatabaseDefinitions.Instance().MoveUp(treeView1);                
             }
             else if (e.ClickedItem == tsmiMoveDown)
             {
-                DatabaseDefinitions.Instance().MoveDown(tnReg);                                
-                MakeDatabaseTree(true);
+                DatabaseDefinitions.Instance().MoveDown(treeView1);                
             }
             else if (e.ClickedItem == tsmiIDBBinaries)
             {
@@ -1216,6 +1169,11 @@ namespace FBXpert
                ev.SetAutocompeteObjects(_actTables,_actSystemTables,_actViews);
                ev.Show();            
             }
+        }
+
+        public TreeView GetTree()
+        {
+            return treeView1;
         }
        
         private void CloseContextMenuString(object sender)
@@ -1819,12 +1777,7 @@ namespace FBXpert
            
             #endregion refresh group
         }
-
-        private void hsRefreshDatabases_Click(object sender, EventArgs e)
-        {
-            ReloadAllDatabases();                        
-        }
-
+       
         public void ReloadAllDatabases()
         {
             if (!ReadDatabaseDefinition()) return;
@@ -1835,40 +1788,86 @@ namespace FBXpert
             NotifiesClass.Instance().InfoThreshold = eInfoLevel.few; //Alleinfos bis few angezeigt
         }
         
-        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        public void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!e.Control) return;
-            switch (e.KeyCode)
+            if(e.Alt) return;
+            if (e.Control && e.Shift)
             {
-                case Keys.Up:
+                switch (e.KeyCode)
                 {
-                    var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
                     
-                    if (tnReg == null) return;
-                    if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
-                    string nm = treeView1.SelectedNode.Text;
-                    DatabaseDefinitions.Instance().MoveUp(tnReg);
-                    
-                    MakeDatabaseTree(false);
-                    var tnn = treeView1.Nodes.Find("DATABASE",true).First(x=>x.Text == nm);
-                    treeView1.SelectedNode = tnn;
-                    break;
-                }
-                case Keys.Down:
-                {
-                    var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
-                    
-                    if (tnReg == null) return;
-                    if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
-                    string nm = treeView1.SelectedNode.Text;
-                    DatabaseDefinitions.Instance().MoveDown(tnReg);
-                    
-                    MakeDatabaseTree(false);
-                    var tnn = treeView1.Nodes.Find("DATABASE",true).First(x=>x.Text == nm);
-                    treeView1.SelectedNode = tnn;
-                    break;
+                    case Keys.C:
+                    {
+                        cmsDatabase.Close();
+                        foreach (TreeNode nd in treeView1.Nodes)
+                        {
+                            if (DatabaseDefinitions.Instance().IsRegistration(nd))
+                            {
+                                CloseDatabase(nd);
+                            }
+                        }
+                        DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        break;
+                    }
+                    case Keys.O:
+                    {
+                        cmsDatabase.Close();
+                        foreach (TreeNode nd in treeView1.Nodes)
+                        {
+                            if (DatabaseDefinitions.Instance().IsRegistration(nd))
+                            {
+                                Application.DoEvents();
+                                ReadDatabaseMetadata(nd);
+                            }
+                        }
+                        DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        break;
+                    }
                 }
             }
+            else if (e.Control)
+            { 
+                switch (e.KeyCode)
+                {
+                    case Keys.Up:
+                    {
+                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
+                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                            DatabaseDefinitions.Instance().MoveUp(treeView1);                    
+                        break;
+                    }
+                    case Keys.Down:
+                    {
+                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
+                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                            DatabaseDefinitions.Instance().MoveDown(treeView1);                    
+                        break;
+                    }
+                    case Keys.O:
+                    {                    
+                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                    
+                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                        { 
+                            cmsDatabase.Close();
+                            Application.DoEvents();
+                            ReadDatabaseMetadata(tnReg);
+                            DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;                        
+                        }
+                        break;
+                    }
+                    case Keys.C:
+                    {
+                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                   
+                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                        {
+                            CloseDatabase(tnReg);
+                            DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        }
+                        break;
+                    }               
+                }
+            }
+            
         }
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
@@ -1879,17 +1878,21 @@ namespace FBXpert
         }
 
         private void hsDatabaseDefinitionSave_Click(object sender, EventArgs e)
-        {                        
+        {         
+            var fi = new FileInfo($@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}");
+            sfdSaveDefinition.InitialDirectory  = fi.DirectoryName;
+            sfdSaveDefinition.FileName          = fi.Name;
             if (sfdSaveDefinition.ShowDialog() != DialogResult.OK) return;
+            var fi2 = new FileInfo(sfdSaveDefinition.FileName);
 
             DatabaseDefinitions.Instance().Serialize(sfdSaveDefinition.FileName, "SAVE_DATABASE_DEFINITION");
-                
+            if(fi2.FullName == fi.FullName) return;
+             
             object[] p = { sfdSaveDefinition.FileName, Environment.NewLine };
-            if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "StartDefinitionChangeCaption", "StartDefinitionChange", FormStartPosition.CenterScreen, SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Question, null, p) != SEDialogResult.Yes) return;
 
-            var fi = new FileInfo(sfdSaveDefinition.FileName);
-            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = fi.DirectoryName;
-            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = fi.Name;
+            if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "StartDefinitionChangeCaption", "StartDefinitionChange", FormStartPosition.CenterScreen, SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Question, null, p) != SEDialogResult.Yes) return;            
+            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = fi2.DirectoryName;
+            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = fi2.Name;
             AppSettingsClass.Instance().SaveSettings();
         }
        

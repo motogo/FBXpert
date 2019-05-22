@@ -305,7 +305,8 @@ namespace FBXpert.SQLView
                 User = user,
                 Alias = "ConScript",
                 CharSet = "UTF8",
-                ConnectionType = eConnectionType.localhost
+                Server = "localhost",
+                ConnectionType = eConnectionType.server
             };
 
 

@@ -506,7 +506,8 @@ namespace FBXpert.DataClasses
                 User = user,
                 Alias = "ConScript",
                 CharSet = "UTF8",
-                ConnectionType = eConnectionType.localhost
+                Server = "localhost",
+                ConnectionType = eConnectionType.server
             };
 
 
@@ -616,7 +617,8 @@ namespace FBXpert.DataClasses
                 User = user,
                 Alias = "ConScript",
                 CharSet = "UTF8",
-                ConnectionType = eConnectionType.localhost
+                Server = "localhost",
+                ConnectionType = eConnectionType.server
             };
 
 

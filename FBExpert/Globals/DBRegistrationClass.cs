@@ -47,9 +47,10 @@ namespace FBXpert.Globals
             this.Alias = $@"new_database_{tks.ToString()}";
             this.DatabasePath = $@"{this.Alias}.fdb";
             this.Server = "localhost";
-            this.ConnectionType = eConnectionType.localhost;
+            this.ConnectionType = eConnectionType.server;
             this.CodeSettings = new CodeSettingsClass();
             this.ErrorCodes = new ErrorCodes();
+            
             string pf = $@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\ErrorCodes{this.Version}.txt";
             this.ErrorCodes.Load(pf);
            
@@ -70,28 +71,10 @@ namespace FBXpert.Globals
         {
             return this.MemberwiseClone() as DBRegistrationClass;            
         }
-
-        public string GetDatabasepfad()
-        {
-            string srvstr = string.Empty;
-            if(ConnectionType == eConnectionType.server)
-            {
-                srvstr =  $@"//{Server}:{DatabasePath}";
-            }
-            else if(ConnectionType == eConnectionType.localhost)
-            {
-                srvstr =  $@"//{Server}:{DatabasePath}";
-            }
-            if(ConnectionType == eConnectionType.embedded)
-            {
-                srvstr =  $@"{DatabasePath}";
-            }
-            return srvstr;
-        }
-
+        
         public override string ToString()
         {            
-            return String.Format("{0,-30} ({1}) V{2}",  Alias, GetDatabasepfad() , Version);
+            return String.Format("{0,-30} ({1}) V{2}",  Alias, GetFullDatabasePath() , Version);
         }
         
         public void SetNode(TreeNode tn)

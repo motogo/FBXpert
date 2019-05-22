@@ -181,7 +181,7 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} ViewManagerForm->RefreshDependenciesFrom->{ex.Message}");
+                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
             }
             bsDependencies.DataMember = "Table";
             return dsDependencies.Tables[0].Rows.Count;
@@ -231,7 +231,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr() + " ViewManagerForm->RefreshDependenciesFrom->" + ex.Message);
+                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
             }               
             return lvFields.Items.Count;
         }

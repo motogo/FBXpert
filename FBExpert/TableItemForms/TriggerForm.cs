@@ -232,7 +232,7 @@ namespace FBXpert
             }
             catch (Exception ex)
             {
-               _localNotify?.AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->TableManegeForm->RefreshDependenciesFrom->{ex.Message}");
+               _localNotify?.AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->{this.Name}->RefreshDependenciesTo->{ex.Message}");
             }
                       
             return 0;

@@ -80,9 +80,12 @@ namespace FBXpert.Globals
             }
             catch
             {
-
+                lifetimeText = "-1";
             }
-            con.Close();
+            finally
+            { 
+              con.Close();            
+            }
             return lifetimeText;
         }
         

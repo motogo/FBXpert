@@ -264,4 +264,16 @@
   <data name="SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
+  <data name="DatabaseNotCreated" xml:space="preserve">
+    <value>No database created. </value>
+  </data>
+  <data name="DatabaseBackup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="DatabaseRestore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="DatabaseVersion" xml:space="preserve">
+    <value>Get Version</value>
+  </data>
 </root>

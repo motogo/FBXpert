@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DatabaseError" xml:space="preserve">
-    <value>DatabaseError</value>
+    <value>Datenbank Fehler</value>
   </data>
   <data name="DatabaseExceptionCaption" xml:space="preserve">
     <value>Datenbank Fehler</value>
   </data>
   <data name="DeleteDatabaseRegistration" xml:space="preserve">
-    <value>DeleteDatabaseRegistration</value>
+    <value>Datenbank Registration entfernen</value>
   </data>
   <data name="DoYouWantDeleteDatabaseRegistration" xml:space="preserve">
-    <value>Möchten Sie wirklich die Datenbank Definition löschen</value>
+    <value>Möchten Sie wirklich die Datenbank Definition für {0} löschen</value>
   </data>
   <data name="ErrorWhileOpeningDatabase" xml:space="preserve">
     <value>Fehler beim Öffnen der Datebank:{0}</value>
@@ -392,5 +392,17 @@
   </data>
   <data name="SUCCEEDED" xml:space="preserve">
     <value>Erfolgreich</value>
+  </data>
+  <data name="DatabaseNotCreated" xml:space="preserve">
+    <value>Datenbank konnte nicht erzeugt werden</value>
+  </data>
+  <data name="DatabaseBackup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="DatabaseRestore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="DatabaseVersion" xml:space="preserve">
+    <value>Get Version</value>
   </data>
 </root>

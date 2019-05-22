@@ -886,6 +886,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\ampel_red_x24.png" />
+    <None Include="Resources\ampel_green_x241.png" />
+    <None Include="Resources\ampel_green_x24.png" />
+    <None Include="Resources\edit_mode_px241.png" />
+    <None Include="Resources\edn_edit_px24.png" />
+    <None Include="Resources\edit_mode_px24.png" />
+    <None Include="Resources\help_about_gn_x22.png" />
+    <None Include="Resources\help_about_blue_x221.png" />
+    <None Include="Resources\help_about_gn_x32.png" />
+    <None Include="Resources\help_about_blue_x32.png" />
+    <None Include="Resources\go_up_blue32x.png" />
+    <None Include="Resources\go_down_red32x.png" />
     <None Include="Resources\up_down32x.png" />
     <None Include="Resources\down_up32x.png" />
     <None Include="Resources\media_playlist_repeat_blue_x221.png" />

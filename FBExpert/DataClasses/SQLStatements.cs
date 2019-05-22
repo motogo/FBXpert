@@ -717,7 +717,7 @@ namespace FBXpert.DataClasses
         {
             var sb = new StringBuilder();
             sb.Append("SELECT RDB$DEPENDENCIES.RDB$FIELD_NAME as Field,");
-            sb.Append("RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME as DepentFrom,CASE RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE");
+            sb.Append("RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME as DepentFrom,CASE RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE ");
             sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} AS  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE FROM RDB$DEPENDENCIES ");
             sb.Append($@"WHERE UPPER(RDB$DEPENDENCIES.RDB$DEPENDENT_NAME) = '{tableName}' AND RDB$DEPENDENCIES.RDB$FIELD_NAME IS NOT null ");
             sb.Append("ORDER BY RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
@@ -992,7 +992,7 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.rdb$field_precision,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.rdb$field_scale,");
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME ");
-                sb.Append($@"FROM RDB$FUNCTION_ARGUMENTS"); 
+                sb.Append($@"FROM RDB$FUNCTION_ARGUMENTS "); 
                 sb.Append($@"LEFT JOIN RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FUNCTION_ARGUMENTS.rdb$field_type ");
                 sb.Append($@"WHERE RDB$FUNCTION_ARGUMENTS.RDB$FUNCTION_NAME = 'GET_RECHPOSCOUNT' AND RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'");
 

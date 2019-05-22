@@ -16,23 +16,14 @@ namespace FBExpert
     [Serializable]
     public class DatabaseDefinitions : ApplicationPathClass
     {
-
-
         public string Reason;
         public EditStateClass.eDataState DataState = EditStateClass.eDataState.UnSaved;
 
         public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();  
-
-        //		public Image Pic;
-
+      
         public DatabaseDefinitions()
         {
-            //
-            // TODO: Hier die Konstruktorlogik einfügen
-            //
-
-
-
+           
         }
         private static readonly object _lock_this = new object();
         private static volatile DatabaseDefinitions instance = null;
@@ -47,54 +38,69 @@ namespace FBExpert
             }
             return (instance);
         }
-        public void TestParams()
+
+
+        public bool IsRegistration(TreeNode nd)
         {
-            string error_str = "";
-
-
-
-            if (error_str.Length > 0)
-                MessageBox.Show(error_str, "Configuration structure error !!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
+            if(nd?.Tag == null) return false;
+            return (nd.Tag.GetType() == typeof(DBRegistrationClass));
         }
 
-
-        public void MoveUp(TreeNode tnReg)
+        public void Rebuild(TreeView tv)
         {
-            if (tnReg == null) return;
-            if (tnReg.PrevNode == null) return;
+            Databases.Clear();
+            foreach (TreeNode tn in tv.Nodes)
+            {
+                if (tn == null) continue;
+                if (!(tn.Tag is DBRegistrationClass dbReg)) continue;                 
+                DBRegistrationClass dbreg = (DBRegistrationClass) tn.Tag;
+                Databases.Add(dbreg);               
+            }
+        }        
 
-            int inx1  = Databases.FindIndex(x => x.Alias == tnReg.Text);
-            int inx2  = Databases.FindIndex(x => x.Alias == tnReg.PrevNode.Text);
-            DBRegistrationClass dbr1 = (DBRegistrationClass) Databases[inx1].Clone();
-            DBRegistrationClass dbr2 = (DBRegistrationClass) Databases[inx2].Clone();
-
-            int pos = dbr1.Position;
-            dbr1.Position = dbr2.Position;
-            dbr2.Position = pos;
-            Databases[inx1] = dbr2;
-            Databases[inx2] = dbr1;
+        public void MoveUp(TreeView treeView)
+        {
+            TreeNode tn = treeView.SelectedNode.PrevNode;
+            int idx = tn.NextNode.Index;
+            if (tn.Level != 0)
+            {
+                int pidx = tn.Parent.Index;
+                treeView.Nodes.Remove(tn);
+                treeView.Nodes[pidx].Nodes.Insert(idx, tn);
+                treeView.Focus();
+            }
+            else
+            {
+                treeView.Nodes.Remove(tn);
+                treeView.Nodes.Insert(idx, tn);
+            }
+            Rebuild(treeView);
             DataState = EditStateClass.eDataState.UnSaved;
         }
 
-        public void MoveDown(TreeNode tnReg)
-        {               
-            if (tnReg == null) return;
-            if (tnReg.NextNode == null) return;
-            int inx1  = Databases.FindIndex(x => x.Alias == tnReg.NextNode.Text);
-            int inx2  = Databases.FindIndex(x => x.Alias == tnReg.Text);
-            DBRegistrationClass dbr1 = (DBRegistrationClass) Databases[inx1].Clone();
-            DBRegistrationClass dbr2 = (DBRegistrationClass) Databases[inx2].Clone();
+        public void MoveDown(TreeView treeView)
+        {
+            TreeNode tn = treeView.SelectedNode;
+            int idx = tn.NextNode.Index;
 
-            int pos = dbr1.Position;
-            dbr1.Position = dbr2.Position;
-            dbr2.Position = pos;
-            Databases[inx1] = dbr2;
-            Databases[inx2] = dbr1;
+            if (tn.Level != 0)
+            {
+                int pidx = tn.Parent.Index;
+                treeView.Nodes.Remove(tn);
+                treeView.Nodes[pidx].Nodes.Insert(idx, tn);
+                treeView.SelectedNode = tn;
+                treeView.Focus();
+            }
+            else
+            {
+                treeView.Nodes.Remove(tn);
+                treeView.Nodes.Insert(idx, tn);
+                treeView.SelectedNode = tn;
+            }
+            Rebuild(treeView);
             DataState = EditStateClass.eDataState.UnSaved;
         }
-
+        
         public bool Deserialize(string FileName)
         {            
             try
@@ -109,22 +115,20 @@ namespace FBExpert
                 
                 foreach (DBRegistrationClass dbr in this.Databases)
                 {
-                    if (string.IsNullOrEmpty(dbr.InitialScriptingPath)) dbr.InitialScriptingPath = StaticVariablesClass.ScriptPath;
-                    if (string.IsNullOrEmpty(dbr.InitialReportPath))    dbr.InitialReportPath = StaticVariablesClass.ReportPath;
-                    if (string.IsNullOrEmpty(dbr.Collation)) dbr.Collation = StaticVariablesClass.Collation;
-                    if (string.IsNullOrEmpty(dbr.CommentEnd)) dbr.CommentEnd = StaticVariablesClass.CommentEnd;
-                    if (string.IsNullOrEmpty(dbr.CommentStart)) dbr.CommentStart = StaticVariablesClass.CommentStart;
-                    if (string.IsNullOrEmpty(dbr.InitialTerminator)) dbr.InitialTerminator = StaticVariablesClass.InitialTerminator;
-                    if (string.IsNullOrEmpty(dbr.AlternativeTerminator)) dbr.AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
-                    if (string.IsNullOrEmpty(dbr.SingleLineComment)) dbr.SingleLineComment = StaticVariablesClass.SingleLineComment;
-                  //  if(dbr.CodeSettings.SourceCodePrimaryKeyType == FBXpert.DataClasses.eSourceCodePrimaryKeyType.UUID) dbr.CodeSettings.SourceCodePrimaryKeyType = FBXpert.DataClasses.eSourceCodePrimaryKeyType.GUID;
+                    if (string.IsNullOrEmpty(dbr.InitialScriptingPath))     dbr.InitialScriptingPath = StaticVariablesClass.ScriptPath;
+                    if (string.IsNullOrEmpty(dbr.InitialReportPath))        dbr.InitialReportPath = StaticVariablesClass.ReportPath;
+                    if (string.IsNullOrEmpty(dbr.Collation))                dbr.Collation = StaticVariablesClass.Collation;
+                    if (string.IsNullOrEmpty(dbr.CommentEnd))               dbr.CommentEnd = StaticVariablesClass.CommentEnd;
+                    if (string.IsNullOrEmpty(dbr.CommentStart))             dbr.CommentStart = StaticVariablesClass.CommentStart;
+                    if (string.IsNullOrEmpty(dbr.InitialTerminator))        dbr.InitialTerminator = StaticVariablesClass.InitialTerminator;
+                    if (string.IsNullOrEmpty(dbr.AlternativeTerminator))    dbr.AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
+                    if (string.IsNullOrEmpty(dbr.SingleLineComment))        dbr.SingleLineComment = StaticVariablesClass.SingleLineComment;                  
                 }
                 
                 if (PF.Reason == null) PF.Reason = "none";
                 this.Reason = PF.Reason;
                 DataState = EditStateClass.eDataState.Saved;
-               
-                TestParams();                
+                                               
             }
             catch(Exception ex)
             {                
@@ -138,41 +142,7 @@ namespace FBExpert
             }
             return true;
         }
-
-        public void SerializeDefault(string path)
-        {
-            this.Reason = "Default";
-            this.Databases = new List<DBRegistrationClass>();
-            var dbr = new DBRegistrationClass
-            {
-                Position = 1,
-                CharSet = "NONE",
-                DatabasePath = "D:\\temp\\test.fdb",
-                Alias = "D:\\temp\\test.fdb",
-                Password = "'masterkey'",
-                User = "SYSDBA",
-                Active = true
-            };
-
-            this.Databases.Add(dbr);
-
-            var dbr2 = new DBRegistrationClass
-            {
-                Position = 2,
-                CharSet = "NONE",
-                DatabasePath = "D:\\temp\\test3.fdb",
-                Alias = "D:\\temp\\test3.fdb",
-                Password = "'masterkey'",
-                User = "SYSDBA",
-                Active = false
-            };
-            this.Databases.Add(dbr2);
-
-            this.XMLName = path;
-            this.SerializeCurrent("default");
-            DataState = EditStateClass.eDataState.Saved;
-        }
-    
+            
         public void SerializeCurrent(string reason)
         {            
             Stream writer = new FileStream(this.XMLName, FileMode.Create);                        
@@ -192,25 +162,6 @@ namespace FBExpert
             this.XMLName = fn;
             SerializeCurrent(reason);            
         }
-
-        public bool DeleteDB(string AliasName)
-        {
-            int n = -1;
-            for(int i = 0; i < Databases.Count; i++)
-            {
-                var dbr = Databases[i];
-                if(dbr.Alias == AliasName)
-                {
-                    n = i;
-                    break;
-                }
-            }
-            if(n >= 0)
-            {
-                Databases.RemoveAt(n);
-                return true;
-            }
-            return false;
-        }
+        
     }
 }

@@ -19,21 +19,46 @@ namespace FBExpert
     public partial class DatabaseConfigForm : IEditForm
     {
         DBRegistrationClass _dbReg = null;
+
        
-        public DatabaseConfigForm(Form parent, DBRegistrationClass reg)
+       
+        public DatabaseConfigForm(Form parent, DBRegistrationClass reg, TreeView aktTree, int aktPosition, EditStateClass.eBearbeiten bMode)
         {
             InitializeComponent();
             this.MdiParent = parent;
-
-            if (reg == null)
+            if(reg == null)
             {
-                _dbReg = new DBRegistrationClass();
+                //Insert neuer Knoten
+                SetBearbeitenMode(EditStateClass.eBearbeiten.eInsert);
+                _dbReg = reg;
+
+                TreeNode newNode = new TreeNode();
+                _dbReg.SetNode(newNode);
+                aktTree.Nodes.Insert(aktPosition, newNode);
+
+                
+                NewDataToEdit();
+                
             }
+            else if(bMode == EditStateClass.eBearbeiten.eInsert)
+            {
+                //Neuer TreeKnoten als Cloned anfügen
+                _dbReg = reg;
+                               
+                TreeNode newNode = new TreeNode();
+                newNode.Name = "DATABASE";
+                _dbReg.SetNode(newNode);
+                aktTree.Nodes.Insert(aktPosition, newNode);
+                SetBearbeitenMode(bMode);
+                
+                DataToEdit();                
+            }            
             else
             {
                 _dbReg = reg;
-            }
-                      
+                SetBearbeitenMode(bMode);
+                DataToEdit();
+            }                      
         }
 
         public void SetBearbeitenMode(EditStateClass.eBearbeiten bea)
@@ -72,13 +97,13 @@ namespace FBExpert
         }
         public void EditToData()
         {
-            _dbReg.Alias = txtDatabaseAlias.Text;
-           // DBReg.Charset = cbCharSet.Text;
+            _dbReg.Alias = txtDatabaseAlias.Text;           
             _dbReg.CharSet = cbCharSet.Text;
             _dbReg.Collation = cbCollation.Text;
             _dbReg.PacketSize = StaticFunctionsClass.ToIntDef(txtPacketsize.Text, 0);
             _dbReg.Password = txtPassword.Text;
             _dbReg.User = txtUser.Text;
+           
 
             if(rb25_32.Checked) _dbReg.Version = eDBVersion.FB25_32;
             else if(rb25_64.Checked) _dbReg.Version = eDBVersion.FB25_64;
@@ -145,12 +170,7 @@ namespace FBExpert
                 _dbReg.Server = txtServer.Text;
                 _dbReg.ConnectionType = eConnectionType.server;
             }
-            else
-            {
-                //_dbReg.ServerType = eConnectionType.local;
-                _dbReg.Server = "localhost";
-                _dbReg.ConnectionType = eConnectionType.localhost;
-            }
+            
         }
 
         bool DoEvent = true;
@@ -175,10 +195,7 @@ namespace FBExpert
                     rbRemote.Checked = true;
                     
                     break;
-                case eConnectionType.localhost:
-                    rbLocal.Checked = true;
-                    
-                    break;
+                
                 default:
                     rbEmbedded.Checked = true;
                     
@@ -230,21 +247,23 @@ namespace FBExpert
             tn.Text = _dbReg.Alias;
             if (BearbeitenMode == EditStateClass.eBearbeiten.eEdit)
             {
-                var drc = DatabaseDefinitions.Instance().Databases.Find(x=>x.Position == _dbReg.Position);                
+                var drc = DatabaseDefinitions.Instance().Databases.Find(x=>x.Position == _dbReg.Position);
+                _dbReg.State = eRegState.update;
             }
             else
             {
                 _dbReg.Position = DatabaseDefinitions.Instance().Databases.Count+1;
                 DatabaseDefinitions.Instance().Databases.Add(_dbReg);
                 DataToEdit();
+                _dbReg.State = eRegState.create;
             }
 
             DatabaseDefinitions.Instance().SerializeCurrent("User changed");
 
-            _dbReg.State = Cloned ? eRegState.create : eRegState.update;
+            //_dbReg.State = (BearbeitenMode == EditStateClass.eBearbeiten.eEdit) ? eRegState.update : eRegState.create;
 
             BearbeitenMode = EditStateClass.eBearbeiten.eEdit;
-            if (_connectionDataChanged)
+            if ((_connectionDataChanged) || (_dbReg.State != eRegState.update))
             {                
                 NotifiesClass.Instance().Notify.RaiseInfo($@"Configuration saved for {_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);
                 DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);                
@@ -256,8 +275,7 @@ namespace FBExpert
                 tn.Text = _dbReg.Alias;
                 _dataChanged = false;
             }
-
-            if (Cloned) Close();
+            
         }
 
         public void SetServerUIVisiblies()
@@ -269,11 +287,7 @@ namespace FBExpert
                     txtServer.Enabled = false;
                     
                     break;
-                case eConnectionType.localhost:
-                    rbLocal.Checked = true;
-                    txtServer.Enabled = false;
-                    
-                    break;
+              
                 default:
                     rbRemote.Checked = true;
                     txtServer.Enabled = true;
@@ -308,8 +322,7 @@ namespace FBExpert
             SetServerUIVisiblies();
             DoEvent = true;
         }
-      
-        public bool Cloned = false;
+             
         private void DatabaseConfigForm_Load(object sender, EventArgs e)
         {  
             oldserver = _dbReg.Server;
@@ -318,15 +331,7 @@ namespace FBExpert
             LanguageChanged();                
             ShowCaptions();
 
-            if (BearbeitenMode == EditStateClass.eBearbeiten.eEdit)
-            {
-                DataToEdit();
-                if (Cloned) BearbeitenMode = EditStateClass.eBearbeiten.eInsert;
-            }
-            else
-            {                
-                NewDataToEdit();
-            }
+           
         }
 
         private void LanguageChanged()
@@ -370,10 +375,12 @@ namespace FBExpert
         private void hsConnect_Click(object sender, EventArgs e)
         {
             pnlConnectState.BackColor = System.Drawing.Color.Yellow;
-            EditToData();            
+            Application.DoEvents();
+            EditToData();  
+            string lfText = string.Empty;
             try
             {
-                AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text);
+                lfText = AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text);
                 pnlConnectState.BackColor = System.Drawing.Color.Green;
             }
             catch(Exception ex)
@@ -381,6 +388,13 @@ namespace FBExpert
                 Debug.WriteLine(ex.Message);
                 pnlConnectState.BackColor = System.Drawing.Color.Red;
             }
+
+            if(lfText == "-1")
+            {
+                pnlConnectState.BackColor = System.Drawing.Color.Red;
+            }
+            
+            txtLifetime.Text = lfText;
         }
 
         private void hsLoad_Click(object sender, EventArgs e)
@@ -398,22 +412,28 @@ namespace FBExpert
         private void hsCreateDatabase_Click(object sender, EventArgs e)
         {
             var fi = new FileInfo(txtLocation.Text);
-            
+            bool ok = false;
             if(fi.Exists)
             {
                 object[] param = {$@"{txtServer.Text}:{txtLocation.Text}",Environment.NewLine};
                 if(SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExistsCaption","OverrideExistingDatabase", SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Asterisk, null, param)== SEDialogResult.Yes)                
                 {
-                    DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
+                    ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
                     StaticFunctionsClass.ToIntDef(txtPacketsize.Text,AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize), true, true);
                 }
             }
             else
             {
                 if (!fi.Directory.Exists) return;
-                DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
+                ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
                 StaticFunctionsClass.ToIntDef(txtPacketsize.Text, AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize), true, true);
-            }            
+            }         
+            
+
+            if(!ok)
+            {
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseError", "DatabaseNotCreated", SEMessageBoxButtons.OK, SEMessageBoxIcon.Asterisk, null, null);               
+            }
         }
 
         private void hsClone_Click(object sender, EventArgs e)
@@ -433,14 +453,7 @@ namespace FBExpert
 
         string oldserver = string.Empty;
 
-        private void rbLocal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!rbLocal.Checked) return;
-            txtServer.Text = "localhost";
-            txtServer.Enabled = false;
-            SetServerDatas();
-            connectionDataChanged();
-        }
+    
 
         
 
@@ -633,6 +646,13 @@ namespace FBExpert
              fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtDefaultExportPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void HotSpot1_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtFirebirdBinaryPath.Text = fbdPath.SelectedPath;
         }
     }
 }
