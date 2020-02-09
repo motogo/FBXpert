@@ -30,7 +30,7 @@ namespace FBXpert.SonstForms
             MdiParent = parent;
             _dbReg = reg;
            
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler += LanguageChanged;
+            LanguageClass.Instance().RegisterChangeNotifiy(LanguageChanged);
         }
         
         private void LanguageChanged(object sender, LanguageChangedEventArgs k)
@@ -93,8 +93,9 @@ namespace FBXpert.SonstForms
             };
             var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
             var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
-            
-                
+            var functions  = StaticTreeClass.Instance().GetFunctionObjects(db);
+
+
             slbDbObjects1.ClearItems();
             foreach (var tc in ddc.Tables.Values)
             {                
@@ -113,7 +114,11 @@ namespace FBXpert.SonstForms
             foreach (var tc in procedures.Values)
             {             
                 slbDbObjects1.Add($@"PROC.{tc.Name}", CheckState.Checked, tc);
-            } 
+            }
+            foreach (var tc in functions.Values)
+            {
+                slbDbObjects1.Add($@"FUNC.{tc.Name}", CheckState.Checked, tc);
+            }
             this.Cursor = Cursors.Default;
         }
 
@@ -130,7 +135,8 @@ namespace FBXpert.SonstForms
 
             var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
             var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
-                       
+            var functions = StaticTreeClass.Instance().GetFunctionObjects(db);
+
             slbDbObjects2.ClearItems();
             foreach (var tc in ddc.Tables.Values)
             {                
@@ -150,7 +156,11 @@ namespace FBXpert.SonstForms
             foreach (var tc in procedures.Values)
             {             
                 slbDbObjects2.Add($@"PROC.{tc.Name}", CheckState.Checked, tc);
-            } 
+            }
+            foreach (var tc in functions.Values)
+            {
+                slbDbObjects2.Add($@"FUNC.{tc.Name}", CheckState.Checked, tc);
+            }
             this.Cursor = Cursors.Default;
         }
       
@@ -301,15 +311,22 @@ namespace FBXpert.SonstForms
                 fctSource.AppendText(Environment.NewLine);
                
             }
-            else if (itm1.Object.GetType() == typeof(ViewClass))
-            {                
+                     
+            fctSource.AppendText(Environment.NewLine);
+        }
+
+        private void TestView(ItemDataClass itm1, ItemDataClass itm2, string db1, string db2, bool second)
+        {
+            string str = (second) ? "<<--<<--<<--<<--<<" : ">>-->>-->>-->>-->>";
+            if (itm1.Object.GetType() == typeof(ViewClass))
+            {
                 fctSource.AppendText($"{str} Testing DB {db1} view {itm1.Text} -> {db2}{Environment.NewLine}{Environment.NewLine}");
                 if (itm2 != null)
-                {                    
-                    var tc1 = (ViewClass) itm1.Object;
-                    var tc2 = (ViewClass) itm2.Object;                    
-                    if(!cbOnlyFailures.Checked)  fctSource.AppendText($"{"OK",-8}DB {db1}->view {itm1.Text} exists in DB {itm1.Text}{db2}");
-                    TestViewFields(itm1,itm2,db1,db2);
+                {
+                    var tc1 = (ViewClass)itm1.Object;
+                    var tc2 = (ViewClass)itm2.Object;
+                    if (!cbOnlyFailures.Checked) fctSource.AppendText($"{"OK",-8}DB {db1}->view {itm1.Text} exists in DB {itm1.Text}{db2}");
+                    TestViewFields(itm1, itm2, db1, db2);
                     tc1.CREATEINSERT_SQL = $@"<START>{RemoveUnneccessaryCharacters(tc1.CREATEINSERT_SQL)}<END>";
                     tc2.CREATEINSERT_SQL = $@"<START>{RemoveUnneccessaryCharacters(tc2.CREATEINSERT_SQL)}<END>";
                     if (tc1.CREATEINSERT_SQL != tc2.CREATEINSERT_SQL)
@@ -331,23 +348,23 @@ namespace FBXpert.SonstForms
                         {
                             resultstr += (resultstr.Length > 0) ? ", differences in newlines" : "differences in newlines";
                         }
-                        
-                        while(str1.Contains("  "))
+
+                        while (str1.Contains("  "))
                         {
                             str1 = str1.Replace("  ", " ");
                         }
-                        while(str2.Contains("  "))
+                        while (str2.Contains("  "))
                         {
-                           str2 = str2.Replace("  ", " ");
+                            str2 = str2.Replace("  ", " ");
                         }
-                                                
+
                         if (str1 == str2)
                         {
                             resultstr += (resultstr.Length > 0) ? ", differences in spaces" : "differences in spaces";
                         }
 
-                        int nw1 = str1.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries).Length;
-                        int nw2 = str2.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries).Length;
+                        int nw1 = str1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
+                        int nw2 = str2.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
                         if (nw1 != nw2)
                         {
                             Console.WriteLine();
@@ -360,21 +377,21 @@ namespace FBXpert.SonstForms
                         {
                             fctSource.AppendText($"{"FAILURE SQL differs ",-8} for {tc1.Name} in words:{nw1}<->{nw2}, length:{tc1.CREATEINSERT_SQL.Length}<->{tc2.CREATEINSERT_SQL.Length}{Environment.NewLine}{Environment.NewLine}");
                         }
-                  
+
                         else
                         {
                             fctSource.AppendText($"{"WARNING SQL differs by",-8}  ({resultstr}), may not a problem, for {tc1.Name} words:{nw1}<->{nw2},  length:{tc1.CREATEINSERT_SQL.Trim().ToUpper().Length}<->{tc2.CREATEINSERT_SQL.Trim().ToUpper().Length}{Environment.NewLine}{Environment.NewLine}");
                         }
 
-                        fctSource.AppendText($"{Environment.NewLine}SQL1 -------------------------------------------{Environment.NewLine}{tc1.CREATEINSERT_SQL}{Environment.NewLine}");                       
-                        fctSource.AppendText($"{Environment.NewLine}SQL2 -------------------------------------------{Environment.NewLine}{tc2.CREATEINSERT_SQL}{Environment.NewLine}");                       
+                        fctSource.AppendText($"{Environment.NewLine}SQL1 -------------------------------------------{Environment.NewLine}{tc1.CREATEINSERT_SQL}{Environment.NewLine}");
+                        fctSource.AppendText($"{Environment.NewLine}SQL2 -------------------------------------------{Environment.NewLine}{tc2.CREATEINSERT_SQL}{Environment.NewLine}");
                     }
                 }
                 else
                 {
                     fctSource.AppendText($"{"FAILURE",-8} DB {db1}->view {itm1.Text} has no view in DB {db2}{Environment.NewLine}");
                 }
-            }           
+            }
             fctSource.AppendText(Environment.NewLine);
         }
 
@@ -418,17 +435,19 @@ namespace FBXpert.SonstForms
                 {
                     string txt1 = tcf1.GetSourceText();
                     string txt2 = tcf2.GetSourceText();
-                    if(txt1 == txt2)
+                    
+                    if (txt1 == txt2)
                     {
                         if(!cbOnlyFailures.Checked) fctSource.AppendText($"{"OK",-8}procedure {tcf1.Name} exists and source is equal{Environment.NewLine}");  
                     }
                     else
                     {
                         fctSource.AppendText($"{"FAILURE",-8}procedure {tcf1.Name} exists but source is not equal{Environment.NewLine}");  
-                        fctSource.AppendText($"----------------- Source {db1}->{tcf1.Name} ---------------------{Environment.NewLine}{Environment.NewLine}");
+
+                        fctSource.AppendText($"----------------- Source {db1}->{tcf1.Name} Length:{txt1.Length} ---------------------{Environment.NewLine}{Environment.NewLine}");
                         fctSource.AppendText(txt1);
                         fctSource.AppendText($"{Environment.NewLine}{Environment.NewLine}");
-                        fctSource.AppendText($"----------------- Source {db2}->{tcf2.Name} ---------------------{Environment.NewLine}{Environment.NewLine}");
+                        fctSource.AppendText($"----------------- Source {db2}->{tcf2.Name} Length:{txt2.Length} ---------------------{Environment.NewLine}{Environment.NewLine}");
                         fctSource.AppendText(txt2);
                     }
                 }
@@ -442,6 +461,48 @@ namespace FBXpert.SonstForms
             {
                 var tcf1 = (ProcedureClass) itm1.Object;
                 fctSource.AppendText($"{"FAILURE",-8}DB {db1}->has no procedure {tcf1} in DB {db2}{Environment.NewLine}");
+            }
+
+            fctSource.AppendText(Environment.NewLine);
+        }
+
+        private void TestFunctions(ItemDataClass itm1, ItemDataClass itm2, string db1, string db2, bool second)
+        {
+            string str = (second) ? "<<--<<--<<--<<--<<" : ">>-->>-->>-->>-->>";
+            fctSource.AppendText($"{str} Testing DB {db1} function {itm1.Text} -> {db2}{Environment.NewLine}{Environment.NewLine}");
+            if (itm2 != null)
+            {
+                var tcf1 = (FunctionClass)itm1.Object;
+                var tcf2 = (FunctionClass)itm2.Object;
+
+                if (tcf1.Name == tcf2.Name)
+                {
+                    string txt1 = tcf1.GetSourceText();
+                    string txt2 = tcf2.GetSourceText();
+                    if (txt1 == txt2)
+                    {
+                        if (!cbOnlyFailures.Checked) fctSource.AppendText($"{"OK",-8}function {tcf1.Name} exists and source is equal{Environment.NewLine}");
+                    }
+                    else
+                    {
+                        fctSource.AppendText($"{"FAILURE",-8}function {tcf1.Name} exists but source is not equal{Environment.NewLine}");
+                        fctSource.AppendText($"----------------- Source {db1}->{tcf1.Name} Length:{txt1.Length} -----------{Environment.NewLine}{Environment.NewLine}");
+                        fctSource.AppendText(txt1);
+                        fctSource.AppendText($"{Environment.NewLine}{Environment.NewLine}");
+                        fctSource.AppendText($"----------------- Source {db2}->{tcf2.Name} Length:{txt2.Length} -----------{Environment.NewLine}{Environment.NewLine}");
+                        fctSource.AppendText(txt2);
+                    }
+                }
+                else
+                {
+
+                    fctSource.AppendText($"{"FAILURE",-8}function {tcf1.Name} not exists in {db2}{Environment.NewLine}");
+                }
+            }
+            else
+            {
+                var tcf1 = (FunctionClass)itm1.Object;
+                fctSource.AppendText($"{"FAILURE",-8}DB {db1}->has no function {tcf1} in DB {db2}{Environment.NewLine}");
             }
 
             fctSource.AppendText(Environment.NewLine);
@@ -481,22 +542,43 @@ namespace FBXpert.SonstForms
                     itm2 = slbDbObjects2.ItemDatas[inx2];
                     string it = itm2.GetType().ToString();
                 }
-                
-                if (cbForwardRun.Checked && ((itm1.Object.GetType() == typeof(TableClass)) || (itm1.Object.GetType() == typeof(ViewClass))))            
-                {                    
-                    TestTable(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText,false);                    
+                if (ckTables.Checked)
+                {
+                    if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(TableClass)))
+                    {
+                        TestTable(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
                 }
-             
-                if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(GeneratorClass)))
-                {                    
-                    TestGenerators(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText,false);                    
+                if (ckViews.Checked)
+                {
+                    if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(ViewClass)))
+                    {
+                        TestView(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
                 }
-               
-                if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(ProcedureClass)))
-                {                    
-                    TestProcedures(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText,false);                    
-                }                
+                if (ckGenerators.Checked)
+                {
+                    if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(GeneratorClass)))
+                    {
+                        TestGenerators(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
+                }
+                if (ckProcedures.Checked)
+                {
+                    if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(ProcedureClass)))
+                    {
+                        TestProcedures(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
+                }
+                if (ckFuntions.Checked)
+                {
+                    if (cbForwardRun.Checked && (itm1.Object.GetType() == typeof(FunctionClass)))
+                    {
+                        TestFunctions(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
+                }
             }
+
             for (int i = 0; i < slbDbObjects2.CheckedItemDatasNotNulls.Count; i++)
             {               
                 var itm1 = slbDbObjects2.CheckedItemDatasNotNulls[i];
@@ -508,21 +590,43 @@ namespace FBXpert.SonstForms
                     itm2 = slbDbObjects1.ItemDatas[inx2];
                     string it = itm2.GetType().ToString();
                 }
-                
-                if (cbReverseRun.Checked && ((itm1.Object.GetType() == typeof(TableClass)) || (itm1.Object.GetType() == typeof(ViewClass))))            
-                {                    
-                    TestTable(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText,true);                    
+                if (ckTables.Checked)
+                {
+                    if (cbReverseRun.Checked && (itm1.Object.GetType() == typeof(TableClass)))
+                    {
+                        TestTable(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText, true);
+                    }
                 }
-               
-                if (cbReverseRun.Checked && (itm1.Object.GetType() == typeof(GeneratorClass)))
-                {                    
-                    TestGenerators(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText,true);                    
+                if (ckViews.Checked)
+                {
+                    if (cbReverseRun.Checked && (itm1.Object.GetType() == typeof(ViewClass)))
+                    {
+                        TestView(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText, true);
+                    }
                 }
-                
-                if (cbReverse.Checked && (itm1.Object.GetType() == typeof(ProcedureClass)))
-                {                    
-                    TestProcedures(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText,true);                    
-                }               
+
+                if (ckGenerators.Checked)
+                {
+                    if (cbReverseRun.Checked && (itm1.Object.GetType() == typeof(GeneratorClass)))
+                    {
+                        TestGenerators(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText, true);
+                    }
+                }
+                if (ckProcedures.Checked)
+                {
+                    if (cbReverse.Checked && (itm1.Object.GetType() == typeof(ProcedureClass)))
+                    {
+                        TestProcedures(itm1, itm2, slbDatabase2.LastSelectedText, slbDatabase1.LastSelectedText, true);
+                    }
+                }
+
+                if (ckFuntions.Checked)
+                {
+                    if (cbReverseRun.Checked && (itm1.Object.GetType() == typeof(FunctionClass)))
+                    {
+                        TestFunctions(itm1, itm2, slbDatabase1.LastSelectedText, slbDatabase2.LastSelectedText, false);
+                    }
+                }
             }
             Search();
             this.Cursor = Cursors.Default;

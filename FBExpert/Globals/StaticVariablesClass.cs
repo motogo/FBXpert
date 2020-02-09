@@ -1,4 +1,5 @@
-﻿using FBXpert.DataClasses;
+﻿using BasicClassLibrary;
+using FBXpert.DataClasses;
 using MessageLibrary;
 using System.Text;
 using System.Windows.Forms;
@@ -99,9 +100,10 @@ namespace FBXpert.Globals
                 case "INT64":
                     return "BIGINT"; //HE
                     
-                case "TIMESTAMP":
+                case "TIMESTAMP":                    
+                case "TIMESTAMP WITH TIMEZONE":
                     return "TIMESTAMP"; //HE
-                    
+
                 case "TIME":
                     return "TIME";
                 default:
@@ -140,6 +142,7 @@ namespace FBXpert.Globals
             return "UNDEFINED";
         }
 
+        /*
         public static string ConvertDesignType(string name, int length)
         {
             if (name == "LONG")
@@ -189,10 +192,10 @@ namespace FBXpert.Globals
             {
                 return "BLOB";
             }
-            NotifiesClass.Instance().AddToERROR("Datatype:" + name + " not defined !!! (StaticVariables->ConvertDiesignType)");
+            NotifiesClass.Instance().AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertDiesignType)");
             return "UNDEFINED";
         }
-
+        */
         public static string ConvertRawTypeToRawName(string name)
         {            
             if (name.StartsWith("VARCHAR")|| name.StartsWith("TEXT"))
@@ -433,6 +436,7 @@ namespace FBXpert.Globals
         public static readonly string ExportPath = Application.StartupPath + "\\exports";
         public static readonly string ScriptPath = Application.StartupPath + "\\scripts";
         public static readonly string ReportPath = Application.StartupPath + "\\reports";
+        public static readonly string SQLExportPath = Application.StartupPath + "\\exports\\sql";
         public static readonly string InitialTerminator = ";";
         public static readonly string AlternativeTerminator = "~";
         public static readonly string SingleLineComment = "--";
@@ -467,7 +471,17 @@ namespace FBXpert.Globals
         public static readonly string CommandDone = "COMMAND_DONE";
         public static readonly string CommandPrepared = "COMMAND_PREPARED";
         public static readonly string AddCommandLine = "ADD_COMMAND_LINE";
-        
+
+        public static string[] DefaultVariables = new string[]
+            {"CURRENT_USER",
+            "CURRENT_DATE",
+            "CURRENT_TIMESTAMP",
+            "CURRENT_TIME",
+            "CURRENT_ROLE",
+            "CURRENT_PATH"};
+
+        public static string[] DefaultCheckVariables = new string[] { "VAULE IS NOT NULL", "VALUE IS NULL" };
+
 
     }
 }

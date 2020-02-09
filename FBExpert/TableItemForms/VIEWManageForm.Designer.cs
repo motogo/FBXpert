@@ -136,6 +136,8 @@ namespace FBExpert
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bwExport = new System.ComponentModel.BackgroundWorker();
+            this.cmdDATA = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSpaltenEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlViews.SuspendLayout();
             this.tabPageFIELDS.SuspendLayout();
             this.cmsUpdateInsertText.SuspendLayout();
@@ -178,6 +180,7 @@ namespace FBExpert
             this.gbMaxAllowedErrors.SuspendLayout();
             this.gbMaxRows.SuspendLayout();
             this.pnlCenter.SuspendLayout();
+            this.cmdDATA.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlViews
@@ -226,6 +229,7 @@ namespace FBExpert
             this.lvFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvFields.FullRowSelect = true;
             this.lvFields.GridLines = true;
+            this.lvFields.HideSelection = false;
             this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
@@ -303,6 +307,7 @@ namespace FBExpert
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsViewContent;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
@@ -426,6 +431,7 @@ namespace FBExpert
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "1";
@@ -508,6 +514,7 @@ namespace FBExpert
             this.hsCancelGettingData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCancelGettingData.FlatAppearance.BorderSize = 0;
             this.hsCancelGettingData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCancelGettingData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCancelGettingData.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCancelGettingData.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsCancelGettingData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -599,7 +606,6 @@ namespace FBExpert
             this.fctDLL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctDLL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctDLL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctDLL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctDLL.IsReplaceMode = false;
             this.fctDLL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctDLL.LeftBracket = '(';
@@ -661,6 +667,7 @@ namespace FBExpert
             this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot1.FlatAppearance.BorderSize = 0;
             this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot1.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hotSpot1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -734,7 +741,6 @@ namespace FBExpert
             this.fctCREATEINSERTSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctCREATEINSERTSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctCREATEINSERTSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctCREATEINSERTSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctCREATEINSERTSQL.IsReplaceMode = false;
             this.fctCREATEINSERTSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctCREATEINSERTSQL.LeftBracket = '(';
@@ -804,6 +810,7 @@ namespace FBExpert
             this.hsLoadSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSQL.FlatAppearance.BorderSize = 0;
             this.hsLoadSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadSQL.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -853,6 +860,7 @@ namespace FBExpert
             this.hsSaveSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSQL.FlatAppearance.BorderSize = 0;
             this.hsSaveSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSQL.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -902,6 +910,7 @@ namespace FBExpert
             this.hsRunStatement.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunStatement.FlatAppearance.BorderSize = 0;
             this.hsRunStatement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunStatement.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunStatement.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunStatement.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsRunStatement.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1022,6 +1031,7 @@ namespace FBExpert
             this.hsRefreshDependenciesTo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshDependenciesTo.FlatAppearance.BorderSize = 0;
             this.hsRefreshDependenciesTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDependenciesTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshDependenciesTo.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshDependenciesTo.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshDependenciesTo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1104,7 +1114,6 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1167,6 +1176,7 @@ namespace FBExpert
             this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClearMessages.FlatAppearance.BorderSize = 0;
             this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1240,7 +1250,6 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';
@@ -1424,6 +1433,7 @@ namespace FBExpert
             this.hsCancelExport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCancelExport.FlatAppearance.BorderSize = 0;
             this.hsCancelExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCancelExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCancelExport.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCancelExport.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsCancelExport.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1472,6 +1482,7 @@ namespace FBExpert
             this.hsExportData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsExportData.FlatAppearance.BorderSize = 0;
             this.hsExportData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsExportData.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsExportData.Image = global::FBXpert.Properties.Resources.format_indent_more_2_22x;
             this.hsExportData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1521,6 +1532,7 @@ namespace FBExpert
             this.hsRefreshExportData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshExportData.FlatAppearance.BorderSize = 0;
             this.hsRefreshExportData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshExportData.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshExportData.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshExportData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1671,6 +1683,7 @@ namespace FBExpert
             this.hsPageRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsPageRefresh.FlatAppearance.BorderSize = 0;
             this.hsPageRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsPageRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsPageRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsPageRefresh.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsPageRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1719,6 +1732,7 @@ namespace FBExpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -1779,6 +1793,22 @@ namespace FBExpert
             this.bwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwExport_DoWork);
             this.bwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExport_ProgressChanged);
             this.bwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExport_RunWorkerCompleted);
+            // 
+            // cmdDATA
+            // 
+            this.cmdDATA.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmdDATA.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSpaltenEdit});
+            this.cmdDATA.Name = "cmsText";
+            this.cmdDATA.Size = new System.Drawing.Size(185, 52);
+            this.cmdDATA.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmdDATA_ItemClicked);
+            // 
+            // tsmiSpaltenEdit
+            // 
+            this.tsmiSpaltenEdit.Image = global::FBXpert.Properties.Resources.Table_x24;
+            this.tsmiSpaltenEdit.Name = "tsmiSpaltenEdit";
+            this.tsmiSpaltenEdit.Size = new System.Drawing.Size(184, 26);
+            this.tsmiSpaltenEdit.Text = "Spaltendeditor";
             // 
             // VIEWManageForm
             // 
@@ -1842,6 +1872,7 @@ namespace FBExpert
             this.gbMaxRows.ResumeLayout(false);
             this.gbMaxRows.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
+            this.cmdDATA.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1946,5 +1977,7 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gnUsedTime;
         private System.Windows.Forms.TextBox txtUsedTime;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ContextMenuStrip cmdDATA;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSpaltenEdit;
     }
 }

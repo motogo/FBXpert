@@ -9,10 +9,12 @@ using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using MessageLibrary;
+using SESpaltenEditor;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -41,29 +43,29 @@ namespace FBExpert
         int pi = 0;
         string filename = string.Empty;
         List<string> exportList = new List<string>();
+        GridStoreClass gridStore;
         public VIEWManageForm(Form parent, DBRegistrationClass drc, TreeNode tnSelected)
         {
             InitializeComponent();
             this.MdiParent = parent;
             instance = this;
-            ViewClass viewObject = (ViewClass)tnSelected.Tag;
-
-            _localNofity.NotifyType = eNotifyType.ErrorWithoutMessage;
-            _localNofity.AllowErrors = false;                            
-            _localNofity.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(MeldungRaised);
-            _localNofity.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
+            ViewClass viewObject = (ViewClass)tnSelected.Tag;           
+            _localNofity.ErrorGranularity = eMessageGranularity.never;
+            _localNofity.Register4Info(MeldungRaised);
+            _localNofity.Register4Error(ErrorRaised);
             
             TnSelected = tnSelected;
             ViewObject = (ViewClass)tnSelected.Tag;
-            
-            
+
             DBReg = drc;
             txtMaxRows.Text = DBReg.MaxRowsForSelect.ToString();
             this.GetDataWorker.WorkerReportsProgress = true;
             this.GetDataWorker.WorkerSupportsCancellation = true;
-            this.GetDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.GetDataWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.GetDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwGetData_DoWork);
+            this.GetDataWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwGetData_ProgressChanged);
+            this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetData_RunWorkerCompleted);
+
+            gridStore = new GridStoreClass(dgvResults);
         }
 
         AutocompleteClass ac;
@@ -128,8 +130,6 @@ namespace FBExpert
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();                       
         }
-
-        
 
         void MeldungRaised(object sender, MessageEventArgs k)
         {
@@ -327,7 +327,8 @@ namespace FBExpert
             fctDLL.Text = ViewObject.SQL;
             fctCREATEINSERTSQL.Text = (cbAlterView.Checked) 
                 ? (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(ViewObject.CREATEINSERT_SQL) : ViewObject.CREATEINSERT_SQL 
-                : (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(ViewObject.CREATE_SQL) : ViewObject.CREATE_SQL;            
+                : (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(ViewObject.CREATE_SQL) : ViewObject.CREATE_SQL;
+            if (!fctCREATEINSERTSQL.Text.Trim().EndsWith(";")) fctCREATEINSERTSQL.Text += ";";
         }
 
         string _cmd = null;
@@ -374,9 +375,45 @@ namespace FBExpert
             }
         }
 
+        public void SpaltenEdit()
+        {
+            var sp = SPALTENEditForm.Instance(this, null,true);
+            sp.Notify.Register4Info(SpaltenNotify_SpaltenOnRaiseInfoHandler);
+
+            sp.SetGrid(dgvResults, ViewObject.Name,DBReg.Alias);
+            sp.ShowDialog();
+        }
+
+        private void SpaltenNotify_SpaltenOnRaiseInfoHandler(object sender, MessageEventArgs k)
+        {
+            if (dgvResults.Columns.Count <= 0) return;
+            if (k.Key.ToString() == SESpaltenEditor.Consts.ChangeCheckKey)
+            {
+                int n = StaticFunctionsClass.ToIntDef(k.Meldung, -1);
+                if ((n >= 0) && (dgvResults.Columns.Count > n))
+                {
+                    dgvResults.Columns[n].Visible = (bool)k.Data;
+                }
+            }
+            else if (k.Key.ToString() == SESpaltenEditor.Consts.SwapItemKey)
+            {
+                //Columns swapped
+                Point pt = (Point)k.Data;
+                int d1 = dgvResults.Columns[pt.X].DisplayIndex;
+                int d2 = dgvResults.Columns[pt.Y].DisplayIndex;
+
+                dgvResults.Columns[pt.X].DisplayIndex = d2;
+                dgvResults.Columns[pt.Y].DisplayIndex = d1;
+            }
+            else if (k.Key.ToString() == SESpaltenEditor.Consts.CloseForm)
+            {
+                gridStore.StoreGridDesign();
+            }
+        }
+
         private void hsRefresh_Click(object sender, EventArgs e)
         {
-            RefreshAll();            
+            RefreshAll();
         }
 
         private void hsRefreshData_Click(object sender, EventArgs e)
@@ -394,7 +431,7 @@ namespace FBExpert
             fctMessages.Clear();
             
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
-            SetDesign(FbXpertMainForm.Instance().AppDesign);            
+            SetDesign(FbXpertMainForm.Instance().AppDesign);
             RefreshAll();
            // DBReg.AutocompleteSetTextobjectForDatabase(fctCREATEINSERTSQL);
         }
@@ -429,7 +466,8 @@ namespace FBExpert
 
         private void hsSave_Click(object sender, EventArgs e)
         {
-            if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
+            saveSQLFile.FileName = $@"{ViewObject.Name}.sql";
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;            
             fctCREATEINSERTSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);               
         }
         
@@ -441,17 +479,27 @@ namespace FBExpert
                 DataSet dataSet1 = new DataSet();
                 dataSet1.Clear();
                 dgvResults.AutoGenerateColumns = true;                               
-                DoCreateAlter(fctCREATEINSERTSQL.Lines,DBReg,_localNofity,Name);
+                DoCreateAlter(fctCREATEINSERTSQL.Lines,DBReg,Name);
                 DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{Name}->RunStatement", StaticVariablesClass.ReloadViews, TnSelected);      
                 return;
             }
-            SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(),"Cancelling getting Data failed","Timeout for cancelling getting Data has arrived (5000 ms)");
+            SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(),"Canceling getting data failed","Timeout for canceling getting data has arrived (5000 ms)");
         }
 
-        private void DoCreateAlter(IList<string> cmd,DBRegistrationClass DBReg, NotifiesClass _localNofity, string Name)
+        private void DoCreateAlter(IList<string> cmd,DBRegistrationClass DBReg, string Name)
         {
-            var SQLcommand = new SQLCommandsClass(DBReg, _localNofity);
-            var ri = SQLcommand.ExecuteCommand(cmd,true);            
+            var SQLcommand = new SQLCommandsClass(DBReg);
+            SQLcommand.Notify.Register4Info(MeldungRaised);
+            SQLcommand.Notify.Register4Error(ErrorRaised);
+            IList<string> cmd2 = new List<string>();
+            foreach(string s in cmd)
+            {
+                if (s.Trim().StartsWith("/*")) continue;
+                if (string.IsNullOrEmpty(s)) continue;
+                cmd2.Add(s);
+            }
+            
+            var ri = SQLcommand.ExecuteCommand(cmd2,true);            
         }
 
         private void hsClearMessages_Click(object sender, EventArgs e)
@@ -531,19 +579,19 @@ namespace FBExpert
             Cursor.Current = Cursors.Default;            
         }
         
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void bwGetData_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {                  
             DeactivateGrid();     
             stopwatch.Restart();
             RefreshDatas(_cmd);
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void bwGetData_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {            
             tabPageDATA.Text = e.UserState.ToString();
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void bwGetData_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             string utime = stopwatch.ElapsedMilliseconds.ToString();
             stopwatch.Restart();
@@ -556,7 +604,7 @@ namespace FBExpert
             
             dgvResults.DataSource = bsViewContent;            
             sfbViewData.Enabled = true;
-            
+            gridStore.RestoreGridDesign();
             ActivateGrid();
             stopwatch.Stop(); 
             utime+= $@" / {stopwatch.ElapsedMilliseconds}";
@@ -864,6 +912,14 @@ namespace FBExpert
         private void cbPretty_CheckedChanged(object sender, EventArgs e)
         {
             RefreshDLL();
-        }        
+        }
+
+        private void cmdDATA_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem == tsmiSpaltenEdit)
+            {
+                SpaltenEdit();
+            }
+        }
     }
 }

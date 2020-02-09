@@ -1583,6 +1583,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sql_x24 {
+            get {
+                object obj = ResourceManager.GetObject("sql_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SQL_x32 {
             get {
                 object obj = ResourceManager.GetObject("SQL_x32", resourceCulture);
@@ -1616,6 +1626,16 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap Table_select_x32 {
             get {
                 object obj = ResourceManager.GetObject("Table_select_x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Table_x24 {
+            get {
+                object obj = ResourceManager.GetObject("Table_x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

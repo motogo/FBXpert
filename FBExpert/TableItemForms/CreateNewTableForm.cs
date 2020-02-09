@@ -1,16 +1,14 @@
 ﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpert.SQLStatements;
 using FormInterfaces;
-using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using System.Linq;
-using FBXpert.SQLStatements;
 
 namespace FBExpert
 {
@@ -62,8 +60,8 @@ namespace FBExpert
             var tc = _tableObject;
             var sb = new StringBuilder();
             _errorCount++;
-            if (_messagesCount > 0) sb.Append("Messages (" + (_messagesCount).ToString() + ") ");
-            if (_errorCount > 0) sb.Append("Errors (" + (_errorCount).ToString() + ")");
+            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount}) ");
+            if (_errorCount > 0)    sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
                        
             fctMessages.AppendText("ERROR " + k.Meldung);
             tabPageMessages.Text = sb.ToString();
@@ -74,10 +72,10 @@ namespace FBExpert
         {
             var sb = new StringBuilder();
             _messagesCount++;
-            if (_messagesCount > 0) sb.Append("Messages (" + (_messagesCount).ToString() + ") ");
-            if (_errorCount > 0) sb.Append("Errors (" + (_errorCount).ToString() + ")");
+            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount}) ");
+            if (_errorCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
 
-            fctMessages.AppendText("INFO  " + k.Meldung);
+            fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -208,17 +206,17 @@ namespace FBExpert
                     //Lege Column mit Datentyp an                
                     if (cbCharSet.Text.Length > 0)
                     {
-                        sb.Append(" CHARACTER SET " + cbCharSet.Text);
+                        sb.Append($@" CHARACTER SET {cbCharSet.Text}");
                     }
                     if (cbCollate.Text.Length > 0)
                     {
-                        sb.Append(" COLLATE " + cbCollate.Text);
+                        sb.Append($@" COLLATE {cbCollate.Text}");
                     }                    
                 }
                 
                 if (txtDefault.Text.Length > 0)
                 {
-                    sb.Append(" DEFAULT " + txtDefault.Text.Trim());
+                    sb.Append($@" DEFAULT {txtDefault.Text.Trim()}");
                 }
 
                 if (cbPrimaryKey.Checked)
@@ -369,10 +367,14 @@ namespace FBExpert
 
         private void Create()
         {             
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
-                       
+            var riFailure = riList.Find(x=>x.commandDone == false);
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+
+            
             string info = (riFailure==null) 
                 ? $@"Table {_dbReg.Alias}->{_tableObject.Name} updated." 
                 : $@"Table {_dbReg.Alias}->{_tableObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
@@ -409,7 +411,7 @@ namespace FBExpert
         
         private void hsSelectDefault_Click(object sender, EventArgs e)
         {
-            var sd = new SelectDefaultForm(this.MdiParent,_localTableNotify);
+            var sd = new SelectDefaultForm(this.MdiParent,_localTableNotify, "SELECT_DEFAULTS",StaticVariablesClass.DefaultVariables);
             sd.Show();
         }
 

@@ -51,6 +51,7 @@ namespace FBXpert.SonstForms
 
         private void AppSettingsForm_Load(object sender, EventArgs e)
         {
+            /*
             string appfile = Application.StartupPath + "\\config\\AppSettings.json";
             if (File.Exists(appfile))
             {
@@ -61,6 +62,8 @@ namespace FBXpert.SonstForms
             {
                 AppSettingsClass.Instance();
             }
+            */
+            this.Text = $@"App settings file:{AppSettingsClass.Instance().Path}";
             DataToEdit();
             SetEnables();            
         }

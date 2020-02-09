@@ -34,8 +34,8 @@ namespace FBExpert
             this.MdiParent = parent;
             _dbReg = dbReg;
            
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
 
             string cn = ConnectionStrings.Instance().MakeConnectionString(dbReg);
             revent = new FbRemoteEvent(cn);                     

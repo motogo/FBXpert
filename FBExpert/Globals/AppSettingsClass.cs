@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace FBXpert.DataClasses
 {
-
+    
     public class BehavierSettingsClass
     {
         public int DebugThreshold = 2;       
@@ -40,7 +40,7 @@ namespace FBXpert.DataClasses
     [Serializable]
     public class AppSettingsClass
     {
-
+        public string Path = string.Empty;
         private static readonly object _lock_this = new object();
         private static volatile AppSettingsClass instance = null;
         public static AppSettingsClass Instance()
@@ -68,7 +68,7 @@ namespace FBXpert.DataClasses
         public void Load(AppSettingsClass appSettings)
         {
             instance = appSettings.MemberwiseClone() as AppSettingsClass;
-            
+            instance.Path = appSettings.Path;
             instance.PathSettings.ScriptingPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
             instance.PathSettings.TempPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
             instance.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
@@ -87,7 +87,8 @@ namespace FBXpert.DataClasses
 
             string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
 
-            File.WriteAllText(Application.StartupPath + "\\config\\AppSettings.json", jsonText);
+            //  File.WriteAllText(Application.StartupPath + "\\config\\AppSettings.json", jsonText);
+            File.WriteAllText(appsetting.Path, jsonText);
         }
 
         public DateTime Stamp;

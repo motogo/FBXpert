@@ -81,13 +81,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\FastJson\output\net40\fastJSON.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport, Version=2018.1.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FastReport, Version=2018.1.4.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net Trial\Framework 4.0\FastReport.dll</HintPath>
+      <HintPath>C:\FastReports\FastReport.Net\Framework 4.0\FastReport.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport.Editor, Version=2018.1.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FastReport.Editor, Version=2018.1.4.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net Trial\Framework 4.0\FastReport.Editor.dll</HintPath>
+      <HintPath>C:\FastReports\FastReport.Net\Framework 4.0\FastReport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="FBXDesigns">
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
@@ -98,9 +98,8 @@
     <Reference Include="FormularUtils">
       <HintPath>..\..\SELibraries\Lib\FormularUtils.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.TextEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a" />
-    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="LiteDB, Version=5.0.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.5.0.1\lib\net45\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="MessageLibrary, Version=2016.9.19.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -131,6 +130,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibraries\Lib\SEListBox.dll</HintPath>
     </Reference>
+    <Reference Include="SESpaltenEditor">
+      <HintPath>..\..\SELibraries\Lib\SESpaltenEditor.dll</HintPath>
+    </Reference>
     <Reference Include="SpezialfilterBox">
       <HintPath>..\..\SELibraries\Lib\SpezialfilterBox.dll</HintPath>
     </Reference>
@@ -144,6 +146,7 @@
     <Reference Include="System.Interactive, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.3.1.1\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -167,6 +170,7 @@
     <Compile Include="DataClasses\ExportClass.cs" />
     <Compile Include="DataClasses\NotNullsClass.cs" />
     <Compile Include="DataClasses\PrimayrKeyClass.cs" />
+    <Compile Include="DataClasses\SQLHistoryClass.cs" />
     <Compile Include="DataClasses\SQLPatterns.cs" />
     <Compile Include="DataClasses\UniquesClass.cs" />
     <Compile Include="DesignDatabase\DesignerForm.cs">
@@ -203,6 +207,7 @@
     <Compile Include="Globals\WorkerClass.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="HistoryClass.cs" />
     <Compile Include="SonstForms\BinariesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +219,12 @@
     </Compile>
     <Compile Include="SonstForms\CopyrightForm.Designer.cs">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\ExportViewsSQLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\ExportViewsSQLForm.Designer.cs">
+      <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TableItemForms\ConstraintsForm.cs">
       <SubType>Form</SubType>
@@ -400,7 +411,6 @@
     <Compile Include="DataClasses\IndexClass.cs" />
     <Compile Include="DataClasses\ProcedureClass.cs" />
     <Compile Include="DataClasses\RoleClass.cs" />
-    <Compile Include="SQLView\SQLScriptingClass.cs" />
     <Compile Include="DataClasses\TriggerClass.cs" />
     <Compile Include="DataClasses\TypeClass.cs" />
     <Compile Include="TableItemForms\ForeignKeyForm.cs">
@@ -528,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\CopyrightForm.resx">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\ExportViewsSQLForm.resx">
+      <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\ConstraintsForm.resx">
       <DependentUpon>ConstraintsForm.cs</DependentUpon>
@@ -886,6 +899,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\Table_x24.png" />
+    <None Include="Resources\sql_x24.png" />
     <None Include="Resources\ampel_red_x24.png" />
     <None Include="Resources\ampel_green_x241.png" />
     <None Include="Resources\ampel_green_x24.png" />

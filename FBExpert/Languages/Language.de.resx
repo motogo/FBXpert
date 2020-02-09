@@ -405,4 +405,22 @@
   <data name="DatabaseVersion" xml:space="preserve">
     <value>Get Version</value>
   </data>
+  <data name="DoYouWantOpenDatabases" xml:space="preserve">
+    <value>Es sind {0} Datenbanken zu öffnen, möchten Sie dies tun</value>
+  </data>
+  <data name="OpenDatabases" xml:space="preserve">
+    <value>Datenbanken öffnen</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Historie</value>
+  </data>
+  <data name="DirectoryNotExists" xml:space="preserve">
+    <value>Verzeichniss existiert nicht</value>
+  </data>
+  <data name="DirectoryNotExistsParam" xml:space="preserve">
+    <value>Das Verzeichniss {0} existiert nicht</value>
+  </data>
+  <data name="FORM_CLOSE" xml:space="preserve">
+    <value>Schliessen</value>
+  </data>
 </root>

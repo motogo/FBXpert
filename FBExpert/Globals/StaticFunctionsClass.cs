@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
@@ -25,6 +26,24 @@ namespace FBXpert.Globals
 
     public static class AppStaticFunctionsClass
     {     
+        static public long SendResultNotify(List<SQLCommandsReturnInfoClass> riList, NotifiesClass notify)
+        {
+            long costs = 0;
+            foreach (var ri in riList)
+            {
+                costs += ri.costs;
+                if (ri.commandDone)
+                {
+                    notify.Notify.RaiseInfo($@"Done: {ri.lastSQL}{Environment.NewLine}", StaticVariablesClass.ReloadFields);
+                }
+                else
+                {
+                    notify.Notify.RaiseError($@"ERROR: {ri.lastSQL}->{ri.lastError}{Environment.NewLine}", StaticVariablesClass.ReloadFields);
+                }
+            }
+            return costs;
+        }
+
         public static string GetErrorCodeString(string errorString,DBRegistrationClass DBReg)
         {
             if(DBReg.GetErrorCodes().Errors.Count <= 0) return errorString;
@@ -58,7 +77,7 @@ namespace FBXpert.Globals
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
         }
 
-        public static string GetLifetime(string cnString)
+        public static string GetLifetime(string cnString, bool withMon)
         {             
             var con = new FbConnection(cnString);            
             
@@ -66,19 +85,27 @@ namespace FBXpert.Globals
             try
             {     
                 con.Open();
-                string cmd = "select mon$next_transaction livetime from mon$database;";
-                var fcmd = new FbCommand(cmd, con);
-                fcmd.CommandTimeout = 10;
-                var dread = fcmd.ExecuteReader();
-                if (dread.HasRows)
-                {
-                    while (dread.Read())
+                if(withMon)
+                { 
+                    string cmd = "select mon$next_transaction livetime from mon$database;";
+                    var fcmd = new FbCommand(cmd, con);
+                    fcmd.CommandTimeout = 10;
+                    var dread = fcmd.ExecuteReader();
+                    if (dread.HasRows)
                     {
-                        lifetimeText = dread.GetValue(0).ToString().Trim();
+                        while (dread.Read())
+                        {
+                            lifetimeText = dread.GetValue(0).ToString().Trim();
+                        }
                     }
                 }
+                else
+                {
+                    lifetimeText = "old version < V3";
+                }
+
             }
-            catch
+            catch //(Exception ex)
             {
                 lifetimeText = "-1";
             }
@@ -217,6 +244,20 @@ namespace FBXpert.Globals
                 }
             }
             return sb.ToString();
+        }
+
+        
+
+
+
+        public static string CreateComment()
+        {
+            StringBuilder sbcomment = new StringBuilder();
+            sbcomment.AppendLine($@"/* ############################### */");
+            sbcomment.AppendLine($@"/* # Create: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} # */");
+            sbcomment.AppendLine($@"/* ############################### */");
+            sbcomment.AppendLine("");
+            return sbcomment.ToString();
         }
 
         public static string MakeSqlPretty(string sqlCmd)

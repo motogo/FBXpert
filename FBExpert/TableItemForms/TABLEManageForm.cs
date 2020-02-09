@@ -11,6 +11,7 @@ using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using MessageLibrary;
+using SESpaltenEditor;
 using StateClasses;
 using System;
 using System.Collections.Generic;
@@ -29,11 +30,10 @@ namespace FBExpert
     {
         private readonly TableClass _tableObject    = null;
         private TableFieldClass _actFieldObject     = null;
-        private List<TableClass> _actTables = null;
+        private List<TableClass> _actTables         = null;
         private DBRegistrationClass _dbReg          = null;
         private readonly NotifiesClass _localNotify = null;
 
-        //private AutocompleteClass _autoComplete = null;
         private int _messagesCount              = 0;
         private int _errorCount                 = 0;
 
@@ -95,11 +95,10 @@ namespace FBExpert
             _tableObject = tc.Clone() as TableClass;
             _localNotify = new NotifiesClass()
             {
-                NotifyType = eNotifyType.ErrorWithoutMessage,
-                AllowErrors = false
+                ErrorGranularity = eMessageGranularity.never
             };
-            _localNotify.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(InfoRaised);
-            _localNotify.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
+            _localNotify.Register4Info(InfoRaised);
+            _localNotify.Register4Error(ErrorRaised);
             
             _dbReg = drc;
             _actTables = actTables;
@@ -109,6 +108,7 @@ namespace FBExpert
             this.GetDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwGetData_DoWork);
             this.GetDataWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwGetData_ProgressChanged);
             this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetData_RunWorkerCompleted);
+            gridStore = new GridStoreClass(dgvResults);
         }
         WorkerClass GetDataWorker = new WorkerClass();
 
@@ -124,7 +124,8 @@ namespace FBExpert
             ac.Activate();
         }
 
-
+        GridStoreClass gridStore;
+        
         public void RefreshLanguageText()
         {
             hsPageRefresh.Text           = LanguageClass.Instance().GetString("REFRESH");
@@ -165,12 +166,12 @@ namespace FBExpert
                 fctMessages.AppendText(k.Meldung);
                 var sb = new StringBuilder();
                 _errorCount++;
-                if (_messagesCount > 0) sb.AppendLine($@"Messages ({_messagesCount})");
-                if (_errorCount > 0)    sb.AppendLine($@"Errors   ({_errorCount})");
+                if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount})");
+                if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
                 tabPageMessages.Text = sb.ToString();
                 fctMessages.ScrollLeft();
             }
-            catch(Exception ex)
+            catch //(Exception ex)
             {
             }
 
@@ -183,8 +184,8 @@ namespace FBExpert
             fctMessages.AppendText(k.Meldung);
             var sb = new StringBuilder();
             _messagesCount++;
-            if (_messagesCount > 0) sb.AppendLine($@"Messages ({_messagesCount})");
-            if (_errorCount > 0)    sb.AppendLine($@"Errors   ({_errorCount})");
+            if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount})");
+            if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
 
@@ -507,9 +508,45 @@ namespace FBExpert
             return n;
         }
 
+        public void SpaltenEdit()
+        {
+            var sp = SPALTENEditForm.Instance(this, null,true);
+            sp.Notify.Register4Info(SpaltenNotify_SpaltenOnRaiseInfoHandler);
+
+            sp.SetGrid(dgvResults,  _tableObject.Name, _dbReg.Alias);
+            sp.ShowDialog();
+        }
+
+        private void SpaltenNotify_SpaltenOnRaiseInfoHandler(object sender, MessageEventArgs k)
+        {
+            if (k.Key.ToString() == SESpaltenEditor.Consts.ChangeCheckKey)
+            {
+                int n = StaticFunctionsClass.ToIntDef(k.Meldung, -1);
+                if ((n >= 0)&&(dgvResults.Columns.Count > n))
+                {
+                    dgvResults.Columns[n].Visible = (bool)k.Data;
+                }
+            }
+            else if (k.Key.ToString() == SESpaltenEditor.Consts.SwapItemKey)
+            {
+                //Columns swapped
+                Point pt = (Point)k.Data;
+                int d1 = dgvResults.Columns[pt.X].DisplayIndex;
+                int d2 = dgvResults.Columns[pt.Y].DisplayIndex;
+
+                dgvResults.Columns[pt.X].DisplayIndex = d2;
+                dgvResults.Columns[pt.Y].DisplayIndex = d1;
+
+            }
+            else if(k.Key.ToString() == SESpaltenEditor.Consts.CloseForm)
+            {
+                gridStore.StoreGridDesign();
+            }
+        }
+
         public void RefreshDLL()
         {
-            fctTableCreateDLL.Text =  CreateDLLClass.CreateTabelDLL(_tableObject,eCreateMode.create);
+            fctTableCreateDLL.Text = AppStaticFunctionsClass.CreateComment() + CreateDLLClass.CreateTabelDLL(_tableObject,eCreateMode.create);
         }
                 
         public string MakeFieldsCmd()
@@ -537,7 +574,7 @@ namespace FBExpert
             }
             
             sb.Append($@" FROM {_tableObject.Name}");
-            sfbTableData.SQLKonjunktion = "WHERE";
+            sfbTableData.SQLKonjunktion = SQLConstants.WHERE;
             string SCmd = sfbTableData.SQLCmd;
             if (SCmd.Length > 0)
             {
@@ -927,9 +964,7 @@ namespace FBExpert
             tabPageFIELDS.Text = $@"Fields ({RefreshFields().ToString()})";
 
             _cmd = MakeFieldsCmd();
-            
-           
-            
+
             bsTableContent.DataMember   = null;
             hsRefreshData.Enabled       = false;
             sfbTableData.Enabled        = false;
@@ -1231,6 +1266,7 @@ namespace FBExpert
         private void hsRefresh_Click(object sender, EventArgs e)
         {
             RefreshAll();
+            
         }
       
         private void hsRefreshData_Click(object sender, EventArgs e)
@@ -1268,7 +1304,7 @@ namespace FBExpert
                 DataSet dsInsert = dsTableContent.GetChanges(DataRowState.Added);
                 DataSet dsDeleted = dsTableContent.GetChanges(DataRowState.Deleted);
 
-                string cm1 = $@"SELECT {_cmd}";
+                string cm1 = $@"{SQLConstants.SELECT} {_cmd}";
                 var da = new FbDataAdapter(cm1, _dataConnection);
                 var cb = new FbCommandBuilder(da);  
                
@@ -1447,9 +1483,9 @@ namespace FBExpert
             if (bsTableContent.DataMember == null) return;
             
             bsTableContent.DataMember = "Table";
-            tabPageDATA.Text = $@"Data ({dsTableContent.Tables[0].Rows.Count})";    
+            tabPageDATA.Text = $@"Data ({dsTableContent.Tables[0].Rows.Count})";
             sfbTableData.SetDataColumns(dgvResults.Columns);
-            
+            gridStore.RestoreGridDesign();
             ActivateGrid();
             stopwatch.Stop();
             timedone += $@" / {stopwatch.ElapsedMilliseconds}";
@@ -1590,7 +1626,11 @@ namespace FBExpert
                 dgvResults.EndEdit();                
                 dgvResults.InvalidateCell(dgvResults.CurrentCell);            
             }
-            if(e.ClickedItem == tsmiReadBLOB)
+            else if(e.ClickedItem == tsmiSpaltenEdit)
+            {
+                SpaltenEdit();
+            }
+            else if(e.ClickedItem == tsmiReadBLOB)
             {                                                                       
                        
                 if (dgvResults.CurrentCell.Value.GetType().Name != "DBNull")
@@ -1738,17 +1778,27 @@ namespace FBExpert
 
         private void hsRunStatement_Click(object sender, EventArgs e)
         {
-            
             GetDataWorker.CancelGettingData();
             if(GetDataWorker.CancellingDone())
             {
-           
                 DataSet dataSet1 = new DataSet();
                 dataSet1.Clear();
                 dgvResults.AutoGenerateColumns = true;
             
-                var SQLcommand = new SQLCommandsClass(_dbReg, _localNotify);
-                var ri = SQLcommand.ExecuteCommand(fctTableCreateDLL.Lines,false);
+                var SQLcommand = new SQLCommandsClass(_dbReg);
+                SQLcommand.Notify.Register4Info(InfoRaised);
+                SQLcommand.Notify.Register4Error(ErrorRaised);
+
+                IList<string> cmd2 = new List<string>();
+                foreach (string s in fctTableCreateDLL.Lines)
+                {
+                    if (s.Trim().StartsWith("/*")) continue;
+                    if (string.IsNullOrEmpty(s)) continue;
+                    cmd2.Add(s);
+                }
+
+
+                var ri = SQLcommand.ExecuteCommand(cmd2,false);
                 lblUsedMs.Text = ri.costs.ToString();
                 if (GetDataWorker.IsBusy) return;
             

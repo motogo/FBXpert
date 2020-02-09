@@ -3,6 +3,7 @@ using FBXpert.DataClasses;
 using MessageLibrary;
 using System.Windows.Forms;
 using FBXpert.Globals;
+using BasicClassLibrary;
 
 namespace FBExpert.DataClasses
 {

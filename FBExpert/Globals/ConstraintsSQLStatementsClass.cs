@@ -48,9 +48,9 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,"); 
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"where rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = 'NOT NULL';");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"where rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = 'NOT NULL';");
             return sb.ToString();
         }
         public string GetConstraintsByTypeUnique()
@@ -73,10 +73,10 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,"); 
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$index_segments ins on ins.rdb$index_name = rc.rdb$index_name ");
-            sb.Append($@"where rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = 'UNIQUE';");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments ins ON ins.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"where rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = 'UNIQUE';");
             return sb.ToString();
         }
         public string GetConstraintsByTypePrimaryKey()
@@ -99,10 +99,10 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,"); 
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$index_segments ins on ins.rdb$index_name = rc.rdb$index_name ");
-            sb.Append($@"where rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = 'PRIMARY KEY';");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments ins ON ins.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"where rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = 'PRIMARY KEY';");
             return sb.ToString();
         }
 
@@ -126,9 +126,9 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,"); 
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"where  rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = '{ContraintsType}';");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"where  rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = '{ContraintsType}';");
             return sb.ToString();
         }
 
@@ -150,10 +150,10 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule,");
             sb.Append($@"inx.rdb$field_name,inx.rdb$field_position ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$index_segments inx on inx.rdb$index_name = rc.rdb$index_name ");
-            sb.Append($@"where rc.rdb$relation_name not like '%$%' and rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = '{EnumHelper.GetDescription(ContraintsType)}' ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments inx ON inx.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"where rc.rdb$relation_name NOT LIKE '%$%' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = '{EnumHelper.GetDescription(ContraintsType)}' ");
             sb.Append($@"order by rc.rdb$constraint_name,rc.rdb$relation_name,  inx.rdb$field_name,inx.rdb$field_position;");
             return sb.ToString();
         }
@@ -174,9 +174,9 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$delete_rule,");
             sb.Append($@"inx.rdb$field_name,inx.rdb$field_position ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$index_segments inx on inx.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments inx ON inx.rdb$index_name = rc.rdb$index_name ");
             sb.Append($@"where rc.rdb$relation_name like '%$%' AND rc.rdb$constraint_type = '{EnumHelper.GetDescription(ContraintsType)}' ");
             sb.Append($@"order by rc.rdb$constraint_name,rc.rdb$relation_name,  inx.rdb$field_name,inx.rdb$field_position;");
             return sb.ToString();
@@ -193,9 +193,9 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule,");
             sb.Append($@"inx.rdb$field_name,inx.rdb$field_position ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$index_segments inx on inx.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments inx ON inx.rdb$index_name = rc.rdb$index_name ");
             sb.Append($@"where rc.rdb$relation_name like '%$%' AND rc.rdb$constraint_type = '{EnumHelper.GetDescription(ContraintsType)}' ");
             sb.Append($@"order by rc.rdb$constraint_name,rc.rdb$relation_name,  inx.rdb$field_name,inx.rdb$field_position;");
             return sb.ToString();
@@ -212,11 +212,11 @@ namespace FBXpert.SQLStatements
             var sb = new StringBuilder(); 
             sb.Append($@"select rc.rdb$constraint_name, rc.rdb$constraint_type, rc.rdb$relation_name, rc.rdb$deferrable, rc.rdb$initially_deferred, rc.rdb$index_name,");
             sb.Append($@"tr.rdb$trigger_name,tr.rdb$trigger_source,rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule ");
-            sb.Append($@"from rdb$relation_constraints rc "+"");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$triggers tr on tr.rdb$trigger_name = cc.rdb$trigger_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"where  rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = 'CHECK';");
+            sb.Append($@"from rdb$relation_constraints rc ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$triggers tr ON tr.rdb$trigger_name = cc.rdb$trigger_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"where  rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = 'CHECK';");
             return sb.ToString();
         }
 
@@ -242,10 +242,10 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$triggers tr on tr.rdb$trigger_name = cc.rdb$trigger_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"where  rc.rdb$relation_name not like '%$%' and rc.rdb$constraint_name not like '%$%' AND rc.rdb$constraint_type = 'CHECK';");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$triggers tr ON tr.rdb$trigger_name = cc.rdb$trigger_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"where  rc.rdb$relation_name NOT LIKE '%$%' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = 'CHECK';");
             return sb.ToString();
         }
 
@@ -266,9 +266,9 @@ namespace FBXpert.SQLStatements
             sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
-            sb.Append($@"left join rdb$check_constraints cc on cc.rdb$constraint_name = rc.rdb$constraint_name ");
-            sb.Append($@"left join rdb$triggers tr on tr.rdb$trigger_name = cc.rdb$trigger_name ");
-            sb.Append($@"left join rdb$ref_constraints rfc on rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$triggers tr ON tr.rdb$trigger_name = cc.rdb$trigger_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
             sb.Append($@"where  rc.rdb$relation_name like '%$%' AND rc.rdb$constraint_type = 'CHECK';");
             return sb.ToString();
         }

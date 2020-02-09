@@ -477,18 +477,23 @@ namespace FBXpert
 
         public void RegisterNotify(NotifyInfos.RaiseNotifyHandler infoN)
         {
-           _localNotify.Notify.OnRaiseInfoHandler += infoN;
+            _localNotify.Register4Info(infoN);
         }
 
         private void Create()
         {                                             
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList      = _sql.ExecuteCommands(fctSQL.Lines);             
-            var riFailure   = riList.Find(x=>x.commandDone = false);                                    
+            var riFailure   = riList.Find(x=>x.commandDone == false);                                    
             oldIndexColumnName = _indexObject.Name;
             
             if (_dataFilled) MakeSQL();
-           
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+
+            
             string info = (riFailure==null) 
                 ? $@"Index {_dbReg.Alias}->{_indexObject.Name} updated." 
                 : $@"Index {_dbReg.Alias}->{_indexObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";

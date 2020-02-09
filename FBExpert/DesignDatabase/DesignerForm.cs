@@ -1,7 +1,9 @@
-﻿using ExtendedXmlSerializer.Configuration;
+﻿using BasicClassLibrary;
+using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
+using FBXpert.Globals;
 using Initialization;
 using MessageLibrary;
 using MessageLibrary.SendMessages;
@@ -102,28 +104,141 @@ namespace FBXDesigns
             }
         }
 
+        public void SetDatas(DBRegistrationClass dbReg, Dictionary<string, TableClass> Tables, Dictionary<string, ViewClass> Views)
+        {
+            ddc = new DesDatabaseDesignClass();
+
+            
+            ddc.Views = new Dictionary<string, DesViewClass>();
+            ddc.Tables = new Dictionary<string, DesTableClass>();
+
+            int posx = 10;
+            int posy = 10;
+
+
+            foreach (ViewClass view in Views.Values)
+            {
+                DesViewClass dvc = new DesViewClass();
+                dvc.View = view;
+                dvc.Design = new ObjectDesignClass(posx,posy);
+               
+                posx += 100;
+                posy += 20;
+                ddc.Views.Add(view.Name, dvc);
+            }
+
+            posx = 10;
+            posy = 100;
+            foreach (TableClass table in Tables.Values)
+            {
+                DesTableClass dvc = new DesTableClass();
+                dvc.Table  = table;
+                dvc.Design = new ObjectDesignClass(posx, posy);
+                
+                posx += 100;
+                posy += 20;
+                ddc.Tables.Add(table.Name, dvc);
+            }
+            
+            CreateDBDesign(0);
+            CreateDBObjects(0);
+            
+        }
+        private void CreateDBDesign(int lvl)
+        {
+            /*
+            int x = 10;
+            int y = 10;
+            foreach (var tc in ddc.Tables.Values)
+            {
+                tc.Design = new ObjectDesignClass();
+                tc.Design.posx = x;
+                tc.Design.posy = y;
+                x += 50;
+            }
+            x = 10;
+            y = 100;
+            foreach (var tc in ddc.Views.Values)
+            {
+                tc.Design = new ObjectDesignClass();
+                tc.Design.posx = x;
+                tc.Design.posy = y;
+                x += 50;
+            }
+            */
+        }
+        DesDatabaseDesignClass ddc = null;
         private void CreateDBObjects(int lvl)
-        {       
-           // var serializer = new SharpSerializer();
+        {
+            if (ddc == null) return;
+            selDBObjects.ClearItems();
+
+            foreach (var tc in ddc.Tables.Values)
+            {
+                foreach(var fld in tc.Table.Fields)
+                {
+                    if (fld.Value.Domain.RawType.Length > 0) continue;
+                    Console.WriteLine();
+                }
+            }
+
+            foreach (var tc in ddc.Views.Values)
+            {
+                foreach (var fld in tc.View.Fields.Values)
+                {
+                    if (fld.Domain.RawType.Length > 0) continue;
+                    Console.WriteLine();
+                }
+            }
+
+            foreach (var tc in ddc.Tables.Values)
+            {
+               // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
+                selDBObjects.Add(tc.Table.Name, CheckState.Checked, tc);
+            }
+
+            foreach (var tc in ddc.Views.Values)
+            {
+               // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
+                selDBObjects.Add(tc.View.Name, CheckState.Checked, tc);
+            }
+
+            foreach (var tc in ddc.Tables.Values)
+            {
+              //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
+                selDBObjects.Add("Cb" + tc.Table.Name, CheckState.Checked, tc);
+            }
+
+            foreach (var tc in ddc.Views.Values)
+            {
+              //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
+                selDBObjects.Add("Cb"+tc.View.Name, CheckState.Checked, tc);
+            }
+            if(selDBObjects.ItemDatas.Count > 0)
+            selDBObjects.SelectedIndex = 0;            
+        }
+        private void CreateDBObjectsFromXML(int lvl)
+        {
+            // var serializer = new SharpSerializer();
 
 
-          //  var serializer = new XmlSerializer(typeof(DatabaseDesignClass));
-            if(File.Exists(xmlEditDefinition.originalXmlFile))
+            //  var serializer = new XmlSerializer(typeof(DatabaseDesignClass));
+            if (File.Exists(xmlEditDefinition.originalXmlFile))
             {
                 var fs = new FileStream(xmlEditDefinition.originalXmlFile, FileMode.Open);
                 var serializer = new ConfigurationContainer().Create();
-                            
-                var ddc = (DatabaseDesignClass) serializer.Deserialize<DatabaseDesignClass>(fs);
-               
+
+                var ddc = (DatabaseDesignClass)serializer.Deserialize<DatabaseDesignClass>(fs);
+
                 //DatabaseDesignClass ddc = (DatabaseDesignClass) serializer.Deserialize(XmlReader.Create(fs));
                 //var ddc = (DatabaseDesignClass)serializer.Deserialize(fs);
                 fs.Close();
-          
+
                 selDBObjects.ClearItems();
 
                 foreach (var tc in ddc.Tables.Values)
                 {
-                    foreach(var fld in tc.Fields)
+                    foreach (var fld in tc.Fields)
                     {
                         if (fld.Value.Domain.RawType.Length > 0) continue;
                         Console.WriteLine();
@@ -141,40 +256,39 @@ namespace FBXDesigns
 
                 foreach (var tc in ddc.Tables.Values)
                 {
-                   // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
+                    // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
                     selDBObjects.Add(tc.Name, CheckState.Checked, tc);
                 }
 
                 foreach (var tc in ddc.Views.Values)
                 {
-                   // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
+                    // CodeFactory.Instance().CreateDesignForTable(lvl,tc);
                     selDBObjects.Add(tc.Name, CheckState.Checked, tc);
                 }
 
                 foreach (var tc in ddc.Tables.Values)
                 {
-                  //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
+                    //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
                     selDBObjects.Add("Cb" + tc.Name, CheckState.Checked, tc);
                 }
 
                 foreach (var tc in ddc.Views.Values)
                 {
-                  //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
-                    selDBObjects.Add("Cb"+tc.Name, CheckState.Checked, tc);
+                    //  CodeFactory.Instance().CreateDesignForCbTable(lvl,tc);
+                    selDBObjects.Add("Cb" + tc.Name, CheckState.Checked, tc);
                 }
-                if(selDBObjects.ItemDatas.Count > 0)
-                selDBObjects.SelectedIndex = 0;
+                if (selDBObjects.ItemDatas.Count > 0)
+                    selDBObjects.SelectedIndex = 0;
             }
         }
-
         private void ShowAllObjects()
         {
             foreach(var ob in ObjectList)
             {
                 foreach(var ln in ob.LineList)
                 {
-                    DesignTableClass ob_s = (DesignTableClass) ln.StartObject;
-                    DesignTableClass ob_e = (DesignTableClass) ln.EndObject;
+                    UIDesignTableClass ob_s = (UIDesignTableClass) ln.StartObject;
+                    UIDesignTableClass ob_e = (UIDesignTableClass) ln.EndObject;
                     Graphics g;
 
                     g = pbDesign.CreateGraphics();
@@ -195,7 +309,7 @@ namespace FBXDesigns
 
             // string[] ln = File.ReadAllLines(fn);
 
-            DesignTableClass tc;
+            UIDesignTableClass tc;
             int x = 20;
             int y = 20;
             
@@ -205,13 +319,16 @@ namespace FBXDesigns
             //object ob2=null;
             foreach (ItemDataClass s in selDBObjects.CheckedItemDatas)
             {
-                if(s.Object.GetType() == typeof(TableClass))
+                if(s.Object.GetType() == typeof(DesTableClass))
                 {
                     //  string n = s.Substring(s.IndexOf("'")+1, s.LastIndexOf("'") - s.IndexOf("'") -1);
+                    DesTableClass TableObject = (DesTableClass) s.Object;
                     n++;
-                    tc = new DesignTableClass(pbDesign,s.Object.ToString(),true,x,y);
                     
-                    tc.TableNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler; 
+
+                    tc = new UIDesignTableClass(pbDesign,s.Object.ToString(),true, TableObject.Design.posx,TableObject.Design.posy);
+
+                    tc.TableNotify.Register4Info(Notify_OnRaiseInfoHandler1);
                     x += 160;
                     //y += 0;
                     if(x > 1000)
@@ -219,8 +336,8 @@ namespace FBXDesigns
                         x = 20;
                         y += 180;
                     }
-                    var tob = (TableClass) s.Object;
-                    foreach(var att in tob.Fields.Values)                        
+                    var tob = (DesTableClass) s.Object;
+                    foreach(var att in tob.Table.Fields.Values)                        
                     {                        
                         tc.AddAttribute(att.Name);
                     }
@@ -244,15 +361,15 @@ namespace FBXDesigns
 
             foreach (ItemDataClass s in selDBObjects.CheckedItemDatas)
             {
-                if(s.Object.GetType() == typeof(TableClass))
+                if(s.Object.GetType() == typeof(DesTableClass))
                 {
-                    TableClass tb1 = (TableClass) s.Object;
-                    foreach(var fld in tb1.Fields)
+                    DesTableClass tb1 = (DesTableClass) s.Object;
+                    foreach(var fld in tb1.Table.Fields)
                     {
                         if(fld.Key.EndsWith("_ID"))
                         {
-                            DesignTableClass ob1 = (DesignTableClass) FindObject(tb1.Name);
-                            DesignTableClass ob2 = (DesignTableClass) FindObject(fld.Key.Remove(fld.Key.Length-3));
+                            UIDesignTableClass ob1 = (UIDesignTableClass) FindObject(tb1.Table.Name);
+                            UIDesignTableClass ob2 = (UIDesignTableClass) FindObject(fld.Key.Remove(fld.Key.Length-3));
                             if((ob1 != null)&&(ob2!=null))
                             {
                                 ReferenzClass rc = new ReferenzClass();
@@ -270,6 +387,11 @@ namespace FBXDesigns
             
         }
 
+        private void Notify_OnRaiseInfoHandler1(object sender, MessageEventArgs k)
+        {
+            ActTable = k.Data as UIDesignTableClass;
+        }
+
         private object FindObject(string tn)
         {
             return ObjectList.Find(x=>x.Name == tn);
@@ -278,7 +400,7 @@ namespace FBXDesigns
         private void XmlEditSimpleUserControl1_LoadClick(string fileName)
         {
             string fn = xmlEditDefinition.originalXmlFile;
-
+            CreateDBDesign(0);
             CreateDBObjects(0);
             CreateDesignObjects();
             ShowAllObjects();
@@ -290,11 +412,7 @@ namespace FBXDesigns
 
 
         }
-
-        private void Notify_OnRaiseInfoHandler(object sender, MessageLibrary.MessageEventArgs k)
-        {
-            ActTable = k.Data as DesignTableClass;
-        }
+        
 
         float zoom = 1;
 
@@ -318,11 +436,11 @@ namespace FBXDesigns
         }
 
 
-        List<DesignTableClass> ObjectList = new List<DesignTableClass>();
+        List<UIDesignTableClass> ObjectList = new List<UIDesignTableClass>();
         List<ReferenzClass> LineList = new List<ReferenzClass>();
 
 
-        DesignTableClass ActTable = null;
+        UIDesignTableClass ActTable = null;
         /*
         public DrawLine(int i)
         {                    
@@ -350,7 +468,7 @@ namespace FBXDesigns
             absoff.Y = 32;  // Location plus Fenstertitelrand
 
 
-            DesignTableClass tc = new DesignTableClass(pbDesign,"test");
+            UIDesignTableClass tc = new UIDesignTableClass(pbDesign,"test");
             ActTable = tc;
 
         }
@@ -401,7 +519,7 @@ namespace FBXDesigns
         private void hsZoomPlus_Click(object sender, EventArgs e)
         {
             float zm = 01;
-            foreach (DesignTableClass tc in ObjectList)
+            foreach (UIDesignTableClass tc in ObjectList)
             {
                 tc.SetZoom(2f);
             }
@@ -412,7 +530,7 @@ namespace FBXDesigns
         {
 
             float zm = 01;
-            foreach (DesignTableClass tc in ObjectList)
+            foreach (UIDesignTableClass tc in ObjectList)
             {
                 tc.SetZoom(0.5f);
                 zm = tc.GetZoom();
@@ -433,8 +551,6 @@ namespace FBXDesigns
 
         private void DesignerForm_Load(object sender, EventArgs e)
         {
-            LoadUserDesign();
-            CreateDBObjects(0);
             CreateDesignObjects();
             ShowAllObjects();
         }
@@ -449,6 +565,11 @@ namespace FBXDesigns
             pbDesign.Refresh();
             CreateDesignObjects();
             ShowAllObjects();
+        }
+
+        private void CbDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            UIDesignTableClass.debug = cbDebug.Checked;
         }
     }
 }

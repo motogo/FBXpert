@@ -1,10 +1,11 @@
-﻿using FBExpert;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
+using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FormInterfaces;
-using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,8 +55,8 @@ namespace FBXpert
             OldFunctionObject = (FunctionClass) FunctionObject.Clone();
                                    
             _dbReg = dbReg;
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
            
             cbDatatype.Items.Clear();
                         
@@ -215,14 +216,18 @@ namespace FBXpert
 
         private void Create()
         {                                    
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
+            _sql.ScriptNotify.Register4Info(Notify_OnRaiseInfoHandler);
+            _sql.ScriptNotify.Register4Error(Notify_OnRaiseErrorHandler);
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
-           
+            var riFailure = riList.Find(x=>x.commandDone == false);
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
             
             string info = (riFailure==null) 
-                ? $@"Foreign key for {_dbReg.Alias}->{FunctionObject.Name} updated." 
-                : $@"Foreign key for {_dbReg.Alias}->{FunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";                                            
+                ? $@"Function {_dbReg.Alias}->{FunctionObject.Name} updated." 
+                : $@"Function {_dbReg.Alias}->{FunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";                                            
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadFunctions,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
 

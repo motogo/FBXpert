@@ -14,13 +14,13 @@ namespace FBXDesigns
             absolute_offset = abs_offset;
             ctrl = parent;
         }
-        public DesignTableClass AddTable()
+        public UIDesignTableClass AddTable()
         {
            return AddTable(false);            
         }
-        public DesignTableClass AddTable(bool show)
+        public UIDesignTableClass AddTable(bool show)
         {
-            DesignTableClass tb = new DesignTableClass(ctrl,"test",show);
+            UIDesignTableClass tb = new UIDesignTableClass(ctrl,"test",show);
             Tables.Add(tb);
             return tb;
 

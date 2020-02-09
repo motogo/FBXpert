@@ -49,7 +49,7 @@
             this.label1.ForeColor = System.Drawing.Color.Yellow;
             this.label1.Location = new System.Drawing.Point(49, 192);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 21);
+            this.label1.Size = new System.Drawing.Size(202, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "(c) Copyright SoftEnd 2018";
             // 

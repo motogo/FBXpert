@@ -17,7 +17,19 @@ namespace FBExpert
     public class DatabaseDefinitions : ApplicationPathClass
     {
         public string Reason;
-        public EditStateClass.eDataState DataState = EditStateClass.eDataState.UnSaved;
+        public int OpenDatabaseCount = 0;
+        private EditStateClass.eDataState _dataState = EditStateClass.eDataState.UnSaved;
+        public EditStateClass.eDataState DataState
+        {
+            get
+            { 
+                return _dataState;
+            }
+            set
+            {
+                _dataState = value;
+            }            
+        } 
 
         public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();  
       
@@ -38,6 +50,15 @@ namespace FBExpert
             }
             return (instance);
         }
+
+        public void MarkDatabasesActiv(bool active)
+        {                        
+            foreach (var datab in Databases)
+            {                   
+                datab.Active = active;
+            }                                                            
+        }
+
 
 
         public bool IsRegistration(TreeNode nd)
@@ -100,6 +121,16 @@ namespace FBExpert
             Rebuild(treeView);
             DataState = EditStateClass.eDataState.UnSaved;
         }
+
+        public int CountToOpen()
+        {
+            int n = 0;
+            foreach(var db in Databases)
+            {
+                if(db.Active) n++;
+            }
+            return n;
+        }
         
         public bool Deserialize(string FileName)
         {            
@@ -112,6 +143,7 @@ namespace FBExpert
                 reader.Close();
                 this.XMLName = FileName;             
                 this.Databases = PF.Databases;
+                this.OpenDatabaseCount = PF.OpenDatabaseCount;
                 
                 foreach (DBRegistrationClass dbr in this.Databases)
                 {
@@ -151,6 +183,7 @@ namespace FBExpert
             XmlQualifiedName[] names = { q1 };
             var test = new XmlSerializerNamespaces(names);
             this.Reason = reason;
+            this.OpenDatabaseCount = instance.OpenDatabaseCount;
             this.Databases = instance.Databases;
             serializer.Serialize(writer, instance, test);
             writer.Close();

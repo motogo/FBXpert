@@ -1,4 +1,5 @@
-﻿using DBBasicClassLibrary;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
@@ -53,20 +54,24 @@ namespace FBXpert
             OldUserDefinedFunctionObject = (UserDefinedFunctionClass) UserDefinedFunctionObject.Clone();
                                    
             _dbReg = dbReg;
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;                                  
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
-            
-
+            fctMessages.CurrentLineColor = System.Drawing.Color.Blue;            
+            fctMessages.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} INFO  {k.Meldung}");
+            fctMessages.ScrollLeft();
         }
 
         private void Notify_OnRaiseErrorHandler(object sender, MessageEventArgs k)
         {
-            
+           
+            fctMessages.CurrentLineColor = System.Drawing.Color.Red;
+            fctMessages.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} ERROR  {k.Meldung}");
+            fctMessages.ScrollLeft();
         }
 
         public void MakeSQL()
@@ -147,10 +152,15 @@ namespace FBXpert
         }
         
         private void Create()
-        {                                                
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+        {
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
+
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
+            var riFailure = riList.Find(x=>x.commandDone == false);
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
             
             string info = (riFailure==null) 
                 ? $@"Constraint {_dbReg.Alias}->{UserDefinedFunctionObject.Name} updated." 
@@ -209,10 +219,14 @@ namespace FBXpert
 
         private void hsRunStatement_Click(object sender, EventArgs e)
         {
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);      
-            var riOk = riList.Find(x=>x.commandDone = true);      
+            var riFailure = riList.Find(x=>x.commandDone == false);      
+            var riOk = riList.Find(x=>x.commandDone == true);
+            long costs = AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+            
             var sb = new StringBuilder();
             if(riFailure != null)
             {                
@@ -220,23 +234,7 @@ namespace FBXpert
                 if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
                 if (error_count > 0)    sb.Append($@"Errors ({error_count})");           
             }
-            
-            long costs = 0;
-            foreach(var ri in riList)
-            {
-                if(ri.commandDone) 
-                {
-                    fctMessages.CurrentLineColor = System.Drawing.Color.Blue;
-                    fctMessages.AppendText($@"done {ri.lastSQL}");            
-                }
-                else  
-                {
-                    fctMessages.CurrentLineColor = System.Drawing.Color.Red;
-                    fctMessages.AppendText($@"not done {ri.lastSQL}");            
-                }
-                costs+=ri.costs;
-            }
-            
+                                   
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();            
             lblUsedMs.Text = costs.ToString();

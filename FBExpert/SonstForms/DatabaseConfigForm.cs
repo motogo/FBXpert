@@ -4,7 +4,6 @@ using FBExpert.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using MessageLibrary;
 using StateClasses;
@@ -19,9 +18,11 @@ namespace FBExpert
     public partial class DatabaseConfigForm : IEditForm
     {
         DBRegistrationClass _dbReg = null;
+        private bool _connectionDataChanged = false;
+        private bool _dataChanged = false;
+        bool DoEvent = true;
 
-       
-       
+
         public DatabaseConfigForm(Form parent, DBRegistrationClass reg, TreeView aktTree, int aktPosition, EditStateClass.eBearbeiten bMode)
         {
             InitializeComponent();
@@ -32,25 +33,21 @@ namespace FBExpert
                 SetBearbeitenMode(EditStateClass.eBearbeiten.eInsert);
                 _dbReg = reg;
 
-                TreeNode newNode = new TreeNode();
+                var newNode = new TreeNode();
                 _dbReg.SetNode(newNode);
-                aktTree.Nodes.Insert(aktPosition, newNode);
-
-                
-                NewDataToEdit();
-                
+                aktTree.Nodes.Insert(aktPosition, newNode);                
+                NewDataToEdit();                
             }
             else if(bMode == EditStateClass.eBearbeiten.eInsert)
             {
                 //Neuer TreeKnoten als Cloned anfügen
                 _dbReg = reg;
                                
-                TreeNode newNode = new TreeNode();
+                var newNode = new TreeNode();
                 newNode.Name = "DATABASE";
                 _dbReg.SetNode(newNode);
                 aktTree.Nodes.Insert(aktPosition, newNode);
-                SetBearbeitenMode(bMode);
-                
+                SetBearbeitenMode(bMode);                
                 DataToEdit();                
             }            
             else
@@ -89,52 +86,44 @@ namespace FBExpert
                 cc.CloseConnection();
             }            
         }
-
-        
-        public void SetNotifyEvent(NotifiesList nofifyInf)
-        {
             
-        }
         public void EditToData()
-        {
-            _dbReg.Alias = txtDatabaseAlias.Text;           
-            _dbReg.CharSet = cbCharSet.Text;
-            _dbReg.Collation = cbCollation.Text;
-            _dbReg.PacketSize = StaticFunctionsClass.ToIntDef(txtPacketsize.Text, 0);
-            _dbReg.Password = txtPassword.Text;
-            _dbReg.User = txtUser.Text;
-           
+        {                       
+            if(rb25_32.Checked) _dbReg.Version          = eDBVersion.FB25_32;
+            else if(rb25_64.Checked) _dbReg.Version     = eDBVersion.FB25_64;
+            else if(rb3_32.Checked) _dbReg.Version      = eDBVersion.FB3_32;
+            else if(rb3_64.Checked) _dbReg.Version      = eDBVersion.FB3_64;
+            else if(rb4_32.Checked) _dbReg.Version      = eDBVersion.FB4_32;
+            else if(rb4_64.Checked) _dbReg.Version      = eDBVersion.FB4_64;
 
-            if(rb25_32.Checked) _dbReg.Version = eDBVersion.FB25_32;
-            else if(rb25_64.Checked) _dbReg.Version = eDBVersion.FB25_64;
-            else if(rb3_32.Checked) _dbReg.Version = eDBVersion.FB3_32;
-            else if(rb3_64.Checked) _dbReg.Version = eDBVersion.FB3_64;
-            else if(rb4_32.Checked) _dbReg.Version = eDBVersion.FB4_32;
-            else if(rb4_64.Checked) _dbReg.Version = eDBVersion.FB4_64;
-
-            
-            _dbReg.FirebirdBinaryPath = txtFirebirdBinaryPath.Text;
+            _dbReg.Alias                                = txtDatabaseAlias.Text;
+            _dbReg.CharSet                              = cbCharSet.Text;
+            _dbReg.Collation                            = cbCollation.Text;
+            _dbReg.PacketSize                           = StaticFunctionsClass.ToIntDef(txtPacketsize.Text, 0);
+            _dbReg.Password                             = txtPassword.Text;
+            _dbReg.User                                 = txtUser.Text;
+            _dbReg.FirebirdBinaryPath                   = txtFirebirdBinaryPath.Text;                                  
+            _dbReg.Port                                 = StaticFunctionsClass.ToIntDef(txtPort.Text,3050);
+            _dbReg.Role                                 = txtRole.Text;
+            _dbReg.DatabasePath                         = txtLocation.Text;            
+            _dbReg.Pooling                              = cbPooling.Checked;
+            _dbReg.MaxPoolSize                          = StaticFunctionsClass.ToIntDef(txtMaxPoolSize.Text, 15);
+            _dbReg.MinPoolSize                          = StaticFunctionsClass.ToIntDef(txtMinPoolSize.Text, 0);
+            _dbReg.ConnectionLifetime                   = StaticFunctionsClass.ToIntDef(txtConnectionLifetime.Text, 0);
+            _dbReg.InitialScriptingPath                 = txtDefaultScriptPath.Text;
+            _dbReg.InitialReportPath                    = txtDefaultReportPath.Text;
+            _dbReg.InitialExportPath                    = txtDefaultExportPath.Text;
+            _dbReg.InitialSQLExportPath                 = txtDefaultSQLExportPath.Text;
+            _dbReg.InitialTerminator                    = ";";
+            _dbReg.AlternativeTerminator                = txtAlternativeSetTermCharacter.Text;
+            _dbReg.SkipForSelect                        = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
+            _dbReg.MaxRowsForSelect                     = StaticFunctionsClass.ToLongDef(txtTableMaxRows.Text, 0);
+            _dbReg.ClientLibrary                        = txtClientLibrary.Text;
+            _dbReg.CodeSettings.SourceCodeNamespace     = txtDBNamespace.Text;
+            _dbReg.CodeSettings.SourceCodeOutputPath    = txtSourcecodeOutputPath.Text;
             SetServerDatas();
 
-           // DBReg.Server = txtServer.Text;            
-            _dbReg.Port = StaticFunctionsClass.ToIntDef(txtPort.Text,3050);
-            _dbReg.Role = txtRole.Text;
-            _dbReg.DatabasePath = txtLocation.Text;
-            
-            _dbReg.Pooling = cbPooling.Checked;
-            _dbReg.MaxPoolSize = StaticFunctionsClass.ToIntDef(txtMaxPoolSize.Text, 15);
-            _dbReg.MinPoolSize = StaticFunctionsClass.ToIntDef(txtMinPoolSize.Text, 0);
-            _dbReg.ConnectionLifetime       = StaticFunctionsClass.ToIntDef(txtConnectionLifetime.Text, 0);
-            _dbReg.InitialScriptingPath     = txtDefaultScriptPath.Text;
-            _dbReg.InitialReportPath        = txtDefaultReportPath.Text;
-            _dbReg.InitialExportPath        = txtDefaultExportPath.Text;
-
-            _dbReg.InitialTerminator = ";";
-            _dbReg.AlternativeTerminator = txtAlternativeSetTermCharacter.Text;
-            _dbReg.SkipForSelect = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
-            _dbReg.MaxRowsForSelect = StaticFunctionsClass.ToLongDef(txtTableMaxRows.Text, 0);
-            _dbReg.ClientLibrary = txtClientLibrary.Text;
-            if(rbGenerateDBGenerator.Checked)
+            if (rbGenerateDBGenerator.Checked)
             {             
                 _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
             }
@@ -151,92 +140,73 @@ namespace FBExpert
                 _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
             }
 
-            _dbReg.CodeSettings.SourceCodeNamespace = txtDBNamespace.Text;
-            _dbReg.CodeSettings.SourceCodeOutputPath = txtSourcecodeOutputPath.Text;
             
+            DatabaseDefinitions.Instance().OpenDatabaseCount = StaticFunctionsClass.ToIntDef(txtOpenDatabasesCount.Text, 0);
         }
 
         public void SetServerDatas()
         {
             if (rbEmbedded.Checked)
-            {
-                //_dbReg.ServerType = eConnectionType.embedded;
+            {                
                 _dbReg.Server = "";
                 _dbReg.ConnectionType = eConnectionType.embedded;
             }
             else if (rbRemote.Checked)
-            {
-                //_dbReg.ServerType = eConnectionType.remote;
+            {                
                 _dbReg.Server = txtServer.Text;
                 _dbReg.ConnectionType = eConnectionType.server;
             }
             
         }
-
-        bool DoEvent = true;
-
+        
         public override void DataToEdit()
         {
-            DoEvent = false;
-            txtLocation.Text = _dbReg.DatabasePath;           
-            txtServer.Text = _dbReg.Server;
+            DoEvent = false;            
             if(_dbReg.Version == eDBVersion.FB25_32) rb25_32.Checked = true;
             else if(_dbReg.Version == eDBVersion.FB25_64) rb25_64.Checked = true;
             else if(_dbReg.Version == eDBVersion.FB3_32) rb3_32.Checked = true;
             else if(_dbReg.Version == eDBVersion.FB3_64) rb3_64.Checked = true;
             else if(_dbReg.Version == eDBVersion.FB4_32) rb4_32.Checked = true;
             else if(_dbReg.Version == eDBVersion.FB4_64) rb4_64.Checked = true;
-            
-            txtFirebirdBinaryPath.Text = _dbReg.FirebirdBinaryPath;
-            txtServer.Enabled = _dbReg.ConnectionType == eConnectionType.server;
-            switch (_dbReg.ConnectionType)
-            {
-                case eConnectionType.server:
-                    rbRemote.Checked = true;
-                    
-                    break;
-                
-                default:
-                    rbEmbedded.Checked = true;
-                    
-                    break;
-            }
-            
-            cbCharSet.SelectedIndex   = cbCharSet.FindString(_dbReg.CharSet);
-            cbCollation.SelectedIndex = cbCollation.FindString(_dbReg.Collation);
 
-            txtPacketsize.Text          = _dbReg.PacketSize.ToString();
-            txtPort.Text                = _dbReg.Port.ToString();
-            txtUser.Text                = _dbReg.User;
-            txtPassword.Text            = _dbReg.Password;
-            txtDatabaseAlias.Text       = _dbReg.Alias;
-            txtRole.Text                = _dbReg.Role;
-            txtMaxPoolSize.Text         = _dbReg.MaxPoolSize.ToString();
-            txtMinPoolSize.Text         = _dbReg.MinPoolSize.ToString();
-            txtConnectionLifetime.Text  = _dbReg.ConnectionLifetime.ToString();
-            
+            if (_dbReg.ConnectionType== eConnectionType.server) rbRemote.Checked = true;
+            else rbEmbedded.Checked = true;
+
+            txtConnectionString.Text = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            if (_dbReg.CodeSettings == null) _dbReg.CodeSettings = new CodeSettingsClass();
+
+            if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger) rbGenerateDBGenerator.Checked = true;
+            else if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID) rbGenerateGUID.Checked = true;
+            else if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID) rbGenerateHEXGUID.Checked = true;
+
+            txtLocation.Text                    = _dbReg.DatabasePath;
+            txtServer.Text                      = _dbReg.Server;
+            txtFirebirdBinaryPath.Text          = _dbReg.FirebirdBinaryPath;            
+            txtServer.Enabled                   = _dbReg.ConnectionType == eConnectionType.server;                        
+            cbCharSet.SelectedIndex             = cbCharSet.FindString(_dbReg.CharSet);
+            cbCollation.SelectedIndex           = cbCollation.FindString(_dbReg.Collation);
+            txtPacketsize.Text                  = _dbReg.PacketSize.ToString();
+            txtPort.Text                        = _dbReg.Port.ToString();
+            txtUser.Text                        = _dbReg.User;
+            txtPassword.Text                    = _dbReg.Password;
+            txtDatabaseAlias.Text               = _dbReg.Alias;
+            txtRole.Text                        = _dbReg.Role;
+            txtMaxPoolSize.Text                 = _dbReg.MaxPoolSize.ToString();
+            txtMinPoolSize.Text                 = _dbReg.MinPoolSize.ToString();
+            txtConnectionLifetime.Text          = _dbReg.ConnectionLifetime.ToString();            
             cbPooling.Checked                   = _dbReg.Pooling;
             txtClientLibrary.Text               = _dbReg.ClientLibrary;
-            txtAlternativeSetTermCharacter.Text = _dbReg.AlternativeTerminator;
-            
-            txtDefaultScriptPath.Text =  _dbReg.InitialScriptingPath;          
-            txtDefaultReportPath.Text = _dbReg.InitialReportPath;
-
-            txtSkipForSelect.Text = _dbReg.SkipForSelect.ToString();
-            txtTableMaxRows.Text  = _dbReg.MaxRowsForSelect.ToString();
-           
+            txtAlternativeSetTermCharacter.Text = _dbReg.AlternativeTerminator;            
+            txtDefaultScriptPath.Text           = _dbReg.InitialScriptingPath;          
+            txtDefaultReportPath.Text           = _dbReg.InitialReportPath;
+            txtDefaultSQLExportPath.Text        = _dbReg.InitialSQLExportPath;
+            txtSkipForSelect.Text               = _dbReg.SkipForSelect.ToString();
+            txtTableMaxRows.Text                = _dbReg.MaxRowsForSelect.ToString();
+            txtDBNamespace.Text                 = _dbReg.CodeSettings.SourceCodeNamespace;
+            txtSourcecodeOutputPath.Text        = _dbReg.CodeSettings.SourceCodeOutputPath;
+            txtOpenDatabasesCount.Text          = DatabaseDefinitions.Instance().OpenDatabaseCount.ToString();
             SetServerUIVisiblies();
-            
-            txtConnectionString.Text = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
-            if(_dbReg.CodeSettings == null) _dbReg.CodeSettings = new CodeSettingsClass();
-            
-            txtDBNamespace.Text = _dbReg.CodeSettings.SourceCodeNamespace;
-            txtSourcecodeOutputPath.Text = _dbReg.CodeSettings.SourceCodeOutputPath;
-          
-            if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger)  rbGenerateDBGenerator.Checked = true;
-            else if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID)         rbGenerateGUID.Checked = true;
-            else if(_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID)      rbGenerateHEXGUID.Checked = true;
-          
+                                                                                            
             DoEvent = true;
         }
 
@@ -255,13 +225,11 @@ namespace FBExpert
                 _dbReg.Position = DatabaseDefinitions.Instance().Databases.Count+1;
                 DatabaseDefinitions.Instance().Databases.Add(_dbReg);
                 DataToEdit();
-                _dbReg.State = eRegState.create;
+                _dbReg.State = eRegState.create;               
             }
 
             DatabaseDefinitions.Instance().SerializeCurrent("User changed");
-
-            //_dbReg.State = (BearbeitenMode == EditStateClass.eBearbeiten.eEdit) ? eRegState.update : eRegState.create;
-
+           
             BearbeitenMode = EditStateClass.eBearbeiten.eEdit;
             if ((_connectionDataChanged) || (_dbReg.State != eRegState.update))
             {                
@@ -274,8 +242,7 @@ namespace FBExpert
             {
                 tn.Text = _dbReg.Alias;
                 _dataChanged = false;
-            }
-            
+            }            
         }
 
         public void SetServerUIVisiblies()
@@ -340,7 +307,6 @@ namespace FBExpert
             hsSave.Text = LanguageClass.Instance().GetString("UPDATE_CHANGES");    
         }
 
-
         public void ShowCaptions()
         {
             lblTableName.Text = $@"Database Config: {_dbReg.Alias}";
@@ -350,18 +316,16 @@ namespace FBExpert
         private void hsSave_Click(object sender, EventArgs e)
         {
             EditToData();
-            SaveConfig();                     
+            SaveConfig();    
+            Close();
         }
         
-
         private void dataChanged()
         {
             SetServerUIVisiblies();
             _dataChanged = true;
         }
-
-        private bool _connectionDataChanged = false;
-        private bool _dataChanged = false;
+       
         private void connectionDataChanged()
         {           
             SetServerDatas();
@@ -370,7 +334,6 @@ namespace FBExpert
             txtConnectionString.Text = connectionString;
             _connectionDataChanged = true;
         }
-
         
         private void hsConnect_Click(object sender, EventArgs e)
         {
@@ -380,7 +343,10 @@ namespace FBExpert
             string lfText = string.Empty;
             try
             {
-                lfText = AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text);
+                lfText = (rb25_32.Checked||rb25_64.Checked) 
+                    ? AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text, false) 
+                    : AppStaticFunctionsClass.GetLifetime(txtConnectionString.Text,true);
+                
                 pnlConnectState.BackColor = System.Drawing.Color.Green;
             }
             catch(Exception ex)
@@ -399,9 +365,9 @@ namespace FBExpert
 
         private void hsLoad_Click(object sender, EventArgs e)
         {
-            openFileDialog1.DefaultExt = "*.fdb";
-            openFileDialog1.Filter = @"Firebird DB|*.fdb|All|*.*";
-            openFileDialog1.Title =  LanguageClass.Instance().GetString("SELECT_DATABSE");
+            openFileDialog1.DefaultExt  = "*.fdb";
+            openFileDialog1.Filter      = @"Firebird DB|*.fdb|All|*.*";
+            openFileDialog1.Title       =  LanguageClass.Instance().GetString("SELECT_DATABASE");
 
             if (openFileDialog1.ShowDialog()== DialogResult.OK)
             {
@@ -429,7 +395,6 @@ namespace FBExpert
                 StaticFunctionsClass.ToIntDef(txtPacketsize.Text, AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize), true, true);
             }         
             
-
             if(!ok)
             {
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseError", "DatabaseNotCreated", SEMessageBoxButtons.OK, SEMessageBoxIcon.Asterisk, null, null);               
@@ -441,7 +406,7 @@ namespace FBExpert
             _dbReg = _dbReg.Clone();
             _dbReg.Alias = $@"{_dbReg.Alias}_clone{(DateTime.Now.Ticks/10000).ToString()}";
             DataToEdit();
-            //txtDatabaseAlias.Text =  txtDatabaseAlias.Text + "_clone";
+           
             BearbeitenMode = EditStateClass.eBearbeiten.eInsert;
             EditToData();
         }
@@ -452,11 +417,7 @@ namespace FBExpert
         }
 
         string oldserver = string.Empty;
-
-    
-
-        
-
+            
         private void rbRemote_CheckedChanged(object sender, EventArgs e)
         {
             if ((!DoEvent) || (!rbRemote.Checked)) return;
@@ -546,35 +507,29 @@ namespace FBExpert
             _dbReg.Pooling = (cbPooling.Checked==true);
             connectionDataChanged();
         }
-
         private void txtMinPoolSize_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
             _dbReg.MinPoolSize = StaticFunctionsClass.ToIntDef(txtMinPoolSize.Text.Trim(), 0);
             connectionDataChanged();
         }
-
         private void txtMaxPoolSize_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
             _dbReg.MaxPoolSize = StaticFunctionsClass.ToIntDef(txtMaxPoolSize.Text.Trim(), 15);
             connectionDataChanged();
         }
-
         private void txtConnectionLifetime_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
             _dbReg.Lifetime = StaticFunctionsClass.ToIntDef(txtLifetime.Text.Trim(), 0);
             connectionDataChanged();
         }
-
         private void txtSkipForSelect_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
             _dbReg.SkipForSelect = StaticFunctionsClass.ToIntDef(txtSkipForSelect.Text.Trim(), 1000);
-        }
-
-       
+        }       
 
         private void txtAlternativeSetTermCHaracter_TextChanged(object sender, EventArgs e)
         {
@@ -616,31 +571,20 @@ namespace FBExpert
             fbdPath.SelectedPath = _dbReg.InitialReportPath;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtDefaultReportPath.Text = fbdPath.SelectedPath;
-
         }
 
         private void dataChanged(object sender, EventArgs e)
         {
             dataChanged();
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void hsSourcecodeFolder_Click(object sender, EventArgs e)
         {
             fbdPath.SelectedPath = _dbReg.CodeSettings.SourceCodeOutputPath;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtSourcecodeOutputPath.Text = fbdPath.SelectedPath;
         }
-
-        private void hsCreate_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void hsLoadDefaultExports_Click(object sender, EventArgs e)
         {
              fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
@@ -653,6 +597,13 @@ namespace FBExpert
             fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtFirebirdBinaryPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void hsInitialSQLExportPath_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = _dbReg.InitialSQLExportPath;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtDefaultSQLExportPath.Text = fbdPath.SelectedPath;
         }
     }
 }

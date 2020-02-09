@@ -6,7 +6,6 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
-using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -823,7 +822,7 @@ namespace FBExpert
             {
                 con.Close();
             }
-            return tableObject.Indices;
+            return tableObject?.Indices;
         }
         
         public void AddIndexObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
@@ -1376,7 +1375,7 @@ namespace FBExpert
 
         public void RefreshProceduresItems(DBRegistrationClass DBReg,  TreeNode nd)
         {
-            NotifiesClass.Instance().AddToINFO($@"Refresh Procedures for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh Procedures for {DBReg.Alias}",eMessageGranularity.few,true);
             var allprocedures = GetProcedureObjects(DBReg);
             foreach(var procedure in allprocedures.Values)
             {
@@ -1510,7 +1509,7 @@ namespace FBExpert
 
         public void RefreshInternalFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
         {
-            NotifiesClass.Instance().AddToINFO($@"Refresh Functions for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh Functions for {DBReg.Alias}",eMessageGranularity.few, true);
             var allObjects = GetInternalFunctionObjects(DBReg);
             foreach(var procedure in allObjects.Values)
             {
@@ -1539,7 +1538,7 @@ namespace FBExpert
 
         public void RefreshUserDefinedFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
         {
-            NotifiesClass.Instance().AddToINFO($@"Refresh user defined functions for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh user defined functions for {DBReg.Alias}",eMessageGranularity.few, true);
             var allObjects = GetUserDefinedFunctionObjects(DBReg);
             foreach(var procedure in allObjects.Values)
             {
@@ -1555,7 +1554,7 @@ namespace FBExpert
             //Systemflag = 4 für Systemtable Triggers
             string _funcStr = $@"RefreshTriggers(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance().RefreshNonSystemTriggers(DBReg.Version);
-            NotifiesClass.Instance().AddToINFO($@"Refresh Triggers for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh Triggers for {DBReg.Alias}",eMessageGranularity.few, true);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
             {
@@ -1623,7 +1622,7 @@ namespace FBExpert
         public void RefreshRoles(DBRegistrationClass DBReg,  TreeNode nd)
         {
             string _funcStr = $@"RefreshRoles(DBReg={DBReg})";
-            NotifiesClass.Instance().AddToINFO($@"Refresh Roles for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh Roles for {DBReg.Alias}",eMessageGranularity.few, true);
             string cmd = SQLStatementsClass.Instance().RefreshRoles(DBReg.Version);
 
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -1707,7 +1706,7 @@ namespace FBExpert
         public void RefreshGeneratorsItems(DBRegistrationClass DBReg, TreeNode nd)
         {     
             string _funcStr = $@"RefreshGeneratorsItems(DBReg={DBReg})";
-            NotifiesClass.Instance().AddToINFO($@"Refresh Generators for {DBReg.Alias}",eInfoLevel.few);
+            NotifiesClass.Instance().AddToINFO($@"Refresh Generators for {DBReg.Alias}",eMessageGranularity.few, true);
             string cmd = SQLStatementsClass.Instance().RefreshNonSystemGeneratorsItems(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -1792,10 +1791,9 @@ namespace FBExpert
             
             var fieldgroup_node = FindNode(tableNode, StaticVariablesClass.FieldsKeyGroupStr);
             var tc = tableNode.Tag as TableClass;            
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Refresh Table {DBReg.Alias}->{tc.Name}");
-            }
+            
+            NotifiesClass.Instance().AddToINFO($@"Refresh Table {DBReg.Alias}->{tc.Name}");
+            
             var tcc = GetTableObject(DBReg,tc);
             tableNode.Tag = tcc;
             if (tableNode.Parent != null)
@@ -1830,11 +1828,9 @@ namespace FBExpert
                 Name = $@"TableGroup_{DBReg.Alias}"
             };
             tn.Tag = vgc;
-
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Reading common tables for {DBReg.Alias}",eInfoLevel.more);
-            }
+            
+            NotifiesClass.Instance().AddToINFO($@"Reading common tables for {DBReg.Alias}",eMessageGranularity.more, true);
+            
             var tableList = GetAllTableObjectsComplete(DBReg);
             
       
@@ -1843,12 +1839,9 @@ namespace FBExpert
             int n = 0;
             
             foreach (var tc in tableList.Values)
-            {                
-                 if (NotifiesClass.Instance().AllowInfos)
-                 {
-                    NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}",eInfoLevel.less);
-                 }
-
+            {                                 
+                 NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}",eMessageGranularity.less, true);
+                 
                  var table_node = DataClassFactory.GetNewNode(StaticVariablesClass.TablesKeyStr,tc.Name,tc);
                 
                  #region fields
@@ -2195,10 +2188,9 @@ namespace FBExpert
             };
             tn.Tag = vgc;
             
-            if (NotifiesClass.Instance().AllowInfos)
-            {                
-                NotifiesClass.Instance().AddToINFO($@"Reading system tables for {DBReg.Alias}",eInfoLevel.more);
-            }
+                           
+            NotifiesClass.Instance().AddToINFO($@"Reading system tables for {DBReg.Alias}",eMessageGranularity.more, true);
+            
                         
             var tableList = GetSystemTableObjects(DBReg);
 
@@ -2219,10 +2211,9 @@ namespace FBExpert
 
             foreach (var tc in tableList.Values)
             {                
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}", eInfoLevel.few);
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}", eMessageGranularity.few, true);
+                
 
                 var table_node = DataClassFactory.GetNewNode(StaticVariablesClass.SystemTablesKeyStr, tc.Name, tc);
                 
@@ -2556,10 +2547,9 @@ namespace FBExpert
                 {
                     
                     var tc = ndx.Tag as ViewClass;
-                    if (NotifiesClass.Instance().AllowInfos)
-                    {
-                        NotifiesClass.Instance().AddToINFO($@"Refresh  view {DBReg.Alias}->{tc.Name}");
-                    }
+                    
+                    NotifiesClass.Instance().AddToINFO($@"Refresh  view {DBReg.Alias}->{tc.Name}");
+                    
                     //Neuew View wird erzeugt und in Node geschrieben 
                     var vw = GetViewObject(DBReg, tc.Name);
                     ndx.Tag = vw;
@@ -2616,10 +2606,9 @@ namespace FBExpert
             };
             tn.Tag = vgc;
             
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Reading views for {DBReg.Alias}",eInfoLevel.more);
-            }
+            
+            NotifiesClass.Instance().AddToINFO($@"Reading views for {DBReg.Alias}",eMessageGranularity.more, true);
+            
 
             var allviews = GetViewObjects(DBReg);
             if (allviews == null) return null;
@@ -2632,10 +2621,9 @@ namespace FBExpert
             
             foreach (var tc in allviews.Values)
             {
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}",eInfoLevel.few);
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading done {tc.Name}", eMessageGranularity.few, true);
+                
                 var view_node = DataClassFactory.GetNewNode(StaticVariablesClass.ViewsKeyStr, tc.Name,tc);
                 
                 #region fields
@@ -2856,10 +2844,9 @@ namespace FBExpert
                 tableNode.ForeColor = Color.Green;
                 group_node.ForeColor = Color.Green;
                 group_node.Text = $@"Fields ({tcc.Fields.Count})";
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading field from table object {dbReg.Alias}->{tcc.Name}");
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading field from table object {dbReg.Alias}->{tcc.Name}");
+                
 
                 tableNode.Tag = tcc;
 
@@ -2884,10 +2871,9 @@ namespace FBExpert
                 tableNode.ForeColor = Color.Green;
                 group_node.ForeColor = Color.Green;
                 group_node.Text = $@"Foreign keys ({tcc.ForeignKeys.Count})";
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading foreign keys from table object {dbReg.Alias}->{tcc.Name}");
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading foreign keys from table object {dbReg.Alias}->{tcc.Name}");
+                
                 tableNode.Tag = tcc;
                 if (tableNode.Parent != null)
                 {
@@ -2910,10 +2896,9 @@ namespace FBExpert
                 tableNode.ForeColor = Color.Green;
                 group_node.ForeColor = Color.Green;
                 group_node.Text = $@"Indecies ({tcc.Indices.Count})";
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading indecies from table object {dbReg.Alias}->{tcc.Name}");
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading indecies from table object {dbReg.Alias}->{tcc.Name}");
+                
                 tableNode.Tag = tcc;
                 if (tableNode.Parent != null)
                 {
@@ -2936,10 +2921,9 @@ namespace FBExpert
                 tableNode.ForeColor = Color.Green;
                 group_node.ForeColor = Color.Green;
                 group_node.Text = $@"Triggers ({tcc.Triggers.Count})";
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Reading triggers from table object {dbReg.Alias}->{tcc.Name}");
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Reading triggers from table object {dbReg.Alias}->{tcc.Name}");
+                
                 tableNode.Tag = tcc;
                 if (tableNode.Parent != null)
                 {
@@ -2975,10 +2959,9 @@ namespace FBExpert
             tableNode.ForeColor = Color.Green;
             group_node.ForeColor = Color.Green;
             group_node.Text = $@"NotNulls ({tcc.notnulls_constraints.Count})";
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Reading not null constraints from table object {dbReg.Alias}->{tcc.Name}");
-            }
+            
+            NotifiesClass.Instance().AddToINFO($@"Reading not null constraints from table object {dbReg.Alias}->{tcc.Name}");
+            
             tableNode.Tag = tcc;
             if (tableNode.Parent != null)  return tableNode;
             
@@ -3769,7 +3752,7 @@ namespace FBExpert
             {
                 File.WriteAllLines(fn,lines,enc);            
             }
-            catch(Exception ex)
+            catch //(Exception ex)
             {
 
             }
@@ -4555,7 +4538,7 @@ namespace FBExpert
 
                 data.Add(" ");
                 data.Add(" ");
-                cmd = "select r.rdb$relation_name, (select max(i.rdb$statistics)||(count(rf.rdb$relation_name) * 0) from rdb$relation_fields rf where rf.rdb$relation_name = r.rdb$relation_name ) , (select count(rfx.rdb$relation_name) from rdb$relation_fields rfx where rfx.rdb$relation_name = r.rdb$relation_name ) from rdb$relations r join rdb$indices i on (i.rdb$relation_name = r.rdb$relation_name) group by r.rdb$relation_name order by 2";
+                cmd = $@"SELECT r.rdb$relation_name, (SELECT max(i.rdb$statistics)||(count(rf.rdb$relation_name) * 0) FROM rdb$relation_fields rf WHERE rf.rdb$relation_name = r.rdb$relation_name ) , (SELECT count(rfx.rdb$relation_name) FROM rdb$relation_fields rfx where rfx.rdb$relation_name = r.rdb$relation_name ) FROM rdb$relations r join rdb$indices i ON (i.rdb$relation_name = r.rdb$relation_name) GROUP BY r.rdb$relation_name order by 2";
                 fcmd = new FbCommand(cmd, con);
                 dread = fcmd.ExecuteReader();
                 if (dread.HasRows)
@@ -5158,7 +5141,7 @@ namespace FBExpert
             return fields;
         }
 
-
+        
         public TreeNode GetRegNode(TreeNode tn)
         {
             if (tn == null) return null;
@@ -5242,9 +5225,9 @@ namespace FBExpert
                                     strli.AppendLine("");
                                     strli.AppendLine(") ");
                                     strli.Append("AS ");
-                                    strli.AppendLine(voldsql);
+                                    strli.AppendLine($@"{voldsql};");
 
-                                    vc.CREATE_SQL = strli.ToString();
+                                    vc.CREATE_SQL = AppStaticFunctionsClass.CreateComment() + strli.ToString();
 
                                     strli.Clear();
                                 }
@@ -5257,10 +5240,12 @@ namespace FBExpert
                                     strl.AppendLine("");
                                     strl.AppendLine(") ");
                                     strl.Append("AS ");
-                                    strl.AppendLine(voldsql);
-
+                                    strl.AppendLine($@"{voldsql};");
+                                    
                                     vc.SQL = voldsql;
-                                    vc.CREATEINSERT_SQL = strl.ToString();
+
+                                    
+                                    vc.CREATEINSERT_SQL = AppStaticFunctionsClass.CreateComment() + strl.ToString();
                                     
                                     allviews.Add(vc.Name,vc);
                                     var fields = GetViewFieldObjects(DBReg, vc.Name);
@@ -5305,8 +5290,8 @@ namespace FBExpert
                             strli.AppendLine("");
                             strli.AppendLine(") ");
                             strli.Append("AS ");
-                            strli.AppendLine(voldsql);
-                            vcl.CREATE_SQL = strli.ToString();
+                            strli.AppendLine($@"{voldsql};");
+                            vcl.CREATE_SQL = AppStaticFunctionsClass.CreateComment() + strli.ToString();
                             strli.Clear();
                         }
 
@@ -5318,10 +5303,10 @@ namespace FBExpert
                             strl.AppendLine("");
                             strl.AppendLine(") ");
                             strl.Append("AS ");
-                            strl.AppendLine(voldsql);
+                            strl.AppendLine($@"{voldsql};");
 
                             vcl.SQL = voldsql;
-                            vcl.CREATEINSERT_SQL = strl.ToString();
+                            vcl.CREATEINSERT_SQL = AppStaticFunctionsClass.CreateComment() + strl.ToString();
 
                             allviews.Add(vcl.Name,vcl);
                             var fields = GetViewFieldObjects(DBReg, vcl.Name);
@@ -5454,9 +5439,7 @@ namespace FBExpert
             }
             return domains;
         }
-        
-  
-        
+                  
         public Dictionary<string,TriggerClass> GetTriggerObjects(DBRegistrationClass DBReg)
         {
             var trigger = new Dictionary<string,TriggerClass>();
@@ -5691,6 +5674,112 @@ namespace FBExpert
             }
 
             return procedures;
+        }
+
+        public Dictionary<string, FunctionClass> GetFunctionObjects(DBRegistrationClass DBReg)
+        {
+            string cmd = SQLStatementsClass.Instance().RefreshInternalFunctionsItems(DBReg.Version);
+            var functions = new Dictionary<string, FunctionClass>();
+            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            try
+            {
+                con.Open();
+            }
+            catch
+            {
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionItems->{DBReg}->Connection not open"));
+                return functions;
+            }
+
+
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                var fcmd = new FbCommand(cmd, con);
+                var dread = fcmd.ExecuteReader();
+                if (dread != null)
+                {
+                    if (dread.HasRows)
+                    {
+                        int n = 0;
+                        while (dread.Read())
+                        {
+                            var tc = DataClassFactory.GetDataClass(StaticVariablesClass.FunctionsKeyStr) as FunctionClass;
+                            tc.Name = dread.GetValue(0).ToString().Trim();
+                            string src = dread.GetValue(2).ToString().Trim();
+                            string[] srcarr = src.Split('\n');
+                            foreach (string st in srcarr)
+                            {
+                                tc.Source.Add(st.Trim());
+                            }
+
+                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            con2.Open();
+
+                            if (con2.State == System.Data.ConnectionState.Open)
+                            {
+                                string cmd1 = SQLStatementsClass.Instance().GetFunctionsArguments(DBReg.Version, tc.Name);
+                                var fcmd2 = new FbCommand(cmd1, con2);
+                                var dread2 = fcmd2.ExecuteReader();
+
+                                if (dread2 != null)
+                                {
+                                    if (dread2.HasRows)
+                                    {
+                                        while (dread2.Read())
+                                        {
+                                            ParameterClass pc = new ParameterClass()
+                                            {
+                                                Name = dread2.GetValue(0).ToString().Trim()
+                                            };
+                                            int InOutTyp = string.IsNullOrEmpty(dread2.GetValue(0).ToString().Trim()) ? 1 : 0; // 0 == in, 1 == out
+                                            pc.Position = StaticFunctionsClass.ToIntDef(dread2.GetValue(1).ToString().Trim(), 0);
+                                            pc.TypeNumber = StaticFunctionsClass.ToIntDef(dread2.GetValue(2).ToString().Trim(), 0);                                           
+                                            pc.Length = StaticFunctionsClass.ToIntDef(dread2.GetValue(3).ToString().Trim(), 0);
+                                            pc.Precision = StaticFunctionsClass.ToIntDef(dread2.GetValue(4).ToString().Trim(), 0);
+
+                                            pc.Scale = StaticFunctionsClass.ToIntDef(dread2.GetValue(5).ToString().Trim(), 0);
+                                            pc.FieldType = dread2.GetValue(6).ToString().Trim();
+
+                                            pc.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(pc.FieldType, pc.Length);
+
+                                            if (InOutTyp == 0)
+                                            {
+                                                tc.ParameterIn.Add(pc);
+                                            }
+                                            else
+                                            {
+                                                tc.ParameterOut.Add(pc);
+                                            }
+                                        }
+                                    }
+                                    dread2.Close();
+                                }
+
+                                con2.Close();
+                                functions.Add(tc.Name, tc);
+                                n++;
+                            }
+                            else
+                            {
+                                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread2==null"));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread==null"));
+                }
+
+                dread.Close();
+                con.Close();
+            }
+            else
+            {
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->Connections not open"));
+            }
+
+            return functions;
         }
 
 
@@ -5978,7 +6067,11 @@ namespace FBExpert
                                 Sequence = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0),
                                 Source = dread.GetValue(6).ToString().Trim()
                             };
-                            tcc?.Triggers.Add(tfc.Name,tfc);
+                            if(tcc != null)
+                            {
+                                if (!tcc.Triggers.ContainsKey(tfc.Name))
+                                   tcc.Triggers.Add(tfc.Name,tfc);
+                            }
                         }
                     }
                     con.Close();
@@ -6072,7 +6165,11 @@ namespace FBExpert
                             Sequence = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0),
                             Source = dread.GetValue(6).ToString().Trim()
                         };
-                        tcc?.Triggers.Add(tfc.Name,tfc);
+                        if(tcc != null)
+                        { 
+                            if (!tcc.Triggers.ContainsKey(tfc.Name))
+                                tcc.Triggers.Add(tfc.Name,tfc);
+                        }
                     }
                 }
                 con.Close();
@@ -6621,16 +6718,19 @@ namespace FBExpert
                                 {
                                     if ((deptyp == eDependencies.TABLE)&&(!tcc.DependenciesTO_Tables.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Tables.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
                                     }
                                     if ((deptyp == eDependencies.TRIGGER)&&(!tcc.DependenciesTO_Triggers.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Triggers.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
                                     }
 
                                     if ((deptyp == eDependencies.VIEW)&&(!tcc.DependenciesTO_Views.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Views.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
                                     }
                                     if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesTO_Procedures.ContainsKey(tcs.Name)))
                                     {
@@ -6746,16 +6846,19 @@ namespace FBExpert
                                 {
                                     if ((deptyp == eDependencies.TABLE)&&(!tcc.DependenciesTO_Tables.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Tables.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
                                     }
                                     if ((deptyp == eDependencies.TRIGGER)&&(!tcc.DependenciesTO_Triggers.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Triggers.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
                                     }
 
                                     if ((deptyp == eDependencies.VIEW)&&(!tcc.DependenciesTO_Views.ContainsKey(tcs.Name)))
                                     {
-                                        tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Views.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
                                     }
                                     if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesTO_Procedures.ContainsKey(tcs.Name)))
                                     {
@@ -6869,17 +6972,20 @@ namespace FBExpert
                                 {
                                     if (deptyp == eDependencies.TABLE)
                                     {
-                                        tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Tables.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Tables.Add(tcs.Name,tcs);
                                     }
 
                                     if (deptyp == eDependencies.TRIGGER)
                                     {
-                                        tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Triggers.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Triggers.Add(tcs.Name,tcs);
                                     }
 
                                     if (deptyp == eDependencies.VIEW)
                                     {
-                                        tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
+                                        if (!tcc.DependenciesTO_Views.ContainsKey(tcs.Name))
+                                            tcc.DependenciesTO_Views.Add(tcs.Name,tcs);
                                     }
 
                                     if (deptyp == eDependencies.PROCEDURE)
@@ -6997,16 +7103,19 @@ namespace FBExpert
 
                                 if ((deptyp == eDependencies.TABLE)&&(!tcc.DependenciesFROM_Tables.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Tables.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Tables.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Tables.Add(tcs.Name,tcs);
                                 }
                                 if ((deptyp == eDependencies.TRIGGER)&&(!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
                                 }
 
                                 if ((deptyp == eDependencies.VIEW)&&(!tcc.DependenciesFROM_Views.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Views.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
                                 }
                                 if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesFROM_Procedures.ContainsKey(tcs.Name)))
                                 {
@@ -7117,24 +7226,27 @@ namespace FBExpert
 
                                 if ((deptyp == eDependencies.TABLE)&&(!tcc.DependenciesFROM_Tables.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Tables.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
                                 }
                                 if ((deptyp == eDependencies.TRIGGER)&&(!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
                                 }
 
                                 if ((deptyp == eDependencies.VIEW)&&(!tcc.DependenciesFROM_Views.ContainsKey(tcs.Name)))
                                 {
-                                    tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Views.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
                                 }
                                 if ((deptyp == eDependencies.PROCEDURE)&&(!tcc.DependenciesFROM_Procedures.ContainsKey(tcs.Name)))
                                 {
                                     string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";
                                     if (!tcc.DependenciesFROM_Procedures.ContainsKey(key))
-                                    tcc.DependenciesFROM_Procedures.Add(key,tcs);
-                                     else
-                                     NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->dread==null"));
+                                        tcc.DependenciesFROM_Procedures.Add(key,tcs);
+                                    else
+                                        NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddDepednenciesFROMObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, List<TableClass> tc, eDependencies typ)->dread==null"));
                                 }
                             }
                             n++;
@@ -7234,19 +7346,21 @@ namespace FBExpert
 
                                 if (deptyp == eDependencies.TABLE)
                                 {
-                                    tcc.DependenciesFROM_Tables.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Tables.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Tables.Add(tcs.Name,tcs);
                                 }
 
                                 if (deptyp == eDependencies.TRIGGER)
                                 {
-                                    tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
+                                    if (!tcc.DependenciesFROM_Triggers.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Triggers.Add(tcs.Name,tcs);
                                 }
 
                                 if (deptyp == eDependencies.VIEW)
                                 {
-                                    tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
-                                }
-
+                                    if (!tcc.DependenciesFROM_Views.ContainsKey(tcs.Name))
+                                        tcc.DependenciesFROM_Views.Add(tcs.Name,tcs);
+                                }                                
                                 if (deptyp == eDependencies.PROCEDURE)
                                 {
                                     string key = $@"{DependObjectName}->{tcs.Name}->{tcs.FieldName}";

@@ -11,7 +11,6 @@ using MessageLibrary;
 using StateClasses;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -39,40 +38,55 @@ namespace FBXpert
         private int _notifications;
 
         private static FbXpertMainForm _instance;
+        
         public static FbXpertMainForm Instance()
         {
+            /*
             if (_instance != null) return (_instance);
             lock (_lock_this)
             {
-                _instance = new FbXpertMainForm();        
+                _instance = new FbXpertMainForm($@"{Application.StartupPath}\config\AppSettings.json");        
             }
+            */
+            return (_instance);
+        }
+        
+        public static FbXpertMainForm CreateInstance(string[] args)
+        {
+            if (_instance != null) return (_instance);
+            lock (_lock_this)
+            {                
+                _instance = (args.Length > 0) ? new FbXpertMainForm(args[0]) : new FbXpertMainForm($@"{Application.StartupPath}\config\AppSettings.json");             
+            }
+            
             return (_instance);
         }
 
-        private FbXpertMainForm()
+        private FbXpertMainForm(string appSettingsFile)
         {
             InitializeComponent();
                         
             NotificationsForm.Instance().Init();
-            NotifiesClass.Instance().Notify.OnRaiseInfoHandler += InfoRaised;
-            NotifiesClass.Instance().Notify.OnRaiseErrorHandler += ErrorRaised;
+            NotifiesClass.Instance().Register4Info(InfoRaised);
+            NotifiesClass.Instance().Register4Error(ErrorRaised);
             
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler += FBXpertMainForm_OnRaiseLanguageChangedHandler;
+            LanguageClass.Instance().RegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
             NotificationsForm.Instance().SetMDIForm(this);
-                                             
-            string appfile = Application.StartupPath + "\\config\\AppSettings.json";
+
+            string appfile = appSettingsFile;
             if (File.Exists(appfile))
             {
                 AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
+                appset.Path = appfile;
                 AppSettingsClass.Instance().Load(appset);
             }
             else
             {
                 AppSettingsClass.Instance();                                
             }          
-            NotifiesClass.Instance().InfoThreshold = eInfoLevel.normal;
+            NotifiesClass.Instance().InfoGranularity = eMessageGranularity.normal;
            
-            //(eInfoLevel) AppSettingsClass.Instance().BehavierSettings.DebugThreshold;
+            //(eMessageGranularity) AppSettingsClass.Instance().BehavierSettings.DebugThreshold;
         }
 
         private void FBXpertMainForm_OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
@@ -134,20 +148,16 @@ namespace FBXpert
                 foreach(Form frm in v)
                 {
                     if(e.ClickedItem.Text.EndsWith(frm.Text))
-                    {
-            //            frm.Show();
-                        frm.WindowState = FormWindowState.Normal;
-            //            frm.BringToFront();
+                    {            
+                        frm.WindowState = FormWindowState.Normal;            
                     }
                 }
             }
             
             if(e.ClickedItem.Text.EndsWith("Copyright"))
             {
-                CopyrightForm cp = CopyrightForm.Instance(this);
-               
-                cp.WindowState = FormWindowState.Normal;                                              
-               
+                var cp = CopyrightForm.Instance(this);               
+                cp.WindowState = FormWindowState.Normal;                                                             
                 cp.Show();
                 cp.Select();               
                 cp.Left = FBXInfo.Instance().Left - 100;
@@ -250,7 +260,7 @@ namespace FBXpert
             LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
             string vers = BasicClassLibrary.Globals.GetAppVersion(this);
             string appname = BasicClassLibrary.Globals.GetAppName(this);
-            Text = $@"{appname} V {vers}";
+            this.Text = $@"{appname} V {vers}";
 
             Application.DoEvents();
             var cf = FBXInfo.Instance();
@@ -261,17 +271,37 @@ namespace FBXpert
             if (_dbe.ReadDatabaseDefinition())
             {
                 Application.DoEvents();
-                NotifiesClass.Instance().InfoThreshold = eInfoLevel.normal;
+                NotifiesClass.Instance().InfoGranularity = eMessageGranularity.normal;
                 _dbe.SetCaption();
                 _dbe.Show();
                 _dbe.Enabled = false;
                 _dbe.MakeDatabaseTree(false);
-                _dbe.OpenActiveDatabases();
-               if (NotificationsForm.Instance().Visible) NotificationsForm.Instance().Close();            
-               NotifiesClass.Instance().InfoThreshold = eInfoLevel.few;
+                int n = DatabaseDefinitions.Instance().CountToOpen();
+                if(n > DatabaseDefinitions.Instance().OpenDatabaseCount)
+                { 
+                    object[] p = { n, Environment.NewLine };
+                    if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "OpenDatabases", "DoYouWantOpenDatabases", FormStartPosition.CenterScreen,
+                            SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Exclamation, null, p) == SEDialogResult.Yes)
+                    {
+                        _dbe.OpenActiveDatabases();
+                    }
+                    else
+                    {
+                        DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        DatabaseDefinitions.Instance().MarkDatabasesActiv(false);
+                    }
+                }
+                else
+                {
+                    _dbe.OpenActiveDatabases();
+                }
+                if (NotificationsForm.Instance().Visible) NotificationsForm.Instance().Close();            
+                NotifiesClass.Instance().InfoGranularity = eMessageGranularity.few;
             }                                       
             DbExplorerForm.Instance().Enabled = true;
             LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
+            SEHotSpot.Controller.Instance().SetupKeyboardHooks(this);
+            DbExplorerForm.Instance().Select();
         }
 
         private void FbXpertMainForm_OnRaiseLanguageExceptionHandler(object sender, LanguageExceptionEventArgs k)
@@ -282,11 +312,9 @@ namespace FBXpert
         public static bool FormOnClosing = false;
         private void FBXpertMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {       
-            FormOnClosing = true;
-            //CopyrightForm.Instance().Close();
-            //DbExplorerForm.Instance().Close();
+            FormOnClosing = true;            
             DatabaseDefinitions.Instance().SerializeCurrent("Definition data changed");    
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler -= FBXpertMainForm_OnRaiseLanguageChangedHandler;
+            LanguageClass.Instance().UnRegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
             Application.Exit();
         }
 

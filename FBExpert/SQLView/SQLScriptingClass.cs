@@ -52,7 +52,7 @@ namespace FBXpert.DataClasses
         public string GUID = "";
     }
 
-    class SQLScriptingClass
+    class SQLScriptingClassOLD
     {
         private List<string> _script = new List<string>();
         private SCRIPTCommandClass _aktCommand = null;
@@ -70,7 +70,7 @@ namespace FBXpert.DataClasses
 
         public bool CommitEachCommand = false;
 
-        public SQLScriptingClass(DBRegistrationClass drc, string connectionName= "SCRIPT", NotifiesClass pNotifies=null, NotifiesClass eventNotifies=null)
+        public SQLScriptingClassOLD(DBRegistrationClass drc, string connectionName= "SCRIPT", NotifiesClass pNotifies=null, NotifiesClass eventNotifies=null)
         {
             _parentNotifies = pNotifies;
             _eventNotifies = eventNotifies;
@@ -772,7 +772,7 @@ namespace FBXpert.DataClasses
          
           
            
-            int i = 0;
+           // int i = 0;
             int nr = 0;
 
            

@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
@@ -55,8 +56,8 @@ namespace FBXpert
             _procedureObjectOld = (ProcedureClass) _procedureObject.Clone();
             
             _dbReg = dbReg;
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             cbDatatype.Items.Clear();
 
             DBTypeList dbList = new DBTypeList();
@@ -223,10 +224,18 @@ namespace FBXpert
        
         private void Create()
         {                                                         
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify,_localEventNotify);
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
-                                              
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify,_localEventNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
+          //  _sql.ScriptNotify.Register4Error(Notify_OnRaiseErrorHandler);
+          //  _sql.ScriptNotify.Register4Info(Notify_OnRaiseInfoHandler);
+            var riList =_sql.ExecuteCommands(fctSQL.Lines);
+
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+
+            
+            var riFailure = riList.Find(x => x.commandDone == false);
             string info = (riFailure==null) 
                 ? $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} updated." 
                 : $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";

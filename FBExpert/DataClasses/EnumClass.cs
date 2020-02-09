@@ -12,6 +12,8 @@ namespace FBXpert.DataClasses
     public enum eCreateMode { create = 0, recreate = 1, drop = 2 };
     public enum eSQLFileWriteMode { none = 0, all = 1, seperated = 2 };
     public enum eSourceCodePrimaryKeyType{GeneratorInteger=0, UUID=1, GUID=2, HEXGUID=3, none=4 };
+
+    public enum eSQLHistoryType {failed=0, succeeded=1 }
       
     public enum eDependencies
     {

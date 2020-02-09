@@ -1,4 +1,6 @@
-﻿using MessageLibrary;
+﻿using BasicClassLibrary;
+using MessageLibrary;
+using SEListBox;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -28,10 +30,11 @@ namespace FBXDesigns
         public object EndObject;
        
     }
-    public class DesignTableClass : Shape
-    {
-        
 
+   
+    public class UIDesignTableClass : Shape
+    {
+        public static bool debug = false;
         private readonly Point _absoluteOffset = new Point(0, 0);
         private GroupBox _gbTable;
         private Panel _pnlTableCenter;
@@ -288,7 +291,7 @@ namespace FBXDesigns
                 {
                     case eAction.OnMove:
                     {
-                        Debug.WriteLine("Table_MouseMove onmove");
+                        if(debug) Debug.WriteLine("Table_MouseMove onmove");
                         Point pt = GetCursorPosition();
                         _action.DrawMoveRectangle(pt);
                         //DrawMove(pt);
@@ -298,7 +301,7 @@ namespace FBXDesigns
                     {
                         Point pt = GetCursorPosition();
 
-                        Debug.WriteLine("Table_MouseMove onresize");
+                        if (debug) Debug.WriteLine("Table_MouseMove onresize");
                         _action.DrawResize(pt);
                         break;
                     }
@@ -316,7 +319,7 @@ namespace FBXDesigns
                     //Action.DrawMove(pt);
                     _action.DrawLastMove();
                     _action.action = eAction.None;
-                    Debug.WriteLine("Form_MouseUp onmove");
+                    if (debug) Debug.WriteLine("Form_MouseUp onmove");
                     break;
                 case eAction.OnResize:
                     /*
@@ -324,7 +327,7 @@ namespace FBXDesigns
                     Action.DrawLastResize(pt);                
                     Action.action = eAction.None;
                     */
-                    Debug.WriteLine("Form_MouseUp onresize");
+                    if (debug) Debug.WriteLine("Form_MouseUp onresize");
                     _action.action = eAction.None;
                     break;
             }
@@ -399,7 +402,7 @@ namespace FBXDesigns
 
         private void ResizeTable(object sender)
         {
-            Debug.WriteLine("ResizeTable");
+            if (debug) Debug.WriteLine("ResizeTable");
             TableNotify?.AddToINFO("", "ACT_TABLE", this);
             Point pt = GetCursorPosition();
 
@@ -425,7 +428,7 @@ namespace FBXDesigns
 
         private void ResizeTable()
         {
-            Debug.WriteLine("ResizeTable");
+            if (debug) Debug.WriteLine("ResizeTable");
             TableNotify?.AddToINFO("", "ACT_TABLE", this);
             Point pt = GetCursorPosition();
             
@@ -462,7 +465,7 @@ namespace FBXDesigns
             _lvTableAttributes.Items.Add(lvi);
         }
         
-        public DesignTableClass(Control frm, string name, bool show = true, int x=50, int y=50) 
+        public UIDesignTableClass(Control frm, string name, bool show = true, int x=50, int y=50) 
         {
             Location = new Point(x,y);
             Name = name;

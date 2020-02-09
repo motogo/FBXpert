@@ -29,9 +29,8 @@ namespace FBXpert
         private ProgressClockForm _pc;
         private TreeNode _actRegNode;
         private TreeNode _tnSelected;
-        private TreeNode _actTableNode;
-        
-        private static DbExplorerForm _instance;       
+        private TreeNode _actTableNode;        
+        private static DbExplorerForm _instance;
         
         public static DbExplorerForm Instance(Form parent)
         {
@@ -40,7 +39,7 @@ namespace FBXpert
             {
                 MdiParent = parent
             };
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler += _instance.DBExplorer_OnRaiseLanguageChangedHandler;
+            LanguageClass.Instance().RegisterChangeNotifiy(_instance.DBExplorer_OnRaiseLanguageChangedHandler);
             _instance.Show();
             return (_instance);
         }
@@ -66,9 +65,9 @@ namespace FBXpert
         {
             InitializeComponent();
             Dock = DockStyle.Left;
-            DbExlorerNotify.NotifyType = eNotifyType.ErrorWithoutMessage;
-            DbExlorerNotify.AllowErrors = false;
-            DbExlorerNotify.Notify.OnRaiseInfoHandler += NotifyInf_DBExplorer;           
+          
+            DbExlorerNotify.ErrorGranularity = eMessageGranularity.never;
+            DbExlorerNotify.Register4Info(NotifyInf_DBExplorer);           
             NotificationsForm.Instance().Show(Left + Width + 16, 64);            
         }
 
@@ -80,7 +79,7 @@ namespace FBXpert
 
         private void SetCmsForDatabase(bool open)
         {
-            tsmiStatistics.Enabled          = open;           
+            tsmiStatistics.Enabled          = open;
             tsmiCreateXMLDesign.Enabled     = open;
             tsmiDatabaseDesigner.Enabled    = open;
             tsmiReportDesigner.Enabled      = open;
@@ -101,9 +100,10 @@ namespace FBXpert
                     ReloadAllDatabases();
                     return;
                 }
+                if(_actRegNode == null) return;
                 _actRegNode.Text = dbReg.Alias;
                 _actRegNode.Tag = dbReg;
-                if(dbReg.Active) ReadDatabaseMetadata(_actRegNode);                
+                if(dbReg.Active) ReadDatabaseMetadata(_actRegNode);
             }
             else if (k.Key.ToString() == "SHOW_DATABASE_STATISTICS")
             {
@@ -236,11 +236,9 @@ namespace FBXpert
             
                 _actRegNode = nd;
                 _actTables.Clear();
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO("Open Database " + dbReg.Alias);
-                }
-            
+                
+                NotifiesClass.Instance().AddToINFO("Open Database " + dbReg.Alias);
+                           
                 var tb = StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);            
                 _actViews = StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
 
@@ -263,10 +261,9 @@ namespace FBXpert
 
                _actSystemTables = StaticTreeClass.Instance().RefreshSystemTables(dbReg, nd);
           
-                if (NotifiesClass.Instance().AllowInfos)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Database {dbReg.Alias} opend !!!");
-                }
+                
+                NotifiesClass.Instance().AddToINFO($@"Database {dbReg.Alias} opend !!!");
+                
             
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
@@ -281,8 +278,9 @@ namespace FBXpert
         }
                         
         public void MakeDatabaseTree(bool openactive)
-        {                      
-            NotifiesClass.Instance().Notify.RaiseInfo("Load database configurations...", "KEY");
+        {
+            NotifiesClass.Instance().AddToINFO("Load database configurations...", "KEY");
+            
            
             treeView1.Nodes.Clear();
             tsmiCreateXMLDesign.Enabled = false;           
@@ -304,7 +302,8 @@ namespace FBXpert
                 nd.ToolTipText = dbr.GetFullDatabasePath();
                 treeView1.Nodes.Add(nd);                
             }
-            NotifiesClass.Instance().Notify.RaiseInfo("Database configurations loaded", "KEY");
+            NotifiesClass.Instance().AddToINFO("Database configurations loaded", "KEY");
+            
             treeView1.EndUpdate();
             treeView1.Refresh();
             Application.DoEvents();
@@ -333,6 +332,7 @@ namespace FBXpert
             }
         }
 
+        
         public void RemakeDatabaseTree(DBRegistrationClass dbr)
         {
             SetCmsForDatabase(false);
@@ -378,6 +378,11 @@ namespace FBXpert
             NotificationsForm.Instance().SetLeft = Width + 16;
             pnlUpper.Select();
             ExtensionMethods.DoubleBuffered(treeView1,true);
+           
+            /*
+            SEHotSpot.Controller ctrl = new SEHotSpot.Controller();            
+            ctrl.SetupKeyboardHooks(this);
+            */
         }
 
         private void ToolStripTextBox_MouseLeave(object sender, EventArgs e)
@@ -595,7 +600,7 @@ namespace FBXpert
                    if (field == null) return;            
                    var tff = new FieldForm(drc,FbXpertMainForm.Instance(), _tnSelected.Parent.Parent, field, null,EditStateClass.eBearbeiten.eEdit);
                    tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
-                   tff.Show();                               
+                   tff.Show();
                }
             }
         }
@@ -1101,6 +1106,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiSQLScriptExplorer)
             {
                 var dbm = new ScriptingForm(dbReg);
+                cmsDatabase.Close();
                 dbm.Show();
             }
             else if (e.ClickedItem == tsmiSQLExplorer)
@@ -1133,6 +1139,12 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiDatabaseDesigner)
             {
+                Dictionary<string,TableClass> tab = new System.Collections.Generic.Dictionary<string,TableClass>();
+                foreach(var table in _actTables)
+                {
+                    tab.Add(table.Name,table);
+                }
+                DatabaseDesignForm.Instance().SetDatas(dbReg, tab, _actViews);
                 DatabaseDesignForm.Instance().SetParent(MdiParent);
                 DatabaseDesignForm.Instance().Show();
             }
@@ -1546,7 +1558,9 @@ namespace FBXpert
             }
             #endregion refresh item
         }
+
         
+
         private void cmsGroup2Items_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {            
             var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
@@ -1639,9 +1653,16 @@ namespace FBXpert
                 string str = (treeView1.SelectedNode.Level == 1) ? StaticVariablesClass.ReloadAllConstraits : StaticVariablesClass.ReloadConstraits;                
                 DbExlorerNotify.Notify.RaiseInfo(Name, str, null);                
             }
-            else if (e.ClickedItem == tsmiRefreshViews)
+            else if (e.ClickedItem == tsmiRefreshViews) 
             {
                 DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadAllViews);
+            }
+            else if (e.ClickedItem == tsmiExportAllViewsSQL)
+            {
+                ExportViewsSQLForm evs = new ExportViewsSQLForm(MdiParent);
+                evs.dbReg = dbReg;
+                evs.views = _actViews;
+                evs.Show();
             }
             else if (e.ClickedItem == tsmiRefreshAllTables)
             {
@@ -1781,11 +1802,30 @@ namespace FBXpert
         public void ReloadAllDatabases()
         {
             if (!ReadDatabaseDefinition()) return;
-            NotifiesClass.Instance().InfoThreshold = eInfoLevel.normal;
+
+            NotifiesClass.Instance().InfoGranularity = eMessageGranularity.normal;
             MakeDatabaseTree(false);
-            OpenActiveDatabases();
+            int n = DatabaseDefinitions.Instance().CountToOpen();
+            if(n > DatabaseDefinitions.Instance().OpenDatabaseCount)
+            { 
+                object[] p = {n, Environment.NewLine };
+                if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "OpenDatabases", "DoYouWantOpenDatabases", FormStartPosition.CenterScreen,
+                        SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Exclamation, null, p) != SEDialogResult.Yes)
+                { 
+                    OpenActiveDatabases();
+                }
+                else
+                {
+                    DatabaseDefinitions.Instance().MarkDatabasesActiv(false);
+                    DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                }
+            }
+            else
+            {
+                OpenActiveDatabases();
+            }
             if (NotificationsForm.Instance().Visible)  NotificationsForm.Instance().Close();
-            NotifiesClass.Instance().InfoThreshold = eInfoLevel.few; //Alleinfos bis few angezeigt
+            NotifiesClass.Instance().InfoGranularity = eMessageGranularity.few; //Alleinfos bis few angezeigt
         }
         
         public void treeView1_KeyDown(object sender, KeyEventArgs e)
@@ -1794,8 +1834,7 @@ namespace FBXpert
             if (e.Control && e.Shift)
             {
                 switch (e.KeyCode)
-                {
-                    
+                {                    
                     case Keys.C:
                     {
                         cmsDatabase.Close();
@@ -1866,8 +1905,7 @@ namespace FBXpert
                         break;
                     }               
                 }
-            }
-            
+            }            
         }
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
@@ -1905,6 +1943,15 @@ namespace FBXpert
         {
             ReloadAllDatabases(); 
         }
-       
+
+        private void hsExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void DbExplorerForm_Enter(object sender, EventArgs e)
+        {
+            //SEHotSpot.Controller.Instance().SetHookForm(this);
+        }
     }
 }

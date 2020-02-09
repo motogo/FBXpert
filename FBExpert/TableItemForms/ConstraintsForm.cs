@@ -1,4 +1,6 @@
-﻿using FBExpert.DataClasses;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
+using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
@@ -41,12 +43,7 @@ namespace FBXpert
             
             _dbReg = dbReg;
             _tables = tables;
-                                                          
-            
-                _constraintObject = constraintObject;
-                
-           
-            
+            _constraintObject = constraintObject;
             OldConstraintName = _constraintObject.Name;
             _tableObject = tableObject;
             _constraintObject.TableName = _tableObject.Name;            
@@ -99,10 +96,7 @@ namespace FBXpert
 
         public void ShowUI()
         {
-           
             gbUsingIndex.Visible = !rbPrimaryKey.Checked;
-           
-
             if(rbChecks.Checked)
             {
                 gbChecksCode.Visible = true;
@@ -373,20 +367,18 @@ namespace FBXpert
             ac.AddAutocompleteForTables(tables);   
             ac.Activate();
         }
-
-        private void hsNEWClick(object sender, EventArgs e)
-        {
-           
-        }
-
+        
         private void Create()
-        {                       
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+        {                                   
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines); 
             
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
+            var riFailure = riList.Find(x=>x.commandDone == false);                                    
             OldConstraintName = NewConstraintName;
             if (DataFilled) MakeSQL();
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
             string info = (riFailure==null) 
                 ? $@"Constraint {_dbReg.Alias}->{_constraintObject.TableName}->{_constraintObject.Name} updated." 
@@ -413,10 +405,7 @@ namespace FBXpert
                 MakeSQL();
             }
         }
-       
         
-        
-       
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvFields.SelectedItems.Count > 0)
@@ -428,7 +417,7 @@ namespace FBXpert
 
         private void hsAddField_Click_1(object sender, EventArgs e)
         {
-            String fieldName = cbFields.SelectedItem.ToString();
+            string fieldName = cbFields.SelectedItem.ToString();
             ListViewItem lvi = new ListViewItem(fieldName);
             ListViewItem lvifind = lvFields.FindItemWithText(fieldName);
             if (lvifind == null)
@@ -440,7 +429,7 @@ namespace FBXpert
 
         private void hsRemoveField_Click_1(object sender, EventArgs e)
         {
-            String fieldName = cbFields.SelectedItem.ToString();
+            string fieldName = cbFields.SelectedItem.ToString();
             ListViewItem lvi = new ListViewItem(fieldName);
             ListViewItem lvifind = lvFields.FindItemWithText(fieldName);
             if (lvifind != null)
@@ -449,9 +438,6 @@ namespace FBXpert
                 ConstraintEditChanged();
             }
         }
-
-       
-
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == (Keys.K | Keys.Control))

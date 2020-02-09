@@ -867,7 +867,7 @@ namespace FBXpert
             this.hsNew.ToolTipTitle = "";
             this.hsNew.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsNew.UseVisualStyleBackColor = false;
-            this.hsNew.Click += new System.EventHandler(this.hsNEWClick);
+            
             // 
             // tabPageDependencies
             // 

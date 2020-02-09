@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using FBXpert.Globals;
 using System.Linq;
 using FBXpert.SQLStatements;
+using BasicClassLibrary;
+using DBBasicClassLibrary;
 
 namespace FBXpert
 {
@@ -47,8 +49,8 @@ namespace FBXpert
             _dbReg = dbReg;
            
                 
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;           
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
@@ -510,16 +512,19 @@ namespace FBXpert
         
         private void Create()
         {               
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone = false);      
+            var riFailure = riList.Find(x=>x.commandDone == false);      
             
             if(riFailure==null) 
             {                
                 old_constraint_name = txtConstraintName.Name;
                
-            }            
-            
+            }
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
             string info = (riFailure==null) 
                 ? $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} updated." 

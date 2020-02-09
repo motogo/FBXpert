@@ -170,7 +170,7 @@ namespace SEDiagramms
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DesignTableClass tb = listBox1.SelectedItem as DesignTableClass;
+            UIDesignTableClass tb = listBox1.SelectedItem as UIDesignTableClass;
             tb.Show();
         }
 

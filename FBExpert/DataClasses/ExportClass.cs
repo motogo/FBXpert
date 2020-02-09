@@ -275,7 +275,7 @@ namespace FBXpert.DataClasses
             _dsTableContent.Clear();
             if ((string.IsNullOrEmpty(tableObject.Name)) || (string.IsNullOrEmpty(cols))) return string.Empty;
             
-            string cmd = $@"SELECT {cols} FROM {tableObject.Name}";
+            string cmd = $@"{SQLConstants.SELECT} {cols} FROM {tableObject.Name}";
             
             _dsTableContent.Tables.Clear(); //[0].Columns.Clear();
                                     
@@ -931,15 +931,14 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetTableStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
             
-                if (SQLDirectoryName != null)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
-                } 
-            }
+            NotifiesClass.Instance().AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
+            
+            if (SQLDirectoryName != null)
+            {
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
+            } 
+            
             _bgw.RunWorkerAsync(allobjects);            
         }
 
@@ -1020,14 +1019,13 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted    += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDatabaseStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
+            
+            NotifiesClass.Instance().AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
+            if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
-                if (WriteToFile == eSQLFileWriteMode.all)
-                {
-                    NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
-                }
+                NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
             }
+            
             _bgw.RunWorkerAsync();            
         }
 
@@ -1035,8 +1033,7 @@ namespace FBXpert.DataClasses
         {            
             var dbReg = AktDBReg;
             var allDatabases = e.Argument as List<TableClass>;
-            _allDatabaseContent = new List<string>();         
-            int n = 0;
+            _allDatabaseContent = new List<string>();                     
             if (CreateDatabaseStatement)
             {
                 _allDatabaseContent.Add($@"/* ********* Create Database for {AktDBReg.Alias} ********** */{Environment.NewLine}");
@@ -1084,10 +1081,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetPKTableStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
+            
                        
             _bgw.RunWorkerAsync(allobjects);            
         }
@@ -1134,10 +1130,9 @@ namespace FBXpert.DataClasses
             this._bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetFKTableStructureChanged);
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFKTableStructureCompleted);
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
-            }            
+            
+            NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
+                        
             _bgw.RunWorkerAsync(allobjects);
         }
 
@@ -1182,10 +1177,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetIndecesStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating index structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating index structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1231,10 +1225,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetTriggerStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating trigger structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating trigger structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1280,10 +1273,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetProcedureStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1329,10 +1321,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetProcedureDefinitionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1379,10 +1370,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFunctionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1428,10 +1418,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFunctionDefinitionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1477,10 +1466,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDomainStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating domain structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating domain structure SQL for " + DBReg.Alias);
+            
 
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1527,10 +1515,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetGeneratorStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating generator structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating generator structure SQL for " + DBReg.Alias);
+            
 
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1579,10 +1566,9 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetViewStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            if (NotifiesClass.Instance().AllowInfos)
-            {
-                NotifiesClass.Instance().AddToINFO("Creating view structure SQL for " + DBReg.Alias);
-            }
+            
+            NotifiesClass.Instance().AddToINFO("Creating view structure SQL for " + DBReg.Alias);
+            
                         
             _bgw.RunWorkerAsync(allobjects);
         }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using DBBasicClassLibrary;
-using FastColoredTextBoxNS;
-using FBExpert.DataClasses;
+﻿using DBBasicClassLibrary;
 using FBXpert.DataClasses;
+using System;
+using System.Windows.Forms;
 
 namespace FBXpert.Globals
 {
@@ -16,7 +13,8 @@ namespace FBXpert.Globals
         public string Collation = StaticVariablesClass.Collation;                
         public bool Active;
         public string Role;
-        
+
+        public string InitialSQLExportPath      = StaticVariablesClass.SQLExportPath;
         public string InitialScriptingPath      = StaticVariablesClass.ScriptPath;
         public string InitialReportPath         = StaticVariablesClass.ReportPath;
         public string InitialExportPath         = StaticVariablesClass.ExportPath;
@@ -32,6 +30,7 @@ namespace FBXpert.Globals
         public eRegState State = eRegState.none;
         public eDBVersion Version = eDBVersion.FB3_32;
         public string FirebirdBinaryPath = $@"{Application.StartupPath}\FB302\Firebird\";
+        
         public CodeSettingsClass CodeSettings;        
         private ErrorCodes ErrorCodes = null;
         private TreeNode _treeNode;
@@ -85,6 +84,61 @@ namespace FBXpert.Globals
         public TreeNode GetNode()
         {
             return _treeNode;
-        }        
+        }
+
+        public string MakeServerFromText(string txtDatabase)
+        {
+            // Servers
+            //   //192.168.11.11:D:\test\test.fdb
+            //   192.168.11.11:D:\test\test.fdb
+
+            // Embedded
+            //   D:\test\test.fdb
+            //   \\192.168.11.99\test\test.fdb
+            if (ConnectionType == eConnectionType.server)
+            {
+                string txt = txtDatabase.Trim();
+                if (txt.StartsWith("//")) txt = txt.Substring(2);
+                string server = string.Empty;
+
+
+                int inxf = txt.IndexOf(":");
+                int inxl = txt.LastIndexOf(":");
+                if (inxf == inxl)
+                {
+                    // normaler dateipfad und kein embedded -> localhost
+                    server = $@"localhost";
+                }
+                else
+                {
+                    // ip:dateipfad
+                    server = txt.Substring(0, inxf);
+                }
+                return server;
+            }
+
+            //embedded
+            return string.Empty;
+        }
+        public string MakeDatabasepathFromText(string txtDatabase)
+        {
+            string txt = txtDatabase.Trim();
+            int inxf = txt.IndexOf(":");
+            int inxl = txt.LastIndexOf(":");
+            string path = string.Empty;
+            if (inxf == inxl)
+            {
+                // normaler dateipfad und kein embedded -> localhost
+                path = txt;
+            }
+            else
+            {
+                // ip:dateipfad
+                path = txt.Substring(inxf + 1);
+            }
+            return path;
+        }
+
+    
     }
 }

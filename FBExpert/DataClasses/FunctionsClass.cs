@@ -1,5 +1,6 @@
 ﻿using FBExpert.DataClasses;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FBXpert.DataClasses
@@ -28,6 +29,41 @@ namespace FBXpert.DataClasses
         public eFunctionType Type = eFunctionType.intern;
         public string ModuleType = string.Empty;
         public string EntryPoint = string.Empty;
+        public string GetSourceText()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("<STARTPARAMS>");
+            foreach (var pi in ParameterIn)
+            {
+                sb.AppendLine($@"ParameterIN :{pi.Name}->{ pi.RawType})");
+            }
+            foreach (var pi in ParameterOut)
+            {
+                sb.AppendLine($@"ParameterOUT:RETURNS->{ pi.RawType})");
+            }
+            sb.AppendLine("<ENDPARAMS>");
+            sb.AppendLine("<STARTTEXT>");
+            sb.AppendLine($@"CREATE OR ALTER FUNCTION {this.Name}");
+            sb.AppendLine($@"(");
+            foreach (var pi in ParameterIn)
+            {
+                sb.AppendLine($@"    {pi.Name} {pi.RawType}");
+            }
+            sb.AppendLine($@")");
+            sb.AppendLine($@"RETURNS");
+            foreach (var pi in ParameterIn)
+            {
+                sb.AppendLine($@"    {pi.RawType}");
+            }
+            sb.AppendLine($@"AS"); 
+
+            foreach (string str in Source)
+            {
+                sb.AppendLine(str);
+            }
+            sb.AppendLine("<ENDTEXT>");
+            return sb.ToString();
+        }
     }
 
     public class UserDefinedFunctionClass : DataObjectClass

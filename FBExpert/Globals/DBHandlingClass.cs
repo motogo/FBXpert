@@ -1,4 +1,5 @@
-﻿using DBBasicClassLibrary;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using MessageLibrary;
 using System.Threading;
 
@@ -36,10 +37,9 @@ namespace FBXpert.Globals
             }
 
             if (cc1.ConnectionIsClosed()) return;
-            if (NotifiesClass.Instance().AllowErrors)
-            {
-                NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc1.ConnName + " while " + str);
-            }
+            
+            NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc1.ConnName + " while " + str);
+            
         }
 
         public void WaitClosed(ConnectionClass cc1, ConnectionClass cc2, string str)
@@ -52,17 +52,15 @@ namespace FBXpert.Globals
             }
             if (!cc1.ConnectionIsClosed())
             {
-                if (NotifiesClass.Instance().AllowErrors)
-                {
-                    NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc1.ConnName + " while " + str);
-                }
+                
+                NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc1.ConnName + " while " + str);
+                
             }
             if (!cc2.ConnectionIsClosed())
             {
-                if (NotifiesClass.Instance().AllowErrors)
-                {
-                    NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc2.ConnName + " while " + str);
-                }
+                
+                NotifiesClass.Instance().AddToERROR("Timeout for Connection " + cc2.ConnName + " while " + str);
+                
             }
         }
     }

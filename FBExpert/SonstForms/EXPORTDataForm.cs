@@ -1,4 +1,5 @@
-﻿using FBExpert.DataClasses;
+﻿using BasicClassLibrary;
+using FBExpert.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
@@ -38,15 +39,15 @@ namespace FBExpert
         public EXPORTDataForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
-            this.MdiParent = parent; 
-                        
+            this.MdiParent = parent;
+
             localNotify = new NotifiesClass()
             {
-                NotifyType = eNotifyType.ErrorWithoutMessage,
-                AllowErrors = false
+                //NotifyType = eNotifyType.ErrorWithoutMessage,
+                ErrorGranularity = eMessageGranularity.never
             };
-            localNotify.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(InfoRaised);
-            localNotify.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
+            localNotify.Register4Info(InfoRaised);
+            localNotify.Register4Error(ErrorRaised);
                              
             DBReg = drc;
             

@@ -70,6 +70,7 @@
             this.slbDatabase1 = new SEListBox.SEListBox();
             this.pnlUpperDatabase1 = new System.Windows.Forms.Panel();
             this.pnlXML_UPPER = new System.Windows.Forms.Panel();
+            this.cbChangeToUppercase = new System.Windows.Forms.CheckBox();
             this.cbForwardRun = new System.Windows.Forms.CheckBox();
             this.cbReverseRun = new System.Windows.Forms.CheckBox();
             this.cbOnlyFailures = new System.Windows.Forms.CheckBox();
@@ -97,7 +98,11 @@
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fbdSourcePath = new System.Windows.Forms.FolderBrowserDialog();
-            this.cbChangeToUppercase = new System.Windows.Forms.CheckBox();
+            this.ckProcedures = new System.Windows.Forms.CheckBox();
+            this.ckViews = new System.Windows.Forms.CheckBox();
+            this.ckTables = new System.Windows.Forms.CheckBox();
+            this.ckGenerators = new System.Windows.Forms.CheckBox();
+            this.ckFuntions = new System.Windows.Forms.CheckBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -157,6 +162,7 @@
             this.hsRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefresh.FlatAppearance.BorderSize = 0;
             this.hsRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
@@ -171,6 +177,7 @@
             this.hsRefresh.NonMarkedText = "";
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 3;
+            this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRefresh.ToolTipActive = false;
             this.hsRefresh.ToolTipAutomaticDelay = 500;
             this.hsRefresh.ToolTipAutoPopDelay = 5000;
@@ -182,7 +189,6 @@
             this.hsRefresh.ToolTipIsBallon = false;
             this.hsRefresh.ToolTipOwnerDraw = false;
             this.hsRefresh.ToolTipReshowDelay = 100;
-            
             this.hsRefresh.ToolTipShowAlways = false;
             this.hsRefresh.ToolTipText = "";
             this.hsRefresh.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -204,6 +210,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -218,6 +225,7 @@
             this.hsClose.NonMarkedText = "";
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 2;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -229,7 +237,6 @@
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -454,6 +461,7 @@
             this.hsSearchDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSearchDown.FlatAppearance.BorderSize = 0;
             this.hsSearchDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSearchDown.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSearchDown.Image = global::FBXpert.Properties.Resources.go_down22x;
             this.hsSearchDown.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
@@ -468,6 +476,7 @@
             this.hsSearchDown.NonMarkedText = "";
             this.hsSearchDown.Size = new System.Drawing.Size(45, 41);
             this.hsSearchDown.TabIndex = 8;
+            this.hsSearchDown.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsSearchDown.ToolTipActive = false;
             this.hsSearchDown.ToolTipAutomaticDelay = 500;
             this.hsSearchDown.ToolTipAutoPopDelay = 5000;
@@ -479,7 +488,6 @@
             this.hsSearchDown.ToolTipIsBallon = false;
             this.hsSearchDown.ToolTipOwnerDraw = false;
             this.hsSearchDown.ToolTipReshowDelay = 100;
-            
             this.hsSearchDown.ToolTipShowAlways = false;
             this.hsSearchDown.ToolTipText = "";
             this.hsSearchDown.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -501,6 +509,7 @@
             this.hsSearchUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSearchUp.FlatAppearance.BorderSize = 0;
             this.hsSearchUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSearchUp.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSearchUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.hsSearchUp.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
@@ -515,6 +524,7 @@
             this.hsSearchUp.NonMarkedText = "";
             this.hsSearchUp.Size = new System.Drawing.Size(45, 41);
             this.hsSearchUp.TabIndex = 7;
+            this.hsSearchUp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsSearchUp.ToolTipActive = false;
             this.hsSearchUp.ToolTipAutomaticDelay = 500;
             this.hsSearchUp.ToolTipAutoPopDelay = 5000;
@@ -526,7 +536,6 @@
             this.hsSearchUp.ToolTipIsBallon = false;
             this.hsSearchUp.ToolTipOwnerDraw = false;
             this.hsSearchUp.ToolTipReshowDelay = 100;
-            
             this.hsSearchUp.ToolTipShowAlways = false;
             this.hsSearchUp.ToolTipText = "";
             this.hsSearchUp.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -548,6 +557,7 @@
             this.hsSeach.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSeach.FlatAppearance.BorderSize = 0;
             this.hsSeach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSeach.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSeach.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSeach.Image = global::FBXpert.Properties.Resources.lupe24x;
             this.hsSeach.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
@@ -562,6 +572,7 @@
             this.hsSeach.NonMarkedText = "";
             this.hsSeach.Size = new System.Drawing.Size(45, 41);
             this.hsSeach.TabIndex = 6;
+            this.hsSeach.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsSeach.ToolTipActive = false;
             this.hsSeach.ToolTipAutomaticDelay = 500;
             this.hsSeach.ToolTipAutoPopDelay = 5000;
@@ -573,7 +584,6 @@
             this.hsSeach.ToolTipIsBallon = false;
             this.hsSeach.ToolTipOwnerDraw = false;
             this.hsSeach.ToolTipReshowDelay = 100;
-            
             this.hsSeach.ToolTipShowAlways = false;
             this.hsSeach.ToolTipText = "";
             this.hsSeach.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -706,6 +716,11 @@
             // 
             this.pnlXML_UPPER.BackColor = System.Drawing.SystemColors.Control;
             this.pnlXML_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXML_UPPER.Controls.Add(this.ckFuntions);
+            this.pnlXML_UPPER.Controls.Add(this.ckGenerators);
+            this.pnlXML_UPPER.Controls.Add(this.ckTables);
+            this.pnlXML_UPPER.Controls.Add(this.ckViews);
+            this.pnlXML_UPPER.Controls.Add(this.ckProcedures);
             this.pnlXML_UPPER.Controls.Add(this.cbChangeToUppercase);
             this.pnlXML_UPPER.Controls.Add(this.cbForwardRun);
             this.pnlXML_UPPER.Controls.Add(this.cbReverseRun);
@@ -717,6 +732,18 @@
             this.pnlXML_UPPER.Name = "pnlXML_UPPER";
             this.pnlXML_UPPER.Size = new System.Drawing.Size(1220, 51);
             this.pnlXML_UPPER.TabIndex = 1;
+            // 
+            // cbChangeToUppercase
+            // 
+            this.cbChangeToUppercase.AutoSize = true;
+            this.cbChangeToUppercase.Checked = true;
+            this.cbChangeToUppercase.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbChangeToUppercase.Location = new System.Drawing.Point(524, 27);
+            this.cbChangeToUppercase.Name = "cbChangeToUppercase";
+            this.cbChangeToUppercase.Size = new System.Drawing.Size(128, 17);
+            this.cbChangeToUppercase.TabIndex = 11;
+            this.cbChangeToUppercase.Text = "Text to uppercase";
+            this.cbChangeToUppercase.UseVisualStyleBackColor = true;
             // 
             // cbForwardRun
             // 
@@ -767,6 +794,7 @@
             this.hsDoCompare.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsDoCompare.FlatAppearance.BorderSize = 0;
             this.hsDoCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDoCompare.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsDoCompare.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsDoCompare.Image = global::FBXpert.Properties.Resources.applications_system;
             this.hsDoCompare.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_32x;
@@ -781,6 +809,7 @@
             this.hsDoCompare.NonMarkedText = "";
             this.hsDoCompare.Size = new System.Drawing.Size(45, 47);
             this.hsDoCompare.TabIndex = 5;
+            this.hsDoCompare.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsDoCompare.ToolTipActive = false;
             this.hsDoCompare.ToolTipAutomaticDelay = 500;
             this.hsDoCompare.ToolTipAutoPopDelay = 5000;
@@ -792,7 +821,6 @@
             this.hsDoCompare.ToolTipIsBallon = false;
             this.hsDoCompare.ToolTipOwnerDraw = false;
             this.hsDoCompare.ToolTipReshowDelay = 100;
-            
             this.hsDoCompare.ToolTipShowAlways = false;
             this.hsDoCompare.ToolTipText = "";
             this.hsDoCompare.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -814,6 +842,7 @@
             this.hsSaveResults.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveResults.FlatAppearance.BorderSize = 0;
             this.hsSaveResults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveResults.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveResults.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
             this.hsSaveResults.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
@@ -828,6 +857,7 @@
             this.hsSaveResults.NonMarkedText = "";
             this.hsSaveResults.Size = new System.Drawing.Size(45, 47);
             this.hsSaveResults.TabIndex = 4;
+            this.hsSaveResults.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsSaveResults.ToolTipActive = false;
             this.hsSaveResults.ToolTipAutomaticDelay = 500;
             this.hsSaveResults.ToolTipAutoPopDelay = 5000;
@@ -839,7 +869,6 @@
             this.hsSaveResults.ToolTipIsBallon = false;
             this.hsSaveResults.ToolTipOwnerDraw = false;
             this.hsSaveResults.ToolTipReshowDelay = 100;
-            
             this.hsSaveResults.ToolTipShowAlways = false;
             this.hsSaveResults.ToolTipText = "";
             this.hsSaveResults.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -942,6 +971,7 @@
             this.hsUnselObjects2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUnselObjects2.FlatAppearance.BorderSize = 0;
             this.hsUnselObjects2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUnselObjects2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUnselObjects2.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUnselObjects2.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUnselObjects2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -970,7 +1000,6 @@
             this.hsUnselObjects2.ToolTipIsBallon = false;
             this.hsUnselObjects2.ToolTipOwnerDraw = false;
             this.hsUnselObjects2.ToolTipReshowDelay = 100;
-            
             this.hsUnselObjects2.ToolTipShowAlways = false;
             this.hsUnselObjects2.ToolTipText = "";
             this.hsUnselObjects2.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -992,6 +1021,7 @@
             this.hsSelObjects2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSelObjects2.FlatAppearance.BorderSize = 0;
             this.hsSelObjects2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSelObjects2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSelObjects2.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSelObjects2.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsSelObjects2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1020,7 +1050,6 @@
             this.hsSelObjects2.ToolTipIsBallon = false;
             this.hsSelObjects2.ToolTipOwnerDraw = false;
             this.hsSelObjects2.ToolTipReshowDelay = 100;
-            
             this.hsSelObjects2.ToolTipShowAlways = false;
             this.hsSelObjects2.ToolTipText = "";
             this.hsSelObjects2.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1106,6 +1135,7 @@
             this.hsUnselObjects1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUnselObjects1.FlatAppearance.BorderSize = 0;
             this.hsUnselObjects1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUnselObjects1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUnselObjects1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUnselObjects1.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUnselObjects1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1134,7 +1164,6 @@
             this.hsUnselObjects1.ToolTipIsBallon = false;
             this.hsUnselObjects1.ToolTipOwnerDraw = false;
             this.hsUnselObjects1.ToolTipReshowDelay = 100;
-            
             this.hsUnselObjects1.ToolTipShowAlways = false;
             this.hsUnselObjects1.ToolTipText = "";
             this.hsUnselObjects1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1156,6 +1185,7 @@
             this.hsSelObjects1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSelObjects1.FlatAppearance.BorderSize = 0;
             this.hsSelObjects1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSelObjects1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSelObjects1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSelObjects1.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsSelObjects1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1184,7 +1214,6 @@
             this.hsSelObjects1.ToolTipIsBallon = false;
             this.hsSelObjects1.ToolTipOwnerDraw = false;
             this.hsSelObjects1.ToolTipReshowDelay = 100;
-            
             this.hsSelObjects1.ToolTipShowAlways = false;
             this.hsSelObjects1.ToolTipText = "";
             this.hsSelObjects1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1273,17 +1302,65 @@
             this.saveFileDialog1.Filter = "Text|*.txt|All|*.*";
             this.saveFileDialog1.Title = "Save compare results";
             // 
-            // cbCHangeToUppercase
+            // ckProcedures
             // 
-            this.cbChangeToUppercase.AutoSize = true;
-            this.cbChangeToUppercase.Checked = true;
-            this.cbChangeToUppercase.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbChangeToUppercase.Location = new System.Drawing.Point(524, 27);
-            this.cbChangeToUppercase.Name = "cbCHangeToUppercase";
-            this.cbChangeToUppercase.Size = new System.Drawing.Size(128, 17);
-            this.cbChangeToUppercase.TabIndex = 11;
-            this.cbChangeToUppercase.Text = "Text to uppercase";
-            this.cbChangeToUppercase.UseVisualStyleBackColor = true;
+            this.ckProcedures.AutoSize = true;
+            this.ckProcedures.Checked = true;
+            this.ckProcedures.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckProcedures.Location = new System.Drawing.Point(766, 3);
+            this.ckProcedures.Name = "ckProcedures";
+            this.ckProcedures.Size = new System.Drawing.Size(86, 17);
+            this.ckProcedures.TabIndex = 12;
+            this.ckProcedures.Text = "Procedures";
+            this.ckProcedures.UseVisualStyleBackColor = true;
+            // 
+            // ckViews
+            // 
+            this.ckViews.AutoSize = true;
+            this.ckViews.Checked = true;
+            this.ckViews.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckViews.Location = new System.Drawing.Point(858, 3);
+            this.ckViews.Name = "ckViews";
+            this.ckViews.Size = new System.Drawing.Size(56, 17);
+            this.ckViews.TabIndex = 13;
+            this.ckViews.Text = "Views";
+            this.ckViews.UseVisualStyleBackColor = true;
+            // 
+            // ckTables
+            // 
+            this.ckTables.AutoSize = true;
+            this.ckTables.Checked = true;
+            this.ckTables.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckTables.Location = new System.Drawing.Point(935, 3);
+            this.ckTables.Name = "ckTables";
+            this.ckTables.Size = new System.Drawing.Size(62, 17);
+            this.ckTables.TabIndex = 14;
+            this.ckTables.Text = "Tables";
+            this.ckTables.UseVisualStyleBackColor = true;
+            // 
+            // ckGenerators
+            // 
+            this.ckGenerators.AutoSize = true;
+            this.ckGenerators.Checked = true;
+            this.ckGenerators.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckGenerators.Location = new System.Drawing.Point(766, 26);
+            this.ckGenerators.Name = "ckGenerators";
+            this.ckGenerators.Size = new System.Drawing.Size(92, 17);
+            this.ckGenerators.TabIndex = 15;
+            this.ckGenerators.Text = "Generatoren";
+            this.ckGenerators.UseVisualStyleBackColor = true;
+            // 
+            // ckFuntions
+            // 
+            this.ckFuntions.AutoSize = true;
+            this.ckFuntions.Checked = true;
+            this.ckFuntions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckFuntions.Location = new System.Drawing.Point(864, 26);
+            this.ckFuntions.Name = "ckFuntions";
+            this.ckFuntions.Size = new System.Drawing.Size(86, 17);
+            this.ckFuntions.TabIndex = 16;
+            this.ckFuntions.Text = "Funktionen";
+            this.ckFuntions.UseVisualStyleBackColor = true;
             // 
             // DatabaseCompareFrom
             // 
@@ -1390,5 +1467,10 @@
         private System.Windows.Forms.CheckBox cbForward;
         private System.Windows.Forms.CheckBox cbReverse;
         private System.Windows.Forms.CheckBox cbChangeToUppercase;
+        private System.Windows.Forms.CheckBox ckTables;
+        private System.Windows.Forms.CheckBox ckViews;
+        private System.Windows.Forms.CheckBox ckProcedures;
+        private System.Windows.Forms.CheckBox ckFuntions;
+        private System.Windows.Forms.CheckBox ckGenerators;
     }
 }

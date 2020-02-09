@@ -21,11 +21,22 @@ namespace FBExpert.DataClasses
         public string GetSourceText()
         {
             var sb = new StringBuilder();
+            sb.AppendLine("<STARTPARAMS>");
+            foreach(var pi in ParameterIn)
+            {
+                sb.AppendLine($@"ParameterIN :{pi.Name}->{ pi.RawType}->Length: {pi.Length})");
+            }
+            foreach (var pi in ParameterOut)
+            {
+                sb.AppendLine($@"ParameterOUT:{pi.Name}->{ pi.RawType}->Length: {pi.Length})");
+            }
+            sb.AppendLine("<ENDPARAMS>");
+            sb.AppendLine("<STARTTEXT>");
             foreach (string str in Source)
             {
                 sb.AppendLine(str);
             }
-
+            sb.AppendLine("<ENDTEXT>");
             return sb.ToString();
         }
 

@@ -59,8 +59,8 @@ namespace FBXpert
             OrgTable = tables.Find(X=>X.Name == notnullObject.TableName);
             NotNullObject.TableName = OrgTable.Name;
             
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             
                    
         }
@@ -274,14 +274,18 @@ namespace FBXpert
         {
             
 
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines); 
           
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
+            var riFailure = riList.Find(x=>x.commandDone == false);                                    
              OldConstraintName = NewConstraintName;
             if (DataFilled) MakeSQL();
-            
 
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+
+            
             string info = (riFailure==null) 
                 ? $@"NotNull {_dbReg.Alias}->{NewConstraintName} updated." 
                 : $@"NotNull {_dbReg.Alias}->{NewConstraintName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";

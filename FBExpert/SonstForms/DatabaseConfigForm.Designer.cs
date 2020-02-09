@@ -30,7 +30,6 @@ namespace FBExpert
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseConfigForm));
             this.hsClone = new SeControlsLib.HotSpot();
             this.hsSave = new SeControlsLib.HotSpot();
@@ -71,6 +70,8 @@ namespace FBExpert
             this.tabXPertUsedAttributes = new System.Windows.Forms.TabPage();
             this.pnlAttributesCenter = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.gbOpenDatabasesCount = new System.Windows.Forms.GroupBox();
+            this.txtOpenDatabasesCount = new System.Windows.Forms.TextBox();
             this.gbTableMaxRows = new System.Windows.Forms.GroupBox();
             this.txtTableMaxRows = new System.Windows.Forms.TextBox();
             this.gbSkipForSelect = new System.Windows.Forms.GroupBox();
@@ -112,10 +113,6 @@ namespace FBExpert
             this.gbDefaultScriptPath = new System.Windows.Forms.GroupBox();
             this.txtDefaultScriptPath = new System.Windows.Forms.TextBox();
             this.hsLoadDefaultScriptPath = new SeControlsLib.HotSpot();
-            this.tabCreateSQL = new System.Windows.Forms.TabPage();
-            this.fcbSQLCreate = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlSQLCreateUpper = new System.Windows.Forms.Panel();
-            this.hsCreate = new SeControlsLib.HotSpot();
             this.gbAttributesUpper = new System.Windows.Forms.GroupBox();
             this.gbVersion = new System.Windows.Forms.GroupBox();
             this.rb4_64 = new System.Windows.Forms.RadioButton();
@@ -135,6 +132,9 @@ namespace FBExpert
             this.pnlUpper = new System.Windows.Forms.Panel();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsClose = new SeControlsLib.HotSpot();
+            this.gbDefaultSQLExportPath = new System.Windows.Forms.GroupBox();
+            this.txtDefaultSQLExportPath = new System.Windows.Forms.TextBox();
+            this.hsInitialSQLExportPath = new SeControlsLib.HotSpot();
             this.pnlCenter.SuspendLayout();
             this.tabcontrolConfig.SuspendLayout();
             this.tabBasicConf.SuspendLayout();
@@ -154,6 +154,7 @@ namespace FBExpert
             this.tabXPertUsedAttributes.SuspendLayout();
             this.pnlAttributesCenter.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.gbOpenDatabasesCount.SuspendLayout();
             this.gbTableMaxRows.SuspendLayout();
             this.gbSkipForSelect.SuspendLayout();
             this.gbConnectionLifetime.SuspendLayout();
@@ -171,14 +172,12 @@ namespace FBExpert
             this.groupBox1.SuspendLayout();
             this.gbDefaultReportPath.SuspendLayout();
             this.gbDefaultScriptPath.SuspendLayout();
-            this.tabCreateSQL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fcbSQLCreate)).BeginInit();
-            this.pnlSQLCreateUpper.SuspendLayout();
             this.gbAttributesUpper.SuspendLayout();
             this.gbVersion.SuspendLayout();
             this.gbLivettime.SuspendLayout();
             this.gbDatenbankAlias.SuspendLayout();
             this.pnlUpper.SuspendLayout();
+            this.gbDefaultSQLExportPath.SuspendLayout();
             this.SuspendLayout();
             // 
             // hsClone
@@ -194,6 +193,7 @@ namespace FBExpert
             this.hsClone.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClone.FlatAppearance.BorderSize = 0;
             this.hsClone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClone.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClone.Image = global::FBXpert.Properties.Resources.database_add_24x;
             this.hsClone.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -243,6 +243,7 @@ namespace FBExpert
             this.hsSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSave.FlatAppearance.BorderSize = 0;
             this.hsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSave.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSave.Image = global::FBXpert.Properties.Resources.ok_gn32x;
             this.hsSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -303,12 +304,11 @@ namespace FBExpert
             this.tabcontrolConfig.Controls.Add(this.tabXPertUsedAttributes);
             this.tabcontrolConfig.Controls.Add(this.tabPageSourceControl);
             this.tabcontrolConfig.Controls.Add(this.tabMisc);
-            this.tabcontrolConfig.Controls.Add(this.tabCreateSQL);
             this.tabcontrolConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabcontrolConfig.Location = new System.Drawing.Point(0, 184);
+            this.tabcontrolConfig.Location = new System.Drawing.Point(0, 145);
             this.tabcontrolConfig.Name = "tabcontrolConfig";
             this.tabcontrolConfig.SelectedIndex = 0;
-            this.tabcontrolConfig.Size = new System.Drawing.Size(855, 464);
+            this.tabcontrolConfig.Size = new System.Drawing.Size(855, 503);
             this.tabcontrolConfig.TabIndex = 7;
             // 
             // tabBasicConf
@@ -317,7 +317,7 @@ namespace FBExpert
             this.tabBasicConf.Location = new System.Drawing.Point(4, 22);
             this.tabBasicConf.Name = "tabBasicConf";
             this.tabBasicConf.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBasicConf.Size = new System.Drawing.Size(847, 438);
+            this.tabBasicConf.Size = new System.Drawing.Size(847, 477);
             this.tabBasicConf.TabIndex = 0;
             this.tabBasicConf.Text = "Basic configuration";
             this.tabBasicConf.UseVisualStyleBackColor = true;
@@ -340,14 +340,14 @@ namespace FBExpert
             this.pnlCenterBasicConf.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCenterBasicConf.Location = new System.Drawing.Point(3, 3);
             this.pnlCenterBasicConf.Name = "pnlCenterBasicConf";
-            this.pnlCenterBasicConf.Size = new System.Drawing.Size(841, 432);
+            this.pnlCenterBasicConf.Size = new System.Drawing.Size(841, 471);
             this.pnlCenterBasicConf.TabIndex = 0;
             // 
             // gbConnectionString
             // 
             this.gbConnectionString.Controls.Add(this.txtConnectionString);
             this.gbConnectionString.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbConnectionString.Location = new System.Drawing.Point(0, 301);
+            this.gbConnectionString.Location = new System.Drawing.Point(0, 340);
             this.gbConnectionString.Name = "gbConnectionString";
             this.gbConnectionString.Size = new System.Drawing.Size(841, 131);
             this.gbConnectionString.TabIndex = 13;
@@ -389,6 +389,7 @@ namespace FBExpert
             this.hsLoadClientLib.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadClientLib.FlatAppearance.BorderSize = 0;
             this.hsLoadClientLib.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadClientLib.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadClientLib.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadClientLib.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadClientLib.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -447,6 +448,7 @@ namespace FBExpert
             this.hsCreateDatabase.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreateDatabase.FlatAppearance.BorderSize = 0;
             this.hsCreateDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreateDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateDatabase.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCreateDatabase.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsCreateDatabase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -593,6 +595,7 @@ namespace FBExpert
             this.hsChangeFullPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsChangeFullPath.FlatAppearance.BorderSize = 0;
             this.hsChangeFullPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsChangeFullPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsChangeFullPath.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsChangeFullPath.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_light_blue_x22;
             this.hsChangeFullPath.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -641,6 +644,7 @@ namespace FBExpert
             this.hsLoad.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoad.FlatAppearance.BorderSize = 0;
             this.hsLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoad.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoad.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -816,7 +820,7 @@ namespace FBExpert
             this.tabXPertUsedAttributes.Location = new System.Drawing.Point(4, 22);
             this.tabXPertUsedAttributes.Name = "tabXPertUsedAttributes";
             this.tabXPertUsedAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXPertUsedAttributes.Size = new System.Drawing.Size(847, 438);
+            this.tabXPertUsedAttributes.Size = new System.Drawing.Size(847, 477);
             this.tabXPertUsedAttributes.TabIndex = 1;
             this.tabXPertUsedAttributes.Text = "FBXpert attributes";
             this.tabXPertUsedAttributes.UseVisualStyleBackColor = true;
@@ -828,12 +832,13 @@ namespace FBExpert
             this.pnlAttributesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAttributesCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlAttributesCenter.Name = "pnlAttributesCenter";
-            this.pnlAttributesCenter.Size = new System.Drawing.Size(841, 432);
+            this.pnlAttributesCenter.Size = new System.Drawing.Size(841, 471);
             this.pnlAttributesCenter.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel3.Controls.Add(this.gbOpenDatabasesCount);
             this.panel3.Controls.Add(this.gbTableMaxRows);
             this.panel3.Controls.Add(this.gbSkipForSelect);
             this.panel3.Controls.Add(this.gbConnectionLifetime);
@@ -843,8 +848,27 @@ namespace FBExpert
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(841, 432);
+            this.panel3.Size = new System.Drawing.Size(841, 471);
             this.panel3.TabIndex = 16;
+            // 
+            // gbOpenDatabasesCount
+            // 
+            this.gbOpenDatabasesCount.Controls.Add(this.txtOpenDatabasesCount);
+            this.gbOpenDatabasesCount.Location = new System.Drawing.Point(414, 44);
+            this.gbOpenDatabasesCount.Name = "gbOpenDatabasesCount";
+            this.gbOpenDatabasesCount.Size = new System.Drawing.Size(166, 41);
+            this.gbOpenDatabasesCount.TabIndex = 18;
+            this.gbOpenDatabasesCount.TabStop = false;
+            this.gbOpenDatabasesCount.Text = "Reopen Databases Count";
+            // 
+            // txtOpenDatabasesCount
+            // 
+            this.txtOpenDatabasesCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOpenDatabasesCount.Location = new System.Drawing.Point(3, 16);
+            this.txtOpenDatabasesCount.Name = "txtOpenDatabasesCount";
+            this.txtOpenDatabasesCount.Size = new System.Drawing.Size(160, 20);
+            this.txtOpenDatabasesCount.TabIndex = 1;
+            this.txtOpenDatabasesCount.Text = "0";
             // 
             // gbTableMaxRows
             // 
@@ -973,7 +997,7 @@ namespace FBExpert
             this.tabPageSourceControl.Location = new System.Drawing.Point(4, 22);
             this.tabPageSourceControl.Name = "tabPageSourceControl";
             this.tabPageSourceControl.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSourceControl.Size = new System.Drawing.Size(847, 438);
+            this.tabPageSourceControl.Size = new System.Drawing.Size(847, 477);
             this.tabPageSourceControl.TabIndex = 2;
             this.tabPageSourceControl.Text = "Sourcecode control";
             this.tabPageSourceControl.UseVisualStyleBackColor = true;
@@ -988,7 +1012,7 @@ namespace FBExpert
             this.pnlSouceControlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSouceControlCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlSouceControlCenter.Name = "pnlSouceControlCenter";
-            this.pnlSouceControlCenter.Size = new System.Drawing.Size(841, 432);
+            this.pnlSouceControlCenter.Size = new System.Drawing.Size(841, 471);
             this.pnlSouceControlCenter.TabIndex = 1;
             // 
             // gbSourceCodeOutputPath
@@ -1010,7 +1034,6 @@ namespace FBExpert
             this.txtSourcecodeOutputPath.Name = "txtSourcecodeOutputPath";
             this.txtSourcecodeOutputPath.Size = new System.Drawing.Size(676, 20);
             this.txtSourcecodeOutputPath.TabIndex = 0;
-            this.txtSourcecodeOutputPath.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // hsSourcecodeFolder
             // 
@@ -1025,6 +1048,7 @@ namespace FBExpert
             this.hsSourcecodeFolder.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSourcecodeFolder.FlatAppearance.BorderSize = 0;
             this.hsSourcecodeFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSourcecodeFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSourcecodeFolder.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSourcecodeFolder.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsSourcecodeFolder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1170,7 +1194,7 @@ namespace FBExpert
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
             this.tabMisc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMisc.Size = new System.Drawing.Size(847, 438);
+            this.tabMisc.Size = new System.Drawing.Size(847, 477);
             this.tabMisc.TabIndex = 3;
             this.tabMisc.Text = "Misc";
             this.tabMisc.UseVisualStyleBackColor = true;
@@ -1178,6 +1202,7 @@ namespace FBExpert
             // pnlMisc
             // 
             this.pnlMisc.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlMisc.Controls.Add(this.gbDefaultSQLExportPath);
             this.pnlMisc.Controls.Add(this.gbDefaultExportPath);
             this.pnlMisc.Controls.Add(this.groupBox1);
             this.pnlMisc.Controls.Add(this.gbDefaultReportPath);
@@ -1185,7 +1210,7 @@ namespace FBExpert
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMisc.Location = new System.Drawing.Point(3, 3);
             this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(841, 432);
+            this.pnlMisc.Size = new System.Drawing.Size(841, 471);
             this.pnlMisc.TabIndex = 2;
             // 
             // gbDefaultExportPath
@@ -1220,6 +1245,7 @@ namespace FBExpert
             this.hsLoadDefaultExports.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadDefaultExports.FlatAppearance.BorderSize = 0;
             this.hsLoadDefaultExports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadDefaultExports.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadDefaultExports.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadDefaultExports.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadDefaultExports.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1286,6 +1312,7 @@ namespace FBExpert
             this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot1.FlatAppearance.BorderSize = 0;
             this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot1.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hotSpot1.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1352,6 +1379,7 @@ namespace FBExpert
             this.hsLoadDefaultReportPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadDefaultReportPath.FlatAppearance.BorderSize = 0;
             this.hsLoadDefaultReportPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadDefaultReportPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadDefaultReportPath.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadDefaultReportPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadDefaultReportPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1419,6 +1447,7 @@ namespace FBExpert
             this.hsLoadDefaultScriptPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadDefaultScriptPath.FlatAppearance.BorderSize = 0;
             this.hsLoadDefaultScriptPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadDefaultScriptPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadDefaultScriptPath.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadDefaultScriptPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadDefaultScriptPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1453,107 +1482,6 @@ namespace FBExpert
             this.hsLoadDefaultScriptPath.UseVisualStyleBackColor = false;
             this.hsLoadDefaultScriptPath.Click += new System.EventHandler(this.hsLoadDefaultScriptPath_Click);
             // 
-            // tabCreateSQL
-            // 
-            this.tabCreateSQL.Controls.Add(this.fcbSQLCreate);
-            this.tabCreateSQL.Controls.Add(this.pnlSQLCreateUpper);
-            this.tabCreateSQL.Location = new System.Drawing.Point(4, 22);
-            this.tabCreateSQL.Name = "tabCreateSQL";
-            this.tabCreateSQL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCreateSQL.Size = new System.Drawing.Size(847, 438);
-            this.tabCreateSQL.TabIndex = 4;
-            this.tabCreateSQL.Text = "SQL";
-            this.tabCreateSQL.UseVisualStyleBackColor = true;
-            // 
-            // fcbSQLCreate
-            // 
-            this.fcbSQLCreate.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fcbSQLCreate.AutoScrollMinSize = new System.Drawing.Size(666, 14);
-            this.fcbSQLCreate.BackBrush = null;
-            this.fcbSQLCreate.CharHeight = 14;
-            this.fcbSQLCreate.CharWidth = 8;
-            this.fcbSQLCreate.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fcbSQLCreate.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fcbSQLCreate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fcbSQLCreate.IsReplaceMode = false;
-            this.fcbSQLCreate.Location = new System.Drawing.Point(3, 35);
-            this.fcbSQLCreate.Name = "fcbSQLCreate";
-            this.fcbSQLCreate.Paddings = new System.Windows.Forms.Padding(0);
-            this.fcbSQLCreate.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fcbSQLCreate.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbSQLCreate.ServiceColors")));
-            this.fcbSQLCreate.Size = new System.Drawing.Size(841, 400);
-            this.fcbSQLCreate.TabIndex = 0;
-            this.fcbSQLCreate.Text = "CREATE DATABASE \'C:\\Temp\\Test.db\' page_size 8192 user \'SYSDBA\' password \'masterke" +
-    "y\'";
-            this.fcbSQLCreate.Zoom = 100;
-            // 
-            // pnlSQLCreateUpper
-            // 
-            this.pnlSQLCreateUpper.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlSQLCreateUpper.Controls.Add(this.hsCreate);
-            this.pnlSQLCreateUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSQLCreateUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlSQLCreateUpper.Name = "pnlSQLCreateUpper";
-            this.pnlSQLCreateUpper.Size = new System.Drawing.Size(841, 32);
-            this.pnlSQLCreateUpper.TabIndex = 1;
-            // 
-            // hsCreate
-            // 
-            this.hsCreate.BackColor = System.Drawing.Color.Transparent;
-            this.hsCreate.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsCreate.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsCreate.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsCreate.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsCreate.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsCreate.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsCreate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsCreate.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsCreate.FlatAppearance.BorderSize = 0;
-            this.hsCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsCreate.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsCreate.Image = global::FBXpert.Properties.Resources.applications_system;
-            this.hsCreate.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_32x;
-            this.hsCreate.ImageToggleOnSelect = true;
-            this.hsCreate.Location = new System.Drawing.Point(0, 0);
-            this.hsCreate.Marked = false;
-            this.hsCreate.MarkedColor = System.Drawing.Color.Teal;
-            this.hsCreate.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsCreate.MarkedText = "";
-            this.hsCreate.MarkMode = false;
-            this.hsCreate.Name = "hsCreate";
-            this.hsCreate.NonMarkedText = "";
-            this.hsCreate.Size = new System.Drawing.Size(45, 32);
-            this.hsCreate.TabIndex = 4;
-            this.hsCreate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsCreate.ToolTipActive = false;
-            this.hsCreate.ToolTipAutomaticDelay = 500;
-            this.hsCreate.ToolTipAutoPopDelay = 5000;
-            this.hsCreate.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsCreate.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsCreate.ToolTipFor4ContextMenu = true;
-            this.hsCreate.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsCreate.ToolTipInitialDelay = 500;
-            this.hsCreate.ToolTipIsBallon = false;
-            this.hsCreate.ToolTipOwnerDraw = false;
-            this.hsCreate.ToolTipReshowDelay = 100;
-            this.hsCreate.ToolTipShowAlways = false;
-            this.hsCreate.ToolTipText = "";
-            this.hsCreate.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsCreate.ToolTipTitle = "";
-            this.hsCreate.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsCreate.UseVisualStyleBackColor = false;
-            this.hsCreate.Click += new System.EventHandler(this.hsCreate_Click);
-            // 
             // gbAttributesUpper
             // 
             this.gbAttributesUpper.Controls.Add(this.gbVersion);
@@ -1564,7 +1492,7 @@ namespace FBExpert
             this.gbAttributesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbAttributesUpper.Location = new System.Drawing.Point(0, 0);
             this.gbAttributesUpper.Name = "gbAttributesUpper";
-            this.gbAttributesUpper.Size = new System.Drawing.Size(855, 184);
+            this.gbAttributesUpper.Size = new System.Drawing.Size(855, 145);
             this.gbAttributesUpper.TabIndex = 13;
             this.gbAttributesUpper.TabStop = false;
             // 
@@ -1576,9 +1504,9 @@ namespace FBExpert
             this.gbVersion.Controls.Add(this.rb3_32);
             this.gbVersion.Controls.Add(this.rb25_64);
             this.gbVersion.Controls.Add(this.rb25_32);
-            this.gbVersion.Location = new System.Drawing.Point(728, 19);
+            this.gbVersion.Location = new System.Drawing.Point(6, 62);
             this.gbVersion.Name = "gbVersion";
-            this.gbVersion.Size = new System.Drawing.Size(115, 159);
+            this.gbVersion.Size = new System.Drawing.Size(308, 75);
             this.gbVersion.TabIndex = 11;
             this.gbVersion.TabStop = false;
             this.gbVersion.Text = "Version";
@@ -1586,7 +1514,7 @@ namespace FBExpert
             // rb4_64
             // 
             this.rb4_64.AutoSize = true;
-            this.rb4_64.Location = new System.Drawing.Point(16, 136);
+            this.rb4_64.Location = new System.Drawing.Point(216, 44);
             this.rb4_64.Name = "rb4_64";
             this.rb4_64.Size = new System.Drawing.Size(57, 17);
             this.rb4_64.TabIndex = 5;
@@ -1597,7 +1525,7 @@ namespace FBExpert
             // rb4_32
             // 
             this.rb4_32.AutoSize = true;
-            this.rb4_32.Location = new System.Drawing.Point(16, 113);
+            this.rb4_32.Location = new System.Drawing.Point(216, 19);
             this.rb4_32.Name = "rb4_32";
             this.rb4_32.Size = new System.Drawing.Size(57, 17);
             this.rb4_32.TabIndex = 4;
@@ -1608,7 +1536,7 @@ namespace FBExpert
             // rb3_64
             // 
             this.rb3_64.AutoSize = true;
-            this.rb3_64.Location = new System.Drawing.Point(15, 90);
+            this.rb3_64.Location = new System.Drawing.Point(123, 44);
             this.rb3_64.Name = "rb3_64";
             this.rb3_64.Size = new System.Drawing.Size(57, 17);
             this.rb3_64.TabIndex = 3;
@@ -1619,7 +1547,7 @@ namespace FBExpert
             // rb3_32
             // 
             this.rb3_32.AutoSize = true;
-            this.rb3_32.Location = new System.Drawing.Point(15, 67);
+            this.rb3_32.Location = new System.Drawing.Point(123, 19);
             this.rb3_32.Name = "rb3_32";
             this.rb3_32.Size = new System.Drawing.Size(57, 17);
             this.rb3_32.TabIndex = 2;
@@ -1699,6 +1627,7 @@ namespace FBExpert
             this.hsConnect.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsConnect.FlatAppearance.BorderSize = 0;
             this.hsConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsConnect.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsConnect.Image = global::FBXpert.Properties.Resources.database1;
             this.hsConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1784,6 +1713,7 @@ namespace FBExpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -1817,6 +1747,73 @@ namespace FBExpert
             this.hsClose.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click_1);
+            // 
+            // gbDefaultSQLExportPath
+            // 
+            this.gbDefaultSQLExportPath.Controls.Add(this.txtDefaultSQLExportPath);
+            this.gbDefaultSQLExportPath.Controls.Add(this.hsInitialSQLExportPath);
+            this.gbDefaultSQLExportPath.Location = new System.Drawing.Point(15, 301);
+            this.gbDefaultSQLExportPath.Name = "gbDefaultSQLExportPath";
+            this.gbDefaultSQLExportPath.Size = new System.Drawing.Size(486, 44);
+            this.gbDefaultSQLExportPath.TabIndex = 6;
+            this.gbDefaultSQLExportPath.TabStop = false;
+            this.gbDefaultSQLExportPath.Text = "Defaut path for SQL exports";
+            // 
+            // txtDefaultSQLExportPath
+            // 
+            this.txtDefaultSQLExportPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDefaultSQLExportPath.Location = new System.Drawing.Point(3, 16);
+            this.txtDefaultSQLExportPath.Name = "txtDefaultSQLExportPath";
+            this.txtDefaultSQLExportPath.Size = new System.Drawing.Size(435, 20);
+            this.txtDefaultSQLExportPath.TabIndex = 1;
+            // 
+            // hsInitialSQLExportPath
+            // 
+            this.hsInitialSQLExportPath.BackColor = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsInitialSQLExportPath.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsInitialSQLExportPath.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsInitialSQLExportPath.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsInitialSQLExportPath.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsInitialSQLExportPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsInitialSQLExportPath.FlatAppearance.BorderSize = 0;
+            this.hsInitialSQLExportPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsInitialSQLExportPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsInitialSQLExportPath.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsInitialSQLExportPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsInitialSQLExportPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsInitialSQLExportPath.ImageToggleOnSelect = true;
+            this.hsInitialSQLExportPath.Location = new System.Drawing.Point(438, 16);
+            this.hsInitialSQLExportPath.Marked = false;
+            this.hsInitialSQLExportPath.MarkedColor = System.Drawing.Color.Teal;
+            this.hsInitialSQLExportPath.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsInitialSQLExportPath.MarkedText = "";
+            this.hsInitialSQLExportPath.MarkMode = false;
+            this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
+            this.hsInitialSQLExportPath.NonMarkedText = "";
+            this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
+            this.hsInitialSQLExportPath.TabIndex = 3;
+            this.hsInitialSQLExportPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsInitialSQLExportPath.ToolTipActive = false;
+            this.hsInitialSQLExportPath.ToolTipAutomaticDelay = 500;
+            this.hsInitialSQLExportPath.ToolTipAutoPopDelay = 5000;
+            this.hsInitialSQLExportPath.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsInitialSQLExportPath.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsInitialSQLExportPath.ToolTipFor4ContextMenu = true;
+            this.hsInitialSQLExportPath.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsInitialSQLExportPath.ToolTipInitialDelay = 500;
+            this.hsInitialSQLExportPath.ToolTipIsBallon = false;
+            this.hsInitialSQLExportPath.ToolTipOwnerDraw = false;
+            this.hsInitialSQLExportPath.ToolTipReshowDelay = 100;
+            this.hsInitialSQLExportPath.ToolTipShowAlways = false;
+            this.hsInitialSQLExportPath.ToolTipText = "";
+            this.hsInitialSQLExportPath.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsInitialSQLExportPath.ToolTipTitle = "";
+            this.hsInitialSQLExportPath.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsInitialSQLExportPath.UseVisualStyleBackColor = false;
+            this.hsInitialSQLExportPath.Click += new System.EventHandler(this.hsInitialSQLExportPath_Click);
             // 
             // DatabaseConfigForm
             // 
@@ -1861,6 +1858,8 @@ namespace FBExpert
             this.pnlAttributesCenter.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.gbOpenDatabasesCount.ResumeLayout(false);
+            this.gbOpenDatabasesCount.PerformLayout();
             this.gbTableMaxRows.ResumeLayout(false);
             this.gbTableMaxRows.PerformLayout();
             this.gbSkipForSelect.ResumeLayout(false);
@@ -1891,9 +1890,6 @@ namespace FBExpert
             this.gbDefaultReportPath.PerformLayout();
             this.gbDefaultScriptPath.ResumeLayout(false);
             this.gbDefaultScriptPath.PerformLayout();
-            this.tabCreateSQL.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fcbSQLCreate)).EndInit();
-            this.pnlSQLCreateUpper.ResumeLayout(false);
             this.gbAttributesUpper.ResumeLayout(false);
             this.gbVersion.ResumeLayout(false);
             this.gbVersion.PerformLayout();
@@ -1903,6 +1899,8 @@ namespace FBExpert
             this.gbDatenbankAlias.PerformLayout();
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
+            this.gbDefaultSQLExportPath.ResumeLayout(false);
+            this.gbDefaultSQLExportPath.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1968,10 +1966,6 @@ namespace FBExpert
         private System.Windows.Forms.TextBox txtSkipForSelect;
         private System.Windows.Forms.GroupBox gbLivettime;
         private System.Windows.Forms.TextBox txtLifetime;
-        private System.Windows.Forms.TabPage tabCreateSQL;
-        private System.Windows.Forms.Panel pnlSQLCreateUpper;
-        private SeControlsLib.HotSpot hsCreate;
-        private FastColoredTextBoxNS.FastColoredTextBox fcbSQLCreate;
         private SeControlsLib.HotSpot hsCreateDatabase;
         private SeControlsLib.HotSpot hsClone;
         private System.Windows.Forms.GroupBox gbClientLibrary;
@@ -2011,5 +2005,10 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gbDefaultExportPath;
         private System.Windows.Forms.TextBox txtDefaultExportPath;
         private SeControlsLib.HotSpot hsLoadDefaultExports;
+        private System.Windows.Forms.GroupBox gbOpenDatabasesCount;
+        private System.Windows.Forms.TextBox txtOpenDatabasesCount;
+        private System.Windows.Forms.GroupBox gbDefaultSQLExportPath;
+        private System.Windows.Forms.TextBox txtDefaultSQLExportPath;
+        private SeControlsLib.HotSpot hsInitialSQLExportPath;
     }
 }

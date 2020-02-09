@@ -11,6 +11,8 @@ using System.Text;
 using System.Windows.Forms;
 using FBXpert.Globals;
 using FBXpert.SQLStatements;
+using BasicClassLibrary;
+using DBBasicClassLibrary;
 
 namespace FBXpert
 {
@@ -20,7 +22,7 @@ namespace FBXpert
         private int _messagesCount = 0;
         private int _errorCount = 0;
         private readonly NotifiesClass _localNotify = new NotifiesClass();
-        private AutocompleteClass _ac = null;
+      //  private AutocompleteClass _ac = null;
         private TableClass _tableObject = null;
         private readonly List<TableClass> _tables;
         private string _oldIndexName = string.Empty;
@@ -66,8 +68,8 @@ namespace FBXpert
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
             }
             _tableObject = tableObject;
-            _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             
             _tables = tables;
 
@@ -371,12 +373,17 @@ namespace FBXpert
             var dataSet1 = new DataSet();
             dataSet1.Clear();
                         
-            var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            // var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);             
-            var riFailure = riList.Find(x=>x.commandDone = false);                                    
+            var riFailure = riList.Find(x=>x.commandDone == false);                                    
+
             _oldIndexName = _newIndexName;
+
+            AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
+
             
-           
             string info = (riFailure==null) 
                 ? $@"PrimaryKey {_dbReg.Alias}->{_newIndexName} updated." 
                 : $@"PrimaryKey {_dbReg.Alias}->{_newIndexName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";

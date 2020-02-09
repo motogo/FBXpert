@@ -9,7 +9,7 @@ namespace FBXpert.MiscClasses
     public class AutocompleteClass
     {
         private AutocompleteMenu _popupMenu;
-        private FastColoredTextBox _txtBox;
+        private FastColoredTextBox _txtBox=null;
         private DBRegistrationClass _dbReg;
         public AutocompleteClass(FastColoredTextBox txt, DBRegistrationClass dbReg)
         {
@@ -298,7 +298,9 @@ namespace FBXpert.MiscClasses
             if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
             if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
             if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
-            _popupMenu = new AutocompleteMenu(_txtBox)
+            AssignToObject(_txtBox);
+            /*
+                _popupMenu = new AutocompleteMenu(_txtBox)
             {
                     MinFragmentLength = 1
             };
@@ -309,13 +311,39 @@ namespace FBXpert.MiscClasses
             //size of popupmenu
             _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
             _popupMenu.Items.Width = 400;
+            */
         }
 
         List<string> words = new List<string>();
         Dictionary<string,TableClass> actTables;             
         Dictionary<string,SystemTableClass> actSystemTables;
         Dictionary<string,ViewClass> actViews;
+        public void AssignToObject(FastColoredTextBox txtBox)
+        {
+            if (txtBox == null) return;
+            _popupMenu = new AutocompleteMenu(txtBox)
+            {
+                MinFragmentLength = 1
+            };
 
+            words = new List<string>();
+            words.AddRange(SqlCommands());
+            words.AddRange(DatabaseTables(actTables));
+            words.AddRange(DatabaseViews(actViews));
+            words.AddRange(DatabaseSystemTables(actSystemTables));
+
+            if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
+            if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
+            if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
+           
+            _popupMenu.SearchPattern = @"[\w\.$]";
+            _popupMenu.Items.SetAutocompleteItems(words);
+            _popupMenu.AllowTabKey = true;
+
+            //size of popupmenu
+            _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
+            _popupMenu.Items.Width = 400;
+        }
         public void RefreshAutocompleteForDatabase()
         {
             //create autocomplete popup menu

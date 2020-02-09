@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.hsRefreshStruktur = new SeControlsLib.HotSpot();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtObjectZoom = new System.Windows.Forms.TextBox();
             this.hsZoomMinus = new SeControlsLib.HotSpot();
@@ -52,7 +53,7 @@
             this.pnlDBObjectsUpper = new System.Windows.Forms.Panel();
             this.pnlDatabaseDesignUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
-            this.hsRefreshStruktur = new SeControlsLib.HotSpot();
+            this.cbDebug = new System.Windows.Forms.CheckBox();
             this.pnlUpper.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDesign)).BeginInit();
@@ -69,6 +70,7 @@
             // pnlUpper
             // 
             this.pnlUpper.AutoScroll = true;
+            this.pnlUpper.Controls.Add(this.cbDebug);
             this.pnlUpper.Controls.Add(this.hsRefreshStruktur);
             this.pnlUpper.Controls.Add(this.groupBox1);
             this.pnlUpper.Controls.Add(this.hsZoomDesingMinus);
@@ -79,6 +81,53 @@
             this.pnlUpper.Name = "pnlUpper";
             this.pnlUpper.Size = new System.Drawing.Size(2394, 34);
             this.pnlUpper.TabIndex = 1;
+            // 
+            // hsRefreshStruktur
+            // 
+            this.hsRefreshStruktur.BackColor = System.Drawing.Color.Transparent;
+            this.hsRefreshStruktur.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshStruktur.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshStruktur.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsRefreshStruktur.ContextMenuXDirection = SeControlsLib.XDirection.Left;
+            this.hsRefreshStruktur.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsRefreshStruktur.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsRefreshStruktur.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsRefreshStruktur.FlatAppearance.BorderSize = 0;
+            this.hsRefreshStruktur.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshStruktur.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsRefreshStruktur.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsRefreshStruktur.Image = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hsRefreshStruktur.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.hsRefreshStruktur.ImageToggleOnSelect = true;
+            this.hsRefreshStruktur.Location = new System.Drawing.Point(1175, 4);
+            this.hsRefreshStruktur.Marked = false;
+            this.hsRefreshStruktur.MarkedColor = System.Drawing.Color.Teal;
+            this.hsRefreshStruktur.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsRefreshStruktur.MarkedText = "";
+            this.hsRefreshStruktur.MarkMode = false;
+            this.hsRefreshStruktur.Name = "hsRefreshStruktur";
+            this.hsRefreshStruktur.NonMarkedText = "";
+            this.hsRefreshStruktur.Size = new System.Drawing.Size(45, 26);
+            this.hsRefreshStruktur.TabIndex = 7;
+            this.hsRefreshStruktur.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsRefreshStruktur.ToolTipActive = false;
+            this.hsRefreshStruktur.ToolTipAutomaticDelay = 500;
+            this.hsRefreshStruktur.ToolTipAutoPopDelay = 5000;
+            this.hsRefreshStruktur.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsRefreshStruktur.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsRefreshStruktur.ToolTipFor4ContextMenu = true;
+            this.hsRefreshStruktur.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsRefreshStruktur.ToolTipInitialDelay = 500;
+            this.hsRefreshStruktur.ToolTipIsBallon = false;
+            this.hsRefreshStruktur.ToolTipOwnerDraw = false;
+            this.hsRefreshStruktur.ToolTipReshowDelay = 100;
+            this.hsRefreshStruktur.ToolTipShowAlways = false;
+            this.hsRefreshStruktur.ToolTipText = "";
+            this.hsRefreshStruktur.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsRefreshStruktur.ToolTipTitle = "";
+            this.hsRefreshStruktur.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsRefreshStruktur.UseVisualStyleBackColor = false;
+            this.hsRefreshStruktur.Click += new System.EventHandler(this.hsRefreshStruktur_Click);
             // 
             // groupBox1
             // 
@@ -113,6 +162,7 @@
             this.hsZoomMinus.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsZoomMinus.FlatAppearance.BorderSize = 0;
             this.hsZoomMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsZoomMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsZoomMinus.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsZoomMinus.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsZoomMinus.ImageHover = global::FBXpert.Properties.Resources.minus_gn24x;
@@ -127,6 +177,7 @@
             this.hsZoomMinus.NonMarkedText = "";
             this.hsZoomMinus.Size = new System.Drawing.Size(45, 14);
             this.hsZoomMinus.TabIndex = 5;
+            this.hsZoomMinus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsZoomMinus.ToolTipActive = false;
             this.hsZoomMinus.ToolTipAutomaticDelay = 500;
             this.hsZoomMinus.ToolTipAutoPopDelay = 5000;
@@ -138,7 +189,6 @@
             this.hsZoomMinus.ToolTipIsBallon = false;
             this.hsZoomMinus.ToolTipOwnerDraw = false;
             this.hsZoomMinus.ToolTipReshowDelay = 100;
-            
             this.hsZoomMinus.ToolTipShowAlways = false;
             this.hsZoomMinus.ToolTipText = "";
             this.hsZoomMinus.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -159,6 +209,7 @@
             this.hsZoomPlus.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsZoomPlus.FlatAppearance.BorderSize = 0;
             this.hsZoomPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsZoomPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsZoomPlus.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsZoomPlus.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsZoomPlus.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
@@ -173,6 +224,7 @@
             this.hsZoomPlus.NonMarkedText = "";
             this.hsZoomPlus.Size = new System.Drawing.Size(45, 13);
             this.hsZoomPlus.TabIndex = 4;
+            this.hsZoomPlus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsZoomPlus.ToolTipActive = false;
             this.hsZoomPlus.ToolTipAutomaticDelay = 500;
             this.hsZoomPlus.ToolTipAutoPopDelay = 5000;
@@ -184,7 +236,6 @@
             this.hsZoomPlus.ToolTipIsBallon = false;
             this.hsZoomPlus.ToolTipOwnerDraw = false;
             this.hsZoomPlus.ToolTipReshowDelay = 100;
-            
             this.hsZoomPlus.ToolTipShowAlways = false;
             this.hsZoomPlus.ToolTipText = "";
             this.hsZoomPlus.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -205,6 +256,7 @@
             this.hsZoomDesingMinus.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsZoomDesingMinus.FlatAppearance.BorderSize = 0;
             this.hsZoomDesingMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsZoomDesingMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsZoomDesingMinus.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsZoomDesingMinus.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsZoomDesingMinus.ImageHover = global::FBXpert.Properties.Resources.minus_gn24x;
@@ -219,6 +271,7 @@
             this.hsZoomDesingMinus.NonMarkedText = "";
             this.hsZoomDesingMinus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomDesingMinus.TabIndex = 3;
+            this.hsZoomDesingMinus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsZoomDesingMinus.ToolTipActive = false;
             this.hsZoomDesingMinus.ToolTipAutomaticDelay = 500;
             this.hsZoomDesingMinus.ToolTipAutoPopDelay = 5000;
@@ -230,7 +283,6 @@
             this.hsZoomDesingMinus.ToolTipIsBallon = false;
             this.hsZoomDesingMinus.ToolTipOwnerDraw = false;
             this.hsZoomDesingMinus.ToolTipReshowDelay = 100;
-            
             this.hsZoomDesingMinus.ToolTipShowAlways = false;
             this.hsZoomDesingMinus.ToolTipText = "";
             this.hsZoomDesingMinus.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -251,6 +303,7 @@
             this.hsZoomCanvasPlus.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsZoomCanvasPlus.FlatAppearance.BorderSize = 0;
             this.hsZoomCanvasPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsZoomCanvasPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsZoomCanvasPlus.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsZoomCanvasPlus.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsZoomCanvasPlus.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
@@ -265,6 +318,7 @@
             this.hsZoomCanvasPlus.NonMarkedText = "";
             this.hsZoomCanvasPlus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomCanvasPlus.TabIndex = 2;
+            this.hsZoomCanvasPlus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsZoomCanvasPlus.ToolTipActive = false;
             this.hsZoomCanvasPlus.ToolTipAutomaticDelay = 500;
             this.hsZoomCanvasPlus.ToolTipAutoPopDelay = 5000;
@@ -276,7 +330,6 @@
             this.hsZoomCanvasPlus.ToolTipIsBallon = false;
             this.hsZoomCanvasPlus.ToolTipOwnerDraw = false;
             this.hsZoomCanvasPlus.ToolTipReshowDelay = 100;
-            
             this.hsZoomCanvasPlus.ToolTipShowAlways = false;
             this.hsZoomCanvasPlus.ToolTipText = "";
             this.hsZoomCanvasPlus.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -297,6 +350,7 @@
             this.hsAddNewTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddNewTable.FlatAppearance.BorderSize = 0;
             this.hsAddNewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddNewTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddNewTable.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddNewTable.Image = null;
             this.hsAddNewTable.ImageHover = null;
@@ -312,6 +366,7 @@
             this.hsAddNewTable.Size = new System.Drawing.Size(86, 26);
             this.hsAddNewTable.TabIndex = 1;
             this.hsAddNewTable.Text = "New Table";
+            this.hsAddNewTable.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddNewTable.ToolTipActive = false;
             this.hsAddNewTable.ToolTipAutomaticDelay = 500;
             this.hsAddNewTable.ToolTipAutoPopDelay = 5000;
@@ -323,7 +378,6 @@
             this.hsAddNewTable.ToolTipIsBallon = false;
             this.hsAddNewTable.ToolTipOwnerDraw = false;
             this.hsAddNewTable.ToolTipReshowDelay = 100;
-            
             this.hsAddNewTable.ToolTipShowAlways = false;
             this.hsAddNewTable.ToolTipText = "";
             this.hsAddNewTable.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -454,7 +508,7 @@
             // selDBObjects
             // 
             this.selDBObjects.AllowMultipleChecks = false;
-            this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
+            this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selDBObjects.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selDBObjects.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selDBObjects.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -467,7 +521,7 @@
             this.selDBObjects.IDVisible = false;
             this.selDBObjects.IDWith = 32;
             this.selDBObjects.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
+            this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.selDBObjects.Location = new System.Drawing.Point(452, 66);
             this.selDBObjects.Name = "selDBObjects";
             this.selDBObjects.SelectedIndex = -1;
@@ -513,6 +567,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -527,6 +582,7 @@
             this.hsClose.NonMarkedText = "";
             this.hsClose.Size = new System.Drawing.Size(45, 34);
             this.hsClose.TabIndex = 3;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -538,7 +594,6 @@
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -547,51 +602,16 @@
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click);
             // 
-            // hsRefreshStruktur
+            // cbDebug
             // 
-            this.hsRefreshStruktur.BackColor = System.Drawing.Color.Transparent;
-            this.hsRefreshStruktur.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshStruktur.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshStruktur.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsRefreshStruktur.ContextMenuXDirection = SeControlsLib.XDirection.Left;
-            this.hsRefreshStruktur.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsRefreshStruktur.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsRefreshStruktur.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsRefreshStruktur.FlatAppearance.BorderSize = 0;
-            this.hsRefreshStruktur.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsRefreshStruktur.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsRefreshStruktur.Image = global::FBXpert.Properties.Resources.view_refresh22x;
-            this.hsRefreshStruktur.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.hsRefreshStruktur.ImageToggleOnSelect = true;
-            this.hsRefreshStruktur.Location = new System.Drawing.Point(1175, 4);
-            this.hsRefreshStruktur.Marked = false;
-            this.hsRefreshStruktur.MarkedColor = System.Drawing.Color.Teal;
-            this.hsRefreshStruktur.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsRefreshStruktur.MarkedText = "";
-            this.hsRefreshStruktur.MarkMode = false;
-            this.hsRefreshStruktur.Name = "hsRefreshStruktur";
-            this.hsRefreshStruktur.NonMarkedText = "";
-            this.hsRefreshStruktur.Size = new System.Drawing.Size(45, 26);
-            this.hsRefreshStruktur.TabIndex = 7;
-            this.hsRefreshStruktur.ToolTipActive = false;
-            this.hsRefreshStruktur.ToolTipAutomaticDelay = 500;
-            this.hsRefreshStruktur.ToolTipAutoPopDelay = 5000;
-            this.hsRefreshStruktur.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsRefreshStruktur.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsRefreshStruktur.ToolTipFor4ContextMenu = true;
-            this.hsRefreshStruktur.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsRefreshStruktur.ToolTipInitialDelay = 500;
-            this.hsRefreshStruktur.ToolTipIsBallon = false;
-            this.hsRefreshStruktur.ToolTipOwnerDraw = false;
-            this.hsRefreshStruktur.ToolTipReshowDelay = 100;
-            
-            this.hsRefreshStruktur.ToolTipShowAlways = false;
-            this.hsRefreshStruktur.ToolTipText = "";
-            this.hsRefreshStruktur.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsRefreshStruktur.ToolTipTitle = "";
-            this.hsRefreshStruktur.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsRefreshStruktur.UseVisualStyleBackColor = false;
-            this.hsRefreshStruktur.Click += new System.EventHandler(this.hsRefreshStruktur_Click);
+            this.cbDebug.AutoSize = true;
+            this.cbDebug.Location = new System.Drawing.Point(639, 6);
+            this.cbDebug.Name = "cbDebug";
+            this.cbDebug.Size = new System.Drawing.Size(56, 17);
+            this.cbDebug.TabIndex = 8;
+            this.cbDebug.Text = "debug";
+            this.cbDebug.UseVisualStyleBackColor = true;
+            this.cbDebug.CheckedChanged += new System.EventHandler(this.CbDebug_CheckedChanged);
             // 
             // DatabaseDesignForm
             // 
@@ -606,6 +626,7 @@
             this.Load += new System.EventHandler(this.DesignerForm_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DesignerForm_MouseMove);
             this.pnlUpper.ResumeLayout(false);
+            this.pnlUpper.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDesign)).EndInit();
@@ -646,5 +667,6 @@
         private System.Windows.Forms.Panel pnlDatabaseDesignUpper;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsRefreshStruktur;
+        private System.Windows.Forms.CheckBox cbDebug;
     }
 }

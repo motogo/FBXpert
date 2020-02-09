@@ -1,4 +1,5 @@
-﻿using DBBasicClassLibrary;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using MessageLibrary;
@@ -20,7 +21,7 @@ namespace FBXpert.SQLStatements
         
         public SQLCommandsReturnInfoClass ExecSql( string cmd, DBRegistrationClass DBReg, NotifiesClass localNotify)
         {
-            var SQLcommand = new SQLCommandsClass(DBReg, null);
+            var SQLcommand = new SQLCommandsClass(DBReg);
             SQLcommand.SetEncoding("NONE");
             var ri = SQLcommand.ExecuteCommand(cmd,true);
             if (!ri.commandDone)

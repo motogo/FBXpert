@@ -38,9 +38,9 @@ namespace FBXpert.SonstForms
             InitializeComponent();
             MdiParent = parent;
             _dbReg = reg;
-            _localNotify.Notify.OnRaiseInfoHandler += InfoRaised;
-            _localNotify.Notify.OnRaiseErrorHandler += ErrorRaised;
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler += LanguageChanged;
+            _localNotify.Register4Info(InfoRaised);
+            _localNotify.Register4Error(ErrorRaised);
+            LanguageClass.Instance().RegisterChangeNotifiy(LanguageChanged);
         }
         
         private void LanguageChanged(object sender, LanguageChangedEventArgs k)
@@ -50,15 +50,15 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {
-            gbExportProgress.Text = LanguageClass.Instance().GetString("PROGRESS");
-            hsSaveSourceCodes.Text = LanguageClass.Instance().GetString("CreateSourcecode");
-            gbSourceCode.Text = LanguageClass.Instance().GetString("SourcecodePath");
-            gbFoundLines.Text = LanguageClass.Instance().GetString("FoundLines");
-            gbSearchCode.Text = LanguageClass.Instance().GetString("SEARCH");
+            gbExportProgress.Text   = LanguageClass.Instance().GetString("PROGRESS");
+            hsSaveSourceCodes.Text  = LanguageClass.Instance().GetString("CreateSourcecode");
+            gbSourceCode.Text       = LanguageClass.Instance().GetString("SourcecodePath");
+            gbFoundLines.Text       = LanguageClass.Instance().GetString("FoundLines");
+            gbSearchCode.Text       = LanguageClass.Instance().GetString("SEARCH");
             object[] param = {_messagesCount, _errorCount};
-            tabPageMessages.Text = LanguageClass.Instance().GetString("MESSAGES_INFO_ERROR", param);
-            tabPageCreateAttributes.Text = LanguageClass.Instance().GetString("SETTINGS");
-            hsClearMessages.Text = LanguageClass.Instance().GetString("CLEAR_ENTRIES");
+            tabPageMessages.Text            = LanguageClass.Instance().GetString("MESSAGES_INFO_ERROR", param);
+            tabPageCreateAttributes.Text    = LanguageClass.Instance().GetString("SETTINGS");
+            hsClearMessages.Text            = LanguageClass.Instance().GetString("CLEAR_ENTRIES");
         }
 
         private void ErrorRaised(object sender, MessageEventArgs k)
@@ -312,7 +312,7 @@ namespace FBXpert.SonstForms
         private string MakeGlobalCode()
         {
             var items = selDBObjects.CheckedItemDatas;
-            return CodeFactory.Instance().MakeGlobalCode(items);            
+            return CodeFactory.Instance().MakeGlobalCode(items,0);            
         }
 
         private string MakeSourceCode(object ob)
@@ -373,6 +373,12 @@ namespace FBXpert.SonstForms
 
         private void hsSaveSourceCodes_Click(object sender, EventArgs e)
         {
+            if(!Directory.Exists(txtSourceCodePath.Text))
+            {
+                object[] p = { txtSourceCodePath.Text, Environment.NewLine };               
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DirectoryNotExists", "DirectoryNotExistsParam", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
+                return;
+            }
             var items = selDBObjects.CheckedItemDatas;
             pbExport.Minimum = 0;
             pbExport.Value = 0;
@@ -386,7 +392,7 @@ namespace FBXpert.SonstForms
                     {
                         File.Delete($@"{file}");
                     }
-                    catch(Exception ex)
+                    catch //(Exception ex)
                     {
 
                     }

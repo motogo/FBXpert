@@ -9,11 +9,9 @@ using FBXpert.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
-using MessageLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -26,53 +24,51 @@ namespace SQLView
     /// Zusammenfassende Beschreibung für WinForm
     /// </summary>
     partial class SQLViewForm1 : INormalForm
-	{
-	    private HistoryMode _history;
-	    private SQLCommandsClass _sqLcommand = null;        
+    {
+        private HistoryMode _history;
+        private SQLCommandsClass _sqLcommand = null;
         private eColorDesigns _appDesign = eColorDesigns.Gray;
         private eColorDesigns _developDesign = eColorDesigns.Gray;
-	    private readonly DBRegistrationClass _dbRegOrg = null;
+        private readonly DBRegistrationClass _dbRegOrg = null;
         private readonly DBRegistrationClass _dbrRegLocal = null;
         private string _cmd = string.Empty;
         private int _cmdDone = 0;
-        private int _cmdError = 0;        
-	    private readonly NotifiesList _localNotifies = new NotifiesList();
-	    //private AutocompleteClass _ac = null;        
+        private int _cmdError = 0;
+               
         private bool _testlauf = true;
-	    private readonly List<string> _obcmd = new List<string>();        
+        private readonly List<string> _obcmd = new List<string>();
         List<TableClass> _tables = null;
         eSort _lastSort = eSort.DESC;
         string lastSuccessfulCommand = string.Empty;
         string lastCommand = string.Empty;
         AutocompleteClass ac;
+        public NotifiesClass SQLnotify = new NotifiesClass();
 
         public SQLViewForm1(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
-            MdiParent       = mdiParent;
-            _dbRegOrg       = ca;              
-            _dbrRegLocal    = _dbRegOrg.Clone();
-            _tables         = tables;
-            _appDesign      = appDesign;
-            _developDesign  = developDesign;
+            MdiParent = mdiParent;
+            _dbRegOrg = ca;
+            _dbrRegLocal = _dbRegOrg.Clone();
+            _tables = tables;
+            _appDesign = appDesign;
+            _developDesign = developDesign;
             InitializeComponent();
-           
-            var nf = new NotifiesClass();
-            nf.gaugeNotify.OnRaiseGaugeHandler += new NotifyGauge.RaiseGaugeHandler(GaugeRaised);
-            _localNotifies.AddNotify(nf,"SQLViewForm");
-            _localNotifies.AddNotify(NotifiesClass.Instance(),"GLOBAL");
-            _sqLcommand = new SQLCommandsClass(_dbrRegLocal,_localNotifies.Find("SQLViewForm"));     
-            tabPageSucceededHistory.Text = "commands succeded DESC";
-            Meldungen();
-            Errors();                        
-            History();                     
+            if (cbErrors.Checked) SQLnotify.Register4Error(ErrorRaised);
+            if (cbMeldungen.Checked) SQLnotify.Register4Info(InfoRaised);
+                        
+            _sqLcommand = new SQLCommandsClass(_dbrRegLocal);
+            _sqLcommand.Notify.Register4Info(InfoRaised);
+            _sqLcommand.Notify.Register4Error(ErrorRaised);
+
+            History();
             ClearDevelopDesign(_developDesign);
             SetDesign(_appDesign);
             cbTestlauf.Checked = testMode;
             cbTestlauf.Visible = testMode;
             LanguageChanged();
-            LanguageClass.Instance().OnRaiseLanguageChangedHandler += OnRaiseLanguageChangedHandler;
+            LanguageClass.Instance().RegisterChangeNotifiy(OnRaiseLanguageChangedHandler);
         }
-                 
+
         private void OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
         {
             LanguageChanged();
@@ -80,41 +76,26 @@ namespace SQLView
 
         private void LanguageChanged()
         {
-            SUCC_SQL.HeaderText             = LanguageClass.Instance().GetString("SQL");
-            SUCC_RUNDATE.HeaderText         = LanguageClass.Instance().GetString("DATETIME");
-            SUCC_DBREG.HeaderText           = LanguageClass.Instance().GetString("DBALIAS");
-            FAIL_SQL.HeaderText             = LanguageClass.Instance().GetString("SQL");
-            FAIL_RUNDATE.HeaderText         = LanguageClass.Instance().GetString("DATETIME");
-            FAIL_DBREG.HeaderText           = LanguageClass.Instance().GetString("DBALIAS");
-            tabPageFailedHistory.Text       = LanguageClass.Instance().GetString("FAILED");
-            tabPageSucceededHistory.Text    = LanguageClass.Instance().GetString("SUCCEEDED");
+            /*
+            colTEXTSUCCESS.Text        = LanguageClass.Instance().GetString("SQL");
+            colDATESUCCESS.Text        = LanguageClass.Instance().GetString("DATETIME");
+            colDBSUCCESS.Text          = LanguageClass.Instance().GetString("DBALIAS");
+            colTEXTFAILED.Text         = LanguageClass.Instance().GetString("SQL");
+            colDATEFAILED.Text         = LanguageClass.Instance().GetString("DATETIME");
+            colDBFAILED.Text           = LanguageClass.Instance().GetString("DBALIAS");
+            */
+            tabHistory.Text = $@"{LanguageClass.Instance().GetString("History")} ({dgvSQLHistory.Rows.Count})";
         }
 
-    void Meldungen()
-        {
-            var nf = _localNotifies.Find("SQLViewForm");
-            if (nf == null) return;            
-            if (cbMeldungen.Checked) nf.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(InfoRaised);
-            else                     nf.Notify.OnRaiseInfoHandler -= new NotifyInfos.RaiseNotifyHandler(InfoRaised);
-               
-        }
 
-        void Errors()
-        {
-            var nf = _localNotifies.Find("SQLViewForm");
-            if (nf == null) return;            
-            if (cbMeldungen.Checked) nf.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
-            else                     nf.Notify.OnRaiseErrorHandler -= new NotifyInfos.RaiseNotifyHandler(ErrorRaised);                           
-        }
-        
         void History()
         {
-            _history = (cbHistory.Checked) ?  HistoryMode.AddToHistory : HistoryMode.NoHistory;            
+            _history = (cbHistory.Checked) ? HistoryMode.AddToHistory : HistoryMode.NoHistory;
         }
 
         void GaugeRaised(object sender, MessageEventIntArgs k)
         {
-            progressBar1.Value += k.N;
+            pbRunSQL.Value += k.N;
         }
 
         void InfoRaised(object sender, MessageEventArgs k)
@@ -123,11 +104,12 @@ namespace SQLView
             {
                 _cmdDone++;
                 tabMELDUNG.Text = $@"Messages ({_cmdDone})";
-                if (((txtMeldIntervall.Inhalt.Length > 0)&&(cbErrAutoclear.Checked))&&(rtfMELDUNG.Lines.Length > Int32.Parse(txtMeldIntervall.Inhalt)))
-                {                   
-                    rtfMELDUNG.Clear();                   
+                /*
+                if (((txtMeldIntervall.Inhalt.Length > 0) && (cbErrAutoclear.Checked)) && (rtfMELDUNG.Lines.Length > Int32.Parse(txtMeldIntervall.Inhalt)))
+                {
+                    rtfMELDUNG.Clear();
                 }
-                
+                */
                 if (rbMeldAppend.Checked)
                 {
                     rtfMELDUNG.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} {k.Meldung}");
@@ -145,19 +127,18 @@ namespace SQLView
                     rtfMELDUNG.Select(0, 0);
                     rtfMELDUNG.Text.Insert(0, $@"{StaticFunctionsClass.DateTimeNowStr()} {k.Meldung}");
                     rtfMELDUNG.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} {k.Meldung}");
-                }                
+                }
             }
 
-            var nf = _localNotifies.Find("GLOBAL");
-            if(nf == null) return;            
-            nf.Notify.OnRaiseInfo(k);               
+            
         }
-        
+
         void ErrorRaised(object sender, MessageEventArgs k)
         {
             _cmdError++;
             tabERRORS.Text = $@"Errors ({_cmdError})";
-            int? inhalt = StaticFunctionsClass.ToIntDef(txtErrIntervall.Inhalt,null);
+            int? inhalt = StaticFunctionsClass.ToIntDef(txtErrIntervall.Inhalt, null);
+            /*
             if ((inhalt != null) && (cbErrAutoclear.Checked))
             {
                 if (rtfERRORS.Lines.Length > inhalt.Value)
@@ -165,6 +146,7 @@ namespace SQLView
                     rtfERRORS.Clear();
                 }
             }
+            */
             if (rbErrAppend.Checked)
             {
                 rtfERRORS.AppendText(k.Meldung);
@@ -180,17 +162,6 @@ namespace SQLView
             {
                 rtfERRORS.Text.Insert(0, k.Meldung);
             }
-            NotifiesClass nf = _localNotifies.Find("GLOBAL");
-            if (nf != null)
-            {
-                nf.Notify.OnRaiseError(k);
-            }
-        }
-
-        private void btnDO_SQL_Click(object sender, EventArgs e)
-        {            
-            ExecSql(HistoryMode.AddToHistory);
-            tcSQLCONTROL.SelectedTab = tabRESULT;
         }
 
         private void ExecSqlThread(HistoryMode toHistory)
@@ -206,7 +177,7 @@ namespace SQLView
 
         private void ExecSql()
         {
-            ExecSqlTh(HistoryMode.NoHistory,(string[])txtSQL.Lines);
+            ExecSqlTh(HistoryMode.NoHistory, (string[])txtSQL.Lines);
         }
 
         private string GetTerm(string[] cmds)
@@ -225,77 +196,71 @@ namespace SQLView
             {
                 term = ";";
             }
-            return(term);
+            return (term);
         }
-        
-        private bool AddToHistory(HistoryMode toHistory,string cmd)
+
+        private bool AddToHistory(HistoryMode toHistory, string cmd)
         {
-            if (toHistory != HistoryMode.AddToHistory)  return false;      
-            
-            DataRow dr = dtSUCCESS.NewRow();
-            dr.ItemArray = new object[] {DateTime.Now,cmd,_dbRegOrg.Alias };
-
+            if (toHistory != HistoryMode.AddToHistory) return false;
+            bool ok = false;
             try
-            { 
-                dtSUCCESS.Rows.Add(dr);
-                dtSUCCESS.AcceptChanges();
-                lastSuccessfulCommand = cmd;
+            {                
+                SQLHistoryClass sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
+                ok = sh.InsertHistory(cmd, eSQLHistoryType.succeeded);
+                sh.HistoryRefresh(dgvSQLHistory,bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.SortGrid(dgvSQLHistory, 1);
                 lastCommand = cmd;
-                return true;
             }
-            catch
+            catch(Exception ex)
             {
-
+                SQLnotify.AddToERROR(ex.Message);
             }
-                        
-            lastCommand = cmd;
-            return false;
+            return ok;
         }
         private bool AddToFailedHistory(HistoryMode toHistory, string cmd)
         {
             if (toHistory != HistoryMode.AddToHistory) return false;
-            DataRow dr = dtFAILED.NewRow();
-            dr.ItemArray = new object[] { DateTime.Now, cmd, _dbRegOrg.Alias };
+            bool ok = false;
             try
-            { 
-                dtFAILED.Rows.Add(dr);
-                dtFAILED.AcceptChanges();            
-                lastCommand = cmd;
-                return true;
-            }
-            catch
             {
-
+                SQLHistoryClass sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
+                ok = sh.InsertHistory(cmd, eSQLHistoryType.failed);
+                sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.SortGrid(dgvSQLHistory, 1);
+            }            
+            catch(Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
             }
-            return false;
+            return ok;
         }
 
         private void AddToHistory(HistoryMode toHistory, string[] cmds)
         {
-            if (toHistory != HistoryMode.AddToHistory) return;            
+            if (toHistory != HistoryMode.AddToHistory) return;
             foreach (string cmd in cmds)
             {
-                AddToHistory(toHistory,cmd);
-            }               
+                AddToHistory(toHistory, cmd);
+            }
         }
 
         private void AddToFailedHistory(HistoryMode toHistory, string[] cmds)
         {
-            if (toHistory != HistoryMode.AddToHistory) return;            
+            if (toHistory != HistoryMode.AddToHistory) return;
             foreach (string cmd in cmds)
             {
                 AddToFailedHistory(toHistory, cmd);
-            }               
+            }
         }
 
         private void ExecSqlTh(HistoryMode toHistory, string[] cmds)
-        {            
-            dataSet1.Clear();
+        {
+            dsResults.Clear();
             dgvResults.AutoGenerateColumns = true;
             string term = GetTerm(cmds);
-            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);            
-            var ri  = _sqLcommand.ExecuteCommandsAddToDataset(dataSet1,cmds,true);
-            if(ri.commandDone)
+            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
+            var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, cmds, true);
+            if (ri.commandDone)
             {
                 AddToHistory(toHistory, cmds);
             }
@@ -303,30 +268,20 @@ namespace SQLView
             {
                 AddToFailedHistory(toHistory, cmds);
             }
-            dataSet1 = ri.dataSet;                                   
-            bindingSource1.DataMember = "Table";            
+            dsResults = ri.dataSet;
+            bsResults.DataMember = "Table";
         }
-        
-     
-        private void ArrayToText(string[] ob)
-        {
-            string stc;
-            for (int i = 0; i < ob.Length; i++)
-            {
-                stc = (string)ob[i];
-                txtSQL.AppendText(stc + "\r\n");
-            }            
-        }
-        
+
+
         private SQLCommandsReturnInfoClass ExecSql(HistoryMode toHistory)
-        {           
-            dataSet1.Clear();
+        {
+            dsResults.Clear();
             dgvResults.AutoGenerateColumns = true;
-            if(txtSQL.Text.Length <= 0) return new SQLCommandsReturnInfoClass();
-         
+            if (txtSQL.Text.Length <= 0) return new SQLCommandsReturnInfoClass();
+
             _sqLcommand.SetEncoding(cbEncoding.Text);
-           
-            var ri  = _sqLcommand.ExecuteCommandWithGlobalConnection(txtSQL.Lines);
+
+            var ri = _sqLcommand.ExecuteCommandWithGlobalConnection(txtSQL.Lines);
             if (ri.commandDone)
             {
                 AddToHistory(toHistory, ri.lastSQL);
@@ -337,31 +292,132 @@ namespace SQLView
             }
 
             lblUsedMs.Text = ri.costs.ToString();
-            dataSet1 = ri.dataSet;
-           
-            if(dataSet1?.Tables.Count > 0)
-            {  
-                if(ckShowResults.Checked)
+            dsResults = ri.dataSet;
+
+            if (dsResults?.Tables.Count > 0)
+            {
+                ckShowResults.Text = $@"Show results ({dsResults.Tables[0].Rows.Count})";
+                if (ckShowResults.Checked)
                 {
-                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected");
-                    _localNotifies?.AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected");
-                    bindingSource1.DataSource = dataSet1;
-                    bindingSource1.DataMember = "Table";
+                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected");
+                    SQLnotify.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected");
+                    bsResults.DataSource = dsResults;
+                    bsResults.DataMember = "Table";
 
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected, but not visible in results");
-                    _localNotifies?.AddToINFO($@"SQLViewForm->ExecSql-> {dataSet1.Tables[0].Rows.Count} datas selected, but not visible in results");
+                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected, but not visible in results");
+                    SQLnotify.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected, but not visible in results");
                 }
             }
             else if (ri.lastCommandType == SQLCommandType.select)
             {
                 NotifiesClass.Instance().AddToERROR("SQLViewForm->ExecSql->No datas selected");
-                _localNotifies?.AddToERROR("SQLViewForm->ExecSql->No datas selected");
+                SQLnotify.AddToERROR("SQLViewForm->ExecSql->No datas selected");
             }
-                        
-            return ri;        
+
+            return ri;
+        }
+        bool doExport = false;
+        private int ExecSqlForExport(HistoryMode toHistory)
+        {
+            if (txtSQL.Text.Length <= 0) return 0;
+            if (ckClearExportListBeforeExecute.Checked) fctXMLData.Clear();
+            //_sqLcommand.SetEncoding(cbEncoding.Text);
+            System.IO.StreamWriter file = null;
+            doExport = true;
+            if (ckExportToFile.Checked)
+            {
+                saveFileDialogCSV.DefaultExt = ".csv";
+                saveFileDialogCSV.Filter = "CSV|*.csv|All|*.*";
+                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+                {
+                    file = new System.IO.StreamWriter(saveFileDialogCSV.FileName, false, Encoding.UTF8);
+                }
+            }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            this.Cursor = Cursors.WaitCursor;
+            var Con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
+            Con.Open();
+
+            var cmd1 = new FbCommand(txtSQL.Text, Con);
+
+            string quote = "\"";
+            var data = cmd1.ExecuteReader();
+            int n = 0;
+            pbExport.Minimum = 0;
+            pbExport.Value = 0;
+            pbExport.Maximum = 10000;
+            bool first = true;
+
+            while (data.Read())
+            {
+                if (!doExport)
+                {
+                    if (file != null) file.Close();
+                    Con.Close();
+                    this.Cursor = Cursors.Default;
+                    sw.Stop();
+                    lblExportCosts.Text = sw.ElapsedMilliseconds.ToString();
+                    return n;
+                }
+
+                if (first)
+                {
+                    first = false;
+                    var sbh = new StringBuilder();
+                    for (int i = 0; i < data.FieldCount; i++)
+                    {
+                        string line = (ckMaskData.Checked) ? $@"{quote}{data.GetName(i)}{quote}{cbCSVSeperator.Text}" : $@"{data.GetName(i)}{cbCSVSeperator.Text}";
+                        sbh.Append(line);
+                    }
+                    if (ckExportToScreen.Checked)
+                    {
+                        fctXMLData.AppendText($@"{sbh.ToString()}{Environment.NewLine}");
+                    }
+                    if (ckExportToFile.Checked)
+                    {
+                        file.WriteLine(sbh.ToString());
+                    }
+                }
+
+                var sb = new StringBuilder();
+                for (int i = 0; i < data.FieldCount; i++)
+                {
+                    string line = (ckMaskData.Checked)
+                        ? string.IsNullOrEmpty(data.GetString(i))
+                            ? $@"{data.GetString(i)}{cbCSVSeperator.Text}"
+                            : $@"{quote}{data.GetString(i)}{quote}{cbCSVSeperator.Text}"
+                        : $@"{data.GetString(i)}{cbCSVSeperator.Text}";
+
+                    sb.Append(line);
+                }
+                if (ckExportToScreen.Checked)
+                {
+                    fctXMLData.AppendText($@"{sb.ToString()}{Environment.NewLine}");
+                }
+                if (ckExportToFile.Checked)
+                {
+                    file.WriteLine(sb.ToString());
+                }
+                n++;
+                if (cbShowExportProgress.Checked)
+                {
+                    if (n % 100 == 0) pbExport.Value = n % 10000;
+                    gbExportProgress.Text = $@"Processed:{n}";
+                    Application.DoEvents();
+                }
+            }
+
+            if (file != null) file.Close();
+            Con.Close();
+            this.Cursor = Cursors.Default;
+            sw.Stop();
+            lblExportCosts.Text = sw.ElapsedMilliseconds.ToString();
+            return n;
         }
         private void LoadSQL()
         {
@@ -373,57 +429,58 @@ namespace SQLView
                 }
             }
             if (ofdSQL.ShowDialog() != DialogResult.OK) return;
-            
+
             txtSQL.Clear();
             var fi = new FileInfo(ofdSQL.FileName);
             using (System.IO.StreamReader file = new StreamReader(fi.FullName, Encoding.UTF8))
             {
-                SQLViewLastRunClass.Instance().ScriptPath = fi.Directory.FullName;                   
+                SQLViewLastRunClass.Instance().ScriptPath = fi.Directory.FullName;
                 var sql = new StringBuilder();
                 string line = string.Empty;
                 while ((line = file.ReadLine()) != null)
-                {                                              
-                    txtSQL.AppendText(line+Environment.NewLine);                        
-                }                    
+                {
+                    txtSQL.AppendText(line + Environment.NewLine);
+                }
                 file.Close();
-            }               
+            }
         }
-        
+
         private void LoadReplacelist()
-        {            
+        {
             string line;
             if (ofdSQL.ShowDialog() != DialogResult.OK) return;
-            
+
             using (System.IO.StreamReader file = new StreamReader(ofdSQL.FileName, Encoding.Default))
-            {                                       
+            {
                 rtbReplace.Clear();
                 var sql = new StringBuilder();
-                progressBar1.Minimum = 0;
-                progressBar1.Maximum = (int)(file.BaseStream.Length / 1000L)+1;
+                pbRunSQL.Minimum = 0;
+                pbRunSQL.Maximum = (int)(file.BaseStream.Length / 1000L) + 1;
                 while ((line = file.ReadLine()) != null)
-                {                       
-                    sql.AppendLine(line);                        
+                {
+                    sql.AppendLine(line);
                     Application.DoEvents();
-                    progressBar1.Value = (int)(file.BaseStream.Position / 1000L);
-                }                    
+                    pbRunSQL.Value = (int)(file.BaseStream.Position / 1000L);
+                }
                 file.Close();
                 rtbReplace.Text = sql.ToString();
-            }                               
+            }
         }
-        
+
         private void btnSpeichern_Click(object sender, EventArgs e)
         {
-            if (sfdSQL.ShowDialog() != DialogResult.OK) return;            
-            txtSQL.SaveToFile(sfdSQL.FileName,Encoding.UTF8);                               
+            if (sfdSQL.ShowDialog() != DialogResult.OK) return;
+            txtSQL.SaveToFile(sfdSQL.FileName, Encoding.UTF8);
         }
 
-        public void TestOpen(string databaseString)
+        public bool TestOpen(string databaseString, DBRegistrationClass dbReg)
         {
-
+            /*
             int inx1 = txtDatabase.Text.IndexOf("\\");
             int inx2 = txtDatabase.Text.IndexOf("//");
             int inx = txtDatabase.Text.IndexOf(":");
 
+            
             string server = ((inx1 < inx)||inx2>=0) ? txtDatabase.Text.Substring(0,inx): "localhost";
             if(inx2>=0) server = server.Replace("//","");
             if(inx1 < inx)
@@ -434,110 +491,116 @@ namespace SQLView
                 }
             }
             string path = txtDatabase.Text.Substring(inx+1);
+            */
+            string server = dbReg.MakeServerFromText(txtDatabase.Text);
+            string path = dbReg.MakeDatabasepathFromText(txtDatabase.Text);
 
-            _sqLcommand.ReplaceConnection(server,path);        
+            _sqLcommand.ReplaceConnection(server, path);
             _dbrRegLocal.Server = server;
             _dbrRegLocal.DatabasePath = path;
             string connectionString = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
-            string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString);
+            string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString, (int)_dbrRegLocal.Version >= (int)eDBVersion.FB3_32);
             hsLifeTime.ToolTipActive = true;
             hsLifeTime.ToolTipText = connectionString;
-            hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);           
+            hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);
             hsLifeTime.Text = lifeTime;
+            return (lifeTime != "-1");
         }
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
-            txtSQL.Clear();            
+            txtSQL.Clear();
             UserStart();
             Testlauf();
             EditMode(cbEditMode.Checked);
             this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
-            txtDatabase.Text =  _dbrRegLocal.GetFullDatabasePath(); 
-            TestOpen(txtDatabase.Text);
+            txtDatabase.Text = _dbrRegLocal.GetFullDatabasePath();
+            TestOpen(txtDatabase.Text, _dbrRegLocal);
             hsBreak.Enabled = false;
 
             LoadHistory(_lastSort);
-                        
+            LanguageChanged();
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
-            SetEncoding();   
+            SetEncoding();
             SetAutocompeteObjects(_tables);
+          //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
-        
+
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
             ac = new AutocompleteClass(txtSQL, _dbRegOrg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);   
+            ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
-
+        SQLHistoryClass sh = null;
         private void LoadHistory(eSort sort)
         {
-            dsHistory.Clear();
             try
-            { 
-                dsHistory.ReadXml($@"{Application.StartupPath}\SQL\SQLHistory.xml");   
-                dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Descending);
-            }
-            catch
             {
-
+                sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
+                sh.HistoryRefresh(dgvSQLHistory, bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.SortGrid(dgvSQLHistory, 1, false);
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
             }
         }
 
         private void ExecuteHistorySelected()
         {
-            txtSQL.Clear();
-            DataGridViewRow dr = dgViewHistorySuccess.SelectedRows[0];
-            string sql = dr.Cells["SUCC_SQL"].Value.ToString();
-
-            txtSQL.AppendText($@"{sql}{Environment.NewLine}");            
-            tcSQLCONTROL.SelectedTab = tabSQLTEXT;
-            ExecSql(HistoryMode.NoHistory);
-            tcSQLCONTROL.SelectedTab = tabRESULT;        
+            if (dgvSQLHistory.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow dr in dgvSQLHistory.SelectedRows)
+                {
+                    string sql = dr.Cells[3].Value.ToString();
+                    txtSQL.Clear();
+                    txtSQL.AppendText($@"{sql}{Environment.NewLine}");                    
+                    ExecSql(HistoryMode.NoHistory);
+                }
+                tcSQLCONTROL.SelectedTab = tabRESULT;
+            }
         }
 
         private void SQLViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
-            dsHistory.WriteXml($@"{Application.StartupPath}\SQL\SQLHistory.xml");
-            
-            _localNotifies.ClearAllEvents("SQLViewForm");            
+            // dsHistory.WriteXml($@"{Application.StartupPath}\SQL\SQLHistory.xml");            
+           // SQLnotify.ClearAllEvents("SQLViewForm");
             this.WindowState = FormWindowState.Normal;
         }
-        
+
         private void txtSQL_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((txtSQL.Text.Length <= 0)||(!e.Shift)||(e.KeyCode != Keys.Return)) return;            
+            if ((txtSQL.Text.Length <= 0) || (!e.Shift) || (e.KeyCode != Keys.Return)) return;
             ExecSql(HistoryMode.AddToHistory);
-            tcSQLCONTROL.SelectedTab = tabRESULT;                                
+            tcSQLCONTROL.SelectedTab = tabRESULT;
         }
 
         private string leseNextLine(System.IO.StreamReader file)
-        {                        
-            if (!file.EndOfStream) return file.ReadLine();            
+        {
+            if (!file.EndOfStream) return file.ReadLine();
             return (null);
         }
-               
+
         private void FillScript()
         {
             string strcmd;
             var al = new ArrayList();
-            string[] strarr = (string[] )txtSQL.Lines;
+            string[] strarr = (string[])txtSQL.Lines;
             txtSQL.Clear();
             string term = ";";
             string termold = "^";
             int tpos;
-            
+
             foreach (string str in strarr)
             {
                 tpos = str.IndexOf("SET TERM");
-                if(tpos > -1)
+                if (tpos > -1)
                 {
                     termold = term;
-                    term = str.Substring(tpos+9,1);                   
+                    term = str.Substring(tpos + 9, 1);
                 }
 
                 strcmd = str.Trim();
@@ -549,17 +612,17 @@ namespace SQLView
             }
 
             string cmdstr = txtSQL.Text.Replace("\n", "");
-            
+
             txtSQL.Clear();
             foreach (string st in cmdstr.Split('~'))
             {
-                txtSQL.AppendText(st+Environment.NewLine);
+                txtSQL.AppendText(st + Environment.NewLine);
             }
         }
 
         private void DeactivateGrid()
         {
-            ExtensionMethods.DoubleBuffered(dgvResults,true);
+            ExtensionMethods.DoubleBuffered(dgvResults, true);
             dgvResults.SuspendLayout();
             Cursor.Current = Cursors.WaitCursor;
         }
@@ -576,9 +639,9 @@ namespace SQLView
             _obcmd.Clear();
             _obcmd.AddRange(txtSQL.Lines);
             var ri = ExecSql(hMode);
-            if(dgvResults.RowCount > 1)
+            if (dgvResults.RowCount > 1)
             {
-              tcSQLCONTROL.SelectedTab = tabRESULT;
+                tcSQLCONTROL.SelectedTab = tabRESULT;
             }
             UserBreak();
             ActivateGrid();
@@ -600,7 +663,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         public void MemoryusagePerStatement()
         {
             lvPerformance.Items.Clear();
-            if(_dbrRegLocal.Version < eDBVersion.FB3_32)
+            if (_dbrRegLocal.Version < eDBVersion.FB3_32)
             {
                 lvPerformance.Items.Add($@"{Environment.NewLine}No performance for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
                 return;
@@ -608,18 +671,18 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             var scmd = new StringBuilder();
             scmd.Append("SELECT STMT.MON$ATTACHMENT_ID,  STMT.MON$SQL_TEXT,  MEM.MON$MEMORY_USED, R.MON$RECORD_SEQ_READS,R.MON$RECORD_IDX_READS,R.MON$RECORD_INSERTS,R.MON$RECORD_UPDATES,R.MON$RECORD_DELETES,R.MON$RECORD_CONFLICTS");
             scmd.Append(" FROM MON$STATEMENTS s ");
-            scmd.Append(" join mon$record_stats r on r.mon$stat_id = s.mon$stat_id");
-            scmd.Append(" join MON$MEMORY_USAGE mem on r.mon$stat_id = mem.mon$stat_id");
+            scmd.Append(" JOIN mon$record_stats r on r.mon$stat_id = s.mon$stat_id");
+            scmd.Append(" JOIN MON$MEMORY_USAGE mem on r.mon$stat_id = mem.mon$stat_id");
             scmd.Append(" JOIN MON$STATEMENTS stmt on stmt.mon$stat_id = r.mon$stat_id ORDER BY mem.MON$MEMORY_USED DESC");
 
             string cmd = scmd.ToString();
-            var ri = _sqLcommand.ExecuteCommandWithGlobalConnection(cmd,false);           
+            var ri = _sqLcommand.ExecuteCommandWithGlobalConnection(cmd, false);
             if (ri.dataSet.Tables.Count <= 0) return;
             foreach (DataRow dr in ri.dataSet.Tables[0].Rows)
-            {                    
+            {
                 object ob1 = dr[1]; //SQL Text
                 if ((ob1.ToString().IndexOf(".MON$") >= 0)) continue; //&&(ob1.ToString().IndexOf(".RDB$") < 0))
-                
+
                 object ob2 = dr[2]; //Memory used
                 object ob3 = dr[3]; //sseq reads
                 object ob4 = dr[4]; //idx reads
@@ -639,17 +702,17 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
                 var lvi = new ListViewItem(sarr);
                 lvPerformance.Items.Add(lvi);
-                   
+
             }
 
-            if (ri.connection?.State != ConnectionState.Open) return;            
-            ri.connection.Close();               
+            if (ri.connection?.State != ConnectionState.Open) return;
+            ri.connection.Close();
         }
 
         public void RefreshPLAN()
-        {          
+        {
             fctPlan.Clear();
-            if(_dbrRegLocal.Version < eDBVersion.FB3_32)
+            if (_dbrRegLocal.Version < eDBVersion.FB3_32)
             {
                 fctPlan.AppendText($@"{Environment.NewLine}No plan for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
                 return;
@@ -657,20 +720,20 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
             var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
             string sql = txtSQL.Text.Trim();
-            if(sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
-            
+            if (sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
+
             string cmd = "SELECT MON$STATEMENTS.MON$STATEMENT_ID,MON$STATEMENTS.MON$SQL_TEXT,MON$STATEMENTS.MON$EXPLAINED_PLAN FROM MON$STATEMENTS WHERE MON$STATEMENTS.MON$SQL_TEXT = @sql";
-          
+
             DoInfoNotifications = false;
             _globalCon.Open();
 
-            var fbcmd = new FbCommand(cmd,_globalCon);
-            fbcmd.Parameters.Add("@sql",sql);
+            var fbcmd = new FbCommand(cmd, _globalCon);
+            fbcmd.Parameters.Add("@sql", sql);
             var dr = fbcmd.ExecuteReader();
-            if(dr.HasRows)
+            if (dr.HasRows)
             {
-                while(dr.Read())
-                {                    
+                while (dr.Read())
+                {
                     object ob1 = dr.GetValue(1);
                     object ob2 = dr.GetValue(2);
                     fctPlan.AppendText(ob1.ToString() + Environment.NewLine);
@@ -679,42 +742,41 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     fctPlan.AppendText($@"------------------------------------------------------------------{Environment.NewLine}");
                 }
             }
-            _globalCon.Close();                      
+            _globalCon.Close();
         }
-        
+
         private void Testlauf()
         {
             _testlauf = cbTestlauf.Checked;
         }
-        
+
         private void RunSQLFromFile()
         {
-            progressBar1.Value = progressBar1.Minimum;
-            UserActionClass.Instance().UserAction = UserActionType.none;           
+            pbRunSQL.Value = pbRunSQL.Minimum;
+            UserActionClass.Instance().UserAction = UserActionType.none;
             if (!string.IsNullOrEmpty(SQLViewLastRunClass.Instance().ScriptPath))
             {
                 ofdSQL.InitialDirectory = SQLViewLastRunClass.Instance().ScriptPath;
             }
             if (ofdSQL.ShowDialog() != DialogResult.OK) return;
-            
+
             hsRunSQLfromFile.Enabled = false;
 
-            dataSet1.Clear();
+            dsResults.Clear();
             dgvResults.AutoGenerateColumns = true;
             var fi = new FileInfo(ofdSQL.FileName);
-            progressBar1.Value = 0;
-            progressBar1.Maximum = (int)fi.Length;
+            pbRunSQL.Value = 0;
+            pbRunSQL.Maximum = (int)fi.Length;
             hsBreak.Enabled = true;
             string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbRegOrg);
             string[] strarr = File.ReadAllLines(fi.FullName);
-            var sb = new StringBuilder();
-
-            var ri = _sqLcommand.ExecuteCommandsAddToDataset(dataSet1,strarr,true);
-            dataSet1 = ri.dataSet;
             
+            var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, strarr, true);
+            dsResults = ri.dataSet;
+
             hsRunSQLfromFile.Enabled = true;
             SQLViewLastRunClass.Instance().ScriptPath = fi.Directory.FullName;
-            UserBreak();                     
+            UserBreak();
         }
 
         private void UserBreak()
@@ -722,36 +784,40 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             UserActionClass.Instance().UserAction = UserActionType.abort;
         }
         private void UserStart()
-        {           
+        {
             UserActionClass.Instance().UserAction = UserActionType.none;
         }
         private void UserStartReady()
         {
-            UserActionClass.Instance().UserAction = UserActionType.none;           
+            UserActionClass.Instance().UserAction = UserActionType.none;
             hsBreak.Enabled = false;
             hsRunSQL.Enabled = true;
             hsRunSQLfromFile.Enabled = true;
-        }          
-        
+        }
+
         private void SetEncoding()
-        {            
+        {
             int inx = cbEncoding.FindString(_dbrRegLocal.CharSet);
-            cbEncoding.SelectedIndex = inx;                        
+            cbEncoding.SelectedIndex = inx;
         }
 
         private void cbTestlauf_CheckedChanged(object sender, EventArgs e)
         {
             Testlauf();
         }
-       
+
         private void cbErrors_CheckedChanged(object sender, EventArgs e)
         {
-            Errors();
+            if (cbErrors.Checked)
+                SQLnotify.Register4Error(ErrorRaised);
+            else SQLnotify.Unegister4Error(ErrorRaised);
         }
 
         private void cbMeldungen_CheckedChanged(object sender, EventArgs e)
         {
-            Meldungen();
+            if (cbMeldungen.Checked)
+                SQLnotify.Register4Info(InfoRaised);
+            else SQLnotify.Unegister4Info(InfoRaised);
         }
 
         private void cbHistory_CheckedChanged(object sender, EventArgs e)
@@ -767,11 +833,11 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
         }
         private void ReplaceText(string line)
-        {            
+        {
             if (line.IndexOf(';') <= 0) return;
             string[] rpl = line.Split(';');
             txtSQL.Text = txtSQL.Text.Replace(rpl[0], rpl[1]);
-        }        
+        }
 
         private void btnLoadMeld_Click(object sender, EventArgs e)
         {
@@ -790,24 +856,32 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             secDATABASEPATH.Inhalt = pf.ServerDatabasePfad;
             secSERVERNAME.Inhalt = pf.ServerName;
         }
-        
+
         private void hsClose_Click(object sender, EventArgs e)
         {
             UserActionClass.Instance().UserAction = UserActionType.none; Close();
         }
         private void hsRunSQL_Click(object sender, EventArgs e)
-        {            
-            ExecuteSQL(_history);            
+        {
+            ExecuteSQL(_history);
         }
         Stopwatch stopwatch = new Stopwatch();
         private void ExecuteSQL(HistoryMode hMode)
         {
-            dgvResults.Visible = false; 
+            dgvResults.Visible = false;
+
+            if (!hsLifeTime.Marked)
+            {
+                //Datenbank wurde geändert, neu einloggen -> bei fehler return
+                if (!TestOpen(txtDatabase.Text, _dbrRegLocal)) return;
+            }
+
             stopwatch.Restart();
             DoInfoNotifications = true;
-            if(cbClearListBeforeExcecute.Checked)
+            if (cbClearListBeforeExcecute.Checked)
             {
                 _cmdDone = 0;
+                _cmdError = 0;
                 rtfMELDUNG.Clear();
                 rtfERRORS.Clear();
             }
@@ -826,10 +900,12 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
             stopwatch.Stop();
             txtUsedTime.Text = stopwatch.ElapsedMilliseconds.ToString();
-            EditMode(cbEditMode.Checked);   
-            tabRESULT.Text = $@"Results ({dgvResults.Rows.Count})";
-            tabHistory.Text = $@"History ({dgViewHistorySuccess.RowCount}/{dgViewHistoryFailed.RowCount})";
-            dgvResults.Visible = true; 
+            EditMode(cbEditMode.Checked);
+            tabRESULT.Text = (dsResults.Tables.Count > 0) ? $@"Results ({dsResults.Tables[0].Rows.Count})" : $@"Results (0)";
+
+
+            tabHistory.Text = $@"History ({dgvSQLHistory.Rows.Count})";
+            dgvResults.Visible = true;
         }
 
         private void hsClearText_Click(object sender, EventArgs e)
@@ -865,13 +941,8 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         }
 
         private void hsExecuteHistorySelected_Click(object sender, EventArgs e)
-        {            
-            ExecuteHistorySelected();
-        }
-
-        private void hsClearHistoryAll_Click(object sender, EventArgs e)
         {
-           dtSUCCESS.Clear();
+            ExecuteHistorySelected();
         }
 
         private void hsClearErrorAll_Click(object sender, EventArgs e)
@@ -890,59 +961,59 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             if (sfdSQL.ShowDialog() != DialogResult.OK) return;
             txtSQL.SaveToFile(sfdSQL.FileName, Encoding.UTF8);
         }
-        
+
         private void hsSaveDataset_Click(object sender, EventArgs e)
-        {            
+        {
             try
             {
-                DataSet dsUpdate = dataSet1.GetChanges(DataRowState.Modified);
-                DataSet dsInsert = dataSet1.GetChanges(DataRowState.Added);
-                DataSet dsDeleted = dataSet1.GetChanges(DataRowState.Deleted);
+                DataSet dsUpdate = dsResults.GetChanges(DataRowState.Modified);
+                DataSet dsInsert = dsResults.GetChanges(DataRowState.Added);
+                DataSet dsDeleted = dsResults.GetChanges(DataRowState.Deleted);
                 string constr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
                 var cn = new FbConnection(constr);
                 string cm1 = _cmd;
                 var da = new FbDataAdapter(cm1, cn);
-                var cb = new FbCommandBuilder(da);  
-               
+                var cb = new FbCommandBuilder(da);
+
                 da.AcceptChangesDuringUpdate = true;
                 if (dsUpdate != null)
-                {   
+                {
                     var fc = cb.GetUpdateCommand();
                     da.UpdateCommand = fc;
                     if (dsUpdate.Tables[0].Rows.Count > 0)
                     {
-                       _localNotifies?.AddToINFO($@"Table {dsUpdate.Tables[0].TableName} updated {dsUpdate.Tables[0].Rows.Count} records affected");
+                        SQLnotify.AddToINFO($@"Table {dsUpdate.Tables[0].TableName} updated {dsUpdate.Tables[0].Rows.Count} records affected");
                         da.Update(dsUpdate);
                     }
                 }
                 if (dsInsert != null)
                 {
                     var fi = cb.GetInsertCommand();
-                    da.InsertCommand = fi;                    
-                    _localNotifies?.AddToINFO($@"Table {dsInsert.Tables[0].TableName} added {dsInsert.Tables[0].Rows.Count} records affected");
-                    da.Update(dsInsert);                        
+                    da.InsertCommand = fi;
+                    SQLnotify.AddToINFO($@"Table {dsInsert.Tables[0].TableName} added {dsInsert.Tables[0].Rows.Count} records affected");
+                    da.Update(dsInsert);
                 }
                 if (dsDeleted != null)
                 {
-                    var fd = cb.GetDeleteCommand();                
+                    var fd = cb.GetDeleteCommand();
                     da.DeleteCommand = fd;
                     if (dsDeleted.Tables[0].Rows.Count > 0)
                     {
-                       _localNotifies?.AddToINFO($@"Table {dsDeleted.Tables[0].TableName} deleted {dsDeleted.Tables[0].Rows.Count} records affected");
+                        SQLnotify.AddToINFO($@"Table {dsDeleted.Tables[0].TableName} deleted {dsDeleted.Tables[0].Rows.Count} records affected");
                         da.Update(dsDeleted);
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
                 var sb = new StringBuilder();
                 sb.AppendLine("Views und Tabels ohne Primary Key können nicht editiert werden.");
                 sb.AppendLine(ex.Message);
-                MessageBox.Show(sb.ToString(),"Dataset Update failed");
+                MessageBox.Show(sb.ToString(), "Dataset Update failed");
                 //NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> Savedataset_Click()", ex));   
-                _localNotifies?.AddToERROR(sb.ToString());
+                SQLnotify.AddToERROR(sb.ToString());
             }
-            bindingSource1.DataMember = null;                                
+            bsResults.DataMember = null;
             var ri = RunSQL(_history);
             _cmd = ri.lastSQL;
             if (ri.lastCommandType != SQLCommandType.@select) return;
@@ -955,47 +1026,47 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         {
             if (e.ClickedItem == tsmiDDLCopyToClipboard)
             {
-                if(!string.IsNullOrEmpty(txtSQL.SelectedText))
-                Clipboard.SetText(txtSQL.SelectedText);
+                if (!string.IsNullOrEmpty(txtSQL.SelectedText))
+                    Clipboard.SetText(txtSQL.SelectedText);
             }
             else if (e.ClickedItem == tsmiDDLPaste)
             {
-              string txt =  Clipboard.GetText();
-              if(!string.IsNullOrEmpty(txt))
-              txtSQL.Text = txtSQL.Text.Insert(txtSQL.SelectionStart,txt);
+                string txt = Clipboard.GetText();
+                if (!string.IsNullOrEmpty(txt))
+                    txtSQL.Text = txtSQL.Text.Insert(txtSQL.SelectionStart, txt);
             }
-            else if(e.ClickedItem == tsmiLastCommand)
+            else if (e.ClickedItem == tsmiLastCommand)
             {
-               txtSQL.Clear();
-               UserStartReady();            
-               txtSQL.AppendText($@"{lastCommand}{Environment.NewLine}");           
-               tcSQLCONTROL.SelectedTab = tabSQLTEXT;  
+                txtSQL.Clear();
+                UserStartReady();
+                txtSQL.AppendText($@"{lastCommand}{Environment.NewLine}");
+                tcSQLCONTROL.SelectedTab = tabSQLTEXT;
             }
-            else if(e.ClickedItem == tsmiInsertLastSuccessfullCommand)
+            else if (e.ClickedItem == tsmiInsertLastSuccessfullCommand)
             {
-               txtSQL.Clear();
-               UserStartReady();            
-               txtSQL.AppendText($@"{lastSuccessfulCommand}{Environment.NewLine}");           
-               tcSQLCONTROL.SelectedTab = tabSQLTEXT;  
+                txtSQL.Clear();
+                UserStartReady();
+                txtSQL.AppendText($@"{lastSuccessfulCommand}{Environment.NewLine}");
+                tcSQLCONTROL.SelectedTab = tabSQLTEXT;
             }
-            else if(e.ClickedItem ==  tsmiExecuteLastSucessfullCommand)
+            else if (e.ClickedItem == tsmiExecuteLastSucessfullCommand)
             {
-               txtSQL.Clear();
-               UserStartReady();            
-               txtSQL.AppendText($@"{lastSuccessfulCommand}{Environment.NewLine}");           
-               tcSQLCONTROL.SelectedTab = tabSQLTEXT;  
-               ExecuteSQL(HistoryMode.NoHistory);  
+                txtSQL.Clear();
+                UserStartReady();
+                txtSQL.AppendText($@"{lastSuccessfulCommand}{Environment.NewLine}");
+                tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+                ExecuteSQL(HistoryMode.NoHistory);
             }
         }
 
         private void hsRefreshXMLScheme_Click(object sender, EventArgs e)
         {
-            fctXMLScheme.Text = dataSet1.GetXmlSchema();
+            fctXMLScheme.Text = dsResults.GetXmlSchema();
         }
 
         private void hsRefreshXMLData_Click(object sender, EventArgs e)
         {
-            fctXMLData.Text = dataSet1.GetXml();
+            fctXMLData.Text = dsResults.GetXml();
         }
 
         private void hsSaveXML_Click(object sender, EventArgs e)
@@ -1015,16 +1086,11 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             MemoryusagePerStatement();
         }
 
-        private void hsCrearAllFailed_Click(object sender, EventArgs e)
-        {
-            dtFAILED.Clear();
-        }
-       
         private void txtSQL_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == (Keys.K | Keys.Control)) 
+            if (e.KeyData == (Keys.K | Keys.Control))
             {
-                if(ac != null) ac.Show();
+                if (ac != null) ac.Show();
                 e.Handled = true;
             }
         }
@@ -1038,12 +1104,12 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         {
             dgvResults.AutoSizeColumnsMode = (enabled) ? DataGridViewAutoSizeColumnsMode.None : DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvResults.ReadOnly = !enabled;
-            dgvResults.RowHeadersVisible     = enabled;
-            dgvResults.AllowUserToAddRows    = enabled;
+            dgvResults.RowHeadersVisible = enabled;
+            dgvResults.AllowUserToAddRows = enabled;
             dgvResults.AllowUserToDeleteRows = enabled;
             dgvResults.SelectionMode = (enabled) ? DataGridViewSelectionMode.CellSelect : DataGridViewSelectionMode.FullRowSelect;
-            hsUpdateDataset.Enabled    = enabled;
-            bnTableContentDeleteItem.Enabled = enabled;              
+            hsUpdateDataset.Enabled = enabled;
+            bnTableContentDeleteItem.Enabled = enabled;
         }
 
         private void dgvResults_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1053,75 +1119,44 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void cbRowManually_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbRowManually.Checked)
-            {                
+            if (cbRowManually.Checked)
+            {
                 dgvResults.Invalidate();
             }
         }
 
         private void dgvResults_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {           
+        {
             int rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
-            foreach(DataGridViewRow x in dgvResults.Rows)
+            foreach (DataGridViewRow x in dgvResults.Rows)
             {
-              x.MinimumHeight = rh;
+                x.MinimumHeight = rh;
             }
         }
 
         private void txtRowHeight_TextChanged(object sender, EventArgs e)
         {
-            if(cbRowManually.Checked)
-            {                
-                cbRowManually.Checked = false;                
+            if (cbRowManually.Checked)
+            {
+                cbRowManually.Checked = false;
             }
         }
-
         private void txtRowHeight_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Return)
+            if (e.KeyCode == Keys.Return)
             {
                 cbRowManually.Checked = true;
             }
         }
 
-        private void Sort()
-        {
-           
-        }
-
-        private void cmsHistory_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if(e.ClickedItem == tsmiSortASC)
-            {
-                if(_lastSort != eSort.ASC)
-                {
-                    Sort();
-                    _lastSort = eSort.ASC;
-                    tabPageSucceededHistory.Text = "commands succeded ASC";
-                }                
-            }
-            else if(e.ClickedItem == tsmiSortDESC)
-            {
-                if(_lastSort != eSort.DESC)
-                {
-                    Sort();
-                    _lastSort = eSort.DESC;
-                    tabPageSucceededHistory.Text = "commands succeded DESC";
-                }
-            }
-        }
-
         private void hsPageRefresh_Click(object sender, EventArgs e)
-        {            
-            ExecuteSQL(_history);            
+        {
+            ExecuteSQL(_history);
         }
 
         private void hsLifeTime_Click(object sender, EventArgs e)
         {
-            
-          
-           
-            TestOpen(txtDatabase.Text);
+            TestOpen(txtDatabase.Text, _dbrRegLocal);
         }
 
         private void txtDatabase_TextChanged(object sender, EventArgs e)
@@ -1130,52 +1165,50 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         }
 
 
-        private void exportToHtml(string filename)   
-        {   
-            var sb = new StringBuilder();   
-            sb.Append("<html >");   
-            sb.Append("<head>");   
-            sb.Append("</head>");   
-            sb.Append("<body>");   
-            sb.Append("<table border='1px' cellpadding='1' cellspacing='1' bgcolor='lightyellow' style='font-family:Garamond; font-size:smaller'>");      
-            sb.Append("<tr >");   
-            foreach (DataColumn myColumn in dataSet1.Tables[0].Columns)   
-            {   
-                sb.Append("<td >");   
-                sb.Append(myColumn.ColumnName);   
-                sb.Append("</td>");   
-   
-            }   
-            sb.Append("</tr>");         
-            foreach (DataRow myRow in dataSet1.Tables[0].Rows)   
-            {      
-                sb.Append("<tr >");   
-                foreach (DataColumn myColumn in dataSet1.Tables[0].Columns)   
-                {   
-                    sb.Append("<td >");   
-                    sb.Append(myRow[myColumn.ColumnName].ToString());   
-                    sb.Append("</td>");   
-   
-                }   
-                sb.Append("</tr>");   
-            }   
-   
-            //Close tags.   
-            sb.Append("</table>");   
-            sb.Append("</body>");   
-            sb.Append("</html>");   
-   
-            if(ckExportToScreen.Checked)
+        private void exportToHtml(string filename)
+        {
+            var sb = new StringBuilder();
+            sb.Append("<html >");
+            sb.Append("<head>");
+            sb.Append("</head>");
+            sb.Append("<body>");
+            sb.Append("<table border='1px' cellpadding='1' cellspacing='1' bgcolor='lightyellow' style='font-family:Garamond; font-size:smaller'>");
+            sb.Append("<tr >");
+            foreach (DataColumn myColumn in dsResults.Tables[0].Columns)
             {
-               fctXMLData.Clear();
-               fctXMLData.Language = FastColoredTextBoxNS.Language.HTML;
-               fctXMLData.AppendText(sb.ToString());
-            }
-            if(ckExportToFile.Checked)
-            File.WriteAllText(filename, sb.ToString()); 
-   
-        }  
+                sb.Append("<td >");
+                sb.Append(myColumn.ColumnName);
+                sb.Append("</td>");
 
+            }
+            sb.Append("</tr>");
+            foreach (DataRow myRow in dsResults.Tables[0].Rows)
+            {
+                sb.Append("<tr >");
+                foreach (DataColumn myColumn in dsResults.Tables[0].Columns)
+                {
+                    sb.Append("<td >");
+                    sb.Append(myRow[myColumn.ColumnName].ToString());
+                    sb.Append("</td>");
+
+                }
+                sb.Append("</tr>");
+            }
+
+            //Close tags.   
+            sb.Append("</table>");
+            sb.Append("</body>");
+            sb.Append("</html>");
+
+            if (ckExportToScreen.Checked)
+            {
+                fctXMLData.Clear();
+                fctXMLData.Language = FastColoredTextBoxNS.Language.HTML;
+                fctXMLData.AppendText(sb.ToString());
+            }
+            if (ckExportToFile.Checked)
+                File.WriteAllText(filename, sb.ToString());
+        }
 
         public static string WriteCSV(string input, char seperator)
         {
@@ -1183,7 +1216,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 if (input == null)
                     return string.Empty;
- 
+
                 bool containsQuote = false;
                 bool containsComma = false;
                 int len = input.Length;
@@ -1195,7 +1228,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     else if (ch == seperator)
                         containsComma = true;
                 }
- 
+
                 // test test test;te"s"t2  
                 // test;"test;te""s""t2";
 
@@ -1204,7 +1237,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
                 if (containsQuote && containsComma)
                     input = input.Replace("\"", "\"\"");
- 
+
                 if (containsComma)
                     return "\"" + input + "\"";
                 else
@@ -1217,59 +1250,59 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         }
 
         private async void exportCSV(string filename, char seperator)
-        {            
-            DataTable dt = dataSet1.Tables[0];
+        {
+            DataTable dt = dsResults.Tables[0];
             fctXMLData.Clear();
             fctXMLData.Language = FastColoredTextBoxNS.Language.Custom;
             bool first = true;
-            if(ckExportToFile.Checked)
+            if (ckExportToFile.Checked)
             {
                 using (StreamWriter writer = File.CreateText(filename))
-                {                    
+                {
                     foreach (DataRow dr in dt.Rows)
                     {
                         var sb = new StringBuilder();
-                        if(first)
+                        if (first)
                         {
                             foreach (DataColumn dc in dt.Columns)
-                            {                            
-                                sb.Append($@"{WriteCSV(dc.ColumnName,seperator)}{seperator}");                                                                                    
+                            {
+                                sb.Append($@"{WriteCSV(dc.ColumnName, seperator)}{seperator}");
                             }
                             sb.Remove(sb.Length - 1, 1);
-                            
+
                             await writer.WriteLineAsync(sb.ToString());
-                            if(ckExportToScreen.Checked)
+                            if (ckExportToScreen.Checked)
                             {
-                                 fctXMLData.AppendText(sb.ToString());
+                                fctXMLData.AppendText(sb.ToString());
                             }
                             first = false;
                             sb = new StringBuilder();
                         }
 
                         foreach (DataColumn dc in dt.Columns)
-                        {                            
-                            sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");                                                                                    
+                        {
+                            sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(), seperator)}{seperator}");
                         }
                         sb.Remove(sb.Length - 1, 1);
-                        
+
                         await writer.WriteLineAsync(sb.ToString());
-                        if(ckExportToScreen.Checked)
+                        if (ckExportToScreen.Checked)
                         {
-                             fctXMLData.AppendText(sb.ToString());
+                            fctXMLData.AppendText(sb.ToString());
                         }
                     }
                 }
             }
-            else if(ckExportToScreen.Checked)
+            else if (ckExportToScreen.Checked)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
                     var sb = new StringBuilder();
-                    if(first)
+                    if (first)
                     {
                         foreach (DataColumn dc in dt.Columns)
-                        {                            
-                            sb.Append($@"{WriteCSV(dc.ColumnName,seperator)}{seperator}");                                                                                    
+                        {
+                            sb.Append($@"{WriteCSV(dc.ColumnName, seperator)}{seperator}");
                         }
                         sb.Remove(sb.Length - 1, 1);
                         sb.AppendLine();
@@ -1279,46 +1312,46 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     }
 
                     foreach (DataColumn dc in dt.Columns)
-                    {                        
-                        sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(),seperator)}{seperator}");                                                                      
+                    {
+                        sb.Append($@"{WriteCSV(dr[dc.ColumnName].ToString(), seperator)}{seperator}");
                     }
                     sb.Remove(sb.Length - 1, 1);
                     sb.AppendLine();
                     fctXMLData.AppendText(sb.ToString());
                 }
             }
-            
+
         }
 
         private void hsExportCSV_Click(object sender, EventArgs e)
-        {            
-            if(ckExportToFile.Checked)
+        {
+            if (ckExportToFile.Checked)
             {
                 saveFileDialogCSV.DefaultExt = ".csv";
                 saveFileDialogCSV.Filter = "CSV|*.csv|All|*.*";
                 saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
-                if(saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+                if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
                 {
                     string s = cbCSVSeperator.Text.Trim();
-                    exportCSV(saveFileDialogCSV.FileName,s[0]);
+                    exportCSV(saveFileDialogCSV.FileName, s[0]);
                 }
             }
             else
             {
                 string s = cbCSVSeperator.Text.Trim();
-                exportCSV("",s[0]);
+                exportCSV("", s[0]);
             }
         }
 
         private void hsExportHTML_Click(object sender, EventArgs e)
         {
-            if(ckExportToFile.Checked)
+            if (ckExportToFile.Checked)
             {
                 saveFileDialogCSV.DefaultExt = ".html";
                 saveFileDialogCSV.Filter = "HTML|*.html|All|*.*";
                 saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
-                if(saveFileDialogCSV.ShowDialog() == DialogResult.OK)
-                {                
+                if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
+                {
                     exportToHtml(saveFileDialogCSV.FileName);
                 }
             }
@@ -1328,43 +1361,106 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
         }
 
-        private void DgViewHistorySuccess_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void HotSpot2_Click(object sender, EventArgs e)
         {
-            txtSQL.Clear();
-            UserStartReady();
-            DataGridViewRow dr = dgViewHistorySuccess.SelectedRows[0];
-            string sql = dr.Cells["SUCC_SQL"].Value.ToString();
 
-            txtSQL.AppendText($@"{sql.Trim()}{Environment.NewLine}");
-            tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+            int n = ExecSqlForExport(_history);
+            lblExportLinesCount.Text = n.ToString();
         }
 
-        private void HsSort_Click(object sender, EventArgs e)
+        private void HsExportBreak_Click(object sender, EventArgs e)
         {
-            if(tabControlHistory.SelectedTab == tabPageSucceededHistory)
-            { 
-                SUCC_RUNDATE.SortMode = DataGridViewColumnSortMode.Programmatic;
-                if (dgViewHistorySuccess.SortOrder == SortOrder.Ascending)
-                {             
-                    dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Descending);                
-                }
-                else
-                {                
-                    dgViewHistorySuccess.Sort(SUCC_RUNDATE, ListSortDirection.Ascending);
-                } 
-            }
-            else
+            doExport = false;
+        }
+
+        private void HsRefreshHistory_Click(object sender, EventArgs e)
+        {
+            try
             {
-                FAIL_RUNDATE.SortMode = DataGridViewColumnSortMode.Programmatic;
-                if (dgViewHistoryFailed.SortOrder == SortOrder.Ascending)
+                sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.SortGrid(dgvSQLHistory, 1);
+                
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+        }
+        
+        private void DataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridView grid = sender as DataGridView;
+            if (grid.SelectedRows.Count > 0)
+            {
+                var row = grid.SelectedRows[0];
+                txtSQL.Text = row.Cells[3].Value.ToString();
+                tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+            }
+        }
+
+        private void DgvSQLHistory_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView grid = sender as DataGridView;
+            sh.SwapSortGrid(grid, e.ColumnIndex);           
+        }        
+        private void CbAllHistory_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                sh.HistoryRefresh(dgvSQLHistory,bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.SortGrid(dgvSQLHistory, 1);
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+        }
+
+        private void CmsHistory_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == tsmiDeleteHistoryEntry)
+            {
+                int n = 0;
+                foreach (DataGridViewRow dr in dgvSQLHistory.SelectedRows)
                 {
-                    dgViewHistoryFailed.Sort(FAIL_RUNDATE, ListSortDirection.Descending);                
+                    if (sh.DeleteHistoryEntry((int)dr.Cells[0].Value)) n++;
                 }
-                else
+                if (n > 0)
                 {
-                    dgViewHistoryFailed.Sort(FAIL_RUNDATE, ListSortDirection.Ascending);
+                    try
+                    {
+                        sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                        sh.SortGrid(dgvSQLHistory, 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        SQLnotify.AddToERROR(ex.Message);
+                    }
                 }
             }
+            else if (e.ClickedItem == tsmiHistoryCopyToSQL)
+            {
+                if (dgvSQLHistory.SelectedRows.Count > 0)
+                {
+                    txtSQL.Clear();
+                    tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+                }
+                foreach (DataGridViewRow dr in dgvSQLHistory.SelectedRows)
+                {
+                    string sql = dr.Cells[3].Value.ToString();
+                    txtSQL.AppendText($@"{sql}{Environment.NewLine}");
+                }
+            }
+            else if (e.ClickedItem == tsmiHistoryExecuteSQL)
+            {
+                ExecuteHistorySelected();                
+            }
+        }
+
+        private void SQLViewForm1_Enter(object sender, EventArgs e)
+        {
+          //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
     }
 }

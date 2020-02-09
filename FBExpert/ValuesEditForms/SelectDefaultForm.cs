@@ -1,6 +1,5 @@
-﻿using MessageLibrary;
+﻿using BasicClassLibrary;
 using System;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -8,18 +7,19 @@ namespace FBXpert
     public partial class SelectDefaultForm : Form
     {
         NotifiesClass localNotify = null;
-        public SelectDefaultForm(Form parent, NotifiesClass locNotify)
+        string _key = string.Empty;
+        public SelectDefaultForm(Form parent, NotifiesClass locNotify, string key, string[] items)
         {
             InitializeComponent();
             this.MdiParent = parent;
             localNotify = locNotify;
+            _key = key;
             cbDefaults.Items.Clear();
-            cbDefaults.Items.Add("CURRENT_USER");
-            cbDefaults.Items.Add("CURRENT_DATE");
-            cbDefaults.Items.Add("CURRENT_TIMESTAMP");
-            cbDefaults.Items.Add("CURRENT_TIME");
-            cbDefaults.Items.Add("CURRENT_ROLE");
-            cbDefaults.Items.Add("CURRENT_PATH");
+            foreach(string s in items)
+            {
+                cbDefaults.Items.Add(s);
+            }
+            
 
             cbDefaults.SelectedIndex = 0;
         }
@@ -28,7 +28,7 @@ namespace FBXpert
 
         private void hsOK_Click(object sender, EventArgs e)
         {
-            localNotify.Notify.RaiseInfo("SelectDefaultForm->hsOK", "SELECT_DEFAULTS",cbDefaults.Text);
+            localNotify.Notify.RaiseInfo("SelectDefaultForm->hsOK", _key,cbDefaults.Text);
             Close();
         }
 
