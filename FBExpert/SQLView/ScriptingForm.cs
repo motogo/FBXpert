@@ -6,7 +6,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
-using MessageLibrary;
+using MessageFormLibrary;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,7 +39,7 @@ namespace FBXpert.SQLView
             fcbSQL.SelectionStart = 0;
             string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
-            _sql.RegisterInfoNotify(EventMeldungRaised);
+            _sql.ScriptNotify.Register4Info(EventMeldungRaised);
         }
 
         public ScriptingForm(DBRegistrationClass drc, List<string> script)
@@ -544,7 +544,7 @@ namespace FBXpert.SQLView
         {            
             string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");            
-            _sql.RegisterInfoNotify(EventMeldungRaised);
+            _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             if (cbClearBeforePreparing.Checked)
             {                               
                 lvCommands.Items.Clear();
@@ -566,7 +566,7 @@ namespace FBXpert.SQLView
             Application.DoEvents();            
             string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
-            _sql.RegisterInfoNotify(EventMeldungRaised);
+            _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             _sql.Commands.Clear();
                                                             
             int lineCount = 0;

@@ -10,7 +10,7 @@ using FBXpert.SQLStatements;
 using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
-using MessageLibrary;
+using MessageFormLibrary;
 using SESpaltenEditor;
 using StateClasses;
 using System;

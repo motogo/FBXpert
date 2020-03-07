@@ -7,7 +7,6 @@ using FBXpert.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
-using MessageLibrary;
 using MessageLibrary.SendMessages;
 using SharedStorages;
 using StateClasses;

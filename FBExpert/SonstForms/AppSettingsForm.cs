@@ -1,7 +1,6 @@
 ﻿using BasicClassLibrary;
 using FBXpert.DataClasses;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace FBXpert.SonstForms

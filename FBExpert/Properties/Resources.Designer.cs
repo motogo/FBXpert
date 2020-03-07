@@ -1603,6 +1603,26 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sweep_bl24x {
+            get {
+                object obj = ResourceManager.GetObject("sweep_bl24x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sweep_ge24x {
+            get {
+                object obj = ResourceManager.GetObject("sweep_ge24x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap system_search_blue_22x {
             get {
                 object obj = ResourceManager.GetObject("system_search_blue_22x", resourceCulture);

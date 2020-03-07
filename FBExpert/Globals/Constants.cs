@@ -1,8 +1,6 @@
-﻿using System.Windows.Forms;
-
-namespace FBXpert.Globals
+﻿namespace FBXpert.Globals
 {
-    
+
     public static class SQLConstants
     {
         public static readonly string WHERE = "WHERE";
@@ -23,6 +21,7 @@ namespace FBXpert.Globals
         public static readonly string NOT_NULL = "NOT NULL";
         public static readonly string NULL = "NULL";
         public static readonly string IS = "IS";
+        
 
     }
     

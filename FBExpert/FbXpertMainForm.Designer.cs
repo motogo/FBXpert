@@ -44,7 +44,7 @@ namespace FBXpert
             this.tsmiUtilities = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUtilities = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDesignEarth = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDesign = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDesignGray = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAppSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDatabaseDesign = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +152,7 @@ namespace FBXpert
             this.cmsUtilities.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsUtilities.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDesignEarth,
-            this.tsmiDesign,
+            this.tsmiDesignGray,
             this.tsmiAppSettings,
             this.toolStripSeparator4,
             this.tsmiDatabaseDesign,
@@ -178,9 +178,9 @@ namespace FBXpert
             // 
             // tsmiDesign
             // 
-            this.tsmiDesign.Name = "tsmiDesign";
-            this.tsmiDesign.Size = new System.Drawing.Size(189, 26);
-            this.tsmiDesign.Text = "Design Gray";
+            this.tsmiDesignGray.Name = "tsmiDesign";
+            this.tsmiDesignGray.Size = new System.Drawing.Size(189, 26);
+            this.tsmiDesignGray.Text = "Design Gray";
             // 
             // tsmiAppSettings
             // 
@@ -297,7 +297,7 @@ namespace FBXpert
         private System.Windows.Forms.ToolStripMenuItem tsmiUtilities;
         private System.Windows.Forms.ContextMenuStrip cmsUtilities;
         private System.Windows.Forms.ToolStripMenuItem tsmiDesignEarth;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDesign;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDesignGray;
         private System.Windows.Forms.ToolStripMenuItem tsmiAppSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiDatabaseDesign;
         private System.Windows.Forms.ToolStripMenuItem tsmiNotifications;

@@ -1,13 +1,8 @@
 ﻿using FBXpert.DataClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FBXpert.SQLStatements
 {
-   
+
     public class DomainSQLStatementsClass : SQLStatementsBase
     {
        

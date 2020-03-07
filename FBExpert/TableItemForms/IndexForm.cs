@@ -9,7 +9,6 @@ using FBXpert.MiscClasses;
 using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
-using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,19 +1,18 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
+using FBXpert;
 using FBXpert.DataClasses;
+using FBXpert.Globals;
 using FBXpert.MiscClasses;
+using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
-using MessageLibrary;
 using StateClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using FBXpert;
-using FBXpert.Globals;
-using FBXpert.SQLStatements;
 
 namespace FBExpert
 {
@@ -53,14 +52,11 @@ namespace FBExpert
             {
                DomainObject = tc;
             }
-            if(!string.IsNullOrEmpty(DomainObject.DefaultValue))
-            {
-                Console.WriteLine();
-            }
 
+            
             Cm = cm;
             Tn = tn;
-            _localNotify.Register4Info(Notify_OnRaiseErrorHandler);
+            _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             _localTableNotify.Register4Info(TableInfoRaised);
         }
@@ -347,13 +343,12 @@ namespace FBExpert
             var riFailure = riList.Find(x=>x.commandDone == false);
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-            
 
             string info = (riFailure==null) 
                 ? $@"Domain {_dbReg.Alias}->{DomainObject.Name} updated." 
-                : $@"Domain {_dbReg.Alias}->{DomainObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
+                : $@"Domain {_dbReg.Alias}->{DomainObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors";
                                             
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadDomains,$@"->Proc:{Name}->Create");
+            //DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadDomains,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
             EditToData();
         }
@@ -394,9 +389,9 @@ namespace FBExpert
         public void AddExamples()
         {
             fcbExamples.Text = string.Empty;
-            fcbExamples.AppendText($@"CREATE DOMAIN <domainname> AS VARCHAR(2048) CHARACTER SET UTF8 COLLATE UTF8; /* creates domain */{Environment.NewLine}");
-            fcbExamples.AppendText($@"ALTER DOMAIN domain <domainname> ADD CONSTRAINT CHECK (VALUE IS NOT NULLl); /* adds not null flag to domain */{Environment.NewLine}");
-            fcbExamples.AppendText($@"ALTER DOMAIN <domainname> DROP CONSTRAINT; /* dorop check constraint */){Environment.NewLine}");
+            fcbExamples.AppendText($@"CREATE DOMAIN <domainname> AS VARCHAR(2048) CHARACTER SET UTF8 COLLATE UTF8; /* create domain */{Environment.NewLine}");
+            fcbExamples.AppendText($@"ALTER DOMAIN domain <domainname> ADD CONSTRAINT CHECK (VALUE IS NOT NULLl); /* add not null flag to domain */{Environment.NewLine}");
+            fcbExamples.AppendText($@"ALTER DOMAIN <domainname> DROP CONSTRAINT; /* drop check constraint */){Environment.NewLine}");
         }
         
         public void ShowCaptions()

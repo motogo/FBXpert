@@ -8,7 +8,7 @@ using FBXpert.MiscClasses;
 using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
-using MessageLibrary;
+using MessageFormLibrary;
 using SESpaltenEditor;
 using System;
 using System.Collections.Generic;
@@ -119,10 +119,17 @@ namespace FBExpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Manage Views");
         }
 
+        
+
         void ErrorRaised(object sender, MessageEventArgs k)
         {
             fctMessages.CurrentLineColor = System.Drawing.Color.Red;
             fctMessages.AppendText(k.Meldung);
+            string posTxt = AppStaticFunctionsClass.getErrorPosText(k.Meldung);
+            if (!string.IsNullOrEmpty(posTxt))
+            {
+                fctMessages.AppendText(posTxt);
+            }
             var sb = new StringBuilder();
             error_count++;
             if (messages_count > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({messages_count}) ");

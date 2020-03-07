@@ -8,7 +8,7 @@ using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FBXpert.SQLStatements;
 using FBXpert.SQLView;
-using MessageLibrary;
+using MessageFormLibrary;
 using SQLView;
 using StateClasses;
 using System;
@@ -1795,7 +1795,30 @@ namespace FBXpert
                 Cursor = Cursors.Default;
                 DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadAllForeignKeys);
             }
-           
+            else if (e.ClickedItem == tsmiExportTablesDLL)
+            {
+                ExportTablesDLLForm evs = new ExportTablesDLLForm(MdiParent);
+                evs.dbReg = dbReg;
+                evs.Tables = _actTables;
+                evs.Show();
+            }
+            else if (e.ClickedItem == tsmiExportAllProceduresScript)
+            {
+                var allprocedures = StaticTreeClass.Instance().GetProcedureObjects(dbReg);
+                ExportProceduresScriptForm evs = new ExportProceduresScriptForm(MdiParent);
+                evs.dbReg = dbReg;
+                evs.procedures = allprocedures;
+                evs.Show();
+            }
+            else if (e.ClickedItem == tsmiExportAllFunctionsScript)
+            {
+                var allprocedures = StaticTreeClass.Instance().GetFunctionObjects(dbReg);
+                ExportFunctionsScriptForm evs = new ExportFunctionsScriptForm(MdiParent);
+                evs.dbReg = dbReg;
+                evs.Functions = allprocedures;
+                evs.Show();
+            }
+
             #endregion refresh group
         }
        

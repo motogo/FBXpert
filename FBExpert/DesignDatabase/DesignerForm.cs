@@ -5,7 +5,6 @@ using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using Initialization;
-using MessageLibrary;
 using MessageLibrary.SendMessages;
 using SEListBox;
 using SharedStorages;
@@ -16,7 +15,6 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace FBXDesigns
 {

@@ -1,9 +1,8 @@
-﻿using DBBasicClassLibrary;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
 using FBXpert.DataClasses;
-using MessageLibrary;
-using System.Windows.Forms;
 using FBXpert.Globals;
-using BasicClassLibrary;
+using System.Windows.Forms;
 
 namespace FBExpert.DataClasses
 {
@@ -139,7 +138,7 @@ namespace FBExpert.DataClasses
                     {
                         Name = name.ToUpper(),
                         Text = "User defined functions",
-                        Tag = new UserDefinedFunctionGroupClass(),
+                        Tag = new FunctionGroupClass(),
                         //ContextMenuStrip = ContextMenusClass.Instance().cmsFunctionGroup,
                         ImageIndex = (int)eImageIndex.FUNCTION
                     };

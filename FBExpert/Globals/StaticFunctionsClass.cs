@@ -1,15 +1,12 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FirebirdSql.Data.FirebirdClient;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace FBXpert.Globals
 {
-
     public class SqlStack
     {
         public int inxStart;
@@ -25,7 +22,33 @@ namespace FBXpert.Globals
     };
 
     public static class AppStaticFunctionsClass
-    {     
+    {
+        public static string getErrorPosText(string errorstring)
+        {
+            string result = string.Empty;
+            if (errorstring.Contains("Token unknown - line "))
+            {
+                // Token unknown -line 1, column 202
+                int inx = errorstring.IndexOf("Token unknown - line");
+                string mld = errorstring.Substring(inx + 20);
+                mld = mld.Replace("column", "").Replace("\r\n", "").Replace(".", "");
+                string[] mldarr = mld.Trim().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (mldarr.Length > 1)
+                {                    
+                    int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1], -1);
+                    if (n2 > 10)
+                    {
+                        result = "5->" + errorstring.Substring(n2 - 5, 10);
+                    }
+                    else if (n2 > -1)
+                    {
+                        result = $@"{n2}->" + errorstring.Substring(0, n2);
+                    }
+                }
+            }
+            return result;
+        }
+
         static public long SendResultNotify(List<SQLCommandsReturnInfoClass> riList, NotifiesClass notify)
         {
             long costs = 0;
@@ -80,7 +103,6 @@ namespace FBXpert.Globals
         public static string GetLifetime(string cnString, bool withMon)
         {             
             var con = new FbConnection(cnString);            
-            
             string lifetimeText = string.Empty;
             try
             {     
@@ -120,24 +142,20 @@ namespace FBXpert.Globals
         {            
             if(string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
-
         }
 
         static string ReplaceButNotBefore(string sql, string cmd, string[] notcmd)
         {
-            
             int n = 0;
             int inx = sql.ToUpper().IndexOf($@" {cmd} ",n, StringComparison.Ordinal);
 
             while (inx >= 0)
             {
-               
                 bool donot = false;
-                int inxnot = -1;
                 for (int i = 0; i < notcmd.Length; i++)
                 {
                     string nstr = notcmd[i];
-                    inxnot = sql.ToUpper().IndexOf(nstr,inx-nstr.Length-1, StringComparison.Ordinal);
+                    int inxnot = sql.ToUpper().IndexOf(nstr,inx-nstr.Length-1, StringComparison.Ordinal);
                     if ((inxnot + nstr.Length) == inx)
                     {
                         donot = true;
@@ -147,31 +165,27 @@ namespace FBXpert.Globals
 
                 if ((inx >= 0) && (!donot))
                 {
-                    sql = sql.Insert(inx + 1, Environment.NewLine);                    
+                    sql = sql.Insert(inx + 1, Environment.NewLine);
                 }
                 
                 inx = sql.ToUpper().IndexOf($@" {cmd} ",inx+1, StringComparison.Ordinal);
             }
-            
             return sql;
         }
 
         static string ReplaceButNotAfter(string sql, string cmd, string[] notcmd)
         {
-            
             int n = 0;
             int inx = sql.ToUpper().IndexOf($@" {cmd} ",n, StringComparison.Ordinal);
 
             while (inx >= 0)
             {
-               
                 bool donot = false;
-                int inxnot = -1;
                 for (int i = 0; i < notcmd.Length; i++)
                 {
                     string nstr = notcmd[i];
-                    inxnot = sql.ToUpper().IndexOf(nstr,inx, StringComparison.Ordinal);
-                    if ((inxnot ) == inx+cmd.Length+2)
+                    int inxnot = sql.ToUpper().IndexOf(nstr,inx, StringComparison.Ordinal);
+                    if (inxnot == inx+cmd.Length+2)
                     {
                         donot = true;
                         break;
@@ -180,12 +194,10 @@ namespace FBXpert.Globals
 
                 if ((inx >= 0) && (!donot))
                 {
-                    sql = sql.Insert(inx + 1, Environment.NewLine);                    
+                    sql = sql.Insert(inx + 1, Environment.NewLine);
                 }
-                
                 inx = sql.ToUpper().IndexOf($@" {cmd} ",inx+1, StringComparison.Ordinal);
             }
-            
             return sql;
         }
 
@@ -202,20 +214,18 @@ namespace FBXpert.Globals
         }
         static string ReplaceL(string sql, string cmd)
         {
-            int inx = sql.ToUpper().IndexOf(cmd + " ", StringComparison.Ordinal);
+            int inx = sql.ToUpper().IndexOf($@"{cmd} ", StringComparison.Ordinal);
             
             if (inx >= 0)
             {
                 sql = sql.Insert(inx, Environment.NewLine);
-                inx = sql.ToUpper().IndexOf(cmd + " ", StringComparison.Ordinal)-3;
             }
             return sql;
         }
 
         static string Spaces(int depth)
         {
-            StringBuilder sb = new StringBuilder();
-                
+            var sb = new StringBuilder();
             for(int i = 0; i < depth; i++)
             {
                 sb.Append("    ");
@@ -231,28 +241,21 @@ namespace FBXpert.Globals
             sts[1] = Environment.NewLine[1];
 
             string[] strList = sql.Split(sts);
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             int depth = 0;
             foreach(string st in strList)
             {
-                if (st.Length > 0)
-                {
-                    
-                    if (st.StartsWith(")")) depth--;
-                    sb.AppendLine(Spaces(depth) + st);
-                    if (st.StartsWith("(")) depth++;
-                }
+                if (st.Length <= 0) continue;
+                if (st.StartsWith(")")) depth--;
+                sb.AppendLine(Spaces(depth) + st);
+                if (st.StartsWith("(")) depth++;
             }
             return sb.ToString();
         }
 
-        
-
-
-
         public static string CreateComment()
         {
-            StringBuilder sbcomment = new StringBuilder();
+            var sbcomment = new StringBuilder();
             sbcomment.AppendLine($@"/* ############################### */");
             sbcomment.AppendLine($@"/* # Create: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} # */");
             sbcomment.AppendLine($@"/* ############################### */");
@@ -275,10 +278,8 @@ namespace FBXpert.Globals
             }
            
             string[] dnot = { "LEFT", "RIGHT","CROSS","NATURAL","FULL","OUTER" };
-
             string[] dnotfrom = { "CAST"};
 
-                               
             sql = Replace(sql, "GROUP BY");
             sql = Replace(sql, "ORDER BY");
             sql = Replace(sql, "SELECT AS");
@@ -291,11 +292,10 @@ namespace FBXpert.Globals
             sql = ReplaceButNotBefore(sql, "JOIN", dnot);
             sql = ReplaceButNotAfter(sql, "FROM", dnotfrom);
                                                
-            string cmd = string.Empty;
+            //string cmd = string.Empty;
             int istart = 0;
-            int iend = 0;
             int level = 0;
-            List<string> strList = new List<string>();
+            var strList = new List<string>();
            
             for(int i = 0; i < sql.Length; i++)
             {
@@ -303,66 +303,31 @@ namespace FBXpert.Globals
                 {
                     if(level == 0)
                     {
-                        cmd = sql.Substring(istart,i-istart);
-                        
-                        cmd = Replace(cmd, "CASE");
-                        cmd = Replace(cmd, "IIF");
-                        strList.Add(cmd);
-                        istart = i;                        
+                        string cmd1 = sql.Substring(istart, i - istart);
+                        cmd1 = Replace(cmd1, "CASE");
+                        cmd1 = Replace(cmd1, "IIF");
+                        strList.Add(cmd1);
+                        istart = i;
                     }
                     level ++;
                 }
                 else if(sql[i] == ')')
-                {                  
+                {
                    level--;
                    if(level == 0)
                    {
-                        iend = i;
-                        cmd = sql.Substring(istart,i-istart+1);
-                        cmd = ReplaceL(cmd, "(SELECT");
-                        cmd = ReplaceL(cmd, " IIF");
-                        strList.Add(cmd);
+                        string cmd2 = sql.Substring(istart,i-istart+1);
+                        cmd2 = ReplaceL(cmd2, "(SELECT");
+                        cmd2 = ReplaceL(cmd2, " IIF");
+                        strList.Add(cmd2);
                         istart = i+1;
                    }
-                }                
+                }
             }
-            cmd = sql.Substring(istart);
+            string cmd = sql.Substring(istart);
             cmd = Replace(cmd, "FROM");
             strList.Add(cmd);
-           
-            // sql = MakeSpaced(sql);
-            /*
-            StringBuilder sb = new StringBuilder();
-            foreach(string sl in strList)
-            {
-                string s = sl;
-                int n = 80;
-                int nl = 2;
-                while(s.Length > 80 && (s.IndexOf(",")>=0))
-                {
-                    if(s.Length <= n) break;
-                    if(s.Length <= nl) break;
-                    nl = s.IndexOf($@"{Environment.NewLine}",nl);
-                    n = s.IndexOf(",",n);
-                    if(nl > n)
-                    {
-                        n++;
-                        s = s.Insert(n,Environment.NewLine);
-                        nl = n+1;
-                        n+=80;                       
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }                
-                sb.Append(s);
-            }
-            
-            sql = sb.ToString();
-            */
             return sql;
-           
         }
     }
 }

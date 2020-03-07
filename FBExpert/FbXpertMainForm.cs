@@ -7,7 +7,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
-using MessageLibrary;
+using MessageFormLibrary;
 using StateClasses;
 using System;
 using System.IO;
@@ -173,14 +173,17 @@ namespace FBXpert
         {
             if (e.ClickedItem == tsmiDesignEarth)
             {
+                AppDesign = ReloadDesign(eColorDesigns.Earth);
+                /*
                 var pc = new ProgressClockForm(this)
                 {
                     X = 50,
                     Y = 200
                 };
                 pc.Show();                
+                */
             }
-            else if (e.ClickedItem == tsmiDesign)
+            else if (e.ClickedItem == tsmiDesignGray)
             {
                 AppDesign = ReloadDesign(eColorDesigns.Gray);
             }
@@ -226,10 +229,10 @@ namespace FBXpert
 
         public void RefreshLanguage()
         {
-            tsmiUtilities.Text = LanguageClass.Instance().GetString("UTILITIES");
-            tsmiNotifications.Text = LanguageClass.Instance().GetString("NOTIFICATIONS") + @" (" +(_errors+_notifications).ToString()+@")";
-            tsmiShowWindows.Text = LanguageClass.Instance().GetString("SHOWWINDOWS");            
-            tsmiErrors.Text = LanguageClass.Instance().GetString("ERRORS")+ @" (" + (_errors).ToString() + @")";
+            tsmiUtilities.Text      = LanguageClass.Instance().GetString("UTILITIES");
+            tsmiNotifications.Text  = $@"{LanguageClass.Instance().GetString("NOTIFICATIONS")} ({_errors+_notifications})";
+            tsmiShowWindows.Text    = LanguageClass.Instance().GetString("SHOWWINDOWS");
+            tsmiErrors.Text         = $@"{LanguageClass.Instance().GetString("ERRORS")} ({_errors})";
             Refresh();
         }
         
@@ -297,7 +300,7 @@ namespace FBXpert
                 }
                 if (NotificationsForm.Instance().Visible) NotificationsForm.Instance().Close();            
                 NotifiesClass.Instance().InfoGranularity = eMessageGranularity.few;
-            }                                       
+            }
             DbExplorerForm.Instance().Enabled = true;
             LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
             SEHotSpot.Controller.Instance().SetupKeyboardHooks(this);
@@ -312,14 +315,14 @@ namespace FBXpert
         public static bool FormOnClosing = false;
         private void FBXpertMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {       
-            FormOnClosing = true;            
+            FormOnClosing = true;
             DatabaseDefinitions.Instance().SerializeCurrent("Definition data changed");    
             LanguageClass.Instance().UnRegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
             Application.Exit();
         }
 
         private void testMToolStripMenuItem_Click(object sender, EventArgs e)
-        {                       
+        {
             SEMessageBox.ShowMDIDialog(Instance(), "Error while opening database", "test", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);            
         }
     }

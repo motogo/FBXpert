@@ -101,6 +101,9 @@
     <Reference Include="LiteDB, Version=5.0.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.5.0.1\lib\net45\LiteDB.dll</HintPath>
     </Reference>
+    <Reference Include="MessageFormLibrary">
+      <HintPath>..\..\SELibraries\Lib\MessageFormLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="MessageLibrary, Version=2016.9.19.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibraries\Lib\MessageLibrary.dll</HintPath>
@@ -219,6 +222,24 @@
     </Compile>
     <Compile Include="SonstForms\CopyrightForm.Designer.cs">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\ExportFunctionsScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\ExportFunctionsScriptForm.Designer.cs">
+      <DependentUpon>ExportFunctionsScriptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\ExportProceduresScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\ExportProceduresScriptForm.Designer.cs">
+      <DependentUpon>ExportProceduresScriptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\ExportTablesDLLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\ExportTablesDLLForm.Designer.cs">
+      <DependentUpon>ExportTablesDLLForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SonstForms\ExportViewsSQLForm.cs">
       <SubType>Form</SubType>
@@ -538,6 +559,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\CopyrightForm.resx">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\ExportFunctionsScriptForm.resx">
+      <DependentUpon>ExportFunctionsScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\ExportProceduresScriptForm.resx">
+      <DependentUpon>ExportProceduresScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\ExportTablesDLLForm.resx">
+      <DependentUpon>ExportTablesDLLForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\ExportViewsSQLForm.resx">
       <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
@@ -899,6 +929,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <None Include="Resources\sweep_ge24x.png" />
+    <None Include="Resources\sweep_bl24x.png" />
     <None Include="Resources\Table_x24.png" />
     <None Include="Resources\sql_x24.png" />
     <None Include="Resources\ampel_red_x24.png" />

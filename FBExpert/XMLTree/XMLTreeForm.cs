@@ -19,7 +19,6 @@ namespace FBXpert.KonfigurationForms
 
 	    public XMLTreeForm(Form mdiParent, string XMLfile)
 	    {
-            
 	        InitializeComponent();
 	        MdiParent = mdiParent;
 	        xmlFile = XMLfile;
@@ -35,13 +34,12 @@ namespace FBXpert.KonfigurationForms
         private void PFADEForm_Load(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(xmlFile)) return;
-            
             FileInfo fi = new FileInfo(xmlFile);
             if (fi.Exists)
             {
-                xmlEdit.LoadXmlFromFile(fi.FullName);                
+                xmlEdit.LoadXmlFromFile(fi.FullName);
             }
-        }        
+        }
 
       
         private void hsClose_Click(object sender, EventArgs e)

@@ -423,4 +423,10 @@
   <data name="FORM_CLOSE" xml:space="preserve">
     <value>Schliessen</value>
   </data>
+  <data name="DeleteHistory" xml:space="preserve">
+    <value>History löschen</value>
+  </data>
+  <data name="DoYouWantDeleteHistory" xml:space="preserve">
+    <value>Möchten Sie wirklich die History löschen</value>
+  </data>
 </root>

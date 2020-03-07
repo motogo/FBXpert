@@ -2,7 +2,7 @@
 using FastReport.Data;
 using FBXpert.Globals;
 using FirebirdSql.Data.FirebirdClient;
-using MessageLibrary;
+using MessageFormLibrary;
 using System;
 using System.Collections.Generic;
 using System.Data;

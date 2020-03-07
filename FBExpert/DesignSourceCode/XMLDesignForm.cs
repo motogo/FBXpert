@@ -1,5 +1,4 @@
 ﻿using BasicClassLibrary;
-using BasicFormClassLibrary;
 using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
 using FastColoredTextBoxNS;
@@ -7,8 +6,7 @@ using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FormularUtils;
-using MessageLibrary;
+using MessageFormLibrary;
 using SEListBox;
 using System;
 using System.Collections.Generic;
@@ -322,13 +320,13 @@ namespace FBXpert.SonstForms
             
             if (ob.GetType() == typeof(TableClass))
             {
-                var tc = ob as TableClass;                
-                st = CodeFactory.Instance().CreateDesignForTable(0, tc);               
+                var tc = ob as TableClass;
+                st = CodeFactory.Instance().CreateDesignForTable(0, tc);
             }
             else if (ob.GetType() == typeof(ViewClass))
             {
-                var tc = ob as ViewClass;               
-                st = CodeFactory.Instance().CreateDesignForTable(0, tc);               
+                var tc = ob as ViewClass;
+                st = CodeFactory.Instance().CreateDesignForView(0, tc);
             }
             return st;
         }

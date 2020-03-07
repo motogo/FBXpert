@@ -1,11 +1,10 @@
 ﻿using Initialization;
 using System;
 using System.IO;
-using System.Windows.Forms;
 
 namespace FBXpert.DataClasses
 {
-    
+
     public class BehavierSettingsClass
     {
         public int DebugThreshold = 2;       

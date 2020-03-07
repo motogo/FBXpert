@@ -1,6 +1,5 @@
 ﻿using BasicClassLibrary;
 using FBXpert.DataClasses;
-using MessageLibrary;
 using System.Text;
 using System.Windows.Forms;
 
@@ -471,6 +470,7 @@ namespace FBXpert.Globals
         public static readonly string CommandDone = "COMMAND_DONE";
         public static readonly string CommandPrepared = "COMMAND_PREPARED";
         public static readonly string AddCommandLine = "ADD_COMMAND_LINE";
+        
 
         public static string[] DefaultVariables = new string[]
             {"CURRENT_USER",

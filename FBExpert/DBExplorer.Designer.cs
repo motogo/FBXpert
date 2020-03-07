@@ -72,6 +72,10 @@
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiIDBBinaries = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.hsExit = new SeControlsLib.HotSpot();
+            this.hsRefreshDB = new SeControlsLib.HotSpot();
+            this.hsDatabaseDefinitionSave = new SeControlsLib.HotSpot();
+            this.hsLoadDefinition = new SeControlsLib.HotSpot();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.pnlLower = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -96,6 +100,8 @@
             this.tsmiDropAllProcedures = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRefreshProcedures = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiExportAllProceduresScript = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsTable = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiRefreshTable = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -139,6 +145,7 @@
             this.tsmiDropAllTables = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefreshAllTables = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiExportTablesDLL = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsViewGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewView = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllViews = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,10 +214,8 @@
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hsExit = new SeControlsLib.HotSpot();
-            this.hsRefreshDB = new SeControlsLib.HotSpot();
-            this.hsDatabaseDefinitionSave = new SeControlsLib.HotSpot();
-            this.hsLoadDefinition = new SeControlsLib.HotSpot();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiExportAllFunctionsScript = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -665,6 +670,214 @@
             this.pnlUpper.Size = new System.Drawing.Size(260, 42);
             this.pnlUpper.TabIndex = 1;
             // 
+            // hsExit
+            // 
+            this.hsExit.BackColor = System.Drawing.Color.Transparent;
+            this.hsExit.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
+            this.hsExit.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsExit.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsExit.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsExit.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsExit.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsExit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsExit.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsExit.FlatAppearance.BorderSize = 0;
+            this.hsExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsExit.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsExit.Image = global::FBXpert.Properties.Resources.cross_red_x22;
+            this.hsExit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsExit.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
+            this.hsExit.ImageToggleOnSelect = true;
+            this.hsExit.Location = new System.Drawing.Point(215, 0);
+            this.hsExit.Marked = false;
+            this.hsExit.MarkedColor = System.Drawing.Color.Teal;
+            this.hsExit.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsExit.MarkedText = "";
+            this.hsExit.MarkMode = false;
+            this.hsExit.Name = "hsExit";
+            this.hsExit.NonMarkedText = "";
+            this.hsExit.Shortcut = SeControlsLib.Shortcut.ESC;
+            this.hsExit.ShowShortcut = true;
+            this.hsExit.Size = new System.Drawing.Size(45, 42);
+            this.hsExit.TabIndex = 9;
+            this.hsExit.Text = " <Esc>";
+            this.hsExit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsExit.ToolTipActive = true;
+            this.hsExit.ToolTipAutomaticDelay = 500;
+            this.hsExit.ToolTipAutoPopDelay = 5000;
+            this.hsExit.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsExit.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsExit.ToolTipFor4ContextMenu = true;
+            this.hsExit.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsExit.ToolTipInitialDelay = 500;
+            this.hsExit.ToolTipIsBallon = false;
+            this.hsExit.ToolTipOwnerDraw = false;
+            this.hsExit.ToolTipReshowDelay = 100;
+            this.hsExit.ToolTipShowAlways = false;
+            this.hsExit.ToolTipText = "Load database definitions";
+            this.hsExit.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsExit.ToolTipTitle = "";
+            this.hsExit.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsExit.UseVisualStyleBackColor = false;
+            this.hsExit.Click += new System.EventHandler(this.hsExit_Click);
+            // 
+            // hsRefreshDB
+            // 
+            this.hsRefreshDB.BackColor = System.Drawing.Color.Transparent;
+            this.hsRefreshDB.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
+            this.hsRefreshDB.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshDB.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsRefreshDB.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsRefreshDB.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsRefreshDB.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsRefreshDB.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsRefreshDB.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsRefreshDB.FlatAppearance.BorderSize = 0;
+            this.hsRefreshDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsRefreshDB.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsRefreshDB.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.hsRefreshDB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsRefreshDB.ImageHover = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hsRefreshDB.ImageToggleOnSelect = true;
+            this.hsRefreshDB.Location = new System.Drawing.Point(90, 0);
+            this.hsRefreshDB.Marked = false;
+            this.hsRefreshDB.MarkedColor = System.Drawing.Color.Teal;
+            this.hsRefreshDB.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsRefreshDB.MarkedText = "";
+            this.hsRefreshDB.MarkMode = false;
+            this.hsRefreshDB.Name = "hsRefreshDB";
+            this.hsRefreshDB.NonMarkedText = "";
+            this.hsRefreshDB.Shortcut = SeControlsLib.Shortcut.F5;
+            this.hsRefreshDB.ShowShortcut = true;
+            this.hsRefreshDB.Size = new System.Drawing.Size(45, 42);
+            this.hsRefreshDB.TabIndex = 8;
+            this.hsRefreshDB.Text = " <F5>";
+            this.hsRefreshDB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsRefreshDB.ToolTipActive = true;
+            this.hsRefreshDB.ToolTipAutomaticDelay = 500;
+            this.hsRefreshDB.ToolTipAutoPopDelay = 5000;
+            this.hsRefreshDB.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsRefreshDB.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsRefreshDB.ToolTipFor4ContextMenu = true;
+            this.hsRefreshDB.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsRefreshDB.ToolTipInitialDelay = 500;
+            this.hsRefreshDB.ToolTipIsBallon = false;
+            this.hsRefreshDB.ToolTipOwnerDraw = false;
+            this.hsRefreshDB.ToolTipReshowDelay = 100;
+            this.hsRefreshDB.ToolTipShowAlways = false;
+            this.hsRefreshDB.ToolTipText = "Load database definitions";
+            this.hsRefreshDB.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsRefreshDB.ToolTipTitle = "";
+            this.hsRefreshDB.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsRefreshDB.UseVisualStyleBackColor = false;
+            this.hsRefreshDB.Click += new System.EventHandler(this.hsRefreshDB_Click);
+            // 
+            // hsDatabaseDefinitionSave
+            // 
+            this.hsDatabaseDefinitionSave.BackColor = System.Drawing.Color.Transparent;
+            this.hsDatabaseDefinitionSave.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
+            this.hsDatabaseDefinitionSave.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsDatabaseDefinitionSave.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsDatabaseDefinitionSave.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsDatabaseDefinitionSave.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsDatabaseDefinitionSave.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsDatabaseDefinitionSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsDatabaseDefinitionSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsDatabaseDefinitionSave.FlatAppearance.BorderSize = 0;
+            this.hsDatabaseDefinitionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDatabaseDefinitionSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsDatabaseDefinitionSave.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsDatabaseDefinitionSave.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.hsDatabaseDefinitionSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsDatabaseDefinitionSave.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
+            this.hsDatabaseDefinitionSave.ImageToggleOnSelect = true;
+            this.hsDatabaseDefinitionSave.Location = new System.Drawing.Point(45, 0);
+            this.hsDatabaseDefinitionSave.Marked = false;
+            this.hsDatabaseDefinitionSave.MarkedColor = System.Drawing.Color.Teal;
+            this.hsDatabaseDefinitionSave.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsDatabaseDefinitionSave.MarkedText = "";
+            this.hsDatabaseDefinitionSave.MarkMode = false;
+            this.hsDatabaseDefinitionSave.Name = "hsDatabaseDefinitionSave";
+            this.hsDatabaseDefinitionSave.NonMarkedText = "";
+            this.hsDatabaseDefinitionSave.Shortcut = SeControlsLib.Shortcut.F2;
+            this.hsDatabaseDefinitionSave.ShowShortcut = true;
+            this.hsDatabaseDefinitionSave.Size = new System.Drawing.Size(45, 42);
+            this.hsDatabaseDefinitionSave.TabIndex = 7;
+            this.hsDatabaseDefinitionSave.Text = " <F2>";
+            this.hsDatabaseDefinitionSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsDatabaseDefinitionSave.ToolTipActive = true;
+            this.hsDatabaseDefinitionSave.ToolTipAutomaticDelay = 500;
+            this.hsDatabaseDefinitionSave.ToolTipAutoPopDelay = 5000;
+            this.hsDatabaseDefinitionSave.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsDatabaseDefinitionSave.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsDatabaseDefinitionSave.ToolTipFor4ContextMenu = true;
+            this.hsDatabaseDefinitionSave.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsDatabaseDefinitionSave.ToolTipInitialDelay = 500;
+            this.hsDatabaseDefinitionSave.ToolTipIsBallon = false;
+            this.hsDatabaseDefinitionSave.ToolTipOwnerDraw = false;
+            this.hsDatabaseDefinitionSave.ToolTipReshowDelay = 100;
+            this.hsDatabaseDefinitionSave.ToolTipShowAlways = false;
+            this.hsDatabaseDefinitionSave.ToolTipText = "Save database definitions";
+            this.hsDatabaseDefinitionSave.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsDatabaseDefinitionSave.ToolTipTitle = "";
+            this.hsDatabaseDefinitionSave.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsDatabaseDefinitionSave.UseVisualStyleBackColor = false;
+            this.hsDatabaseDefinitionSave.Click += new System.EventHandler(this.hsDatabaseDefinitionSave_Click);
+            // 
+            // hsLoadDefinition
+            // 
+            this.hsLoadDefinition.BackColor = System.Drawing.Color.Transparent;
+            this.hsLoadDefinition.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
+            this.hsLoadDefinition.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsLoadDefinition.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsLoadDefinition.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsLoadDefinition.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsLoadDefinition.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsLoadDefinition.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsLoadDefinition.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsLoadDefinition.FlatAppearance.BorderSize = 0;
+            this.hsLoadDefinition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadDefinition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsLoadDefinition.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsLoadDefinition.Image = global::FBXpert.Properties.Resources.data_import_gn_x24;
+            this.hsLoadDefinition.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsLoadDefinition.ImageHover = global::FBXpert.Properties.Resources.data_import_blue_x24;
+            this.hsLoadDefinition.ImageToggleOnSelect = true;
+            this.hsLoadDefinition.Location = new System.Drawing.Point(0, 0);
+            this.hsLoadDefinition.Marked = false;
+            this.hsLoadDefinition.MarkedColor = System.Drawing.Color.Teal;
+            this.hsLoadDefinition.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsLoadDefinition.MarkedText = "";
+            this.hsLoadDefinition.MarkMode = false;
+            this.hsLoadDefinition.Name = "hsLoadDefinition";
+            this.hsLoadDefinition.NonMarkedText = "";
+            this.hsLoadDefinition.Shortcut = SeControlsLib.Shortcut.F3;
+            this.hsLoadDefinition.ShowShortcut = true;
+            this.hsLoadDefinition.Size = new System.Drawing.Size(45, 42);
+            this.hsLoadDefinition.TabIndex = 6;
+            this.hsLoadDefinition.Text = " <F3>";
+            this.hsLoadDefinition.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsLoadDefinition.ToolTipActive = true;
+            this.hsLoadDefinition.ToolTipAutomaticDelay = 500;
+            this.hsLoadDefinition.ToolTipAutoPopDelay = 5000;
+            this.hsLoadDefinition.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsLoadDefinition.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsLoadDefinition.ToolTipFor4ContextMenu = true;
+            this.hsLoadDefinition.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsLoadDefinition.ToolTipInitialDelay = 500;
+            this.hsLoadDefinition.ToolTipIsBallon = false;
+            this.hsLoadDefinition.ToolTipOwnerDraw = false;
+            this.hsLoadDefinition.ToolTipReshowDelay = 100;
+            this.hsLoadDefinition.ToolTipShowAlways = false;
+            this.hsLoadDefinition.ToolTipText = "Load database definitions";
+            this.hsLoadDefinition.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsLoadDefinition.ToolTipTitle = "";
+            this.hsLoadDefinition.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsLoadDefinition.UseVisualStyleBackColor = false;
+            this.hsLoadDefinition.Click += new System.EventHandler(this.hsLoadDefinition_Click);
+            // 
             // pnlCenter
             // 
             this.pnlCenter.Controls.Add(this.gbDatabases);
@@ -822,36 +1035,50 @@
             this.tsmiNewProcedureGroup,
             this.tsmiDropAllProcedures,
             this.toolStripSeparator11,
-            this.tsmiRefreshProcedures});
+            this.tsmiRefreshProcedures,
+            this.toolStripSeparator25,
+            this.tsmiExportAllProceduresScript});
             this.cmsProcedureGroup.Name = "contextMenuStrip1";
-            this.cmsProcedureGroup.Size = new System.Drawing.Size(182, 88);
+            this.cmsProcedureGroup.Size = new System.Drawing.Size(222, 120);
             this.cmsProcedureGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewProcedureGroup
             // 
             this.tsmiNewProcedureGroup.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
             this.tsmiNewProcedureGroup.Name = "tsmiNewProcedureGroup";
-            this.tsmiNewProcedureGroup.Size = new System.Drawing.Size(181, 26);
+            this.tsmiNewProcedureGroup.Size = new System.Drawing.Size(221, 26);
             this.tsmiNewProcedureGroup.Text = "New procedure";
             // 
             // tsmiDropAllProcedures
             // 
             this.tsmiDropAllProcedures.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiDropAllProcedures.Name = "tsmiDropAllProcedures";
-            this.tsmiDropAllProcedures.Size = new System.Drawing.Size(181, 26);
+            this.tsmiDropAllProcedures.Size = new System.Drawing.Size(221, 26);
             this.tsmiDropAllProcedures.Text = "Drop all procedures";
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(218, 6);
             // 
             // tsmiRefreshProcedures
             // 
             this.tsmiRefreshProcedures.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshProcedures.Name = "tsmiRefreshProcedures";
-            this.tsmiRefreshProcedures.Size = new System.Drawing.Size(181, 26);
+            this.tsmiRefreshProcedures.Size = new System.Drawing.Size(221, 26);
             this.tsmiRefreshProcedures.Text = "Refresh procedures";
+            // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(218, 6);
+            // 
+            // tsmiExportAllProceduresScript
+            // 
+            this.tsmiExportAllProceduresScript.Image = global::FBXpert.Properties.Resources.Table_x24;
+            this.tsmiExportAllProceduresScript.Name = "tsmiExportAllProceduresScript";
+            this.tsmiExportAllProceduresScript.Size = new System.Drawing.Size(221, 26);
+            this.tsmiExportAllProceduresScript.Text = "Export all procedures script";
             // 
             // cmsTable
             // 
@@ -1094,35 +1321,37 @@
             this.tsmiNewFunctionGroup,
             this.tsmiDropAllFunctions,
             this.toolStripSeparator10,
-            this.tsmiRefreshFunctions});
+            this.tsmiRefreshFunctions,
+            this.toolStripSeparator26,
+            this.tsmiExportAllFunctionsScript});
             this.cmsFunctionGroup.Name = "contextMenuStrip1";
-            this.cmsFunctionGroup.Size = new System.Drawing.Size(173, 88);
+            this.cmsFunctionGroup.Size = new System.Drawing.Size(213, 142);
             this.cmsFunctionGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewFunctionGroup
             // 
             this.tsmiNewFunctionGroup.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
             this.tsmiNewFunctionGroup.Name = "tsmiNewFunctionGroup";
-            this.tsmiNewFunctionGroup.Size = new System.Drawing.Size(172, 26);
+            this.tsmiNewFunctionGroup.Size = new System.Drawing.Size(212, 26);
             this.tsmiNewFunctionGroup.Text = "New function";
             // 
             // tsmiDropAllFunctions
             // 
             this.tsmiDropAllFunctions.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiDropAllFunctions.Name = "tsmiDropAllFunctions";
-            this.tsmiDropAllFunctions.Size = new System.Drawing.Size(172, 26);
+            this.tsmiDropAllFunctions.Size = new System.Drawing.Size(212, 26);
             this.tsmiDropAllFunctions.Text = "Drop all functions";
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(209, 6);
             // 
             // tsmiRefreshFunctions
             // 
             this.tsmiRefreshFunctions.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.tsmiRefreshFunctions.Name = "tsmiRefreshFunctions";
-            this.tsmiRefreshFunctions.Size = new System.Drawing.Size(172, 26);
+            this.tsmiRefreshFunctions.Size = new System.Drawing.Size(212, 26);
             this.tsmiRefreshFunctions.Text = "Refresh functions";
             // 
             // cmsTriggerGroup
@@ -1155,36 +1384,44 @@
             this.tsmiNewTable,
             this.tsmiDropAllTables,
             this.tsmiRefreshAllTables,
-            this.toolStripSeparator19});
+            this.toolStripSeparator19,
+            this.tsmiExportTablesDLL});
             this.cmsTableGroup.Name = "contextMenuStrip1";
-            this.cmsTableGroup.Size = new System.Drawing.Size(167, 88);
+            this.cmsTableGroup.Size = new System.Drawing.Size(170, 114);
             this.cmsTableGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiNewTable
             // 
             this.tsmiNewTable.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
             this.tsmiNewTable.Name = "tsmiNewTable";
-            this.tsmiNewTable.Size = new System.Drawing.Size(166, 26);
+            this.tsmiNewTable.Size = new System.Drawing.Size(169, 26);
             this.tsmiNewTable.Text = "New table";
             // 
             // tsmiDropAllTables
             // 
             this.tsmiDropAllTables.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.tsmiDropAllTables.Name = "tsmiDropAllTables";
-            this.tsmiDropAllTables.Size = new System.Drawing.Size(166, 26);
+            this.tsmiDropAllTables.Size = new System.Drawing.Size(169, 26);
             this.tsmiDropAllTables.Text = "Drop all tables";
             // 
             // tsmiRefreshAllTables
             // 
             this.tsmiRefreshAllTables.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.tsmiRefreshAllTables.Name = "tsmiRefreshAllTables";
-            this.tsmiRefreshAllTables.Size = new System.Drawing.Size(166, 26);
+            this.tsmiRefreshAllTables.Size = new System.Drawing.Size(169, 26);
             this.tsmiRefreshAllTables.Text = "Refresh all tables";
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(166, 6);
+            // 
+            // tsmiExportTablesDLL
+            // 
+            this.tsmiExportTablesDLL.Image = global::FBXpert.Properties.Resources.Table_x24;
+            this.tsmiExportTablesDLL.Name = "tsmiExportTablesDLL";
+            this.tsmiExportTablesDLL.Size = new System.Drawing.Size(169, 26);
+            this.tsmiExportTablesDLL.Text = "Export tables DLL";
             // 
             // cmsViewGroup
             // 
@@ -1706,213 +1943,17 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
             // 
-            // hsExit
+            // toolStripSeparator26
             // 
-            this.hsExit.BackColor = System.Drawing.Color.Transparent;
-            this.hsExit.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
-            this.hsExit.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsExit.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsExit.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsExit.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsExit.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsExit.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsExit.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsExit.FlatAppearance.BorderSize = 0;
-            this.hsExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsExit.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsExit.Image = global::FBXpert.Properties.Resources.cross_red_x22;
-            this.hsExit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsExit.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
-            this.hsExit.ImageToggleOnSelect = true;
-            this.hsExit.Location = new System.Drawing.Point(215, 0);
-            this.hsExit.Marked = false;
-            this.hsExit.MarkedColor = System.Drawing.Color.Teal;
-            this.hsExit.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsExit.MarkedText = "";
-            this.hsExit.MarkMode = false;
-            this.hsExit.Name = "hsExit";
-            this.hsExit.NonMarkedText = "";
-            this.hsExit.Shortcut = SeControlsLib.Shortcut.ESC;
-            this.hsExit.ShowShortcut = true;
-            this.hsExit.Size = new System.Drawing.Size(45, 42);
-            this.hsExit.TabIndex = 9;
-            this.hsExit.Text = " <Esc>";
-            this.hsExit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsExit.ToolTipActive = true;
-            this.hsExit.ToolTipAutomaticDelay = 500;
-            this.hsExit.ToolTipAutoPopDelay = 5000;
-            this.hsExit.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsExit.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsExit.ToolTipFor4ContextMenu = true;
-            this.hsExit.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsExit.ToolTipInitialDelay = 500;
-            this.hsExit.ToolTipIsBallon = false;
-            this.hsExit.ToolTipOwnerDraw = false;
-            this.hsExit.ToolTipReshowDelay = 100;
-            this.hsExit.ToolTipShowAlways = false;
-            this.hsExit.ToolTipText = "Load database definitions";
-            this.hsExit.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsExit.ToolTipTitle = "";
-            this.hsExit.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsExit.UseVisualStyleBackColor = false;
-            this.hsExit.Click += new System.EventHandler(this.hsExit_Click);
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(209, 6);
             // 
-            // hsRefreshDB
+            // tsmiExportAllFunctionsScript
             // 
-            this.hsRefreshDB.BackColor = System.Drawing.Color.Transparent;
-            this.hsRefreshDB.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
-            this.hsRefreshDB.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsRefreshDB.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsRefreshDB.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsRefreshDB.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsRefreshDB.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsRefreshDB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsRefreshDB.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsRefreshDB.FlatAppearance.BorderSize = 0;
-            this.hsRefreshDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsRefreshDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsRefreshDB.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsRefreshDB.Image = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.hsRefreshDB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsRefreshDB.ImageHover = global::FBXpert.Properties.Resources.view_refresh22x;
-            this.hsRefreshDB.ImageToggleOnSelect = true;
-            this.hsRefreshDB.Location = new System.Drawing.Point(90, 0);
-            this.hsRefreshDB.Marked = false;
-            this.hsRefreshDB.MarkedColor = System.Drawing.Color.Teal;
-            this.hsRefreshDB.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsRefreshDB.MarkedText = "";
-            this.hsRefreshDB.MarkMode = false;
-            this.hsRefreshDB.Name = "hsRefreshDB";
-            this.hsRefreshDB.NonMarkedText = "";
-            this.hsRefreshDB.Shortcut = SeControlsLib.Shortcut.F5;
-            this.hsRefreshDB.ShowShortcut = true;
-            this.hsRefreshDB.Size = new System.Drawing.Size(45, 42);
-            this.hsRefreshDB.TabIndex = 8;
-            this.hsRefreshDB.Text = " <F5>";
-            this.hsRefreshDB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsRefreshDB.ToolTipActive = true;
-            this.hsRefreshDB.ToolTipAutomaticDelay = 500;
-            this.hsRefreshDB.ToolTipAutoPopDelay = 5000;
-            this.hsRefreshDB.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsRefreshDB.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsRefreshDB.ToolTipFor4ContextMenu = true;
-            this.hsRefreshDB.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsRefreshDB.ToolTipInitialDelay = 500;
-            this.hsRefreshDB.ToolTipIsBallon = false;
-            this.hsRefreshDB.ToolTipOwnerDraw = false;
-            this.hsRefreshDB.ToolTipReshowDelay = 100;
-            this.hsRefreshDB.ToolTipShowAlways = false;
-            this.hsRefreshDB.ToolTipText = "Load database definitions";
-            this.hsRefreshDB.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsRefreshDB.ToolTipTitle = "";
-            this.hsRefreshDB.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsRefreshDB.UseVisualStyleBackColor = false;
-            this.hsRefreshDB.Click += new System.EventHandler(this.hsRefreshDB_Click);
-            // 
-            // hsDatabaseDefinitionSave
-            // 
-            this.hsDatabaseDefinitionSave.BackColor = System.Drawing.Color.Transparent;
-            this.hsDatabaseDefinitionSave.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
-            this.hsDatabaseDefinitionSave.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsDatabaseDefinitionSave.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsDatabaseDefinitionSave.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsDatabaseDefinitionSave.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsDatabaseDefinitionSave.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsDatabaseDefinitionSave.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsDatabaseDefinitionSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsDatabaseDefinitionSave.FlatAppearance.BorderSize = 0;
-            this.hsDatabaseDefinitionSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsDatabaseDefinitionSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsDatabaseDefinitionSave.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsDatabaseDefinitionSave.Image = global::FBXpert.Properties.Resources.floppy_x24;
-            this.hsDatabaseDefinitionSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsDatabaseDefinitionSave.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
-            this.hsDatabaseDefinitionSave.ImageToggleOnSelect = true;
-            this.hsDatabaseDefinitionSave.Location = new System.Drawing.Point(45, 0);
-            this.hsDatabaseDefinitionSave.Marked = false;
-            this.hsDatabaseDefinitionSave.MarkedColor = System.Drawing.Color.Teal;
-            this.hsDatabaseDefinitionSave.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsDatabaseDefinitionSave.MarkedText = "";
-            this.hsDatabaseDefinitionSave.MarkMode = false;
-            this.hsDatabaseDefinitionSave.Name = "hsDatabaseDefinitionSave";
-            this.hsDatabaseDefinitionSave.NonMarkedText = "";
-            this.hsDatabaseDefinitionSave.Shortcut = SeControlsLib.Shortcut.F2;
-            this.hsDatabaseDefinitionSave.ShowShortcut = true;
-            this.hsDatabaseDefinitionSave.Size = new System.Drawing.Size(45, 42);
-            this.hsDatabaseDefinitionSave.TabIndex = 7;
-            this.hsDatabaseDefinitionSave.Text = " <F2>";
-            this.hsDatabaseDefinitionSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsDatabaseDefinitionSave.ToolTipActive = true;
-            this.hsDatabaseDefinitionSave.ToolTipAutomaticDelay = 500;
-            this.hsDatabaseDefinitionSave.ToolTipAutoPopDelay = 5000;
-            this.hsDatabaseDefinitionSave.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsDatabaseDefinitionSave.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsDatabaseDefinitionSave.ToolTipFor4ContextMenu = true;
-            this.hsDatabaseDefinitionSave.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsDatabaseDefinitionSave.ToolTipInitialDelay = 500;
-            this.hsDatabaseDefinitionSave.ToolTipIsBallon = false;
-            this.hsDatabaseDefinitionSave.ToolTipOwnerDraw = false;
-            this.hsDatabaseDefinitionSave.ToolTipReshowDelay = 100;
-            this.hsDatabaseDefinitionSave.ToolTipShowAlways = false;
-            this.hsDatabaseDefinitionSave.ToolTipText = "Save database definitions";
-            this.hsDatabaseDefinitionSave.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsDatabaseDefinitionSave.ToolTipTitle = "";
-            this.hsDatabaseDefinitionSave.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsDatabaseDefinitionSave.UseVisualStyleBackColor = false;
-            this.hsDatabaseDefinitionSave.Click += new System.EventHandler(this.hsDatabaseDefinitionSave_Click);
-            // 
-            // hsLoadDefinition
-            // 
-            this.hsLoadDefinition.BackColor = System.Drawing.Color.Transparent;
-            this.hsLoadDefinition.BackColorHover = System.Drawing.SystemColors.AppWorkspace;
-            this.hsLoadDefinition.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsLoadDefinition.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsLoadDefinition.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsLoadDefinition.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsLoadDefinition.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsLoadDefinition.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsLoadDefinition.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsLoadDefinition.FlatAppearance.BorderSize = 0;
-            this.hsLoadDefinition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsLoadDefinition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsLoadDefinition.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsLoadDefinition.Image = global::FBXpert.Properties.Resources.data_import_gn_x24;
-            this.hsLoadDefinition.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsLoadDefinition.ImageHover = global::FBXpert.Properties.Resources.data_import_blue_x24;
-            this.hsLoadDefinition.ImageToggleOnSelect = true;
-            this.hsLoadDefinition.Location = new System.Drawing.Point(0, 0);
-            this.hsLoadDefinition.Marked = false;
-            this.hsLoadDefinition.MarkedColor = System.Drawing.Color.Teal;
-            this.hsLoadDefinition.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsLoadDefinition.MarkedText = "";
-            this.hsLoadDefinition.MarkMode = false;
-            this.hsLoadDefinition.Name = "hsLoadDefinition";
-            this.hsLoadDefinition.NonMarkedText = "";
-            this.hsLoadDefinition.Shortcut = SeControlsLib.Shortcut.F3;
-            this.hsLoadDefinition.ShowShortcut = true;
-            this.hsLoadDefinition.Size = new System.Drawing.Size(45, 42);
-            this.hsLoadDefinition.TabIndex = 6;
-            this.hsLoadDefinition.Text = " <F3>";
-            this.hsLoadDefinition.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsLoadDefinition.ToolTipActive = true;
-            this.hsLoadDefinition.ToolTipAutomaticDelay = 500;
-            this.hsLoadDefinition.ToolTipAutoPopDelay = 5000;
-            this.hsLoadDefinition.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsLoadDefinition.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsLoadDefinition.ToolTipFor4ContextMenu = true;
-            this.hsLoadDefinition.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsLoadDefinition.ToolTipInitialDelay = 500;
-            this.hsLoadDefinition.ToolTipIsBallon = false;
-            this.hsLoadDefinition.ToolTipOwnerDraw = false;
-            this.hsLoadDefinition.ToolTipReshowDelay = 100;
-            this.hsLoadDefinition.ToolTipShowAlways = false;
-            this.hsLoadDefinition.ToolTipText = "Load database definitions";
-            this.hsLoadDefinition.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsLoadDefinition.ToolTipTitle = "";
-            this.hsLoadDefinition.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsLoadDefinition.UseVisualStyleBackColor = false;
-            this.hsLoadDefinition.Click += new System.EventHandler(this.hsLoadDefinition_Click);
+            this.tsmiExportAllFunctionsScript.Image = global::FBXpert.Properties.Resources.Table_x24;
+            this.tsmiExportAllFunctionsScript.Name = "tsmiExportAllFunctionsScript";
+            this.tsmiExportAllFunctionsScript.Size = new System.Drawing.Size(212, 26);
+            this.tsmiExportAllFunctionsScript.Text = "Export all functions script";
             // 
             // DbExplorerForm
             // 
@@ -2158,5 +2199,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiExportAllViewsSQL;
         private SeControlsLib.HotSpot hsExit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExportTablesDLL;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExportAllProceduresScript;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExportAllFunctionsScript;
     }
 }

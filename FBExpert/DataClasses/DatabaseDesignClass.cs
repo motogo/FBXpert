@@ -223,7 +223,6 @@ namespace FBXpert.DataClasses
                 sb.Append(BlockEnd(lvl+2));
                 sb.Append(BlockEnd(lvl+1));
                 sb.Append(Nl);                
-
                 sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance().GetString(txt.ToString());" + Nl));
                 sb.Append(Format(lvl+1,"return (txt.ToString());" + Nl));
                 sb.Append(Format(lvl,"} //method ToString" + Nl));
@@ -266,6 +265,7 @@ namespace FBXpert.DataClasses
                 sb.Append(BlockEnd(lvl+2));
                 sb.Append(BlockEnd(lvl+1));
                 sb.Append(Nl);
+                sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance().GetString(txt.ToString());" + Nl));
                 sb.Append(Format(lvl+1,"return (txt.ToString());" + Nl));
                 sb.Append(Format(lvl,"} //method ToString" + Nl));
             }
@@ -738,11 +738,22 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl, BlockEnd(lvl)));
             return sb.ToString();
         }
-
         public string CreateDesignForTable(int lvl, DataObjectClass tc)
         {
             var sb = new StringBuilder();
             sb.Append(CreateTableUsings(lvl));
+            return CreateDesignForViewTable(lvl, tc, sb);
+        }
+        public string CreateDesignForView(int lvl, DataObjectClass tc)
+        {
+            var sb = new StringBuilder();
+            sb.Append(CreateViewUsings(lvl));
+            return CreateDesignForViewTable(lvl, tc, sb);
+        }
+        public string CreateDesignForViewTable(int lvl, DataObjectClass tc, StringBuilder sb)
+        {
+            //var sb = new StringBuilder();
+            //sb.Append(CreateTableUsings(lvl));
             sb.Append(CreateCopyright(lvl,tc.Name));
             sb.Append(Format(lvl, "namespace " + CodeCreateAttribute.CodeNamespace + Nl));
             sb.Append(Format(lvl, BlockStart(lvl)));
@@ -2015,23 +2026,23 @@ namespace FBXpert.DataClasses
             if (obj.GetType() == typeof(TableClass))
             {
                 var table = obj as TableClass;
-                sb.Append(Format(lvl,"        /// <summary>" + Nl));
-                sb.Append(Format(lvl,"        /// Enum of available dataindexes" + Nl));                
-                sb.Append(Format(lvl,"        /// </summary>" + Nl));
-                sb.Append(Format(lvl,"        public enum eTDataClass {"));
+                sb.Append(Format(lvl,"/// <summary>" + Nl));
+                sb.Append(Format(lvl,"/// Enum of available dataindexes" + Nl));
+                sb.Append(Format(lvl,"/// </summary>" + Nl));
+                sb.Append(Format(lvl,"public enum eTDataClass {"));
                 int n = 0;
                 foreach (var tfc in table.Fields.Values)
-                {                    
+                {
                     sb.Append(tfc.Name + " = " + n++.ToString() + ",");
                 }
-                sb.Append(Format(lvl," NO_FIELD = " + n.ToString()));                
+                sb.Append(Format(lvl," NO_FIELD = " + n.ToString()));
                 sb.Append(BlockEnd(lvl));
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
                 var table = obj as ViewClass;
                 sb.Append(Format(lvl, "/// <summary>" + Nl));
-                sb.Append(Format(lvl, "/// Enum of available dataindexes" + Nl));                
+                sb.Append(Format(lvl, "/// Enum of available dataindexes" + Nl));
                 sb.Append(Format(lvl, "/// </summary>" + Nl));
                 sb.Append(Format(lvl, "public enum eTDataClass {"));
                 int n = 0;
@@ -2039,7 +2050,7 @@ namespace FBXpert.DataClasses
                 {                    
                     sb.Append($@"{tfc.Name} = {n++},");
                 }
-                sb.Append(Format(lvl, " NO_FIELD = " + n.ToString()));                
+                sb.Append(Format(lvl, " NO_FIELD = " + n.ToString()));
                 sb.Append(BlockEnd(lvl));
             }
             return sb.ToString();
@@ -2072,14 +2083,33 @@ namespace FBXpert.DataClasses
             var sb = new StringBuilder();
             sb.Append(Format(lvl, "#region Using directives" + Nl));
             sb.Append(Format(lvl, "using System;" + Nl));
-            sb.Append(Format(lvl, "using System.Collections;" + Nl));            
+            sb.Append(Format(lvl, "using System.Collections;" + Nl));
             sb.Append(Format(lvl, "using System.IO;" + Nl));
             sb.Append(Format(lvl, "using System.Text;" + Nl));
-            sb.Append(Format(lvl, "using System.Xml.Serialization;" + Nl));            
+            sb.Append(Format(lvl, "using System.Xml.Serialization;" + Nl));
             sb.Append(Format(lvl, "using System.Xml;" + Nl));
             sb.Append(Format(lvl, "using System.Windows.Forms;" + Nl));
             //sb.Append(Format(lvl, "using System.Numerics;" + Nl));
-            sb.Append(Format(lvl, "using DBBasicClassLibrary;" + Nl));            
+            sb.Append(Format(lvl, "using DBBasicClassLibrary;" + Nl));
+            sb.Append(Format(lvl, "using MessageLibrary.Messages;" + Nl));
+            sb.Append(Format(lvl, "using BasicClassLibrary;" + Nl));
+            sb.Append(Format(lvl, "#endregion" + Nl));
+            return sb.ToString();
+        }
+
+        public string CreateViewUsings(int lvl)
+        {
+            var sb = new StringBuilder();
+            sb.Append(Format(lvl, "#region Using directives" + Nl));
+            sb.Append(Format(lvl, "using System;" + Nl));
+            sb.Append(Format(lvl, "using System.Collections;" + Nl));
+            sb.Append(Format(lvl, "using System.IO;" + Nl));
+            sb.Append(Format(lvl, "using System.Text;" + Nl));
+            sb.Append(Format(lvl, "using System.Xml.Serialization;" + Nl));
+            sb.Append(Format(lvl, "using System.Xml;" + Nl));
+            sb.Append(Format(lvl, "using System.Windows.Forms;" + Nl));
+            //sb.Append(Format(lvl, "using System.Numerics;" + Nl));
+            sb.Append(Format(lvl, "using DBBasicClassLibrary;" + Nl));
             sb.Append(Format(lvl, "using MessageLibrary.Messages;" + Nl));
             sb.Append(Format(lvl, "using BasicClassLibrary;" + Nl));
             sb.Append(Format(lvl, "#endregion" + Nl));
@@ -2089,11 +2119,11 @@ namespace FBXpert.DataClasses
         public string CreateCbTableUsings(int lvl)
         {
             var sb = new StringBuilder();
-            sb.Append(Format(lvl,"#region Using directives" + Nl));    
+            sb.Append(Format(lvl,"#region Using directives" + Nl));
             sb.Append(Format(lvl,"using System;" + Nl));
             sb.Append(Format(lvl,"using System.Windows.Forms;" + Nl));
             //sb.Append(Format(lvl,"using System.Numerics;" + Nl));
-            sb.Append(Format(lvl,"using DBBasicClassLibrary;" + Nl));           
+            sb.Append(Format(lvl,"using DBBasicClassLibrary;" + Nl));
             sb.Append(Format(lvl,"#endregion" + Nl));
             return sb.ToString();
         }

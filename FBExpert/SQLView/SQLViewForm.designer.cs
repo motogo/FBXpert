@@ -1,9 +1,6 @@
-using System;
-using System.Drawing;
-using System.Collections;
+using BasicForms;
 using System.ComponentModel;
 using System.Windows.Forms;
-using BasicForms;
 
 namespace SQLView
 {
@@ -135,6 +132,7 @@ namespace SQLView
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteHistoryEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlHistoryUpper = new System.Windows.Forms.Panel();
+            this.hsClearHistory = new SeControlsLib.HotSpot();
             this.cbSQLfailed = new System.Windows.Forms.CheckBox();
             this.cbSQLsucceded = new System.Windows.Forms.CheckBox();
             this.cbAllHistory = new System.Windows.Forms.CheckBox();
@@ -212,7 +210,6 @@ namespace SQLView
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.hsRefreshPerformance = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
-            this.bsHistory = new System.Windows.Forms.BindingSource(this.components);
             this.sfdSQL = new System.Windows.Forms.SaveFileDialog();
             this.helpMain = new System.Windows.Forms.HelpProvider();
             this.ofdLog = new System.Windows.Forms.OpenFileDialog();
@@ -221,6 +218,7 @@ namespace SQLView
             this.saveFileDialogXML = new System.Windows.Forms.SaveFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
+            this.bsHistory = new System.Windows.Forms.BindingSource(this.components);
             this.pnl_upper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
@@ -298,7 +296,7 @@ namespace SQLView
             this.pnl_upper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_upper.Location = new System.Drawing.Point(0, 0);
             this.pnl_upper.Name = "pnl_upper";
-            this.pnl_upper.Size = new System.Drawing.Size(1604, 40);
+            this.pnl_upper.Size = new System.Drawing.Size(1604, 49);
             this.pnl_upper.TabIndex = 0;
             // 
             // hsLifeTime
@@ -329,7 +327,8 @@ namespace SQLView
             this.hsLifeTime.Name = "hsLifeTime";
             this.hsLifeTime.NonMarkedText = "";
             this.hsLifeTime.Shortcut = SeControlsLib.Shortcut.None;
-            this.hsLifeTime.Size = new System.Drawing.Size(87, 38);
+            this.hsLifeTime.ShowShortcut = false;
+            this.hsLifeTime.Size = new System.Drawing.Size(87, 47);
             this.hsLifeTime.TabIndex = 34;
             this.hsLifeTime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLifeTime.ToolTipActive = false;
@@ -358,7 +357,7 @@ namespace SQLView
             this.gbDatabase.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbDatabase.Location = new System.Drawing.Point(45, 0);
             this.gbDatabase.Name = "gbDatabase";
-            this.gbDatabase.Size = new System.Drawing.Size(606, 38);
+            this.gbDatabase.Size = new System.Drawing.Size(606, 47);
             this.gbDatabase.TabIndex = 29;
             this.gbDatabase.TabStop = false;
             this.gbDatabase.Text = "Database";
@@ -399,7 +398,8 @@ namespace SQLView
             this.hsLoadDatabasePath.Name = "hsLoadDatabasePath";
             this.hsLoadDatabasePath.NonMarkedText = "";
             this.hsLoadDatabasePath.Shortcut = SeControlsLib.Shortcut.None;
-            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 19);
+            this.hsLoadDatabasePath.ShowShortcut = false;
+            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 28);
             this.hsLoadDatabasePath.TabIndex = 3;
             this.hsLoadDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadDatabasePath.ToolTipActive = false;
@@ -448,7 +448,8 @@ namespace SQLView
             this.hsPageRefresh.Name = "hsPageRefresh";
             this.hsPageRefresh.NonMarkedText = "Refresh";
             this.hsPageRefresh.Shortcut = SeControlsLib.Shortcut.None;
-            this.hsPageRefresh.Size = new System.Drawing.Size(89, 38);
+            this.hsPageRefresh.ShowShortcut = false;
+            this.hsPageRefresh.Size = new System.Drawing.Size(89, 47);
             this.hsPageRefresh.TabIndex = 28;
             this.hsPageRefresh.Text = "Refresh";
             this.hsPageRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -477,7 +478,7 @@ namespace SQLView
             this.gnUsedTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.gnUsedTime.Location = new System.Drawing.Point(1486, 0);
             this.gnUsedTime.Name = "gnUsedTime";
-            this.gnUsedTime.Size = new System.Drawing.Size(116, 38);
+            this.gnUsedTime.Size = new System.Drawing.Size(116, 47);
             this.gnUsedTime.TabIndex = 27;
             this.gnUsedTime.TabStop = false;
             this.gnUsedTime.Text = "Used time";
@@ -520,7 +521,8 @@ namespace SQLView
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = SeControlsLib.Shortcut.None;
-            this.hsClose.Size = new System.Drawing.Size(45, 38);
+            this.hsClose.ShowShortcut = false;
+            this.hsClose.Size = new System.Drawing.Size(45, 47);
             this.hsClose.TabIndex = 26;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -607,9 +609,9 @@ namespace SQLView
             this.pnl_center.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_center.Controls.Add(this.tcSQLCONTROL);
             this.pnl_center.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_center.Location = new System.Drawing.Point(0, 40);
+            this.pnl_center.Location = new System.Drawing.Point(0, 49);
             this.pnl_center.Name = "pnl_center";
-            this.pnl_center.Size = new System.Drawing.Size(1604, 659);
+            this.pnl_center.Size = new System.Drawing.Size(1604, 650);
             this.pnl_center.TabIndex = 2;
             // 
             // tcSQLCONTROL
@@ -629,7 +631,7 @@ namespace SQLView
             this.tcSQLCONTROL.Location = new System.Drawing.Point(0, 0);
             this.tcSQLCONTROL.Name = "tcSQLCONTROL";
             this.tcSQLCONTROL.SelectedIndex = 0;
-            this.tcSQLCONTROL.Size = new System.Drawing.Size(1602, 657);
+            this.tcSQLCONTROL.Size = new System.Drawing.Size(1602, 648);
             this.tcSQLCONTROL.TabIndex = 0;
             // 
             // tabSQLTEXT
@@ -642,7 +644,7 @@ namespace SQLView
             this.tabSQLTEXT.Location = new System.Drawing.Point(4, 23);
             this.tabSQLTEXT.Name = "tabSQLTEXT";
             this.tabSQLTEXT.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSQLTEXT.Size = new System.Drawing.Size(1594, 630);
+            this.tabSQLTEXT.Size = new System.Drawing.Size(1594, 621);
             this.tabSQLTEXT.TabIndex = 0;
             this.tabSQLTEXT.Text = "SQL commands";
             // 
@@ -652,7 +654,7 @@ namespace SQLView
             this.pnlSQLCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSQLCenter.Location = new System.Drawing.Point(3, 48);
             this.pnlSQLCenter.Name = "pnlSQLCenter";
-            this.pnlSQLCenter.Size = new System.Drawing.Size(1588, 569);
+            this.pnlSQLCenter.Size = new System.Drawing.Size(1588, 560);
             this.pnlSQLCenter.TabIndex = 28;
             // 
             // txtSQL
@@ -688,7 +690,7 @@ namespace SQLView
             this.txtSQL.RightBracket = ')';
             this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
-            this.txtSQL.Size = new System.Drawing.Size(1588, 569);
+            this.txtSQL.Size = new System.Drawing.Size(1588, 560);
             this.txtSQL.TabIndex = 24;
             this.txtSQL.Zoom = 100;
             this.txtSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSQL_KeyDown_1);
@@ -801,7 +803,7 @@ namespace SQLView
             this.hsBreak.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsBreak.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
             this.hsBreak.ImageToggleOnSelect = true;
-            this.hsBreak.Location = new System.Drawing.Point(469, 0);
+            this.hsBreak.Location = new System.Drawing.Point(531, 0);
             this.hsBreak.Marked = false;
             this.hsBreak.MarkedColor = System.Drawing.Color.Teal;
             this.hsBreak.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -810,6 +812,7 @@ namespace SQLView
             this.hsBreak.Name = "hsBreak";
             this.hsBreak.NonMarkedText = "Break";
             this.hsBreak.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsBreak.ShowShortcut = false;
             this.hsBreak.Size = new System.Drawing.Size(68, 41);
             this.hsBreak.TabIndex = 33;
             this.hsBreak.Text = "Break";
@@ -852,7 +855,7 @@ namespace SQLView
             this.hsReplaceText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsReplaceText.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsReplaceText.ImageToggleOnSelect = true;
-            this.hsReplaceText.Location = new System.Drawing.Point(373, 0);
+            this.hsReplaceText.Location = new System.Drawing.Point(435, 0);
             this.hsReplaceText.Marked = false;
             this.hsReplaceText.MarkedColor = System.Drawing.Color.Teal;
             this.hsReplaceText.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -861,6 +864,7 @@ namespace SQLView
             this.hsReplaceText.Name = "hsReplaceText";
             this.hsReplaceText.NonMarkedText = "Replace Text";
             this.hsReplaceText.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsReplaceText.ShowShortcut = false;
             this.hsReplaceText.Size = new System.Drawing.Size(96, 41);
             this.hsReplaceText.TabIndex = 32;
             this.hsReplaceText.Text = "Replace Text";
@@ -903,7 +907,7 @@ namespace SQLView
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsSaveSQL.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSaveSQL.ImageToggleOnSelect = true;
-            this.hsSaveSQL.Location = new System.Drawing.Point(305, 0);
+            this.hsSaveSQL.Location = new System.Drawing.Point(367, 0);
             this.hsSaveSQL.Marked = false;
             this.hsSaveSQL.MarkedColor = System.Drawing.Color.Teal;
             this.hsSaveSQL.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -912,6 +916,7 @@ namespace SQLView
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(68, 41);
             this.hsSaveSQL.TabIndex = 31;
             this.hsSaveSQL.Text = "Save SQL";
@@ -954,7 +959,7 @@ namespace SQLView
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsLoadSQL.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadSQL.ImageToggleOnSelect = true;
-            this.hsLoadSQL.Location = new System.Drawing.Point(237, 0);
+            this.hsLoadSQL.Location = new System.Drawing.Point(299, 0);
             this.hsLoadSQL.Marked = false;
             this.hsLoadSQL.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadSQL.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -963,6 +968,7 @@ namespace SQLView
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(68, 41);
             this.hsLoadSQL.TabIndex = 30;
             this.hsLoadSQL.Text = "Load SQL";
@@ -1005,7 +1011,7 @@ namespace SQLView
             this.hsRunSQLfromFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunSQLfromFile.ImageHover = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
             this.hsRunSQLfromFile.ImageToggleOnSelect = true;
-            this.hsRunSQLfromFile.Location = new System.Drawing.Point(136, 0);
+            this.hsRunSQLfromFile.Location = new System.Drawing.Point(198, 0);
             this.hsRunSQLfromFile.Marked = false;
             this.hsRunSQLfromFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunSQLfromFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1014,6 +1020,7 @@ namespace SQLView
             this.hsRunSQLfromFile.Name = "hsRunSQLfromFile";
             this.hsRunSQLfromFile.NonMarkedText = "Run SQL from File";
             this.hsRunSQLfromFile.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRunSQLfromFile.ShowShortcut = false;
             this.hsRunSQLfromFile.Size = new System.Drawing.Size(101, 41);
             this.hsRunSQLfromFile.TabIndex = 29;
             this.hsRunSQLfromFile.Text = "Run SQL from File";
@@ -1056,7 +1063,7 @@ namespace SQLView
             this.hsClearText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsClearText.ImageHover = global::FBXpert.Properties.Resources.document_blue_x32;
             this.hsClearText.ImageToggleOnSelect = true;
-            this.hsClearText.Location = new System.Drawing.Point(68, 0);
+            this.hsClearText.Location = new System.Drawing.Point(130, 0);
             this.hsClearText.Marked = false;
             this.hsClearText.MarkedColor = System.Drawing.Color.Teal;
             this.hsClearText.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1065,6 +1072,7 @@ namespace SQLView
             this.hsClearText.Name = "hsClearText";
             this.hsClearText.NonMarkedText = "Clear Text";
             this.hsClearText.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearText.ShowShortcut = false;
             this.hsClearText.Size = new System.Drawing.Size(68, 41);
             this.hsClearText.TabIndex = 28;
             this.hsClearText.Text = "Clear Text";
@@ -1116,7 +1124,8 @@ namespace SQLView
             this.hsRunSQL.Name = "hsRunSQL";
             this.hsRunSQL.NonMarkedText = "Run SQL";
             this.hsRunSQL.Shortcut = SeControlsLib.Shortcut.None;
-            this.hsRunSQL.Size = new System.Drawing.Size(68, 41);
+            this.hsRunSQL.ShowShortcut = false;
+            this.hsRunSQL.Size = new System.Drawing.Size(130, 41);
             this.hsRunSQL.TabIndex = 27;
             this.hsRunSQL.Text = "Run SQL";
             this.hsRunSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1167,7 +1176,7 @@ namespace SQLView
             // pbRunSQL
             // 
             this.pbRunSQL.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbRunSQL.Location = new System.Drawing.Point(3, 617);
+            this.pbRunSQL.Location = new System.Drawing.Point(3, 608);
             this.pbRunSQL.Name = "pbRunSQL";
             this.pbRunSQL.Size = new System.Drawing.Size(1588, 10);
             this.pbRunSQL.TabIndex = 24;
@@ -1406,6 +1415,7 @@ namespace SQLView
             this.hsUpdateDataset.Name = "hsUpdateDataset";
             this.hsUpdateDataset.NonMarkedText = "Update";
             this.hsUpdateDataset.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsUpdateDataset.ShowShortcut = false;
             this.hsUpdateDataset.Size = new System.Drawing.Size(111, 43);
             this.hsUpdateDataset.TabIndex = 30;
             this.hsUpdateDataset.Text = "Update dataset";
@@ -1677,6 +1687,7 @@ namespace SQLView
             this.hsClearInfo.Name = "hsClearInfo";
             this.hsClearInfo.NonMarkedText = "Clear";
             this.hsClearInfo.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearInfo.ShowShortcut = false;
             this.hsClearInfo.Size = new System.Drawing.Size(69, 43);
             this.hsClearInfo.TabIndex = 27;
             this.hsClearInfo.Text = "Clear";
@@ -1796,6 +1807,7 @@ namespace SQLView
             this.hsClearErrorAll.Name = "hsClearErrorAll";
             this.hsClearErrorAll.NonMarkedText = "Clear All";
             this.hsClearErrorAll.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearErrorAll.ShowShortcut = false;
             this.hsClearErrorAll.Size = new System.Drawing.Size(78, 43);
             this.hsClearErrorAll.TabIndex = 30;
             this.hsClearErrorAll.Text = "Clear All";
@@ -1897,6 +1909,7 @@ namespace SQLView
             // pnlHistoryUpper
             // 
             this.pnlHistoryUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlHistoryUpper.Controls.Add(this.hsClearHistory);
             this.pnlHistoryUpper.Controls.Add(this.cbSQLfailed);
             this.pnlHistoryUpper.Controls.Add(this.cbSQLsucceded);
             this.pnlHistoryUpper.Controls.Add(this.cbAllHistory);
@@ -1908,12 +1921,64 @@ namespace SQLView
             this.pnlHistoryUpper.Size = new System.Drawing.Size(1588, 49);
             this.pnlHistoryUpper.TabIndex = 23;
             // 
+            // hsClearHistory
+            // 
+            this.hsClearHistory.BackColor = System.Drawing.Color.Transparent;
+            this.hsClearHistory.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClearHistory.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClearHistory.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClearHistory.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClearHistory.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClearHistory.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClearHistory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsClearHistory.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClearHistory.FlatAppearance.BorderSize = 0;
+            this.hsClearHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsClearHistory.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsClearHistory.Image = global::FBXpert.Properties.Resources.sweep_ge24x;
+            this.hsClearHistory.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsClearHistory.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsClearHistory.ImageToggleOnSelect = true;
+            this.hsClearHistory.Location = new System.Drawing.Point(90, 0);
+            this.hsClearHistory.Marked = false;
+            this.hsClearHistory.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClearHistory.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClearHistory.MarkedText = "";
+            this.hsClearHistory.MarkMode = false;
+            this.hsClearHistory.Name = "hsClearHistory";
+            this.hsClearHistory.NonMarkedText = "Clear History";
+            this.hsClearHistory.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearHistory.ShowShortcut = false;
+            this.hsClearHistory.Size = new System.Drawing.Size(90, 45);
+            this.hsClearHistory.TabIndex = 37;
+            this.hsClearHistory.Text = "Clear History";
+            this.hsClearHistory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClearHistory.ToolTipActive = false;
+            this.hsClearHistory.ToolTipAutomaticDelay = 500;
+            this.hsClearHistory.ToolTipAutoPopDelay = 5000;
+            this.hsClearHistory.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClearHistory.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClearHistory.ToolTipFor4ContextMenu = true;
+            this.hsClearHistory.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClearHistory.ToolTipInitialDelay = 500;
+            this.hsClearHistory.ToolTipIsBallon = false;
+            this.hsClearHistory.ToolTipOwnerDraw = false;
+            this.hsClearHistory.ToolTipReshowDelay = 100;
+            this.hsClearHistory.ToolTipShowAlways = false;
+            this.hsClearHistory.ToolTipText = "";
+            this.hsClearHistory.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsClearHistory.ToolTipTitle = "";
+            this.hsClearHistory.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClearHistory.UseVisualStyleBackColor = false;
+            this.hsClearHistory.Click += new System.EventHandler(this.hsClearHistory_Click);
+            // 
             // cbSQLfailed
             // 
             this.cbSQLfailed.AutoSize = true;
             this.cbSQLfailed.Checked = true;
             this.cbSQLfailed.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSQLfailed.Location = new System.Drawing.Point(439, 18);
+            this.cbSQLfailed.Location = new System.Drawing.Point(550, 15);
             this.cbSQLfailed.Name = "cbSQLfailed";
             this.cbSQLfailed.Size = new System.Drawing.Size(75, 17);
             this.cbSQLfailed.TabIndex = 36;
@@ -1926,7 +1991,7 @@ namespace SQLView
             this.cbSQLsucceded.AutoSize = true;
             this.cbSQLsucceded.Checked = true;
             this.cbSQLsucceded.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSQLsucceded.Location = new System.Drawing.Point(294, 18);
+            this.cbSQLsucceded.Location = new System.Drawing.Point(405, 15);
             this.cbSQLsucceded.Name = "cbSQLsucceded";
             this.cbSQLsucceded.Size = new System.Drawing.Size(100, 17);
             this.cbSQLsucceded.TabIndex = 35;
@@ -1937,7 +2002,7 @@ namespace SQLView
             // cbAllHistory
             // 
             this.cbAllHistory.AutoSize = true;
-            this.cbAllHistory.Location = new System.Drawing.Point(115, 18);
+            this.cbAllHistory.Location = new System.Drawing.Point(226, 15);
             this.cbAllHistory.Name = "cbAllHistory";
             this.cbAllHistory.Size = new System.Drawing.Size(146, 17);
             this.cbAllHistory.TabIndex = 34;
@@ -1973,6 +2038,7 @@ namespace SQLView
             this.hsRefreshHistory.Name = "hsRefreshHistory";
             this.hsRefreshHistory.NonMarkedText = "Refresh";
             this.hsRefreshHistory.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshHistory.ShowShortcut = false;
             this.hsRefreshHistory.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshHistory.TabIndex = 33;
             this.hsRefreshHistory.Text = "Refresh";
@@ -2011,7 +2077,7 @@ namespace SQLView
             this.hsExecuteHistorySelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsExecuteHistorySelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsExecuteHistorySelected.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsExecuteHistorySelected.Image = global::FBXpert.Properties.Resources.applications_system;
+            this.hsExecuteHistorySelected.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsExecuteHistorySelected.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsExecuteHistorySelected.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsExecuteHistorySelected.ImageToggleOnSelect = true;
@@ -2024,6 +2090,7 @@ namespace SQLView
             this.hsExecuteHistorySelected.Name = "hsExecuteHistorySelected";
             this.hsExecuteHistorySelected.NonMarkedText = "Execute";
             this.hsExecuteHistorySelected.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExecuteHistorySelected.ShowShortcut = false;
             this.hsExecuteHistorySelected.Size = new System.Drawing.Size(90, 45);
             this.hsExecuteHistorySelected.TabIndex = 28;
             this.hsExecuteHistorySelected.Text = "Execute";
@@ -2118,6 +2185,7 @@ namespace SQLView
             this.hsLoadListReplaces.Name = "hsLoadListReplaces";
             this.hsLoadListReplaces.NonMarkedText = "Load List";
             this.hsLoadListReplaces.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLoadListReplaces.ShowShortcut = false;
             this.hsLoadListReplaces.Size = new System.Drawing.Size(68, 44);
             this.hsLoadListReplaces.TabIndex = 31;
             this.hsLoadListReplaces.Text = "Load List";
@@ -2256,6 +2324,7 @@ namespace SQLView
             this.hsRefreshConfig.Name = "hsRefreshConfig";
             this.hsRefreshConfig.NonMarkedText = "";
             this.hsRefreshConfig.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshConfig.ShowShortcut = false;
             this.hsRefreshConfig.Size = new System.Drawing.Size(45, 45);
             this.hsRefreshConfig.TabIndex = 1;
             this.hsRefreshConfig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2426,7 +2495,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctPlan.AutoIndentCharsPatterns = "";
-            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(154, 14);
+            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(179, 14);
             this.fctPlan.BackBrush = null;
             this.fctPlan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctPlan.CharHeight = 14;
@@ -2517,7 +2586,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -2603,6 +2672,7 @@ namespace SQLView
             this.hsExportBreak.Name = "hsExportBreak";
             this.hsExportBreak.NonMarkedText = "Break";
             this.hsExportBreak.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportBreak.ShowShortcut = false;
             this.hsExportBreak.Size = new System.Drawing.Size(68, 44);
             this.hsExportBreak.TabIndex = 44;
             this.hsExportBreak.Text = "Break";
@@ -2719,6 +2789,7 @@ namespace SQLView
             this.hotSpot2.Name = "hotSpot2";
             this.hotSpot2.NonMarkedText = "Run SQL and Export as CSV";
             this.hotSpot2.Shortcut = SeControlsLib.Shortcut.None;
+            this.hotSpot2.ShowShortcut = false;
             this.hotSpot2.Size = new System.Drawing.Size(172, 44);
             this.hotSpot2.TabIndex = 39;
             this.hotSpot2.Text = "Run SQL and Export as CSV";
@@ -2792,6 +2863,7 @@ namespace SQLView
             this.hsExportHTML.Name = "hsExportHTML";
             this.hsExportHTML.NonMarkedText = "Export as HTML";
             this.hsExportHTML.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportHTML.ShowShortcut = false;
             this.hsExportHTML.Size = new System.Drawing.Size(111, 44);
             this.hsExportHTML.TabIndex = 36;
             this.hsExportHTML.Text = "Export as HTML";
@@ -2867,6 +2939,7 @@ namespace SQLView
             this.hsExportCSV.Name = "hsExportCSV";
             this.hsExportCSV.NonMarkedText = "Export results as CSV";
             this.hsExportCSV.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportCSV.ShowShortcut = false;
             this.hsExportCSV.Size = new System.Drawing.Size(152, 44);
             this.hsExportCSV.TabIndex = 33;
             this.hsExportCSV.Text = "Export results as CSV";
@@ -2918,6 +2991,7 @@ namespace SQLView
             this.hsSaveXML.Name = "hsSaveXML";
             this.hsSaveXML.NonMarkedText = "Save XML-Data";
             this.hsSaveXML.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveXML.ShowShortcut = false;
             this.hsSaveXML.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXML.TabIndex = 32;
             this.hsSaveXML.Text = "Save XML-Data";
@@ -2968,6 +3042,7 @@ namespace SQLView
             this.hsRefreshXMLData.Name = "hsRefreshXMLData";
             this.hsRefreshXMLData.NonMarkedText = "";
             this.hsRefreshXMLData.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshXMLData.ShowShortcut = false;
             this.hsRefreshXMLData.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLData.TabIndex = 3;
             this.hsRefreshXMLData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3097,6 +3172,7 @@ namespace SQLView
             this.hsSaveXMLScheme.Name = "hsSaveXMLScheme";
             this.hsSaveXMLScheme.NonMarkedText = "Save XML-Scheme";
             this.hsSaveXMLScheme.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveXMLScheme.ShowShortcut = false;
             this.hsSaveXMLScheme.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXMLScheme.TabIndex = 33;
             this.hsSaveXMLScheme.Text = "Save XML-Scheme";
@@ -3147,6 +3223,7 @@ namespace SQLView
             this.hsRefreshXMLScheme.Name = "hsRefreshXMLScheme";
             this.hsRefreshXMLScheme.NonMarkedText = "";
             this.hsRefreshXMLScheme.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshXMLScheme.ShowShortcut = false;
             this.hsRefreshXMLScheme.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLScheme.TabIndex = 3;
             this.hsRefreshXMLScheme.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3289,6 +3366,7 @@ namespace SQLView
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Save XML-Data";
             this.hotSpot1.Shortcut = SeControlsLib.Shortcut.None;
+            this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(111, 44);
             this.hotSpot1.TabIndex = 32;
             this.hotSpot1.Text = "Save XML-Data";
@@ -3338,6 +3416,7 @@ namespace SQLView
             this.hsRefreshPerformance.Name = "hsRefreshPerformance";
             this.hsRefreshPerformance.NonMarkedText = "";
             this.hsRefreshPerformance.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshPerformance.ShowShortcut = false;
             this.hsRefreshPerformance.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshPerformance.TabIndex = 3;
             this.hsRefreshPerformance.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3693,5 +3772,6 @@ namespace SQLView
         private ToolStripMenuItem tsmiHistoryExecuteSQL;
         private ToolStripSeparator toolStripSeparator2;
         private BindingSource bsHistory;
+        private SeControlsLib.HotSpot hsClearHistory;
     }
 }
