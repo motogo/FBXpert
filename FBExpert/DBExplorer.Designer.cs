@@ -697,7 +697,7 @@
             this.hsExit.MarkMode = false;
             this.hsExit.Name = "hsExit";
             this.hsExit.NonMarkedText = "";
-            this.hsExit.Shortcut = SeControlsLib.Shortcut.ESC;
+            this.hsExit.Shortcut = BasicClassLibrary.Shortcut.ESC;
             this.hsExit.ShowShortcut = true;
             this.hsExit.Size = new System.Drawing.Size(45, 42);
             this.hsExit.TabIndex = 9;
@@ -749,7 +749,7 @@
             this.hsRefreshDB.MarkMode = false;
             this.hsRefreshDB.Name = "hsRefreshDB";
             this.hsRefreshDB.NonMarkedText = "";
-            this.hsRefreshDB.Shortcut = SeControlsLib.Shortcut.F5;
+            this.hsRefreshDB.Shortcut = BasicClassLibrary.Shortcut.F5;
             this.hsRefreshDB.ShowShortcut = true;
             this.hsRefreshDB.Size = new System.Drawing.Size(45, 42);
             this.hsRefreshDB.TabIndex = 8;
@@ -801,7 +801,7 @@
             this.hsDatabaseDefinitionSave.MarkMode = false;
             this.hsDatabaseDefinitionSave.Name = "hsDatabaseDefinitionSave";
             this.hsDatabaseDefinitionSave.NonMarkedText = "";
-            this.hsDatabaseDefinitionSave.Shortcut = SeControlsLib.Shortcut.F2;
+            this.hsDatabaseDefinitionSave.Shortcut = BasicClassLibrary.Shortcut.F2;
             this.hsDatabaseDefinitionSave.ShowShortcut = true;
             this.hsDatabaseDefinitionSave.Size = new System.Drawing.Size(45, 42);
             this.hsDatabaseDefinitionSave.TabIndex = 7;
@@ -853,7 +853,7 @@
             this.hsLoadDefinition.MarkMode = false;
             this.hsLoadDefinition.Name = "hsLoadDefinition";
             this.hsLoadDefinition.NonMarkedText = "";
-            this.hsLoadDefinition.Shortcut = SeControlsLib.Shortcut.F3;
+            this.hsLoadDefinition.Shortcut = BasicClassLibrary.Shortcut.F3;
             this.hsLoadDefinition.ShowShortcut = true;
             this.hsLoadDefinition.Size = new System.Drawing.Size(45, 42);
             this.hsLoadDefinition.TabIndex = 6;

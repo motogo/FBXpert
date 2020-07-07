@@ -30,38 +30,50 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseCompareFrom));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsRefresh = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageDatabases = new System.Windows.Forms.TabPage();
             this.pnlSourceCode = new System.Windows.Forms.Panel();
-            this.fctSource = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.tabControlResults = new System.Windows.Forms.TabControl();
+            this.tabPageForward = new System.Windows.Forms.TabPage();
+            this.fctSourceForward = new FastColoredTextBoxNS.FastColoredTextBox();
             this.cmsSourceCode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiSearchFirst = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSearchPrevious = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSearchNext = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlUpperSourceCode = new System.Windows.Forms.Panel();
-            this.gbFoundLines = new System.Windows.Forms.GroupBox();
-            this.cbFoundLines = new System.Windows.Forms.ComboBox();
-            this.gbSearchCode = new System.Windows.Forms.GroupBox();
-            this.txtSearchCode = new System.Windows.Forms.TextBox();
-            this.hsSearchDown = new SeControlsLib.HotSpot();
-            this.hsSearchUp = new SeControlsLib.HotSpot();
-            this.hsSeach = new SeControlsLib.HotSpot();
+            this.pnlUpperSourceCodeForward = new System.Windows.Forms.Panel();
+            this.gbFoundLinesForward = new System.Windows.Forms.GroupBox();
+            this.cbFoundLinesForward = new System.Windows.Forms.ComboBox();
+            this.gbSearchCodeForward = new System.Windows.Forms.GroupBox();
+            this.txtSearchCodeForward = new System.Windows.Forms.TextBox();
+            this.hsSearchDownForward = new SeControlsLib.HotSpot();
+            this.hsSearchUpForward = new SeControlsLib.HotSpot();
+            this.hsSeachForward = new SeControlsLib.HotSpot();
+            this.tabPageReverse = new System.Windows.Forms.TabPage();
+            this.fctSourceReverse = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.pnlUpperSourceCodeReverse = new System.Windows.Forms.Panel();
+            this.gbFoundLinesReverse = new System.Windows.Forms.GroupBox();
+            this.cbFoundLinesReverse = new System.Windows.Forms.ComboBox();
+            this.gbSearchCodeReverse = new System.Windows.Forms.GroupBox();
+            this.txtSearchCodeReverse = new System.Windows.Forms.TextBox();
+            this.hsSearchDownReverse = new SeControlsLib.HotSpot();
+            this.hsSearchUpReverse = new SeControlsLib.HotSpot();
+            this.hsSeachReverse = new SeControlsLib.HotSpot();
             this.pnlDatabases = new System.Windows.Forms.Panel();
             this.gbDatabase2 = new System.Windows.Forms.GroupBox();
             this.slbDatabase2 = new SEListBox.SEListBox();
@@ -70,9 +82,17 @@
             this.slbDatabase1 = new SEListBox.SEListBox();
             this.pnlUpperDatabase1 = new System.Windows.Forms.Panel();
             this.pnlXML_UPPER = new System.Windows.Forms.Panel();
+            this.ckPK = new System.Windows.Forms.CheckBox();
+            this.ckDepent = new System.Windows.Forms.CheckBox();
+            this.ckFK = new System.Windows.Forms.CheckBox();
+            this.ckFuntions = new System.Windows.Forms.CheckBox();
+            this.ckGenerators = new System.Windows.Forms.CheckBox();
+            this.ckTables = new System.Windows.Forms.CheckBox();
+            this.ckViews = new System.Windows.Forms.CheckBox();
+            this.ckProcedures = new System.Windows.Forms.CheckBox();
             this.cbChangeToUppercase = new System.Windows.Forms.CheckBox();
             this.cbForwardRun = new System.Windows.Forms.CheckBox();
-            this.cbReverseRun = new System.Windows.Forms.CheckBox();
+            this.ckReverseRun = new System.Windows.Forms.CheckBox();
             this.cbOnlyFailures = new System.Windows.Forms.CheckBox();
             this.hsDoCompare = new SeControlsLib.HotSpot();
             this.hsSaveResults = new SeControlsLib.HotSpot();
@@ -90,29 +110,26 @@
             this.hsUnselObjects1 = new SeControlsLib.HotSpot();
             this.hsSelObjects1 = new SeControlsLib.HotSpot();
             this.pnlMessagesUpper = new System.Windows.Forms.Panel();
-            this.tabPageOptions = new System.Windows.Forms.TabPage();
-            this.pnlCenterCreateAttributes = new System.Windows.Forms.Panel();
-            this.cbForward = new System.Windows.Forms.CheckBox();
-            this.cbReverse = new System.Windows.Forms.CheckBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fbdSourcePath = new System.Windows.Forms.FolderBrowserDialog();
-            this.ckProcedures = new System.Windows.Forms.CheckBox();
-            this.ckViews = new System.Windows.Forms.CheckBox();
-            this.ckTables = new System.Windows.Forms.CheckBox();
-            this.ckGenerators = new System.Windows.Forms.CheckBox();
-            this.ckFuntions = new System.Windows.Forms.CheckBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.tabPageDatabases.SuspendLayout();
             this.pnlSourceCode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctSource)).BeginInit();
+            this.tabControlResults.SuspendLayout();
+            this.tabPageForward.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctSourceForward)).BeginInit();
             this.cmsSourceCode.SuspendLayout();
-            this.pnlUpperSourceCode.SuspendLayout();
-            this.gbFoundLines.SuspendLayout();
-            this.gbSearchCode.SuspendLayout();
+            this.pnlUpperSourceCodeForward.SuspendLayout();
+            this.gbFoundLinesForward.SuspendLayout();
+            this.gbSearchCodeForward.SuspendLayout();
+            this.tabPageReverse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctSourceReverse)).BeginInit();
+            this.pnlUpperSourceCodeReverse.SuspendLayout();
+            this.gbFoundLinesReverse.SuspendLayout();
+            this.gbSearchCodeReverse.SuspendLayout();
             this.pnlDatabases.SuspendLayout();
             this.gbDatabase2.SuspendLayout();
             this.gbDatabase1.SuspendLayout();
@@ -123,8 +140,6 @@
             this.pnlUpperObjects2.SuspendLayout();
             this.gbDBObjets2.SuspendLayout();
             this.pnlUpperObjects1.SuspendLayout();
-            this.tabPageOptions.SuspendLayout();
-            this.pnlCenterCreateAttributes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -175,6 +190,8 @@
             this.hsRefresh.MarkMode = false;
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
+            this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 3;
             this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -223,6 +240,8 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 2;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -256,25 +275,24 @@
             // 
             // pnlCenter
             // 
-            this.pnlCenter.Controls.Add(this.tabControl1);
+            this.pnlCenter.Controls.Add(this.tabControlMain);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCenter.Location = new System.Drawing.Point(0, 42);
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(1234, 896);
             this.pnlCenter.TabIndex = 2;
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            this.tabControl1.Controls.Add(this.tabPageDatabases);
-            this.tabControl1.Controls.Add(this.tabPageObjects);
-            this.tabControl1.Controls.Add(this.tabPageOptions);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.ImageList = this.ilTabControl;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1234, 896);
-            this.tabControl1.TabIndex = 1;
+            this.tabControlMain.Controls.Add(this.tabPageDatabases);
+            this.tabControlMain.Controls.Add(this.tabPageObjects);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.ImageList = this.ilTabControl;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(1234, 896);
+            this.tabControlMain.TabIndex = 1;
             // 
             // tabPageDatabases
             // 
@@ -293,18 +311,40 @@
             // 
             // pnlSourceCode
             // 
-            this.pnlSourceCode.Controls.Add(this.fctSource);
-            this.pnlSourceCode.Controls.Add(this.pnlUpperSourceCode);
+            this.pnlSourceCode.Controls.Add(this.tabControlResults);
             this.pnlSourceCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSourceCode.Location = new System.Drawing.Point(406, 54);
             this.pnlSourceCode.Name = "pnlSourceCode";
             this.pnlSourceCode.Size = new System.Drawing.Size(817, 812);
             this.pnlSourceCode.TabIndex = 6;
             // 
-            // fctSource
+            // tabControlResults
             // 
-            this.fctSource.AutoCompleteBrackets = true;
-            this.fctSource.AutoCompleteBracketsList = new char[] {
+            this.tabControlResults.Controls.Add(this.tabPageForward);
+            this.tabControlResults.Controls.Add(this.tabPageReverse);
+            this.tabControlResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlResults.Location = new System.Drawing.Point(0, 0);
+            this.tabControlResults.Name = "tabControlResults";
+            this.tabControlResults.SelectedIndex = 0;
+            this.tabControlResults.Size = new System.Drawing.Size(817, 812);
+            this.tabControlResults.TabIndex = 5;
+            // 
+            // tabPageForward
+            // 
+            this.tabPageForward.Controls.Add(this.fctSourceForward);
+            this.tabPageForward.Controls.Add(this.pnlUpperSourceCodeForward);
+            this.tabPageForward.Location = new System.Drawing.Point(4, 22);
+            this.tabPageForward.Name = "tabPageForward";
+            this.tabPageForward.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageForward.Size = new System.Drawing.Size(809, 786);
+            this.tabPageForward.TabIndex = 0;
+            this.tabPageForward.Text = "Forward";
+            this.tabPageForward.UseVisualStyleBackColor = true;
+            // 
+            // fctSourceForward
+            // 
+            this.fctSourceForward.AutoCompleteBrackets = true;
+            this.fctSourceForward.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
         '{',
@@ -315,33 +355,34 @@
         '\"',
         '\'',
         '\''};
-            this.fctSource.AutoIndentCharsPatterns = "";
-            this.fctSource.AutoScrollMinSize = new System.Drawing.Size(0, 12);
-            this.fctSource.BackBrush = null;
-            this.fctSource.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctSource.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
-            this.fctSource.CharHeight = 12;
-            this.fctSource.CharWidth = 6;
-            this.fctSource.CommentPrefix = "--";
-            this.fctSource.ContextMenuStrip = this.cmsSourceCode;
-            this.fctSource.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctSource.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSource.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.fctSource.IsReplaceMode = false;
-            this.fctSource.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctSource.LeftBracket = '(';
-            this.fctSource.Location = new System.Drawing.Point(0, 41);
-            this.fctSource.Name = "fctSource";
-            this.fctSource.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctSource.RightBracket = ')';
-            this.fctSource.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctSource.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSource.ServiceColors")));
-            this.fctSource.Size = new System.Drawing.Size(817, 771);
-            this.fctSource.TabIndex = 3;
-            this.fctSource.WordWrap = true;
-            this.fctSource.Zoom = 100;
-            this.fctSource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctb_KeyDown);
+            this.fctSourceForward.AutoIndentCharsPatterns = "";
+            this.fctSourceForward.AutoScrollMinSize = new System.Drawing.Size(0, 12);
+            this.fctSourceForward.BackBrush = null;
+            this.fctSourceForward.BackColor = System.Drawing.SystemColors.Info;
+            this.fctSourceForward.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctSourceForward.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
+            this.fctSourceForward.CharHeight = 12;
+            this.fctSourceForward.CharWidth = 6;
+            this.fctSourceForward.CommentPrefix = "--";
+            this.fctSourceForward.ContextMenuStrip = this.cmsSourceCode;
+            this.fctSourceForward.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctSourceForward.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctSourceForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSourceForward.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.fctSourceForward.IsReplaceMode = false;
+            this.fctSourceForward.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctSourceForward.LeftBracket = '(';
+            this.fctSourceForward.Location = new System.Drawing.Point(3, 62);
+            this.fctSourceForward.Name = "fctSourceForward";
+            this.fctSourceForward.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctSourceForward.RightBracket = ')';
+            this.fctSourceForward.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctSourceForward.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSourceForward.ServiceColors")));
+            this.fctSourceForward.Size = new System.Drawing.Size(803, 721);
+            this.fctSourceForward.TabIndex = 3;
+            this.fctSourceForward.WordWrap = true;
+            this.fctSourceForward.Zoom = 100;
+            this.fctSourceForward.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctb_KeyDown);
             // 
             // cmsSourceCode
             // 
@@ -389,208 +430,477 @@
             this.tsmiCopyToClipboard.Size = new System.Drawing.Size(173, 26);
             this.tsmiCopyToClipboard.Text = "Copy to clipboard";
             // 
-            // pnlUpperSourceCode
+            // pnlUpperSourceCodeForward
             // 
-            this.pnlUpperSourceCode.Controls.Add(this.gbFoundLines);
-            this.pnlUpperSourceCode.Controls.Add(this.gbSearchCode);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSearchDown);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSearchUp);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSeach);
-            this.pnlUpperSourceCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperSourceCode.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpperSourceCode.Name = "pnlUpperSourceCode";
-            this.pnlUpperSourceCode.Size = new System.Drawing.Size(817, 41);
-            this.pnlUpperSourceCode.TabIndex = 4;
+            this.pnlUpperSourceCodeForward.Controls.Add(this.gbFoundLinesForward);
+            this.pnlUpperSourceCodeForward.Controls.Add(this.gbSearchCodeForward);
+            this.pnlUpperSourceCodeForward.Controls.Add(this.hsSearchDownForward);
+            this.pnlUpperSourceCodeForward.Controls.Add(this.hsSearchUpForward);
+            this.pnlUpperSourceCodeForward.Controls.Add(this.hsSeachForward);
+            this.pnlUpperSourceCodeForward.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUpperSourceCodeForward.Location = new System.Drawing.Point(3, 3);
+            this.pnlUpperSourceCodeForward.Name = "pnlUpperSourceCodeForward";
+            this.pnlUpperSourceCodeForward.Size = new System.Drawing.Size(803, 59);
+            this.pnlUpperSourceCodeForward.TabIndex = 4;
             // 
-            // gbFoundLines
+            // gbFoundLinesForward
             // 
-            this.gbFoundLines.Controls.Add(this.cbFoundLines);
-            this.gbFoundLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbFoundLines.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbFoundLines.Location = new System.Drawing.Point(0, 0);
-            this.gbFoundLines.Name = "gbFoundLines";
-            this.gbFoundLines.Size = new System.Drawing.Size(482, 41);
-            this.gbFoundLines.TabIndex = 10;
-            this.gbFoundLines.TabStop = false;
-            this.gbFoundLines.Text = "FoundLines";
+            this.gbFoundLinesForward.Controls.Add(this.cbFoundLinesForward);
+            this.gbFoundLinesForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbFoundLinesForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbFoundLinesForward.Location = new System.Drawing.Point(0, 0);
+            this.gbFoundLinesForward.Name = "gbFoundLinesForward";
+            this.gbFoundLinesForward.Size = new System.Drawing.Size(468, 59);
+            this.gbFoundLinesForward.TabIndex = 10;
+            this.gbFoundLinesForward.TabStop = false;
+            this.gbFoundLinesForward.Text = "FoundLines";
             // 
-            // cbFoundLines
+            // cbFoundLinesForward
             // 
-            this.cbFoundLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbFoundLines.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbFoundLines.FormattingEnabled = true;
-            this.cbFoundLines.Location = new System.Drawing.Point(3, 16);
-            this.cbFoundLines.Name = "cbFoundLines";
-            this.cbFoundLines.Size = new System.Drawing.Size(476, 21);
-            this.cbFoundLines.TabIndex = 0;
-            this.cbFoundLines.SelectedIndexChanged += new System.EventHandler(this.cbFoundLines_SelectedIndexChanged);
+            this.cbFoundLinesForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbFoundLinesForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFoundLinesForward.FormattingEnabled = true;
+            this.cbFoundLinesForward.Location = new System.Drawing.Point(3, 16);
+            this.cbFoundLinesForward.Name = "cbFoundLinesForward";
+            this.cbFoundLinesForward.Size = new System.Drawing.Size(462, 21);
+            this.cbFoundLinesForward.TabIndex = 0;
+            this.cbFoundLinesForward.SelectedIndexChanged += new System.EventHandler(this.cbFoundLinesForeward_SelectedIndexChanged);
             // 
-            // gbSearchCode
+            // gbSearchCodeForward
             // 
-            this.gbSearchCode.Controls.Add(this.txtSearchCode);
-            this.gbSearchCode.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbSearchCode.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbSearchCode.Location = new System.Drawing.Point(482, 0);
-            this.gbSearchCode.Name = "gbSearchCode";
-            this.gbSearchCode.Size = new System.Drawing.Size(200, 41);
-            this.gbSearchCode.TabIndex = 9;
-            this.gbSearchCode.TabStop = false;
-            this.gbSearchCode.Text = "Search";
+            this.gbSearchCodeForward.Controls.Add(this.txtSearchCodeForward);
+            this.gbSearchCodeForward.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbSearchCodeForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbSearchCodeForward.Location = new System.Drawing.Point(468, 0);
+            this.gbSearchCodeForward.Name = "gbSearchCodeForward";
+            this.gbSearchCodeForward.Size = new System.Drawing.Size(200, 59);
+            this.gbSearchCodeForward.TabIndex = 9;
+            this.gbSearchCodeForward.TabStop = false;
+            this.gbSearchCodeForward.Text = "Search";
             // 
-            // txtSearchCode
+            // txtSearchCodeForward
             // 
-            this.txtSearchCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearchCode.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchCode.Location = new System.Drawing.Point(3, 16);
-            this.txtSearchCode.Name = "txtSearchCode";
-            this.txtSearchCode.Size = new System.Drawing.Size(194, 20);
-            this.txtSearchCode.TabIndex = 0;
-            this.txtSearchCode.Text = "FAILURE";
-            this.txtSearchCode.TextChanged += new System.EventHandler(this.txtSearchCode_TextChanged);
+            this.txtSearchCodeForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchCodeForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchCodeForward.Location = new System.Drawing.Point(3, 16);
+            this.txtSearchCodeForward.Name = "txtSearchCodeForward";
+            this.txtSearchCodeForward.Size = new System.Drawing.Size(194, 20);
+            this.txtSearchCodeForward.TabIndex = 0;
+            this.txtSearchCodeForward.Text = "FAILURE";
+            this.txtSearchCodeForward.TextChanged += new System.EventHandler(this.txtSearchCodeForward_TextChanged);
             // 
-            // hsSearchDown
+            // hsSearchDownForward
             // 
-            this.hsSearchDown.BackColor = System.Drawing.Color.Transparent;
-            this.hsSearchDown.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSearchDown.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSearchDown.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSearchDown.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSearchDown.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSearchDown.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSearchDown.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsSearchDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSearchDown.FlatAppearance.BorderSize = 0;
-            this.hsSearchDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSearchDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsSearchDown.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSearchDown.Image = global::FBXpert.Properties.Resources.go_down22x;
-            this.hsSearchDown.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
-            this.hsSearchDown.ImageToggleOnSelect = true;
-            this.hsSearchDown.Location = new System.Drawing.Point(682, 0);
-            this.hsSearchDown.Marked = false;
-            this.hsSearchDown.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSearchDown.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSearchDown.MarkedText = "";
-            this.hsSearchDown.MarkMode = false;
-            this.hsSearchDown.Name = "hsSearchDown";
-            this.hsSearchDown.NonMarkedText = "";
-            this.hsSearchDown.Size = new System.Drawing.Size(45, 41);
-            this.hsSearchDown.TabIndex = 8;
-            this.hsSearchDown.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSearchDown.ToolTipActive = false;
-            this.hsSearchDown.ToolTipAutomaticDelay = 500;
-            this.hsSearchDown.ToolTipAutoPopDelay = 5000;
-            this.hsSearchDown.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSearchDown.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSearchDown.ToolTipFor4ContextMenu = true;
-            this.hsSearchDown.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSearchDown.ToolTipInitialDelay = 500;
-            this.hsSearchDown.ToolTipIsBallon = false;
-            this.hsSearchDown.ToolTipOwnerDraw = false;
-            this.hsSearchDown.ToolTipReshowDelay = 100;
-            this.hsSearchDown.ToolTipShowAlways = false;
-            this.hsSearchDown.ToolTipText = "";
-            this.hsSearchDown.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsSearchDown.ToolTipTitle = "";
-            this.hsSearchDown.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSearchDown.UseVisualStyleBackColor = false;
-            this.hsSearchDown.Click += new System.EventHandler(this.hsSearchDown_Click);
+            this.hsSearchDownForward.BackColor = System.Drawing.Color.Transparent;
+            this.hsSearchDownForward.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchDownForward.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchDownForward.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSearchDownForward.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSearchDownForward.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSearchDownForward.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSearchDownForward.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSearchDownForward.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSearchDownForward.FlatAppearance.BorderSize = 0;
+            this.hsSearchDownForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchDownForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSearchDownForward.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSearchDownForward.Image = global::FBXpert.Properties.Resources.go_down22x;
+            this.hsSearchDownForward.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
+            this.hsSearchDownForward.ImageToggleOnSelect = true;
+            this.hsSearchDownForward.Location = new System.Drawing.Point(668, 0);
+            this.hsSearchDownForward.Marked = false;
+            this.hsSearchDownForward.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSearchDownForward.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSearchDownForward.MarkedText = "";
+            this.hsSearchDownForward.MarkMode = false;
+            this.hsSearchDownForward.Name = "hsSearchDownForward";
+            this.hsSearchDownForward.NonMarkedText = "";
+            this.hsSearchDownForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDownForward.ShowShortcut = false;
+            this.hsSearchDownForward.Size = new System.Drawing.Size(45, 59);
+            this.hsSearchDownForward.TabIndex = 8;
+            this.hsSearchDownForward.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSearchDownForward.ToolTipActive = false;
+            this.hsSearchDownForward.ToolTipAutomaticDelay = 500;
+            this.hsSearchDownForward.ToolTipAutoPopDelay = 5000;
+            this.hsSearchDownForward.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSearchDownForward.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSearchDownForward.ToolTipFor4ContextMenu = true;
+            this.hsSearchDownForward.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSearchDownForward.ToolTipInitialDelay = 500;
+            this.hsSearchDownForward.ToolTipIsBallon = false;
+            this.hsSearchDownForward.ToolTipOwnerDraw = false;
+            this.hsSearchDownForward.ToolTipReshowDelay = 100;
+            this.hsSearchDownForward.ToolTipShowAlways = false;
+            this.hsSearchDownForward.ToolTipText = "";
+            this.hsSearchDownForward.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSearchDownForward.ToolTipTitle = "";
+            this.hsSearchDownForward.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSearchDownForward.UseVisualStyleBackColor = false;
+            this.hsSearchDownForward.Click += new System.EventHandler(this.hsSearchDownForward_Click);
             // 
-            // hsSearchUp
+            // hsSearchUpForward
             // 
-            this.hsSearchUp.BackColor = System.Drawing.Color.Transparent;
-            this.hsSearchUp.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSearchUp.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSearchUp.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSearchUp.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSearchUp.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSearchUp.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSearchUp.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsSearchUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSearchUp.FlatAppearance.BorderSize = 0;
-            this.hsSearchUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSearchUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsSearchUp.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSearchUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
-            this.hsSearchUp.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
-            this.hsSearchUp.ImageToggleOnSelect = true;
-            this.hsSearchUp.Location = new System.Drawing.Point(727, 0);
-            this.hsSearchUp.Marked = false;
-            this.hsSearchUp.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSearchUp.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSearchUp.MarkedText = "";
-            this.hsSearchUp.MarkMode = false;
-            this.hsSearchUp.Name = "hsSearchUp";
-            this.hsSearchUp.NonMarkedText = "";
-            this.hsSearchUp.Size = new System.Drawing.Size(45, 41);
-            this.hsSearchUp.TabIndex = 7;
-            this.hsSearchUp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSearchUp.ToolTipActive = false;
-            this.hsSearchUp.ToolTipAutomaticDelay = 500;
-            this.hsSearchUp.ToolTipAutoPopDelay = 5000;
-            this.hsSearchUp.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSearchUp.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSearchUp.ToolTipFor4ContextMenu = true;
-            this.hsSearchUp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSearchUp.ToolTipInitialDelay = 500;
-            this.hsSearchUp.ToolTipIsBallon = false;
-            this.hsSearchUp.ToolTipOwnerDraw = false;
-            this.hsSearchUp.ToolTipReshowDelay = 100;
-            this.hsSearchUp.ToolTipShowAlways = false;
-            this.hsSearchUp.ToolTipText = "";
-            this.hsSearchUp.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsSearchUp.ToolTipTitle = "";
-            this.hsSearchUp.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSearchUp.UseVisualStyleBackColor = false;
-            this.hsSearchUp.Click += new System.EventHandler(this.hsSearchUp_Click);
+            this.hsSearchUpForward.BackColor = System.Drawing.Color.Transparent;
+            this.hsSearchUpForward.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchUpForward.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchUpForward.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSearchUpForward.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSearchUpForward.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSearchUpForward.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSearchUpForward.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSearchUpForward.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSearchUpForward.FlatAppearance.BorderSize = 0;
+            this.hsSearchUpForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchUpForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSearchUpForward.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSearchUpForward.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
+            this.hsSearchUpForward.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
+            this.hsSearchUpForward.ImageToggleOnSelect = true;
+            this.hsSearchUpForward.Location = new System.Drawing.Point(713, 0);
+            this.hsSearchUpForward.Marked = false;
+            this.hsSearchUpForward.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSearchUpForward.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSearchUpForward.MarkedText = "";
+            this.hsSearchUpForward.MarkMode = false;
+            this.hsSearchUpForward.Name = "hsSearchUpForward";
+            this.hsSearchUpForward.NonMarkedText = "";
+            this.hsSearchUpForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUpForward.ShowShortcut = false;
+            this.hsSearchUpForward.Size = new System.Drawing.Size(45, 59);
+            this.hsSearchUpForward.TabIndex = 7;
+            this.hsSearchUpForward.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSearchUpForward.ToolTipActive = false;
+            this.hsSearchUpForward.ToolTipAutomaticDelay = 500;
+            this.hsSearchUpForward.ToolTipAutoPopDelay = 5000;
+            this.hsSearchUpForward.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSearchUpForward.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSearchUpForward.ToolTipFor4ContextMenu = true;
+            this.hsSearchUpForward.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSearchUpForward.ToolTipInitialDelay = 500;
+            this.hsSearchUpForward.ToolTipIsBallon = false;
+            this.hsSearchUpForward.ToolTipOwnerDraw = false;
+            this.hsSearchUpForward.ToolTipReshowDelay = 100;
+            this.hsSearchUpForward.ToolTipShowAlways = false;
+            this.hsSearchUpForward.ToolTipText = "";
+            this.hsSearchUpForward.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSearchUpForward.ToolTipTitle = "";
+            this.hsSearchUpForward.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSearchUpForward.UseVisualStyleBackColor = false;
+            this.hsSearchUpForward.Click += new System.EventHandler(this.hsSearchUpForward_Click);
             // 
-            // hsSeach
+            // hsSeachForward
             // 
-            this.hsSeach.BackColor = System.Drawing.Color.Transparent;
-            this.hsSeach.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSeach.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSeach.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSeach.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSeach.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSeach.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSeach.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsSeach.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSeach.FlatAppearance.BorderSize = 0;
-            this.hsSeach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSeach.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsSeach.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSeach.Image = global::FBXpert.Properties.Resources.lupe24x;
-            this.hsSeach.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
-            this.hsSeach.ImageToggleOnSelect = true;
-            this.hsSeach.Location = new System.Drawing.Point(772, 0);
-            this.hsSeach.Marked = false;
-            this.hsSeach.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSeach.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSeach.MarkedText = "";
-            this.hsSeach.MarkMode = false;
-            this.hsSeach.Name = "hsSeach";
-            this.hsSeach.NonMarkedText = "";
-            this.hsSeach.Size = new System.Drawing.Size(45, 41);
-            this.hsSeach.TabIndex = 6;
-            this.hsSeach.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSeach.ToolTipActive = false;
-            this.hsSeach.ToolTipAutomaticDelay = 500;
-            this.hsSeach.ToolTipAutoPopDelay = 5000;
-            this.hsSeach.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSeach.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSeach.ToolTipFor4ContextMenu = true;
-            this.hsSeach.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSeach.ToolTipInitialDelay = 500;
-            this.hsSeach.ToolTipIsBallon = false;
-            this.hsSeach.ToolTipOwnerDraw = false;
-            this.hsSeach.ToolTipReshowDelay = 100;
-            this.hsSeach.ToolTipShowAlways = false;
-            this.hsSeach.ToolTipText = "";
-            this.hsSeach.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsSeach.ToolTipTitle = "";
-            this.hsSeach.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSeach.UseVisualStyleBackColor = false;
-            this.hsSeach.Click += new System.EventHandler(this.hsSeach_Click);
+            this.hsSeachForward.BackColor = System.Drawing.Color.Transparent;
+            this.hsSeachForward.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSeachForward.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSeachForward.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSeachForward.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSeachForward.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSeachForward.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSeachForward.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSeachForward.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSeachForward.FlatAppearance.BorderSize = 0;
+            this.hsSeachForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSeachForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSeachForward.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSeachForward.Image = global::FBXpert.Properties.Resources.lupe24x;
+            this.hsSeachForward.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
+            this.hsSeachForward.ImageToggleOnSelect = true;
+            this.hsSeachForward.Location = new System.Drawing.Point(758, 0);
+            this.hsSeachForward.Marked = false;
+            this.hsSeachForward.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSeachForward.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSeachForward.MarkedText = "";
+            this.hsSeachForward.MarkMode = false;
+            this.hsSeachForward.Name = "hsSeachForward";
+            this.hsSeachForward.NonMarkedText = "";
+            this.hsSeachForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSeachForward.ShowShortcut = false;
+            this.hsSeachForward.Size = new System.Drawing.Size(45, 59);
+            this.hsSeachForward.TabIndex = 6;
+            this.hsSeachForward.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSeachForward.ToolTipActive = false;
+            this.hsSeachForward.ToolTipAutomaticDelay = 500;
+            this.hsSeachForward.ToolTipAutoPopDelay = 5000;
+            this.hsSeachForward.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSeachForward.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSeachForward.ToolTipFor4ContextMenu = true;
+            this.hsSeachForward.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSeachForward.ToolTipInitialDelay = 500;
+            this.hsSeachForward.ToolTipIsBallon = false;
+            this.hsSeachForward.ToolTipOwnerDraw = false;
+            this.hsSeachForward.ToolTipReshowDelay = 100;
+            this.hsSeachForward.ToolTipShowAlways = false;
+            this.hsSeachForward.ToolTipText = "";
+            this.hsSeachForward.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSeachForward.ToolTipTitle = "";
+            this.hsSeachForward.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSeachForward.UseVisualStyleBackColor = false;
+            this.hsSeachForward.Click += new System.EventHandler(this.hsSeach_Click);
+            // 
+            // tabPageReverse
+            // 
+            this.tabPageReverse.Controls.Add(this.fctSourceReverse);
+            this.tabPageReverse.Controls.Add(this.pnlUpperSourceCodeReverse);
+            this.tabPageReverse.Location = new System.Drawing.Point(4, 22);
+            this.tabPageReverse.Name = "tabPageReverse";
+            this.tabPageReverse.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageReverse.Size = new System.Drawing.Size(809, 786);
+            this.tabPageReverse.TabIndex = 1;
+            this.tabPageReverse.Text = "Reverse";
+            this.tabPageReverse.UseVisualStyleBackColor = true;
+            // 
+            // fctSourceReverse
+            // 
+            this.fctSourceReverse.AutoCompleteBrackets = true;
+            this.fctSourceReverse.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctSourceReverse.AutoIndentCharsPatterns = "";
+            this.fctSourceReverse.AutoScrollMinSize = new System.Drawing.Size(0, 12);
+            this.fctSourceReverse.BackBrush = null;
+            this.fctSourceReverse.BackColor = System.Drawing.Color.Wheat;
+            this.fctSourceReverse.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctSourceReverse.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
+            this.fctSourceReverse.CharHeight = 12;
+            this.fctSourceReverse.CharWidth = 6;
+            this.fctSourceReverse.CommentPrefix = "--";
+            this.fctSourceReverse.ContextMenuStrip = this.cmsSourceCode;
+            this.fctSourceReverse.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctSourceReverse.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctSourceReverse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSourceReverse.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.fctSourceReverse.IsReplaceMode = false;
+            this.fctSourceReverse.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctSourceReverse.LeftBracket = '(';
+            this.fctSourceReverse.Location = new System.Drawing.Point(3, 62);
+            this.fctSourceReverse.Name = "fctSourceReverse";
+            this.fctSourceReverse.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctSourceReverse.RightBracket = ')';
+            this.fctSourceReverse.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctSourceReverse.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSourceReverse.ServiceColors")));
+            this.fctSourceReverse.Size = new System.Drawing.Size(803, 721);
+            this.fctSourceReverse.TabIndex = 5;
+            this.fctSourceReverse.WordWrap = true;
+            this.fctSourceReverse.Zoom = 100;
+            // 
+            // pnlUpperSourceCodeReverse
+            // 
+            this.pnlUpperSourceCodeReverse.Controls.Add(this.gbFoundLinesReverse);
+            this.pnlUpperSourceCodeReverse.Controls.Add(this.gbSearchCodeReverse);
+            this.pnlUpperSourceCodeReverse.Controls.Add(this.hsSearchDownReverse);
+            this.pnlUpperSourceCodeReverse.Controls.Add(this.hsSearchUpReverse);
+            this.pnlUpperSourceCodeReverse.Controls.Add(this.hsSeachReverse);
+            this.pnlUpperSourceCodeReverse.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUpperSourceCodeReverse.Location = new System.Drawing.Point(3, 3);
+            this.pnlUpperSourceCodeReverse.Name = "pnlUpperSourceCodeReverse";
+            this.pnlUpperSourceCodeReverse.Size = new System.Drawing.Size(803, 59);
+            this.pnlUpperSourceCodeReverse.TabIndex = 6;
+            // 
+            // gbFoundLinesReverse
+            // 
+            this.gbFoundLinesReverse.Controls.Add(this.cbFoundLinesReverse);
+            this.gbFoundLinesReverse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbFoundLinesReverse.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbFoundLinesReverse.Location = new System.Drawing.Point(0, 0);
+            this.gbFoundLinesReverse.Name = "gbFoundLinesReverse";
+            this.gbFoundLinesReverse.Size = new System.Drawing.Size(468, 59);
+            this.gbFoundLinesReverse.TabIndex = 10;
+            this.gbFoundLinesReverse.TabStop = false;
+            this.gbFoundLinesReverse.Text = "FoundLines";
+            // 
+            // cbFoundLinesReverse
+            // 
+            this.cbFoundLinesReverse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbFoundLinesReverse.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFoundLinesReverse.FormattingEnabled = true;
+            this.cbFoundLinesReverse.Location = new System.Drawing.Point(3, 16);
+            this.cbFoundLinesReverse.Name = "cbFoundLinesReverse";
+            this.cbFoundLinesReverse.Size = new System.Drawing.Size(462, 21);
+            this.cbFoundLinesReverse.TabIndex = 0;
+            this.cbFoundLinesReverse.SelectedIndexChanged += new System.EventHandler(this.cbFoundLinesReverse_SelectedIndexChanged);
+            // 
+            // gbSearchCodeReverse
+            // 
+            this.gbSearchCodeReverse.Controls.Add(this.txtSearchCodeReverse);
+            this.gbSearchCodeReverse.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbSearchCodeReverse.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbSearchCodeReverse.Location = new System.Drawing.Point(468, 0);
+            this.gbSearchCodeReverse.Name = "gbSearchCodeReverse";
+            this.gbSearchCodeReverse.Size = new System.Drawing.Size(200, 59);
+            this.gbSearchCodeReverse.TabIndex = 9;
+            this.gbSearchCodeReverse.TabStop = false;
+            this.gbSearchCodeReverse.Text = "Search";
+            // 
+            // txtSearchCodeReverse
+            // 
+            this.txtSearchCodeReverse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchCodeReverse.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchCodeReverse.Location = new System.Drawing.Point(3, 16);
+            this.txtSearchCodeReverse.Name = "txtSearchCodeReverse";
+            this.txtSearchCodeReverse.Size = new System.Drawing.Size(194, 20);
+            this.txtSearchCodeReverse.TabIndex = 0;
+            this.txtSearchCodeReverse.Text = "FAILURE";
+            this.txtSearchCodeReverse.TextChanged += new System.EventHandler(this.txtSearchCodeReverse_TextChanged);
+            // 
+            // hsSearchDownReverse
+            // 
+            this.hsSearchDownReverse.BackColor = System.Drawing.Color.Transparent;
+            this.hsSearchDownReverse.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchDownReverse.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchDownReverse.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSearchDownReverse.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSearchDownReverse.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSearchDownReverse.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSearchDownReverse.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSearchDownReverse.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSearchDownReverse.FlatAppearance.BorderSize = 0;
+            this.hsSearchDownReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchDownReverse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSearchDownReverse.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSearchDownReverse.Image = global::FBXpert.Properties.Resources.go_down22x;
+            this.hsSearchDownReverse.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
+            this.hsSearchDownReverse.ImageToggleOnSelect = true;
+            this.hsSearchDownReverse.Location = new System.Drawing.Point(668, 0);
+            this.hsSearchDownReverse.Marked = false;
+            this.hsSearchDownReverse.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSearchDownReverse.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSearchDownReverse.MarkedText = "";
+            this.hsSearchDownReverse.MarkMode = false;
+            this.hsSearchDownReverse.Name = "hsSearchDownReverse";
+            this.hsSearchDownReverse.NonMarkedText = "";
+            this.hsSearchDownReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDownReverse.ShowShortcut = false;
+            this.hsSearchDownReverse.Size = new System.Drawing.Size(45, 59);
+            this.hsSearchDownReverse.TabIndex = 8;
+            this.hsSearchDownReverse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSearchDownReverse.ToolTipActive = false;
+            this.hsSearchDownReverse.ToolTipAutomaticDelay = 500;
+            this.hsSearchDownReverse.ToolTipAutoPopDelay = 5000;
+            this.hsSearchDownReverse.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSearchDownReverse.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSearchDownReverse.ToolTipFor4ContextMenu = true;
+            this.hsSearchDownReverse.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSearchDownReverse.ToolTipInitialDelay = 500;
+            this.hsSearchDownReverse.ToolTipIsBallon = false;
+            this.hsSearchDownReverse.ToolTipOwnerDraw = false;
+            this.hsSearchDownReverse.ToolTipReshowDelay = 100;
+            this.hsSearchDownReverse.ToolTipShowAlways = false;
+            this.hsSearchDownReverse.ToolTipText = "";
+            this.hsSearchDownReverse.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSearchDownReverse.ToolTipTitle = "";
+            this.hsSearchDownReverse.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSearchDownReverse.UseVisualStyleBackColor = false;
+            this.hsSearchDownReverse.Click += new System.EventHandler(this.hsSearchDownReverse_Click);
+            // 
+            // hsSearchUpReverse
+            // 
+            this.hsSearchUpReverse.BackColor = System.Drawing.Color.Transparent;
+            this.hsSearchUpReverse.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchUpReverse.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSearchUpReverse.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSearchUpReverse.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSearchUpReverse.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSearchUpReverse.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSearchUpReverse.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSearchUpReverse.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSearchUpReverse.FlatAppearance.BorderSize = 0;
+            this.hsSearchUpReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchUpReverse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSearchUpReverse.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSearchUpReverse.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
+            this.hsSearchUpReverse.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
+            this.hsSearchUpReverse.ImageToggleOnSelect = true;
+            this.hsSearchUpReverse.Location = new System.Drawing.Point(713, 0);
+            this.hsSearchUpReverse.Marked = false;
+            this.hsSearchUpReverse.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSearchUpReverse.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSearchUpReverse.MarkedText = "";
+            this.hsSearchUpReverse.MarkMode = false;
+            this.hsSearchUpReverse.Name = "hsSearchUpReverse";
+            this.hsSearchUpReverse.NonMarkedText = "";
+            this.hsSearchUpReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUpReverse.ShowShortcut = false;
+            this.hsSearchUpReverse.Size = new System.Drawing.Size(45, 59);
+            this.hsSearchUpReverse.TabIndex = 7;
+            this.hsSearchUpReverse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSearchUpReverse.ToolTipActive = false;
+            this.hsSearchUpReverse.ToolTipAutomaticDelay = 500;
+            this.hsSearchUpReverse.ToolTipAutoPopDelay = 5000;
+            this.hsSearchUpReverse.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSearchUpReverse.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSearchUpReverse.ToolTipFor4ContextMenu = true;
+            this.hsSearchUpReverse.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSearchUpReverse.ToolTipInitialDelay = 500;
+            this.hsSearchUpReverse.ToolTipIsBallon = false;
+            this.hsSearchUpReverse.ToolTipOwnerDraw = false;
+            this.hsSearchUpReverse.ToolTipReshowDelay = 100;
+            this.hsSearchUpReverse.ToolTipShowAlways = false;
+            this.hsSearchUpReverse.ToolTipText = "";
+            this.hsSearchUpReverse.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSearchUpReverse.ToolTipTitle = "";
+            this.hsSearchUpReverse.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSearchUpReverse.UseVisualStyleBackColor = false;
+            this.hsSearchUpReverse.Click += new System.EventHandler(this.hsSearchUpReverse_Click);
+            // 
+            // hsSeachReverse
+            // 
+            this.hsSeachReverse.BackColor = System.Drawing.Color.Transparent;
+            this.hsSeachReverse.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSeachReverse.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSeachReverse.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSeachReverse.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSeachReverse.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSeachReverse.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSeachReverse.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSeachReverse.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSeachReverse.FlatAppearance.BorderSize = 0;
+            this.hsSeachReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSeachReverse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSeachReverse.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSeachReverse.Image = global::FBXpert.Properties.Resources.lupe24x;
+            this.hsSeachReverse.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
+            this.hsSeachReverse.ImageToggleOnSelect = true;
+            this.hsSeachReverse.Location = new System.Drawing.Point(758, 0);
+            this.hsSeachReverse.Marked = false;
+            this.hsSeachReverse.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSeachReverse.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSeachReverse.MarkedText = "";
+            this.hsSeachReverse.MarkMode = false;
+            this.hsSeachReverse.Name = "hsSeachReverse";
+            this.hsSeachReverse.NonMarkedText = "";
+            this.hsSeachReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSeachReverse.ShowShortcut = false;
+            this.hsSeachReverse.Size = new System.Drawing.Size(45, 59);
+            this.hsSeachReverse.TabIndex = 6;
+            this.hsSeachReverse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSeachReverse.ToolTipActive = false;
+            this.hsSeachReverse.ToolTipAutomaticDelay = 500;
+            this.hsSeachReverse.ToolTipAutoPopDelay = 5000;
+            this.hsSeachReverse.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSeachReverse.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSeachReverse.ToolTipFor4ContextMenu = true;
+            this.hsSeachReverse.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSeachReverse.ToolTipInitialDelay = 500;
+            this.hsSeachReverse.ToolTipIsBallon = false;
+            this.hsSeachReverse.ToolTipOwnerDraw = false;
+            this.hsSeachReverse.ToolTipReshowDelay = 100;
+            this.hsSeachReverse.ToolTipShowAlways = false;
+            this.hsSeachReverse.ToolTipText = "";
+            this.hsSeachReverse.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSeachReverse.ToolTipTitle = "";
+            this.hsSeachReverse.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSeachReverse.UseVisualStyleBackColor = false;
+            this.hsSeachReverse.Click += new System.EventHandler(this.hsSeachReverse_Click);
             // 
             // pnlDatabases
             // 
@@ -618,7 +928,7 @@
             // slbDatabase2
             // 
             this.slbDatabase2.AllowMultipleChecks = false;
-            this.slbDatabase2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
+            this.slbDatabase2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle25;
             this.slbDatabase2.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDatabase2.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDatabase2.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -632,7 +942,7 @@
             this.slbDatabase2.IDVisible = false;
             this.slbDatabase2.IDWith = 32;
             this.slbDatabase2.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDatabase2.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
+            this.slbDatabase2.ListEntriesDefaultCellStyle = dataGridViewCellStyle26;
             this.slbDatabase2.Location = new System.Drawing.Point(3, 58);
             this.slbDatabase2.Name = "slbDatabase2";
             this.slbDatabase2.SelectedIndex = -1;
@@ -673,7 +983,7 @@
             // slbDatabase1
             // 
             this.slbDatabase1.AllowMultipleChecks = false;
-            this.slbDatabase1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
+            this.slbDatabase1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle27;
             this.slbDatabase1.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDatabase1.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDatabase1.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -687,7 +997,7 @@
             this.slbDatabase1.IDVisible = false;
             this.slbDatabase1.IDWith = 32;
             this.slbDatabase1.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDatabase1.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
+            this.slbDatabase1.ListEntriesDefaultCellStyle = dataGridViewCellStyle28;
             this.slbDatabase1.Location = new System.Drawing.Point(3, 58);
             this.slbDatabase1.Name = "slbDatabase1";
             this.slbDatabase1.SelectedIndex = -1;
@@ -716,6 +1026,9 @@
             // 
             this.pnlXML_UPPER.BackColor = System.Drawing.SystemColors.Control;
             this.pnlXML_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXML_UPPER.Controls.Add(this.ckPK);
+            this.pnlXML_UPPER.Controls.Add(this.ckDepent);
+            this.pnlXML_UPPER.Controls.Add(this.ckFK);
             this.pnlXML_UPPER.Controls.Add(this.ckFuntions);
             this.pnlXML_UPPER.Controls.Add(this.ckGenerators);
             this.pnlXML_UPPER.Controls.Add(this.ckTables);
@@ -723,7 +1036,7 @@
             this.pnlXML_UPPER.Controls.Add(this.ckProcedures);
             this.pnlXML_UPPER.Controls.Add(this.cbChangeToUppercase);
             this.pnlXML_UPPER.Controls.Add(this.cbForwardRun);
-            this.pnlXML_UPPER.Controls.Add(this.cbReverseRun);
+            this.pnlXML_UPPER.Controls.Add(this.ckReverseRun);
             this.pnlXML_UPPER.Controls.Add(this.cbOnlyFailures);
             this.pnlXML_UPPER.Controls.Add(this.hsDoCompare);
             this.pnlXML_UPPER.Controls.Add(this.hsSaveResults);
@@ -733,12 +1046,108 @@
             this.pnlXML_UPPER.Size = new System.Drawing.Size(1220, 51);
             this.pnlXML_UPPER.TabIndex = 1;
             // 
+            // ckPK
+            // 
+            this.ckPK.AutoSize = true;
+            this.ckPK.Checked = true;
+            this.ckPK.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckPK.Location = new System.Drawing.Point(985, 3);
+            this.ckPK.Name = "ckPK";
+            this.ckPK.Size = new System.Drawing.Size(98, 17);
+            this.ckPK.TabIndex = 19;
+            this.ckPK.Text = "Primary Keys";
+            this.ckPK.UseVisualStyleBackColor = true;
+            // 
+            // ckDepent
+            // 
+            this.ckDepent.AutoSize = true;
+            this.ckDepent.Checked = true;
+            this.ckDepent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckDepent.Location = new System.Drawing.Point(877, 27);
+            this.ckDepent.Name = "ckDepent";
+            this.ckDepent.Size = new System.Drawing.Size(98, 17);
+            this.ckDepent.TabIndex = 18;
+            this.ckDepent.Text = "Dependencies";
+            this.ckDepent.UseVisualStyleBackColor = true;
+            // 
+            // ckFK
+            // 
+            this.ckFK.AutoSize = true;
+            this.ckFK.Checked = true;
+            this.ckFK.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckFK.Location = new System.Drawing.Point(877, 3);
+            this.ckFK.Name = "ckFK";
+            this.ckFK.Size = new System.Drawing.Size(98, 17);
+            this.ckFK.TabIndex = 17;
+            this.ckFK.Text = "Foreign Keys";
+            this.ckFK.UseVisualStyleBackColor = true;
+            // 
+            // ckFuntions
+            // 
+            this.ckFuntions.AutoSize = true;
+            this.ckFuntions.Checked = true;
+            this.ckFuntions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckFuntions.Location = new System.Drawing.Point(738, 26);
+            this.ckFuntions.Name = "ckFuntions";
+            this.ckFuntions.Size = new System.Drawing.Size(80, 17);
+            this.ckFuntions.TabIndex = 16;
+            this.ckFuntions.Text = "Functions";
+            this.ckFuntions.UseVisualStyleBackColor = true;
+            // 
+            // ckGenerators
+            // 
+            this.ckGenerators.AutoSize = true;
+            this.ckGenerators.Checked = true;
+            this.ckGenerators.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckGenerators.Location = new System.Drawing.Point(640, 26);
+            this.ckGenerators.Name = "ckGenerators";
+            this.ckGenerators.Size = new System.Drawing.Size(86, 17);
+            this.ckGenerators.TabIndex = 15;
+            this.ckGenerators.Text = "Generators";
+            this.ckGenerators.UseVisualStyleBackColor = true;
+            // 
+            // ckTables
+            // 
+            this.ckTables.AutoSize = true;
+            this.ckTables.Checked = true;
+            this.ckTables.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckTables.Location = new System.Drawing.Point(809, 3);
+            this.ckTables.Name = "ckTables";
+            this.ckTables.Size = new System.Drawing.Size(62, 17);
+            this.ckTables.TabIndex = 14;
+            this.ckTables.Text = "Tables";
+            this.ckTables.UseVisualStyleBackColor = true;
+            // 
+            // ckViews
+            // 
+            this.ckViews.AutoSize = true;
+            this.ckViews.Checked = true;
+            this.ckViews.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckViews.Location = new System.Drawing.Point(738, 3);
+            this.ckViews.Name = "ckViews";
+            this.ckViews.Size = new System.Drawing.Size(56, 17);
+            this.ckViews.TabIndex = 13;
+            this.ckViews.Text = "Views";
+            this.ckViews.UseVisualStyleBackColor = true;
+            // 
+            // ckProcedures
+            // 
+            this.ckProcedures.AutoSize = true;
+            this.ckProcedures.Checked = true;
+            this.ckProcedures.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckProcedures.Location = new System.Drawing.Point(640, 3);
+            this.ckProcedures.Name = "ckProcedures";
+            this.ckProcedures.Size = new System.Drawing.Size(86, 17);
+            this.ckProcedures.TabIndex = 12;
+            this.ckProcedures.Text = "Procedures";
+            this.ckProcedures.UseVisualStyleBackColor = true;
+            // 
             // cbChangeToUppercase
             // 
             this.cbChangeToUppercase.AutoSize = true;
             this.cbChangeToUppercase.Checked = true;
             this.cbChangeToUppercase.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbChangeToUppercase.Location = new System.Drawing.Point(524, 27);
+            this.cbChangeToUppercase.Location = new System.Drawing.Point(270, 27);
             this.cbChangeToUppercase.Name = "cbChangeToUppercase";
             this.cbChangeToUppercase.Size = new System.Drawing.Size(128, 17);
             this.cbChangeToUppercase.TabIndex = 11;
@@ -750,35 +1159,35 @@
             this.cbForwardRun.AutoSize = true;
             this.cbForwardRun.Checked = true;
             this.cbForwardRun.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbForwardRun.Location = new System.Drawing.Point(404, 3);
+            this.cbForwardRun.Location = new System.Drawing.Point(150, 3);
             this.cbForwardRun.Name = "cbForwardRun";
             this.cbForwardRun.Size = new System.Drawing.Size(92, 17);
             this.cbForwardRun.TabIndex = 10;
-            this.cbForwardRun.Text = "forward run";
+            this.cbForwardRun.Text = "Forward run";
             this.cbForwardRun.UseVisualStyleBackColor = true;
             // 
-            // cbReverseRun
+            // ckReverseRun
             // 
-            this.cbReverseRun.AutoSize = true;
-            this.cbReverseRun.Checked = true;
-            this.cbReverseRun.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReverseRun.Location = new System.Drawing.Point(404, 26);
-            this.cbReverseRun.Name = "cbReverseRun";
-            this.cbReverseRun.Size = new System.Drawing.Size(92, 17);
-            this.cbReverseRun.TabIndex = 9;
-            this.cbReverseRun.Text = "reverse run";
-            this.cbReverseRun.UseVisualStyleBackColor = true;
+            this.ckReverseRun.AutoSize = true;
+            this.ckReverseRun.Checked = true;
+            this.ckReverseRun.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckReverseRun.Location = new System.Drawing.Point(150, 26);
+            this.ckReverseRun.Name = "ckReverseRun";
+            this.ckReverseRun.Size = new System.Drawing.Size(92, 17);
+            this.ckReverseRun.TabIndex = 9;
+            this.ckReverseRun.Text = "Reverse run";
+            this.ckReverseRun.UseVisualStyleBackColor = true;
             // 
             // cbOnlyFailures
             // 
             this.cbOnlyFailures.AutoSize = true;
             this.cbOnlyFailures.Checked = true;
             this.cbOnlyFailures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbOnlyFailures.Location = new System.Drawing.Point(524, 3);
+            this.cbOnlyFailures.Location = new System.Drawing.Point(270, 3);
             this.cbOnlyFailures.Name = "cbOnlyFailures";
             this.cbOnlyFailures.Size = new System.Drawing.Size(104, 17);
             this.cbOnlyFailures.TabIndex = 7;
-            this.cbOnlyFailures.Text = "only failures";
+            this.cbOnlyFailures.Text = "Only failures";
             this.cbOnlyFailures.UseVisualStyleBackColor = true;
             // 
             // hsDoCompare
@@ -807,6 +1216,8 @@
             this.hsDoCompare.MarkMode = false;
             this.hsDoCompare.Name = "hsDoCompare";
             this.hsDoCompare.NonMarkedText = "";
+            this.hsDoCompare.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDoCompare.ShowShortcut = false;
             this.hsDoCompare.Size = new System.Drawing.Size(45, 47);
             this.hsDoCompare.TabIndex = 5;
             this.hsDoCompare.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -855,6 +1266,8 @@
             this.hsSaveResults.MarkMode = false;
             this.hsSaveResults.Name = "hsSaveResults";
             this.hsSaveResults.NonMarkedText = "";
+            this.hsSaveResults.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveResults.ShowShortcut = false;
             this.hsSaveResults.Size = new System.Drawing.Size(45, 47);
             this.hsSaveResults.TabIndex = 4;
             this.hsSaveResults.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -918,7 +1331,7 @@
             // slbDbObjects2
             // 
             this.slbDbObjects2.AllowMultipleChecks = false;
-            this.slbDbObjects2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle5;
+            this.slbDbObjects2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle29;
             this.slbDbObjects2.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDbObjects2.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDbObjects2.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -932,7 +1345,7 @@
             this.slbDbObjects2.IDVisible = false;
             this.slbDbObjects2.IDWith = 32;
             this.slbDbObjects2.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDbObjects2.ListEntriesDefaultCellStyle = dataGridViewCellStyle6;
+            this.slbDbObjects2.ListEntriesDefaultCellStyle = dataGridViewCellStyle30;
             this.slbDbObjects2.Location = new System.Drawing.Point(3, 58);
             this.slbDbObjects2.Name = "slbDbObjects2";
             this.slbDbObjects2.SelectedIndex = -1;
@@ -985,6 +1398,8 @@
             this.hsUnselObjects2.MarkMode = false;
             this.hsUnselObjects2.Name = "hsUnselObjects2";
             this.hsUnselObjects2.NonMarkedText = "Uncheck all";
+            this.hsUnselObjects2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselObjects2.ShowShortcut = false;
             this.hsUnselObjects2.Size = new System.Drawing.Size(112, 42);
             this.hsUnselObjects2.TabIndex = 5;
             this.hsUnselObjects2.Text = "Uncheck all";
@@ -1035,6 +1450,8 @@
             this.hsSelObjects2.MarkMode = false;
             this.hsSelObjects2.Name = "hsSelObjects2";
             this.hsSelObjects2.NonMarkedText = "Check all";
+            this.hsSelObjects2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelObjects2.ShowShortcut = false;
             this.hsSelObjects2.Size = new System.Drawing.Size(96, 42);
             this.hsSelObjects2.TabIndex = 4;
             this.hsSelObjects2.Text = "Check all";
@@ -1082,7 +1499,7 @@
             // slbDbObjects1
             // 
             this.slbDbObjects1.AllowMultipleChecks = false;
-            this.slbDbObjects1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle7;
+            this.slbDbObjects1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle31;
             this.slbDbObjects1.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDbObjects1.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDbObjects1.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1096,7 +1513,7 @@
             this.slbDbObjects1.IDVisible = false;
             this.slbDbObjects1.IDWith = 32;
             this.slbDbObjects1.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDbObjects1.ListEntriesDefaultCellStyle = dataGridViewCellStyle8;
+            this.slbDbObjects1.ListEntriesDefaultCellStyle = dataGridViewCellStyle32;
             this.slbDbObjects1.Location = new System.Drawing.Point(3, 58);
             this.slbDbObjects1.Name = "slbDbObjects1";
             this.slbDbObjects1.SelectedIndex = -1;
@@ -1149,6 +1566,8 @@
             this.hsUnselObjects1.MarkMode = false;
             this.hsUnselObjects1.Name = "hsUnselObjects1";
             this.hsUnselObjects1.NonMarkedText = "Uncheck all";
+            this.hsUnselObjects1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselObjects1.ShowShortcut = false;
             this.hsUnselObjects1.Size = new System.Drawing.Size(108, 42);
             this.hsUnselObjects1.TabIndex = 5;
             this.hsUnselObjects1.Text = "Uncheck all";
@@ -1199,6 +1618,8 @@
             this.hsSelObjects1.MarkMode = false;
             this.hsSelObjects1.Name = "hsSelObjects1";
             this.hsSelObjects1.NonMarkedText = "Check all";
+            this.hsSelObjects1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelObjects1.ShowShortcut = false;
             this.hsSelObjects1.Size = new System.Drawing.Size(96, 42);
             this.hsSelObjects1.TabIndex = 4;
             this.hsSelObjects1.Text = "Check all";
@@ -1232,61 +1653,6 @@
             this.pnlMessagesUpper.Size = new System.Drawing.Size(1220, 46);
             this.pnlMessagesUpper.TabIndex = 5;
             // 
-            // tabPageOptions
-            // 
-            this.tabPageOptions.Controls.Add(this.pnlCenterCreateAttributes);
-            this.tabPageOptions.Controls.Add(this.panel2);
-            this.tabPageOptions.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPageOptions.ImageIndex = 3;
-            this.tabPageOptions.Location = new System.Drawing.Point(4, 23);
-            this.tabPageOptions.Name = "tabPageOptions";
-            this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOptions.Size = new System.Drawing.Size(1226, 869);
-            this.tabPageOptions.TabIndex = 2;
-            this.tabPageOptions.Text = "Einstellungen";
-            this.tabPageOptions.UseVisualStyleBackColor = true;
-            // 
-            // pnlCenterCreateAttributes
-            // 
-            this.pnlCenterCreateAttributes.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlCenterCreateAttributes.Controls.Add(this.cbForward);
-            this.pnlCenterCreateAttributes.Controls.Add(this.cbReverse);
-            this.pnlCenterCreateAttributes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenterCreateAttributes.Location = new System.Drawing.Point(3, 49);
-            this.pnlCenterCreateAttributes.Name = "pnlCenterCreateAttributes";
-            this.pnlCenterCreateAttributes.Size = new System.Drawing.Size(1220, 817);
-            this.pnlCenterCreateAttributes.TabIndex = 7;
-            // 
-            // cbForward
-            // 
-            this.cbForward.AutoSize = true;
-            this.cbForward.Location = new System.Drawing.Point(41, 57);
-            this.cbForward.Name = "cbForward";
-            this.cbForward.Size = new System.Drawing.Size(92, 17);
-            this.cbForward.TabIndex = 8;
-            this.cbForward.Text = "forward run";
-            this.cbForward.UseVisualStyleBackColor = true;
-            // 
-            // cbReverse
-            // 
-            this.cbReverse.AutoSize = true;
-            this.cbReverse.Location = new System.Drawing.Point(41, 80);
-            this.cbReverse.Name = "cbReverse";
-            this.cbReverse.Size = new System.Drawing.Size(92, 17);
-            this.cbReverse.TabIndex = 7;
-            this.cbReverse.Text = "reverse run";
-            this.cbReverse.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1220, 46);
-            this.panel2.TabIndex = 6;
-            // 
             // ilTabControl
             // 
             this.ilTabControl.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilTabControl.ImageStream")));
@@ -1301,66 +1667,6 @@
             this.saveFileDialog1.DefaultExt = "*.txt";
             this.saveFileDialog1.Filter = "Text|*.txt|All|*.*";
             this.saveFileDialog1.Title = "Save compare results";
-            // 
-            // ckProcedures
-            // 
-            this.ckProcedures.AutoSize = true;
-            this.ckProcedures.Checked = true;
-            this.ckProcedures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckProcedures.Location = new System.Drawing.Point(766, 3);
-            this.ckProcedures.Name = "ckProcedures";
-            this.ckProcedures.Size = new System.Drawing.Size(86, 17);
-            this.ckProcedures.TabIndex = 12;
-            this.ckProcedures.Text = "Procedures";
-            this.ckProcedures.UseVisualStyleBackColor = true;
-            // 
-            // ckViews
-            // 
-            this.ckViews.AutoSize = true;
-            this.ckViews.Checked = true;
-            this.ckViews.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckViews.Location = new System.Drawing.Point(858, 3);
-            this.ckViews.Name = "ckViews";
-            this.ckViews.Size = new System.Drawing.Size(56, 17);
-            this.ckViews.TabIndex = 13;
-            this.ckViews.Text = "Views";
-            this.ckViews.UseVisualStyleBackColor = true;
-            // 
-            // ckTables
-            // 
-            this.ckTables.AutoSize = true;
-            this.ckTables.Checked = true;
-            this.ckTables.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckTables.Location = new System.Drawing.Point(935, 3);
-            this.ckTables.Name = "ckTables";
-            this.ckTables.Size = new System.Drawing.Size(62, 17);
-            this.ckTables.TabIndex = 14;
-            this.ckTables.Text = "Tables";
-            this.ckTables.UseVisualStyleBackColor = true;
-            // 
-            // ckGenerators
-            // 
-            this.ckGenerators.AutoSize = true;
-            this.ckGenerators.Checked = true;
-            this.ckGenerators.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckGenerators.Location = new System.Drawing.Point(766, 26);
-            this.ckGenerators.Name = "ckGenerators";
-            this.ckGenerators.Size = new System.Drawing.Size(92, 17);
-            this.ckGenerators.TabIndex = 15;
-            this.ckGenerators.Text = "Generatoren";
-            this.ckGenerators.UseVisualStyleBackColor = true;
-            // 
-            // ckFuntions
-            // 
-            this.ckFuntions.AutoSize = true;
-            this.ckFuntions.Checked = true;
-            this.ckFuntions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckFuntions.Location = new System.Drawing.Point(864, 26);
-            this.ckFuntions.Name = "ckFuntions";
-            this.ckFuntions.Size = new System.Drawing.Size(86, 17);
-            this.ckFuntions.TabIndex = 16;
-            this.ckFuntions.Text = "Funktionen";
-            this.ckFuntions.UseVisualStyleBackColor = true;
             // 
             // DatabaseCompareFrom
             // 
@@ -1378,15 +1684,23 @@
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.tabPageDatabases.ResumeLayout(false);
             this.pnlSourceCode.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fctSource)).EndInit();
+            this.tabControlResults.ResumeLayout(false);
+            this.tabPageForward.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctSourceForward)).EndInit();
             this.cmsSourceCode.ResumeLayout(false);
-            this.pnlUpperSourceCode.ResumeLayout(false);
-            this.gbFoundLines.ResumeLayout(false);
-            this.gbSearchCode.ResumeLayout(false);
-            this.gbSearchCode.PerformLayout();
+            this.pnlUpperSourceCodeForward.ResumeLayout(false);
+            this.gbFoundLinesForward.ResumeLayout(false);
+            this.gbSearchCodeForward.ResumeLayout(false);
+            this.gbSearchCodeForward.PerformLayout();
+            this.tabPageReverse.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctSourceReverse)).EndInit();
+            this.pnlUpperSourceCodeReverse.ResumeLayout(false);
+            this.gbFoundLinesReverse.ResumeLayout(false);
+            this.gbSearchCodeReverse.ResumeLayout(false);
+            this.gbSearchCodeReverse.PerformLayout();
             this.pnlDatabases.ResumeLayout(false);
             this.gbDatabase2.ResumeLayout(false);
             this.gbDatabase1.ResumeLayout(false);
@@ -1398,9 +1712,6 @@
             this.pnlUpperObjects2.ResumeLayout(false);
             this.gbDBObjets2.ResumeLayout(false);
             this.pnlUpperObjects1.ResumeLayout(false);
-            this.tabPageOptions.ResumeLayout(false);
-            this.pnlCenterCreateAttributes.ResumeLayout(false);
-            this.pnlCenterCreateAttributes.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1414,7 +1725,7 @@
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsSaveResults;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageDatabases;
         private System.Windows.Forms.TabPage tabPageObjects;
         private System.Windows.Forms.ImageList ilTabControl;
@@ -1422,26 +1733,23 @@
         private System.Windows.Forms.Panel pnlXML_UPPER;
         private System.Windows.Forms.Label lblCaption;
         private SeControlsLib.HotSpot hsDoCompare;
-        private FastColoredTextBoxNS.FastColoredTextBox fctSource;
+        private FastColoredTextBoxNS.FastColoredTextBox fctSourceForward;
         private System.Windows.Forms.GroupBox gbDBObjets2;
         private SEListBox.SEListBox slbDbObjects1;
         private System.Windows.Forms.FolderBrowserDialog fbdSourcePath;
         private System.Windows.Forms.Panel pnlUpperObjects1;
-        private System.Windows.Forms.TabPage tabPageOptions;
-        private System.Windows.Forms.Panel pnlCenterCreateAttributes;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ContextMenuStrip cmsSourceCode;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchFirst;
         private System.Windows.Forms.Panel pnlSourceCode;
-        private System.Windows.Forms.Panel pnlUpperSourceCode;
-        private SeControlsLib.HotSpot hsSeach;
-        private SeControlsLib.HotSpot hsSearchUp;
-        private System.Windows.Forms.GroupBox gbSearchCode;
-        private System.Windows.Forms.TextBox txtSearchCode;
-        private SeControlsLib.HotSpot hsSearchDown;
-        private System.Windows.Forms.GroupBox gbFoundLines;
-        private System.Windows.Forms.ComboBox cbFoundLines;
+        private System.Windows.Forms.Panel pnlUpperSourceCodeForward;
+        private SeControlsLib.HotSpot hsSeachForward;
+        private SeControlsLib.HotSpot hsSearchUpForward;
+        private System.Windows.Forms.GroupBox gbSearchCodeForward;
+        private System.Windows.Forms.TextBox txtSearchCodeForward;
+        private SeControlsLib.HotSpot hsSearchDownForward;
+        private System.Windows.Forms.GroupBox gbFoundLinesForward;
+        private System.Windows.Forms.ComboBox cbFoundLinesForward;
         private System.Windows.Forms.GroupBox gbDatabase1;
         private SEListBox.SEListBox slbDatabase1;
         private System.Windows.Forms.Panel pnlUpperDatabase1;
@@ -1462,15 +1770,28 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel pnlSplitCenter;
         private System.Windows.Forms.CheckBox cbForwardRun;
-        private System.Windows.Forms.CheckBox cbReverseRun;
+        private System.Windows.Forms.CheckBox ckReverseRun;
         private System.Windows.Forms.CheckBox cbOnlyFailures;
-        private System.Windows.Forms.CheckBox cbForward;
-        private System.Windows.Forms.CheckBox cbReverse;
         private System.Windows.Forms.CheckBox cbChangeToUppercase;
         private System.Windows.Forms.CheckBox ckTables;
         private System.Windows.Forms.CheckBox ckViews;
         private System.Windows.Forms.CheckBox ckProcedures;
         private System.Windows.Forms.CheckBox ckFuntions;
         private System.Windows.Forms.CheckBox ckGenerators;
+        private System.Windows.Forms.CheckBox ckDepent;
+        private System.Windows.Forms.CheckBox ckFK;
+        private System.Windows.Forms.CheckBox ckPK;
+        private System.Windows.Forms.TabControl tabControlResults;
+        private System.Windows.Forms.TabPage tabPageForward;
+        private System.Windows.Forms.TabPage tabPageReverse;
+        private System.Windows.Forms.Panel pnlUpperSourceCodeReverse;
+        private System.Windows.Forms.GroupBox gbFoundLinesReverse;
+        private System.Windows.Forms.ComboBox cbFoundLinesReverse;
+        private System.Windows.Forms.GroupBox gbSearchCodeReverse;
+        private System.Windows.Forms.TextBox txtSearchCodeReverse;
+        private SeControlsLib.HotSpot hsSearchDownReverse;
+        private SeControlsLib.HotSpot hsSearchUpReverse;
+        private SeControlsLib.HotSpot hsSeachReverse;
+        private FastColoredTextBoxNS.FastColoredTextBox fctSourceReverse;
     }
 }

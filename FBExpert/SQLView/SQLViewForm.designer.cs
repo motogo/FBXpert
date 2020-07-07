@@ -326,7 +326,7 @@ namespace SQLView
             this.hsLifeTime.MarkMode = true;
             this.hsLifeTime.Name = "hsLifeTime";
             this.hsLifeTime.NonMarkedText = "";
-            this.hsLifeTime.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLifeTime.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLifeTime.ShowShortcut = false;
             this.hsLifeTime.Size = new System.Drawing.Size(87, 47);
             this.hsLifeTime.TabIndex = 34;
@@ -397,7 +397,7 @@ namespace SQLView
             this.hsLoadDatabasePath.MarkMode = false;
             this.hsLoadDatabasePath.Name = "hsLoadDatabasePath";
             this.hsLoadDatabasePath.NonMarkedText = "";
-            this.hsLoadDatabasePath.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLoadDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLoadDatabasePath.ShowShortcut = false;
             this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 28);
             this.hsLoadDatabasePath.TabIndex = 3;
@@ -447,7 +447,7 @@ namespace SQLView
             this.hsPageRefresh.MarkMode = false;
             this.hsPageRefresh.Name = "hsPageRefresh";
             this.hsPageRefresh.NonMarkedText = "Refresh";
-            this.hsPageRefresh.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsPageRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsPageRefresh.ShowShortcut = false;
             this.hsPageRefresh.Size = new System.Drawing.Size(89, 47);
             this.hsPageRefresh.TabIndex = 28;
@@ -520,7 +520,7 @@ namespace SQLView
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            this.hsClose.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 47);
             this.hsClose.TabIndex = 26;
@@ -811,7 +811,7 @@ namespace SQLView
             this.hsBreak.MarkMode = false;
             this.hsBreak.Name = "hsBreak";
             this.hsBreak.NonMarkedText = "Break";
-            this.hsBreak.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsBreak.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsBreak.ShowShortcut = false;
             this.hsBreak.Size = new System.Drawing.Size(68, 41);
             this.hsBreak.TabIndex = 33;
@@ -863,7 +863,7 @@ namespace SQLView
             this.hsReplaceText.MarkMode = false;
             this.hsReplaceText.Name = "hsReplaceText";
             this.hsReplaceText.NonMarkedText = "Replace Text";
-            this.hsReplaceText.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsReplaceText.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsReplaceText.ShowShortcut = false;
             this.hsReplaceText.Size = new System.Drawing.Size(96, 41);
             this.hsReplaceText.TabIndex = 32;
@@ -915,7 +915,7 @@ namespace SQLView
             this.hsSaveSQL.MarkMode = false;
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
-            this.hsSaveSQL.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(68, 41);
             this.hsSaveSQL.TabIndex = 31;
@@ -967,7 +967,7 @@ namespace SQLView
             this.hsLoadSQL.MarkMode = false;
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
-            this.hsLoadSQL.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(68, 41);
             this.hsLoadSQL.TabIndex = 30;
@@ -1019,7 +1019,7 @@ namespace SQLView
             this.hsRunSQLfromFile.MarkMode = false;
             this.hsRunSQLfromFile.Name = "hsRunSQLfromFile";
             this.hsRunSQLfromFile.NonMarkedText = "Run SQL from File";
-            this.hsRunSQLfromFile.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRunSQLfromFile.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRunSQLfromFile.ShowShortcut = false;
             this.hsRunSQLfromFile.Size = new System.Drawing.Size(101, 41);
             this.hsRunSQLfromFile.TabIndex = 29;
@@ -1071,7 +1071,7 @@ namespace SQLView
             this.hsClearText.MarkMode = false;
             this.hsClearText.Name = "hsClearText";
             this.hsClearText.NonMarkedText = "Clear Text";
-            this.hsClearText.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearText.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearText.ShowShortcut = false;
             this.hsClearText.Size = new System.Drawing.Size(68, 41);
             this.hsClearText.TabIndex = 28;
@@ -1123,7 +1123,7 @@ namespace SQLView
             this.hsRunSQL.MarkMode = false;
             this.hsRunSQL.Name = "hsRunSQL";
             this.hsRunSQL.NonMarkedText = "Run SQL";
-            this.hsRunSQL.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRunSQL.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRunSQL.ShowShortcut = false;
             this.hsRunSQL.Size = new System.Drawing.Size(130, 41);
             this.hsRunSQL.TabIndex = 27;
@@ -1414,7 +1414,7 @@ namespace SQLView
             this.hsUpdateDataset.MarkMode = false;
             this.hsUpdateDataset.Name = "hsUpdateDataset";
             this.hsUpdateDataset.NonMarkedText = "Update";
-            this.hsUpdateDataset.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsUpdateDataset.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsUpdateDataset.ShowShortcut = false;
             this.hsUpdateDataset.Size = new System.Drawing.Size(111, 43);
             this.hsUpdateDataset.TabIndex = 30;
@@ -1686,7 +1686,7 @@ namespace SQLView
             this.hsClearInfo.MarkMode = false;
             this.hsClearInfo.Name = "hsClearInfo";
             this.hsClearInfo.NonMarkedText = "Clear";
-            this.hsClearInfo.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearInfo.ShowShortcut = false;
             this.hsClearInfo.Size = new System.Drawing.Size(69, 43);
             this.hsClearInfo.TabIndex = 27;
@@ -1806,7 +1806,7 @@ namespace SQLView
             this.hsClearErrorAll.MarkMode = false;
             this.hsClearErrorAll.Name = "hsClearErrorAll";
             this.hsClearErrorAll.NonMarkedText = "Clear All";
-            this.hsClearErrorAll.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearErrorAll.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearErrorAll.ShowShortcut = false;
             this.hsClearErrorAll.Size = new System.Drawing.Size(78, 43);
             this.hsClearErrorAll.TabIndex = 30;
@@ -1948,7 +1948,7 @@ namespace SQLView
             this.hsClearHistory.MarkMode = false;
             this.hsClearHistory.Name = "hsClearHistory";
             this.hsClearHistory.NonMarkedText = "Clear History";
-            this.hsClearHistory.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClearHistory.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearHistory.ShowShortcut = false;
             this.hsClearHistory.Size = new System.Drawing.Size(90, 45);
             this.hsClearHistory.TabIndex = 37;
@@ -2037,7 +2037,7 @@ namespace SQLView
             this.hsRefreshHistory.MarkMode = false;
             this.hsRefreshHistory.Name = "hsRefreshHistory";
             this.hsRefreshHistory.NonMarkedText = "Refresh";
-            this.hsRefreshHistory.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshHistory.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshHistory.ShowShortcut = false;
             this.hsRefreshHistory.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshHistory.TabIndex = 33;
@@ -2089,7 +2089,7 @@ namespace SQLView
             this.hsExecuteHistorySelected.MarkMode = false;
             this.hsExecuteHistorySelected.Name = "hsExecuteHistorySelected";
             this.hsExecuteHistorySelected.NonMarkedText = "Execute";
-            this.hsExecuteHistorySelected.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExecuteHistorySelected.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsExecuteHistorySelected.ShowShortcut = false;
             this.hsExecuteHistorySelected.Size = new System.Drawing.Size(90, 45);
             this.hsExecuteHistorySelected.TabIndex = 28;
@@ -2184,7 +2184,7 @@ namespace SQLView
             this.hsLoadListReplaces.MarkMode = false;
             this.hsLoadListReplaces.Name = "hsLoadListReplaces";
             this.hsLoadListReplaces.NonMarkedText = "Load List";
-            this.hsLoadListReplaces.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsLoadListReplaces.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLoadListReplaces.ShowShortcut = false;
             this.hsLoadListReplaces.Size = new System.Drawing.Size(68, 44);
             this.hsLoadListReplaces.TabIndex = 31;
@@ -2323,7 +2323,7 @@ namespace SQLView
             this.hsRefreshConfig.MarkMode = false;
             this.hsRefreshConfig.Name = "hsRefreshConfig";
             this.hsRefreshConfig.NonMarkedText = "";
-            this.hsRefreshConfig.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshConfig.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshConfig.ShowShortcut = false;
             this.hsRefreshConfig.Size = new System.Drawing.Size(45, 45);
             this.hsRefreshConfig.TabIndex = 1;
@@ -2671,7 +2671,7 @@ namespace SQLView
             this.hsExportBreak.MarkMode = false;
             this.hsExportBreak.Name = "hsExportBreak";
             this.hsExportBreak.NonMarkedText = "Break";
-            this.hsExportBreak.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportBreak.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsExportBreak.ShowShortcut = false;
             this.hsExportBreak.Size = new System.Drawing.Size(68, 44);
             this.hsExportBreak.TabIndex = 44;
@@ -2788,7 +2788,7 @@ namespace SQLView
             this.hotSpot2.MarkMode = false;
             this.hotSpot2.Name = "hotSpot2";
             this.hotSpot2.NonMarkedText = "Run SQL and Export as CSV";
-            this.hotSpot2.Shortcut = SeControlsLib.Shortcut.None;
+            this.hotSpot2.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hotSpot2.ShowShortcut = false;
             this.hotSpot2.Size = new System.Drawing.Size(172, 44);
             this.hotSpot2.TabIndex = 39;
@@ -2862,7 +2862,7 @@ namespace SQLView
             this.hsExportHTML.MarkMode = false;
             this.hsExportHTML.Name = "hsExportHTML";
             this.hsExportHTML.NonMarkedText = "Export as HTML";
-            this.hsExportHTML.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportHTML.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsExportHTML.ShowShortcut = false;
             this.hsExportHTML.Size = new System.Drawing.Size(111, 44);
             this.hsExportHTML.TabIndex = 36;
@@ -2938,7 +2938,7 @@ namespace SQLView
             this.hsExportCSV.MarkMode = false;
             this.hsExportCSV.Name = "hsExportCSV";
             this.hsExportCSV.NonMarkedText = "Export results as CSV";
-            this.hsExportCSV.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportCSV.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsExportCSV.ShowShortcut = false;
             this.hsExportCSV.Size = new System.Drawing.Size(152, 44);
             this.hsExportCSV.TabIndex = 33;
@@ -2990,7 +2990,7 @@ namespace SQLView
             this.hsSaveXML.MarkMode = false;
             this.hsSaveXML.Name = "hsSaveXML";
             this.hsSaveXML.NonMarkedText = "Save XML-Data";
-            this.hsSaveXML.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveXML.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsSaveXML.ShowShortcut = false;
             this.hsSaveXML.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXML.TabIndex = 32;
@@ -3041,7 +3041,7 @@ namespace SQLView
             this.hsRefreshXMLData.MarkMode = false;
             this.hsRefreshXMLData.Name = "hsRefreshXMLData";
             this.hsRefreshXMLData.NonMarkedText = "";
-            this.hsRefreshXMLData.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshXMLData.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshXMLData.ShowShortcut = false;
             this.hsRefreshXMLData.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLData.TabIndex = 3;
@@ -3171,7 +3171,7 @@ namespace SQLView
             this.hsSaveXMLScheme.MarkMode = false;
             this.hsSaveXMLScheme.Name = "hsSaveXMLScheme";
             this.hsSaveXMLScheme.NonMarkedText = "Save XML-Scheme";
-            this.hsSaveXMLScheme.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsSaveXMLScheme.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsSaveXMLScheme.ShowShortcut = false;
             this.hsSaveXMLScheme.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXMLScheme.TabIndex = 33;
@@ -3222,7 +3222,7 @@ namespace SQLView
             this.hsRefreshXMLScheme.MarkMode = false;
             this.hsRefreshXMLScheme.Name = "hsRefreshXMLScheme";
             this.hsRefreshXMLScheme.NonMarkedText = "";
-            this.hsRefreshXMLScheme.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshXMLScheme.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshXMLScheme.ShowShortcut = false;
             this.hsRefreshXMLScheme.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLScheme.TabIndex = 3;
@@ -3365,7 +3365,7 @@ namespace SQLView
             this.hotSpot1.MarkMode = false;
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Save XML-Data";
-            this.hotSpot1.Shortcut = SeControlsLib.Shortcut.None;
+            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(111, 44);
             this.hotSpot1.TabIndex = 32;
@@ -3415,7 +3415,7 @@ namespace SQLView
             this.hsRefreshPerformance.MarkMode = false;
             this.hsRefreshPerformance.Name = "hsRefreshPerformance";
             this.hsRefreshPerformance.NonMarkedText = "";
-            this.hsRefreshPerformance.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsRefreshPerformance.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshPerformance.ShowShortcut = false;
             this.hsRefreshPerformance.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshPerformance.TabIndex = 3;

@@ -117,7 +117,7 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            this.hsClose.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 44);
             this.hsClose.TabIndex = 0;
@@ -167,7 +167,7 @@
             this.hsExportTables.MarkMode = false;
             this.hsExportTables.Name = "hsExportTables";
             this.hsExportTables.NonMarkedText = "Export";
-            this.hsExportTables.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsExportTables.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsExportTables.ShowShortcut = false;
             this.hsExportTables.Size = new System.Drawing.Size(114, 52);
             this.hsExportTables.TabIndex = 3;
@@ -237,7 +237,7 @@
             this.hsInitialSQLExportPath.MarkMode = false;
             this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
             this.hsInitialSQLExportPath.NonMarkedText = "";
-            this.hsInitialSQLExportPath.Shortcut = SeControlsLib.Shortcut.None;
+            this.hsInitialSQLExportPath.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsInitialSQLExportPath.ShowShortcut = false;
             this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
             this.hsInitialSQLExportPath.TabIndex = 3;
