@@ -929,6 +929,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FBXpert.ico" />
+    <Content Include="postbuild.txt" />
     <None Include="Resources\sweep_ge24x.png" />
     <None Include="Resources\sweep_bl24x.png" />
     <None Include="Resources\Table_x24.png" />

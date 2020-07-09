@@ -1,0 +1,4 @@
+﻿$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.de.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.en.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.ja.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.pt.resx

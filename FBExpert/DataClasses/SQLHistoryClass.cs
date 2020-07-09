@@ -27,7 +27,7 @@ namespace FBXpert.DataClasses
         bool asc = true;
         public SQLHistoryClass(string dbName, string dbLocation)
         {
-            DatabaseName = dbName;
+            DatabaseName = dbName.Replace(" ","_");
             DatabaseLocation = dbLocation;
         }
         private List<History> GetAll(string dbn, bool success, bool failed)

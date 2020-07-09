@@ -1258,10 +1258,16 @@ namespace FBXpert.DataClasses
                 sb.Append(Format(lvl+1, "        for (int i = 0; i < cb.Items.Count; i++)" + Nl));
                 sb.Append(Format(lvl+1, "        {" + Nl));
                 sb.Append(Format(lvl+2, "        var KS = (TDataClass.TColumns)cb.Items[i];" + Nl));
-                if (pk == null)
+                if (obj.GetType() == typeof(ViewClass))
                 {
-                    _localNotifies?.AddToERROR("No PrimaryKey in Table " + obj.Name + ", using field ID instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
-                    sb.Append(Format(lvl+2, "        if (KS.ID == id)" + Nl));
+                    string fld = GetFirstViewField(((ViewClass)obj).Fields);
+                    sb.Append(Format(lvl + 2, $@"        if (KS.{fld} == id)" + Nl));
+                }
+                else if (pk == null)
+                {
+                    string fld = GetFirstTableField(((TableClass)obj).Fields);
+                    _localNotifies?.AddToERROR($@"No PrimaryKey in Table {obj.Name}, using field {fld} instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
+                    sb.Append(Format(lvl+2, $@"        if (KS.{fld} == id)" + Nl));
                 }
                 else
                 {                    
@@ -1289,10 +1295,16 @@ namespace FBXpert.DataClasses
                 sb.Append(Format(lvl+1, "        for (int i = 0; i < cb.Items.Count; i++)" + Nl));
                 sb.Append(Format(lvl+1, "        {" + Nl));
                 sb.Append(Format(lvl+2, "        var KS = (TDataClass.TColumns)cb.Items[i];" + Nl));
-                if (pk == null)
+                if (obj.GetType() == typeof(ViewClass))
                 {
-                    _localNotifies?.AddToERROR("No PrimaryKey in Table " + obj.Name + ", using field ID instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
-                    sb.Append(Format(lvl+2, "        if (KS.ID == id)" + Nl));
+                    string fld = GetFirstViewField(((ViewClass)obj).Fields);
+                    sb.Append(Format(lvl + 2, $@"        if (KS.{fld} == id)" + Nl));
+                }
+                else if (pk == null)
+                {
+                    string fld = GetFirstTableField(((TableClass)obj).Fields);
+                    _localNotifies?.AddToERROR($@"No PrimaryKey in Table {obj.Name}, using field {fld} instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
+                    sb.Append(Format(lvl+2, $@"        if (KS.{fld} == id)" + Nl));
                 }
                 else
                 {                    
@@ -1331,10 +1343,16 @@ namespace FBXpert.DataClasses
                 sb.Append(Format(lvl+1, "        for (int i = 0; i < cb.Items.Count; i++)" + Nl));
                 sb.Append(Format(lvl+1, "        {" + Nl));
                 sb.Append(Format(lvl+2, "        var KS = (TDataClass.TColumns)cb.Items[i];" + Nl));
-                if (pk == null)
+                if (obj.GetType() == typeof(ViewClass))
                 {
-                    _localNotifies?.AddToERROR("No PrimaryKey in Table " + obj.Name + ", using field ID instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
-                    sb.Append(Format(lvl+2, "        if (KS.ID == id)" + Nl));
+                    string fld = GetFirstViewField(((ViewClass)obj).Fields);
+                    sb.Append(Format(lvl + 2, $@"        if (KS.{fld} == id)" + Nl));
+                }
+                else if (pk == null)
+                {
+                    string fld = GetFirstTableField(((TableClass)obj).Fields);
+                    _localNotifies?.AddToERROR($@"No PrimaryKey in Table {obj.Name}, using field {fld} instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, int id)");
+                    sb.Append(Format(lvl+2, $@"        if (KS.{fld} == id)" + Nl));
                 }
                 else
                 {                    
@@ -1364,17 +1382,23 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+2, "        {" + Nl));
             sb.Append(Format(lvl+3, "        var KS = (TDataClass.TColumns)cb.Items[i];" + Nl));
 
-            if (pk == null)
+            if (obj.GetType() == typeof(ViewClass))
             {
-                _localNotifies?.AddToERROR("No PrimaryKey in Table " + obj.Name + ", using field ID instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, object id)");
-                sb.Append(Format(lvl+3, "        if (KS.ID.ToString() == id.ToString())" + Nl));
+                string fld = GetFirstViewField(((ViewClass)obj).Fields);
+                sb.Append(Format(lvl + 3, $@"        if (KS.{fld}.ToString() == id.ToString())" + Nl));
+            }
+            else if (pk == null)
+            {
+                string fld = GetFirstTableField(((TableClass)obj).Fields);
+                _localNotifies?.AddToERROR($@"No PrimaryKey in Table {obj.Name}, using field {fld} instead in method:  public TDataClass.TColumns SelectComboIndex(ComboBox cb, object id)");
+                sb.Append(Format(lvl + 3, $@"        if (KS.{fld}.ToString() == id.ToString())" + Nl));
             }
             else
-            {                
+            {
                 string fn = StaticFunctionsClass.GetFirstDictionaryEntry(pk.FieldNames);
-                if(!string.IsNullOrEmpty(fn))
+                if (!string.IsNullOrEmpty(fn))
                 {
-                    sb.Append(Format(lvl+3, "        if (KS." + fn + ".ToString() == id.ToString())" + Nl));
+                    sb.Append(Format(lvl + 3, "        if (KS." + fn + ".ToString() == id.ToString())" + Nl));
                 }
             }
 
@@ -1396,13 +1420,33 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
+        public static string GetFirstViewField(Dictionary<string, ViewFieldClass> Names)
+        {
+            string[] arr = new string[Names.Count];
+            Names.Keys.CopyTo(arr, 0);            
+            if (arr.Length > 0) return arr[0];
+            return string.Empty;
+        }
+        public static string GetFirstTableField(Dictionary<string, TableFieldClass> Names)
+        {
+            string[] arr = new string[Names.Count];
+            Names.Keys.CopyTo(arr, 0);
+            if (arr.Length > 0) return arr[0];
+            return string.Empty;
+        }
+
         public string CreateDeleteDataMethods(int lvl, DataObjectClass obj)
         {
             var sb = new StringBuilder();
             PrimaryKeyClass pk = null;
+            string pkName = string.Empty;
             if (obj.GetType() == typeof(TableClass))
             {
                 pk = ((TableClass) obj).primary_constraint;
+            }
+            else
+            {
+
             }
             sb.Append(Format(lvl, "/// <summary>" + Nl));
             sb.Append(Format(lvl, "/// Erases datas of actual object from database" + Nl));
@@ -1412,10 +1456,16 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+1, "ReturnInfo rt = null;" + Nl));
             sb.Append(Format(lvl+1, "" + obj.Name + "Class.TDataClass dc = (" + obj.Name + "Class.TDataClass)CurrentData;" + Nl));
 
-            if (pk == null)
+            if(obj.GetType() == typeof(ViewClass))
             {
-                _localNotifies?.AddToERROR($@"No PrimaryKey in table {obj.Name}, using field ID instead in method:  public override ReturnInfo DeleteData(eDataDeleteMode dataMode)");
-                sb.Append(Format(lvl+1, $@"rt = DeleteData(dc.Item.ID,dataMode);{Nl}"));
+                string fld = GetFirstViewField(((ViewClass)obj).Fields);
+                sb.Append(Format(lvl + 1, $@"rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
+            }
+            else if (pk == null)
+            {
+                string fld = GetFirstTableField(((TableClass)obj).Fields);
+                _localNotifies?.AddToERROR($@"No PrimaryKey in table {obj.Name}, using field {fld} instead in method:  public override ReturnInfo DeleteData(eDataDeleteMode dataMode)");
+                sb.Append(Format(lvl+1, $@"rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
             }
             else
             {
@@ -1771,8 +1821,9 @@ namespace FBXpert.DataClasses
                     }
                     else
                     {
-                        _localNotifies?.AddToERROR("No PrimaryKey in Table " + table.Name + ", using field ID instead in method:  public override ReturnInfo UpdateData()");
-                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE ID = '\" + dc.Item.ID.ToString() + \"'; \");" + Nl));
+                        string fld = GetFirstTableField(((TableClass)obj).Fields);
+                        _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
+                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE "+fld+" = '\" + dc.Item."+fld+".ToString() + \"'; \");" + Nl));
                     }
                 }
                 else if(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenOID)
@@ -1787,8 +1838,9 @@ namespace FBXpert.DataClasses
                     }
                     else
                     {
-                        _localNotifies?.AddToERROR("No PrimaryKey in Table " + table.Name + ", using field ID instead in method:  public override ReturnInfo UpdateData()");
-                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE ID = \" + dc.Item.ID.ToString() + \"; \");" + Nl));
+                        string fld = GetFirstTableField(((TableClass)obj).Fields);
+                        _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
+                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE "+fld+" = \" + dc.Item."+fld+".ToString() + \"; \");" + Nl));
                     }
                 }
                 else
@@ -1803,8 +1855,9 @@ namespace FBXpert.DataClasses
                     }
                     else
                     {
-                        _localNotifies?.AddToERROR("No PrimaryKey in Table " + table.Name + ", using field ID instead in method:  public override ReturnInfo UpdateData()");
-                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE ID = \" + dc.Item.ID.ToString() + \"; \");" + Nl));
+                        string fld = GetFirstTableField(((TableClass)obj).Fields);
+                        _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
+                        sb.Append(Format(lvl+2,"sql.Append(@\" WHERE "+fld+" = \" + dc.Item."+fld+".ToString() + \"; \");" + Nl));
                     }
                 }
                 sb.Append(Format(lvl+2,"ConnectionData.CreateCommand(sql.ToString());" + Nl));
@@ -1879,11 +1932,13 @@ namespace FBXpert.DataClasses
                 sb.Append(BlockStart(lvl));                
                 sb.Append(Format(lvl+1,"using (TDataClass aktData = new TDataClass(DisplayMemberDef))" + Nl));
                 sb.Append(BlockStart(lvl+1));
+                /*
                 if (table?.primary_constraint == null)
                 {
+
                     _localNotifies?.AddToERROR("No PrimaryKey in Table " + table?.Name + ", using field ID instead in method:  public override TMainData getDatas()");
                 }
-
+                */
                 foreach (var tfc in table.Fields.Values)
                 {                   
                     sb.Append(Format(lvl+2,"aktData.Item."+tfc.Name + " = get" + tfc.Name + "();" + Nl));                    
@@ -1955,8 +2010,9 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+2,"aktData.Clear();" + Nl));
             if (table?.primary_constraint == null)
             {
-                _localNotifies?.AddToERROR("No PrimaryKey in Table " + table.Name + ", using field ID instead in method:  public TDataClass GetNewData()");
-                sb.Append(Format(lvl+2,"aktData.Item.ID = "+ newIdMethod + ";" + Nl));
+                string fld = GetFirstTableField(((TableClass)obj).Fields);
+                _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public TDataClass GetNewData()");
+                sb.Append(Format(lvl+2,$@"aktData.Item.{fld} = {newIdMethod};" + Nl));
             }
             else
             {                
@@ -1992,8 +2048,9 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+2,"aktData.Clear();" + Nl));
             if (table?.primary_constraint == null)
             {
-                _localNotifies?.AddToERROR("No PrimaryKey in Table " + table.Name + ", using field ID instead in method:  public TDataClass GetNewData(int gruppe)");
-                sb.Append(Format(lvl+2,"aktData.Item.ID = "+ newIdMethod + ";" + Nl));
+                string fld = GetFirstTableField(((TableClass)obj).Fields);
+                _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public TDataClass GetNewData(int gruppe)");
+                sb.Append(Format(lvl+2,$@"aktData.Item.{fld} = {newIdMethod};" + Nl));
             }
             else
             {              
