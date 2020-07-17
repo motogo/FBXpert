@@ -1,5 +1,4 @@
 ﻿using BasicClassLibrary;
-using DBBasicClassLibrary;
 using FBXpert.Globals;
 using MessageFormLibrary;
 using System;
@@ -32,21 +31,20 @@ namespace FBXpert.SonstForms
 
         private void MakeISQLParameters()
         {
-            string serverTypeStr = (_dbReg.ConnectionType == eConnectionType.embedded) ? "" : $@"{_dbReg.Server}: : ";
-            
+            //string serverTypeStr = (_dbReg.ConnectionType == eConnectionType.embedded) ? "" : $@"{_dbReg.Server}: : ";
             //txtISQLParameters.Text = $"-user {txtISQLUser.Text} -password **** -database connect \"{_dbReg.GetFullDatabasePath().Replace("//","")}\"";
             txtISQLParameters.Text = $"-user {txtISQLUser.Text} -password **** -database connect \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void MakeGFIXParameters()
         {
-            string serverTypeStr = (_dbReg.ConnectionType == eConnectionType.embedded) ? "" : $@"{_dbReg.Server}: : ";
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -validate \"{_dbReg.GetFullDatabasePath()}\"";            
+            //string serverTypeStr = (_dbReg.ConnectionType == eConnectionType.embedded) ? "" : $@"{_dbReg.Server}: : ";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -validate \"{_dbReg.GetFullDatabasePath()}\"";
         }
         
         private void MakeGSTATParameters()
-        {            
-            StringBuilder cmd = new StringBuilder();
+        {
+            var cmd = new StringBuilder();
             cmd.Append($@"-user {_dbReg.User} -password ****");
 
             if (cbGSTATDisplayVersion.Checked)
@@ -93,25 +91,22 @@ namespace FBXpert.SonstForms
                 {
                     cmd.Append($@" -t {txtGSTATTablename.Text}");
                 }
-
             }
-
-            txtGSTATParameters.Text = cmd.ToString();           
+            txtGSTATParameters.Text = cmd.ToString();
         }
 
         void MakeVERSIONParameters()
         {
-            StringBuilder cmd = new StringBuilder();
+            var cmd = new StringBuilder();
             cmd.Append($"-user {txtGBAKUser.Text} -password ****  -z");     
             cmd.Append($" \"{_dbReg.GetFullDatabasePath()}\""); 
-            txtGBAKParameters.Text = cmd.ToString();            
+            txtGBAKParameters.Text = cmd.ToString();
         }
 
         void MakeBackupParameters()
         {
-            
-            FileInfo fi = new FileInfo(txtDatabaseLocation.Text);
-            StringBuilder cmd = new StringBuilder();
+            //FileInfo fi = new FileInfo(txtDatabaseLocation.Text);
+            var cmd = new StringBuilder();
             cmd.Append($@" -B");
             if (cbBackupReportActions.Checked)
             {
@@ -196,6 +191,10 @@ namespace FBXpert.SonstForms
             if (rbRestoreRecreate.Checked)
             {
                 cmd.Append(" -REP");
+            }
+            if (ckRestoreDeactivateIndexes.Checked)
+            {
+                cmd.Append(" -I");
             }
             if (rbRestoreOverride.Checked)
             {
@@ -320,14 +319,14 @@ namespace FBXpert.SonstForms
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "FileNotExists", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
                 return;
             }
-            txtGBAKOutput.Clear();
+            fctGBAKOutput.Clear();
             string args = txtGBAKParameters.Text.Replace("****",_dbReg.Password);
             var psi = new ProcessStartInfo($@"{_dbReg.FirebirdBinaryPath}\gbak.exe",args);            
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
-            txtGBAKOutput.AppendText($@"Starting of GBAK{Environment.NewLine}");
+            fctGBAKOutput.AppendText($@"Starting of GBAK{Environment.NewLine}");
             
             backgroundWorker1 = new BackgroundWorker();            
             backgroundWorker1.WorkerReportsProgress = true;
@@ -346,7 +345,7 @@ namespace FBXpert.SonstForms
             sw = new StreamWatcher(ps.StandardOutput.BaseStream);
             sw.MessageAvailable += Sw_MessageAvailable;
             sw_error = new StreamWatcher(ps.StandardError.BaseStream);
-            sw_error.MessageAvailable += Sw_MessageAvailable;                        
+            sw_error.MessageAvailable += Sw_MessageAvailable;
         }
 
         private void Ps_Exited(object sender, EventArgs e)
@@ -376,23 +375,23 @@ namespace FBXpert.SonstForms
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "FileNotExists", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
                 return;
             }
-            var psi = new ProcessStartInfo(binfile,args);            
+            var psi = new ProcessStartInfo(binfile,args);
             psi.RedirectStandardOutput  = true;
             psi.RedirectStandardError   = true;
             psi.UseShellExecute         = false;
-            psi.CreateNoWindow          = true;             
+            psi.CreateNoWindow          = true;
              
-                var ps = new Process();            
-                ps.StartInfo = psi;
-                ps.Start();
+            var ps = new Process();
+            ps.StartInfo = psi;
+            ps.Start();
             
-                fctGSTATOutput.AppendText(ps.StandardOutput.ReadToEnd());
-                fctGSTATOutput.AppendText(ps.StandardError.ReadToEnd());
+            fctGSTATOutput.AppendText(ps.StandardOutput.ReadToEnd());
+            fctGSTATOutput.AppendText(ps.StandardError.ReadToEnd());
 
-                ps.WaitForExit();
-                ps.Close();
+            ps.WaitForExit();
+            ps.Close();
             
-            fctGSTATOutput.AppendText("END of statistics");                    
+            fctGSTATOutput.AppendText("END of statistics");
         }
 
         private void Sw_MessageAvailable(object sender, MessageAvailableEventArgs e)
@@ -405,7 +404,7 @@ namespace FBXpert.SonstForms
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            txtGBAKOutput.AppendText($@"{Environment.NewLine}End of of GBAK{Environment.NewLine}");
+            fctGBAKOutput.AppendText($@"{Environment.NewLine}End of of GBAK{Environment.NewLine}");
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -418,10 +417,11 @@ namespace FBXpert.SonstForms
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {   
-            int l = e.UserState.ToString().Length;            
-            txtGBAKOutput.AppendText(e.UserState.ToString());            
-            txtGBAKOutput.SelectionStart = txtGBAKOutput.TextLength;
-            txtGBAKOutput.ScrollToCaret();            
+            int l = e.UserState.ToString().Length;
+            fctGBAKOutput.AppendText(e.UserState.ToString());
+            fctGBAKOutput.SelectionStart = fctGBAKOutput.TextLength;
+            fctGBAKOutput.ScrollLeft();
+            //fctGBAKOutput.sc.ScrollToCaret();            
         }
 
         private void BinariesForm_Load(object sender, EventArgs e)
@@ -510,142 +510,130 @@ namespace FBXpert.SonstForms
             MakeGSTATParameters();
         }
 
-        public string GetGFIXVersion()
+        public string GetVersion()
         {
-            return cbGFIXShutVersion.Checked ? "-z" : string.Empty;
-        }
-        public string GetGFIXMemoryVersion()
-        {
-            return cbGFIXVersionMemory.Checked ? "-z" : string.Empty;
-        }
-        public string GetGFIXReadWriteVersion()
-        {
-            return cbGFIXReadWriteVersion.Checked ? "-z" : string.Empty;
+            return cbShowVersion.Checked ? "-z" : string.Empty;
         }
 
-        public string GetGFIXValidationVersion()
-        {
-            return cbGFIXValidationVersion.Checked ? "-z" : string.Empty;
-        }
 
         private void HsGFIXShutdownMulti_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut multi -force {txtGFIXShutdownSeconds.Text.Trim()} {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut multi -force {txtGFIXShutdownSeconds.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXShutdownSingle_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut single -force {txtGFIXShutdownSeconds.Text.Trim()} {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut single -force {txtGFIXShutdownSeconds.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXShutdownFull_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut full -force {txtGFIXShutdownSeconds.Text.Trim()} {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -shut full -force {txtGFIXShutdownSeconds.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXSetOnline_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online multi {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online multi {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXOnlineFull_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXOnlineSingle_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online single {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online single {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXONlineMulti_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online multi {GetGFIXVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -online multi {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXSweep_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -sweep {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -sweep {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HotSpot2_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -h {txtGFIXSweepInterval.Text.Trim()} {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -h {txtGFIXSweepInterval.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXPageCapacityReserve_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -u reserve {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -u reserve {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXPageFillFull_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -u full {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -u full {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXBuffers_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -b {txtGFIXBuffers.Text.Trim()} {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -b {txtGFIXBuffers.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXBufferServerDefault_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -b 0 {GetGFIXMemoryVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -b 0 {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXReadWriteMode_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -mo read_write {GetGFIXReadWriteVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -mo read_write {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXAccessRead_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -mo read_only {GetGFIXReadWriteVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -mo read_only {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXENableForcedWrites_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -w sync {GetGFIXReadWriteVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -w sync {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXDisableForcedWrites_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -w async {GetGFIXReadWriteVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -w async {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXLimboTransactions_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -list {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -list {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXAutomatetRecovery_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -two_phase all {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -two_phase all {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXRecoverLimboTrans_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -commit all {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -commit all {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HotSpot3_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -commit {txtGFIXLimboIDRecover.Text.Trim()} {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -commit {txtGFIXLimboIDRecover.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HotSpot4_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -two_phase {txtGFIXTowWayLimboID.Text} {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -two_phase {txtGFIXTowWayLimboID.Text} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXResolveLimboAll_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -rollback all {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -rollback all {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsGFIXResolveLimbID_Click(object sender, EventArgs e)
         {
-            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -rollback {txtGFIXLimboIDRecover.Text.Trim()} {GetGFIXValidationVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
+            txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -rollback {txtGFIXLimboIDRecover.Text.Trim()} {GetVersion()} \"{_dbReg.GetFullDatabasePath()}\"";
         }
 
         private void HsRunGFIX_Click(object sender, EventArgs e)
@@ -698,7 +686,6 @@ namespace FBXpert.SonstForms
             {
                 MakeVERSIONParameters();
             }
-
         }
 
         private void HotSpot5_Click(object sender, EventArgs e)
@@ -707,6 +694,26 @@ namespace FBXpert.SonstForms
             {
                 txtRestoreFile.Text = ofdBackup.FileName;
             }
+        }
+
+        private void rtbGFIXArguments_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hsClearGBAKOutput_Click(object sender, EventArgs e)
+        {
+            fctGBAKOutput.Clear();
+        }
+
+        private void hsClearGSTATOutput_Click(object sender, EventArgs e)
+        {
+            fctGSTATOutput.Clear();
+        }
+
+        private void ckRestoreDeactivateIndexes_CheckedChanged(object sender, EventArgs e)
+        {
+            MakeRestoreParameters();
         }
     }
 }

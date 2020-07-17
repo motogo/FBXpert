@@ -1,6 +1,7 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using Enums;
+using FastColoredTextBoxNS;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Windows.Forms;
 
@@ -1832,8 +1834,8 @@ namespace FBExpert
             NotifiesClass.Instance().AddToINFO($@"Reading common tables for {DBReg.Alias}",eMessageGranularity.more, true);
             
             var tableList = GetAllTableObjectsComplete(DBReg);
-            
-      
+
+            if (tableList == null) return null;
             if (tableList.Count <= 0) return null;
             string oldTableName = string.Empty;
             int n = 0;
@@ -1884,27 +1886,27 @@ namespace FBExpert
                  if (tc.DependenciesFROM_Procedures != null) dependenciesFROMProcedures_cnt = tc.DependenciesFROM_Procedures.Count;
 
 
-                var table_field_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.FieldsKeyGroupStr, "Fields (" + fields_cnt.ToString() + ")");               
-                var table_pk_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyGroupStr,"Primary Keys (" + pk_cnt.ToString() + ")");
-                var table_fk_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr,"Foreign Keys (" + fk_cnt.ToString() + ")");
-                var constraint_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyGroupStr,"Constraints (" + (uc_cnt + nn_cnt + constraints_pk_cnt).ToString() + ")");
-                var dependencies_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesKeyGroupStr,"Dependencies (" + (dependenciesTOTables_cnt + dependenciesFROMTables_cnt + dependenciesTOTriggers_cnt + dependenciesFROMTriggers_cnt + dependenciesTOViews_cnt + dependenciesFROMViews_cnt + dependenciesTOProcedures_cnt + dependenciesFROMProcedures_cnt).ToString() + ")");
-                var dependencies_group_node_Tables = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesTablesKeyGroupStr,"Dep Tables (" + (dependenciesTOTables_cnt + dependenciesFROMTables_cnt).ToString() + ")");
-                var dependencies_group_node_Triggers = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyGroupStr,"Triggers (" + (dependenciesTOTriggers_cnt + dependenciesFROMTriggers_cnt).ToString() + ")");
-                var dependencies_group_node_Views = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromViewsKeyGroupStr,"Dep Views (" + (dependenciesTOViews_cnt + dependenciesFROMViews_cnt).ToString() + ")");
-                var dependencies_group_node_Procedures = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyGroupStr,"Procedures (" + (dependenciesTOProcedures_cnt + dependenciesFROMProcedures_cnt).ToString() + ")");
-                var constraint_uniques_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyGroupStr,"Uniques (" + uc_cnt.ToString() + ")");
-                var constraint_notnull_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyGroupStr,"Not Nulls (" + nn_cnt.ToString() + ")");
-                var constraint_check_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyGroupStr,"Checks (" + ck_cnt.ToString() + ")");
-                var dependenciesTOTables_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTablesKeyGroupStr,"Dependencies To (" + dependenciesTOTables_cnt.ToString() + ")");
-                var dependenciesFROMTables_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTablesKeyGroupStr,"Dependencies From (" + dependenciesFROMTables_cnt.ToString() + ")");
-                var dependenciesTOTriggers_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyGroupStr,"Dependencies To (" + dependenciesTOTriggers_cnt.ToString() + ")");
-                var dependenciesFROMTriggers_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyGroupStr,"Dependencies From (" + dependenciesFROMTriggers_cnt.ToString()+ ")");
-                var dependenciesTOViews_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToViewsKeyGroupStr,"Dependencies To (" + dependenciesTOViews_cnt.ToString() + ")");
-                var dependenciesFROMViews_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromViewsKeyGroupStr,"Dependencies From (" + dependenciesFROMViews_cnt.ToString() + ")");
-                var dependenciesTOProcedures_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToProceduresKeyGroupStr,"Dependencies To (" + dependenciesTOProcedures_cnt.ToString() + ")");
-                var dependenciesFROMProcedures_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyGroupStr,"Dependencies From (" + dependenciesFROMProcedures_cnt.ToString() + ")");                           
-                var table_indices_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyGroupStr,"Indices (" + indices_cnt.ToString() + ")");
+                var table_field_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.FieldsKeyGroupStr, $@"Fields ({fields_cnt})");
+                var table_pk_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyGroupStr, $@"Primary Keys ({pk_cnt})");
+                var table_fk_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr, $@"Foreign Keys ({fk_cnt})");
+                var constraint_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyGroupStr, $@"Constraints ({(uc_cnt + nn_cnt + constraints_pk_cnt)})");
+                var dependencies_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesKeyGroupStr, $@"Dependencies ({(dependenciesTOTables_cnt + dependenciesFROMTables_cnt + dependenciesTOTriggers_cnt + dependenciesFROMTriggers_cnt + dependenciesTOViews_cnt + dependenciesFROMViews_cnt + dependenciesTOProcedures_cnt + dependenciesFROMProcedures_cnt)})");
+                var dependencies_group_node_Tables = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesTablesKeyGroupStr, $@"Dep Tables ({(dependenciesTOTables_cnt + dependenciesFROMTables_cnt)})");
+                var dependencies_group_node_Triggers = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyGroupStr, $@"Triggers ({(dependenciesTOTriggers_cnt + dependenciesFROMTriggers_cnt)})");
+                var dependencies_group_node_Views = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromViewsKeyGroupStr, $@"Dep Views ({(dependenciesTOViews_cnt + dependenciesFROMViews_cnt)})");
+                var dependencies_group_node_Procedures = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyGroupStr, $@"Procedures ({(dependenciesTOProcedures_cnt + dependenciesFROMProcedures_cnt)})");
+                var constraint_uniques_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyGroupStr, $@"Uniques ({uc_cnt})");
+                var constraint_notnull_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyGroupStr, $@"Not Nulls ({nn_cnt})");
+                var constraint_check_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyGroupStr, $@"Checks ({ck_cnt})");
+                var dependenciesTOTables_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTablesKeyGroupStr, $@"Dependencies To ({dependenciesTOTables_cnt})");
+                var dependenciesFROMTables_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTablesKeyGroupStr, $@"Dependencies From ({dependenciesFROMTables_cnt})");
+                var dependenciesTOTriggers_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyGroupStr, $@"Dependencies To ({dependenciesTOTriggers_cnt})");
+                var dependenciesFROMTriggers_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyGroupStr, $@"Dependencies From ({dependenciesFROMTriggers_cnt})");
+                var dependenciesTOViews_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToViewsKeyGroupStr, $@"Dependencies To ({dependenciesTOViews_cnt})");
+                var dependenciesFROMViews_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromViewsKeyGroupStr, $@"Dependencies From ({dependenciesFROMViews_cnt})");
+                var dependenciesTOProcedures_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToProceduresKeyGroupStr, $@"Dependencies To ({dependenciesTOProcedures_cnt})");
+                var dependenciesFROMProcedures_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyGroupStr, $@"Dependencies From ({dependenciesFROMProcedures_cnt})");
+                var table_indices_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyGroupStr, $@"Indices ({indices_cnt})");
 
 
                 #endregion
@@ -1939,7 +1941,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.Indices.Values)
                      {
-                        var inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, inx.Name, inx);                        
+                        var inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, inx.Name, inx);
                         table_indices_group_node.Nodes.Add(inx_node);
                      }
                  }
@@ -1947,7 +1949,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.uniques_constraints.Values)
                      {
-                        var u_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyStr, inx.Name, inx);                        
+                        var u_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyStr, inx.Name, inx);
                         constraint_uniques_group_node.Nodes.Add(u_node);
                      }
                  }
@@ -1956,7 +1958,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.notnulls_constraints.Values)
                      {
-                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyStr, inx.Name, inx);                        
+                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyStr, inx.Name, inx);
                         constraint_notnull_group_node.Nodes.Add(nn_node);
                      }
                  }
@@ -1965,7 +1967,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.check_constraints.Values)
                      {
-                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyStr, inx.Name, inx);                        
+                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyStr, inx.Name, inx);
                         constraint_check_group_node.Nodes.Add(nn_node);
                      }
                  }
@@ -1980,7 +1982,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.Triggers.Values)
                      {
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.TriggersKeyStr, inx.Name, inx);                        
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.TriggersKeyStr, inx.Name, inx);
                         table_triggers_group_node.Nodes.Add(p_node);
                      }
                  }
@@ -1995,7 +1997,7 @@ namespace FBExpert
                      {
                         if (oldInxName != inx.DependOnName)
                         {
-                            inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTablesKeyStr, inx.Name, inx);                            
+                            inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTablesKeyStr, inx.Name, inx);
                             dependenciesTOTables_group_node.Nodes.Add(inx_node);
                             oldInxName = inx.DependOnName;
                         }
@@ -2037,7 +2039,7 @@ namespace FBExpert
                             dependenciesTOTriggers_group_node.Nodes.Add(inx_node);
                             oldInxName = inx.DependOnName;
                         }
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);                                                     
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToTriggersKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);
                         inx_node.Nodes.Add(p_node);
                      }
                  }
@@ -2050,11 +2052,11 @@ namespace FBExpert
                     {
                         if (oldInxName != $@"{inx.Name}->{inx.FieldName}")
                         {
-                            inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyStr, inx.FieldName, inx);                            
+                            inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyStr, inx.FieldName, inx);
                             dependenciesFROMTriggers_group_node.Nodes.Add(inx_node);
                             oldInxName = $@"{inx.Name}->{inx.FieldName}";
                         }
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyStr, inx.DependOnName, inx);                                                    
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromTriggersKeyStr, inx.DependOnName, inx);
                         inx_node.Nodes.Add(p_node);
                     }
                  }
@@ -2072,7 +2074,7 @@ namespace FBExpert
                             dependenciesTOViews_group_node.Nodes.Add(inx_node);
                             oldInxName = inx.DependOnName;
                         }
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToViewsKeyStr, inx.Name + "->" + inx.FieldName, inx);                        
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToViewsKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);
                         inx_node.Nodes.Add(p_node);
                      }
                  }
@@ -2110,7 +2112,7 @@ namespace FBExpert
                             oldInxName = inx.DependOnName;
                         }
 
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);                        
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);
                         inx_node.Nodes.Add(p_node);
                      }
                  }
@@ -3068,14 +3070,14 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile($@"{directoryName}\{dataObject.Name}.sql",SQLSep,enc);
                     }
                 }                
             }
             SQLAll.Add(Environment.NewLine);
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile($@"{directoryName}\{fileName}",SQLAll,enc);
             }
             return SQLAll;
         }
@@ -3086,10 +3088,10 @@ namespace FBExpert
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
             
-            string infoStr = $@"/* ********* Primary keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
+            string infoStr = $@"/* ********* Primary keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
             SQLAll.Add(GetInfoHeader(infoStr.Length));
             SQLAll.Add(infoStr);
-            SQLAll.Add(GetInfoHeader(infoStr.Length));            
+            SQLAll.Add(GetInfoHeader(infoStr.Length));
             SQLAll.Add(Environment.NewLine);
             if((primarykeys == null)||(primarykeys.Count <= 0)) return SQLSep;
 
@@ -3102,10 +3104,10 @@ namespace FBExpert
                     var constraintObject = dataObject as PrimaryKeyClass;
                     
                     infoStr = $@"/* ********* Primary key {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(Environment.NewLine);
                     SQLSep.Add(GetInfoHeader(infoStr.Length));
                     SQLSep.Add(infoStr);
-                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
                     SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterTabelPrimaryKeyConstraintDLL(constraintObject, eCreateMode.drop);
@@ -3153,10 +3155,10 @@ namespace FBExpert
                     var constraintObject = dataObject;
                     
                     infoStr = $@"/* ********* Primary key {dataObject.Name} structure for {DBReg.Alias} date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
-                    SQLSep.Add(Environment.NewLine);                
+                    SQLSep.Add(Environment.NewLine);
                     SQLSep.Add(GetInfoHeader(infoStr.Length));
                     SQLSep.Add(infoStr);
-                    SQLSep.Add(GetInfoHeader(infoStr.Length));            
+                    SQLSep.Add(GetInfoHeader(infoStr.Length));
                     SQLSep.Add(Environment.NewLine);
 
                     string sql = FBXpert.CreateDLLClass.CreateAlterTabelPrimaryKeyConstraintDLL(constraintObject, eCreateMode.create);
@@ -3177,7 +3179,7 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile($@"{directoryName}\{dataObject.Name}.sql",SQLSep,enc);
                     }
                 }
                 SQLAll.Add(Environment.NewLine);
@@ -3185,7 +3187,7 @@ namespace FBExpert
 
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile($@"{directoryName}\{fileName}",SQLAll,enc);
             }
             return SQLAll;
         }
@@ -3195,7 +3197,7 @@ namespace FBExpert
             var SQLSep = new List<string>();
             var SQLAll = new List<string>();
             
-            string infoStr = $@"/* ********* Foreign keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";                            
+            string infoStr = $@"/* ********* Foreign keys structure for {DBReg.Alias} Date:{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} ********** */";
             SQLAll.Add(GetInfoHeader(infoStr.Length));
             SQLAll.Add(infoStr);
             SQLAll.Add(GetInfoHeader(infoStr.Length));            
@@ -3249,7 +3251,7 @@ namespace FBExpert
                         SQLAll.AddRange(SQLSep);
                         if(fileWrite == eSQLFileWriteMode.seperated)
                         {
-                            WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                            WriteFile($@"{directoryName}\{dataObject.Name}.sql",SQLSep,enc);
                         }
                     }                       
                 }
@@ -3288,14 +3290,14 @@ namespace FBExpert
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile($@"{directoryName}\{dataObject.Name}.sql",SQLSep,enc);
                     }
                 }                   
             }
             SQLAll.Add(Environment.NewLine);   
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile($@"{directoryName}\{fileName}",SQLAll,enc);
             }
             return SQLAll;
         }
@@ -3353,20 +3355,20 @@ namespace FBExpert
 
                         if (commit)
                         {
-                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");                    
+                            SQLSep.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
                         }
                     }   
                     SQLAll.AddRange(SQLSep);
                     if(fileWrite == eSQLFileWriteMode.seperated)
                     {
-                        WriteFile(directoryName+"\\"+dataObject.Name+".sql",SQLSep,enc);
+                        WriteFile($@"{directoryName}\{dataObject.Name}.sql",SQLSep,enc);
                     }
                 }
                 SQLAll.Add(Environment.NewLine);
             }
             if(fileWrite == eSQLFileWriteMode.all)
             {
-                WriteFile(directoryName+"\\"+ fileName,SQLAll,enc);            
+                WriteFile($@"{directoryName}\{fileName}",SQLAll,enc);
             }
             return SQLAll;
         }
@@ -5815,7 +5817,7 @@ namespace FBExpert
         }
 
 
-        public void ReadPKFields(FbDataReader dread, Dictionary<string,string> FieldNames, string tableName, string pkName, string pkField)
+        public bool ReadPKFields(FbDataReader dread, Dictionary<string,string> FieldNames, string tableName, string pkName, string pkField)
         {
             string TableName = tableName;
             string PKField = pkField;
@@ -5836,9 +5838,11 @@ namespace FBExpert
                 }
                 else
                 {
-                    break;
+                    return false;
+                    //break;
                 }
             }
+            return true;
         }
         
         public void GetAllTablePrimaryKeyObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
@@ -5884,21 +5888,23 @@ namespace FBExpert
                                     Name = PKName.Trim()
                                 };
 
-                                ReadPKFields(dread, tfc.FieldNames, TableName, PKName, PKField);
-                                
-                                tcc.primary_constraint = tfc;
-                               
-                                NewTableName = dread.GetValue(0).ToString().Trim();
-                                PKField = dread.GetValue(3).ToString().Trim();
-                                PKName = dread.GetValue(1).ToString().Trim();
+                                if (ReadPKFields(dread, tfc.FieldNames, TableName, PKName, PKField))
+                                {
+
+                                    tcc.primary_constraint = tfc;
+
+                                    NewTableName = dread.GetValue(0).ToString().Trim();
+                                    PKField = dread.GetValue(3).ToString().Trim();
+                                    PKName = dread.GetValue(1).ToString().Trim();
+                                }
                             }
-                        }                        
-                    }                    
+                        }
+                    }
                     con.Close();
                 }
                 catch (Exception ex)
                 {
-                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTablePrimaryObjects({DBReg},List<TableClass>", ex));                         
+                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->GetAllTablePrimaryKeyObjects({DBReg},List<TableClass>", ex));                         
                 }
                 finally
                 {

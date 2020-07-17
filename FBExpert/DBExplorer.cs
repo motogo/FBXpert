@@ -452,6 +452,7 @@ namespace FBXpert
              if (tnn == typeof(ViewClass))
              {
                  var tmf = new VIEWManageForm(MdiParent, drc, tn);
+                 tmf.GetData = true;
                  tmf.SetAutocompeteObjects(_actTables);
                  tmf.Show();
              }
@@ -460,6 +461,7 @@ namespace FBXpert
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
                  var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
+                 tmf.GetData = true;
                  tmf.SetAutocompeteObjects(_actTables,null);
                  tmf.Show();
                  Cursor = Cursors.Default;
@@ -469,6 +471,7 @@ namespace FBXpert
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
                  var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
+                 tmf.GetData = true;
                  tmf.SetAutocompeteObjects(null,_actSystemTables);
                  tmf.Show();
                  Cursor = Cursors.Default;
@@ -1210,17 +1213,31 @@ namespace FBXpert
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
                 var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
+                tmf.GetData = true;
                 tmf.SetAutocompeteObjects(_actTables,null);
                 tmf.Show();
                 Cursor = Cursors.Default;
             }
-            if (e.ClickedItem == tsmiOpenSystemTable)
+            else if (e.ClickedItem == tsmiEditTableStruct)
+            {
+                var tc = (TableClass)_tnSelected.Tag;
+                if (tc == null) return;
+                Cursor = Cursors.WaitCursor;
+                Application.DoEvents();
+                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
+                tmf.GetData = false;
+                tmf.SetAutocompeteObjects(_actTables, null);
+                tmf.Show();
+                Cursor = Cursors.Default;
+            }
+            else if (e.ClickedItem == tsmiOpenSystemTable)
             {
                 var tc = (SystemTableClass)_tnSelected.Tag;
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
                 var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
+                tmf.GetData = true;
                 tmf.SetAutocompeteObjects(null,_actSystemTables);
                 tmf.Show();
                 Cursor = Cursors.Default;
@@ -1309,8 +1326,16 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiEditView)
             {                            
                 var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
+                tmf.GetData = true;
                 tmf.SetAutocompeteObjects(_actTables);
                 tmf.Show();                                
+            }
+            else if (e.ClickedItem == tsmiEditStructView)
+            {
+                var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
+                tmf.GetData = false;
+                tmf.SetAutocompeteObjects(_actTables);
+                tmf.Show();
             }
             else if (e.ClickedItem == tsmiEditForeignKeys)
             {                            

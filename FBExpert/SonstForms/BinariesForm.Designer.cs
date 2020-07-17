@@ -60,7 +60,6 @@
             this.gbGFIXOptions = new System.Windows.Forms.GroupBox();
             this.tabControlGFIX = new System.Windows.Forms.TabControl();
             this.tabPageOfflineOnline = new System.Windows.Forms.TabPage();
-            this.cbGFIXShutVersion = new System.Windows.Forms.CheckBox();
             this.hsGFIXONlineMulti = new SeControlsLib.HotSpot();
             this.hsGFIXOnlineSingle = new SeControlsLib.HotSpot();
             this.hsGFIXOnlineFull = new SeControlsLib.HotSpot();
@@ -75,7 +74,6 @@
             this.txtGFIXBuffers = new System.Windows.Forms.TextBox();
             this.gbGFIXSweepInterval = new System.Windows.Forms.GroupBox();
             this.txtGFIXSweepInterval = new System.Windows.Forms.TextBox();
-            this.cbGFIXVersionMemory = new System.Windows.Forms.CheckBox();
             this.hsGFIXBuffers = new SeControlsLib.HotSpot();
             this.hsGFIXPageCapacityReserve = new SeControlsLib.HotSpot();
             this.hsGFIXPageFillFull = new SeControlsLib.HotSpot();
@@ -86,7 +84,6 @@
             this.hsGFIXENableForcedWrites = new SeControlsLib.HotSpot();
             this.hsGFIXAccessRead = new SeControlsLib.HotSpot();
             this.hsGFIXReadWriteMode = new SeControlsLib.HotSpot();
-            this.cbGFIXReadWriteVersion = new System.Windows.Forms.CheckBox();
             this.tabPageValidation = new System.Windows.Forms.TabPage();
             this.gbGFIXResolveLimboID = new System.Windows.Forms.GroupBox();
             this.tstGFIXResolveLimbiID = new System.Windows.Forms.TextBox();
@@ -101,10 +98,10 @@
             this.hsGFIXRecoverLimboTrans = new SeControlsLib.HotSpot();
             this.hsGFIXAutomatetRecovery = new SeControlsLib.HotSpot();
             this.hsGFIXLimboTransactions = new SeControlsLib.HotSpot();
-            this.cbGFIXValidationVersion = new System.Windows.Forms.CheckBox();
             this.gbGFIXArgumentsText = new System.Windows.Forms.GroupBox();
             this.rtbGFIXArguments = new System.Windows.Forms.RichTextBox();
             this.pnlGFIXUpper = new System.Windows.Forms.Panel();
+            this.cbShowVersion = new System.Windows.Forms.CheckBox();
             this.hsRunGFIX = new SeControlsLib.HotSpot();
             this.gbGFIXPassword = new System.Windows.Forms.GroupBox();
             this.txtGFIXPassword = new System.Windows.Forms.TextBox();
@@ -114,6 +111,7 @@
             this.gbGStatOut = new System.Windows.Forms.GroupBox();
             this.fctGSTATOutput = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlGSTATOutputUpper = new System.Windows.Forms.Panel();
+            this.hsClearGSTATOutput = new SeControlsLib.HotSpot();
             this.hsSaveGStatToFile = new SeControlsLib.HotSpot();
             this.pnlGSTATLeft = new System.Windows.Forms.Panel();
             this.gbGSTATParameters = new System.Windows.Forms.GroupBox();
@@ -129,19 +127,20 @@
             this.cbGSTATAnalyzeDataPages = new System.Windows.Forms.CheckBox();
             this.cbGSTATAnalyzeSystemRelations = new System.Windows.Forms.CheckBox();
             this.cbGSTATAnalyzeIndexLeafPages = new System.Windows.Forms.CheckBox();
-            this.cbGSTATDisplayVersion = new System.Windows.Forms.CheckBox();
             this.gbGSTATArgumentsText = new System.Windows.Forms.GroupBox();
             this.rtbGSTATArgument = new System.Windows.Forms.RichTextBox();
             this.pnlGSTATUpper = new System.Windows.Forms.Panel();
             this.hsRunGSTAT = new SeControlsLib.HotSpot();
             this.gbGSTATUser = new System.Windows.Forms.GroupBox();
             this.txtGSTATUser = new System.Windows.Forms.TextBox();
+            this.cbGSTATDisplayVersion = new System.Windows.Forms.CheckBox();
             this.gbGSTATPassword = new System.Windows.Forms.GroupBox();
             this.txtGSTATPassword = new System.Windows.Forms.TextBox();
             this.tabGBAK = new System.Windows.Forms.TabPage();
             this.gbGBAKOutput = new System.Windows.Forms.GroupBox();
-            this.txtGBAKOutput = new System.Windows.Forms.TextBox();
+            this.fctGBAKOutput = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlGBAKOutputUpper = new System.Windows.Forms.Panel();
+            this.hsClearGBAKOutput = new SeControlsLib.HotSpot();
             this.hsGBAKOutputSave = new SeControlsLib.HotSpot();
             this.pnlGBAKLeft = new System.Windows.Forms.Panel();
             this.gbGBAKParameters = new System.Windows.Forms.GroupBox();
@@ -155,7 +154,6 @@
             this.gbBackupLocation = new System.Windows.Forms.GroupBox();
             this.txtBackupLocation = new System.Windows.Forms.TextBox();
             this.hsLoadBackupFile = new SeControlsLib.HotSpot();
-            this.cbGBAKVersion = new System.Windows.Forms.CheckBox();
             this.cbBackupReportActions = new System.Windows.Forms.CheckBox();
             this.cbUseLocalhost = new System.Windows.Forms.CheckBox();
             this.cbBackupExpand = new System.Windows.Forms.CheckBox();
@@ -168,6 +166,9 @@
             this.cbBackupMetatdataOnly = new System.Windows.Forms.CheckBox();
             this.cbBackupDisableTriggers = new System.Windows.Forms.CheckBox();
             this.tabPageRestore = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtRestoreFile = new System.Windows.Forms.TextBox();
+            this.hotSpot5 = new SeControlsLib.HotSpot();
             this.gbRestoreOveridePageBuffers = new System.Windows.Forms.GroupBox();
             this.cbRestoreOverridePageBuffers = new System.Windows.Forms.CheckBox();
             this.txtRestoreOverridePageBuffers = new System.Windows.Forms.TextBox();
@@ -198,15 +199,14 @@
             this.hsRunGBAK = new SeControlsLib.HotSpot();
             this.gbBAKUser = new System.Windows.Forms.GroupBox();
             this.txtGBAKUser = new System.Windows.Forms.TextBox();
+            this.cbGBAKVersion = new System.Windows.Forms.CheckBox();
             this.gbBAKPassword = new System.Windows.Forms.GroupBox();
             this.txtGBAKPassword = new System.Windows.Forms.TextBox();
             this.ofdFiles = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.ofdDatabase = new System.Windows.Forms.OpenFileDialog();
             this.ofdBackup = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtRestoreFile = new System.Windows.Forms.TextBox();
-            this.hotSpot5 = new SeControlsLib.HotSpot();
+            this.ckRestoreDeactivateIndexes = new System.Windows.Forms.CheckBox();
             this.pnlUpper.SuspendLayout();
             this.tcCenter.SuspendLayout();
             this.tabISQL.SuspendLayout();
@@ -256,6 +256,7 @@
             this.gbGSTATPassword.SuspendLayout();
             this.tabGBAK.SuspendLayout();
             this.gbGBAKOutput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctGBAKOutput)).BeginInit();
             this.pnlGBAKOutputUpper.SuspendLayout();
             this.pnlGBAKLeft.SuspendLayout();
             this.gbGBAKParameters.SuspendLayout();
@@ -264,6 +265,7 @@
             this.gbDatabaseLocation.SuspendLayout();
             this.gbBackupLocation.SuspendLayout();
             this.tabPageRestore.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.gbRestoreOveridePageBuffers.SuspendLayout();
             this.gbRestoreOverridePageSize.SuspendLayout();
             this.gbRestoreMode.SuspendLayout();
@@ -273,7 +275,6 @@
             this.pnlGBAKUserPassword.SuspendLayout();
             this.gbBAKUser.SuspendLayout();
             this.gbBAKPassword.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -283,7 +284,7 @@
             this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1284, 48);
+            this.pnlUpper.Size = new System.Drawing.Size(1336, 48);
             this.pnlUpper.TabIndex = 2;
             // 
             // hsClose
@@ -299,6 +300,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -311,6 +313,8 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 48);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -346,12 +350,13 @@
             this.hsRunISQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunISQL.FlatAppearance.BorderSize = 0;
             this.hsRunISQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunISQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunISQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunISQL.Image = global::FBXpert.Properties.Resources.console_x32;
             this.hsRunISQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunISQL.ImageHover = global::FBXpert.Properties.Resources.console2_x32;
             this.hsRunISQL.ImageToggleOnSelect = true;
-            this.hsRunISQL.Location = new System.Drawing.Point(505, 0);
+            this.hsRunISQL.Location = new System.Drawing.Point(545, 0);
             this.hsRunISQL.Marked = false;
             this.hsRunISQL.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunISQL.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -359,6 +364,8 @@
             this.hsRunISQL.MarkMode = false;
             this.hsRunISQL.Name = "hsRunISQL";
             this.hsRunISQL.NonMarkedText = "Run";
+            this.hsRunISQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunISQL.ShowShortcut = false;
             this.hsRunISQL.Size = new System.Drawing.Size(75, 53);
             this.hsRunISQL.TabIndex = 5;
             this.hsRunISQL.Text = "Run";
@@ -392,7 +399,7 @@
             this.tcCenter.Location = new System.Drawing.Point(0, 48);
             this.tcCenter.Name = "tcCenter";
             this.tcCenter.SelectedIndex = 0;
-            this.tcCenter.Size = new System.Drawing.Size(1284, 772);
+            this.tcCenter.Size = new System.Drawing.Size(1336, 772);
             this.tcCenter.TabIndex = 3;
             this.tcCenter.Enter += new System.EventHandler(this.TcCenter_Enter);
             // 
@@ -403,7 +410,7 @@
             this.tabISQL.Location = new System.Drawing.Point(4, 22);
             this.tabISQL.Name = "tabISQL";
             this.tabISQL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabISQL.Size = new System.Drawing.Size(1276, 746);
+            this.tabISQL.Size = new System.Drawing.Size(1328, 746);
             this.tabISQL.TabIndex = 0;
             this.tabISQL.Text = "ISQL";
             this.tabISQL.UseVisualStyleBackColor = true;
@@ -414,9 +421,9 @@
             this.gbISQLOutput.Controls.Add(this.pnlISQLOutputUpper);
             this.gbISQLOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbISQLOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbISQLOutput.Location = new System.Drawing.Point(583, 3);
+            this.gbISQLOutput.Location = new System.Drawing.Point(623, 3);
             this.gbISQLOutput.Name = "gbISQLOutput";
-            this.gbISQLOutput.Size = new System.Drawing.Size(690, 740);
+            this.gbISQLOutput.Size = new System.Drawing.Size(702, 740);
             this.gbISQLOutput.TabIndex = 16;
             this.gbISQLOutput.TabStop = false;
             this.gbISQLOutput.Text = "Output";
@@ -455,7 +462,7 @@
             this.fctISQLOutput.RightBracket = ')';
             this.fctISQLOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctISQLOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctISQLOutput.ServiceColors")));
-            this.fctISQLOutput.Size = new System.Drawing.Size(684, 679);
+            this.fctISQLOutput.Size = new System.Drawing.Size(696, 679);
             this.fctISQLOutput.TabIndex = 25;
             this.fctISQLOutput.WordWrap = true;
             this.fctISQLOutput.Zoom = 100;
@@ -467,7 +474,7 @@
             this.pnlISQLOutputUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlISQLOutputUpper.Location = new System.Drawing.Point(3, 16);
             this.pnlISQLOutputUpper.Name = "pnlISQLOutputUpper";
-            this.pnlISQLOutputUpper.Size = new System.Drawing.Size(684, 42);
+            this.pnlISQLOutputUpper.Size = new System.Drawing.Size(696, 42);
             this.pnlISQLOutputUpper.TabIndex = 23;
             // 
             // hotSpot1
@@ -483,6 +490,7 @@
             this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot1.FlatAppearance.BorderSize = 0;
             this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot1.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hotSpot1.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
@@ -495,6 +503,8 @@
             this.hotSpot1.MarkMode = false;
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "";
+            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(37, 42);
             this.hotSpot1.TabIndex = 6;
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -524,7 +534,7 @@
             this.pnlISQLLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlISQLLeft.Location = new System.Drawing.Point(3, 3);
             this.pnlISQLLeft.Name = "pnlISQLLeft";
-            this.pnlISQLLeft.Size = new System.Drawing.Size(580, 740);
+            this.pnlISQLLeft.Size = new System.Drawing.Size(620, 740);
             this.pnlISQLLeft.TabIndex = 12;
             // 
             // gbISQLParameters
@@ -533,7 +543,7 @@
             this.gbISQLParameters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbISQLParameters.Location = new System.Drawing.Point(0, 53);
             this.gbISQLParameters.Name = "gbISQLParameters";
-            this.gbISQLParameters.Size = new System.Drawing.Size(580, 267);
+            this.gbISQLParameters.Size = new System.Drawing.Size(620, 267);
             this.gbISQLParameters.TabIndex = 9;
             this.gbISQLParameters.TabStop = false;
             this.gbISQLParameters.Text = "Parameters";
@@ -546,7 +556,7 @@
             this.txtISQLParameters.Location = new System.Drawing.Point(3, 16);
             this.txtISQLParameters.Multiline = true;
             this.txtISQLParameters.Name = "txtISQLParameters";
-            this.txtISQLParameters.Size = new System.Drawing.Size(574, 248);
+            this.txtISQLParameters.Size = new System.Drawing.Size(614, 248);
             this.txtISQLParameters.TabIndex = 0;
             // 
             // gbArgumentsInfo
@@ -555,7 +565,7 @@
             this.gbArgumentsInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbArgumentsInfo.Location = new System.Drawing.Point(0, 320);
             this.gbArgumentsInfo.Name = "gbArgumentsInfo";
-            this.gbArgumentsInfo.Size = new System.Drawing.Size(580, 420);
+            this.gbArgumentsInfo.Size = new System.Drawing.Size(620, 420);
             this.gbArgumentsInfo.TabIndex = 10;
             this.gbArgumentsInfo.TabStop = false;
             this.gbArgumentsInfo.Text = "Arguments info";
@@ -566,7 +576,7 @@
             this.rtfISQLCommands.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtfISQLCommands.Location = new System.Drawing.Point(3, 16);
             this.rtfISQLCommands.Name = "rtfISQLCommands";
-            this.rtfISQLCommands.Size = new System.Drawing.Size(574, 401);
+            this.rtfISQLCommands.Size = new System.Drawing.Size(614, 401);
             this.rtfISQLCommands.TabIndex = 0;
             this.rtfISQLCommands.Text = resources.GetString("rtfISQLCommands.Text");
             // 
@@ -578,7 +588,7 @@
             this.pnlISQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlISQLUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlISQLUpper.Name = "pnlISQLUpper";
-            this.pnlISQLUpper.Size = new System.Drawing.Size(580, 53);
+            this.pnlISQLUpper.Size = new System.Drawing.Size(620, 53);
             this.pnlISQLUpper.TabIndex = 11;
             // 
             // gbISQLPassword
@@ -625,7 +635,7 @@
             this.tabGFIX.Location = new System.Drawing.Point(4, 22);
             this.tabGFIX.Name = "tabGFIX";
             this.tabGFIX.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGFIX.Size = new System.Drawing.Size(1276, 746);
+            this.tabGFIX.Size = new System.Drawing.Size(1328, 746);
             this.tabGFIX.TabIndex = 1;
             this.tabGFIX.Text = "GFIX";
             this.tabGFIX.UseVisualStyleBackColor = true;
@@ -636,9 +646,9 @@
             this.gbGFIXOutput.Controls.Add(this.pnlGFIXOutputUpper);
             this.gbGFIXOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbGFIXOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbGFIXOutput.Location = new System.Drawing.Point(583, 3);
+            this.gbGFIXOutput.Location = new System.Drawing.Point(623, 3);
             this.gbGFIXOutput.Name = "gbGFIXOutput";
-            this.gbGFIXOutput.Size = new System.Drawing.Size(690, 740);
+            this.gbGFIXOutput.Size = new System.Drawing.Size(702, 740);
             this.gbGFIXOutput.TabIndex = 12;
             this.gbGFIXOutput.TabStop = false;
             this.gbGFIXOutput.Text = "Output";
@@ -677,7 +687,7 @@
             this.fctGFIXOutput.RightBracket = ')';
             this.fctGFIXOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctGFIXOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGFIXOutput.ServiceColors")));
-            this.fctGFIXOutput.Size = new System.Drawing.Size(684, 679);
+            this.fctGFIXOutput.Size = new System.Drawing.Size(696, 679);
             this.fctGFIXOutput.TabIndex = 24;
             this.fctGFIXOutput.WordWrap = true;
             this.fctGFIXOutput.Zoom = 100;
@@ -689,7 +699,7 @@
             this.pnlGFIXOutputUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGFIXOutputUpper.Location = new System.Drawing.Point(3, 16);
             this.pnlGFIXOutputUpper.Name = "pnlGFIXOutputUpper";
-            this.pnlGFIXOutputUpper.Size = new System.Drawing.Size(684, 42);
+            this.pnlGFIXOutputUpper.Size = new System.Drawing.Size(696, 42);
             this.pnlGFIXOutputUpper.TabIndex = 23;
             // 
             // hsGFIXSaveOutput
@@ -705,6 +715,7 @@
             this.hsGFIXSaveOutput.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXSaveOutput.FlatAppearance.BorderSize = 0;
             this.hsGFIXSaveOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXSaveOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXSaveOutput.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXSaveOutput.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hsGFIXSaveOutput.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
@@ -717,6 +728,8 @@
             this.hsGFIXSaveOutput.MarkMode = false;
             this.hsGFIXSaveOutput.Name = "hsGFIXSaveOutput";
             this.hsGFIXSaveOutput.NonMarkedText = "";
+            this.hsGFIXSaveOutput.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXSaveOutput.ShowShortcut = false;
             this.hsGFIXSaveOutput.Size = new System.Drawing.Size(37, 42);
             this.hsGFIXSaveOutput.TabIndex = 6;
             this.hsGFIXSaveOutput.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -747,16 +760,16 @@
             this.pnlGFIXLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlGFIXLeft.Location = new System.Drawing.Point(3, 3);
             this.pnlGFIXLeft.Name = "pnlGFIXLeft";
-            this.pnlGFIXLeft.Size = new System.Drawing.Size(580, 740);
+            this.pnlGFIXLeft.Size = new System.Drawing.Size(620, 740);
             this.pnlGFIXLeft.TabIndex = 15;
             // 
             // gbGFIXParameters
             // 
             this.gbGFIXParameters.Controls.Add(this.txtGFIXParameters);
             this.gbGFIXParameters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbGFIXParameters.Location = new System.Drawing.Point(0, 297);
+            this.gbGFIXParameters.Location = new System.Drawing.Point(0, 302);
             this.gbGFIXParameters.Name = "gbGFIXParameters";
-            this.gbGFIXParameters.Size = new System.Drawing.Size(580, 120);
+            this.gbGFIXParameters.Size = new System.Drawing.Size(620, 115);
             this.gbGFIXParameters.TabIndex = 13;
             this.gbGFIXParameters.TabStop = false;
             this.gbGFIXParameters.Text = "Parameters";
@@ -769,16 +782,16 @@
             this.txtGFIXParameters.Location = new System.Drawing.Point(3, 16);
             this.txtGFIXParameters.Multiline = true;
             this.txtGFIXParameters.Name = "txtGFIXParameters";
-            this.txtGFIXParameters.Size = new System.Drawing.Size(574, 101);
+            this.txtGFIXParameters.Size = new System.Drawing.Size(614, 96);
             this.txtGFIXParameters.TabIndex = 0;
             // 
             // gbGFIXOptions
             // 
             this.gbGFIXOptions.Controls.Add(this.tabControlGFIX);
             this.gbGFIXOptions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbGFIXOptions.Location = new System.Drawing.Point(0, 53);
+            this.gbGFIXOptions.Location = new System.Drawing.Point(0, 58);
             this.gbGFIXOptions.Name = "gbGFIXOptions";
-            this.gbGFIXOptions.Size = new System.Drawing.Size(580, 244);
+            this.gbGFIXOptions.Size = new System.Drawing.Size(620, 244);
             this.gbGFIXOptions.TabIndex = 13;
             this.gbGFIXOptions.TabStop = false;
             this.gbGFIXOptions.Text = "Options";
@@ -793,12 +806,11 @@
             this.tabControlGFIX.Location = new System.Drawing.Point(3, 16);
             this.tabControlGFIX.Name = "tabControlGFIX";
             this.tabControlGFIX.SelectedIndex = 0;
-            this.tabControlGFIX.Size = new System.Drawing.Size(574, 225);
+            this.tabControlGFIX.Size = new System.Drawing.Size(614, 225);
             this.tabControlGFIX.TabIndex = 31;
             // 
             // tabPageOfflineOnline
             // 
-            this.tabPageOfflineOnline.Controls.Add(this.cbGFIXShutVersion);
             this.tabPageOfflineOnline.Controls.Add(this.hsGFIXONlineMulti);
             this.tabPageOfflineOnline.Controls.Add(this.hsGFIXOnlineSingle);
             this.tabPageOfflineOnline.Controls.Add(this.hsGFIXOnlineFull);
@@ -809,22 +821,10 @@
             this.tabPageOfflineOnline.Location = new System.Drawing.Point(4, 22);
             this.tabPageOfflineOnline.Name = "tabPageOfflineOnline";
             this.tabPageOfflineOnline.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOfflineOnline.Size = new System.Drawing.Size(566, 199);
+            this.tabPageOfflineOnline.Size = new System.Drawing.Size(606, 199);
             this.tabPageOfflineOnline.TabIndex = 0;
             this.tabPageOfflineOnline.Text = "Online/Offline";
             this.tabPageOfflineOnline.UseVisualStyleBackColor = true;
-            // 
-            // cbGFIXShutVersion
-            // 
-            this.cbGFIXShutVersion.AutoSize = true;
-            this.cbGFIXShutVersion.Checked = true;
-            this.cbGFIXShutVersion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGFIXShutVersion.Location = new System.Drawing.Point(156, 129);
-            this.cbGFIXShutVersion.Name = "cbGFIXShutVersion";
-            this.cbGFIXShutVersion.Size = new System.Drawing.Size(136, 17);
-            this.cbGFIXShutVersion.TabIndex = 34;
-            this.cbGFIXShutVersion.Text = "Display Version number";
-            this.cbGFIXShutVersion.UseVisualStyleBackColor = true;
             // 
             // hsGFIXONlineMulti
             // 
@@ -838,6 +838,7 @@
             this.hsGFIXONlineMulti.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXONlineMulti.FlatAppearance.BorderSize = 0;
             this.hsGFIXONlineMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXONlineMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXONlineMulti.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXONlineMulti.Image = global::FBXpert.Properties.Resources.go_up;
             this.hsGFIXONlineMulti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -851,6 +852,8 @@
             this.hsGFIXONlineMulti.MarkMode = false;
             this.hsGFIXONlineMulti.Name = "hsGFIXONlineMulti";
             this.hsGFIXONlineMulti.NonMarkedText = "";
+            this.hsGFIXONlineMulti.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXONlineMulti.ShowShortcut = false;
             this.hsGFIXONlineMulti.Size = new System.Drawing.Size(122, 32);
             this.hsGFIXONlineMulti.TabIndex = 31;
             this.hsGFIXONlineMulti.Text = "Online multi";
@@ -886,6 +889,7 @@
             this.hsGFIXOnlineSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXOnlineSingle.FlatAppearance.BorderSize = 0;
             this.hsGFIXOnlineSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXOnlineSingle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXOnlineSingle.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXOnlineSingle.Image = global::FBXpert.Properties.Resources.go_up;
             this.hsGFIXOnlineSingle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -899,6 +903,8 @@
             this.hsGFIXOnlineSingle.MarkMode = false;
             this.hsGFIXOnlineSingle.Name = "hsGFIXOnlineSingle";
             this.hsGFIXOnlineSingle.NonMarkedText = "";
+            this.hsGFIXOnlineSingle.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXOnlineSingle.ShowShortcut = false;
             this.hsGFIXOnlineSingle.Size = new System.Drawing.Size(122, 32);
             this.hsGFIXOnlineSingle.TabIndex = 32;
             this.hsGFIXOnlineSingle.Text = "Online single";
@@ -934,6 +940,7 @@
             this.hsGFIXOnlineFull.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXOnlineFull.FlatAppearance.BorderSize = 0;
             this.hsGFIXOnlineFull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXOnlineFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXOnlineFull.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXOnlineFull.Image = global::FBXpert.Properties.Resources.go_up;
             this.hsGFIXOnlineFull.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -947,6 +954,8 @@
             this.hsGFIXOnlineFull.MarkMode = false;
             this.hsGFIXOnlineFull.Name = "hsGFIXOnlineFull";
             this.hsGFIXOnlineFull.NonMarkedText = "";
+            this.hsGFIXOnlineFull.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXOnlineFull.ShowShortcut = false;
             this.hsGFIXOnlineFull.Size = new System.Drawing.Size(122, 32);
             this.hsGFIXOnlineFull.TabIndex = 33;
             this.hsGFIXOnlineFull.Text = "Online (all users)";
@@ -982,6 +991,7 @@
             this.hsGFIXShutdownMulti.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXShutdownMulti.FlatAppearance.BorderSize = 0;
             this.hsGFIXShutdownMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXShutdownMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXShutdownMulti.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXShutdownMulti.Image = global::FBXpert.Properties.Resources.go_down_red32x;
             this.hsGFIXShutdownMulti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -995,6 +1005,8 @@
             this.hsGFIXShutdownMulti.MarkMode = false;
             this.hsGFIXShutdownMulti.Name = "hsGFIXShutdownMulti";
             this.hsGFIXShutdownMulti.NonMarkedText = "";
+            this.hsGFIXShutdownMulti.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXShutdownMulti.ShowShortcut = false;
             this.hsGFIXShutdownMulti.Size = new System.Drawing.Size(220, 32);
             this.hsGFIXShutdownMulti.TabIndex = 26;
             this.hsGFIXShutdownMulti.Text = "Shutdown multi (only privileged users)";
@@ -1049,6 +1061,7 @@
             this.hsGFIXShutdownSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXShutdownSingle.FlatAppearance.BorderSize = 0;
             this.hsGFIXShutdownSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXShutdownSingle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXShutdownSingle.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXShutdownSingle.Image = global::FBXpert.Properties.Resources.go_down_red32x;
             this.hsGFIXShutdownSingle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1062,6 +1075,8 @@
             this.hsGFIXShutdownSingle.MarkMode = false;
             this.hsGFIXShutdownSingle.Name = "hsGFIXShutdownSingle";
             this.hsGFIXShutdownSingle.NonMarkedText = "";
+            this.hsGFIXShutdownSingle.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXShutdownSingle.ShowShortcut = false;
             this.hsGFIXShutdownSingle.Size = new System.Drawing.Size(220, 32);
             this.hsGFIXShutdownSingle.TabIndex = 27;
             this.hsGFIXShutdownSingle.Text = "Shutdown single (only one user)";
@@ -1097,6 +1112,7 @@
             this.hsGFIXShutdownFull.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXShutdownFull.FlatAppearance.BorderSize = 0;
             this.hsGFIXShutdownFull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXShutdownFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXShutdownFull.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXShutdownFull.Image = global::FBXpert.Properties.Resources.go_down_red32x;
             this.hsGFIXShutdownFull.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1110,6 +1126,8 @@
             this.hsGFIXShutdownFull.MarkMode = false;
             this.hsGFIXShutdownFull.Name = "hsGFIXShutdownFull";
             this.hsGFIXShutdownFull.NonMarkedText = "";
+            this.hsGFIXShutdownFull.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXShutdownFull.ShowShortcut = false;
             this.hsGFIXShutdownFull.Size = new System.Drawing.Size(220, 32);
             this.hsGFIXShutdownFull.TabIndex = 28;
             this.hsGFIXShutdownFull.Text = "Shutdown full (no user)";
@@ -1138,7 +1156,6 @@
             this.tabPageGFIXMisc.Controls.Add(this.hsGFIXBufferServerDefault);
             this.tabPageGFIXMisc.Controls.Add(this.gbGFIXBuffers);
             this.tabPageGFIXMisc.Controls.Add(this.gbGFIXSweepInterval);
-            this.tabPageGFIXMisc.Controls.Add(this.cbGFIXVersionMemory);
             this.tabPageGFIXMisc.Controls.Add(this.hsGFIXBuffers);
             this.tabPageGFIXMisc.Controls.Add(this.hsGFIXPageCapacityReserve);
             this.tabPageGFIXMisc.Controls.Add(this.hsGFIXPageFillFull);
@@ -1147,7 +1164,7 @@
             this.tabPageGFIXMisc.Location = new System.Drawing.Point(4, 22);
             this.tabPageGFIXMisc.Name = "tabPageGFIXMisc";
             this.tabPageGFIXMisc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGFIXMisc.Size = new System.Drawing.Size(566, 199);
+            this.tabPageGFIXMisc.Size = new System.Drawing.Size(606, 199);
             this.tabPageGFIXMisc.TabIndex = 1;
             this.tabPageGFIXMisc.Text = "Memoryfunktions";
             this.tabPageGFIXMisc.UseVisualStyleBackColor = true;
@@ -1164,12 +1181,13 @@
             this.hsGFIXBufferServerDefault.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXBufferServerDefault.FlatAppearance.BorderSize = 0;
             this.hsGFIXBufferServerDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXBufferServerDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXBufferServerDefault.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXBufferServerDefault.Image = global::FBXpert.Properties.Resources.database_gr_24x;
             this.hsGFIXBufferServerDefault.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsGFIXBufferServerDefault.ImageHover = global::FBXpert.Properties.Resources.help_about_gn_x32;
             this.hsGFIXBufferServerDefault.ImageToggleOnSelect = false;
-            this.hsGFIXBufferServerDefault.Location = new System.Drawing.Point(352, 82);
+            this.hsGFIXBufferServerDefault.Location = new System.Drawing.Point(325, 70);
             this.hsGFIXBufferServerDefault.Marked = false;
             this.hsGFIXBufferServerDefault.MarkedColor = System.Drawing.Color.Teal;
             this.hsGFIXBufferServerDefault.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1177,9 +1195,11 @@
             this.hsGFIXBufferServerDefault.MarkMode = false;
             this.hsGFIXBufferServerDefault.Name = "hsGFIXBufferServerDefault";
             this.hsGFIXBufferServerDefault.NonMarkedText = "";
-            this.hsGFIXBufferServerDefault.Size = new System.Drawing.Size(205, 44);
+            this.hsGFIXBufferServerDefault.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXBufferServerDefault.ShowShortcut = false;
+            this.hsGFIXBufferServerDefault.Size = new System.Drawing.Size(221, 44);
             this.hsGFIXBufferServerDefault.TabIndex = 42;
-            this.hsGFIXBufferServerDefault.Text = "Buffers to Server level (DefaultDbChachePages)";
+            this.hsGFIXBufferServerDefault.Text = "Page Buffers to Server level (DefaultDbChachePages)";
             this.hsGFIXBufferServerDefault.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsGFIXBufferServerDefault.ToolTipActive = false;
             this.hsGFIXBufferServerDefault.ToolTipAutomaticDelay = 500;
@@ -1203,7 +1223,7 @@
             // gbGFIXBuffers
             // 
             this.gbGFIXBuffers.Controls.Add(this.txtGFIXBuffers);
-            this.gbGFIXBuffers.Location = new System.Drawing.Point(457, 33);
+            this.gbGFIXBuffers.Location = new System.Drawing.Point(460, 6);
             this.gbGFIXBuffers.Name = "gbGFIXBuffers";
             this.gbGFIXBuffers.Size = new System.Drawing.Size(103, 43);
             this.gbGFIXBuffers.TabIndex = 41;
@@ -1222,12 +1242,12 @@
             // gbGFIXSweepInterval
             // 
             this.gbGFIXSweepInterval.Controls.Add(this.txtGFIXSweepInterval);
-            this.gbGFIXSweepInterval.Location = new System.Drawing.Point(203, 33);
+            this.gbGFIXSweepInterval.Location = new System.Drawing.Point(196, 36);
             this.gbGFIXSweepInterval.Name = "gbGFIXSweepInterval";
-            this.gbGFIXSweepInterval.Size = new System.Drawing.Size(103, 43);
+            this.gbGFIXSweepInterval.Size = new System.Drawing.Size(103, 40);
             this.gbGFIXSweepInterval.TabIndex = 37;
             this.gbGFIXSweepInterval.TabStop = false;
-            this.gbGFIXSweepInterval.Text = "Interval";
+            this.gbGFIXSweepInterval.Text = "Sweep Interval";
             // 
             // txtGFIXSweepInterval
             // 
@@ -1237,18 +1257,6 @@
             this.txtGFIXSweepInterval.Size = new System.Drawing.Size(97, 20);
             this.txtGFIXSweepInterval.TabIndex = 0;
             this.txtGFIXSweepInterval.Text = "1000";
-            // 
-            // cbGFIXVersionMemory
-            // 
-            this.cbGFIXVersionMemory.AutoSize = true;
-            this.cbGFIXVersionMemory.Checked = true;
-            this.cbGFIXVersionMemory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGFIXVersionMemory.Location = new System.Drawing.Point(6, 187);
-            this.cbGFIXVersionMemory.Name = "cbGFIXVersionMemory";
-            this.cbGFIXVersionMemory.Size = new System.Drawing.Size(136, 17);
-            this.cbGFIXVersionMemory.TabIndex = 35;
-            this.cbGFIXVersionMemory.Text = "Display Version number";
-            this.cbGFIXVersionMemory.UseVisualStyleBackColor = true;
             // 
             // hsGFIXBuffers
             // 
@@ -1262,12 +1270,13 @@
             this.hsGFIXBuffers.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXBuffers.FlatAppearance.BorderSize = 0;
             this.hsGFIXBuffers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXBuffers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXBuffers.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXBuffers.Image = global::FBXpert.Properties.Resources.database_gr_24x;
             this.hsGFIXBuffers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsGFIXBuffers.ImageHover = global::FBXpert.Properties.Resources.help_about_gn_x32;
             this.hsGFIXBuffers.ImageToggleOnSelect = false;
-            this.hsGFIXBuffers.Location = new System.Drawing.Point(352, 42);
+            this.hsGFIXBuffers.Location = new System.Drawing.Point(325, 6);
             this.hsGFIXBuffers.Marked = false;
             this.hsGFIXBuffers.MarkedColor = System.Drawing.Color.Teal;
             this.hsGFIXBuffers.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1275,9 +1284,11 @@
             this.hsGFIXBuffers.MarkMode = false;
             this.hsGFIXBuffers.Name = "hsGFIXBuffers";
             this.hsGFIXBuffers.NonMarkedText = "";
-            this.hsGFIXBuffers.Size = new System.Drawing.Size(102, 32);
+            this.hsGFIXBuffers.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXBuffers.ShowShortcut = false;
+            this.hsGFIXBuffers.Size = new System.Drawing.Size(129, 32);
             this.hsGFIXBuffers.TabIndex = 40;
-            this.hsGFIXBuffers.Text = "Buffers";
+            this.hsGFIXBuffers.Text = "Page Buffers";
             this.hsGFIXBuffers.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsGFIXBuffers.ToolTipActive = false;
             this.hsGFIXBuffers.ToolTipAutomaticDelay = 500;
@@ -1310,6 +1321,7 @@
             this.hsGFIXPageCapacityReserve.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXPageCapacityReserve.FlatAppearance.BorderSize = 0;
             this.hsGFIXPageCapacityReserve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXPageCapacityReserve.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXPageCapacityReserve.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXPageCapacityReserve.Image = global::FBXpert.Properties.Resources.help_about_blue_x221;
             this.hsGFIXPageCapacityReserve.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1323,6 +1335,8 @@
             this.hsGFIXPageCapacityReserve.MarkMode = false;
             this.hsGFIXPageCapacityReserve.Name = "hsGFIXPageCapacityReserve";
             this.hsGFIXPageCapacityReserve.NonMarkedText = "";
+            this.hsGFIXPageCapacityReserve.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXPageCapacityReserve.ShowShortcut = false;
             this.hsGFIXPageCapacityReserve.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXPageCapacityReserve.TabIndex = 39;
             this.hsGFIXPageCapacityReserve.Text = "Page fill reserve (80%)";
@@ -1358,10 +1372,11 @@
             this.hsGFIXPageFillFull.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXPageFillFull.FlatAppearance.BorderSize = 0;
             this.hsGFIXPageFillFull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXPageFillFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXPageFillFull.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsGFIXPageFillFull.Image = global::FBXpert.Properties.Resources.help_about_blue_x32;
+            this.hsGFIXPageFillFull.Image = global::FBXpert.Properties.Resources.help_about_blue_x22;
             this.hsGFIXPageFillFull.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hsGFIXPageFillFull.ImageHover = global::FBXpert.Properties.Resources.help_about_gn_x32;
+            this.hsGFIXPageFillFull.ImageHover = global::FBXpert.Properties.Resources.help_about_gn_x22;
             this.hsGFIXPageFillFull.ImageToggleOnSelect = false;
             this.hsGFIXPageFillFull.Location = new System.Drawing.Point(6, 82);
             this.hsGFIXPageFillFull.Marked = false;
@@ -1371,6 +1386,8 @@
             this.hsGFIXPageFillFull.MarkMode = false;
             this.hsGFIXPageFillFull.Name = "hsGFIXPageFillFull";
             this.hsGFIXPageFillFull.NonMarkedText = "";
+            this.hsGFIXPageFillFull.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXPageFillFull.ShowShortcut = false;
             this.hsGFIXPageFillFull.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXPageFillFull.TabIndex = 38;
             this.hsGFIXPageFillFull.Text = "Page fill capacity full";
@@ -1406,6 +1423,7 @@
             this.hotSpot2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot2.FlatAppearance.BorderSize = 0;
             this.hotSpot2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot2.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot2.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hotSpot2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1419,6 +1437,8 @@
             this.hotSpot2.MarkMode = false;
             this.hotSpot2.Name = "hotSpot2";
             this.hotSpot2.NonMarkedText = "";
+            this.hotSpot2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot2.ShowShortcut = false;
             this.hotSpot2.Size = new System.Drawing.Size(184, 32);
             this.hotSpot2.TabIndex = 36;
             this.hotSpot2.Text = "Sweep interval";
@@ -1454,6 +1474,7 @@
             this.hsGFIXSweep.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXSweep.FlatAppearance.BorderSize = 0;
             this.hsGFIXSweep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXSweep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXSweep.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXSweep.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsGFIXSweep.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1467,6 +1488,8 @@
             this.hsGFIXSweep.MarkMode = false;
             this.hsGFIXSweep.Name = "hsGFIXSweep";
             this.hsGFIXSweep.NonMarkedText = "";
+            this.hsGFIXSweep.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXSweep.ShowShortcut = false;
             this.hsGFIXSweep.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXSweep.TabIndex = 27;
             this.hsGFIXSweep.Text = "Sweep";
@@ -1496,11 +1519,10 @@
             this.tabPageGFIXReadWrite.Controls.Add(this.hsGFIXENableForcedWrites);
             this.tabPageGFIXReadWrite.Controls.Add(this.hsGFIXAccessRead);
             this.tabPageGFIXReadWrite.Controls.Add(this.hsGFIXReadWriteMode);
-            this.tabPageGFIXReadWrite.Controls.Add(this.cbGFIXReadWriteVersion);
             this.tabPageGFIXReadWrite.Location = new System.Drawing.Point(4, 22);
             this.tabPageGFIXReadWrite.Name = "tabPageGFIXReadWrite";
             this.tabPageGFIXReadWrite.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGFIXReadWrite.Size = new System.Drawing.Size(566, 199);
+            this.tabPageGFIXReadWrite.Size = new System.Drawing.Size(606, 199);
             this.tabPageGFIXReadWrite.TabIndex = 2;
             this.tabPageGFIXReadWrite.Text = "Read/Write options";
             this.tabPageGFIXReadWrite.UseVisualStyleBackColor = true;
@@ -1517,6 +1539,7 @@
             this.hsGFIXDisableForcedWrites.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXDisableForcedWrites.FlatAppearance.BorderSize = 0;
             this.hsGFIXDisableForcedWrites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXDisableForcedWrites.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXDisableForcedWrites.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXDisableForcedWrites.Image = global::FBXpert.Properties.Resources.ampel_red_x24;
             this.hsGFIXDisableForcedWrites.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1530,6 +1553,8 @@
             this.hsGFIXDisableForcedWrites.MarkMode = false;
             this.hsGFIXDisableForcedWrites.Name = "hsGFIXDisableForcedWrites";
             this.hsGFIXDisableForcedWrites.NonMarkedText = "";
+            this.hsGFIXDisableForcedWrites.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXDisableForcedWrites.ShowShortcut = false;
             this.hsGFIXDisableForcedWrites.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXDisableForcedWrites.TabIndex = 40;
             this.hsGFIXDisableForcedWrites.Text = "Disable forced-writes";
@@ -1565,6 +1590,7 @@
             this.hsGFIXENableForcedWrites.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXENableForcedWrites.FlatAppearance.BorderSize = 0;
             this.hsGFIXENableForcedWrites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXENableForcedWrites.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXENableForcedWrites.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXENableForcedWrites.Image = global::FBXpert.Properties.Resources.ampel_green_x24;
             this.hsGFIXENableForcedWrites.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1578,6 +1604,8 @@
             this.hsGFIXENableForcedWrites.MarkMode = false;
             this.hsGFIXENableForcedWrites.Name = "hsGFIXENableForcedWrites";
             this.hsGFIXENableForcedWrites.NonMarkedText = "";
+            this.hsGFIXENableForcedWrites.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXENableForcedWrites.ShowShortcut = false;
             this.hsGFIXENableForcedWrites.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXENableForcedWrites.TabIndex = 39;
             this.hsGFIXENableForcedWrites.Text = "Enable forced-writes";
@@ -1613,6 +1641,7 @@
             this.hsGFIXAccessRead.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXAccessRead.FlatAppearance.BorderSize = 0;
             this.hsGFIXAccessRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXAccessRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXAccessRead.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXAccessRead.Image = global::FBXpert.Properties.Resources.edn_edit_px24;
             this.hsGFIXAccessRead.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1626,6 +1655,8 @@
             this.hsGFIXAccessRead.MarkMode = false;
             this.hsGFIXAccessRead.Name = "hsGFIXAccessRead";
             this.hsGFIXAccessRead.NonMarkedText = "";
+            this.hsGFIXAccessRead.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXAccessRead.ShowShortcut = false;
             this.hsGFIXAccessRead.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXAccessRead.TabIndex = 38;
             this.hsGFIXAccessRead.Text = "Accessmode read";
@@ -1661,6 +1692,7 @@
             this.hsGFIXReadWriteMode.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXReadWriteMode.FlatAppearance.BorderSize = 0;
             this.hsGFIXReadWriteMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXReadWriteMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXReadWriteMode.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXReadWriteMode.Image = global::FBXpert.Properties.Resources.edit_mode_px24;
             this.hsGFIXReadWriteMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1674,6 +1706,8 @@
             this.hsGFIXReadWriteMode.MarkMode = false;
             this.hsGFIXReadWriteMode.Name = "hsGFIXReadWriteMode";
             this.hsGFIXReadWriteMode.NonMarkedText = "";
+            this.hsGFIXReadWriteMode.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXReadWriteMode.ShowShortcut = false;
             this.hsGFIXReadWriteMode.Size = new System.Drawing.Size(184, 32);
             this.hsGFIXReadWriteMode.TabIndex = 37;
             this.hsGFIXReadWriteMode.Text = "Accessmode read-write";
@@ -1697,19 +1731,6 @@
             this.hsGFIXReadWriteMode.UseVisualStyleBackColor = false;
             this.hsGFIXReadWriteMode.Click += new System.EventHandler(this.HsGFIXReadWriteMode_Click);
             // 
-            // cbGFIXReadWriteVersion
-            // 
-            this.cbGFIXReadWriteVersion.AutoSize = true;
-            this.cbGFIXReadWriteVersion.Checked = true;
-            this.cbGFIXReadWriteVersion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGFIXReadWriteVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cbGFIXReadWriteVersion.Location = new System.Drawing.Point(3, 179);
-            this.cbGFIXReadWriteVersion.Name = "cbGFIXReadWriteVersion";
-            this.cbGFIXReadWriteVersion.Size = new System.Drawing.Size(560, 17);
-            this.cbGFIXReadWriteVersion.TabIndex = 36;
-            this.cbGFIXReadWriteVersion.Text = "Display Version number";
-            this.cbGFIXReadWriteVersion.UseVisualStyleBackColor = true;
-            // 
             // tabPageValidation
             // 
             this.tabPageValidation.Controls.Add(this.gbGFIXResolveLimboID);
@@ -1722,11 +1743,10 @@
             this.tabPageValidation.Controls.Add(this.hsGFIXRecoverLimboTrans);
             this.tabPageValidation.Controls.Add(this.hsGFIXAutomatetRecovery);
             this.tabPageValidation.Controls.Add(this.hsGFIXLimboTransactions);
-            this.tabPageValidation.Controls.Add(this.cbGFIXValidationVersion);
             this.tabPageValidation.Location = new System.Drawing.Point(4, 22);
             this.tabPageValidation.Name = "tabPageValidation";
             this.tabPageValidation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageValidation.Size = new System.Drawing.Size(566, 199);
+            this.tabPageValidation.Size = new System.Drawing.Size(606, 199);
             this.tabPageValidation.TabIndex = 3;
             this.tabPageValidation.Text = "Validation and maintanance";
             this.tabPageValidation.UseVisualStyleBackColor = true;
@@ -1734,9 +1754,9 @@
             // gbGFIXResolveLimboID
             // 
             this.gbGFIXResolveLimboID.Controls.Add(this.tstGFIXResolveLimbiID);
-            this.gbGFIXResolveLimboID.Location = new System.Drawing.Point(429, 123);
+            this.gbGFIXResolveLimboID.Location = new System.Drawing.Point(469, 123);
             this.gbGFIXResolveLimboID.Name = "gbGFIXResolveLimboID";
-            this.gbGFIXResolveLimboID.Size = new System.Drawing.Size(102, 43);
+            this.gbGFIXResolveLimboID.Size = new System.Drawing.Size(117, 43);
             this.gbGFIXResolveLimboID.TabIndex = 49;
             this.gbGFIXResolveLimboID.TabStop = false;
             this.gbGFIXResolveLimboID.Text = "ID";
@@ -1746,15 +1766,15 @@
             this.tstGFIXResolveLimbiID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tstGFIXResolveLimbiID.Location = new System.Drawing.Point(3, 16);
             this.tstGFIXResolveLimbiID.Name = "tstGFIXResolveLimbiID";
-            this.tstGFIXResolveLimbiID.Size = new System.Drawing.Size(96, 20);
+            this.tstGFIXResolveLimbiID.Size = new System.Drawing.Size(111, 20);
             this.tstGFIXResolveLimbiID.TabIndex = 0;
             // 
             // gbGFIXLimboRecoverID
             // 
             this.gbGFIXLimboRecoverID.Controls.Add(this.txtGFIXLimboIDRecover);
-            this.gbGFIXLimboRecoverID.Location = new System.Drawing.Point(429, 79);
+            this.gbGFIXLimboRecoverID.Location = new System.Drawing.Point(469, 79);
             this.gbGFIXLimboRecoverID.Name = "gbGFIXLimboRecoverID";
-            this.gbGFIXLimboRecoverID.Size = new System.Drawing.Size(102, 43);
+            this.gbGFIXLimboRecoverID.Size = new System.Drawing.Size(117, 43);
             this.gbGFIXLimboRecoverID.TabIndex = 44;
             this.gbGFIXLimboRecoverID.TabStop = false;
             this.gbGFIXLimboRecoverID.Text = "ID";
@@ -1764,7 +1784,7 @@
             this.txtGFIXLimboIDRecover.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtGFIXLimboIDRecover.Location = new System.Drawing.Point(3, 16);
             this.txtGFIXLimboIDRecover.Name = "txtGFIXLimboIDRecover";
-            this.txtGFIXLimboIDRecover.Size = new System.Drawing.Size(96, 20);
+            this.txtGFIXLimboIDRecover.Size = new System.Drawing.Size(111, 20);
             this.txtGFIXLimboIDRecover.TabIndex = 0;
             // 
             // hsGFIXResolveLimbID
@@ -1779,12 +1799,13 @@
             this.hsGFIXResolveLimbID.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXResolveLimbID.FlatAppearance.BorderSize = 0;
             this.hsGFIXResolveLimbID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXResolveLimbID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXResolveLimbID.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXResolveLimbID.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x22;
             this.hsGFIXResolveLimbID.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsGFIXResolveLimbID.ImageHover = global::FBXpert.Properties.Resources.media_playlist_repeat_light_blue_x22;
             this.hsGFIXResolveLimbID.ImageToggleOnSelect = false;
-            this.hsGFIXResolveLimbID.Location = new System.Drawing.Point(220, 126);
+            this.hsGFIXResolveLimbID.Location = new System.Drawing.Point(230, 126);
             this.hsGFIXResolveLimbID.Marked = false;
             this.hsGFIXResolveLimbID.MarkedColor = System.Drawing.Color.Teal;
             this.hsGFIXResolveLimbID.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1792,7 +1813,9 @@
             this.hsGFIXResolveLimbID.MarkMode = false;
             this.hsGFIXResolveLimbID.Name = "hsGFIXResolveLimbID";
             this.hsGFIXResolveLimbID.NonMarkedText = "";
-            this.hsGFIXResolveLimbID.Size = new System.Drawing.Size(200, 32);
+            this.hsGFIXResolveLimbID.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXResolveLimbID.ShowShortcut = false;
+            this.hsGFIXResolveLimbID.Size = new System.Drawing.Size(221, 32);
             this.hsGFIXResolveLimbID.TabIndex = 48;
             this.hsGFIXResolveLimbID.Text = "Recover limbo transactions (ID)";
             this.hsGFIXResolveLimbID.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1827,6 +1850,7 @@
             this.hsGFIXResolveLimboAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXResolveLimboAll.FlatAppearance.BorderSize = 0;
             this.hsGFIXResolveLimboAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXResolveLimboAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXResolveLimboAll.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXResolveLimboAll.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x22;
             this.hsGFIXResolveLimboAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1840,7 +1864,9 @@
             this.hsGFIXResolveLimboAll.MarkMode = false;
             this.hsGFIXResolveLimboAll.Name = "hsGFIXResolveLimboAll";
             this.hsGFIXResolveLimboAll.NonMarkedText = "";
-            this.hsGFIXResolveLimboAll.Size = new System.Drawing.Size(200, 32);
+            this.hsGFIXResolveLimboAll.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXResolveLimboAll.ShowShortcut = false;
+            this.hsGFIXResolveLimboAll.Size = new System.Drawing.Size(212, 32);
             this.hsGFIXResolveLimboAll.TabIndex = 47;
             this.hsGFIXResolveLimboAll.Text = "Reslove limbo transactions (all)";
             this.hsGFIXResolveLimboAll.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1866,9 +1892,9 @@
             // gnGFIXTowWayLimboID
             // 
             this.gnGFIXTowWayLimboID.Controls.Add(this.txtGFIXTowWayLimboID);
-            this.gnGFIXTowWayLimboID.Location = new System.Drawing.Point(429, 38);
+            this.gnGFIXTowWayLimboID.Location = new System.Drawing.Point(469, 38);
             this.gnGFIXTowWayLimboID.Name = "gnGFIXTowWayLimboID";
-            this.gnGFIXTowWayLimboID.Size = new System.Drawing.Size(102, 41);
+            this.gnGFIXTowWayLimboID.Size = new System.Drawing.Size(117, 41);
             this.gnGFIXTowWayLimboID.TabIndex = 46;
             this.gnGFIXTowWayLimboID.TabStop = false;
             this.gnGFIXTowWayLimboID.Text = "ID";
@@ -1878,7 +1904,7 @@
             this.txtGFIXTowWayLimboID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtGFIXTowWayLimboID.Location = new System.Drawing.Point(3, 16);
             this.txtGFIXTowWayLimboID.Name = "txtGFIXTowWayLimboID";
-            this.txtGFIXTowWayLimboID.Size = new System.Drawing.Size(96, 20);
+            this.txtGFIXTowWayLimboID.Size = new System.Drawing.Size(111, 20);
             this.txtGFIXTowWayLimboID.TabIndex = 0;
             // 
             // hotSpot4
@@ -1893,12 +1919,13 @@
             this.hotSpot4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot4.FlatAppearance.BorderSize = 0;
             this.hotSpot4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot4.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot4.Image = global::FBXpert.Properties.Resources.font_x24;
             this.hotSpot4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hotSpot4.ImageHover = global::FBXpert.Properties.Resources.font2_x24;
             this.hotSpot4.ImageToggleOnSelect = false;
-            this.hotSpot4.Location = new System.Drawing.Point(220, 47);
+            this.hotSpot4.Location = new System.Drawing.Point(230, 47);
             this.hotSpot4.Marked = false;
             this.hotSpot4.MarkedColor = System.Drawing.Color.Teal;
             this.hotSpot4.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1906,7 +1933,9 @@
             this.hotSpot4.MarkMode = false;
             this.hotSpot4.Name = "hotSpot4";
             this.hotSpot4.NonMarkedText = "";
-            this.hotSpot4.Size = new System.Drawing.Size(200, 32);
+            this.hotSpot4.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot4.ShowShortcut = false;
+            this.hotSpot4.Size = new System.Drawing.Size(221, 32);
             this.hotSpot4.TabIndex = 45;
             this.hotSpot4.Text = "Automatet two-way recovery (ID)";
             this.hotSpot4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1941,12 +1970,13 @@
             this.hotSpot3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot3.FlatAppearance.BorderSize = 0;
             this.hotSpot3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot3.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot3.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x22;
             this.hotSpot3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hotSpot3.ImageHover = global::FBXpert.Properties.Resources.media_playlist_repeat_light_blue_x22;
             this.hotSpot3.ImageToggleOnSelect = false;
-            this.hotSpot3.Location = new System.Drawing.Point(220, 85);
+            this.hotSpot3.Location = new System.Drawing.Point(230, 85);
             this.hotSpot3.Marked = false;
             this.hotSpot3.MarkedColor = System.Drawing.Color.Teal;
             this.hotSpot3.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1954,7 +1984,9 @@
             this.hotSpot3.MarkMode = false;
             this.hotSpot3.Name = "hotSpot3";
             this.hotSpot3.NonMarkedText = "";
-            this.hotSpot3.Size = new System.Drawing.Size(200, 32);
+            this.hotSpot3.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot3.ShowShortcut = false;
+            this.hotSpot3.Size = new System.Drawing.Size(221, 32);
             this.hotSpot3.TabIndex = 43;
             this.hotSpot3.Text = "Recover limbo transactions (ID)";
             this.hotSpot3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1989,6 +2021,7 @@
             this.hsGFIXRecoverLimboTrans.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXRecoverLimboTrans.FlatAppearance.BorderSize = 0;
             this.hsGFIXRecoverLimboTrans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXRecoverLimboTrans.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXRecoverLimboTrans.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXRecoverLimboTrans.Image = global::FBXpert.Properties.Resources.media_playlist_repeat_blue_x22;
             this.hsGFIXRecoverLimboTrans.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2002,7 +2035,9 @@
             this.hsGFIXRecoverLimboTrans.MarkMode = false;
             this.hsGFIXRecoverLimboTrans.Name = "hsGFIXRecoverLimboTrans";
             this.hsGFIXRecoverLimboTrans.NonMarkedText = "";
-            this.hsGFIXRecoverLimboTrans.Size = new System.Drawing.Size(200, 32);
+            this.hsGFIXRecoverLimboTrans.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXRecoverLimboTrans.ShowShortcut = false;
+            this.hsGFIXRecoverLimboTrans.Size = new System.Drawing.Size(212, 32);
             this.hsGFIXRecoverLimboTrans.TabIndex = 42;
             this.hsGFIXRecoverLimboTrans.Text = "Recover limbo transactions (all)";
             this.hsGFIXRecoverLimboTrans.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2037,6 +2072,7 @@
             this.hsGFIXAutomatetRecovery.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXAutomatetRecovery.FlatAppearance.BorderSize = 0;
             this.hsGFIXAutomatetRecovery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXAutomatetRecovery.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXAutomatetRecovery.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXAutomatetRecovery.Image = global::FBXpert.Properties.Resources.font_x24;
             this.hsGFIXAutomatetRecovery.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2050,7 +2086,9 @@
             this.hsGFIXAutomatetRecovery.MarkMode = false;
             this.hsGFIXAutomatetRecovery.Name = "hsGFIXAutomatetRecovery";
             this.hsGFIXAutomatetRecovery.NonMarkedText = "";
-            this.hsGFIXAutomatetRecovery.Size = new System.Drawing.Size(200, 32);
+            this.hsGFIXAutomatetRecovery.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXAutomatetRecovery.ShowShortcut = false;
+            this.hsGFIXAutomatetRecovery.Size = new System.Drawing.Size(212, 32);
             this.hsGFIXAutomatetRecovery.TabIndex = 41;
             this.hsGFIXAutomatetRecovery.Text = "Automatet two-way recovery (all)";
             this.hsGFIXAutomatetRecovery.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2085,6 +2123,7 @@
             this.hsGFIXLimboTransactions.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGFIXLimboTransactions.FlatAppearance.BorderSize = 0;
             this.hsGFIXLimboTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGFIXLimboTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGFIXLimboTransactions.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGFIXLimboTransactions.Image = global::FBXpert.Properties.Resources.lupe24x;
             this.hsGFIXLimboTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2098,6 +2137,8 @@
             this.hsGFIXLimboTransactions.MarkMode = false;
             this.hsGFIXLimboTransactions.Name = "hsGFIXLimboTransactions";
             this.hsGFIXLimboTransactions.NonMarkedText = "";
+            this.hsGFIXLimboTransactions.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGFIXLimboTransactions.ShowShortcut = false;
             this.hsGFIXLimboTransactions.Size = new System.Drawing.Size(200, 32);
             this.hsGFIXLimboTransactions.TabIndex = 40;
             this.hsGFIXLimboTransactions.Text = "Finding limbo transactions";
@@ -2121,26 +2162,13 @@
             this.hsGFIXLimboTransactions.UseVisualStyleBackColor = false;
             this.hsGFIXLimboTransactions.Click += new System.EventHandler(this.HsGFIXLimboTransactions_Click);
             // 
-            // cbGFIXValidationVersion
-            // 
-            this.cbGFIXValidationVersion.AutoSize = true;
-            this.cbGFIXValidationVersion.Checked = true;
-            this.cbGFIXValidationVersion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGFIXValidationVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cbGFIXValidationVersion.Location = new System.Drawing.Point(3, 179);
-            this.cbGFIXValidationVersion.Name = "cbGFIXValidationVersion";
-            this.cbGFIXValidationVersion.Size = new System.Drawing.Size(560, 17);
-            this.cbGFIXValidationVersion.TabIndex = 37;
-            this.cbGFIXValidationVersion.Text = "Display Version number";
-            this.cbGFIXValidationVersion.UseVisualStyleBackColor = true;
-            // 
             // gbGFIXArgumentsText
             // 
             this.gbGFIXArgumentsText.Controls.Add(this.rtbGFIXArguments);
             this.gbGFIXArgumentsText.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbGFIXArgumentsText.Location = new System.Drawing.Point(0, 417);
             this.gbGFIXArgumentsText.Name = "gbGFIXArgumentsText";
-            this.gbGFIXArgumentsText.Size = new System.Drawing.Size(580, 323);
+            this.gbGFIXArgumentsText.Size = new System.Drawing.Size(620, 323);
             this.gbGFIXArgumentsText.TabIndex = 14;
             this.gbGFIXArgumentsText.TabStop = false;
             this.gbGFIXArgumentsText.Text = "Arguments info";
@@ -2151,20 +2179,34 @@
             this.rtbGFIXArguments.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbGFIXArguments.Location = new System.Drawing.Point(3, 16);
             this.rtbGFIXArguments.Name = "rtbGFIXArguments";
-            this.rtbGFIXArguments.Size = new System.Drawing.Size(574, 304);
+            this.rtbGFIXArguments.Size = new System.Drawing.Size(614, 304);
             this.rtbGFIXArguments.TabIndex = 0;
             this.rtbGFIXArguments.Text = resources.GetString("rtbGFIXArguments.Text");
+            this.rtbGFIXArguments.TextChanged += new System.EventHandler(this.rtbGFIXArguments_TextChanged);
             // 
             // pnlGFIXUpper
             // 
+            this.pnlGFIXUpper.Controls.Add(this.cbShowVersion);
             this.pnlGFIXUpper.Controls.Add(this.hsRunGFIX);
             this.pnlGFIXUpper.Controls.Add(this.gbGFIXPassword);
             this.pnlGFIXUpper.Controls.Add(this.gbGFIXUser);
             this.pnlGFIXUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGFIXUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlGFIXUpper.Name = "pnlGFIXUpper";
-            this.pnlGFIXUpper.Size = new System.Drawing.Size(580, 53);
+            this.pnlGFIXUpper.Size = new System.Drawing.Size(620, 58);
             this.pnlGFIXUpper.TabIndex = 12;
+            // 
+            // cbShowVersion
+            // 
+            this.cbShowVersion.AutoSize = true;
+            this.cbShowVersion.Checked = true;
+            this.cbShowVersion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowVersion.Location = new System.Drawing.Point(373, 24);
+            this.cbShowVersion.Name = "cbShowVersion";
+            this.cbShowVersion.Size = new System.Drawing.Size(136, 17);
+            this.cbShowVersion.TabIndex = 34;
+            this.cbShowVersion.Text = "Display Version number";
+            this.cbShowVersion.UseVisualStyleBackColor = true;
             // 
             // hsRunGFIX
             // 
@@ -2179,12 +2221,13 @@
             this.hsRunGFIX.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunGFIX.FlatAppearance.BorderSize = 0;
             this.hsRunGFIX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunGFIX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunGFIX.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunGFIX.Image = global::FBXpert.Properties.Resources.console_x32;
             this.hsRunGFIX.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunGFIX.ImageHover = global::FBXpert.Properties.Resources.console2_x32;
             this.hsRunGFIX.ImageToggleOnSelect = true;
-            this.hsRunGFIX.Location = new System.Drawing.Point(505, 0);
+            this.hsRunGFIX.Location = new System.Drawing.Point(545, 0);
             this.hsRunGFIX.Marked = false;
             this.hsRunGFIX.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunGFIX.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2192,7 +2235,9 @@
             this.hsRunGFIX.MarkMode = false;
             this.hsRunGFIX.Name = "hsRunGFIX";
             this.hsRunGFIX.NonMarkedText = "Run";
-            this.hsRunGFIX.Size = new System.Drawing.Size(75, 53);
+            this.hsRunGFIX.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunGFIX.ShowShortcut = false;
+            this.hsRunGFIX.Size = new System.Drawing.Size(75, 58);
             this.hsRunGFIX.TabIndex = 8;
             this.hsRunGFIX.Text = "Run";
             this.hsRunGFIX.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2220,7 +2265,7 @@
             this.gbGFIXPassword.Controls.Add(this.txtGFIXPassword);
             this.gbGFIXPassword.Location = new System.Drawing.Point(231, 6);
             this.gbGFIXPassword.Name = "gbGFIXPassword";
-            this.gbGFIXPassword.Size = new System.Drawing.Size(219, 43);
+            this.gbGFIXPassword.Size = new System.Drawing.Size(136, 43);
             this.gbGFIXPassword.TabIndex = 7;
             this.gbGFIXPassword.TabStop = false;
             this.gbGFIXPassword.Text = "Passwort";
@@ -2231,7 +2276,7 @@
             this.txtGFIXPassword.Location = new System.Drawing.Point(3, 16);
             this.txtGFIXPassword.Name = "txtGFIXPassword";
             this.txtGFIXPassword.PasswordChar = '*';
-            this.txtGFIXPassword.Size = new System.Drawing.Size(213, 20);
+            this.txtGFIXPassword.Size = new System.Drawing.Size(130, 20);
             this.txtGFIXPassword.TabIndex = 0;
             // 
             // gbGFIXUser
@@ -2259,7 +2304,7 @@
             this.tabGSTAT.Location = new System.Drawing.Point(4, 22);
             this.tabGSTAT.Name = "tabGSTAT";
             this.tabGSTAT.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGSTAT.Size = new System.Drawing.Size(1276, 746);
+            this.tabGSTAT.Size = new System.Drawing.Size(1328, 746);
             this.tabGSTAT.TabIndex = 2;
             this.tabGSTAT.Text = "GSTAT";
             this.tabGSTAT.UseVisualStyleBackColor = true;
@@ -2270,9 +2315,9 @@
             this.gbGStatOut.Controls.Add(this.pnlGSTATOutputUpper);
             this.gbGStatOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbGStatOut.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbGStatOut.Location = new System.Drawing.Point(583, 3);
+            this.gbGStatOut.Location = new System.Drawing.Point(623, 3);
             this.gbGStatOut.Name = "gbGStatOut";
-            this.gbGStatOut.Size = new System.Drawing.Size(690, 740);
+            this.gbGStatOut.Size = new System.Drawing.Size(702, 740);
             this.gbGStatOut.TabIndex = 0;
             this.gbGStatOut.TabStop = false;
             this.gbGStatOut.Text = "Output";
@@ -2311,20 +2356,71 @@
             this.fctGSTATOutput.RightBracket = ')';
             this.fctGSTATOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctGSTATOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGSTATOutput.ServiceColors")));
-            this.fctGSTATOutput.Size = new System.Drawing.Size(684, 679);
-            this.fctGSTATOutput.TabIndex = 24;
+            this.fctGSTATOutput.Size = new System.Drawing.Size(696, 679);
+            this.fctGSTATOutput.TabIndex = 25;
             this.fctGSTATOutput.WordWrap = true;
             this.fctGSTATOutput.Zoom = 100;
             // 
             // pnlGSTATOutputUpper
             // 
             this.pnlGSTATOutputUpper.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlGSTATOutputUpper.Controls.Add(this.hsClearGSTATOutput);
             this.pnlGSTATOutputUpper.Controls.Add(this.hsSaveGStatToFile);
             this.pnlGSTATOutputUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGSTATOutputUpper.Location = new System.Drawing.Point(3, 16);
             this.pnlGSTATOutputUpper.Name = "pnlGSTATOutputUpper";
-            this.pnlGSTATOutputUpper.Size = new System.Drawing.Size(684, 42);
+            this.pnlGSTATOutputUpper.Size = new System.Drawing.Size(696, 42);
             this.pnlGSTATOutputUpper.TabIndex = 23;
+            // 
+            // hsClearGSTATOutput
+            // 
+            this.hsClearGSTATOutput.BackColor = System.Drawing.Color.Transparent;
+            this.hsClearGSTATOutput.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClearGSTATOutput.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClearGSTATOutput.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClearGSTATOutput.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClearGSTATOutput.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClearGSTATOutput.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClearGSTATOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsClearGSTATOutput.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClearGSTATOutput.FlatAppearance.BorderSize = 0;
+            this.hsClearGSTATOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearGSTATOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsClearGSTATOutput.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsClearGSTATOutput.Image = global::FBXpert.Properties.Resources.seewp_ge22x;
+            this.hsClearGSTATOutput.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsClearGSTATOutput.ImageToggleOnSelect = true;
+            this.hsClearGSTATOutput.Location = new System.Drawing.Point(37, 0);
+            this.hsClearGSTATOutput.Marked = false;
+            this.hsClearGSTATOutput.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClearGSTATOutput.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClearGSTATOutput.MarkedText = "";
+            this.hsClearGSTATOutput.MarkMode = false;
+            this.hsClearGSTATOutput.Name = "hsClearGSTATOutput";
+            this.hsClearGSTATOutput.NonMarkedText = "";
+            this.hsClearGSTATOutput.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearGSTATOutput.ShowShortcut = false;
+            this.hsClearGSTATOutput.Size = new System.Drawing.Size(37, 42);
+            this.hsClearGSTATOutput.TabIndex = 8;
+            this.hsClearGSTATOutput.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClearGSTATOutput.ToolTipActive = false;
+            this.hsClearGSTATOutput.ToolTipAutomaticDelay = 500;
+            this.hsClearGSTATOutput.ToolTipAutoPopDelay = 5000;
+            this.hsClearGSTATOutput.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClearGSTATOutput.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClearGSTATOutput.ToolTipFor4ContextMenu = true;
+            this.hsClearGSTATOutput.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClearGSTATOutput.ToolTipInitialDelay = 500;
+            this.hsClearGSTATOutput.ToolTipIsBallon = false;
+            this.hsClearGSTATOutput.ToolTipOwnerDraw = false;
+            this.hsClearGSTATOutput.ToolTipReshowDelay = 100;
+            this.hsClearGSTATOutput.ToolTipShowAlways = false;
+            this.hsClearGSTATOutput.ToolTipText = "";
+            this.hsClearGSTATOutput.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsClearGSTATOutput.ToolTipTitle = "";
+            this.hsClearGSTATOutput.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClearGSTATOutput.UseVisualStyleBackColor = false;
+            this.hsClearGSTATOutput.Click += new System.EventHandler(this.hsClearGSTATOutput_Click);
             // 
             // hsSaveGStatToFile
             // 
@@ -2339,6 +2435,7 @@
             this.hsSaveGStatToFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveGStatToFile.FlatAppearance.BorderSize = 0;
             this.hsSaveGStatToFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveGStatToFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveGStatToFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveGStatToFile.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hsSaveGStatToFile.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
@@ -2351,6 +2448,8 @@
             this.hsSaveGStatToFile.MarkMode = false;
             this.hsSaveGStatToFile.Name = "hsSaveGStatToFile";
             this.hsSaveGStatToFile.NonMarkedText = "";
+            this.hsSaveGStatToFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveGStatToFile.ShowShortcut = false;
             this.hsSaveGStatToFile.Size = new System.Drawing.Size(37, 42);
             this.hsSaveGStatToFile.TabIndex = 6;
             this.hsSaveGStatToFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2381,16 +2480,16 @@
             this.pnlGSTATLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlGSTATLeft.Location = new System.Drawing.Point(3, 3);
             this.pnlGSTATLeft.Name = "pnlGSTATLeft";
-            this.pnlGSTATLeft.Size = new System.Drawing.Size(580, 740);
+            this.pnlGSTATLeft.Size = new System.Drawing.Size(620, 740);
             this.pnlGSTATLeft.TabIndex = 23;
             // 
             // gbGSTATParameters
             // 
             this.gbGSTATParameters.Controls.Add(this.txtGSTATParameters);
             this.gbGSTATParameters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbGSTATParameters.Location = new System.Drawing.Point(0, 288);
+            this.gbGSTATParameters.Location = new System.Drawing.Point(0, 290);
             this.gbGSTATParameters.Name = "gbGSTATParameters";
-            this.gbGSTATParameters.Size = new System.Drawing.Size(580, 129);
+            this.gbGSTATParameters.Size = new System.Drawing.Size(620, 127);
             this.gbGSTATParameters.TabIndex = 10;
             this.gbGSTATParameters.TabStop = false;
             this.gbGSTATParameters.Text = "Parameters";
@@ -2403,18 +2502,17 @@
             this.txtGSTATParameters.Location = new System.Drawing.Point(3, 16);
             this.txtGSTATParameters.Multiline = true;
             this.txtGSTATParameters.Name = "txtGSTATParameters";
-            this.txtGSTATParameters.Size = new System.Drawing.Size(574, 110);
+            this.txtGSTATParameters.Size = new System.Drawing.Size(614, 108);
             this.txtGSTATParameters.TabIndex = 0;
             // 
             // gbGSTATOptions
             // 
             this.gbGSTATOptions.Controls.Add(this.cbGSTATAnalyzeHeaderOnly);
             this.gbGSTATOptions.Controls.Add(this.gbGSTATOptions2);
-            this.gbGSTATOptions.Controls.Add(this.cbGSTATDisplayVersion);
             this.gbGSTATOptions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbGSTATOptions.Location = new System.Drawing.Point(0, 56);
+            this.gbGSTATOptions.Location = new System.Drawing.Point(0, 58);
             this.gbGSTATOptions.Name = "gbGSTATOptions";
-            this.gbGSTATOptions.Size = new System.Drawing.Size(580, 232);
+            this.gbGSTATOptions.Size = new System.Drawing.Size(620, 232);
             this.gbGSTATOptions.TabIndex = 23;
             this.gbGSTATOptions.TabStop = false;
             this.gbGSTATOptions.Text = "Options";
@@ -2529,27 +2627,13 @@
             this.cbGSTATAnalyzeIndexLeafPages.UseVisualStyleBackColor = true;
             this.cbGSTATAnalyzeIndexLeafPages.CheckedChanged += new System.EventHandler(this.cbGSTATChecked_Changed);
             // 
-            // cbGSTATDisplayVersion
-            // 
-            this.cbGSTATDisplayVersion.AutoSize = true;
-            this.cbGSTATDisplayVersion.Checked = true;
-            this.cbGSTATDisplayVersion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGSTATDisplayVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cbGSTATDisplayVersion.Location = new System.Drawing.Point(3, 212);
-            this.cbGSTATDisplayVersion.Name = "cbGSTATDisplayVersion";
-            this.cbGSTATDisplayVersion.Size = new System.Drawing.Size(574, 17);
-            this.cbGSTATDisplayVersion.TabIndex = 5;
-            this.cbGSTATDisplayVersion.Text = "Display Version number";
-            this.cbGSTATDisplayVersion.UseVisualStyleBackColor = true;
-            this.cbGSTATDisplayVersion.CheckedChanged += new System.EventHandler(this.cbGSTATChecked_Changed);
-            // 
             // gbGSTATArgumentsText
             // 
             this.gbGSTATArgumentsText.Controls.Add(this.rtbGSTATArgument);
             this.gbGSTATArgumentsText.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbGSTATArgumentsText.Location = new System.Drawing.Point(0, 417);
             this.gbGSTATArgumentsText.Name = "gbGSTATArgumentsText";
-            this.gbGSTATArgumentsText.Size = new System.Drawing.Size(580, 323);
+            this.gbGSTATArgumentsText.Size = new System.Drawing.Size(620, 323);
             this.gbGSTATArgumentsText.TabIndex = 11;
             this.gbGSTATArgumentsText.TabStop = false;
             this.gbGSTATArgumentsText.Text = "Arguments info";
@@ -2560,7 +2644,7 @@
             this.rtbGSTATArgument.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbGSTATArgument.Location = new System.Drawing.Point(3, 16);
             this.rtbGSTATArgument.Name = "rtbGSTATArgument";
-            this.rtbGSTATArgument.Size = new System.Drawing.Size(574, 304);
+            this.rtbGSTATArgument.Size = new System.Drawing.Size(614, 304);
             this.rtbGSTATArgument.TabIndex = 0;
             this.rtbGSTATArgument.Text = resources.GetString("rtbGSTATArgument.Text");
             // 
@@ -2568,11 +2652,12 @@
             // 
             this.pnlGSTATUpper.Controls.Add(this.hsRunGSTAT);
             this.pnlGSTATUpper.Controls.Add(this.gbGSTATUser);
+            this.pnlGSTATUpper.Controls.Add(this.cbGSTATDisplayVersion);
             this.pnlGSTATUpper.Controls.Add(this.gbGSTATPassword);
             this.pnlGSTATUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGSTATUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlGSTATUpper.Name = "pnlGSTATUpper";
-            this.pnlGSTATUpper.Size = new System.Drawing.Size(580, 56);
+            this.pnlGSTATUpper.Size = new System.Drawing.Size(620, 58);
             this.pnlGSTATUpper.TabIndex = 22;
             // 
             // hsRunGSTAT
@@ -2588,12 +2673,13 @@
             this.hsRunGSTAT.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunGSTAT.FlatAppearance.BorderSize = 0;
             this.hsRunGSTAT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunGSTAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunGSTAT.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunGSTAT.Image = global::FBXpert.Properties.Resources.console_x32;
             this.hsRunGSTAT.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunGSTAT.ImageHover = global::FBXpert.Properties.Resources.console2_x32;
             this.hsRunGSTAT.ImageToggleOnSelect = true;
-            this.hsRunGSTAT.Location = new System.Drawing.Point(505, 0);
+            this.hsRunGSTAT.Location = new System.Drawing.Point(545, 0);
             this.hsRunGSTAT.Marked = false;
             this.hsRunGSTAT.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunGSTAT.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2601,7 +2687,9 @@
             this.hsRunGSTAT.MarkMode = false;
             this.hsRunGSTAT.Name = "hsRunGSTAT";
             this.hsRunGSTAT.NonMarkedText = "Run";
-            this.hsRunGSTAT.Size = new System.Drawing.Size(75, 56);
+            this.hsRunGSTAT.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunGSTAT.ShowShortcut = false;
+            this.hsRunGSTAT.Size = new System.Drawing.Size(75, 58);
             this.hsRunGSTAT.TabIndex = 20;
             this.hsRunGSTAT.Text = "Run";
             this.hsRunGSTAT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2643,12 +2731,25 @@
             this.txtGSTATUser.TabIndex = 0;
             this.txtGSTATUser.TextChanged += new System.EventHandler(this.cbGSTATChecked_Changed);
             // 
+            // cbGSTATDisplayVersion
+            // 
+            this.cbGSTATDisplayVersion.AutoSize = true;
+            this.cbGSTATDisplayVersion.Checked = true;
+            this.cbGSTATDisplayVersion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbGSTATDisplayVersion.Location = new System.Drawing.Point(382, 29);
+            this.cbGSTATDisplayVersion.Name = "cbGSTATDisplayVersion";
+            this.cbGSTATDisplayVersion.Size = new System.Drawing.Size(136, 17);
+            this.cbGSTATDisplayVersion.TabIndex = 5;
+            this.cbGSTATDisplayVersion.Text = "Display Version number";
+            this.cbGSTATDisplayVersion.UseVisualStyleBackColor = true;
+            this.cbGSTATDisplayVersion.CheckedChanged += new System.EventHandler(this.cbGSTATChecked_Changed);
+            // 
             // gbGSTATPassword
             // 
             this.gbGSTATPassword.Controls.Add(this.txtGSTATPassword);
             this.gbGSTATPassword.Location = new System.Drawing.Point(235, 10);
             this.gbGSTATPassword.Name = "gbGSTATPassword";
-            this.gbGSTATPassword.Size = new System.Drawing.Size(173, 43);
+            this.gbGSTATPassword.Size = new System.Drawing.Size(141, 43);
             this.gbGSTATPassword.TabIndex = 19;
             this.gbGSTATPassword.TabStop = false;
             this.gbGSTATPassword.Text = "Passwort";
@@ -2659,7 +2760,7 @@
             this.txtGSTATPassword.Location = new System.Drawing.Point(3, 16);
             this.txtGSTATPassword.Name = "txtGSTATPassword";
             this.txtGSTATPassword.PasswordChar = '*';
-            this.txtGSTATPassword.Size = new System.Drawing.Size(167, 20);
+            this.txtGSTATPassword.Size = new System.Drawing.Size(135, 20);
             this.txtGSTATPassword.TabIndex = 0;
             this.txtGSTATPassword.TextChanged += new System.EventHandler(this.cbGSTATChecked_Changed);
             // 
@@ -2670,7 +2771,7 @@
             this.tabGBAK.Location = new System.Drawing.Point(4, 22);
             this.tabGBAK.Name = "tabGBAK";
             this.tabGBAK.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGBAK.Size = new System.Drawing.Size(1276, 746);
+            this.tabGBAK.Size = new System.Drawing.Size(1328, 746);
             this.tabGBAK.TabIndex = 3;
             this.tabGBAK.Text = "GBAK";
             this.tabGBAK.UseVisualStyleBackColor = true;
@@ -2678,36 +2779,116 @@
             // 
             // gbGBAKOutput
             // 
-            this.gbGBAKOutput.Controls.Add(this.txtGBAKOutput);
+            this.gbGBAKOutput.Controls.Add(this.fctGBAKOutput);
             this.gbGBAKOutput.Controls.Add(this.pnlGBAKOutputUpper);
             this.gbGBAKOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbGBAKOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbGBAKOutput.Location = new System.Drawing.Point(583, 3);
+            this.gbGBAKOutput.Location = new System.Drawing.Point(623, 3);
             this.gbGBAKOutput.Name = "gbGBAKOutput";
-            this.gbGBAKOutput.Size = new System.Drawing.Size(690, 740);
+            this.gbGBAKOutput.Size = new System.Drawing.Size(702, 740);
             this.gbGBAKOutput.TabIndex = 15;
             this.gbGBAKOutput.TabStop = false;
             this.gbGBAKOutput.Text = "Output";
             // 
-            // txtGBAKOutput
+            // fctGBAKOutput
             // 
-            this.txtGBAKOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtGBAKOutput.Location = new System.Drawing.Point(3, 58);
-            this.txtGBAKOutput.Multiline = true;
-            this.txtGBAKOutput.Name = "txtGBAKOutput";
-            this.txtGBAKOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtGBAKOutput.Size = new System.Drawing.Size(684, 679);
-            this.txtGBAKOutput.TabIndex = 25;
+            this.fctGBAKOutput.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctGBAKOutput.AutoIndentCharsPatterns = "";
+            this.fctGBAKOutput.AutoScrollMinSize = new System.Drawing.Size(0, 14);
+            this.fctGBAKOutput.BackBrush = null;
+            this.fctGBAKOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctGBAKOutput.CharHeight = 14;
+            this.fctGBAKOutput.CharWidth = 7;
+            this.fctGBAKOutput.CommentPrefix = "--";
+            this.fctGBAKOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctGBAKOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctGBAKOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctGBAKOutput.Font = new System.Drawing.Font("Consolas", 9F);
+            this.fctGBAKOutput.IsReplaceMode = false;
+            this.fctGBAKOutput.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctGBAKOutput.LeftBracket = '(';
+            this.fctGBAKOutput.Location = new System.Drawing.Point(3, 58);
+            this.fctGBAKOutput.Name = "fctGBAKOutput";
+            this.fctGBAKOutput.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctGBAKOutput.ReadOnly = true;
+            this.fctGBAKOutput.RightBracket = ')';
+            this.fctGBAKOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctGBAKOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGBAKOutput.ServiceColors")));
+            this.fctGBAKOutput.Size = new System.Drawing.Size(696, 679);
+            this.fctGBAKOutput.TabIndex = 25;
+            this.fctGBAKOutput.WordWrap = true;
+            this.fctGBAKOutput.Zoom = 100;
             // 
             // pnlGBAKOutputUpper
             // 
             this.pnlGBAKOutputUpper.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlGBAKOutputUpper.Controls.Add(this.hsClearGBAKOutput);
             this.pnlGBAKOutputUpper.Controls.Add(this.hsGBAKOutputSave);
             this.pnlGBAKOutputUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGBAKOutputUpper.Location = new System.Drawing.Point(3, 16);
             this.pnlGBAKOutputUpper.Name = "pnlGBAKOutputUpper";
-            this.pnlGBAKOutputUpper.Size = new System.Drawing.Size(684, 42);
+            this.pnlGBAKOutputUpper.Size = new System.Drawing.Size(696, 42);
             this.pnlGBAKOutputUpper.TabIndex = 23;
+            // 
+            // hsClearGBAKOutput
+            // 
+            this.hsClearGBAKOutput.BackColor = System.Drawing.Color.Transparent;
+            this.hsClearGBAKOutput.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClearGBAKOutput.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClearGBAKOutput.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClearGBAKOutput.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClearGBAKOutput.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClearGBAKOutput.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClearGBAKOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsClearGBAKOutput.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClearGBAKOutput.FlatAppearance.BorderSize = 0;
+            this.hsClearGBAKOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearGBAKOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsClearGBAKOutput.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsClearGBAKOutput.Image = global::FBXpert.Properties.Resources.seewp_ge22x;
+            this.hsClearGBAKOutput.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsClearGBAKOutput.ImageToggleOnSelect = true;
+            this.hsClearGBAKOutput.Location = new System.Drawing.Point(37, 0);
+            this.hsClearGBAKOutput.Marked = false;
+            this.hsClearGBAKOutput.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClearGBAKOutput.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClearGBAKOutput.MarkedText = "";
+            this.hsClearGBAKOutput.MarkMode = false;
+            this.hsClearGBAKOutput.Name = "hsClearGBAKOutput";
+            this.hsClearGBAKOutput.NonMarkedText = "";
+            this.hsClearGBAKOutput.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearGBAKOutput.ShowShortcut = false;
+            this.hsClearGBAKOutput.Size = new System.Drawing.Size(37, 42);
+            this.hsClearGBAKOutput.TabIndex = 7;
+            this.hsClearGBAKOutput.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClearGBAKOutput.ToolTipActive = false;
+            this.hsClearGBAKOutput.ToolTipAutomaticDelay = 500;
+            this.hsClearGBAKOutput.ToolTipAutoPopDelay = 5000;
+            this.hsClearGBAKOutput.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClearGBAKOutput.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClearGBAKOutput.ToolTipFor4ContextMenu = true;
+            this.hsClearGBAKOutput.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClearGBAKOutput.ToolTipInitialDelay = 500;
+            this.hsClearGBAKOutput.ToolTipIsBallon = false;
+            this.hsClearGBAKOutput.ToolTipOwnerDraw = false;
+            this.hsClearGBAKOutput.ToolTipReshowDelay = 100;
+            this.hsClearGBAKOutput.ToolTipShowAlways = false;
+            this.hsClearGBAKOutput.ToolTipText = "";
+            this.hsClearGBAKOutput.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsClearGBAKOutput.ToolTipTitle = "";
+            this.hsClearGBAKOutput.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClearGBAKOutput.UseVisualStyleBackColor = false;
+            this.hsClearGBAKOutput.Click += new System.EventHandler(this.hsClearGBAKOutput_Click);
             // 
             // hsGBAKOutputSave
             // 
@@ -2722,6 +2903,7 @@
             this.hsGBAKOutputSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsGBAKOutputSave.FlatAppearance.BorderSize = 0;
             this.hsGBAKOutputSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsGBAKOutputSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsGBAKOutputSave.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsGBAKOutputSave.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hsGBAKOutputSave.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
@@ -2734,6 +2916,8 @@
             this.hsGBAKOutputSave.MarkMode = false;
             this.hsGBAKOutputSave.Name = "hsGBAKOutputSave";
             this.hsGBAKOutputSave.NonMarkedText = "";
+            this.hsGBAKOutputSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGBAKOutputSave.ShowShortcut = false;
             this.hsGBAKOutputSave.Size = new System.Drawing.Size(37, 42);
             this.hsGBAKOutputSave.TabIndex = 6;
             this.hsGBAKOutputSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2764,16 +2948,16 @@
             this.pnlGBAKLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlGBAKLeft.Location = new System.Drawing.Point(3, 3);
             this.pnlGBAKLeft.Name = "pnlGBAKLeft";
-            this.pnlGBAKLeft.Size = new System.Drawing.Size(580, 740);
+            this.pnlGBAKLeft.Size = new System.Drawing.Size(620, 740);
             this.pnlGBAKLeft.TabIndex = 22;
             // 
             // gbGBAKParameters
             // 
             this.gbGBAKParameters.Controls.Add(this.txtGBAKParameters);
             this.gbGBAKParameters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbGBAKParameters.Location = new System.Drawing.Point(0, 348);
+            this.gbGBAKParameters.Location = new System.Drawing.Point(0, 310);
             this.gbGBAKParameters.Name = "gbGBAKParameters";
-            this.gbGBAKParameters.Size = new System.Drawing.Size(580, 85);
+            this.gbGBAKParameters.Size = new System.Drawing.Size(620, 123);
             this.gbGBAKParameters.TabIndex = 16;
             this.gbGBAKParameters.TabStop = false;
             this.gbGBAKParameters.Text = "Parameters";
@@ -2786,7 +2970,7 @@
             this.txtGBAKParameters.Location = new System.Drawing.Point(3, 16);
             this.txtGBAKParameters.Multiline = true;
             this.txtGBAKParameters.Name = "txtGBAKParameters";
-            this.txtGBAKParameters.Size = new System.Drawing.Size(574, 66);
+            this.txtGBAKParameters.Size = new System.Drawing.Size(614, 104);
             this.txtGBAKParameters.TabIndex = 0;
             // 
             // tabControlGBAK
@@ -2798,14 +2982,13 @@
             this.tabControlGBAK.Location = new System.Drawing.Point(0, 58);
             this.tabControlGBAK.Name = "tabControlGBAK";
             this.tabControlGBAK.SelectedIndex = 0;
-            this.tabControlGBAK.Size = new System.Drawing.Size(580, 290);
+            this.tabControlGBAK.Size = new System.Drawing.Size(620, 252);
             this.tabControlGBAK.TabIndex = 20;
             // 
             // tabPageBackup
             // 
             this.tabPageBackup.Controls.Add(this.gbDatabaseLocation);
             this.tabPageBackup.Controls.Add(this.gbBackupLocation);
-            this.tabPageBackup.Controls.Add(this.cbGBAKVersion);
             this.tabPageBackup.Controls.Add(this.cbBackupReportActions);
             this.tabPageBackup.Controls.Add(this.cbUseLocalhost);
             this.tabPageBackup.Controls.Add(this.cbBackupExpand);
@@ -2820,7 +3003,7 @@
             this.tabPageBackup.Location = new System.Drawing.Point(4, 22);
             this.tabPageBackup.Name = "tabPageBackup";
             this.tabPageBackup.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBackup.Size = new System.Drawing.Size(572, 264);
+            this.tabPageBackup.Size = new System.Drawing.Size(612, 226);
             this.tabPageBackup.TabIndex = 0;
             this.tabPageBackup.Text = "tabPageBackup";
             this.tabPageBackup.UseVisualStyleBackColor = true;
@@ -2871,6 +3054,7 @@
             this.HsLoadDatabaseFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.HsLoadDatabaseFile.FlatAppearance.BorderSize = 0;
             this.HsLoadDatabaseFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HsLoadDatabaseFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HsLoadDatabaseFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.HsLoadDatabaseFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.HsLoadDatabaseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2884,6 +3068,8 @@
             this.HsLoadDatabaseFile.MarkMode = false;
             this.HsLoadDatabaseFile.Name = "HsLoadDatabaseFile";
             this.HsLoadDatabaseFile.NonMarkedText = "";
+            this.HsLoadDatabaseFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.HsLoadDatabaseFile.ShowShortcut = false;
             this.HsLoadDatabaseFile.Size = new System.Drawing.Size(29, 29);
             this.HsLoadDatabaseFile.TabIndex = 3;
             this.HsLoadDatabaseFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2940,6 +3126,7 @@
             this.hsLoadBackupFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadBackupFile.FlatAppearance.BorderSize = 0;
             this.hsLoadBackupFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadBackupFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadBackupFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadBackupFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadBackupFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2953,6 +3140,8 @@
             this.hsLoadBackupFile.MarkMode = false;
             this.hsLoadBackupFile.Name = "hsLoadBackupFile";
             this.hsLoadBackupFile.NonMarkedText = "";
+            this.hsLoadBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadBackupFile.ShowShortcut = false;
             this.hsLoadBackupFile.Size = new System.Drawing.Size(29, 29);
             this.hsLoadBackupFile.TabIndex = 3;
             this.hsLoadBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2974,19 +3163,6 @@
             this.hsLoadBackupFile.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsLoadBackupFile.UseVisualStyleBackColor = false;
             this.hsLoadBackupFile.Click += new System.EventHandler(this.HsLoadBackupFile_Click);
-            // 
-            // cbGBAKVersion
-            // 
-            this.cbGBAKVersion.AutoSize = true;
-            this.cbGBAKVersion.Checked = true;
-            this.cbGBAKVersion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGBAKVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cbGBAKVersion.Location = new System.Drawing.Point(3, 244);
-            this.cbGBAKVersion.Name = "cbGBAKVersion";
-            this.cbGBAKVersion.Size = new System.Drawing.Size(566, 17);
-            this.cbGBAKVersion.TabIndex = 35;
-            this.cbGBAKVersion.Text = "Display Version number";
-            this.cbGBAKVersion.UseVisualStyleBackColor = true;
             // 
             // cbBackupReportActions
             // 
@@ -3116,6 +3292,7 @@
             // 
             // tabPageRestore
             // 
+            this.tabPageRestore.Controls.Add(this.ckRestoreDeactivateIndexes);
             this.tabPageRestore.Controls.Add(this.groupBox1);
             this.tabPageRestore.Controls.Add(this.gbRestoreOveridePageBuffers);
             this.tabPageRestore.Controls.Add(this.cbRestoreNoSpaceRecordVersions);
@@ -3133,11 +3310,82 @@
             this.tabPageRestore.Location = new System.Drawing.Point(4, 22);
             this.tabPageRestore.Name = "tabPageRestore";
             this.tabPageRestore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRestore.Size = new System.Drawing.Size(572, 264);
+            this.tabPageRestore.Size = new System.Drawing.Size(612, 226);
             this.tabPageRestore.TabIndex = 1;
             this.tabPageRestore.Text = "tabPageRestore";
             this.tabPageRestore.UseVisualStyleBackColor = true;
             this.tabPageRestore.Enter += new System.EventHandler(this.TabPageRestore_Enter);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtRestoreFile);
+            this.groupBox1.Controls.Add(this.hotSpot5);
+            this.groupBox1.Location = new System.Drawing.Point(12, 144);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(345, 48);
+            this.groupBox1.TabIndex = 37;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Backup Location";
+            // 
+            // txtRestoreFile
+            // 
+            this.txtRestoreFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRestoreFile.Location = new System.Drawing.Point(3, 16);
+            this.txtRestoreFile.Name = "txtRestoreFile";
+            this.txtRestoreFile.Size = new System.Drawing.Size(310, 20);
+            this.txtRestoreFile.TabIndex = 0;
+            this.txtRestoreFile.Text = "D:\\temp\\test.fbk";
+            // 
+            // hotSpot5
+            // 
+            this.hotSpot5.BackColor = System.Drawing.Color.Transparent;
+            this.hotSpot5.BackColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot5.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot5.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hotSpot5.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hotSpot5.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hotSpot5.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hotSpot5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hotSpot5.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hotSpot5.FlatAppearance.BorderSize = 0;
+            this.hotSpot5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hotSpot5.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hotSpot5.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hotSpot5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hotSpot5.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hotSpot5.ImageToggleOnSelect = false;
+            this.hotSpot5.Location = new System.Drawing.Point(313, 16);
+            this.hotSpot5.Marked = false;
+            this.hotSpot5.MarkedColor = System.Drawing.Color.Teal;
+            this.hotSpot5.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hotSpot5.MarkedText = "";
+            this.hotSpot5.MarkMode = false;
+            this.hotSpot5.Name = "hotSpot5";
+            this.hotSpot5.NonMarkedText = "";
+            this.hotSpot5.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot5.ShowShortcut = false;
+            this.hotSpot5.Size = new System.Drawing.Size(29, 29);
+            this.hotSpot5.TabIndex = 3;
+            this.hotSpot5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hotSpot5.ToolTipActive = false;
+            this.hotSpot5.ToolTipAutomaticDelay = 500;
+            this.hotSpot5.ToolTipAutoPopDelay = 5000;
+            this.hotSpot5.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hotSpot5.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hotSpot5.ToolTipFor4ContextMenu = true;
+            this.hotSpot5.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hotSpot5.ToolTipInitialDelay = 500;
+            this.hotSpot5.ToolTipIsBallon = false;
+            this.hotSpot5.ToolTipOwnerDraw = false;
+            this.hotSpot5.ToolTipReshowDelay = 100;
+            this.hotSpot5.ToolTipShowAlways = false;
+            this.hotSpot5.ToolTipText = "";
+            this.hotSpot5.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hotSpot5.ToolTipTitle = "";
+            this.hotSpot5.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hotSpot5.UseVisualStyleBackColor = false;
+            this.hotSpot5.Click += new System.EventHandler(this.HotSpot5_Click);
             // 
             // gbRestoreOveridePageBuffers
             // 
@@ -3393,7 +3641,7 @@
             this.tabPageVersion.Location = new System.Drawing.Point(4, 22);
             this.tabPageVersion.Name = "tabPageVersion";
             this.tabPageVersion.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVersion.Size = new System.Drawing.Size(572, 264);
+            this.tabPageVersion.Size = new System.Drawing.Size(612, 226);
             this.tabPageVersion.TabIndex = 2;
             this.tabPageVersion.Text = "tabPageVersion";
             this.tabPageVersion.UseVisualStyleBackColor = true;
@@ -3404,7 +3652,7 @@
             this.gbGBAKParameterInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbGBAKParameterInfo.Location = new System.Drawing.Point(0, 433);
             this.gbGBAKParameterInfo.Name = "gbGBAKParameterInfo";
-            this.gbGBAKParameterInfo.Size = new System.Drawing.Size(580, 307);
+            this.gbGBAKParameterInfo.Size = new System.Drawing.Size(620, 307);
             this.gbGBAKParameterInfo.TabIndex = 17;
             this.gbGBAKParameterInfo.TabStop = false;
             this.gbGBAKParameterInfo.Text = "Arguments info";
@@ -3415,7 +3663,7 @@
             this.rtbGBAKArguments.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbGBAKArguments.Location = new System.Drawing.Point(3, 16);
             this.rtbGBAKArguments.Name = "rtbGBAKArguments";
-            this.rtbGBAKArguments.Size = new System.Drawing.Size(574, 288);
+            this.rtbGBAKArguments.Size = new System.Drawing.Size(614, 288);
             this.rtbGBAKArguments.TabIndex = 0;
             this.rtbGBAKArguments.Text = resources.GetString("rtbGBAKArguments.Text");
             // 
@@ -3423,11 +3671,12 @@
             // 
             this.pnlGBAKUserPassword.Controls.Add(this.hsRunGBAK);
             this.pnlGBAKUserPassword.Controls.Add(this.gbBAKUser);
+            this.pnlGBAKUserPassword.Controls.Add(this.cbGBAKVersion);
             this.pnlGBAKUserPassword.Controls.Add(this.gbBAKPassword);
             this.pnlGBAKUserPassword.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlGBAKUserPassword.Location = new System.Drawing.Point(0, 0);
             this.pnlGBAKUserPassword.Name = "pnlGBAKUserPassword";
-            this.pnlGBAKUserPassword.Size = new System.Drawing.Size(580, 58);
+            this.pnlGBAKUserPassword.Size = new System.Drawing.Size(620, 58);
             this.pnlGBAKUserPassword.TabIndex = 21;
             // 
             // hsRunGBAK
@@ -3443,12 +3692,13 @@
             this.hsRunGBAK.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunGBAK.FlatAppearance.BorderSize = 0;
             this.hsRunGBAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunGBAK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunGBAK.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunGBAK.Image = global::FBXpert.Properties.Resources.console_x32;
             this.hsRunGBAK.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunGBAK.ImageHover = global::FBXpert.Properties.Resources.console2_x32;
             this.hsRunGBAK.ImageToggleOnSelect = true;
-            this.hsRunGBAK.Location = new System.Drawing.Point(505, 0);
+            this.hsRunGBAK.Location = new System.Drawing.Point(545, 0);
             this.hsRunGBAK.Marked = false;
             this.hsRunGBAK.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunGBAK.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -3456,6 +3706,8 @@
             this.hsRunGBAK.MarkMode = false;
             this.hsRunGBAK.Name = "hsRunGBAK";
             this.hsRunGBAK.NonMarkedText = "Run";
+            this.hsRunGBAK.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunGBAK.ShowShortcut = false;
             this.hsRunGBAK.Size = new System.Drawing.Size(75, 58);
             this.hsRunGBAK.TabIndex = 20;
             this.hsRunGBAK.Text = "Run";
@@ -3497,12 +3749,24 @@
             this.txtGBAKUser.Size = new System.Drawing.Size(213, 20);
             this.txtGBAKUser.TabIndex = 0;
             // 
+            // cbGBAKVersion
+            // 
+            this.cbGBAKVersion.AutoSize = true;
+            this.cbGBAKVersion.Checked = true;
+            this.cbGBAKVersion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbGBAKVersion.Location = new System.Drawing.Point(387, 29);
+            this.cbGBAKVersion.Name = "cbGBAKVersion";
+            this.cbGBAKVersion.Size = new System.Drawing.Size(136, 17);
+            this.cbGBAKVersion.TabIndex = 35;
+            this.cbGBAKVersion.Text = "Display Version number";
+            this.cbGBAKVersion.UseVisualStyleBackColor = true;
+            // 
             // gbBAKPassword
             // 
             this.gbBAKPassword.Controls.Add(this.txtGBAKPassword);
             this.gbBAKPassword.Location = new System.Drawing.Point(235, 10);
             this.gbBAKPassword.Name = "gbBAKPassword";
-            this.gbBAKPassword.Size = new System.Drawing.Size(173, 43);
+            this.gbBAKPassword.Size = new System.Drawing.Size(146, 43);
             this.gbBAKPassword.TabIndex = 19;
             this.gbBAKPassword.TabStop = false;
             this.gbBAKPassword.Text = "Passwort";
@@ -3513,7 +3777,7 @@
             this.txtGBAKPassword.Location = new System.Drawing.Point(3, 16);
             this.txtGBAKPassword.Name = "txtGBAKPassword";
             this.txtGBAKPassword.PasswordChar = '*';
-            this.txtGBAKPassword.Size = new System.Drawing.Size(167, 20);
+            this.txtGBAKPassword.Size = new System.Drawing.Size(140, 20);
             this.txtGBAKPassword.TabIndex = 0;
             // 
             // ofdFiles
@@ -3541,79 +3805,22 @@
             this.ofdBackup.DefaultExt = "*.fbk";
             this.ofdBackup.Filter = "Firebird backup|*.fbk|All|*.*";
             // 
-            // groupBox1
+            // ckRestoreDeactivateIndexes
             // 
-            this.groupBox1.Controls.Add(this.txtRestoreFile);
-            this.groupBox1.Controls.Add(this.hotSpot5);
-            this.groupBox1.Location = new System.Drawing.Point(12, 144);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(345, 48);
-            this.groupBox1.TabIndex = 37;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Backup Location";
-            // 
-            // txtRestoreFile
-            // 
-            this.txtRestoreFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRestoreFile.Location = new System.Drawing.Point(3, 16);
-            this.txtRestoreFile.Name = "txtRestoreFile";
-            this.txtRestoreFile.Size = new System.Drawing.Size(310, 20);
-            this.txtRestoreFile.TabIndex = 0;
-            this.txtRestoreFile.Text = "D:\\temp\\test.fbk";
-            // 
-            // hotSpot5
-            // 
-            this.hotSpot5.BackColor = System.Drawing.Color.Transparent;
-            this.hotSpot5.BackColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot5.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot5.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hotSpot5.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hotSpot5.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hotSpot5.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hotSpot5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hotSpot5.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hotSpot5.FlatAppearance.BorderSize = 0;
-            this.hotSpot5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hotSpot5.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hotSpot5.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hotSpot5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hotSpot5.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hotSpot5.ImageToggleOnSelect = false;
-            this.hotSpot5.Location = new System.Drawing.Point(313, 16);
-            this.hotSpot5.Marked = false;
-            this.hotSpot5.MarkedColor = System.Drawing.Color.Teal;
-            this.hotSpot5.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hotSpot5.MarkedText = "";
-            this.hotSpot5.MarkMode = false;
-            this.hotSpot5.Name = "hotSpot5";
-            this.hotSpot5.NonMarkedText = "";
-            this.hotSpot5.Size = new System.Drawing.Size(29, 29);
-            this.hotSpot5.TabIndex = 3;
-            this.hotSpot5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hotSpot5.ToolTipActive = false;
-            this.hotSpot5.ToolTipAutomaticDelay = 500;
-            this.hotSpot5.ToolTipAutoPopDelay = 5000;
-            this.hotSpot5.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hotSpot5.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hotSpot5.ToolTipFor4ContextMenu = true;
-            this.hotSpot5.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hotSpot5.ToolTipInitialDelay = 500;
-            this.hotSpot5.ToolTipIsBallon = false;
-            this.hotSpot5.ToolTipOwnerDraw = false;
-            this.hotSpot5.ToolTipReshowDelay = 100;
-            this.hotSpot5.ToolTipShowAlways = false;
-            this.hotSpot5.ToolTipText = "";
-            this.hotSpot5.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hotSpot5.ToolTipTitle = "";
-            this.hotSpot5.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hotSpot5.UseVisualStyleBackColor = false;
-            this.hotSpot5.Click += new System.EventHandler(this.HotSpot5_Click);
+            this.ckRestoreDeactivateIndexes.AutoSize = true;
+            this.ckRestoreDeactivateIndexes.Location = new System.Drawing.Point(157, 126);
+            this.ckRestoreDeactivateIndexes.Name = "ckRestoreDeactivateIndexes";
+            this.ckRestoreDeactivateIndexes.Size = new System.Drawing.Size(118, 17);
+            this.ckRestoreDeactivateIndexes.TabIndex = 39;
+            this.ckRestoreDeactivateIndexes.Text = "Deactivate Indexes";
+            this.ckRestoreDeactivateIndexes.UseVisualStyleBackColor = true;
+            this.ckRestoreDeactivateIndexes.CheckedChanged += new System.EventHandler(this.ckRestoreDeactivateIndexes_CheckedChanged);
             // 
             // BinariesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 820);
+            this.ClientSize = new System.Drawing.Size(1336, 820);
             this.Controls.Add(this.tcCenter);
             this.Controls.Add(this.pnlUpper);
             this.Name = "BinariesForm";
@@ -3644,19 +3851,15 @@
             this.gbGFIXOptions.ResumeLayout(false);
             this.tabControlGFIX.ResumeLayout(false);
             this.tabPageOfflineOnline.ResumeLayout(false);
-            this.tabPageOfflineOnline.PerformLayout();
             this.gbGFIXSHutdownSeconds.ResumeLayout(false);
             this.gbGFIXSHutdownSeconds.PerformLayout();
             this.tabPageGFIXMisc.ResumeLayout(false);
-            this.tabPageGFIXMisc.PerformLayout();
             this.gbGFIXBuffers.ResumeLayout(false);
             this.gbGFIXBuffers.PerformLayout();
             this.gbGFIXSweepInterval.ResumeLayout(false);
             this.gbGFIXSweepInterval.PerformLayout();
             this.tabPageGFIXReadWrite.ResumeLayout(false);
-            this.tabPageGFIXReadWrite.PerformLayout();
             this.tabPageValidation.ResumeLayout(false);
-            this.tabPageValidation.PerformLayout();
             this.gbGFIXResolveLimboID.ResumeLayout(false);
             this.gbGFIXResolveLimboID.PerformLayout();
             this.gbGFIXLimboRecoverID.ResumeLayout(false);
@@ -3665,6 +3868,7 @@
             this.gnGFIXTowWayLimboID.PerformLayout();
             this.gbGFIXArgumentsText.ResumeLayout(false);
             this.pnlGFIXUpper.ResumeLayout(false);
+            this.pnlGFIXUpper.PerformLayout();
             this.gbGFIXPassword.ResumeLayout(false);
             this.gbGFIXPassword.PerformLayout();
             this.gbGFIXUser.ResumeLayout(false);
@@ -3684,13 +3888,14 @@
             this.gbGSTATTableName.PerformLayout();
             this.gbGSTATArgumentsText.ResumeLayout(false);
             this.pnlGSTATUpper.ResumeLayout(false);
+            this.pnlGSTATUpper.PerformLayout();
             this.gbGSTATUser.ResumeLayout(false);
             this.gbGSTATUser.PerformLayout();
             this.gbGSTATPassword.ResumeLayout(false);
             this.gbGSTATPassword.PerformLayout();
             this.tabGBAK.ResumeLayout(false);
             this.gbGBAKOutput.ResumeLayout(false);
-            this.gbGBAKOutput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctGBAKOutput)).EndInit();
             this.pnlGBAKOutputUpper.ResumeLayout(false);
             this.pnlGBAKLeft.ResumeLayout(false);
             this.gbGBAKParameters.ResumeLayout(false);
@@ -3704,6 +3909,8 @@
             this.gbBackupLocation.PerformLayout();
             this.tabPageRestore.ResumeLayout(false);
             this.tabPageRestore.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.gbRestoreOveridePageBuffers.ResumeLayout(false);
             this.gbRestoreOveridePageBuffers.PerformLayout();
             this.gbRestoreOverridePageSize.ResumeLayout(false);
@@ -3716,12 +3923,11 @@
             this.gbGRestoreWrite.PerformLayout();
             this.gbGBAKParameterInfo.ResumeLayout(false);
             this.pnlGBAKUserPassword.ResumeLayout(false);
+            this.pnlGBAKUserPassword.PerformLayout();
             this.gbBAKUser.ResumeLayout(false);
             this.gbBAKUser.PerformLayout();
             this.gbBAKPassword.ResumeLayout(false);
             this.gbBAKPassword.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3748,7 +3954,6 @@
         private System.Windows.Forms.TextBox txtGSTATParameters;
         private System.Windows.Forms.GroupBox gbGSTATArgumentsText;
         private System.Windows.Forms.RichTextBox rtbGSTATArgument;
-        private FastColoredTextBoxNS.FastColoredTextBox fctGSTATOutput;
         private System.Windows.Forms.Panel pnlGSTATOutputUpper;
         private SeControlsLib.HotSpot hsSaveGStatToFile;
         private System.Windows.Forms.GroupBox gbGFIXArgumentsText;
@@ -3773,7 +3978,6 @@
         private System.Windows.Forms.GroupBox gbBAKUser;
         private System.Windows.Forms.TextBox txtGBAKUser;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TextBox txtGBAKOutput;
         private System.Windows.Forms.Panel pnlGBAKUserPassword;
         private System.Windows.Forms.TabControl tabControlGBAK;
         private System.Windows.Forms.TabPage tabPageBackup;
@@ -3856,9 +4060,8 @@
         private SeControlsLib.HotSpot hsGFIXONlineMulti;
         private SeControlsLib.HotSpot hsGFIXOnlineSingle;
         private SeControlsLib.HotSpot hsGFIXOnlineFull;
-        private System.Windows.Forms.CheckBox cbGFIXShutVersion;
+        private System.Windows.Forms.CheckBox cbShowVersion;
         private SeControlsLib.HotSpot hsGFIXSweep;
-        private System.Windows.Forms.CheckBox cbGFIXVersionMemory;
         private System.Windows.Forms.GroupBox gbGFIXSweepInterval;
         private System.Windows.Forms.TextBox txtGFIXSweepInterval;
         private SeControlsLib.HotSpot hotSpot2;
@@ -3869,14 +4072,12 @@
         private SeControlsLib.HotSpot hsGFIXBuffers;
         private SeControlsLib.HotSpot hsGFIXBufferServerDefault;
         private System.Windows.Forms.TabPage tabPageGFIXReadWrite;
-        private System.Windows.Forms.CheckBox cbGFIXReadWriteVersion;
         private SeControlsLib.HotSpot hsGFIXReadWriteMode;
         private SeControlsLib.HotSpot hsGFIXAccessRead;
         private SeControlsLib.HotSpot hsGFIXENableForcedWrites;
         private SeControlsLib.HotSpot hsGFIXDisableForcedWrites;
         private System.Windows.Forms.TabPage tabPageValidation;
         private SeControlsLib.HotSpot hsGFIXLimboTransactions;
-        private System.Windows.Forms.CheckBox cbGFIXValidationVersion;
         private SeControlsLib.HotSpot hsGFIXAutomatetRecovery;
         private System.Windows.Forms.GroupBox gbGFIXLimboRecoverID;
         private System.Windows.Forms.TextBox txtGFIXLimboIDRecover;
@@ -3905,5 +4106,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtRestoreFile;
         private SeControlsLib.HotSpot hotSpot5;
+        private SeControlsLib.HotSpot hsClearGBAKOutput;
+        private SeControlsLib.HotSpot hsClearGSTATOutput;
+        private FastColoredTextBoxNS.FastColoredTextBox fctGSTATOutput;
+        private FastColoredTextBoxNS.FastColoredTextBox fctGBAKOutput;
+        private System.Windows.Forms.CheckBox ckRestoreDeactivateIndexes;
     }
 }

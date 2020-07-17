@@ -44,8 +44,8 @@ namespace FBXpert
 
         public override void DataToEdit()
         {            
-            txtRestoreDetinationDatabasePath.Text = DBReg.DatabasePath;
-            txtBackupSourceDatabasePath.Text = DBReg.GetFullDatabasePath();
+            txtRestoreDestinationDatabasePath.Text = DBReg.DatabasePath;
+            txtBackupSourceDatabasePath.Text = DBReg.DatabasePath;
 
             if(DBReg.ConnectionType == eConnectionType.embedded)
             {                
@@ -70,11 +70,7 @@ namespace FBXpert
                 _dbReg.ConnectionType = eConnectionType.server;
                 _dbReg.Server = txtServer.Text;
             }
-            else if(rbLocal.Checked)
-            {                
-                _dbReg.ConnectionType = eConnectionType.server;
-                _dbReg.Server = txtServer.Text;
-            }
+            _dbReg.DatabasePath = txtBackupSourceDatabasePath.Text;
             return _dbReg;
         }
 
@@ -181,7 +177,7 @@ namespace FBXpert
             var ca = new ConnectionAttributes();
             ca.Server = DBReg.Server;
           //SE  ca.Client = DRC.Client;
-            ca.DatabasePath = txtRestoreDetinationDatabasePath.Text;
+            ca.DatabasePath = txtRestoreDestinationDatabasePath.Text;
             ca.Password = DBReg.Password;
             ca.User = DBReg.User;
             ca.ConnectionType = DBReg.ConnectionType;
@@ -313,13 +309,13 @@ namespace FBXpert
             
             if (ofdRestoreFromDatabase.ShowDialog() == DialogResult.OK)
             {
-                txtRestoreDetinationDatabasePath.Text = ofdRestoreFromDatabase.FileName;
+                txtRestoreDestinationDatabasePath.Text = ofdRestoreFromDatabase.FileName;
             }
         }
 
         private void rbCreateDatabase_CheckedChanged(object sender, EventArgs e)
         {
-            FileInfo fi = new FileInfo(txtRestoreDetinationDatabasePath.Text);
+            FileInfo fi = new FileInfo(txtRestoreDestinationDatabasePath.Text);
             if(fi.Exists&&rbCreateDatabase.Checked)
             {
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExceptionCaption","DatabaseFileExistsNoCreate",  SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation,null,null);
@@ -348,18 +344,25 @@ namespace FBXpert
                 txtServer.Enabled = false;
                 txtServer.Text = "";
             }
-            else if(rbLocal.Checked)
-            {
-                txtServer.Enabled = false;
-                txtServer.Text = "localhost";
-            }
+            
             EditToData();
-            txtBackupSourceDatabasePath.Text = _dbReg.GetFullDatabasePath();
+            txtBackupSourceDatabasePath.Text = _dbReg.DatabasePath;
         }
 
         private void rbEmbedded_CheckedChanged(object sender, EventArgs e)
         {
             rbCheckedChanged();            
+        }
+
+        private void hsChooseDatabase_Click(object sender, EventArgs e)
+        {
+            ofdDatabase.InitialDirectory = DBReg.DatabasePath;
+            ofdDatabase.FileName = txtBackupSourceDatabasePath.Text;
+            ofdDatabase.Title = "Databasefile";
+            if (ofdDatabase.ShowDialog() == DialogResult.OK)
+            {
+                txtBackupSourceDatabasePath.Text = ofdDatabase.FileName;
+            }
         }
     }  
 }

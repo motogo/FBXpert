@@ -105,7 +105,7 @@ namespace FBExpert
             cbExportToFile.Text = LanguageClass.Instance().GetString("EXPORT_TO_FILE");
             gbExportFile.Text = LanguageClass.Instance().GetString("FILE");
             gbInsertUpdate.Text = LanguageClass.Instance().GetString("INSERT_UPDATE_TYPE");
-
+            ckGetDatas.Text = LanguageClass.Instance().GetString("READ_DATAS");
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -349,14 +349,28 @@ namespace FBExpert
         }
 
         WorkerClass GetDataWorker = new WorkerClass();
+
+
+        public void CreateTabControl()
+        {
+            tabControlViews.TabPages.Clear();
+            tabControlViews.TabPages.Add(tabPageFIELDS);
+            if(getData) tabControlViews.TabPages.Add(tabPageDATA);
+            tabControlViews.TabPages.Add(tabDDL);
+            tabControlViews.TabPages.Add(tabUpdateInsert);
+            tabControlViews.TabPages.Add(tabPageDependenciesTo);
+            tabControlViews.TabPages.Add(tabPageMessages);
+            if (getData) tabControlViews.TabPages.Add(tabPageExport);
+        }
         public void RefreshAll()
         {
+            CreateTabControl();
             dgvResults.Visible = false;
             bsViewContent.DataMember = null;
             int rf = RefreshFields();
             _cmd = MakeFieldsCmd();
             
-            bsViewContent.DataMember = null;          
+            bsViewContent.DataMember = null;
             
             sfbViewData.Enabled = false;
             Application.DoEvents();
@@ -372,6 +386,39 @@ namespace FBExpert
                 }
                 int rd = RefreshDependenciesTo();
             
+                tabPageDependenciesTo.Text = $@"Dependencies ({rd})";
+                tabPageFIELDS.Text = $@"Fields ({rf})";
+
+                RefreshDLL();
+                ShowCaptions();
+                cbCAuto.Checked = !cbCAuto.Checked;
+                cbCAuto.Checked = !cbCAuto.Checked;
+            }
+        }
+
+        public void RefreshStruct()
+        {
+            CreateTabControl();
+            dgvResults.Visible = false;
+            bsViewContent.DataMember = null;
+            dgvResults.Enabled = false;
+            pnlDataUpper.Enabled = false;
+            int rf = RefreshFields();
+            _cmd = MakeFieldsCmd();
+
+            bsViewContent.DataMember = null;
+
+            sfbViewData.Enabled = false;
+            Application.DoEvents();
+            GetDataWorker.CancelGettingData();
+
+            if (GetDataWorker.CancellingDone())
+            {
+                ClearDataGrid();
+
+                
+                int rd = RefreshDependenciesTo();
+
                 tabPageDependenciesTo.Text = $@"Dependencies ({rd})";
                 tabPageFIELDS.Text = $@"Fields ({rf})";
 
@@ -427,7 +474,19 @@ namespace FBExpert
         {
             RefreshAll();
         }
-
+        bool getData = false;
+        public bool GetData
+        {
+            set
+            {
+                getData = value;
+                ckGetDatas.Checked = value;
+            }
+            get
+            {
+                return getData;
+            }
+        }
         private void VIEWManageForm_Load(object sender, EventArgs e)
         {
             if (DbExplorerForm.Instance().Visible)
@@ -439,8 +498,9 @@ namespace FBExpert
             
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
-            RefreshAll();
-           // DBReg.AutocompleteSetTextobjectForDatabase(fctCREATEINSERTSQL);
+            if(getData) RefreshAll();
+            else RefreshStruct();
+            // DBReg.AutocompleteSetTextobjectForDatabase(fctCREATEINSERTSQL);
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -927,6 +987,11 @@ namespace FBExpert
             {
                 SpaltenEdit();
             }
+        }
+
+        private void ckGetDatas_CheckedChanged(object sender, EventArgs e)
+        {
+            getData = ckGetDatas.Checked;
         }
     }
 }

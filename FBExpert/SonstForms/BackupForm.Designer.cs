@@ -55,11 +55,11 @@ namespace FBXpert
             this.gbConnectionType = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtBackupSourceDatabasePath = new System.Windows.Forms.TextBox();
+            this.hsChooseDatabase = new SeControlsLib.HotSpot();
             this.rbEmbedded = new System.Windows.Forms.RadioButton();
             this.gbServer = new System.Windows.Forms.GroupBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.rbRemote = new System.Windows.Forms.RadioButton();
-            this.rbLocal = new System.Windows.Forms.RadioButton();
             this.cbUseLocalhost = new System.Windows.Forms.CheckBox();
             this.cbBackupExpand = new System.Windows.Forms.CheckBox();
             this.cbBackupOldDescriptions = new System.Windows.Forms.CheckBox();
@@ -113,7 +113,7 @@ namespace FBXpert
             this.dataTable5 = new System.Data.DataTable();
             this.pnlRestoreUpper = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtRestoreDetinationDatabasePath = new System.Windows.Forms.TextBox();
+            this.txtRestoreDestinationDatabasePath = new System.Windows.Forms.TextBox();
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.hsRestore = new SeControlsLib.HotSpot();
             this.dsDependenciesFrom = new System.Data.DataSet();
@@ -122,6 +122,7 @@ namespace FBXpert
             this.ofdBackup = new System.Windows.Forms.OpenFileDialog();
             this.ofdRestore = new System.Windows.Forms.OpenFileDialog();
             this.ofdRestoreFromDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.ofdDatabase = new System.Windows.Forms.OpenFileDialog();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -189,6 +190,7 @@ namespace FBXpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -201,6 +203,8 @@ namespace FBXpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -297,6 +301,7 @@ namespace FBXpert
             this.lvBackupMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvBackupMessage.FullRowSelect = true;
             this.lvBackupMessage.GridLines = true;
+            this.lvBackupMessage.HideSelection = false;
             this.lvBackupMessage.Location = new System.Drawing.Point(3, 16);
             this.lvBackupMessage.Name = "lvBackupMessage";
             this.lvBackupMessage.Size = new System.Drawing.Size(635, 508);
@@ -339,6 +344,7 @@ namespace FBXpert
             this.lvBackup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvBackup.FullRowSelect = true;
             this.lvBackup.GridLines = true;
+            this.lvBackup.HideSelection = false;
             this.lvBackup.Location = new System.Drawing.Point(3, 16);
             this.lvBackup.Name = "lvBackup";
             this.lvBackup.Size = new System.Drawing.Size(611, 144);
@@ -386,7 +392,6 @@ namespace FBXpert
             this.gbConnectionType.Controls.Add(this.rbEmbedded);
             this.gbConnectionType.Controls.Add(this.gbServer);
             this.gbConnectionType.Controls.Add(this.rbRemote);
-            this.gbConnectionType.Controls.Add(this.rbLocal);
             this.gbConnectionType.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbConnectionType.Location = new System.Drawing.Point(3, 217);
             this.gbConnectionType.Name = "gbConnectionType";
@@ -398,6 +403,7 @@ namespace FBXpert
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtBackupSourceDatabasePath);
+            this.groupBox2.Controls.Add(this.hsChooseDatabase);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(3, 100);
             this.groupBox2.Name = "groupBox2";
@@ -411,8 +417,59 @@ namespace FBXpert
             this.txtBackupSourceDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBackupSourceDatabasePath.Location = new System.Drawing.Point(3, 16);
             this.txtBackupSourceDatabasePath.Name = "txtBackupSourceDatabasePath";
-            this.txtBackupSourceDatabasePath.Size = new System.Drawing.Size(593, 20);
+            this.txtBackupSourceDatabasePath.Size = new System.Drawing.Size(564, 20);
             this.txtBackupSourceDatabasePath.TabIndex = 1;
+            // 
+            // hsChooseDatabase
+            // 
+            this.hsChooseDatabase.BackColor = System.Drawing.Color.Transparent;
+            this.hsChooseDatabase.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsChooseDatabase.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsChooseDatabase.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsChooseDatabase.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsChooseDatabase.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsChooseDatabase.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsChooseDatabase.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsChooseDatabase.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsChooseDatabase.FlatAppearance.BorderSize = 0;
+            this.hsChooseDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsChooseDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsChooseDatabase.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsChooseDatabase.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsChooseDatabase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hsChooseDatabase.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsChooseDatabase.ImageToggleOnSelect = false;
+            this.hsChooseDatabase.Location = new System.Drawing.Point(567, 16);
+            this.hsChooseDatabase.Marked = false;
+            this.hsChooseDatabase.MarkedColor = System.Drawing.Color.Teal;
+            this.hsChooseDatabase.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsChooseDatabase.MarkedText = "";
+            this.hsChooseDatabase.MarkMode = false;
+            this.hsChooseDatabase.Name = "hsChooseDatabase";
+            this.hsChooseDatabase.NonMarkedText = "";
+            this.hsChooseDatabase.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsChooseDatabase.ShowShortcut = false;
+            this.hsChooseDatabase.Size = new System.Drawing.Size(29, 22);
+            this.hsChooseDatabase.TabIndex = 4;
+            this.hsChooseDatabase.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsChooseDatabase.ToolTipActive = false;
+            this.hsChooseDatabase.ToolTipAutomaticDelay = 500;
+            this.hsChooseDatabase.ToolTipAutoPopDelay = 5000;
+            this.hsChooseDatabase.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsChooseDatabase.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsChooseDatabase.ToolTipFor4ContextMenu = true;
+            this.hsChooseDatabase.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsChooseDatabase.ToolTipInitialDelay = 500;
+            this.hsChooseDatabase.ToolTipIsBallon = false;
+            this.hsChooseDatabase.ToolTipOwnerDraw = false;
+            this.hsChooseDatabase.ToolTipReshowDelay = 100;
+            this.hsChooseDatabase.ToolTipShowAlways = false;
+            this.hsChooseDatabase.ToolTipText = "";
+            this.hsChooseDatabase.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsChooseDatabase.ToolTipTitle = "";
+            this.hsChooseDatabase.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsChooseDatabase.UseVisualStyleBackColor = false;
+            this.hsChooseDatabase.Click += new System.EventHandler(this.hsChooseDatabase_Click);
             // 
             // rbEmbedded
             // 
@@ -455,18 +512,6 @@ namespace FBXpert
             this.rbRemote.Text = "Remote";
             this.rbRemote.UseVisualStyleBackColor = true;
             this.rbRemote.CheckedChanged += new System.EventHandler(this.rbRemote_CheckedChanged);
-            // 
-            // rbLocal
-            // 
-            this.rbLocal.AutoSize = true;
-            this.rbLocal.Location = new System.Drawing.Point(18, 19);
-            this.rbLocal.Name = "rbLocal";
-            this.rbLocal.Size = new System.Drawing.Size(51, 17);
-            this.rbLocal.TabIndex = 1;
-            this.rbLocal.TabStop = true;
-            this.rbLocal.Text = "Local";
-            this.rbLocal.UseVisualStyleBackColor = true;
-            this.rbLocal.CheckedChanged += new System.EventHandler(this.rbLocal_CheckedChanged);
             // 
             // cbUseLocalhost
             // 
@@ -553,6 +598,7 @@ namespace FBXpert
             this.hsAddBackupFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddBackupFile.FlatAppearance.BorderSize = 0;
             this.hsAddBackupFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddBackupFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddBackupFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddBackupFile.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddBackupFile.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
@@ -565,6 +611,8 @@ namespace FBXpert
             this.hsAddBackupFile.MarkMode = false;
             this.hsAddBackupFile.Name = "hsAddBackupFile";
             this.hsAddBackupFile.NonMarkedText = "";
+            this.hsAddBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddBackupFile.ShowShortcut = false;
             this.hsAddBackupFile.Size = new System.Drawing.Size(45, 32);
             this.hsAddBackupFile.TabIndex = 11;
             this.hsAddBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -650,6 +698,7 @@ namespace FBXpert
             this.hsRemoveBackupFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveBackupFile.FlatAppearance.BorderSize = 0;
             this.hsRemoveBackupFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveBackupFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveBackupFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveBackupFile.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveBackupFile.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
@@ -662,6 +711,8 @@ namespace FBXpert
             this.hsRemoveBackupFile.MarkMode = false;
             this.hsRemoveBackupFile.Name = "hsRemoveBackupFile";
             this.hsRemoveBackupFile.NonMarkedText = "";
+            this.hsRemoveBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveBackupFile.ShowShortcut = false;
             this.hsRemoveBackupFile.Size = new System.Drawing.Size(45, 32);
             this.hsRemoveBackupFile.TabIndex = 12;
             this.hsRemoveBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -717,6 +768,7 @@ namespace FBXpert
             this.hsLoadBackupFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadBackupFile.FlatAppearance.BorderSize = 0;
             this.hsLoadBackupFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadBackupFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadBackupFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadBackupFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadBackupFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -730,6 +782,8 @@ namespace FBXpert
             this.hsLoadBackupFile.MarkMode = false;
             this.hsLoadBackupFile.Name = "hsLoadBackupFile";
             this.hsLoadBackupFile.NonMarkedText = "";
+            this.hsLoadBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadBackupFile.ShowShortcut = false;
             this.hsLoadBackupFile.Size = new System.Drawing.Size(29, 29);
             this.hsLoadBackupFile.TabIndex = 3;
             this.hsLoadBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -776,6 +830,7 @@ namespace FBXpert
             this.hsBackup.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsBackup.FlatAppearance.BorderSize = 0;
             this.hsBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsBackup.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsBackup.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -789,6 +844,8 @@ namespace FBXpert
             this.hsBackup.MarkMode = false;
             this.hsBackup.Name = "hsBackup";
             this.hsBackup.NonMarkedText = "Run Backup";
+            this.hsBackup.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsBackup.ShowShortcut = false;
             this.hsBackup.Size = new System.Drawing.Size(111, 39);
             this.hsBackup.TabIndex = 1;
             this.hsBackup.Text = "Run Backup";
@@ -858,6 +915,7 @@ namespace FBXpert
             this.lvRestoreMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRestoreMessage.FullRowSelect = true;
             this.lvRestoreMessage.GridLines = true;
+            this.lvRestoreMessage.HideSelection = false;
             this.lvRestoreMessage.Location = new System.Drawing.Point(3, 16);
             this.lvRestoreMessage.Name = "lvRestoreMessage";
             this.lvRestoreMessage.Size = new System.Drawing.Size(635, 506);
@@ -900,6 +958,7 @@ namespace FBXpert
             this.lvRestore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRestore.FullRowSelect = true;
             this.lvRestore.GridLines = true;
+            this.lvRestore.HideSelection = false;
             this.lvRestore.Location = new System.Drawing.Point(3, 16);
             this.lvRestore.Name = "lvRestore";
             this.lvRestore.Size = new System.Drawing.Size(611, 255);
@@ -1065,6 +1124,7 @@ namespace FBXpert
             this.hsAddRestoreFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddRestoreFile.FlatAppearance.BorderSize = 0;
             this.hsAddRestoreFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddRestoreFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddRestoreFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddRestoreFile.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddRestoreFile.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
@@ -1077,6 +1137,8 @@ namespace FBXpert
             this.hsAddRestoreFile.MarkMode = false;
             this.hsAddRestoreFile.Name = "hsAddRestoreFile";
             this.hsAddRestoreFile.NonMarkedText = "";
+            this.hsAddRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddRestoreFile.ShowShortcut = false;
             this.hsAddRestoreFile.Size = new System.Drawing.Size(45, 32);
             this.hsAddRestoreFile.TabIndex = 11;
             this.hsAddRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1111,6 +1173,7 @@ namespace FBXpert
             this.hsRemoveRestoreFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveRestoreFile.FlatAppearance.BorderSize = 0;
             this.hsRemoveRestoreFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveRestoreFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveRestoreFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveRestoreFile.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveRestoreFile.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
@@ -1123,6 +1186,8 @@ namespace FBXpert
             this.hsRemoveRestoreFile.MarkMode = false;
             this.hsRemoveRestoreFile.Name = "hsRemoveRestoreFile";
             this.hsRemoveRestoreFile.NonMarkedText = "";
+            this.hsRemoveRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveRestoreFile.ShowShortcut = false;
             this.hsRemoveRestoreFile.Size = new System.Drawing.Size(45, 32);
             this.hsRemoveRestoreFile.TabIndex = 12;
             this.hsRemoveRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1178,6 +1243,7 @@ namespace FBXpert
             this.hsLoadRestoreFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadRestoreFile.FlatAppearance.BorderSize = 0;
             this.hsLoadRestoreFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadRestoreFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadRestoreFile.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadRestoreFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadRestoreFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1191,6 +1257,8 @@ namespace FBXpert
             this.hsLoadRestoreFile.MarkMode = false;
             this.hsLoadRestoreFile.Name = "hsLoadRestoreFile";
             this.hsLoadRestoreFile.NonMarkedText = "";
+            this.hsLoadRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadRestoreFile.ShowShortcut = false;
             this.hsLoadRestoreFile.Size = new System.Drawing.Size(29, 29);
             this.hsLoadRestoreFile.TabIndex = 3;
             this.hsLoadRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1273,7 +1341,7 @@ namespace FBXpert
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtRestoreDetinationDatabasePath);
+            this.groupBox1.Controls.Add(this.txtRestoreDestinationDatabasePath);
             this.groupBox1.Controls.Add(this.hotSpot1);
             this.groupBox1.Location = new System.Drawing.Point(186, 3);
             this.groupBox1.Name = "groupBox1";
@@ -1282,14 +1350,14 @@ namespace FBXpert
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Database Location";
             // 
-            // txtRestoreDetinationDatabasePath
+            // txtRestoreDestinationDatabasePath
             // 
-            this.txtRestoreDetinationDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRestoreDetinationDatabasePath.Location = new System.Drawing.Point(3, 16);
-            this.txtRestoreDetinationDatabasePath.Name = "txtRestoreDetinationDatabasePath";
-            this.txtRestoreDetinationDatabasePath.Size = new System.Drawing.Size(457, 20);
-            this.txtRestoreDetinationDatabasePath.TabIndex = 0;
-            this.txtRestoreDetinationDatabasePath.Text = "D:\\temp\\test.fbk";
+            this.txtRestoreDestinationDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRestoreDestinationDatabasePath.Location = new System.Drawing.Point(3, 16);
+            this.txtRestoreDestinationDatabasePath.Name = "txtRestoreDestinationDatabasePath";
+            this.txtRestoreDestinationDatabasePath.Size = new System.Drawing.Size(457, 20);
+            this.txtRestoreDestinationDatabasePath.TabIndex = 0;
+            this.txtRestoreDestinationDatabasePath.Text = "D:\\temp\\test.fbk";
             // 
             // hotSpot1
             // 
@@ -1304,6 +1372,7 @@ namespace FBXpert
             this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot1.FlatAppearance.BorderSize = 0;
             this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot1.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hotSpot1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1317,6 +1386,8 @@ namespace FBXpert
             this.hotSpot1.MarkMode = false;
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "";
+            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(29, 19);
             this.hotSpot1.TabIndex = 3;
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1352,6 +1423,7 @@ namespace FBXpert
             this.hsRestore.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRestore.FlatAppearance.BorderSize = 0;
             this.hsRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRestore.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRestore.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1365,6 +1437,8 @@ namespace FBXpert
             this.hsRestore.MarkMode = false;
             this.hsRestore.Name = "hsRestore";
             this.hsRestore.NonMarkedText = "Run Restore";
+            this.hsRestore.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRestore.ShowShortcut = false;
             this.hsRestore.Size = new System.Drawing.Size(105, 41);
             this.hsRestore.TabIndex = 2;
             this.hsRestore.Text = "Run Restore";
@@ -1421,6 +1495,13 @@ namespace FBXpert
             this.ofdRestoreFromDatabase.DefaultExt = "*.fdb";
             this.ofdRestoreFromDatabase.Filter = "*.fdb|Firebird DB|*.*|All";
             this.ofdRestoreFromDatabase.Multiselect = true;
+            // 
+            // ofdDatabase
+            // 
+            this.ofdDatabase.CheckFileExists = false;
+            this.ofdDatabase.DefaultExt = "*.fbd";
+            this.ofdDatabase.FileName = "ofdDBLocation";
+            this.ofdDatabase.Filter = "Firebird Database|*.fdb|All|*.*";
             // 
             // BackupForm
             // 
@@ -1557,7 +1638,7 @@ namespace FBXpert
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtRestoreDetinationDatabasePath;
+        private System.Windows.Forms.TextBox txtRestoreDestinationDatabasePath;
         private SeControlsLib.HotSpot hotSpot1;
         private System.Windows.Forms.OpenFileDialog ofdRestore;
         private System.Windows.Forms.Label lblCaption;
@@ -1568,8 +1649,9 @@ namespace FBXpert
         private System.Windows.Forms.GroupBox gbServer;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.RadioButton rbRemote;
-        private System.Windows.Forms.RadioButton rbLocal;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtBackupSourceDatabasePath;
+        private SeControlsLib.HotSpot hsChooseDatabase;
+        private System.Windows.Forms.OpenFileDialog ofdDatabase;
     }
 }

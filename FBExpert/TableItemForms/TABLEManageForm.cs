@@ -156,6 +156,7 @@ namespace FBExpert
             cbExportToFile.Text          = LanguageClass.Instance().GetString("EXPORT_TO_FILE");
             gbExportFile.Text            = LanguageClass.Instance().GetString("FILE");
             gbInsertUpdate.Text          = LanguageClass.Instance().GetString("INSERT_UPDATE_TYPE");
+            ckGetDatas.Text             = LanguageClass.Instance().GetString("READ_DATAS");
         }
 
         void ErrorRaised(object sender, MessageEventArgs k)
@@ -191,11 +192,13 @@ namespace FBExpert
 
             if(k.Key.ToString() == StaticVariablesClass.ReloadFields)
             {
-                RefreshAll();
+                if (getData) RefreshAll();
+                else RefreshStruct();
             }
             else if(k.Key.ToString() == StaticVariablesClass.ReloadIndex)
             {
-                RefreshAll();
+                if(getData) RefreshAll();
+                else RefreshStruct();
             }
             NotifiesClass.Instance().Notify.OnRaiseInfo(k);            
         }
@@ -548,7 +551,7 @@ namespace FBExpert
         {
             fctTableCreateDLL.Text = AppStaticFunctionsClass.CreateComment() + CreateDLLClass.CreateTabelDLL(_tableObject,eCreateMode.create);
         }
-                
+
         public string MakeFieldsCmd()
         {
             var sb = new StringBuilder();
@@ -589,7 +592,19 @@ namespace FBExpert
             txtSQL.Text = $@"SELECT {cmd}";
             return cmd;
         }
-               
+        bool getData;
+        public bool GetData
+        {
+            set
+            {
+                getData = value;
+                ckGetDatas.Checked = value;
+            }
+            get
+            {
+                return getData;
+            }
+        }
         public void RefreshDatas(string cmd)
         {           
            if (string.IsNullOrEmpty(_tableObject.Name)) return;
@@ -641,7 +656,7 @@ namespace FBExpert
            }                              
            
         }
-           
+
         private void SelectIndexID()
         {
             if (!IndexDataFilled) return;            
@@ -815,7 +830,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "IndexDeletedTitle","IndexDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                 RefreshAll();
+                if (getData) RefreshAll();
+                else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -830,7 +846,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                 RefreshAll();
+                 if (getData) RefreshAll();
+                 else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -845,7 +862,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                 RefreshAll();
+                 if (getData) RefreshAll();
+                 else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -860,7 +878,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                 RefreshAll();
+                 if (getData) RefreshAll();
+                 else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -875,7 +894,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                 RefreshAll();
+                 if (getData) RefreshAll();
+                 else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -953,12 +973,26 @@ namespace FBExpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Manage Tables"); 
         }
 
-        
+        public void CreateTabControl()
+        {
+            tabControl.TabPages.Clear();
+            tabControl.TabPages.Add(tabPageFIELDS);
+            if (getData) tabControl.TabPages.Add(tabPageDATA);
+            tabControl.TabPages.Add(tabDDL);
+            tabControl.TabPages.Add(tabConstraints);
+            tabControl.TabPages.Add(tabIndicies);
+            tabControl.TabPages.Add(tabPageDependenciesTo);
+            tabControl.TabPages.Add(tabPageDependenciesFrom);
+            tabControl.TabPages.Add(tabPageMessages);
+            if (getData) tabControl.TabPages.Add(tabPageExport);
+            tabControl.TabPages.Add(tabPageTablestatistics);
+        }
 
         private void RefreshAll()
         {
             DataFilled = false;
             dgvResults.Visible = false;
+            CreateTabControl();
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
             tabPageFIELDS.Text = $@"Fields ({RefreshFields().ToString()})";
@@ -999,6 +1033,54 @@ namespace FBExpert
                 GetDataWorker.RunWorkerAsync();      
                 DataFilled = true;
                 SelectID(); 
+            }
+        }
+
+        private void RefreshStruct()
+        {
+            DataFilled = false;
+            dgvResults.Visible = false;
+            CreateTabControl();
+            this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+            tabPageFIELDS.Text = $@"Fields ({RefreshFields()})";
+
+            _cmd = MakeFieldsCmd();
+
+            bsTableContent.DataMember = null;
+            hsRefreshData.Enabled = false;
+            sfbTableData.Enabled = false;
+            Application.DoEvents();
+            GetDataWorker.CancelGettingData();
+            if (GetDataWorker.CancellingDone())
+            {
+
+                ClearDataGrid();
+
+
+                int PrimaryKeys = RefreshPrimaryKeys();
+                int ForeignKeys = RefreshForeignKeys();
+                int Uniques = RefreshUniques();
+                int DependenciesTo = RefreshDependenciesTo();
+                int DependenciesFrom = RefreshDependenciesFrom();
+
+                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys.ToString()})";
+                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys.ToString()})";
+                tabPageUniques.Text = $@"Uniques ({Uniques.ToString()})";
+                tabConstraints.Text = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques).ToString()})";
+
+                tabIndicies.Text = $@"Indicies ({RefreshIndices().ToString()})";
+                tabPageDependenciesTo.Text = $@"Dependencies ({DependenciesTo.ToString()})";
+                tabPageDependenciesFrom.Text = $@"Dependencies ({DependenciesFrom.ToString()})";
+
+                RefreshDLL();
+                cbEditMode.Checked = !cbEditMode.Checked;
+                cbEditMode.Checked = !cbEditMode.Checked;
+                ShowCaptions();
+                this.Cursor = Cursors.Default;
+                //GetDataWorker.RunWorkerAsync();
+                DataFilled = true;
+                SelectID();
             }
         }
 
@@ -1051,8 +1133,9 @@ namespace FBExpert
             fctMessages.Clear();
             
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
-            SetDesign(FbXpertMainForm.Instance().AppDesign);            
-            RefreshAll();            
+            SetDesign(FbXpertMainForm.Instance().AppDesign);
+            if (getData) RefreshAll();
+            else RefreshStruct();
         }
 
         public void SelectID()
@@ -1261,12 +1344,10 @@ namespace FBExpert
             }
         }
         
-        
-        
         private void hsRefresh_Click(object sender, EventArgs e)
         {
-            RefreshAll();
-            
+            if (getData) RefreshAll();
+            else RefreshStruct();
         }
       
         private void hsRefreshData_Click(object sender, EventArgs e)
@@ -1402,7 +1483,8 @@ namespace FBExpert
             var tff = new FieldForm(_dbReg,null,_tnSelected, NewFieldObject,_localNotify,StateClasses.EditStateClass.eBearbeiten.eInsert);
             
             tff.ShowDialog();
-            RefreshAll();                
+            if (getData) RefreshAll();
+            else RefreshStruct();
         }
 
         private void hsRefreshAll_Click_1(object sender, EventArgs e)
@@ -1413,7 +1495,8 @@ namespace FBExpert
         private void hsDropField_Click(object sender, EventArgs e)
         {
             DropField();
-            RefreshAll();
+            if (getData) RefreshAll();
+            else RefreshStruct();
         }
 
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -2093,6 +2176,11 @@ namespace FBExpert
         private void dgvResults_Resize(object sender, EventArgs e)
         {            
             ActivateGrid();
+        }
+
+        private void ckGetDatas_CheckedChanged(object sender, EventArgs e)
+        {
+            getData = ckGetDatas.Checked;
         }
     }
 }

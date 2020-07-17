@@ -484,11 +484,11 @@ namespace FBXpert.DataClasses
         {            
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$INDICES.RDB$RELATION_NAME,RDB$RELATION_CONSTRAINTS.rdb$constraint_name {SQLConstants.AS} Constraint_Name,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE {SQLConstants.AS} Constraint_Type,");
-            sb.Append($@"RDB$INDEX_SEGMENTS.RDB$FIELD_NAME {SQLConstants.AS} FieldName,RDB$INDICES.RDB$DESCRIPTION {SQLConstants.AS} Index_Description,(RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) {SQLConstants.AS} Field_Position");
+            sb.Append($@"RDB$INDEX_SEGMENTS.RDB$FIELD_NAME {SQLConstants.AS} FieldName,RDB$INDICES.RDB$DESCRIPTION {SQLConstants.AS} Index_Description,(RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) {SQLConstants.AS} Field_Position ");
             sb.Append($@"{SQLConstants.FROM} RDB$INDEX_SEGMENTS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
-            sb.Append($@"{SQLConstants.WHERE} RDB$INDICES.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY') ");
+            sb.Append($@"{SQLConstants.WHERE} (RDB$INDICES.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY') ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");            
             return sb.ToString();
         }

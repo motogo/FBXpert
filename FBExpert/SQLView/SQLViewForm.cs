@@ -844,7 +844,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void ExecuteSQL(HistoryMode hMode)
         {
             dgvResults.Visible = false;
-
+            rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
             if (!hsLifeTime.Marked)
             {
                 //Datenbank wurde geändert, neu einloggen -> bei fehler return
@@ -1102,19 +1102,20 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void dgvResults_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            int rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
+            //int rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
             foreach (DataGridViewRow x in dgvResults.Rows)
             {
                 x.MinimumHeight = rh;
             }
         }
-
+        int rh = 22;
         private void txtRowHeight_TextChanged(object sender, EventArgs e)
         {
             if (cbRowManually.Checked)
             {
                 cbRowManually.Checked = false;
             }
+            rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
         }
         private void txtRowHeight_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1448,6 +1449,11 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 File.Delete(HistoryFile);
                 RefreshHistory();
             }
+        }
+
+        private void ckShowResults_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

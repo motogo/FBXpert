@@ -681,6 +681,7 @@ namespace SQLView
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -783,6 +784,7 @@ namespace SQLView
             this.ckShowResults.Text = "Show Results";
             this.ckShowResults.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ckShowResults.UseVisualStyleBackColor = false;
+            this.ckShowResults.CheckedChanged += new System.EventHandler(this.ckShowResults_CheckedChanged);
             // 
             // hsBreak
             // 
@@ -1191,7 +1193,7 @@ namespace SQLView
             this.tabRESULT.Location = new System.Drawing.Point(4, 23);
             this.tabRESULT.Name = "tabRESULT";
             this.tabRESULT.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRESULT.Size = new System.Drawing.Size(1594, 630);
+            this.tabRESULT.Size = new System.Drawing.Size(1594, 621);
             this.tabRESULT.TabIndex = 1;
             this.tabRESULT.Text = "Results grid";
             this.tabRESULT.UseVisualStyleBackColor = true;
@@ -1223,7 +1225,7 @@ namespace SQLView
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResults.ShowCellErrors = false;
             this.dgvResults.ShowRowErrors = false;
-            this.dgvResults.Size = new System.Drawing.Size(1588, 552);
+            this.dgvResults.Size = new System.Drawing.Size(1588, 543);
             this.dgvResults.TabIndex = 16;
             this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvResults_CellPainting);
             this.dgvResults.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResults_DataError);
@@ -1260,7 +1262,7 @@ namespace SQLView
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(3, 602);
+            this.bindingNavigator1.Location = new System.Drawing.Point(3, 593);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -1624,7 +1626,7 @@ namespace SQLView
             this.tabMELDUNG.Location = new System.Drawing.Point(4, 23);
             this.tabMELDUNG.Name = "tabMELDUNG";
             this.tabMELDUNG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMELDUNG.Size = new System.Drawing.Size(1594, 630);
+            this.tabMELDUNG.Size = new System.Drawing.Size(1594, 621);
             this.tabMELDUNG.TabIndex = 2;
             this.tabMELDUNG.Text = "Messagens";
             // 
@@ -1634,7 +1636,7 @@ namespace SQLView
             this.pnlInfoCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlInfoCenter.Location = new System.Drawing.Point(3, 50);
             this.pnlInfoCenter.Name = "pnlInfoCenter";
-            this.pnlInfoCenter.Size = new System.Drawing.Size(1588, 577);
+            this.pnlInfoCenter.Size = new System.Drawing.Size(1588, 568);
             this.pnlInfoCenter.TabIndex = 25;
             // 
             // rtfMELDUNG
@@ -1644,7 +1646,7 @@ namespace SQLView
             this.rtfMELDUNG.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtfMELDUNG.Location = new System.Drawing.Point(0, 0);
             this.rtfMELDUNG.Name = "rtfMELDUNG";
-            this.rtfMELDUNG.Size = new System.Drawing.Size(1588, 577);
+            this.rtfMELDUNG.Size = new System.Drawing.Size(1588, 568);
             this.rtfMELDUNG.TabIndex = 0;
             this.rtfMELDUNG.Text = "";
             // 
@@ -1732,7 +1734,7 @@ namespace SQLView
             this.tabERRORS.Location = new System.Drawing.Point(4, 23);
             this.tabERRORS.Name = "tabERRORS";
             this.tabERRORS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabERRORS.Size = new System.Drawing.Size(1594, 630);
+            this.tabERRORS.Size = new System.Drawing.Size(1594, 621);
             this.tabERRORS.TabIndex = 4;
             this.tabERRORS.Text = "Errors";
             // 
@@ -1742,7 +1744,7 @@ namespace SQLView
             this.pnlErrorUpper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlErrorUpper.Location = new System.Drawing.Point(3, 50);
             this.pnlErrorUpper.Name = "pnlErrorUpper";
-            this.pnlErrorUpper.Size = new System.Drawing.Size(1588, 577);
+            this.pnlErrorUpper.Size = new System.Drawing.Size(1588, 568);
             this.pnlErrorUpper.TabIndex = 24;
             // 
             // rtfERRORS
@@ -1752,7 +1754,7 @@ namespace SQLView
             this.rtfERRORS.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtfERRORS.Location = new System.Drawing.Point(0, 0);
             this.rtfERRORS.Name = "rtfERRORS";
-            this.rtfERRORS.Size = new System.Drawing.Size(1588, 577);
+            this.rtfERRORS.Size = new System.Drawing.Size(1588, 568);
             this.rtfERRORS.TabIndex = 1;
             this.rtfERRORS.Text = "";
             // 
@@ -1840,7 +1842,7 @@ namespace SQLView
             this.tabHistory.Location = new System.Drawing.Point(4, 23);
             this.tabHistory.Name = "tabHistory";
             this.tabHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHistory.Size = new System.Drawing.Size(1594, 630);
+            this.tabHistory.Size = new System.Drawing.Size(1594, 621);
             this.tabHistory.TabIndex = 3;
             this.tabHistory.Text = "History";
             // 
@@ -1850,7 +1852,7 @@ namespace SQLView
             this.pnlHistoryCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHistoryCenter.Location = new System.Drawing.Point(3, 52);
             this.pnlHistoryCenter.Name = "pnlHistoryCenter";
-            this.pnlHistoryCenter.Size = new System.Drawing.Size(1588, 575);
+            this.pnlHistoryCenter.Size = new System.Drawing.Size(1588, 566);
             this.pnlHistoryCenter.TabIndex = 24;
             // 
             // dgvSQLHistory
@@ -1864,7 +1866,7 @@ namespace SQLView
             this.dgvSQLHistory.Name = "dgvSQLHistory";
             this.dgvSQLHistory.RowHeadersVisible = false;
             this.dgvSQLHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSQLHistory.Size = new System.Drawing.Size(1588, 575);
+            this.dgvSQLHistory.Size = new System.Drawing.Size(1588, 566);
             this.dgvSQLHistory.TabIndex = 0;
             this.dgvSQLHistory.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_CellMouseDoubleClick);
             this.dgvSQLHistory.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvSQLHistory_ColumnHeaderMouseClick);
@@ -2123,7 +2125,7 @@ namespace SQLView
             this.tabRelpacelist.Location = new System.Drawing.Point(4, 23);
             this.tabRelpacelist.Name = "tabRelpacelist";
             this.tabRelpacelist.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRelpacelist.Size = new System.Drawing.Size(1594, 630);
+            this.tabRelpacelist.Size = new System.Drawing.Size(1594, 621);
             this.tabRelpacelist.TabIndex = 5;
             this.tabRelpacelist.Text = "Replaces";
             // 
@@ -2133,7 +2135,7 @@ namespace SQLView
             this.pnlReplacesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlReplacesCenter.Location = new System.Drawing.Point(3, 51);
             this.pnlReplacesCenter.Name = "pnlReplacesCenter";
-            this.pnlReplacesCenter.Size = new System.Drawing.Size(1588, 576);
+            this.pnlReplacesCenter.Size = new System.Drawing.Size(1588, 567);
             this.pnlReplacesCenter.TabIndex = 5;
             // 
             // rtbReplace
@@ -2143,7 +2145,7 @@ namespace SQLView
             this.rtbReplace.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbReplace.Location = new System.Drawing.Point(0, 0);
             this.rtbReplace.Name = "rtbReplace";
-            this.rtbReplace.Size = new System.Drawing.Size(1588, 576);
+            this.rtbReplace.Size = new System.Drawing.Size(1588, 567);
             this.rtbReplace.TabIndex = 2;
             this.rtbReplace.Text = "";
             // 
@@ -2221,7 +2223,7 @@ namespace SQLView
             this.tabOptionen.Location = new System.Drawing.Point(4, 23);
             this.tabOptionen.Name = "tabOptionen";
             this.tabOptionen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOptionen.Size = new System.Drawing.Size(1594, 630);
+            this.tabOptionen.Size = new System.Drawing.Size(1594, 621);
             this.tabOptionen.TabIndex = 6;
             this.tabOptionen.Text = "Options";
             // 
@@ -2467,7 +2469,7 @@ namespace SQLView
             this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
             this.tabPagePlan.Name = "tabPagePlan";
             this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePlan.Size = new System.Drawing.Size(1594, 630);
+            this.tabPagePlan.Size = new System.Drawing.Size(1594, 621);
             this.tabPagePlan.TabIndex = 7;
             this.tabPagePlan.Text = "Plan";
             this.tabPagePlan.UseVisualStyleBackColor = true;
@@ -2478,7 +2480,7 @@ namespace SQLView
             this.pnlPlanCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlanCenter.Location = new System.Drawing.Point(3, 51);
             this.pnlPlanCenter.Name = "pnlPlanCenter";
-            this.pnlPlanCenter.Size = new System.Drawing.Size(1588, 528);
+            this.pnlPlanCenter.Size = new System.Drawing.Size(1588, 519);
             this.pnlPlanCenter.TabIndex = 7;
             // 
             // fctPlan
@@ -2495,7 +2497,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctPlan.AutoIndentCharsPatterns = "";
-            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.fctPlan.AutoScrollMinSize = new System.Drawing.Size(154, 14);
             this.fctPlan.BackBrush = null;
             this.fctPlan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctPlan.CharHeight = 14;
@@ -2504,6 +2506,7 @@ namespace SQLView
             this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctPlan.IsReplaceMode = false;
             this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctPlan.LeftBracket = '(';
@@ -2513,7 +2516,7 @@ namespace SQLView
             this.fctPlan.RightBracket = ')';
             this.fctPlan.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctPlan.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctPlan.ServiceColors")));
-            this.fctPlan.Size = new System.Drawing.Size(1588, 528);
+            this.fctPlan.Size = new System.Drawing.Size(1588, 519);
             this.fctPlan.TabIndex = 0;
             this.fctPlan.Text = "fastColoredTextBox1";
             this.fctPlan.Zoom = 100;
@@ -2521,7 +2524,7 @@ namespace SQLView
             // pnlPlanLower
             // 
             this.pnlPlanLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlPlanLower.Location = new System.Drawing.Point(3, 579);
+            this.pnlPlanLower.Location = new System.Drawing.Point(3, 570);
             this.pnlPlanLower.Name = "pnlPlanLower";
             this.pnlPlanLower.Size = new System.Drawing.Size(1588, 48);
             this.pnlPlanLower.TabIndex = 6;
@@ -2543,7 +2546,7 @@ namespace SQLView
             this.tabPageExport.Location = new System.Drawing.Point(4, 23);
             this.tabPageExport.Name = "tabPageExport";
             this.tabPageExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExport.Size = new System.Drawing.Size(1594, 630);
+            this.tabPageExport.Size = new System.Drawing.Size(1594, 621);
             this.tabPageExport.TabIndex = 8;
             this.tabPageExport.Text = "Export";
             this.tabPageExport.UseVisualStyleBackColor = true;
@@ -2556,7 +2559,7 @@ namespace SQLView
             this.tabControlExport.Location = new System.Drawing.Point(3, 3);
             this.tabControlExport.Name = "tabControlExport";
             this.tabControlExport.SelectedIndex = 0;
-            this.tabControlExport.Size = new System.Drawing.Size(1588, 624);
+            this.tabControlExport.Size = new System.Drawing.Size(1588, 615);
             this.tabControlExport.TabIndex = 0;
             // 
             // tabPageXML
@@ -2567,7 +2570,7 @@ namespace SQLView
             this.tabPageXML.Location = new System.Drawing.Point(4, 22);
             this.tabPageXML.Name = "tabPageXML";
             this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXML.Size = new System.Drawing.Size(1580, 598);
+            this.tabPageXML.Size = new System.Drawing.Size(1580, 589);
             this.tabPageXML.TabIndex = 0;
             this.tabPageXML.Text = "XML-Data";
             this.tabPageXML.UseVisualStyleBackColor = true;
@@ -2586,7 +2589,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -2595,6 +2598,7 @@ namespace SQLView
             this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLData.IsReplaceMode = false;
             this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLData.LeftBracket = '(';
@@ -2604,7 +2608,7 @@ namespace SQLView
             this.fctXMLData.RightBracket = ')';
             this.fctXMLData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLData.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLData.ServiceColors")));
-            this.fctXMLData.Size = new System.Drawing.Size(1574, 513);
+            this.fctXMLData.Size = new System.Drawing.Size(1574, 504);
             this.fctXMLData.TabIndex = 7;
             this.fctXMLData.Zoom = 100;
             // 
@@ -3069,7 +3073,7 @@ namespace SQLView
             // 
             this.gbExportProgress.Controls.Add(this.pbExport);
             this.gbExportProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbExportProgress.Location = new System.Drawing.Point(3, 564);
+            this.gbExportProgress.Location = new System.Drawing.Point(3, 555);
             this.gbExportProgress.Name = "gbExportProgress";
             this.gbExportProgress.Size = new System.Drawing.Size(1574, 31);
             this.gbExportProgress.TabIndex = 8;
@@ -3119,6 +3123,7 @@ namespace SQLView
             this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLScheme.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLScheme.IsReplaceMode = false;
             this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLScheme.LeftBracket = '(';
@@ -3254,7 +3259,7 @@ namespace SQLView
             this.tabPagePerformance.Location = new System.Drawing.Point(4, 23);
             this.tabPagePerformance.Name = "tabPagePerformance";
             this.tabPagePerformance.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePerformance.Size = new System.Drawing.Size(1594, 630);
+            this.tabPagePerformance.Size = new System.Drawing.Size(1594, 621);
             this.tabPagePerformance.TabIndex = 9;
             this.tabPagePerformance.Text = "Performance";
             this.tabPagePerformance.UseVisualStyleBackColor = true;
@@ -3265,7 +3270,7 @@ namespace SQLView
             this.gbPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbPerformance.Location = new System.Drawing.Point(3, 51);
             this.gbPerformance.Name = "gbPerformance";
-            this.gbPerformance.Size = new System.Drawing.Size(1588, 576);
+            this.gbPerformance.Size = new System.Drawing.Size(1588, 567);
             this.gbPerformance.TabIndex = 8;
             this.gbPerformance.TabStop = false;
             // 
@@ -3285,7 +3290,7 @@ namespace SQLView
             this.lvPerformance.HideSelection = false;
             this.lvPerformance.Location = new System.Drawing.Point(3, 16);
             this.lvPerformance.Name = "lvPerformance";
-            this.lvPerformance.Size = new System.Drawing.Size(1582, 557);
+            this.lvPerformance.Size = new System.Drawing.Size(1582, 548);
             this.lvPerformance.TabIndex = 0;
             this.lvPerformance.UseCompatibleStateImageBehavior = false;
             this.lvPerformance.View = System.Windows.Forms.View.Details;

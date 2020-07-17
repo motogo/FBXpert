@@ -429,4 +429,7 @@
   <data name="DoYouWantDeleteHistory" xml:space="preserve">
     <value>Möchten Sie wirklich die History löschen</value>
   </data>
+  <data name="READ_DATAS" xml:space="preserve">
+    <value>Daten lesen</value>
+  </data>
 </root>

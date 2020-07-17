@@ -1785,29 +1785,39 @@ namespace FBXpert.DataClasses
             }
             return sb.ToString();
         }
-      
+
+        const string a = "\"";
+        const string bb = "{";
+        const string be = "}";
+
         public string CreateUpdateDataMethods(int lvl,DataObjectClass obj)
         {
             var sb = new StringBuilder();
+            
             if (obj.GetType() == typeof(TableClass))
             {
                 var table = obj as TableClass;
 
-                sb.Append(Format(lvl,"/// <summary>" + Nl));
-                sb.Append(Format(lvl,"/// Updates database with actual object" + Nl));
-                sb.Append(Format(lvl,"/// </summary>" + Nl));
-                sb.Append(Format(lvl,"public override ReturnInfo UpdateData()" + Nl));
+                sb.Append(Format(lvl,$@"/// <summary>{Nl}"));
+                sb.Append(Format(lvl,$@"/// Updates database with actual object{Nl}"));
+                sb.Append(Format(lvl,$@"/// </summary>{Nl}"));
+                sb.Append(Format(lvl,$@"public override ReturnInfo UpdateData(){Nl}"));
                 sb.Append(BlockStart(lvl));                
-                sb.Append(Format(lvl+1,"using (var dc = (" + table.Name + "Class.TDataClass) CurrentData)" + Nl));
-                sb.Append(Format(lvl+1,"{"+Nl));
-                sb.Append(Format(lvl+2,"var sql = new StringBuilder();" + Nl));
-                sb.Append(Format(lvl+2,"sql.Append(@\"UPDATE \");" + Nl));
-                sb.Append(Format(lvl+2,"sql.Append(TableName);" + Nl));
-                sb.Append(Format(lvl+2,"sql.Append(@\" SET \");" + Nl));
+                sb.Append(Format(lvl+1,$@"using (var dc = ({table.Name}Class.TDataClass) CurrentData){Nl}"));
+                sb.Append(Format(lvl+1,$@"{bb}{Nl}"));
+                sb.Append(Format(lvl+2,$@"var sql = new StringBuilder();{Nl}"));
+                sb.Append(Format(lvl+2,$@"sql.Append(@{a}UPDATE {a});{Nl}"));
+                sb.Append(Format(lvl+2,$@"sql.Append(TableName);{Nl}"));
+                sb.Append(Format(lvl+2,$@"sql.Append(@{a} SET {a});{Nl}"));
                 int n = 0;
                 foreach (var tfc in table.Fields.Values)
                 {
-                    sb.Append(++n < table.Fields.Count ? Format(lvl + 2, "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + ",\");" + Nl) : Format(lvl + 2, "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + "\");" + Nl));
+                    //string s10 = "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + ",\");" + Nl;
+                    string s1 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name},{a});{Nl}";
+                    
+                    //string s20 = "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + "\");" + Nl;
+                    string s2 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name}{a});{Nl}";
+                    sb.Append(++n < table.Fields.Count ? Format(lvl + 2, s1) : Format(lvl + 2, s2));
                 }
                 if((CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenGUID)||(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenGUIDHEX))
                 {
@@ -1832,7 +1842,7 @@ namespace FBXpert.DataClasses
                     {                        
                         string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
                         if(!string.IsNullOrEmpty(fn))
-                        {                             
+                        {
                            sb.Append(Format(lvl+2,"sql.Append(@\" WHERE " + fn + " = \" + dc.Item." + fn + ".ToString() + \"; \");" + Nl));                             
                         }
                     }
