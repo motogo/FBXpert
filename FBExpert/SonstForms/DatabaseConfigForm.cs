@@ -261,6 +261,21 @@ namespace FBExpert
                     
                     break;
             }
+
+            gbDatabaseLocation.Text = $@"Database Location";
+            try
+            {
+                FileInfo fi = new FileInfo(txtLocation.Text);
+                if (fi.Exists)
+                {
+                    gbDatabaseLocation.Text = $@"Database Location {fi.Length/(1024*1024)} MB";
+                }
+            }
+            catch
+            {
+
+            }
+
         }
         
         public void NewDataToEdit()
@@ -448,6 +463,22 @@ namespace FBExpert
         {
             if (!DoEvent) return;
             _dbReg.DatabasePath = txtLocation.Text;
+            gbDatabaseLocation.Text = $@"Database Location";
+            try
+            {
+                FileInfo fi = new FileInfo(txtLocation.Text);
+                if (fi.Exists)
+                {
+                    gbDatabaseLocation.Text = $@"Database Location {fi.Length}";
+                }
+            }
+            catch
+            {
+
+            }
+            
+                
+            
             connectionDataChanged();
         }
 

@@ -98,94 +98,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string GetTablesByNameCmd(string TableName)
-        {
-            return GetTablesByNameCmd(Version,TableName);
-        }
-
-        public TableClass RefreshTableFields(TableClass tableObject, DBRegistrationClass dbReg, NotifiesClass notify )
-        {            
-            if (string.IsNullOrEmpty(tableObject.Name)) return tableObject;
-                                    
-            tableObject.Fields = new Dictionary<string, TableFieldClass>();                
-            try
-            {    
-                using(TransactionScope c = new TransactionScope())
-                {
-                    using(var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(dbReg)))
-                    {                
-                        con.Open();
-                        string cmd = SQLStatementsClass.Instance().GetTableFields(dbReg.Version, tableObject.Name);
-                        var fcmd = new FbCommand(cmd, con);
-                        var dread = fcmd.ExecuteReader();
-                        if (dread.HasRows)
-                        {
-                            while (dread.Read())
-                            {
-                                var tfc = new TableFieldClass();
-                                string TabName = dread.GetValue(0).ToString().Trim();
-                                tfc.Name = dread.GetValue(1).ToString().Trim();
-                                
-                                tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                                tfc.Domain.FieldType = dread.GetValue(4).ToString().Trim();
-                                tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                                tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;
-                                tfc.Domain.Name = dread.GetValue(6).ToString().Trim();
-                        
-                                tfc.Domain.Scale = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                                tfc.DefaultValue = dread.GetValue(8).ToString().Trim();
-                                tfc.Domain.Collate = dread.GetValue(9).ToString().Trim();
-                                tfc.Domain.CharSet = dread.GetValue(10).ToString().Trim();
-                                tfc.Domain.NotNull = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
-                        
-                                tfc.Domain.DefaultValue = dread.GetValue(13).ToString().Trim();
-                                if(tfc.Domain.DefaultValue.Length > 0 )
-                                {
-                                    if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
-                                    {
-                                        tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
-                                    }
-                                    if(tfc.Domain.DefaultValue.Length > 1)
-                                    {
-                                        Console.WriteLine();
-                                    }
-                                }
-
-                                tfc.Description = dread.GetValue(14).ToString().Trim();
-                                tfc.Domain.Description = dread.GetValue(15).ToString().Trim();
-                                if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
-                                {
-                                    Console.WriteLine();
-                                }
-
-                                bool PK = tableObject.IsPrimary(tfc.Name);
-                                bool UQ = tableObject.IsUnique(tfc.Name);
-                                bool NN = tableObject.IsNotNull(tfc.Name);
-
-                                string[] obarr = { tfc.Position.ToString(), tfc.Name, tfc.Domain.FieldType, tfc.Domain.Length.ToString(), tfc.Domain.RawType, StaticVariablesClass.ToMark(NN), tfc.DefaultValue, tfc.Domain.Scale.ToString(), StaticVariablesClass.ToMark(PK), StaticVariablesClass.ToMark(UQ), tfc.Domain.CharSet, tfc.Domain.Collate, "1", tfc.Domain.Name, StaticVariablesClass.ToMark(NN), tfc.Domain.DefaultValue };
-                                object[] obarr_export = { tfc.Position.ToString(), tfc.Name, !PK, PK };
-                       
-                                tableObject.Fields.Add(tfc.Name,tfc);
-                            }
-                        }                    
-                        con.Close();
-                    }
-                    c.Complete();
-                }
-            }
-            catch (Exception ex)
-            {
-              notify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"TypesClass->RefreshTypes({tableObject.Name})->{dbReg.Alias}", ex));                               
-            }
-               
-            return tableObject;
-        }
-
-        public string RefreshViews()
-        {
-            return RefreshViews(Version);
-        }
-
         public string RefreshViews(eDBVersion version)
         {
             StringBuilder sb = new StringBuilder();
@@ -255,11 +167,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
         
-        public string RefreshNnonSystemGeneratorsItems()
-        {
-            return RefreshNonSystemGeneratorsItems(Version);
-        }
-
         public string RefreshNonSystemGeneratorsItems(eDBVersion version)
         {
             var sb = new StringBuilder();
@@ -280,11 +187,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.FROM} RDB$GENERATORS ");
             sb.Append($@"{SQLConstants.WHERE} RDB$GENERATORS.RDB$GENERATOR_NAME {SQLConstants.NOT_LIKE} '%$%';");
             return sb.ToString();
-        }
-
-        public string RefreshSystemGeneratorsItems()
-        {
-            return RefreshSystemGeneratorsItems(Version);
         }
 
         public string RefreshSystemGeneratorsItems(eDBVersion version)
@@ -309,11 +211,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string RefreshRoles()
-        {
-            return RefreshRoles(Version);
-        }
-
         public string RefreshRoles(eDBVersion version)
         {
             var sb = new StringBuilder();            
@@ -323,11 +220,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
                
-        public string RefreshNonSystemTriggers()
-        {
-            return RefreshNonSystemTriggers(Version);
-        }
-
         public string RefreshNonSystemTriggers(eDBVersion version)
         {
             var sb = new StringBuilder();
@@ -341,11 +233,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
         
-        public string RefreshSystemTriggers()
-        {
-            return RefreshSystemTriggers(Version);
-        }
-
         public string RefreshSystemTriggers(eDBVersion version)
         {
             var sb = new StringBuilder();
@@ -358,11 +245,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string RefreshInternalFunctionsItems()
-        {
-            return RefreshInternalFunctionsItems(Version);
-        }
-        
         public string RefreshInternalFunctionsItems(eDBVersion version)
         {            
             var sb = new StringBuilder();
@@ -413,21 +295,11 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string RefreshProcedureItems()
-        {
-            return RefreshProcedureItems(Version);
-        }
-
         public string RefreshProcedureItems(eDBVersion version)
         {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$PROCEDURES.RDB$PROCEDURE_NAME,RDB$PROCEDURES.RDB$PROCEDURE_SOURCE {SQLConstants.FROM} RDB$PROCEDURES;");            
             return sb.ToString();
-        }
-
-        public string RefreshTablePrimaryKeys(string tableName)
-        {
-            return RefreshTablePrimaryKeys(Version,tableName);
         }
 
         public string RefreshTablePrimaryKeys(eDBVersion version, string tableName)
@@ -450,11 +322,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string GetTabePrimaryKeys(string tableName)
-        {
-            return GetTablePrimaryKeys(Version, tableName);
-        }
-
         public string GetTablePrimaryKeys(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -473,11 +340,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
             
             return sb.ToString();
-        }
-
-        public string GetAllTablePrimaryKeys()
-        {
-            return GetAllTablePrimaryKeys(Version);
         }
 
         public string GetAllTablePrimaryKeys(eDBVersion version)
@@ -573,11 +435,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
        
-        public string GetTableTriggers(string tableName)
-        {
-            return GetTableTriggers(Version, tableName);
-        }
-
         public string GetTableTriggers(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -591,11 +448,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.WHERE} RDB$TRIGGERS.RDB$RELATION_NAME = '{tableName}' {SQLConstants.AND} RDB$TRIGGERS.RDB$SYSTEM_FLAG = 0 {SQLConstants.AND} RDB$TRIGGERS.RDB$TRIGGER_NAME {SQLConstants.NOT_LIKE} '%$%';");
             
             return sb.ToString();
-        }
-
-        public string GetAllTableTriggers()
-        {
-            return GetAllTableTriggersNonSystemTables(Version);
         }
 
         public string GetAllTableTriggersNonSystemTables(eDBVersion version)
@@ -633,11 +485,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
                        
-        public string GetFieldDependencies(string tableName, string fieldName)
-        {
-            return GetFieldDependencies(Version, tableName, fieldName);
-        }
-
         public string GetFieldDependencies(eDBVersion version, string tableName, string fieldName)
         {
             var sb = new StringBuilder();
@@ -687,11 +534,6 @@ namespace FBXpert.DataClasses
         #endregion
 
 
-        public string GetTableManagerDependenciesTO(string tableName)
-        {
-            return GetTableManagerDependenciesTO(Version, tableName);
-        }
-
         public string GetTableManagerDependenciesTO(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -706,10 +548,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string GetTableManagerDependenciesFROM(string tableName)
-        {
-            return GetTableManagerDependenciesFROM(Version, tableName);
-        }
 
         public string GetTableManagerDependenciesFROM(eDBVersion version, string tableName)
         {
@@ -719,13 +557,8 @@ namespace FBXpert.DataClasses
             sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDENT_NAME) = '{tableName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
-            return sb.ToString();
-        }
 
-        public string GetViewManagerDependenciesTO(string viewName)
-        {
-            return GetViewManagerDependenciesTO(Version, viewName);
+            return sb.ToString();
         }
 
         public string GetViewManagerDependenciesTO(eDBVersion version, string viewName)
@@ -742,11 +575,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string GetViewManagerDependenciesFROM(string viewName)
-        {
-            return GetViewManagerDependenciesFROM(Version, viewName);
-        }
-
         public string GetViewManagerDependenciesFROM(eDBVersion version, string viewName)
         {
             var sb = new StringBuilder();
@@ -759,12 +587,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
             
             return sb.ToString();
-        }
-
-
-        public string GetViewFields(string viewName)
-        {
-            return GetViewFields(Version, viewName);
         }
 
         public string GetViewFields(eDBVersion version, string viewName)
@@ -784,11 +606,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }                
 
-        public string GetTableUniques(string tableName)
-        {
-            return GetTableUniques(Version, tableName);
-        }
-
         public string GetTableUniques(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -806,10 +623,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
         
-        public string GetTableForeignKeysFosDataset(string tableName)
-        {
-            return GetTableForeignKeysForDataset(Version, tableName);
-        }
 
         public string GetTableForeignKeysForDataset(eDBVersion version, string tableName)
         {
@@ -841,13 +654,9 @@ namespace FBXpert.DataClasses
             sb.Append($@"where inx.rdb$index_type = 0 and inx.rdb$foreign_key {SQLConstants.IS} {SQLConstants.NOT_NULL} and inx.rdb$relation_name = '{tableName}';");                        
             return sb.ToString();
         }
-        
-        public string GetTableFields(string tableName)
-        {
-            return GetTableFields(Version, tableName);
-        }
+                
 
-        public string GetTableFieldsCmd(eDBVersion version)
+        public string GetAllTables_Fields_Cmd(eDBVersion version)
         {
             var sb = new StringBuilder();
             if (version >= eDBVersion.FB3_32)
@@ -865,7 +674,7 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$COLLATIONS.RDB$COLLATION_NAME,");
                 sb.Append($@"RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$NULL_FLAG,");
-                sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
+                //sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$DEFAULT_SOURCE,");
                 sb.Append($@"RDB$RELATION_FIELDS.rdb$description {SQLConstants.AS} FIeldDescription,");
                 sb.Append($@"RDB$FIELDS.rdb$description {SQLConstants.AS} DomainDescription ");
@@ -891,7 +700,7 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$COLLATIONS.RDB$COLLATION_NAME,");
                 sb.Append($@"RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$NULL_FLAG,");
-                sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
+                //sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$DEFAULT_SOURCE,");
                 sb.Append($@"RDB$RELATION_FIELDS.rdb$description {SQLConstants.AS} FieldDescription,");
                 sb.Append($@"RDB$FIELDS.rdb$description {SQLConstants.AS} DomainDescription ");
@@ -907,21 +716,16 @@ namespace FBXpert.DataClasses
 
         public string GetTableFields(eDBVersion version, string tableName)
         {
-            var sb = new StringBuilder(GetTableFieldsCmd(version));            
+            var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));            
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{tableName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             
             return sb.ToString();
         }
 
-        public string GetAllTableFields()
-        {
-            return GetAllNonSystemTableFields(Version);
-        }
-
         public string GetAllNonSystemTableFields(eDBVersion version)
         {
-            var sb = new StringBuilder(GetTableFieldsCmd(version));
+            var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));
             if (version >= eDBVersion.FB3_32)
             {
                 sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.Table}) {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' {SQLConstants.AND}  RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' ");
@@ -934,15 +738,11 @@ namespace FBXpert.DataClasses
             }
             return sb.ToString();
         }
-
-        public string GetSystemTableFields()
-        {
-            return GetAllSystemTableFields(Version);
-        }
+        
 
         public string GetAllSystemTableFields(eDBVersion version)
         {      
-            var sb = new StringBuilder(GetTableFieldsCmd(version));
+            var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));
             if (version >= eDBVersion.FB3_32)
             {
                 sb.Append($@"{SQLConstants.WHERE} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' {SQLConstants.AND}  RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.LIKE} '%$%' ");
@@ -955,12 +755,7 @@ namespace FBXpert.DataClasses
             }
             return  sb.ToString();               
         }
-
-        public string GetProcedureAttributes(string tableName)
-        {
-            return GetProcedureAttributes(Version, tableName);
-        }
-
+        
         public string GetProcedureAttributes(eDBVersion version, string procName)
         {            
             var sb = new StringBuilder();
@@ -972,12 +767,7 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.WHERE} RDB$PROCEDURE_PARAMETERS.RDB$PROCEDURE_NAME = '{procName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'"); 
             return sb.ToString();
         }
-
-        public string GetFunctionsArguments(string tableName)
-        {
-            return GetFunctionsArguments(Version, tableName);
-        }
-
+        
         public string GetFunctionsArguments(eDBVersion version, string procName)
         {            
             var sb = new StringBuilder();
@@ -1012,11 +802,6 @@ namespace FBXpert.DataClasses
 
             }
             return sb.ToString();
-        }
-
-        public string GetUserDefinedFunctionsAttributes(string tableName)
-        {
-            return GetUserDefinedFunctionsAttributes(Version, tableName);
         }
 
         public string GetUserDefinedFunctionsAttributes(eDBVersion version, string procName)
@@ -1059,10 +844,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string GetDepentenciesGenerators(string generatorName)
-        {
-            return GetDepentenciesGenerators(Version, generatorName);
-        }
         
         public string GetDepentenciesGenerators(eDBVersion version, string generatorName)
         {            
@@ -1073,12 +854,7 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
             return sb.ToString();
         }
-
-        public string GetDepentenciesProcedures(string generatorName)
-        {
-            return GetDepentenciesProcedures(Version, generatorName);
-        }
-
+        
         public string GetDepentenciesProcedures(eDBVersion version, string procedureName)
         {
             var sb = new StringBuilder();   
@@ -1087,11 +863,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{procedureName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
             return sb.ToString();
-        }
-
-        public string GetMonitorConnections(eDBVersion Version)
-        {
-            return GetMonitorConnections(Version, true);
         }
 
         public string GetMonitorConnections(eDBVersion version,bool allConnections)
@@ -1136,11 +907,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"(RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%MON$%') {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%IBE$%') ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME;");            
             return sb.ToString();
-        }
-
-        public string GetFieldsForRefreshXML(string viewName)
-        {
-            return GetFieldsForRefreshXML(Version, viewName);
         }
 
         public string GetFieldsForRefreshXML(eDBVersion version, string viewName)

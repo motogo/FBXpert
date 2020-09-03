@@ -156,7 +156,7 @@ namespace FBExpert
             cbExportToFile.Text          = LanguageClass.Instance().GetString("EXPORT_TO_FILE");
             gbExportFile.Text            = LanguageClass.Instance().GetString("FILE");
             gbInsertUpdate.Text          = LanguageClass.Instance().GetString("INSERT_UPDATE_TYPE");
-            ckGetDatas.Text             = LanguageClass.Instance().GetString("READ_DATAS");
+            ckGetDatas.Text              = LanguageClass.Instance().GetString("READ_DATAS");
         }
 
         void ErrorRaised(object sender, MessageEventArgs k)
@@ -364,13 +364,13 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshDependenciesFrom() -> {_dbReg.Alias}", ex));                    
+                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}->RefreshDependenciesFrom()->{_dbReg.Alias}", ex));                    
             }                            
             return 0;
         }
 
         public int RefreshUniques()
-        {             
+        {
             dsUniques.Clear();
             UniqueDataFilled = false;
             dgvUniques.AutoGenerateColumns = true;
@@ -392,7 +392,6 @@ namespace FBExpert
             {
                 _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshUniques() -> {_dbReg.Alias}", ex));                    
             }
-                                           
             return 0;
         }
 
@@ -410,7 +409,7 @@ namespace FBExpert
         public int RefreshFields()
         {            
             if (string.IsNullOrEmpty(_tableObject.Name)) return 0;
-            
+            string _funcStr = $@"RefreshFields()";
             int n = 0;
             string cmd = SQLStatementsClass.Instance().GetTableFields(_dbReg.Version, _tableObject.Name);
             lvFields.Items.Clear();
@@ -421,9 +420,7 @@ namespace FBExpert
             _pkColumnName = pk[1];
             string ConstraintName = pk[0];
             try
-            { 
-                //var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
-                //con2.Open();
+            {
                 using(TransactionScope c = new TransactionScope())
                 {
                     using(var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg)))
@@ -438,7 +435,7 @@ namespace FBExpert
                                 TableFieldClass tfc = new TableFieldClass();
                                 string TabName = dread.GetValue(0).ToString().Trim();
                                 tfc.Name = dread.GetValue(1).ToString().Trim();
-                                
+                                StaticTreeClass.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
                                 tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
                                 tfc.Domain.FieldType = dread.GetValue(4).ToString().Trim();
                                 tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
@@ -454,10 +451,16 @@ namespace FBExpert
                                 tfc.DefaultValue = dread.GetValue(8).ToString().Trim();
                                 tfc.Domain.Collate = dread.GetValue(9).ToString().Trim();
                                 tfc.Domain.CharSet = dread.GetValue(10).ToString().Trim();
-                                
-                                tfc.Domain.NotNull = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
-                              
-                                tfc.Domain.DefaultValue = dread.GetValue(13).ToString().Trim();
+
+                                bool NNField  = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                                bool NN = _tableObject.IsNotNull(tfc.Name);
+
+                                tfc.Domain.NotNull = NN;
+                                if (NNField != NN)
+                                {
+                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{_tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NN},Flag:{NNField})"));
+                                }
+                                tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
                                 if(tfc.Domain.DefaultValue.Length > 0 )
                                 {
                                     if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
@@ -469,19 +472,17 @@ namespace FBExpert
                                         Console.WriteLine();
                                     }
                                 }
-                                tfc.Description = dread.GetValue(14).ToString().Trim();
-                                tfc.Domain.Description = dread.GetValue(15).ToString().Trim();
+                                tfc.Description = dread.GetValue(13).ToString().Trim();
+                                tfc.Domain.Description = dread.GetValue(14).ToString().Trim();
                                 if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
                                 {
                                     Console.WriteLine();
                                 }
                                 bool PK = _tableObject.IsPrimary(tfc.Name);
-                                bool UQ = _tableObject.IsUnique(tfc.Name);
-                                bool NN = _tableObject.IsNotNull(tfc.Name);
+                                bool UQ = _tableObject.IsUnique(tfc.Name);                                
 
                                 string[] obarr = { tfc.Position.ToString(), tfc.Name, tfc.Domain.FieldType, tfc.Domain.Length.ToString(), tfc.Domain.RawType, StaticVariablesClass.ToMark(NN), tfc.DefaultValue, tfc.Domain.Scale.ToString(), StaticVariablesClass.ToMark(PK), StaticVariablesClass.ToMark(UQ), tfc.Domain.CharSet, tfc.Domain.Collate, "1", tfc.Domain.Name, StaticVariablesClass.ToMark(NN), tfc.Domain.DefaultValue };
                                 object[] obarr_export = { tfc.Position.ToString(), tfc.Name, !PK, PK };
-
 
                                 var lvi = new ListViewItem(obarr)
                                 {
@@ -496,16 +497,15 @@ namespace FBExpert
                                 _tableObject.Fields.Add(tfc.Name,tfc);
                             }
                         }
-                        //con2.Close();
                         con.Dispose();
-                        con.Close();                    
+                        con.Close();
                     }
                     c.Complete();
                 }
             }
             catch(Exception ex)
             {
-                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshFields() -> {_dbReg.Alias}", ex));                    
+                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}->RefreshFields()->{_dbReg.Alias}", ex));                    
             }
                
             return n;
@@ -555,7 +555,6 @@ namespace FBExpert
         public string MakeFieldsCmd()
         {
             var sb = new StringBuilder();
-                        
             foreach(ListViewItem lvi in lvFields.Items)
             {
                 var obarr = (TableFieldClass) lvi.Tag;
@@ -588,7 +587,7 @@ namespace FBExpert
                 sb.Append($@" ORDER BY {_pkColumnName} {EnumHelper.GetDescription(eSort.ASC)}");
             }
             
-            string cmd = $@"{sb.ToString()};";
+            string cmd = $@"{sb};";
             txtSQL.Text = $@"SELECT {cmd}";
             return cmd;
         }
@@ -995,7 +994,7 @@ namespace FBExpert
             CreateTabControl();
             this.Cursor = Cursors.WaitCursor;
             Application.DoEvents();
-            tabPageFIELDS.Text = $@"Fields ({RefreshFields().ToString()})";
+            tabPageFIELDS.Text = $@"Fields ({RefreshFields()})";
 
             _cmd = MakeFieldsCmd();
 
@@ -1006,9 +1005,7 @@ namespace FBExpert
             GetDataWorker.CancelGettingData();
             if(GetDataWorker.CancellingDone())
             {
-            
                 ClearDataGrid();
-            
 
                 int PrimaryKeys         = RefreshPrimaryKeys();
                 int ForeignKeys         = RefreshForeignKeys();
@@ -1016,14 +1013,14 @@ namespace FBExpert
                 int DependenciesTo      = RefreshDependenciesTo();
                 int DependenciesFrom    = RefreshDependenciesFrom();
 
-                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys.ToString()})";
-                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys .ToString()})";
-                tabPageUniques.Text     = $@"Uniques ({Uniques .ToString()})";
-                tabConstraints.Text     = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques).ToString()})";
+                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
+                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys})";
+                tabPageUniques.Text     = $@"Uniques ({Uniques})";
+                tabConstraints.Text     = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques)})";
             
-                tabIndicies.Text                = $@"Indicies ({RefreshIndices().ToString()})";
-                tabPageDependenciesTo.Text      = $@"Dependencies ({DependenciesTo.ToString()})";
-                tabPageDependenciesFrom.Text    = $@"Dependencies ({DependenciesFrom.ToString()})";
+                tabIndicies.Text                = $@"Indicies ({RefreshIndices()})";
+                tabPageDependenciesTo.Text      = $@"Dependencies ({DependenciesTo})";
+                tabPageDependenciesFrom.Text    = $@"Dependencies ({DependenciesFrom})";
 
                 RefreshDLL();
                 cbEditMode.Checked = !cbEditMode.Checked;
@@ -1064,14 +1061,14 @@ namespace FBExpert
                 int DependenciesTo = RefreshDependenciesTo();
                 int DependenciesFrom = RefreshDependenciesFrom();
 
-                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys.ToString()})";
-                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys.ToString()})";
-                tabPageUniques.Text = $@"Uniques ({Uniques.ToString()})";
-                tabConstraints.Text = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques).ToString()})";
+                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
+                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys})";
+                tabPageUniques.Text = $@"Uniques ({Uniques})";
+                tabConstraints.Text = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques)})";
 
-                tabIndicies.Text = $@"Indicies ({RefreshIndices().ToString()})";
-                tabPageDependenciesTo.Text = $@"Dependencies ({DependenciesTo.ToString()})";
-                tabPageDependenciesFrom.Text = $@"Dependencies ({DependenciesFrom.ToString()})";
+                tabIndicies.Text = $@"Indicies ({RefreshIndices()})";
+                tabPageDependenciesTo.Text = $@"Dependencies ({DependenciesTo})";
+                tabPageDependenciesFrom.Text = $@"Dependencies ({DependenciesFrom})";
 
                 RefreshDLL();
                 cbEditMode.Checked = !cbEditMode.Checked;

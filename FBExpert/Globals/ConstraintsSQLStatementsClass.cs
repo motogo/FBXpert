@@ -113,6 +113,7 @@ namespace FBXpert.SQLStatements
         public string GetTableConstraintsByType(eDBVersion version, string ContraintsType, string TableName)
         {
             var sb = new StringBuilder(); 
+            /*
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,"); 
             sb.Append($@"rc.rdb$constraint_type,"); 
@@ -129,6 +130,24 @@ namespace FBXpert.SQLStatements
             sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
             sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
             sb.Append($@"where  rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = '{ContraintsType}';");
+            */
+            sb.Append($@"select ");
+            sb.Append($@"rc.rdb$constraint_name,");
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
+            sb.Append($@"rc.rdb$index_name,");
+            sb.Append($@"cc.rdb$trigger_name,");
+            sb.Append($@"rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule,");
+            sb.Append($@"inx.rdb$field_name,inx.rdb$field_position ");
+            sb.Append($@"from rdb$relation_constraints rc ");
+            sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
+            sb.Append($@"LEFT JOIN rdb$index_segments inx ON inx.rdb$index_name = rc.rdb$index_name ");
+            sb.Append($@"where rc.rdb$relation_name = '{TableName}' and rc.rdb$constraint_name NOT LIKE '%$%' AND rc.rdb$constraint_type = '{ContraintsType}' ");
+            sb.Append($@"order by rc.rdb$constraint_name,rc.rdb$relation_name,  inx.rdb$field_name,inx.rdb$field_position;");
+
             return sb.ToString();
         }
 

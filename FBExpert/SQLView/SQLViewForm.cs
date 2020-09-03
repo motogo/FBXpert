@@ -182,7 +182,7 @@ namespace SQLView
             }
             if (term.Trim().Length <= 0)
             {
-                term = ";";
+                return (";");
             }
             return (term);
         }
@@ -201,7 +201,7 @@ namespace SQLView
             bool ok = false;
             try
             {                
-                SQLHistoryClass sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
+                var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.succeeded);
                 sh.HistoryRefresh(dgvSQLHistory,bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
@@ -219,7 +219,7 @@ namespace SQLView
             bool ok = false;
             try
             {
-                SQLHistoryClass sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
+                var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.failed);
                 sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
@@ -500,7 +500,6 @@ namespace SQLView
             txtSQL.Focus();
             SetEncoding();
             SetAutocompeteObjects(_tables);
-          //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
 
         public void SetAutocompeteObjects(List<TableClass> tables)
@@ -534,7 +533,7 @@ namespace SQLView
                 {
                     string sql = dr.Cells[3].Value.ToString();
                     txtSQL.Clear();
-                    txtSQL.AppendText($@"{sql}{Environment.NewLine}");                    
+                    txtSQL.AppendText($@"{sql}{Environment.NewLine}");
                     ExecSql(HistoryMode.NoHistory);
                 }
                 tcSQLCONTROL.SelectedTab = tabRESULT;
@@ -562,22 +561,16 @@ namespace SQLView
         private void FillScript()
         {
             string strcmd;
-            var al = new ArrayList();
+            
             string[] strarr = (string[])txtSQL.Lines;
             txtSQL.Clear();
-            string term = ";";
-            string termold = "^";
+
             int tpos;
 
             foreach (string str in strarr)
             {
                 tpos = str.IndexOf("SET TERM");
-                if (tpos > -1)
-                {
-                    termold = term;
-                    term = str.Substring(tpos + 9, 1);
-                }
-
+                
                 strcmd = str.Trim();
                 if (strcmd.EndsWith(";"))
                 {
@@ -591,7 +584,7 @@ namespace SQLView
             txtSQL.Clear();
             foreach (string st in cmdstr.Split('~'))
             {
-                txtSQL.AppendText(st + Environment.NewLine);
+                txtSQL.AppendText($@"{st}{Environment.NewLine}");
             }
         }
 
@@ -687,37 +680,44 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         public void RefreshPLAN()
         {
             fctPlan.Clear();
-            if (_dbrRegLocal.Version < eDBVersion.FB3_32)
+            try
             {
-                fctPlan.AppendText($@"{Environment.NewLine}No plan for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
-                return;
-            }
-
-            var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
-            string sql = txtSQL.Text.Trim();
-            if (sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
-
-            string cmd = "SELECT MON$STATEMENTS.MON$STATEMENT_ID,MON$STATEMENTS.MON$SQL_TEXT,MON$STATEMENTS.MON$EXPLAINED_PLAN FROM MON$STATEMENTS WHERE MON$STATEMENTS.MON$SQL_TEXT = @sql";
-
-            DoInfoNotifications = false;
-            _globalCon.Open();
-
-            var fbcmd = new FbCommand(cmd, _globalCon);
-            fbcmd.Parameters.Add("@sql", sql);
-            var dr = fbcmd.ExecuteReader();
-            if (dr.HasRows)
-            {
-                while (dr.Read())
+                if (_dbrRegLocal.Version < eDBVersion.FB3_32)
                 {
-                    object ob1 = dr.GetValue(1);
-                    object ob2 = dr.GetValue(2);
-                    fctPlan.AppendText(ob1.ToString() + Environment.NewLine);
-                    fctPlan.AppendText(ob2.ToString() + Environment.NewLine);
-                    fctPlan.AppendText(Environment.NewLine);
-                    fctPlan.AppendText($@"------------------------------------------------------------------{Environment.NewLine}");
+                    fctPlan.AppendText($@"{Environment.NewLine}No plan for database {_dbrRegLocal.Alias} V{_dbrRegLocal.Version} available !!!");
+                    return;
                 }
+
+                var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
+                string sql = txtSQL.Text.Trim();
+                if (sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
+
+                string cmd = "SELECT MON$STATEMENTS.MON$STATEMENT_ID,MON$STATEMENTS.MON$SQL_TEXT,MON$STATEMENTS.MON$EXPLAINED_PLAN FROM MON$STATEMENTS WHERE MON$STATEMENTS.MON$SQL_TEXT = @sql";
+
+                DoInfoNotifications = false;
+                _globalCon.Open();
+
+                var fbcmd = new FbCommand(cmd, _globalCon);
+                fbcmd.Parameters.Add("@sql", sql);
+                var dr = fbcmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        object ob1 = dr.GetValue(1);
+                        object ob2 = dr.GetValue(2);
+                        fctPlan.AppendText($@"{ob1}{Environment.NewLine}");
+                        fctPlan.AppendText($@"{ob2}{Environment.NewLine}");
+                        fctPlan.AppendText(Environment.NewLine);
+                        fctPlan.AppendText($@"------------------------------------------------------------------{Environment.NewLine}");
+                    }
+                }
+                _globalCon.Close();
             }
-            _globalCon.Close();
+            catch(Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
         }
 
         private void Testlauf()
@@ -743,7 +743,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             pbRunSQL.Value = 0;
             pbRunSQL.Maximum = (int)fi.Length;
             hsBreak.Enabled = true;
-            string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbRegOrg);
+           // string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbRegOrg);
             string[] strarr = File.ReadAllLines(fi.FullName);
             
             var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, strarr, true);
@@ -878,7 +878,6 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             EditMode(cbEditMode.Checked);
             tabRESULT.Text = (dsResults.Tables.Count > 0) ? $@"Results ({dsResults.Tables[0].Rows.Count})" : $@"Results (0)";
 
-            
             RefreshHistory();
             dgvResults.Visible = true;
         }
@@ -985,16 +984,14 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 sb.AppendLine("Views und Tabels ohne Primary Key können nicht editiert werden.");
                 sb.AppendLine(ex.Message);
                 MessageBox.Show(sb.ToString(), "Dataset Update failed");
-                //NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> Savedataset_Click()", ex));   
                 SQLnotify.AddToERROR(sb.ToString());
             }
             bsResults.DataMember = null;
             var ri = RunSQL(_history);
             _cmd = ri.lastSQL;
             if (ri.lastCommandType != SQLCommandType.@select) return;
-            //ClearDataGrid();
-            RefreshPLAN();
 
+            RefreshPLAN();
         }
 
         private void cmsSQLText_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -1089,7 +1086,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void dgvResults_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            string msg = e.Exception.Message;
+            //string msg = e.Exception.Message;
         }
 
         private void cbRowManually_CheckedChanged(object sender, EventArgs e)
