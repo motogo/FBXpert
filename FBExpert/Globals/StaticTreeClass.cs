@@ -48,7 +48,9 @@ namespace FBExpert
         }
         
         public TreeNode FindNode(TreeNode nd, string name)
-        {            
+        {
+
+            if (nd.Name == name) return nd;
             foreach(TreeNode n in nd.Nodes)
             {               
                 if (n.Name == name )
@@ -1296,8 +1298,8 @@ namespace FBExpert
         public void RefreshConstraints(DBRegistrationClass DBReg, TreeNode nconstr)
         {
             var tablenode = FindPrevTableNode(nconstr);
-            var tc = (TableClass)tablenode.Tag;
-            var tn = FindNode(nconstr, StaticVariablesClass.ConstraintsKeyGroupStr);
+            var tc =  (TableClass)tablenode.Tag;
+            var tn = FindNode(tablenode, StaticVariablesClass.ConstraintsKeyGroupStr);
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyGroupStr);
@@ -1308,7 +1310,7 @@ namespace FBExpert
             }
           
             int n = RefreshConstraintItems(eConstraintType.UNIQUE, DBReg, tn,tc.Name);           
-            n+= RefreshConstraintItems(eConstraintType.NOTNULL, DBReg, tn, tc.Name);           
+            n = RefreshConstraintItems(eConstraintType.NOTNULL, DBReg, tn, tc.Name);           
             n+= RefreshConstraintItems(eConstraintType.PRIMARYKEY, DBReg, tn, tc.Name);
             tn.Text = $@"Constraints ({n})";
             tn.Collapse();
@@ -1648,7 +1650,6 @@ namespace FBExpert
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.GeneratorsKeyGroupStr);
-                
                 nd.Nodes.Add(tn);
             }
             else
@@ -4665,26 +4666,29 @@ namespace FBExpert
                         }
                         tfc.TableName = tableName;
 
-                        tfc.Name = dread.GetValue(1).ToString().Trim();
+                        tfc.Name                = dread.GetValue(1).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0) + 1;
+                        tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
+                        tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
+                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
+                        tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
+                        tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
+                        tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
+                        bool NNFlag             = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
+                        tfc.Description         = dread.GetValue(13).ToString().Trim();
+                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim();
 
-                        tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                        tfc.Domain.FieldType = dread.GetValue(4).ToString().Trim();
                         tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                        tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;
-                        tfc.Domain.Name = dread.GetValue(6).ToString().Trim();
-
-                        tfc.Domain.Scale = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                        tfc.DefaultValue = dread.GetValue(8).ToString().Trim();
-                        tfc.Domain.Collate = dread.GetValue(9).ToString().Trim();
-                        tfc.Domain.CharSet = dread.GetValue(10).ToString().Trim();
                         bool NNConstraint = tableObject.IsNotNull(tfc.Name);
-                        bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        
                         if (NNConstraint != NNFlag)
                         {
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NNConstraint},Flag:{NNFlag})"));
                         }
                         tfc.Domain.NotNull = NNConstraint;
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
+                        
                         if(tfc.Domain.DefaultValue.Length > 0 )
                         {
                             if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
@@ -4696,8 +4700,7 @@ namespace FBExpert
                                 Console.WriteLine();
                             }
                         }
-                        tfc.Description = dread.GetValue(13).ToString().Trim();
-                        tfc.Domain.Description = dread.GetValue(14).ToString().Trim();
+                        
                         if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
                         {
                             Console.WriteLine();
@@ -4709,7 +4712,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", ex));
             }
             finally
             {
@@ -5052,28 +5055,30 @@ namespace FBExpert
                     while (dread.Read())
                     {
                         var tfc = new TableFieldClass();
-                        string TabName = dread.GetValue(0).ToString().Trim();
-                        tfc.Name = dread.GetValue(1).ToString().Trim();
-
-                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
+                        string TabName          = dread.GetValue(0).ToString().Trim();
+                        tfc.Name                = dread.GetValue(1).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0) + 1;
                         tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
-                        tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
                         tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
-
                         tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
                         tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
                         tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
                         tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
+                        bool NNlag              = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
+                        tfc.Description         = dread.GetValue(13).ToString().Trim();
+                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim();
+
+                        tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                         bool NNConstraint       = tableObject.IsNotNull(tfc.Name);
-                        bool NNlag = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        
                         if (NNConstraint != NNlag)
                         {
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NNConstraint},Flag:{NNlag})"));
                         }
                         tfc.Domain.NotNull = NNConstraint;
-                   
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
+
                         if(tfc.Domain.DefaultValue.Length > 0 )
                         {
                             if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
@@ -5086,8 +5091,6 @@ namespace FBExpert
                             }
                         }
 
-                        tfc.Description             = dread.GetValue(13).ToString().Trim();
-                        tfc.Domain.Description      = dread.GetValue(14).ToString().Trim();
                         if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
                         {
                             Console.WriteLine();
@@ -6999,7 +7002,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->con.Open()", ex));                     
+                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->con.Open()", ex));
                 con.Close();
                 return;
             }
@@ -7196,7 +7199,7 @@ namespace FBExpert
                                 tcs.DependOnName = DependObjectName;
                                 tcs.FieldName = FieldName;
 
-                                tcs.Type = (eDependencies)StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), (int)eDependencies.NONE);
+                                tcs.Type   = (eDependencies)StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), (int)eDependencies.NONE);
                                 tcs.TypeOn = (eDependencies)StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), (int)eDependencies.NONE);
 
                                 if ((deptyp == eDependencies.TABLE)&&(!tcc.DependenciesFROM_Tables.ContainsKey(tcs.Name)))
@@ -7561,16 +7564,15 @@ namespace FBExpert
                     {
                         while (dread.Read())
                         {
-                            object ob = dread.GetValue(0);
-                            object ob_field_position = dread.GetValue(1);
+                            object ob                   = dread.GetValue(0);
+                            object ob_field_position    = dread.GetValue(1);
+                            string posstr               = ob_field_position.ToString().Trim();
+                            string typename             = dread.GetValue(3).ToString().Trim();
+                            string typelength           = dread.GetValue(4).ToString().Trim();
 
                             string fieldstr = ob.ToString().Trim();
-                            string posstr = ob_field_position.ToString().Trim();
-                            int pos = StaticFunctionsClass.ToIntDef(posstr, -1);
-                            string typename = dread.GetValue(3).ToString().Trim();
-                            string typelength = dread.GetValue(4).ToString().Trim();
                             int length = StaticFunctionsClass.ToIntDef(typelength, 0);
-
+                            int pos = StaticFunctionsClass.ToIntDef(posstr, -1);
                             var vf = new ViewFieldClass()
                             {
                                 Name = fieldstr,
