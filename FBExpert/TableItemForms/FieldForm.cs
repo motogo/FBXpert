@@ -463,6 +463,64 @@ namespace FBExpert
             SQLToUI();
         }
 
+        public void MakeNotNullAlter(bool isPrimary)
+        {
+            // ALTER TABLE TADRESSEN ALTER POSTFACH TO POSTFACHX
+            // COMMENT ON COLUMN TADRESSEN.POSTFACHX IS '123'
+
+            // ALTER TABLE Customer CHANGE Address Addr char(50); feldnamen ändern
+            // ALTER TABLE t1 ALTER c_temp TO c1;
+            // ALTER TABLE t1 ALTER c1 TYPE char(90);
+            fctSQL.BackColor = SystemColors.Info;
+            SQLScript.Clear();
+            gbCollate.Enabled = false;
+            gbNULLDefault.Enabled = true;
+
+            bool FieldNameChanged = (OrgFieldObject.Name != FieldObject.Name);
+            bool FieldTypeChanged = ((OrgFieldObject.Domain.FieldType != FieldObject.Domain.FieldType)
+                || (OrgFieldObject.Domain.Precision != FieldObject.Domain.Precision)
+                || (OrgFieldObject.Domain.Scale != FieldObject.Domain.Scale)
+                || (OrgFieldObject.Domain.Length != FieldObject.Domain.Length)
+                || (OrgFieldObject.Domain.CharSet != FieldObject.Domain.CharSet)
+                || (OrgFieldObject.Domain.Collate != FieldObject.Domain.Collate));
+
+            bool PrimaryKeyChanged = (OrgFieldObject.IsPrimary != FieldObject.IsPrimary);
+            bool IsNUllChanged = (OrgFieldObject.Domain.NotNull != FieldObject.Domain.NotNull);
+            bool PositionChanged = ((OrgFieldObject.Position != FieldObject.Position) && (FieldObject.Position > 0));
+            bool DefaultChanged = (OrgFieldObject.Domain.DefaultValue != FieldObject.Domain.DefaultValue);
+            bool DescriptionChanged = (OrgFieldObject.Description != FieldObject.Description);
+
+            
+            
+
+            if (!string.IsNullOrEmpty(txtNULLDefault.Text))
+            {
+                SQLScript.Add(Environment.NewLine);
+                SQLScript.Add(SQLPatterns.UpdateFieldData.Replace(SQLPatterns.TableKey, TableObject.Name).Replace(SQLPatterns.ColumnKey, FieldObject.Name).Replace(SQLPatterns.ValueKey, txtNULLDefault.Text));
+                SQLScript.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
+            }
+
+//            if (IsNUllChanged && (tabControlFieldTypes.SelectedTab == tabPageFieldType)) // && (TableObject.IsNotNull(FieldObject.Name) != cbNotNull.Checked))
+            {
+                // alter table tartikel alter datum set not null;   
+                SQLScript.Add(Environment.NewLine);
+                if (!isPrimary)
+                {
+                    string cmd1 = SQLPatterns.AlterTableFieldSetNull.Replace(SQLPatterns.TableKey, TableObject.Name).Replace(SQLPatterns.ColumnKey, FieldObject.Name);
+                    SQLScript.Add(cmd1);
+                    SQLScript.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
+                }
+                string cmd2 = SQLPatterns.AlterTableFieldSetNotNull.Replace(SQLPatterns.TableKey, TableObject.Name).Replace(SQLPatterns.ColumnKey, FieldObject.Name);                
+                SQLScript.Add(cmd2);
+                SQLScript.Add($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
+            }
+
+            
+
+
+            SQLToUI();
+        }
+
         public List<string> SQLScript = new List<string>();
 
         public void SQLToUI()
@@ -857,6 +915,12 @@ namespace FBExpert
             if (!DataFilled) return;
             SetVisible();
             MakeSQL();
+        }
+
+        private void hsToggleNotNull_Click(object sender, EventArgs e)
+        {
+            MakeNotNullAlter(cbPrimaryKey.Checked);
+            ExecueteSQL();
         }
     }
 }

@@ -176,7 +176,7 @@ namespace FBExpert
             {
             }
 
-            NotifiesClass.Instance().Notify.OnRaiseError(k);            
+            NotifiesClass.Instance().Notify.OnRaiseError(k);
         }
 
         void InfoRaised(object sender, MessageEventArgs k)
@@ -190,15 +190,28 @@ namespace FBExpert
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
 
-            if(k.Key.ToString() == StaticVariablesClass.ReloadFields)
+            if (k.Key.ToString() == StaticVariablesClass.ReloadFields)
             {
                 if (getData) RefreshAll();
                 else RefreshStruct();
             }
-            else if(k.Key.ToString() == StaticVariablesClass.ReloadIndex)
+            else if (k.Key.ToString() == StaticVariablesClass.ReloadIndex)
             {
-                if(getData) RefreshAll();
+                if (getData) RefreshAll();
                 else RefreshStruct();
+            }
+            else if (k.Key.ToString() == StaticVariablesClass.ReloadForeignKeysForTable)
+            {
+                ForeignKeys = RefreshForeignKeys();
+                AnzeigeConstraints();
+            }
+            else if (k.Key.ToString() == StaticVariablesClass.ReloadConstraintsKeysForTable)
+            {
+                ForeignKeys =  RefreshForeignKeys();
+                Uniques = RefreshUniques();
+                DependenciesTo = RefreshDependenciesTo();
+                DependenciesFrom = RefreshDependenciesFrom();
+                AnzeigeConstraints();
             }
             NotifiesClass.Instance().Notify.OnRaiseInfo(k);            
         }
@@ -282,16 +295,21 @@ namespace FBExpert
         {          
             dsForeignKeys.Clear();
             dgvForeignKeys.AutoGenerateColumns = true;
-            
-            string cmd_index = SQLStatementsClass.Instance().GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance().GetAllTableForeignKeys(_dbReg.Version, eTableType.withoutsystem, _tableObject.Name);
+           //string cmd_index = SQLStatementsClass.Instance().GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsForeignKeys);
                 con.Close();
+
                 bsForeignKeys.DataMember = "Table";
                 FKDataFilled = true;
+                dgvForeignKeys.Columns["RELATION_NAME"].Visible = false;
+                dgvForeignKeys.Columns["FOREIGN_KEY_NAME"].Visible = false;
+                dgvForeignKeys.Columns["CONSTRAINT_TYPE"].Visible = false;
+
                 SelectForeignKeyID();
                 return dsForeignKeys.Tables[0].Rows.Count;
             }
@@ -722,8 +740,9 @@ namespace FBExpert
         {
             if (!FKDataFilled) return;            
             var ob = (DataRowView)  bsForeignKeys.Current;
-            if (ob == null) return;            
-            SelectedFKConstraintName = ob.Row["FOREIGN_KEY_NAME"].ToString().Trim(); 
+            if (ob == null) return;
+            //SelectedFKConstraintName = ob.Row["FOREIGN_KEY_NAME"].ToString().Trim(); 
+            SelectedFKConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim();
             SelectedFKFieldName = ob.Row["FIELD_NAME"].ToString().Trim();
             if(string.IsNullOrEmpty(SelectedFKConstraintName))
             {
@@ -769,6 +788,22 @@ namespace FBExpert
             _indexChanged = true;
         }
 
+        private int GetNewNr(DataGridView dgv, string colName)
+        {
+            int nnr = 0;
+            if (dgv.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow rw in dgv.Rows)
+                {
+                    string str = rw.Cells[colName].Value.ToString();
+                    string[] strarr = str.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+                    int NewNr = StaticFunctionsClass.ToIntDef(strarr[strarr.Length - 1].Trim(), -1);
+                    if (NewNr > nnr) nnr = NewNr;
+                }
+            }
+            return nnr;
+        }
+
         private void AddConstraint()
         {
             var _constraintObject = new ConstraintsClass();
@@ -777,9 +812,13 @@ namespace FBExpert
             _constraintObject.Name = $@"CN_{_tableObject.Name}_NEW";
             if(tabControlConstraints.SelectedTab == tabPageForeignKeys)
             {
-                _constraintObject.Name = $@"FK_{_tableObject.Name}_NEW";
+                int nnr = GetNewNr(dgvForeignKeys, "CONSTRAINT_NAME");
+                
+                _constraintObject.Name = $@"FK_{_tableObject.Name}_{nnr+1}";
                 _constraintObject.ConstraintType = eConstraintType.FOREIGNKEY;
-                ForeignKeyForm fk = new ForeignKeyForm(FbXpertMainForm.Instance(), _dbReg, _actTables, _tableObject.Name,  null);
+                
+                ForeignKeyForm fk = new ForeignKeyForm(FbXpertMainForm.Instance(), _dbReg, _actTables, _tableObject.Name, null,nnr+1);
+                fk._localNotify.Register4Info(InfoRaised);
                 fk.Show();
                  _indexChanged = true;
                 return;
@@ -856,7 +895,9 @@ namespace FBExpert
 
         private void DropFKConstraint()
         {
-            var result = SQLStatementsClass.Instance().DropConstraint(SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
+            
+            var result = SQLStatementsClass.Instance().DropTableConstraint(_tableObject.Name, SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
+           // var result = SQLStatementsClass.Instance().DropConstraint(SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedFKConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -921,7 +962,7 @@ namespace FBExpert
                 var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject,_actTables, _dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.RegisterNotify(InfoRaised);
-                tff.Show();              
+                tff.Show();
             }
             else if(tabControlConstraints.SelectedTab == tabPageUniques)
             {
@@ -931,7 +972,7 @@ namespace FBExpert
                  var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _actTables,_dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.RegisterNotify(InfoRaised);
-                tff.Show();                
+                tff.Show();
             }
             else if(tabControlConstraints.SelectedTab == tabPageForeignKeys)
             {
@@ -946,10 +987,14 @@ namespace FBExpert
                 {
                     _tables.Add(tab);
                 }
-
-                var tff = new ForeignKeyForm(MdiParent, _dbReg, _tables, string.Empty, null);                     
-                tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);                
+                
+                var tff = new ForeignKeyForm(MdiParent, _dbReg, _tables, string.Empty, uc,-1);
+                tff._localNotify.Register4Info(InfoRaised);
+                tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.Show();
+
+                
+                
             }
             else if(tabControlConstraints.SelectedTab == tabPageChecks)
             {
@@ -964,6 +1009,7 @@ namespace FBExpert
 
            
             _constraintChanged = true;
+            AnzeigeConstraints();
         }
 
         public void ShowCaptions()
@@ -987,6 +1033,18 @@ namespace FBExpert
             tabControl.TabPages.Add(tabPageTablestatistics);
         }
 
+        int PrimaryKeys;
+        int ForeignKeys;
+        int Uniques;
+        int DependenciesTo;
+        int DependenciesFrom;
+        private void AnzeigeConstraints()
+        {
+            tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
+            tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys})";
+            tabPageUniques.Text = $@"Uniques ({Uniques})";
+            tabConstraints.Text = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques)})";
+        }
         private void RefreshAll()
         {
             DataFilled = false;
@@ -1007,16 +1065,13 @@ namespace FBExpert
             {
                 ClearDataGrid();
 
-                int PrimaryKeys         = RefreshPrimaryKeys();
-                int ForeignKeys         = RefreshForeignKeys();
-                int Uniques             = RefreshUniques();
-                int DependenciesTo      = RefreshDependenciesTo();
-                int DependenciesFrom    = RefreshDependenciesFrom();
+                PrimaryKeys         = RefreshPrimaryKeys();
+                ForeignKeys         = RefreshForeignKeys();
+                Uniques             = RefreshUniques();
+                DependenciesTo      = RefreshDependenciesTo();
+                DependenciesFrom    = RefreshDependenciesFrom();
 
-                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
-                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys})";
-                tabPageUniques.Text     = $@"Uniques ({Uniques})";
-                tabConstraints.Text     = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques)})";
+                AnzeigeConstraints();
             
                 tabIndicies.Text                = $@"Indicies ({RefreshIndices()})";
                 tabPageDependenciesTo.Text      = $@"Dependencies ({DependenciesTo})";
@@ -1055,16 +1110,13 @@ namespace FBExpert
                 ClearDataGrid();
 
 
-                int PrimaryKeys = RefreshPrimaryKeys();
-                int ForeignKeys = RefreshForeignKeys();
-                int Uniques = RefreshUniques();
-                int DependenciesTo = RefreshDependenciesTo();
-                int DependenciesFrom = RefreshDependenciesFrom();
+                PrimaryKeys = RefreshPrimaryKeys();
+                ForeignKeys = RefreshForeignKeys();
+                Uniques = RefreshUniques();
+                DependenciesTo = RefreshDependenciesTo();
+                DependenciesFrom = RefreshDependenciesFrom();
 
-                tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
-                tabPageForeignKeys.Text = $@"Foreign Keys ({ForeignKeys})";
-                tabPageUniques.Text = $@"Uniques ({Uniques})";
-                tabConstraints.Text = $@"Constraints ({(PrimaryKeys + ForeignKeys + Uniques)})";
+                AnzeigeConstraints();
 
                 tabIndicies.Text = $@"Indicies ({RefreshIndices()})";
                 tabPageDependenciesTo.Text = $@"Dependencies ({DependenciesTo})";
@@ -2087,7 +2139,7 @@ namespace FBExpert
 
         private void hsDropConstraint_Click(object sender, EventArgs e)
         {
-            DropPKConstraint();
+            //DropPKConstraint();
             if(tabControlConstraints.SelectedTab == tabPagePrimaryKeys)
             {
                DropPKConstraint();

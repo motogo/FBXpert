@@ -6,7 +6,6 @@ using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FBXpert.SQLStatements;
 using FormInterfaces;
-using MessageLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -465,6 +464,11 @@ namespace FBXpert
         {
             if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
             fctSQL.OpenFile(ofdSQL.FileName);      
+        }
+
+        private void ConstraintsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadConstraintsKeysForTable, $@"->Proc:{Name}->Close");
         }
     }    
 }

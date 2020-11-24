@@ -157,6 +157,7 @@ namespace FBXpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -169,8 +170,11 @@ namespace FBXpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
+            this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
             this.hsClose.ToolTipAutoPopDelay = 5000;
@@ -182,7 +186,6 @@ namespace FBXpert
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -281,6 +284,7 @@ namespace FBXpert
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -321,6 +325,7 @@ namespace FBXpert
             this.hsLoadSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSQL.FlatAppearance.BorderSize = 0;
             this.hsLoadSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadSQL.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -334,6 +339,8 @@ namespace FBXpert
             this.hsLoadSQL.MarkMode = false;
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
+            this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(82, 41);
             this.hsLoadSQL.TabIndex = 11;
             this.hsLoadSQL.Text = "Load SQL";
@@ -349,7 +356,6 @@ namespace FBXpert
             this.hsLoadSQL.ToolTipIsBallon = false;
             this.hsLoadSQL.ToolTipOwnerDraw = false;
             this.hsLoadSQL.ToolTipReshowDelay = 100;
-            
             this.hsLoadSQL.ToolTipShowAlways = false;
             this.hsLoadSQL.ToolTipText = "";
             this.hsLoadSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -371,6 +377,7 @@ namespace FBXpert
             this.hsSaveSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSQL.FlatAppearance.BorderSize = 0;
             this.hsSaveSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSQL.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -384,6 +391,8 @@ namespace FBXpert
             this.hsSaveSQL.MarkMode = false;
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
+            this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(80, 41);
             this.hsSaveSQL.TabIndex = 10;
             this.hsSaveSQL.Text = "Save SQL";
@@ -399,7 +408,6 @@ namespace FBXpert
             this.hsSaveSQL.ToolTipIsBallon = false;
             this.hsSaveSQL.ToolTipOwnerDraw = false;
             this.hsSaveSQL.ToolTipReshowDelay = 100;
-            
             this.hsSaveSQL.ToolTipShowAlways = false;
             this.hsSaveSQL.ToolTipText = "";
             this.hsSaveSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -421,6 +429,7 @@ namespace FBXpert
             this.hsCreate.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreate.FlatAppearance.BorderSize = 0;
             this.hsCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreate.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCreate.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsCreate.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -434,6 +443,8 @@ namespace FBXpert
             this.hsCreate.MarkMode = false;
             this.hsCreate.Name = "hsCreate";
             this.hsCreate.NonMarkedText = "Execute";
+            this.hsCreate.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreate.ShowShortcut = false;
             this.hsCreate.Size = new System.Drawing.Size(89, 41);
             this.hsCreate.TabIndex = 1;
             this.hsCreate.Text = "Execute";
@@ -449,7 +460,6 @@ namespace FBXpert
             this.hsCreate.ToolTipIsBallon = false;
             this.hsCreate.ToolTipOwnerDraw = false;
             this.hsCreate.ToolTipReshowDelay = 100;
-            
             this.hsCreate.ToolTipShowAlways = false;
             this.hsCreate.ToolTipText = "";
             this.hsCreate.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -576,7 +586,7 @@ namespace FBXpert
         '\"',
         '\'',
         '\''};
-            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctGenDescription.BackBrush = null;
             this.fctGenDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctGenDescription.CharHeight = 14;
@@ -584,6 +594,7 @@ namespace FBXpert
             this.fctGenDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctGenDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctGenDescription.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctGenDescription.IsReplaceMode = false;
             this.fctGenDescription.Location = new System.Drawing.Point(3, 16);
             this.fctGenDescription.Name = "fctGenDescription";
@@ -616,6 +627,7 @@ namespace FBXpert
             this.lvFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvFields.FullRowSelect = true;
             this.lvFields.GridLines = true;
+            this.lvFields.HideSelection = false;
             this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.lvFields.Location = new System.Drawing.Point(3, 16);
@@ -655,6 +667,7 @@ namespace FBXpert
             this.hsRemoveField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveField.FlatAppearance.BorderSize = 0;
             this.hsRemoveField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveField.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveField.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
@@ -667,8 +680,11 @@ namespace FBXpert
             this.hsRemoveField.MarkMode = false;
             this.hsRemoveField.Name = "hsRemoveField";
             this.hsRemoveField.NonMarkedText = "";
+            this.hsRemoveField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveField.ShowShortcut = false;
             this.hsRemoveField.Size = new System.Drawing.Size(45, 27);
             this.hsRemoveField.TabIndex = 21;
+            this.hsRemoveField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveField.ToolTipActive = false;
             this.hsRemoveField.ToolTipAutomaticDelay = 500;
             this.hsRemoveField.ToolTipAutoPopDelay = 5000;
@@ -680,7 +696,6 @@ namespace FBXpert
             this.hsRemoveField.ToolTipIsBallon = false;
             this.hsRemoveField.ToolTipOwnerDraw = false;
             this.hsRemoveField.ToolTipReshowDelay = 100;
-            
             this.hsRemoveField.ToolTipShowAlways = false;
             this.hsRemoveField.ToolTipText = "";
             this.hsRemoveField.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -701,6 +716,7 @@ namespace FBXpert
             this.hsAddField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddField.FlatAppearance.BorderSize = 0;
             this.hsAddField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddField.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddField.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
@@ -713,8 +729,11 @@ namespace FBXpert
             this.hsAddField.MarkMode = false;
             this.hsAddField.Name = "hsAddField";
             this.hsAddField.NonMarkedText = "";
+            this.hsAddField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddField.ShowShortcut = false;
             this.hsAddField.Size = new System.Drawing.Size(45, 27);
             this.hsAddField.TabIndex = 20;
+            this.hsAddField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddField.ToolTipActive = false;
             this.hsAddField.ToolTipAutomaticDelay = 500;
             this.hsAddField.ToolTipAutoPopDelay = 5000;
@@ -726,7 +745,6 @@ namespace FBXpert
             this.hsAddField.ToolTipIsBallon = false;
             this.hsAddField.ToolTipOwnerDraw = false;
             this.hsAddField.ToolTipReshowDelay = 100;
-            
             this.hsAddField.ToolTipShowAlways = false;
             this.hsAddField.ToolTipText = "";
             this.hsAddField.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -778,6 +796,7 @@ namespace FBXpert
             this.fcbChecksCode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbChecksCode.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbChecksCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fcbChecksCode.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbChecksCode.IsReplaceMode = false;
             this.fcbChecksCode.Location = new System.Drawing.Point(3, 16);
             this.fcbChecksCode.Name = "fcbChecksCode";
@@ -832,6 +851,7 @@ namespace FBXpert
             this.hsNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsNew.FlatAppearance.BorderSize = 0;
             this.hsNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsNew.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsNew.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -845,6 +865,8 @@ namespace FBXpert
             this.hsNew.MarkMode = false;
             this.hsNew.Name = "hsNew";
             this.hsNew.NonMarkedText = "New";
+            this.hsNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNew.ShowShortcut = false;
             this.hsNew.Size = new System.Drawing.Size(89, 41);
             this.hsNew.TabIndex = 1;
             this.hsNew.Text = "New";
@@ -860,14 +882,12 @@ namespace FBXpert
             this.hsNew.ToolTipIsBallon = false;
             this.hsNew.ToolTipOwnerDraw = false;
             this.hsNew.ToolTipReshowDelay = 100;
-            
             this.hsNew.ToolTipShowAlways = false;
             this.hsNew.ToolTipText = "";
             this.hsNew.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
             this.hsNew.ToolTipTitle = "";
             this.hsNew.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsNew.UseVisualStyleBackColor = false;
-            
             // 
             // tabPageDependencies
             // 
@@ -952,6 +972,7 @@ namespace FBXpert
             this.hsRefreshDependencies.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshDependencies.FlatAppearance.BorderSize = 0;
             this.hsRefreshDependencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDependencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshDependencies.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshDependencies.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshDependencies.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -965,6 +986,8 @@ namespace FBXpert
             this.hsRefreshDependencies.MarkMode = false;
             this.hsRefreshDependencies.Name = "hsRefreshDependencies";
             this.hsRefreshDependencies.NonMarkedText = "Refresh";
+            this.hsRefreshDependencies.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependencies.ShowShortcut = false;
             this.hsRefreshDependencies.Size = new System.Drawing.Size(73, 41);
             this.hsRefreshDependencies.TabIndex = 2;
             this.hsRefreshDependencies.Text = "Refresh";
@@ -980,7 +1003,6 @@ namespace FBXpert
             this.hsRefreshDependencies.ToolTipIsBallon = false;
             this.hsRefreshDependencies.ToolTipOwnerDraw = false;
             this.hsRefreshDependencies.ToolTipReshowDelay = 100;
-            
             this.hsRefreshDependencies.ToolTipShowAlways = false;
             this.hsRefreshDependencies.ToolTipText = "";
             this.hsRefreshDependencies.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1024,6 +1046,7 @@ namespace FBXpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1061,6 +1084,7 @@ namespace FBXpert
             this.hotSpot3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot3.FlatAppearance.BorderSize = 0;
             this.hotSpot3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot3.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot3.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hotSpot3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1074,6 +1098,8 @@ namespace FBXpert
             this.hotSpot3.MarkMode = false;
             this.hotSpot3.Name = "hotSpot3";
             this.hotSpot3.NonMarkedText = "Refresh";
+            this.hotSpot3.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot3.ShowShortcut = false;
             this.hotSpot3.Size = new System.Drawing.Size(89, 41);
             this.hotSpot3.TabIndex = 2;
             this.hotSpot3.Text = "Refresh";
@@ -1089,7 +1115,6 @@ namespace FBXpert
             this.hotSpot3.ToolTipIsBallon = false;
             this.hotSpot3.ToolTipOwnerDraw = false;
             this.hotSpot3.ToolTipReshowDelay = 100;
-            
             this.hotSpot3.ToolTipShowAlways = false;
             this.hotSpot3.ToolTipText = "";
             this.hotSpot3.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1154,6 +1179,7 @@ namespace FBXpert
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConstraintsForm";
             this.Text = "ConstraintsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConstraintsForm_FormClosing);
             this.Load += new System.EventHandler(this.ConstraintsForm_Load);
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();

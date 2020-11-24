@@ -13,58 +13,7 @@ namespace FBXpert.Globals
         {
             return ft ? "*" : "";
         }
-         /*              
-        public static string GetConstraintTypeStr(eConstraintType ct)
-        {
-            switch (ct)
-            {
-                case eConstraintType.NOTNULL:
-                    return ("NOT NULL");
-                case eConstraintType.PRIMARYKEY:
-                    return "PRIMARY KEY";
-                case eConstraintType.UNIQUE:
-                    return "UNIQUE";
-            }
-            return string.Empty;
-        }
-        */
-        /*
-        public static string GetTriggerTypeStr(eTriggerType ct)
-        {
-            switch (ct)
-            {
-                case eTriggerType.afterInsert:
-                    return ("AFTER INSERT");
-                case eTriggerType.beforeInsert:
-                    return ("BEFORE INSERT");
-                case eTriggerType.afterUpdate:
-                    return ("AFTER UPDATE");
-                case eTriggerType.beforeUpdate:
-                    return ("BEFORE UPDATE");
-                case eTriggerType.afterDelete:
-                    return ("AFTER DELETE");
-                case eTriggerType.beforeDelete:
-                    return ("BEFORE DELETE");
-
-                case eTriggerType.afterInsertOrUpdate:
-                    return ("AFTER INSERT OR UPDATE");
-                case eTriggerType.beforeInsertOrUpdate:
-                    return ("BEFORE INSERT OR UPDATE");
-
-                case eTriggerType.afterInsertOrDelete:
-                    return ("AFTER INSERT OR DELETE");
-                case eTriggerType.beforeInsertOrDelete:
-                    return ("BEFORE INSERT OR DELETE");
-
-                case eTriggerType.afterInsertOrUpdateOrDelete:
-                    return ("AFTER INSERT OR UPDATE OR DELETE");
-                case eTriggerType.beforeInsertOrUpdateOrDelete:
-                    return ("BEFORE INSERT OR UPDATE OR DELETE");
-                                
-            }
-            return string.Empty;
-        }
-        */
+        
         public static eConstraintType GetConstraintType(string ct)
         {
             switch (ct.ToUpper())
@@ -453,6 +402,8 @@ namespace FBXpert.Globals
         public static readonly string ReloadConstraits = "RELOAD_CONSTRAINTS";
         public static readonly string ReloadAllConstraits = "RELOAD_ALL_CONSTRAINTS";
         public static readonly string ReloadForeignKeys = "RELOAD_FOREIGNKEYS";
+        public static readonly string ReloadForeignKeysForTable = "RELOAD_TABLE_FOREIGNKEYS";
+        public static readonly string ReloadConstraintsKeysForTable = "RELOAD_CONTRAINTS_FOREIGNKEYS";
         public static readonly string ReloadAllForeignKeys = "RELOAD_ALL_FOREIGNKEYS";
         public static readonly string ReloadAllViews = "RELOAD_ALL_VIEWS";
         public static readonly string ReloadViews = "RELOAD_VIEWS";

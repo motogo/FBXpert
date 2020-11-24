@@ -327,30 +327,6 @@
     </Compile>
     <Compile Include="Globals\Constants.cs" />
     <Compile Include="Globals\StaticFunctionsClass.cs" />
-    <Compile Include="Languages\Language.de.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.de.resx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Languages\Language.en.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.en.resx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Languages\Language.pt.Designer.cs">
-      <DependentUpon>Language.pt.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Languages\Language.ja.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.ja.resx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="MiscClasses\AutocompleteClass.cs" />
     <Compile Include="ProgressClockForm.cs">
       <SubType>Form</SubType>
@@ -611,17 +587,17 @@
     <EmbeddedResource Include="XMLTree\XMLTreeForm.resx">
       <DependentUpon>XMLTreeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Languages\Language.de.resx">
+    <Content Include="Languages\Language.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.de.Designer.cs</LastGenOutput>
+      <LastGenOutput>Language.de-DE.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Languages\Language.en.resx">
+    </Content>
+    <Content Include="Languages\Language.en-US.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Language.en-US.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
     <EmbeddedResource Include="Languages\Language.pt.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.pt.Designer.cs</LastGenOutput>
@@ -1052,8 +1028,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.de.resx
-$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.en.resx
+    <PostBuildEvent>$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.de-DE.resx
+$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.en-US.resx
 $(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.ja.resx
 $(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.pt.resx</PostBuildEvent>
   </PropertyGroup>

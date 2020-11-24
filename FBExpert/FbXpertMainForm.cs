@@ -8,6 +8,7 @@ using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
 using MessageFormLibrary;
+using SELanguage;
 using StateClasses;
 using System;
 using System.IO;
@@ -215,15 +216,15 @@ namespace FBXpert
             }
             else if(e.ClickedItem == tsmiGerman)
             {
-                LanguageClass.Instance().ChangeLanguage(LanguageClass.German);                
+                LanguageClass.Instance().ChangeLanguage(LanguageConsts.Deutsch);                
             }
             else if (e.ClickedItem == tsmiEnglish)
             {
-                LanguageClass.Instance().ChangeLanguage(LanguageClass.English);                
+                LanguageClass.Instance().ChangeLanguage(LanguageConsts.Englisch);                
             }
             else if (e.ClickedItem == tsmiJapanese)
             {
-                LanguageClass.Instance().ChangeLanguage(LanguageClass.Japanese);
+                LanguageClass.Instance().ChangeLanguage(LanguageConsts.Japanisch);
             }
         }
 
@@ -258,9 +259,10 @@ namespace FBXpert
         private void FBXpertMainForm_Load(object sender, EventArgs e)
         {
          //   LanguageClass.Instance().InitEmbedded(this,"FBXpert.Languages","Language","de");
-            LanguageClass.Instance().InitFile(this,$@"{Application.StartupPath}\Languages\","Language",".","de");
+            LanguageClass.Instance().InitFile(this.GetType().Assembly, $@"{Application.StartupPath}\Languages\","Language",".","de");
             LanguageClass.Instance().OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
-            LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
+            LanguageClass.Instance().ChangeLanguage(LanguageConsts.Deutsch);
+            string test = LanguageClass.Instance().GetString("test");
             string vers = BasicClassLibrary.Globals.GetAppVersion(this);
             string appname = BasicClassLibrary.Globals.GetAppName(this);
             this.Text = $@"{appname} V {vers}";
@@ -302,7 +304,7 @@ namespace FBXpert
                 NotifiesClass.Instance().InfoGranularity = eMessageGranularity.few;
             }
             DbExplorerForm.Instance().Enabled = true;
-            LanguageClass.Instance().ChangeLanguage(LanguageClass.German);
+            LanguageClass.Instance().ChangeLanguage(LanguageConsts.Deutsch);
             SEHotSpot.Controller.Instance().SetupKeyboardHooks(this);
             DbExplorerForm.Instance().Select();
         }

@@ -55,6 +55,8 @@ namespace FBXpert.SQLStatements
         public static string DeactivateFKPattern        = DeactivateIndexPattern;
         public static string DropConstraintPattern      = $@"DROP CONSTRAINT {ConstraintKey};";
         public static string DropColumnPattern          = $@"ALTER TABLE {TableKey} DROP {ColumnKey};";
+        public static string DropTableConstraintPattern = $@"ALTER TABLE {TableKey} DROP CONSTRAINT {ConstraintKey};";
+        
 
         public static string AddForeignKeyConstraintPattern = $@"ALTER TABLE {TableKey} ADD CONSTRAINT {ConstraintKey} FOREIGN KEY({ColumnKey}) REFERENCES {ReferenceTableKey} ({ReferenceColumnKey}) ON UPDATE {UpdateTypeKey};";
         public static string Commit = "COMMIT;";

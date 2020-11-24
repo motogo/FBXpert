@@ -56,6 +56,7 @@ namespace FBXpert
             this.gbDestinationTable = new System.Windows.Forms.GroupBox();
             this.cbDestinationTable = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPrimaryKey = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbDestinationTableFields = new System.Windows.Forms.ComboBox();
             this.hsAddDestField = new SeControlsLib.HotSpot();
@@ -90,7 +91,6 @@ namespace FBXpert
             this.hsRefreshDependencies = new SeControlsLib.HotSpot();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
-            this.txtPrimaryKey = new System.Windows.Forms.TextBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -159,6 +159,7 @@ namespace FBXpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -171,6 +172,8 @@ namespace FBXpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -282,7 +285,7 @@ namespace FBXpert
         '\"',
         '\'',
         '\''};
-            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(25, 15);
+            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(2, 15);
             this.fctGenDescription.BackBrush = null;
             this.fctGenDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctGenDescription.CharHeight = 15;
@@ -356,6 +359,7 @@ namespace FBXpert
             this.hsAddSourceField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddSourceField.FlatAppearance.BorderSize = 0;
             this.hsAddSourceField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddSourceField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddSourceField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddSourceField.Image = global::FBXpert.Properties.Resources.plus_gn32x;
             this.hsAddSourceField.ImageHover = global::FBXpert.Properties.Resources.plus_blue32x;
@@ -368,6 +372,8 @@ namespace FBXpert
             this.hsAddSourceField.MarkMode = false;
             this.hsAddSourceField.Name = "hsAddSourceField";
             this.hsAddSourceField.NonMarkedText = "";
+            this.hsAddSourceField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddSourceField.ShowShortcut = false;
             this.hsAddSourceField.Size = new System.Drawing.Size(45, 42);
             this.hsAddSourceField.TabIndex = 15;
             this.hsAddSourceField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -402,6 +408,7 @@ namespace FBXpert
             this.hsRemoveSourceField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveSourceField.FlatAppearance.BorderSize = 0;
             this.hsRemoveSourceField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveSourceField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveSourceField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveSourceField.Image = global::FBXpert.Properties.Resources.minus_gn32x;
             this.hsRemoveSourceField.ImageHover = global::FBXpert.Properties.Resources.minus_blau32x;
@@ -414,6 +421,8 @@ namespace FBXpert
             this.hsRemoveSourceField.MarkMode = false;
             this.hsRemoveSourceField.Name = "hsRemoveSourceField";
             this.hsRemoveSourceField.NonMarkedText = "";
+            this.hsRemoveSourceField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveSourceField.ShowShortcut = false;
             this.hsRemoveSourceField.Size = new System.Drawing.Size(45, 42);
             this.hsRemoveSourceField.TabIndex = 14;
             this.hsRemoveSourceField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -459,6 +468,7 @@ namespace FBXpert
             this.lvSourceFields.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvSourceFields.FullRowSelect = true;
             this.lvSourceFields.GridLines = true;
+            this.lvSourceFields.HideSelection = false;
             this.lvSourceFields.Location = new System.Drawing.Point(3, 16);
             this.lvSourceFields.Name = "lvSourceFields";
             this.lvSourceFields.Size = new System.Drawing.Size(224, 137);
@@ -533,6 +543,16 @@ namespace FBXpert
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Primary Key";
             // 
+            // txtPrimaryKey
+            // 
+            this.txtPrimaryKey.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtPrimaryKey.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPrimaryKey.Location = new System.Drawing.Point(3, 16);
+            this.txtPrimaryKey.Name = "txtPrimaryKey";
+            this.txtPrimaryKey.ReadOnly = true;
+            this.txtPrimaryKey.Size = new System.Drawing.Size(169, 20);
+            this.txtPrimaryKey.TabIndex = 1;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cbDestinationTableFields);
@@ -566,6 +586,7 @@ namespace FBXpert
             this.hsAddDestField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddDestField.FlatAppearance.BorderSize = 0;
             this.hsAddDestField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddDestField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddDestField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddDestField.Image = global::FBXpert.Properties.Resources.plus_gn32x;
             this.hsAddDestField.ImageHover = global::FBXpert.Properties.Resources.plus_blue32x;
@@ -578,6 +599,8 @@ namespace FBXpert
             this.hsAddDestField.MarkMode = false;
             this.hsAddDestField.Name = "hsAddDestField";
             this.hsAddDestField.NonMarkedText = "";
+            this.hsAddDestField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddDestField.ShowShortcut = false;
             this.hsAddDestField.Size = new System.Drawing.Size(45, 42);
             this.hsAddDestField.TabIndex = 8;
             this.hsAddDestField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -612,6 +635,7 @@ namespace FBXpert
             this.hsRemoveDestField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveDestField.FlatAppearance.BorderSize = 0;
             this.hsRemoveDestField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveDestField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveDestField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveDestField.Image = global::FBXpert.Properties.Resources.minus_gn32x;
             this.hsRemoveDestField.ImageHover = global::FBXpert.Properties.Resources.minus_blau32x;
@@ -624,6 +648,8 @@ namespace FBXpert
             this.hsRemoveDestField.MarkMode = false;
             this.hsRemoveDestField.Name = "hsRemoveDestField";
             this.hsRemoveDestField.NonMarkedText = "";
+            this.hsRemoveDestField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveDestField.ShowShortcut = false;
             this.hsRemoveDestField.Size = new System.Drawing.Size(45, 42);
             this.hsRemoveDestField.TabIndex = 7;
             this.hsRemoveDestField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -669,6 +695,7 @@ namespace FBXpert
             this.lvDestFields.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvDestFields.FullRowSelect = true;
             this.lvDestFields.GridLines = true;
+            this.lvDestFields.HideSelection = false;
             this.lvDestFields.Location = new System.Drawing.Point(3, 16);
             this.lvDestFields.Name = "lvDestFields";
             this.lvDestFields.Size = new System.Drawing.Size(224, 141);
@@ -743,6 +770,7 @@ namespace FBXpert
             this.hsDropFK.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsDropFK.FlatAppearance.BorderSize = 0;
             this.hsDropFK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDropFK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsDropFK.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsDropFK.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.hsDropFK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -756,6 +784,8 @@ namespace FBXpert
             this.hsDropFK.MarkMode = false;
             this.hsDropFK.Name = "hsDropFK";
             this.hsDropFK.NonMarkedText = "Drop";
+            this.hsDropFK.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDropFK.ShowShortcut = false;
             this.hsDropFK.Size = new System.Drawing.Size(58, 23);
             this.hsDropFK.TabIndex = 2;
             this.hsDropFK.Text = "Drop";
@@ -878,6 +908,7 @@ namespace FBXpert
             this.hsSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSave.FlatAppearance.BorderSize = 0;
             this.hsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSave.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSave.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -891,6 +922,8 @@ namespace FBXpert
             this.hsSave.MarkMode = false;
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "Execute";
+            this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(87, 43);
             this.hsSave.TabIndex = 1;
             this.hsSave.Text = "Execute";
@@ -927,6 +960,7 @@ namespace FBXpert
             this.hsLoadSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSQL.FlatAppearance.BorderSize = 0;
             this.hsLoadSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadSQL.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -940,6 +974,8 @@ namespace FBXpert
             this.hsLoadSQL.MarkMode = false;
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
+            this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(82, 43);
             this.hsLoadSQL.TabIndex = 7;
             this.hsLoadSQL.Text = "Load SQL";
@@ -976,6 +1012,7 @@ namespace FBXpert
             this.hsSaveSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSQL.FlatAppearance.BorderSize = 0;
             this.hsSaveSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSQL.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -989,6 +1026,8 @@ namespace FBXpert
             this.hsSaveSQL.MarkMode = false;
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
+            this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(80, 43);
             this.hsSaveSQL.TabIndex = 6;
             this.hsSaveSQL.Text = "Save SQL";
@@ -1019,7 +1058,7 @@ namespace FBXpert
             this.tabInfo.Location = new System.Drawing.Point(4, 23);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(866, 484);
+            this.tabInfo.Size = new System.Drawing.Size(786, 484);
             this.tabInfo.TabIndex = 1;
             this.tabInfo.Text = "Info, Syntax";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -1057,7 +1096,7 @@ namespace FBXpert
             this.fctInfo.RightBracket = ')';
             this.fctInfo.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctInfo.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctInfo.ServiceColors")));
-            this.fctInfo.Size = new System.Drawing.Size(860, 435);
+            this.fctInfo.Size = new System.Drawing.Size(780, 435);
             this.fctInfo.TabIndex = 11;
             this.fctInfo.Text = resources.GetString("fctInfo.Text");
             this.fctInfo.Zoom = 100;
@@ -1068,7 +1107,7 @@ namespace FBXpert
             this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlInfo.Location = new System.Drawing.Point(3, 3);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(860, 43);
+            this.pnlInfo.Size = new System.Drawing.Size(780, 43);
             this.pnlInfo.TabIndex = 12;
             // 
             // ilTabControl
@@ -1111,6 +1150,7 @@ namespace FBXpert
             this.hsNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsNew.FlatAppearance.BorderSize = 0;
             this.hsNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsNew.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsNew.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1124,6 +1164,8 @@ namespace FBXpert
             this.hsNew.MarkMode = false;
             this.hsNew.Name = "hsNew";
             this.hsNew.NonMarkedText = "New";
+            this.hsNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNew.ShowShortcut = false;
             this.hsNew.Size = new System.Drawing.Size(45, 36);
             this.hsNew.TabIndex = 16;
             this.hsNew.Text = "New";
@@ -1145,6 +1187,7 @@ namespace FBXpert
             this.hsNew.ToolTipTitle = "";
             this.hsNew.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsNew.UseVisualStyleBackColor = false;
+            this.hsNew.Click += new System.EventHandler(this.hsNew_Click);
             // 
             // tabPageMessages
             // 
@@ -1223,6 +1266,7 @@ namespace FBXpert
             this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClearMessages.FlatAppearance.BorderSize = 0;
             this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1236,6 +1280,8 @@ namespace FBXpert
             this.hsClearMessages.MarkMode = false;
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
+            this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShowShortcut = false;
             this.hsClearMessages.Size = new System.Drawing.Size(45, 46);
             this.hsClearMessages.TabIndex = 3;
             this.hsClearMessages.Text = "Clear";
@@ -1272,6 +1318,7 @@ namespace FBXpert
             this.hsRefreshDependencies.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshDependencies.FlatAppearance.BorderSize = 0;
             this.hsRefreshDependencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDependencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshDependencies.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshDependencies.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshDependencies.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
@@ -1284,6 +1331,8 @@ namespace FBXpert
             this.hsRefreshDependencies.MarkMode = false;
             this.hsRefreshDependencies.Name = "hsRefreshDependencies";
             this.hsRefreshDependencies.NonMarkedText = "";
+            this.hsRefreshDependencies.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependencies.ShowShortcut = false;
             this.hsRefreshDependencies.Size = new System.Drawing.Size(45, 46);
             this.hsRefreshDependencies.TabIndex = 2;
             this.hsRefreshDependencies.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1315,16 +1364,6 @@ namespace FBXpert
             this.saveSQLFile.Filter = "SQL|*.sql|All|*.*";
             this.saveSQLFile.Title = "Save SQL ";
             // 
-            // txtPrimaryKey
-            // 
-            this.txtPrimaryKey.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtPrimaryKey.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPrimaryKey.Location = new System.Drawing.Point(3, 16);
-            this.txtPrimaryKey.Name = "txtPrimaryKey";
-            this.txtPrimaryKey.ReadOnly = true;
-            this.txtPrimaryKey.Size = new System.Drawing.Size(169, 20);
-            this.txtPrimaryKey.TabIndex = 1;
-            // 
             // ForeignKeyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1335,6 +1374,7 @@ namespace FBXpert
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ForeignKeyForm";
             this.Text = "ForeignKeyForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ForeignKeyForm_FormClosing);
             this.Load += new System.EventHandler(this.ForeignKeyForm_Load);
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();

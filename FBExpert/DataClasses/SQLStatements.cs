@@ -39,8 +39,15 @@ namespace FBXpert.DataClasses
         public SQLCommandsReturnInfoClass DropConstraint(string name, DBRegistrationClass dbReg, NotifiesClass notify)
         {
               string cmd =  SQLPatterns.DropConstraintPattern.Replace(SQLPatterns.ConstraintKey, name);
-            
+           
               return ExecSql(cmd, dbReg,notify);  
+        }
+
+        public SQLCommandsReturnInfoClass DropTableConstraint(string tableName, string constraintName, DBRegistrationClass dbReg, NotifiesClass notify)
+        {
+            string cmd = SQLPatterns.DropTableConstraintPattern.Replace(SQLPatterns.TableKey, tableName).Replace(SQLPatterns.ConstraintKey, constraintName);
+
+            return ExecSql(cmd, dbReg, notify);
         }
 
         public string RefreshTablesCmd(eDBVersion version)
@@ -360,20 +367,22 @@ namespace FBXpert.DataClasses
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
             
-            sb.Append($@"RDB$INDICES.RDB$RELATION_NAME,");
-            sb.Append($@"RDB$INDICES.RDB$INDEX_INACTIVE,");
+            sb.Append($@"RDB$INDICES.RDB$RELATION_NAME {SQLConstants.AS} Relation_name,");
+            sb.Append($@"RDB$INDICES.RDB$INDEX_INACTIVE {SQLConstants.AS} Is_Inactive,");
             sb.Append($@"fkc.rdb$constraint_name {SQLConstants.AS} Constraint_Name,");
             sb.Append($@"fkc.RDB$CONSTRAINT_TYPE {SQLConstants.AS} Constraint_Type,");
-            sb.Append($@"ISF.rdb$field_name {SQLConstants.AS} FieldName,");
+            sb.Append($@"ISF.rdb$field_name {SQLConstants.AS} Field_Name,");
             sb.Append($@"RDB$INDICES.RDB$DESCRIPTION {SQLConstants.AS} Index_Description,");
             sb.Append($@"(RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) {SQLConstants.AS} Field_Position,");
-            sb.Append($@"RDB$INDICES.RDB$FOREIGN_KEY {SQLConstants.AS} ForeignKey,");
-            sb.Append($@"RDB$REF_CONSTRAINTS.RDB$MATCH_OPTION,");
-            sb.Append($@"RDB$REF_CONSTRAINTS.RDB$UPDATE_RULE,RDB$REF_CONSTRAINTS.RDB$DELETE_RULE,");
-            sb.Append($@"pkc.rdb$relation_name {SQLConstants.AS} dest_TableName,");
-            sb.Append($@"pkc.rdb$constraint_name {SQLConstants.AS} dest_Constraint_Name,");
-            sb.Append($@"pkc.RDB$CONSTRAINT_TYPE {SQLConstants.AS} dest_Constraint_Type,");
-            sb.Append($@"ISP.rdb$field_name {SQLConstants.AS} dest_fieldname ");
+            sb.Append($@"RDB$INDICES.RDB$FOREIGN_KEY {SQLConstants.AS} Foreign_Key_Name,");
+            sb.Append($@"RDB$REF_CONSTRAINTS.RDB$MATCH_OPTION {SQLConstants.AS} Match_Option,");
+            sb.Append($@"RDB$REF_CONSTRAINTS.RDB$UPDATE_RULE {SQLConstants.AS} Update_Rule,");
+            sb.Append($@"RDB$REF_CONSTRAINTS.RDB$DELETE_RULE {SQLConstants.AS} Delete_Rule,");
+            sb.Append($@"pkc.rdb$relation_name {SQLConstants.AS} To_Relation_Name,");
+            sb.Append($@"pkc.rdb$constraint_name {SQLConstants.AS} To_Constraint_Name,");
+            sb.Append($@"pkc.RDB$CONSTRAINT_TYPE {SQLConstants.AS} To_Constraint_Type,");
+            sb.Append($@"ISP.rdb$field_name {SQLConstants.AS} To_Field_Name,");
+            sb.Append($@"RDB$INDICES.rdb$unique_flag {SQLConstants.AS} Is_Unique ");
 
             sb.Append($@"{SQLConstants.FROM} RDB$INDEX_SEGMENTS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
@@ -385,7 +394,7 @@ namespace FBXpert.DataClasses
             string cmd = string.Empty;
             if(tableName.Length > 0)
             {
-                cmd = $@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName.ToUpper()}' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
+                cmd = $@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName.ToUpper()}' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
             }
             else
             {
@@ -623,7 +632,7 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
         
-
+        /*
         public string GetTableForeignKeysForDataset(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -651,10 +660,14 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$relation_constraints relc  ON relc.rdb$constraint_name = refc.rdb$constraint_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$indices inx2 ON inx2.rdb$index_name = inx.rdb$foreign_key ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$index_segments iseg2 ON iseg2.rdb$index_name = inx2.rdb$index_name ");
-            sb.Append($@"where inx.rdb$index_type = 0 and inx.rdb$foreign_key {SQLConstants.IS} {SQLConstants.NOT_NULL} and inx.rdb$relation_name = '{tableName}';");                        
+            sb.Append($@"where inx.rdb$index_type = 0 and inx.rdb$foreign_key {SQLConstants.IS} {SQLConstants.NOT_NULL} and inx.rdb$relation_name = '{tableName}';");   
+            
+
+
+
             return sb.ToString();
         }
-                
+        */        
 
         public string GetAllTables_Fields_Cmd(eDBVersion version)
         {

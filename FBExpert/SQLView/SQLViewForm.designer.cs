@@ -219,6 +219,7 @@ namespace SQLView
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
             this.bsHistory = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmiInsertPK = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_upper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
@@ -681,7 +682,6 @@ namespace SQLView
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -704,9 +704,10 @@ namespace SQLView
             this.toolStripSeparator1,
             this.tsmiLastCommand,
             this.tsmiInsertLastSuccessfullCommand,
-            this.tsmiExecuteLastSucessfullCommand});
+            this.tsmiExecuteLastSucessfullCommand,
+            this.tsmiInsertPK});
             this.cmsSQLText.Name = "cmsText";
-            this.cmsSQLText.Size = new System.Drawing.Size(249, 120);
+            this.cmsSQLText.Size = new System.Drawing.Size(249, 164);
             this.cmsSQLText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSQLText_ItemClicked);
             // 
             // tsmiDDLCopyToClipboard
@@ -2506,7 +2507,6 @@ namespace SQLView
             this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctPlan.IsReplaceMode = false;
             this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctPlan.LeftBracket = '(';
@@ -2598,7 +2598,6 @@ namespace SQLView
             this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLData.IsReplaceMode = false;
             this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLData.LeftBracket = '(';
@@ -3095,7 +3094,7 @@ namespace SQLView
             this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
             this.tabPageXMLScheme.Name = "tabPageXMLScheme";
             this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 598);
+            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 589);
             this.tabPageXMLScheme.TabIndex = 1;
             this.tabPageXMLScheme.Text = "XML-Schema";
             this.tabPageXMLScheme.UseVisualStyleBackColor = true;
@@ -3123,7 +3122,6 @@ namespace SQLView
             this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLScheme.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLScheme.IsReplaceMode = false;
             this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLScheme.LeftBracket = '(';
@@ -3133,7 +3131,7 @@ namespace SQLView
             this.fctXMLScheme.RightBracket = ')';
             this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
-            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 544);
+            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 535);
             this.fctXMLScheme.TabIndex = 9;
             this.fctXMLScheme.Zoom = 100;
             // 
@@ -3498,6 +3496,12 @@ namespace SQLView
             this.saveFileDialogCSV.Filter = "CSV|*.csv|XLS|*.xls|All|*.*";
             this.saveFileDialogCSV.Title = "Save CSV";
             // 
+            // tsmiInsertPK
+            // 
+            this.tsmiInsertPK.Name = "tsmiInsertPK";
+            this.tsmiInsertPK.Size = new System.Drawing.Size(248, 22);
+            this.tsmiInsertPK.Text = "Insert PRIMARY KEY NOT NULL";
+            // 
             // SQLViewForm1
             // 
             this.ClientSize = new System.Drawing.Size(1604, 699);
@@ -3778,5 +3782,6 @@ namespace SQLView
         private ToolStripSeparator toolStripSeparator2;
         private BindingSource bsHistory;
         private SeControlsLib.HotSpot hsClearHistory;
+        private ToolStripMenuItem tsmiInsertPK;
     }
 }

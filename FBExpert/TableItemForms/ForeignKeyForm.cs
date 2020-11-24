@@ -22,27 +22,23 @@ namespace FBXpert
         
         List<TableClass> _tables = null;
         
-        NotifiesClass _localNotify = new NotifiesClass();
+        public NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
         int messages_count = 0;
         int error_count = 0;
         bool DataFilled = false;
-        string TableName = string.Empty;    
+        string TableName = string.Empty;
         string FKName = string.Empty;
-        public ForeignKeyForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, string tableName,ForeignKeyClass foreignKeys)
+        int NewNr = 0;
+        ForeignKeyClass _foreignKeys;
+        public ForeignKeyForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, string tableName,ForeignKeyClass foreignKeys, int newNr)
         {
             InitializeComponent();
-            this.MdiParent = parent;       
+            this.MdiParent = parent;
             _tables = tables;
-            
-            if (foreignKeys == null)
-            {
-                FKName = "";
-            }
-            else
-            {
-                FKName = foreignKeys.Name;
-            }
+            _foreignKeys = foreignKeys;
+            NewNr = newNr;
+            FKName = (_foreignKeys == null) ? $@"FK_{TableName}_{NewNr}" : foreignKeys.Name;
             TableName = tableName;
             DataFilled = false;
             _dbReg = dbReg;
@@ -192,9 +188,9 @@ namespace FBXpert
 
             */
             sb.Append(Environment.NewLine);
-            sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " DROP CONSTRAINT " + old_constraint_name+";");
-            sb.Append($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");            
-            sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " ADD CONSTRAINT " + ForeignKeyObject.Name + " FOREIGN KEY(");
+            sb.Append($@"ALTER TABLE {ForeignKeyObject.SourceTableName.Trim()} DROP CONSTRAINT {old_constraint_name};");
+            sb.Append($@"{Environment.NewLine}{SQLPatterns.Commit}{Environment.NewLine}");
+            sb.Append($@"ALTER TABLE {ForeignKeyObject.SourceTableName.Trim()} ADD CONSTRAINT {ForeignKeyObject.Name} FOREIGN KEY(");
 
             for (int i = 0; i < ForeignKeyObject.SourceFields.Count; i++)
             {
@@ -454,9 +450,9 @@ namespace FBXpert
             FillCombo();
             
             ForeignKeyObject = GetFK(FKName);
-            txtConstraintName.Text = $@"FK_{TableName}_NEW";
-            UpdateForeignKeyObject();            
-            old_constraint_name = ForeignKeyObject.Name;                      
+            txtConstraintName.Text = $@"FK_{TableName}_{NewNr}";
+            UpdateForeignKeyObject();
+            old_constraint_name = ForeignKeyObject.Name;
             SetEnables();
             DataToEdit();                        
 
@@ -519,7 +515,7 @@ namespace FBXpert
             
             if(riFailure==null) 
             {                
-                old_constraint_name = txtConstraintName.Name;
+                old_constraint_name = txtConstraintName.Text;
                
             }
 
@@ -625,11 +621,12 @@ namespace FBXpert
         {
              
             if (!DataFilled) return;
-            
+
             // ForeignKeyObject = GetFK(txtConstraintName.Text.Trim());                
             // UpdateForeignKeyObject();
             // DataToEdit();
-            MakeSQL();                        
+            ForeignKeyObject.Name = txtConstraintName.Text.Trim();
+            MakeSQL();
         }
         
 
@@ -688,6 +685,20 @@ namespace FBXpert
                 }
                 e.Handled = true;
             }
+        }
+
+        private void ForeignKeyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+
+           _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadForeignKeysForTable, $@"->Form:{Name}->Reload");
+        }
+
+        private void hsNew_Click(object sender, EventArgs e)
+        {
+            NewNr++;
+            BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
+            FKName = $@"FK_{TableName}_{NewNr}";
         }
     }
 }

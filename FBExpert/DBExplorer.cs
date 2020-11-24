@@ -1351,7 +1351,7 @@ namespace FBXpert
                 }
 
                 ForeignKeyClass fkc = (ForeignKeyClass)_tnSelected.Tag;
-                var tmf = new ForeignKeyForm(MdiParent, dbReg,_actTables, fktable?.Name, fkc)
+                var tmf = new ForeignKeyForm(MdiParent, dbReg,_actTables, fktable?.Name, fkc,-1)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
                 };
@@ -1662,7 +1662,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiForeignKeyNew)
             {
                 _tnSelected.Tag = null;
-                var tmf = new ForeignKeyForm(MdiParent, dbReg, _actTables, string.Empty, null)
+                var tmf = new ForeignKeyForm(MdiParent, dbReg, _actTables, string.Empty, null,0)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eInsert
                 };

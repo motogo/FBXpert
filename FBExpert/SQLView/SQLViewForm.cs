@@ -11,7 +11,6 @@ using FormInterfaces;
 using Initialization;
 using MessageFormLibrary;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -1028,6 +1027,12 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 txtSQL.AppendText($@"{lastSuccessfulCommand}{Environment.NewLine}");
                 tcSQLCONTROL.SelectedTab = tabSQLTEXT;
                 ExecuteSQL(HistoryMode.NoHistory);
+            }
+            else if(e.ClickedItem == tsmiInsertPK)
+            {
+                //int s = txtSQL.Selection.Start;
+                txtSQL.InsertText(" PRIMARY KEY NOT NULL");
+
             }
         }
 
