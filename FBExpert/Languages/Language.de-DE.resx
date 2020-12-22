@@ -432,4 +432,10 @@
   <data name="READ_DATAS" xml:space="preserve">
     <value>Daten lesen</value>
   </data>
+  <data name="COLAPSE_NODE" xml:space="preserve">
+    <value>Knoten verkleinern</value>
+  </data>
+  <data name="EXPAND_NODE" xml:space="preserve">
+    <value>Knoten erweitern</value>
+  </data>
 </root>

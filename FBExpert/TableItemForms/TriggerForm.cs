@@ -306,14 +306,15 @@ namespace FBXpert
             TriggerObject.Sequence = StaticFunctionsClass.ToIntDef(txtGenValue.Text,0);
         }
 
-        private void TextChanged(object sender, EventArgs e)
+        private void EditChanged(object sender, EventArgs e)
         {
-            TextChanged();
+            EditChanged();
         }
 
-        private void TextChanged()
+        public override void EditChanged()
         {
-            if(!FormEvents.IsActive(this,"TextChanged")) return;
+            base.EditChanged();
+            if(!FormEvents.IsActive(this,"EditChanged")) return;
             MakeSQL();
         }
         
@@ -324,10 +325,7 @@ namespace FBXpert
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
             var riFailure = riList.Find(x=>x.commandDone == false);
-
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-
-            
             string info = (riFailure==null) 
                 ? $@"Trigger {_dbReg.Alias}->{TriggerObject.RelationName}->{TriggerObject.Name} updated." 
                 : $@"Trigger {_dbReg.Alias}->{TriggerObject.RelationName}->{TriggerObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";

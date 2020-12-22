@@ -28,49 +28,49 @@ namespace FBExpert
 {
     public partial class TABLEManageForm : INormalForm
     {
-        private readonly TableClass _tableObject    = null;
-        private TableFieldClass _actFieldObject     = null;
-        private List<TableClass> _actTables         = null;
-        private DBRegistrationClass _dbReg          = null;
+        private readonly TableClass _tableObject = null;
+        private TableFieldClass _actFieldObject = null;
+        private List<TableClass> _actTables = null;
+        private DBRegistrationClass _dbReg = null;
         private readonly NotifiesClass _localNotify = null;
 
-        private int _messagesCount              = 0;
-        private int _errorCount                 = 0;
+        private int _messagesCount = 0;
+        private int _errorCount = 0;
 
-        private string _cmd                     = string.Empty;
-        private bool _firstTab                  = false;
-        private FbConnection _dataConnection    = null;
-        private StreamWriter _sw                = null;
-        private string _fileName                = string.Empty;
-        private bool _writeFile                 = false;
+        private string _cmd = string.Empty;
+        private bool _firstTab = false;
+        private FbConnection _dataConnection = null;
+        private StreamWriter _sw = null;
+        private string _fileName = string.Empty;
+        private bool _writeFile = false;
 
         private int _pi = 0;
         private string _pkColumnName = string.Empty;
         private TreeNode _tnSelected = null;
 
-        private string  cn = null;
-        private bool IndexDataFilled    = false;
-        private bool UniqueDataFilled   = false;
-        private bool PKDataFilled       = false;
-        private bool FKDataFilled       = false;
-        private bool CheckDataFilled    = false;
-        private bool DataFilled         = false;
+        private string cn = null;
+        private bool IndexDataFilled = false;
+        private bool UniqueDataFilled = false;
+        private bool PKDataFilled = false;
+        private bool FKDataFilled = false;
+        private bool CheckDataFilled = false;
+        private bool DataFilled = false;
 
-        private string SelectedIndexName            = string.Empty;
-        private string SelectedPKConstraintName     = string.Empty;
-        private string SelectedFKConstraintName     = string.Empty;
+        private string SelectedIndexName = string.Empty;
+        private string SelectedPKConstraintName = string.Empty;
+        private string SelectedFKConstraintName = string.Empty;
         private string SelectedUniqueConstraintName = string.Empty;
-        private string SelectedCheckConstraintName  = string.Empty;
+        private string SelectedCheckConstraintName = string.Empty;
 
-        
-        private string SelectedPKFieldName      = string.Empty;
-        private string SelectedFKFieldName      = string.Empty;
-        private string SelectedUniqueFieldName  = string.Empty;
-        private string SelectedCheckFieldName   = string.Empty;
 
-        private bool _indexChanged      = false;
-        private bool _constraintChanged = false;    
-        private bool _tableChanged      = false;
+        private string SelectedPKFieldName = string.Empty;
+        private string SelectedFKFieldName = string.Empty;
+        private string SelectedUniqueFieldName = string.Empty;
+        private string SelectedCheckFieldName = string.Empty;
+
+        private bool _indexChanged = false;
+        private bool _constraintChanged = false;
+        private bool _tableChanged = false;
 
         List<string> exportList = new List<string>();
 
@@ -85,7 +85,7 @@ namespace FBExpert
         {
             _dbReg = drc;
         }
-        
+
         public TABLEManageForm(Form parent, DBRegistrationClass drc, TreeNode tnSelected, List<TableClass> actTables)
         {
             InitializeComponent();
@@ -99,7 +99,7 @@ namespace FBExpert
             };
             _localNotify.Register4Info(InfoRaised);
             _localNotify.Register4Error(ErrorRaised);
-            
+
             _dbReg = drc;
             _actTables = actTables;
             txtMaxRows.Text = _dbReg.MaxRowsForSelect.ToString();
@@ -114,7 +114,7 @@ namespace FBExpert
 
         AutocompleteClass ac;
 
-        public void SetAutocompeteObjects(List<TableClass> tables,Dictionary<string,SystemTableClass> systemtables)
+        public void SetAutocompeteObjects(List<TableClass> tables, Dictionary<string, SystemTableClass> systemtables)
         {
             ac = new AutocompleteClass(fctTableCreateDLL, _dbReg);
             ac.CreateAutocompleteForDatabase();
@@ -125,6 +125,8 @@ namespace FBExpert
         }
 
         GridStoreClass gridStore;
+
+        
         
         public void RefreshLanguageText()
         {
@@ -428,6 +430,8 @@ namespace FBExpert
         {            
             if (string.IsNullOrEmpty(_tableObject.Name)) return 0;
             string _funcStr = $@"RefreshFields()";
+
+
             int n = 0;
             string cmd = SQLStatementsClass.Instance().GetTableFields(_dbReg.Version, _tableObject.Name);
             lvFields.Items.Clear();
@@ -451,26 +455,26 @@ namespace FBExpert
                             while (dread.Read())
                             {
                                 TableFieldClass tfc = new TableFieldClass();
-                                string TabName = dread.GetValue(0).ToString().Trim();
-                                tfc.Name = dread.GetValue(1).ToString().Trim();
+                                string TabName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
+                                tfc.Name = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                                 StaticTreeClass.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
-                                tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                                tfc.Domain.FieldType = dread.GetValue(4).ToString().Trim();
+                                tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                                tfc.Domain.FieldType = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
                                 tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                                tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;
-                                tfc.Domain.Name = dread.GetValue(6).ToString().Trim();
+                                tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;
+                                tfc.Domain.Name = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
 
                                 if (tfc.Name == _pkColumnName)
                                 {                                   
                                     tfc.PK_ConstraintName = ConstraintName;                                   
                                 }
                                 
-                                tfc.Domain.Scale = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                                tfc.DefaultValue = dread.GetValue(8).ToString().Trim();
-                                tfc.Domain.Collate = dread.GetValue(9).ToString().Trim();
-                                tfc.Domain.CharSet = dread.GetValue(10).ToString().Trim();
+                                tfc.Domain.Scale = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                                tfc.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                                tfc.Domain.Collate = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                                tfc.Domain.CharSet = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
 
-                                bool NNField  = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                                bool NNField  = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
                                 bool NN = _tableObject.IsNotNull(tfc.Name);
 
                                 tfc.Domain.NotNull = NN;
@@ -478,24 +482,18 @@ namespace FBExpert
                                 {
                                     NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{_tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NN},Flag:{NNField})"));
                                 }
-                                tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
+                                tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
                                 if(tfc.Domain.DefaultValue.Length > 0 )
                                 {
                                     if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
                                     {
                                         tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                                     }
-                                    if(tfc.Domain.DefaultValue.Length > 1)
-                                    {
-                                        Console.WriteLine();
-                                    }
+                                    
                                 }
-                                tfc.Description = dread.GetValue(13).ToString().Trim();
-                                tfc.Domain.Description = dread.GetValue(14).ToString().Trim();
-                                if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
-                                {
-                                    Console.WriteLine();
-                                }
+                                tfc.Description = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
+                                tfc.Domain.Description = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
+                                
                                 bool PK = _tableObject.IsPrimary(tfc.Name);
                                 bool UQ = _tableObject.IsUnique(tfc.Name);                                
 
@@ -1696,10 +1694,7 @@ namespace FBExpert
             try
             { 
                 Rectangle newRect;
-                if(dgvResults.CurrentCell.OwningColumn.Name.IndexOf("BLR")>0)
-                {
-                    Console.WriteLine();
-                }
+                
                 if (e.Value == null || e.RowIndex < 0) return;
                 
                 string vs = e.Value.ToString();
@@ -1888,7 +1883,7 @@ namespace FBExpert
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            object ob = dgvResults.CurrentCell.Value;
+            //object ob = dgvResults.CurrentCell.Value;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

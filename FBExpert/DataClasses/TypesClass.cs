@@ -71,10 +71,7 @@ namespace FBXpert.DataClasses
             {
                 return "FLOAT";
             }
-            else
-            {
-                Console.WriteLine();
-            }
+            
             return "";
         }
 
@@ -142,10 +139,7 @@ namespace FBXpert.DataClasses
             {
                 return "FLOAT";
             }
-            else
-            {
-                Console.WriteLine();
-            }
+            
             return "";
         }
 
@@ -218,11 +212,6 @@ namespace FBXpert.DataClasses
                 if (!domain.NotNull) stype = stype + "?";
                 return stype;
             }
-            else
-            {
-                Console.WriteLine();
-            }
-
 
             return stype;
         }
@@ -287,12 +276,7 @@ namespace FBXpert.DataClasses
                 stype = "double";                
                 return stype;
             }
-            else
-            {
-                Console.WriteLine();
-            }
-
-
+            
             return stype;
         }
 
@@ -352,10 +336,7 @@ namespace FBXpert.DataClasses
                 if (!domain.NotNull) return typeof(float?);
                 return typeof(float);
             }
-            else
-            {
-                Console.WriteLine();
-            }
+           
             return null;
         }
 
@@ -411,10 +392,7 @@ namespace FBXpert.DataClasses
             {
                 return eLogicalType.BINARY;
             }
-            else
-            {
-                Console.WriteLine();
-            }
+            
             return eLogicalType.NONE;
         }
 
@@ -448,10 +426,7 @@ namespace FBXpert.DataClasses
             {
                 return "null";
             }
-            else
-            {
-                Console.WriteLine();
-            }
+            
             return "ToDefaultEmpty_TypeError_" + domain.FieldType;
         }
 

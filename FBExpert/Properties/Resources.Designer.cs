@@ -1673,6 +1673,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tree_expanded1_x24 {
+            get {
+                object obj = ResourceManager.GetObject("tree_expanded1_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap up_down32x {
             get {
                 object obj = ResourceManager.GetObject("up_down32x", resourceCulture);

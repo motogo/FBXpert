@@ -678,7 +678,7 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_POSITION,");
-                sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_SOURCE,");
+              //  sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_SOURCE,");
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME,");
                 sb.Append($@"RDB$FIELDS.RDB$CHARACTER_LENGTH,");
                 sb.Append($@"RDB$FIELDS.RDB$FIELD_NAME,");
@@ -687,7 +687,6 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$COLLATIONS.RDB$COLLATION_NAME,");
                 sb.Append($@"RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$NULL_FLAG,");
-                //sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$DEFAULT_SOURCE,");
                 sb.Append($@"RDB$RELATION_FIELDS.rdb$description {SQLConstants.AS} FIeldDescription,");
                 sb.Append($@"RDB$FIELDS.rdb$description {SQLConstants.AS} DomainDescription ");
@@ -713,7 +712,6 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$COLLATIONS.RDB$COLLATION_NAME,");
                 sb.Append($@"RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$NULL_FLAG,");
-                //sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$DEFAULT_SOURCE,");
                 sb.Append($@"RDB$RELATION_FIELDS.rdb$description {SQLConstants.AS} FieldDescription,");
                 sb.Append($@"RDB$FIELDS.rdb$description {SQLConstants.AS} DomainDescription ");
@@ -736,6 +734,8 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
+        
+
         public string GetAllNonSystemTableFields(eDBVersion version)
         {
             var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));
@@ -751,7 +751,7 @@ namespace FBXpert.DataClasses
             }
             return sb.ToString();
         }
-        
+
 
         public string GetAllSystemTableFields(eDBVersion version)
         {      

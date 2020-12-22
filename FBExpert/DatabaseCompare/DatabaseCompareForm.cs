@@ -517,11 +517,7 @@ namespace FBXpert.SonstForms
                         }
                         int nw1 = str1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
                         int nw2 = str2.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
-                        if (nw1 != nw2)
-                        {
-                            Console.WriteLine();
-                        }
-
+                        
                         if (resultstr.Length <= 0)
                         {
                             fct.AppendText($"{"FAILURE SQL differs ",-8} for {tc1.Name} words:{nw1}<->{nw2}, length:{tc1.CREATEINSERT_SQL.Length}<->{tc2.CREATEINSERT_SQL.Length}{Environment.NewLine}{Environment.NewLine}");

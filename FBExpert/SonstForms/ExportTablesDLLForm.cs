@@ -42,7 +42,7 @@ namespace FBXpert.SonstForms
                     }
                     catch(Exception ex)
                     {
-
+                        Console.WriteLine(ex.Message);
                     }
                 }
             }
@@ -69,6 +69,7 @@ namespace FBXpert.SonstForms
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     break;
                 }
             }

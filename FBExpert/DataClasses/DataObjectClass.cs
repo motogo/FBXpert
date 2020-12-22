@@ -23,10 +23,6 @@ namespace FBExpert.DataClasses
             set
             {
                 _name = value;
-                if(_name.Length <= 0)
-                {
-                    Console.WriteLine("");
-                }
             }
         }
         public override string ToString()

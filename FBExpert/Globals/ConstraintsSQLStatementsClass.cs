@@ -113,10 +113,7 @@ namespace FBXpert.SQLStatements
         }
         public string GetTableConstraintsByType(eDBVersion version, string ContraintsType, string TableName)
         {
-            if(ContraintsType.Contains("Foreign"))
-            {
-                Console.WriteLine();
-            }
+            
             var sb = new StringBuilder(); 
             /*
             sb.Append($@"select ");
@@ -162,10 +159,7 @@ namespace FBXpert.SQLStatements
         }
         public string GetAllTableConstraintsByTypeNonSystemTables(eDBVersion version, eConstraintType ContraintsType)
         {            
-            if(ContraintsType == eConstraintType.FOREIGNKEY)
-            {
-                Console.WriteLine();
-            }
+            
             var sb = new StringBuilder(); 
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");

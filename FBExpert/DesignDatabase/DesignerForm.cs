@@ -176,7 +176,7 @@ namespace FBXDesigns
                 foreach(var fld in tc.Table.Fields)
                 {
                     if (fld.Value.Domain.RawType.Length > 0) continue;
-                    Console.WriteLine();
+                    
                 }
             }
 
@@ -185,7 +185,7 @@ namespace FBXDesigns
                 foreach (var fld in tc.View.Fields.Values)
                 {
                     if (fld.Domain.RawType.Length > 0) continue;
-                    Console.WriteLine();
+                    
                 }
             }
 
@@ -239,7 +239,7 @@ namespace FBXDesigns
                     foreach (var fld in tc.Fields)
                     {
                         if (fld.Value.Domain.RawType.Length > 0) continue;
-                        Console.WriteLine();
+                        
                     }
                 }
 
@@ -248,7 +248,7 @@ namespace FBXDesigns
                     foreach (var fld in tc.Fields.Values)
                     {
                         if (fld.Domain.RawType.Length > 0) continue;
-                        Console.WriteLine();
+                        
                     }
                 }
 

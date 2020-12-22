@@ -8,7 +8,6 @@ namespace FBXpert.Globals
         public bool CancelGettingData(int timeout = 2000)
         {
             if (!this.IsBusy) return true;
-            
             this.CancelAsync();
             Stopwatch sw = new Stopwatch();
             sw.Start();

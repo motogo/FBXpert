@@ -311,7 +311,7 @@ namespace FBXpert
 
         private void FbXpertMainForm_OnRaiseLanguageExceptionHandler(object sender, LanguageExceptionEventArgs k)
         {
-            Console.WriteLine(k);
+            //Console.WriteLine(k);
         }
 
         public static bool FormOnClosing = false;

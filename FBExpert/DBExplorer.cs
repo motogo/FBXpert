@@ -53,7 +53,8 @@ namespace FBXpert
         {
             gbDatabases.Text                        = LanguageClass.Instance().GetString("DATABASES");                        
             hsLoadDefinition.ToolTipText            = LanguageClass.Instance().GetString("LoadDatabaseDefinitions");        
-            hsDatabaseDefinitionSave.ToolTipText    = LanguageClass.Instance().GetString("SaveDatabaseDefinitions");                         
+            hsDatabaseDefinitionSave.ToolTipText    = LanguageClass.Instance().GetString("SaveDatabaseDefinitions");         
+            
         }
         
         public static DbExplorerForm Instance()
@@ -280,8 +281,8 @@ namespace FBXpert
         public void MakeDatabaseTree(bool openactive)
         {
             NotifiesClass.Instance().AddToINFO("Load database configurations...", "KEY");
-            
-           
+            SetTreeLanguageDefaults();
+
             treeView1.Nodes.Clear();
             tsmiCreateXMLDesign.Enabled = false;           
             treeView1.BeginUpdate();
@@ -1843,14 +1844,49 @@ namespace FBXpert
                 evs.Functions = allprocedures;
                 evs.Show();
             }
+            else if(e.ClickedItem == tsmiExpandTablesNodes)
+            {
+                ColapseExpandNodes(treeView1.SelectedNode);
+            }
+            else if (e.ClickedItem == tsmiExpandViewNodes)
+            {
+                ColapseExpandNodes(treeView1.SelectedNode);
+            }
 
             #endregion refresh group
+        }
+
+        public void ColapseExpandNodes(TreeNode nd)
+        {
+            if (nd.IsExpanded)
+            {
+                nd.Collapse();
+
+                tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
+            }
+            else
+            {
+                nd.Expand();
+                foreach (TreeNode n in nd.Nodes)
+                {
+                   // var tp = n.Tag.GetType();
+                    n.Expand();
+                }
+
+                tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("COLAPSE_NODE");
+            }
+        }
+
+        public void SetTreeLanguageDefaults()
+        {
+            tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
+            tsmiExpandViewNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
         }
        
         public void ReloadAllDatabases()
         {
             if (!ReadDatabaseDefinition()) return;
-
+            
             NotifiesClass.Instance().InfoGranularity = eMessageGranularity.normal;
             MakeDatabaseTree(false);
             int n = DatabaseDefinitions.Instance().CountToOpen();

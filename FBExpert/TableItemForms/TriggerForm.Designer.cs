@@ -327,7 +327,7 @@ namespace FBXpert
             this.cbIsActive.TabIndex = 18;
             this.cbIsActive.Text = "Active";
             this.cbIsActive.UseVisualStyleBackColor = true;
-            this.cbIsActive.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.cbIsActive.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // gbTable
             // 
@@ -347,7 +347,7 @@ namespace FBXpert
             this.cbTable.Name = "cbTable";
             this.cbTable.Size = new System.Drawing.Size(198, 21);
             this.cbTable.TabIndex = 1;
-            this.cbTable.SelectedIndexChanged += new System.EventHandler(this.TextChanged);
+            this.cbTable.SelectedIndexChanged += new System.EventHandler(this.EditChanged);
             // 
             // gbTriggerName
             // 
@@ -367,7 +367,7 @@ namespace FBXpert
             this.txtTriggerName.Size = new System.Drawing.Size(194, 20);
             this.txtTriggerName.TabIndex = 0;
             this.txtTriggerName.Text = "NEW_TRG";
-            this.txtTriggerName.TextChanged += new System.EventHandler(this.TextChanged);
+            this.txtTriggerName.TextChanged += new System.EventHandler(this.EditChanged);
             // 
             // gbTriggerTyp
             // 
@@ -393,7 +393,7 @@ namespace FBXpert
             this.cbDELETE.TabIndex = 4;
             this.cbDELETE.Text = "Delete";
             this.cbDELETE.UseVisualStyleBackColor = true;
-            this.cbDELETE.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.cbDELETE.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // cbUPDATE
             // 
@@ -404,7 +404,7 @@ namespace FBXpert
             this.cbUPDATE.TabIndex = 3;
             this.cbUPDATE.Text = "Update";
             this.cbUPDATE.UseVisualStyleBackColor = true;
-            this.cbUPDATE.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.cbUPDATE.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // cbINSERT
             // 
@@ -417,7 +417,7 @@ namespace FBXpert
             this.cbINSERT.TabIndex = 2;
             this.cbINSERT.Text = "Insert";
             this.cbINSERT.UseVisualStyleBackColor = true;
-            this.cbINSERT.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.cbINSERT.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // rbAFTER
             // 
@@ -428,7 +428,7 @@ namespace FBXpert
             this.rbAFTER.TabIndex = 1;
             this.rbAFTER.Text = "After";
             this.rbAFTER.UseVisualStyleBackColor = true;
-            this.rbAFTER.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.rbAFTER.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // rbBEFORE
             // 
@@ -441,7 +441,7 @@ namespace FBXpert
             this.rbBEFORE.TabStop = true;
             this.rbBEFORE.Text = "Before";
             this.rbBEFORE.UseVisualStyleBackColor = true;
-            this.rbBEFORE.CheckedChanged += new System.EventHandler(this.TextChanged);
+            this.rbBEFORE.CheckedChanged += new System.EventHandler(this.EditChanged);
             // 
             // gbPosition
             // 
@@ -461,7 +461,7 @@ namespace FBXpert
             this.txtGenValue.Size = new System.Drawing.Size(54, 20);
             this.txtGenValue.TabIndex = 0;
             this.txtGenValue.Text = "0";
-            this.txtGenValue.TextChanged += new System.EventHandler(this.TextChanged);
+            this.txtGenValue.TextChanged += new System.EventHandler(this.EditChanged);
             // 
             // tabControl1
             // 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace FBExpert.DataClasses
 {
@@ -22,10 +21,6 @@ namespace FBExpert.DataClasses
             set
             {
                  _defaultValue = value;
-                if(_defaultValue == "null")
-                {
-                    Console.WriteLine();
-                } 
             }
             get
             {

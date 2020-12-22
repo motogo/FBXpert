@@ -38,23 +38,21 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BasicClassLibrary">
-      <HintPath>..\..\..\SELibraries\Lib\BasicClassLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="BasicFormClassLibrary, Version=2016.12.1.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BasicClassLibrary, Version=2020.11.20.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SELibraries\Lib\BasicFormClassLibrary.dll</HintPath>
+      <HintPath>..\..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\BasicClassLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="FastColoredTextBox">
-      <HintPath>..\..\..\SELibraries\Lib\FastColoredTextBox.dll</HintPath>
-    </Reference>
-    <Reference Include="MessageLibrary, Version=2016.9.19.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BasicFormClassLibrary, Version=2020.12.18.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SELibraries\Lib\MessageLibrary.dll</HintPath>
+      <HintPath>..\..\..\SELibrariesSource\BasicFormClassLibrary\bin\Debug\BasicFormClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageLibrary, Version=2020.1.16.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SELibrariesSource\MessageLibrary\MainSource\bin\Debug\MessageLibrary.dll</HintPath>
     </Reference>
     <Reference Include="SEListBox, Version=2017.11.6.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SELibraries\Lib\SEListBox.dll</HintPath>
+      <HintPath>..\..\..\SELibrariesSource\SEListBox\Dev\bin\Debug\SEListBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

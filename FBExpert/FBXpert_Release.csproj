@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE44C06F-4B5E-4F9F-9D34-B7EBBDCEE964}</ProjectGuid>
+    <ProjectGuid>{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FBXpert</RootNamespace>
@@ -81,23 +81,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BasicClassLibrary, Version=2020.11.20.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\BasicClassLibrary.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\BasicClassLibrary\bin\Release\BasicClassLibrary.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="BasicFormClassLibrary, Version=2020.12.18.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\BasicFormClassLibrary\bin\Debug\BasicFormClassLibrary.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\BasicFormClassLibrary\bin\Release\BasicFormClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="DBBasicClassLibrary, Version=2018.3.22.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\DBBasicClassLibrary\MainSource\bin\Debug\DBBasicClassLibrary.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\DBBasicClassLibrary\MainSource\bin\Release\DBBasicClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ExtendedXmlSerializer, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExtendedXmlSerializer.2.1.1\lib\net45\ExtendedXmlSerializer.dll</HintPath>
     </Reference>
     <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\FastColoredTextBox\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\FastColoredTextBox\FastColoredTextBox\bin\Release\FastColoredTextBox.dll</HintPath>
     </Reference>
     <Reference Include="fastJSON, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -119,18 +119,18 @@
     </Reference>
     <Reference Include="FormularUtils, Version=2017.11.21.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\FormularUtils\Source\bin\Debug\FormularUtils.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\FormularUtils\Source\bin\Release\FormularUtils.dll</HintPath>
     </Reference>
     <Reference Include="LiteDB, Version=5.0.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.5.0.1\lib\net45\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="MessageFormLibrary, Version=2020.2.29.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\MessageFormLibrary\bin\Debug\MessageFormLibrary.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\MessageFormLibrary\bin\Release\MessageFormLibrary.dll</HintPath>
     </Reference>
     <Reference Include="MessageLibrary, Version=2020.1.16.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\MessageLibrary\MainSource\bin\Debug\MessageLibrary.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\MessageLibrary\MainSource\bin\Release\MessageLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.TransactSql.ScriptDom.14.0.3811.1\lib\net40\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
@@ -139,31 +139,31 @@
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="NullableComboBox, Version=2020.11.26.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\NullableComboBox\bin\Debug\NullableComboBox.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\NullableComboBox\bin\Release\NullableComboBox.dll</HintPath>
     </Reference>
     <Reference Include="SECaptionEditBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SECaptionEditBox\bin\Debug\SECaptionEditBox.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SECaptionEditBox\bin\Release\SECaptionEditBox.dll</HintPath>
     </Reference>
     <Reference Include="SEHotSpot, Version=2020.2.6.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SEHotSpot\bin\Debug\SEHotSpot.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SEHotSpot\bin\Release\SEHotSpot.dll</HintPath>
     </Reference>
     <Reference Include="SELibraries, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SELibraries\bin\Debug\SELibraries.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SELibraries\bin\Release\SELibraries.dll</HintPath>
     </Reference>
     <Reference Include="SEListBox, Version=2017.11.6.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SEListBox\Dev\bin\Debug\SEListBox.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SEListBox\Dev\bin\Release\SEListBox.dll</HintPath>
     </Reference>
     <Reference Include="SESpaltenEditor, Version=2020.2.12.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SESpaltenEditor\bin\Debug\SESpaltenEditor.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SESpaltenEditor\bin\Release\SESpaltenEditor.dll</HintPath>
     </Reference>
     <Reference Include="SpezialfilterBox, Version=2020.12.18.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SpezialfilterBox\bin\Debug\SpezialfilterBox.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\SpezialfilterBox\bin\Release\SpezialfilterBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -187,7 +187,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="XMLEditSimpleForm, Version=2016.11.25.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\XMLEdit\XMLEditSimple\bin\Debug\XMLEditSimpleForm.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\XMLEdit\XMLEditSimple\bin\Release\XMLEditSimpleForm.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1189,10 +1189,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.de-DE.resx
-$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.en-US.resx
-$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.ja.resx
-$(ProjectDir)\bin\Debug\Languages\ResGen.exe $(ProjectDir)\bin\Debug\Languages\Language.pt.resx</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)\bin\Release\Languages\ResGen.exe $(ProjectDir)\bin\Release\Languages\Language.de-DE.resx
+$(ProjectDir)\bin\Release\Languages\ResGen.exe $(ProjectDir)\bin\Release\Languages\Language.en-US.resx
+$(ProjectDir)\bin\Release\Languages\ResGen.exe $(ProjectDir)\bin\Release\Languages\Language.ja.resx
+$(ProjectDir)\bin\Release\Languages\ResGen.exe $(ProjectDir)\bin\Release\Languages\Language.pt.resx</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

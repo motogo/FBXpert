@@ -48,9 +48,9 @@ namespace FBXpert
                     FunctionObject = (FunctionClass)tn.Tag;
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine(" ");
+                Console.WriteLine(ex.Message);
             }
             OldFunctionObject = (FunctionClass) FunctionObject.Clone();
                                    

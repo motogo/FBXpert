@@ -8,6 +8,7 @@ using FBXpert.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,26 @@ using System.Windows.Forms;
 
 namespace FBExpert
 {
+
+    public static class GetTableFieldsInx
+    {
+        public static int TableNameInx = 0;
+        public static int FieldNameInx = 1;
+        public static int FieldPositionInx = 2;
+        //
+        public static int FieldTypeInx = 3;
+        public static int FieldLengthInx = 4;
+        public static int FieldDomainNameInx = 5;
+        public static int FieldDomainScaleInx = 6;
+        public static int FieldDefaultValueInx = 7;
+        public static int FieldDomainCollateInx = 8;
+        public static int FieldDomainCharSetInx = 9;
+        public static int FieldNotNullFlagInx = 10;
+        public static int FieldDomainDefaultValueInx = 11;
+        public static int FieldDescriptionInx = 12;
+        public static int FieldDomainDescriptionInx = 13;
+    }
+
     public class StaticTreeClass : object
     {
         enum eTableTypes { SystemTables, UserdefinedTables, AllTables };
@@ -581,7 +602,7 @@ namespace FBExpert
         public Dictionary<string,IndexClass> GetIndecesObjects(DBRegistrationClass DBReg)
         {
             var indeces = new Dictionary<string,IndexClass>();
-
+            string _funcStr = $@"GetIndecesObjects(DBReg={DBReg})";
             string cmd = IndexSQLStatementsClass.Instance().GetAllIndicies(DBReg.Version,eTableType.withoutsystem); //  .RefreshNonSystemIndicies(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -604,8 +625,11 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         string oldKey = string.Empty;
-                        string newKey = string.Empty;                                                                 
+                        string newKey = string.Empty;
                         IndexClass tc = null;
 
                         while (dread.Read())
@@ -634,7 +658,10 @@ namespace FBExpert
                             n++;
                         }
                         
-                        if((oldKey == newKey)&&(!string.IsNullOrEmpty(oldKey)))
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetIndecesObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
+                        if ((oldKey == newKey)&&(!string.IsNullOrEmpty(oldKey)))
                         {                                 
                             if(tc != null)
                             {
@@ -737,7 +764,8 @@ namespace FBExpert
         
         //Holt alle Indecies der Datenbank und fügt diese in einen Tree-Konten an        
         public Dictionary<string,IndexClass> AddIndexObjects_To_ListOfTableObjects(DBRegistrationClass DBReg, Dictionary<string,TableClass> tc)
-        {                           
+        {
+            string _funcStr = $@"AddIndexObjects_To_ListOfTableObjects(DBReg={DBReg})";
             string fields_cmd = IndexSQLStatementsClass.Instance().GetAllIndicies(DBReg.Version,eTableType.withoutsystem);                        
             TableClass tableObject = null;
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -758,17 +786,16 @@ namespace FBExpert
                     string oldFieldKey = string.Empty; 
                     string newFieldKey = string.Empty; 
                     IndexClass tfc = null;
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    
                     while (dread.Read())
                     {
                         n++;
                         newTableKey = dread.GetValue(0).ToString().Trim();
                         newIndexKey = dread.GetValue(1).ToString().Trim();   
                         newFieldKey = dread.GetValue(2).ToString().Trim();  
-                          
-                        if(newIndexKey.ToUpper().Contains("TESTT"))
-                        {
-                            Console.WriteLine();
-                        }
+
                         if (oldTableKey != newTableKey)
                         {
                             tableObject = tc.FirstOrDefault(X => X.Value.Name == newTableKey).Value as TableClass;
@@ -813,6 +840,9 @@ namespace FBExpert
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()}) -> Indices.Add", ex));                                                                                         
                         }
                     }
+                    Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                    NotifiesClass.Instance().AddToINFO($@"AddIndexObjects_To_ListOfTableObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                    sw.Stop();
                 }
                 con.Close();
             }
@@ -830,7 +860,7 @@ namespace FBExpert
         public void AddIndexObjects_To_ListOfSystemTableObjects(DBRegistrationClass DBReg, Dictionary<string,SystemTableClass> tc)
         {
             string fields_cmd = string.Empty;
-           
+            string _funcStr = $@"AddIndexObjects_To_ListOfSystemTableObjects(DBReg={DBReg})";
             fields_cmd = IndexSQLStatementsClass.Instance().GetAllIndicies(DBReg.Version, eTableType.system);
                     
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -845,6 +875,9 @@ namespace FBExpert
                 SystemTableClass tableObject = null;
                 if (dread.HasRows)
                 {
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    
                     while (dread.Read())
                     {
                         n++;
@@ -889,6 +922,9 @@ namespace FBExpert
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system.ToString()}) -> Indices.Add", ex));                                                                                         
                         }
                     }
+                    Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                    NotifiesClass.Instance().AddToINFO($@"AddIndexObjects_To_ListOfSystemTableObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                    sw.Stop();
                 }
                 con.Close();
             }
@@ -1066,6 +1102,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.DomainsKeyStr) as DomainClass;
@@ -1092,6 +1131,10 @@ namespace FBExpert
                             n++;
                         }
                         tn.Text = $@"Domains ({n})";
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+
+                        NotifiesClass.Instance().AddToINFO($@"RefreshDomains->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                     }
                     dread.Close();
                 }
@@ -1149,6 +1192,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.ForeignKeyStr) as ForeignKeyClass;
@@ -1165,6 +1211,9 @@ namespace FBExpert
                             tn.Nodes.Add(tablen);
                             n++;
                         }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"RefreshForeignKeys->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                         tn.Text = $@"Foreign Keys ({n})";
                     }
                     dread.Close();
@@ -1241,6 +1290,9 @@ namespace FBExpert
                         string tnameold = string.Empty;
                        
                         ConstraintsClass tc = null;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                       
                         while (dread.Read())
                         {
                             fieldname = dread.GetValue(6).ToString().Trim();
@@ -1271,7 +1323,9 @@ namespace FBExpert
                                 tc.FieldNames.Add(fieldname,fieldname);                                                                
                             }
                         }
-
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"RefreshConstraintItems->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                         if (tc != null)
                         {
                             TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyStr, tc.Name,tc);                            
@@ -1546,7 +1600,10 @@ namespace FBExpert
 
                     if (dread.HasRows)
                     {
-                        int n = 0;                        
+                        int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {                            
                             var tc          = DataClassFactory.GetDataClass(StaticVariablesClass.TriggersKeyStr) as TriggerClass;
@@ -1561,6 +1618,9 @@ namespace FBExpert
                             tn.Nodes.Add(tablen);
                             n++;
                         }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"{_funcStr}->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                         tn.Text = $@"Trigger ({n})";
                     }
                     dread.Close();
@@ -1617,6 +1677,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
 
@@ -1627,6 +1690,9 @@ namespace FBExpert
                             tn.Nodes.Add(tablen);
                             n++;
                         }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"RefreshRoles->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                         tn.Text = $@"Roles ({n})";
                     }
                     dread.Close();
@@ -1689,6 +1755,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.GeneratorsKeyStr) as GeneratorClass;
@@ -1721,7 +1790,10 @@ namespace FBExpert
                                 }
                                 con2.Close();
                             }                            
-                        }                        
+                        }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"RefreshGeneratorsItems->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                         nd.Text = $@"Generators ({n})";
                     }
                     dread.Close();
@@ -1794,7 +1866,7 @@ namespace FBExpert
 
             if (tableList == null) return null;
             if (tableList.Count <= 0) return null;
-            string oldTableName = string.Empty;
+            
             int n = 0;
             
             foreach (var tc in tableList.Values)
@@ -4302,36 +4374,33 @@ namespace FBExpert
                             TableName = TableName                            
                         };
 
-                        tfc.Name                = dread.GetValue(1).ToString().Trim();
+                        tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;                        
-                        tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
-                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                        tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
-                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                        tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
-                        tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
-                        tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;                        
+                        tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                        tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
+                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                        tfc.DefaultValue        = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                        tfc.Domain.Collate      = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                        tfc.Domain.CharSet      = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
                         bool NNConstraint = tableObject.IsNotNull(tfc.Name);
-                        bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
                         if (NNConstraint != NNFlag)
                         {
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NNConstraint},Flag:{NNFlag})"));
                         }
                         tfc.Domain.NotNull = NNConstraint;              
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
-                        tfc.Description         = dread.GetValue(13).ToString().Trim(); 
-                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim(); 
+                        tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
+                        tfc.Description         = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim(); 
+                        tfc.Domain.Description  = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim(); 
                         if (tfc.Domain.DefaultValue.Length > 0 )
                         {
                             if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
                             {
                                 tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                             }
-                            if(tfc.Domain.DefaultValue.Length > 1)
-                            {
-                                Console.WriteLine();
-                            }
+                            
                         }
                                                 
                         tableObject.Fields.Add(tfc.Name,tfc);
@@ -4353,7 +4422,9 @@ namespace FBExpert
         public TableClass GetTableObject(DBRegistrationClass DBReg, TableClass tc)
         {
             string _funcStr = $@"GetTableObject(DBReg={DBReg})";
-            
+
+           
+
             var tableObject = (TableClass) tc.Clone();            
             string fields_cmd = SQLStatementsClass.Instance().GetTableFields(DBReg.Version, tableObject.Name);
             tableObject.Fields = new Dictionary<string, TableFieldClass>();
@@ -4368,32 +4439,35 @@ namespace FBExpert
                 if (dread.HasRows)
                 {                   
                     tableObject.Fields = new Dictionary<string, TableFieldClass>();
-                
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    int n = 0;
                     while (dread.Read())
                     {
+                        n++;
                         var tfc = new TableFieldClass();
                                             
-                        tfc.TableName           = dread.GetValue(0).ToString().Trim();
-                        tfc.Name                = dread.GetValue(1).ToString().Trim();
-                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                        tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
+                        tfc.TableName           = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
+                        tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                        tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0)+1;
-                        tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
-                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                        tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
-                        tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
-                        tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;
+                        tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
+                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                        tfc.DefaultValue        = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                        tfc.Domain.Collate      = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                        tfc.Domain.CharSet      = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
                         bool NNConstraint= tableObject.IsNotNull(tfc.Name);
-                        bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                        bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
                         if (NNConstraint != NNFlag)
                         {
                             NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NNConstraint},Flag:{NNFlag})"));
                         }
                         tfc.Domain.NotNull = NNConstraint;
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
-                        tfc.Description         = dread.GetValue(13).ToString().Trim();
-                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim();
+                        tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
+                        tfc.Description         = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
+                        tfc.Domain.Description  = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
                         if (tfc.Domain.DefaultValue.Length > 0 )
                         {
                             if(tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
@@ -4401,9 +4475,11 @@ namespace FBExpert
                                 tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                             }                            
                         }
-                                                
                         tableObject.Fields.Add(tfc.Name,tfc);
                     }
+                    Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                    NotifiesClass.Instance().AddToINFO($@"GetTableObject->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                    sw.Stop();
                 }
                 con.Close();
             }
@@ -4415,7 +4491,6 @@ namespace FBExpert
             {
                 con.Close();
             }
-                
             return tableObject;
         }
 
@@ -4540,12 +4615,13 @@ namespace FBExpert
         public Dictionary<string,TableClass> GetAllTableObjects(DBRegistrationClass DBReg)
         {
           //  Thread.Sleep(1000);
-            string _funcStr = $@"GetAllTableObjects(DBReg={DBReg})";            
+            string _funcStr = $@"GetAllTableObjects(DBReg={DBReg})";
             var TableObject = new TableClass();
             string fields_cmd = SQLStatementsClass.Instance().GetAllNonSystemTableFields(DBReg.Version);
             TableObject.Fields = new Dictionary<string, TableFieldClass>();
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             var tables = new Dictionary<string,TableClass>();
+
             try
             {
                 using (TransactionScope c = new TransactionScope())
@@ -4558,14 +4634,16 @@ namespace FBExpert
                     {
                         string oldTableName = string.Empty;
                         TableClass table = null;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        int n = 0;
                         while (dread.Read())
                         {
+                         //   Console.WriteLine($@"GetAllTableObjects used Time {n}:{sw.ElapsedMilliseconds}");
+                            n++;
                             var tfc = new TableFieldClass();
-                            var tableName = dread.GetValue(0).ToString().Trim();
-                            if (tableName == "TUSER")
-                            {
-                                Console.WriteLine();
-                            }
+                            var tableName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
+
                             if (tableName != oldTableName)
                             {
                                 table = new TableClass
@@ -4579,26 +4657,26 @@ namespace FBExpert
                             }
                             tfc.TableName = tableName;
                             
-                            tfc.Name = dread.GetValue(1).ToString().Trim();
-                            tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0) + 1;
-                            tfc.Domain.FieldType = dread.GetValue(4).ToString().Trim();
-                            tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                            tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
-                            tfc.Domain.Name = dread.GetValue(6).ToString().Trim();
-                            tfc.Domain.Scale = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                            tfc.DefaultValue = dread.GetValue(8).ToString().Trim();
-                            tfc.Domain.Collate = dread.GetValue(9).ToString().Trim();
-                            tfc.Domain.CharSet = dread.GetValue(10).ToString().Trim();
-                            bool NNConstraint = table.IsNotNull(tfc.Name);
-                            bool NNFlag = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
+                            tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
+                            tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
+                            tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                            tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                            tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
+                            tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
+                            tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                            tfc.DefaultValue        = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                            tfc.Domain.Collate      = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                            tfc.Domain.CharSet      = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
+                            bool NNConstraint       = table.IsNotNull(tfc.Name);
+                            bool NNFlag             = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
                             if (NNConstraint != NNFlag)
                             {
                                 NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}",$@"{table.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NNConstraint},Flag:{NNFlag})"));
                             }
-                            tfc.Domain.NotNull = NNConstraint;
-                            tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
-                            tfc.Description = dread.GetValue(13).ToString().Trim();
-                            tfc.Domain.Description = dread.GetValue(14).ToString().Trim();
+                            tfc.Domain.NotNull      = NNConstraint;
+                            tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
+                            tfc.Description         = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
+                            tfc.Domain.Description  = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
                             if (tfc.Domain.DefaultValue.Length > 0)
                             {
                                 if (tfc.Domain.DefaultValue.StartsWith("DEFAULT "))
@@ -4606,14 +4684,11 @@ namespace FBExpert
                                     tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                                 }
                             }
-
                             table.Fields.Add(tfc.Name, tfc);
-
-                            if ((tfc.TableName == "TUSER") && (tfc.Name == "PORTABLEDOC"))
-                            {
-                                Console.WriteLine();
-                            }
                         }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetAllTableObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.more, true);
+                        sw.Stop();
                     }
                     con.Close();
                     c.Complete();
@@ -4633,7 +4708,8 @@ namespace FBExpert
 
         public Dictionary<string,SystemTableClass> GetSystemTableObjects(DBRegistrationClass DBReg)
         {
-            string _funcStr = $@"GetSystemTableObjects(DBReg={DBReg})";            
+            string _funcStr = $@"GetSystemTableObjects(DBReg={DBReg})";
+
             var tables = new Dictionary<string,SystemTableClass>();
             var TableObject = new TableClass();
             
@@ -4646,14 +4722,20 @@ namespace FBExpert
 
                 var fcmd = new FbCommand(fields_cmd, con);
                 var dread = fcmd.ExecuteReader();
+               
                 if (dread.HasRows)
                 {
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    int n = 0;
+
                     string oldTableName = string.Empty;
                     SystemTableClass tableObject = null;
                     while (dread.Read())
                     {
+                        n++;
                         var tfc = new TableFieldClass();
-                        var tableName = dread.GetValue(0).ToString().Trim();
+                        var tableName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
                         if (tableName != oldTableName)
                         {
                             tableObject = new SystemTableClass
@@ -4666,19 +4748,19 @@ namespace FBExpert
                         }
                         tfc.TableName = tableName;
 
-                        tfc.Name                = dread.GetValue(1).ToString().Trim();
-                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0) + 1;
-                        tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
-                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                        tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
-                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                        tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
-                        tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
-                        tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
-                        bool NNFlag             = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
-                        tfc.Description         = dread.GetValue(13).ToString().Trim();
-                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim();
+                        tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
+                        tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                        tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
+                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                        tfc.DefaultValue        = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                        tfc.Domain.Collate      = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                        tfc.Domain.CharSet      = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
+                        bool NNFlag             = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
+                        tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
+                        tfc.Description         = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
+                        tfc.Domain.Description  = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
 
                         tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                         bool NNConstraint = tableObject.IsNotNull(tfc.Name);
@@ -4695,18 +4777,12 @@ namespace FBExpert
                             {
                                 tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                             }
-                            if(tfc.Domain.DefaultValue.Length > 1)
-                            {
-                                Console.WriteLine();
-                            }
-                        }
-                        
-                        if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
-                        {
-                            Console.WriteLine();
                         }
                         tableObject.Fields.Add(tfc.Name,tfc);
                     }
+                    Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                    NotifiesClass.Instance().AddToINFO($@"GetSystemTableObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.more, true);
+                    sw.Stop();
                 }
                 con.Close();
             }
@@ -4749,6 +4825,9 @@ namespace FBExpert
                         if (dread.HasRows)
                         {
                             int n = 0;
+                            Stopwatch sw = new Stopwatch();
+                            sw.Start();
+                            
                             while (dread.Read())
                             {
                                 var tc = DataClassFactory.GetDataClass(StaticVariablesClass.FunctionsKeyStr) as FunctionClass;
@@ -4763,7 +4842,7 @@ namespace FBExpert
                                                            
                                 var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
                                 con2.Open();
-                            
+                                
                                 if (con2.State == System.Data.ConnectionState.Open)
                                 {
                                     string cmd1 = SQLStatementsClass.Instance().GetFunctionsArguments(DBReg.Version, tc.Name);
@@ -4810,7 +4889,10 @@ namespace FBExpert
                                 {
                                     NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->dread2==null"));
                                 }
-                            }            
+                            }
+                            Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                            NotifiesClass.Instance().AddToINFO($@"GetInternalFunctionObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                            sw.Stop();
                         }
                     }
                     else
@@ -4834,7 +4916,8 @@ namespace FBExpert
 
         public Dictionary<string,UserDefinedFunctionClass> GetUserDefinedFunctionObjects(DBRegistrationClass DBReg)
         {
-            String cmd = SQLStatementsClass.Instance().RefreshUserDefinedFunctionsItems(DBReg.Version);     
+            string _funcStr = $@"GetUserDefinedFunctionObjects(DBReg={DBReg})";
+            string cmd = SQLStatementsClass.Instance().RefreshUserDefinedFunctionsItems(DBReg.Version);     
             var allfunctions = new  Dictionary<string,UserDefinedFunctionClass>();
             if(string.IsNullOrEmpty(cmd)) return allfunctions;
 
@@ -4860,6 +4943,9 @@ namespace FBExpert
                         if (dread.HasRows)
                         {
                             int n = 0;
+                            Stopwatch sw = new Stopwatch();
+                            sw.Start();
+                            
                             while (dread.Read())
                             {
                                 var tc = DataClassFactory.GetDataClass(StaticVariablesClass.UserDefinedFunctionsKeyStr) as UserDefinedFunctionClass;
@@ -4920,7 +5006,10 @@ namespace FBExpert
                                 {
                                     NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshFunctionsItems->dread2==null"));
                                 }
-                            }                        
+                            }
+                            Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                            NotifiesClass.Instance().AddToINFO($@"GetUserDefinedFunctionObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                            sw.Stop();
                         }
                     }
                     else
@@ -5040,7 +5129,7 @@ namespace FBExpert
 
             var tableObject = new TableClass();
             if (string.IsNullOrEmpty(TableName)) return fields;
-            
+
             string fields_cmd = SQLStatementsClass.Instance().GetTableFields(DBReg.Version, TableName);
             tableObject.Fields = new Dictionary<string, TableFieldClass>();
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5052,23 +5141,26 @@ namespace FBExpert
                 var dread = fcmd.ExecuteReader();
                 if (dread.HasRows)
                 {
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    int n = 0;
                     while (dread.Read())
                     {
                         var tfc = new TableFieldClass();
-                        string TabName          = dread.GetValue(0).ToString().Trim();
-                        tfc.Name                = dread.GetValue(1).ToString().Trim();
-                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0) + 1;
-                        tfc.Domain.FieldType    = dread.GetValue(4).ToString().Trim();
-                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(5).ToString().Trim(), 0);
-                        tfc.Domain.Name         = dread.GetValue(6).ToString().Trim();
-                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(7).ToString().Trim(), 0) * -1;
-                        tfc.DefaultValue        = dread.GetValue(8).ToString().Trim();
-                        tfc.Domain.Collate      = dread.GetValue(9).ToString().Trim();
-                        tfc.Domain.CharSet      = dread.GetValue(10).ToString().Trim();
-                        bool NNlag              = StaticFunctionsClass.ToIntDef(dread.GetValue(11).ToString().Trim(), 0) > 0;
-                        tfc.Domain.DefaultValue = dread.GetValue(12).ToString().Trim();
-                        tfc.Description         = dread.GetValue(13).ToString().Trim();
-                        tfc.Domain.Description  = dread.GetValue(14).ToString().Trim();
+                        string TabName          = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
+                        tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
+                        tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
+                        tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
+                        tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
+                        tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
+                        tfc.DefaultValue        = dread.GetValue(GetTableFieldsInx.FieldDefaultValueInx).ToString().Trim();
+                        tfc.Domain.Collate      = dread.GetValue(GetTableFieldsInx.FieldDomainCollateInx).ToString().Trim();
+                        tfc.Domain.CharSet      = dread.GetValue(GetTableFieldsInx.FieldDomainCharSetInx).ToString().Trim();
+                        bool NNlag              = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
+                        tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
+                        tfc.Description         = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
+                        tfc.Domain.Description  = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
 
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                         bool NNConstraint       = tableObject.IsNotNull(tfc.Name);
@@ -5085,19 +5177,15 @@ namespace FBExpert
                             {
                                 tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                             }
-                            if(tfc.Domain.DefaultValue.Length > 1)
-                            {
-                                Console.WriteLine();
-                            }
+                            
                         }
 
-                        if((tfc.Domain.Description.Length > 0)||(tfc.Description.Length > 0))
-                        {
-                            Console.WriteLine();
-                        }
                         
                         fields.Add(tfc.Name,tfc);
                     }
+                    Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                    NotifiesClass.Instance().AddToINFO($@"GetFieldObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                    sw.Stop();
                 }
                 con.Close();
             }
@@ -5127,7 +5215,7 @@ namespace FBExpert
         public Dictionary<string,ViewClass> GetViewObjects(DBRegistrationClass DBReg)
         {
             var allviews = new Dictionary<string,ViewClass>();
-
+            string _funcStr = $@"GetViewObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance().RefreshViews(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -5162,7 +5250,9 @@ namespace FBExpert
                         object ob_fieldpos = null;
                         object ob_fieldtype = null;
                         object ob_fieldlength = null;
-
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        int nn = 0;
                         while (dread.Read())
                         {
 
@@ -5174,7 +5264,7 @@ namespace FBExpert
                             fieldtypename
                             fieldlength
                             */
-
+                            nn++;
                             ob_viewname = dread.GetValue(0);
                             ob_sql = dread.GetValue(1);
                             ob_fieldname = dread.GetValue(2);
@@ -5252,7 +5342,9 @@ namespace FBExpert
                             voldsql = ob_sql.ToString().Trim();
                             System.Text.Encoding enc = System.Text.Encoding.Default;
                         }
-
+                        Console.WriteLine($@"{_funcStr} used Time {nn}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetViewObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.more, true);
+                        sw.Stop();
                         var vcl = DataClassFactory.GetDataClass(StaticVariablesClass.ViewsKeyStr) as ViewClass;
 
                         if (strli.Length > 0)
@@ -5311,7 +5403,7 @@ namespace FBExpert
         public Dictionary<string,DomainClass> GetDomainObjects(DBRegistrationClass DBReg)
         {
             var domains = new Dictionary<string,DomainClass>();
-           
+            string _funcStr = $@"GetViewObjects(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance().RefreshNonSystemDomains(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -5334,6 +5426,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
 
@@ -5352,17 +5447,15 @@ namespace FBExpert
                                 {
                                     tc.DefaultValue = tc.DefaultValue.Substring(8).Trim();
                                 }
-                                if(tc.DefaultValue.Length > 1)
-                                {
-                                    Console.WriteLine();
-                                }
+                                
                             }
                             tc.Description = dread.GetValue(7).ToString().Trim();
                             domains.Add(tc.Name,tc);
                             
                             n++;
                         }
-                        
+                        Console.WriteLine($@"GetDomainObjects->RefreshNonSystemDomainObjects used Time {n}:{sw.ElapsedMilliseconds}");
+                        sw.Stop();
                     }
                     dread.Close();
                 }
@@ -5380,6 +5473,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.DomainsKeyStr) as DomainClass;
@@ -5394,7 +5490,9 @@ namespace FBExpert
 
                             n++;
                         }
-
+                        Console.WriteLine($@"{_funcStr}->RefreshSystemDomainObjects used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetDomainObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                     }
                     dread.Close();
                 }
@@ -5471,6 +5569,7 @@ namespace FBExpert
         public Dictionary<string,GeneratorClass> GetGeneratorObjects(DBRegistrationClass DBReg)
         {
             var generator = new Dictionary<string,GeneratorClass>();
+            string _funcStr = $@"GetGeneratorObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance().RefreshNonSystemGeneratorsItems(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
             try
@@ -5492,6 +5591,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
 
@@ -5501,7 +5603,7 @@ namespace FBExpert
                             // tc.Increment = StaticFunctionsClass.ToIntDef(cc.GetValue(2).ToString().Trim(), 0);
                             tc.Description = dread.GetValue(3).ToString().Trim();
 
-                            string cmd2 = "SELECT GEN_ID(" + tc.Name + ", 0) FROM RDB$DATABASE;";
+                            string cmd2 = $@"SELECT GEN_ID({tc.Name}, 0) FROM RDB$DATABASE;";
 
                             var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
                             con2.Open();
@@ -5525,7 +5627,10 @@ namespace FBExpert
                                 dread2.Close();
                             }
                             con2.Close();                               
-                        }                        
+                        }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetGeneratorObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                     }
                     dread.Close();
                 }
@@ -5544,6 +5649,7 @@ namespace FBExpert
         
         public Dictionary<string,ProcedureClass> GetProcedureObjects(DBRegistrationClass DBReg)
         {
+            string _funcStr = $@"GetProcedureObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance().RefreshProcedureItems(DBReg.Version);
             var procedures = new Dictionary<string,ProcedureClass>();
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5567,6 +5673,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                        
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.ProceduresKeyStr) as ProcedureClass;
@@ -5628,7 +5737,10 @@ namespace FBExpert
                             {
                                 NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread2==null"));
                             }
-                        }                        
+                        }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetProcedureObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                     }
                 }
                 else
@@ -5649,6 +5761,7 @@ namespace FBExpert
 
         public Dictionary<string, FunctionClass> GetFunctionObjects(DBRegistrationClass DBReg)
         {
+            string _funcStr = $@"GetFunctionObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance().RefreshInternalFunctionsItems(DBReg.Version);
             var functions = new Dictionary<string, FunctionClass>();
             var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -5672,6 +5785,9 @@ namespace FBExpert
                     if (dread.HasRows)
                     {
                         int n = 0;
+                        Stopwatch sw = new Stopwatch();
+                        sw.Start();
+                    
                         while (dread.Read())
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.FunctionsKeyStr) as FunctionClass;
@@ -5735,6 +5851,9 @@ namespace FBExpert
                                 NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->RefreshProceduresItems->dread2==null"));
                             }
                         }
+                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        NotifiesClass.Instance().AddToINFO($@"GetFunctionObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
+                        sw.Stop();
                     }
                 }
                 else

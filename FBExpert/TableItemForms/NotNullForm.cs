@@ -232,7 +232,7 @@ namespace FBXpert
                 lvFields.Items.Add(lvi);
             }
         }
-        public void DataToEdit()
+        public override void DataToEdit()
         {
             cbTable.Items.Clear();
             cbTable.Items.AddRange(_tables.ToArray());
