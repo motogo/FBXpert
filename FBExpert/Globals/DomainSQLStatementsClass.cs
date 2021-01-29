@@ -48,6 +48,7 @@ namespace FBXpert.SQLStatements
             return cmd;
         }
         
+
         public string RefreshSystemDomains(eDBVersion version)
         {
             string cmd = string.Empty;

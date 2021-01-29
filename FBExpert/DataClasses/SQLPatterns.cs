@@ -8,6 +8,7 @@ namespace FBXpert.SQLStatements
         public const string ReferenceColumnKey   = "%REFERENCECOLUMN%";
         public const string ColumnKey2           = "%COLUMN2%";
         public const string TableKey             = "%TABLE%";
+        public const string FieldKey             = "%FIELD%";
         public const string ReferenceTableKey    = "%REFERENCETABLE%";
         public const string DefaultKey           = "%DEFAULT%";
         public const string PositionKey          = "%POSITION%";
@@ -54,6 +55,8 @@ namespace FBXpert.SQLStatements
         public static string DeactivateIndexPattern     = $@"ALTER INDEX {IndexKey} INACTIVE;";
         public static string DeactivateFKPattern        = DeactivateIndexPattern;
         public static string DropConstraintPattern      = $@"DROP CONSTRAINT {ConstraintKey};";
+        public static string DropNotNullConstraintPattern = $@"ALTER TABLE {TableKey} ALTER {FieldKey} DROP NOT NULL;";
+        public static string DropPrimaryKeyConstraintPattern = $@" ALTER TABLE {TableKey} DROP CONSTRAINT {ConstraintKey};";
         public static string DropColumnPattern          = $@"ALTER TABLE {TableKey} DROP {ColumnKey};";
         public static string DropTableConstraintPattern = $@"ALTER TABLE {TableKey} DROP CONSTRAINT {ConstraintKey};";
         

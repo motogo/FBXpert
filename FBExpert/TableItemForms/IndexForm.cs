@@ -379,7 +379,6 @@ namespace FBXpert
             SQLToUI();
         }
 
-        
 
         private void hsClose_Click(object sender, EventArgs e)
         {

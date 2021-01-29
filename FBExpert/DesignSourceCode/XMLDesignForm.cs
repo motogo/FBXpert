@@ -91,7 +91,7 @@ namespace FBXpert.SonstForms
         
         public void RefreshXml()
         {
-            _ddc.Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(_dbReg);
+            _ddc.Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
             _ddc.Views  = StaticTreeClass.Instance().GetViewObjects(_dbReg);
             StaticTreeClass.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
             _ddc.Database = _dbReg;

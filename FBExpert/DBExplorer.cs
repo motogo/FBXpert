@@ -24,7 +24,7 @@ namespace FBXpert
         public NotifiesClass DbExlorerNotify = new NotifiesClass();               
         private List<TableClass> _actTables = new List<TableClass>();
         private Dictionary<string,ViewClass> _actViews = new Dictionary<string,ViewClass>();
-        private Dictionary<string,SystemTableClass> _actSystemTables = new Dictionary<string,SystemTableClass>();
+        private List<SystemTableClass> _actSystemTables = new List<SystemTableClass>();
         
         private ProgressClockForm _pc;
         private TreeNode _actRegNode;
@@ -237,7 +237,7 @@ namespace FBXpert
             
                 _actRegNode = nd;
                 _actTables.Clear();
-                
+                _actSystemTables.Clear();
                 NotifiesClass.Instance().AddToINFO("Open Database " + dbReg.Alias);
                            
                 var tb = StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);            
@@ -245,27 +245,40 @@ namespace FBXpert
 
                 if (tb != null)
                 {
-                    _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(tb);                                
-                    StaticTreeClass.Instance().RefreshDomains(dbReg, nd);
-                    StaticTreeClass.Instance().RefreshPrimaryKeysFromTableNodes(dbReg, nd,null);
-                    StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(dbReg, nd,null);
-                    StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(dbReg, nd,null);
-                    StaticTreeClass.Instance().RefreshTriggersFromTableNodes(dbReg, nd,null);
-                    StaticTreeClass.Instance().RefreshAllIndicies(dbReg, nd,null);
-                    StaticTreeClass.Instance().RefreshDependenciesFromTableNodes(dbReg, nd);               
-                    StaticTreeClass.Instance().RefreshProcedures(dbReg, nd);
-                    StaticTreeClass.Instance().RefreshInternalFunctions(dbReg, nd);
-                    StaticTreeClass.Instance().RefreshUserDefinedFunctions(dbReg, nd);
-                    StaticTreeClass.Instance().RefreshGenerators(dbReg, nd);                
-                    StaticTreeClass.Instance().RefreshRoles(dbReg, nd);                                                
+                    _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(tb);
+                    if (_actTables != null)
+                    {
+                        StaticTreeClass.Instance().RefreshDomains(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshPrimaryKeysFromTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshTriggersFromTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshAllIndicies(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshDependenciesFromTableNodes(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshProcedures(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshInternalFunctions(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshUserDefinedFunctions(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshGenerators(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshRoles(dbReg, nd);
+                    }
                 }
 
-               _actSystemTables = StaticTreeClass.Instance().RefreshSystemTables(dbReg, nd);
-          
-                
+
+                var tbs = StaticTreeClass.Instance().RefreshSystemTables(dbReg, nd);
+                if (tbs != null)
+                {
+                    _actSystemTables = StaticTreeClass.Instance().GetSystemTableObjectsFromNode(tbs);
+                    if (_actSystemTables != null)
+                    {
+                        StaticTreeClass.Instance().RefreshSystemDomains(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshPrimaryKeysFromSystemTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshSystemTriggersFromTableNodes(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshAllSystemIndicies(dbReg, nd, null);
+                    }
+                }
+
                 NotifiesClass.Instance().AddToINFO($@"Database {dbReg.Alias} opend !!!");
-                
-            
+
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
                 SetCmsForDatabase(true);                
@@ -1478,6 +1491,41 @@ namespace FBXpert
                 }
                 _tnSelected.Remove();
             }
+            else if (e.ClickedItem == tsmiDeleteNotNull)
+            {
+                var vc = (NotNullsClass)_tnSelected.Tag;
+                //var ctable = _actTables.Find(fc => fc.notnulls_constraints?.Name == _tnSelected.Text);
+                string[] vals = vc.FieldNames.Values.ToArray(); //.TryGetValue("ID", out string val);
+                if (MessageBox.Show($@"Do you really want to drop constraint {vc.Name}", $@"Drop Constraint", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+                var ri = ConstraintsSQLStatementsClass.Instance().DropNotNullConstraint(vc.Name,vc.TableName, vals[0], dbReg, NotifiesClass.Instance());
+                if (!ri.commandDone)
+                {
+                    MessageBox.Show($@"Error droping NotNull constraint {ri.lastError}", @"NotNull constraint", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                _tnSelected.Remove();
+
+                
+            }
+            else if (e.ClickedItem == tsmiDropPrimaryKey)
+            {
+                // ALTER TABLE TSTAND_TPROC DROP CONSTRAINT PK_TSTAND_TPROC;
+                
+                var vc = (PrimaryKeyClass)_tnSelected.Tag;
+                //var ctable = _actTables.Find(fc => fc.notnulls_constraints?.Name == _tnSelected.Text);
+                
+                string[] vals = vc.FieldNames.Values.ToArray();
+                if (MessageBox.Show($@"Do you really want to drop PK constraint {vc.Name}", $@"Drop PK Constraint", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+                var ri = ConstraintsSQLStatementsClass.Instance().DropPrimaryKeyConstraint(vc.Name, vc.TableName, vals[0], dbReg, NotifiesClass.Instance());
+                if (!ri.commandDone)
+                {
+                    MessageBox.Show($@"Error droping PK constraint {ri.lastError}", @"Drop PK constraint", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                _tnSelected.Remove();
+
+               
+            }
             else if(e.ClickedItem == tsmiActivateIndex)
             {
                  var tc = (IndexClass)_tnSelected.Tag;
@@ -1582,6 +1630,7 @@ namespace FBXpert
             {
                 DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadGenerators);
             }
+            
             #endregion refresh item
         }
 
@@ -1851,6 +1900,29 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiExpandViewNodes)
             {
                 ColapseExpandNodes(treeView1.SelectedNode);
+            }
+            else if (e.ClickedItem == tsmiDropAllViews)
+            {
+                var vc = (ViewGroupClass)_tnSelected.Tag;
+                if (MessageBox.Show($@"Do you really want to drop view {vc.Name}", @"Drop View",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+
+                foreach(TreeNode sel in _tnSelected.Nodes)
+                {
+                    TreeNode vco = sel;
+                    var ri2 = SQLStatementsClass.Instance().ExecSql($@"DROP VIEW {vco.Text.ToUpper()};", dbReg, NotifiesClass.Instance());
+
+                }
+                /*
+                var ri = SQLStatementsClass.Instance().ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                if (!ri.commandDone)
+                {
+                    MessageBox.Show($@"Error droping view {ri.lastError}", @"Drop View", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                */
+                _tnSelected.Remove();
             }
 
             #endregion refresh group

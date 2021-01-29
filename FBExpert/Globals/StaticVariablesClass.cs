@@ -338,8 +338,12 @@ namespace FBXpert.Globals
 
         public const string TriggersKeyStr = "TRIGGERS";
         public const string TriggersKeyGroupStr = "TRIGGERS_GROUP";
+        public const string SystemTriggersKeyStr = "SYSTEM_TRIGGERS";
+        public const string SystemTriggersKeyGroupStr = "SYSTEM_TRIGGERS_GROUP";
         public const string IndicesKeyStr = "INDICES";
         public const string IndicesKeyGroupStr = "INDICES_GROUP";
+        public const string SystemIndicesKeyStr = "SYSTEM_INDICES";
+        public const string SystemIndicesKeyGroupStr = "SYSTEM_INDICES_GROUP";
         public const string PrimaryKeyStr = "PRIMARYKEYS";
         public const string PrimaryKeyGroupStr = "PRIMARYKEYS_GROUP";
         public const string UniquesKeyStr = "UNIQUESS";
@@ -349,6 +353,8 @@ namespace FBXpert.Globals
         public const string DatabaseKeyStr = "DATABASE";
         public const string DomainsKeyStr = "DOMAINS";
         public const string DomainsKeyGroupStr = "DOMAINS_GROUP";
+        public const string SystemDomainsKeyStr = "SYSTEM_DOMAINS";
+        public const string SystemDomainsKeyGroupStr = "SYSTEM_DOMAINS_GROUP";
         public const string DependenciesKeyStr = "DEPENDENCY";
         public const string DependenciesKeyGroupStr = "DEPENDENCY_GROUP";
         public const string DependenciesTablesKeyStr = "DEPENDENCYTABLES";

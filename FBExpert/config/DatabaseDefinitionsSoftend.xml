@@ -996,7 +996,7 @@
       </CodeSettings>
     </DBRegistrationClass>
     <DBRegistrationClass>
-      <Server>192.168.178.91</Server>
+      <Server>localhost</Server>
       <DatabasePath>D:\Data\Werner\DATABASE30.FDB</DatabasePath>
       <Password>masterkey</Password>
       <User>SYSDBA</User>
@@ -1433,6 +1433,96 @@
       <CommentEnd>*/</CommentEnd>
       <NewLine>
 </NewLine>
+      <SkipForSelect>1000</SkipForSelect>
+      <MaxRowsForSelect>0</MaxRowsForSelect>
+      <State>update</State>
+      <Version>FB3_64</Version>
+      <FirebirdBinaryPath>D:\Projekte2015\FBXpert\FBExpert\bin\Debug\FB302\Firebird\</FirebirdBinaryPath>
+      <CodeSettings>
+        <AlternativeTerm>~</AlternativeTerm>
+        <SourceCodePrimaryKeyType>GUID</SourceCodePrimaryKeyType>
+        <SourceCodeNamespace>ProjectDatas</SourceCodeNamespace>
+        <SourceCodeOutputPath>D:\Projekte2015\DokuMento\TabellenLib\sources</SourceCodeOutputPath>
+      </CodeSettings>
+    </DBRegistrationClass>
+    <DBRegistrationClass>
+      <Server>localhost</Server>
+      <DatabasePath>D:\Data\DokuLief\DOKULIEF30.FDB</DatabasePath>
+      <Password>masterkey</Password>
+      <User>SYSDBA</User>
+      <CharSet>NONE</CharSet>
+      <Port>3050</Port>
+      <PacketSize>8192</PacketSize>
+      <ConnectionType>server</ConnectionType>
+      <Pooling>false</Pooling>
+      <MaxPoolSize>15</MaxPoolSize>
+      <MinPoolSize>0</MinPoolSize>
+      <ConnectionLifetime>0</ConnectionLifetime>
+      <Dialect>3</Dialect>
+      <ConnectionTimeout>15</ConnectionTimeout>
+      <Lifetime>0</Lifetime>
+      <ClientLibrary>C:\Projekte2015\FBXpert\FBExpert\bin\Debug\FB304_X32\fbclient.dll</ClientLibrary>
+      <Position>32</Position>
+      <Alias>DOKLIEF30 local</Alias>
+      <Collation>NONE</Collation>
+      <Active>false</Active>
+      <Role />
+      <InitialSQLExportPath>D:\Projekte2015\DokuMento\MainSource\DBDesign</InitialSQLExportPath>
+      <InitialScriptingPath>D:\Projekte2015\DokuMento\MainSource\DBDesign\Views</InitialScriptingPath>
+      <InitialReportPath>D:\Projekte2015\FBXpert\FBExpert\bin\Debug\reports</InitialReportPath>
+      <InitialExportPath />
+      <InitialTerminator>;</InitialTerminator>
+      <AlternativeTerminator>~</AlternativeTerminator>
+      <SingleLineComment>--</SingleLineComment>
+      <CommentStart>/*</CommentStart>
+      <CommentEnd>*/</CommentEnd>
+      <NewLine>
+      </NewLine>
+      <SkipForSelect>1000</SkipForSelect>
+      <MaxRowsForSelect>0</MaxRowsForSelect>
+      <State>update</State>
+      <Version>FB3_64</Version>
+      <FirebirdBinaryPath>D:\Projekte2015\FBXpert\FBExpert\bin\Debug\FB302\Firebird\</FirebirdBinaryPath>
+      <CodeSettings>
+        <AlternativeTerm>~</AlternativeTerm>
+        <SourceCodePrimaryKeyType>GUID</SourceCodePrimaryKeyType>
+        <SourceCodeNamespace>ProjectDatas</SourceCodeNamespace>
+        <SourceCodeOutputPath>D:\Projekte2015\DokuMento\TabellenLib\sources</SourceCodeOutputPath>
+      </CodeSettings>
+    </DBRegistrationClass>
+    <DBRegistrationClass>
+      <Server>localhost</Server>
+      <DatabasePath>D:\Data\SELicense\SELICENSE30.FDB</DatabasePath>
+      <Password>masterkey</Password>
+      <User>SYSDBA</User>
+      <CharSet>NONE</CharSet>
+      <Port>3050</Port>
+      <PacketSize>8192</PacketSize>
+      <ConnectionType>server</ConnectionType>
+      <Pooling>false</Pooling>
+      <MaxPoolSize>15</MaxPoolSize>
+      <MinPoolSize>0</MinPoolSize>
+      <ConnectionLifetime>0</ConnectionLifetime>
+      <Dialect>3</Dialect>
+      <ConnectionTimeout>15</ConnectionTimeout>
+      <Lifetime>0</Lifetime>
+      <ClientLibrary>C:\Projekte2015\FBXpert\FBExpert\bin\Debug\FB304_X32\fbclient.dll</ClientLibrary>
+      <Position>32</Position>
+      <Alias>SELicense local</Alias>
+      <Collation>NONE</Collation>
+      <Active>false</Active>
+      <Role />
+      <InitialSQLExportPath>D:\Projekte2015\DokuMento\MainSource\DBDesign</InitialSQLExportPath>
+      <InitialScriptingPath>D:\Projekte2015\DokuMento\MainSource\DBDesign\Views</InitialScriptingPath>
+      <InitialReportPath>D:\Projekte2015\FBXpert\FBExpert\bin\Debug\reports</InitialReportPath>
+      <InitialExportPath />
+      <InitialTerminator>;</InitialTerminator>
+      <AlternativeTerminator>~</AlternativeTerminator>
+      <SingleLineComment>--</SingleLineComment>
+      <CommentStart>/*</CommentStart>
+      <CommentEnd>*/</CommentEnd>
+      <NewLine>
+      </NewLine>
       <SkipForSelect>1000</SkipForSelect>
       <MaxRowsForSelect>0</MaxRowsForSelect>
       <State>update</State>

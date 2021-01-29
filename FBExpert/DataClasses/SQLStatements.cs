@@ -508,7 +508,21 @@ namespace FBXpert.DataClasses
         }
 
         #region All Table Depend            
-              
+
+
+        /// <summary>
+        /// Liest die Abhängikeiten aller Objekte wie Tables,Views,Procedures... welche zu objekten gegebenen types eine anhängikeit haben
+        /// VABTEILUNG                     	TABTEILUNG                     	BEZ                            	1	0
+        /// VABTEILUNG                     	TABTEILUNG                     	ID                             	1	0
+        /// VABTEILUNG                     	TABTEILUNG                     	SCHLUESSEL                     	1	0
+        /// VABTEILUNG                     	TABTEILUNG                     	STAMP                          	1	0
+        /// VABTEILUNG                     	TABTEILUNG                     	TSTANDORT_ID                   	1	0
+        /// VABTEILUNG                     	TSTANDORT                      	BEZ                            	1	0
+        /// VABTEILUNG                     	TSTANDORT                      	ID                             	1	0
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="onTYPE">0 = table, 1 = view</param>
+        /// <returns></returns>
         public string GetAllDependenciesON(eDBVersion version, eDependencies onTYPE)
         {
             var sb = new StringBuilder();
@@ -523,8 +537,24 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
             
             return sb.ToString();
-        }        
-        
+        }
+
+        public string GetAllDependenciesOfAnyObjectTOObjects(eDBVersion version, eDependencies onTYPE)
+        {
+            var sb = new StringBuilder();
+            sb.Append($@"{SQLConstants.SELECT} ");
+            sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,");
+            sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,");
+            sb.Append($@"RDB$DEPENDENCIES.RDB$FIELD_NAME,");
+            sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE,");
+            sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE ");
+            sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
+            sb.Append($@"{SQLConstants.WHERE} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
+
+            return sb.ToString();
+        }
+
         public string GetAllDependenciesFROM(eDBVersion version, eDependencies onTYPE)
         {
             var sb = new StringBuilder();

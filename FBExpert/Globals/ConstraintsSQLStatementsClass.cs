@@ -1,5 +1,8 @@
-﻿using Enums;
+﻿using BasicClassLibrary;
+using DBBasicClassLibrary;
+using Enums;
 using FBXpert.DataClasses;
+using FBXpert.Globals;
 using System;
 using System.Text;
 
@@ -338,6 +341,17 @@ namespace FBXpert.SQLStatements
             sb.Append($@"LEFT JOIN rdb$ref_constraints rfc ON rfc.rdb$constraint_name = rc.rdb$constraint_name ");
             sb.Append($@"where  rc.rdb$relation_name like '%$%' AND rc.rdb$constraint_type = 'CHECK';");
             return sb.ToString();
+        }
+
+        public SQLCommandsReturnInfoClass DropNotNullConstraint(string name,string tablename,string fieldname, DBRegistrationClass dbReg, NotifiesClass notify)
+        {
+            string cmd = SQLPatterns.DropNotNullConstraintPattern.Replace(SQLPatterns.FieldKey, fieldname).Replace(SQLPatterns.TableKey,tablename);
+            return ExecSql(cmd, dbReg, notify);
+        }
+        public SQLCommandsReturnInfoClass DropPrimaryKeyConstraint(string name, string tablename, string fieldname, DBRegistrationClass dbReg, NotifiesClass notify)
+        {
+            string cmd = SQLPatterns.DropPrimaryKeyConstraintPattern.Replace(SQLPatterns.ConstraintKey, name).Replace(SQLPatterns.TableKey, tablename);
+            return ExecSql(cmd, dbReg, notify);
         }
     }
 }

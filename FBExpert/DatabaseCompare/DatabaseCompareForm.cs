@@ -17,8 +17,8 @@ namespace FBXpert.SonstForms
     public partial class DatabaseCompareFrom : Form
     {
         private readonly NotifiesClass _localNotify = new NotifiesClass();
-        private readonly DBRegistrationClass _dbReg;
-        private readonly DatabaseDesignClass _ddc = new DatabaseDesignClass();        
+        //private readonly DBRegistrationClass _dbReg;
+        //private readonly DatabaseDesignClass _ddc = new DatabaseDesignClass();        
         private List<int> _findlstForward;
         private List<int> _findlstReverse;
         private int _aktSelectedLineForward;
@@ -29,7 +29,7 @@ namespace FBXpert.SonstForms
         {
             InitializeComponent();
             MdiParent = parent;
-            _dbReg = reg;
+            //_dbReg = reg;
            
             LanguageClass.Instance().RegisterChangeNotifiy(LanguageChanged);
         }
@@ -43,9 +43,7 @@ namespace FBXpert.SonstForms
         {                      
             gbFoundLinesForward.Text = LanguageClass.Instance().GetString("FoundLines");
             gbSearchCodeForward.Text = LanguageClass.Instance().GetString("SEARCH");
-           
             tabPageObjects.Text = LanguageClass.Instance().GetString("OBJECTS");
-            
         }
        
         private void hsClose_Click(object sender, EventArgs e)
@@ -83,19 +81,17 @@ namespace FBXpert.SonstForms
 
         private void GetDatabaseObjects1(DBRegistrationClass dbR)
         {
-            
             if (dbR == null) return;
             this.Cursor = Cursors.WaitCursor;
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(db),
+                Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(db),
                 Views  = StaticTreeClass.Instance().GetViewObjects(db)
             };
             var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
             var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
             var functions  = StaticTreeClass.Instance().GetFunctionObjects(db);
-
 
             slbDbObjects1.ClearItems();
             if (ddc.Tables != null)
@@ -143,7 +139,7 @@ namespace FBXpert.SonstForms
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.Instance().GetAllTableObjectsComplete(db),
+                Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(db),
                 Views  = StaticTreeClass.Instance().GetViewObjects(db)                
             };
 
@@ -243,7 +239,7 @@ namespace FBXpert.SonstForms
                 }
                 else
                 {
-                    fct.AppendText($"{"FAILURE",-12}object {itm1.Text} ->field {tcf1.Name} ->type {tcf1.Domain.FieldType} length {tcf1.Domain.Length} field not exists{Environment.NewLine}");                        
+                    fct.AppendText($"{"FAILURE",-12}object {itm1.Text} ->field {tcf1.Name} ->type {tcf1.Domain.FieldType} length {tcf1.Domain.Length} field not exists{Environment.NewLine}");
                 }
             }
         }
@@ -279,8 +275,6 @@ namespace FBXpert.SonstForms
                 {
                     fct.AppendText($"{"FAILURE",-12}object {itm1.Text} foreign keys length {tc1.ForeignKeys.Count} is not equal {itm2.Text} {tc2.ForeignKeys.Count}{Environment.NewLine}");
                 }
-
-                
             }
             else if (tc1.ForeignKeys != null)
             {
@@ -290,8 +284,6 @@ namespace FBXpert.SonstForms
             {
                 fct.AppendText($"{"FAILURE",-12}object {itm1.Text} foreign keys length 0 is not equal {itm2.Text} {tc2.ForeignKeys.Count}{Environment.NewLine}");
             }
-
-            
         }
         private void TestTablePK(ItemDataClass itm1, ItemDataClass itm2, string db1, string db2, FastColoredTextBox fct)
         {
@@ -392,43 +384,20 @@ namespace FBXpert.SonstForms
                 }
             }
         }
-
         private string RemoveUnneccessaryCharacters(string str1)
         {
-            while(str1.Contains(" ,"))
-            {
-                str1 = str1.Replace(" ,", ",");
-            }
-
-            while(str1.Contains(" ;"))
-            {
-                str1 = str1.Replace(" ;", ";");
-            }
-            
+            str1 = StringsFunctionsClass.Reduce(str1, " ,", ",");
+            str1 = StringsFunctionsClass.Reduce(str1, " ;", ";");
             str1 = str1.Replace(",",", ");
-            
-
-            while(str1.Contains("  "))
-            {
-                str1 = str1.Replace("  ", " ");
-            }
-            
-            while(str1.Contains("\r\n\r\n"))
-            {
-                str1 = str1.Replace("\r\n\r\n", "\r\n");
-            }
-
-            while(str1.Contains("( "))
-            {
-                str1 = str1.Replace("( ", "(");
-            }
+            str1 = StringsFunctionsClass.Reduce(str1, "  "," ");
+            str1 = StringsFunctionsClass.Reduce(str1, "\r\n\r\n","\r\n");
+            str1 = StringsFunctionsClass.Reduce(str1, "( ", "(");
             
             while(str1.EndsWith("\n")||str1.EndsWith("\r")||str1.EndsWith(";")||str1.EndsWith(" ") ) 
             {
                 string rm = str1.Substring(str1.Length-1,1);
-                str1 = str1.Remove(str1.Length-1,1);                    
+                str1 = str1.Remove(str1.Length-1,1);
             }
-            
             return cbChangeToUppercase.Checked ? str1.ToUpper() : str1;
         }
 
@@ -500,14 +469,8 @@ namespace FBXpert.SonstForms
                             }
                             else
                             {
-                                while (str1.Contains("  "))
-                                {
-                                    str1 = str1.Replace("  ", " ");
-                                }
-                                while (str2.Contains("  "))
-                                {
-                                    str2 = str2.Replace("  ", " ");
-                                }
+                                str1 = StringsFunctionsClass.Reduce(str1, "  ", " ");
+                                str2 = StringsFunctionsClass.Reduce(str2, "  ", " ");
 
                                 if (str1 == str2)
                                 {
@@ -603,7 +566,7 @@ namespace FBXpert.SonstForms
                 {
                     
                     fct.AppendText($"{"FAILURE",-8}procedure {tcf1.Name} not exists in {db2}{Environment.NewLine}");                        
-                }                
+                }
             }
             else
             {
@@ -657,14 +620,14 @@ namespace FBXpert.SonstForms
 
         public bool GetDatabaseObjects()
         {
-            var dbi1 = (ItemDataClass)  slbDatabase1?.LastSelectedObject;            
+            var dbi1 = (ItemDataClass)  slbDatabase1?.LastSelectedObject;
             var dbR1 = (DBRegistrationClass) dbi1?.Object;
-            var dbi2 = (ItemDataClass)  slbDatabase2?.LastSelectedObject;            
+            var dbi2 = (ItemDataClass)  slbDatabase2?.LastSelectedObject;
             var dbR2 = (DBRegistrationClass) dbi2?.Object;
 
             if ((dbR2 == null)|| (dbR1 == null)) return false;
             
-            GetDatabaseObjects1(dbR1);            
+            GetDatabaseObjects1(dbR1);
             GetDatabaseObjects2(dbR2);
             return true;
         }
@@ -997,8 +960,6 @@ namespace FBXpert.SonstForms
             SearchUpForward();
         }
 
-        
-
         private void txtSearchCodeForward_TextChanged(object sender, EventArgs e)
         {
             hsSeachForward.Enabled = txtSearchCodeForward.TextLength > 0;
@@ -1014,28 +975,6 @@ namespace FBXpert.SonstForms
             _aktSelectedLineForward = ob.LineIndex;
         }
 
-        private void slbDatabase1_ItemSelect(object sender, SelectItemEventArgs e)
-        {            
-            /*
-            var dbi1 = (ItemDataClass)  slbDatabase1?.LastSelectedObject;            
-            var dbR1 = (DBRegistrationClass) dbi1?.Object;
-
-            if (dbR1 == null) return;
-            GetDatabaseObjects1(dbR1);
-            */
-        }
-
-        private void slbDatabase2_ItemSelect(object sender, SelectItemEventArgs e)
-        {
-            /*
-            var dbi1 = (ItemDataClass)  slbDatabase2?.LastSelectedObject;            
-            var dbR1 = (DBRegistrationClass) dbi1?.Object;
-
-            if (dbR1 == null) return;
-            GetDatabaseObjects2(dbR1);
-            */
-        }
-        
         private void hsSelObjects1_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);

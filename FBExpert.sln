@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBDiagrammClass", "FBDiagra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQListApp", "..\SQLite\SQListApp\SQListApp.csproj", "{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBXpert_Release", "FBExpert\FBXpert_Release.csproj", "{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,33 +109,13 @@ Global
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x64.Build.0 = Release|Any CPU
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x86.Build.0 = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|ARM.Build.0 = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|x64.Build.0 = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Debug|x86.Build.0 = Debug|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|ARM.Build.0 = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|ARM64.Build.0 = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|x64.ActiveCfg = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|x64.Build.0 = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|x86.ActiveCfg = Release|Any CPU
-		{0A4D02D5-A29D-4CDD-AED1-0D528E11DD0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
-		RESX_NeutralResourcesLanguage = de-DE
 		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
+		RESX_NeutralResourcesLanguage = de-DE
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal

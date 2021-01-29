@@ -114,7 +114,7 @@ namespace FBExpert
 
         AutocompleteClass ac;
 
-        public void SetAutocompeteObjects(List<TableClass> tables, Dictionary<string, SystemTableClass> systemtables)
+        public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables)
         {
             ac = new AutocompleteClass(fctTableCreateDLL, _dbReg);
             ac.CreateAutocompleteForDatabase();
@@ -583,7 +583,7 @@ namespace FBExpert
                 }
                 if(obarr.Domain.FieldType ==  "BLOB")
                 {
-                    sb.Append($@"'<BLOB>{cn}' as DOKUBLOB");                
+                    sb.Append($@"'<BLOB>{cn}' as {obarr.Name}");                
                 }
                 else
                 {
@@ -978,7 +978,7 @@ namespace FBExpert
                 _tableObject.ForeignKeys.TryGetValue(SelectedFKConstraintName,out uc);
                 _constraintObject = uc;
 
-                Dictionary<string,TableClass> allTables = StaticTreeClass.Instance().GetAllTableObjectsComplete(_dbReg);
+                Dictionary<string,TableClass> allTables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
 
                 var _tables = new List<TableClass>();
                 foreach(var tab in allTables.Values)

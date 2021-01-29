@@ -40,6 +40,7 @@ namespace FBExpert.DataClasses
                 case StaticVariablesClass.FieldsKeyStr: return new TableFieldClass();
                 case StaticVariablesClass.RolesKeyStr: return new RoleClass();
                 case StaticVariablesClass.IndicesKeyStr: return new IndexClass();
+                
                 case StaticVariablesClass.DomainsKeyStr: return new DomainClass();
                 case "TYPE": return new TypeClass();
                 case StaticVariablesClass.FunctionsKeyStr: return new FunctionClass();
@@ -619,6 +620,29 @@ namespace FBExpert.DataClasses
                     };
                     return node;
 
+                case StaticVariablesClass.SystemTriggersKeyGroupStr:
+                    node = new TreeNode()
+                    {
+                        Text = "System Triggers",
+                        Name = name.ToUpper(),
+                        Tag = new TriggerGroupClass(),
+                        //   ContextMenuStrip = ContextMenusClass.Instance().cmsTriggerGroup,
+                        ImageIndex = (int)eImageIndex.TRIGGERS
+                    };
+
+                    return node;
+                case StaticVariablesClass.SystemTriggersKeyStr:
+                    node = new TreeNode()
+                    {
+                        //ContextMenuStrip = ContextMenusClass.Instance().cmsTrigger,
+                        Text = "System Trigger",
+                        Tag = new TriggerClass(),
+                        Name = name.ToUpper(),
+                        ImageIndex = (int)eImageIndex.TRIGGERS
+                    };
+                    return node;
+
+
                 case StaticVariablesClass.IndicesKeyGroupStr:
                     node = new TreeNode()
                     {
@@ -630,10 +654,32 @@ namespace FBExpert.DataClasses
                     };
                     return node;
 
-                case StaticVariablesClass.IndicesKeyStr:
+                case StaticVariablesClass.SystemIndicesKeyStr:
                     node = new TreeNode()
                     {
                       //  ContextMenuStrip = ContextMenusClass.Instance().cmsIndices,
+                        Text = "System-Index",
+                        Tag = new IndexClass(),
+                        Name = name.ToUpper(),
+                        ImageIndex = (int)eImageIndex.INDEX
+                    };
+                    return node;
+
+                case StaticVariablesClass.SystemIndicesKeyGroupStr:
+                    node = new TreeNode()
+                    {
+                        Text = "System-Indices",
+                        Name = name.ToUpper(),
+                        Tag = new IndexGroupClass(),
+                        //   ContextMenuStrip = ContextMenusClass.Instance().cmsIndicesGroup,
+                        ImageIndex = (int)eImageIndex.INDEX
+                    };
+                    return node;
+
+                case StaticVariablesClass.IndicesKeyStr:
+                    node = new TreeNode()
+                    {
+                        //  ContextMenuStrip = ContextMenusClass.Instance().cmsIndices,
                         Text = "Index",
                         Tag = new IndexClass(),
                         Name = name.ToUpper(),
@@ -788,6 +834,28 @@ namespace FBExpert.DataClasses
                         Text = "Domain",
                         Tag = new DomainClass(),
                      //   ContextMenuStrip = ContextMenusClass.Instance().cmsDomain,
+                        ImageIndex = (int)eImageIndex.DOMAIN
+                    };
+                    return node;
+
+                case StaticVariablesClass.SystemDomainsKeyGroupStr:
+                    node = new TreeNode()
+                    {
+                        Name = name.ToUpper(),
+                        Text = "System Domains",
+                        Tag = new DomainGroupClass(),
+                        //   ContextMenuStrip = ContextMenusClass.Instance().cmsDomainGroup,
+                        ImageIndex = (int)eImageIndex.DOMAIN
+                    };
+                    return node;
+
+                case StaticVariablesClass.SystemDomainsKeyStr:
+                    node = new TreeNode()
+                    {
+                        Name = name.ToUpper(),
+                        Text = "System Domain",
+                        Tag = new DomainClass(),
+                        //   ContextMenuStrip = ContextMenusClass.Instance().cmsDomain,
                         ImageIndex = (int)eImageIndex.DOMAIN
                     };
                     return node;

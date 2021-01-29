@@ -555,7 +555,19 @@ namespace FBXpert.SQLView
             _sql.PrepareCommands(fcbSQL.Lines,cbClearBeforePreparing.Checked);       
             int clearAfter = StaticFunctionsClass.ToIntDef(txtClear.Text, 1000);                   
         }
-                
+        private void PrepareCommandsFromFile(string fn)
+        {
+            string sql = File.ReadAllText(fn);
+            List<string> sqlarr = new List<string>();
+            sqlarr.Add(sql);
+            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql.ScriptNotify.Register4Info(EventMeldungRaised);
+            //_sql.PrepareCommands(sqlarr, cbClearBeforePreparing.Checked);
+            _sql.ExecuteCommands(sqlarr);
+            //int clearAfter = StaticFunctionsClass.ToIntDef(txtClear.Text, 1000);
+        }
+
         private void ExecuteCommandsFromFile(string filename)
         {
             var fi = new FileInfo(filename);
@@ -618,9 +630,22 @@ namespace FBXpert.SQLView
             ofdSQL.InitialDirectory = _lastDirectory;
             if (ofdSQL.ShowDialog() == DialogResult.OK)
             {
-               txtSQLLocation.Text = ofdSQL.FileName;               
-               _fi = new FileInfo(txtSQLLocation.Text);
-               txtFileSize.Text = (_fi.Length/1024).ToString();
+               foreach(string fn in ofdSQL.FileNames)
+               {
+                    txtSQLLocation.Text = fn;
+                    _fi = new FileInfo(fn);
+                    int fLength = (int) (_fi.Length / 1024);
+                    txtFileSize.Text = fLength.ToString();
+                     StaticFunctionsClass.ToIntDef(txtFileSize.Text.Trim(), 0);
+                    string[] obarr = { txtSQLLocation.Text, fLength.ToString() };
+                    var lvi = new ListViewItem(obarr)
+                    {
+                        Tag = _fi
+                    };
+                    lvFiles.Items.Add(lvi);
+
+                }
+               
                _lastDirectory = _fi.DirectoryName;
             }
         }
@@ -766,7 +791,19 @@ namespace FBXpert.SQLView
 
         private void hotSpot4_Click(object sender, EventArgs e)
         {
+            if (lvFiles.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in lvFiles.SelectedItems)
+                {
+                    
+                    //var cc = (KeyValuePair<string,DBBasicClassLibrary.SCRIPTCommandClass>) lvi.Tag;
+                    FileInfo fi = (FileInfo)lvi.Tag;
+                    PrepareCommandsFromFile(fi.FullName);
 
+                    //var cc = (DBBasicClassLibrary.SCRIPTCommandClass)lvi.Tag;
+                    //RunSingleCommand(cc);
+                }
+            }
         }
 
         private void tabSQL_Click(object sender, EventArgs e)

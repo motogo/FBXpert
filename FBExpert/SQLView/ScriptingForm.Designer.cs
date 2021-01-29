@@ -210,6 +210,7 @@ namespace FBXpert.SQLView
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.F12;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(52, 44);
             this.hsClose.TabIndex = 1;
             this.hsClose.Text = " (F12)";
@@ -515,6 +516,7 @@ namespace FBXpert.SQLView
             this.hsPrepareCommands.Name = "hsPrepareCommands";
             this.hsPrepareCommands.NonMarkedText = "Prepare SQL";
             this.hsPrepareCommands.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPrepareCommands.ShowShortcut = false;
             this.hsPrepareCommands.Size = new System.Drawing.Size(87, 62);
             this.hsPrepareCommands.TabIndex = 6;
             this.hsPrepareCommands.Text = "Prepare SQL";
@@ -567,6 +569,7 @@ namespace FBXpert.SQLView
             this.hsRunSQLDirect.Name = "hsRunSQLDirect";
             this.hsRunSQLDirect.NonMarkedText = "Run direct";
             this.hsRunSQLDirect.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunSQLDirect.ShowShortcut = false;
             this.hsRunSQLDirect.Size = new System.Drawing.Size(87, 60);
             this.hsRunSQLDirect.TabIndex = 5;
             this.hsRunSQLDirect.Text = "Run direct";
@@ -631,6 +634,7 @@ namespace FBXpert.SQLView
             this.hsClearSQL.Name = "hsClearSQL";
             this.hsClearSQL.NonMarkedText = "Clear";
             this.hsClearSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearSQL.ShowShortcut = false;
             this.hsClearSQL.Size = new System.Drawing.Size(76, 39);
             this.hsClearSQL.TabIndex = 35;
             this.hsClearSQL.Text = "Clear";
@@ -683,6 +687,7 @@ namespace FBXpert.SQLView
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "Save to file";
             this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(111, 39);
             this.hsSave.TabIndex = 1;
             this.hsSave.Text = "Save to file";
@@ -735,6 +740,7 @@ namespace FBXpert.SQLView
             this.hsLoadScript.Name = "hsLoadScript";
             this.hsLoadScript.NonMarkedText = "Load from File";
             this.hsLoadScript.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadScript.ShowShortcut = false;
             this.hsLoadScript.Size = new System.Drawing.Size(131, 39);
             this.hsLoadScript.TabIndex = 4;
             this.hsLoadScript.Text = "Load from File";
@@ -761,11 +767,11 @@ namespace FBXpert.SQLView
             // tabPageFiles
             // 
             this.tabPageFiles.Controls.Add(this.pnlOptionsCenter);
-            this.tabPageFiles.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFiles.Location = new System.Drawing.Point(4, 24);
             this.tabPageFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageFiles.Name = "tabPageFiles";
             this.tabPageFiles.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageFiles.Size = new System.Drawing.Size(492, 316);
+            this.tabPageFiles.Size = new System.Drawing.Size(492, 314);
             this.tabPageFiles.TabIndex = 1;
             this.tabPageFiles.Text = "Files";
             this.tabPageFiles.UseVisualStyleBackColor = true;
@@ -778,7 +784,7 @@ namespace FBXpert.SQLView
             this.pnlOptionsCenter.Location = new System.Drawing.Point(3, 4);
             this.pnlOptionsCenter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlOptionsCenter.Name = "pnlOptionsCenter";
-            this.pnlOptionsCenter.Size = new System.Drawing.Size(486, 308);
+            this.pnlOptionsCenter.Size = new System.Drawing.Size(486, 306);
             this.pnlOptionsCenter.TabIndex = 22;
             // 
             // gbSQLFiles
@@ -791,7 +797,7 @@ namespace FBXpert.SQLView
             this.gbSQLFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLFiles.Name = "gbSQLFiles";
             this.gbSQLFiles.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLFiles.Size = new System.Drawing.Size(486, 308);
+            this.gbSQLFiles.Size = new System.Drawing.Size(486, 306);
             this.gbSQLFiles.TabIndex = 11;
             this.gbSQLFiles.TabStop = false;
             this.gbSQLFiles.Text = "SQL Files";
@@ -808,7 +814,7 @@ namespace FBXpert.SQLView
             this.lvFiles.Location = new System.Drawing.Point(3, 20);
             this.lvFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvFiles.Name = "lvFiles";
-            this.lvFiles.Size = new System.Drawing.Size(355, 185);
+            this.lvFiles.Size = new System.Drawing.Size(355, 183);
             this.lvFiles.TabIndex = 0;
             this.lvFiles.UseCompatibleStateImageBehavior = false;
             this.lvFiles.View = System.Windows.Forms.View.Details;
@@ -834,7 +840,7 @@ namespace FBXpert.SQLView
             this.gbSQLFilesRight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLFilesRight.Name = "gbSQLFilesRight";
             this.gbSQLFilesRight.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLFilesRight.Size = new System.Drawing.Size(125, 185);
+            this.gbSQLFilesRight.Size = new System.Drawing.Size(125, 183);
             this.gbSQLFilesRight.TabIndex = 14;
             this.gbSQLFilesRight.TabStop = false;
             // 
@@ -867,6 +873,7 @@ namespace FBXpert.SQLView
             this.hsPrepareSQLFromFiles.Name = "hsPrepareSQLFromFiles";
             this.hsPrepareSQLFromFiles.NonMarkedText = "Prepare SQL";
             this.hsPrepareSQLFromFiles.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPrepareSQLFromFiles.ShowShortcut = false;
             this.hsPrepareSQLFromFiles.Size = new System.Drawing.Size(119, 55);
             this.hsPrepareSQLFromFiles.TabIndex = 6;
             this.hsPrepareSQLFromFiles.Text = "Prepare SQL";
@@ -918,6 +925,7 @@ namespace FBXpert.SQLView
             this.hsRunFilesDirect.Name = "hsRunFilesDirect";
             this.hsRunFilesDirect.NonMarkedText = "Run file(s)";
             this.hsRunFilesDirect.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunFilesDirect.ShowShortcut = false;
             this.hsRunFilesDirect.Size = new System.Drawing.Size(119, 59);
             this.hsRunFilesDirect.TabIndex = 5;
             this.hsRunFilesDirect.Text = "Run file(s) direct";
@@ -947,7 +955,7 @@ namespace FBXpert.SQLView
             this.gbAddFile.Controls.Add(this.hsAddBackupFile);
             this.gbAddFile.Controls.Add(this.hsRemoveBackupFile);
             this.gbAddFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbAddFile.Location = new System.Drawing.Point(3, 205);
+            this.gbAddFile.Location = new System.Drawing.Point(3, 203);
             this.gbAddFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbAddFile.Name = "gbAddFile";
             this.gbAddFile.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -1019,6 +1027,7 @@ namespace FBXpert.SQLView
             this.hsLoad.Name = "hsLoad";
             this.hsLoad.NonMarkedText = "";
             this.hsLoad.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoad.ShowShortcut = false;
             this.hsLoad.Size = new System.Drawing.Size(34, 26);
             this.hsLoad.TabIndex = 3;
             this.hsLoad.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1091,6 +1100,7 @@ namespace FBXpert.SQLView
             this.hsAddBackupFile.Name = "hsAddBackupFile";
             this.hsAddBackupFile.NonMarkedText = "";
             this.hsAddBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddBackupFile.ShowShortcut = false;
             this.hsAddBackupFile.Size = new System.Drawing.Size(52, 37);
             this.hsAddBackupFile.TabIndex = 11;
             this.hsAddBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1140,6 +1150,7 @@ namespace FBXpert.SQLView
             this.hsRemoveBackupFile.Name = "hsRemoveBackupFile";
             this.hsRemoveBackupFile.NonMarkedText = "";
             this.hsRemoveBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveBackupFile.ShowShortcut = false;
             this.hsRemoveBackupFile.Size = new System.Drawing.Size(52, 37);
             this.hsRemoveBackupFile.TabIndex = 12;
             this.hsRemoveBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1312,6 +1323,7 @@ namespace FBXpert.SQLView
             this.hsRunAllCommands.Name = "hsRunAllCommands";
             this.hsRunAllCommands.NonMarkedText = "Run all commands";
             this.hsRunAllCommands.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunAllCommands.ShowShortcut = false;
             this.hsRunAllCommands.Size = new System.Drawing.Size(125, 39);
             this.hsRunAllCommands.TabIndex = 37;
             this.hsRunAllCommands.Text = "Run all commands";
@@ -1364,6 +1376,7 @@ namespace FBXpert.SQLView
             this.hsRunActualCommand.Name = "hsRunActualCommand";
             this.hsRunActualCommand.NonMarkedText = "Run actual command";
             this.hsRunActualCommand.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunActualCommand.ShowShortcut = false;
             this.hsRunActualCommand.Size = new System.Drawing.Size(146, 39);
             this.hsRunActualCommand.TabIndex = 36;
             this.hsRunActualCommand.Text = "Run actual command";
@@ -1425,6 +1438,7 @@ namespace FBXpert.SQLView
             this.hsClearCmds.Name = "hsClearCmds";
             this.hsClearCmds.NonMarkedText = "Clear";
             this.hsClearCmds.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearCmds.ShowShortcut = false;
             this.hsClearCmds.Size = new System.Drawing.Size(78, 39);
             this.hsClearCmds.TabIndex = 34;
             this.hsClearCmds.Text = "Clear";
@@ -1512,6 +1526,7 @@ namespace FBXpert.SQLView
             // 
             this.ofdSQL.DefaultExt = "*.sql";
             this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
+            this.ofdSQL.Multiselect = true;
             this.ofdSQL.Title = "Load script";
             // 
             // sfSQL

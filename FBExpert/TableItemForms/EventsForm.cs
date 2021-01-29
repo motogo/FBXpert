@@ -229,7 +229,7 @@ namespace FBExpert
             
         }
         AutocompleteClass ac;
-        public void SetAutocompeteObjects(List<TableClass> tables, Dictionary<string,SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
+        public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
         {
             ac = new AutocompleteClass(fctSQL, _dbReg);
             ac.CreateAutocompleteForDatabase();

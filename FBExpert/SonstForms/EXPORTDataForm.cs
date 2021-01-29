@@ -51,7 +51,7 @@ namespace FBExpert
             DBReg = drc;
             
             var viewobjects = StaticTreeClass.Instance().GetViewObjects(DBReg);
-            var tableObjects = StaticTreeClass.Instance().GetAllTableObjectsComplete(DBReg);
+            var tableObjects = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
             var domainObjects = StaticTreeClass.Instance().GetDomainObjects(DBReg);
             var generatorObjects = StaticTreeClass.Instance().GetGeneratorObjects(DBReg);
             var indecesObjects = StaticTreeClass.Instance().GetIndecesObjects(DBReg);

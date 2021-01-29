@@ -957,7 +957,7 @@
             this.slbDatabase2.TextWith = 189;
             this.slbDatabase2.Title = "Database 2";
             this.slbDatabase2.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
-            this.slbDatabase2.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.slbDatabase2_ItemSelect);
+            
             // 
             // pnlUpperDatabase2
             // 
@@ -1012,7 +1012,7 @@
             this.slbDatabase1.TextWith = 189;
             this.slbDatabase1.Title = "Database 1";
             this.slbDatabase1.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
-            this.slbDatabase1.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.slbDatabase1_ItemSelect);
+           
             // 
             // pnlUpperDatabase1
             // 
