@@ -49,7 +49,8 @@ namespace FBExpert
             {
                 FieldObject = fieldObject;
                 FieldObject.IsPrimary = TableObject.IsPrimary(FieldObject.Name); 
-                FieldObject.Domain.NotNull = TableObject.IsNotNull(FieldObject.Name);                
+                FieldObject.Domain.NotNull = TableObject.IsNotNull(FieldObject.Name);
+                FieldObject.TableName = TableObject.Name;
             }
 
             OrgFieldObject = FieldObject.DeepClone();
@@ -572,10 +573,12 @@ namespace FBExpert
             FieldObject.DefaultValue        = string.Empty;
             FieldObject.Domain.Check        = string.Empty;
             FieldObject.Domain.DefaultValue = string.Empty;
+            FieldObject.TableName           = TableObject.Name;
         }
 
         public void EditToObject()
         {
+            var TempFieldobject = FieldObject;
             FieldObject = new TableFieldClass();
             FieldObject.Name                = txtFieldName.Text.Trim();
             FieldObject.Position            = StaticFunctionsClass.ToIntDef(txtPosition.Text,OrgFieldObject.Position);                                  
@@ -590,6 +593,7 @@ namespace FBExpert
             FieldObject.Domain.Length       = StaticFunctionsClass.ToIntDef(txtLength.Text,OrgFieldObject.Domain.Length);
             FieldObject.Domain.DefaultValue = txtDefault.Text;
             FieldObject.Domain.Collate      = cbCollate.Text;
+            FieldObject.TableName           = TempFieldobject?.TableName;
         }
 
 

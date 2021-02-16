@@ -708,7 +708,7 @@ namespace FBXpert.DataClasses
                         sb.Append(Format(lvl, Nl));
                         sb.Append(Format(lvl+3, $@"// {i}.Table" + Nl));
                         sb.Append(Format(lvl+3, "cmd = \"DELETE FROM " +tc.Name+ "\";" + Nl));
-                        sb.Append(Format(lvl+3, "n = DB.ExecuteCommand(cmd);" + Nl));
+                        sb.Append(Format(lvl+3, "n = DB.ExecuteCommand(cmd).RecordsAffected;" + Nl));
                         sb.Append(Format(lvl+3, "lst.Add($@\"{cmd}->{n}\");" + Nl));
                     }
                 }
@@ -725,8 +725,8 @@ namespace FBXpert.DataClasses
                         i++;
                         sb.Append(Format(lvl, Nl));
                         sb.Append(Format(lvl+3, $@"//{i}.Table" + Nl));
-                        sb.Append(Format(lvl+3, "cmd = \"DELETE FROM " +tc.Name+"\";"));
-                        sb.Append(Format(lvl+3, "n = DB.ExecuteCommand(cmd);" + Nl));
+                        sb.Append(Format(lvl+3, "cmd = \"DELETE FROM " +tc.Name+"\";" + Nl));
+                        sb.Append(Format(lvl+3, "n = DB.ExecuteCommand(cmd).RecordsAffected;" + Nl));
                         sb.Append(Format(lvl+3, "lst.Add($@\"{cmd}->{n}\");" + Nl));
                     }
                 }
