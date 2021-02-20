@@ -101,6 +101,9 @@ namespace FBExpert
             this.txtAlternativeSetTermCharacter = new System.Windows.Forms.TextBox();
             this.tabMisc = new System.Windows.Forms.TabPage();
             this.pnlMisc = new System.Windows.Forms.Panel();
+            this.gbDefaultSQLExportPath = new System.Windows.Forms.GroupBox();
+            this.txtDefaultSQLExportPath = new System.Windows.Forms.TextBox();
+            this.hsInitialSQLExportPath = new SeControlsLib.HotSpot();
             this.gbDefaultExportPath = new System.Windows.Forms.GroupBox();
             this.txtDefaultExportPath = new System.Windows.Forms.TextBox();
             this.hsLoadDefaultExports = new SeControlsLib.HotSpot();
@@ -132,9 +135,6 @@ namespace FBExpert
             this.pnlUpper = new System.Windows.Forms.Panel();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsClose = new SeControlsLib.HotSpot();
-            this.gbDefaultSQLExportPath = new System.Windows.Forms.GroupBox();
-            this.txtDefaultSQLExportPath = new System.Windows.Forms.TextBox();
-            this.hsInitialSQLExportPath = new SeControlsLib.HotSpot();
             this.pnlCenter.SuspendLayout();
             this.tabcontrolConfig.SuspendLayout();
             this.tabBasicConf.SuspendLayout();
@@ -168,6 +168,7 @@ namespace FBExpert
             this.gbSetTerm.SuspendLayout();
             this.tabMisc.SuspendLayout();
             this.pnlMisc.SuspendLayout();
+            this.gbDefaultSQLExportPath.SuspendLayout();
             this.gbDefaultExportPath.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbDefaultReportPath.SuspendLayout();
@@ -177,7 +178,6 @@ namespace FBExpert
             this.gbLivettime.SuspendLayout();
             this.gbDatenbankAlias.SuspendLayout();
             this.pnlUpper.SuspendLayout();
-            this.gbDefaultSQLExportPath.SuspendLayout();
             this.SuspendLayout();
             // 
             // hsClone
@@ -207,6 +207,8 @@ namespace FBExpert
             this.hsClone.MarkMode = false;
             this.hsClone.Name = "hsClone";
             this.hsClone.NonMarkedText = "Clone";
+            this.hsClone.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClone.ShowShortcut = false;
             this.hsClone.Size = new System.Drawing.Size(73, 51);
             this.hsClone.TabIndex = 4;
             this.hsClone.Text = "Clone";
@@ -257,6 +259,8 @@ namespace FBExpert
             this.hsSave.MarkMode = false;
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "Save";
+            this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(106, 51);
             this.hsSave.TabIndex = 3;
             this.hsSave.Text = "Save";
@@ -403,6 +407,8 @@ namespace FBExpert
             this.hsLoadClientLib.MarkMode = false;
             this.hsLoadClientLib.Name = "hsLoadClientLib";
             this.hsLoadClientLib.NonMarkedText = "Load";
+            this.hsLoadClientLib.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadClientLib.ShowShortcut = false;
             this.hsLoadClientLib.Size = new System.Drawing.Size(65, 22);
             this.hsLoadClientLib.TabIndex = 4;
             this.hsLoadClientLib.Text = "Load";
@@ -462,6 +468,8 @@ namespace FBExpert
             this.hsCreateDatabase.MarkMode = false;
             this.hsCreateDatabase.Name = "hsCreateDatabase";
             this.hsCreateDatabase.NonMarkedText = "Create new Database";
+            this.hsCreateDatabase.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateDatabase.ShowShortcut = false;
             this.hsCreateDatabase.Size = new System.Drawing.Size(150, 29);
             this.hsCreateDatabase.TabIndex = 4;
             this.hsCreateDatabase.Text = "Create new Database";
@@ -609,6 +617,8 @@ namespace FBExpert
             this.hsChangeFullPath.MarkMode = false;
             this.hsChangeFullPath.Name = "hsChangeFullPath";
             this.hsChangeFullPath.NonMarkedText = "";
+            this.hsChangeFullPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsChangeFullPath.ShowShortcut = false;
             this.hsChangeFullPath.Size = new System.Drawing.Size(36, 29);
             this.hsChangeFullPath.TabIndex = 12;
             this.hsChangeFullPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -658,6 +668,8 @@ namespace FBExpert
             this.hsLoad.MarkMode = false;
             this.hsLoad.Name = "hsLoad";
             this.hsLoad.NonMarkedText = "Load";
+            this.hsLoad.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoad.ShowShortcut = false;
             this.hsLoad.Size = new System.Drawing.Size(65, 29);
             this.hsLoad.TabIndex = 3;
             this.hsLoad.Text = "Load";
@@ -700,6 +712,7 @@ namespace FBExpert
             this.txtPassword.Size = new System.Drawing.Size(193, 20);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "masterkey";
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // gbPort
             // 
@@ -1062,6 +1075,8 @@ namespace FBExpert
             this.hsSourcecodeFolder.MarkMode = false;
             this.hsSourcecodeFolder.Name = "hsSourcecodeFolder";
             this.hsSourcecodeFolder.NonMarkedText = "Clone";
+            this.hsSourcecodeFolder.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSourcecodeFolder.ShowShortcut = false;
             this.hsSourcecodeFolder.Size = new System.Drawing.Size(42, 27);
             this.hsSourcecodeFolder.TabIndex = 5;
             this.hsSourcecodeFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1213,6 +1228,75 @@ namespace FBExpert
             this.pnlMisc.Size = new System.Drawing.Size(841, 471);
             this.pnlMisc.TabIndex = 2;
             // 
+            // gbDefaultSQLExportPath
+            // 
+            this.gbDefaultSQLExportPath.Controls.Add(this.txtDefaultSQLExportPath);
+            this.gbDefaultSQLExportPath.Controls.Add(this.hsInitialSQLExportPath);
+            this.gbDefaultSQLExportPath.Location = new System.Drawing.Point(15, 301);
+            this.gbDefaultSQLExportPath.Name = "gbDefaultSQLExportPath";
+            this.gbDefaultSQLExportPath.Size = new System.Drawing.Size(486, 44);
+            this.gbDefaultSQLExportPath.TabIndex = 6;
+            this.gbDefaultSQLExportPath.TabStop = false;
+            this.gbDefaultSQLExportPath.Text = "Defaut path for SQL exports";
+            // 
+            // txtDefaultSQLExportPath
+            // 
+            this.txtDefaultSQLExportPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDefaultSQLExportPath.Location = new System.Drawing.Point(3, 16);
+            this.txtDefaultSQLExportPath.Name = "txtDefaultSQLExportPath";
+            this.txtDefaultSQLExportPath.Size = new System.Drawing.Size(435, 20);
+            this.txtDefaultSQLExportPath.TabIndex = 1;
+            // 
+            // hsInitialSQLExportPath
+            // 
+            this.hsInitialSQLExportPath.BackColor = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsInitialSQLExportPath.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsInitialSQLExportPath.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsInitialSQLExportPath.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsInitialSQLExportPath.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsInitialSQLExportPath.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsInitialSQLExportPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsInitialSQLExportPath.FlatAppearance.BorderSize = 0;
+            this.hsInitialSQLExportPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsInitialSQLExportPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsInitialSQLExportPath.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsInitialSQLExportPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsInitialSQLExportPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsInitialSQLExportPath.ImageToggleOnSelect = true;
+            this.hsInitialSQLExportPath.Location = new System.Drawing.Point(438, 16);
+            this.hsInitialSQLExportPath.Marked = false;
+            this.hsInitialSQLExportPath.MarkedColor = System.Drawing.Color.Teal;
+            this.hsInitialSQLExportPath.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsInitialSQLExportPath.MarkedText = "";
+            this.hsInitialSQLExportPath.MarkMode = false;
+            this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
+            this.hsInitialSQLExportPath.NonMarkedText = "";
+            this.hsInitialSQLExportPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInitialSQLExportPath.ShowShortcut = false;
+            this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
+            this.hsInitialSQLExportPath.TabIndex = 3;
+            this.hsInitialSQLExportPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsInitialSQLExportPath.ToolTipActive = false;
+            this.hsInitialSQLExportPath.ToolTipAutomaticDelay = 500;
+            this.hsInitialSQLExportPath.ToolTipAutoPopDelay = 5000;
+            this.hsInitialSQLExportPath.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsInitialSQLExportPath.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsInitialSQLExportPath.ToolTipFor4ContextMenu = true;
+            this.hsInitialSQLExportPath.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsInitialSQLExportPath.ToolTipInitialDelay = 500;
+            this.hsInitialSQLExportPath.ToolTipIsBallon = false;
+            this.hsInitialSQLExportPath.ToolTipOwnerDraw = false;
+            this.hsInitialSQLExportPath.ToolTipReshowDelay = 100;
+            this.hsInitialSQLExportPath.ToolTipShowAlways = false;
+            this.hsInitialSQLExportPath.ToolTipText = "";
+            this.hsInitialSQLExportPath.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsInitialSQLExportPath.ToolTipTitle = "";
+            this.hsInitialSQLExportPath.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsInitialSQLExportPath.UseVisualStyleBackColor = false;
+            this.hsInitialSQLExportPath.Click += new System.EventHandler(this.hsInitialSQLExportPath_Click);
+            // 
             // gbDefaultExportPath
             // 
             this.gbDefaultExportPath.Controls.Add(this.txtDefaultExportPath);
@@ -1258,6 +1342,8 @@ namespace FBExpert
             this.hsLoadDefaultExports.MarkMode = false;
             this.hsLoadDefaultExports.Name = "hsLoadDefaultExports";
             this.hsLoadDefaultExports.NonMarkedText = "";
+            this.hsLoadDefaultExports.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadDefaultExports.ShowShortcut = false;
             this.hsLoadDefaultExports.Size = new System.Drawing.Size(45, 25);
             this.hsLoadDefaultExports.TabIndex = 3;
             this.hsLoadDefaultExports.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1325,6 +1411,8 @@ namespace FBExpert
             this.hotSpot1.MarkMode = false;
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "";
+            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(45, 25);
             this.hotSpot1.TabIndex = 3;
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1392,6 +1480,8 @@ namespace FBExpert
             this.hsLoadDefaultReportPath.MarkMode = false;
             this.hsLoadDefaultReportPath.Name = "hsLoadDefaultReportPath";
             this.hsLoadDefaultReportPath.NonMarkedText = "";
+            this.hsLoadDefaultReportPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadDefaultReportPath.ShowShortcut = false;
             this.hsLoadDefaultReportPath.Size = new System.Drawing.Size(45, 25);
             this.hsLoadDefaultReportPath.TabIndex = 3;
             this.hsLoadDefaultReportPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1460,6 +1550,8 @@ namespace FBExpert
             this.hsLoadDefaultScriptPath.MarkMode = false;
             this.hsLoadDefaultScriptPath.Name = "hsLoadDefaultScriptPath";
             this.hsLoadDefaultScriptPath.NonMarkedText = "";
+            this.hsLoadDefaultScriptPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadDefaultScriptPath.ShowShortcut = false;
             this.hsLoadDefaultScriptPath.Size = new System.Drawing.Size(45, 25);
             this.hsLoadDefaultScriptPath.TabIndex = 3;
             this.hsLoadDefaultScriptPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1641,6 +1733,8 @@ namespace FBExpert
             this.hsConnect.MarkMode = false;
             this.hsConnect.Name = "hsConnect";
             this.hsConnect.NonMarkedText = "Connect";
+            this.hsConnect.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsConnect.ShowShortcut = false;
             this.hsConnect.Size = new System.Drawing.Size(96, 53);
             this.hsConnect.TabIndex = 8;
             this.hsConnect.Text = "Connect";
@@ -1726,6 +1820,8 @@ namespace FBExpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 51);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1747,73 +1843,6 @@ namespace FBExpert
             this.hsClose.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click_1);
-            // 
-            // gbDefaultSQLExportPath
-            // 
-            this.gbDefaultSQLExportPath.Controls.Add(this.txtDefaultSQLExportPath);
-            this.gbDefaultSQLExportPath.Controls.Add(this.hsInitialSQLExportPath);
-            this.gbDefaultSQLExportPath.Location = new System.Drawing.Point(15, 301);
-            this.gbDefaultSQLExportPath.Name = "gbDefaultSQLExportPath";
-            this.gbDefaultSQLExportPath.Size = new System.Drawing.Size(486, 44);
-            this.gbDefaultSQLExportPath.TabIndex = 6;
-            this.gbDefaultSQLExportPath.TabStop = false;
-            this.gbDefaultSQLExportPath.Text = "Defaut path for SQL exports";
-            // 
-            // txtDefaultSQLExportPath
-            // 
-            this.txtDefaultSQLExportPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDefaultSQLExportPath.Location = new System.Drawing.Point(3, 16);
-            this.txtDefaultSQLExportPath.Name = "txtDefaultSQLExportPath";
-            this.txtDefaultSQLExportPath.Size = new System.Drawing.Size(435, 20);
-            this.txtDefaultSQLExportPath.TabIndex = 1;
-            // 
-            // hsInitialSQLExportPath
-            // 
-            this.hsInitialSQLExportPath.BackColor = System.Drawing.Color.Transparent;
-            this.hsInitialSQLExportPath.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsInitialSQLExportPath.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsInitialSQLExportPath.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsInitialSQLExportPath.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsInitialSQLExportPath.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsInitialSQLExportPath.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsInitialSQLExportPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsInitialSQLExportPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsInitialSQLExportPath.FlatAppearance.BorderSize = 0;
-            this.hsInitialSQLExportPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsInitialSQLExportPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsInitialSQLExportPath.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsInitialSQLExportPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hsInitialSQLExportPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hsInitialSQLExportPath.ImageToggleOnSelect = true;
-            this.hsInitialSQLExportPath.Location = new System.Drawing.Point(438, 16);
-            this.hsInitialSQLExportPath.Marked = false;
-            this.hsInitialSQLExportPath.MarkedColor = System.Drawing.Color.Teal;
-            this.hsInitialSQLExportPath.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsInitialSQLExportPath.MarkedText = "";
-            this.hsInitialSQLExportPath.MarkMode = false;
-            this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
-            this.hsInitialSQLExportPath.NonMarkedText = "";
-            this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
-            this.hsInitialSQLExportPath.TabIndex = 3;
-            this.hsInitialSQLExportPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsInitialSQLExportPath.ToolTipActive = false;
-            this.hsInitialSQLExportPath.ToolTipAutomaticDelay = 500;
-            this.hsInitialSQLExportPath.ToolTipAutoPopDelay = 5000;
-            this.hsInitialSQLExportPath.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsInitialSQLExportPath.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsInitialSQLExportPath.ToolTipFor4ContextMenu = true;
-            this.hsInitialSQLExportPath.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsInitialSQLExportPath.ToolTipInitialDelay = 500;
-            this.hsInitialSQLExportPath.ToolTipIsBallon = false;
-            this.hsInitialSQLExportPath.ToolTipOwnerDraw = false;
-            this.hsInitialSQLExportPath.ToolTipReshowDelay = 100;
-            this.hsInitialSQLExportPath.ToolTipShowAlways = false;
-            this.hsInitialSQLExportPath.ToolTipText = "";
-            this.hsInitialSQLExportPath.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsInitialSQLExportPath.ToolTipTitle = "";
-            this.hsInitialSQLExportPath.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsInitialSQLExportPath.UseVisualStyleBackColor = false;
-            this.hsInitialSQLExportPath.Click += new System.EventHandler(this.hsInitialSQLExportPath_Click);
             // 
             // DatabaseConfigForm
             // 
@@ -1882,6 +1911,8 @@ namespace FBExpert
             this.gbSetTerm.PerformLayout();
             this.tabMisc.ResumeLayout(false);
             this.pnlMisc.ResumeLayout(false);
+            this.gbDefaultSQLExportPath.ResumeLayout(false);
+            this.gbDefaultSQLExportPath.PerformLayout();
             this.gbDefaultExportPath.ResumeLayout(false);
             this.gbDefaultExportPath.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1899,8 +1930,6 @@ namespace FBExpert
             this.gbDatenbankAlias.PerformLayout();
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
-            this.gbDefaultSQLExportPath.ResumeLayout(false);
-            this.gbDefaultSQLExportPath.PerformLayout();
             this.ResumeLayout(false);
 
         }

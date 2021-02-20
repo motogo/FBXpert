@@ -1263,6 +1263,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Matrix {
+            get {
+                object obj = ResourceManager.GetObject("Matrix", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap media_playlist_repeat_blue_x22 {
             get {
                 object obj = ResourceManager.GetObject("media_playlist_repeat_blue_x22", resourceCulture);

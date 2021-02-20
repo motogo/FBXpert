@@ -908,6 +908,11 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
+        public string GetUsers(eDBVersion version)
+        {
+            string cmd = $@"SELECT * FROM SEC$USERS";
+            return cmd;
+        }
         public string GetMonitorConnections(eDBVersion version,bool allConnections)
         {            
             var sb = new StringBuilder();             

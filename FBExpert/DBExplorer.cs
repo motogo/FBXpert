@@ -1135,6 +1135,11 @@ namespace FBXpert
                 var dbm = new DBMonitoringForm(FbXpertMainForm.Instance(), dbReg);
                 dbm.Show();
             }
+            else if (e.ClickedItem == tsminUserManagement)
+            {
+                var dbm = new DBUserManagementForm(FbXpertMainForm.Instance(), dbReg);
+                dbm.Show();
+            }
             else if (e.ClickedItem == tsmiBackUp)
             {
                 var bf = new BackupForm(FbXpertMainForm.Instance(), dbReg);
@@ -2066,11 +2071,25 @@ namespace FBXpert
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
         {
+            var fi = new FileInfo($@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}");
+            ofdLoadDefinition.InitialDirectory = fi.DirectoryName;
+            ofdLoadDefinition.FileName = fi.Name;
+            
             if (ofdLoadDefinition.ShowDialog() != DialogResult.OK) return;
-            if (!DatabaseDefinitions.Instance().Deserialize(ofdLoadDefinition.FileName)) return;            
-            ReloadAllDatabases();                               
+
+            var fi2 = new FileInfo(ofdLoadDefinition.FileName);
+            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = fi2.DirectoryName;
+            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = fi2.Name;
+            ReloadAllDatabases();
         }
 
+
+        /// <summary>
+        /// Speichert die aktuelle Datenbankdefiniton unter angegeben Namen und Speicher dies als
+        /// Application Configuration für den nächsten parameterlosen Neustart.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hsDatabaseDefinitionSave_Click(object sender, EventArgs e)
         {         
             var fi = new FileInfo($@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}");

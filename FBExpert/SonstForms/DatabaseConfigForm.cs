@@ -636,5 +636,12 @@ namespace FBExpert
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtDefaultSQLExportPath.Text = fbdPath.SelectedPath;
         }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (!DoEvent) return;
+            _dbReg.Password = txtPassword.Text;
+            connectionDataChanged();
+        }
     }
 }

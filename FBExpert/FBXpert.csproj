@@ -114,8 +114,8 @@
     <Reference Include="FBXDesigns">
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.5.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.7.5.0\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.10.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.7.10.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="FormularUtils, Version=2017.11.21.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -268,6 +268,18 @@
     </Compile>
     <Compile Include="SonstForms\CopyrightForm.Designer.cs">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\DBMonitoringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\DBMonitoringForm.Designer.cs">
+      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\DBUserManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\DBUserManagementForm.Designer.cs">
+      <DependentUpon>DBUserManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SonstForms\ExportFunctionsScriptForm.cs">
       <SubType>Form</SubType>
@@ -486,12 +498,6 @@
     <Compile Include="DBExplorer.Designer.cs">
       <DependentUpon>DBExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SonstForms\DBMonitoringForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SonstForms\DBMonitoringForm.Designer.cs">
-      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Globals\DBHandlingClass.cs" />
     <Compile Include="Globals\DBRegistrationClass.cs" />
     <Compile Include="DesignReport\ReportDesignForm.cs">
@@ -573,6 +579,7 @@
     <Content Include="config\AppSettingsTelekom.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Matrix.png" />
     <None Include="FBXpert_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Resources\tree_expanded1_x24.png" />
@@ -608,6 +615,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\CopyrightForm.resx">
       <DependentUpon>CopyrightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\DBMonitoringForm.resx">
+      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\DBUserManagementForm.resx">
+      <DependentUpon>DBUserManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\ExportFunctionsScriptForm.resx">
       <DependentUpon>ExportFunctionsScriptForm.cs</DependentUpon>
@@ -728,9 +741,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DBExplorer.resx">
       <DependentUpon>DBExplorer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SonstForms\DBMonitoringForm.resx">
-      <DependentUpon>DBMonitoringForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\EXPORTDataForm.resx">
       <DependentUpon>EXPORTDataForm.cs</DependentUpon>

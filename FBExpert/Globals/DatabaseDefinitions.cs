@@ -144,7 +144,7 @@ namespace FBExpert
                 this.XMLName = FileName;             
                 this.Databases = PF.Databases;
                 this.OpenDatabaseCount = PF.OpenDatabaseCount;
-                
+                int pos = 1;
                 foreach (DBRegistrationClass dbr in this.Databases)
                 {
                     if (string.IsNullOrEmpty(dbr.InitialScriptingPath))     dbr.InitialScriptingPath = StaticVariablesClass.ScriptPath;
@@ -155,6 +155,8 @@ namespace FBExpert
                     if (string.IsNullOrEmpty(dbr.InitialTerminator))        dbr.InitialTerminator = StaticVariablesClass.InitialTerminator;
                     if (string.IsNullOrEmpty(dbr.AlternativeTerminator))    dbr.AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
                     if (string.IsNullOrEmpty(dbr.SingleLineComment))        dbr.SingleLineComment = StaticVariablesClass.SingleLineComment;                  
+
+                    dbr.Position = pos++;
                 }
                 
                 if (PF.Reason == null) PF.Reason = "none";
