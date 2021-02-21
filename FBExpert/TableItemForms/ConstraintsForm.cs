@@ -350,6 +350,7 @@ namespace FBXpert
         
         private void ConstraintsForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             DataToEdit();
             OldConstraintName = txtConstraintName.Text.Trim();
             NewConstraintName = OldConstraintName;            

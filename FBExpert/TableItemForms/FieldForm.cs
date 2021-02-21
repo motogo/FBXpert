@@ -618,7 +618,7 @@ namespace FBExpert
 
         private void FieldForm_Load(object sender, EventArgs e)
         {
-            if (this.Left < DbExplorerForm.Instance().Width + 16) this.Left = DbExplorerForm.Instance().Width + 16;
+            FormDesign.SetFormLeft(this);
             DataFilled = false;
             
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)

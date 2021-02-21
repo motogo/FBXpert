@@ -82,6 +82,7 @@ namespace FBXpert.SonstForms
 
         private void ExportViewsSQLForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             txtSQLExportPath.Text = Path.Combine(dbReg.InitialSQLExportPath,"Views");
         }
 

@@ -188,6 +188,7 @@ namespace FBXpert.SonstForms
       
         private void DatabaseCompareFrom_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             LanguageChanged();
             hsSearchDownForward.Enabled = false;
             hsSearchUpForward.Enabled = false;

@@ -403,7 +403,8 @@ namespace FBXpert
         string oldIndexColumnName = string.Empty;
         
         private void IndexForm_Load(object sender, EventArgs e)
-        {    
+        {
+            FormDesign.SetFormLeft(this);
             _dataFilled = false;
             cbTables.Items.Clear();
             cbTables.Items.AddRange(_tables.ToArray());

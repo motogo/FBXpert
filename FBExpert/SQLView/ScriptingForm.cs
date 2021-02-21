@@ -152,7 +152,8 @@ namespace FBXpert.SQLView
         }
        
         private void DefaultForm_Load(object sender, EventArgs e)
-        {                                           
+        {
+            FormDesign.SetFormLeft(this);
             ofdSQL.InitialDirectory = DBStaticData.ChangeToFullPath(_actScriptingDbReg.InitialScriptingPath);
             GetDatabases();
             ShowCaptions();

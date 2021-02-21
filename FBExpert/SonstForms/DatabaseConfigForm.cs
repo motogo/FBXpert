@@ -309,7 +309,8 @@ namespace FBExpert
         {  
             oldserver = _dbReg.Server;
             fbdPath.SelectedPath = $@"{Application.StartupPath}\{_dbReg.Version}\fbclient.dll";
-            if(this.Left < DbExplorerForm.Instance().Width + 16) this.Left = DbExplorerForm.Instance().Width + 16;
+            
+            FormDesign.SetFormLeft(this);
             LanguageChanged();                
             ShowCaptions();
 

@@ -324,7 +324,8 @@ namespace FBXpert
         }        
         
         private void PrimaryKeyForm_Load(object sender, EventArgs e)
-        {            
+        {
+            FormDesign.SetFormLeft(this);
             _dataFilled = false;
             DataToEdit();
             _oldIndexName = txtPKName.Text.Trim();

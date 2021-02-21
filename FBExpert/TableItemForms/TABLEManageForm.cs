@@ -1404,6 +1404,7 @@ namespace FBExpert
         
         private void TABLEManageForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             _indexChanged = false;
             _tableChanged = false;
             SetButtonDefaults();

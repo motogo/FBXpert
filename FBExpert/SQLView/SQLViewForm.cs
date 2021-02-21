@@ -484,6 +484,7 @@ namespace SQLView
         }
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             txtSQL.Clear();
             UserStart();
             Testlauf();

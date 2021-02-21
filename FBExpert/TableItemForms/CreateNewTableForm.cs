@@ -289,8 +289,8 @@ namespace FBExpert
         }
         private void CreateNewTableForm_Load(object sender, EventArgs e)
         {
-            if (this.Left < DbExplorerForm.Instance().Width + 16) this.Left = DbExplorerForm.Instance().Width + 16;
-        
+            FormDesign.SetFormLeft(this);
+
             _dataFilled = false;
                       
             FillCombos();

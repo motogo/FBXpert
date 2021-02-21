@@ -254,6 +254,7 @@ namespace FBXpert.SonstForms
 
         private void ReportDesignForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             LoadUserDesign();         
         }
 

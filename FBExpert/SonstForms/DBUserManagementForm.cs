@@ -88,7 +88,7 @@ namespace FBXpert
 
         private void DBUserManagementForm_Load(object sender, EventArgs e)
         {
-            
+            FormDesign.SetFormLeft(this);
             ShowCaptions();
             RefreshUsers();
         }

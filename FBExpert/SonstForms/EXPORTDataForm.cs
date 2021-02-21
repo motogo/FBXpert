@@ -182,6 +182,7 @@ namespace FBExpert
         
         private void EXPORTDataForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
             {

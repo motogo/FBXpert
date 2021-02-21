@@ -36,7 +36,7 @@ namespace FBXpert
             _cm = cm;
             _tables = tables;
             try
-            {                
+            {
                 BearbeitenMode = mode;
                 if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
                 {
@@ -64,8 +64,6 @@ namespace FBXpert
             {
                 cbDatatype.Items.Add(dt);
             }
-
-            
             _doEvents = true;
         }
         
@@ -183,7 +181,8 @@ namespace FBXpert
         }
                
         private void ProcedureForm_Load(object sender, EventArgs e)
-        {                        
+        {
+            FormDesign.SetFormLeft(this);
             DataToEdit();            
             SetEnables();            
             MakeSQL();
@@ -223,17 +222,12 @@ namespace FBXpert
        
         private void Create()
         {                                                         
-            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify,_localEventNotify);
             string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
-          //  _sql.ScriptNotify.Register4Error(Notify_OnRaiseErrorHandler);
-          //  _sql.ScriptNotify.Register4Info(Notify_OnRaiseInfoHandler);
+
             var riList =_sql.ExecuteCommands(fctSQL.Lines);
 
-
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-
-            
             var riFailure = riList.Find(x => x.commandDone == false);
             string info = (riFailure==null) 
                 ? $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} updated." 
@@ -241,7 +235,6 @@ namespace FBXpert
                                             
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadProcedures,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);  
-           
         }
 
         private void hsCreate_Click(object sender, EventArgs e)

@@ -87,6 +87,7 @@ namespace FBXpert.SonstForms
 
         private void ExportTablesDLLForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             txtSQLExportPath.Text = Path.Combine(dbReg.InitialSQLExportPath,"Tables");
         }
 

@@ -539,7 +539,7 @@ namespace FBXDesigns
 
         private void xmlEditDefinition_Load(object sender, EventArgs e)
         {
-
+            FormDesign.SetFormLeft(this);
         }
 
         private void pnlDBObjectsCenter_Paint(object sender, PaintEventArgs e)
@@ -549,6 +549,7 @@ namespace FBXDesigns
 
         private void DesignerForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             CreateDesignObjects();
             ShowAllObjects();
         }

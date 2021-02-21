@@ -498,7 +498,26 @@ namespace FBXpert
                  };
                  tmf.Show();
              }
-             else if (tnn == typeof(ProcedureClass))
+            else if (tnn == typeof(ForeignKeyClass))
+            {  
+                ForeignKeyClass fkc = (ForeignKeyClass)_tnSelected.Tag;  
+                var tmf = new ForeignKeyForm(MdiParent, drc, _actTables, fkc.SourceTableName, fkc, -1)
+                {
+                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit
+                };
+                tmf.Show();
+            }
+            else if (tnn == typeof(PrimaryKeyClass))
+            {
+                PrimaryKeyClass fkc = (PrimaryKeyClass)_tnSelected.Tag;
+                var fktable = _actTables.Find(fc => fc.primary_constraint?.Name == _tnSelected.Text);
+                var tmf = new PrimaryKeyForm(MdiParent, _actTables, fktable, drc)
+                {
+                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit
+                };
+                tmf.Show();
+            }
+            else if (tnn == typeof(ProcedureClass))
              {
                  var tmf = new ProcedureForm(MdiParent, drc,_actTables, tn, cmsProcedure,EditStateClass.eBearbeiten.eEdit);
                  

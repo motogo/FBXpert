@@ -231,6 +231,7 @@
     <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
     <Compile Include="Globals\DomainSQLStatementsClass.cs" />
     <Compile Include="Globals\ErrorCodes.cs" />
+    <Compile Include="Globals\FormDesign.cs" />
     <Compile Include="Globals\IndexSQLStatementsClass.cs" />
     <Compile Include="Globals\SQLStatementsBase.cs" />
     <Compile Include="Globals\WorkerClass.cs">

@@ -263,10 +263,9 @@ namespace FBXpert
         
         private void NotNullForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             DataToEdit();
             txtConstraintName.Text = initialConstraintName;
-            
-            
             cbTable.Text = NotNullObject.TableName;
    
             GetFieldConstraintList(cbTable.Text);

@@ -194,7 +194,8 @@ namespace FBXpert
         }
         
         private void GeneratorForm_Load(object sender, EventArgs e)
-        {                      
+        {
+            FormDesign.SetFormLeft(this);
             DataToEdit();
             SetEnables();
             RefreshDependenciesTo();

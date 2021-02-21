@@ -445,6 +445,7 @@ namespace FBXpert
 
         private void ForeignKeyForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             DataFilled = false;
 
             FillCombo();

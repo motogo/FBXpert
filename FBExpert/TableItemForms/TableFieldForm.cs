@@ -213,7 +213,7 @@ namespace FBExpert
 
         private void TableFieldForm_Load(object sender, EventArgs e)
         {
-            
+            FormDesign.SetFormLeft(this);
             ShowCaptions();
             GetConstraints();
         }

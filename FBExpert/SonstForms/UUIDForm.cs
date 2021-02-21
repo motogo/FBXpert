@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FBXpert.Globals;
+using System;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -43,6 +44,7 @@ namespace FBXpert
 
         private void UUIDForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             Guid g = Guid.NewGuid();
             txtUUID.Text = g.ToString();
         }

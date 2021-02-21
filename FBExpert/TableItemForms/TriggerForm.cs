@@ -239,7 +239,8 @@ namespace FBXpert
 
         
         private void TriggerForm_Load(object sender, EventArgs e)
-        {           
+        {
+            FormDesign.SetFormLeft(this);
             SetComboBox();
             DataToEdit();
             SetEnables();
@@ -367,7 +368,7 @@ namespace FBXpert
 
         private void fctGenDescription_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void fctSQL_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)

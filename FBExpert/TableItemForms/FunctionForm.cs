@@ -176,7 +176,8 @@ namespace FBXpert
         }
                
         private void FunctionForm_Load(object sender, EventArgs e)
-        {                        
+        {
+            FormDesign.SetFormLeft(this);
             DataToEdit();
             SetEnables();            
             MakeSQL();

@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using FBXpert.DataClasses;
+using FBXpert.Globals;
 using System;
 using System.Windows.Forms;
 
@@ -50,18 +51,7 @@ namespace FBXpert.SonstForms
 
         private void AppSettingsForm_Load(object sender, EventArgs e)
         {
-            /*
-            string appfile = Application.StartupPath + "\\config\\AppSettings.json";
-            if (File.Exists(appfile))
-            {
-                AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
-                AppSettingsClass.Instance().Load(appset);
-            }
-            else
-            {
-                AppSettingsClass.Instance();
-            }
-            */
+            FormDesign.SetFormLeft(this);
             this.Text = $@"App settings file:{AppSettingsClass.Instance().Path}";
             DataToEdit();
             SetEnables();            

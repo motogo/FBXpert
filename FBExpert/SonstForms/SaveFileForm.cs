@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FBXpert.Globals;
+using System;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -77,6 +78,7 @@ namespace FBXpert
 
         private void SaveFileForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             fname = string.Empty;
             
         }

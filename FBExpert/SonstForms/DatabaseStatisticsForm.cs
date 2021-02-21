@@ -94,6 +94,7 @@ namespace FBXpert
         }
         private void DatabaseStatisticsForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             RefreshStatistics();
             TableStatistics();
         }

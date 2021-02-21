@@ -74,7 +74,7 @@ namespace FBXpert
 
         private void DBMonitoringForm_Load(object sender, EventArgs e)
         {
-            
+            FormDesign.SetFormLeft(this);
             ShowCaptions();
             RefreshMonitorConnections();
         }

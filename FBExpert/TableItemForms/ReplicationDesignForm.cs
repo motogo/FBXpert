@@ -107,7 +107,8 @@ namespace FBXpert
         string oldIndexName = string.Empty;
         
         private void ReplicationDesignForm_Load(object sender, EventArgs e)
-        {            
+        {
+            FormDesign.SetFormLeft(this);
             DataToEdit();
          
             //RefreshDependenciesTo();

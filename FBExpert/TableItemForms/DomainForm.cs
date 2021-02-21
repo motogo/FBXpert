@@ -367,6 +367,7 @@ namespace FBExpert
 
         private void DomainForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             SetCombo();
             DataToEdit();
             DataFilled = true;

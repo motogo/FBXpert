@@ -1,3 +1,4 @@
+using FBXpert.Globals;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -9,7 +10,6 @@ namespace FBXpert.KonfigurationForms
     /// </summary>
     partial class XMLTreeForm : System.Windows.Forms.Form
 	{
-
         public bool TreeChanged = false;
 		public XMLTreeForm(string XMLfile)
 		{
@@ -25,14 +25,10 @@ namespace FBXpert.KonfigurationForms
 	    }
 
         private string xmlFile = String.Empty;
-	    
-        private void btn_close_Click(object sender, System.EventArgs e)
-		{            
-			Close();
-		}
 
         private void PFADEForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             if (string.IsNullOrEmpty(xmlFile)) return;
             FileInfo fi = new FileInfo(xmlFile);
             if (fi.Exists)
@@ -41,7 +37,6 @@ namespace FBXpert.KonfigurationForms
             }
         }
 
-      
         private void hsClose_Click(object sender, EventArgs e)
         {
             Close();

@@ -489,10 +489,8 @@ namespace FBExpert
         }
         private void VIEWManageForm_Load(object sender, EventArgs e)
         {
-            if (DbExplorerForm.Instance().Visible)
-            {
-                this.Left = DbExplorerForm.Instance().Width + 16;
-            }
+            
+            FormDesign.SetFormLeft(this);
             RefreshLanguageText();
             fctMessages.Clear();
             

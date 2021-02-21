@@ -426,6 +426,7 @@ namespace FBXpert.SonstForms
 
         private void BinariesForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             txtISQLUser.Text         = _dbReg.User;
             txtISQLPassword.Text     = _dbReg.Password;
             txtGBAKUser.Text         = _dbReg.User;

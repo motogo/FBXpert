@@ -85,6 +85,7 @@ namespace FBXpert.SonstForms
 
         private void ExportFunctionsScriptForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             txtSQLExportPath.Text = Path.Combine(dbReg.InitialSQLExportPath,"Functions");
         }
 

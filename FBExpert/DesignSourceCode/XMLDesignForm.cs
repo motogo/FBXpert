@@ -195,6 +195,7 @@ namespace FBXpert.SonstForms
 
         private void XMLDesignForm_Load(object sender, EventArgs e)
         {
+            FormDesign.SetFormLeft(this);
             LanguageChanged();
             hsSearchDown.Enabled = false;
             hsSearchUp.Enabled   = false;
