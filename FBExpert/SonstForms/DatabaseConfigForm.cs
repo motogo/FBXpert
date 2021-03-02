@@ -420,7 +420,7 @@ namespace FBExpert
         private void hsClone_Click(object sender, EventArgs e)
         {
             _dbReg = _dbReg.Clone();
-            _dbReg.Alias = $@"{_dbReg.Alias}_clone{(DateTime.Now.Ticks/10000).ToString()}";
+            _dbReg.Alias = $@"{_dbReg.Alias}_clone{DateTimeFunctions.GetMSecondsFromNow()}";
             DataToEdit();
            
             BearbeitenMode = EditStateClass.eBearbeiten.eInsert;

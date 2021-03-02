@@ -109,7 +109,7 @@ namespace FBExpert
             this.hsLoadDefaultExports = new SeControlsLib.HotSpot();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtFirebirdBinaryPath = new System.Windows.Forms.TextBox();
-            this.hotSpot1 = new SeControlsLib.HotSpot();
+            this.hsFirebirdBinarys = new SeControlsLib.HotSpot();
             this.gbDefaultReportPath = new System.Windows.Forms.GroupBox();
             this.txtDefaultReportPath = new System.Windows.Forms.TextBox();
             this.hsLoadDefaultReportPath = new SeControlsLib.HotSpot();
@@ -1369,7 +1369,7 @@ namespace FBExpert
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtFirebirdBinaryPath);
-            this.groupBox1.Controls.Add(this.hotSpot1);
+            this.groupBox1.Controls.Add(this.hsFirebirdBinarys);
             this.groupBox1.Location = new System.Drawing.Point(15, 157);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 44);
@@ -1385,55 +1385,55 @@ namespace FBExpert
             this.txtFirebirdBinaryPath.Size = new System.Drawing.Size(435, 20);
             this.txtFirebirdBinaryPath.TabIndex = 1;
             // 
-            // hotSpot1
+            // hsFirebirdBinarys
             // 
-            this.hotSpot1.BackColor = System.Drawing.Color.Transparent;
-            this.hotSpot1.BackColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot1.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot1.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hotSpot1.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hotSpot1.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hotSpot1.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hotSpot1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hotSpot1.FlatAppearance.BorderSize = 0;
-            this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hotSpot1.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hotSpot1.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hotSpot1.ImageToggleOnSelect = true;
-            this.hotSpot1.Location = new System.Drawing.Point(438, 16);
-            this.hotSpot1.Marked = false;
-            this.hotSpot1.MarkedColor = System.Drawing.Color.Teal;
-            this.hotSpot1.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hotSpot1.MarkedText = "";
-            this.hotSpot1.MarkMode = false;
-            this.hotSpot1.Name = "hotSpot1";
-            this.hotSpot1.NonMarkedText = "";
-            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hotSpot1.ShowShortcut = false;
-            this.hotSpot1.Size = new System.Drawing.Size(45, 25);
-            this.hotSpot1.TabIndex = 3;
-            this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hotSpot1.ToolTipActive = false;
-            this.hotSpot1.ToolTipAutomaticDelay = 500;
-            this.hotSpot1.ToolTipAutoPopDelay = 5000;
-            this.hotSpot1.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hotSpot1.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hotSpot1.ToolTipFor4ContextMenu = true;
-            this.hotSpot1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hotSpot1.ToolTipInitialDelay = 500;
-            this.hotSpot1.ToolTipIsBallon = false;
-            this.hotSpot1.ToolTipOwnerDraw = false;
-            this.hotSpot1.ToolTipReshowDelay = 100;
-            this.hotSpot1.ToolTipShowAlways = false;
-            this.hotSpot1.ToolTipText = "";
-            this.hotSpot1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hotSpot1.ToolTipTitle = "";
-            this.hotSpot1.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hotSpot1.UseVisualStyleBackColor = false;
-            this.hotSpot1.Click += new System.EventHandler(this.HotSpot1_Click);
+            this.hsFirebirdBinarys.BackColor = System.Drawing.Color.Transparent;
+            this.hsFirebirdBinarys.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsFirebirdBinarys.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsFirebirdBinarys.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsFirebirdBinarys.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsFirebirdBinarys.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsFirebirdBinarys.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsFirebirdBinarys.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsFirebirdBinarys.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsFirebirdBinarys.FlatAppearance.BorderSize = 0;
+            this.hsFirebirdBinarys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsFirebirdBinarys.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsFirebirdBinarys.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsFirebirdBinarys.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsFirebirdBinarys.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsFirebirdBinarys.ImageToggleOnSelect = true;
+            this.hsFirebirdBinarys.Location = new System.Drawing.Point(438, 16);
+            this.hsFirebirdBinarys.Marked = false;
+            this.hsFirebirdBinarys.MarkedColor = System.Drawing.Color.Teal;
+            this.hsFirebirdBinarys.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsFirebirdBinarys.MarkedText = "";
+            this.hsFirebirdBinarys.MarkMode = false;
+            this.hsFirebirdBinarys.Name = "hsFirebirdBinarys";
+            this.hsFirebirdBinarys.NonMarkedText = "";
+            this.hsFirebirdBinarys.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsFirebirdBinarys.ShowShortcut = false;
+            this.hsFirebirdBinarys.Size = new System.Drawing.Size(45, 25);
+            this.hsFirebirdBinarys.TabIndex = 3;
+            this.hsFirebirdBinarys.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsFirebirdBinarys.ToolTipActive = false;
+            this.hsFirebirdBinarys.ToolTipAutomaticDelay = 500;
+            this.hsFirebirdBinarys.ToolTipAutoPopDelay = 5000;
+            this.hsFirebirdBinarys.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsFirebirdBinarys.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsFirebirdBinarys.ToolTipFor4ContextMenu = true;
+            this.hsFirebirdBinarys.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsFirebirdBinarys.ToolTipInitialDelay = 500;
+            this.hsFirebirdBinarys.ToolTipIsBallon = false;
+            this.hsFirebirdBinarys.ToolTipOwnerDraw = false;
+            this.hsFirebirdBinarys.ToolTipReshowDelay = 100;
+            this.hsFirebirdBinarys.ToolTipShowAlways = false;
+            this.hsFirebirdBinarys.ToolTipText = "";
+            this.hsFirebirdBinarys.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsFirebirdBinarys.ToolTipTitle = "";
+            this.hsFirebirdBinarys.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsFirebirdBinarys.UseVisualStyleBackColor = false;
+            this.hsFirebirdBinarys.Click += new System.EventHandler(this.HotSpot1_Click);
             // 
             // gbDefaultReportPath
             // 
@@ -2021,7 +2021,7 @@ namespace FBExpert
         private System.Windows.Forms.TextBox txtSourcecodeOutputPath;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtFirebirdBinaryPath;
-        private SeControlsLib.HotSpot hotSpot1;
+        private SeControlsLib.HotSpot hsFirebirdBinarys;
         private System.Windows.Forms.RadioButton rb4_64;
         private System.Windows.Forms.RadioButton rb4_32;
         private System.Windows.Forms.RadioButton rb3_64;

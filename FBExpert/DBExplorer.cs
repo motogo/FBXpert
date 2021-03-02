@@ -159,59 +159,61 @@ namespace FBXpert
             else if (k.Key.ToString() == StaticVariablesClass.ReloadViews)
             {
                 var nd = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
-                var dbReg = (DBRegistrationClass)nd.Tag;
-                var tn = k.Data as TreeNode;
-                StaticTreeClass.Instance().RefreshView(dbReg, tn);
+                if (nd != null)
+                {
+                    var dbReg = (DBRegistrationClass)nd.Tag;
+                    var tn = k.Data as TreeNode;
+                    StaticTreeClass.Instance().RefreshView(dbReg, tn);
+                }
+                else if(_actRegNode != null)
+                {
+                    var dbReg = (DBRegistrationClass)_actRegNode.Tag;
+                    StaticTreeClass.Instance().RefreshAllViews(dbReg, _actRegNode);
+                }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllViews)
             {
                 var nd = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
-                var dbReg = (DBRegistrationClass)nd.Tag;             
-                NotificationsForm.Instance().Show(Width + 4,40);
-                StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
+                if (nd != null)
+                {
+                    var dbReg = (DBRegistrationClass)nd.Tag;
+                    NotificationsForm.Instance().Show(Width + 4, 40);
+                    StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
+                }
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadTable)
             {                
                 var nd = StaticTreeClass.Instance().FindPrevTableNode(_tnSelected);
                 if(nd != null)
-                {                    
-                    var dbReg = (DBRegistrationClass) _actRegNode.Tag;                
-                    var tn = k.Data as TreeNode;
-                    StaticTreeClass.Instance().RefreshTable( dbReg, nd);               
-                }                
+                {
+                    var dbReg = (DBRegistrationClass) _actRegNode.Tag;
+                    StaticTreeClass.Instance().RefreshTable( dbReg, nd);
+                }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllTables)
             {
-                var nd = StaticTreeClass.Instance().FindPrevTableGroupNode(_tnSelected);                
-                var rnd = StaticTreeClass.Instance().FindPrevDBNode(nd);
-                var dbReg = (DBRegistrationClass)rnd.Tag; 
+                var nd = StaticTreeClass.Instance().FindPrevTableGroupNode(_tnSelected);
+                if (nd != null)
+                {
+                    var rnd = StaticTreeClass.Instance().FindPrevDBNode(nd);
+                    var dbReg = (DBRegistrationClass)rnd.Tag;
 
-                NotificationsForm.Instance().Show();
-                StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);               
+                    NotificationsForm.Instance().Show();
+                    StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);
+                }
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadForeignKeys)
             {                
                 var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshForeignKeys(dbReg,_tnSelected);               
+                StaticTreeClass.Instance().RefreshForeignKeys(dbReg,_tnSelected);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllForeignKeys)
-            {                
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;                  
+            {
+                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
                 StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(dbReg, _actRegNode, _tnSelected);
             }
-        }
-        
-        public void StartClock()
-        {
-            _pc = new ProgressClockForm(null)
-            {
-                X = 200,
-                Y = 200
-            };
-            _pc.Show();
-            _pc.BringToFront();
         }
 
         public bool ReadDatabaseDefinition()
@@ -392,11 +394,6 @@ namespace FBXpert
             NotificationsForm.Instance().SetLeft = Width + 16;
             pnlUpper.Select();
             ExtensionMethods.DoubleBuffered(treeView1,true);
-           
-            /*
-            SEHotSpot.Controller ctrl = new SEHotSpot.Controller();            
-            ctrl.SetupKeyboardHooks(this);
-            */
         }
 
         private void ToolStripTextBox_MouseLeave(object sender, EventArgs e)
