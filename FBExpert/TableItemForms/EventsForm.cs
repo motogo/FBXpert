@@ -44,11 +44,11 @@ namespace FBExpert
 
         public void RefreshLanguageText()
         {
-            lblTableName.Text = LanguageClass.Instance().GetString("EVENTS_TRACKING");   
+            lblTableName.Text = LanguageClass.Instance.GetString("EVENTS_TRACKING");   
             
-            this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, LanguageClass.Instance().GetString("EVENTS_TRACKING")); 
-            hsSaveTRACKING.Text = LanguageClass.Instance().GetString("SAVE_TRACKING");
-            hsLoadTRACKING.Text = LanguageClass.Instance().GetString("LOAD_TRACKING");
+            this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, LanguageClass.Instance.GetString("EVENTS_TRACKING")); 
+            hsSaveTRACKING.Text = LanguageClass.Instance.GetString("SAVE_TRACKING");
+            hsLoadTRACKING.Text = LanguageClass.Instance.GetString("LOAD_TRACKING");
         }
 
         private void Revent_RemoteEventCounts(object sender, FbRemoteEventCountsEventArgs e)
@@ -134,7 +134,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {                                                                                                              
-                SendMessageClass.Instance().SendAllErrors($@"{SharedName}->LoadUserDesign()->{ex.Message}");
+                SendMessageClass.Instance.SendAllErrors($@"{SharedName}->LoadUserDesign()->{ex.Message}");
             }
         }
 
@@ -144,14 +144,14 @@ namespace FBExpert
             {     
                 try
                 {
-                    _mw.cbEventName = cbEvents.Text;                     
+                    _mw.cbEventName = cbEvents.Text;
                     _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
                     _ss.StorageName = SharedName;
-                    _ss.AddOrUpdate(SharedName, _mw);                
+                    _ss.AddOrUpdate(SharedName, _mw);
                 }
                 catch(Exception ex)
                 {
-                    SendMessageClass.Instance().SendAllErrors($@"{SharedName}->SaveUserDesign()->{ex.Message}");
+                    SendMessageClass.Instance.SendAllErrors($@"{SharedName}->SaveUserDesign()->{ex.Message}");
                 }
             }
         }

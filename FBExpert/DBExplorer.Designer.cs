@@ -61,6 +61,8 @@
             this.tsmiReplicationDesigner = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCompareDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsminUserManagement = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
             this.tstStatistics = new System.Windows.Forms.ToolStripTextBox();
             this.tsmiStatistics = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEventsTracker = new System.Windows.Forms.ToolStripMenuItem();
@@ -224,8 +226,6 @@
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsminUserManagement = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -363,7 +363,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(307, 812);
+            this.cmsDatabase.Size = new System.Drawing.Size(307, 790);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -584,6 +584,18 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(303, 6);
+            // 
+            // tsminUserManagement
+            // 
+            this.tsminUserManagement.Image = global::FBXpert.Properties.Resources.Matrix;
+            this.tsminUserManagement.Name = "tsminUserManagement";
+            this.tsminUserManagement.Size = new System.Drawing.Size(306, 26);
+            this.tsminUserManagement.Text = "User Management";
+            // 
+            // toolStripSeparator31
+            // 
+            this.toolStripSeparator31.Name = "toolStripSeparator31";
+            this.toolStripSeparator31.Size = new System.Drawing.Size(303, 6);
             // 
             // tstStatistics
             // 
@@ -2023,18 +2035,6 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
             // 
-            // tsminUserManagement
-            // 
-            this.tsminUserManagement.Image = global::FBXpert.Properties.Resources.Matrix;
-            this.tsminUserManagement.Name = "tsminUserManagement";
-            this.tsminUserManagement.Size = new System.Drawing.Size(306, 26);
-            this.tsminUserManagement.Text = "User Management";
-            // 
-            // toolStripSeparator31
-            // 
-            this.toolStripSeparator31.Name = "toolStripSeparator31";
-            this.toolStripSeparator31.Size = new System.Drawing.Size(303, 6);
-            // 
             // DbExplorerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2049,6 +2049,7 @@
             this.Name = "DbExplorerForm";
             this.Text = "DBExplorer";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DbExplorerForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DBExplorer_FormClosed);
             this.Load += new System.EventHandler(this.DBExplorer_Load);
             this.SizeChanged += new System.EventHandler(this.DbExplorerForm_SizeChanged);

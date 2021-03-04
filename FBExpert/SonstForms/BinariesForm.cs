@@ -452,9 +452,9 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {
-          tabPageRestore.Text = LanguageClass.Instance().GetString("DatabaseRestore");
-          tabPageBackup.Text  = LanguageClass.Instance().GetString("DatabaseBackup");
-          tabPageVersion.Text = LanguageClass.Instance().GetString("DatabaseVersion");
+          tabPageRestore.Text = LanguageClass.Instance.GetString("DatabaseRestore");
+          tabPageBackup.Text  = LanguageClass.Instance.GetString("DatabaseBackup");
+          tabPageVersion.Text = LanguageClass.Instance.GetString("DatabaseVersion");
         }              
               
         private void cbRestore_CheckedChanged(object sender, EventArgs e)

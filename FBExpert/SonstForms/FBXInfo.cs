@@ -6,34 +6,21 @@ namespace FBXpert
 {
     public partial class FBXInfo : Form
     {
-
-        private static FBXInfo instance = null;
-        public static FBXInfo Instance()
+        private static readonly Lazy<FBXInfo> lazy = new Lazy<FBXInfo>(() => new FBXInfo());
+        public static FBXInfo Instance
         {
-
-            if (instance == null)
+            get
             {
-                // lock (_lock_this)
-                {
-                    instance = new FBXInfo();
-
-                }
+                return lazy.Value;
             }
-            else
-            {
-
-            }
-
-
-            return (instance);
         }
+
 
         protected FBXInfo()
         {
             InitializeComponent();
             this.Text = "Copyright";
             MoveRandom();
-            
         }
 
         private void CopyrightForm_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -64,18 +51,10 @@ namespace FBXpert
             {
                 this.Left += hdirection - 1;
             }
-            else
-            {
-               // MoveRandom();
 
-            }
             if ((this.Top > 0) && ((this.Top + this.Height) < FbXpertMainForm.Instance().Height))
             {
                 this.Top += vdirection - 1;
-            }
-            else
-            {
-              //  MoveRandom();
             }
 
             if (aktduro > duration)
@@ -86,10 +65,7 @@ namespace FBXpert
 
         private void Occ(ref Bitmap pic, int occ)
         {
-            //  timer1.Start();
-          
 
-           
             for (int w = 0; w < pic.Width; w++)
             {
                 for (int h = 0; h < pic.Height; h++)
@@ -137,7 +113,7 @@ namespace FBXpert
         {
             timer1.Stop();
             e.Cancel = false;
-            instance = null;
+            //instance = null;
 
         }
 

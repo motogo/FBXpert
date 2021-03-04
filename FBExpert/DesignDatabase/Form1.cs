@@ -134,7 +134,7 @@ namespace SEDiagramms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DatabaseDesignForm.Instance().Show();
+            DatabaseDesignForm.Instance.Show();
         }
 
         private void gbTable_MouseHover(object sender, EventArgs e)
@@ -211,7 +211,7 @@ namespace SEDiagramms
         {
             float z = (float) StaticFunctionsClass.ToDoubleDef(textBox1.Text, 1.0);
 
-            DatabaseDesignForm.Instance().SetZoom(z);
+            DatabaseDesignForm.Instance.SetZoom(z);
         }
     }
 }

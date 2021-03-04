@@ -130,35 +130,35 @@ namespace FBExpert
         
         public void RefreshLanguageText()
         {
-            hsPageRefresh.Text           = LanguageClass.Instance().GetString("REFRESH");
-            hsExportData.Text            = LanguageClass.Instance().GetString("EXPORT");
-            hsCancelGettingData.Text     = LanguageClass.Instance().GetString("CANCEL_READING");
-            hsCancelExport.Text          = LanguageClass.Instance().GetString("CANCEL_READING");
-            hsNewField.Text              = LanguageClass.Instance().GetString("ADD_FIELD");
-            hsDropField.Text             = LanguageClass.Instance().GetString("DROP_FIELD");
-            hsEditField.Text             = LanguageClass.Instance().GetString("EDIT_FIELD");
-            hsSaveSQL.Text               = LanguageClass.Instance().GetString("SAVE_SQL");
-            hsLoadSQL.Text               = LanguageClass.Instance().GetString("LOAD_SQL");
-            hsRunStatement.Text          = LanguageClass.Instance().GetString("EXECUTE_SQL");
-            hsAddIndex.Text              = LanguageClass.Instance().GetString("ADD_INDEX");
-            hsDropIndex.Text             = LanguageClass.Instance().GetString("DROP_INDEX");
-            hsEditIndex.Text             = LanguageClass.Instance().GetString("EDIT_INDEX");
-            hsRefreshExportData.Text     = LanguageClass.Instance().GetString("REFRESH");
-            rbINSERT.Text                = LanguageClass.Instance().GetString("INSERT");
-            rbUPDATE.Text                = LanguageClass.Instance().GetString("UPDATE");
-            rbINSERTUPDATE.Text          = LanguageClass.Instance().GetString("INSERT_UPDATE");
-            tabPageFIELDS.Text           = LanguageClass.Instance().GetString("FIELDS");
-            tabPageDATA.Text             = LanguageClass.Instance().GetString("DATA");
-            tabPageDependenciesTo.Text   = LanguageClass.Instance().GetString("DEPENDENCIES_TO");
-            tabPageDependenciesFrom.Text = LanguageClass.Instance().GetString("DEPENDENCIES_FROM");
-            tabPageExport.Text           = LanguageClass.Instance().GetString("EXPORT_DATA");
-            tabPageMessages.Text         = LanguageClass.Instance().GetString("MESSAGES");
-            gbMaxRows.Text               = LanguageClass.Instance().GetString("MAX_ROWS");
-            cbExportToScreen.Text        = LanguageClass.Instance().GetString("EXPORT_TO_SCREEN");
-            cbExportToFile.Text          = LanguageClass.Instance().GetString("EXPORT_TO_FILE");
-            gbExportFile.Text            = LanguageClass.Instance().GetString("FILE");
-            gbInsertUpdate.Text          = LanguageClass.Instance().GetString("INSERT_UPDATE_TYPE");
-            ckGetDatas.Text              = LanguageClass.Instance().GetString("READ_DATAS");
+            hsPageRefresh.Text           = LanguageClass.Instance.GetString("REFRESH");
+            hsExportData.Text            = LanguageClass.Instance.GetString("EXPORT");
+            hsCancelGettingData.Text     = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsCancelExport.Text          = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsNewField.Text              = LanguageClass.Instance.GetString("ADD_FIELD");
+            hsDropField.Text             = LanguageClass.Instance.GetString("DROP_FIELD");
+            hsEditField.Text             = LanguageClass.Instance.GetString("EDIT_FIELD");
+            hsSaveSQL.Text               = LanguageClass.Instance.GetString("SAVE_SQL");
+            hsLoadSQL.Text               = LanguageClass.Instance.GetString("LOAD_SQL");
+            hsRunStatement.Text          = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsAddIndex.Text              = LanguageClass.Instance.GetString("ADD_INDEX");
+            hsDropIndex.Text             = LanguageClass.Instance.GetString("DROP_INDEX");
+            hsEditIndex.Text             = LanguageClass.Instance.GetString("EDIT_INDEX");
+            hsRefreshExportData.Text     = LanguageClass.Instance.GetString("REFRESH");
+            rbINSERT.Text                = LanguageClass.Instance.GetString("INSERT");
+            rbUPDATE.Text                = LanguageClass.Instance.GetString("UPDATE");
+            rbINSERTUPDATE.Text          = LanguageClass.Instance.GetString("INSERT_UPDATE");
+            tabPageFIELDS.Text           = LanguageClass.Instance.GetString("FIELDS");
+            tabPageDATA.Text             = LanguageClass.Instance.GetString("DATA");
+            tabPageDependenciesTo.Text   = LanguageClass.Instance.GetString("DEPENDENCIES_TO");
+            tabPageDependenciesFrom.Text = LanguageClass.Instance.GetString("DEPENDENCIES_FROM");
+            tabPageExport.Text           = LanguageClass.Instance.GetString("EXPORT_DATA");
+            tabPageMessages.Text         = LanguageClass.Instance.GetString("MESSAGES");
+            gbMaxRows.Text               = LanguageClass.Instance.GetString("MAX_ROWS");
+            cbExportToScreen.Text        = LanguageClass.Instance.GetString("EXPORT_TO_SCREEN");
+            cbExportToFile.Text          = LanguageClass.Instance.GetString("EXPORT_TO_FILE");
+            gbExportFile.Text            = LanguageClass.Instance.GetString("FILE");
+            gbInsertUpdate.Text          = LanguageClass.Instance.GetString("INSERT_UPDATE_TYPE");
+            ckGetDatas.Text              = LanguageClass.Instance.GetString("READ_DATAS");
         }
 
         void ErrorRaised(object sender, MessageEventArgs k)
@@ -169,8 +169,8 @@ namespace FBExpert
                 fctMessages.AppendText(k.Meldung);
                 var sb = new StringBuilder();
                 _errorCount++;
-                if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount})");
-                if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
+                if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance.GetString("MESSAGES")} ({_messagesCount})");
+                if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
                 tabPageMessages.Text = sb.ToString();
                 fctMessages.ScrollLeft();
             }
@@ -178,7 +178,7 @@ namespace FBExpert
             {
             }
 
-            NotifiesClass.Instance().Notify.OnRaiseError(k);
+            NotifiesClass.Instance.Notify.OnRaiseError(k);
         }
 
         void InfoRaised(object sender, MessageEventArgs k)
@@ -187,8 +187,8 @@ namespace FBExpert
             fctMessages.AppendText(k.Meldung);
             var sb = new StringBuilder();
             _messagesCount++;
-            if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount})");
-            if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
+            if (_messagesCount > 0) sb.AppendLine($@"{LanguageClass.Instance.GetString("MESSAGES")} ({_messagesCount})");
+            if (_errorCount > 0)    sb.AppendLine($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
 
@@ -215,7 +215,7 @@ namespace FBExpert
                 DependenciesFrom = RefreshDependenciesFrom();
                 AnzeigeConstraints();
             }
-            NotifiesClass.Instance().Notify.OnRaiseInfo(k);            
+            NotifiesClass.Instance.Notify.OnRaiseInfo(k);            
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -230,7 +230,7 @@ namespace FBExpert
 
         public int RefreshPrimaryKeys()
         {                        
-            string cmd_index = SQLStatementsClass.Instance().RefreshTablePrimaryKeys(_dbReg.Version,_tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.RefreshTablePrimaryKeys(_dbReg.Version,_tableObject.Name);
             dsPrimaryKeys.Clear();
             dgvPrimaryKeys.AutoGenerateColumns = true;
             try
@@ -254,7 +254,7 @@ namespace FBExpert
 
         public string[] GetPrimaryKeys()
         {
-            string cmd_index = SQLStatementsClass.Instance().GetTablePrimaryKeys(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetTablePrimaryKeys(_dbReg.Version, _tableObject.Name);
 
             try
             { 
@@ -297,8 +297,8 @@ namespace FBExpert
         {          
             dsForeignKeys.Clear();
             dgvForeignKeys.AutoGenerateColumns = true;
-            string cmd_index = SQLStatementsClass.Instance().GetAllTableForeignKeys(_dbReg.Version, eTableType.withoutsystem, _tableObject.Name);
-           //string cmd_index = SQLStatementsClass.Instance().GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetAllTableForeignKeys(_dbReg.Version, eTableType.withoutsystem, _tableObject.Name);
+           //string cmd_index = SQLStatementsClass.Instance.GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
@@ -324,7 +324,7 @@ namespace FBExpert
        
         public int RefreshIndices()
         {
-            string cmd_index = IndexSQLStatementsClass.Instance().GetTableFieldIndicies(_dbReg.Version,_tableObject.Name);
+            string cmd_index = IndexSQLStatementsClass.Instance.GetTableFieldIndicies(_dbReg.Version,_tableObject.Name);
             IndexDataFilled = false;
             dsIndicies.Clear();
             dgvIndicies.AutoGenerateColumns = true;
@@ -351,7 +351,7 @@ namespace FBExpert
         {            
             dsDependenciesTo.Clear();
             dgvDependenciesTo.AutoGenerateColumns = true;            
-            string cmd_index = SQLStatementsClass.Instance().GetTableManagerDependenciesTO(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetTableManagerDependenciesTO(_dbReg.Version, _tableObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
@@ -372,7 +372,7 @@ namespace FBExpert
         {           
             dsDependenciesFrom.Clear();
             dgvDependenciesFrom.AutoGenerateColumns = true;
-            string cmd_index = SQLStatementsClass.Instance().GetTableManagerDependenciesFROM(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetTableManagerDependenciesFROM(_dbReg.Version, _tableObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
@@ -395,7 +395,7 @@ namespace FBExpert
             UniqueDataFilled = false;
             dgvUniques.AutoGenerateColumns = true;
 
-            string cmd_index = SQLStatementsClass.Instance().GetTableUniques(_dbReg.Version, _tableObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetTableUniques(_dbReg.Version, _tableObject.Name);
 
             try
             {
@@ -423,7 +423,7 @@ namespace FBExpert
             var tfc = (TableFieldClass)lvFields.SelectedItems[0].Tag;
             string cmd = $@"ALTER TABLE {_tableObject.Name} DROP {tfc.Name}";
 
-            SQLStatementsClass.Instance().ExecSql(cmd,_dbReg,_localNotify);                                                  
+            SQLStatementsClass.Instance.ExecSql(cmd,_dbReg,_localNotify);                                                  
         }
         
         public int RefreshFields()
@@ -433,7 +433,7 @@ namespace FBExpert
 
 
             int n = 0;
-            string cmd = SQLStatementsClass.Instance().GetTableFields(_dbReg.Version, _tableObject.Name);
+            string cmd = SQLStatementsClass.Instance.GetTableFields(_dbReg.Version, _tableObject.Name);
             lvFields.Items.Clear();
             dgExportGrid.Rows.Clear();
             _tableObject.Fields = new Dictionary<string, TableFieldClass>();
@@ -480,7 +480,7 @@ namespace FBExpert
                                 tfc.Domain.NotNull = NN;
                                 if (NNField != NN)
                                 {
-                                    NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{_tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NN},Flag:{NNField})"));
+                                    NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", $@"{_tableObject.Name}->{tfc.Name}->NotNull constraint differs (Constraint:{NN},Flag:{NNField})"));
                                 }
                                 tfc.Domain.DefaultValue = dread.GetValue(GetTableFieldsInx.FieldDomainDefaultValueInx).ToString().Trim();
                                 if(tfc.Domain.DefaultValue.Length > 0 )
@@ -861,7 +861,7 @@ namespace FBExpert
 
         private void DropIndex()
         {
-            var result = IndexSQLStatementsClass.Instance().DropIndex(SelectedIndexName.Trim(), _dbReg, _localNotify);
+            var result = IndexSQLStatementsClass.Instance.DropIndex(SelectedIndexName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedIndexName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -877,7 +877,7 @@ namespace FBExpert
 
         private void DropPKConstraint()
         {
-            var result = SQLStatementsClass.Instance().DropConstraint(SelectedPKConstraintName.Trim(), _dbReg, _localNotify);
+            var result = SQLStatementsClass.Instance.DropConstraint(SelectedPKConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedPKConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -894,8 +894,8 @@ namespace FBExpert
         private void DropFKConstraint()
         {
             
-            var result = SQLStatementsClass.Instance().DropTableConstraint(_tableObject.Name, SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
-           // var result = SQLStatementsClass.Instance().DropConstraint(SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
+            var result = SQLStatementsClass.Instance.DropTableConstraint(_tableObject.Name, SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
+           // var result = SQLStatementsClass.Instance.DropConstraint(SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedFKConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -911,7 +911,7 @@ namespace FBExpert
 
         private void DropUniqueConstraint()
         {
-            var result = SQLStatementsClass.Instance().DropConstraint(SelectedUniqueConstraintName.Trim(), _dbReg, _localNotify);
+            var result = SQLStatementsClass.Instance.DropConstraint(SelectedUniqueConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedUniqueConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -927,7 +927,7 @@ namespace FBExpert
 
         private void DropChaeckConstraint()
         {
-            var result = SQLStatementsClass.Instance().DropConstraint(SelectedCheckConstraintName.Trim(), _dbReg, _localNotify);
+            var result = SQLStatementsClass.Instance.DropConstraint(SelectedCheckConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedCheckConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -1469,7 +1469,7 @@ namespace FBExpert
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> Savedataset_Click()", ex));                                        
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> Savedataset_Click()", ex));                                        
             }
             bsTableContent.DataMember = null;                                
             if (!cbAutoRefresh.Checked) return;

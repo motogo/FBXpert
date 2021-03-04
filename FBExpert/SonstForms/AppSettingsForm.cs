@@ -26,33 +26,33 @@ namespace FBXpert.SonstForms
 
         public override void DataToEdit()
         {
-            txtDefaultPacketsize.Text = AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize.ToString();
-            txtDefaulUser.Text = AppSettingsClass.Instance().DatabaseSettings.DefaultUser;
-            txtDefaultPassword.Text = AppSettingsClass.Instance().DatabaseSettings.DefaultPassword;
-            txtDatabasesConfigPath.Text = AppSettingsClass.Instance().PathSettings.DatabasesConfigPath;
-            txtScriptingPath.Text = AppSettingsClass.Instance().PathSettings.ScriptingPath;
-            txtTemporaryPath.Text = AppSettingsClass.Instance().PathSettings.TempPath;
-            txtDatabasesConfigFile.Text = $@"{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}";
+            txtDefaultPacketsize.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize.ToString();
+            txtDefaulUser.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultUser;
+            txtDefaultPassword.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultPassword;
+            txtDatabasesConfigPath.Text = AppSettingsClass.Instance.PathSettings.DatabasesConfigPath;
+            txtScriptingPath.Text = AppSettingsClass.Instance.PathSettings.ScriptingPath;
+            txtTemporaryPath.Text = AppSettingsClass.Instance.PathSettings.TempPath;
+            txtDatabasesConfigFile.Text = $@"{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}";
             
         }
         public void EditToData()
         {
-            AppSettingsClass.Instance().Stamp = DateTime.Now;
-            AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize = StaticFunctionsClass.ToIntDef(txtDefaultPacketsize.Text,8192);
-            AppSettingsClass.Instance().DatabaseSettings.DefaultPassword = txtDefaultPassword.Text;
-            AppSettingsClass.Instance().DatabaseSettings.DefaultUser = txtDefaulUser.Text;
-            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = txtDatabasesConfigPath.Text;
+            AppSettingsClass.Instance.Stamp = DateTime.Now;
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize = StaticFunctionsClass.ToIntDef(txtDefaultPacketsize.Text,8192);
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPassword = txtDefaultPassword.Text;
+            AppSettingsClass.Instance.DatabaseSettings.DefaultUser = txtDefaulUser.Text;
+            AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = txtDatabasesConfigPath.Text;
            
-            AppSettingsClass.Instance().PathSettings.TempPath = txtTemporaryPath.Text;
-            AppSettingsClass.Instance().PathSettings.ScriptingPath = txtScriptingPath.Text;
-            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = txtDatabasesConfigFile.Text;
+            AppSettingsClass.Instance.PathSettings.TempPath = txtTemporaryPath.Text;
+            AppSettingsClass.Instance.PathSettings.ScriptingPath = txtScriptingPath.Text;
+            AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = txtDatabasesConfigFile.Text;
         }
 
 
         private void AppSettingsForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
-            this.Text = $@"App settings file:{AppSettingsClass.Instance().Path}";
+            this.Text = $@"App settings file:{AppSettingsClass.Instance.Path}";
             DataToEdit();
             SetEnables();            
         }
@@ -60,7 +60,7 @@ namespace FBXpert.SonstForms
         private void SaveAppSettings()
         {
             EditToData();
-            AppSettingsClass.Instance().SaveSettings();
+            AppSettingsClass.Instance.SaveSettings();
         }
       
         private void hsSave_Click(object sender, EventArgs e)

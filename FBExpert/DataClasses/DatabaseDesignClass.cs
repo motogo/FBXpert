@@ -223,7 +223,7 @@ namespace FBXpert.DataClasses
                 sb.Append(BlockEnd(lvl+2));
                 sb.Append(BlockEnd(lvl+1));
                 sb.Append(Nl);                
-                sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance().GetString(txt.ToString());" + Nl));
+                sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance.GetString(txt.ToString());" + Nl));
                 sb.Append(Format(lvl+1,"return (txt.ToString());" + Nl));
                 sb.Append(Format(lvl,"} //method ToString" + Nl));
             }
@@ -265,7 +265,7 @@ namespace FBXpert.DataClasses
                 sb.Append(BlockEnd(lvl+2));
                 sb.Append(BlockEnd(lvl+1));
                 sb.Append(Nl);
-                sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance().GetString(txt.ToString());" + Nl));
+                sb.Append(Format(lvl+1,"if(_translateToString) return LanguageClass.Instance.GetString(txt.ToString());" + Nl));
                 sb.Append(Format(lvl+1,"return (txt.ToString());" + Nl));
                 sb.Append(Format(lvl,"} //method ToString" + Nl));
             }
@@ -1154,7 +1154,7 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+1,"///" + Nl));
             sb.Append(Format(lvl+1,"public class Cb" + tc.Name + "Class : SELibraries.WindowsForms.cbMainClass" + Nl));
             sb.Append(BlockStart(lvl+1));
-            sb.Append(Format(lvl+2,"private "+tc.Name+ "Class DATA = new " + tc.Name + "Class(ConnectionPoolClass.Instance().GetConnection(GlobalsCon.MainCon));" + Nl));
+            sb.Append(Format(lvl+2,"private "+tc.Name+ "Class DATA = new " + tc.Name + "Class(ConnectionPoolClass.Instance.GetConnection(GlobalsCon.MainCon));" + Nl));
             sb.Append(Nl);
             sb.Append(CreateCbConstructors(lvl+2,tc));
             sb.Append(Nl);
@@ -1627,7 +1627,7 @@ namespace FBXpert.DataClasses
                     sb.Append(BlockEnd(lvl+1));
                     sb.Append(Format(lvl+1,"catch (Exception ex)" + Nl));
                     sb.Append(BlockStart(lvl+1));
-                    sb.Append(Format(lvl+2,$"TMessages.Instance().HandleKonvertException(ex.Message, \"{tc.Name}->get{tfc.Name}()\");{Nl}"));
+                    sb.Append(Format(lvl+2,$"TMessages.Instance.HandleKonvertException(ex.Message, \"{tc.Name}->get{tfc.Name}()\");{Nl}"));
                     sb.Append(BlockEnd(lvl+1));
                     sb.Append(Format(lvl+1,"return (data);" + Nl));
                     sb.Append(BlockEnd(lvl));
@@ -1666,7 +1666,7 @@ namespace FBXpert.DataClasses
                     sb.Append(Format(lvl+1, BlockEnd(lvl)));
                     sb.Append(Format(lvl+1, "catch (Exception ex)" + Nl));
                     sb.Append(Format(lvl+1, BlockStart(lvl)));
-                    sb.Append(Format(lvl+2,$"TMessages.Instance().HandleKonvertException(ex.Message, \"{vc.Name}->get{tfc.Name}()\");{Nl}"));
+                    sb.Append(Format(lvl+2,$"TMessages.Instance.HandleKonvertException(ex.Message, \"{vc.Name}->get{tfc.Name}()\");{Nl}"));
                     sb.Append(Format(lvl+1, BlockEnd(lvl)));
                     sb.Append(Format(lvl+1, "return (data);" + Nl));
                     sb.Append(Format(lvl, BlockEnd(lvl)));
@@ -2039,7 +2039,7 @@ namespace FBXpert.DataClasses
             sb.Append(BlockEnd(lvl+1));
             sb.Append(Format(lvl+1,"catch (Exception ex)" + Nl));
             sb.Append(BlockStart(lvl+1));
-            sb.Append(Format(lvl+2,"TMessages.Instance().HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));            
+            sb.Append(Format(lvl+2,"TMessages.Instance.HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));            
             sb.Append(Format(lvl+2,"Application.Exit();" + Nl));
             sb.Append(BlockEnd(lvl+1));
             sb.Append(Format(lvl+1,"return (aktData);" + Nl));
@@ -2077,7 +2077,7 @@ namespace FBXpert.DataClasses
             sb.Append(BlockEnd(lvl+1));
             sb.Append(Format(lvl+1,"catch (Exception ex)" + Nl));
             sb.Append(BlockStart(lvl+1));
-            sb.Append(Format(lvl+2,"TMessages.Instance().HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));
+            sb.Append(Format(lvl+2,"TMessages.Instance.HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));
             sb.Append(Format(lvl+2,"Application.Exit();" + Nl));
             sb.Append(BlockEnd(lvl+1));
             sb.Append(Format(lvl+1,"return (aktData);" + Nl));

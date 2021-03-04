@@ -86,7 +86,7 @@ namespace FBXpert.Globals
 
                     break;
             }
-            NotifiesClass.Instance().AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertType)");
+            NotifiesClass.Instance.AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertType)");
             return "UNDEFINED";
         }
 
@@ -140,7 +140,7 @@ namespace FBXpert.Globals
             {
                 return "BLOB";
             }
-            NotifiesClass.Instance().AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertDiesignType)");
+            NotifiesClass.Instance.AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertDiesignType)");
             return "UNDEFINED";
         }
         */

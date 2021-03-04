@@ -260,7 +260,7 @@ namespace FBXpert
 
         public string RefreshIndicesAndGetTablename(string _indexObjectName)
         {
-            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, _indexObjectName.Trim());
+            string cmd_index = IndexSQLStatementsClass.Instance.GetIndiciesByName(_dbReg.Version, _indexObjectName.Trim());
             _dataFilled = false;
             txtIndexName.Text = _indexObjectName.Trim();
             string TableName = string.Empty;

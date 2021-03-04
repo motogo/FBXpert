@@ -66,7 +66,7 @@ namespace FBExpert
             string where = "WHERE RDB$FIELDS.RDB$FIELD_NAME = '" + FieldObject.Domain+ "' AND RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'";
             string cmd = cmd0 + " " + cmd1 + " " +where+";";
 
-            ConnectionClass cc = ConnectionPoolClass.Instance().GetConnection("C1");
+            ConnectionClass cc = ConnectionPoolClass.Instance.GetConnection("C1");
             cc.ShowExceptionMode = MessageLibrary.ShowError.no;
             DbDataReader dr = cc.ExecuteQuery(cmd, false);
             
@@ -114,7 +114,7 @@ namespace FBExpert
 
         public void GetConstraints()
         {
-            ConnectionClass cc = ConnectionPoolClass.Instance().GetConnection("TABLE1");
+            ConnectionClass cc = ConnectionPoolClass.Instance.GetConnection("TABLE1");
             cc.ShowExceptionMode = MessageLibrary.ShowError.no;
 
             string cmd_index0 = "SELECT RDB$INDICES.RDB$INDEX_NAME as Name,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE as FieldType";

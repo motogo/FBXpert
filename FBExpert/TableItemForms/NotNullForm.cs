@@ -144,7 +144,7 @@ namespace FBXpert
 
         public void GetFieldConstraintList(string TableName)
         {
-            string cmd = ConstraintsSQLStatementsClass.Instance().GetAllTableConstraintsByTableName(_dbReg.Version, eConstraintType.NOTNULL, TableName);
+            string cmd = ConstraintsSQLStatementsClass.Instance.GetAllTableConstraintsByTableName(_dbReg.Version, eConstraintType.NOTNULL, TableName);
             DataFilled = false;
 
             try

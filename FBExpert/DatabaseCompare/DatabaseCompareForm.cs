@@ -31,7 +31,7 @@ namespace FBXpert.SonstForms
             MdiParent = parent;
             //_dbReg = reg;
            
-            LanguageClass.Instance().RegisterChangeNotifiy(LanguageChanged);
+            LanguageClass.Instance.RegisterChangeNotifiy(LanguageChanged);
         }
         
         private void LanguageChanged(object sender, LanguageChangedEventArgs k)
@@ -41,9 +41,9 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {                      
-            gbFoundLinesForward.Text = LanguageClass.Instance().GetString("FoundLines");
-            gbSearchCodeForward.Text = LanguageClass.Instance().GetString("SEARCH");
-            tabPageObjects.Text = LanguageClass.Instance().GetString("OBJECTS");
+            gbFoundLinesForward.Text = LanguageClass.Instance.GetString("FoundLines");
+            gbSearchCodeForward.Text = LanguageClass.Instance.GetString("SEARCH");
+            tabPageObjects.Text = LanguageClass.Instance.GetString("OBJECTS");
         }
        
         private void hsClose_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace FBXpert.SonstForms
         private void GetAllDatabases()
         {
             this.Cursor = Cursors.WaitCursor;
-            var databases = DatabaseDefinitions.Instance().Databases;
+            var databases = DatabaseDefinitions.Instance.Databases;
             slbDatabase1.ClearItems();
             slbDatabase2.ClearItems();
             foreach (var dbReg in databases)
@@ -194,7 +194,7 @@ namespace FBXpert.SonstForms
             hsSearchUpForward.Enabled = false;
             hsSeachForward.Enabled = txtSearchCodeForward.TextLength > 0;
             
-          //  fbdSourcePath.SelectedPath = AppSettingsClass.Instance().PathSettings.DesignClassesOutputPath;
+          //  fbdSourcePath.SelectedPath = AppSettingsClass.Instance.PathSettings.DesignClassesOutputPath;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
             {

@@ -26,22 +26,14 @@ namespace FBXDesigns
         public static extern bool GetCursorPos(out Point lpPoint);
 
         NotifiesClass _localNotifies;
-        private static readonly object _lockThis = new object();
-        private static volatile DatabaseDesignForm instance = null;
-        public static DatabaseDesignForm Instance()
+
+        private static readonly Lazy<DatabaseDesignForm> lazy = new Lazy<DatabaseDesignForm>(() => new DatabaseDesignForm());
+        public static DatabaseDesignForm Instance
         {
-            if (instance == null)
+            get
             {
-                lock (_lockThis)
-                {
-                    instance = new DatabaseDesignForm();
-                }
+                return lazy.Value;
             }
-            else
-            {
-                instance.FormLoadAgain();
-            }
-            return (instance);
         }
 
         public void SetNotifies(NotifiesClass notifies)
@@ -87,7 +79,7 @@ namespace FBXDesigns
             }
             catch (Exception ex)
             {                                                                                                              
-                SendMessageClass.Instance().SendAllErrors(Name + " -> LoadUserDesign() ->" + ex.Message);
+                SendMessageClass.Instance.SendAllErrors(Name + " -> LoadUserDesign() ->" + ex.Message);
             }
         }
 
@@ -509,7 +501,7 @@ namespace FBXDesigns
         private void DesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveUserDesign();
-            instance = null;
+            //instance = null;
         }
 
        

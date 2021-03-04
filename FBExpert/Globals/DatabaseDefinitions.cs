@@ -33,22 +33,19 @@ namespace FBExpert
 
         public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();  
       
-        public DatabaseDefinitions()
+        private DatabaseDefinitions()
         {
            
         }
-        private static readonly object _lock_this = new object();
-        private static volatile DatabaseDefinitions instance = null;
-        public static DatabaseDefinitions Instance()
+
+
+        private static readonly Lazy<DatabaseDefinitions> lazy = new Lazy<DatabaseDefinitions>(() => new DatabaseDefinitions());
+        public static DatabaseDefinitions Instance
         {
-            if (instance == null)
+            get
             {
-                lock (_lock_this)
-                {
-                    instance = new DatabaseDefinitions();
-                }
+                return lazy.Value;
             }
-            return (instance);
         }
 
         public void MarkDatabasesActiv(bool active)
@@ -56,7 +53,7 @@ namespace FBExpert
             foreach (var datab in Databases)
             {                   
                 datab.Active = active;
-            }                                                            
+            }
         }
 
 
@@ -178,16 +175,19 @@ namespace FBExpert
         }
             
         public void SerializeCurrent(string reason)
-        {            
+        {
+            if (this.XMLName == null) return;
+            //if (File.Exists(this.XMLName)) File.Delete(this.XMLName);
             Stream writer = new FileStream(this.XMLName, FileMode.Create);                        
             var serializer = new XmlSerializer(typeof(DatabaseDefinitions));
             var q1 = new XmlQualifiedName("", "");
             XmlQualifiedName[] names = { q1 };
             var test = new XmlSerializerNamespaces(names);
             this.Reason = reason;
-            this.OpenDatabaseCount = instance.OpenDatabaseCount;
-            this.Databases = instance.Databases;
-            serializer.Serialize(writer, instance, test);
+            // this.OpenDatabaseCount = instance.OpenDatabaseCount;
+            // this.Databases = instance.Databases;
+            // serializer.Serialize(writer, instance, test);
+            serializer.Serialize(writer, this, test);
             writer.Close();
             DataState = EditStateClass.eDataState.Saved;
         }

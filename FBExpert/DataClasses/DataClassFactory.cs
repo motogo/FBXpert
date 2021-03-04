@@ -2,6 +2,7 @@
 using DBBasicClassLibrary;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using System;
 using System.Windows.Forms;
 
 namespace FBExpert.DataClasses
@@ -11,20 +12,14 @@ namespace FBExpert.DataClasses
     {
         public string Collation = "NONE";
         public string Role = string.Empty;
-        private static DefaultConnectionClass instance;
-        private static readonly object _lockThis = new object();
-        public static DefaultConnectionClass Instance()
+        
+        public DefaultConnectionClass()
         {
-            if (instance == null)
-            {
-                lock (_lockThis)
-                {
-                    instance = new DefaultConnectionClass();
-                }
-            }
-            return (instance);
+
         }
-    }
+
+        
+    }   
     public static class DataClassFactory
     {
 
@@ -862,7 +857,7 @@ namespace FBExpert.DataClasses
 
 
             }
-            NotifiesClass.Instance().AddToERROR("DataCLassFactory->GetNode->" + name + " not created", "GetNode");
+            NotifiesClass.Instance.AddToERROR("DataCLassFactory->GetNode->" + name + " not created", "GetNode");
             return null;
         }
     }

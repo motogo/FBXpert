@@ -235,9 +235,9 @@ namespace FBXpert
             {
                 bu.AddOptions(FirebirdSql.Data.Services.FbRestoreFlags.UseAllSpace);
             }
-            ConnectionPoolClass.Instance().CloseAllConnections();
-            if(ConnectionPoolClass.Instance().AktCON != null)
-            ConnectionPoolClass.Instance().AktCON.Close();
+            ConnectionPoolClass.Instance.CloseAllConnections();
+            if(ConnectionPoolClass.Instance.AktCON != null)
+            ConnectionPoolClass.Instance.AktCON.Close();
             bu.Execute();
             DbExplorerForm.Instance().MakeDatabaseTree(true);
         }

@@ -651,7 +651,7 @@ namespace FBExpert
             dsDependencies.Clear();
             dgvDependenciesTo.AutoGenerateColumns = true;
 
-            string cmd_index = SQLStatementsClass.Instance().GetFieldDependencies(_dbReg.Version, TableObject.Name, FieldObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetFieldDependencies(_dbReg.Version, TableObject.Name, FieldObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
@@ -665,7 +665,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($"{StaticFunctionsClass.DateTimeNowStr()}->{Name}->RefreshDependencies->{ex.Message}");
+                NotifiesClass.Instance.AddToERROR($"{StaticFunctionsClass.DateTimeNowStr()}->{Name}->RefreshDependencies->{ex.Message}");
             }
             return 0;
         }

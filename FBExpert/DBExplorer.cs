@@ -39,7 +39,7 @@ namespace FBXpert
             {
                 MdiParent = parent
             };
-            LanguageClass.Instance().RegisterChangeNotifiy(_instance.DBExplorer_OnRaiseLanguageChangedHandler);
+            LanguageClass.Instance.RegisterChangeNotifiy(_instance.DBExplorer_OnRaiseLanguageChangedHandler);
             _instance.Show();
             return (_instance);
         }
@@ -51,9 +51,9 @@ namespace FBXpert
 
         private void LanguageChanged()
         {
-            gbDatabases.Text                        = LanguageClass.Instance().GetString("DATABASES");                        
-            hsLoadDefinition.ToolTipText            = LanguageClass.Instance().GetString("LoadDatabaseDefinitions");        
-            hsDatabaseDefinitionSave.ToolTipText    = LanguageClass.Instance().GetString("SaveDatabaseDefinitions");         
+            gbDatabases.Text                        = LanguageClass.Instance.GetString("DATABASES");                        
+            hsLoadDefinition.ToolTipText            = LanguageClass.Instance.GetString("LoadDatabaseDefinitions");        
+            hsDatabaseDefinitionSave.ToolTipText    = LanguageClass.Instance.GetString("SaveDatabaseDefinitions");         
             
         }
         
@@ -75,7 +75,7 @@ namespace FBXpert
         public void SetCaption()
         {            
             Text = @"DBExplorer";
-            toolStripStatusLabel1.Text = $@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}";
+            toolStripStatusLabel1.Text = $@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}";
         }
 
         private void SetCmsForDatabase(bool open)
@@ -216,13 +216,6 @@ namespace FBXpert
             }
         }
 
-        public bool ReadDatabaseDefinition()
-        {
-            string pf = $@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}";
-            bool dz = DatabaseDefinitions.Instance().Deserialize(pf);
-            return dz;
-        }
-    
         public bool ReadDatabaseMetadata(TreeNode nd)
         {
             nd.ToolTipText = "test";
@@ -240,7 +233,7 @@ namespace FBXpert
                 _actRegNode = nd;
                 _actTables.Clear();
                 _actSystemTables.Clear();
-                NotifiesClass.Instance().AddToINFO("Open Database " + dbReg.Alias);
+                NotifiesClass.Instance.AddToINFO("Open Database " + dbReg.Alias);
                            
                 var tb = StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);            
                 _actViews = StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
@@ -279,7 +272,7 @@ namespace FBXpert
                     }
                 }
 
-                NotifiesClass.Instance().AddToINFO($@"Database {dbReg.Alias} opend !!!");
+                NotifiesClass.Instance.AddToINFO($@"Database {dbReg.Alias} opend !!!");
 
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
@@ -295,13 +288,13 @@ namespace FBXpert
                         
         public void MakeDatabaseTree(bool openactive)
         {
-            NotifiesClass.Instance().AddToINFO("Load database configurations...", "KEY");
+            NotifiesClass.Instance.AddToINFO("Load database configurations...", "KEY");
             SetTreeLanguageDefaults();
 
             treeView1.Nodes.Clear();
             tsmiCreateXMLDesign.Enabled = false;           
             treeView1.BeginUpdate();
-            foreach (var dbr in DatabaseDefinitions.Instance().Databases)
+            foreach (var dbr in DatabaseDefinitions.Instance.Databases)
             {
                 var nd = DataClassFactory.GetNewNode(StaticVariablesClass.DatabaseKeyStr, dbr.Alias,dbr);
                 dbr.SetNode(nd);             
@@ -318,7 +311,7 @@ namespace FBXpert
                 nd.ToolTipText = dbr.GetFullDatabasePath();
                 treeView1.Nodes.Add(nd);                
             }
-            NotifiesClass.Instance().AddToINFO("Database configurations loaded", "KEY");
+            NotifiesClass.Instance.AddToINFO("Database configurations loaded", "KEY");
             
             treeView1.EndUpdate();
             treeView1.Refresh();
@@ -688,8 +681,12 @@ namespace FBXpert
         }
 
         private void DBExplorer_FormClosed(object sender, FormClosedEventArgs e)
-        {            
-          if(!FbXpertMainForm.FormOnClosing) FbXpertMainForm.Instance().Close();
+        {
+            if (!FbXpertMainForm.FormOnClosing)
+            {
+                
+                FbXpertMainForm.Instance().Close();
+            }
         }
                
         public void SetUiDatabaseClosed()
@@ -713,7 +710,7 @@ namespace FBXpert
             var drc = (DBRegistrationClass)tn.Tag;
             drc.Active = false;
             tn.Tag = drc;
-            ConnectionPoolClass.Instance().CloseAllConnections();            
+            ConnectionPoolClass.Instance.CloseAllConnections();            
         }
        
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -1031,7 +1028,7 @@ namespace FBXpert
                 }
             }
             
-            if (!DatabaseDefinitions.Instance().IsRegistration(e.Node))
+            if (!DatabaseDefinitions.Instance.IsRegistration(e.Node))
             {
                _actRegNode = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
             }
@@ -1065,39 +1062,39 @@ namespace FBXpert
             {
                 if (treeView1.SelectedNode == null) return;
                 CloseDatabase(tnReg);
-                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
             else if(e.ClickedItem == tsmiCloseAll)
             {                
                 cmsDatabase.Close();
                 foreach (TreeNode nd in treeView1.Nodes)
                 {
-                    if (DatabaseDefinitions.Instance().IsRegistration(nd))
+                    if (DatabaseDefinitions.Instance.IsRegistration(nd))
                     {                        
                         CloseDatabase(nd);
                     }
                 }
-                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiOpenAll)
             {                
                 cmsDatabase.Close();
                 foreach (TreeNode nd in treeView1.Nodes)
                 {                    
-                    if(DatabaseDefinitions.Instance().IsRegistration(nd))
+                    if(DatabaseDefinitions.Instance.IsRegistration(nd))
                     {
                         Application.DoEvents();
                         ReadDatabaseMetadata(nd);
                     }
                 }
-                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiOpen)
             {
                 cmsDatabase.Close();
                 Application.DoEvents();
                 ReadDatabaseMetadata(tnReg);
-                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiStatistics)
             {
@@ -1172,8 +1169,8 @@ namespace FBXpert
                 CloseDatabase(treeView1.SelectedNode);
                 treeView1.SelectedNode.Tag = null;
                 treeView1.SelectedNode.Remove();
-                DatabaseDefinitions.Instance().Rebuild(treeView1);
-                DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;                
+                DatabaseDefinitions.Instance.Rebuild(treeView1);
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;                
             }
             else if (e.ClickedItem == tsmiDatabaseDesigner)
             {
@@ -1182,13 +1179,13 @@ namespace FBXpert
                 {
                     tab.Add(table.Name,table);
                 }
-                DatabaseDesignForm.Instance().SetDatas(dbReg, tab, _actViews);
-                DatabaseDesignForm.Instance().SetParent(MdiParent);
-                DatabaseDesignForm.Instance().Show();
+                DatabaseDesignForm.Instance.SetDatas(dbReg, tab, _actViews);
+                DatabaseDesignForm.Instance.SetParent(MdiParent);
+                DatabaseDesignForm.Instance.Show();
             }
             else if (e.ClickedItem == tsmiReportDesigner)
             {
-                var rdf = new ReportDesignForm(FbXpertMainForm.Instance(), dbReg,NotifiesClass.Instance());
+                var rdf = new ReportDesignForm(FbXpertMainForm.Instance(), dbReg,NotifiesClass.Instance);
                 rdf.Show();
             }
             else if (e.ClickedItem == tsmiExportData)
@@ -1202,11 +1199,11 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiMoveUp)
             {
-                DatabaseDefinitions.Instance().MoveUp(treeView1);                
+                DatabaseDefinitions.Instance.MoveUp(treeView1);                
             }
             else if (e.ClickedItem == tsmiMoveDown)
             {
-                DatabaseDefinitions.Instance().MoveDown(treeView1);                
+                DatabaseDefinitions.Instance.MoveDown(treeView1);                
             }
             else if (e.ClickedItem == tsmiIDBBinaries)
             {
@@ -1409,7 +1406,7 @@ namespace FBXpert
                 if (fkc != null)
                 {
                     Application.DoEvents();
-                    var ri = IndexSQLStatementsClass.Instance().ActivateIndex(fkc.Name, dbReg, NotifiesClass.Instance());
+                    var ri = IndexSQLStatementsClass.Instance.ActivateIndex(fkc.Name, dbReg, NotifiesClass.Instance);
                     if (ri.commandDone)
                     {
                         fkc.IsActive = true;
@@ -1427,7 +1424,7 @@ namespace FBXpert
                 if (MessageBox.Show($@"Do you really want to drop view {vc.Name}", @"Drop View",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri =  SQLStatementsClass.Instance().ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri =  SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping view {ri.lastError}", @"Drop View", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1441,7 +1438,7 @@ namespace FBXpert
                 if (MessageBox.Show($@"Do you really want to drop table {vc.Name}", @"Drop Table",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri =  SQLStatementsClass.Instance().ExecSql($@"DROP TABLE {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri =  SQLStatementsClass.Instance.ExecSql($@"DROP TABLE {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error dropping table {ri.lastError}", @"Drop Table", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1455,7 +1452,7 @@ namespace FBXpert
                 if (MessageBox.Show($@"Do you really want to drop function {vc.Name}", @"Drop Function",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                SQLStatementsClass.Instance().ExecSql($@"DROP EXTERNAL FUNCTION {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                SQLStatementsClass.Instance.ExecSql($@"DROP EXTERNAL FUNCTION {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 DbExlorerNotify.Notify.RaiseInfo("DBExplorerForm", StaticVariablesClass.ReloadFunctions);
             }
             else if (e.ClickedItem == tsmiDropProcedure)
@@ -1465,7 +1462,7 @@ namespace FBXpert
                 if (MessageBox.Show($@"Do you really want to drop procedure {vc.Name}", @"Drop Procedure",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = SQLStatementsClass.Instance().ExecSql($@"DROP PROCEDURE {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri = SQLStatementsClass.Instance.ExecSql($@"DROP PROCEDURE {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping procedure {ri.lastError}", @"Drop Procedure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1480,7 +1477,7 @@ namespace FBXpert
                 if (MessageBox.Show($@"Do you really want to drop domain {vc.Name}", @"Drop Domain",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = SQLStatementsClass.Instance().ExecSql($@"DROP DOMAIN {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri = SQLStatementsClass.Instance.ExecSql($@"DROP DOMAIN {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping domain {ri.lastError}", @"Drop Domain", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1492,7 +1489,7 @@ namespace FBXpert
             {
                 var vc = (GeneratorClass)_tnSelected.Tag;
                 if (MessageBox.Show($@"Do you really want to drop generator {vc.Name}", @"Drop Generator", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = SQLStatementsClass.Instance().ExecSql($@"DROP GENERATOR {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri = SQLStatementsClass.Instance.ExecSql($@"DROP GENERATOR {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping generator {ri.lastError}", @"Drop Generator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1504,7 +1501,7 @@ namespace FBXpert
             {
                 var vc = (IndexClass)_tnSelected.Tag;               
                 if (MessageBox.Show($@"Do you really want to drop index {vc.Name}", $@"Drop Index", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = IndexSQLStatementsClass.Instance().DropIndex(vc.Name, dbReg, NotifiesClass.Instance());                
+                var ri = IndexSQLStatementsClass.Instance.DropIndex(vc.Name, dbReg, NotifiesClass.Instance);                
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping index {ri.lastError}", @"Drop Index", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1518,7 +1515,7 @@ namespace FBXpert
                 //var ctable = _actTables.Find(fc => fc.notnulls_constraints?.Name == _tnSelected.Text);
                 string[] vals = vc.FieldNames.Values.ToArray(); //.TryGetValue("ID", out string val);
                 if (MessageBox.Show($@"Do you really want to drop constraint {vc.Name}", $@"Drop Constraint", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = ConstraintsSQLStatementsClass.Instance().DropNotNullConstraint(vc.Name,vc.TableName, vals[0], dbReg, NotifiesClass.Instance());
+                var ri = ConstraintsSQLStatementsClass.Instance.DropNotNullConstraint(vc.Name,vc.TableName, vals[0], dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone)
                 {
                     MessageBox.Show($@"Error droping NotNull constraint {ri.lastError}", @"NotNull constraint", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1537,7 +1534,7 @@ namespace FBXpert
                 
                 string[] vals = vc.FieldNames.Values.ToArray();
                 if (MessageBox.Show($@"Do you really want to drop PK constraint {vc.Name}", $@"Drop PK Constraint", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri = ConstraintsSQLStatementsClass.Instance().DropPrimaryKeyConstraint(vc.Name, vc.TableName, vals[0], dbReg, NotifiesClass.Instance());
+                var ri = ConstraintsSQLStatementsClass.Instance.DropPrimaryKeyConstraint(vc.Name, vc.TableName, vals[0], dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone)
                 {
                     MessageBox.Show($@"Error droping PK constraint {ri.lastError}", @"Drop PK constraint", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1553,7 +1550,7 @@ namespace FBXpert
                  if (tc == null) return;
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
-                 var ri = IndexSQLStatementsClass.Instance().ActivateIndex(tc.Name,dbReg, NotifiesClass.Instance());
+                 var ri = IndexSQLStatementsClass.Instance.ActivateIndex(tc.Name,dbReg, NotifiesClass.Instance);
                  if (!ri.commandDone) 
                  {
                     MessageBox.Show($@"Error activating index {ri.lastError}", @"Activate Index", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1573,7 +1570,7 @@ namespace FBXpert
                  if (tc == null) return;
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
-                 var ri = IndexSQLStatementsClass.Instance().DeactivateIndex(tc.Name,dbReg, NotifiesClass.Instance());
+                 var ri = IndexSQLStatementsClass.Instance.DeactivateIndex(tc.Name,dbReg, NotifiesClass.Instance);
                  if (!ri.commandDone) 
                  {
                     MessageBox.Show($@"Error deactivating index {ri.lastError}", @"Deactivate Index", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1593,13 +1590,13 @@ namespace FBXpert
                  if (tc == null) return;
                  Cursor = Cursors.WaitCursor;
                  Application.DoEvents();
-                 var ri = IndexSQLStatementsClass.Instance().DeactivateIndex(tc.Name,dbReg, NotifiesClass.Instance());
+                 var ri = IndexSQLStatementsClass.Instance.DeactivateIndex(tc.Name,dbReg, NotifiesClass.Instance);
                  if (ri.commandDone) 
                  {                   
                     tc.IsActive = false;
                     _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
                  }
-                 var ria = IndexSQLStatementsClass.Instance().ActivateIndex(tc.Name,dbReg, NotifiesClass.Instance());
+                 var ria = IndexSQLStatementsClass.Instance.ActivateIndex(tc.Name,dbReg, NotifiesClass.Instance);
                  if (ria.commandDone) 
                  {                   
                     tc.IsActive = true;
@@ -1612,7 +1609,7 @@ namespace FBXpert
             {
                 var vc = (TriggerClass)_tnSelected.Tag;
                 if (MessageBox.Show($@"Do you really want to drop trigger {vc.Name}", @"Drop Trigger",MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri =  SQLStatementsClass.Instance().ExecSql($@"DROP TRIGGER {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri =  SQLStatementsClass.Instance.ExecSql($@"DROP TRIGGER {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping trigger {ri.lastError}", @"Drop Trigger", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1624,14 +1621,14 @@ namespace FBXpert
             {
                 var vc = (ForeignKeyClass)_tnSelected.Tag;
                 if (MessageBox.Show($@"Do you really want to drop foreign key {vc.Name}",$@"Drop Foreignkey", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var ri =  SQLStatementsClass.Instance().ExecSql($@"ALTER TABLE {vc.SourceTableName} DROP CONSTRAINT  {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri =  SQLStatementsClass.Instance.ExecSql($@"ALTER TABLE {vc.SourceTableName} DROP CONSTRAINT  {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone) 
                 {
                     MessageBox.Show($@"Error droping foreign key {ri.lastError}", @"Drop Foreign Key", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 _tnSelected.Remove();
-                NotifiesClass.Instance().Notify.RaiseInfo(Name, "RELOAD_FOREIGNKEYS", vc.SourceTableName);
+                NotifiesClass.Instance.Notify.RaiseInfo(Name, "RELOAD_FOREIGNKEYS", vc.SourceTableName);
             }
             #endregion drop item
             #region refresh item
@@ -1794,7 +1791,7 @@ namespace FBXpert
                     if(inxObject != null)
                     {                        
                          Application.DoEvents();
-                         var ri = IndexSQLStatementsClass.Instance().ActivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance());
+                         var ri = IndexSQLStatementsClass.Instance.ActivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance);
                          if (ri.commandDone) 
                          {
                             inxObject.IsActive = true;
@@ -1820,13 +1817,13 @@ namespace FBXpert
                     if(inxObject != null)
                     {                        
                          Application.DoEvents();
-                         var ris = IndexSQLStatementsClass.Instance().DeactivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance());
+                         var ris = IndexSQLStatementsClass.Instance.DeactivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance);
                          if (ris.commandDone) 
                          {
                             inxObject.IsActive = false;
                             _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
                          }
-                         var ria = IndexSQLStatementsClass.Instance().ActivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance());
+                         var ria = IndexSQLStatementsClass.Instance.ActivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance);
                          if (ria.commandDone) 
                          {
                             inxObject.IsActive = true;
@@ -1852,7 +1849,7 @@ namespace FBXpert
                     if(inxObject != null)
                     {                
                          Application.DoEvents();
-                         var ri = IndexSQLStatementsClass.Instance().DeactivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance());
+                         var ri = IndexSQLStatementsClass.Instance.DeactivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance);
                          if (ri.commandDone) 
                          {
                             inxObject.IsActive = false;
@@ -1878,7 +1875,7 @@ namespace FBXpert
                     if (fkObject != null)
                     {
                         Application.DoEvents();
-                        var ri = IndexSQLStatementsClass.Instance().ActivateIndex(fkObject.Name, dbReg, NotifiesClass.Instance());
+                        var ri = IndexSQLStatementsClass.Instance.ActivateIndex(fkObject.Name, dbReg, NotifiesClass.Instance);
                         if (ri.commandDone)
                         {
                             fkObject.IsActive = true;
@@ -1932,11 +1929,11 @@ namespace FBXpert
                 foreach(TreeNode sel in _tnSelected.Nodes)
                 {
                     TreeNode vco = sel;
-                    var ri2 = SQLStatementsClass.Instance().ExecSql($@"DROP VIEW {vco.Text.ToUpper()};", dbReg, NotifiesClass.Instance());
+                    var ri2 = SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vco.Text.ToUpper()};", dbReg, NotifiesClass.Instance);
 
                 }
                 /*
-                var ri = SQLStatementsClass.Instance().ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance());
+                var ri = SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
                 if (!ri.commandDone)
                 {
                     MessageBox.Show($@"Error droping view {ri.lastError}", @"Drop View", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1955,7 +1952,7 @@ namespace FBXpert
             {
                 nd.Collapse();
 
-                tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
+                tsmiExpandTablesNodes.Text = LanguageClass.Instance.GetString("EXPAND_NODE");
             }
             else
             {
@@ -1966,24 +1963,28 @@ namespace FBXpert
                     n.Expand();
                 }
 
-                tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("COLAPSE_NODE");
+                tsmiExpandTablesNodes.Text = LanguageClass.Instance.GetString("COLAPSE_NODE");
             }
         }
 
         public void SetTreeLanguageDefaults()
         {
-            tsmiExpandTablesNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
-            tsmiExpandViewNodes.Text = LanguageClass.Instance().GetString("EXPAND_NODE");
+            tsmiExpandTablesNodes.Text = LanguageClass.Instance.GetString("EXPAND_NODE");
+            tsmiExpandViewNodes.Text = LanguageClass.Instance.GetString("EXPAND_NODE");
         }
        
         public void ReloadAllDatabases()
         {
-            if (!ReadDatabaseDefinition()) return;
+            string pf = $@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}";
+            bool dz = DatabaseDefinitions.Instance.Deserialize(pf);
             
-            NotifiesClass.Instance().InfoGranularity = eMessageGranularity.normal;
+            FbXpertMainForm.Instance().SetLastLoadedDefinition(pf);
+            if (!dz) return;
+            
+            NotifiesClass.Instance.InfoGranularity = eMessageGranularity.normal;
             MakeDatabaseTree(false);
-            int n = DatabaseDefinitions.Instance().CountToOpen();
-            if(n > DatabaseDefinitions.Instance().OpenDatabaseCount)
+            int n = DatabaseDefinitions.Instance.CountToOpen();
+            if(n > DatabaseDefinitions.Instance.OpenDatabaseCount)
             { 
                 object[] p = {n, Environment.NewLine };
                 if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "OpenDatabases", "DoYouWantOpenDatabases", FormStartPosition.CenterScreen,
@@ -1993,8 +1994,8 @@ namespace FBXpert
                 }
                 else
                 {
-                    DatabaseDefinitions.Instance().MarkDatabasesActiv(false);
-                    DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                    DatabaseDefinitions.Instance.MarkDatabasesActiv(false);
+                    DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
                 }
             }
             else
@@ -2002,7 +2003,7 @@ namespace FBXpert
                 OpenActiveDatabases();
             }
             if (NotificationsForm.Instance().Visible)  NotificationsForm.Instance().Close();
-            NotifiesClass.Instance().InfoGranularity = eMessageGranularity.few; //Alleinfos bis few angezeigt
+            NotifiesClass.Instance.InfoGranularity = eMessageGranularity.few; //Alleinfos bis few angezeigt
         }
         
         public void treeView1_KeyDown(object sender, KeyEventArgs e)
@@ -2017,12 +2018,12 @@ namespace FBXpert
                         cmsDatabase.Close();
                         foreach (TreeNode nd in treeView1.Nodes)
                         {
-                            if (DatabaseDefinitions.Instance().IsRegistration(nd))
+                            if (DatabaseDefinitions.Instance.IsRegistration(nd))
                             {
                                 CloseDatabase(nd);
                             }
                         }
-                        DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
                         break;
                     }
                     case Keys.O:
@@ -2030,13 +2031,13 @@ namespace FBXpert
                         cmsDatabase.Close();
                         foreach (TreeNode nd in treeView1.Nodes)
                         {
-                            if (DatabaseDefinitions.Instance().IsRegistration(nd))
+                            if (DatabaseDefinitions.Instance.IsRegistration(nd))
                             {
                                 Application.DoEvents();
                                 ReadDatabaseMetadata(nd);
                             }
                         }
-                        DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                        DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
                         break;
                     }
                 }
@@ -2048,36 +2049,36 @@ namespace FBXpert
                     case Keys.Up:
                     {
                         var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
-                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
-                            DatabaseDefinitions.Instance().MoveUp(treeView1);                    
+                        if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
+                            DatabaseDefinitions.Instance.MoveUp(treeView1);                    
                         break;
                     }
                     case Keys.Down:
                     {
                         var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
-                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
-                            DatabaseDefinitions.Instance().MoveDown(treeView1);                    
+                        if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
+                            DatabaseDefinitions.Instance.MoveDown(treeView1);                    
                         break;
                     }
                     case Keys.O:
                     {                    
                         var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                    
-                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                        if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                         { 
                             cmsDatabase.Close();
                             Application.DoEvents();
                             ReadDatabaseMetadata(tnReg);
-                            DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;                        
+                            DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;                        
                         }
                         break;
                     }
                     case Keys.C:
                     {
                         var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                   
-                        if (DatabaseDefinitions.Instance().IsRegistration(tnReg))
+                        if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                         {
                             CloseDatabase(tnReg);
-                            DatabaseDefinitions.Instance().DataState = EditStateClass.eDataState.UnSaved;
+                            DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
                         }
                         break;
                     }               
@@ -2087,15 +2088,15 @@ namespace FBXpert
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
         {
-            var fi = new FileInfo($@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}");
+            var fi = new FileInfo($@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}");
             ofdLoadDefinition.InitialDirectory = fi.DirectoryName;
             ofdLoadDefinition.FileName = fi.Name;
             
             if (ofdLoadDefinition.ShowDialog() != DialogResult.OK) return;
 
             var fi2 = new FileInfo(ofdLoadDefinition.FileName);
-            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = fi2.DirectoryName;
-            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = fi2.Name;
+            AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = fi2.DirectoryName;
+            AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = fi2.Name;
             ReloadAllDatabases();
         }
 
@@ -2108,21 +2109,24 @@ namespace FBXpert
         /// <param name="e"></param>
         private void hsDatabaseDefinitionSave_Click(object sender, EventArgs e)
         {         
-            var fi = new FileInfo($@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance().PathSettings.DatabaseConfigFile}");
+            var fi = new FileInfo($@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}");
             sfdSaveDefinition.InitialDirectory  = fi.DirectoryName;
             sfdSaveDefinition.FileName          = fi.Name;
             if (sfdSaveDefinition.ShowDialog() != DialogResult.OK) return;
             var fi2 = new FileInfo(sfdSaveDefinition.FileName);
 
-            DatabaseDefinitions.Instance().Serialize(sfdSaveDefinition.FileName, "SAVE_DATABASE_DEFINITION");
+
+
+            DatabaseDefinitions.Instance.Rebuild(treeView1);
+            DatabaseDefinitions.Instance.Serialize(sfdSaveDefinition.FileName, "SAVE_DATABASE_DEFINITION");
             if(fi2.FullName == fi.FullName) return;
              
             object[] p = { sfdSaveDefinition.FileName, Environment.NewLine };
 
             if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "StartDefinitionChangeCaption", "StartDefinitionChange", FormStartPosition.CenterScreen, SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Question, null, p) != SEDialogResult.Yes) return;            
-            AppSettingsClass.Instance().PathSettings.DatabasesConfigPath = fi2.DirectoryName;
-            AppSettingsClass.Instance().PathSettings.DatabaseConfigFile = fi2.Name;
-            AppSettingsClass.Instance().SaveSettings();
+            AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = fi2.DirectoryName;
+            AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = fi2.Name;
+            AppSettingsClass.Instance.SaveSettings();
         }
        
         private void DbExplorerForm_SizeChanged(object sender, EventArgs e)
@@ -2143,6 +2147,11 @@ namespace FBXpert
         private void DbExplorerForm_Enter(object sender, EventArgs e)
         {
             //SEHotSpot.Controller.Instance().SetHookForm(this);
+        }
+
+        private void DbExplorerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            AppSettingsClass.Instance.SaveSettings();
         }
     }
 }

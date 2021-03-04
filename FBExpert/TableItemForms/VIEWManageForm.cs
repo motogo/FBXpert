@@ -81,31 +81,31 @@ namespace FBExpert
 
         public void RefreshLanguageText()
         {
-            hsPageRefresh.Text = LanguageClass.Instance().GetString("REFRESH");
-            hsExportData.Text = LanguageClass.Instance().GetString("EXPORT");
-            hsCancelGettingData.Text = LanguageClass.Instance().GetString("CANCEL_READING");
-            hsCancelExport.Text = LanguageClass.Instance().GetString("CANCEL_READING");
+            hsPageRefresh.Text = LanguageClass.Instance.GetString("REFRESH");
+            hsExportData.Text = LanguageClass.Instance.GetString("EXPORT");
+            hsCancelGettingData.Text = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsCancelExport.Text = LanguageClass.Instance.GetString("CANCEL_READING");
             
-            hsSaveSQL.Text = LanguageClass.Instance().GetString("SAVE_SQL");
-            hsLoadSQL.Text = LanguageClass.Instance().GetString("LOAD_SQL");
-            hsRunStatement.Text = LanguageClass.Instance().GetString("EXECUTE_SQL");
+            hsSaveSQL.Text = LanguageClass.Instance.GetString("SAVE_SQL");
+            hsLoadSQL.Text = LanguageClass.Instance.GetString("LOAD_SQL");
+            hsRunStatement.Text = LanguageClass.Instance.GetString("EXECUTE_SQL");
             
-            hsRefreshExportData.Text = LanguageClass.Instance().GetString("REFRESH");
-            rbINSERT.Text = LanguageClass.Instance().GetString("INSERT");
-            rbUPDATE.Text = LanguageClass.Instance().GetString("UPDATE");
-            rbINSERTUPDATE.Text = LanguageClass.Instance().GetString("INSERT_UPDATE");
-            tabPageFIELDS.Text = LanguageClass.Instance().GetString("FIELDS");
-            tabPageDATA.Text = LanguageClass.Instance().GetString("DATA");
-            tabPageDependenciesTo.Text = LanguageClass.Instance().GetString("DEPENDENCIES_TO");
+            hsRefreshExportData.Text = LanguageClass.Instance.GetString("REFRESH");
+            rbINSERT.Text = LanguageClass.Instance.GetString("INSERT");
+            rbUPDATE.Text = LanguageClass.Instance.GetString("UPDATE");
+            rbINSERTUPDATE.Text = LanguageClass.Instance.GetString("INSERT_UPDATE");
+            tabPageFIELDS.Text = LanguageClass.Instance.GetString("FIELDS");
+            tabPageDATA.Text = LanguageClass.Instance.GetString("DATA");
+            tabPageDependenciesTo.Text = LanguageClass.Instance.GetString("DEPENDENCIES_TO");
             
-            tabPageExport.Text = LanguageClass.Instance().GetString("EXPORT_DATA");
-            tabPageMessages.Text = LanguageClass.Instance().GetString("MESSAGES");
-            gbMaxRows.Text = LanguageClass.Instance().GetString("MAX_ROWS");
-            cbExportToScreen.Text = LanguageClass.Instance().GetString("EXPORT_TO_SCREEN");
-            cbExportToFile.Text = LanguageClass.Instance().GetString("EXPORT_TO_FILE");
-            gbExportFile.Text = LanguageClass.Instance().GetString("FILE");
-            gbInsertUpdate.Text = LanguageClass.Instance().GetString("INSERT_UPDATE_TYPE");
-            ckGetDatas.Text = LanguageClass.Instance().GetString("READ_DATAS");
+            tabPageExport.Text = LanguageClass.Instance.GetString("EXPORT_DATA");
+            tabPageMessages.Text = LanguageClass.Instance.GetString("MESSAGES");
+            gbMaxRows.Text = LanguageClass.Instance.GetString("MAX_ROWS");
+            cbExportToScreen.Text = LanguageClass.Instance.GetString("EXPORT_TO_SCREEN");
+            cbExportToFile.Text = LanguageClass.Instance.GetString("EXPORT_TO_FILE");
+            gbExportFile.Text = LanguageClass.Instance.GetString("FILE");
+            gbInsertUpdate.Text = LanguageClass.Instance.GetString("INSERT_UPDATE_TYPE");
+            ckGetDatas.Text = LanguageClass.Instance.GetString("READ_DATAS");
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -132,8 +132,8 @@ namespace FBExpert
             }
             var sb = new StringBuilder();
             error_count++;
-            if (messages_count > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({messages_count}) ");
-            if (error_count > 0) sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({error_count})");
+            if (messages_count > 0) sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({messages_count}) ");
+            if (error_count > 0) sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({error_count})");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();                       
         }
@@ -144,8 +144,8 @@ namespace FBExpert
             fctMessages.AppendText(k.Meldung);
             var sb = new StringBuilder();
             messages_count++;
-            if (messages_count > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({messages_count}) ");
-            if (error_count > 0) sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({error_count})");
+            if (messages_count > 0) sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({messages_count}) ");
+            if (error_count > 0) sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({error_count})");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();            
         }
@@ -156,7 +156,7 @@ namespace FBExpert
             dsDependencies.Clear();
             dgvDependencies.AutoGenerateColumns = true;
 
-            string cmd_index = SQLStatementsClass.Instance().GetViewManagerDependenciesTO(DBReg.Version, ViewObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesTO(DBReg.Version, ViewObject.Name);
             try
             { 
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -166,7 +166,7 @@ namespace FBExpert
             }
             catch(Exception ex)
             {                
-              NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} ViewManagerForm->RefreshDependenciesTo->{ex.Message}");
+              NotifiesClass.Instance.AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} ViewManagerForm->RefreshDependenciesTo->{ex.Message}");
             }
             bsDependencies.DataMember = "Table";
 
@@ -178,7 +178,7 @@ namespace FBExpert
         {                  
             dsDependencies.Clear();
             dgvDependencies.AutoGenerateColumns = true;
-            string cmd_index = SQLStatementsClass.Instance().GetViewManagerDependenciesFROM(DBReg.Version, ViewObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesFROM(DBReg.Version, ViewObject.Name);
             try
             { 
                 var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
@@ -188,7 +188,7 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
+                NotifiesClass.Instance.AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
             }
             bsDependencies.DataMember = "Table";
             return dsDependencies.Tables[0].Rows.Count;
@@ -198,7 +198,7 @@ namespace FBExpert
         {
             if (string.IsNullOrEmpty(ViewObject.Name)) return lvFields.Items.Count;
             
-            string cmd =  SQLStatementsClass.Instance().GetViewFields(DBReg.Version, ViewObject.Name);
+            string cmd =  SQLStatementsClass.Instance.GetViewFields(DBReg.Version, ViewObject.Name);
             ViewFieldClass vf = null;
             lvFields.Items.Clear();
             dgExportGrid.Rows.Clear();
@@ -238,7 +238,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
+                NotifiesClass.Instance.AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
             }               
             return lvFields.Items.Count;
         }
@@ -324,7 +324,7 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()}->{this.Name}->RefreshDatas({cmd}), msg:{ex.Message}");
+                NotifiesClass.Instance.AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()}->{this.Name}->RefreshDatas({cmd}), msg:{ex.Message}");
             }                               
             return dsViewContent.Tables[0].Rows.Count;
         }
@@ -573,8 +573,8 @@ namespace FBExpert
             messages_count = 0;
             error_count = 0;
             var sb = new StringBuilder();
-            sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({messages_count}) ");            
-            sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({error_count})");
+            sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({messages_count}) ");            
+            sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({error_count})");
             tabPageMessages.Text = sb.ToString();
         }
 

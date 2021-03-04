@@ -119,7 +119,7 @@ namespace FBXpert
 
         public void RefreshIndices()
         {
-            string cmd_index = IndexSQLStatementsClass.Instance().GetIndiciesByName(_dbReg.Version, IndexName.Trim());
+            string cmd_index = IndexSQLStatementsClass.Instance.GetIndiciesByName(_dbReg.Version, IndexName.Trim());
             DataFilled = false;
             txtConstraintName.Text = IndexName.Trim();
 

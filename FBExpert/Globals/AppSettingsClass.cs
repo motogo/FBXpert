@@ -7,7 +7,7 @@ namespace FBXpert.DataClasses
 
     public class BehavierSettingsClass
     {
-        public int DebugThreshold = 2;       
+        public int DebugThreshold = 2;
     }
     [Serializable]
     public class CodeSettingsClass
@@ -29,7 +29,6 @@ namespace FBXpert.DataClasses
     }
     public class PathSettingsClass
     {
-      //  public string DesignClassesOutputPath=string.Empty;
         public string ScriptingPath=string.Empty;
         public string TempPath=string.Empty;
         public string DatabasesConfigPath = string.Empty;
@@ -37,21 +36,22 @@ namespace FBXpert.DataClasses
     }
 
     [Serializable]
-    public class AppSettingsClass
+    public sealed class AppSettingsClass
     {
         public string Path = string.Empty;
-        private static readonly object _lock_this = new object();
-        private static volatile AppSettingsClass instance = null;
-        public static AppSettingsClass Instance()
+        //private static readonly object _lock_this = new object();
+       // private static volatile AppSettingsClass instance = null;
+
+        
+
+        private static readonly Lazy<AppSettingsClass> lazy = new Lazy<AppSettingsClass>(() => new AppSettingsClass());
+        public static AppSettingsClass Instance
         {
-            if (instance == null)
+            get
             {
-                lock (_lock_this)
-                {
-                    instance = new AppSettingsClass();
-                }
+                return lazy.Value;
             }
-            return (instance);
+            
         }
         public AppSettingsClass()
         {
@@ -66,27 +66,53 @@ namespace FBXpert.DataClasses
 
         public void Load(AppSettingsClass appSettings)
         {
+            
+            
+
+            this.Stamp = appSettings.Stamp;
+            this.CodeSettings = appSettings.CodeSettings;
+            this.DatabaseSettings = appSettings.DatabaseSettings;
+            this.PathSettings = appSettings.PathSettings;
+            this.BehavierSettings = appSettings.BehavierSettings;
+
+            this.Path = appSettings.Path;
+            this.PathSettings.ScriptingPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
+            this.PathSettings.TempPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
+            this.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
+
+
+
+            /*
             instance = appSettings.MemberwiseClone() as AppSettingsClass;
             instance.Path = appSettings.Path;
             instance.PathSettings.ScriptingPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
             instance.PathSettings.TempPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
             instance.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
-
-            
+            */
         }
 
         public void SaveSettings()
         {
             fastJSON.JSON.Parameters.UseExtensions = true;
+            AppSettingsClass appsetting = new AppSettingsClass();
 
-            AppSettingsClass appsetting = instance.MemberwiseClone() as AppSettingsClass;            
+            appsetting.PathSettings = this.PathSettings;
+            appsetting.CodeSettings = this.CodeSettings;
+            appsetting.DatabaseSettings = this.DatabaseSettings;
+            appsetting.BehavierSettings = this.BehavierSettings;
+
+            appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetPathCode(this.PathSettings.DatabasesConfigPath);
+            appsetting.PathSettings.TempPath = ApplicationPathClass.GetPathCode(this.PathSettings.TempPath);
+            appsetting.PathSettings.ScriptingPath = ApplicationPathClass.GetPathCode(this.PathSettings.ScriptingPath);
+            appsetting.Path = this.Path;
+            appsetting.Stamp = DateTime.Now;
+            /*
+            var appsetting = instance.MemberwiseClone() as AppSettingsClass;
             appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetPathCode(instance.PathSettings.DatabasesConfigPath);
             appsetting.PathSettings.TempPath = ApplicationPathClass.GetPathCode(instance.PathSettings.TempPath);
             appsetting.PathSettings.ScriptingPath = ApplicationPathClass.GetPathCode(instance.PathSettings.ScriptingPath);
-
+            */
             string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
-
-            //  File.WriteAllText(Application.StartupPath + "\\config\\AppSettings.json", jsonText);
             File.WriteAllText(appsetting.Path, jsonText);
         }
 

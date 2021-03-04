@@ -1,32 +1,30 @@
 ﻿using FBXpert.DataClasses;
+using System;
+using System.Collections.Generic;
 
 namespace FBXpert.SQLStatements
 {
 
     public class DomainSQLStatementsClass : SQLStatementsBase
     {
-       
-        private static readonly object _lock_this = new object();
-        private static volatile DomainSQLStatementsClass instance = null;
 
-        public static DomainSQLStatementsClass Instance()
+
+        private DomainSQLStatementsClass()
         {
-            if (instance == null)
+
+        }
+
+        private static readonly Lazy<DomainSQLStatementsClass> lazy = new Lazy<DomainSQLStatementsClass>(() => new DomainSQLStatementsClass());
+        public static DomainSQLStatementsClass Instance
+        {
+            get
             {
-                lock (_lock_this)
-                {
-                    instance = new DomainSQLStatementsClass();
-                }
+                return lazy.Value;
             }
-            return (instance);
+
         }
 
-        public DomainSQLStatementsClass()
-        {
-           
-        }
 
-       
 
         public string RefreshNonSystemDomains()
         {

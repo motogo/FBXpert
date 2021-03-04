@@ -69,7 +69,7 @@ namespace FBExpert
            
             string cmd = cmd0 + ";";
 
-            ConnectionClass cc = ConnectionPoolClass.Instance().GetConnection(cn_name);
+            ConnectionClass cc = ConnectionPoolClass.Instance.GetConnection(cn_name);
             cc.ShowExceptionMode = MessageLibrary.ShowError.no;
             DbDataReader dr = cc.ExecuteQuery(cmd, false);
             if (dr != null)
@@ -141,7 +141,7 @@ namespace FBExpert
             }
 
             
-            DatabaseDefinitions.Instance().OpenDatabaseCount = StaticFunctionsClass.ToIntDef(txtOpenDatabasesCount.Text, 0);
+            DatabaseDefinitions.Instance.OpenDatabaseCount = StaticFunctionsClass.ToIntDef(txtOpenDatabasesCount.Text, 0);
         }
 
         public void SetServerDatas()
@@ -204,7 +204,7 @@ namespace FBExpert
             txtTableMaxRows.Text                = _dbReg.MaxRowsForSelect.ToString();
             txtDBNamespace.Text                 = _dbReg.CodeSettings.SourceCodeNamespace;
             txtSourcecodeOutputPath.Text        = _dbReg.CodeSettings.SourceCodeOutputPath;
-            txtOpenDatabasesCount.Text          = DatabaseDefinitions.Instance().OpenDatabaseCount.ToString();
+            txtOpenDatabasesCount.Text          = DatabaseDefinitions.Instance.OpenDatabaseCount.ToString();
             SetServerUIVisiblies();
                                                                                             
             DoEvent = true;
@@ -217,23 +217,23 @@ namespace FBExpert
             tn.Text = _dbReg.Alias;
             if (BearbeitenMode == EditStateClass.eBearbeiten.eEdit)
             {
-                var drc = DatabaseDefinitions.Instance().Databases.Find(x=>x.Position == _dbReg.Position);
+                var drc = DatabaseDefinitions.Instance.Databases.Find(x=>x.Position == _dbReg.Position);
                 _dbReg.State = eRegState.update;
             }
             else
             {
-                _dbReg.Position = DatabaseDefinitions.Instance().Databases.Count+1;
-                DatabaseDefinitions.Instance().Databases.Add(_dbReg);
+                _dbReg.Position = DatabaseDefinitions.Instance.Databases.Count+1;
+                DatabaseDefinitions.Instance.Databases.Add(_dbReg);
                 DataToEdit();
                 _dbReg.State = eRegState.create;               
             }
 
-            DatabaseDefinitions.Instance().SerializeCurrent("User changed");
+            DatabaseDefinitions.Instance.SerializeCurrent("User changed");
            
             BearbeitenMode = EditStateClass.eBearbeiten.eEdit;
             if ((_connectionDataChanged) || (_dbReg.State != eRegState.update))
             {                
-                NotifiesClass.Instance().Notify.RaiseInfo($@"Configuration saved for {_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);
+                NotifiesClass.Instance.Notify.RaiseInfo($@"Configuration saved for {_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);
                 DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);                
                 _connectionDataChanged = false;
             }
@@ -319,8 +319,8 @@ namespace FBExpert
 
         private void LanguageChanged()
         {
-            hsClose.ToolTipText = LanguageClass.Instance().GetString("CLOSE_FORM");    
-            hsSave.Text = LanguageClass.Instance().GetString("UPDATE_CHANGES");    
+            hsClose.ToolTipText = LanguageClass.Instance.GetString("CLOSE_FORM");    
+            hsSave.Text = LanguageClass.Instance.GetString("UPDATE_CHANGES");    
         }
 
         public void ShowCaptions()
@@ -383,7 +383,7 @@ namespace FBExpert
         {
             openFileDialog1.DefaultExt  = "*.fdb";
             openFileDialog1.Filter      = @"Firebird DB|*.fdb|All|*.*";
-            openFileDialog1.Title       =  LanguageClass.Instance().GetString("SELECT_DATABASE");
+            openFileDialog1.Title       =  LanguageClass.Instance.GetString("SELECT_DATABASE");
 
             if (openFileDialog1.ShowDialog()== DialogResult.OK)
             {
@@ -401,14 +401,14 @@ namespace FBExpert
                 if(SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExistsCaption","OverrideExistingDatabase", SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Asterisk, null, param)== SEDialogResult.Yes)                
                 {
                     ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
-                    StaticFunctionsClass.ToIntDef(txtPacketsize.Text,AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize), true, true);
+                    StaticFunctionsClass.ToIntDef(txtPacketsize.Text,AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize), true, true);
                 }
             }
             else
             {
                 if (!fi.Directory.Exists) return;
                 ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
-                StaticFunctionsClass.ToIntDef(txtPacketsize.Text, AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize), true, true);
+                StaticFunctionsClass.ToIntDef(txtPacketsize.Text, AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize), true, true);
             }         
             
             if(!ok)
@@ -579,7 +579,7 @@ namespace FBExpert
         {
             openFileDialog1.DefaultExt = "*.dll";
             openFileDialog1.Filter = "DLL|*.dll|All|*.*";
-            openFileDialog1.Title = LanguageClass.Instance().GetString("CHOOSE_CLIENT_LIBRARY");
+            openFileDialog1.Title = LanguageClass.Instance.GetString("CHOOSE_CLIENT_LIBRARY");
             openFileDialog1.InitialDirectory = Application.StartupPath;
             if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
             FileInfo fi = new FileInfo(openFileDialog1.FileName);

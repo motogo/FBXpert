@@ -14,7 +14,7 @@ namespace FBXpert.SonstForms
             {
                 MdiParent = parent
             };
-            LanguageClass.Instance().RegisterChangeNotifiy(CopyrightForm_OnRaiseLanguageChangedHandler);            
+            LanguageClass.Instance.RegisterChangeNotifiy(CopyrightForm_OnRaiseLanguageChangedHandler);            
             return (_instance);
         }
 

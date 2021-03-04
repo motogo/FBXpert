@@ -50,7 +50,7 @@ namespace FBXpert.Globals
             this.CodeSettings = new CodeSettingsClass();
             this.ErrorCodes = new ErrorCodes();
             
-            string pf = $@"{AppSettingsClass.Instance().PathSettings.DatabasesConfigPath}\ErrorCodes{this.Version}.txt";
+            string pf = $@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\ErrorCodes{this.Version}.txt";
             this.ErrorCodes.Load(pf);
            
         }

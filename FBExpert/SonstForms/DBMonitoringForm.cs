@@ -24,7 +24,7 @@ namespace FBXpert
         public void GetConnections()
         {
             lvConnections.Items.Clear();
-            foreach (ConnectionClass c in ConnectionPoolClass.Instance().Connections)
+            foreach (ConnectionClass c in ConnectionPoolClass.Instance.Connections)
             {
                 string[] cn = new string[3];
                 cn[0] = c.ConnName;
@@ -45,7 +45,7 @@ namespace FBXpert
             GetConnections();
             try
             { 
-                string cmd_index = SQLStatementsClass.Instance().GetMonitorConnections(DBReg.Version,cbAllConnections.Checked );
+                string cmd_index = SQLStatementsClass.Instance.GetMonitorConnections(DBReg.Version,cbAllConnections.Checked );
                 dsMonConnections.Clear();
                 dgvMonConnections.AutoGenerateColumns = true;
                 
@@ -59,7 +59,7 @@ namespace FBXpert
             }
             catch(Exception ex)
             {
-                 NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));                      
+                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));                      
             }
             bsMonConnections.DataMember = "Table";
             return dsMonConnections.Tables[0].Rows.Count;
@@ -140,7 +140,7 @@ namespace FBXpert
 
         private void hotSpot1_Click(object sender, EventArgs e)
         {
-            ConnectionPoolClass.Instance().CloseAllConnections();
+            ConnectionPoolClass.Instance.CloseAllConnections();
         }
 
         private void hsRefresh_Click(object sender, EventArgs e)

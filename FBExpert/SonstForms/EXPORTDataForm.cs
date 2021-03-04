@@ -225,7 +225,7 @@ namespace FBExpert
        
         private void hsExport_Click(object sender, EventArgs e)
         {
-            var ew = new ExportWorkers(NotifiesClass.Instance())
+            var ew = new ExportWorkers(NotifiesClass.Instance)
             {
                 alltables = new List<TableClass>()
             };
@@ -478,7 +478,7 @@ namespace FBExpert
         
         private void hsExportStructure_Click(object sender, EventArgs e)
         {
-            var ew = new ExportWorkers(NotifiesClass.Instance())
+            var ew = new ExportWorkers(NotifiesClass.Instance)
             {
                 allviews = new List<ViewClass>()
             };

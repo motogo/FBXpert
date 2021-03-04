@@ -172,7 +172,7 @@ namespace FBXpert
 
         public int RefreshDependenciesTo()
         {                                        
-            string cmd = SQLStatementsClass.Instance().GetDepentenciesGenerators(_dbReg.Version, GeneratorObject.Name);
+            string cmd = SQLStatementsClass.Instance.GetDepentenciesGenerators(_dbReg.Version, GeneratorObject.Name);
             try
             { 
                 dsDependenciesTo.Clear();
@@ -188,7 +188,7 @@ namespace FBXpert
             }
             catch(Exception ex)
             {
-                NotifiesClass.Instance().AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()} GeneratorForm -> RefreshDependenciesTo: {ex.Message}");
+                NotifiesClass.Instance.AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()} GeneratorForm -> RefreshDependenciesTo: {ex.Message}");
             }
             return 0;                       
         }

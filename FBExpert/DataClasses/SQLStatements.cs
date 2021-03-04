@@ -14,28 +14,20 @@ namespace FBXpert.DataClasses
 
     public class SQLStatementsClass : SQLStatementsBase
     {
-       
-        private static readonly object _lock_this = new object();
-        
-        private static volatile SQLStatementsClass instance = null;
-
-        public static SQLStatementsClass Instance()
-        {
-            if (instance == null)
-            {
-                lock (_lock_this)
-                {
-                    instance = new SQLStatementsClass();
-                }
-            }
-            return (instance);
-        }
-
-        public SQLStatementsClass()
+        private SQLStatementsClass()
         {
            
         }
-       
+
+        private static readonly Lazy<SQLStatementsClass> lazy = new Lazy<SQLStatementsClass>(() => new SQLStatementsClass());
+        public static SQLStatementsClass Instance
+        {
+            get
+            {
+                return lazy.Value;
+            }
+        }
+
         public SQLCommandsReturnInfoClass DropConstraint(string name, DBRegistrationClass dbReg, NotifiesClass notify)
         {
               string cmd =  SQLPatterns.DropConstraintPattern.Replace(SQLPatterns.ConstraintKey, name);
@@ -580,7 +572,7 @@ namespace FBXpert.DataClasses
             sb.Append($@"RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field,");
             sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDENT_NAME {SQLConstants.AS} DepentTo,");
             sb.Append($@"CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE ");
-            sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
+            sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{tableName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
             
@@ -593,7 +585,7 @@ namespace FBXpert.DataClasses
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field,");
             sb.Append($@"RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME {SQLConstants.AS} DepentFrom,CASE RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE ");
-            sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
+            sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDENT_NAME) = '{tableName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
 
@@ -892,7 +884,7 @@ namespace FBXpert.DataClasses
         {            
             var sb = new StringBuilder();   
             sb.Append($@"{SQLConstants.SELECT} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME {SQLConstants.AS} DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE ");
-            sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
+            sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{generatorName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
             return sb.ToString();
@@ -902,7 +894,7 @@ namespace FBXpert.DataClasses
         {
             var sb = new StringBuilder();   
             sb.Append($@"{SQLConstants.SELECT} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME {SQLConstants.AS} DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE ");
-            sb.Append($@"{EnumClass.Instance().GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
+            sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{procedureName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
             return sb.ToString();

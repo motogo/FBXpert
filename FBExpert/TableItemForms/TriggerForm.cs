@@ -203,19 +203,16 @@ namespace FBXpert
                                                                     cbINSERT.Checked = true;
                                                                     cbUPDATE.Checked = true;
                                                                     break;
-
             }
         }
-
-        
 
         public int RefreshDependenciesTo()
         {            
             string cmd_index0 = "SELECT RDB$DEPENDENCIES.RDB$FIELD_NAME as Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME as DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE";
-            string case0 = EnumClass.Instance().GetDependenciesTypeSQLCase() + " AS  DependentType FROM RDB$DEPENDENCIES";
+            string case0 = EnumClass.Instance.GetDependenciesTypeSQLCase() + " AS  DependentType FROM RDB$DEPENDENCIES";
             string cmd_index_where = "WHERE UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '" + TriggerObject.Name + "' AND RDB$DEPENDENCIES.RDB$FIELD_NAME IS NOT NULL";
             string cmd_index_order = "ORDER BY RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME";
-            string cmd_index = cmd_index0 + " " + case0 + " " + cmd_index_where + " " + cmd_index_order + ";";
+            string cmd_index = $@"{cmd_index0} {case0} {cmd_index_where} {cmd_index_order};";
 
             dsDependenciesTo.Clear();
             dgvDependenciesTo.AutoGenerateColumns = true;
@@ -233,7 +230,6 @@ namespace FBXpert
             {
                _localNotify?.AddToERROR($@"{StaticFunctionsClass.DateTimeNowStr()}->{this.Name}->RefreshDependenciesTo->{ex.Message}");
             }
-                      
             return 0;
         }
 

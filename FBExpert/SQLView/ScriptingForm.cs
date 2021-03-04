@@ -172,7 +172,7 @@ namespace FBXpert.SQLView
         private void GetDatabases()
         {
             cbConnection.Items.Clear();
-            foreach (var dbr in DatabaseDefinitions.Instance().Databases)
+            foreach (var dbr in DatabaseDefinitions.Instance.Databases)
             {
                 cbConnection.Items.Add(dbr);
             }
@@ -418,11 +418,11 @@ namespace FBXpert.SQLView
             try
             {
                 _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} ...Creating new database via script {server}:{location}");
-                DBProviderSet.CreateDatabase(location, server, user, password, StaticFunctionsClass.ToIntDef(packetsize, AppSettingsClass.Instance().DatabaseSettings.DefaultPacketSize));
+                DBProviderSet.CreateDatabase(location, server, user, password, StaticFunctionsClass.ToIntDef(packetsize, AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize));
             }
             catch (Exception ex)
             {               
-                NotifiesClass.Instance().AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> CreateDatabase()", ex));                      
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> CreateDatabase()", ex));                      
             }
 
             return true;

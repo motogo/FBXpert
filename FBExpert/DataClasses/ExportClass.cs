@@ -932,11 +932,11 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
+            NotifiesClass.Instance.AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
             
             if (SQLDirectoryName != null)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
             } 
             
             _bgw.RunWorkerAsync(allobjects);            
@@ -975,7 +975,7 @@ namespace FBXpert.DataClasses
            // NotificationsForm.Instance().Close();
             if (WriteToFile != eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");               
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");               
             }
             
             _bgw.CancelAsync();
@@ -1020,10 +1020,10 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
+            NotifiesClass.Instance.AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
             }
             
             _bgw.RunWorkerAsync();            
@@ -1056,7 +1056,7 @@ namespace FBXpert.DataClasses
         {           
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");                
             }
             
             _bgw.CancelAsync();
@@ -1082,7 +1082,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
             
                        
             _bgw.RunWorkerAsync(allobjects);            
@@ -1107,7 +1107,7 @@ namespace FBXpert.DataClasses
            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL primary key structure {_allPKConstraintsContent.Count} lines to {SQLDirectoryName}");
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL primary key structure {_allPKConstraintsContent.Count} lines to {SQLDirectoryName}");
                 
             }           
         }
@@ -1131,7 +1131,7 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFKTableStructureCompleted);
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
                         
             _bgw.RunWorkerAsync(allobjects);
         }
@@ -1154,7 +1154,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL foreign key structure {_allFKConstraintsContent.Count} lines to {SQLDirectoryName}");            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL foreign key structure {_allFKConstraintsContent.Count} lines to {SQLDirectoryName}");            
             }            
         }
         #endregion
@@ -1178,7 +1178,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating index structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating index structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1202,7 +1202,7 @@ namespace FBXpert.DataClasses
         {           
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL index structure {_allIndexContent.Count} lines to {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL index structure {_allIndexContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1226,7 +1226,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating trigger structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating trigger structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1250,7 +1250,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1274,7 +1274,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1298,7 +1298,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1322,7 +1322,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1346,7 +1346,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1371,7 +1371,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating function structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1395,7 +1395,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1419,7 +1419,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating function structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating function structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1443,7 +1443,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1467,7 +1467,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating domain structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating domain structure SQL for " + DBReg.Alias);
             
 
 
@@ -1492,7 +1492,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL domain structure {_allDomainContent.Count} lines to file {SQLDirectoryName}");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL domain structure {_allDomainContent.Count} lines to file {SQLDirectoryName}");                
             }            
         }
         #endregion
@@ -1516,7 +1516,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating generator structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating generator structure SQL for " + DBReg.Alias);
             
 
             _bgw.RunWorkerAsync(allobjects);
@@ -1540,7 +1540,7 @@ namespace FBXpert.DataClasses
         {            
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance().AddToINFO($@"Writing SQL generator structure {_allGeneratorContent.Count} lines to {SQLDirectoryName}");         
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL generator structure {_allGeneratorContent.Count} lines to {SQLDirectoryName}");         
             }
         }
         #endregion
@@ -1567,7 +1567,7 @@ namespace FBXpert.DataClasses
 
             NotificationsForm.Instance().Show();
             
-            NotifiesClass.Instance().AddToINFO("Creating view structure SQL for " + DBReg.Alias);
+            NotifiesClass.Instance.AddToINFO("Creating view structure SQL for " + DBReg.Alias);
             
                         
             _bgw.RunWorkerAsync(allobjects);

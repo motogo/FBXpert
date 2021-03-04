@@ -192,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\ChecksClass.cs" />
-    <Compile Include="DataClasses\ContextMenusClass.cs" />
     <Compile Include="DataClasses\DatabaseDesignClass.cs" />
     <Compile Include="DataClasses\DBDataTypes.cs" />
     <Compile Include="DataClasses\DependencyClass.cs" />
@@ -499,7 +498,6 @@
     <Compile Include="DBExplorer.Designer.cs">
       <DependentUpon>DBExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globals\DBHandlingClass.cs" />
     <Compile Include="Globals\DBRegistrationClass.cs" />
     <Compile Include="DesignReport\ReportDesignForm.cs">
       <SubType>Form</SubType>
@@ -571,15 +569,9 @@
     <Compile Include="TableItemForms\VIEWManageForm.Designer.cs">
       <DependentUpon>VIEWManageForm.cs</DependentUpon>
     </Compile>
-    <Content Include="config\AppSettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="config\AppSettingsSoftend.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="config\AppSettingsTelekom.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="config\AppSettings.json" />
+    <Content Include="config\AppSettingsSoftend.json" />
+    <Content Include="config\AppSettingsTelekom.json" />
     <None Include="Resources\Matrix.png" />
     <None Include="FBXpert_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
@@ -596,9 +588,7 @@
     <EmbeddedResource Include="DesignSourceCode\XMLDesignForm.resx">
       <DependentUpon>XMLDesignForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="config\DatabaseDefinitionsDemo.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="config\DatabaseDefinitionsDemo.xml" />
     <Content Include="Languages\Language.de-DE.resources">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -674,12 +664,8 @@
     <EmbeddedResource Include="XMLTree\XMLTreeForm.resx">
       <DependentUpon>XMLTreeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="config\DatabaseDefinitionsSoftend.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="config\DatabaseDefinitionsTelekom.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="config\DatabaseDefinitionsSoftend.xml" />
+    <Content Include="config\DatabaseDefinitionsTelekom.xml" />
     <Content Include="Languages\Language.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.de-DE.Designer.cs</LastGenOutput>

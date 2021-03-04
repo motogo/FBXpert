@@ -66,7 +66,7 @@ namespace SQLView
             cbTestlauf.Checked = testMode;
             cbTestlauf.Visible = testMode;
             LanguageChanged();
-            LanguageClass.Instance().RegisterChangeNotifiy(OnRaiseLanguageChangedHandler);
+            LanguageClass.Instance.RegisterChangeNotifiy(OnRaiseLanguageChangedHandler);
         }
 
         private void OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
@@ -76,12 +76,12 @@ namespace SQLView
 
         private void LanguageChanged()
         {
-            tabHistory.Text                 = $@"{LanguageClass.Instance().GetString("History")} ({dgvSQLHistory.Rows.Count})";
-            hsClearHistory.Text             = LanguageClass.Instance().GetString("DeleteHistory");
-            hsExecuteHistorySelected.Text   = LanguageClass.Instance().GetString("EXECUTE_SQL");
-            hsRunSQL.Text                   = LanguageClass.Instance().GetString("EXECUTE_SQL");
-            hsRefreshHistory.Text           = LanguageClass.Instance().GetString("REFRESH");
-            hsPageRefresh.Text              = LanguageClass.Instance().GetString("REFRESH");
+            tabHistory.Text                 = $@"{LanguageClass.Instance.GetString("History")} ({dgvSQLHistory.Rows.Count})";
+            hsClearHistory.Text             = LanguageClass.Instance.GetString("DeleteHistory");
+            hsExecuteHistorySelected.Text   = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsRunSQL.Text                   = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsRefreshHistory.Text           = LanguageClass.Instance.GetString("REFRESH");
+            hsPageRefresh.Text              = LanguageClass.Instance.GetString("REFRESH");
         }
 
 
@@ -293,20 +293,20 @@ namespace SQLView
                 ckShowResults.Text = $@"Show results ({dsResults.Tables[0].Rows.Count})";
                 if (ckShowResults.Checked)
                 {
-                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected");
+                    NotifiesClass.Instance.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected");
                     SQLnotify.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected");
                     bsResults.DataSource = dsResults;
                     bsResults.DataMember = "Table";
                 }
                 else
                 {
-                    NotifiesClass.Instance().AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected, but not visible in results");
+                    NotifiesClass.Instance.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected, but not visible in results");
                     SQLnotify.AddToINFO($@"SQLViewForm->ExecSql-> {dsResults.Tables[0].Rows.Count} datas selected, but not visible in results");
                 }
             }
             else if (ri.lastCommandType == SQLCommandType.select)
             {
-                NotifiesClass.Instance().AddToERROR("SQLViewForm->ExecSql->No datas selected");
+                NotifiesClass.Instance.AddToERROR("SQLViewForm->ExecSql->No datas selected");
                 SQLnotify.AddToERROR("SQLViewForm->ExecSql->No datas selected");
             }
 
@@ -1366,7 +1366,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 SQLnotify.AddToERROR(ex.Message);
             }
-            tabHistory.Text = $@"{LanguageClass.Instance().GetString("History")} ({dgvSQLHistory.Rows.Count})";
+            tabHistory.Text = $@"{LanguageClass.Instance.GetString("History")} ({dgvSQLHistory.Rows.Count})";
         }
         
         private void DataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

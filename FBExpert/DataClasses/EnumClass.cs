@@ -1,4 +1,5 @@
 ﻿using Enums;
+using System;
 
 namespace FBXpert.DataClasses
 {
@@ -171,23 +172,16 @@ namespace FBXpert.DataClasses
 
     public class EnumClass
     {
-        private static EnumClass instance = null;
-        protected static readonly object _lock_this = new object();
-        public static EnumClass Instance()
-        {
-            
-            if (instance == null)
-            {
-              //  lock (_lock_this)
-                {
-                    instance = new EnumClass();
-        
-                }
-            }
-            
 
-            return (instance);
+        private static readonly Lazy<EnumClass> lazy = new Lazy<EnumClass>(() => new EnumClass());
+        public static EnumClass Instance
+        {
+            get
+            {
+                return lazy.Value;
+            }
         }
+
         public string GetDependenciesTypeSQLCase()
         {
             string case0 = "WHEN 0 THEN 'TABLE' WHEN 1 THEN 'VIEW' WHEN 2 THEN 'Trigger' WHEN 3 THEN 'Computed' WHEN 4 THEN 'Validation' WHEN 5 THEN 'Procedure' WHEN 6 THEN 'Expression' WHEN 7 THEN 'ExceptionIndex' WHEN 8 THEN 'User' WHEN 9 THEN 'Field' WHEN 10 THEN 'Index' WHEN 14 THEN 'Generator' WHEN 15 THEN 'UDF' ELSE 'UNKNOWN' END";

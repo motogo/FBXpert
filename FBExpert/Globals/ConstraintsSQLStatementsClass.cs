@@ -10,22 +10,19 @@ namespace FBXpert.SQLStatements
 {
     class ConstraintsSQLStatementsClass : SQLStatementsBase
     {
-        private static readonly object _lock_this = new object();
-        private static volatile ConstraintsSQLStatementsClass instance = null;
+        
 
-        public static ConstraintsSQLStatementsClass Instance()
+        private static readonly Lazy<ConstraintsSQLStatementsClass> lazy = new Lazy<ConstraintsSQLStatementsClass>(() => new ConstraintsSQLStatementsClass());
+        public static ConstraintsSQLStatementsClass Instance
         {
-            if (instance == null)
+            get
             {
-                lock (_lock_this)
-                {
-                    instance = new ConstraintsSQLStatementsClass();
-                }
+                return lazy.Value;
             }
-            return (instance);
         }
 
-        public ConstraintsSQLStatementsClass()
+
+        private ConstraintsSQLStatementsClass()
         {
            
         }

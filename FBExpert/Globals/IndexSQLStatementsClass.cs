@@ -2,28 +2,23 @@
 using DBBasicClassLibrary;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using System;
 using System.Text;
 
 namespace FBXpert.SQLStatements
 {
     public class IndexSQLStatementsClass : SQLStatementsBase
     {       
-        private static readonly object _lock_this = new object();
-        private static volatile IndexSQLStatementsClass instance = null;
-
-        public static IndexSQLStatementsClass Instance()
+        private static readonly Lazy<IndexSQLStatementsClass> lazy = new Lazy<IndexSQLStatementsClass>(() => new IndexSQLStatementsClass());
+        public static IndexSQLStatementsClass Instance
         {
-            if (instance == null)
+            get
             {
-                lock (_lock_this)
-                {
-                    instance = new IndexSQLStatementsClass();
-                }
+                return lazy.Value;
             }
-            return (instance);
         }
 
-        public IndexSQLStatementsClass()
+        private IndexSQLStatementsClass()
         {
            
         }
@@ -31,7 +26,6 @@ namespace FBXpert.SQLStatements
         public SQLCommandsReturnInfoClass ActivateIndex(string name, DBRegistrationClass dbReg, NotifiesClass notify)
         {
               string cmd = SQLPatterns.ActivateIndexPattern.Replace(SQLPatterns.IndexKey, name);
-              
               return ExecSql(cmd, dbReg,notify);  
         }
 

@@ -58,6 +58,7 @@ namespace FBXpert
             this.tsmiGerman = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiJapanese = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLastLoadedDefinition = new System.Windows.Forms.Label();
             this.mnuMain.SuspendLayout();
             this.cmsView.SuspendLayout();
             this.cmsNotifications.SuspendLayout();
@@ -94,19 +95,19 @@ namespace FBXpert
             this.tsmiExit});
             this.cmsView.Name = "contextMenuStrip1";
             this.cmsView.OwnerItem = this.tsmiShowWindows;
-            this.cmsView.Size = new System.Drawing.Size(141, 36);
+            this.cmsView.Size = new System.Drawing.Size(142, 36);
             this.cmsView.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Image = global::FBXpert.Properties.Resources.go_previous22x;
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(140, 26);
+            this.tsmiExit.Size = new System.Drawing.Size(141, 26);
             this.tsmiExit.Text = "Exit FBXpert";
             // 
             // tsmiNotifications
@@ -124,19 +125,20 @@ namespace FBXpert
             this.tsmiNotes,
             this.tsmiErrors});
             this.cmsNotifications.Name = "contextMenuStrip1";
-            this.cmsNotifications.Size = new System.Drawing.Size(181, 70);
+            this.cmsNotifications.OwnerItem = this.tsmiNotifications;
+            this.cmsNotifications.Size = new System.Drawing.Size(123, 48);
             this.cmsNotifications.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsNotifications_ItemClicked);
             // 
             // tsmiNotes
             // 
             this.tsmiNotes.Name = "tsmiNotes";
-            this.tsmiNotes.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNotes.Size = new System.Drawing.Size(122, 22);
             this.tsmiNotes.Text = "Notes (0)";
             // 
             // tsmiErrors
             // 
             this.tsmiErrors.Name = "tsmiErrors";
-            this.tsmiErrors.Size = new System.Drawing.Size(180, 22);
+            this.tsmiErrors.Size = new System.Drawing.Size(122, 22);
             this.tsmiErrors.Text = "Errors (0)";
             // 
             // tsmiUtilities
@@ -167,6 +169,7 @@ namespace FBXpert
             this.tsmiEnglish,
             this.tsmiJapanese});
             this.cmsUtilities.Name = "contextMenuStrip1";
+            this.cmsUtilities.OwnerItem = this.tsmiUtilities;
             this.cmsUtilities.Size = new System.Drawing.Size(190, 334);
             this.cmsUtilities.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip2_ItemClicked);
             // 
@@ -176,9 +179,9 @@ namespace FBXpert
             this.tsmiDesignEarth.Size = new System.Drawing.Size(189, 26);
             this.tsmiDesignEarth.Text = "Design Earth";
             // 
-            // tsmiDesign
+            // tsmiDesignGray
             // 
-            this.tsmiDesignGray.Name = "tsmiDesign";
+            this.tsmiDesignGray.Name = "tsmiDesignGray";
             this.tsmiDesignGray.Size = new System.Drawing.Size(189, 26);
             this.tsmiDesignGray.Text = "Design Gray";
             // 
@@ -266,11 +269,21 @@ namespace FBXpert
             this.tsmiJapanese.Size = new System.Drawing.Size(189, 26);
             this.tsmiJapanese.Text = "Japanisch (TEST)";
             // 
+            // lblLastLoadedDfinition
+            // 
+            this.lblLastLoadedDefinition.AutoSize = true;
+            this.lblLastLoadedDefinition.Location = new System.Drawing.Point(384, 9);
+            this.lblLastLoadedDefinition.Name = "lblLastLoadedDfinition";
+            this.lblLastLoadedDefinition.Size = new System.Drawing.Size(101, 13);
+            this.lblLastLoadedDefinition.TabIndex = 5;
+            this.lblLastLoadedDefinition.Text = "lastLoadedDefintion";
+            // 
             // FbXpertMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1113, 636);
+            this.Controls.Add(this.lblLastLoadedDefinition);
             this.Controls.Add(this.mnuMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -317,6 +330,7 @@ namespace FBXpert
         private System.Windows.Forms.ToolStripMenuItem tsmiGerman;
         private System.Windows.Forms.ToolStripMenuItem tsmiEnglish;
         private System.Windows.Forms.ToolStripMenuItem tsmiJapanese;
+        private System.Windows.Forms.Label lblLastLoadedDefinition;
     }
 }
 

@@ -38,7 +38,7 @@ namespace FBXpert.SonstForms
             _dbReg = reg;
             _localNotify.Register4Info(InfoRaised);
             _localNotify.Register4Error(ErrorRaised);
-            LanguageClass.Instance().RegisterChangeNotifiy(LanguageChanged);
+            LanguageClass.Instance.RegisterChangeNotifiy(LanguageChanged);
         }
         
         private void LanguageChanged(object sender, LanguageChangedEventArgs k)
@@ -48,15 +48,15 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {
-            gbExportProgress.Text   = LanguageClass.Instance().GetString("PROGRESS");
-            hsSaveSourceCodes.Text  = LanguageClass.Instance().GetString("CreateSourcecode");
-            gbSourceCode.Text       = LanguageClass.Instance().GetString("SourcecodePath");
-            gbFoundLines.Text       = LanguageClass.Instance().GetString("FoundLines");
-            gbSearchCode.Text       = LanguageClass.Instance().GetString("SEARCH");
+            gbExportProgress.Text   = LanguageClass.Instance.GetString("PROGRESS");
+            hsSaveSourceCodes.Text  = LanguageClass.Instance.GetString("CreateSourcecode");
+            gbSourceCode.Text       = LanguageClass.Instance.GetString("SourcecodePath");
+            gbFoundLines.Text       = LanguageClass.Instance.GetString("FoundLines");
+            gbSearchCode.Text       = LanguageClass.Instance.GetString("SEARCH");
             object[] param = {_messagesCount, _errorCount};
-            tabPageMessages.Text            = LanguageClass.Instance().GetString("MESSAGES_INFO_ERROR", param);
-            tabPageCreateAttributes.Text    = LanguageClass.Instance().GetString("SETTINGS");
-            hsClearMessages.Text            = LanguageClass.Instance().GetString("CLEAR_ENTRIES");
+            tabPageMessages.Text            = LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR", param);
+            tabPageCreateAttributes.Text    = LanguageClass.Instance.GetString("SETTINGS");
+            hsClearMessages.Text            = LanguageClass.Instance.GetString("CLEAR_ENTRIES");
         }
 
         private void ErrorRaised(object sender, MessageEventArgs k)
@@ -67,7 +67,7 @@ namespace FBXpert.SonstForms
             fctMessages.ScrollLeft();
             
             object[] param = {_messagesCount, _errorCount};
-            tabPageMessages.Text = LanguageClass.Instance().GetString("MESSAGES_INFO_ERROR", param);
+            tabPageMessages.Text = LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR", param);
         }
 
         private void InfoRaised(object sender, MessageEventArgs k)
@@ -76,7 +76,7 @@ namespace FBXpert.SonstForms
             fctMessages.AppendText(k.Meldung);            
             _messagesCount++;            
             fctMessages.ScrollLeft();
-            tabPageMessages.Text = Format(LanguageClass.Instance().GetString("MESSAGES_INFO_ERROR"),_messagesCount,_errorCount);
+            tabPageMessages.Text = Format(LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR"),_messagesCount,_errorCount);
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace FBXpert.SonstForms
         /*
         public void RefreshXml2()
         {
-            string cmd = SQLStatementsClass.Instance().GetForRefreshXML(_dbReg.Version);
+            string cmd = SQLStatementsClass.Instance.GetForRefreshXML(_dbReg.Version);
             try
             {
                 var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
@@ -145,7 +145,7 @@ namespace FBXpert.SonstForms
                         strl.AppendLine("<VIEW Name='" + vn + "'>");
                     }
 
-                    string fcmd3 = SQLStatementsClass.Instance().GetFieldsForRefreshXML(_dbReg.Version, vn);
+                    string fcmd3 = SQLStatementsClass.Instance.GetFieldsForRefreshXML(_dbReg.Version, vn);
 
                     var fcmd2 = new FbCommand(fcmd3, con2);
                     var dread2 = fcmd2.ExecuteReader();
@@ -431,7 +431,7 @@ namespace FBXpert.SonstForms
                 }
                 
                 pbExport.Value++;
-                gbExportProgress.Text = LanguageClass.Instance().GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
+                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
                 Application.DoEvents();
             }           
         }
@@ -664,7 +664,7 @@ namespace FBXpert.SonstForms
                 
                 
                 pbExport.Value++;
-                gbExportProgress.Text = LanguageClass.Instance().GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
+                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
                 Application.DoEvents();
             } 
             fctSource.Text = sb.ToString();

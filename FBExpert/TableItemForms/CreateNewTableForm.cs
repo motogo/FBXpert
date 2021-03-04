@@ -60,8 +60,8 @@ namespace FBExpert
             var tc = _tableObject;
             var sb = new StringBuilder();
             _errorCount++;
-            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
+            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({_messagesCount}) ");
+            if (_errorCount > 0)    sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
                        
             fctMessages.AppendText("ERROR " + k.Meldung);
             tabPageMessages.Text = sb.ToString();
@@ -72,8 +72,8 @@ namespace FBExpert
         {
             var sb = new StringBuilder();
             _messagesCount++;
-            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("MESSAGES")} ({_messagesCount}) ");
-            if (_errorCount > 0) sb.Append($@"{LanguageClass.Instance().GetString("ERRORS")} ({_errorCount})");
+            if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({_messagesCount}) ");
+            if (_errorCount > 0) sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
 
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
