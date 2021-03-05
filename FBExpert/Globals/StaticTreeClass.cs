@@ -676,7 +676,7 @@ namespace FBExpert
             var indeces = new Dictionary<string,IndexClass>();
             string _funcStr = $@"GetIndecesObjects(DBReg={DBReg})";
             string cmd = IndexSQLStatementsClass.Instance.GetAllIndicies(DBReg.Version,eTableType.withoutsystem); //  .RefreshNonSystemIndicies(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -760,7 +760,7 @@ namespace FBExpert
             var indeces = new Dictionary<string, IndexClass>();
             string _funcStr = $@"GetIndecesObjects(DBReg={DBReg})";
             string cmd = IndexSQLStatementsClass.Instance.GetAllIndicies(DBReg.Version, eTableType.system); //  .RefreshNonSystemIndicies(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -844,7 +844,7 @@ namespace FBExpert
             var indeces = new Dictionary<string,IndexClass>();
 
             string cmd = IndexSQLStatementsClass.Instance.GetAllIndiciesWithoutRefConstraints(DBReg.Version,eTableType.withoutsystem); //  .RefreshNonSystemIndicies(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -924,7 +924,7 @@ namespace FBExpert
             string _funcStr = $@"AddIndexObjects_To_ListOfTableObjects(DBReg={DBReg})";
             string fields_cmd = IndexSQLStatementsClass.Instance.GetAllIndicies(DBReg.Version,eTableType.withoutsystem);                        
             TableClass tableObject = null;
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1018,7 +1018,7 @@ namespace FBExpert
             string _funcStr = $@"AddIndexObjects_To_ListOfTableObjects(DBReg={DBReg})";
             string fields_cmd = IndexSQLStatementsClass.Instance.GetAllIndicies(DBReg.Version, eTableType.system);
             TableClass tableObject = null;
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1113,7 +1113,7 @@ namespace FBExpert
             string _funcStr = $@"AddIndexObjects_To_ListOfSystemTableObjects(DBReg={DBReg})";
             fields_cmd = IndexSQLStatementsClass.Instance.GetAllIndicies(DBReg.Version, eTableType.system);
                     
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1197,7 +1197,7 @@ namespace FBExpert
             var tcc = tnn.Tag as TableClass;
             string fields_cmd = IndexSQLStatementsClass.Instance.GetTableIndicies(tcc.Name);
                                    
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1395,7 +1395,7 @@ namespace FBExpert
         {
             string _funcStr = $@"RefreshDomains(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance.RefreshNonSystemDomains(DBReg.Version);          
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             { 
                 con.Open();
@@ -1481,7 +1481,7 @@ namespace FBExpert
         {
             string _funcStr = $@"RefreshDomains(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance.RefreshSystemDomains(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1575,7 +1575,7 @@ namespace FBExpert
             //string cmd = SQLStatementsClass.Instance.GetTableForeignKeys(DBReg.Version, table.Name);
             string cmd = SQLStatementsClass.Instance.GetAllTableForeignKeys(DBReg.Version, eTableType.withoutsystem, table.Name);
             
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1665,7 +1665,7 @@ namespace FBExpert
                 cmd = ConstraintsSQLStatementsClass.Instance.GetTableConstraintsByType(DBReg.Version, "UNIQUE", tableName);
             }
             
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1820,7 +1820,7 @@ namespace FBExpert
             string _funcStr = $@"RefreshProceduresItemsOld(DBReg={DBReg})";
             String cmd = SQLStatementsClass.Instance.RefreshProcedureItems(DBReg.Version);     
 
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -1851,7 +1851,7 @@ namespace FBExpert
                                 tc.Source.Add(st.Trim());
                             }
                                                            
-                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                             con2.Open();
                             
                             if (con2.State == System.Data.ConnectionState.Open)
@@ -1985,7 +1985,7 @@ namespace FBExpert
             string _funcStr = $@"RefreshTriggers(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshNonSystemTriggers(DBReg.Version);
             NotifiesClass.Instance.AddToINFO($@"Refresh Triggers for {DBReg.Alias}",eMessageGranularity.few, true);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -2061,7 +2061,7 @@ namespace FBExpert
             NotifiesClass.Instance.AddToINFO($@"Refresh Roles for {DBReg.Alias}",eMessageGranularity.few, true);
             string cmd = SQLStatementsClass.Instance.RefreshRoles(DBReg.Version);
 
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -2149,7 +2149,7 @@ namespace FBExpert
             string _funcStr = $@"RefreshGeneratorsItems(DBReg={DBReg})";
             NotifiesClass.Instance.AddToINFO($@"Refresh Generators for {DBReg.Alias}",eMessageGranularity.few, true);
             string cmd = SQLStatementsClass.Instance.RefreshNonSystemGeneratorsItems(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -2183,7 +2183,7 @@ namespace FBExpert
 
                             string cmd2 = $@"SELECT GEN_ID({tc.Name}, 0) FROM RDB$DATABASE;";
 
-                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                             con2.Open();
                             if (con2.State == System.Data.ConnectionState.Open)
                             {
@@ -5166,7 +5166,7 @@ namespace FBExpert
             {
                 Fields = new Dictionary<string, TableFieldClass>()
             };
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5238,7 +5238,7 @@ namespace FBExpert
             var tableObject = (TableClass) tc.Clone();            
             string fields_cmd = SQLStatementsClass.Instance.GetTableFields(DBReg.Version, tableObject.Name);
             tableObject.Fields = new Dictionary<string, TableFieldClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5307,7 +5307,7 @@ namespace FBExpert
         public List<string> GetDatabaseStatistics(DBRegistrationClass DBReg)
         {
             string _funcStr = $@"GetDatabaseStatistics(DBReg={DBReg})";
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             var data = new List<string>();
             try
             {
@@ -5449,7 +5449,7 @@ namespace FBExpert
             var TableObject = new TableClass();
             string fields_cmd = SQLStatementsClass.Instance.GetAllNonSystemTableFields(DBReg.Version);
             TableObject.Fields = new Dictionary<string, TableFieldClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             var tables = new Dictionary<string,TableClass>();
 
             try
@@ -5545,7 +5545,7 @@ namespace FBExpert
             
             string fields_cmd = SQLStatementsClass.Instance.GetAllSystemTableFields(DBReg.Version);
             TableObject.Fields = new Dictionary<string, TableFieldClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5633,7 +5633,7 @@ namespace FBExpert
             string _funcStr = $@"GetInternalFunctionObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshInternalFunctionsItems(DBReg.Version);     
             var allfunctions = new Dictionary<string,FunctionClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5670,7 +5670,7 @@ namespace FBExpert
                                     tc.Source.Add(st.Trim());
                                 }
                                                            
-                                var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                                var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                                 con2.Open();
                                 
                                 if (con2.State == System.Data.ConnectionState.Open)
@@ -5751,7 +5751,7 @@ namespace FBExpert
             var allfunctions = new  Dictionary<string,UserDefinedFunctionClass>();
             if(string.IsNullOrEmpty(cmd)) return allfunctions;
 
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5790,7 +5790,7 @@ namespace FBExpert
                                     if(st.Trim().Length > 0)  tc.Source.Add(st.Trim());
                                 }
                                                            
-                                var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                                var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                                 con2.Open();                            
                                 if (con2.State == System.Data.ConnectionState.Open)
                                 {
@@ -5868,7 +5868,7 @@ namespace FBExpert
             if (!string.IsNullOrEmpty(TableName))
             {
                 string fields_cmd = SQLStatementsClass.Instance.GetTableTriggers(DBReg.Version, TableName);
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 try
                 {                    
                     con.Open();
@@ -5903,7 +5903,7 @@ namespace FBExpert
         {
             var constraints = new Dictionary<string,ConstraintsClass>();
             string cmd = ConstraintsSQLStatementsClass.Instance.GetTableCheckConstraints(DBReg.Version,  TableName);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -5962,7 +5962,7 @@ namespace FBExpert
 
             string fields_cmd = SQLStatementsClass.Instance.GetTableFields(DBReg.Version, TableName);
             tableObject.Fields = new Dictionary<string, TableFieldClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6047,7 +6047,7 @@ namespace FBExpert
             var allviews = new Dictionary<string,ViewClass>();
             string _funcStr = $@"GetViewObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshViews(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6235,7 +6235,7 @@ namespace FBExpert
             var domains = new Dictionary<string,DomainClass>();
             string _funcStr = $@"GetViewObjects(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance.RefreshNonSystemDomains(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6344,7 +6344,7 @@ namespace FBExpert
             var trigger = new Dictionary<string,TriggerClass>();
 
             string cmd = SQLStatementsClass.Instance.GetAllTableTriggersNonSystemTables(DBReg.Version); //  .RefreshNonSystemIndicies(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6401,7 +6401,7 @@ namespace FBExpert
             var generator = new Dictionary<string,GeneratorClass>();
             string _funcStr = $@"GetGeneratorObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshNonSystemGeneratorsItems(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6435,7 +6435,7 @@ namespace FBExpert
 
                             string cmd2 = $@"SELECT GEN_ID({tc.Name}, 0) FROM RDB$DATABASE;";
 
-                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                             con2.Open();
                             if (con2.State != System.Data.ConnectionState.Open) continue;
                             
@@ -6482,7 +6482,7 @@ namespace FBExpert
             string _funcStr = $@"GetProcedureObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshProcedureItems(DBReg.Version);
             var procedures = new Dictionary<string,ProcedureClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6517,7 +6517,7 @@ namespace FBExpert
                                 tc.Source.Add(st.Trim());
                             }
                                                            
-                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                             con2.Open();
                             
                             if (con2.State == System.Data.ConnectionState.Open)
@@ -6594,7 +6594,7 @@ namespace FBExpert
             string _funcStr = $@"GetFunctionObjects(DBReg={DBReg})";
             string cmd = SQLStatementsClass.Instance.RefreshInternalFunctionsItems(DBReg.Version);
             var functions = new Dictionary<string, FunctionClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6629,7 +6629,7 @@ namespace FBExpert
                                 tc.Source.Add(st.Trim());
                             }
 
-                            var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                            var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                             con2.Open();
 
                             if (con2.State == System.Data.ConnectionState.Open)
@@ -6704,7 +6704,7 @@ namespace FBExpert
 
         public string GetBLOBData(DBRegistrationClass DBReg, string cmd)
         {                        
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6763,7 +6763,7 @@ namespace FBExpert
         {
             string _funcStr = $@"GetAllTablePrimaryKeyObjects(DBReg={DBReg},TableClass={tc})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTablePrimaryKeys(DBReg.Version);
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 try
                 {
                     con.Open();
@@ -6831,7 +6831,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddForeignKeyObjects_To_ListOfTableObjects(DBReg={DBReg},TableClass={tc})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTableForeignKeys(DBReg.Version,eTableType.withoutsystem);            
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6892,7 +6892,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddForeignKeyObjects_To_ListOfTableObjects(DBReg={DBReg},TableClass={tc})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTableForeignKeys(DBReg.Version,eTableType.system);            
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -6953,7 +6953,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddTriggerObjects_To_ListOfTableObjects(DBReg={DBReg},TableClass={tc})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTableTriggersNonSystemTables(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7014,7 +7014,7 @@ namespace FBExpert
             string _funcStr = $@"GetAllTriggerObjects(DBReg={DBReg})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTableTriggersNonSystemTables(DBReg.Version);                   
             var triggers = new Dictionary<string, TriggerClass>();
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7053,7 +7053,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddTriggerObjects_To_ListOfSystemTableObjects(DBReg={DBReg},tc={tc})";
             string fields_cmd = SQLStatementsClass.Instance.GetAllTableTriggersSystemTables(DBReg.Version);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7127,7 +7127,7 @@ namespace FBExpert
                 }
             }
 
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7263,7 +7263,7 @@ namespace FBExpert
             string _funcStr = $@"GetConstraintsObjectsForTable(ctyp={ctyp},TableClass={tc},DBReg={DBReg})";
             string ctyp_string = EnumHelper.GetDescription(ctyp);
             string cmd = ConstraintsSQLStatementsClass.Instance.GetTableConstraintsByType(DBReg.Version, ctyp_string, tc.Name);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7395,7 +7395,7 @@ namespace FBExpert
         {
             string _funcStr = $@"GetSystemTableConstraintsObjects(ctyp={ctyp},tc={tc},DBReg={DBReg})";
             string cmd = ConstraintsSQLStatementsClass.Instance.GetSystemTableConstraintsByType(DBReg.Version, ctyp);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7519,7 +7519,7 @@ namespace FBExpert
                     break;
                 }
             }
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7611,7 +7611,7 @@ namespace FBExpert
                     break;
                 }
             }
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7690,7 +7690,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDependenciesTOObjects_To_ListOfTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesON(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7817,7 +7817,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDependenciesTOObjects_To_ListOfTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesOfAnyObjectTOObjects(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -7945,7 +7945,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDependenciesTOObjects_To_ListOfTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesOfAnyObjectTOObjects(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8073,7 +8073,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDependenciesTOObjects_To_ListOfSystemTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesON(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8200,7 +8200,7 @@ namespace FBExpert
         {
             string _funcStr = $@"GetAllDependenciesOn(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesON(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8329,7 +8329,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDependenciesFROMObjects_To_ListOfTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesFROM(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8453,7 +8453,7 @@ namespace FBExpert
         {
             string _funcStr = $@"AddDepednenciesFROMObjects_To_ListOfSystemTableObjects(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesFROM(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8577,7 +8577,7 @@ namespace FBExpert
         {
             string _funcStr = $@"GetAllDepednenciesFROM(DBReg={DBReg},tc={tc},typ={typ})";
             string cmd = SQLStatementsClass.Instance.GetAllDependenciesON(DBReg.Version, typ);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();
@@ -8701,7 +8701,7 @@ namespace FBExpert
             if (!string.IsNullOrEmpty(ViewName))
             {
                 string cmd = SQLStatementsClass.Instance.GetViewFields(DBReg.Version, ViewName);                
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 try
                 {                    
                     con.Open();
@@ -8758,7 +8758,7 @@ namespace FBExpert
             {
                 string cmd = SQLStatementsClass.Instance.GetViewFields(DBReg.Version,View.Name);
                
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 try
                 {
                     con.Open();
@@ -8819,7 +8819,7 @@ namespace FBExpert
             var new_view = new ViewClass();
 
             string cmd = SQLStatementsClass.Instance.RefreshView(DBReg.Version,viewname);
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
             try
             {
                 con.Open();

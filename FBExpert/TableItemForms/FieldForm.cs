@@ -654,7 +654,7 @@ namespace FBExpert
             string cmd_index = SQLStatementsClass.Instance.GetFieldDependencies(_dbReg.Version, TableObject.Name, FieldObject.Name);
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsDependencies);
                 con.Close();
@@ -737,7 +737,7 @@ namespace FBExpert
         }
         private void ExecueteSQL()
         {           
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             //_sql.ScriptNotify.Register4Info(InfoRaised);
             _sql.ScriptNotify.Register4Error(ErrorRaised);

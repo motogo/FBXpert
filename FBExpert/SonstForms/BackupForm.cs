@@ -81,7 +81,7 @@ namespace FBXpert
             lvBackupMessage.Items.Clear();
             EditToData();
             
-            string cns = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string cns = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var bu = new BackupClass(cns);
             var lf = new List<FirebirdSql.Data.Services.FbBackupFile>();
             for(int i = 0; i < lvBackup.Items.Count; i++)
@@ -186,7 +186,7 @@ namespace FBXpert
             ca.PacketSize = DBReg.PacketSize;
             ca.Port = DBReg.Port;
 
-            string connstr = ConnectionStrings.Instance().MakeConnectionString(ca);
+            string connstr = ConnectionStrings.Instance.MakeConnectionString(ca);
 
             lvRestoreMessage.Items.Clear();
             var bu = new RestoreClass(connstr);

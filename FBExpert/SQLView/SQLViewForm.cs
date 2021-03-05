@@ -333,7 +333,7 @@ namespace SQLView
             Stopwatch sw = new Stopwatch();
             sw.Start();
             this.Cursor = Cursors.WaitCursor;
-            var Con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
+            var Con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal));
             Con.Open();
 
             var cmd1 = new FbCommand(txtSQL.Text, Con);
@@ -474,7 +474,7 @@ namespace SQLView
             _sqLcommand.ReplaceConnection(server, path);
             _dbrRegLocal.Server = server;
             _dbrRegLocal.DatabasePath = path;
-            string connectionString = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
+            string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal);
             string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString, (int)_dbrRegLocal.Version >= (int)eDBVersion.FB3_32);
             hsLifeTime.ToolTipActive = true;
             hsLifeTime.ToolTipText = connectionString;
@@ -688,7 +688,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     return;
                 }
 
-                var _globalCon = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal));
+                var _globalCon = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal));
                 string sql = txtSQL.Text.Trim();
                 if (sql.EndsWith(";")) sql = sql.Substring(0, sql.Length - 1);
 
@@ -728,7 +728,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void RunSQLFromFile()
         {
             pbRunSQL.Value = pbRunSQL.Minimum;
-            UserActionClass.Instance().UserAction = UserActionType.none;
+            UserActionClass.Instance.UserAction = UserActionType.none;
             if (!string.IsNullOrEmpty(SQLViewLastRunClass.Instance().ScriptPath))
             {
                 ofdSQL.InitialDirectory = SQLViewLastRunClass.Instance().ScriptPath;
@@ -743,7 +743,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             pbRunSQL.Value = 0;
             pbRunSQL.Maximum = (int)fi.Length;
             hsBreak.Enabled = true;
-           // string connectionstr = ConnectionStrings.Instance().MakeConnectionString(_dbRegOrg);
+           // string connectionstr = ConnectionStrings.Instance.MakeConnectionString(_dbRegOrg);
             string[] strarr = File.ReadAllLines(fi.FullName);
             
             var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, strarr, true);
@@ -756,15 +756,15 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void UserBreak()
         {
-            UserActionClass.Instance().UserAction = UserActionType.abort;
+            UserActionClass.Instance.UserAction = UserActionType.abort;
         }
         private void UserStart()
         {
-            UserActionClass.Instance().UserAction = UserActionType.none;
+            UserActionClass.Instance.UserAction = UserActionType.none;
         }
         private void UserStartReady()
         {
-            UserActionClass.Instance().UserAction = UserActionType.none;
+            UserActionClass.Instance.UserAction = UserActionType.none;
             hsBreak.Enabled = false;
             hsRunSQL.Enabled = true;
             hsRunSQLfromFile.Enabled = true;
@@ -834,7 +834,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void hsClose_Click(object sender, EventArgs e)
         {
-            UserActionClass.Instance().UserAction = UserActionType.none; Close();
+            UserActionClass.Instance.UserAction = UserActionType.none; Close();
         }
         private void hsRunSQL_Click(object sender, EventArgs e)
         {
@@ -943,7 +943,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 DataSet dsUpdate = dsResults.GetChanges(DataRowState.Modified);
                 DataSet dsInsert = dsResults.GetChanges(DataRowState.Added);
                 DataSet dsDeleted = dsResults.GetChanges(DataRowState.Deleted);
-                string constr = ConnectionStrings.Instance().MakeConnectionString(_dbrRegLocal);
+                string constr = ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal);
                 var cn = new FbConnection(constr);
                 string cm1 = _cmd;
                 var da = new FbDataAdapter(cm1, cn);

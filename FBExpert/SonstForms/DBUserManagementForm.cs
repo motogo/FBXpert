@@ -63,7 +63,7 @@ namespace FBXpert
                 dsMonConnections.Clear();
                 dgvMonConnections.AutoGenerateColumns = true;
                 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 var ds = new FbDataAdapter(cmd, con);
                 ds.Fill(dsMonConnections);
                 con.Close();
@@ -289,7 +289,7 @@ namespace FBXpert
 
         private void ExecueteSQL()
         {
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(DBReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(DBReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, DBReg.NewLine, DBReg.CommentStart, DBReg.CommentEnd, DBReg.SingleLineComment, "SCRIPT");
             //_sql.ScriptNotify.Register4Info(InfoRaised);
             _sql.ScriptNotify.Register4Error(ErrorRaised);

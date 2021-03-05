@@ -218,7 +218,7 @@ namespace FBXpert
         private void Create()
         {                                    
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(Notify_OnRaiseInfoHandler);
             _sql.ScriptNotify.Register4Error(Notify_OnRaiseErrorHandler);

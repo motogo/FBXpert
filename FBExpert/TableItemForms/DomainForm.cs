@@ -336,7 +336,7 @@ namespace FBExpert
         
         private void Create()
         {            
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
 
             var riList =_sql.ExecuteCommands(fctSQL.Lines);
@@ -355,7 +355,7 @@ namespace FBExpert
 
         private void hotSpot2_Click(object sender, EventArgs e)
         {
-            var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
             con.Open();
             foreach (string cmd in fctSQL.Lines)
             {

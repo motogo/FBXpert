@@ -219,7 +219,7 @@ namespace FBXpert
           
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsDependenciesTo);
                 con.Close();
@@ -318,7 +318,7 @@ namespace FBXpert
         private void Create()
         {
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
             var riFailure = riList.Find(x=>x.commandDone == false);

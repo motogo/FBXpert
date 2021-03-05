@@ -159,7 +159,7 @@ namespace FBExpert
             string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesTO(DBReg.Version, ViewObject.Name);
             try
             { 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con );
                 ds.Fill(dsDependencies);
                 con.Close();               
@@ -181,7 +181,7 @@ namespace FBExpert
             string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesFROM(DBReg.Version, ViewObject.Name);
             try
             { 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsDependencies);
                 con.Close();              
@@ -204,7 +204,7 @@ namespace FBExpert
             dgExportGrid.Rows.Clear();
             try
             { 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 con.Open();
                 var fcmd = new FbCommand(cmd, con);
                 var dread = fcmd.ExecuteReader();                                                                                           
@@ -287,7 +287,7 @@ namespace FBExpert
                 {
                   if(_dataConnection.State != System.Data.ConnectionState.Closed)   _dataConnection.Close();
                 }
-                _dataConnection = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));                    
+                _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));                    
                 _dataConnection.Open();
                 var cnt = DBReg.SkipForSelect;
                 var sk = DBReg.SkipForSelect;

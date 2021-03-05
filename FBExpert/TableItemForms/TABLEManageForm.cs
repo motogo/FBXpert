@@ -235,7 +235,7 @@ namespace FBExpert
             dgvPrimaryKeys.AutoGenerateColumns = true;
             try
             { 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsPrimaryKeys);
                 con.Close();            
@@ -263,7 +263,7 @@ namespace FBExpert
                 int n = 0;
                 using(TransactionScope c = new TransactionScope())
                 {
-                    using(var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg)))
+                    using(var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg)))
                     {
                         con.Open();                        
                         var fcmd = new FbCommand(cmd_index, con);
@@ -301,7 +301,7 @@ namespace FBExpert
            //string cmd_index = SQLStatementsClass.Instance.GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsForeignKeys);
                 con.Close();
@@ -331,7 +331,7 @@ namespace FBExpert
 
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsIndicies);
                 con.Close();
@@ -354,7 +354,7 @@ namespace FBExpert
             string cmd_index = SQLStatementsClass.Instance.GetTableManagerDependenciesTO(_dbReg.Version, _tableObject.Name);
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsDependenciesTo);
                 con.Close();
@@ -375,7 +375,7 @@ namespace FBExpert
             string cmd_index = SQLStatementsClass.Instance.GetTableManagerDependenciesFROM(_dbReg.Version, _tableObject.Name);
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsDependenciesFrom);
                 con.Close();
@@ -399,7 +399,7 @@ namespace FBExpert
 
             try
             {
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 FbDataAdapter ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsUniques);
                 con.Close();
@@ -445,7 +445,7 @@ namespace FBExpert
             {
                 using(TransactionScope c = new TransactionScope())
                 {
-                    using(var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg)))
+                    using(var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg)))
                     {                
                         con.Open();
                         var fcmd = new FbCommand(cmd, con);
@@ -634,7 +634,7 @@ namespace FBExpert
            long skip = 0;
            if (_dataConnection?.State != System.Data.ConnectionState.Closed)   _dataConnection?.Close();
            
-           _dataConnection = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+           _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
            _dataConnection.Open();
            
            long cnt = _dbReg.SkipForSelect;

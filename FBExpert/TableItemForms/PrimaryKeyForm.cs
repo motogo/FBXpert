@@ -373,7 +373,7 @@ namespace FBXpert
             dataSet1.Clear();
                         
             // var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines);             
             var riFailure = riList.Find(x=>x.commandDone == false);                                    

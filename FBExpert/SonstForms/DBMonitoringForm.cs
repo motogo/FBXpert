@@ -49,7 +49,7 @@ namespace FBXpert
                 dsMonConnections.Clear();
                 dgvMonConnections.AutoGenerateColumns = true;
                 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(DBReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsMonConnections);
                 con.Close();

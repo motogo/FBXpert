@@ -283,7 +283,7 @@ namespace FBXpert.DataClasses
             
             using(var c = new TransactionScope())
             {
-                using(var _dataConnection = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg)))
+                using(var _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg)))
                 {
                      _dataConnection.Open();                                
                      if(tableObject.primary_constraint != null)

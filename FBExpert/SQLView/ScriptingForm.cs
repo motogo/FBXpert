@@ -37,7 +37,7 @@ namespace FBXpert.SQLView
             
             fcbSQL.Clear();
             fcbSQL.SelectionStart = 0;
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
         }
@@ -53,7 +53,7 @@ namespace FBXpert.SQLView
                      
             fcbSQL.Clear();            
             fcbSQL.SelectionStart = 0;           
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
             foreach (string str in script)
             {
@@ -336,7 +336,7 @@ namespace FBXpert.SQLView
             };
 
 
-            string connstr = ConnectionStrings.Instance().MakeConnectionString(drc);
+            string connstr = ConnectionStrings.Instance.MakeConnectionString(drc);
             if (fbConn?.State == System.Data.ConnectionState.Open)
             {
                 fbConn.Close();
@@ -463,7 +463,7 @@ namespace FBXpert.SQLView
             _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()}->{command.CommandType}->Executing");
             Application.DoEvents();
             
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(ScriptInfoRaised);
             _sql.ScriptNotify.Register4Error(ScriptErrorRaised);
@@ -543,7 +543,7 @@ namespace FBXpert.SQLView
                               
         private void PrepareCommandsFromSQL()
         {            
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");            
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             if (cbClearBeforePreparing.Checked)
@@ -561,7 +561,7 @@ namespace FBXpert.SQLView
             string sql = File.ReadAllText(fn);
             List<string> sqlarr = new List<string>();
             sqlarr.Add(sql);
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             //_sql.PrepareCommands(sqlarr, cbClearBeforePreparing.Checked);
@@ -577,7 +577,7 @@ namespace FBXpert.SQLView
             var content = new StringBuilder();
             _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} Prepare executing script in file {filename}");
             Application.DoEvents();            
-            string _connstr = ConnectionStrings.Instance().MakeConnectionString(_actScriptingDbReg);
+            string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             _sql.Commands.Clear();

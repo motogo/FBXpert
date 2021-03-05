@@ -113,10 +113,10 @@ namespace FBXpert.SonstForms
             string cmd = SQLStatementsClass.Instance.GetForRefreshXML(_dbReg.Version);
             try
             {
-                var con2 = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 con2.Open();
 
-                var con = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(_dbReg));
+                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 con.Open();
 
                 var fcmd = new FbCommand(cmd, con);

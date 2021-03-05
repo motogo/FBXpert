@@ -172,7 +172,7 @@ namespace FBExpert
             if (_dbReg.ConnectionType== eConnectionType.server) rbRemote.Checked = true;
             else rbEmbedded.Checked = true;
 
-            txtConnectionString.Text = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            txtConnectionString.Text = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             if (_dbReg.CodeSettings == null) _dbReg.CodeSettings = new CodeSettingsClass();
 
             if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger) rbGenerateDBGenerator.Checked = true;
@@ -346,7 +346,7 @@ namespace FBExpert
         {           
             SetServerDatas();
             SetServerUIVisiblies();
-            string connectionString = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+            string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             txtConnectionString.Text = connectionString;
             _connectionDataChanged = true;
         }

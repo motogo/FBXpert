@@ -36,7 +36,7 @@ namespace FBExpert
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
 
-            string cn = ConnectionStrings.Instance().MakeConnectionString(dbReg);
+            string cn = ConnectionStrings.Instance.MakeConnectionString(dbReg);
             revent = new FbRemoteEvent(cn);                     
             revent.RemoteEventCounts += Revent_RemoteEventCounts;   // new FbRemoteEventEventHandler(EventCounts);
                       
@@ -257,7 +257,7 @@ namespace FBExpert
                fctSQL.SaveToFile(saveTRACKINGFile.FileName,Encoding.UTF8);       
                
             /*
-               string cn = ConnectionStrings.Instance().MakeConnectionString(_dbReg);
+               string cn = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
                FbConnection connection = new FbConnection(cn);
                connection.Open();
 

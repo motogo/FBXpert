@@ -37,7 +37,7 @@ namespace FBXpert.DesignReport
 
                 if (dataConnection.State != ConnectionState.Closed) dataConnection.Close();
 
-                dataConnection = new FbConnection(ConnectionStrings.Instance().MakeConnectionString(dbReg));
+                dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(dbReg));
                 dataConnection.Open();
                 var ds = new DataSet();
                 var adapter = new FbDataAdapter("", dataConnection);
