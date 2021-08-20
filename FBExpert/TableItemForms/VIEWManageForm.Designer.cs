@@ -31,13 +31,13 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWManageForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWManageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlViews = new System.Windows.Forms.TabControl();
             this.tabPageFIELDS = new System.Windows.Forms.TabPage();
             this.lvFields = new System.Windows.Forms.ListView();
@@ -56,6 +56,8 @@ namespace FBExpert
             this.bsViewContent = new System.Windows.Forms.BindingSource(this.components);
             this.dsViewContent = new System.Data.DataSet();
             this.Table = new System.Data.DataTable();
+            this.gbSQL = new System.Windows.Forms.GroupBox();
+            this.txtSQL = new System.Windows.Forms.TextBox();
             this.pnlDataUpper = new System.Windows.Forms.Panel();
             this.gbBnView = new System.Windows.Forms.GroupBox();
             this.bnView = new System.Windows.Forms.BindingNavigator(this.components);
@@ -125,6 +127,7 @@ namespace FBExpert
             this.hsRefreshExportData = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.ckGetDatas = new System.Windows.Forms.CheckBox();
             this.gnUsedTime = new System.Windows.Forms.GroupBox();
             this.txtUsedTime = new System.Windows.Forms.TextBox();
             this.gbMaxAllowedErrors = new System.Windows.Forms.GroupBox();
@@ -138,7 +141,8 @@ namespace FBExpert
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bwExport = new System.ComponentModel.BackgroundWorker();
-            this.ckGetDatas = new System.Windows.Forms.CheckBox();
+            this.rbSQLDesc = new System.Windows.Forms.RadioButton();
+            this.rbSQLAsc = new System.Windows.Forms.RadioButton();
             this.tabControlViews.SuspendLayout();
             this.tabPageFIELDS.SuspendLayout();
             this.cmsUpdateInsertText.SuspendLayout();
@@ -148,6 +152,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsViewContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsViewContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).BeginInit();
+            this.gbSQL.SuspendLayout();
             this.pnlDataUpper.SuspendLayout();
             this.gbBnView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bnView)).BeginInit();
@@ -232,8 +237,8 @@ namespace FBExpert
             this.lvFields.GridLines = true;
             this.lvFields.HideSelection = false;
             this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.lvFields.Location = new System.Drawing.Point(3, 3);
             this.lvFields.Name = "lvFields";
             this.lvFields.Size = new System.Drawing.Size(1261, 525);
@@ -286,6 +291,7 @@ namespace FBExpert
             // tabPageDATA
             // 
             this.tabPageDATA.Controls.Add(this.dgvResults);
+            this.tabPageDATA.Controls.Add(this.gbSQL);
             this.tabPageDATA.Controls.Add(this.pnlDataUpper);
             this.tabPageDATA.Controls.Add(this.panel1);
             this.tabPageDATA.ImageIndex = 6;
@@ -302,31 +308,31 @@ namespace FBExpert
             this.dgvResults.AllowUserToAddRows = false;
             this.dgvResults.AllowUserToDeleteRows = false;
             this.dgvResults.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsViewContent;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(3, 43);
+            this.dgvResults.Location = new System.Drawing.Point(3, 89);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
             this.dgvResults.RowHeadersVisible = false;
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.Size = new System.Drawing.Size(1261, 485);
+            this.dgvResults.Size = new System.Drawing.Size(1261, 439);
             this.dgvResults.TabIndex = 17;
             this.dgvResults.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
@@ -360,6 +366,27 @@ namespace FBExpert
             // Table
             // 
             this.Table.TableName = "Table";
+            // 
+            // gbSQL
+            // 
+            this.gbSQL.Controls.Add(this.txtSQL);
+            this.gbSQL.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbSQL.Location = new System.Drawing.Point(3, 43);
+            this.gbSQL.Name = "gbSQL";
+            this.gbSQL.Size = new System.Drawing.Size(1261, 46);
+            this.gbSQL.TabIndex = 21;
+            this.gbSQL.TabStop = false;
+            this.gbSQL.Text = "Select command";
+            // 
+            // txtSQL
+            // 
+            this.txtSQL.BackColor = System.Drawing.SystemColors.Info;
+            this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSQL.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSQL.Location = new System.Drawing.Point(3, 16);
+            this.txtSQL.Name = "txtSQL";
+            this.txtSQL.Size = new System.Drawing.Size(1255, 20);
+            this.txtSQL.TabIndex = 0;
             // 
             // pnlDataUpper
             // 
@@ -500,6 +527,7 @@ namespace FBExpert
             // 
             this.sfbViewData.Caption = "Spezialfilter";
             this.sfbViewData.cbChecked = false;
+            this.sfbViewData.ClearFilterCaption = "Clear Filter";
             this.sfbViewData.dcFilter = null;
             this.sfbViewData.Dock = System.Windows.Forms.DockStyle.Left;
             this.sfbViewData.EditCaption = "Edit filter";
@@ -510,12 +538,14 @@ namespace FBExpert
             this.sfbViewData.Name = "sfbViewData";
             this.sfbViewData.PasteCaption = "Paste filter from clipboard";
             this.sfbViewData.Pattern = "";
+            this.sfbViewData.SaveFilterCaption = "Save Filter";
             this.sfbViewData.SearchMode = SeControlsLib.eSearchMode.NotCaseSensitive;
             this.sfbViewData.ShowCheckbox = false;
             this.sfbViewData.Size = new System.Drawing.Size(236, 36);
             this.sfbViewData.SQLKonjunktion = "WHERE";
             this.sfbViewData.SQLVorfilterCmd = "";
             this.sfbViewData.TabIndex = 6;
+            this.sfbViewData.UseTranslation = false;
             this.sfbViewData.CbCheckedChanged += new SeControlsLib.cbCheckedChangedHandler(this.spezialfilterBox1_CbCheckedChanged);
             // 
             // hsCancelGettingData
@@ -993,22 +1023,22 @@ namespace FBExpert
             // 
             this.dgvDependencies.AllowUserToAddRows = false;
             this.dgvDependencies.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependencies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependencies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDependencies.AutoGenerateColumns = false;
             this.dgvDependencies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependencies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependencies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDependencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependencies.DataSource = this.bsDependencies;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependencies.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependencies.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDependencies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependencies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependencies.EnableHeadersVisualStyles = false;
@@ -1643,6 +1673,17 @@ namespace FBExpert
             this.pnlUpper.Size = new System.Drawing.Size(1275, 40);
             this.pnlUpper.TabIndex = 1;
             // 
+            // ckGetDatas
+            // 
+            this.ckGetDatas.AutoSize = true;
+            this.ckGetDatas.Location = new System.Drawing.Point(1086, 11);
+            this.ckGetDatas.Name = "ckGetDatas";
+            this.ckGetDatas.Size = new System.Drawing.Size(83, 17);
+            this.ckGetDatas.TabIndex = 9;
+            this.ckGetDatas.Text = "Read Datas";
+            this.ckGetDatas.UseVisualStyleBackColor = true;
+            this.ckGetDatas.CheckedChanged += new System.EventHandler(this.ckGetDatas_CheckedChanged);
+            // 
             // gnUsedTime
             // 
             this.gnUsedTime.Controls.Add(this.txtUsedTime);
@@ -1685,20 +1726,22 @@ namespace FBExpert
             // 
             // gbMaxRows
             // 
+            this.gbMaxRows.Controls.Add(this.rbSQLDesc);
+            this.gbMaxRows.Controls.Add(this.rbSQLAsc);
             this.gbMaxRows.Controls.Add(this.txtMaxRows);
             this.gbMaxRows.Location = new System.Drawing.Point(585, 0);
             this.gbMaxRows.Name = "gbMaxRows";
-            this.gbMaxRows.Size = new System.Drawing.Size(110, 41);
+            this.gbMaxRows.Size = new System.Drawing.Size(218, 41);
             this.gbMaxRows.TabIndex = 4;
             this.gbMaxRows.TabStop = false;
             this.gbMaxRows.Text = "Max Rows";
             // 
             // txtMaxRows
             // 
-            this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtMaxRows.Location = new System.Drawing.Point(3, 16);
             this.txtMaxRows.Name = "txtMaxRows";
-            this.txtMaxRows.Size = new System.Drawing.Size(104, 20);
+            this.txtMaxRows.Size = new System.Drawing.Size(88, 20);
             this.txtMaxRows.TabIndex = 0;
             this.txtMaxRows.Text = "2000";
             // 
@@ -1840,16 +1883,27 @@ namespace FBExpert
             this.bwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExport_ProgressChanged);
             this.bwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExport_RunWorkerCompleted);
             // 
-            // ckGetDatas
+            // rbSQLDesc
             // 
-            this.ckGetDatas.AutoSize = true;
-            this.ckGetDatas.Location = new System.Drawing.Point(1086, 11);
-            this.ckGetDatas.Name = "ckGetDatas";
-            this.ckGetDatas.Size = new System.Drawing.Size(83, 17);
-            this.ckGetDatas.TabIndex = 9;
-            this.ckGetDatas.Text = "Read Datas";
-            this.ckGetDatas.UseVisualStyleBackColor = true;
-            this.ckGetDatas.CheckedChanged += new System.EventHandler(this.ckGetDatas_CheckedChanged);
+            this.rbSQLDesc.AutoSize = true;
+            this.rbSQLDesc.Checked = true;
+            this.rbSQLDesc.Location = new System.Drawing.Point(149, 19);
+            this.rbSQLDesc.Name = "rbSQLDesc";
+            this.rbSQLDesc.Size = new System.Drawing.Size(54, 17);
+            this.rbSQLDesc.TabIndex = 4;
+            this.rbSQLDesc.TabStop = true;
+            this.rbSQLDesc.Text = "DESC";
+            this.rbSQLDesc.UseVisualStyleBackColor = true;
+            // 
+            // rbSQLAsc
+            // 
+            this.rbSQLAsc.AutoSize = true;
+            this.rbSQLAsc.Location = new System.Drawing.Point(97, 18);
+            this.rbSQLAsc.Name = "rbSQLAsc";
+            this.rbSQLAsc.Size = new System.Drawing.Size(46, 17);
+            this.rbSQLAsc.TabIndex = 3;
+            this.rbSQLAsc.Text = "ASC";
+            this.rbSQLAsc.UseVisualStyleBackColor = true;
             // 
             // VIEWManageForm
             // 
@@ -1872,6 +1926,8 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsViewContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsViewContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).EndInit();
+            this.gbSQL.ResumeLayout(false);
+            this.gbSQL.PerformLayout();
             this.pnlDataUpper.ResumeLayout(false);
             this.pnlDataUpper.PerformLayout();
             this.gbBnView.ResumeLayout(false);
@@ -2021,5 +2077,9 @@ namespace FBExpert
         private System.Windows.Forms.ContextMenuStrip cmdDATA;
         private System.Windows.Forms.ToolStripMenuItem tsmiSpaltenEdit;
         private System.Windows.Forms.CheckBox ckGetDatas;
+        private System.Windows.Forms.GroupBox gbSQL;
+        private System.Windows.Forms.TextBox txtSQL;
+        private System.Windows.Forms.RadioButton rbSQLDesc;
+        private System.Windows.Forms.RadioButton rbSQLAsc;
     }
 }

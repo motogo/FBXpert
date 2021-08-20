@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -281,6 +281,12 @@
     <Compile Include="SonstForms\DBUserManagementForm.Designer.cs">
       <DependentUpon>DBUserManagementForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SonstForms\EXPORTDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\EXPORTDataForm.Designer.cs">
+      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SonstForms\ExportFunctionsScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,12 @@
     </Compile>
     <Compile Include="SonstForms\ExportViewsSQLForm.Designer.cs">
       <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SonstForms\IMPORTDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\IMPORTDataForm.Designer.cs">
+      <DependentUpon>IMPORTDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TableItemForms\ConstraintsForm.cs">
       <SubType>Form</SubType>
@@ -448,12 +460,6 @@
     <Compile Include="DataClasses\ForgeignKeyClass.cs" />
     <Compile Include="DataClasses\SQLStatements.cs" />
     <Compile Include="DataClasses\TypesClass.cs" />
-    <Compile Include="SonstForms\EXPORTDataForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SonstForms\EXPORTDataForm.Designer.cs">
-      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Globals\AppSettingsClass.cs" />
     <Compile Include="DataClasses\DataClassFactory.cs" />
     <Compile Include="DataClasses\DataObjectClass.cs" />
@@ -613,6 +619,9 @@
     <EmbeddedResource Include="SonstForms\DBUserManagementForm.resx">
       <DependentUpon>DBUserManagementForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\EXPORTDataForm.resx">
+      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\ExportFunctionsScriptForm.resx">
       <DependentUpon>ExportFunctionsScriptForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -624,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\ExportViewsSQLForm.resx">
       <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\IMPORTDataForm.resx">
+      <DependentUpon>IMPORTDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\ConstraintsForm.resx">
       <DependentUpon>ConstraintsForm.cs</DependentUpon>
@@ -728,9 +740,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DBExplorer.resx">
       <DependentUpon>DBExplorer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SonstForms\EXPORTDataForm.resx">
-      <DependentUpon>EXPORTDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DesignReport\ReportDesignForm.resx">
       <DependentUpon>ReportDesignForm.cs</DependentUpon>

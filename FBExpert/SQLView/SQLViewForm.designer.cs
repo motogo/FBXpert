@@ -35,8 +35,8 @@ namespace SQLView
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLViewForm1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_upper = new System.Windows.Forms.Panel();
             this.hsLifeTime = new SeControlsLib.HotSpot();
             this.gbDatabase = new System.Windows.Forms.GroupBox();
@@ -62,6 +62,7 @@ namespace SQLView
             this.tsmiLastCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiInsertLastSuccessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExecuteLastSucessfullCommand = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsertPK = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSQLUpper = new System.Windows.Forms.Panel();
             this.ckShowResults = new System.Windows.Forms.CheckBox();
             this.hsBreak = new SeControlsLib.HotSpot();
@@ -219,7 +220,6 @@ namespace SQLView
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
             this.bsHistory = new System.Windows.Forms.BindingSource(this.components);
-            this.tsmiInsertPK = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_upper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
@@ -682,6 +682,7 @@ namespace SQLView
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -707,7 +708,7 @@ namespace SQLView
             this.tsmiExecuteLastSucessfullCommand,
             this.tsmiInsertPK});
             this.cmsSQLText.Name = "cmsText";
-            this.cmsSQLText.Size = new System.Drawing.Size(249, 164);
+            this.cmsSQLText.Size = new System.Drawing.Size(249, 142);
             this.cmsSQLText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSQLText_ItemClicked);
             // 
             // tsmiDDLCopyToClipboard
@@ -750,6 +751,12 @@ namespace SQLView
             this.tsmiExecuteLastSucessfullCommand.Name = "tsmiExecuteLastSucessfullCommand";
             this.tsmiExecuteLastSucessfullCommand.Size = new System.Drawing.Size(248, 22);
             this.tsmiExecuteLastSucessfullCommand.Text = "Execute last sucessfull command";
+            // 
+            // tsmiInsertPK
+            // 
+            this.tsmiInsertPK.Name = "tsmiInsertPK";
+            this.tsmiInsertPK.Size = new System.Drawing.Size(248, 22);
+            this.tsmiInsertPK.Text = "Insert PRIMARY KEY NOT NULL";
             // 
             // pnlSQLUpper
             // 
@@ -1169,7 +1176,9 @@ namespace SQLView
             this.cbEncoding.FormattingEnabled = true;
             this.cbEncoding.Items.AddRange(new object[] {
             "NONE",
-            "UTF8"});
+            "UTF8",
+            "ASCII",
+            "ISO8859_1"});
             this.cbEncoding.Location = new System.Drawing.Point(3, 16);
             this.cbEncoding.Name = "cbEncoding";
             this.cbEncoding.Size = new System.Drawing.Size(116, 21);
@@ -1201,21 +1210,21 @@ namespace SQLView
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.DataSource = this.bsResults;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
             this.dgvResults.Location = new System.Drawing.Point(3, 50);
@@ -2507,6 +2516,7 @@ namespace SQLView
             this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctPlan.IsReplaceMode = false;
             this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctPlan.LeftBracket = '(';
@@ -2598,6 +2608,7 @@ namespace SQLView
             this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLData.IsReplaceMode = false;
             this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLData.LeftBracket = '(';
@@ -3122,6 +3133,7 @@ namespace SQLView
             this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLScheme.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLScheme.IsReplaceMode = false;
             this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLScheme.LeftBracket = '(';
@@ -3495,12 +3507,6 @@ namespace SQLView
             this.saveFileDialogCSV.DefaultExt = "*.xml";
             this.saveFileDialogCSV.Filter = "CSV|*.csv|XLS|*.xls|All|*.*";
             this.saveFileDialogCSV.Title = "Save CSV";
-            // 
-            // tsmiInsertPK
-            // 
-            this.tsmiInsertPK.Name = "tsmiInsertPK";
-            this.tsmiInsertPK.Size = new System.Drawing.Size(248, 22);
-            this.tsmiInsertPK.Text = "Insert PRIMARY KEY NOT NULL";
             // 
             // SQLViewForm1
             // 

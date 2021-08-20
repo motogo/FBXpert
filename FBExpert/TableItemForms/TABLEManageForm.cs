@@ -600,11 +600,21 @@ namespace FBExpert
             }
             if(_pkColumnName.Length > 0)
             {
-                sb.Append($@" ORDER BY {_pkColumnName} {EnumHelper.GetDescription(eSort.ASC)}");
+                if(rbSQLAsc.Checked)
+                    sb.Append($@" ORDER BY {_pkColumnName} {EnumHelper.GetDescription(eSort.ASC)}");
+                else if (rbSQLDesc.Checked)
+                    sb.Append($@" ORDER BY {_pkColumnName} {EnumHelper.GetDescription(eSort.DESC)}");
+            }
+            else
+            {
+                rbSQLAsc.Checked = false;
+                rbSQLDesc.Checked = false;
             }
             
             string cmd = $@"{sb};";
+            
             txtSQL.Text = $@"SELECT {cmd}";
+            
             return cmd;
         }
         bool getData;
@@ -619,6 +629,29 @@ namespace FBExpert
             {
                 return getData;
             }
+        }
+
+        public void SetMaxRows(int maxrows)
+        {
+            txtMaxRows.Text = maxrows.ToString();
+        }
+
+        public void SetOrder(eSort sort)
+        {
+            if(sort == eSort.ASC)
+            {
+                rbSQLAsc.Checked = true;
+            }
+            else if (sort == eSort.DESC)
+            {
+                rbSQLDesc.Checked = true;
+            }
+            else
+            {
+                rbSQLDesc.Checked = false;
+                rbSQLAsc.Checked = false;
+            }
+
         }
         public void RefreshDatas(string cmd)
         {           
@@ -647,7 +680,19 @@ namespace FBExpert
 
            dsTableContent = new DataSet();
            string cmd2 = string.Empty;
-           while ((cnt >= sk)&&(skip < maxRows||maxRows <= 0))
+           if (maxRows > 0)
+           {
+                
+                GetDataWorker.ReportProgress(0, $@"SELECT FIRST {maxRows} {cmd.Trim()}");
+            }
+           else
+           {
+                
+                GetDataWorker.ReportProgress(0, $@"SELECT {cmd.Trim()}");
+            }
+            
+
+            while ((cnt >= sk)&&(skip < maxRows||maxRows <= 0))
            {
                try
                {
@@ -839,18 +884,18 @@ namespace FBExpert
                 _constraintObject.Name = $@"UN_{_tableObject.Name}_NEW";
                 _constraintObject.ConstraintType = eConstraintType.UNIQUE;
                 var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
-            tff.RegisterNotify(InfoRaised);
-            tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
-            tff.Show();
-            }
-            else if(tabControlConstraints.SelectedTab == tabPageChecks)
-            {
-                _constraintObject.Name = $@"CK_{_tableObject.Name}_NEW";
-                _constraintObject.ConstraintType = eConstraintType.CHECK;
-                var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
-            tff.RegisterNotify(InfoRaised);
-            tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
-            tff.Show();
+                tff.RegisterNotify(InfoRaised);
+                tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
+                tff.Show();
+                }
+                else if(tabControlConstraints.SelectedTab == tabPageChecks)
+                {
+                    _constraintObject.Name = $@"CK_{_tableObject.Name}_NEW";
+                    _constraintObject.ConstraintType = eConstraintType.CHECK;
+                    var tff = new ConstraintsForm(FbXpertMainForm.Instance(), _tableObject,_actTables, _dbReg,_constraintObject);
+                tff.RegisterNotify(InfoRaised);
+                tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
+                tff.Show();
             }
             
             
@@ -1625,7 +1670,14 @@ namespace FBExpert
 
         private void bwGetData_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            tabPageDATA.Text = e.UserState.ToString();
+            if (e.ProgressPercentage == 1)
+            {
+                tabPageDATA.Text = e.UserState.ToString();
+            }
+            else if (e.ProgressPercentage == 0)
+            {
+                txtSQL.Text = e.UserState.ToString();
+            }
         }
 
         private void DeactivateGrid()

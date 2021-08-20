@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.cbDebug = new System.Windows.Forms.CheckBox();
             this.hsRefreshStruktur = new SeControlsLib.HotSpot();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtObjectZoom = new System.Windows.Forms.TextBox();
@@ -53,7 +54,6 @@
             this.pnlDBObjectsUpper = new System.Windows.Forms.Panel();
             this.pnlDatabaseDesignUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
-            this.cbDebug = new System.Windows.Forms.CheckBox();
             this.pnlUpper.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDesign)).BeginInit();
@@ -79,8 +79,19 @@
             this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(2394, 34);
+            this.pnlUpper.Size = new System.Drawing.Size(2397, 34);
             this.pnlUpper.TabIndex = 1;
+            // 
+            // cbDebug
+            // 
+            this.cbDebug.AutoSize = true;
+            this.cbDebug.Location = new System.Drawing.Point(639, 6);
+            this.cbDebug.Name = "cbDebug";
+            this.cbDebug.Size = new System.Drawing.Size(56, 17);
+            this.cbDebug.TabIndex = 8;
+            this.cbDebug.Text = "debug";
+            this.cbDebug.UseVisualStyleBackColor = true;
+            this.cbDebug.CheckedChanged += new System.EventHandler(this.CbDebug_CheckedChanged);
             // 
             // hsRefreshStruktur
             // 
@@ -107,6 +118,8 @@
             this.hsRefreshStruktur.MarkMode = false;
             this.hsRefreshStruktur.Name = "hsRefreshStruktur";
             this.hsRefreshStruktur.NonMarkedText = "";
+            this.hsRefreshStruktur.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshStruktur.ShowShortcut = false;
             this.hsRefreshStruktur.Size = new System.Drawing.Size(45, 26);
             this.hsRefreshStruktur.TabIndex = 7;
             this.hsRefreshStruktur.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -175,6 +188,8 @@
             this.hsZoomMinus.MarkMode = false;
             this.hsZoomMinus.Name = "hsZoomMinus";
             this.hsZoomMinus.NonMarkedText = "";
+            this.hsZoomMinus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomMinus.ShowShortcut = false;
             this.hsZoomMinus.Size = new System.Drawing.Size(45, 14);
             this.hsZoomMinus.TabIndex = 5;
             this.hsZoomMinus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -222,6 +237,8 @@
             this.hsZoomPlus.MarkMode = false;
             this.hsZoomPlus.Name = "hsZoomPlus";
             this.hsZoomPlus.NonMarkedText = "";
+            this.hsZoomPlus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomPlus.ShowShortcut = false;
             this.hsZoomPlus.Size = new System.Drawing.Size(45, 13);
             this.hsZoomPlus.TabIndex = 4;
             this.hsZoomPlus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -269,6 +286,8 @@
             this.hsZoomDesingMinus.MarkMode = false;
             this.hsZoomDesingMinus.Name = "hsZoomDesingMinus";
             this.hsZoomDesingMinus.NonMarkedText = "";
+            this.hsZoomDesingMinus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomDesingMinus.ShowShortcut = false;
             this.hsZoomDesingMinus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomDesingMinus.TabIndex = 3;
             this.hsZoomDesingMinus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -316,6 +335,8 @@
             this.hsZoomCanvasPlus.MarkMode = false;
             this.hsZoomCanvasPlus.Name = "hsZoomCanvasPlus";
             this.hsZoomCanvasPlus.NonMarkedText = "";
+            this.hsZoomCanvasPlus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomCanvasPlus.ShowShortcut = false;
             this.hsZoomCanvasPlus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomCanvasPlus.TabIndex = 2;
             this.hsZoomCanvasPlus.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -363,6 +384,8 @@
             this.hsAddNewTable.MarkMode = false;
             this.hsAddNewTable.Name = "hsAddNewTable";
             this.hsAddNewTable.NonMarkedText = "New Table";
+            this.hsAddNewTable.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddNewTable.ShowShortcut = false;
             this.hsAddNewTable.Size = new System.Drawing.Size(86, 26);
             this.hsAddNewTable.TabIndex = 1;
             this.hsAddNewTable.Text = "New Table";
@@ -580,6 +603,8 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 34);
             this.hsClose.TabIndex = 3;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -601,17 +626,6 @@
             this.hsClose.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click);
-            // 
-            // cbDebug
-            // 
-            this.cbDebug.AutoSize = true;
-            this.cbDebug.Location = new System.Drawing.Point(639, 6);
-            this.cbDebug.Name = "cbDebug";
-            this.cbDebug.Size = new System.Drawing.Size(56, 17);
-            this.cbDebug.TabIndex = 8;
-            this.cbDebug.Text = "debug";
-            this.cbDebug.UseVisualStyleBackColor = true;
-            this.cbDebug.CheckedChanged += new System.EventHandler(this.CbDebug_CheckedChanged);
             // 
             // DatabaseDesignForm
             // 

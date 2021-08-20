@@ -9,7 +9,6 @@ using FormInterfaces;
 using Initialization;
 using MessageLibrary.SendMessages;
 using SharedStorages;
-using StateClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,9 +18,7 @@ namespace FBExpert
 {
     public partial class EventsForm : IEditForm
     {
-       
         DBRegistrationClass _dbReg = null;
-        //AutocompleteClass ac = null;
         NotifiesClass _localNotify = new NotifiesClass();
         int messages_count = 0;
         int error_count = 0;
@@ -38,14 +35,12 @@ namespace FBExpert
 
             string cn = ConnectionStrings.Instance.MakeConnectionString(dbReg);
             revent = new FbRemoteEvent(cn);                     
-            revent.RemoteEventCounts += Revent_RemoteEventCounts;   // new FbRemoteEventEventHandler(EventCounts);
-                      
+            revent.RemoteEventCounts += Revent_RemoteEventCounts;
         }
 
         public void RefreshLanguageText()
         {
             lblTableName.Text = LanguageClass.Instance.GetString("EVENTS_TRACKING");   
-            
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, LanguageClass.Instance.GetString("EVENTS_TRACKING")); 
             hsSaveTRACKING.Text = LanguageClass.Instance.GetString("SAVE_TRACKING");
             hsLoadTRACKING.Text = LanguageClass.Instance.GetString("LOAD_TRACKING");
@@ -53,7 +48,7 @@ namespace FBExpert
 
         private void Revent_RemoteEventCounts(object sender, FbRemoteEventCountsEventArgs e)
         {
-            fctSQL.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} Event occured ->{e.Name}->{e.Counts}");
+            fctSQL.AppendText($@"{Environment.NewLine}{StaticFunctionsClass.DateTimeNowStr()} Event occured ->{e.Name}->{e.Counts}");
         }
 
         public EventsForm(Form parent, DBRegistrationClass dbReg,  DomainClass domainObject)
@@ -61,7 +56,6 @@ namespace FBExpert
             InitializeComponent();
             this.MdiParent = parent;
             _dbReg = dbReg;
-                                
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
             _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;           
         }
@@ -86,16 +80,14 @@ namespace FBExpert
             if (error_count > 0)    sb.Append($@"Errors ({error_count})");
             string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
-            
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
 
-
         public override void FormLoadFirst()
         {
             base.FormLoadFirst();
-            ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);            
+            ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
         }
 
@@ -114,7 +106,7 @@ namespace FBExpert
         [Serializable]
         class MerkeWerte
         {           
-            public string cbEventName;          
+            public string cbEventName;
         };
 
         private MerkeWerte _mw = new MerkeWerte();
@@ -130,7 +122,7 @@ namespace FBExpert
                 var mw2 = (MerkeWerte)_ss[SharedName];
                 if (mw2 == null) return;
                 _mw = mw2;
-                cbEvents.Text = _mw.cbEventName;                               
+                cbEvents.Text = _mw.cbEventName;
             }
             catch (Exception ex)
             {                                                                                                              
@@ -154,28 +146,6 @@ namespace FBExpert
                     SendMessageClass.Instance.SendAllErrors($@"{SharedName}->SaveUserDesign()->{ex.Message}");
                 }
             }
-        }
-
-
-
-        public EditStateClass.eAction GetLastActionState()
-        {
-            return EditStateClass.eAction.eNone;
-        }
-
-        public void SetBearbeitenMode(EditStateClass.eBearbeiten bea)
-        {
-
-        }
-
-        public void SetDataBearbeitenMode(EditStateClass.eAction bea)
-        {
-
-        }
-
-        private void ClearEdit()
-        {            
-          
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -204,12 +174,8 @@ namespace FBExpert
         {     
         
         }
-        public void EditToData()
-        {
         
-        }
 
-        
         Dictionary<string,TriggerClass> triggers = null;
 
         private void EventsForm_Load(object sender, EventArgs e)
@@ -220,14 +186,10 @@ namespace FBExpert
             SetCombo();
             LoadUserDesign();
             DataToEdit();
-        
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
-            
             RefreshLanguageText();
             Restart();
-            
-            
         }
         AutocompleteClass ac;
         public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
@@ -286,7 +248,6 @@ namespace FBExpert
             ListViewItem lvi = new ListViewItem(cols);
             lvEvents.Items.Add(lvi);
             Restart();
-            
         }
 
         private void CancelTracking()
@@ -298,7 +259,7 @@ namespace FBExpert
         {
             fctSQL.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} Event tracking stopped...{Environment.NewLine}");
             hsTracking.Marked = false;
-            List<string> events = new List<string>();
+            var events = new List<string>();
             foreach(ListViewItem lvi in lvEvents.Items)
             {
                 if(string.IsNullOrEmpty(lvi.Text)) continue;
@@ -306,20 +267,14 @@ namespace FBExpert
             }
             if(events.Count > 0)
             {
-                
                 revent.CancelEvents();
                 revent.QueueEvents(events.ToArray());
-           
-
-                //revent.QueueEvents(new string[] { "new_user","update_user" });
-
                 fctSQL.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} Event tracking restarted...{Environment.NewLine}");
                 hsTracking.Marked = true;
             }
             else
             {
                 fctSQL.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} No events will be tracked !!!{Environment.NewLine}");
-                
             }
         }
 

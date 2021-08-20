@@ -258,17 +258,18 @@ namespace FBXpert
 
         private void FBXpertMainForm_Load(object sender, EventArgs e)
         {
-         //   LanguageClass.Instance.InitEmbedded(this,"FBXpert.Languages","Language","de");
+            //   LanguageClass.Instance.InitEmbedded(this,"FBXpert.Languages","Language","de");
+            ProgramAttributes.Instance.Init(System.Reflection.Assembly.GetExecutingAssembly());
             LanguageClass.Instance.InitFile(this.GetType().Assembly, $@"{Application.StartupPath}\Languages\","Language",".","de");
             LanguageClass.Instance.OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
             LanguageClass.Instance.ChangeLanguage(LanguageConsts.Deutsch);
             string test = LanguageClass.Instance.GetString("test");
-            string vers = BasicClassLibrary.Globals.GetAppVersion(this);
-            string appname = BasicClassLibrary.Globals.GetAppName(this);
-            this.Text = $@"{appname} V {vers}";
+            
+            
+            this.Text = $@"{ProgramAttributes.Instance.GetAppName()} V {ProgramAttributes.Instance.GetAppVersion()}";
 
             Application.DoEvents();
-            //var cf = FBXInfo.Instance();
+            
             FBXInfo.Instance.MdiParent = this;
             FBXInfo.Instance.Show();
                                     
@@ -309,7 +310,7 @@ namespace FBXpert
             }
             DbExplorerForm.Instance().Enabled = true;
             LanguageClass.Instance.ChangeLanguage(LanguageConsts.Deutsch);
-            SEHotSpot.Controller.Instance.SetupKeyboardHooks(this);
+            SEHotSpot.Controller.Instance.NewKeyboardHooks(this);
             DbExplorerForm.Instance().Select();
         }
 

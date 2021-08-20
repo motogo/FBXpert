@@ -54,6 +54,7 @@ namespace FBExpert
             this.tabControlText = new System.Windows.Forms.TabControl();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.gbSQL = new System.Windows.Forms.GroupBox();
+            this.fctSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlSQLUpper = new System.Windows.Forms.Panel();
             this.hsLoadTRACKING = new SeControlsLib.HotSpot();
             this.hsSaveTRACKING = new SeControlsLib.HotSpot();
@@ -65,7 +66,6 @@ namespace FBExpert
             this.hotSpot3 = new SeControlsLib.HotSpot();
             this.saveTRACKINGFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdTRACKING = new System.Windows.Forms.OpenFileDialog();
-            this.fctSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlEvents.SuspendLayout();
@@ -81,11 +81,11 @@ namespace FBExpert
             this.tabControlText.SuspendLayout();
             this.tabPageEvents.SuspendLayout();
             this.gbSQL.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.pnlSQLUpper.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
             this.pnlMessagesUpper.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -123,6 +123,7 @@ namespace FBExpert
             this.hsRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefresh.FlatAppearance.BorderSize = 0;
             this.hsRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
@@ -135,6 +136,8 @@ namespace FBExpert
             this.hsRefresh.MarkMode = false;
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
+            this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 2;
             this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -169,6 +172,7 @@ namespace FBExpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -181,6 +185,8 @@ namespace FBExpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -249,19 +255,23 @@ namespace FBExpert
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.splitContainer1.Panel1.Controls.Add(this.pnlProcedureAttributesUpper);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.splitContainer1.Panel2.Controls.Add(this.tabControlText);
             this.splitContainer1.Size = new System.Drawing.Size(1226, 521);
-            this.splitContainer1.SplitterDistance = 403;
+            this.splitContainer1.SplitterDistance = 408;
+            this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 19;
             // 
             // pnlProcedureAttributesUpper
@@ -272,7 +282,7 @@ namespace FBExpert
             this.pnlProcedureAttributesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlProcedureAttributesUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlProcedureAttributesUpper.Name = "pnlProcedureAttributesUpper";
-            this.pnlProcedureAttributesUpper.Size = new System.Drawing.Size(403, 433);
+            this.pnlProcedureAttributesUpper.Size = new System.Drawing.Size(408, 433);
             this.pnlProcedureAttributesUpper.TabIndex = 0;
             // 
             // hsTracking
@@ -287,12 +297,13 @@ namespace FBExpert
             this.hsTracking.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsTracking.FlatAppearance.BorderSize = 0;
             this.hsTracking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsTracking.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsTracking.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsTracking.Image = null;
             this.hsTracking.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsTracking.ImageHover = null;
             this.hsTracking.ImageToggleOnSelect = true;
-            this.hsTracking.Location = new System.Drawing.Point(286, 44);
+            this.hsTracking.Location = new System.Drawing.Point(284, 98);
             this.hsTracking.Marked = false;
             this.hsTracking.MarkedColor = System.Drawing.Color.SpringGreen;
             this.hsTracking.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -300,7 +311,9 @@ namespace FBExpert
             this.hsTracking.MarkMode = true;
             this.hsTracking.Name = "hsTracking";
             this.hsTracking.NonMarkedText = "Tracking OFF";
-            this.hsTracking.Size = new System.Drawing.Size(82, 64);
+            this.hsTracking.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsTracking.ShowShortcut = false;
+            this.hsTracking.Size = new System.Drawing.Size(93, 24);
             this.hsTracking.TabIndex = 22;
             this.hsTracking.Text = "Tracking";
             this.hsTracking.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -328,7 +341,7 @@ namespace FBExpert
             this.gbEventList.Controls.Add(this.lvEvents);
             this.gbEventList.Location = new System.Drawing.Point(5, 82);
             this.gbEventList.Name = "gbEventList";
-            this.gbEventList.Size = new System.Drawing.Size(245, 324);
+            this.gbEventList.Size = new System.Drawing.Size(273, 324);
             this.gbEventList.TabIndex = 21;
             this.gbEventList.TabStop = false;
             this.gbEventList.Text = "Events to observe";
@@ -343,11 +356,12 @@ namespace FBExpert
             this.lvEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEvents.FullRowSelect = true;
             this.lvEvents.GridLines = true;
+            this.lvEvents.HideSelection = false;
             this.lvEvents.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.lvEvents.Location = new System.Drawing.Point(3, 16);
             this.lvEvents.Name = "lvEvents";
-            this.lvEvents.Size = new System.Drawing.Size(239, 305);
+            this.lvEvents.Size = new System.Drawing.Size(267, 305);
             this.lvEvents.TabIndex = 2;
             this.lvEvents.UseCompatibleStateImageBehavior = false;
             this.lvEvents.View = System.Windows.Forms.View.Details;
@@ -355,7 +369,7 @@ namespace FBExpert
             // colEVENTNAME
             // 
             this.colEVENTNAME.Text = "Event Name";
-            this.colEVENTNAME.Width = 160;
+            this.colEVENTNAME.Width = 240;
             // 
             // gbEventNames
             // 
@@ -364,7 +378,7 @@ namespace FBExpert
             this.gbEventNames.Controls.Add(this.cbEvents);
             this.gbEventNames.Location = new System.Drawing.Point(5, 28);
             this.gbEventNames.Name = "gbEventNames";
-            this.gbEventNames.Size = new System.Drawing.Size(245, 46);
+            this.gbEventNames.Size = new System.Drawing.Size(372, 46);
             this.gbEventNames.TabIndex = 20;
             this.gbEventNames.TabStop = false;
             this.gbEventNames.Text = "Event Name";
@@ -382,11 +396,12 @@ namespace FBExpert
             this.hsRemoveField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveField.FlatAppearance.BorderSize = 0;
             this.hsRemoveField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRemoveField.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveField.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
             this.hsRemoveField.ImageToggleOnSelect = true;
-            this.hsRemoveField.Location = new System.Drawing.Point(152, 16);
+            this.hsRemoveField.Location = new System.Drawing.Point(279, 16);
             this.hsRemoveField.Marked = false;
             this.hsRemoveField.MarkedColor = System.Drawing.Color.Teal;
             this.hsRemoveField.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -394,6 +409,8 @@ namespace FBExpert
             this.hsRemoveField.MarkMode = false;
             this.hsRemoveField.Name = "hsRemoveField";
             this.hsRemoveField.NonMarkedText = "";
+            this.hsRemoveField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveField.ShowShortcut = false;
             this.hsRemoveField.Size = new System.Drawing.Size(45, 27);
             this.hsRemoveField.TabIndex = 21;
             this.hsRemoveField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -428,11 +445,12 @@ namespace FBExpert
             this.hsAddField.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddField.FlatAppearance.BorderSize = 0;
             this.hsAddField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddField.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddField.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsAddField.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddField.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsAddField.ImageToggleOnSelect = true;
-            this.hsAddField.Location = new System.Drawing.Point(197, 16);
+            this.hsAddField.Location = new System.Drawing.Point(324, 16);
             this.hsAddField.Marked = false;
             this.hsAddField.MarkedColor = System.Drawing.Color.Teal;
             this.hsAddField.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -440,6 +458,8 @@ namespace FBExpert
             this.hsAddField.MarkMode = false;
             this.hsAddField.Name = "hsAddField";
             this.hsAddField.NonMarkedText = "";
+            this.hsAddField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddField.ShowShortcut = false;
             this.hsAddField.Size = new System.Drawing.Size(45, 27);
             this.hsAddField.TabIndex = 20;
             this.hsAddField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -467,7 +487,7 @@ namespace FBExpert
             this.cbEvents.FormattingEnabled = true;
             this.cbEvents.Location = new System.Drawing.Point(6, 19);
             this.cbEvents.Name = "cbEvents";
-            this.cbEvents.Size = new System.Drawing.Size(140, 21);
+            this.cbEvents.Size = new System.Drawing.Size(267, 21);
             this.cbEvents.TabIndex = 19;
             // 
             // tabControlText
@@ -478,7 +498,7 @@ namespace FBExpert
             this.tabControlText.Location = new System.Drawing.Point(0, 0);
             this.tabControlText.Name = "tabControlText";
             this.tabControlText.SelectedIndex = 0;
-            this.tabControlText.Size = new System.Drawing.Size(819, 521);
+            this.tabControlText.Size = new System.Drawing.Size(810, 521);
             this.tabControlText.TabIndex = 11;
             // 
             // tabPageEvents
@@ -489,7 +509,7 @@ namespace FBExpert
             this.tabPageEvents.Location = new System.Drawing.Point(4, 23);
             this.tabPageEvents.Name = "tabPageEvents";
             this.tabPageEvents.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvents.Size = new System.Drawing.Size(811, 494);
+            this.tabPageEvents.Size = new System.Drawing.Size(802, 494);
             this.tabPageEvents.TabIndex = 0;
             this.tabPageEvents.Text = "Events Tracking";
             this.tabPageEvents.UseVisualStyleBackColor = true;
@@ -500,10 +520,44 @@ namespace FBExpert
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSQL.Location = new System.Drawing.Point(3, 43);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(805, 448);
+            this.gbSQL.Size = new System.Drawing.Size(796, 448);
             this.gbSQL.TabIndex = 9;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
+            // 
+            // fctSQL
+            // 
+            this.fctSQL.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.fctSQL.BackBrush = null;
+            this.fctSQL.BackColor = System.Drawing.SystemColors.Info;
+            this.fctSQL.CharHeight = 14;
+            this.fctSQL.CharWidth = 8;
+            this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctSQL.IsReplaceMode = false;
+            this.fctSQL.Location = new System.Drawing.Point(3, 16);
+            this.fctSQL.Name = "fctSQL";
+            this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
+            this.fctSQL.Size = new System.Drawing.Size(790, 429);
+            this.fctSQL.TabIndex = 0;
+            this.fctSQL.Text = "fastColoredTextBox1";
+            this.fctSQL.Zoom = 100;
+            this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
             // 
             // pnlSQLUpper
             // 
@@ -514,7 +568,7 @@ namespace FBExpert
             this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSQLUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlSQLUpper.Name = "pnlSQLUpper";
-            this.pnlSQLUpper.Size = new System.Drawing.Size(805, 40);
+            this.pnlSQLUpper.Size = new System.Drawing.Size(796, 40);
             this.pnlSQLUpper.TabIndex = 10;
             // 
             // hsLoadTRACKING
@@ -530,12 +584,13 @@ namespace FBExpert
             this.hsLoadTRACKING.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadTRACKING.FlatAppearance.BorderSize = 0;
             this.hsLoadTRACKING.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadTRACKING.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadTRACKING.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadTRACKING.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadTRACKING.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsLoadTRACKING.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadTRACKING.ImageToggleOnSelect = true;
-            this.hsLoadTRACKING.Location = new System.Drawing.Point(237, 0);
+            this.hsLoadTRACKING.Location = new System.Drawing.Point(173, 0);
             this.hsLoadTRACKING.Marked = false;
             this.hsLoadTRACKING.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadTRACKING.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -543,7 +598,9 @@ namespace FBExpert
             this.hsLoadTRACKING.MarkMode = false;
             this.hsLoadTRACKING.Name = "hsLoadTRACKING";
             this.hsLoadTRACKING.NonMarkedText = "Load SQL";
-            this.hsLoadTRACKING.Size = new System.Drawing.Size(211, 36);
+            this.hsLoadTRACKING.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadTRACKING.ShowShortcut = false;
+            this.hsLoadTRACKING.Size = new System.Drawing.Size(164, 36);
             this.hsLoadTRACKING.TabIndex = 9;
             this.hsLoadTRACKING.Text = "Load tracking";
             this.hsLoadTRACKING.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -579,6 +636,7 @@ namespace FBExpert
             this.hsSaveTRACKING.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveTRACKING.FlatAppearance.BorderSize = 0;
             this.hsSaveTRACKING.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveTRACKING.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveTRACKING.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveTRACKING.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveTRACKING.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -592,7 +650,9 @@ namespace FBExpert
             this.hsSaveTRACKING.MarkMode = false;
             this.hsSaveTRACKING.Name = "hsSaveTRACKING";
             this.hsSaveTRACKING.NonMarkedText = "Save SQL";
-            this.hsSaveTRACKING.Size = new System.Drawing.Size(237, 36);
+            this.hsSaveTRACKING.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveTRACKING.ShowShortcut = false;
+            this.hsSaveTRACKING.Size = new System.Drawing.Size(173, 36);
             this.hsSaveTRACKING.TabIndex = 8;
             this.hsSaveTRACKING.Text = "Save tracking";
             this.hsSaveTRACKING.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -704,6 +764,7 @@ namespace FBExpert
             this.hotSpot3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot3.FlatAppearance.BorderSize = 0;
             this.hotSpot3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot3.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot3.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hotSpot3.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
@@ -716,6 +777,8 @@ namespace FBExpert
             this.hotSpot3.MarkMode = false;
             this.hotSpot3.Name = "hotSpot3";
             this.hotSpot3.NonMarkedText = "";
+            this.hotSpot3.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot3.ShowShortcut = false;
             this.hotSpot3.Size = new System.Drawing.Size(45, 33);
             this.hotSpot3.TabIndex = 2;
             this.hotSpot3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -748,40 +811,6 @@ namespace FBExpert
             this.ofdTRACKING.Filter = "Event Tracking|*.trk|All|*.*";
             this.ofdTRACKING.Title = "Load Eventtracking";
             // 
-            // fctSQL
-            // 
-            this.fctSQL.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctSQL.AutoScrollMinSize = new System.Drawing.Size(179, 14);
-            this.fctSQL.BackBrush = null;
-            this.fctSQL.BackColor = System.Drawing.SystemColors.Info;
-            this.fctSQL.CharHeight = 14;
-            this.fctSQL.CharWidth = 8;
-            this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.fctSQL.IsReplaceMode = false;
-            this.fctSQL.Location = new System.Drawing.Point(3, 16);
-            this.fctSQL.Name = "fctSQL";
-            this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
-            this.fctSQL.Size = new System.Drawing.Size(799, 429);
-            this.fctSQL.TabIndex = 0;
-            this.fctSQL.Text = "fastColoredTextBox1";
-            this.fctSQL.Zoom = 100;
-            this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
-            // 
             // EventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -809,11 +838,11 @@ namespace FBExpert
             this.tabControlText.ResumeLayout(false);
             this.tabPageEvents.ResumeLayout(false);
             this.gbSQL.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.pnlSQLUpper.ResumeLayout(false);
             this.tabPageMessages.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
             this.pnlMessagesUpper.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
             this.ResumeLayout(false);
 
         }

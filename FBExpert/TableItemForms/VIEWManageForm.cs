@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using Enums;
 using FBExpert.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
@@ -257,6 +258,22 @@ namespace FBExpert
             }
 
             sb.Append($@" FROM {ViewObject.Name}");
+
+            if (lvFields.Items.Count > 0)
+            {
+                ListViewItem lvi_first = lvFields.Items[0];
+                var obarr = (ViewFieldClass)lvi_first.Tag;
+                if (rbSQLAsc.Checked)
+                    sb.Append($@" ORDER BY {obarr.Name} {EnumHelper.GetDescription(eSort.ASC)}");
+                else if (rbSQLDesc.Checked)
+                    sb.Append($@" ORDER BY {obarr.Name} {EnumHelper.GetDescription(eSort.DESC)}");
+            }
+            else
+            {
+                rbSQLAsc.Checked = false;
+                rbSQLDesc.Checked = false;
+            }
+
             sfbViewData.SQLKonjunktion = "WHERE";
             string SCmd = sfbViewData.SQLCmd;
             if (SCmd.Length > 0)
@@ -270,6 +287,28 @@ namespace FBExpert
 
         public FbConnection _dataConnection = null;
 
+        public void SetMaxRows(int maxrows)
+        {
+            txtMaxRows.Text = maxrows.ToString();
+        }
+
+        public void SetOrder(eSort sort)
+        {
+            if (sort == eSort.ASC)
+            {
+                rbSQLAsc.Checked = true;
+            }
+            else if (sort == eSort.DESC)
+            {
+                rbSQLDesc.Checked = true;
+            }
+            else
+            {
+                rbSQLDesc.Checked = false;
+                rbSQLAsc.Checked = false;
+            }
+
+        }
         public int RefreshDatas(string cmd)
         {
             int errorsCnt = 0;
@@ -297,6 +336,15 @@ namespace FBExpert
                     sk = cnt;
                 }
                 string cmds = string.Empty;
+                if (maxRows > 0)
+                {
+                    GetDataWorker.ReportProgress(0, $@"SELECT FIRST {maxRows} {cmd.Trim()}");
+                }
+                else
+                {
+                    GetDataWorker.ReportProgress(0, $@"SELECT {cmd.Trim()}");
+                }
+
                 while ((cnt >= sk) && (skip < maxRows||maxRows <= 0))
                 {
                     try
@@ -653,7 +701,14 @@ namespace FBExpert
 
         private void bwGetData_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {            
-            tabPageDATA.Text = e.UserState.ToString();
+            if (e.ProgressPercentage == 1)
+            {
+                tabPageDATA.Text = e.UserState.ToString();
+            }
+            else if (e.ProgressPercentage == 0)
+            {
+                txtSQL.Text = e.UserState.ToString();
+            }
         }
 
         private void bwGetData_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

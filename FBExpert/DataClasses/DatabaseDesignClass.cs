@@ -2098,12 +2098,28 @@ namespace FBXpert.DataClasses
                 sb.Append(Format(lvl,"/// </summary>" + Nl));
                 sb.Append(Format(lvl,"public enum eTDataClass {"));
                 int n = 0;
+                
                 foreach (var tfc in table.Fields.Values)
                 {
-                    sb.Append(tfc.Name + " = " + n++.ToString() + ",");
+                    sb.Append($@"{tfc.Name} = {n++},");
                 }
                 sb.Append(Format(lvl," NO_FIELD = " + n.ToString()));
                 sb.Append(BlockEnd(lvl));
+                /*
+                string primary = string.Empty;
+                if (table.primary_constraint.FieldNames.Count > 0)
+                {
+                    foreach(string pr in table.primary_constraint.FieldNames.Values)
+                    {
+                        primary = pr;
+                    }
+                    sb.Append(Format(lvl, $@"PrimaryFieldInx = (int) eTDataClass.{primary};" + Nl));
+                }
+                else
+                {
+                    sb.Append(Format(lvl, $@"PrimaryFieldInx = 0;" + Nl));
+                }
+                */
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
@@ -2119,6 +2135,7 @@ namespace FBXpert.DataClasses
                 }
                 sb.Append(Format(lvl, " NO_FIELD = " + n.ToString()));
                 sb.Append(BlockEnd(lvl));
+                //sb.Append(Format(lvl, $@"PrimaryFieldInx = 0;" + Nl));
             }
             return sb.ToString();
         }

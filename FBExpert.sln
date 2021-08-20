@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQListApp", "..\SQLite\SQLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBBasicClassLibrary", "..\SELibrariesSource\DBBasicClassLibrary\MainSource\DBBasicClassLibrary.csproj", "{B62CE2DC-2336-4216-8856-155EDDF76B82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEListBox", "..\SELibrariesSource\SEListBox\Dev\SEListBox.csproj", "{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,13 +133,33 @@ Global
 		{B62CE2DC-2336-4216-8856-155EDDF76B82}.Release|x64.Build.0 = Release|Any CPU
 		{B62CE2DC-2336-4216-8856-155EDDF76B82}.Release|x86.ActiveCfg = Release|Any CPU
 		{B62CE2DC-2336-4216-8856-155EDDF76B82}.Release|x86.Build.0 = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|x64.Build.0 = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Debug|x86.Build.0 = Debug|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|ARM.Build.0 = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|ARM64.Build.0 = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|x64.ActiveCfg = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|x64.Build.0 = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|x86.ActiveCfg = Release|Any CPU
+		{EBD5F27B-C2B4-4B08-AA63-8EC6B8AEB455}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
-		RESX_NeutralResourcesLanguage = de-DE
 		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
+		RESX_NeutralResourcesLanguage = de-DE
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal

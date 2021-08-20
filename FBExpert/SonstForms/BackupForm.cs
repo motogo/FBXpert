@@ -128,9 +128,15 @@ namespace FBXpert
             {
                 bu.AddOptions(FirebirdSql.Data.Services.FbBackupFlags.Expand);
             }
-            
-            bu.Execute();
-        }
+            try
+            { 
+                bu.Execute();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+}
 
         int n = 0;
         

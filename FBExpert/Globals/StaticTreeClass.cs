@@ -4689,8 +4689,8 @@ namespace FBExpert
             {
                 int inx = gstr.IndexOf("(");                 
                 string cms1 = (inx < 0) 
-                    ? $@"GRANT SELECT ON {gstr.Trim()} TO PROCEDURE {FunctionObject.Name};{Environment.NewLine}" 
-                    : $@"GRANT EXECUTE ON PROCEDURE {gstr.Substring(0, inx)} TO PROCEDURE {FunctionObject.Name};{Environment.NewLine}";
+                    ? $@"GRANT SELECT ON {gstr.Trim()} TO FUNCTION {FunctionObject.Name};{Environment.NewLine}" 
+                    : $@"GRANT EXECUTE ON FUNCTION {gstr.Substring(0, inx)} TO FUNCTION {FunctionObject.Name};{Environment.NewLine}";
                 SQLScript.Add(cms1);                
             }            
             string cms = $@"GRANT EXECUTE ON FUNCTION {FunctionObject.Name} TO SYSDBA;{Environment.NewLine}";
@@ -4708,8 +4708,6 @@ namespace FBExpert
             SQL.AppendLine(infoStr);
             SQL.AppendLine(GetInfoHeader(infoStr.Length));
             SQL.Append(Environment.NewLine);
-
-            
 
             SQL.Append($@"SET TERM ^ ;{Environment.NewLine}{Environment.NewLine}");            
             SQL.Append($@"CREATE PROCEDURE {ProcedureObject.Name.Trim()}{Environment.NewLine}");

@@ -438,4 +438,10 @@
   <data name="EXPAND_NODE" xml:space="preserve">
     <value>Knoten erweitern</value>
   </data>
+  <data name="LOAD_TRACKING" xml:space="preserve">
+    <value>Load tracking</value>
+  </data>
+  <data name="SAVE_TRACKING" xml:space="preserve">
+    <value>Save tracking</value>
+  </data>
 </root>

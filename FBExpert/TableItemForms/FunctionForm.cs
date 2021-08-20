@@ -95,15 +95,11 @@ namespace FBXpert
         }
 
         public void MakeSQL()
-        {            
-            if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
-            {
-                SQLScript = StaticTreeClass.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true);
-            }
-            else
-            {
-                SQLScript = StaticTreeClass.Instance().MakeSQLCreateFunction(FunctionObject,true);
-            }
+        {
+            SQLScript = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) 
+                ? StaticTreeClass.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true)
+                : StaticTreeClass.Instance().MakeSQLCreateFunction(FunctionObject,true);
+            
             SQLToUI(SQLScript);
             ShowCaptions();
             hsCreate.Enabled = (txtFuncName.Text.Length > 0);
