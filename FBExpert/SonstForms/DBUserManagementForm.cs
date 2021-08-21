@@ -14,8 +14,8 @@ namespace FBXpert
     public partial class DBUserManagementForm : Form
     {
 
-        NotifiesClass _localNotify = new NotifiesClass();
-        DBRegistrationClass DBReg = null;
+        private NotifiesClass _localNotify = new NotifiesClass();
+        private DBRegistrationClass DBReg = null;
         public DBUserManagementForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
@@ -48,8 +48,10 @@ namespace FBXpert
                     cn[1] = "closed";
                 }
                 cn[2] = "";
-                ListViewItem lvi = new ListViewItem(cn);
-                lvi.Tag = c;
+                ListViewItem lvi = new ListViewItem(cn)
+                {
+                    Tag = c
+                };
                 lvConnections.Items.Add(lvi);
             }
         }

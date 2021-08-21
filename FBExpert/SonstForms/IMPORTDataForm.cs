@@ -84,8 +84,8 @@ namespace FBExpert
             {
                 this.Left = DbExplorerForm.Instance().Width + 16;
             }
-
-
+            FillCHarsets();
+            cbEncodingCSV.Text = ToDBCharsetName(Encoding.Default);
             cbEncoding.Text = DBReg.CharSet;
 
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
@@ -196,7 +196,6 @@ namespace FBExpert
 
         private void selFields_SelectItem(object sender, SEListBox.SelectItemEventArgs e)
         {
-            int ri = e.RowIndex;
             var itm = selFields.ItemDatas[e.RowIndex] as ItemDataClass;
             var ob = itm.Object as TableFieldClass;
 
@@ -358,7 +357,7 @@ namespace FBExpert
                         }
                         else if (wertstr.StartsWith("INT("))
                         {
-                            string wert = wertstr.Substring(4,wertstr.Length-5);
+                            string wert = wertstr.Substring(4, wertstr.Length - 5);
                             if (first)
                             {
                                 valnames += $@"{DBCol}";
@@ -485,11 +484,56 @@ namespace FBExpert
             dataGridView1.DataSource = ds;
         }
 
+        private string ToDBCharsetName(Encoding enc)
+        {
+            if (enc == Encoding.UTF8) return "UTF8";
+            if (enc == Encoding.ASCII) return "ASCII";
+            if (enc.HeaderName == "Windows-1250") return "WIN1250";
+            if (enc.HeaderName == "Windows-1251") return "WIN1251";
+            if (enc.HeaderName == "Windows-1252") return "WIN1252";
+            if (enc.HeaderName == "ISO8859-1") return "ISO8859_1";
+            if (enc.HeaderName == "ISO8859-2") return "ISO8859_2";
+            return enc.HeaderName;
+        }
+        private Encoding GetCharsetEncodingFromName(string enc)
+        {
+            //var  es = Encoding.GetEncodings();
+            if (enc == "UTF8") return Encoding.UTF8;
+            if (enc == "ASCII") return Encoding.ASCII;
+            return Encoding.Default;
+        }
+
+            public void FillCHarsets()
+        {
+            cbEncodingCSV.Items.Clear();
+            cbEncoding.Items.Clear();
+            cbEncodingCSV.Items.Add("NONE");
+            cbEncodingCSV.Items.Add("ASCII");
+            cbEncodingCSV.Items.Add("UTF8");
+            cbEncodingCSV.Items.Add("ISO8859_1");
+            cbEncodingCSV.Items.Add("ISO8859_2");
+            cbEncodingCSV.Items.Add("WIN1250");
+            cbEncodingCSV.Items.Add("WIN1251");
+            cbEncodingCSV.Items.Add("WIN1252");
+
+            cbEncoding.Items.Add("NONE");
+            cbEncoding.Items.Add("ASCII");
+            cbEncoding.Items.Add("UTF8");
+            cbEncoding.Items.Add("ISO8859_1");
+            cbEncoding.Items.Add("ISO8859_2");
+            cbEncoding.Items.Add("WIN1250");
+            cbEncoding.Items.Add("WIN1251");
+            cbEncoding.Items.Add("WIN1252");
+
+        }
+
         private void hsImportCSV_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "CSV|*.csv|ALL|*.*";
             openFileDialog1.FileName = string.Empty;
             openFileDialog1.Title = "Reading CSV file, converting to XML";
+            Encoding enc = GetCharsetEncodingFromName(cbEncodingCSV.Text);
+           
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string[] lines = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
@@ -507,13 +551,11 @@ namespace FBExpert
                     }
                     else
                     {
-
                         XElement cust2 = new XElement("Table");
                         cust.Add(cust2);
                         string[] csvValues = line.Split(new char[] { colSep }, StringSplitOptions.None);
                         for (int i = 0; i < csvCols.Length; i++)
                         {
-
                             XElement cust3 = new XElement(csvCols[i], csvValues[i].ToString());
                             cust2.Add(cust3);
                         }
@@ -535,18 +577,13 @@ namespace FBExpert
                         ds.ReadXml(sr);
                     }
                 }
-
                 gbImport.Text = $@"Read {ds.Tables[0].Rows.Count} datarows from XML (CSV)";
-
-
                 dataGridView1.DataSource = ds;
             }
         }
-        char colSep = ';';
-
-        string[] csvCols;
-
-        string ColDefFileName = string.Empty;
+        private char colSep = ';';
+        private string[] csvCols;
+        private string ColDefFileName = string.Empty;
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
         {
@@ -596,7 +633,7 @@ namespace FBExpert
         private void hsDoSQL_Click(object sender, EventArgs e)
         {
             int i = 0;
-            
+
             EmptyLists();
             pbSQL.Minimum = 0;
             pbSQL.Maximum = txtSQLAll.Lines.Length;
@@ -613,7 +650,7 @@ namespace FBExpert
 
         private void cmsColDefData_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem == tsmiDateTimeNow)
+            if (e.ClickedItem == tsmiDateTimeNow)
             {
                 rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "#DateTime.Now");
             }
@@ -638,6 +675,7 @@ namespace FBExpert
                 rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, Clipboard.GetText());
             }
         }
+    }
 }
 
 

@@ -31,20 +31,19 @@ namespace FBExpert
             return (instance);
         }
 
-        ViewClass ViewObject = null;
-        StreamWriter sw = null;
-        NotifiesList Notifies = new NotifiesList();
-        //AutocompleteClass ac = null;
-        int messages_count = 0;
-        int error_count = 0;
-        NotifiesClass _localNofity = new NotifiesClass();
-        DBRegistrationClass DBReg = null;
-        TreeNode TnSelected = null;
-        bool writefile = false;
-        int pi = 0;
-        string filename = string.Empty;
-        List<string> exportList = new List<string>();
-        GridStoreClass gridStore;
+        private ViewClass ViewObject = null;
+        private StreamWriter sw = null;
+
+        private int messages_count = 0;
+        private int error_count = 0;
+        private NotifiesClass _localNofity = new NotifiesClass();
+        private DBRegistrationClass DBReg = null;
+        private TreeNode TnSelected = null;
+        private bool writefile = false;
+        private int pi = 0;
+        private string filename = string.Empty;
+        private List<string> exportList = new List<string>();
+        private GridStoreClass gridStore;
         public VIEWManageForm(Form parent, DBRegistrationClass drc, TreeNode tnSelected)
         {
             InitializeComponent();
@@ -200,7 +199,7 @@ namespace FBExpert
             if (string.IsNullOrEmpty(ViewObject.Name)) return lvFields.Items.Count;
             
             string cmd =  SQLStatementsClass.Instance.GetViewFields(DBReg.Version, ViewObject.Name);
-            ViewFieldClass vf = null;
+            
             lvFields.Items.Clear();
             dgExportGrid.Rows.Clear();
             try
@@ -218,7 +217,7 @@ namespace FBExpert
                         string typename     = dread.GetValue(3).ToString();
                         string typelength   = dread.GetValue(4).ToString();
 
-                        vf = new ViewFieldClass()
+                        ViewFieldClass vf = new ViewFieldClass()
                         {
                             Name = fieldstr.Trim()
                         };
@@ -592,14 +591,14 @@ namespace FBExpert
                 DataSet dataSet1 = new DataSet();
                 dataSet1.Clear();
                 dgvResults.AutoGenerateColumns = true;                               
-                DoCreateAlter(fctCREATEINSERTSQL.Lines,DBReg,Name);
+                DoCreateAlter(fctCREATEINSERTSQL.Lines,DBReg);
                 DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{Name}->RunStatement", StaticVariablesClass.ReloadViews, TnSelected);      
                 return;
             }
             SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(),"Canceling getting data failed","Timeout for canceling getting data has arrived (5000 ms)");
         }
 
-        private void DoCreateAlter(IList<string> cmd,DBRegistrationClass DBReg, string Name)
+        private void DoCreateAlter(IList<string> cmd,DBRegistrationClass DBReg)
         {
             var SQLcommand = new SQLCommandsClass(DBReg);
             SQLcommand.Notify.Register4Info(MeldungRaised);
@@ -719,7 +718,7 @@ namespace FBExpert
             if (bsViewContent.DataMember != null)
             {
                 bsViewContent.DataMember = "Table";
-                tabPageDATA.Text = $@"Data ({dsViewContent.Tables[0].Rows.Count.ToString()})";
+                tabPageDATA.Text = $@"Data ({dsViewContent.Tables[0].Rows.Count})";
             }
             
             dgvResults.DataSource = bsViewContent;            
@@ -827,7 +826,7 @@ namespace FBExpert
             return result;
         }
 
-        private void ExportForInsertUpdate(string fn, bool insertupdate)
+        private void ExportForInsertUpdate(bool insertupdate)
         {
             var sb = new StringBuilder();
             var cols = new StringBuilder();
@@ -901,7 +900,7 @@ namespace FBExpert
             }
         }
 
-        private void ExportForUpdate(string fn)
+        private void ExportForUpdate()
         {
             int i = 0;
             foreach (DataRow dr in dsViewContent.Tables[0].Rows)
@@ -968,15 +967,15 @@ namespace FBExpert
         {
             if (rbINSERT.Checked)
             {
-                ExportForInsertUpdate(filename, false);
+                ExportForInsertUpdate(false);
             }
             else if (rbINSERTUPDATE.Checked)
             {
-                ExportForInsertUpdate(filename, true);
+                ExportForInsertUpdate(true);
             }
             else if (rbUPDATE.Checked)
             {
-                ExportForUpdate(filename);
+                ExportForUpdate();
             }
         }
 
@@ -984,11 +983,11 @@ namespace FBExpert
         {
             if (cbExportToScreen.Checked)
             {
-                exportList.Add($@"{e.UserState.ToString()};{Environment.NewLine}");                
+                exportList.Add($@"{e.UserState};{Environment.NewLine}");                
             }
             if (writefile)
             {
-                sw.WriteLine($@"{e.UserState.ToString()};");
+                sw.WriteLine($@"{e.UserState};");
             }
 
             pi++;

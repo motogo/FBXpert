@@ -42,9 +42,11 @@ namespace FBExpert
             {
                 //Neuer TreeKnoten als Cloned anfügen
                 _dbReg = reg;
-                               
-                var newNode = new TreeNode();
-                newNode.Name = "DATABASE";
+
+                var newNode = new TreeNode
+                {
+                    Name = "DATABASE"
+                };
                 _dbReg.SetNode(newNode);
                 aktTree.Nodes.Insert(aktPosition, newNode);
                 SetBearbeitenMode(bMode);                
@@ -62,7 +64,7 @@ namespace FBExpert
         {
             BearbeitenMode = bea;
         }
-
+        /*
         public static void RefreshCharacterSets(string cn_name)
         {
             string cmd0 = "SELECT RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME FROM RDB$CHARACTER_SETS";
@@ -86,7 +88,7 @@ namespace FBExpert
                 cc.CloseConnection();
             }            
         }
-            
+        */    
         public void EditToData()
         {                       
             if(rb25_32.Checked) _dbReg.Version          = eDBVersion.FB25_32;
@@ -643,6 +645,70 @@ namespace FBExpert
             if (!DoEvent) return;
             _dbReg.Password = txtPassword.Text;
             connectionDataChanged();
+        }
+
+        private void cbCharSet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string charset = cbCharSet.Text;
+            if(charset == "NONE")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("NONE");
+            }
+            else if (charset == "ASCII")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("ASCII");
+            }
+            else if (charset == "UTF8")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("UTF8");
+                cbCollation.Items.Add("UNICODE");
+                cbCollation.Items.Add("UNICODE_CI");
+                cbCollation.Items.Add("UNICODE_CI_AI");
+            }
+            else if (charset == "ISO8859_1")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("ISO8859_1");
+                cbCollation.Items.Add("DA_DA");
+                
+                cbCollation.Items.Add("DE_DE");
+                cbCollation.Items.Add("DU_NL");
+                cbCollation.Items.Add("EN_UK");
+                cbCollation.Items.Add("EN_US");
+                cbCollation.Items.Add("ES_ES");
+                cbCollation.Items.Add("ES_ES_CI_AI");
+                cbCollation.Items.Add("FI_FI");
+                cbCollation.Items.Add("FR_CA");
+                cbCollation.Items.Add("FR_FR");
+                cbCollation.Items.Add("FR_FR_CI_AI");
+                cbCollation.Items.Add("IS_IS");
+                cbCollation.Items.Add("IT_IT");
+                cbCollation.Items.Add("NO_NO");
+                cbCollation.Items.Add("PT_PT");
+                cbCollation.Items.Add("PT_BR");
+                cbCollation.Items.Add("SV_SV");
+            }
+            else if (charset == "UNICODE_FSS")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("UNICODE_FSS");
+            }
+            else if (charset == "WIN1250")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("WIN1250");
+            }
+            else if (charset == "WIN1251")
+            {
+                cbCollation.Items.Clear();
+                cbCollation.Items.Add("WIN1251");
+                cbCollation.Items.Add("WIN1251_UA");
+                cbCollation.Items.Add("PXW_CYRL");
+            }
+
         }
     }
 }

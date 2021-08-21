@@ -47,7 +47,7 @@ namespace FBExpert
         public  Color ActiveHasConstraint = Color.DarkCyan;
         public  Color InactiveHasConstraint = Color.OrangeRed;
 
-        static ContextMenuStrip cmnull = new ContextMenuStrip();
+        
         private static StaticTreeClass _instance;       
         private static readonly object _lock_this = new object();
         public static StaticTreeClass Instance()
@@ -993,7 +993,7 @@ namespace FBExpert
                         }
                         catch (Exception ex)
                         {
-                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()}) -> Indices.Add", ex));                                                                                         
+                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem}) -> Indices.Add", ex));                                                                                         
                         }
                     }
                     Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
@@ -1004,7 +1004,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));                                                                                         
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem})", ex));                                                                                         
             }
             finally
             {
@@ -1087,7 +1087,7 @@ namespace FBExpert
                         }
                         catch (Exception ex)
                         {
-                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()}) -> Indices.Add", ex));
+                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem}) -> Indices.Add", ex));
                         }
                     }
                     Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
@@ -1098,7 +1098,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem.ToString()})", ex));
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.withoutsystem})", ex));
             }
             finally
             {
@@ -1169,7 +1169,7 @@ namespace FBExpert
                         }
                         catch (Exception ex)
                         {
-                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system.ToString()}) -> Indices.Add", ex));                                                                                         
+                            NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system}) -> Indices.Add", ex));                                                                                         
                         }
                     }
                     Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
@@ -1180,7 +1180,7 @@ namespace FBExpert
             }
             catch (Exception ex)
             {
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system.ToString()})", ex));                                                                                         
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->AddIndexObjects_To_ListOfTableObjects({DBReg},List<TableClass>,{eTableType.system})", ex));                                                                                         
             }
             finally
             {
@@ -1701,8 +1701,7 @@ namespace FBExpert
 
                     if (dread.HasRows)
                     {
-                        string fieldname = string.Empty;
-                        string tname = string.Empty;
+                        
                         string tnameold = string.Empty;
                        
                         ConstraintsClass tc = null;
@@ -1711,8 +1710,8 @@ namespace FBExpert
                        
                         while (dread.Read())
                         {
-                            fieldname = dread.GetValue(6).ToString().Trim();
-                            tname = dread.GetValue(0).ToString().Trim();
+                            string fieldname = dread.GetValue(6).ToString().Trim();
+                            string tname = dread.GetValue(0).ToString().Trim();
                             if (tname != tnameold)
                             {
                                 //neuer constr
@@ -5253,10 +5252,11 @@ namespace FBExpert
                     while (dread.Read())
                     {
                         n++;
-                        var tfc = new TableFieldClass();
-                                            
-                        tfc.TableName           = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
-                        tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
+                        var tfc = new TableFieldClass
+                        {
+                            TableName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim(),
+                            Name = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim()
+                        };
                         tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                         tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
@@ -5350,8 +5350,8 @@ namespace FBExpert
                        data.Add($@"Database lifetime       :{dread.GetValue(0).ToString().Trim(),-40}");
                        data.Add($@"Database creation date  :{dread.GetValue(3).ToString().Trim(),-40}");
                        data.Add($@"Database SQL dialect    :{dread.GetValue(1).ToString().Trim(),-40}");
-                       data.Add($@"Database page size      :{ps.ToString()} bytes, number of pages:{pg.ToString()} toal size:{((ps*pg)/1024).ToString()} kbyte");
-                       data.Add($@"Database sweep intervall:{speewintervall.ToString(),-40}");
+                       data.Add($@"Database page size      :{ps} bytes, number of pages:{pg} toal size:{ps*pg/1024} kbyte");
+                       data.Add($@"Database sweep intervall:{speewintervall,-40}");
                        data.Add($@"Database read-write mode:{rdstr,-40}");
                        data.Add($@"Database forced-writes  :{fwrite,-40}");
                        data.Add($@"Database backup-state   :{bstate,-40}");
@@ -6065,19 +6065,13 @@ namespace FBExpert
                 {
                     if (dread.HasRows)
                     {
-                        string view_name = "";
+                        
                         string view_name_old = "";
                         string voldsql = "";
 
                         var strl = new StringBuilder();
                         var strli = new StringBuilder();
 
-                        object ob_viewname = null;
-                        object ob_sql = null;
-                        object ob_fieldname = null;
-                        object ob_fieldpos = null;
-                        object ob_fieldtype = null;
-                        object ob_fieldlength = null;
                         Stopwatch sw = new Stopwatch();
                         sw.Start();
                         int nn = 0;
@@ -6093,14 +6087,15 @@ namespace FBExpert
                             fieldlength
                             */
                             nn++;
-                            ob_viewname = dread.GetValue(0);
-                            ob_sql = dread.GetValue(1);
-                            ob_fieldname = dread.GetValue(2);
-                            ob_fieldpos = dread.GetValue(3);
-                            ob_fieldtype = dread.GetValue(4);
-                            ob_fieldlength = dread.GetValue(5);
-
-                            view_name = ob_viewname.ToString().Trim();
+                            object ob_viewname = dread.GetValue(0);
+                            object ob_sql = dread.GetValue(1);
+                            object ob_fieldname = dread.GetValue(2);
+                            /*
+                            object ob_fieldpos = dread.GetValue(3);
+                            object ob_fieldtype = dread.GetValue(4);
+                            object ob_fieldlength = dread.GetValue(5);
+                            */
+                            string view_name = ob_viewname.ToString().Trim();
 
                             if (view_name != view_name_old)
                             {
@@ -6168,7 +6163,7 @@ namespace FBExpert
                                 strli.Append($@"    {ob_fieldname.ToString().Trim()}");
                             }
                             voldsql = ob_sql.ToString().Trim();
-                            System.Text.Encoding enc = System.Text.Encoding.Default;
+                            
                         }
                         Console.WriteLine($@"{_funcStr} used Time {nn}:{sw.ElapsedMilliseconds}");
                         NotifiesClass.Instance.AddToINFO($@"GetViewObjects->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.more, true);
@@ -8844,15 +8839,11 @@ namespace FBExpert
                         var strl = new StringBuilder();
                         var strli = new StringBuilder();
 
-                        object ob_viewname = null;
-                        object ob_sql = null;
-                        object ob_fieldname = null;
-
                         while (dread.Read())
                         {
-                            ob_viewname = dread.GetValue(0);
-                            ob_sql = dread.GetValue(1);
-                            ob_fieldname = dread.GetValue(2);
+                            object ob_viewname = dread.GetValue(0);
+                            object ob_sql = dread.GetValue(1);
+                            object ob_fieldname = dread.GetValue(2);
                             view_name = ob_viewname.ToString().Trim();
 
                             if (view_name != view_name_old)

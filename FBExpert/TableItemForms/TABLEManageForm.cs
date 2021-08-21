@@ -62,19 +62,17 @@ namespace FBExpert
         private string SelectedUniqueConstraintName = string.Empty;
         private string SelectedCheckConstraintName = string.Empty;
 
-
-        private string SelectedPKFieldName = string.Empty;
-        private string SelectedFKFieldName = string.Empty;
-        private string SelectedUniqueFieldName = string.Empty;
-        private string SelectedCheckFieldName = string.Empty;
-
         private bool _indexChanged = false;
         private bool _constraintChanged = false;
         private bool _tableChanged = false;
 
-        List<string> exportList = new List<string>();
+        private List<string> exportList = new List<string>();
 
-        Stopwatch stopwatch = new Stopwatch();
+        private Stopwatch stopwatch = new Stopwatch();
+        private WorkerClass GetDataWorker = new WorkerClass();
+
+        private AutocompleteClass ac;
+        private GridStoreClass gridStore;
 
         public void SetMDIParent(Form parent)
         {
@@ -110,9 +108,7 @@ namespace FBExpert
             this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetData_RunWorkerCompleted);
             gridStore = new GridStoreClass(dgvResults);
         }
-        WorkerClass GetDataWorker = new WorkerClass();
-
-        AutocompleteClass ac;
+        
 
         public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables)
         {
@@ -124,7 +120,7 @@ namespace FBExpert
             ac.Activate();
         }
 
-        GridStoreClass gridStore;
+       
 
         
         
@@ -576,18 +572,18 @@ namespace FBExpert
                 var obarr = (TableFieldClass) lvi.Tag;
                 if(obarr == null) continue;                
                 if(sb.ToString().Length > 0) sb.Append(",");
-                Type tp = obarr.Domain.GetType();
+                
                 if(!string.IsNullOrEmpty(obarr.PK_ConstraintName))
                 {
                    if(string.IsNullOrEmpty(cn)) cn = obarr.Name;
                 }
                 if(obarr.Domain.FieldType ==  "BLOB")
                 {
-                    sb.Append($@"'<BLOB>{cn}' as {obarr.Name}");                
+                    sb.Append($@"'<BLOB>{cn}' as {obarr.Name}");
                 }
                 else
                 {
-                   sb.Append(obarr.Name);                
+                   sb.Append(obarr.Name);
                 }
             }
             
@@ -657,8 +653,7 @@ namespace FBExpert
         {           
            if (string.IsNullOrEmpty(_tableObject.Name)) return;
            
-           long maxRows = 0;
-           long.TryParse(txtMaxRows.Text.Trim(), out maxRows);
+           long.TryParse(txtMaxRows.Text.Trim(), out long maxRows);
 
            int errorsCnt = 0;
            int errorsAllowed = StaticFunctionsClass.ToIntDef(txtMaxAllowedErrors.Text,0);
@@ -679,7 +674,7 @@ namespace FBExpert
            }
 
            dsTableContent = new DataSet();
-           string cmd2 = string.Empty;
+
            if (maxRows > 0)
            {
                 
@@ -692,12 +687,12 @@ namespace FBExpert
             }
             
 
-            while ((cnt >= sk)&&(skip < maxRows||maxRows <= 0))
+           while ((cnt >= sk)&&(skip < maxRows||maxRows <= 0))
            {
                try
                {
                    if (this.GetDataWorker.CancellationPending) return;                   
-                   cmd2 = $@"SELECT FIRST {sk} SKIP {skip} {cmd.Trim()}";
+                   string cmd2 = $@"SELECT FIRST {sk} SKIP {skip} {cmd.Trim()}";
                    var ds = new FbDataAdapter(cmd2, _dataConnection);
                    cnt = ds.Fill(dsTableContent);                   
                    GetDataWorker.ReportProgress(1, "..."+skip.ToString());
@@ -743,7 +738,7 @@ namespace FBExpert
             var ob = (DataRowView)  bsPrimaryKeys.Current;
             if (ob == null) return;            
             SelectedPKConstraintName = ob.Row["CONSTRAINT_NAME"].ToString(); 
-            SelectedPKFieldName = ob.Row["FIELDNAME"].ToString(); 
+            
             if(string.IsNullOrEmpty(SelectedPKConstraintName))
             {
                  hsAddConstraint.Enabled  = true;
@@ -762,9 +757,9 @@ namespace FBExpert
         {
             if (!UniqueDataFilled) return;            
             var ob = (DataRowView)  bsUniques.Current;
-            if (ob == null) return;            
-            SelectedUniqueConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim(); 
-            SelectedUniqueFieldName = ob.Row["FIELD_NAME"].ToString().Trim();
+            if (ob == null) return;
+            SelectedUniqueConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim();
+            
             if(string.IsNullOrEmpty(SelectedUniqueConstraintName))
             {
                  hsAddConstraint.Enabled  = true;
@@ -786,7 +781,7 @@ namespace FBExpert
             if (ob == null) return;
             //SelectedFKConstraintName = ob.Row["FOREIGN_KEY_NAME"].ToString().Trim(); 
             SelectedFKConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim();
-            SelectedFKFieldName = ob.Row["FIELD_NAME"].ToString().Trim();
+            
             if(string.IsNullOrEmpty(SelectedFKConstraintName))
             {
                  hsAddConstraint.Enabled  = true;
@@ -807,7 +802,6 @@ namespace FBExpert
             var ob = (DataRowView)  bsForeignKeys.Current;
             if (ob == null) return;            
             SelectedCheckConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim(); 
-            SelectedCheckFieldName = ob.Row["FIELD_NAME"].ToString().Trim();
             if(string.IsNullOrEmpty(SelectedCheckConstraintName))
             {
                  hsAddConstraint.Enabled  = true;
@@ -849,11 +843,12 @@ namespace FBExpert
 
         private void AddConstraint()
         {
-            var _constraintObject = new ConstraintsClass();
-             
-            _constraintObject.ConstraintType = eConstraintType.NONE;
-            _constraintObject.Name = $@"CN_{_tableObject.Name}_NEW";
-            if(tabControlConstraints.SelectedTab == tabPageForeignKeys)
+            var _constraintObject = new ConstraintsClass
+            {
+                ConstraintType = eConstraintType.NONE,
+                Name = $@"CN_{_tableObject.Name}_NEW"
+            };
+            if (tabControlConstraints.SelectedTab == tabPageForeignKeys)
             {
                 int nnr = GetNewNr(dgvForeignKeys, "CONSTRAINT_NAME");
                 
@@ -1009,8 +1004,7 @@ namespace FBExpert
             }
             else if(tabControlConstraints.SelectedTab == tabPageUniques)
             {
-                UniquesClass uc = null;
-                _tableObject.uniques_constraints.TryGetValue(SelectedUniqueConstraintName,out uc);
+                _tableObject.uniques_constraints.TryGetValue(SelectedUniqueConstraintName,out UniquesClass uc);
                 _constraintObject = uc;
                  var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _actTables,_dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
@@ -1019,8 +1013,7 @@ namespace FBExpert
             }
             else if(tabControlConstraints.SelectedTab == tabPageForeignKeys)
             {
-                ForeignKeyClass uc = null;
-                _tableObject.ForeignKeys.TryGetValue(SelectedFKConstraintName,out uc);
+                _tableObject.ForeignKeys.TryGetValue(SelectedFKConstraintName,out ForeignKeyClass uc);
                 _constraintObject = uc;
 
                 Dictionary<string,TableClass> allTables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
@@ -1041,8 +1034,7 @@ namespace FBExpert
             }
             else if(tabControlConstraints.SelectedTab == tabPageChecks)
             {
-                ConstraintsClass uc = null;
-                _tableObject.check_constraints.TryGetValue(SelectedCheckConstraintName,out uc);
+                _tableObject.check_constraints.TryGetValue(SelectedCheckConstraintName,out ConstraintsClass uc);
                 _constraintObject = uc;
                 var tff = new ConstraintsForm(FbXpertMainForm.Instance(),_tableObject, _actTables,_dbReg, _constraintObject);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
@@ -1279,7 +1271,7 @@ namespace FBExpert
             return tfc;
         }
 
-        private void ExportForInsertUpdate(string fn,bool insertupdate)
+        private void ExportForInsertUpdate(bool insertupdate)
         {
             var sb = new StringBuilder();
             var cols = new StringBuilder();
@@ -1347,7 +1339,7 @@ namespace FBExpert
             }          
         }
 
-        private void ExportForUpdate(string fn)
+        private void ExportForUpdate()
         {
             int i = 0;
             foreach (DataRow dr in dsTableContent.Tables[0].Rows)
@@ -1414,21 +1406,25 @@ namespace FBExpert
             if(File.Exists(fn))
             {
                 string args = $"-u {_dbReg.User} -p {_dbReg.Password} -d {_dbReg.DatabasePath} -r -t {_tableObject.Name.ToUpper()}";
-            
-                var psi = new ProcessStartInfo(fn,args);            
-                psi.RedirectStandardOutput = true;
-                psi.UseShellExecute = false;   
-                psi.CreateNoWindow = true;
-            
-                var ps = new Process();
-                ps.StartInfo = psi;
-                ps.Start();
-                StreamReader reader = ps.StandardOutput;
-                string output = reader.ReadToEnd();       
-                fctTableStatistics.AppendText(output);
 
-                ps.WaitForExit();
-                ps.Close();
+                var psi = new ProcessStartInfo(fn, args)
+                {
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var ps = new Process())
+                {
+                    ps.StartInfo = psi;
+                    ps.Start();
+                    StreamReader reader = ps.StandardOutput;
+                    string output = reader.ReadToEnd();
+                    fctTableStatistics.AppendText(output);
+
+                    ps.WaitForExit();
+                    ps.Close();
+                }
             }
             else
             {
@@ -1817,7 +1813,7 @@ namespace FBExpert
                 {                    
                     string kenner = "<BLOB>";
                     string cl = (dgvResults.CurrentCell.Value.ToString().StartsWith(kenner)) ? dgvResults.CurrentCell.Value.ToString().Substring(kenner.Length) : "ID";                                        
-                    string cmd = $@"SELECT {dgvResults.CurrentCell.OwningColumn.Name} FROM {_tableObject.Name} WHERE {cl} = '{dgvResults.CurrentRow.Cells[cl].Value.ToString()}'";
+                    string cmd = $@"SELECT {dgvResults.CurrentCell.OwningColumn.Name} FROM {_tableObject.Name} WHERE {cl} = '{dgvResults.CurrentRow.Cells[cl].Value}'";
                   
                     var fbCommand = new FbCommand(cmd, _dataConnection);
                     var fbDataReader = fbCommand.ExecuteReader();
@@ -1948,7 +1944,7 @@ namespace FBExpert
             tsmiDate.Visible = (tn == "DateTime")||((tn == "DateTime")&&(obt == "DBNull"));
             tsmiSetToNULL.Visible = IsNullable(dgvResults.Columns[e.ColumnIndex].Name);
                        
-            this.Text = $@"CellClick  {e.ColumnIndex} {e.RowIndex}{dgvResults.CurrentCell.Value.ToString()} {dgvResults.CurrentCell.ValueType.ToString()}";
+            this.Text = $@"CellClick  {e.ColumnIndex} {e.RowIndex}{dgvResults.CurrentCell.Value} {dgvResults.CurrentCell.ValueType}";
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -2035,22 +2031,22 @@ namespace FBExpert
                     _writeFile = false;
                 }
             }
-            bwExport.RunWorkerAsync();                     
+            bwExport.RunWorkerAsync();
         }
         
         private void bwExport_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             if (rbINSERT.Checked)
             {
-                ExportForInsertUpdate(_fileName, false);
+                ExportForInsertUpdate(false);
             }
             else if (rbINSERTUPDATE.Checked)
             {
-                ExportForInsertUpdate(_fileName, true);
+                ExportForInsertUpdate(true);
             }
             else if (rbUPDATE.Checked)
             {
-                ExportForUpdate(_fileName);
+                ExportForUpdate();
             }
         }
 
@@ -2154,8 +2150,7 @@ namespace FBExpert
 
         private void dgvResults_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            int ri = e.RowIndex;
-            int ci = e.ColumnIndex;
+
         }
 
         private void fctTableCreateDLL_KeyDown(object sender, KeyEventArgs e)

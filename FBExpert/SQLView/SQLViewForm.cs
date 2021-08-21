@@ -35,7 +35,7 @@ namespace SQLView
         private int _cmdDone = 0;
         private int _cmdError = 0;
                
-        private bool _testlauf = true;
+        
         private readonly List<string> _obcmd = new List<string>();
         List<TableClass> _tables = null;
         eSort _lastSort = eSort.DESC;
@@ -148,17 +148,6 @@ namespace SQLView
             else
             {
                 rtfERRORS.Text.Insert(0, k.Meldung);
-            }
-        }
-
-        private void ExecSqlThread(HistoryMode toHistory)
-        {
-            ThreadStart ts = new ThreadStart(ExecSql);
-            Thread th = new Thread(ts);
-            th.Start();
-            while (th.ThreadState == System.Threading.ThreadState.Stopped)
-            {
-                Thread.Sleep(100);
             }
         }
 
@@ -487,7 +476,7 @@ namespace SQLView
             FormDesign.SetFormLeft(this);
             txtSQL.Clear();
             UserStart();
-            Testlauf();
+           
             EditMode(cbEditMode.Checked);
             this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
             txtDatabase.Text = _dbrRegLocal.GetFullDatabasePath();
@@ -720,10 +709,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
         }
 
-        private void Testlauf()
-        {
-            _testlauf = cbTestlauf.Checked;
-        }
+       
 
         private void RunSQLFromFile()
         {
@@ -778,7 +764,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void cbTestlauf_CheckedChanged(object sender, EventArgs e)
         {
-            Testlauf();
+            
         }
 
         private void cbErrors_CheckedChanged(object sender, EventArgs e)

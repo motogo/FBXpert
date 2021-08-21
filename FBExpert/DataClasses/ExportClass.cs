@@ -169,7 +169,6 @@ namespace FBXpert.DataClasses
             this.colDOMAINDEFAULTVALUE.Width = 100;
 
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();            
             this._dsTableContent = new System.Data.DataSet();
 
             // 
@@ -213,7 +212,7 @@ namespace FBXpert.DataClasses
             this.colExportWhere.Width = 24;            
         }
 
-        public string TestForValidation(string txt, int ncmd)
+        public string TestForValidation(string txt)
         {
             string cmd = txt.Replace(" ,", ",");
             cmd = cmd.Replace(", ", ",");
@@ -943,9 +942,7 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_DoGetTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var dbReg = AktDBReg;
-            string str = e.Argument.GetType().ToString();
+        {
             List<TableClass> tb = (List<TableClass>) e.Argument;
             Dictionary<string,TableClass> alltables = new Dictionary<string, TableClass>();
             foreach(var itm in tb)
@@ -962,8 +959,7 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_ProgressGetTableStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {      
-            int n = e.ProgressPercentage;
+        {
             foreach(var obj in e.UserState as List<string>)
             {
                 _allTableContent.Add(obj);
@@ -984,7 +980,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetViewStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = e.Argument as DBRegistrationClass;
             var alltables = e.Argument as List<ViewClass>;
             _allViewContent = new List<string>();                       
             var vlst = StaticTreeClass.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);            
@@ -1032,7 +1027,6 @@ namespace FBXpert.DataClasses
         private void bgw_DoGetDatabaseStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
             var dbReg = AktDBReg;
-            var allDatabases = e.Argument as List<TableClass>;
             _allDatabaseContent = new List<string>();                     
             if (CreateDatabaseStatement)
             {
@@ -1089,8 +1083,7 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_DoGetPKTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            var dbReg = AktDBReg;
+        {           
             var obj = e.Argument as Dictionary<string,PrimaryKeyClass>;
             _allPKConstraintsContent = new List<string>();            
             var tlst = StaticTreeClass.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1138,7 +1131,7 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetFKTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
+
             var obj = e.Argument as Dictionary<string,ForeignKeyClass>;
             _allFKConstraintsContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1186,7 +1179,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetIndecesStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allIndeces = e.Argument as Dictionary<string,IndexClass>;
             _allIndexContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1234,7 +1226,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetTriggerStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allTriggers = e.Argument as Dictionary<string,TriggerClass>;
             _allTriggerContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1282,7 +1273,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetProcedureStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1330,7 +1320,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetProcedureDefinitionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureDefinitionContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1379,7 +1368,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetFunctionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1427,7 +1415,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetFunctionDefinitionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionDefinitionContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1476,7 +1463,6 @@ namespace FBXpert.DataClasses
 
         private void bgw_DoGetDomainStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {            
-            var dbReg = AktDBReg;
             var allDomain = e.Argument as Dictionary<string,DomainClass>;
             _allDomainContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
@@ -1523,8 +1509,7 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_DoGetGeneratorStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var dbReg = AktDBReg;
+        {
             var allGenerator = e.Argument as Dictionary<string,GeneratorClass>;
             _allGeneratorContent = new List<string>();
             var tlst = StaticTreeClass.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 

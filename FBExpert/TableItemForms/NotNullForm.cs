@@ -17,18 +17,18 @@ namespace FBXpert
 {
     public partial class NotNullForm : IEditForm
     {
-        DBRegistrationClass _dbReg = null;
-        int messages_count = 0;
-        int error_count = 0;
-        NotifiesClass _localNotify = new NotifiesClass();
-        AutocompleteClass ac = null;
+        private DBRegistrationClass _dbReg = null;
+        private int messages_count = 0;
+        private int error_count = 0;
+        private NotifiesClass _localNotify = new NotifiesClass();
+        private AutocompleteClass ac = null;
 
-        ContextMenuStrip Cm=null;
-        ContextMenuStrip CmGroup=null;
-        NotNullsClass NotNullObject = null;
-        List<TableClass> _tables = new List<TableClass>();
-        TableClass OrgTable = null;
-        string initialConstraintName = String.Empty;
+        private ContextMenuStrip Cm =null;
+        private ContextMenuStrip CmGroup =null;
+        private NotNullsClass NotNullObject = null;
+        private List<TableClass> _tables = new List<TableClass>();
+        private TableClass OrgTable = null;
+        private string initialConstraintName = String.Empty;
         public NotNullForm(Form parent,  DBRegistrationClass dbReg,List<TableClass> tables , NotNullsClass notnullObject, ContextMenuStrip cmGroup, ContextMenuStrip cm)
         {
             InitializeComponent();
@@ -41,9 +41,11 @@ namespace FBXpert
            
             if(notnullObject == null)
             {
-                NotNullObject = new NotNullsClass();
-                NotNullObject.Name = "NEW_CNSTR";
-                NotNullObject.ConstraintType = eConstraintType.NOTNULL;
+                NotNullObject = new NotNullsClass
+                {
+                    Name = "NEW_CNSTR",
+                    ConstraintType = eConstraintType.NOTNULL
+                };
                 initialConstraintName = string.Empty;
             }
             else

@@ -83,6 +83,9 @@ namespace FBExpert
             this.tabPageSQLAll = new System.Windows.Forms.TabPage();
             this.txtSQLAll = new System.Windows.Forms.TextBox();
             this.pnlSQLAllUpper = new System.Windows.Forms.Panel();
+            this.hsCalcel = new SeControlsLib.HotSpot();
+            this.gbEncoding = new System.Windows.Forms.GroupBox();
+            this.cbEncoding = new System.Windows.Forms.ComboBox();
             this.hsDoSQL = new SeControlsLib.HotSpot();
             this.tabPageSQLdone = new System.Windows.Forms.TabPage();
             this.txtSQLdone = new System.Windows.Forms.TextBox();
@@ -91,9 +94,6 @@ namespace FBExpert
             this.gbProcessBar = new System.Windows.Forms.GroupBox();
             this.pbSQL = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gbEncoding = new System.Windows.Forms.GroupBox();
-            this.cbEncoding = new System.Windows.Forms.ComboBox();
-            this.hsCalcel = new SeControlsLib.HotSpot();
             this.gbSQLMode = new System.Windows.Forms.GroupBox();
             this.rbUpdate = new System.Windows.Forms.RadioButton();
             this.rbInsert = new System.Windows.Forms.RadioButton();
@@ -117,6 +117,8 @@ namespace FBExpert
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbEncodingCSV = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabTableImports.SuspendLayout();
             this.gbTableFields.SuspendLayout();
@@ -140,11 +142,11 @@ namespace FBExpert
             this.tabControl1.SuspendLayout();
             this.tabPageSQLAll.SuspendLayout();
             this.pnlSQLAllUpper.SuspendLayout();
+            this.gbEncoding.SuspendLayout();
             this.tabPageSQLdone.SuspendLayout();
             this.tabPageSQLfail.SuspendLayout();
             this.gbProcessBar.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.gbEncoding.SuspendLayout();
             this.gbSQLMode.SuspendLayout();
             this.gbAttributes.SuspendLayout();
             this.tabControlImport.SuspendLayout();
@@ -152,6 +154,7 @@ namespace FBExpert
             this.pnlUpperIports.SuspendLayout();
             this.tabPageTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -911,6 +914,84 @@ namespace FBExpert
             this.pnlSQLAllUpper.Size = new System.Drawing.Size(362, 47);
             this.pnlSQLAllUpper.TabIndex = 6;
             // 
+            // hsCalcel
+            // 
+            this.hsCalcel.BackColor = System.Drawing.Color.Transparent;
+            this.hsCalcel.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsCalcel.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsCalcel.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsCalcel.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsCalcel.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsCalcel.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsCalcel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsCalcel.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsCalcel.FlatAppearance.BorderSize = 0;
+            this.hsCalcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCalcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsCalcel.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsCalcel.Image = global::FBXpert.Properties.Resources.cross_red_x20;
+            this.hsCalcel.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
+            this.hsCalcel.ImageToggleOnSelect = true;
+            this.hsCalcel.Location = new System.Drawing.Point(194, 0);
+            this.hsCalcel.Marked = false;
+            this.hsCalcel.MarkedColor = System.Drawing.Color.Teal;
+            this.hsCalcel.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsCalcel.MarkedText = "";
+            this.hsCalcel.MarkMode = false;
+            this.hsCalcel.Name = "hsCalcel";
+            this.hsCalcel.NonMarkedText = "";
+            this.hsCalcel.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCalcel.ShowShortcut = false;
+            this.hsCalcel.Size = new System.Drawing.Size(64, 47);
+            this.hsCalcel.TabIndex = 7;
+            this.hsCalcel.Text = "Cancel";
+            this.hsCalcel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsCalcel.ToolTipActive = false;
+            this.hsCalcel.ToolTipAutomaticDelay = 500;
+            this.hsCalcel.ToolTipAutoPopDelay = 5000;
+            this.hsCalcel.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsCalcel.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsCalcel.ToolTipFor4ContextMenu = true;
+            this.hsCalcel.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsCalcel.ToolTipInitialDelay = 500;
+            this.hsCalcel.ToolTipIsBallon = false;
+            this.hsCalcel.ToolTipOwnerDraw = false;
+            this.hsCalcel.ToolTipReshowDelay = 100;
+            this.hsCalcel.ToolTipShowAlways = false;
+            this.hsCalcel.ToolTipText = "";
+            this.hsCalcel.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsCalcel.ToolTipTitle = "";
+            this.hsCalcel.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsCalcel.UseVisualStyleBackColor = false;
+            this.hsCalcel.Click += new System.EventHandler(this.hotSpot1_Click);
+            // 
+            // gbEncoding
+            // 
+            this.gbEncoding.BackColor = System.Drawing.Color.Gainsboro;
+            this.gbEncoding.Controls.Add(this.cbEncoding);
+            this.gbEncoding.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbEncoding.Location = new System.Drawing.Point(72, 0);
+            this.gbEncoding.Name = "gbEncoding";
+            this.gbEncoding.Size = new System.Drawing.Size(122, 47);
+            this.gbEncoding.TabIndex = 26;
+            this.gbEncoding.TabStop = false;
+            this.gbEncoding.Text = "Encoding DB";
+            // 
+            // cbEncoding
+            // 
+            this.cbEncoding.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEncoding.FormattingEnabled = true;
+            this.cbEncoding.Items.AddRange(new object[] {
+            "NONE",
+            "UTF8",
+            "ASCII",
+            "ISO8859_1"});
+            this.cbEncoding.Location = new System.Drawing.Point(3, 16);
+            this.cbEncoding.Name = "cbEncoding";
+            this.cbEncoding.Size = new System.Drawing.Size(116, 21);
+            this.cbEncoding.TabIndex = 34;
+            this.cbEncoding.Text = "UTF8";
+            // 
             // hsDoSQL
             // 
             this.hsDoSQL.BackColor = System.Drawing.Color.Transparent;
@@ -1039,84 +1120,6 @@ namespace FBExpert
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(515, 53);
             this.panel1.TabIndex = 2;
-            // 
-            // gbEncoding
-            // 
-            this.gbEncoding.BackColor = System.Drawing.Color.Gainsboro;
-            this.gbEncoding.Controls.Add(this.cbEncoding);
-            this.gbEncoding.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbEncoding.Location = new System.Drawing.Point(72, 0);
-            this.gbEncoding.Name = "gbEncoding";
-            this.gbEncoding.Size = new System.Drawing.Size(122, 47);
-            this.gbEncoding.TabIndex = 26;
-            this.gbEncoding.TabStop = false;
-            this.gbEncoding.Text = "Encoding DB";
-            // 
-            // cbEncoding
-            // 
-            this.cbEncoding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEncoding.FormattingEnabled = true;
-            this.cbEncoding.Items.AddRange(new object[] {
-            "NONE",
-            "UTF8",
-            "ASCII",
-            "ISO8859_1"});
-            this.cbEncoding.Location = new System.Drawing.Point(3, 16);
-            this.cbEncoding.Name = "cbEncoding";
-            this.cbEncoding.Size = new System.Drawing.Size(116, 21);
-            this.cbEncoding.TabIndex = 34;
-            this.cbEncoding.Text = "UTF8";
-            // 
-            // hsCalcel
-            // 
-            this.hsCalcel.BackColor = System.Drawing.Color.Transparent;
-            this.hsCalcel.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsCalcel.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsCalcel.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsCalcel.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsCalcel.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsCalcel.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsCalcel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsCalcel.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsCalcel.FlatAppearance.BorderSize = 0;
-            this.hsCalcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsCalcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsCalcel.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsCalcel.Image = global::FBXpert.Properties.Resources.cross_red_x20;
-            this.hsCalcel.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
-            this.hsCalcel.ImageToggleOnSelect = true;
-            this.hsCalcel.Location = new System.Drawing.Point(194, 0);
-            this.hsCalcel.Marked = false;
-            this.hsCalcel.MarkedColor = System.Drawing.Color.Teal;
-            this.hsCalcel.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsCalcel.MarkedText = "";
-            this.hsCalcel.MarkMode = false;
-            this.hsCalcel.Name = "hsCalcel";
-            this.hsCalcel.NonMarkedText = "";
-            this.hsCalcel.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsCalcel.ShowShortcut = false;
-            this.hsCalcel.Size = new System.Drawing.Size(64, 47);
-            this.hsCalcel.TabIndex = 7;
-            this.hsCalcel.Text = "Cancel";
-            this.hsCalcel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsCalcel.ToolTipActive = false;
-            this.hsCalcel.ToolTipAutomaticDelay = 500;
-            this.hsCalcel.ToolTipAutoPopDelay = 5000;
-            this.hsCalcel.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsCalcel.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsCalcel.ToolTipFor4ContextMenu = true;
-            this.hsCalcel.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsCalcel.ToolTipInitialDelay = 500;
-            this.hsCalcel.ToolTipIsBallon = false;
-            this.hsCalcel.ToolTipOwnerDraw = false;
-            this.hsCalcel.ToolTipReshowDelay = 100;
-            this.hsCalcel.ToolTipShowAlways = false;
-            this.hsCalcel.ToolTipText = "";
-            this.hsCalcel.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsCalcel.ToolTipTitle = "";
-            this.hsCalcel.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsCalcel.UseVisualStyleBackColor = false;
-            this.hsCalcel.Click += new System.EventHandler(this.hotSpot1_Click);
             // 
             // gbSQLMode
             // 
@@ -1378,6 +1381,7 @@ namespace FBExpert
             // pnlUpperIports
             // 
             this.pnlUpperIports.BackColor = System.Drawing.Color.Gainsboro;
+            this.pnlUpperIports.Controls.Add(this.groupBox1);
             this.pnlUpperIports.Controls.Add(this.hsImportCSV);
             this.pnlUpperIports.Controls.Add(this.hsImportXML);
             this.pnlUpperIports.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1494,7 +1498,7 @@ namespace FBExpert
             this.tabPageTable.Location = new System.Drawing.Point(4, 22);
             this.tabPageTable.Name = "tabPageTable";
             this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTable.Size = new System.Drawing.Size(506, 557);
+            this.tabPageTable.Size = new System.Drawing.Size(385, 557);
             this.tabPageTable.TabIndex = 1;
             this.tabPageTable.Text = "Table";
             this.tabPageTable.UseVisualStyleBackColor = true;
@@ -1506,7 +1510,7 @@ namespace FBExpert
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(500, 551);
+            this.dataGridView1.Size = new System.Drawing.Size(379, 551);
             this.dataGridView1.TabIndex = 0;
             // 
             // ofdSQL
@@ -1529,6 +1533,33 @@ namespace FBExpert
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.Controls.Add(this.cbEncodingCSV);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(188, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(133, 53);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Default Encoding";
+            // 
+            // cbEncodingCSV
+            // 
+            this.cbEncodingCSV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEncodingCSV.FormattingEnabled = true;
+            this.cbEncodingCSV.Items.AddRange(new object[] {
+            "NONE",
+            "UTF8",
+            "ASCII",
+            "ISO8859_1"});
+            this.cbEncodingCSV.Location = new System.Drawing.Point(3, 16);
+            this.cbEncodingCSV.Name = "cbEncodingCSV";
+            this.cbEncodingCSV.Size = new System.Drawing.Size(127, 21);
+            this.cbEncodingCSV.TabIndex = 34;
+            this.cbEncodingCSV.Text = "UTF8";
             // 
             // IMPORTDataForm
             // 
@@ -1568,13 +1599,13 @@ namespace FBExpert
             this.tabPageSQLAll.ResumeLayout(false);
             this.tabPageSQLAll.PerformLayout();
             this.pnlSQLAllUpper.ResumeLayout(false);
+            this.gbEncoding.ResumeLayout(false);
             this.tabPageSQLdone.ResumeLayout(false);
             this.tabPageSQLdone.PerformLayout();
             this.tabPageSQLfail.ResumeLayout(false);
             this.tabPageSQLfail.PerformLayout();
             this.gbProcessBar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.gbEncoding.ResumeLayout(false);
             this.gbSQLMode.ResumeLayout(false);
             this.gbSQLMode.PerformLayout();
             this.gbAttributes.ResumeLayout(false);
@@ -1584,6 +1615,7 @@ namespace FBExpert
             this.pnlUpperIports.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1671,5 +1703,7 @@ namespace FBExpert
         private System.Windows.Forms.ToolStripMenuItem tsmiDOUBLE;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnlSQLAllUpper;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cbEncodingCSV;
     }
 }

@@ -454,10 +454,12 @@ namespace FBXpert
              var tnn = tn.Tag.GetType();
              if (tnn == typeof(ViewClass))
              {
-                 var tmf = new VIEWManageForm(MdiParent, drc, tn);
-                 tmf.GetData = true;
-                 tmf.SetAutocompeteObjects(_actTables);
-                 tmf.Show();
+                using (var tmf = new VIEWManageForm(MdiParent, drc, tn))
+                {
+                    tmf.GetData = true;
+                    tmf.SetAutocompeteObjects(_actTables);
+                    tmf.Show();
+                }
              }
              else if (tnn == typeof(TableClass))
              {                        
@@ -472,18 +474,20 @@ namespace FBXpert
                  Cursor = Cursors.Default;
              }
              else if (tnn == typeof(SystemTableClass))
-             {                        
-                 Cursor = Cursors.WaitCursor;
-                 Application.DoEvents();
-                 var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
-                 tmf.GetData = true;
-                 tmf.SetMaxRows(0);
-                 tmf.SetOrder(eSort.ASC);
-                 tmf.SetAutocompeteObjects(null,_actSystemTables);
-                 tmf.Show();
-                 Cursor = Cursors.Default;
-             }
-             else if (tnn == typeof(GeneratorClass))
+            {
+                Cursor = Cursors.WaitCursor;
+                Application.DoEvents();
+                using (var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(0);
+                    tmf.SetOrder(eSort.ASC);
+                    tmf.SetAutocompeteObjects(null, _actSystemTables);
+                    tmf.Show();
+                }
+                Cursor = Cursors.Default;
+            }
+            else if (tnn == typeof(GeneratorClass))
              {
                  var tmf = new GeneratorForm(MdiParent, drc, tn, cmsGenerator)
                  {
@@ -624,8 +628,7 @@ namespace FBXpert
                var table = _actTables.Find(fc => fc.Name == tn.Parent.Parent.Text);  
                if(table != null)
                {
-                   TableFieldClass field = null;
-                   table.Fields.TryGetValue(tn.Text,out field);
+                   table.Fields.TryGetValue(tn.Text,out TableFieldClass field);
                    if (field == null) return;            
                    var tff = new FieldForm(drc,FbXpertMainForm.Instance(), _tnSelected.Parent.Parent, field, null,EditStateClass.eBearbeiten.eEdit);
                    tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
@@ -807,15 +810,13 @@ namespace FBXpert
             }
             else if (tnn == typeof(UserDefinedFunctionClass))
             {                                
-                var vc = (UserDefinedFunctionClass)_tnSelected.Tag;                
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                    cmsUserDefinedFunctions.Show(cmsLeft,cmsTop);
                 }
             }
             else if (tnn == typeof(UserDefinedFunctionGroupClass))
-            {                
-                var vc = (UserDefinedFunctionGroupClass)_tnSelected.Tag;                
+            {
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                     cmsUserDefinedFunctionGroup.Show(cmsLeft,cmsTop);
@@ -1047,7 +1048,7 @@ namespace FBXpert
 
         private void SqlExplorer(DBRegistrationClass drc, List<TableClass> actTables)
         {                                   
-            var sf = new SQLViewForm1(drc, _actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);                      
+            var sf = new SQLViewForm1(drc, actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);                      
             sf.Show();            
         }
 
@@ -1258,12 +1259,14 @@ namespace FBXpert
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
-                tmf.GetData = true;
-                tmf.SetMaxRows(0);
-                tmf.SetOrder(eSort.DESC);
-                tmf.SetAutocompeteObjects(_actTables,null);
-                tmf.Show();
+                using (var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(0);
+                    tmf.SetOrder(eSort.DESC);
+                    tmf.SetAutocompeteObjects(_actTables, null);
+                    tmf.Show();
+                }
                 Cursor = Cursors.Default;
             }
             else if (e.ClickedItem == tsmiEditFirst100OfTable)
@@ -1272,12 +1275,14 @@ namespace FBXpert
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
-                tmf.GetData = true;
-                tmf.SetMaxRows(100);
-                tmf.SetOrder(eSort.ASC);
-                tmf.SetAutocompeteObjects(_actTables, null);
-                tmf.Show();
+                using (var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(100);
+                    tmf.SetOrder(eSort.ASC);
+                    tmf.SetAutocompeteObjects(_actTables, null);
+                    tmf.Show();
+                }
                 Cursor = Cursors.Default;
             }
             else if (e.ClickedItem == tsmiEditLast100OfTable)
@@ -1286,12 +1291,14 @@ namespace FBXpert
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
-                tmf.GetData = true;
-                tmf.SetMaxRows(100);
-                tmf.SetOrder(eSort.DESC);
-                tmf.SetAutocompeteObjects(_actTables, null);
-                tmf.Show();
+                using (var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(100);
+                    tmf.SetOrder(eSort.DESC);
+                    tmf.SetAutocompeteObjects(_actTables, null);
+                    tmf.Show();
+                }
                 Cursor = Cursors.Default;
             }
             else if (e.ClickedItem == tsmiEditTableStruct)
@@ -1300,10 +1307,12 @@ namespace FBXpert
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
-                tmf.GetData = false;
-                tmf.SetAutocompeteObjects(_actTables, null);
-                tmf.Show();
+                using (var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables))
+                {
+                    tmf.GetData = false;
+                    tmf.SetAutocompeteObjects(_actTables, null);
+                    tmf.Show();
+                }
                 Cursor = Cursors.Default;
             }
             else if (e.ClickedItem == tsmiOpenSystemTable)
@@ -1312,12 +1321,14 @@ namespace FBXpert
                 if (tc == null) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables);
-                tmf.GetData = true;
-                tmf.SetMaxRows(0);
-                tmf.SetOrder(eSort.ASC);
-                tmf.SetAutocompeteObjects(null,_actSystemTables);
-                tmf.Show();
+                using (var tmf = new TABLEManageForm(MdiParent, dbReg, _tnSelected, _actTables))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(0);
+                    tmf.SetOrder(eSort.ASC);
+                    tmf.SetAutocompeteObjects(null, _actSystemTables);
+                    tmf.Show();
+                }
                 Cursor = Cursors.Default;
             }
             else if (e.ClickedItem == tsmiEditGenerator)
@@ -1402,39 +1413,47 @@ namespace FBXpert
                 cf.Show();                            
             }
             else if (e.ClickedItem == tsmiEditViewAllRows)
-            {                            
-                var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
-                tmf.GetData = true;
-                tmf.SetMaxRows(0);
-                tmf.SetOrder(eSort.DESC);
-                tmf.SetAutocompeteObjects(_actTables);
-                tmf.Show();                                
+            {
+                using (var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(0);
+                    tmf.SetOrder(eSort.DESC);
+                    tmf.SetAutocompeteObjects(_actTables);
+                    tmf.Show();
+                }
             }
             else if (e.ClickedItem == tsmiEditFirst100OfView)
             {
-                var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
-                tmf.GetData = true;
-                tmf.SetMaxRows(100);
-                tmf.SetOrder(eSort.ASC);
-                tmf.SetAutocompeteObjects(_actTables);
-                tmf.Show();
+                using (var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(100);
+                    tmf.SetOrder(eSort.ASC);
+                    tmf.SetAutocompeteObjects(_actTables);
+                    tmf.Show();
+                }
             }
             else if (e.ClickedItem == tsmiEditLast100OfView)
             {
-                var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
-                tmf.GetData = true;
-                tmf.SetMaxRows(100);
-                tmf.SetOrder(eSort.DESC);
-                tmf.SetAutocompeteObjects(_actTables);
-                tmf.Show();
+                using (var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected))
+                {
+                    tmf.GetData = true;
+                    tmf.SetMaxRows(100);
+                    tmf.SetOrder(eSort.DESC);
+                    tmf.SetAutocompeteObjects(_actTables);
+                    tmf.Show();
+                }
             }
             else if (e.ClickedItem == tsmiEditStructView)
             {
-                var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
-                tmf.GetData = false;
-                tmf.SetMaxRows(0);
-                tmf.SetAutocompeteObjects(_actTables);
-                tmf.Show();
+                using (var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected))
+                {
+                    tmf.GetData = false;
+                    tmf.SetMaxRows(0);
+                    tmf.SetAutocompeteObjects(_actTables);
+                    tmf.Show();
+                }
             }
             else if (e.ClickedItem == tsmiEditForeignKeys)
             {                            
@@ -1817,10 +1836,12 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiExportAllViewsSQL)
             {
-                ExportViewsSQLForm evs = new ExportViewsSQLForm(MdiParent);
-                evs.dbReg = dbReg;
-                evs.views = _actViews;
-                evs.Show();
+                using (ExportViewsSQLForm evs = new ExportViewsSQLForm(MdiParent))
+                {
+                    evs.dbReg = dbReg;
+                    evs.views = _actViews;
+                    evs.Show();
+                }
             }
             else if (e.ClickedItem == tsmiRefreshAllTables)
             {
@@ -1955,26 +1976,32 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiExportTablesDLL)
             {
-                ExportTablesDLLForm evs = new ExportTablesDLLForm(MdiParent);
-                evs.dbReg = dbReg;
-                evs.Tables = _actTables;
-                evs.Show();
+                using (ExportTablesDLLForm evs = new ExportTablesDLLForm(MdiParent))
+                {
+                    evs.dbReg = dbReg;
+                    evs.Tables = _actTables;
+                    evs.Show();
+                }
             }
             else if (e.ClickedItem == tsmiExportAllProceduresScript)
             {
                 var allprocedures = StaticTreeClass.Instance().GetProcedureObjects(dbReg);
-                ExportProceduresScriptForm evs = new ExportProceduresScriptForm(MdiParent);
-                evs.dbReg = dbReg;
-                evs.procedures = allprocedures;
-                evs.Show();
+                using (ExportProceduresScriptForm evs = new ExportProceduresScriptForm(MdiParent))
+                {
+                    evs.dbReg = dbReg;
+                    evs.procedures = allprocedures;
+                    evs.Show();
+                }
             }
             else if (e.ClickedItem == tsmiExportAllFunctionsScript)
             {
                 var allprocedures = StaticTreeClass.Instance().GetFunctionObjects(dbReg);
-                ExportFunctionsScriptForm evs = new ExportFunctionsScriptForm(MdiParent);
-                evs.dbReg = dbReg;
-                evs.Functions = allprocedures;
-                evs.Show();
+                using (ExportFunctionsScriptForm evs = new ExportFunctionsScriptForm(MdiParent))
+                {
+                    evs.dbReg = dbReg;
+                    evs.Functions = allprocedures;
+                    evs.Show();
+                }
             }
             else if(e.ClickedItem == tsmiExpandTablesNodes)
             {
@@ -1994,17 +2021,9 @@ namespace FBXpert
                 foreach(TreeNode sel in _tnSelected.Nodes)
                 {
                     TreeNode vco = sel;
-                    var ri2 = SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vco.Text.ToUpper()};", dbReg, NotifiesClass.Instance);
-
+                    SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vco.Text.ToUpper()};", dbReg, NotifiesClass.Instance);
                 }
-                /*
-                var ri = SQLStatementsClass.Instance.ExecSql($@"DROP VIEW {vc.Name.ToUpper()};", dbReg, NotifiesClass.Instance);
-                if (!ri.commandDone)
-                {
-                    MessageBox.Show($@"Error droping view {ri.lastError}", @"Drop View", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                */
+                
                 _tnSelected.Remove();
             }
 

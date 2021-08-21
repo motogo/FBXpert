@@ -25,7 +25,6 @@ namespace FBXDesigns
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out Point lpPoint);
 
-        NotifiesClass _localNotifies;
 
         private static readonly Lazy<DatabaseDesignForm> lazy = new Lazy<DatabaseDesignForm>(() => new DatabaseDesignForm());
         public static DatabaseDesignForm Instance
@@ -36,12 +35,6 @@ namespace FBXDesigns
             }
         }
 
-        public void SetNotifies(NotifiesClass notifies)
-        {
-            _localNotifies = notifies;
-        }
-
-       
         public DatabaseDesignForm()
         {
             InitializeComponent();
@@ -96,11 +89,11 @@ namespace FBXDesigns
 
         public void SetDatas(DBRegistrationClass dbReg, Dictionary<string, TableClass> Tables, Dictionary<string, ViewClass> Views)
         {
-            ddc = new DesDatabaseDesignClass();
-
-            
-            ddc.Views = new Dictionary<string, DesViewClass>();
-            ddc.Tables = new Dictionary<string, DesTableClass>();
+            ddc = new DesDatabaseDesignClass
+            {
+                Views = new Dictionary<string, DesViewClass>(),
+                Tables = new Dictionary<string, DesTableClass>()
+            };
 
             int posx = 10;
             int posy = 10;
@@ -108,10 +101,12 @@ namespace FBXDesigns
 
             foreach (ViewClass view in Views.Values)
             {
-                DesViewClass dvc = new DesViewClass();
-                dvc.View = view;
-                dvc.Design = new ObjectDesignClass(posx,posy);
-               
+                DesViewClass dvc = new DesViewClass
+                {
+                    View = view,
+                    Design = new ObjectDesignClass(posx, posy)
+                };
+
                 posx += 100;
                 posy += 20;
                 ddc.Views.Add(view.Name, dvc);
@@ -121,10 +116,12 @@ namespace FBXDesigns
             posy = 100;
             foreach (TableClass table in Tables.Values)
             {
-                DesTableClass dvc = new DesTableClass();
-                dvc.Table  = table;
-                dvc.Design = new ObjectDesignClass(posx, posy);
-                
+                DesTableClass dvc = new DesTableClass
+                {
+                    Table = table,
+                    Design = new ObjectDesignClass(posx, posy)
+                };
+
                 posx += 100;
                 posy += 20;
                 ddc.Tables.Add(table.Name, dvc);
@@ -277,17 +274,19 @@ namespace FBXDesigns
             {
                 foreach(var ln in ob.LineList)
                 {
-                    UIDesignTableClass ob_s = (UIDesignTableClass) ln.StartObject;
-                    UIDesignTableClass ob_e = (UIDesignTableClass) ln.EndObject;
+                    UIDesignTableClass ob_s = (UIDesignTableClass)ln.StartObject;
+                    UIDesignTableClass ob_e = (UIDesignTableClass)ln.EndObject;
                     Graphics g;
 
                     g = pbDesign.CreateGraphics();
 
-                    Pen myPen = new Pen(Color.Red);
-                    myPen.Width = 4;
-                    myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                    myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-                    g.DrawLine(myPen, ob_s.Location.X, ob_s.Location.Y,ob_e.Location.X, ob_e.Location.Y);
+                    using (Pen myPen = new Pen(Color.Red))
+                    {
+                        myPen.Width = 4;
+                        myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                        myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                        g.DrawLine(myPen, ob_s.Location.X, ob_s.Location.Y, ob_e.Location.X, ob_e.Location.Y);
+                    }
 
                 }
             }
@@ -362,10 +361,12 @@ namespace FBXDesigns
                             UIDesignTableClass ob2 = (UIDesignTableClass) FindObject(fld.Key.Remove(fld.Key.Length-3));
                             if((ob1 != null)&&(ob2!=null))
                             {
-                                ReferenzClass rc = new ReferenzClass();
-                                rc.Name = fld.Key;
-                                rc.StartObject = ob1;
-                                rc.EndObject = ob2;
+                                ReferenzClass rc = new ReferenzClass
+                                {
+                                    Name = fld.Key,
+                                    StartObject = ob1,
+                                    EndObject = ob2
+                                };
                                 ob1.LineList.Add(rc);
                             }
                         }
@@ -389,7 +390,7 @@ namespace FBXDesigns
 
         private void XmlEditSimpleUserControl1_LoadClick(string fileName)
         {
-            string fn = xmlEditDefinition.originalXmlFile;
+            //string fn = xmlEditDefinition.originalXmlFile;
             CreateDBDesign(0);
             CreateDBObjects(0);
             CreateDesignObjects();
@@ -426,11 +427,11 @@ namespace FBXDesigns
         }
 
 
-        List<UIDesignTableClass> ObjectList = new List<UIDesignTableClass>();
-        List<ReferenzClass> LineList = new List<ReferenzClass>();
+        private List<UIDesignTableClass> ObjectList = new List<UIDesignTableClass>();
+        private List<ReferenzClass> LineList = new List<ReferenzClass>();
 
 
-        UIDesignTableClass ActTable = null;
+        private UIDesignTableClass ActTable = null;
         /*
         public DrawLine(int i)
         {                    
@@ -449,13 +450,11 @@ namespace FBXDesigns
         {
             ActionClass.Instance().Clear();
 
-           
-            int offsetx = this.Left;
-            int offsety = this.Top;
-
-            Point absoff = new Point();
-            absoff.X = 0;
-            absoff.Y = 32;  // Location plus Fenstertitelrand
+            Point absoff = new Point
+            {
+                X = 0,
+                Y = 32  // Location plus Fenstertitelrand
+            };
 
 
             UIDesignTableClass tc = new UIDesignTableClass(pbDesign,"test");

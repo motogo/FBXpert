@@ -14,7 +14,7 @@ namespace FBXpert
     public partial class BackupForm : IEditForm
     {
         
-        DBRegistrationClass DBReg = null;
+        private DBRegistrationClass DBReg = null;
         public BackupForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace FBXpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Backup/Restore");
         }
 
-        DBRegistrationClass _dbReg = null;
+        private DBRegistrationClass _dbReg = null;
 
         public override void DataToEdit()
         {            
@@ -181,16 +181,18 @@ namespace FBXpert
         private void hsRestore_Click(object sender, EventArgs e)
         {
             n = 0;
-            var ca = new ConnectionAttributes();
-            ca.Server = DBReg.Server;
-          //SE  ca.Client = DRC.Client;
-            ca.DatabasePath = txtRestoreDestinationDatabasePath.Text;
-            ca.Password = DBReg.Password;
-            ca.User = DBReg.User;
-            ca.ConnectionType = DBReg.ConnectionType;
-            ca.CharSet = DBReg.CharSet;
-            ca.PacketSize = DBReg.PacketSize;
-            ca.Port = DBReg.Port;
+            var ca = new ConnectionAttributes
+            {
+                Server = DBReg.Server,
+                //SE  ca.Client = DRC.Client;
+                DatabasePath = txtRestoreDestinationDatabasePath.Text,
+                Password = DBReg.Password,
+                User = DBReg.User,
+                ConnectionType = DBReg.ConnectionType,
+                CharSet = DBReg.CharSet,
+                PacketSize = DBReg.PacketSize,
+                Port = DBReg.Port
+            };
 
             string connstr = ConnectionStrings.Instance.MakeConnectionString(ca);
 
@@ -250,11 +252,15 @@ namespace FBXpert
 
         private void hsAddBackupFile_Click(object sender, EventArgs e)
         {
-            FirebirdSql.Data.Services.FbBackupFile bf = new FirebirdSql.Data.Services.FbBackupFile(txtBackupLocation.Text);
-            bf.BackupLength = StaticFunctionsClass.ToIntDef(txtBackupFileSize.Text.Trim(), 0);
+            FirebirdSql.Data.Services.FbBackupFile bf = new FirebirdSql.Data.Services.FbBackupFile(txtBackupLocation.Text)
+            {
+                BackupLength = StaticFunctionsClass.ToIntDef(txtBackupFileSize.Text.Trim(), 0)
+            };
             string[] obarr = { bf.BackupFile,bf.BackupLength.ToString() };
-            ListViewItem lvi = new ListViewItem(obarr);
-            lvi.Tag = bf;
+            ListViewItem lvi = new ListViewItem(obarr)
+            {
+                Tag = bf
+            };
             lvBackup.Items.Add(lvi);           
         }
 
@@ -269,11 +275,15 @@ namespace FBXpert
 
         private void hsAddRestoreFile_Click(object sender, EventArgs e)
         {
-            FirebirdSql.Data.Services.FbBackupFile bf = new FirebirdSql.Data.Services.FbBackupFile(txtRestoreLocation.Text);
-            bf.BackupLength = StaticFunctionsClass.ToIntDef(txtRestoreFileSize.Text.Trim(), 0);
+            FirebirdSql.Data.Services.FbBackupFile bf = new FirebirdSql.Data.Services.FbBackupFile(txtRestoreLocation.Text)
+            {
+                BackupLength = StaticFunctionsClass.ToIntDef(txtRestoreFileSize.Text.Trim(), 0)
+            };
             string[] obarr = { bf.BackupFile, bf.BackupLength.ToString() };
-            ListViewItem lvi = new ListViewItem(obarr);
-            lvi.Tag = bf;
+            ListViewItem lvi = new ListViewItem(obarr)
+            {
+                Tag = bf
+            };
             lvRestore.Items.Add(lvi);
         }
 

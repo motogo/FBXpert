@@ -560,12 +560,14 @@ namespace FBExpert
             "ASCII",
             "UNICODE_FSS",
             "ISO8859_1",
+            "WIN1250",
             "WIN1251"});
             this.cbCharSet.Location = new System.Drawing.Point(3, 16);
             this.cbCharSet.Name = "cbCharSet";
             this.cbCharSet.Size = new System.Drawing.Size(179, 21);
             this.cbCharSet.TabIndex = 3;
             this.cbCharSet.Text = "NONE";
+            this.cbCharSet.SelectedIndexChanged += new System.EventHandler(this.cbCharSet_SelectedIndexChanged);
             this.cbCharSet.TextChanged += new System.EventHandler(this.cbCharSet_TextChanged);
             // 
             // gbDatabaseLocation

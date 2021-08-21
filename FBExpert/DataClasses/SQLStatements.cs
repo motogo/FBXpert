@@ -383,7 +383,7 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS pkc ON pkc.RDB$INDEX_NAME = RDB$INDICES.RDB$FOREIGN_KEY ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISF ON fkc.rdb$index_name = ISF.rdb$index_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISP ON pkc.rdb$index_name = ISP.rdb$index_name ");
-            string cmd = string.Empty;
+            string cmd;
             if(tableName.Length > 0)
             {
                 cmd = $@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName.ToUpper()}' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
