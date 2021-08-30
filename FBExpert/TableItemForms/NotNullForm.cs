@@ -67,6 +67,12 @@ namespace FBXpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Manage Constraints");
         }
 
+
+        public void EditToData()
+        {
+
+        }
+
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
             var sb = new StringBuilder();
@@ -234,7 +240,7 @@ namespace FBXpert
                 lvFields.Items.Add(lvi);
             }
         }
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             cbTable.Items.Clear();
             cbTable.Items.AddRange(_tables.ToArray());

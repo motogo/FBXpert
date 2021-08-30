@@ -24,7 +24,7 @@ namespace FBXpert.SonstForms
             
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             txtDefaultPacketsize.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize.ToString();
             txtDefaulUser.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultUser;

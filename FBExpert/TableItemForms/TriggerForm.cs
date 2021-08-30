@@ -146,7 +146,7 @@ namespace FBXpert
             txtTriggerName.Enabled = (BearbeitenMode != StateClasses.EditStateClass.eBearbeiten.eEdit);            
         }
         
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             txtTriggerName.Text     = TriggerObject.Name;                       
             fctGenDescription.Text  = TriggerObject.Description;    
@@ -206,6 +206,49 @@ namespace FBXpert
             }
         }
 
+        public void EditToData()
+        {
+            TriggerObject.Name = txtTriggerName.Text.Trim();
+            TriggerObject.Active = cbIsActive.Checked;
+
+            eTriggerType typ = eTriggerType.none;
+
+            string temp = rbBEFORE.Checked ? "BEFORE" : "AFTER";
+            if (cbINSERT.Checked)
+            {
+                typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsert : eTriggerType.afterInsert;
+            }
+            if (cbUPDATE.Checked)
+            {
+                if (typ == eTriggerType.none)
+                {
+                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeUpdate : eTriggerType.afterUpdate;
+                }
+                else
+                {
+                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrUpdate : eTriggerType.afterInsertOrUpdate;
+                }
+            }
+            if (cbDELETE.Checked)
+            {
+                if (typ == eTriggerType.none)
+                {
+                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeDelete : eTriggerType.afterDelete;
+                }
+                else if ((typ == eTriggerType.beforeInsert) || (typ == eTriggerType.afterInsert))
+                {
+                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrDelete : eTriggerType.afterInsertOrDelete;
+                }
+                else if ((typ == eTriggerType.beforeInsertOrUpdate) || (typ == eTriggerType.afterInsertOrUpdate))
+                {
+                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrUpdateOrDelete : eTriggerType.afterInsertOrUpdateOrDelete;
+                }
+            }
+
+            TriggerObject.Type = typ;
+            TriggerObject.Sequence = StaticFunctionsClass.ToIntDef(txtGenValue.Text, 0);
+        }
+
         public int RefreshDependenciesTo()
         {            
             string cmd_index0 = "SELECT RDB$DEPENDENCIES.RDB$FIELD_NAME as Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME as DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE";
@@ -260,48 +303,7 @@ namespace FBXpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Trigger");
         }
 
-        private void EditToData()
-        {
-            TriggerObject.Name = txtTriggerName.Text.Trim();
-            TriggerObject.Active = cbIsActive.Checked;
-
-            eTriggerType typ = eTriggerType.none;
-
-            string temp = rbBEFORE.Checked ? "BEFORE" : "AFTER";
-            if(cbINSERT.Checked)
-            {
-                typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsert : eTriggerType.afterInsert;
-            }
-            if(cbUPDATE.Checked)
-            {
-                if(typ == eTriggerType.none)
-                {
-                   typ = (rbBEFORE.Checked) ? eTriggerType.beforeUpdate : eTriggerType.afterUpdate;
-                }
-                else
-                {
-                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrUpdate : eTriggerType.afterInsertOrUpdate;
-                }
-            }
-            if(cbDELETE.Checked)
-            {
-                if(typ == eTriggerType.none)
-                {
-                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeDelete : eTriggerType.afterDelete;
-                }
-                else if((typ == eTriggerType.beforeInsert)||(typ == eTriggerType.afterInsert))
-                {
-                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrDelete : eTriggerType.afterInsertOrDelete;
-                }
-                else if((typ == eTriggerType.beforeInsertOrUpdate)||(typ == eTriggerType.afterInsertOrUpdate))
-                {
-                    typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsertOrUpdateOrDelete : eTriggerType.afterInsertOrUpdateOrDelete;
-                }
-            }
-            
-            TriggerObject.Type = typ;
-            TriggerObject.Sequence = StaticFunctionsClass.ToIntDef(txtGenValue.Text,0);
-        }
+        
 
         private void EditChanged(object sender, EventArgs e)
         {

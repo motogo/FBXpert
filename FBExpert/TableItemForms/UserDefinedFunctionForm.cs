@@ -106,7 +106,7 @@ namespace FBXpert
            
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {            
             for (int i = 0; i < UserDefinedFunctionObject.ParameterIn.Count; i++)
             {                

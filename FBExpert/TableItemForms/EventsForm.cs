@@ -170,11 +170,15 @@ namespace FBExpert
            if(cbEvents.Items.Count > 0) cbEvents.SelectedIndex = 0;
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {     
         
         }
         
+        public void EditToData()
+        {
+
+        }
 
         Dictionary<string,TriggerClass> triggers = null;
 

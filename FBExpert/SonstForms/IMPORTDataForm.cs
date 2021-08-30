@@ -230,9 +230,11 @@ namespace FBExpert
 
         public void GetValnames(DataRow rw)
         {
-
-            foreach (string line in rtbColDef.Lines)
+            foreach (string ln in rtbColDef.Lines)
             {
+                string line = ln.Trim();
+                if(line.StartsWith("//")) continue;
+
                 if (line.Contains(">"))
                 {
                     foreach (DataColumn cl in rw.Table.Columns)
@@ -240,11 +242,47 @@ namespace FBExpert
                         string cn = cl.ColumnName;
                         Type dt = cl.DataType;
                         string DBCol = string.Empty; // findMapping(cn);
-
+                        bool SplitEnd = false;
+                        bool r = false;
+                        bool l = false;
+                        bool SplitStart = false;
                         string[] larr = line.Split(new char[] { '>' }, StringSplitOptions.RemoveEmptyEntries);
                         if (larr.Length == 2)
                         {
-                            if (larr[0].Trim() == cn)
+                            string defcol = larr[0].Trim();
+                            int inx = defcol.IndexOf(".RSplitEnd(");
+                            if (inx >= 0)
+                            {
+                                int len = inx;
+                                defcol = defcol.Substring(0,defcol.Length-15);
+                                SplitEnd = true;
+                                r = true;
+                            }
+                            inx = defcol.IndexOf(".LSplitEnd(");
+                            if (inx >= 0)
+                            {
+                                int len = inx;
+                                defcol = defcol.Substring(0, defcol.Length - 15);
+                                SplitEnd = true;
+                                l = true;
+                            }
+                            inx = defcol.IndexOf(".RSplitStart(");
+                            if(inx >= 0)
+                            {
+                                int len = defcol.Length - inx;
+                                defcol = defcol.Substring(0, defcol.Length - 17);
+                                SplitStart = true;
+                                r = true;
+                            }
+                            inx = defcol.IndexOf(".LSplitStart(");
+                            if (inx >= 0)
+                            {
+                                int len = defcol.Length - inx;
+                                defcol = defcol.Substring(0, defcol.Length - 17);
+                                SplitStart = true;
+                                l = true;
+                            }
+                            if (defcol == cn)
                             {
                                 DBCol = larr[1].Trim();
                             }
@@ -255,6 +293,46 @@ namespace FBExpert
                         if (dt == typeof(String))
                         {
                             var wert = rw.Field<string>(cn);
+                            if (!string.IsNullOrEmpty(wert))
+                            {
+                                
+                                if (l)
+                                {
+                                    if (SplitEnd && wert.Contains(" "))
+                                    {
+                                        int inx = wert.LastIndexOf(" ");
+                                        wert = wert.Substring(0, inx);
+                                    }
+                                    else if (SplitStart && wert.Contains(" "))
+                                    {
+                                        int inx = wert.IndexOf(" ");
+                                        wert = wert.Substring(0, inx);
+                                    }
+                                    else
+                                    {
+                                        //wert = wert;
+                                        Console.WriteLine();
+                                    }
+                                }
+                                else if (r)
+                                {
+                                    if (SplitEnd && wert.Contains(" "))
+                                    {
+                                        int inx = wert.LastIndexOf(" ");
+                                        wert = wert.Substring(inx);
+                                    }
+                                    else if (SplitStart && wert.Contains(" "))
+                                    {
+                                        int inx = wert.IndexOf(" ");
+                                        wert = wert.Substring(inx);
+                                    }
+                                    else
+                                    {
+                                        wert = string.Empty;
+                                    }
+                                }
+                            }
+
                             if (first)
                             {
                                 valnames += $@"{DBCol}";

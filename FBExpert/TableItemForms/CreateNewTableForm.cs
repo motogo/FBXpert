@@ -48,13 +48,17 @@ namespace FBExpert
             _localNotify.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
         }
       
-        public override void  DataToEdit()
+        public void  DataToEdit()
         {
             txtTableName.Text = _tableObject.Name;
             txtFieldName.Text = _fieldObject.Name;
             txtLength.Text    = _fieldObject.Domain.Length.ToString();            
         }
 
+        public void EditToData()
+        {
+
+        }
         private void ErrorRaised(object sender, MessageEventArgs k)
         {
             var tc = _tableObject;

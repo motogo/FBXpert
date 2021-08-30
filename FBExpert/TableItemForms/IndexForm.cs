@@ -384,9 +384,14 @@ namespace FBXpert
         {
             Close();
         }
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             DataToCBFields();
+        }
+
+        public void EditToData()
+        {
+
         }
         public void DataToCBFields()
         {

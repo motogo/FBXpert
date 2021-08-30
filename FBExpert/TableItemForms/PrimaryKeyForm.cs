@@ -312,7 +312,7 @@ namespace FBXpert
             }
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
            txtPKName.Text   = _tableObject.primary_constraint.Name;
            txtUsingIndex.Text = _tableObject.primary_constraint.IndexName;
@@ -321,7 +321,8 @@ namespace FBXpert
            cbSorting.SelectedItem  = _tableObject.primary_constraint.Sorting;
                        
            FillObjectToConstraintFields();
-        }        
+        }    
+                
         
         private void PrimaryKeyForm_Load(object sender, EventArgs e)
         {

@@ -161,7 +161,7 @@ namespace FBExpert
             
         }
         
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             DoEvent = false;            
             if(_dbReg.Version == eDBVersion.FB25_32) rb25_32.Checked = true;
@@ -211,6 +211,8 @@ namespace FBExpert
                                                                                             
             DoEvent = true;
         }
+
+        
 
         public void SaveConfig()
         {            

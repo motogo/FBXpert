@@ -136,7 +136,7 @@ namespace FBXpert
           txtProcName.Enabled = true;   
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             _doEvents = false;
             txtProcName.Text = _procedureObject.Name;                       

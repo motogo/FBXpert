@@ -130,7 +130,7 @@ namespace FBXpert
            txtFuncName.Enabled = true;      
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             DoEvents = false;
             txtFuncName.Text = FunctionObject.Name;                       

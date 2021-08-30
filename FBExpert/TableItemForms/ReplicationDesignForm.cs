@@ -99,9 +99,14 @@ namespace FBXpert
             Close();
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
            
+        }
+
+        public void EditToData()
+        {
+
         }
 
         string oldIndexName = string.Empty;

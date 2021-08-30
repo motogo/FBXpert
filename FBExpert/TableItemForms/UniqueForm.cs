@@ -197,7 +197,7 @@ namespace FBXpert
             Close();
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
            
             cbTable.Items.Clear();
@@ -225,6 +225,10 @@ namespace FBXpert
 
         }
 
+        public void EditToData()
+        {
+
+        }
 
         public void SetUIControls()
         {

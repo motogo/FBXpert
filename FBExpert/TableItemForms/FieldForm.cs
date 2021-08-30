@@ -133,7 +133,7 @@ namespace FBExpert
 
         public void MakeSQL()
         {
-            EditToObject();
+            EditToData();
             if(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
             {
                 SetFormAlter();
@@ -576,7 +576,7 @@ namespace FBExpert
             FieldObject.TableName           = TableObject.Name;
         }
 
-        public void EditToObject()
+        public void EditToData()
         {
             var TempFieldobject = FieldObject;
             FieldObject = new TableFieldClass();
@@ -596,7 +596,10 @@ namespace FBExpert
             FieldObject.TableName           = TempFieldobject?.TableName;
         }
 
+        public void DataToEdit()
+        {
 
+        }
         public void ObjectToEdit(TableFieldClass FieldObject)
         {
             txtFieldName.Text       = FieldObject.Name;
@@ -744,7 +747,7 @@ namespace FBExpert
 
             var riList =_sql.ExecuteCommands(fctSQL.Lines);
             var riFailure = riList.Find(x=>x.commandDone == false); 
-            EditToObject();
+            EditToData();
             if(riFailure == null)
             {
                 OrgFieldObject = FieldObject.DeepClone();

@@ -162,12 +162,17 @@ namespace FBXpert
             //txtGenName.Enabled = txtGenInitValue.Enabled = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);            
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {
             txtGenName.Text        = GeneratorObject.Name;
             txtGenValue.Text       = GeneratorObject.Value.ToString();
             txtGenNewValue.Text   = GeneratorObject.Value.ToString();
             fctGenDescription.Text = GeneratorObject.Description;            
+        }
+
+        public void EditToData()
+        {
+
         }
 
         public int RefreshDependenciesTo()

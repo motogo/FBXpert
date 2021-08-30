@@ -50,6 +50,12 @@ namespace FBXpert
             _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;                               
         }
 
+        public void EditToData()
+        {
+
+        }
+
+       
         public void RegisterNotify(NotifyInfos.RaiseNotifyHandler infoN)
         {
            _localNotify.Notify.OnRaiseInfoHandler += infoN;
@@ -310,7 +316,7 @@ namespace FBXpert
             Close();
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {           
             cbFields.Items.Clear();
             cbFields.Items.AddRange(_tableObject.Fields.Values.ToArray());

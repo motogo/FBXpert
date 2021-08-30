@@ -43,7 +43,7 @@ namespace FBXpert
 
         private DBRegistrationClass _dbReg = null;
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {            
             txtRestoreDestinationDatabasePath.Text = DBReg.DatabasePath;
             txtBackupSourceDatabasePath.Text = DBReg.DatabasePath;
@@ -60,7 +60,8 @@ namespace FBXpert
             }
         }
 
-        private DBRegistrationClass EditToData()
+        
+        public void EditToData()
         {                       
             if(rbEmbedded.Checked)
             {                
@@ -72,7 +73,7 @@ namespace FBXpert
                 _dbReg.Server = txtServer.Text;
             }
             _dbReg.DatabasePath = txtBackupSourceDatabasePath.Text;
-            return _dbReg;
+            
         }
 
         private void hsBackup_Click(object sender, EventArgs e)

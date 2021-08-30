@@ -304,7 +304,7 @@ namespace FBExpert
             RefreshTypes();            
         }
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {            
             txtName.Text        = DomainObject.Name;
             fctDescription.Text = DomainObject.Description;

@@ -311,7 +311,7 @@ namespace FBXpert
         }
 
 
-        public override void DataToEdit()
+        public void DataToEdit()
         {            
             TableClass destTable = _tables.Find(x => x.Name == ForeignKeyObject.DestTableName);
             TableClass sourceTable = _tables.Find(x => x.Name == ForeignKeyObject.SourceTableName);
