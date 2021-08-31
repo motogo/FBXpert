@@ -32,10 +32,10 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IMPORTDataForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTableImports = new System.Windows.Forms.TabPage();
@@ -107,6 +107,8 @@ namespace FBExpert
             this.tabPageImportfile = new System.Windows.Forms.TabPage();
             this.rtbSource = new System.Windows.Forms.RichTextBox();
             this.pnlUpperIports = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbEncodingCSV = new System.Windows.Forms.ComboBox();
             this.hsImportCSV = new SeControlsLib.HotSpot();
             this.hsImportXML = new SeControlsLib.HotSpot();
             this.tabPageTable = new System.Windows.Forms.TabPage();
@@ -117,8 +119,6 @@ namespace FBExpert
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbEncodingCSV = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabTableImports.SuspendLayout();
             this.gbTableFields.SuspendLayout();
@@ -152,9 +152,9 @@ namespace FBExpert
             this.tabControlImport.SuspendLayout();
             this.tabPageImportfile.SuspendLayout();
             this.pnlUpperIports.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPageTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -199,7 +199,7 @@ namespace FBExpert
             // selFields
             // 
             this.selFields.AllowMultipleChecks = true;
-            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle5;
+            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle9;
             this.selFields.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selFields.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selFields.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -213,7 +213,7 @@ namespace FBExpert
             this.selFields.IDVisible = false;
             this.selFields.IDWith = 32;
             this.selFields.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle6;
+            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle10;
             this.selFields.Location = new System.Drawing.Point(3, 58);
             this.selFields.Name = "selFields";
             this.selFields.SelectedIndex = -1;
@@ -361,7 +361,7 @@ namespace FBExpert
             // selTables
             // 
             this.selTables.AllowMultipleChecks = true;
-            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle7;
+            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle11;
             this.selTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selTables.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selTables.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -375,7 +375,7 @@ namespace FBExpert
             this.selTables.IDVisible = false;
             this.selTables.IDWith = 32;
             this.selTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle8;
+            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle12;
             this.selTables.Location = new System.Drawing.Point(3, 58);
             this.selTables.Name = "selTables";
             this.selTables.SelectedIndex = -1;
@@ -828,7 +828,7 @@ namespace FBExpert
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.splitContainer1.Panel2.Controls.Add(this.gbSQL);
             this.splitContainer1.Size = new System.Drawing.Size(515, 511);
-            this.splitContainer1.SplitterDistance = 127;
+            this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -838,7 +838,7 @@ namespace FBExpert
             this.gbColDef.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbColDef.Location = new System.Drawing.Point(0, 0);
             this.gbColDef.Name = "gbColDef";
-            this.gbColDef.Size = new System.Drawing.Size(127, 511);
+            this.gbColDef.Size = new System.Drawing.Size(200, 511);
             this.gbColDef.TabIndex = 6;
             this.gbColDef.TabStop = false;
             this.gbColDef.Text = "Col Definitions";
@@ -850,9 +850,10 @@ namespace FBExpert
             this.rtbColDef.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbColDef.Location = new System.Drawing.Point(3, 16);
             this.rtbColDef.Name = "rtbColDef";
-            this.rtbColDef.Size = new System.Drawing.Size(121, 492);
+            this.rtbColDef.Size = new System.Drawing.Size(194, 492);
             this.rtbColDef.TabIndex = 4;
-            this.rtbColDef.Text = "KDNR>KDNR\nKUNDE>KUNDE\nSTAMP#DateTime.Now";
+            this.rtbColDef.Text = "#SQL>UPDATE TKUNDBEWIMPORT SET TKUNDBEWIMPORT.LIEFERANZAHL = |SourceValue#anz| WH" +
+    "ERE TKUNDBEWIMPORT.KDNR = |SourceValue#debnr|";
             // 
             // gbSQL
             // 
@@ -861,7 +862,7 @@ namespace FBExpert
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSQL.Location = new System.Drawing.Point(0, 0);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(382, 511);
+            this.gbSQL.Size = new System.Drawing.Size(309, 511);
             this.gbSQL.TabIndex = 5;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
@@ -875,7 +876,7 @@ namespace FBExpert
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(376, 458);
+            this.tabControl1.Size = new System.Drawing.Size(303, 458);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPageSQLAll
@@ -885,7 +886,7 @@ namespace FBExpert
             this.tabPageSQLAll.Location = new System.Drawing.Point(4, 22);
             this.tabPageSQLAll.Name = "tabPageSQLAll";
             this.tabPageSQLAll.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQLAll.Size = new System.Drawing.Size(368, 432);
+            this.tabPageSQLAll.Size = new System.Drawing.Size(295, 432);
             this.tabPageSQLAll.TabIndex = 2;
             this.tabPageSQLAll.Text = "SQL all";
             this.tabPageSQLAll.UseVisualStyleBackColor = true;
@@ -898,7 +899,7 @@ namespace FBExpert
             this.txtSQLAll.Multiline = true;
             this.txtSQLAll.Name = "txtSQLAll";
             this.txtSQLAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQLAll.Size = new System.Drawing.Size(362, 379);
+            this.txtSQLAll.Size = new System.Drawing.Size(289, 379);
             this.txtSQLAll.TabIndex = 5;
             this.txtSQLAll.WordWrap = false;
             // 
@@ -911,7 +912,7 @@ namespace FBExpert
             this.pnlSQLAllUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSQLAllUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlSQLAllUpper.Name = "pnlSQLAllUpper";
-            this.pnlSQLAllUpper.Size = new System.Drawing.Size(362, 47);
+            this.pnlSQLAllUpper.Size = new System.Drawing.Size(289, 47);
             this.pnlSQLAllUpper.TabIndex = 6;
             // 
             // hsCalcel
@@ -1095,7 +1096,7 @@ namespace FBExpert
             this.gbProcessBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbProcessBar.Location = new System.Drawing.Point(3, 474);
             this.gbProcessBar.Name = "gbProcessBar";
-            this.gbProcessBar.Size = new System.Drawing.Size(376, 34);
+            this.gbProcessBar.Size = new System.Drawing.Size(303, 34);
             this.gbProcessBar.TabIndex = 4;
             this.gbProcessBar.TabStop = false;
             this.gbProcessBar.Text = "Process";
@@ -1105,7 +1106,7 @@ namespace FBExpert
             this.pbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbSQL.Location = new System.Drawing.Point(3, 16);
             this.pbSQL.Name = "pbSQL";
-            this.pbSQL.Size = new System.Drawing.Size(370, 15);
+            this.pbSQL.Size = new System.Drawing.Size(297, 15);
             this.pbSQL.TabIndex = 0;
             // 
             // panel1
@@ -1390,6 +1391,33 @@ namespace FBExpert
             this.pnlUpperIports.Size = new System.Drawing.Size(379, 53);
             this.pnlUpperIports.TabIndex = 5;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.Controls.Add(this.cbEncodingCSV);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(188, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(133, 53);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Default Encoding";
+            // 
+            // cbEncodingCSV
+            // 
+            this.cbEncodingCSV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEncodingCSV.FormattingEnabled = true;
+            this.cbEncodingCSV.Items.AddRange(new object[] {
+            "NONE",
+            "UTF8",
+            "ASCII",
+            "ISO8859_1"});
+            this.cbEncodingCSV.Location = new System.Drawing.Point(3, 16);
+            this.cbEncodingCSV.Name = "cbEncodingCSV";
+            this.cbEncodingCSV.Size = new System.Drawing.Size(127, 21);
+            this.cbEncodingCSV.TabIndex = 34;
+            this.cbEncodingCSV.Text = "UTF8";
+            // 
             // hsImportCSV
             // 
             this.hsImportCSV.BackColor = System.Drawing.Color.Transparent;
@@ -1534,33 +1562,6 @@ namespace FBExpert
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBox1.Controls.Add(this.cbEncodingCSV);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(188, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(133, 53);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Default Encoding";
-            // 
-            // cbEncodingCSV
-            // 
-            this.cbEncodingCSV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEncodingCSV.FormattingEnabled = true;
-            this.cbEncodingCSV.Items.AddRange(new object[] {
-            "NONE",
-            "UTF8",
-            "ASCII",
-            "ISO8859_1"});
-            this.cbEncodingCSV.Location = new System.Drawing.Point(3, 16);
-            this.cbEncodingCSV.Name = "cbEncodingCSV";
-            this.cbEncodingCSV.Size = new System.Drawing.Size(127, 21);
-            this.cbEncodingCSV.TabIndex = 34;
-            this.cbEncodingCSV.Text = "UTF8";
-            // 
             // IMPORTDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1613,9 +1614,9 @@ namespace FBExpert
             this.tabControlImport.ResumeLayout(false);
             this.tabPageImportfile.ResumeLayout(false);
             this.pnlUpperIports.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

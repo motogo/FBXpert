@@ -228,15 +228,103 @@ namespace FBExpert
         bool first = true;
 
 
-        public void GetValnames(DataRow rw)
+        public string GetCommands(DataRow rw)
         {
+            string cmdstr = string.Empty;
             foreach (string ln in rtbColDef.Lines)
             {
                 string line = ln.Trim();
                 if(line.StartsWith("//")) continue;
+                if(line.StartsWith("#SQL>"))
+                {
+                    line = line.Substring(5).Trim();
+                   
+                    string[] cmdarr = line.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (DataColumn cl in rw.Table.Columns)
+                    {
+                        string sourceColumnName = cl.ColumnName;
+                        Type dt = cl.DataType;
+                        string DBCol = string.Empty;
+                        //UPDATE TKUNDBEWIMPORT SET TKUNDBEWIMPORT.LIEFERANZAHL = |SourceValue#anz| WHERE TKUNDBEWIMPORT.KDNR = |SourceValue#debnr|
 
+                        for (int i = 0; i < cmdarr.Length; i++)
+                        {
+                            string cmd = cmdarr[i];
+                            if (cmd.StartsWith("SourceValue#"))
+                            {
+                                string defcol = cmd.Substring(12);
+                                if (defcol == sourceColumnName)
+                                {
+                                    if (dt == typeof(String))
+                                    {
+                                        var wert = rw.Field<string>(sourceColumnName);
+                                        cmdarr[i] = $@"'{wert}'";
+                                    }
+                                    else if (dt == typeof(Int32))
+                                    {
+                                        var wert = rw.Field<int>(sourceColumnName);
+                                        cmdarr[i] = $@"{wert}";
+                                    }
+                                    else if (dt == typeof(Double))
+                                    {
+                                        var wert = rw.Field<double>(sourceColumnName);
+                                        cmdarr[i] = $@"{wert}";
+                                    }
+                                    else if (dt == typeof(DateTime))
+                                    {
+                                        DateTime wert = rw.Field<DateTime>(sourceColumnName);
+                                        cmdarr[i] = $@"{wert.ToString("G")}";
+                                    }
+                                }
+                            }
+                            else if (cmd.StartsWith("Function#"))
+                            {
+                                string fname = cmd.Substring(9);
+                                if (fname == "DateTime.Now")
+                                {
+                                    DateTime wert = DateTime.Now;
+                                    cmdarr[i] = $@"'{wert.ToString("G")}'";
+                                }
+                                else if (fname == "DateTime.Today")
+                                {
+                                    DateTime wert = DateTime.Today;
+                                    cmdarr[i] = $@"'{wert.ToString("d")}'";
+                                }
+                                else if (fname == "DateTime.UtcNow")
+                                {
+                                    DateTime wert = DateTime.UtcNow;
+                                    cmdarr[i] = $@"'{wert.ToString("G")}'";
+                                }
+                                else if (fname == "GUID")
+                                {
+                                    string wert = Guid.NewGuid().ToString();
+                                    cmdarr[i] = $@"'{wert}'";
+                                }
+                            }
+                        }
+                    }
+                    string cmdstract = string.Empty;
+
+                    foreach(string cmd1 in cmdarr)
+                    {
+                        cmdstract += cmd1;
+                    }
+                    cmdstr += $@"{cmdstract};{Environment.NewLine}";
+                }
+            }
+            return cmdstr;
+        }
+
+        public string GetValues(DataRow rw)
+        {
+            string cmdstr = string.Empty;
+            foreach (string ln in rtbColDef.Lines)
+            {
+                string line = ln.Trim();
+                if (line.StartsWith("//")) continue;
                 if (line.Contains(">"))
                 {
+                    string cmd = $@"INSERT INTO {tableName} ";
                     foreach (DataColumn cl in rw.Table.Columns)
                     {
                         string cn = cl.ColumnName;
@@ -254,7 +342,7 @@ namespace FBExpert
                             if (inx >= 0)
                             {
                                 int len = inx;
-                                defcol = defcol.Substring(0,defcol.Length-15);
+                                defcol = defcol.Substring(0, defcol.Length - 15);
                                 SplitEnd = true;
                                 r = true;
                             }
@@ -267,7 +355,7 @@ namespace FBExpert
                                 l = true;
                             }
                             inx = defcol.IndexOf(".RSplitStart(");
-                            if(inx >= 0)
+                            if (inx >= 0)
                             {
                                 int len = defcol.Length - inx;
                                 defcol = defcol.Substring(0, defcol.Length - 17);
@@ -295,7 +383,7 @@ namespace FBExpert
                             var wert = rw.Field<string>(cn);
                             if (!string.IsNullOrEmpty(wert))
                             {
-                                
+
                                 if (l)
                                 {
                                     if (SplitEnd && wert.Contains(" "))
@@ -395,9 +483,12 @@ namespace FBExpert
                             Console.WriteLine($@"TypeNotUsed:{dt}");
                         }
                     }
+                    cmdstr = $@"{cmd} ({valnames}) VALUES ({val})";
+
                 }
                 else if (line.Contains("#"))
                 {
+                    string cmd = $@"INSERT INTO {tableName} ";
                     string[] larr = line.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
                     if (larr.Length == 2)
                     {
@@ -464,9 +555,11 @@ namespace FBExpert
                             }
                         }
                     }
+                    cmdstr = $@"{cmd} ({valnames}) VALUES ({val})";
                 }
 
             }
+            return cmdstr;
         }
 
         private void InsertImport()
@@ -495,14 +588,16 @@ namespace FBExpert
                     first = false;
                 }
 
-                GetValnames(rw);
+                string cmdstr = GetCommands(rw);
+                if (string.IsNullOrEmpty(cmdstr)) continue;
                 i++;
                 gbProcessBar.Text = $@"Process {i}({pbSQL.Maximum})";
                 pbSQL.Value++;
                 // ExecuteSQL($@"{cmd} ({valnames}) VALUES ({val})");
-                txtSQLAll.Text += $@"{cmd} ({valnames}) VALUES ({val}){Environment.NewLine}";
+                //string cmdstr = $@"{cmd} ({valnames}) VALUES ({val})";
+                txtSQLAll.Text += $@"{cmdstr}{Environment.NewLine}";
                 Application.DoEvents();
-                if (!ckTestmode.Checked) ExecSql($@"{cmd} ({valnames}) VALUES ({val})");
+                if (!ckTestmode.Checked) ExecSql(cmdstr);
             }
         }
 
