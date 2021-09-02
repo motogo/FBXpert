@@ -17,14 +17,17 @@ namespace FBExpert
 {
     public partial class IMPORTDataForm : INormalForm
     {
-        TableClass TableObject = null;
-
-        DBRegistrationClass DBReg = null;
-
-        NotifiesClass localNotify = null;
-
-
-        bool firsttab = false;
+        private TableClass TableObject = null;
+        private DBRegistrationClass DBReg = null;
+        private NotifiesClass localNotify = null;
+        private bool firsttab = false;
+        private bool doImport = false;
+        private int done = 0;
+        private int notdone = 0;
+        //private string tableName = string.Empty;
+        private char colSep = ';';
+        private string[] csvCols;
+        private string ColDefFileName = string.Empty;
 
         public IMPORTDataForm(Form parent, DBRegistrationClass drc)
         {
@@ -69,7 +72,6 @@ namespace FBExpert
             Close();
         }
 
-
         public void ShowCaptions()
         {
             lblTableName.Text = (TableObject != null) ? $@"Import into Table: {TableObject.Name}" : "Import into Table";
@@ -103,7 +105,6 @@ namespace FBExpert
 
         }
 
-
         private void IMPORTDataForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
@@ -113,7 +114,6 @@ namespace FBExpert
             localNotify.Notify.OnRaiseErrorHandler -= new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
             localNotify = null;
         }
-
 
         private void hsCheckAllTables_Click(object sender, EventArgs e)
         {
@@ -191,9 +191,7 @@ namespace FBExpert
                 selFields.Add(fld.ToString(), fld.State, fld);
             }
         }
-
-        string tableName = string.Empty;
-
+        
         private void selFields_SelectItem(object sender, SEListBox.SelectItemEventArgs e)
         {
             var itm = selFields.ItemDatas[e.RowIndex] as ItemDataClass;
@@ -203,7 +201,6 @@ namespace FBExpert
             else ob.State = CheckState.Checked;
         }
 
-
         private void selFields_ItemCheckChanged(object sender, CheckItemEventArgs e)
         {
             var itm = selFields.ItemDatas[e.RowIndex] as ItemDataClass;
@@ -211,22 +208,132 @@ namespace FBExpert
             tc.State = itm.Check;
         }
 
-        DataSet ds = new DataSet();
         private void hsImport_Click(object sender, EventArgs e)
         {
             txtSQLAll.Text = string.Empty;
             EmptyLists();
-            if (rbInsert.Checked)
+            
+            doImport = true;
+            if (ckSQLMode.Checked)
             {
-                doImport = true;
                 InsertImport();
             }
+            else
+            {
+                InsertImport2();
+            }
         }
-
+        /*
         string valnames = string.Empty;
         string val = string.Empty;
         bool first = true;
+        */
 
+
+        public string GetSourceValue(DataRow rw, DataColumn cl, Type dt, string cmd, int len)
+        {
+            string sourceColumnName = cl.ColumnName;
+            
+            string defcol = cmd.Substring(len);
+            string cmdstr = cmd;
+            if (defcol == sourceColumnName)
+            {
+                if (dt == typeof(String))
+                {
+                    var wert = rw.Field<String>(sourceColumnName);
+                    cmdstr = $@"'{wert}'";
+                }
+                else if (dt == typeof(Int32))
+                {
+                    var wert = rw.Field<Int32>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(UInt32))
+                {
+                    var wert = rw.Field<UInt32>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(Int16))
+                {
+                    var wert = rw.Field<Int16>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(UInt16))
+                {
+                    var wert = rw.Field<UInt16>(sourceColumnName);
+                    cmdstr = $@"{wert}";  
+                }
+                else if (dt == typeof(Int64))
+                {
+                    var wert = rw.Field<Int64>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(UInt64))
+                {
+                    var wert = rw.Field<UInt64>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(Boolean))
+                {
+                    var wert = rw.Field<Boolean>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(Double))
+                {
+                    var wert = rw.Field<Double>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(Single))
+                {
+                    var wert = rw.Field<Single>(sourceColumnName);
+                    cmdstr = $@"{wert}";
+                }
+                else if (dt == typeof(DateTime))
+                {
+                    DateTime wert = rw.Field<DateTime>(sourceColumnName);
+                    cmdstr = $@"{wert.ToString("G")}";
+                }
+                else
+                {
+                    //keiin datentyp wird wie string behandelt
+                    var wert = rw.Field<string>(sourceColumnName);
+                    cmdstr = $@"'{wert}'";
+                }
+            }
+            return cmdstr;
+        }
+
+        public string GetFunction(string cmd)
+        {
+            string fname = cmd.Substring(9);
+            string cmdstr = cmd;
+            if (fname == "DateTime.Now")
+            {
+                DateTime wert = DateTime.Now;
+                cmdstr = $@"'{wert.ToString("G")}'";
+            }
+            else if (fname == "DateTime.Today")
+            {
+                DateTime wert = DateTime.Today;
+                cmdstr = $@"'{wert.ToString("d")}'";
+            }
+            else if (fname == "DateTime.UtcNow")
+            {
+                DateTime wert = DateTime.UtcNow;
+                cmdstr = $@"'{wert.ToString("G")}'";
+            }
+            else if (fname == "GUID")
+            {
+                string wert = Guid.NewGuid().ToString();
+                cmdstr = $@"'{wert}'";
+            }
+            else if (fname.StartsWith("Int("))
+            {
+                string wert = Guid.NewGuid().ToString();
+                cmdstr = $@"'{wert}'";
+            }
+            return cmdstr;
+        }
 
         public string GetCommands(DataRow rw)
         {
@@ -243,63 +350,35 @@ namespace FBExpert
                     foreach (DataColumn cl in rw.Table.Columns)
                     {
                         string sourceColumnName = cl.ColumnName;
-                        Type dt = cl.DataType;
+                        if(sourceColumnName == "anz")
+                        {
+                            Console.WriteLine();
+                        }
+                        //Type dt = cl.DataType;
                         string DBCol = string.Empty;
                         //UPDATE TKUNDBEWIMPORT SET TKUNDBEWIMPORT.LIEFERANZAHL = |SourceValue#anz| WHERE TKUNDBEWIMPORT.KDNR = |SourceValue#debnr|
-
+                        //INSERT INTO TKUNDEN(ID, KDNR, STAMP) VALUES(|Function#GUID|,|SourceValue#debnr|,|Function#DateTime.Now|)
                         for (int i = 0; i < cmdarr.Length; i++)
                         {
                             string cmd = cmdarr[i];
                             if (cmd.StartsWith("SourceValue#"))
                             {
-                                string defcol = cmd.Substring(12);
-                                if (defcol == sourceColumnName)
-                                {
-                                    if (dt == typeof(String))
-                                    {
-                                        var wert = rw.Field<string>(sourceColumnName);
-                                        cmdarr[i] = $@"'{wert}'";
-                                    }
-                                    else if (dt == typeof(Int32))
-                                    {
-                                        var wert = rw.Field<int>(sourceColumnName);
-                                        cmdarr[i] = $@"{wert}";
-                                    }
-                                    else if (dt == typeof(Double))
-                                    {
-                                        var wert = rw.Field<double>(sourceColumnName);
-                                        cmdarr[i] = $@"{wert}";
-                                    }
-                                    else if (dt == typeof(DateTime))
-                                    {
-                                        DateTime wert = rw.Field<DateTime>(sourceColumnName);
-                                        cmdarr[i] = $@"{wert.ToString("G")}";
-                                    }
-                                }
+                                Type dt = cl.DataType;
+                                cmdarr[i] = GetSourceValue(rw, cl,dt, cmd,12);
+                            }
+                            else if (cmd.StartsWith("SourceValueInt#"))
+                            {
+                                Type dt = typeof(Int32);
+                                cmdarr[i] = GetSourceValue(rw, cl, dt, cmd,15);
+                            }
+                            else if (cmd.StartsWith("SourceValueDouble#"))
+                            {
+                                Type dt = typeof(Double);
+                                cmdarr[i] = GetSourceValue(rw, cl, dt, cmd, 15);
                             }
                             else if (cmd.StartsWith("Function#"))
                             {
-                                string fname = cmd.Substring(9);
-                                if (fname == "DateTime.Now")
-                                {
-                                    DateTime wert = DateTime.Now;
-                                    cmdarr[i] = $@"'{wert.ToString("G")}'";
-                                }
-                                else if (fname == "DateTime.Today")
-                                {
-                                    DateTime wert = DateTime.Today;
-                                    cmdarr[i] = $@"'{wert.ToString("d")}'";
-                                }
-                                else if (fname == "DateTime.UtcNow")
-                                {
-                                    DateTime wert = DateTime.UtcNow;
-                                    cmdarr[i] = $@"'{wert.ToString("G")}'";
-                                }
-                                else if (fname == "GUID")
-                                {
-                                    string wert = Guid.NewGuid().ToString();
-                                    cmdarr[i] = $@"'{wert}'";
-                                }
+                                cmdarr[i] = GetFunction(cmd);
                             }
                         }
                     }
@@ -315,6 +394,10 @@ namespace FBExpert
             return cmdstr;
         }
 
+        bool first = false;
+        string valnames = string.Empty;
+        string val = string.Empty;
+        string tableName = string.Empty;
         public string GetValues(DataRow rw)
         {
             string cmdstr = string.Empty;
@@ -401,6 +484,7 @@ namespace FBExpert
                                         //wert = wert;
                                         Console.WriteLine();
                                     }
+                                    if (ckTrimValues.Checked) wert = wert.Trim();
                                 }
                                 else if (r)
                                 {
@@ -420,7 +504,7 @@ namespace FBExpert
                                     }
                                 }
                             }
-
+                            if (ckTrimValues.Checked && !string.IsNullOrEmpty(wert)) wert = wert.Trim();
                             if (first)
                             {
                                 valnames += $@"{DBCol}";
@@ -511,7 +595,7 @@ namespace FBExpert
                         }
                         else if (wertstr == "DATETIME.TODAY")
                         {
-                            string wert = DateTime.Today.ToString("G");
+                            string wert = DateTime.Today.ToString("d");
                             if (first)
                             {
                                 valnames += $@"{DBCol}";
@@ -566,6 +650,7 @@ namespace FBExpert
         {
             done = 0;
             notdone = 0;
+            var ds = (DataSet)dataGridView1.DataSource;
             pbSQL.Minimum = 0;
             pbSQL.Maximum = ds.Tables[0].Rows.Count;
             pbSQL.Value = 0;
@@ -575,6 +660,8 @@ namespace FBExpert
             {
                 if (!doImport) break;
                 Guid gd = Guid.NewGuid();
+
+                /*
                 bool newguid = true;
                 first = true;
                 valnames = string.Empty;
@@ -587,7 +674,7 @@ namespace FBExpert
                     val += $@"'{gd}'";
                     first = false;
                 }
-
+                */
                 string cmdstr = GetCommands(rw);
                 if (string.IsNullOrEmpty(cmdstr)) continue;
                 i++;
@@ -600,12 +687,47 @@ namespace FBExpert
                 if (!ckTestmode.Checked) ExecSql(cmdstr);
             }
         }
+        private void InsertImport2()
+        {
+                done = 0;
+                notdone = 0;
+                var ds = (DataSet)dataGridView1.DataSource;
+                pbSQL.Minimum = 0;
+                pbSQL.Maximum = ds.Tables[0].Rows.Count;
+                pbSQL.Value = 0;
+                var rws = ds.Tables[0].Rows;
+                int i = 0;
+                foreach (DataRow rw in rws)
+                {
+                    if (!doImport) break;
+                    Guid gd = Guid.NewGuid();
 
+                    
+                    bool newguid = true;
+                    first = true;
+                    valnames = string.Empty;
+                    val = string.Empty;
+                    string cmd = $@"INSERT INTO {tableName} ";
 
-        bool doImport = false;
-        int done = 0;
-        int notdone = 0;
-
+                    if (newguid)
+                    {
+                        valnames += "ID";
+                        val += $@"'{gd}'";
+                        first = false;
+                    }
+                    
+                    string cmdstr = GetValues(rw);
+                    if (string.IsNullOrEmpty(cmdstr)) continue;
+                    i++;
+                    gbProcessBar.Text = $@"Process {i}({pbSQL.Maximum})";
+                    pbSQL.Value++;
+                    // ExecuteSQL($@"{cmd} ({valnames}) VALUES ({val})");
+                    //string cmdstr = $@"{cmd} ({valnames}) VALUES ({val})";
+                    txtSQLAll.Text += $@"{cmdstr}{Environment.NewLine}";
+                    Application.DoEvents();
+                    if (!ckTestmode.Checked) ExecSql(cmdstr);
+                }           
+        }
         private SQLCommandsReturnInfoClass ExecSql(string command)
         {
             var _sqLcommand = new SQLCommandsClass(DBReg);
@@ -629,14 +751,16 @@ namespace FBExpert
             return ri;
         }
 
-
         private void hsImportXML_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "XML|*.xml|ALL|*.*";
             openFileDialog1.FileName = string.Empty;
             openFileDialog1.Title = "Reading XML file";
+            
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                dataGridView1.DataSource = null;
+                DataSet ds = new DataSet();
                 rtbSource.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
                 ds.Clear();
                 //ds.ReadXml(openFileDialog1.FileName);
@@ -647,14 +771,17 @@ namespace FBExpert
                 {
                     using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream(), Encoding.Default))
                     {
-                        ds.ReadXml(sr);
+                        if(ckTypedXML.Checked)
+                            ds.ReadXml(sr, XmlReadMode.InferTypedSchema);
+                        else
+                            ds.ReadXml(sr);
                     }
                 }
-
-
                 gbImport.Text = $@"Read {ds.Tables[0].Rows.Count} datarows from XML";
+                dataGridView1.DataSource = ds;
+                dataGridView1.DataMember = ds.Tables[0].TableName;
             }
-            dataGridView1.DataSource = ds;
+            
         }
 
         private string ToDBCharsetName(Encoding enc)
@@ -668,6 +795,7 @@ namespace FBExpert
             if (enc.HeaderName == "ISO8859-2") return "ISO8859_2";
             return enc.HeaderName;
         }
+
         private Encoding GetCharsetEncodingFromName(string enc)
         {
             //var  es = Encoding.GetEncodings();
@@ -676,7 +804,7 @@ namespace FBExpert
             return Encoding.Default;
         }
 
-            public void FillCHarsets()
+        public void FillCHarsets()
         {
             cbEncodingCSV.Items.Clear();
             cbEncoding.Items.Clear();
@@ -709,6 +837,8 @@ namespace FBExpert
            
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                dataGridView1.DataSource = null;
+                DataSet ds = new DataSet();
                 string[] lines = File.ReadAllLines(openFileDialog1.FileName, Encoding.Default);
                 ds.Clear();
                 XElement cust = new XElement("CSVImports");
@@ -754,11 +884,12 @@ namespace FBExpert
                 dataGridView1.DataSource = ds;
             }
         }
-        private char colSep = ';';
-        private string[] csvCols;
-        private string ColDefFileName = string.Empty;
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
+        {
+            LoadDefinition();
+        }
+        private void LoadDefinition()
         {
             openFileDialog1.Filter = "ColDef|*.cdf|ALL|*.*";
             openFileDialog1.FileName = string.Empty;
@@ -769,8 +900,11 @@ namespace FBExpert
                 rtbColDef.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
             }
         }
-
         private void hsSaveDefinition_Click(object sender, EventArgs e)
+        {
+            SaveDefinition();
+        }
+        private void SaveDefinition()
         {
             saveFileDialog1.Filter = "ColDef|*.cdf|ALL|*.*";
             saveFileDialog1.FileName = ColDefFileName;
@@ -798,6 +932,7 @@ namespace FBExpert
                 done = 0;
                 notdone = 0;
                 pbSQL.Minimum = 0;
+                var ds = (DataSet)dataGridView1.DataSource;
                 pbSQL.Maximum = ds.Tables[0].Rows.Count;
                 pbSQL.Value = 0;
             }
@@ -823,21 +958,10 @@ namespace FBExpert
 
         private void cmsColDefData_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem == tsmiDateTimeNow)
+            cmsColDefData.Close();
+            if (e.ClickedItem == tsmiFunctionGUID)
             {
-                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "#DateTime.Now");
-            }
-            else if (e.ClickedItem == tsmiDateTimeToday)
-            {
-                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "#DateTime.Today");
-            }
-            else if (e.ClickedItem == tsmiINT)
-            {
-                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "#Int(0)");
-            }
-            else if (e.ClickedItem == tsmiDOUBLE)
-            {
-                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "#Double(0)");
+                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "|Function#GUID|");
             }
             else if (e.ClickedItem == tsmiEXPORTDataCopyToCLipboard)
             {
@@ -846,6 +970,98 @@ namespace FBExpert
             else if (e.ClickedItem == tsmiEXPORTDataPasteFromClipboard)
             {
                 rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, Clipboard.GetText());
+            }
+            else if (e.ClickedItem == tsmiSourceValueInt)
+            {
+                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "|SourceValueInt#field|");
+            }
+            else if (e.ClickedItem == tsmiSoucreValueDouble)
+            {
+                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "|SourceValueDouble#field|");
+            }
+            else if (e.ClickedItem == tsmiSourceValue)
+            {
+                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "|SourceValue#field|");
+            }
+            else if (e.ClickedItem == tsmiFunctionDateTimeNow)
+            {
+                rtbColDef.Text = rtbColDef.Text.Insert(rtbColDef.SelectionStart, "|Function#DateTime.Now|");
+            }
+            else if (e.ClickedItem == tsmiLoadDefinition)
+            {
+                LoadDefinition();
+            }
+            else if (e.ClickedItem == tsmiSaveDefinition)
+            {
+                SaveDefinition();
+            }
+        }
+
+        private void cmsSaveXMLSourceText_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+           cmsSaveXMLSourceText.Close();
+            if (e.ClickedItem == tsmiSaveXML)
+            {
+                saveFileDialog1.Filter = "XML|*.xml|ALL|*.*";
+                saveFileDialog1.FileName = ColDefFileName;
+                saveFileDialog1.Title = "Save col definitions";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    rtbSource.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                }
+            }
+            else if (e.ClickedItem == tsmiSourceXMLCopyToClipboard)
+            {
+                Clipboard.SetText(rtbSource.SelectedText);
+            }
+            else if (e.ClickedItem == tsmiSourceXMLCopyFromClipboard)
+            {
+                rtbSource.Text = rtbSource.Text.Insert(rtbSource.SelectionStart, Clipboard.GetText());
+            }
+        }
+
+        private void cmsSQLList_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            cmsSQLList.Close();
+            if (e.ClickedItem == temiSQLListSaveToClipboard)
+            {
+                Clipboard.SetText(txtSQLAll.SelectedText);
+            }
+            else if (e.ClickedItem == tsmiClipboardPastToSqlList)
+            {
+                txtSQLAll.Text = txtSQLAll.Text.Insert(rtbColDef.SelectionStart, Clipboard.GetText());
+            }
+            else if (e.ClickedItem ==  tsmiSaveSqlList)
+            {
+                if (txtSQLAll.Text.Length <= 0) return;
+                saveFileDialog1.Filter = "SQL|*.sql|ALL|*.*";
+                saveFileDialog1.FileName = ColDefFileName;
+                saveFileDialog1.Title = "Save SQL list";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(saveFileDialog1.FileName, txtSQLAll.Text);
+                }
+            }
+            else if (e.ClickedItem == tsmiLoadSQLList)
+            {
+                openFileDialog1.Filter = "SQL|*.sql|ALL|*.*";
+                openFileDialog1.FileName = string.Empty;
+                openFileDialog1.Title = "Read SQL list";
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    txtSQLAll.Text = string.Empty;
+                    txtSQLAll.Text = File.ReadAllText(openFileDialog1.FileName);
+                }
+            }
+            else if(e.ClickedItem == tsmiDoSelectedSQL)
+            {
+                TextBox txt = new TextBox();
+                txt.Text = txtSQLAll.SelectedText;
+                foreach(string tx in txt.Lines)
+                {
+                    var cmddone = ExecSql($@"{tx}");
+                }
+
             }
         }
     }

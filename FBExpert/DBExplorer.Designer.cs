@@ -71,6 +71,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tstDatas = new System.Windows.Forms.ToolStripTextBox();
             this.tsmiBackUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExportData = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiImportData = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
@@ -231,7 +232,7 @@
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiExperienceInfos = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -355,6 +356,7 @@
             this.tstSQL,
             this.tsmiSQLScriptExplorer,
             this.tsmiSQLExplorer,
+            this.tsmiExperienceInfos,
             this.toolStripSeparator1,
             this.tstDesigners,
             this.tsmiCreateXMLDesign,
@@ -378,7 +380,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(307, 844);
+            this.cmsDatabase.Size = new System.Drawing.Size(307, 870);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -676,6 +678,11 @@
             this.tsmiBackUp.Name = "tsmiBackUp";
             this.tsmiBackUp.Size = new System.Drawing.Size(306, 26);
             this.tsmiBackUp.Text = "Backup/Restore";
+            // 
+            // toolStripSeparator32
+            // 
+            this.toolStripSeparator32.Name = "toolStripSeparator32";
+            this.toolStripSeparator32.Size = new System.Drawing.Size(303, 6);
             // 
             // tsmiExportData
             // 
@@ -2082,10 +2089,12 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
             // 
-            // toolStripSeparator32
+            // tsmiExperienceInfos
             // 
-            this.toolStripSeparator32.Name = "toolStripSeparator32";
-            this.toolStripSeparator32.Size = new System.Drawing.Size(303, 6);
+            this.tsmiExperienceInfos.Image = global::FBXpert.Properties.Resources.font2_x24;
+            this.tsmiExperienceInfos.Name = "tsmiExperienceInfos";
+            this.tsmiExperienceInfos.Size = new System.Drawing.Size(306, 26);
+            this.tsmiExperienceInfos.Text = "Experience Infos";
             // 
             // DbExplorerForm
             // 
@@ -2353,5 +2362,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiEditLast100OfView;
         private System.Windows.Forms.ToolStripMenuItem tsmiImportData;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExperienceInfos;
     }
 }

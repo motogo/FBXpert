@@ -32,10 +32,10 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IMPORTDataForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabTableImports = new System.Windows.Forms.TabPage();
@@ -51,22 +51,30 @@ namespace FBExpert
             this.hsCheckAllTables = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.cmsColDefData = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiLoadDefinition = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveDefinition = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiEXPORTDataCopyToCLipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEXPORTDataPasteFromClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiDateTimeNow = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDateTimeToday = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiINT = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDOUBLE = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSourceValue = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSourceValueInt = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSoucreValueDouble = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolSeperato2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFunctionDateTimeNow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFunctionDateTimeToday = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFunctionGUID = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMessagesText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMessageCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMessagePaste = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdDATA = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiSetToNULL = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDDLText = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiDDLCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDDLPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsSaveXMLSourceText = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSourceXMLCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSourceXMLCopyFromClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSaveXML = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlUpper = new System.Windows.Forms.Panel();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsRefresh = new SeControlsLib.HotSpot();
@@ -74,6 +82,18 @@ namespace FBExpert
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.gbFileExport = new System.Windows.Forms.GroupBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tabControlImport = new System.Windows.Forms.TabControl();
+            this.tabPageImportfile = new System.Windows.Forms.TabPage();
+            this.rtbSource = new System.Windows.Forms.RichTextBox();
+            this.pnlUpperIports = new System.Windows.Forms.Panel();
+            this.ckTypedXML = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbEncodingCSV = new System.Windows.Forms.ComboBox();
+            this.hsImportCSV = new SeControlsLib.HotSpot();
+            this.hsImportXML = new SeControlsLib.HotSpot();
+            this.tabPageTable = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbImport = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gbColDef = new System.Windows.Forms.GroupBox();
@@ -82,6 +102,12 @@ namespace FBExpert
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageSQLAll = new System.Windows.Forms.TabPage();
             this.txtSQLAll = new System.Windows.Forms.TextBox();
+            this.cmsSQLList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.temiSQLListSaveToClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClipboardPastToSqlList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSaveSqlList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLoadSQLList = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSQLAllUpper = new System.Windows.Forms.Panel();
             this.hsCalcel = new SeControlsLib.HotSpot();
             this.gbEncoding = new System.Windows.Forms.GroupBox();
@@ -94,31 +120,22 @@ namespace FBExpert
             this.gbProcessBar = new System.Windows.Forms.GroupBox();
             this.pbSQL = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gbSQLMode = new System.Windows.Forms.GroupBox();
-            this.rbUpdate = new System.Windows.Forms.RadioButton();
-            this.rbInsert = new System.Windows.Forms.RadioButton();
             this.gbAttributes = new System.Windows.Forms.GroupBox();
             this.ckEmptyLists = new System.Windows.Forms.CheckBox();
             this.ckTestmode = new System.Windows.Forms.CheckBox();
             this.hsImport = new SeControlsLib.HotSpot();
             this.hsSaveDefinitions = new SeControlsLib.HotSpot();
             this.hsLoadDefinition = new SeControlsLib.HotSpot();
-            this.tabControlImport = new System.Windows.Forms.TabControl();
-            this.tabPageImportfile = new System.Windows.Forms.TabPage();
-            this.rtbSource = new System.Windows.Forms.RichTextBox();
-            this.pnlUpperIports = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbEncodingCSV = new System.Windows.Forms.ComboBox();
-            this.hsImportCSV = new SeControlsLib.HotSpot();
-            this.hsImportXML = new SeControlsLib.HotSpot();
-            this.tabPageTable = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.sfdFile = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ckSQLMode = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDoSelectedSQL = new System.Windows.Forms.ToolStripMenuItem();
+            this.ckTrimValues = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabTableImports.SuspendLayout();
             this.gbTableFields.SuspendLayout();
@@ -128,10 +145,20 @@ namespace FBExpert
             this.cmsColDefData.SuspendLayout();
             this.cmsMessagesText.SuspendLayout();
             this.cmdDATA.SuspendLayout();
-            this.cmsDDLText.SuspendLayout();
+            this.cmsSaveXMLSourceText.SuspendLayout();
             this.pnlUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.gbFileExport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.tabControlImport.SuspendLayout();
+            this.tabPageImportfile.SuspendLayout();
+            this.pnlUpperIports.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPageTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbImport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -141,20 +168,14 @@ namespace FBExpert
             this.gbSQL.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageSQLAll.SuspendLayout();
+            this.cmsSQLList.SuspendLayout();
             this.pnlSQLAllUpper.SuspendLayout();
             this.gbEncoding.SuspendLayout();
             this.tabPageSQLdone.SuspendLayout();
             this.tabPageSQLfail.SuspendLayout();
             this.gbProcessBar.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.gbSQLMode.SuspendLayout();
             this.gbAttributes.SuspendLayout();
-            this.tabControlImport.SuspendLayout();
-            this.tabPageImportfile.SuspendLayout();
-            this.pnlUpperIports.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPageTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -165,7 +186,7 @@ namespace FBExpert
             this.tabControl.Location = new System.Drawing.Point(3, 16);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(471, 583);
+            this.tabControl.Size = new System.Drawing.Size(471, 706);
             this.tabControl.TabIndex = 0;
             this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -179,7 +200,7 @@ namespace FBExpert
             this.tabTableImports.Location = new System.Drawing.Point(4, 23);
             this.tabTableImports.Name = "tabTableImports";
             this.tabTableImports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTableImports.Size = new System.Drawing.Size(463, 556);
+            this.tabTableImports.Size = new System.Drawing.Size(463, 679);
             this.tabTableImports.TabIndex = 0;
             this.tabTableImports.Text = "Table data import";
             // 
@@ -191,7 +212,7 @@ namespace FBExpert
             this.gbTableFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTableFields.Location = new System.Drawing.Point(245, 3);
             this.gbTableFields.Name = "gbTableFields";
-            this.gbTableFields.Size = new System.Drawing.Size(215, 550);
+            this.gbTableFields.Size = new System.Drawing.Size(215, 673);
             this.gbTableFields.TabIndex = 4;
             this.gbTableFields.TabStop = false;
             this.gbTableFields.Text = "Fields";
@@ -199,7 +220,7 @@ namespace FBExpert
             // selFields
             // 
             this.selFields.AllowMultipleChecks = true;
-            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle9;
+            this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selFields.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selFields.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selFields.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -213,7 +234,7 @@ namespace FBExpert
             this.selFields.IDVisible = false;
             this.selFields.IDWith = 32;
             this.selFields.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle10;
+            this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.selFields.Location = new System.Drawing.Point(3, 58);
             this.selFields.Name = "selFields";
             this.selFields.SelectedIndex = -1;
@@ -221,7 +242,7 @@ namespace FBExpert
             this.selFields.ShowCellToolTips = true;
             this.selFields.ShowCountInTitle = true;
             this.selFields.ShowSelection = false;
-            this.selFields.Size = new System.Drawing.Size(209, 489);
+            this.selFields.Size = new System.Drawing.Size(209, 612);
             this.selFields.TabIndex = 19;
             this.selFields.Text = "selFields";
             this.selFields.TextCaption = "text";
@@ -353,7 +374,7 @@ namespace FBExpert
             this.gbTablesDataExport.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbTablesDataExport.Location = new System.Drawing.Point(3, 3);
             this.gbTablesDataExport.Name = "gbTablesDataExport";
-            this.gbTablesDataExport.Size = new System.Drawing.Size(242, 550);
+            this.gbTablesDataExport.Size = new System.Drawing.Size(242, 673);
             this.gbTablesDataExport.TabIndex = 3;
             this.gbTablesDataExport.TabStop = false;
             this.gbTablesDataExport.Text = "Tables";
@@ -361,7 +382,7 @@ namespace FBExpert
             // selTables
             // 
             this.selTables.AllowMultipleChecks = true;
-            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle11;
+            this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
             this.selTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selTables.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selTables.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -375,7 +396,7 @@ namespace FBExpert
             this.selTables.IDVisible = false;
             this.selTables.IDWith = 32;
             this.selTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle12;
+            this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
             this.selTables.Location = new System.Drawing.Point(3, 58);
             this.selTables.Name = "selTables";
             this.selTables.SelectedIndex = -1;
@@ -383,7 +404,7 @@ namespace FBExpert
             this.selTables.ShowCellToolTips = true;
             this.selTables.ShowCountInTitle = true;
             this.selTables.ShowSelection = true;
-            this.selTables.Size = new System.Drawing.Size(236, 489);
+            this.selTables.Size = new System.Drawing.Size(236, 612);
             this.selTables.TabIndex = 20;
             this.selTables.Text = "seListBox1";
             this.selTables.TextCaption = "text";
@@ -526,59 +547,107 @@ namespace FBExpert
             // 
             this.cmsColDefData.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsColDefData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiLoadDefinition,
+            this.tsmiSaveDefinition,
+            this.toolStripSeparator3,
             this.tsmiEXPORTDataCopyToCLipboard,
             this.tsmiEXPORTDataPasteFromClipboard,
             this.toolStripSeparator1,
-            this.tsmiDateTimeNow,
-            this.tsmiDateTimeToday,
-            this.tsmiINT,
-            this.tsmiDOUBLE});
+            this.tsmiSourceValue,
+            this.tsmiSourceValueInt,
+            this.tsmiSoucreValueDouble,
+            this.toolSeperato2,
+            this.tsmiFunctionDateTimeNow,
+            this.tsmiFunctionDateTimeToday,
+            this.tsmiFunctionGUID});
             this.cmsColDefData.Name = "cmsText";
-            this.cmsColDefData.Size = new System.Drawing.Size(176, 166);
+            this.cmsColDefData.Size = new System.Drawing.Size(223, 282);
             this.cmsColDefData.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsColDefData_ItemClicked);
+            // 
+            // tsmiLoadDefinition
+            // 
+            this.tsmiLoadDefinition.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.tsmiLoadDefinition.Name = "tsmiLoadDefinition";
+            this.tsmiLoadDefinition.Size = new System.Drawing.Size(222, 26);
+            this.tsmiLoadDefinition.Text = "Load Definition";
+            // 
+            // tsmiSaveDefinition
+            // 
+            this.tsmiSaveDefinition.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.tsmiSaveDefinition.Name = "tsmiSaveDefinition";
+            this.tsmiSaveDefinition.Size = new System.Drawing.Size(222, 26);
+            this.tsmiSaveDefinition.Text = "Save Definition";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(219, 6);
             // 
             // tsmiEXPORTDataCopyToCLipboard
             // 
             this.tsmiEXPORTDataCopyToCLipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
             this.tsmiEXPORTDataCopyToCLipboard.Name = "tsmiEXPORTDataCopyToCLipboard";
-            this.tsmiEXPORTDataCopyToCLipboard.Size = new System.Drawing.Size(175, 26);
+            this.tsmiEXPORTDataCopyToCLipboard.Size = new System.Drawing.Size(222, 26);
             this.tsmiEXPORTDataCopyToCLipboard.Text = "Copy to Clipboard";
             // 
             // tsmiEXPORTDataPasteFromClipboard
             // 
             this.tsmiEXPORTDataPasteFromClipboard.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
             this.tsmiEXPORTDataPasteFromClipboard.Name = "tsmiEXPORTDataPasteFromClipboard";
-            this.tsmiEXPORTDataPasteFromClipboard.Size = new System.Drawing.Size(175, 26);
+            this.tsmiEXPORTDataPasteFromClipboard.Size = new System.Drawing.Size(222, 26);
             this.tsmiEXPORTDataPasteFromClipboard.Text = "Paste";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(219, 6);
             // 
-            // tsmiDateTimeNow
+            // tsmiSourceValue
             // 
-            this.tsmiDateTimeNow.Name = "tsmiDateTimeNow";
-            this.tsmiDateTimeNow.Size = new System.Drawing.Size(175, 26);
-            this.tsmiDateTimeNow.Text = "DateTime.Now";
+            this.tsmiSourceValue.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiSourceValue.Name = "tsmiSourceValue";
+            this.tsmiSourceValue.Size = new System.Drawing.Size(222, 26);
+            this.tsmiSourceValue.Text = "|SourceValue#field|";
             // 
-            // tsmiDateTimeToday
+            // tsmiSourceValueInt
             // 
-            this.tsmiDateTimeToday.Name = "tsmiDateTimeToday";
-            this.tsmiDateTimeToday.Size = new System.Drawing.Size(175, 26);
-            this.tsmiDateTimeToday.Text = "DateTime.Today";
+            this.tsmiSourceValueInt.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiSourceValueInt.Name = "tsmiSourceValueInt";
+            this.tsmiSourceValueInt.Size = new System.Drawing.Size(222, 26);
+            this.tsmiSourceValueInt.Text = "|SourceValueInt#field|";
             // 
-            // tsmiINT
+            // tsmiSoucreValueDouble
             // 
-            this.tsmiINT.Name = "tsmiINT";
-            this.tsmiINT.Size = new System.Drawing.Size(175, 26);
-            this.tsmiINT.Text = "INT(0)";
+            this.tsmiSoucreValueDouble.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiSoucreValueDouble.Name = "tsmiSoucreValueDouble";
+            this.tsmiSoucreValueDouble.Size = new System.Drawing.Size(222, 26);
+            this.tsmiSoucreValueDouble.Text = "|SourceValueDouble#field|";
             // 
-            // tsmiDOUBLE
+            // toolSeperato2
             // 
-            this.tsmiDOUBLE.Name = "tsmiDOUBLE";
-            this.tsmiDOUBLE.Size = new System.Drawing.Size(175, 26);
-            this.tsmiDOUBLE.Text = "DOUBLE(0)";
+            this.toolSeperato2.Name = "toolSeperato2";
+            this.toolSeperato2.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsmiFunctionDateTimeNow
+            // 
+            this.tsmiFunctionDateTimeNow.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiFunctionDateTimeNow.Name = "tsmiFunctionDateTimeNow";
+            this.tsmiFunctionDateTimeNow.Size = new System.Drawing.Size(222, 26);
+            this.tsmiFunctionDateTimeNow.Text = "|Function#DateTime.Now|";
+            // 
+            // tsmiFunctionDateTimeToday
+            // 
+            this.tsmiFunctionDateTimeToday.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiFunctionDateTimeToday.Name = "tsmiFunctionDateTimeToday";
+            this.tsmiFunctionDateTimeToday.Size = new System.Drawing.Size(222, 26);
+            this.tsmiFunctionDateTimeToday.Text = "|Function#DateTime.Today|";
+            // 
+            // tsmiFunctionGUID
+            // 
+            this.tsmiFunctionGUID.Image = global::FBXpert.Properties.Resources.view_insert_24x;
+            this.tsmiFunctionGUID.Name = "tsmiFunctionGUID";
+            this.tsmiFunctionGUID.Size = new System.Drawing.Size(222, 26);
+            this.tsmiFunctionGUID.Text = "|Function#GUID|";
             // 
             // cmsMessagesText
             // 
@@ -625,28 +694,43 @@ namespace FBExpert
             this.tsmiDate.Size = new System.Drawing.Size(141, 26);
             this.tsmiDate.Text = "DateTime";
             // 
-            // cmsDDLText
+            // cmsSaveXMLSourceText
             // 
-            this.cmsDDLText.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsDDLText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDDLCopyToClipboard,
-            this.tsmiDDLPaste});
-            this.cmsDDLText.Name = "cmsText";
-            this.cmsDDLText.Size = new System.Drawing.Size(176, 56);
+            this.cmsSaveXMLSourceText.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsSaveXMLSourceText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSourceXMLCopyToClipboard,
+            this.tsmiSourceXMLCopyFromClipboard,
+            this.toolStripSeparator2,
+            this.tsmiSaveXML});
+            this.cmsSaveXMLSourceText.Name = "cmsText";
+            this.cmsSaveXMLSourceText.Size = new System.Drawing.Size(176, 88);
+            this.cmsSaveXMLSourceText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSaveXMLSourceText_ItemClicked);
             // 
-            // tsmiDDLCopyToClipboard
+            // tsmiSourceXMLCopyToClipboard
             // 
-            this.tsmiDDLCopyToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
-            this.tsmiDDLCopyToClipboard.Name = "tsmiDDLCopyToClipboard";
-            this.tsmiDDLCopyToClipboard.Size = new System.Drawing.Size(175, 26);
-            this.tsmiDDLCopyToClipboard.Text = "Copy to Clipboard";
+            this.tsmiSourceXMLCopyToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
+            this.tsmiSourceXMLCopyToClipboard.Name = "tsmiSourceXMLCopyToClipboard";
+            this.tsmiSourceXMLCopyToClipboard.Size = new System.Drawing.Size(175, 26);
+            this.tsmiSourceXMLCopyToClipboard.Text = "Copy to Clipboard";
             // 
-            // tsmiDDLPaste
+            // tsmiSourceXMLCopyFromClipboard
             // 
-            this.tsmiDDLPaste.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
-            this.tsmiDDLPaste.Name = "tsmiDDLPaste";
-            this.tsmiDDLPaste.Size = new System.Drawing.Size(175, 26);
-            this.tsmiDDLPaste.Text = "Paste";
+            this.tsmiSourceXMLCopyFromClipboard.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
+            this.tsmiSourceXMLCopyFromClipboard.Name = "tsmiSourceXMLCopyFromClipboard";
+            this.tsmiSourceXMLCopyFromClipboard.Size = new System.Drawing.Size(175, 26);
+            this.tsmiSourceXMLCopyFromClipboard.Text = "Paste";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(172, 6);
+            // 
+            // tsmiSaveXML
+            // 
+            this.tsmiSaveXML.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.tsmiSaveXML.Name = "tsmiSaveXML";
+            this.tsmiSaveXML.Size = new System.Drawing.Size(175, 26);
+            this.tsmiSaveXML.Text = "Save XML";
             // 
             // pnlUpper
             // 
@@ -657,7 +741,7 @@ namespace FBExpert
             this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1391, 44);
+            this.pnlUpper.Size = new System.Drawing.Size(1510, 44);
             this.pnlUpper.TabIndex = 1;
             // 
             // lblTableName
@@ -688,7 +772,7 @@ namespace FBExpert
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
             this.hsRefresh.ImageToggleOnSelect = true;
-            this.hsRefresh.Location = new System.Drawing.Point(1346, 0);
+            this.hsRefresh.Location = new System.Drawing.Point(1465, 0);
             this.hsRefresh.Marked = false;
             this.hsRefresh.MarkedColor = System.Drawing.Color.Teal;
             this.hsRefresh.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -773,9 +857,9 @@ namespace FBExpert
             // 
             this.pnlLower.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlLower.Location = new System.Drawing.Point(0, 646);
+            this.pnlLower.Location = new System.Drawing.Point(0, 769);
             this.pnlLower.Name = "pnlLower";
-            this.pnlLower.Size = new System.Drawing.Size(1391, 16);
+            this.pnlLower.Size = new System.Drawing.Size(1510, 16);
             this.pnlLower.TabIndex = 2;
             // 
             // pnlCenter
@@ -784,29 +868,257 @@ namespace FBExpert
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCenter.Location = new System.Drawing.Point(0, 44);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1391, 602);
+            this.pnlCenter.Size = new System.Drawing.Size(1510, 725);
             this.pnlCenter.TabIndex = 3;
             // 
             // gbFileExport
             // 
-            this.gbFileExport.Controls.Add(this.gbImport);
-            this.gbFileExport.Controls.Add(this.tabControlImport);
+            this.gbFileExport.Controls.Add(this.splitContainer2);
             this.gbFileExport.Controls.Add(this.tabControl);
             this.gbFileExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbFileExport.Location = new System.Drawing.Point(0, 0);
             this.gbFileExport.Name = "gbFileExport";
-            this.gbFileExport.Size = new System.Drawing.Size(1391, 602);
+            this.gbFileExport.Size = new System.Drawing.Size(1510, 725);
             this.gbFileExport.TabIndex = 15;
             this.gbFileExport.TabStop = false;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(474, 16);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.splitContainer2.Panel1.Controls.Add(this.tabControlImport);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.splitContainer2.Panel2.Controls.Add(this.gbImport);
+            this.splitContainer2.Size = new System.Drawing.Size(1033, 706);
+            this.splitContainer2.SplitterDistance = 395;
+            this.splitContainer2.SplitterWidth = 6;
+            this.splitContainer2.TabIndex = 20;
+            // 
+            // tabControlImport
+            // 
+            this.tabControlImport.Controls.Add(this.tabPageImportfile);
+            this.tabControlImport.Controls.Add(this.tabPageTable);
+            this.tabControlImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlImport.Location = new System.Drawing.Point(0, 0);
+            this.tabControlImport.Name = "tabControlImport";
+            this.tabControlImport.SelectedIndex = 0;
+            this.tabControlImport.Size = new System.Drawing.Size(395, 706);
+            this.tabControlImport.TabIndex = 19;
+            // 
+            // tabPageImportfile
+            // 
+            this.tabPageImportfile.Controls.Add(this.rtbSource);
+            this.tabPageImportfile.Controls.Add(this.pnlUpperIports);
+            this.tabPageImportfile.Location = new System.Drawing.Point(4, 22);
+            this.tabPageImportfile.Name = "tabPageImportfile";
+            this.tabPageImportfile.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageImportfile.Size = new System.Drawing.Size(387, 680);
+            this.tabPageImportfile.TabIndex = 0;
+            this.tabPageImportfile.Text = "Importfiles";
+            this.tabPageImportfile.UseVisualStyleBackColor = true;
+            // 
+            // rtbSource
+            // 
+            this.rtbSource.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtbSource.ContextMenuStrip = this.cmsSaveXMLSourceText;
+            this.rtbSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbSource.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbSource.Location = new System.Drawing.Point(3, 56);
+            this.rtbSource.Name = "rtbSource";
+            this.rtbSource.Size = new System.Drawing.Size(381, 621);
+            this.rtbSource.TabIndex = 6;
+            this.rtbSource.Text = "";
+            // 
+            // pnlUpperIports
+            // 
+            this.pnlUpperIports.BackColor = System.Drawing.Color.Gainsboro;
+            this.pnlUpperIports.Controls.Add(this.ckTypedXML);
+            this.pnlUpperIports.Controls.Add(this.groupBox1);
+            this.pnlUpperIports.Controls.Add(this.hsImportCSV);
+            this.pnlUpperIports.Controls.Add(this.hsImportXML);
+            this.pnlUpperIports.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUpperIports.Location = new System.Drawing.Point(3, 3);
+            this.pnlUpperIports.Name = "pnlUpperIports";
+            this.pnlUpperIports.Size = new System.Drawing.Size(381, 53);
+            this.pnlUpperIports.TabIndex = 5;
+            // 
+            // ckTypedXML
+            // 
+            this.ckTypedXML.AutoSize = true;
+            this.ckTypedXML.Location = new System.Drawing.Point(165, 22);
+            this.ckTypedXML.Name = "ckTypedXML";
+            this.ckTypedXML.Size = new System.Drawing.Size(56, 17);
+            this.ckTypedXML.TabIndex = 28;
+            this.ckTypedXML.Text = "Typed";
+            this.ckTypedXML.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.Controls.Add(this.cbEncodingCSV);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox1.Location = new System.Drawing.Point(248, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(133, 53);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Default Encoding";
+            // 
+            // cbEncodingCSV
+            // 
+            this.cbEncodingCSV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbEncodingCSV.FormattingEnabled = true;
+            this.cbEncodingCSV.Items.AddRange(new object[] {
+            "NONE",
+            "UTF8",
+            "ASCII",
+            "ISO8859_1"});
+            this.cbEncodingCSV.Location = new System.Drawing.Point(3, 16);
+            this.cbEncodingCSV.Name = "cbEncodingCSV";
+            this.cbEncodingCSV.Size = new System.Drawing.Size(127, 21);
+            this.cbEncodingCSV.TabIndex = 34;
+            this.cbEncodingCSV.Text = "UTF8";
+            // 
+            // hsImportCSV
+            // 
+            this.hsImportCSV.BackColor = System.Drawing.Color.Transparent;
+            this.hsImportCSV.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsImportCSV.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsImportCSV.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsImportCSV.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsImportCSV.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsImportCSV.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsImportCSV.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsImportCSV.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsImportCSV.FlatAppearance.BorderSize = 0;
+            this.hsImportCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsImportCSV.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsImportCSV.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsImportCSV.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsImportCSV.ImageToggleOnSelect = true;
+            this.hsImportCSV.Location = new System.Drawing.Point(76, 0);
+            this.hsImportCSV.Marked = false;
+            this.hsImportCSV.MarkedColor = System.Drawing.Color.Teal;
+            this.hsImportCSV.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsImportCSV.MarkedText = "";
+            this.hsImportCSV.MarkMode = false;
+            this.hsImportCSV.Name = "hsImportCSV";
+            this.hsImportCSV.NonMarkedText = "";
+            this.hsImportCSV.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsImportCSV.ShowShortcut = false;
+            this.hsImportCSV.Size = new System.Drawing.Size(69, 53);
+            this.hsImportCSV.TabIndex = 2;
+            this.hsImportCSV.Text = "Import CSV";
+            this.hsImportCSV.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsImportCSV.ToolTipActive = false;
+            this.hsImportCSV.ToolTipAutomaticDelay = 500;
+            this.hsImportCSV.ToolTipAutoPopDelay = 5000;
+            this.hsImportCSV.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsImportCSV.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsImportCSV.ToolTipFor4ContextMenu = true;
+            this.hsImportCSV.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsImportCSV.ToolTipInitialDelay = 500;
+            this.hsImportCSV.ToolTipIsBallon = false;
+            this.hsImportCSV.ToolTipOwnerDraw = false;
+            this.hsImportCSV.ToolTipReshowDelay = 100;
+            this.hsImportCSV.ToolTipShowAlways = false;
+            this.hsImportCSV.ToolTipText = "";
+            this.hsImportCSV.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsImportCSV.ToolTipTitle = "";
+            this.hsImportCSV.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsImportCSV.UseVisualStyleBackColor = false;
+            this.hsImportCSV.Click += new System.EventHandler(this.hsImportCSV_Click);
+            // 
+            // hsImportXML
+            // 
+            this.hsImportXML.BackColor = System.Drawing.Color.Transparent;
+            this.hsImportXML.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsImportXML.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsImportXML.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsImportXML.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsImportXML.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsImportXML.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsImportXML.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsImportXML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsImportXML.FlatAppearance.BorderSize = 0;
+            this.hsImportXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsImportXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsImportXML.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsImportXML.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsImportXML.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsImportXML.ImageToggleOnSelect = true;
+            this.hsImportXML.Location = new System.Drawing.Point(0, 0);
+            this.hsImportXML.Marked = false;
+            this.hsImportXML.MarkedColor = System.Drawing.Color.Teal;
+            this.hsImportXML.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsImportXML.MarkedText = "";
+            this.hsImportXML.MarkMode = false;
+            this.hsImportXML.Name = "hsImportXML";
+            this.hsImportXML.NonMarkedText = "";
+            this.hsImportXML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsImportXML.ShowShortcut = false;
+            this.hsImportXML.Size = new System.Drawing.Size(76, 53);
+            this.hsImportXML.TabIndex = 1;
+            this.hsImportXML.Text = "Import XML";
+            this.hsImportXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsImportXML.ToolTipActive = false;
+            this.hsImportXML.ToolTipAutomaticDelay = 500;
+            this.hsImportXML.ToolTipAutoPopDelay = 5000;
+            this.hsImportXML.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsImportXML.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsImportXML.ToolTipFor4ContextMenu = true;
+            this.hsImportXML.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsImportXML.ToolTipInitialDelay = 500;
+            this.hsImportXML.ToolTipIsBallon = false;
+            this.hsImportXML.ToolTipOwnerDraw = false;
+            this.hsImportXML.ToolTipReshowDelay = 100;
+            this.hsImportXML.ToolTipShowAlways = false;
+            this.hsImportXML.ToolTipText = "";
+            this.hsImportXML.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsImportXML.ToolTipTitle = "";
+            this.hsImportXML.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsImportXML.UseVisualStyleBackColor = false;
+            this.hsImportXML.Click += new System.EventHandler(this.hsImportXML_Click);
+            // 
+            // tabPageTable
+            // 
+            this.tabPageTable.Controls.Add(this.dataGridView1);
+            this.tabPageTable.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTable.Name = "tabPageTable";
+            this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTable.Size = new System.Drawing.Size(387, 680);
+            this.tabPageTable.TabIndex = 1;
+            this.tabPageTable.Text = "Table";
+            this.tabPageTable.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.DataMember = "Table";
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(381, 674);
+            this.dataGridView1.TabIndex = 0;
             // 
             // gbImport
             // 
             this.gbImport.Controls.Add(this.splitContainer1);
             this.gbImport.Controls.Add(this.panel1);
             this.gbImport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbImport.Location = new System.Drawing.Point(867, 16);
+            this.gbImport.Location = new System.Drawing.Point(0, 0);
             this.gbImport.Name = "gbImport";
-            this.gbImport.Size = new System.Drawing.Size(521, 583);
+            this.gbImport.Size = new System.Drawing.Size(632, 706);
             this.gbImport.TabIndex = 17;
             this.gbImport.TabStop = false;
             this.gbImport.Text = "Import";
@@ -817,6 +1129,7 @@ namespace FBExpert
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 69);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
@@ -827,8 +1140,8 @@ namespace FBExpert
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.splitContainer1.Panel2.Controls.Add(this.gbSQL);
-            this.splitContainer1.Size = new System.Drawing.Size(515, 511);
-            this.splitContainer1.SplitterDistance = 200;
+            this.splitContainer1.Size = new System.Drawing.Size(626, 634);
+            this.splitContainer1.SplitterDistance = 143;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -838,7 +1151,7 @@ namespace FBExpert
             this.gbColDef.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbColDef.Location = new System.Drawing.Point(0, 0);
             this.gbColDef.Name = "gbColDef";
-            this.gbColDef.Size = new System.Drawing.Size(200, 511);
+            this.gbColDef.Size = new System.Drawing.Size(626, 143);
             this.gbColDef.TabIndex = 6;
             this.gbColDef.TabStop = false;
             this.gbColDef.Text = "Col Definitions";
@@ -850,10 +1163,11 @@ namespace FBExpert
             this.rtbColDef.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbColDef.Location = new System.Drawing.Point(3, 16);
             this.rtbColDef.Name = "rtbColDef";
-            this.rtbColDef.Size = new System.Drawing.Size(194, 492);
+            this.rtbColDef.Size = new System.Drawing.Size(620, 124);
             this.rtbColDef.TabIndex = 4;
             this.rtbColDef.Text = "#SQL>UPDATE TKUNDBEWIMPORT SET TKUNDBEWIMPORT.LIEFERANZAHL = |SourceValue#anz| WH" +
     "ERE TKUNDBEWIMPORT.KDNR = |SourceValue#debnr|";
+            this.rtbColDef.WordWrap = false;
             // 
             // gbSQL
             // 
@@ -862,7 +1176,7 @@ namespace FBExpert
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSQL.Location = new System.Drawing.Point(0, 0);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(309, 511);
+            this.gbSQL.Size = new System.Drawing.Size(626, 485);
             this.gbSQL.TabIndex = 5;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
@@ -876,7 +1190,7 @@ namespace FBExpert
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(303, 458);
+            this.tabControl1.Size = new System.Drawing.Size(620, 432);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPageSQLAll
@@ -886,22 +1200,71 @@ namespace FBExpert
             this.tabPageSQLAll.Location = new System.Drawing.Point(4, 22);
             this.tabPageSQLAll.Name = "tabPageSQLAll";
             this.tabPageSQLAll.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQLAll.Size = new System.Drawing.Size(295, 432);
+            this.tabPageSQLAll.Size = new System.Drawing.Size(612, 406);
             this.tabPageSQLAll.TabIndex = 2;
             this.tabPageSQLAll.Text = "SQL all";
             this.tabPageSQLAll.UseVisualStyleBackColor = true;
             // 
             // txtSQLAll
             // 
+            this.txtSQLAll.ContextMenuStrip = this.cmsSQLList;
             this.txtSQLAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQLAll.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSQLAll.Location = new System.Drawing.Point(3, 50);
             this.txtSQLAll.Multiline = true;
             this.txtSQLAll.Name = "txtSQLAll";
             this.txtSQLAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQLAll.Size = new System.Drawing.Size(289, 379);
+            this.txtSQLAll.Size = new System.Drawing.Size(606, 353);
             this.txtSQLAll.TabIndex = 5;
             this.txtSQLAll.WordWrap = false;
+            // 
+            // cmsSQLList
+            // 
+            this.cmsSQLList.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsSQLList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.temiSQLListSaveToClipboard,
+            this.tsmiClipboardPastToSqlList,
+            this.toolStripSeparator4,
+            this.tsmiSaveSqlList,
+            this.tsmiLoadSQLList,
+            this.toolStripSeparator5,
+            this.tsmiDoSelectedSQL});
+            this.cmsSQLList.Name = "cmsText";
+            this.cmsSQLList.Size = new System.Drawing.Size(176, 146);
+            this.cmsSQLList.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSQLList_ItemClicked);
+            // 
+            // temiSQLListSaveToClipboard
+            // 
+            this.temiSQLListSaveToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
+            this.temiSQLListSaveToClipboard.Name = "temiSQLListSaveToClipboard";
+            this.temiSQLListSaveToClipboard.Size = new System.Drawing.Size(175, 26);
+            this.temiSQLListSaveToClipboard.Text = "Copy to Clipboard";
+            // 
+            // tsmiClipboardPastToSqlList
+            // 
+            this.tsmiClipboardPastToSqlList.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
+            this.tsmiClipboardPastToSqlList.Name = "tsmiClipboardPastToSqlList";
+            this.tsmiClipboardPastToSqlList.Size = new System.Drawing.Size(175, 26);
+            this.tsmiClipboardPastToSqlList.Text = "Paste";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(172, 6);
+            // 
+            // tsmiSaveSqlList
+            // 
+            this.tsmiSaveSqlList.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.tsmiSaveSqlList.Name = "tsmiSaveSqlList";
+            this.tsmiSaveSqlList.Size = new System.Drawing.Size(175, 26);
+            this.tsmiSaveSqlList.Text = "Save SQL List";
+            // 
+            // tsmiLoadSQLList
+            // 
+            this.tsmiLoadSQLList.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.tsmiLoadSQLList.Name = "tsmiLoadSQLList";
+            this.tsmiLoadSQLList.Size = new System.Drawing.Size(175, 26);
+            this.tsmiLoadSQLList.Text = "Load SQL List";
             // 
             // pnlSQLAllUpper
             // 
@@ -912,7 +1275,7 @@ namespace FBExpert
             this.pnlSQLAllUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSQLAllUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlSQLAllUpper.Name = "pnlSQLAllUpper";
-            this.pnlSQLAllUpper.Size = new System.Drawing.Size(289, 47);
+            this.pnlSQLAllUpper.Size = new System.Drawing.Size(606, 47);
             this.pnlSQLAllUpper.TabIndex = 6;
             // 
             // hsCalcel
@@ -1050,7 +1413,7 @@ namespace FBExpert
             this.tabPageSQLdone.Location = new System.Drawing.Point(4, 22);
             this.tabPageSQLdone.Name = "tabPageSQLdone";
             this.tabPageSQLdone.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQLdone.Size = new System.Drawing.Size(368, 432);
+            this.tabPageSQLdone.Size = new System.Drawing.Size(612, 406);
             this.tabPageSQLdone.TabIndex = 0;
             this.tabPageSQLdone.Text = "SQL done";
             this.tabPageSQLdone.UseVisualStyleBackColor = true;
@@ -1063,7 +1426,7 @@ namespace FBExpert
             this.txtSQLdone.Multiline = true;
             this.txtSQLdone.Name = "txtSQLdone";
             this.txtSQLdone.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQLdone.Size = new System.Drawing.Size(362, 426);
+            this.txtSQLdone.Size = new System.Drawing.Size(606, 400);
             this.txtSQLdone.TabIndex = 3;
             this.txtSQLdone.WordWrap = false;
             // 
@@ -1073,7 +1436,7 @@ namespace FBExpert
             this.tabPageSQLfail.Location = new System.Drawing.Point(4, 22);
             this.tabPageSQLfail.Name = "tabPageSQLfail";
             this.tabPageSQLfail.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQLfail.Size = new System.Drawing.Size(368, 432);
+            this.tabPageSQLfail.Size = new System.Drawing.Size(612, 406);
             this.tabPageSQLfail.TabIndex = 1;
             this.tabPageSQLfail.Text = "SQL fail";
             this.tabPageSQLfail.UseVisualStyleBackColor = true;
@@ -1086,7 +1449,7 @@ namespace FBExpert
             this.txtSQLfail.Multiline = true;
             this.txtSQLfail.Name = "txtSQLfail";
             this.txtSQLfail.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQLfail.Size = new System.Drawing.Size(362, 426);
+            this.txtSQLfail.Size = new System.Drawing.Size(606, 400);
             this.txtSQLfail.TabIndex = 4;
             this.txtSQLfail.WordWrap = false;
             // 
@@ -1094,9 +1457,9 @@ namespace FBExpert
             // 
             this.gbProcessBar.Controls.Add(this.pbSQL);
             this.gbProcessBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbProcessBar.Location = new System.Drawing.Point(3, 474);
+            this.gbProcessBar.Location = new System.Drawing.Point(3, 448);
             this.gbProcessBar.Name = "gbProcessBar";
-            this.gbProcessBar.Size = new System.Drawing.Size(303, 34);
+            this.gbProcessBar.Size = new System.Drawing.Size(620, 34);
             this.gbProcessBar.TabIndex = 4;
             this.gbProcessBar.TabStop = false;
             this.gbProcessBar.Text = "Process";
@@ -1106,12 +1469,13 @@ namespace FBExpert
             this.pbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbSQL.Location = new System.Drawing.Point(3, 16);
             this.pbSQL.Name = "pbSQL";
-            this.pbSQL.Size = new System.Drawing.Size(297, 15);
+            this.pbSQL.Size = new System.Drawing.Size(614, 15);
             this.pbSQL.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.gbSQLMode);
+            this.panel1.Controls.Add(this.ckTrimValues);
+            this.panel1.Controls.Add(this.ckSQLMode);
             this.panel1.Controls.Add(this.gbAttributes);
             this.panel1.Controls.Add(this.hsImport);
             this.panel1.Controls.Add(this.hsSaveDefinitions);
@@ -1119,42 +1483,8 @@ namespace FBExpert
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(515, 53);
+            this.panel1.Size = new System.Drawing.Size(626, 53);
             this.panel1.TabIndex = 2;
-            // 
-            // gbSQLMode
-            // 
-            this.gbSQLMode.Controls.Add(this.rbUpdate);
-            this.gbSQLMode.Controls.Add(this.rbInsert);
-            this.gbSQLMode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbSQLMode.Location = new System.Drawing.Point(376, 0);
-            this.gbSQLMode.Name = "gbSQLMode";
-            this.gbSQLMode.Size = new System.Drawing.Size(82, 53);
-            this.gbSQLMode.TabIndex = 6;
-            this.gbSQLMode.TabStop = false;
-            this.gbSQLMode.Text = "SQL mode";
-            // 
-            // rbUpdate
-            // 
-            this.rbUpdate.AutoSize = true;
-            this.rbUpdate.Location = new System.Drawing.Point(12, 33);
-            this.rbUpdate.Name = "rbUpdate";
-            this.rbUpdate.Size = new System.Drawing.Size(60, 17);
-            this.rbUpdate.TabIndex = 1;
-            this.rbUpdate.Text = "Update";
-            this.rbUpdate.UseVisualStyleBackColor = true;
-            // 
-            // rbInsert
-            // 
-            this.rbInsert.AutoSize = true;
-            this.rbInsert.Checked = true;
-            this.rbInsert.Location = new System.Drawing.Point(12, 16);
-            this.rbInsert.Name = "rbInsert";
-            this.rbInsert.Size = new System.Drawing.Size(51, 17);
-            this.rbInsert.TabIndex = 0;
-            this.rbInsert.TabStop = true;
-            this.rbInsert.Text = "Insert";
-            this.rbInsert.UseVisualStyleBackColor = true;
             // 
             // gbAttributes
             // 
@@ -1163,7 +1493,7 @@ namespace FBExpert
             this.gbAttributes.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbAttributes.Location = new System.Drawing.Point(285, 0);
             this.gbAttributes.Name = "gbAttributes";
-            this.gbAttributes.Size = new System.Drawing.Size(91, 53);
+            this.gbAttributes.Size = new System.Drawing.Size(159, 53);
             this.gbAttributes.TabIndex = 5;
             this.gbAttributes.TabStop = false;
             this.gbAttributes.Text = "Attributes";
@@ -1175,9 +1505,9 @@ namespace FBExpert
             this.ckEmptyLists.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckEmptyLists.Location = new System.Drawing.Point(6, 31);
             this.ckEmptyLists.Name = "ckEmptyLists";
-            this.ckEmptyLists.Size = new System.Drawing.Size(79, 17);
+            this.ckEmptyLists.Size = new System.Drawing.Size(142, 17);
             this.ckEmptyLists.TabIndex = 3;
-            this.ckEmptyLists.Text = "Empty Lists";
+            this.ckEmptyLists.Text = "Empty lists bevore import";
             this.ckEmptyLists.UseVisualStyleBackColor = true;
             // 
             // ckTestmode
@@ -1345,202 +1675,6 @@ namespace FBExpert
             this.hsLoadDefinition.UseVisualStyleBackColor = false;
             this.hsLoadDefinition.Click += new System.EventHandler(this.hsLoadDefinition_Click);
             // 
-            // tabControlImport
-            // 
-            this.tabControlImport.Controls.Add(this.tabPageImportfile);
-            this.tabControlImport.Controls.Add(this.tabPageTable);
-            this.tabControlImport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tabControlImport.Location = new System.Drawing.Point(474, 16);
-            this.tabControlImport.Name = "tabControlImport";
-            this.tabControlImport.SelectedIndex = 0;
-            this.tabControlImport.Size = new System.Drawing.Size(393, 583);
-            this.tabControlImport.TabIndex = 19;
-            // 
-            // tabPageImportfile
-            // 
-            this.tabPageImportfile.Controls.Add(this.rtbSource);
-            this.tabPageImportfile.Controls.Add(this.pnlUpperIports);
-            this.tabPageImportfile.Location = new System.Drawing.Point(4, 22);
-            this.tabPageImportfile.Name = "tabPageImportfile";
-            this.tabPageImportfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImportfile.Size = new System.Drawing.Size(385, 557);
-            this.tabPageImportfile.TabIndex = 0;
-            this.tabPageImportfile.Text = "Importfiles";
-            this.tabPageImportfile.UseVisualStyleBackColor = true;
-            // 
-            // rtbSource
-            // 
-            this.rtbSource.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rtbSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbSource.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbSource.Location = new System.Drawing.Point(3, 56);
-            this.rtbSource.Name = "rtbSource";
-            this.rtbSource.Size = new System.Drawing.Size(379, 498);
-            this.rtbSource.TabIndex = 6;
-            this.rtbSource.Text = "";
-            // 
-            // pnlUpperIports
-            // 
-            this.pnlUpperIports.BackColor = System.Drawing.Color.Gainsboro;
-            this.pnlUpperIports.Controls.Add(this.groupBox1);
-            this.pnlUpperIports.Controls.Add(this.hsImportCSV);
-            this.pnlUpperIports.Controls.Add(this.hsImportXML);
-            this.pnlUpperIports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperIports.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperIports.Name = "pnlUpperIports";
-            this.pnlUpperIports.Size = new System.Drawing.Size(379, 53);
-            this.pnlUpperIports.TabIndex = 5;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBox1.Controls.Add(this.cbEncodingCSV);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(188, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(133, 53);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Default Encoding";
-            // 
-            // cbEncodingCSV
-            // 
-            this.cbEncodingCSV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEncodingCSV.FormattingEnabled = true;
-            this.cbEncodingCSV.Items.AddRange(new object[] {
-            "NONE",
-            "UTF8",
-            "ASCII",
-            "ISO8859_1"});
-            this.cbEncodingCSV.Location = new System.Drawing.Point(3, 16);
-            this.cbEncodingCSV.Name = "cbEncodingCSV";
-            this.cbEncodingCSV.Size = new System.Drawing.Size(127, 21);
-            this.cbEncodingCSV.TabIndex = 34;
-            this.cbEncodingCSV.Text = "UTF8";
-            // 
-            // hsImportCSV
-            // 
-            this.hsImportCSV.BackColor = System.Drawing.Color.Transparent;
-            this.hsImportCSV.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsImportCSV.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsImportCSV.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsImportCSV.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsImportCSV.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsImportCSV.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsImportCSV.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsImportCSV.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsImportCSV.FlatAppearance.BorderSize = 0;
-            this.hsImportCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsImportCSV.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsImportCSV.Image = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hsImportCSV.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hsImportCSV.ImageToggleOnSelect = true;
-            this.hsImportCSV.Location = new System.Drawing.Point(99, 0);
-            this.hsImportCSV.Marked = false;
-            this.hsImportCSV.MarkedColor = System.Drawing.Color.Teal;
-            this.hsImportCSV.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsImportCSV.MarkedText = "";
-            this.hsImportCSV.MarkMode = false;
-            this.hsImportCSV.Name = "hsImportCSV";
-            this.hsImportCSV.NonMarkedText = "";
-            this.hsImportCSV.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsImportCSV.ShowShortcut = false;
-            this.hsImportCSV.Size = new System.Drawing.Size(89, 53);
-            this.hsImportCSV.TabIndex = 2;
-            this.hsImportCSV.Text = "Import CSV";
-            this.hsImportCSV.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsImportCSV.ToolTipActive = false;
-            this.hsImportCSV.ToolTipAutomaticDelay = 500;
-            this.hsImportCSV.ToolTipAutoPopDelay = 5000;
-            this.hsImportCSV.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsImportCSV.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsImportCSV.ToolTipFor4ContextMenu = true;
-            this.hsImportCSV.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsImportCSV.ToolTipInitialDelay = 500;
-            this.hsImportCSV.ToolTipIsBallon = false;
-            this.hsImportCSV.ToolTipOwnerDraw = false;
-            this.hsImportCSV.ToolTipReshowDelay = 100;
-            this.hsImportCSV.ToolTipShowAlways = false;
-            this.hsImportCSV.ToolTipText = "";
-            this.hsImportCSV.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsImportCSV.ToolTipTitle = "";
-            this.hsImportCSV.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsImportCSV.UseVisualStyleBackColor = false;
-            this.hsImportCSV.Click += new System.EventHandler(this.hsImportCSV_Click);
-            // 
-            // hsImportXML
-            // 
-            this.hsImportXML.BackColor = System.Drawing.Color.Transparent;
-            this.hsImportXML.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsImportXML.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsImportXML.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsImportXML.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsImportXML.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsImportXML.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsImportXML.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsImportXML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsImportXML.FlatAppearance.BorderSize = 0;
-            this.hsImportXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsImportXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsImportXML.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsImportXML.Image = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hsImportXML.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hsImportXML.ImageToggleOnSelect = true;
-            this.hsImportXML.Location = new System.Drawing.Point(0, 0);
-            this.hsImportXML.Marked = false;
-            this.hsImportXML.MarkedColor = System.Drawing.Color.Teal;
-            this.hsImportXML.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsImportXML.MarkedText = "";
-            this.hsImportXML.MarkMode = false;
-            this.hsImportXML.Name = "hsImportXML";
-            this.hsImportXML.NonMarkedText = "";
-            this.hsImportXML.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsImportXML.ShowShortcut = false;
-            this.hsImportXML.Size = new System.Drawing.Size(99, 53);
-            this.hsImportXML.TabIndex = 1;
-            this.hsImportXML.Text = "Import XML";
-            this.hsImportXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsImportXML.ToolTipActive = false;
-            this.hsImportXML.ToolTipAutomaticDelay = 500;
-            this.hsImportXML.ToolTipAutoPopDelay = 5000;
-            this.hsImportXML.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsImportXML.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsImportXML.ToolTipFor4ContextMenu = true;
-            this.hsImportXML.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsImportXML.ToolTipInitialDelay = 500;
-            this.hsImportXML.ToolTipIsBallon = false;
-            this.hsImportXML.ToolTipOwnerDraw = false;
-            this.hsImportXML.ToolTipReshowDelay = 100;
-            this.hsImportXML.ToolTipShowAlways = false;
-            this.hsImportXML.ToolTipText = "";
-            this.hsImportXML.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsImportXML.ToolTipTitle = "";
-            this.hsImportXML.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsImportXML.UseVisualStyleBackColor = false;
-            this.hsImportXML.Click += new System.EventHandler(this.hsImportXML_Click);
-            // 
-            // tabPageTable
-            // 
-            this.tabPageTable.Controls.Add(this.dataGridView1);
-            this.tabPageTable.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTable.Name = "tabPageTable";
-            this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTable.Size = new System.Drawing.Size(385, 557);
-            this.tabPageTable.TabIndex = 1;
-            this.tabPageTable.Text = "Table";
-            this.tabPageTable.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataMember = "Table";
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(379, 551);
-            this.dataGridView1.TabIndex = 0;
-            // 
             // ofdSQL
             // 
             this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
@@ -1562,11 +1696,47 @@ namespace FBExpert
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // ckSQLMode
+            // 
+            this.ckSQLMode.AutoSize = true;
+            this.ckSQLMode.Checked = true;
+            this.ckSQLMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckSQLMode.Location = new System.Drawing.Point(480, 13);
+            this.ckSQLMode.Name = "ckSQLMode";
+            this.ckSQLMode.Size = new System.Drawing.Size(76, 17);
+            this.ckSQLMode.TabIndex = 6;
+            this.ckSQLMode.Text = "SQL mode";
+            this.ckSQLMode.UseVisualStyleBackColor = true;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(172, 6);
+            // 
+            // tsmiDoSelectedSQL
+            // 
+            this.tsmiDoSelectedSQL.Image = global::FBXpert.Properties.Resources.SQL_blue_x24;
+            this.tsmiDoSelectedSQL.Name = "tsmiDoSelectedSQL";
+            this.tsmiDoSelectedSQL.Size = new System.Drawing.Size(175, 26);
+            this.tsmiDoSelectedSQL.Text = "Do selected SQL";
+            // 
+            // ckTrimValues
+            // 
+            this.ckTrimValues.AutoSize = true;
+            this.ckTrimValues.Checked = true;
+            this.ckTrimValues.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckTrimValues.Location = new System.Drawing.Point(480, 34);
+            this.ckTrimValues.Name = "ckTrimValues";
+            this.ckTrimValues.Size = new System.Drawing.Size(80, 17);
+            this.ckTrimValues.TabIndex = 7;
+            this.ckTrimValues.Text = "Trim values";
+            this.ckTrimValues.UseVisualStyleBackColor = true;
+            // 
             // IMPORTDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1391, 662);
+            this.ClientSize = new System.Drawing.Size(1510, 785);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
             this.Controls.Add(this.pnlUpper);
@@ -1584,11 +1754,22 @@ namespace FBExpert
             this.cmsColDefData.ResumeLayout(false);
             this.cmsMessagesText.ResumeLayout(false);
             this.cmdDATA.ResumeLayout(false);
-            this.cmsDDLText.ResumeLayout(false);
+            this.cmsSaveXMLSourceText.ResumeLayout(false);
             this.pnlUpper.ResumeLayout(false);
             this.pnlUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.gbFileExport.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.tabControlImport.ResumeLayout(false);
+            this.tabPageImportfile.ResumeLayout(false);
+            this.pnlUpperIports.ResumeLayout(false);
+            this.pnlUpperIports.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.tabPageTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gbImport.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1599,6 +1780,7 @@ namespace FBExpert
             this.tabControl1.ResumeLayout(false);
             this.tabPageSQLAll.ResumeLayout(false);
             this.tabPageSQLAll.PerformLayout();
+            this.cmsSQLList.ResumeLayout(false);
             this.pnlSQLAllUpper.ResumeLayout(false);
             this.gbEncoding.ResumeLayout(false);
             this.tabPageSQLdone.ResumeLayout(false);
@@ -1607,16 +1789,9 @@ namespace FBExpert
             this.tabPageSQLfail.PerformLayout();
             this.gbProcessBar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.gbSQLMode.ResumeLayout(false);
-            this.gbSQLMode.PerformLayout();
+            this.panel1.PerformLayout();
             this.gbAttributes.ResumeLayout(false);
             this.gbAttributes.PerformLayout();
-            this.tabControlImport.ResumeLayout(false);
-            this.tabPageImportfile.ResumeLayout(false);
-            this.pnlUpperIports.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.tabPageTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1631,9 +1806,9 @@ namespace FBExpert
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsRefresh;
         private System.Windows.Forms.Label lblTableName;
-        private System.Windows.Forms.ContextMenuStrip cmsDDLText;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDDLCopyToClipboard;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDDLPaste;
+        private System.Windows.Forms.ContextMenuStrip cmsSaveXMLSourceText;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSourceXMLCopyToClipboard;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSourceXMLCopyFromClipboard;
         private System.Windows.Forms.ContextMenuStrip cmsMessagesText;
         private System.Windows.Forms.ToolStripMenuItem tsmiMessageCopyToClipboard;
         private System.Windows.Forms.ToolStripMenuItem tsmiMessagePaste;
@@ -1674,9 +1849,6 @@ namespace FBExpert
         private SeControlsLib.HotSpot hsSaveDefinitions;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.GroupBox gbAttributes;
-        private System.Windows.Forms.GroupBox gbSQLMode;
-        private System.Windows.Forms.RadioButton rbUpdate;
-        private System.Windows.Forms.RadioButton rbInsert;
         private System.Windows.Forms.GroupBox gbSQL;
         private System.Windows.Forms.GroupBox gbProcessBar;
         private System.Windows.Forms.ProgressBar pbSQL;
@@ -1698,13 +1870,33 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gbEncoding;
         private System.Windows.Forms.ComboBox cbEncoding;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDateTimeNow;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDateTimeToday;
-        private System.Windows.Forms.ToolStripMenuItem tsmiINT;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDOUBLE;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSoucreValueDouble;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFunctionGUID;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnlSQLAllUpper;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cbEncodingCSV;
+        private System.Windows.Forms.CheckBox ckTypedXML;
+        private System.Windows.Forms.ToolStripSeparator toolSeperato2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFunctionDateTimeNow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSourceValue;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSourceValueInt;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFunctionDateTimeToday;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveXML;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLoadDefinition;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveDefinition;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ContextMenuStrip cmsSQLList;
+        private System.Windows.Forms.ToolStripMenuItem temiSQLListSaveToClipboard;
+        private System.Windows.Forms.ToolStripMenuItem tsmiClipboardPastToSqlList;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveSqlList;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLoadSQLList;
+        private System.Windows.Forms.CheckBox ckSQLMode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDoSelectedSQL;
+        private System.Windows.Forms.CheckBox ckTrimValues;
     }
 }

@@ -335,7 +335,13 @@ namespace FBXpert
 
         private void testMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SEMessageBox.ShowMDIDialog(Instance(), "Error while opening database", "test", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);            
+            TestForm tf = new TestForm();
+            tf.MdiParent = this;
+            tf.Show();
+            
+            
+
+            //SEMessageBox.ShowMDIDialog(Instance(), "Error while opening database", "test", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);            
         }
     }
 }

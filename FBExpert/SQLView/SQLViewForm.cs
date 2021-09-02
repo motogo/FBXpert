@@ -183,6 +183,8 @@ namespace SQLView
             }
         }
 
+       
+
         private bool AddToHistory(HistoryMode toHistory, string cmd)
         {
             if (toHistory != HistoryMode.AddToHistory) return false;
@@ -191,7 +193,7 @@ namespace SQLView
             {                
                 var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.succeeded);
-                sh.HistoryRefresh(dgvSQLHistory,bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
                 lastCommand = cmd;
             }
@@ -201,6 +203,45 @@ namespace SQLView
             }
             return ok;
         }
+
+        private ExperienceInfo AddToInfo(string keycode, string info)
+        {
+            ExperienceInfo data = null;
+            
+            try
+            {
+                var sh = new ExperienceInfoClass();
+                data = sh.InsertExperienceInfo(keycode,info);
+                sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
+                sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+              
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+            return data;
+        }
+
+        private bool UpdateToInfo()
+        {
+            bool ok = false;
+            try
+            {
+                var sh = new ExperienceInfoClass();
+                ok = sh.UpdateExperienceInfo(ExData);
+                sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
+                sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+            return ok;
+        }
+
+
         private bool AddToFailedHistory(HistoryMode toHistory, string cmd)
         {
             if (toHistory != HistoryMode.AddToHistory) return false;
@@ -209,7 +250,7 @@ namespace SQLView
             {
                 var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.failed);
-                sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory,   cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
             }            
             catch(Exception ex)
@@ -484,6 +525,7 @@ namespace SQLView
             hsBreak.Enabled = false;
 
             LoadHistory(_lastSort);
+            LoadExperienceInfo(_lastSort);
             LanguageChanged();
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
@@ -500,13 +542,29 @@ namespace SQLView
             ac.Activate();
         }
         SQLHistoryClass sh = null;
+        ExperienceInfoClass exp = null;
         private void LoadHistory(eSort sort)
         {
             try
             {
                 sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
-                sh.HistoryRefresh(dgvSQLHistory, bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1, false);
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+        }
+
+        private void LoadExperienceInfo(eSort sort)
+        {
+            try
+            {
+                exp = new ExperienceInfoClass($@"{Application.StartupPath}\Info\InfoExpierenceData.db");
+                exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+                exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                //dgvExperienceInfo.Columns[(int)ExperienceInfoInx.Id].Visible = false;
             }
             catch (Exception ex)
             {
@@ -1345,7 +1403,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         {
             try
             {
-                sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
             }
             catch (Exception ex)
@@ -1354,7 +1412,20 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
             tabHistory.Text = $@"{LanguageClass.Instance.GetString("History")} ({dgvSQLHistory.Rows.Count})";
         }
-        
+
+        private void RefreshExperienceInfo()
+        {
+            try
+            {
+               exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+               exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+            }
+            catch (Exception ex)
+            {
+                SQLnotify.AddToERROR(ex.Message);
+            }
+        }
+
         private void DataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -1376,7 +1447,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         {
             try
             {
-                sh.HistoryRefresh(dgvSQLHistory,bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
             }
             catch (Exception ex)
@@ -1398,7 +1469,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 {
                     try
                     {
-                        sh.HistoryRefresh(dgvSQLHistory,  bsHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                        sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                         sh.SortGrid(dgvSQLHistory, 1);
                     }
                     catch (Exception ex)
@@ -1443,6 +1514,138 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void ckShowResults_CheckedChanged(object sender, EventArgs e)
         {
             
+        }
+        ExperienceInfo ExData = new ExperienceInfo();
+        private void hotSpot5_Click(object sender, EventArgs e)
+        {
+            ExData = AddToInfo(txtExperienceKeyCode.Text, txtExperienceInfo.Text);
+        }
+
+        private void hsRefreshExpierenceInfo_Click(object sender, EventArgs e)
+        {
+            RefreshExperienceInfo();
+        }
+
+        private void dgvExperienceInfo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView grid = sender as DataGridView;
+            exp.SwapSortGrid(grid, e.ColumnIndex);
+            ExperienceInfoClass.SelColInx = e.ColumnIndex;
+        }
+
+        private void hsClearExperienceInfoFields_Click(object sender, EventArgs e)
+        {
+            ExperienceDataClear();
+        }
+
+        private void ExperienceCellsToData()
+        {
+            var row = dgvExperienceInfo.SelectedRows[0];
+            ExData.Id = (int)row.Cells[(int)ExperienceInfoInx.Id].Value;
+            ExData.Info = row.Cells[(int)ExperienceInfoInx.Info].Value.ToString();
+            ExData.KeyCode = row.Cells[(int)ExperienceInfoInx.KeyCode].Value.ToString();
+            ExData.IsActive = (bool)row.Cells[(int)ExperienceInfoInx.IsActive].Value;
+            ExData.Stamp = (DateTime)row.Cells[(int)ExperienceInfoInx.Stamp].Value;
+        }
+
+        private void ExperienceDataClear()
+        {
+            txtExperienceInfo.Text = string.Empty;
+            txtExperienceKeyCode.Text = string.Empty;
+        }
+        private void ExperienceDataToEdit()
+        {
+            txtExperienceKeyCode.Text = ExData.KeyCode;
+            txtExperienceInfo.Text = ExData.Info; 
+        }
+
+        private void ExperienceEditToData()
+        {
+            ExData.KeyCode = txtExperienceKeyCode.Text;
+            ExData.Info = txtExperienceInfo.Text;
+            ExData.Stamp = DateTime.Now;
+        }
+
+        private void dgvExperienceInfo_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridView grid = sender as DataGridView;
+            if (grid.SelectedRows.Count > 0)
+            {
+                ExperienceCellsToData();
+                ExperienceDataToEdit();
+            }
+        }
+
+        private void hsDeleteExpierenceInfo_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            foreach (DataGridViewRow dr in dgvExperienceInfo.SelectedRows)
+            {
+                if (exp.DeleteExperienceInfoEntry((int)dr.Cells[0].Value)) n++;
+            }
+            if (n > 0)
+            {
+                try
+                {
+                   exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+                   
+                   exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                }
+                catch (Exception ex)
+                {
+                    SQLnotify.AddToERROR(ex.Message);
+                }
+            }
+        }
+
+        private void cmdExperienceInfo_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == tsmiDeleteExperienceInfo)
+            {
+                int n = 0;
+                foreach (DataGridViewRow dr in  dgvExperienceInfo.SelectedRows)
+                {
+                    if (exp.DeleteExperienceInfoEntry((int)dr.Cells[0].Value)) n++;
+                }
+                if (n > 0)
+                {
+                    try
+                    {
+                        exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+                        exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                    }
+                    catch (Exception ex)
+                    {
+                        SQLnotify.AddToERROR(ex.Message);
+                    }
+                }
+            }
+            else if (e.ClickedItem == tsmiExperienceInfoToSQL)
+            {
+                if (dgvExperienceInfo.SelectedRows.Count > 0)
+                {
+                    txtSQL.Clear();
+                    tcSQLCONTROL.SelectedTab = tabSQLTEXT;
+                }
+                foreach (DataGridViewRow dr in dgvExperienceInfo.SelectedRows)
+                {
+                    string sql = dr.Cells[3].Value.ToString();
+                    txtSQL.AppendText($@"{sql}{Environment.NewLine}");
+                }
+            }
+            
+        }
+
+        private void hsUpdateExperienceInfo_Click(object sender, EventArgs e)
+        {
+            ExperienceEditToData();
+            UpdateToInfo();
+        }
+
+        private void hsLoadDatabasePath_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

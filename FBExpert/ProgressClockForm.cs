@@ -8,7 +8,7 @@ namespace FBXpert
     public partial class ProgressClockForm : Form
     {
         private readonly Form _parent;
-        private readonly Graphics _g = null;
+        private readonly Graphics _graphics = null;
         private Rectangle _clockRect = new Rectangle(0, 0, 100, 100);
         private readonly Pen _clockPen = new Pen(Color.Blue,3);
 
@@ -32,22 +32,16 @@ namespace FBXpert
         {
             _parent = parent;
             InitializeComponent();
-           // this.MdiParent = parent;
-            _g = pictureBox1.CreateGraphics();
-
-            _g.DrawEllipse(_clockPen, _clockRect);
+            _graphics = pictureBox1.CreateGraphics();
+            _graphics.DrawEllipse(_clockPen, _clockRect);
             Maximum = 60;
             _clockTimer.Interval = 100;
-            //clockTimer.Elapsed += ClockTimer_Tick;
             _clockTimer.Tick += ClockTimer_Tick;
-
         }
 
         public void Start(int ms)
         {
-            
             _clockTimer.Interval = 100;
-           // clockTimer.Start();
             DrawEmptyClock();
             bool started = true;
             while(started)
@@ -66,13 +60,10 @@ namespace FBXpert
         }
         public void DrawEmptyClock()
         {
-            //g.Clear(Color.Transparent);
-            _g.DrawEllipse(_clockPen, _clockRect);
+            _graphics.DrawEllipse(_clockPen, _clockRect);
             Point center = new Point(_clockRect.Width / 2 + _clockRect.X, _clockRect.Height / 2 + _clockRect.Y);
             Rectangle innerRect = new Rectangle(center.X - 5, center.Y - 5, 10, 10);
-            _g.DrawEllipse(_clockPen, innerRect);
-            
-            
+            _graphics.DrawEllipse(_clockPen, innerRect);
         }
 
         private void ClockTimer_Tick(object sender, EventArgs e)
@@ -81,14 +72,12 @@ namespace FBXpert
         }
         private void NextTick()
         {
-            
-            
             Brush br = new SolidBrush(Color.Lime);
-            _g.FillPie(br,_clockRect, Minimum, Value++);
+            _graphics.FillPie(br,_clockRect, Minimum, Value++);
             if(Value > Maximum)
             {
                 Value = Minimum;
-                _g.FillPie(new SolidBrush(pictureBox1.BackColor), _clockRect, 0, 360);
+                _graphics.FillPie(new SolidBrush(pictureBox1.BackColor), _clockRect, 0, 360);
                 DrawEmptyClock();
             }
         }

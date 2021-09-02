@@ -23,6 +23,8 @@ using System.Windows.Forms;
 
 namespace FBExpert
 {
+
+    
     public partial class VIEWManageForm : INormalForm
     {      
         private static VIEWManageForm instance = null;      
@@ -75,37 +77,39 @@ namespace FBExpert
             ac = new AutocompleteClass(fctCREATEINSERTSQL, DBReg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);       
+            ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
 
         public void RefreshLanguageText()
         {
-            hsPageRefresh.Text = LanguageClass.Instance.GetString("REFRESH");
-            hsExportData.Text = LanguageClass.Instance.GetString("EXPORT");
-            hsCancelGettingData.Text = LanguageClass.Instance.GetString("CANCEL_READING");
-            hsCancelExport.Text = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsPageRefresh.Text          = LanguageClass.Instance.GetString("REFRESH");
+            hsExportData.Text           = LanguageClass.Instance.GetString("EXPORT");
+            hsCancelGettingData.Text    = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsCancelExport.Text         = LanguageClass.Instance.GetString("CANCEL_READING");
+            hsSaveSQL.Text              = LanguageClass.Instance.GetString("SAVE_SQL");
+            hsLoadSQL.Text              = LanguageClass.Instance.GetString("LOAD_SQL");
+            hsRunStatement.Text         = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsRefreshExportData.Text    = LanguageClass.Instance.GetString("REFRESH");
             
-            hsSaveSQL.Text = LanguageClass.Instance.GetString("SAVE_SQL");
-            hsLoadSQL.Text = LanguageClass.Instance.GetString("LOAD_SQL");
-            hsRunStatement.Text = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            rbINSERT.Text               = LanguageClass.Instance.GetString("INSERT");
+            rbUPDATE.Text               = LanguageClass.Instance.GetString("UPDATE");
+            rbINSERTUPDATE.Text         = LanguageClass.Instance.GetString("INSERT_UPDATE");
             
-            hsRefreshExportData.Text = LanguageClass.Instance.GetString("REFRESH");
-            rbINSERT.Text = LanguageClass.Instance.GetString("INSERT");
-            rbUPDATE.Text = LanguageClass.Instance.GetString("UPDATE");
-            rbINSERTUPDATE.Text = LanguageClass.Instance.GetString("INSERT_UPDATE");
-            tabPageFIELDS.Text = LanguageClass.Instance.GetString("FIELDS");
-            tabPageDATA.Text = LanguageClass.Instance.GetString("DATA");
-            tabPageDependenciesTo.Text = LanguageClass.Instance.GetString("DEPENDENCIES_TO");
+            tabPageFIELDS.Text          = LanguageClass.Instance.GetString("FIELDS");
+            tabPageDATA.Text            = LanguageClass.Instance.GetString("DATA");
+            tabPageDependenciesTo.Text  = LanguageClass.Instance.GetString("DEPENDENCIES_TO");
+            tabPageExport.Text          = LanguageClass.Instance.GetString("EXPORT_DATA");
+            tabPageMessages.Text        = LanguageClass.Instance.GetString("MESSAGES");
             
-            tabPageExport.Text = LanguageClass.Instance.GetString("EXPORT_DATA");
-            tabPageMessages.Text = LanguageClass.Instance.GetString("MESSAGES");
-            gbMaxRows.Text = LanguageClass.Instance.GetString("MAX_ROWS");
-            cbExportToScreen.Text = LanguageClass.Instance.GetString("EXPORT_TO_SCREEN");
-            cbExportToFile.Text = LanguageClass.Instance.GetString("EXPORT_TO_FILE");
-            gbExportFile.Text = LanguageClass.Instance.GetString("FILE");
-            gbInsertUpdate.Text = LanguageClass.Instance.GetString("INSERT_UPDATE_TYPE");
-            ckGetDatas.Text = LanguageClass.Instance.GetString("READ_DATAS");
+            gbMaxRows.Text              = LanguageClass.Instance.GetString("MAX_ROWS");
+            gbExportFile.Text           = LanguageClass.Instance.GetString("FILE");
+            gbInsertUpdate.Text         = LanguageClass.Instance.GetString("INSERT_UPDATE_TYPE");
+            
+            cbExportToScreen.Text       = LanguageClass.Instance.GetString("EXPORT_TO_SCREEN");
+            cbExportToFile.Text         = LanguageClass.Instance.GetString("EXPORT_TO_FILE");
+            
+            ckGetDatas.Text             = LanguageClass.Instance.GetString("READ_DATAS");
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -311,12 +315,10 @@ namespace FBExpert
         public int RefreshDatas(string cmd)
         {
             int errorsCnt = 0;
-            int errorsAllowed = BasicClassLibrary.StaticFunctionsClass.ToIntDef(txtMaxAllowedErrors.Text,0);
+            
             if (string.IsNullOrEmpty(ViewObject.Name))  return dsViewContent.Tables[0].Rows.Count;            
             try
             {
-                long.TryParse(txtMaxRows.Text, out var maxRows);
-                
                 dgvResults.AutoGenerateColumns = true;
                 GetDataWorker.ReportProgress(1, "Reading data...");
                 long skip = 0;    
@@ -409,8 +411,17 @@ namespace FBExpert
             tabControlViews.TabPages.Add(tabPageMessages);
             if (getData) tabControlViews.TabPages.Add(tabPageExport);
         }
+
+        int errorsAllowed = 0;
+        long maxRows = 0;
+        public void TextToData()
+        {
+            errorsAllowed = BasicClassLibrary.StaticFunctionsClass.ToIntDef(txtMaxAllowedErrors.Text, 0);
+            maxRows = BasicClassLibrary.StaticFunctionsClass.ToLongDef(txtMaxRows.Text, 0);
+        }
         public void RefreshAll()
         {
+            TextToData();
             CreateTabControl();
             dgvResults.Visible = false;
             bsViewContent.DataMember = null;
@@ -445,6 +456,7 @@ namespace FBExpert
 
         public void RefreshStruct()
         {
+            TextToData();
             CreateTabControl();
             dgvResults.Visible = false;
             bsViewContent.DataMember = null;
@@ -766,7 +778,7 @@ namespace FBExpert
             fctDLL.Clear();
         }
 
-        private void hsRefreshMaxRows_Click(object sender, EventArgs e)
+        private void hsRefreshwws_Click(object sender, EventArgs e)
         {
             RefreshAll();
         }
@@ -1046,4 +1058,7 @@ namespace FBExpert
             getData = ckGetDatas.Checked;
         }
     }
+    
+
+    
 }

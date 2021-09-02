@@ -454,13 +454,13 @@ namespace FBXpert
              var tnn = tn.Tag.GetType();
              if (tnn == typeof(ViewClass))
              {
-                using (var tmf = new VIEWManageForm(MdiParent, drc, tn))
-                {
+                
+                var tmf = new VIEWManageForm(MdiParent, drc, tn);
                     tmf.GetData = true;
                     tmf.SetAutocompeteObjects(_actTables);
                     tmf.Show();
-                }
-             }
+                
+            }
              else if (tnn == typeof(TableClass))
              {                        
                  Cursor = Cursors.WaitCursor;
@@ -477,14 +477,14 @@ namespace FBXpert
             {
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
-                using (var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables))
-                {
-                    tmf.GetData = true;
-                    tmf.SetMaxRows(0);
-                    tmf.SetOrder(eSort.ASC);
-                    tmf.SetAutocompeteObjects(null, _actSystemTables);
-                    tmf.Show();
-                }
+                var tmf = new TABLEManageForm(MdiParent, drc, tn, _actTables);
+                
+                tmf.GetData = true;
+                tmf.SetMaxRows(0);
+                tmf.SetOrder(eSort.ASC);
+                tmf.SetAutocompeteObjects(null, _actSystemTables);
+                tmf.Show();
+                
                 Cursor = Cursors.Default;
             }
             else if (tnn == typeof(GeneratorClass))
@@ -1052,6 +1052,12 @@ namespace FBXpert
             sf.Show();            
         }
 
+        private void ExperienceInfos(DBRegistrationClass drc, List<TableClass> actTables)
+        {
+            var ex = new ExperienceInfoForm(FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
+            ex.Show();
+        }
+
         private void cmsMainGroupItems_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {            
             var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
@@ -1142,6 +1148,10 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiSQLExplorer)
             {
                 SqlExplorer(dbReg,_actTables);
+            }
+            else if (e.ClickedItem == tsmiExperienceInfos)
+            {
+                ExperienceInfos(dbReg, _actTables);
             }
             else if (e.ClickedItem == tsmiActiveConnections)
             {
@@ -1450,8 +1460,8 @@ namespace FBXpert
                 using (var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected))
                 {
                     tmf.GetData = false;
-                    tmf.SetMaxRows(0);
-                    tmf.SetAutocompeteObjects(_actTables);
+               //     tmf.SetMaxRows(0);
+               //     tmf.SetAutocompeteObjects(_actTables);
                     tmf.Show();
                 }
             }

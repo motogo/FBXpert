@@ -294,7 +294,6 @@ namespace FBExpert
             dsForeignKeys.Clear();
             dgvForeignKeys.AutoGenerateColumns = true;
             string cmd_index = SQLStatementsClass.Instance.GetAllTableForeignKeys(_dbReg.Version, eTableType.withoutsystem, _tableObject.Name);
-           //string cmd_index = SQLStatementsClass.Instance.GetTableForeignKeysForDataset(_dbReg.Version, _tableObject.Name);
             try
             {
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));

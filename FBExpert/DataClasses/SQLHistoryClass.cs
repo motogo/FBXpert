@@ -127,7 +127,7 @@ namespace FBXpert.DataClasses
             return data_sorted;
         }
 
-        public void HistoryRefresh(DataGridView dgv, BindingSource bds, bool succeeded, bool failed, bool all)
+        public void HistoryRefresh(DataGridView dgv, bool succeeded, bool failed, bool all)
         {
             string dbn = all ? string.Empty : DatabaseName;                        
             dgv.DataSource = DisplayPresetData(dbn, succeeded, failed);           

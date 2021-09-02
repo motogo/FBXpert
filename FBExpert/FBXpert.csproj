@@ -195,6 +195,7 @@
     <Compile Include="DataClasses\DatabaseDesignClass.cs" />
     <Compile Include="DataClasses\DBDataTypes.cs" />
     <Compile Include="DataClasses\DependencyClass.cs" />
+    <Compile Include="DataClasses\ExperienceInfoClass.cs" />
     <Compile Include="DataClasses\ExportClass.cs" />
     <Compile Include="DataClasses\NotNullsClass.cs" />
     <Compile Include="DataClasses\PrimayrKeyClass.cs" />
@@ -225,6 +226,12 @@
     </Compile>
     <Compile Include="DesignSourceCode\XMLDesignForm.Designer.cs">
       <DependentUpon>XMLDesignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExperienceInfos\ExperienceInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExperienceInfos\ExperienceInfoForm.designer.cs">
+      <DependentUpon>ExperienceInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
@@ -317,6 +324,12 @@
     <Compile Include="SonstForms\IMPORTDataForm.Designer.cs">
       <DependentUpon>IMPORTDataForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLView\SQLViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLView\SQLViewForm.designer.cs">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableItemForms\ConstraintsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +395,12 @@
     </Compile>
     <Compile Include="TableItemForms\UserDefinedFunctionForm.Designer.cs">
       <DependentUpon>UserDefinedFunctionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ValuesEditForms\BlobEditForm.cs">
       <SubType>Form</SubType>
@@ -543,12 +562,6 @@
     <Compile Include="ValuesEditForms\SelectDefaultForm.Designer.cs">
       <DependentUpon>SelectDefaultForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SQLView\SQLViewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SQLView\SQLViewForm.designer.cs">
-      <DependentUpon>SQLViewForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SQLView\SQLViewLastRunClass.cs" />
     <Compile Include="Globals\DatabaseDefinitions.cs" />
     <Compile Include="Globals\StaticPaintClass.cs" />
@@ -578,6 +591,7 @@
     <Content Include="config\AppSettings.json" />
     <Content Include="config\AppSettingsSoftend.json" />
     <Content Include="config\AppSettingsTelekom.json" />
+    <None Include="Resources\view_insert_24x.png" />
     <None Include="Resources\Matrix.png" />
     <None Include="FBXpert_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
@@ -607,6 +621,9 @@
     <Content Include="Languages\Language.pt.resources">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="ExperienceInfos\ExperienceInfoForm.resx">
+      <DependentUpon>ExperienceInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\BinariesForm.resx">
       <DependentUpon>BinariesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -636,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\IMPORTDataForm.resx">
       <DependentUpon>IMPORTDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLView\SQLViewForm.resx">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\ConstraintsForm.resx">
       <DependentUpon>ConstraintsForm.cs</DependentUpon>
@@ -768,9 +788,6 @@
     </Compile>
     <EmbeddedResource Include="ValuesEditForms\SelectDefaultForm.resx">
       <DependentUpon>SelectDefaultForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SQLView\SQLViewForm.resx">
-      <DependentUpon>SQLViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\TableFieldForm.resx">
       <DependentUpon>TableFieldForm.cs</DependentUpon>
