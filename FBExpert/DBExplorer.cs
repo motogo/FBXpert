@@ -1054,7 +1054,7 @@ namespace FBXpert
 
         private void ExperienceInfos(DBRegistrationClass drc, List<TableClass> actTables)
         {
-            var ex = new ExperienceInfoForm(FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
+            var ex = new ExperienceInfoForm(drc,actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
             ex.Show();
         }
 
@@ -2078,7 +2078,7 @@ namespace FBXpert
             NotifiesClass.Instance.InfoGranularity = eMessageGranularity.normal;
             MakeDatabaseTree(false);
             int n = DatabaseDefinitions.Instance.CountToOpen();
-            if(n > DatabaseDefinitions.Instance.OpenDatabaseCount)
+            if(n > AppSettingsClass.Instance.DatabaseSettings.OpenDatabaseCount)
             { 
                 object[] p = {n, Environment.NewLine };
                 if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "OpenDatabases", "DoYouWantOpenDatabases", FormStartPosition.CenterScreen,
@@ -2208,8 +2208,6 @@ namespace FBXpert
             sfdSaveDefinition.FileName          = fi.Name;
             if (sfdSaveDefinition.ShowDialog() != DialogResult.OK) return;
             var fi2 = new FileInfo(sfdSaveDefinition.FileName);
-
-
 
             DatabaseDefinitions.Instance.Rebuild(treeView1);
             DatabaseDefinitions.Instance.Serialize(sfdSaveDefinition.FileName, "SAVE_DATABASE_DEFINITION");

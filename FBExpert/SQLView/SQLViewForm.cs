@@ -16,7 +16,6 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 namespace SQLView
 {
@@ -42,6 +41,7 @@ namespace SQLView
         string lastSuccessfulCommand = string.Empty;
         string lastCommand = string.Empty;
         AutocompleteClass ac;
+        AutocompleteClass rt;
         public NotifiesClass SQLnotify = new NotifiesClass();
 
         public SQLViewForm1(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
@@ -210,7 +210,7 @@ namespace SQLView
             
             try
             {
-                var sh = new ExperienceInfoClass();
+                var sh = new ExperienceInfoClass($@"{AppSettingsClass.Instance.PathSettings.InfoPath}");
                 data = sh.InsertExperienceInfo(keycode,info);
                 sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
@@ -228,7 +228,7 @@ namespace SQLView
             bool ok = false;
             try
             {
-                var sh = new ExperienceInfoClass();
+                var sh = new ExperienceInfoClass($@"{AppSettingsClass.Instance.PathSettings.InfoPath}\{StaticVariablesClass.ExperienceInfoFile}");
                 ok = sh.UpdateExperienceInfo(ExData);
                 sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
@@ -354,7 +354,7 @@ namespace SQLView
             {
                 saveFileDialogCSV.DefaultExt = ".csv";
                 saveFileDialogCSV.Filter = "CSV|*.csv|All|*.*";
-                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                saveFileDialogCSV.InitialDirectory = AppSettingsClass.Instance.PathSettings.ExportPath;
                 if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
                 {
                     file = new System.IO.StreamWriter(saveFileDialogCSV.FileName, false, Encoding.UTF8);
@@ -540,6 +540,12 @@ namespace SQLView
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);
             ac.Activate();
+
+            rt = new AutocompleteClass(txtExperienceInfo, _dbRegOrg);
+            rt.CreateAutocompleteForDatabase();
+            rt.AddAutocompleteForSQL();
+            rt.AddAutocompleteForTables(tables);
+            rt.Activate();
         }
         SQLHistoryClass sh = null;
         ExperienceInfoClass exp = null;
@@ -561,7 +567,7 @@ namespace SQLView
         {
             try
             {
-                exp = new ExperienceInfoClass($@"{Application.StartupPath}\Info\InfoExpierenceData.db");
+                exp = new ExperienceInfoClass($@"{AppSettingsClass.Instance.PathSettings.InfoPath}\InfoExpierenceData.db");
                 exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
                 exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                 //dgvExperienceInfo.Columns[(int)ExperienceInfoInx.Id].Visible = false;
@@ -1352,7 +1358,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 saveFileDialogCSV.DefaultExt = ".csv";
                 saveFileDialogCSV.Filter = "CSV|*.csv|All|*.*";
-                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                saveFileDialogCSV.InitialDirectory = AppSettingsClass.Instance.PathSettings.ExportPath;
                 if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
                 {
                     string s = cbCSVSeperator.Text.Trim();
@@ -1372,7 +1378,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 saveFileDialogCSV.DefaultExt = ".html";
                 saveFileDialogCSV.Filter = "HTML|*.html|All|*.*";
-                saveFileDialogCSV.InitialDirectory = _dbrRegLocal.InitialExportPath;
+                saveFileDialogCSV.InitialDirectory = AppSettingsClass.Instance.PathSettings.ExportPath;
                 if (saveFileDialogCSV.ShowDialog() == DialogResult.OK)
                 {
                     exportToHtml(saveFileDialogCSV.FileName);
@@ -1646,6 +1652,15 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void hsLoadDatabasePath_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtExperienceInfo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.K | Keys.Control))
+            {
+                if (rt != null) rt.Show();
+                e.Handled = true;
+            }
         }
     }
 }

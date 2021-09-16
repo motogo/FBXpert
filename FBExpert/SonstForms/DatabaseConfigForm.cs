@@ -4,12 +4,13 @@ using FBExpert.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpert.SonstForms;
 using FormInterfaces;
 using MessageFormLibrary;
 using StateClasses;
 using System;
-using System.Data.Common;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -88,7 +89,11 @@ namespace FBExpert
                 cc.CloseConnection();
             }            
         }
-        */    
+        */
+
+       
+
+
         public void EditToData()
         {                       
             if(rb25_32.Checked) _dbReg.Version          = eDBVersion.FB25_32;
@@ -101,26 +106,30 @@ namespace FBExpert
             _dbReg.Alias                                = txtDatabaseAlias.Text;
             _dbReg.CharSet                              = cbCharSet.Text;
             _dbReg.Collation                            = cbCollation.Text;
-            _dbReg.PacketSize                           = StaticFunctionsClass.ToIntDef(txtPacketsize.Text, 0);
+            _dbReg.PacketSize                           = (int)numPacketSize.Value;
             _dbReg.Password                             = txtPassword.Text;
             _dbReg.User                                 = txtUser.Text;
-            _dbReg.FirebirdBinaryPath                   = txtFirebirdBinaryPath.Text;                                  
-            _dbReg.Port                                 = StaticFunctionsClass.ToIntDef(txtPort.Text,3050);
+            _dbReg.SetFirebirdBinaryPath(txtFirebirdBinaryPath.Text);
+            _dbReg.Port                                 = (int) numPort.Value;
             _dbReg.Role                                 = txtRole.Text;
-            _dbReg.DatabasePath                         = txtLocation.Text;            
+            _dbReg.DatabasePath                         = txtLocation.Text;
             _dbReg.Pooling                              = cbPooling.Checked;
             _dbReg.MaxPoolSize                          = StaticFunctionsClass.ToIntDef(txtMaxPoolSize.Text, 15);
             _dbReg.MinPoolSize                          = StaticFunctionsClass.ToIntDef(txtMinPoolSize.Text, 0);
             _dbReg.ConnectionLifetime                   = StaticFunctionsClass.ToIntDef(txtConnectionLifetime.Text, 0);
+            /*
             _dbReg.InitialScriptingPath                 = txtDefaultScriptPath.Text;
             _dbReg.InitialReportPath                    = txtDefaultReportPath.Text;
             _dbReg.InitialExportPath                    = txtDefaultExportPath.Text;
             _dbReg.InitialSQLExportPath                 = txtDefaultSQLExportPath.Text;
+            _dbReg.InitialInfoPath                      = txtInfoPath.Text;
+            
             _dbReg.InitialTerminator                    = ";";
             _dbReg.AlternativeTerminator                = txtAlternativeSetTermCharacter.Text;
             _dbReg.SkipForSelect                        = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
             _dbReg.MaxRowsForSelect                     = StaticFunctionsClass.ToLongDef(txtTableMaxRows.Text, 0);
-            _dbReg.ClientLibrary                        = txtClientLibrary.Text;
+            */
+            _dbReg.SetClientLibrary(txtClientLibrary.Text);
             _dbReg.CodeSettings.SourceCodeNamespace     = txtDBNamespace.Text;
             _dbReg.CodeSettings.SourceCodeOutputPath    = txtSourcecodeOutputPath.Text;
             SetServerDatas();
@@ -142,8 +151,7 @@ namespace FBExpert
                 _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
             }
 
-            
-            DatabaseDefinitions.Instance.OpenDatabaseCount = StaticFunctionsClass.ToIntDef(txtOpenDatabasesCount.Text, 0);
+           
         }
 
         public void SetServerDatas()
@@ -158,7 +166,6 @@ namespace FBExpert
                 _dbReg.Server = txtServer.Text;
                 _dbReg.ConnectionType = eConnectionType.server;
             }
-            
         }
         
         public void DataToEdit()
@@ -181,14 +188,17 @@ namespace FBExpert
             else if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID) rbGenerateGUID.Checked = true;
             else if (_dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID) rbGenerateHEXGUID.Checked = true;
 
+
+            GetClientLibraryAndBinPath();
+            _dbReg.SetClientLibrary(txtClientLibrary.Text);
             txtLocation.Text                    = _dbReg.DatabasePath;
             txtServer.Text                      = _dbReg.Server;
-            txtFirebirdBinaryPath.Text          = _dbReg.FirebirdBinaryPath;            
+            //txtFirebirdBinaryPath.Text          = _dbReg._firebirdBinaryPath;            
             txtServer.Enabled                   = _dbReg.ConnectionType == eConnectionType.server;                        
             cbCharSet.SelectedIndex             = cbCharSet.FindString(_dbReg.CharSet);
             cbCollation.SelectedIndex           = cbCollation.FindString(_dbReg.Collation);
-            txtPacketsize.Text                  = _dbReg.PacketSize.ToString();
-            txtPort.Text                        = _dbReg.Port.ToString();
+            numPacketSize.Value                 = _dbReg.PacketSize;
+            numPort.Value                       = _dbReg.Port;
             txtUser.Text                        = _dbReg.User;
             txtPassword.Text                    = _dbReg.Password;
             txtDatabaseAlias.Text               = _dbReg.Alias;
@@ -197,18 +207,24 @@ namespace FBExpert
             txtMinPoolSize.Text                 = _dbReg.MinPoolSize.ToString();
             txtConnectionLifetime.Text          = _dbReg.ConnectionLifetime.ToString();            
             cbPooling.Checked                   = _dbReg.Pooling;
-            txtClientLibrary.Text               = _dbReg.ClientLibrary;
-            txtAlternativeSetTermCharacter.Text = _dbReg.AlternativeTerminator;            
-            txtDefaultScriptPath.Text           = _dbReg.InitialScriptingPath;          
+            //txtClientLibrary.Text               = _dbReg.ClientLibrary;
+            /*
+            txtAlternativeSetTermCharacter.Text = _dbReg.AlternativeTerminator;  
+            
+            txtDefaultScriptPath.Text           = _dbReg.InitialScriptingPath;
             txtDefaultReportPath.Text           = _dbReg.InitialReportPath;
+            txtInfoPath.Text                    = _dbReg.InitialInfoPath;
+            
             txtDefaultSQLExportPath.Text        = _dbReg.InitialSQLExportPath;
+            
             txtSkipForSelect.Text               = _dbReg.SkipForSelect.ToString();
             txtTableMaxRows.Text                = _dbReg.MaxRowsForSelect.ToString();
+            */
             txtDBNamespace.Text                 = _dbReg.CodeSettings.SourceCodeNamespace;
             txtSourcecodeOutputPath.Text        = _dbReg.CodeSettings.SourceCodeOutputPath;
-            txtOpenDatabasesCount.Text          = DatabaseDefinitions.Instance.OpenDatabaseCount.ToString();
+            //txtOpenDatabasesCount.Text          = DatabaseDefinitions.Instance.OpenDatabaseCount.ToString();
             SetServerUIVisiblies();
-                                                                                            
+            connectionDataChanged();
             DoEvent = true;
         }
 
@@ -293,8 +309,8 @@ namespace FBExpert
             txtServer.Text                  = dc.Server;
             cbCharSet.SelectedIndex         = cbCharSet.FindString(dc.CharSet);
             cbCharSet.SelectedIndex         = cbCollation.FindString(dc.Collation);
-            txtPacketsize.Text              = dc.PacketSize.ToString();
-            txtPort.Text                    = dc.Port.ToString();
+            numPacketSize.Value             = (int) dc.PacketSize;
+            numPort.Value                   = (int) dc.Port;
             txtUser.Text                    = dc.User;
             txtPassword.Text                = dc.Password;
             txtDatabaseAlias.Text           = @"NEW_DATABASE";
@@ -302,7 +318,7 @@ namespace FBExpert
             txtMaxPoolSize.Text             = dc.MaxPoolSize.ToString();
             txtMinPoolSize.Text             = dc.MinPoolSize.ToString();
             txtConnectionLifetime.Text      = dc.ConnectionLifetime.ToString();
-            txtClientLibrary.Text           = dc.ClientLibrary;            
+            txtClientLibrary.Text           = dc.GetClientLibrary();            
             cbPooling.Checked               = dc.Pooling;
 
             SetServerUIVisiblies();
@@ -312,13 +328,15 @@ namespace FBExpert
         private void DatabaseConfigForm_Load(object sender, EventArgs e)
         {  
             oldserver = _dbReg.Server;
-            fbdPath.SelectedPath = $@"{Application.StartupPath}\{_dbReg.Version}\fbclient.dll";
+            //fbdPath.SelectedPath = $@"{Application.StartupPath}\{_dbReg.Version}\fbclient.dll";
             
             FormDesign.SetFormLeft(this);
             LanguageChanged();                
             ShowCaptions();
+            GetClientLibraryAndBinPath();
+            FileInfo fi = new FileInfo(_dbReg.DatabasePath);
 
-           
+            txtCreateDatabaseLocationFile.Text = fi.Exists ? $@"{fi.DirectoryName}\{fi.Name.Replace(fi.Extension, $@"_new{fi.Extension}")}"  : "dbnew.fdb";
         }
 
         private void LanguageChanged()
@@ -329,7 +347,7 @@ namespace FBExpert
 
         public void ShowCaptions()
         {
-            lblTableName.Text = $@"Database Config: {_dbReg.Alias}";
+            lblFormName.Text = $@"Database Config: {_dbReg.Alias}";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Database Config");
         }
 
@@ -354,12 +372,17 @@ namespace FBExpert
             txtConnectionString.Text = connectionString;
             _connectionDataChanged = true;
         }
-        
+
         private void hsConnect_Click(object sender, EventArgs e)
         {
+            Connect();
+        }
+        private void Connect()
+        {
+            string _funcStr = "Connect()";
             pnlConnectState.BackColor = System.Drawing.Color.Yellow;
             Application.DoEvents();
-            EditToData();  
+            //EditToData();  
             string lfText = string.Empty;
             try
             {
@@ -371,8 +394,8 @@ namespace FBExpert
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-                pnlConnectState.BackColor = System.Drawing.Color.Red;
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{ex.Message}->{_funcStr}", ex),_funcStr);
+                lfText = "-1";
             }
 
             if(lfText == "-1")
@@ -388,7 +411,17 @@ namespace FBExpert
             openFileDialog1.DefaultExt  = "*.fdb";
             openFileDialog1.Filter      = @"Firebird DB|*.fdb|All|*.*";
             openFileDialog1.Title       =  LanguageClass.Instance.GetString("SELECT_DATABASE");
-
+            openFileDialog1.CheckFileExists = true;
+            FileInfo fi = new FileInfo(txtLocation.Text);
+            if (fi.Exists)
+            {
+                openFileDialog1.FileName = fi.Name;
+            }
+            if (fi.Directory.Exists)
+            {
+                
+                openFileDialog1.InitialDirectory = fi.DirectoryName;
+            }
             if (openFileDialog1.ShowDialog()== DialogResult.OK)
             {
                 txtLocation.Text = openFileDialog1.FileName;
@@ -397,23 +430,21 @@ namespace FBExpert
         
         private void hsCreateDatabase_Click(object sender, EventArgs e)
         {
-            var fi = new FileInfo(txtLocation.Text);
+            var fi = new FileInfo(txtCreateDatabaseLocationFile.Text);
             bool ok = false;
             if(fi.Exists)
             {
-                object[] param = {$@"{txtServer.Text}:{txtLocation.Text}",Environment.NewLine};
+                object[] param = {$@"{txtServer.Text}:{txtCreateDatabaseLocationFile.Text}",Environment.NewLine};
                 if(SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExistsCaption","OverrideExistingDatabase", SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Asterisk, null, param)== SEDialogResult.Yes)                
                 {
-                    ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
-                    StaticFunctionsClass.ToIntDef(txtPacketsize.Text,AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize), true, true);
+                    ok = DBProviderSet.CreateDatabase(txtCreateDatabaseLocationFile.Text, txtServer.Text,(int) numPort.Value, txtUser.Text, txtPassword.Text, (int) numPacketSize.Value,txtClientLibrary.Text, true, true);
                 }
             }
             else
             {
                 if (!fi.Directory.Exists) return;
-                ok = DBProviderSet.CreateDatabase(txtLocation.Text, txtServer.Text, txtUser.Text, txtPassword.Text,
-                StaticFunctionsClass.ToIntDef(txtPacketsize.Text, AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize), true, true);
-            }         
+                ok = DBProviderSet.CreateDatabase(txtCreateDatabaseLocationFile.Text, txtServer.Text, (int)numPort.Value, txtUser.Text, txtPassword.Text, (int)numPacketSize.Value, txtClientLibrary.Text, true, true);
+            }
             
             if(!ok)
             {
@@ -441,8 +472,9 @@ namespace FBExpert
         private void rbRemote_CheckedChanged(object sender, EventArgs e)
         {
             if ((!DoEvent) || (!rbRemote.Checked)) return;
-            txtServer.Text = oldserver;
+            txtServer.Text = string.IsNullOrEmpty(oldserver) ? "localhost" : oldserver;
             txtServer.Enabled = true;
+            EditToData();
             SetServerDatas();
             connectionDataChanged();
         }
@@ -452,7 +484,10 @@ namespace FBExpert
             if (!DoEvent) return;
             if (!rbEmbedded.Checked) return;
             txtServer.Enabled = false;
+            oldserver = txtServer.Text;
             txtServer.Text = "";
+            
+            EditToData();
             SetServerDatas();
             connectionDataChanged();
         }
@@ -460,7 +495,7 @@ namespace FBExpert
         private void txtPacketsize_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
-            _dbReg.PacketSize = StaticFunctionsClass.ToIntDef(txtPacketsize.Text, 0);
+            _dbReg.PacketSize = (int) numPacketSize.Value;
             connectionDataChanged();
         }
 
@@ -512,7 +547,7 @@ namespace FBExpert
         private void txtPort_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
-            _dbReg.Port = StaticFunctionsClass.ToIntDef(txtPort.Text.Trim(), 3050);
+            _dbReg.Port = (int) numPort.Value;
             connectionDataChanged();
         }
 
@@ -533,7 +568,7 @@ namespace FBExpert
         private void txtClientLibrary_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
-            _dbReg.ClientLibrary = txtClientLibrary.Text;
+            //_dbReg._clientLibrary = txtClientLibrary.Text;
             connectionDataChanged();
         }
 
@@ -561,22 +596,11 @@ namespace FBExpert
             _dbReg.Lifetime = StaticFunctionsClass.ToIntDef(txtLifetime.Text.Trim(), 0);
             connectionDataChanged();
         }
-        private void txtSkipForSelect_TextChanged(object sender, EventArgs e)
-        {
-            if (!DoEvent) return;
-            _dbReg.SkipForSelect = StaticFunctionsClass.ToIntDef(txtSkipForSelect.Text.Trim(), 1000);
-        }       
 
         private void txtAlternativeSetTermCHaracter_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvent) return;
-            _dbReg.AlternativeTerminator = txtAlternativeSetTermCharacter.Text;
-        }
-
-        private void txtDefaultScriptPath_TextChanged(object sender, EventArgs e)
-        {
-            if (!DoEvent) return;
-            _dbReg.InitialScriptingPath = txtDefaultScriptPath.Text;
+            AppSettingsClass.Instance.SQLVariables.AlternativeTerminator = txtAlternativeSetTermCharacter.Text;
         }
 
         private void hsLoadClientLib_Click(object sender, EventArgs e)
@@ -595,19 +619,6 @@ namespace FBExpert
             Close();
         }
 
-        private void hsLoadDefaultScriptPath_Click(object sender, EventArgs e)
-        {
-            fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
-            if (fbdPath.ShowDialog() != DialogResult.OK) return;
-            txtDefaultScriptPath.Text = fbdPath.SelectedPath;
-        }
-
-        private void hsLoadDefaultReportPath_Click(object sender, EventArgs e)
-        {            
-            fbdPath.SelectedPath = _dbReg.InitialReportPath;
-            if (fbdPath.ShowDialog() != DialogResult.OK) return;
-            txtDefaultReportPath.Text = fbdPath.SelectedPath;
-        }
 
         private void dataChanged(object sender, EventArgs e)
         {
@@ -619,27 +630,6 @@ namespace FBExpert
             fbdPath.SelectedPath = _dbReg.CodeSettings.SourceCodeOutputPath;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtSourcecodeOutputPath.Text = fbdPath.SelectedPath;
-        }
-        
-        private void hsLoadDefaultExports_Click(object sender, EventArgs e)
-        {
-             fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
-            if (fbdPath.ShowDialog() != DialogResult.OK) return;
-            txtDefaultExportPath.Text = fbdPath.SelectedPath;
-        }
-
-        private void HotSpot1_Click(object sender, EventArgs e)
-        {
-            fbdPath.SelectedPath = _dbReg.InitialScriptingPath;
-            if (fbdPath.ShowDialog() != DialogResult.OK) return;
-            txtFirebirdBinaryPath.Text = fbdPath.SelectedPath;
-        }
-
-        private void hsInitialSQLExportPath_Click(object sender, EventArgs e)
-        {
-            fbdPath.SelectedPath = _dbReg.InitialSQLExportPath;
-            if (fbdPath.ShowDialog() != DialogResult.OK) return;
-            txtDefaultSQLExportPath.Text = fbdPath.SelectedPath;
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -711,6 +701,90 @@ namespace FBExpert
                 cbCollation.Items.Add("PXW_CYRL");
             }
 
+        }
+
+       
+
+        private void hotSpot2_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.DefaultExt = "*.fdb";
+            openFileDialog1.Filter = @"Firebird DB|*.fdb|All|*.*";
+            openFileDialog1.Title = LanguageClass.Instance.GetString("SELECT_DATABASE_NEW");
+            openFileDialog1.CheckFileExists = false;
+
+            FileInfo fi = new FileInfo(txtCreateDatabaseLocationFile.Text);
+            if (fi.Exists)
+            {
+                openFileDialog1.FileName = fi.Name;
+            }
+            else
+            {
+                openFileDialog1.FileName = "NewDB.fdb";
+            }
+            if (fi.Directory.Exists)
+            {
+                openFileDialog1.InitialDirectory = fi.DirectoryName;
+            }
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+              txtCreateDatabaseLocationFile.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void GetClientLibraryAndBinPath()
+        {
+            string clfolder = string.Empty;
+            if(rb4_64.Checked)
+            {
+                clfolder = $@"FB4\X64";
+            }
+            else if(rb4_32.Checked)
+            {
+                clfolder = $@"FB4\X32";
+            }
+            else if (rb3_64.Checked)
+            {
+                clfolder = $@"FB3\X64";
+            }
+            else if (rb3_32.Checked)
+            {
+                clfolder = $@"FB3\X32";
+            }
+            else if (rb25_64.Checked)
+            {
+                clfolder = $@"FB25\X64";
+            }
+            else if (rb25_32.Checked)
+            {
+                clfolder = $@"FB25\X32";
+            }
+            FileInfo fi = new FileInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}\fbclient.dll");
+            DirectoryInfo di = new DirectoryInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}");
+            FileInfo fi_isql = new FileInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}\isql.exe");
+            txtClientLibrary.Text = $@"{Application.StartupPath}\ClientLibraries\{clfolder}\fbclient.dll";
+            txtClientLibrary.BackColor = (fi.Exists) ? SystemColors.Info : Color.Red;
+            txtFirebirdBinaryPath.Text = $@"{Application.StartupPath}\ClientLibraries\{clfolder}";
+            txtFirebirdBinaryPath.BackColor = (di.Exists) ? SystemColors.Info : Color.Red;
+            if (di.Exists)
+            {
+                txtFirebirdBinaryPath.BackColor = (fi_isql.Exists) ? SystemColors.Info : Color.Orange;
+            }
+        }
+
+        private void dbVersion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DoEvent)
+            {
+                GetClientLibraryAndBinPath();
+                EditToData();
+                connectionDataChanged();
+            }
+        }
+
+        private void hsGlobalApplicationSettings_Click(object sender, EventArgs e)
+        {
+            var af = new AppSettingsForm( FbXpertMainForm.Instance());
+            af.Show();
         }
     }
 }

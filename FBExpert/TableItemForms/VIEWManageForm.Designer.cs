@@ -547,7 +547,7 @@ namespace FBExpert
             this.sfbViewData.SQLVorfilterCmd = "";
             this.sfbViewData.TabIndex = 6;
             this.sfbViewData.UseTranslation = false;
-            this.sfbViewData.CbCheckedChanged += new SeControlsLib.cbCheckedChangedHandler(this.spezialfilterBox1_CbCheckedChanged);
+            this.sfbViewData.CheckedChanged += new SeControlsLib.CheckedChangedHandler(this.spezialfilterBox1_CheckedChanged);
             // 
             // hsCancelGettingData
             // 

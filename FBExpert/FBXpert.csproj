@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FBXpert</RootNamespace>
     <AssemblyName>FBXpert</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -95,7 +95,7 @@
     <Reference Include="ExtendedXmlSerializer, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExtendedXmlSerializer.2.1.1\lib\net45\ExtendedXmlSerializer.dll</HintPath>
     </Reference>
-    <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+    <Reference Include="FastColoredTextBox, Version=2.16.26.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\FastColoredTextBox\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll</HintPath>
     </Reference>
@@ -115,7 +115,8 @@
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
     </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.10.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.7.10.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.8.5.3\lib\netstandard2.0\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="FormularUtils, Version=2017.11.21.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -176,6 +177,12 @@
       <HintPath>..\packages\System.Interactive.3.1.1\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -588,9 +595,11 @@
     <Compile Include="TableItemForms\VIEWManageForm.Designer.cs">
       <DependentUpon>VIEWManageForm.cs</DependentUpon>
     </Compile>
-    <Content Include="config\AppSettings.json" />
-    <Content Include="config\AppSettingsSoftend.json" />
-    <Content Include="config\AppSettingsTelekom.json" />
+    <Content Include="Scripts\jquery-2.1.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
+    <None Include="Resources\preferences_system_blue_x24.png" />
     <None Include="Resources\view_insert_24x.png" />
     <None Include="Resources\Matrix.png" />
     <None Include="FBXpert_TemporaryKey.pfx" />
@@ -608,7 +617,6 @@
     <EmbeddedResource Include="DesignSourceCode\XMLDesignForm.resx">
       <DependentUpon>XMLDesignForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="config\DatabaseDefinitionsDemo.xml" />
     <Content Include="Languages\Language.de-DE.resources">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -696,8 +704,6 @@
     <EmbeddedResource Include="XMLTree\XMLTreeForm.resx">
       <DependentUpon>XMLTreeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="config\DatabaseDefinitionsSoftend.xml" />
-    <Content Include="config\DatabaseDefinitionsTelekom.xml" />
     <Content Include="Languages\Language.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.de-DE.Designer.cs</LastGenOutput>
@@ -809,6 +815,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\view_refresh32x.png" />
@@ -1129,66 +1136,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="config\AppSettings.json">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="config\AppSettingsSoftend.json">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="config\AppSettingsTelekom.json">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="config\DatabaseDefinitionsDemo.xml">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="config\DatabaseDefinitionsSoftend.xml">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="config\DatabaseDefinitionsTelekom.xml">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
     <PublishFile Include="Languages\Language.de-DE.resx">
       <Visible>False</Visible>
       <Group>
@@ -1209,6 +1156,9 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -14,10 +14,12 @@ namespace FBXpert.Globals
         public bool Active;
         public string Role;
 
-        public string InitialSQLExportPath      = StaticVariablesClass.SQLExportPath;
-        public string InitialScriptingPath      = StaticVariablesClass.ScriptPath;
-        public string InitialReportPath         = StaticVariablesClass.ReportPath;
-        public string InitialExportPath         = StaticVariablesClass.ExportPath;
+        //public string InitialSQLExportPath      = StaticVariablesClass.SQLExportPath;
+       // public string InitialInfoPath = StaticVariablesClass.ExperienceInfoPath;
+       //public string InitialScriptingPath      = StaticVariablesClass.ScriptPath;
+       // public string InitialReportPath         = StaticVariablesClass.ReportPath;
+       // public string InitialExportPath         = StaticVariablesClass.ExportPath;
+       /*
         public string InitialTerminator         = StaticVariablesClass.InitialTerminator;
         public string AlternativeTerminator     = StaticVariablesClass.AlternativeTerminator;
         public string SingleLineComment         = StaticVariablesClass.SingleLineComment;
@@ -26,19 +28,15 @@ namespace FBXpert.Globals
         public string NewLine                   = Environment.NewLine;
         public long SkipForSelect    = 1000;
         public long MaxRowsForSelect = 0;
-        
+       */ 
         public eRegState State = eRegState.none;
         public eDBVersion Version = eDBVersion.FB3_32;
-        public string FirebirdBinaryPath = $@"{Application.StartupPath}\FB302\Firebird\";
+        private string _firebirdBinaryPath = $@"{Application.StartupPath}\FB302\Firebird\";
         
         public CodeSettingsClass CodeSettings;        
         private ErrorCodes ErrorCodes = null;
         private TreeNode _treeNode;
 
-       
-        
-
-        
 
         public DBRegistrationClass()
         {
@@ -84,6 +82,16 @@ namespace FBXpert.Globals
         public TreeNode GetNode()
         {
             return _treeNode;
+        }
+
+        public string GetFirebirdBinaryPath()
+        {
+            return _firebirdBinaryPath;
+            
+        }
+        public void SetFirebirdBinaryPath(string value)
+        {
+            _firebirdBinaryPath = value;
         }
 
         public string MakeServerFromText(string txtDatabase)

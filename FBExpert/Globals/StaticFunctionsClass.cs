@@ -38,11 +38,11 @@ namespace FBXpert.Globals
                     int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1], -1);
                     if (n2 > 10)
                     {
-                        result = "5->" + errorstring.Substring(n2 - 5, 10);
+                        result = $@"5->{errorstring.Substring(n2 - 5, 10)}";
                     }
                     else if (n2 > -1)
                     {
-                        result = $@"{n2}->" + errorstring.Substring(0, n2);
+                        result = $@"{n2}->{errorstring.Substring(0, n2)}";
                     }
                 }
             }
@@ -101,7 +101,8 @@ namespace FBXpert.Globals
         }
 
         public static string GetLifetime(string cnString, bool withMon)
-        {             
+        {
+            string _funcStr = "GetLifetime";
             var con = new FbConnection(cnString);            
             string lifetimeText = string.Empty;
             try
@@ -127,13 +128,14 @@ namespace FBXpert.Globals
                 }
 
             }
-            catch //(Exception ex)
+            catch (Exception ex)
             {
                 lifetimeText = "-1";
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{ex.Message}->{_funcStr}", ex),_funcStr);
             }
             finally
             { 
-              con.Close();            
+              con.Close();
             }
             return lifetimeText;
         }

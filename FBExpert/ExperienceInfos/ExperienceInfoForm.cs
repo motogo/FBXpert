@@ -1,12 +1,17 @@
 using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
+using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FormInterfaces;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using MessageFormLibrary;
+using FBXpert;
+
 namespace SQLView
 {
 
@@ -15,19 +20,22 @@ namespace SQLView
        
         private eColorDesigns _appDesign = eColorDesigns.Gray;
         private eColorDesigns _developDesign = eColorDesigns.Gray;
-
         private ExperienceInfoClass exp = null;
-
         private AutocompleteClass ac;
+        private DBRegistrationClass _dbReg = null;
+        private List<TableClass> _tables;
+        private ExperienceInfo ExData = new ExperienceInfo();
+        private string _dbfile = string.Empty;
 
-        public ExperienceInfoForm(Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
+        public ExperienceInfoForm(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
             MdiParent = mdiParent;
           
             _appDesign = appDesign;
             _developDesign = developDesign;
+            _tables  = tables;
             InitializeComponent();
-
+            _dbReg = ca;
             ClearDevelopDesign(_developDesign);
             SetDesign(_appDesign);
 ;
@@ -51,14 +59,14 @@ namespace SQLView
             
             try
             {
-                var sh = new ExperienceInfoClass();
+                var sh = new ExperienceInfoClass(_dbfile);
                 data = sh.InsertExperienceInfo(keycode,info);
                 sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
             }
             catch (Exception ex)
             {
-               
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Add to Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
             }
             return data;
         }
@@ -68,15 +76,14 @@ namespace SQLView
             bool ok = false;
             try
             {
-                var sh = new ExperienceInfoClass();
+                var sh = new ExperienceInfoClass(_dbfile);
                 ok = sh.UpdateExperienceInfo(ExData);
                 sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
-
             }
             catch (Exception ex)
             {
-               
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Update Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
             }
             return ok;
         }
@@ -88,20 +95,21 @@ namespace SQLView
             UserStart();
 
             this.Text = $@"Experience Infos";
-
-            LoadExperienceInfo($@"{Application.StartupPath}\Info\InfoExpierenceData.db");
+            
+            LoadExperienceInfo( $@"{AppSettingsClass.Instance.PathSettings.InfoPath}\{StaticVariablesClass.ExperienceInfoFile}");
             LanguageChanged();
-            txtDatabase.Text = exp.InfoExpierenceFile;
+            SetAutocompeteObjects(_tables);
         }
 
         private void LoadExperienceInfo(string dbfile)
         {
             try
             {
+                _dbfile = dbfile;
                 exp = new ExperienceInfoClass(dbfile);
                 exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
                 exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
-                txtDatabase.Text = dbfile;
+                txtDatabase.Text = _dbfile;
             }
             catch (Exception ex)
             {
@@ -118,19 +126,21 @@ namespace SQLView
         {
             UserActionClass.Instance.UserAction = UserActionType.none;
         }
- 
+
+        public void SetAutocompeteObjects(List<TableClass> tables)
+        {
+            ac = new AutocompleteClass(txtExperienceInfo, _dbReg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
+            ac.Activate();
+        }
+
         private void hsClose_Click(object sender, EventArgs e)
         {
             UserActionClass.Instance.UserAction = UserActionType.none; Close();
         }
        
-   
-        private void txtDatabase_TextChanged(object sender, EventArgs e)
-        {
-         
-        }
-
-
         private void RefreshExperienceInfo()
         {
             try
@@ -149,11 +159,9 @@ namespace SQLView
           //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
 
-       
-        ExperienceInfo ExData = new ExperienceInfo();
         private void hotSpot5_Click(object sender, EventArgs e)
         {
-            ExData = AddToInfo(txtExperienceKeyCode.Text, txtExperienceInfo.Text);
+            ExData = AddToInfo(txtExperienceKeyCode.Text,txtExperienceInfo.Text);       
         }
 
         private void hsRefreshExpierenceInfo_Click(object sender, EventArgs e)
@@ -224,12 +232,11 @@ namespace SQLView
                 try
                 {
                    exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
-                   
                    exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                 }
                 catch (Exception ex)
                 {
-                  
+                    SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Delete Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
                 }
             }
         }
@@ -263,13 +270,23 @@ namespace SQLView
             ExperienceEditToData();
             UpdateToInfo();
         }
-
+       
         private void hsLoadDatabasePath_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = $@"{Application.StartupPath}\Info\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                
                 LoadExperienceInfo(openFileDialog1.FileName);
+            }
+        }
+
+        private void txtExperienceInfo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.K | Keys.Control))
+            {
+                if (ac != null) ac.Show();
+                e.Handled = true;
             }
         }
     }

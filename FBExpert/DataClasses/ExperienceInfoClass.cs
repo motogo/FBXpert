@@ -4,6 +4,7 @@ using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -27,23 +28,8 @@ namespace FBXpert.DataClasses
         public static int SelColInx = 1;
         public static bool SortAsc = true;
         private string schemaName = "ExperienceInfo";
-        private string databasefile = $@"{Application.StartupPath}\Info\InfoExpierenceData.db";
-        public string InfoExpierenceFile
-        {
-            get
-            {
-                return databasefile;//  $@"{Application.StartupPath}\Info\InfoExpierenceData.db";
-            }
-            /*
-            set
-            {
-                databasefile = value;
-            }
-            */
-        }
-        //   string KeyCode = string.Empty;
-        string DatabaseLocation = string.Empty;
-        bool asc = true;
+        private string DatabaseLocation = string.Empty;
+        private bool asc = true;
         
         public ExperienceInfoClass(string dbLocation)
         {
@@ -52,7 +38,7 @@ namespace FBXpert.DataClasses
         
         public ExperienceInfoClass()
         {
-            DatabaseLocation = InfoExpierenceFile;
+
         }
         private List<ExperienceInfo> GetAll(string keycode)
         {
@@ -62,17 +48,17 @@ namespace FBXpert.DataClasses
                 var col = db.GetCollection<ExperienceInfo>(schemaName);
                 if (string.IsNullOrEmpty(keycode))
                 {
-                        foreach (ExperienceInfo _id in col.FindAll())
-                        {
-                            list.Add(_id);
-                        }
+                    foreach (ExperienceInfo _id in col.FindAll())
+                    {
+                        list.Add(_id);
+                    }
                 }
                 else
                 {
-                        foreach (ExperienceInfo _id in col.Find(x => x.KeyCode == keycode))
-                        {
-                            list.Add(_id);
-                        }
+                    foreach (ExperienceInfo _id in col.Find(x => x.KeyCode == keycode))
+                    {
+                        list.Add(_id);
+                    }
                 }
             }
             return list;

@@ -17,7 +17,7 @@ namespace FBExpert
     public class DatabaseDefinitions : ApplicationPathClass
     {
         public string Reason;
-        public int OpenDatabaseCount = 0;
+       // public int OpenDatabaseCount = 0;
         private EditStateClass.eDataState _dataState = EditStateClass.eDataState.UnSaved;
         public EditStateClass.eDataState DataState
         {
@@ -140,19 +140,22 @@ namespace FBExpert
                 reader.Close();
                 this.XMLName = FileName;             
                 this.Databases = PF.Databases;
-                this.OpenDatabaseCount = PF.OpenDatabaseCount;
+         //       this.OpenDatabaseCount = PF.OpenDatabaseCount;
+
                 int pos = 1;
                 foreach (DBRegistrationClass dbr in this.Databases)
                 {
+                    /*
                     if (string.IsNullOrEmpty(dbr.InitialScriptingPath))     dbr.InitialScriptingPath = StaticVariablesClass.ScriptPath;
                     if (string.IsNullOrEmpty(dbr.InitialReportPath))        dbr.InitialReportPath = StaticVariablesClass.ReportPath;
+                   
                     if (string.IsNullOrEmpty(dbr.Collation))                dbr.Collation = StaticVariablesClass.Collation;
                     if (string.IsNullOrEmpty(dbr.CommentEnd))               dbr.CommentEnd = StaticVariablesClass.CommentEnd;
                     if (string.IsNullOrEmpty(dbr.CommentStart))             dbr.CommentStart = StaticVariablesClass.CommentStart;
                     if (string.IsNullOrEmpty(dbr.InitialTerminator))        dbr.InitialTerminator = StaticVariablesClass.InitialTerminator;
                     if (string.IsNullOrEmpty(dbr.AlternativeTerminator))    dbr.AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
                     if (string.IsNullOrEmpty(dbr.SingleLineComment))        dbr.SingleLineComment = StaticVariablesClass.SingleLineComment;                  
-
+                    */
                     dbr.Position = pos++;
                 }
                 

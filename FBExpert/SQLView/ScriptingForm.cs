@@ -31,14 +31,14 @@ namespace FBXpert.SQLView
             InitializeComponent();
             MdiParent = FbXpertMainForm.Instance();
             _actScriptingDbReg = drc;
-            _lastDirectory = _actScriptingDbReg.InitialScriptingPath;
+            _lastDirectory = AppSettingsClass.Instance.PathSettings.ScriptingPath;
             _notifies.Register4Info(FormMeldungRaised);
             _notifies.Register4Error(FormErrorRaised);                   
             
             fcbSQL.Clear();
             fcbSQL.SelectionStart = 0;
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
         }
 
@@ -47,14 +47,14 @@ namespace FBXpert.SQLView
             InitializeComponent();
             MdiParent = FbXpertMainForm.Instance();
             _actScriptingDbReg = drc;
-            _lastDirectory = _actScriptingDbReg.InitialScriptingPath;
+            _lastDirectory = AppSettingsClass.Instance.PathSettings.ScriptingPath;
             _notifies.Register4Info(FormMeldungRaised);
             _notifies.Register4Error(FormErrorRaised);
                      
             fcbSQL.Clear();            
             fcbSQL.SelectionStart = 0;           
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             foreach (string str in script)
             {
                 if (!string.IsNullOrEmpty(str))
@@ -154,7 +154,7 @@ namespace FBXpert.SQLView
         private void DefaultForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
-            ofdSQL.InitialDirectory = DBStaticData.ChangeToFullPath(_actScriptingDbReg.InitialScriptingPath);
+            ofdSQL.InitialDirectory = DBStaticData.ChangeToFullPath(AppSettingsClass.Instance.PathSettings.ScriptingPath);
             GetDatabases();
             ShowCaptions();
             Anzeige();
@@ -335,7 +335,6 @@ namespace FBXpert.SQLView
                 ConnectionType = eConnectionType.server
             };
 
-
             string connstr = ConnectionStrings.Instance.MakeConnectionString(drc);
             if (fbConn?.State == System.Data.ConnectionState.Open)
             {
@@ -343,91 +342,11 @@ namespace FBXpert.SQLView
             }
             fbConn = new FbConnection(connstr);
             fbConn.Open();
-            _notifies?.AddToINFO(StaticFunctionsClass.DateTimeNowStr() + " ...Opening database via script" + drc);
-            _notifies?.AddToINFO(StaticFunctionsClass.DateTimeNowStr() + " ...Database state:"+fbConn.State.ToString());
+            _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} ...Opening database via script {drc}");
+            _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} ...Database state:{fbConn.State}");
             return fbConn;
-
         }
 
-        private bool CreateDatabase(string sqlCmd)
-        {
-            /*
-                CREATE DATABASE 'localhost:D:\Data\kj\KJFERT59.FDB'
-                USER 'SYSDBA' PASSWORD 'masterkey'
-                PAGE_SIZE 8192
-                DEFAULT CHARACTER SET NONE;
-                */
-            string sql = sqlCmd.ToUpper();
-            string location = "D:\\Data\\test111.FDB";
-            string server = "localhost";
-            string user = "SYSDBA";
-            string password = "masterkey";
-            string packetsize = "8192";
-            
-            int inx = sql.IndexOf("CREATE DATABASE ", StringComparison.Ordinal);
-            if (inx >= 0)
-            {
-                string cmd3 = sqlCmd.Substring(inx + 16);
-                int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
-                string arg = cmd3.Substring(0, inx2);
-
-                int inx3 = arg.IndexOf(":\\", StringComparison.Ordinal);
-                int inx4 = arg.IndexOf(":", StringComparison.Ordinal);
-                if (inx4 < inx3)
-                {
-                    //server
-                    server = arg.Substring(0, inx4).Replace("'", "");
-                    location = arg.Substring(inx4 + 1);
-                    location = location.Replace("'", "");
-                }
-                else
-                {
-                    //nur dateipfad
-                    server = "localhost";
-                    location = arg.Replace("'", ""); 
-                }
-            }
-
-            inx = sql.IndexOf("USER ", StringComparison.Ordinal);
-            if (inx >= 0)
-            {
-                string cmd3 = sqlCmd.Substring(inx + 5);
-                int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
-                string arg = cmd3.Substring(0, inx2);
-                user = arg.Replace("'", ""); 
-            }
-
-            inx = sql.IndexOf("PASSWORD ", StringComparison.Ordinal);
-            if (inx >= 0)
-            {
-                string cmd3 = sqlCmd.Substring(inx + 9);
-                int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
-                string arg = cmd3.Substring(0, inx2);
-                password = arg.Replace("'", ""); 
-            }
-
-            inx = sql.IndexOf("PAGE_SIZE ", StringComparison.Ordinal);
-            if (inx >= 0)
-            {
-                string cmd3 = sqlCmd.Substring(inx + 10);
-                int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
-                string arg = cmd3.Substring(0, inx2);
-                packetsize = arg;
-            }
-
-            try
-            {
-                _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} ...Creating new database via script {server}:{location}");
-                DBProviderSet.CreateDatabase(location, server, user, password, StaticFunctionsClass.ToIntDef(packetsize, AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize));
-            }
-            catch (Exception ex)
-            {               
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> CreateDatabase()", ex));                      
-            }
-
-            return true;
-        }
-        
         private FbConnection IsCreateDatabaseOrConnect(string cmd, FbConnection fbcon)
         {
             
@@ -447,12 +366,12 @@ namespace FBXpert.SQLView
             string cmd2 = cmd1.ToUpper();
             if (cmd2.StartsWith("CREATE DATABASE"))
             {
-                CreateDatabase(cmd1);                
+                DBProviderSet.CreateDatabase(cmd1,null);
                 return useCon;
             }
             else if(cmd2.StartsWith("CONNECT"))
             {
-                useCon = CreateConnection(cmd1,fbcon);                
+                useCon = CreateConnection(cmd1,fbcon);
                 return useCon;
             }           
             return null;
@@ -464,7 +383,7 @@ namespace FBXpert.SQLView
             Application.DoEvents();
             
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(ScriptInfoRaised);
             _sql.ScriptNotify.Register4Error(ScriptErrorRaised);
             _sql.Commands.Clear();                                            
@@ -544,7 +463,7 @@ namespace FBXpert.SQLView
         private void PrepareCommandsFromSQL()
         {            
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");            
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");            
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             if (cbClearBeforePreparing.Checked)
             {                               
@@ -562,7 +481,7 @@ namespace FBXpert.SQLView
             List<string> sqlarr = new List<string>();
             sqlarr.Add(sql);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             //_sql.PrepareCommands(sqlarr, cbClearBeforePreparing.Checked);
             _sql.ExecuteCommands(sqlarr);
@@ -578,7 +497,7 @@ namespace FBXpert.SQLView
             _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} Prepare executing script in file {filename}");
             Application.DoEvents();            
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _actScriptingDbReg.NewLine, _actScriptingDbReg.CommentStart, _actScriptingDbReg.CommentEnd, _actScriptingDbReg.SingleLineComment, "SCRIPT");
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             _sql.Commands.Clear();
                                                             
@@ -644,7 +563,6 @@ namespace FBXpert.SQLView
                         Tag = _fi
                     };
                     lvFiles.Items.Add(lvi);
-
                 }
                
                _lastDirectory = _fi.DirectoryName;
@@ -692,7 +610,7 @@ namespace FBXpert.SQLView
 
         private void lvFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetFilesVibibilies();            
+            SetFilesVibibilies();
         }
 
         public void SetFilesVibibilies()
@@ -704,7 +622,7 @@ namespace FBXpert.SQLView
             if (lvi == null) return;
             
             var fii = (FileInfo)lvi.Tag;
-            txtSQLLocation.Text = fii.FullName;                                                          
+            txtSQLLocation.Text = fii.FullName;
         }
        
         private void cbConnection_SelectedIndexChanged(object sender, EventArgs e)

@@ -387,10 +387,12 @@ namespace FBXpert.Globals
         public const string DependenciesFromProceduresKeyStr = "DEPENDENCYFROMPROCEDURES";
         public const string DependenciesFromProceduresKeyGroupStr = "DEPENDENCYFROMPROCEDURES_GROUP";
 
-        public static readonly string ExportPath = Application.StartupPath + "\\exports";
-        public static readonly string ScriptPath = Application.StartupPath + "\\scripts";
-        public static readonly string ReportPath = Application.StartupPath + "\\reports";
-        public static readonly string SQLExportPath = Application.StartupPath + "\\exports\\sql";
+        public static readonly string ExportPath            = $@"{Application.StartupPath}\exports";
+        public static readonly string ScriptPath            = $@"{Application.StartupPath}\scripts";
+        public static readonly string ReportPath            = $@"{Application.StartupPath}\reports";
+        public static readonly string SQLExportPath         = $@"{Application.StartupPath}\exports\\sql";
+        public static readonly string ExperienceInfoPath    = $@"{Application.StartupPath}\info";
+        public static readonly string ExperienceInfoFile    = "InfoExpierenceData.db";
         public static readonly string InitialTerminator = ";";
         public static readonly string AlternativeTerminator = "~";
         public static readonly string SingleLineComment = "--";
@@ -398,7 +400,9 @@ namespace FBXpert.Globals
         public static readonly string CommentEnd = "*/";
         public static readonly string Collation = "NONE";
         public static readonly string NullStr = "null";
-        
+        public static readonly int SQLSkipForSelect = 1000;
+        public static readonly int SQLMaxRowForSelect = 0;
+
         public static readonly string UNIQUEStr = "UNIQUE";
         public static readonly string CREATEStr = "CREATE";
 

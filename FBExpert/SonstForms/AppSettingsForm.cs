@@ -26,26 +26,57 @@ namespace FBXpert.SonstForms
 
         public void DataToEdit()
         {
-            txtDefaultPacketsize.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize.ToString();
+            numDefaultPacketSize.Value = AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize;
+            numDefaultPort.Value = AppSettingsClass.Instance.DatabaseSettings.DefaultPort;
+            numOpenDatabaseCount.Value = AppSettingsClass.Instance.DatabaseSettings.OpenDatabaseCount;
+
+            txtSQLCommentEnd.Text = AppSettingsClass.Instance.SQLVariables.CommentEnd;
+            txtSQLCommentStart.Text = AppSettingsClass.Instance.SQLVariables.CommentStart;
+
             txtDefaulUser.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultUser;
             txtDefaultPassword.Text = AppSettingsClass.Instance.DatabaseSettings.DefaultPassword;
             txtDatabasesConfigPath.Text = AppSettingsClass.Instance.PathSettings.DatabasesConfigPath;
             txtScriptingPath.Text = AppSettingsClass.Instance.PathSettings.ScriptingPath;
             txtTemporaryPath.Text = AppSettingsClass.Instance.PathSettings.TempPath;
             txtDatabasesConfigFile.Text = $@"{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}";
-            
+            txtInfoPath.Text = AppSettingsClass.Instance.PathSettings.InfoPath;
+            txtExportPath.Text = AppSettingsClass.Instance.PathSettings.ExportPath;
+            txtSQLExportPath.Text = AppSettingsClass.Instance.PathSettings.SQLExportPath;
+            txtSQLHistoryPath.Text = AppSettingsClass.Instance.PathSettings.SQLHistoryPath;
+            txtSQLNewLine.Text = AppSettingsClass.Instance.SQLVariables.GetNewLineString();
+
+            txtSQLMaxRowForSelect.Text = AppSettingsClass.Instance.SQLVariables.MaxRowsForSelect.ToString();
+            txtSkipForSelect.Text = AppSettingsClass.Instance.SQLVariables.SkipForSelect.ToString();
+            txtSQLSingleLineCommand.Text = AppSettingsClass.Instance.SQLVariables.SingleLineComment;
+            txtSQLAlternativeTerminator.Text = AppSettingsClass.Instance.SQLVariables.AlternativeTerminator;
+            txtSQLInitialTerminator.Text = AppSettingsClass.Instance.SQLVariables.InitialTerminator;
         }
         public void EditToData()
         {
             AppSettingsClass.Instance.Stamp = DateTime.Now;
-            AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize = StaticFunctionsClass.ToIntDef(txtDefaultPacketsize.Text,8192);
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize = (int) numDefaultPacketSize.Value;
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPort = (int) numDefaultPort.Value;
             AppSettingsClass.Instance.DatabaseSettings.DefaultPassword = txtDefaultPassword.Text;
             AppSettingsClass.Instance.DatabaseSettings.DefaultUser = txtDefaulUser.Text;
+            AppSettingsClass.Instance.DatabaseSettings.OpenDatabaseCount = (int)numOpenDatabaseCount.Value;
             AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = txtDatabasesConfigPath.Text;
            
             AppSettingsClass.Instance.PathSettings.TempPath = txtTemporaryPath.Text;
             AppSettingsClass.Instance.PathSettings.ScriptingPath = txtScriptingPath.Text;
             AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = txtDatabasesConfigFile.Text;
+            AppSettingsClass.Instance.PathSettings.InfoPath = txtInfoPath.Text;
+            AppSettingsClass.Instance.PathSettings.ExportPath = txtExportPath.Text;
+            AppSettingsClass.Instance.PathSettings.SQLExportPath = txtSQLExportPath.Text;
+            AppSettingsClass.Instance.PathSettings.SQLHistoryPath = txtSQLHistoryPath.Text;
+
+            AppSettingsClass.Instance.SQLVariables.SetNewLine(txtSQLNewLine.Text);
+            AppSettingsClass.Instance.SQLVariables.CommentStart = txtSQLCommentStart.Text;
+            AppSettingsClass.Instance.SQLVariables.CommentEnd = txtSQLCommentEnd.Text;
+            AppSettingsClass.Instance.SQLVariables.SkipForSelect = StaticFunctionsClass.ToIntDef(txtSkipForSelect.Text, StaticVariablesClass.SQLSkipForSelect);
+            AppSettingsClass.Instance.SQLVariables.MaxRowsForSelect = StaticFunctionsClass.ToIntDef(txtSQLMaxRowForSelect.Text, StaticVariablesClass.SQLMaxRowForSelect);
+            AppSettingsClass.Instance.SQLVariables.SingleLineComment = txtSQLSingleLineCommand.Text;
+            AppSettingsClass.Instance.SQLVariables.AlternativeTerminator = txtSQLAlternativeTerminator.Text;
+            AppSettingsClass.Instance.SQLVariables.InitialTerminator = txtSQLInitialTerminator.Text;
         }
 
 

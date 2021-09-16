@@ -1,4 +1,5 @@
 ﻿using FBExpert.DataClasses;
+using FBXpert.DataClasses;
 using FBXpert.Globals;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,7 @@ namespace FBXpert.SonstForms
         private void ExportViewsSQLForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
-            txtSQLExportPath.Text = Path.Combine(dbReg.InitialSQLExportPath,"Views");
+            txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath,"Views");
         }
 
         private void hsInitialSQLExportPath_Click(object sender, EventArgs e)

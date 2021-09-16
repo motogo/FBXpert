@@ -1,4 +1,5 @@
-﻿using Initialization;
+﻿using FBXpert.Globals;
+using Initialization;
 using System;
 using System.IO;
 
@@ -12,25 +13,70 @@ namespace FBXpert.DataClasses
     [Serializable]
     public class CodeSettingsClass
     {
-        public string AlternativeTerm = "~";
+        
         public eSourceCodePrimaryKeyType SourceCodePrimaryKeyType= eSourceCodePrimaryKeyType.GeneratorInteger;
         public string SourceCodeNamespace = "ProjectDatas";  
-        public string SourceCodeOutputPath= "";
+        public string SourceCodeOutputPath= "";       
+
         public CodeSettingsClass()
         {
 
         }
     }
+
+
+    [Serializable]
+    public class SQLVariablesClass
+    {
+
+        
+        public string InitialTerminator = StaticVariablesClass.InitialTerminator;
+        public string AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
+        public string SingleLineComment = StaticVariablesClass.SingleLineComment;
+        public string CommentStart = StaticVariablesClass.CommentStart;
+        public string CommentEnd = StaticVariablesClass.CommentEnd;
+        public string NewLine = Environment.NewLine;
+        public long SkipForSelect = 1000;
+        public long MaxRowsForSelect = 0;
+
+        public string GetNewLine()
+        {
+            return NewLine; //.Replace("<NewLine>", Environment.NewLine);
+        }
+        public string GetNewLineString()
+        {
+            return NewLine.Replace(Environment.NewLine, "<NewLine>" );
+        }
+        
+        public void SetNewLine(string nline)
+        {
+            NewLine = nline.Replace("<NewLine>",Environment.NewLine);
+        }
+        
+        public SQLVariablesClass()
+        {
+
+        }
+    }
+
+
     public class DatabaseSettingsClass
     {
         public int DefaultPacketSize = 8192;
         public string DefaultUser = "SYSDBA";
         public string DefaultPassword = "masterkey";
+        public int DefaultPort = 3050;
+        public int OpenDatabaseCount = 1;
+
     }
     public class PathSettingsClass
     {
         public string ScriptingPath=string.Empty;
         public string TempPath=string.Empty;
+        public string InfoPath = string.Empty;
+        public string ExportPath = string.Empty;
+        public string SQLExportPath = string.Empty;
+        public string SQLHistoryPath = string.Empty;
         public string DatabasesConfigPath = string.Empty;
         public string DatabaseConfigFile = "DatabaseDefinitions.xml";
     }
@@ -55,7 +101,8 @@ namespace FBXpert.DataClasses
         }
         public AppSettingsClass()
         {
-            CodeSettings = new CodeSettingsClass();
+            //CodeSettings = new CodeSettingsClass();
+            SQLVariables = new SQLVariablesClass();
             DatabaseSettings = new DatabaseSettingsClass();
             PathSettings = new PathSettingsClass();
             BehavierSettings = new BehavierSettingsClass();
@@ -70,15 +117,20 @@ namespace FBXpert.DataClasses
             
 
             this.Stamp = appSettings.Stamp;
-            this.CodeSettings = appSettings.CodeSettings;
+            //this.CodeSettings = appSettings.CodeSettings;
+            this.SQLVariables = appSettings.SQLVariables;   
             this.DatabaseSettings = appSettings.DatabaseSettings;
             this.PathSettings = appSettings.PathSettings;
             this.BehavierSettings = appSettings.BehavierSettings;
 
             this.Path = appSettings.Path;
-            this.PathSettings.ScriptingPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
-            this.PathSettings.TempPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
-            this.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
+            this.PathSettings.ScriptingPath         = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
+            this.PathSettings.TempPath              = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
+            this.PathSettings.DatabasesConfigPath   = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
+            this.PathSettings.SQLExportPath         = ApplicationPathClass.GetFullPath(appSettings.PathSettings.SQLExportPath);
+            this.PathSettings.InfoPath              = ApplicationPathClass.GetFullPath(appSettings.PathSettings.InfoPath);
+            this.PathSettings.SQLHistoryPath        = ApplicationPathClass.GetFullPath(appSettings.PathSettings.SQLHistoryPath);
+            this.PathSettings.ExportPath            = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ExportPath);
 
 
 
@@ -97,27 +149,28 @@ namespace FBXpert.DataClasses
             AppSettingsClass appsetting = new AppSettingsClass();
 
             appsetting.PathSettings = this.PathSettings;
-            appsetting.CodeSettings = this.CodeSettings;
+            //appsetting.CodeSettings = this.CodeSettings;
             appsetting.DatabaseSettings = this.DatabaseSettings;
             appsetting.BehavierSettings = this.BehavierSettings;
 
             appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetPathCode(this.PathSettings.DatabasesConfigPath);
-            appsetting.PathSettings.TempPath = ApplicationPathClass.GetPathCode(this.PathSettings.TempPath);
-            appsetting.PathSettings.ScriptingPath = ApplicationPathClass.GetPathCode(this.PathSettings.ScriptingPath);
+            appsetting.PathSettings.TempPath            = ApplicationPathClass.GetPathCode(this.PathSettings.TempPath);
+            appsetting.PathSettings.ScriptingPath       = ApplicationPathClass.GetPathCode(this.PathSettings.ScriptingPath);
+            appsetting.PathSettings.SQLHistoryPath      = ApplicationPathClass.GetPathCode(this.PathSettings.SQLHistoryPath);
+            appsetting.PathSettings.InfoPath            = ApplicationPathClass.GetPathCode(this.PathSettings.InfoPath);
+            appsetting.PathSettings.SQLExportPath       = ApplicationPathClass.GetPathCode(this.PathSettings.SQLExportPath);
+            appsetting.PathSettings.ExportPath          = ApplicationPathClass.GetPathCode(this.PathSettings.ExportPath);
             appsetting.Path = this.Path;
             appsetting.Stamp = DateTime.Now;
-            /*
-            var appsetting = instance.MemberwiseClone() as AppSettingsClass;
-            appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetPathCode(instance.PathSettings.DatabasesConfigPath);
-            appsetting.PathSettings.TempPath = ApplicationPathClass.GetPathCode(instance.PathSettings.TempPath);
-            appsetting.PathSettings.ScriptingPath = ApplicationPathClass.GetPathCode(instance.PathSettings.ScriptingPath);
-            */
+            
             string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
             File.WriteAllText(appsetting.Path, jsonText);
         }
+        
 
         public DateTime Stamp;
-        public CodeSettingsClass CodeSettings;
+        //public CodeSettingsClass CodeSettings;
+        public SQLVariablesClass SQLVariables;
         public DatabaseSettingsClass DatabaseSettings;
         public PathSettingsClass PathSettings;
         public BehavierSettingsClass BehavierSettings;

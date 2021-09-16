@@ -741,7 +741,7 @@ namespace FBExpert
         private void ExecueteSQL()
         {           
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
-            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             //_sql.ScriptNotify.Register4Info(InfoRaised);
             _sql.ScriptNotify.Register4Error(ErrorRaised);
 

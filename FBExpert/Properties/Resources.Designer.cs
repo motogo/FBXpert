@@ -1503,6 +1503,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap preferences_system_blue_x24 {
+            get {
+                object obj = ResourceManager.GetObject("preferences_system_blue_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap preferences_system_x24 {
             get {
                 object obj = ResourceManager.GetObject("preferences_system_x24", resourceCulture);

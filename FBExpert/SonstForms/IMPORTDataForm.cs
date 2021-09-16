@@ -203,6 +203,7 @@ namespace FBExpert
 
         private void selFields_ItemCheckChanged(object sender, CheckItemEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             var itm = selFields.ItemDatas[e.RowIndex] as ItemDataClass;
             var tc = itm.Object as TableFieldClass;
             tc.State = itm.Check;

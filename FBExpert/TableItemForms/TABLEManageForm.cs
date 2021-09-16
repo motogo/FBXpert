@@ -100,7 +100,7 @@ namespace FBExpert
 
             _dbReg = drc;
             _actTables = actTables;
-            txtMaxRows.Text = _dbReg.MaxRowsForSelect.ToString();
+            txtMaxRows.Text = AppSettingsClass.Instance.SQLVariables.MaxRowsForSelect.ToString();
             this.GetDataWorker.WorkerReportsProgress = true;
             this.GetDataWorker.WorkerSupportsCancellation = true;
             this.GetDataWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwGetData_DoWork);
@@ -664,8 +664,8 @@ namespace FBExpert
            _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
            _dataConnection.Open();
            
-           long cnt = _dbReg.SkipForSelect;
-           long sk = _dbReg.SkipForSelect;
+           long cnt = AppSettingsClass.Instance.SQLVariables.SkipForSelect;
+           long sk = AppSettingsClass.Instance.SQLVariables.SkipForSelect;
            if ((maxRows > 0) && (cnt > maxRows))
            {
                cnt = maxRows;
@@ -1545,7 +1545,7 @@ namespace FBExpert
            sfbTableData.SelectFilter();
         }
 
-        private void spezialfilterBox1_CbCheckedChanged(object sender, EventArgs e)
+        private void spezialfilterBox1_CheckedChanged(object sender, EventArgs e)
         {
             _cmd = MakeFieldsCmd();
             bsTableContent.DataMember = null;          

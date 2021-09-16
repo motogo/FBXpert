@@ -292,7 +292,7 @@ namespace FBXpert
         private void ExecueteSQL()
         {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(DBReg);
-            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, DBReg.NewLine, DBReg.CommentStart, DBReg.CommentEnd, DBReg.SingleLineComment, "SCRIPT");
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             //_sql.ScriptNotify.Register4Info(InfoRaised);
             _sql.ScriptNotify.Register4Error(ErrorRaised);
 

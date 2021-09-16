@@ -444,4 +444,7 @@
   <data name="SAVE_TRACKING" xml:space="preserve">
     <value>Save tracking</value>
   </data>
+  <data name="SELECT_DATABASE_FOR_NEW" xml:space="preserve">
+    <value>Neue Datenbank</value>
+  </data>
 </root>

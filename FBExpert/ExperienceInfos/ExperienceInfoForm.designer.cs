@@ -49,7 +49,7 @@ namespace SQLView
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteExperienceInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtExperienceInfo = new System.Windows.Forms.TextBox();
+            this.txtExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
             this.gbExperienceInfoKey = new System.Windows.Forms.GroupBox();
             this.hsUpdateExperienceInfo = new SeControlsLib.HotSpot();
             this.hsDeleteExperienceInfo = new SeControlsLib.HotSpot();
@@ -68,6 +68,7 @@ namespace SQLView
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).BeginInit();
             this.cmdExperienceInfo.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExperienceInfo)).BeginInit();
             this.gbExperienceInfoKey.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +94,7 @@ namespace SQLView
             this.gbDatabase.Size = new System.Drawing.Size(606, 47);
             this.gbDatabase.TabIndex = 29;
             this.gbDatabase.TabStop = false;
-            this.gbDatabase.Text = "Database";
+            this.gbDatabase.Text = "Info Database File";
             // 
             // txtDatabase
             // 
@@ -102,7 +103,6 @@ namespace SQLView
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(555, 20);
             this.txtDatabase.TabIndex = 1;
-            this.txtDatabase.TextChanged += new System.EventHandler(this.txtDatabase_TextChanged);
             // 
             // hsLoadDatabasePath
             // 
@@ -296,14 +296,40 @@ namespace SQLView
             // 
             // txtExperienceInfo
             // 
-            this.txtExperienceInfo.BackColor = System.Drawing.SystemColors.Info;
+            this.txtExperienceInfo.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtExperienceInfo.AutoIndentCharsPatterns = "";
+            this.txtExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtExperienceInfo.BackBrush = null;
+            this.txtExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtExperienceInfo.CharHeight = 14;
+            this.txtExperienceInfo.CharWidth = 8;
+            this.txtExperienceInfo.CommentPrefix = "--";
+            this.txtExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExperienceInfo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExperienceInfo.IsReplaceMode = false;
+            this.txtExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
+            this.txtExperienceInfo.LeftBracket = '(';
             this.txtExperienceInfo.Location = new System.Drawing.Point(427, 0);
-            this.txtExperienceInfo.Multiline = true;
             this.txtExperienceInfo.Name = "txtExperienceInfo";
+            this.txtExperienceInfo.Paddings = new System.Windows.Forms.Padding(0);
+            this.txtExperienceInfo.RightBracket = ')';
+            this.txtExperienceInfo.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtExperienceInfo.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtExperienceInfo.ServiceColors")));
             this.txtExperienceInfo.Size = new System.Drawing.Size(1157, 103);
-            this.txtExperienceInfo.TabIndex = 38;
+            this.txtExperienceInfo.TabIndex = 41;
+            this.txtExperienceInfo.Zoom = 100;
+            this.txtExperienceInfo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtExperienceInfo_KeyDown);
             // 
             // gbExperienceInfoKey
             // 
@@ -642,7 +668,7 @@ namespace SQLView
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).EndInit();
             this.cmdExperienceInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExperienceInfo)).EndInit();
             this.gbExperienceInfoKey.ResumeLayout(false);
             this.gbExperienceInfoKey.PerformLayout();
             this.ResumeLayout(false);
@@ -664,7 +690,6 @@ namespace SQLView
         private SeControlsLib.HotSpot hsRefreshExperienceInfo;
         private SeControlsLib.HotSpot hsInsertExperienceInfo;
         private DataGridView dgvExperienceInfo;
-        private TextBox txtExperienceInfo;
         private TextBox txtExperienceKeyCode;
         private GroupBox gbExperienceInfoKey;
         private SeControlsLib.HotSpot hsDeleteExperienceInfo;
@@ -674,5 +699,6 @@ namespace SQLView
         private ToolStripMenuItem tsmiDeleteExperienceInfo;
         private SeControlsLib.HotSpot hsUpdateExperienceInfo;
         private OpenFileDialog openFileDialog1;
+        private FastColoredTextBoxNS.FastColoredTextBox txtExperienceInfo;
     }
 }

@@ -35,8 +35,8 @@ namespace SQLView
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLViewForm1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_upper = new System.Windows.Forms.Panel();
             this.hsLifeTime = new SeControlsLib.HotSpot();
             this.gbDatabase = new System.Windows.Forms.GroupBox();
@@ -217,7 +217,7 @@ namespace SQLView
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteExperienceInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtExperienceInfo = new System.Windows.Forms.TextBox();
+            this.txtExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
             this.gbExperienceInfoKey = new System.Windows.Forms.GroupBox();
             this.hsUpdateExperienceInfo = new SeControlsLib.HotSpot();
             this.hsDeleteExperienceInfo = new SeControlsLib.HotSpot();
@@ -300,6 +300,7 @@ namespace SQLView
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).BeginInit();
             this.cmdExperienceInfo.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExperienceInfo)).BeginInit();
             this.gbExperienceInfoKey.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1229,21 +1230,21 @@ namespace SQLView
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.DataSource = this.bsResults;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
             this.dgvResults.Location = new System.Drawing.Point(3, 50);
@@ -3540,14 +3541,41 @@ namespace SQLView
             // 
             // txtExperienceInfo
             // 
-            this.txtExperienceInfo.BackColor = System.Drawing.SystemColors.Info;
+            this.txtExperienceInfo.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtExperienceInfo.AutoIndentCharsPatterns = "";
+            this.txtExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtExperienceInfo.BackBrush = null;
+            this.txtExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtExperienceInfo.CharHeight = 14;
+            this.txtExperienceInfo.CharWidth = 8;
+            this.txtExperienceInfo.CommentPrefix = "--";
+            this.txtExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExperienceInfo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExperienceInfo.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.txtExperienceInfo.IsReplaceMode = false;
+            this.txtExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
+            this.txtExperienceInfo.LeftBracket = '(';
             this.txtExperienceInfo.Location = new System.Drawing.Point(427, 0);
-            this.txtExperienceInfo.Multiline = true;
             this.txtExperienceInfo.Name = "txtExperienceInfo";
+            this.txtExperienceInfo.Paddings = new System.Windows.Forms.Padding(0);
+            this.txtExperienceInfo.RightBracket = ')';
+            this.txtExperienceInfo.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtExperienceInfo.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtExperienceInfo.ServiceColors")));
             this.txtExperienceInfo.Size = new System.Drawing.Size(1157, 103);
-            this.txtExperienceInfo.TabIndex = 38;
+            this.txtExperienceInfo.TabIndex = 42;
+            this.txtExperienceInfo.Zoom = 100;
+            this.txtExperienceInfo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtExperienceInfo_KeyDown);
             // 
             // gbExperienceInfoKey
             // 
@@ -3980,7 +4008,7 @@ namespace SQLView
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).EndInit();
             this.cmdExperienceInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExperienceInfo)).EndInit();
             this.gbExperienceInfoKey.ResumeLayout(false);
             this.gbExperienceInfoKey.PerformLayout();
             this.ResumeLayout(false);
@@ -4175,7 +4203,6 @@ namespace SQLView
         private SeControlsLib.HotSpot hsRefreshExperienceInfo;
         private SeControlsLib.HotSpot hsInsertExperienceInfo;
         private DataGridView dgvExperienceInfo;
-        private TextBox txtExperienceInfo;
         private TextBox txtExperienceKeyCode;
         private GroupBox gbExperienceInfoKey;
         private SeControlsLib.HotSpot hsDeleteExperienceInfo;
@@ -4184,5 +4211,6 @@ namespace SQLView
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem tsmiDeleteExperienceInfo;
         private SeControlsLib.HotSpot hsUpdateExperienceInfo;
+        private FastColoredTextBoxNS.FastColoredTextBox txtExperienceInfo;
     }
 }

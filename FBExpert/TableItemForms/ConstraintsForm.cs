@@ -377,7 +377,7 @@ namespace FBXpert
         private void Create()
         {                                   
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
-            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, _dbReg.NewLine, _dbReg.CommentStart, _dbReg.CommentEnd, _dbReg.SingleLineComment, "SCRIPT");
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr,AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             var riList =_sql.ExecuteCommands(fctSQL.Lines); 
             
             var riFailure = riList.Find(x=>x.commandDone == false);                                    

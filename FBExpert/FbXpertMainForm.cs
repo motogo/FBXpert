@@ -287,7 +287,7 @@ namespace FBXpert
                 _dbe.Enabled = false;
                 _dbe.MakeDatabaseTree(false);
                 int n = DatabaseDefinitions.Instance.CountToOpen();
-                if(n > DatabaseDefinitions.Instance.OpenDatabaseCount)
+                if(n > AppSettingsClass.Instance.DatabaseSettings.OpenDatabaseCount)
                 { 
                     object[] p = { n, Environment.NewLine };
                     if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "OpenDatabases", "DoYouWantOpenDatabases", FormStartPosition.CenterScreen,
