@@ -179,7 +179,7 @@ namespace SQLView
         {
             get
             {
-                return $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db";
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db";
             }
         }
 
@@ -553,7 +553,7 @@ namespace SQLView
         {
             try
             {
-                sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{Application.StartupPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
+                sh = new SQLHistoryClass(_dbRegOrg.Alias, $@"{ApplicationPathClass.Instance.ApplicationPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db");
                 sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1, false);
             }

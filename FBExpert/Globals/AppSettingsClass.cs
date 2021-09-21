@@ -124,13 +124,13 @@ namespace FBXpert.DataClasses
             this.BehavierSettings = appSettings.BehavierSettings;
 
             this.Path = appSettings.Path;
-            this.PathSettings.ScriptingPath         = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ScriptingPath);
-            this.PathSettings.TempPath              = ApplicationPathClass.GetFullPath(appSettings.PathSettings.TempPath);
-            this.PathSettings.DatabasesConfigPath   = ApplicationPathClass.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
-            this.PathSettings.SQLExportPath         = ApplicationPathClass.GetFullPath(appSettings.PathSettings.SQLExportPath);
-            this.PathSettings.InfoPath              = ApplicationPathClass.GetFullPath(appSettings.PathSettings.InfoPath);
-            this.PathSettings.SQLHistoryPath        = ApplicationPathClass.GetFullPath(appSettings.PathSettings.SQLHistoryPath);
-            this.PathSettings.ExportPath            = ApplicationPathClass.GetFullPath(appSettings.PathSettings.ExportPath);
+            this.PathSettings.ScriptingPath         = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ScriptingPath);
+            this.PathSettings.TempPath              = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.TempPath);
+            this.PathSettings.DatabasesConfigPath   = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
+            this.PathSettings.SQLExportPath         = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLExportPath);
+            this.PathSettings.InfoPath              = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.InfoPath);
+            this.PathSettings.SQLHistoryPath        = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLHistoryPath);
+            this.PathSettings.ExportPath            = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ExportPath);
 
 
 
@@ -153,13 +153,13 @@ namespace FBXpert.DataClasses
             appsetting.DatabaseSettings = this.DatabaseSettings;
             appsetting.BehavierSettings = this.BehavierSettings;
 
-            appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.GetPathCode(this.PathSettings.DatabasesConfigPath);
-            appsetting.PathSettings.TempPath            = ApplicationPathClass.GetPathCode(this.PathSettings.TempPath);
-            appsetting.PathSettings.ScriptingPath       = ApplicationPathClass.GetPathCode(this.PathSettings.ScriptingPath);
-            appsetting.PathSettings.SQLHistoryPath      = ApplicationPathClass.GetPathCode(this.PathSettings.SQLHistoryPath);
-            appsetting.PathSettings.InfoPath            = ApplicationPathClass.GetPathCode(this.PathSettings.InfoPath);
-            appsetting.PathSettings.SQLExportPath       = ApplicationPathClass.GetPathCode(this.PathSettings.SQLExportPath);
-            appsetting.PathSettings.ExportPath          = ApplicationPathClass.GetPathCode(this.PathSettings.ExportPath);
+            appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.DatabasesConfigPath);
+            appsetting.PathSettings.TempPath            = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.TempPath);
+            appsetting.PathSettings.ScriptingPath       = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ScriptingPath);
+            appsetting.PathSettings.SQLHistoryPath      = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLHistoryPath);
+            appsetting.PathSettings.InfoPath            = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.InfoPath);
+            appsetting.PathSettings.SQLExportPath       = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLExportPath);
+            appsetting.PathSettings.ExportPath          = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ExportPath);
             appsetting.Path = this.Path;
             appsetting.Stamp = DateTime.Now;
             

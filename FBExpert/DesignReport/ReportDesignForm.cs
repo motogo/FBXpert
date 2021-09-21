@@ -75,7 +75,7 @@ namespace FBXpert.SonstForms
 
         private void LoadUserDesign()
         {
-            _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+            _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
             _ss.StorageName = Name;
             _ss.DestroyWhenDisposed = false;
             try
@@ -120,7 +120,7 @@ namespace FBXpert.SonstForms
                     ReportSqlCommands rcmd = lvi.Tag as ReportSqlCommands;
                     _mw.SqlCommands.Add(rcmd);
                 }
-                _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+                _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
                 _ss.StorageName = Name;
                 _ss.AddOrUpdate(Name, _mw);                
             }

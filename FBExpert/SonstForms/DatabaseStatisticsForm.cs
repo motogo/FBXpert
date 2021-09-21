@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using FBXpert.Globals;
 using System.Diagnostics;
 using System.IO;
+using Initialization;
 
 namespace FBXpert
 {
@@ -126,7 +127,7 @@ namespace FBXpert
         {
             fctTableStatistics.Clear();
             string args = $"-u SYSDBA -p masterkey -r -d {dbReg.DatabasePath}";
-            ProcessStartInfo psi = new ProcessStartInfo($@"{Application.StartupPath}\FB302\Firebird\gstat.exe",args);            
+            ProcessStartInfo psi = new ProcessStartInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\FB302\Firebird\gstat.exe",args);            
             psi.RedirectStandardOutput = true;
             psi.UseShellExecute = false;
             

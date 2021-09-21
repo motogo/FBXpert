@@ -10,6 +10,7 @@ using FBXpert.SQLStatements;
 using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
+using Initialization;
 using MessageFormLibrary;
 using SESpaltenEditor;
 using StateClasses;
@@ -1401,7 +1402,7 @@ namespace FBExpert
         private void TableStatistic()
         {
             fctTableStatistics.Clear();
-            string fn = $@"{Application.StartupPath}\FB{_dbReg.Version}\Firebird\gstat.exe";
+            string fn = $@"{ApplicationPathClass.Instance.ApplicationPath}\FB{_dbReg.Version}\Firebird\gstat.exe";
             if(File.Exists(fn))
             {
                 string args = $"-u {_dbReg.User} -p {_dbReg.Password} -d {_dbReg.DatabasePath} -r -t {_tableObject.Name.ToUpper()}";

@@ -114,7 +114,7 @@ namespace FBExpert
 
         private void LoadUserDesign()
         {
-            _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+            _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
             _ss.StorageName = SharedName;
             _ss.DestroyWhenDisposed = false;
             try
@@ -137,7 +137,7 @@ namespace FBExpert
                 try
                 {
                     _mw.cbEventName = cbEvents.Text;
-                    _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+                    _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
                     _ss.StorageName = SharedName;
                     _ss.AddOrUpdate(SharedName, _mw);
                 }

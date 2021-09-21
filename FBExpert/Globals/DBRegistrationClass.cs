@@ -1,5 +1,6 @@
 ﻿using DBBasicClassLibrary;
 using FBXpert.DataClasses;
+using Initialization;
 using System;
 using System.Windows.Forms;
 
@@ -31,7 +32,7 @@ namespace FBXpert.Globals
        */ 
         public eRegState State = eRegState.none;
         public eDBVersion Version = eDBVersion.FB3_32;
-        private string _firebirdBinaryPath = $@"{Application.StartupPath}\FB302\Firebird\";
+        private string _firebirdBinaryPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\FB302\Firebird\";
         
         public CodeSettingsClass CodeSettings;        
         private ErrorCodes ErrorCodes = null;

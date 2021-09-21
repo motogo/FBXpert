@@ -106,7 +106,7 @@ namespace FBXpert
                 _actRegNode.Tag = dbReg;
                 if(dbReg.Active) ReadDatabaseMetadata(_actRegNode);
             }
-            else if (k.Key.ToString() == "SHOW_DATABASE_STATISTICS")
+            else if (k.Key.ToString() == StaticVariablesClass.ShowDatabaseStatistics)
             {
                 if (!(k.Data is DBRegistrationClass dbReg)) return;
                 var hif = new DatabaseStatisticsForm(FbXpertMainForm.Instance(), dbReg);

@@ -38,9 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BasicClassLibrary, Version=2020.11.20.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BasicClassLibrary, Version=2.21.3.31, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\BasicClassLibrary.dll</HintPath>
+      <HintPath>..\..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\Library452\BasicClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="BasicFormClassLibrary, Version=2020.12.18.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

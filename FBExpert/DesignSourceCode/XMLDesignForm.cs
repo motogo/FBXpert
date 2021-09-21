@@ -6,6 +6,7 @@ using FBExpert;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using Initialization;
 using MessageFormLibrary;
 using SEListBox;
 using System;
@@ -95,17 +96,17 @@ namespace FBXpert.SonstForms
             _ddc.Views  = StaticTreeClass.Instance().GetViewObjects(_dbReg);
             StaticTreeClass.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
             _ddc.Database = _dbReg;
-            var fs = new FileStream(Application.StartupPath + "\\temp\\tmp.xml", FileMode.Create);
+            var fs = new FileStream(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml", FileMode.Create);
             var serializer = new ConfigurationContainer().Create();
             var xml = serializer.Serialize(fs,_ddc);
 
            
 
 //            var serializer = new XmlSerializer(typeof(DatabaseDesignClass));
-          //  var fs = new FileStream(Application.StartupPath + "\\temp\\tmp.xml", FileMode.Create);
-            //serializer.Serialize(_ddc,Application.StartupPath + "\\temp\\tmp.xml");
+          //  var fs = new FileStream(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml", FileMode.Create);
+            //serializer.Serialize(_ddc,ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml");
             fs.Close();
-            xmlEditStruktur.LoadXmlFromFile(Application.StartupPath + "\\temp\\tmp.xml");
+            xmlEditStruktur.LoadXmlFromFile(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml");
         }
         /*
         public void RefreshXml2()

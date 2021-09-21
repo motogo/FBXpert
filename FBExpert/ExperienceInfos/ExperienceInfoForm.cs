@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using MessageFormLibrary;
 using FBXpert;
+using Initialization;
 
 namespace SQLView
 {
@@ -273,7 +274,7 @@ namespace SQLView
        
         private void hsLoadDatabasePath_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = $@"{Application.StartupPath}\Info\";
+            openFileDialog1.InitialDirectory = $@"{ApplicationPathClass.Instance.ApplicationPath}\Info\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 

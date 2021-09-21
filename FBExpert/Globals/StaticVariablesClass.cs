@@ -1,5 +1,6 @@
 ﻿using BasicClassLibrary;
 using FBXpert.DataClasses;
+using Initialization;
 using System.Text;
 using System.Windows.Forms;
 
@@ -387,11 +388,11 @@ namespace FBXpert.Globals
         public const string DependenciesFromProceduresKeyStr = "DEPENDENCYFROMPROCEDURES";
         public const string DependenciesFromProceduresKeyGroupStr = "DEPENDENCYFROMPROCEDURES_GROUP";
 
-        public static readonly string ExportPath            = $@"{Application.StartupPath}\exports";
-        public static readonly string ScriptPath            = $@"{Application.StartupPath}\scripts";
-        public static readonly string ReportPath            = $@"{Application.StartupPath}\reports";
-        public static readonly string SQLExportPath         = $@"{Application.StartupPath}\exports\\sql";
-        public static readonly string ExperienceInfoPath    = $@"{Application.StartupPath}\info";
+        public static readonly string ExportPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\exports";
+        public static readonly string ScriptPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\scripts";
+        public static readonly string ReportPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\reports";
+        public static readonly string SQLExportPath         = $@"{ApplicationPathClass.Instance.ApplicationPath}\exports\\sql";
+        public static readonly string ExperienceInfoPath    = $@"{ApplicationPathClass.Instance.ApplicationPath}\info";
         public static readonly string ExperienceInfoFile    = "InfoExpierenceData.db";
         public static readonly string InitialTerminator = ";";
         public static readonly string AlternativeTerminator = "~";
@@ -431,7 +432,10 @@ namespace FBXpert.Globals
         public static readonly string CommandDone = "COMMAND_DONE";
         public static readonly string CommandPrepared = "COMMAND_PREPARED";
         public static readonly string AddCommandLine = "ADD_COMMAND_LINE";
-        
+        public static readonly string ClearNotifies = "CLEAR_NOTIFIES";
+        public static readonly string ShowDatabaseStatistics = "SHOW_DATABASE_STATISTICS";
+
+
 
         public static string[] DefaultVariables = new string[]
             {"CURRENT_USER",

@@ -58,7 +58,7 @@ namespace FBXDesigns
 
         private void LoadUserDesign()
         {
-            _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+            _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
             _ss.StorageName = Name;
             _ss.DestroyWhenDisposed = false;
             try
@@ -81,7 +81,7 @@ namespace FBXDesigns
             if ((_mw != null) && (_ss != null))
             {                
                 _mw.XmlDataFileName = xmlEditDefinition.originalXmlFile;                               
-                _ss.SharedFolder = ApplicationPathClass.GetFullPath(Application.UserAppDataPath);
+                _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
                 _ss.StorageName = Name;
                 _ss.AddOrUpdate(Name, _mw);                
             }

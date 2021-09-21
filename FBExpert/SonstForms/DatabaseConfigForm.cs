@@ -6,6 +6,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FormInterfaces;
+using Initialization;
 using MessageFormLibrary;
 using StateClasses;
 using System;
@@ -304,7 +305,7 @@ namespace FBExpert
             var dc = new DefaultConnectionClass();
             _dbReg = new DBRegistrationClass();
 
-            dc.DatabasePath                 = $@"{Application.StartupPath}\temp\new_database.fdb";
+            dc.DatabasePath                 = $@"{ApplicationPathClass.Instance.ApplicationPath}\temp\new_database.fdb";
             txtLocation.Text                = dc.DatabasePath;            
             txtServer.Text                  = dc.Server;
             cbCharSet.SelectedIndex         = cbCharSet.FindString(dc.CharSet);
@@ -328,7 +329,7 @@ namespace FBExpert
         private void DatabaseConfigForm_Load(object sender, EventArgs e)
         {  
             oldserver = _dbReg.Server;
-            //fbdPath.SelectedPath = $@"{Application.StartupPath}\{_dbReg.Version}\fbclient.dll";
+            //fbdPath.SelectedPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\{_dbReg.Version}\fbclient.dll";
             
             FormDesign.SetFormLeft(this);
             LanguageChanged();                
@@ -608,7 +609,7 @@ namespace FBExpert
             openFileDialog1.DefaultExt = "*.dll";
             openFileDialog1.Filter = "DLL|*.dll|All|*.*";
             openFileDialog1.Title = LanguageClass.Instance.GetString("CHOOSE_CLIENT_LIBRARY");
-            openFileDialog1.InitialDirectory = Application.StartupPath;
+            openFileDialog1.InitialDirectory = ApplicationPathClass.Instance.ApplicationPath;
             if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
             FileInfo fi = new FileInfo(openFileDialog1.FileName);
             txtClientLibrary.Text = fi.FullName;
@@ -758,12 +759,12 @@ namespace FBExpert
             {
                 clfolder = $@"FB25\X32";
             }
-            FileInfo fi = new FileInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}\fbclient.dll");
-            DirectoryInfo di = new DirectoryInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}");
-            FileInfo fi_isql = new FileInfo($@"{Application.StartupPath}\ClientLibraries\{clfolder}\isql.exe");
-            txtClientLibrary.Text = $@"{Application.StartupPath}\ClientLibraries\{clfolder}\fbclient.dll";
+            FileInfo fi = new FileInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\ClientLibraries\{clfolder}\fbclient.dll");
+            DirectoryInfo di = new DirectoryInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\ClientLibraries\{clfolder}");
+            FileInfo fi_isql = new FileInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\ClientLibraries\{clfolder}\isql.exe");
+            txtClientLibrary.Text = $@"{ApplicationPathClass.Instance.ApplicationPath}\ClientLibraries\{clfolder}\fbclient.dll";
             txtClientLibrary.BackColor = (fi.Exists) ? SystemColors.Info : Color.Red;
-            txtFirebirdBinaryPath.Text = $@"{Application.StartupPath}\ClientLibraries\{clfolder}";
+            txtFirebirdBinaryPath.Text = $@"{ApplicationPathClass.Instance.ApplicationPath}\ClientLibraries\{clfolder}";
             txtFirebirdBinaryPath.BackColor = (di.Exists) ? SystemColors.Info : Color.Red;
             if (di.Exists)
             {

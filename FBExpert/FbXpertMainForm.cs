@@ -7,6 +7,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
+using Initialization;
 using MessageFormLibrary;
 using SELanguage;
 using StateClasses;
@@ -46,7 +47,7 @@ namespace FBXpert
             if (_instance != null) return (_instance);
             lock (_lock_this)
             {
-                _instance = new FbXpertMainForm($@"{Application.StartupPath}\config\AppSettings.json");        
+                _instance = new FbXpertMainForm($@"{ApplicationPathClass.Instance.ApplicationPath}\config\AppSettings.json");        
             }
             */
             return (_instance);
@@ -57,7 +58,7 @@ namespace FBXpert
             if (_instance != null) return (_instance);
             lock (_lock_this)
             {                
-                _instance = (args.Length > 0) ? new FbXpertMainForm(args[0]) : new FbXpertMainForm($@"{Application.StartupPath}\config\AppSettings.json");             
+                _instance = (args.Length > 0) ? new FbXpertMainForm(args[0]) : new FbXpertMainForm($@"{ApplicationPathClass.Instance.ApplicationPath}\config\AppSettings.json");             
             }
             
             return (_instance);
@@ -98,29 +99,22 @@ namespace FBXpert
         void ErrorRaised(object sender, MessageEventArgs k)
         {
             _errors++;            
-            tsmiNotifications.Text = LanguageClass.Instance.GetString("NOTIFICATIONS") + @" (" +(_errors+_notifications).ToString()+@")";
-            tsmiErrors.Text = LanguageClass.Instance.GetString("ERRORS")+ @" (" + (_errors).ToString() + @")";
+            tsmiNotifications.Text  = $@"{LanguageClass.Instance.GetString("NOTIFICATIONS")} ({_errors+_notifications})";
+            tsmiErrors.Text         = $@"{LanguageClass.Instance.GetString("ERRORS")} ({_errors})";
         }
 
         void InfoRaised(object sender, MessageEventArgs k)
-        {            
-            if (k.Key.ToString() == "CLEAR_NOTIFIES")
-            {
-                _notifications = 0;
-            }
-            else
-            {
-                _notifications++;
-            }
-            tsmiNotifications.Text = LanguageClass.Instance.GetString("NOTIFICATIONS") + @" (" + (_errors + _notifications).ToString() + @")";
-            tsmiNotes.Text = LanguageClass.Instance.GetString("NOTES") + @" (" + (_notifications).ToString() + @")";
+        {
+            _notifications = (k.Key.ToString() == StaticVariablesClass.ClearNotifies) ? 0 : _notifications++;
+            tsmiNotifications.Text  = $@"{LanguageClass.Instance.GetString("NOTIFICATIONS")} ({_errors + _notifications})";
+            tsmiNotes.Text          = $@"{LanguageClass.Instance.GetString("NOTES")} ({_notifications})";
         }
         
         public override void FormLoadFirst()
         {            
             base.FormLoadFirst();
             ClearDevelopDesign(DevelopDesign);
-            AppDesign = SetDesign(AppDesign);                  
+            AppDesign = SetDesign(AppDesign);
         }
 
         public override void FormLoadAgain()
@@ -150,17 +144,17 @@ namespace FBXpert
                 {
                     if(e.ClickedItem.Text.EndsWith(frm.Text))
                     {            
-                        frm.WindowState = FormWindowState.Normal;            
+                        frm.WindowState = FormWindowState.Normal;
                     }
                 }
             }
             
             if(e.ClickedItem.Text.EndsWith("Copyright"))
             {
-                var cp = CopyrightForm.Instance(this);               
-                cp.WindowState = FormWindowState.Normal;                                                             
+                var cp = CopyrightForm.Instance(this);
+                cp.WindowState = FormWindowState.Normal;
                 cp.Show();
-                cp.Select();               
+                cp.Select();
                 cp.Left = FBXInfo.Instance.Left - 100;
                 cp.Top = FBXInfo.Instance.Top-100;
             }
@@ -260,7 +254,7 @@ namespace FBXpert
         {
             //   LanguageClass.Instance.InitEmbedded(this,"FBXpert.Languages","Language","de");
             ProgramAttributes.Instance.Init(System.Reflection.Assembly.GetExecutingAssembly());
-            LanguageClass.Instance.InitFile(this.GetType().Assembly, $@"{Application.StartupPath}\Languages\","Language",".","de");
+            LanguageClass.Instance.InitFile(this.GetType().Assembly, $@"{ApplicationPathClass.Instance.ApplicationPath}\Languages\","Language",".","de");
             LanguageClass.Instance.OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
             LanguageClass.Instance.ChangeLanguage(LanguageConsts.Deutsch);
             string test = LanguageClass.Instance.GetString("test");
@@ -328,7 +322,7 @@ namespace FBXpert
         private void FBXpertMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {       
             FormOnClosing = true;
-            DatabaseDefinitions.Instance.SerializeCurrent("Definition data changed");    
+            DatabaseDefinitions.Instance.SerializeCurrent("Definition data changed");
             LanguageClass.Instance.UnRegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
             Application.Exit();
         }
@@ -338,10 +332,6 @@ namespace FBXpert
             TestForm tf = new TestForm();
             tf.MdiParent = this;
             tf.Show();
-            
-            
-
-            //SEMessageBox.ShowMDIDialog(Instance(), "Error while opening database", "test", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);            
         }
     }
 }
