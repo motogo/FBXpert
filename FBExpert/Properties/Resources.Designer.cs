@@ -223,6 +223,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bin_x241 {
+            get {
+                object obj = ResourceManager.GetObject("bin_x241", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap calendar01_22x {
             get {
                 object obj = ResourceManager.GetObject("calendar01_22x", resourceCulture);
@@ -476,6 +486,26 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap database_gr_24x1 {
             get {
                 object obj = ResourceManager.GetObject("database_gr_24x1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap database_logon_x24 {
+            get {
+                object obj = ResourceManager.GetObject("database_logon_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap database_logon2_x24 {
+            get {
+                object obj = ResourceManager.GetObject("database_logon2_x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1236,6 +1266,26 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap jp {
             get {
                 object obj = ResourceManager.GetObject("jp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap link_2_x24 {
+            get {
+                object obj = ResourceManager.GetObject("link_2_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap link_x24 {
+            get {
+                object obj = ResourceManager.GetObject("link_x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

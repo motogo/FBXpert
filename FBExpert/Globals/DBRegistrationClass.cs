@@ -60,6 +60,14 @@ namespace FBXpert.Globals
             return isOpen;
         }
 
+        public string AliasAsFileName
+        {
+            get
+            {
+                return Alias.Replace(" ", "_").Trim();
+            }
+        }
+
         public ErrorCodes GetErrorCodes()
         {
             return ErrorCodes;

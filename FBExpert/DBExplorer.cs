@@ -15,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -70,6 +72,62 @@ namespace FBXpert
             DbExlorerNotify.ErrorGranularity = eMessageGranularity.never;
             DbExlorerNotify.Register4Info(NotifyInf_DBExplorer);           
             NotificationsForm.Instance().Show(Left + Width + 16, 64);            
+        }
+
+        public void GetOpenConnections()
+        { 
+            int cnt = 0;
+            foreach(TreeNode tn in treeView1.Nodes)
+            {
+                DBRegistrationClass dbreg = (DBRegistrationClass) tn.Tag;
+                if (dbreg.Active)
+                {
+                    string connectionString = ConnectionStrings.Instance.MakeConnectionString(dbreg);
+                    ConnectionClass cc = new ConnectionClass(connectionString);
+                    
+                    cc.OpenConnection();
+                    var reader = cc.ExecuteQuery("select count(*) from MON$ATTACHMENTS WHERE MON$SYSTEM_FLAG < 1",false);
+                    if (reader != null)
+                    {
+                        if (reader.Read())
+                        {
+                            cnt += reader.GetInt32(0);
+                        }
+                        cc.Close();
+                        tn.Text = $@"{dbreg.Alias} open:{cnt - 1}";
+                    }
+                    else
+                    {
+                        tn.Text = $@"{dbreg.Alias}";
+                    }
+                }
+                else
+                {
+                    tn.Text = $@"{dbreg.Alias}";
+                }
+            }
+        }
+        
+        public string GetOpenConnections(DBRegistrationClass dbreg)
+        {            
+            if (dbreg.Active)
+            {
+                string connectionString = ConnectionStrings.Instance.MakeConnectionString(dbreg);
+                ConnectionClass cc = new ConnectionClass(connectionString);
+
+                cc.OpenConnection();
+                var reader = cc.ExecuteQuery("select count(*) from MON$ATTACHMENTS WHERE MON$SYSTEM_FLAG < 1", false);
+                if (reader != null)
+                {
+                    if (reader.Read())
+                    {
+                        int cnt = reader.GetInt32(0);
+                        cc.Close();
+                        return $@"{dbreg.Alias} open:{cnt - 1}";
+                    }
+                }
+            }
+            return $@"{dbreg.Alias}";
         }
 
         public void SetCaption()
@@ -233,7 +291,7 @@ namespace FBXpert
                 _actRegNode = nd;
                 _actTables.Clear();
                 _actSystemTables.Clear();
-                NotifiesClass.Instance.AddToINFO("Open Database " + dbReg.Alias);
+                NotifiesClass.Instance.AddToINFO($@"Open Database {dbReg.Alias}");
                            
                 var tb = StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);            
                 _actViews = StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
@@ -258,7 +316,6 @@ namespace FBXpert
                     }
                 }
 
-
                 var tbs = StaticTreeClass.Instance().RefreshSystemTables(dbReg, nd);
                 if (tbs != null)
                 {
@@ -276,7 +333,8 @@ namespace FBXpert
 
                 dbReg.Active = true;
                 nd.Tag = dbReg;              
-                SetCmsForDatabase(true);                
+                SetCmsForDatabase(true);
+                nd.Text = GetOpenConnections(dbReg);
             }
             catch (Exception e)
             {
@@ -716,6 +774,7 @@ namespace FBXpert
             var drc = (DBRegistrationClass)tn.Tag;
             drc.Active = false;
             tn.Tag = drc;
+            tn.Text = drc.Alias;
             ConnectionPoolClass.Instance.CloseAllConnections();            
         }
        
@@ -1066,28 +1125,40 @@ namespace FBXpert
 
             if (e.ClickedItem == tsmiClose)
             {
+                cmsDatabase.Close();
                 if (treeView1.SelectedNode == null) return;
                 CloseDatabase(tnReg);
                 DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
-            else if(e.ClickedItem == tsmiCloseAll)
-            {                
+            else if (e.ClickedItem == tsmiCloseAll)
+            {
                 cmsDatabase.Close();
                 foreach (TreeNode nd in treeView1.Nodes)
                 {
                     if (DatabaseDefinitions.Instance.IsRegistration(nd))
-                    {                        
+                    {
                         CloseDatabase(nd);
                     }
                 }
                 DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
+            else if (e.ClickedItem == tsmiReopenDatabase)
+            {
+                cmsDatabase.Close();
+                if (treeView1.SelectedNode == null) return;
+
+                CloseDatabase(tnReg);
+                Thread.Sleep(1000);
+                Application.DoEvents();
+                ReadDatabaseMetadata(tnReg);
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
+            }
             else if (e.ClickedItem == tsmiOpenAll)
-            {                
+            {
                 cmsDatabase.Close();
                 foreach (TreeNode nd in treeView1.Nodes)
-                {                    
-                    if(DatabaseDefinitions.Instance.IsRegistration(nd))
+                {
+                    if (DatabaseDefinitions.Instance.IsRegistration(nd))
                     {
                         Application.DoEvents();
                         ReadDatabaseMetadata(nd);
@@ -1101,111 +1172,123 @@ namespace FBXpert
                 Application.DoEvents();
                 ReadDatabaseMetadata(tnReg);
                 DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
+                
             }
             else if (e.ClickedItem == tsmiStatistics)
             {
-                DbExlorerNotify.Notify.RaiseInfo("DBExplorer", "SHOW_DATABASE_STATISTICS",dbReg);                        
+                DbExlorerNotify.Notify.RaiseInfo("DBExplorer", "SHOW_DATABASE_STATISTICS", dbReg);
             }
             else if (e.ClickedItem == tsmiCreateXMLDesign)
             {
+                cmsDatabase.Close();
                 var xml = new XmlDesignForm(FbXpertMainForm.Instance(), dbReg);
                 xml.Show();
             }
-            else if (e.ClickedItem ==  tsmiReplicationDesigner)
+            else if (e.ClickedItem == tsmiReplicationDesigner)
             {
+                cmsDatabase.Close();
                 var frm = new ReplicationDesignForm(FbXpertMainForm.Instance(), _actTables, dbReg);
                 frm.Show();
             }
             else if (e.ClickedItem == tsmiCompareDatabase)
             {
+                cmsDatabase.Close();
                 var cd = new DatabaseCompareFrom(FbXpertMainForm.Instance(), dbReg);
                 cd.Show();
             }
             else if (e.ClickedItem == tsmiEditDatabaseConfig)
             {
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), dbReg, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eEdit);                             
+                cmsDatabase.Close();
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), dbReg, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eEdit);
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiNewDatabaseConfig)
-            {                
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), null, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eInsert);                
+            {
+                cmsDatabase.Close();
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), null, treeView1, dbReg.Position, EditStateClass.eBearbeiten.eInsert);
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiCloneDatabaseConfiguration)
             {
-                var drc = dbReg.Clone(); 
-                drc.Alias = $@"{drc.Alias}_clone{(DateTime.Now.Ticks/10000)}";
-                                
-                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), drc, treeView1, drc.Position, EditStateClass.eBearbeiten.eInsert);                                
+                cmsDatabase.Close();
+                var drc = dbReg.Clone();
+                drc.Alias = $@"{drc.Alias}_clone{(DateTime.Now.Ticks / 10000)}";
+
+                var cfg = new DatabaseConfigForm(FbXpertMainForm.Instance(), drc, treeView1, drc.Position, EditStateClass.eBearbeiten.eInsert);
                 cfg.Show();
             }
             else if (e.ClickedItem == tsmiSQLScriptExplorer)
             {
+                cmsDatabase.Close();
                 var dbm = new ScriptingForm(dbReg);
                 cmsDatabase.Close();
                 dbm.Show();
             }
             else if (e.ClickedItem == tsmiSQLExplorer)
             {
-                SqlExplorer(dbReg,_actTables);
+                cmsDatabase.Close();
+                SqlExplorer(dbReg, _actTables);
             }
             else if (e.ClickedItem == tsmiExperienceInfos)
             {
+                cmsDatabase.Close();
                 ExperienceInfos(dbReg, _actTables);
             }
             else if (e.ClickedItem == tsmiActiveConnections)
             {
+                cmsDatabase.Close();
                 var dbm = new DBMonitoringForm(FbXpertMainForm.Instance(), dbReg);
                 dbm.Show();
             }
             else if (e.ClickedItem == tsminUserManagement)
             {
+                cmsDatabase.Close();
                 var dbm = new DBUserManagementForm(FbXpertMainForm.Instance(), dbReg);
                 dbm.Show();
             }
             else if (e.ClickedItem == tsmiBackUp)
             {
+                cmsDatabase.Close();
                 var bf = new BackupForm(FbXpertMainForm.Instance(), dbReg);
                 bf.Show();
             }
             else if (e.ClickedItem == tsmiDeleteDatabaseRegistration)
             {
+                cmsDatabase.Close();
                 CloseContextMenuString(sender);
 
                 object[] p = { dbReg.Alias, dbReg.Server, dbReg.DatabasePath, Environment.NewLine };
                 if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DeleteDatabaseRegistration", "DoYouWantDeleteDatabaseRegistration", FormStartPosition.CenterScreen,
                         SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Exclamation, null, p) != SEDialogResult.Yes) return;
-                
+
                 CloseDatabase(treeView1.SelectedNode);
                 treeView1.SelectedNode.Tag = null;
                 treeView1.SelectedNode.Remove();
                 DatabaseDefinitions.Instance.Rebuild(treeView1);
-                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;                
+                DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
             }
             else if (e.ClickedItem == tsmiDatabaseDesigner)
             {
-                Dictionary<string,TableClass> tab = new System.Collections.Generic.Dictionary<string,TableClass>();
-                foreach(var table in _actTables)
+                cmsDatabase.Close();
+                Dictionary<string, TableClass> tab = new System.Collections.Generic.Dictionary<string, TableClass>();
+                foreach (var table in _actTables)
                 {
-                    tab.Add(table.Name,table);
+                    tab.Add(table.Name, table);
                 }
                 var dbd = new DatabaseDesignForm();
                 dbd.SetDatas(dbReg, tab, _actViews);
                 dbd.SetParent(MdiParent);
                 dbd.Show();
-                /*
-                DatabaseDesignForm.Instance.SetDatas(dbReg, tab, _actViews);
-                DatabaseDesignForm.Instance.SetParent(MdiParent);
-                DatabaseDesignForm.Instance.Show();
-                */
             }
             else if (e.ClickedItem == tsmiReportDesigner)
             {
-                var rdf = new ReportDesignForm(FbXpertMainForm.Instance(), dbReg,NotifiesClass.Instance);
+                cmsDatabase.Close();
+                var rdf = new ReportDesignForm(FbXpertMainForm.Instance(), dbReg, NotifiesClass.Instance);
                 rdf.Show();
             }
             else if (e.ClickedItem == tsmiExportData)
             {
+                cmsDatabase.Close();
                 if (string.IsNullOrEmpty(_tnSelected.Text)) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
@@ -1215,6 +1298,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiImportData)
             {
+                cmsDatabase.Close();
                 if (string.IsNullOrEmpty(_tnSelected.Text)) return;
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
@@ -1224,22 +1308,24 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiMoveUp)
             {
-                DatabaseDefinitions.Instance.MoveUp(treeView1);                
+                DatabaseDefinitions.Instance.MoveUp(treeView1);
             }
             else if (e.ClickedItem == tsmiMoveDown)
             {
-                DatabaseDefinitions.Instance.MoveDown(treeView1);                
+                DatabaseDefinitions.Instance.MoveDown(treeView1);
             }
             else if (e.ClickedItem == tsmiIDBBinaries)
             {
-               BinariesForm bf = new BinariesForm(MdiParent, dbReg);
-               bf.Show();            
+                cmsDatabase.Close();
+                BinariesForm bf = new BinariesForm(MdiParent, dbReg);
+                bf.Show();
             }
             else if (e.ClickedItem == tsmiEventsTracker)
             {
-               EventsForm ev = new EventsForm(MdiParent, dbReg);
-               ev.SetAutocompeteObjects(_actTables,_actSystemTables,_actViews);
-               ev.Show();            
+                cmsDatabase.Close();
+                EventsForm ev = new EventsForm(MdiParent, dbReg);
+                ev.SetAutocompeteObjects(_actTables, _actSystemTables, _actViews);
+                ev.Show();
             }
         }
 
@@ -1744,8 +1830,37 @@ namespace FBXpert
             {
                 DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadGenerators);
             }
-            
+           
+
             #endregion refresh item
+        }
+
+
+        public void SearchInViews(TreeNode tnviews)
+        {
+            StringBuilder sb = new StringBuilder();
+            int cnt = 0;
+            foreach (TreeNode tn in tnviews.Nodes)
+            {
+                ViewClass viewObject = (ViewClass)tn.Tag;
+                
+                if(FindInString(txtSearchView.Text, viewObject.CREATE_SQL))
+                {
+                    sb.Append(viewObject.CREATE_SQL);
+                    sb.Append(Environment.NewLine);
+                    sb.Append(Environment.NewLine);
+                    cnt++;
+                }
+            }
+            TextInfoForm hif = new TextInfoForm();
+            hif.SetTitle($@"Searching key:{txtSearchView.Text} in Views, found {cnt}");
+            hif.Append(sb.ToString());
+            hif.Show();
+        }
+
+        public bool FindInString(string key, string content)
+        {
+            return content.ToLower().Contains(key.ToLower());
         }
 
         private void cmsGroup2Items_Clicked(object sender, ToolStripItemClickedEventArgs e)
@@ -2036,6 +2151,7 @@ namespace FBXpert
                 
                 _tnSelected.Remove();
             }
+            
 
             #endregion refresh group
         }
@@ -2244,6 +2360,16 @@ namespace FBXpert
         private void DbExplorerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             AppSettingsClass.Instance.SaveSettings();
+        }
+
+        private void hsGetOpenConnections_Click(object sender, EventArgs e)
+        {
+            GetOpenConnections();
+        }
+
+        private void tsmiSearchInView_Click(object sender, EventArgs e)
+        {
+            SearchInViews(_tnSelected);
         }
     }
 }

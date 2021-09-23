@@ -36,14 +36,7 @@ namespace FBXpert.Globals
                 if (mldarr.Length > 1)
                 {                    
                     int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1], -1);
-                    if (n2 > 10)
-                    {
-                        result = $@"5->{errorstring.Substring(n2 - 5, 10)}";
-                    }
-                    else if (n2 > -1)
-                    {
-                        result = $@"{n2}->{errorstring.Substring(0, n2)}";
-                    }
+                    result = (n2 > 10) ? $@"5->{errorstring.Substring(n2 - 5, 10)}" : $@"{n2}->{errorstring.Substring(0, n2)}";
                 }
             }
             return result;

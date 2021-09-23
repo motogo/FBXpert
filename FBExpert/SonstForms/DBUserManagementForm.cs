@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using BasicForms;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
@@ -7,6 +8,9 @@ using FirebirdSql.Data.FirebirdClient;
 using MessageLibrary.SendMessages;
 using System;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -37,25 +41,19 @@ namespace FBXpert
 
         public void GetConnections()
         {
-            lvConnections.Items.Clear();
-            foreach (ConnectionClass c in ConnectionPoolClass.Instance.Connections)
-            {
-                string[] cn = new string[3];
-                cn[0] = c.ConnName;
-                cn[1] = "open";
-                if(c.ConnectionIsClosed())
-                {
-                    cn[1] = "closed";
-                }
-                cn[2] = "";
-                ListViewItem lvi = new ListViewItem(cn)
-                {
-                    Tag = c
-                };
-                lvConnections.Items.Add(lvi);
-            }
+           
+           
         }
+        public bool DataOK()
+        {
+            int ok = 0;
+            
+            SetDefaultColor();
+            ok += FormularUtilsClass.Instance.MarkTextBoxWhenTextEmpty(txtPassword);
+            ok += FormularUtilsClass.Instance.MarkTextBoxWhenTextEmpty(txtUserName);
 
+            return (ok == 0);
+        }
         public int RefreshUsers()
         {
             GetConnections();
@@ -75,7 +73,7 @@ namespace FBXpert
             }
             catch(Exception ex)
             {
-                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));                      
+                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));
             }
             bsUsers.DataMember = "Table";
             return dsMonConnections.Tables[0].Rows.Count;
@@ -84,7 +82,7 @@ namespace FBXpert
 
         public void ShowCaptions()
         {
-            lblTableName.Text = "Database Monitoring";
+            lblTableName.Text = "User Management";
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Monitoring");
         }
 
@@ -219,6 +217,7 @@ namespace FBXpert
         }
         private void DataToEdit()
         {
+            SetDefaultColor();
             txtUserName.Text = userData.username;
             txtFirstName.Text = userData.firstname;
             txtMiddleName.Text = userData.middlename;
@@ -237,9 +236,13 @@ namespace FBXpert
 
         private void hsAddUser_Click(object sender, EventArgs e)
         {
-            if(txtPassword.Text.Length > 0)
+            hsExecute.Enabled = false;
+            hsSaveSQL.Enabled = false;
+            if (DataOK())
             {
                 AddUserSQL();
+                hsExecute.Enabled = true;
+                hsSaveSQL.Enabled = true;
             }
             else
             {
@@ -318,9 +321,13 @@ namespace FBXpert
 
         private void hsDropUser_Click(object sender, EventArgs e)
         {
-            if(txtPassword.Text.Length > 0)
+            hsExecute.Enabled = false;
+            hsSaveSQL.Enabled = false;
+            if(DataOK())
             {
                 DropUserSQL();
+                hsExecute.Enabled = true;
+                hsSaveSQL.Enabled = true;
             }
             else
             {
@@ -332,8 +339,8 @@ namespace FBXpert
             fctSQL.Text = string.Empty;
             ePlugin pl = (rbLegacy.Checked) ? ePlugin.Legacy_UserManager : ePlugin.Srp;
             string cmd = $@"DROP USER {txtUserName.Text} ";
-            cmd += $@"USING PLUGIN {pl.ToString()} ";
-            cmd += ";";
+            cmd += $@"USING PLUGIN {pl};";
+            
             cmd += Environment.NewLine;
             cmd += Environment.NewLine;
             cmd += "COMMIT;";
@@ -342,9 +349,14 @@ namespace FBXpert
 
         private void hsUpdateUser_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text.Length > 0)
+            
+            hsExecute.Enabled = false;
+            hsSaveSQL.Enabled = false;
+            if (DataOK())
             {
                 UpdateUserSQL();
+                hsExecute.Enabled = true;
+                hsSaveSQL.Enabled = true;
             }
             else
             {
@@ -393,6 +405,12 @@ namespace FBXpert
             cmd += "COMMIT;";
             fctSQL.Text = cmd;
         }
+        public void SetDefaultColor()
+        {
+            FormularUtilsClass.Instance.SetTextToDefaultColor(txtPassword);
+            FormularUtilsClass.Instance.SetTextToDefaultColor(txtUserName);
+            
+        }
 
         private void hsClearData_Click(object sender, EventArgs e)
         {
@@ -404,6 +422,40 @@ namespace FBXpert
             rbUserActive.Checked = true;
             rbIsAdmin.Checked = false;
             rbSrp.Checked = true;
+            SetDefaultColor();
+        }
+
+        private void hotSpot1_Click_1(object sender, EventArgs e)
+        {
+            txtOpenResult.Text = String.Empty;
+            pnlConnectState.BackColor = System.Drawing.Color.Yellow;
+            DBRegistrationClass dbr = new DBRegistrationClass();
+            dbr = DBReg.Clone();
+            dbr.User = txtUserName.Text;
+            dbr.Password = txtPassword.Text;
+            var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(dbr));
+            try
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                if(con.State != ConnectionState.Open) con.Close();
+                con.Open();
+                Thread.Sleep(100);
+                if (con.State == ConnectionState.Open)
+                {
+                    pnlConnectState.BackColor = System.Drawing.Color.Green;
+                    Application.DoEvents();
+                    con.Close();
+                    txtOpenResult.Text = "succeeded";
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                pnlConnectState.BackColor = System.Drawing.Color.Red;
+                txtOpenResult.Text = ex.Message;
+                Application.DoEvents();
+            }
         }
     }
 }

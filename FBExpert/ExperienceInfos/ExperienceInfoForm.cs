@@ -22,11 +22,15 @@ namespace SQLView
         private eColorDesigns _appDesign = eColorDesigns.Gray;
         private eColorDesigns _developDesign = eColorDesigns.Gray;
         private ExperienceInfoClass exp = null;
+        private ExperienceInfoClass explocal = null;
         private AutocompleteClass ac;
+        private AutocompleteClass aclocal;
         private DBRegistrationClass _dbReg = null;
         private List<TableClass> _tables;
         private ExperienceInfo ExData = new ExperienceInfo();
+        private ExperienceInfo ExLocalData = new ExperienceInfo();
         private string _dbfile = string.Empty;
+        private string _dblocalfile = string.Empty;
 
         public ExperienceInfoForm(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
         {
@@ -72,6 +76,24 @@ namespace SQLView
             return data;
         }
 
+        private ExperienceInfo AddToLocalInfo(string keycode, string info)
+        {
+            ExperienceInfo data = null;
+
+            try
+            {
+                var sh = new ExperienceInfoClass(_dblocalfile);
+                data = sh.InsertExperienceInfo(keycode, info);
+                sh.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
+                sh.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+            }
+            catch (Exception ex)
+            {
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Add to Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
+            }
+            return data;
+        }
+
         private bool UpdateToInfo()
         {
             bool ok = false;
@@ -89,7 +111,24 @@ namespace SQLView
             return ok;
         }
 
-        private void SQLViewForm_Load(object sender, EventArgs e)
+        private bool UpdateToLocalInfo()
+        {
+            bool ok = false;
+            try
+            {
+                var sh = new ExperienceInfoClass(_dblocalfile);
+                ok = sh.UpdateExperienceInfo(ExLocalData);
+                sh.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
+                sh.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+            }
+            catch (Exception ex)
+            {
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Update Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
+            }
+            return ok;
+        }
+
+        private void ExperienceInfoForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
             
@@ -98,8 +137,11 @@ namespace SQLView
             this.Text = $@"Experience Infos";
             
             LoadExperienceInfo( $@"{AppSettingsClass.Instance.PathSettings.InfoPath}\{StaticVariablesClass.ExperienceInfoFile}");
+            LoadLocalExperienceInfo($@"{AppSettingsClass.Instance.PathSettings.InfoPath}\{_dbReg.AliasAsFileName}_{StaticVariablesClass.ExperienceInfoFile}");
             LanguageChanged();
+
             SetAutocompeteObjects(_tables);
+            SetLocalAutocompeteObjects(_tables);
         }
 
         private void LoadExperienceInfo(string dbfile)
@@ -118,7 +160,23 @@ namespace SQLView
             }
         }
 
-        private void SQLViewForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void LoadLocalExperienceInfo(string dbfile)
+        {
+            try
+            {
+                _dblocalfile = dbfile;
+                explocal = new ExperienceInfoClass(_dblocalfile);
+                explocal.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
+                explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+                txtLocalDatabase.Text = _dblocalfile;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void ExperienceInfoForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
         }
@@ -130,11 +188,20 @@ namespace SQLView
 
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
-            ac = new AutocompleteClass(txtExperienceInfo, _dbReg);
+            ac = new AutocompleteClass(fctExperienceInfo, _dbReg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();
             ac.AddAutocompleteForTables(tables);
             ac.Activate();
+        }
+
+        public void SetLocalAutocompeteObjects(List<TableClass> tables)
+        {
+            aclocal = new AutocompleteClass(fctLocalExperienceInfo, _dbReg);
+            aclocal.CreateAutocompleteForDatabase();
+            aclocal.AddAutocompleteForSQL();
+            aclocal.AddAutocompleteForTables(tables);
+            aclocal.Activate();
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -155,14 +222,27 @@ namespace SQLView
             }
         }
 
+        private void RefreshLocalExperienceInfo()
+        {
+            try
+            {
+                explocal.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
+                explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private void ExperienceInfoForm_Enter(object sender, EventArgs e)
         {
           //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
 
-        private void hotSpot5_Click(object sender, EventArgs e)
+        private void hsInserExperienceInfo_Click(object sender, EventArgs e)
         {
-            ExData = AddToInfo(txtExperienceKeyCode.Text,txtExperienceInfo.Text);       
+            ExData = AddToInfo(txtExperienceKeyCode.Text,fctExperienceInfo.Text);       
         }
 
         private void hsRefreshExpierenceInfo_Click(object sender, EventArgs e)
@@ -191,23 +271,48 @@ namespace SQLView
             ExData.IsActive = (bool)row.Cells[(int)ExperienceInfoInx.IsActive].Value;
             ExData.Stamp = (DateTime)row.Cells[(int)ExperienceInfoInx.Stamp].Value;
         }
+        private void LocalExperienceCellsToData()
+        {
+            var row = dgvLocalExperienceInfo.SelectedRows[0];
+            ExLocalData.Id = (int)row.Cells[(int)ExperienceInfoInx.Id].Value;
+            ExLocalData.Info = row.Cells[(int)ExperienceInfoInx.Info].Value.ToString();
+            ExLocalData.KeyCode = row.Cells[(int)ExperienceInfoInx.KeyCode].Value.ToString();
+            ExLocalData.IsActive = (bool)row.Cells[(int)ExperienceInfoInx.IsActive].Value;
+            ExLocalData.Stamp = (DateTime)row.Cells[(int)ExperienceInfoInx.Stamp].Value;
+        }
 
         private void ExperienceDataClear()
         {
-            txtExperienceInfo.Text = string.Empty;
+            fctExperienceInfo.Text = string.Empty;
             txtExperienceKeyCode.Text = string.Empty;
+        }
+        private void LocalExperienceDataClear()
+        {
+            fctLocalExperienceInfo.Text = string.Empty;
+            txtLocalExperienceKeyCode.Text = string.Empty;
         }
         private void ExperienceDataToEdit()
         {
             txtExperienceKeyCode.Text = ExData.KeyCode;
-            txtExperienceInfo.Text = ExData.Info; 
+            fctExperienceInfo.Text = ExData.Info; 
+        }
+        private void LocalExperienceDataToEdit()
+        {
+            txtLocalExperienceKeyCode.Text = ExLocalData.KeyCode;
+            fctLocalExperienceInfo.Text = ExLocalData.Info;
         }
 
         private void ExperienceEditToData()
         {
             ExData.KeyCode = txtExperienceKeyCode.Text;
-            ExData.Info = txtExperienceInfo.Text;
+            ExData.Info = fctExperienceInfo.Text;
             ExData.Stamp = DateTime.Now;
+        }
+        private void LocalExperienceEditToData()
+        {
+            ExLocalData.KeyCode = txtLocalExperienceKeyCode.Text;
+            ExLocalData.Info = fctLocalExperienceInfo.Text;
+            ExLocalData.Stamp = DateTime.Now;
         }
 
         private void dgvExperienceInfo_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -287,6 +392,77 @@ namespace SQLView
             if (e.KeyData == (Keys.K | Keys.Control))
             {
                 if (ac != null) ac.Show();
+                e.Handled = true;
+            }
+        }
+
+        private void hsLoadLocalDatabasePath_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = $@"{ApplicationPathClass.Instance.ApplicationPath}\Info\";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                LoadLocalExperienceInfo(openFileDialog1.FileName);
+            }
+        }
+
+        private void hsUpdateLocalExperienceInfo_Click(object sender, EventArgs e)
+        {
+            LocalExperienceEditToData();
+            UpdateToLocalInfo();
+        }
+
+        private void hsDeleteLocalData_Click(object sender, EventArgs e)
+        {
+            int n = 0;
+            foreach (DataGridViewRow dr in dgvLocalExperienceInfo.SelectedRows)
+            {
+                if (explocal.DeleteExperienceInfoEntry((int)dr.Cells[0].Value)) n++;
+            }
+            if (n > 0)
+            {
+                try
+                {
+                    explocal.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
+                    explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+                }
+                catch (Exception ex)
+                {
+                    SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#Delete Info", $@"#{ex.Message}", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void hsRefreshLocalExperienceInfo_Click(object sender, EventArgs e)
+        {
+            RefreshLocalExperienceInfo();
+        }
+
+        private void hsClearLocalExperienceInfo_Click(object sender, EventArgs e)
+        {
+            LocalExperienceDataClear();
+        }
+
+        private void hsInsertLoaclExperienceInfo_Click(object sender, EventArgs e)
+        {
+            ExLocalData = AddToLocalInfo(txtLocalExperienceKeyCode.Text, fctLocalExperienceInfo.Text);
+        }
+
+        private void dgvLocalExperienceInfo_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridView grid = sender as DataGridView;
+            if (grid.SelectedRows.Count > 0)
+            {
+                LocalExperienceCellsToData();
+                LocalExperienceDataToEdit();
+            }
+        }
+
+        private void fctLocalExperienceInfo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.K | Keys.Control))
+            {
+                if (aclocal != null) aclocal.Show();
                 e.Handled = true;
             }
         }
