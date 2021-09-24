@@ -1830,21 +1830,23 @@ namespace FBXpert
             {
                 DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadGenerators);
             }
-           
-
             #endregion refresh item
         }
 
 
         public void SearchInViews(TreeNode tnviews)
         {
+            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            if (tnReg == null) return;
+            if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
+
             StringBuilder sb = new StringBuilder();
             int cnt = 0;
             foreach (TreeNode tn in tnviews.Nodes)
             {
                 ViewClass viewObject = (ViewClass)tn.Tag;
                 
-                if(FindInString(txtSearchView.Text, viewObject.CREATE_SQL))
+              //  if(FindInString(txtSearchView.Text, viewObject.CREATE_SQL))
                 {
                     sb.Append(viewObject.CREATE_SQL);
                     sb.Append(Environment.NewLine);
@@ -1852,9 +1854,10 @@ namespace FBXpert
                     cnt++;
                 }
             }
-            TextInfoForm hif = new TextInfoForm();
-            hif.SetTitle($@"Searching key:{txtSearchView.Text} in Views, found {cnt}");
+            var hif = new TextInfoForm(MdiParent);
+            hif.SetTitle($@"Database:{dbReg.Alias}, Searching key:{txtSearchView.Text} in Views, found {cnt} Views");
             hif.Append(sb.ToString());
+            hif.SearchPattern = txtSearchView.Text;
             hif.Show();
         }
 
@@ -2370,6 +2373,19 @@ namespace FBXpert
         private void tsmiSearchInView_Click(object sender, EventArgs e)
         {
             SearchInViews(_tnSelected);
+        }
+
+        private void txtSearchView_Enter(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtSearchView_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                SearchInViews(_tnSelected);
+            }
         }
     }
 }

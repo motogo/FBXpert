@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBXDesigns", "FBDesigns\FBDesigns\FBXDesigns.csproj", "{6A096634-8C85-42B8-BA7E-88BFDDD49B1B}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBDiagrammClass", "FBDiagrammLib\FBDiagrammClass\FBDiagrammClass.csproj", "{D977B63B-BF1D-4586-B769-DC9D88F304B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQListApp", "..\SQLite\SQListApp\SQListApp.csproj", "{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "..\SELibrariesSource\FastColoredTextBox\Tester\Tester.csproj", "{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,13 +111,25 @@ Global
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x64.Build.0 = Release|Any CPU
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A6CBE51E-07AD-44AF-AE01-31E360E4C13A}.Release|x86.Build.0 = Release|Any CPU
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|ARM.ActiveCfg = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|ARM64.ActiveCfg = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|x64.ActiveCfg = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|x86.ActiveCfg = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Debug|x86.Build.0 = Debug|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|Any CPU.ActiveCfg = Release|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|ARM.ActiveCfg = Release|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|ARM64.ActiveCfg = Release|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x64.ActiveCfg = Release|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x86.ActiveCfg = Release|x86
+		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
-		RESX_NeutralResourcesLanguage = de-DE
 		RESX_PrefixTranslations = False
+		RESX_NeutralResourcesLanguage = de-DE
+		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
 	EndGlobalSection
 EndGlobal

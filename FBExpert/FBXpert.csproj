@@ -271,6 +271,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.pt.resx</DependentUpon>
     </Compile>
+    <Compile Include="MiscClasses\SearchFastColorTextboxClass.cs" />
     <Compile Include="SonstForms\BinariesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -606,6 +607,12 @@
     <None Include="Resources\link_x24.png" />
     <None Include="Resources\link_2_x24.png" />
     <None Include="Resources\bin_x241.png" />
+    <None Include="Resources\go_next_blue24x.png" />
+    <None Include="Resources\go_next24x.png" />
+    <None Include="Resources\go-first_blue24x.png" />
+    <None Include="Resources\go-first_green24x.png" />
+    <None Include="Resources\go-last_blue24x.png" />
+    <None Include="Resources\go-last_green24x.png" />
     <Content Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
