@@ -244,11 +244,12 @@
             // 
             this.gbNavigate.Controls.Add(this.hsSearchLast);
             this.gbNavigate.Controls.Add(this.hsFindNext);
+            this.gbNavigate.Controls.Add(this.label1);
             this.gbNavigate.Controls.Add(this.hsPrev);
             this.gbNavigate.Controls.Add(this.hsSearchNextFromStart);
             this.gbNavigate.Location = new System.Drawing.Point(311, 3);
             this.gbNavigate.Name = "gbNavigate";
-            this.gbNavigate.Size = new System.Drawing.Size(200, 47);
+            this.gbNavigate.Size = new System.Drawing.Size(245, 47);
             this.gbNavigate.TabIndex = 11;
             this.gbNavigate.TabStop = false;
             this.gbNavigate.Text = "Navigate";
@@ -270,7 +271,7 @@
             this.hsSearchLast.Image = global::FBXpert.Properties.Resources.go_last_green24x;
             this.hsSearchLast.ImageHover = global::FBXpert.Properties.Resources.go_last_blue24x;
             this.hsSearchLast.ImageToggleOnSelect = true;
-            this.hsSearchLast.Location = new System.Drawing.Point(146, 17);
+            this.hsSearchLast.Location = new System.Drawing.Point(194, 17);
             this.hsSearchLast.Marked = false;
             this.hsSearchLast.MarkedColor = System.Drawing.Color.Teal;
             this.hsSearchLast.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -319,7 +320,7 @@
             this.hsFindNext.Image = global::FBXpert.Properties.Resources.go_next24x;
             this.hsFindNext.ImageHover = global::FBXpert.Properties.Resources.go_next_blue24x;
             this.hsFindNext.ImageToggleOnSelect = true;
-            this.hsFindNext.Location = new System.Drawing.Point(102, 17);
+            this.hsFindNext.Location = new System.Drawing.Point(150, 17);
             this.hsFindNext.Marked = false;
             this.hsFindNext.MarkedColor = System.Drawing.Color.Teal;
             this.hsFindNext.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -453,10 +454,9 @@
             // 
             this.gbSearchAttributes.Controls.Add(this.ckWholeWords);
             this.gbSearchAttributes.Controls.Add(this.ckCaseSensitive);
-            this.gbSearchAttributes.Controls.Add(this.label1);
-            this.gbSearchAttributes.Location = new System.Drawing.Point(517, 3);
+            this.gbSearchAttributes.Location = new System.Drawing.Point(562, 3);
             this.gbSearchAttributes.Name = "gbSearchAttributes";
-            this.gbSearchAttributes.Size = new System.Drawing.Size(387, 46);
+            this.gbSearchAttributes.Size = new System.Drawing.Size(215, 46);
             this.gbSearchAttributes.TabIndex = 7;
             this.gbSearchAttributes.TabStop = false;
             this.gbSearchAttributes.Text = "Search Attributes";
@@ -485,12 +485,12 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(238, 23);
+            this.label1.Location = new System.Drawing.Point(81, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // hsSaveText
             // 
@@ -509,7 +509,7 @@
             this.hsSaveText.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hsSaveText.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
             this.hsSaveText.ImageToggleOnSelect = true;
-            this.hsSaveText.Location = new System.Drawing.Point(910, 3);
+            this.hsSaveText.Location = new System.Drawing.Point(783, 3);
             this.hsSaveText.Marked = false;
             this.hsSaveText.MarkedColor = System.Drawing.Color.Teal;
             this.hsSaveText.MarkedStyle = SeControlsLib.frameStyle.filled;

@@ -857,23 +857,23 @@ namespace FBXpert.DataClasses
             if(_allPKConstraintsContent != null)
             {
                 foreach (string str in _allPKConstraintsContent)
-            {
-                    sc.AppendSql(str + Environment.NewLine);
-            }
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
             }
             if(_allFKConstraintsContent != null)
             {
                 foreach (string str in _allFKConstraintsContent)
-            {
-                    sc.AppendSql(str + Environment.NewLine);
-            }
+                {
+                        sc.AppendSql(str + Environment.NewLine);
+                }
             }
             if(_allIndexContent != null)
             {
                 foreach (string str in _allIndexContent)
-            {
-                   sc.AppendSql(str + Environment.NewLine);
-            }
+                {
+                       sc.AppendSql(str + Environment.NewLine);
+                }
             }
             if(_allTriggerContent != null)
             {

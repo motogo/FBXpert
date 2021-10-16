@@ -73,7 +73,7 @@ namespace FBXpert.DataClasses
     {
         public string ScriptingPath=string.Empty;
         public string TempPath=string.Empty;
-        public string InfoPath = string.Empty;
+        public string InfoPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\Info";
         public string ExportPath = string.Empty;
         public string SQLExportPath = string.Empty;
         public string SQLHistoryPath = string.Empty;

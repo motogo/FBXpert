@@ -114,9 +114,9 @@
     <Reference Include="FBXDesigns">
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.10.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=8.5.3.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.8.5.3\lib\netstandard2.0\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\packages\Firebird\FirebirdSql.Data.FirebirdClient.8.5.3\lib\net48\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="FormularUtils, Version=2017.11.21.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

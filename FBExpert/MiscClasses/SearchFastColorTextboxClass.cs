@@ -27,6 +27,7 @@ namespace FBXpert.MiscClasses
         private List<SearchListItem> searchList;
         private List<int> bookmarkList;
         private Color bookmarkColor = Color.Blue;
+        private int actItemInx = -1;
         public SearchFastColorTextboxClass(FastColoredTextBox fct)
         {
             fctInfo = fct;
@@ -44,6 +45,10 @@ namespace FBXpert.MiscClasses
             get=> caseSensitivity;
         }
 
+        public int ActualItemIndex
+        {
+            get => actItemInx;
+        }
         public int FoundCount
         {
             get => searchList == null ? 0 : searchList.Count;
@@ -240,6 +245,7 @@ namespace FBXpert.MiscClasses
                 fctInfo.SelectionStart = n.pos;
                 fctInfo.SelectionLength = n.length;
                 fctInfo.DoSelectionVisible();
+                actItemInx++;
             }
         }
 
@@ -259,11 +265,13 @@ namespace FBXpert.MiscClasses
                 fctInfo.SelectionStart = n.pos;
                 fctInfo.SelectionLength = n.length;
                 fctInfo.DoSelectionVisible();
+                actItemInx--;
             }
         }
 
         public void GoToFirst()
         {
+            actItemInx = -1;
             if (SearchPattern.Length <= 0) return;
             if ((searchList?.Count <= 0)&&(!doNewSearch)) return;
             fctInfo.SelectionStart = 0;
@@ -275,7 +283,34 @@ namespace FBXpert.MiscClasses
                 doNewSearch = false;
                 BookmarkAll();
             }
+            
             GoToNext();
+        }
+
+        public void GoToLast()
+        {
+            actItemInx = -1;
+            if (SearchPattern.Length <= 0) return;
+            if ((searchList?.Count <= 0) && (!doNewSearch)) return;
+            fctInfo.SelectionStart = 0;
+            searchInxOld = 0;
+            searchListInx = -1;
+            if (doNewSearch)
+            {
+                searchList = FindRange();
+                doNewSearch = false;
+                BookmarkAll();
+            }
+            searchListInx = searchList.Count - 1;
+           
+            SearchListItem n = searchList[searchListInx];
+            fctInfo.SelectionStart = n.pos;
+            fctInfo.SelectionLength = n.length;
+            fctInfo.DoSelectionVisible();
+            actItemInx = searchList.Count - 1;
+
+
+
         }
     }
 }

@@ -102,18 +102,21 @@ namespace FBXpert.SonstForms
 
         private void hsScriptingPath_Click(object sender, EventArgs e)
         {
+            fbdPath.SelectedPath = txtScriptingPath.Text;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtScriptingPath.Text = fbdPath.SelectedPath;
         }
 
         private void hsTemporaryPath_Click(object sender, EventArgs e)
         {
+            fbdPath.SelectedPath = txtTemporaryPath.Text;
             if (fbdPath.ShowDialog() != DialogResult.OK) return;
             txtTemporaryPath.Text = fbdPath.SelectedPath;
         }
 
         private void hsDatabasesConfigPath_Click(object sender, EventArgs e)
         {
+            fbdPath.SelectedPath = txtDatabasesConfigPath.Text;
             if (fbdPath.ShowDialog() == DialogResult.OK)
             {
               txtDatabasesConfigPath.Text = fbdPath.SelectedPath;
@@ -127,6 +130,34 @@ namespace FBXpert.SonstForms
             {
                 txtDatabasesConfigFile.Text = ofdFiles.FileName;
             }
+        }
+
+        private void hsLoadInfoPath_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = txtInfoPath.Text;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtInfoPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void hsLoadExportPath_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = txtExportPath.Text;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtExportPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void hsLoadSQLExportPath_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = txtSQLExportPath.Text;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtSQLExportPath.Text = fbdPath.SelectedPath;
+        }
+
+        private void hsSQLHistoryPath_Click(object sender, EventArgs e)
+        {
+            fbdPath.SelectedPath = txtSQLHistoryPath.Text;
+            if (fbdPath.ShowDialog() != DialogResult.OK) return;
+            txtSQLHistoryPath.Text = fbdPath.SelectedPath;
         }
     }
 }

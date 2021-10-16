@@ -165,6 +165,7 @@
             this.tsmiRefreshAllTables = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExportTablesDLL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSearchInTables = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsViewGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExpandViewNodes = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
@@ -174,8 +175,6 @@
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExportAllViewsSQL = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSearchView = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtSearchView = new System.Windows.Forms.ToolStripTextBox();
-            this.tsmiSearchInView = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDomainsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewDomain = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllDomains = new System.Windows.Forms.ToolStripMenuItem();
@@ -238,6 +237,8 @@
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenDBFilePath = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator33 = new System.Windows.Forms.ToolStripSeparator();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -343,6 +344,8 @@
             this.tsmiOpenAll,
             this.tsmiCloseAll,
             this.toolStripSeparator3,
+            this.tsmiOpenDBFilePath,
+            this.toolStripSeparator33,
             this.tsmiMoveUp,
             this.tsmiMoveDown,
             this.toolStripSeparator20,
@@ -379,7 +382,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(307, 874);
+            this.cmsDatabase.Size = new System.Drawing.Size(307, 928);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -1578,9 +1581,10 @@
             this.tsmiDropAllTables,
             this.tsmiRefreshAllTables,
             this.toolStripSeparator19,
-            this.tsmiExportTablesDLL});
+            this.tsmiExportTablesDLL,
+            this.tsmiSearchInTables});
             this.cmsTableGroup.Name = "contextMenuStrip1";
-            this.cmsTableGroup.Size = new System.Drawing.Size(173, 146);
+            this.cmsTableGroup.Size = new System.Drawing.Size(173, 172);
             this.cmsTableGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiExpandTablesNodes
@@ -1628,6 +1632,13 @@
             this.tsmiExportTablesDLL.Size = new System.Drawing.Size(172, 26);
             this.tsmiExportTablesDLL.Text = "Export tables DLL";
             // 
+            // tsmiSearchInTables
+            // 
+            this.tsmiSearchInTables.Image = global::FBXpert.Properties.Resources.lupe24x;
+            this.tsmiSearchInTables.Name = "tsmiSearchInTables";
+            this.tsmiSearchInTables.Size = new System.Drawing.Size(172, 26);
+            this.tsmiSearchInTables.Text = "Search in Tables";
+            // 
             // cmsViewGroup
             // 
             this.cmsViewGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1641,7 +1652,7 @@
             this.tsmiExportAllViewsSQL,
             this.tsmiSearchView});
             this.cmsViewGroup.Name = "contextMenuStrip1";
-            this.cmsViewGroup.Size = new System.Drawing.Size(200, 194);
+            this.cmsViewGroup.Size = new System.Drawing.Size(200, 172);
             this.cmsViewGroup.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsGroup2Items_Clicked);
             // 
             // tsmiExpandViewNodes
@@ -1691,30 +1702,10 @@
             // 
             // tsmiSearchView
             // 
-            this.tsmiSearchView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtSearchView,
-            this.tsmiSearchInView});
-            this.tsmiSearchView.Image = global::FBXpert.Properties.Resources.bin_x24;
+            this.tsmiSearchView.Image = global::FBXpert.Properties.Resources.lupe24x;
             this.tsmiSearchView.Name = "tsmiSearchView";
             this.tsmiSearchView.Size = new System.Drawing.Size(199, 26);
             this.tsmiSearchView.Text = "Search View";
-            // 
-            // txtSearchView
-            // 
-            this.txtSearchView.BackColor = System.Drawing.SystemColors.Info;
-            this.txtSearchView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearchView.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSearchView.Name = "txtSearchView";
-            this.txtSearchView.Size = new System.Drawing.Size(100, 23);
-            this.txtSearchView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchView_KeyUp);
-            // 
-            // tsmiSearchInView
-            // 
-            this.tsmiSearchInView.Image = global::FBXpert.Properties.Resources.lupe24x;
-            this.tsmiSearchInView.Name = "tsmiSearchInView";
-            this.tsmiSearchInView.Size = new System.Drawing.Size(164, 26);
-            this.tsmiSearchInView.Text = "Search";
-            this.tsmiSearchInView.Click += new System.EventHandler(this.tsmiSearchInView_Click);
             // 
             // cmsDomainsGroup
             // 
@@ -2190,6 +2181,18 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
             // 
+            // tsmiOpenDBFilePath
+            // 
+            this.tsmiOpenDBFilePath.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.tsmiOpenDBFilePath.Name = "tsmiOpenDBFilePath";
+            this.tsmiOpenDBFilePath.Size = new System.Drawing.Size(306, 26);
+            this.tsmiOpenDBFilePath.Text = "Pfad zu DB im Explorer öffnen";
+            // 
+            // toolStripSeparator33
+            // 
+            this.toolStripSeparator33.Name = "toolStripSeparator33";
+            this.toolStripSeparator33.Size = new System.Drawing.Size(303, 6);
+            // 
             // DbExplorerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2460,7 +2463,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiReopenDatabase;
         private SeControlsLib.HotSpot hsGetOpenConnections;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchView;
-        private System.Windows.Forms.ToolStripTextBox txtSearchView;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSearchInView;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSearchInTables;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenDBFilePath;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator33;
     }
 }

@@ -1,8 +1,6 @@
 ﻿using FBXpert.DataClasses;
 using FBXpert.MiscClasses;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace FBXpert
@@ -50,35 +48,40 @@ namespace FBXpert
             get => !ckCaseSensitive.Checked;
         }
 
-        
+        private void ShowLabel()
+        {
+            label1.Text = $@"Found:{SearchFCT.FoundCount} ({SearchFCT.ActualItemIndex + 1})";
+        }
 
         private void hsFindPattern_Click(object sender, EventArgs e)
         {
             FindPattern();
         }
 
-            private void hsFindNext_Click(object sender, EventArgs e)
+        private void hsFindNext_Click(object sender, EventArgs e)
         {
             SearchFCT.GoToNext();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
+            
         }
 
         private void hsPrev_Click(object sender, EventArgs e)
         {
             SearchFCT.GoToPrev();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
         }
 
         private void hsSearchNextFromStart_Click(object sender, EventArgs e)
         {
             SearchFCT.GoToFirst();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
         }
        
 
         private void hsSearchLast_Click(object sender, EventArgs e)
         {
-            
+            SearchFCT.GoToLast();
+            ShowLabel();
         }
 
         private void hsSaveText_Click(object sender, EventArgs e)
@@ -99,18 +102,22 @@ namespace FBXpert
 
         private void TextInfoForm_Load(object sender, EventArgs e)
         {
-            
+            gbNavigate.Enabled = false;
             FindPattern();
             
         }
         private void FindPattern()
         {
-            if (txtSearchPattern.Text.Length <= 0) return;
+            if (txtSearchPattern.Text.Length <= 0)
+            {
+                label1.Text = String.Empty;
+                return;
+            }
             SearchFCT.NewSearchPattern(txtSearchPattern.Text);
             SearchFCT.CaseSensitivity = ckCaseSensitive.Checked;
             SearchFCT.WholeWord = ckWholeWords.Checked;
             SearchFCT.GoToFirst();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
             gbNavigate.Enabled = SearchFCT.FoundCount > 0;
         }
 
@@ -121,7 +128,7 @@ namespace FBXpert
             SearchFCT.NewSearchPattern(txtSearchPattern.Text);
             SearchFCT.CaseSensitivity = ckCaseSensitive.Checked;
             SearchFCT.GoToFirst();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
         }
 
         private void ckWholeWords_CheckedChanged(object sender, EventArgs e)
@@ -130,7 +137,7 @@ namespace FBXpert
             SearchFCT.NewSearchPattern(txtSearchPattern.Text);
             SearchFCT.WholeWord =  ckWholeWords.Checked;
             SearchFCT.GoToFirst();
-            label1.Text = $@"Found:{SearchFCT.FoundCount}";
+            ShowLabel();
         }
 
         private void txtSearchPattern_KeyUp(object sender, KeyEventArgs e)

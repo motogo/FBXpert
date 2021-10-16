@@ -480,6 +480,130 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
+        
+        public string CreateGetCSVHeader(int lvl, DataObjectClass obj)
+        {
+            if (obj == null) return Empty;
+            var sb = new StringBuilder();
+
+            if (obj.GetType() == typeof(TableClass))
+            {
+                var table = obj as TableClass;
+
+                sb.Append(Format(lvl, "/// <summary>" + Nl));
+                sb.Append(Format(lvl, "/// Gets a string represents the cvs header of data." + Nl));
+                sb.Append(Format(lvl, "/// </summary>" + Nl));
+                sb.Append(Format(lvl, "public string GetCsvHeader()" + Nl));
+                sb.Append(BlockStart(lvl));
+                sb.Append(Format(lvl+1, "string aps = \"" + "\\\"" + "\";" + Nl));
+                bool first = true;
+                var sbcsv = new StringBuilder();
+                sbcsv.Append("string csv = $@\"");
+                foreach (var tfc in table.Fields.Values)
+                {
+                    if (!first)
+                    {
+                        sbcsv.Append("{CsvSeperator}");
+                    }
+                    first = false;
+                    sbcsv.Append("{aps}" + tfc.Name + "{aps}");
+                }
+                sbcsv.Append("{CsvEndLineSeperator}\"");
+                sb.Append(Format(lvl+1, sbcsv.ToString() + ";" + Nl));
+                sb.Append(Format(lvl+1, "return csv;" + Nl));
+                sb.Append(BlockEnd(lvl));
+            }
+            else if (obj.GetType() == typeof(ViewClass))
+            {
+                var view = obj as ViewClass;
+
+                sb.Append(Format(lvl, "/// <summary>" + Nl));
+                sb.Append(Format(lvl, "///  Gets a string represents the cvs header of data.       " + Nl));
+                sb.Append(Format(lvl, "/// </summary>" + Nl));
+                sb.Append(Format(lvl, "public string GetCsvData()" + Nl));
+                sb.Append(BlockStart(lvl));
+                sb.Append(Format(lvl + 1, "string aps = \"" + "\\\"" + "\";" + Nl));
+                bool first = true;
+                var sbcsv = new StringBuilder();
+                sbcsv.Append("string csv = $@\"");
+                foreach (var tfc in view.Fields.Values)
+                {
+                    if (!first)
+                    {
+                        sbcsv.Append("{CsvSeperator}");
+                    }
+                    first = false;
+                    sbcsv.Append("{aps}tfc.Name{aps}");
+                }
+                sbcsv.Append("{CsvEndLineSeperator}\"");
+                sb.Append(Format(lvl + 1, sbcsv.ToString() + ";" + Nl));
+                sb.Append(Format(lvl + 1, "return csv;" + Nl));
+                sb.Append(BlockEnd(lvl));
+            }
+            return sb.ToString();
+        }
+        
+        public string CreateGetCSVValues(int lvl, DataObjectClass obj)
+        {
+            if (obj == null) return Empty;
+            var sb = new StringBuilder();
+           
+            if (obj.GetType() == typeof(TableClass))
+            {
+                var table = obj as TableClass;
+
+                sb.Append(Format(lvl, "/// <summary>" + Nl));
+                sb.Append(Format(lvl, "/// Gets a string represents the cvs header of data." + Nl));
+                sb.Append(Format(lvl, "/// </summary>" + Nl));
+                sb.Append(Format(lvl, "public string GetCsvData()" + Nl));
+                sb.Append(BlockStart(lvl));
+                sb.Append(Format(lvl+1, "string aps = \""+"\\\""+"\";" + Nl));
+                bool first = true;
+                var sbcsv = new StringBuilder();
+                sbcsv.Append("string csv = $@\"");
+                foreach (var tfc in table.Fields.Values)
+                {
+                    if (!first)
+                    {
+                        sbcsv.Append("{CsvSeperator}");
+                    }
+                    first = false;
+                    sbcsv.Append("{aps}{Item." + tfc.Name + "}{aps}");
+                }
+                sbcsv.Append("{CsvEndLineSeperator}\"");
+                sb.Append(Format(lvl+1,  sbcsv.ToString() + ";" + Nl));
+                sb.Append(Format(lvl+1, "return csv;" + Nl));
+                sb.Append(BlockEnd(lvl));
+            }
+            else if (obj.GetType() == typeof(ViewClass))
+            {
+                var view = obj as ViewClass;
+
+                sb.Append(Format(lvl, "/// <summary>" + Nl));
+                sb.Append(Format(lvl, "///  Gets a string represents the cvs header of data.       " + Nl));
+                sb.Append(Format(lvl, "/// </summary>" + Nl));
+                sb.Append(Format(lvl, "public string GetCsvData()" + Nl));
+                sb.Append(BlockStart(lvl));
+                sb.Append(Format(lvl+1, "string aps = \"" + "\\\"" + "\";" + Nl));
+                bool first = true;
+                var sbcsv = new StringBuilder();
+                sbcsv.Append("string csv = $@\"");
+                foreach (var tfc in view.Fields.Values)
+                {
+                    if (!first)
+                    {
+                        sbcsv.Append("{CsvSeperator}");
+                    }
+                    first = false;
+                    sbcsv.Append("{aps}{Item." + tfc.Name + "}{aps}");
+                }
+                sbcsv.Append("{CsvEndLineSeperator}\"");
+                sb.Append(Format(lvl+1, sbcsv.ToString() + ";" + Nl));
+                sb.Append(Format(lvl+1, "return csv;" + Nl));
+                sb.Append(BlockEnd(lvl));
+            }
+            return sb.ToString();
+        }
         public string CreateDataClassConstructor(int lvl, DataObjectClass obj)
         {
             if (obj == null) return Empty;
@@ -773,6 +897,8 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+2, "private static bool _translateToString = false;"+Nl));
             sb.Append(Format(lvl+2, "public static bool TranslateToStringResult{get => _translateToString; set =>  _translateToString = value; }"+Nl));
             sb.Append(Format(lvl+2, "public static int ColCount = (int)eTDataClass.NO_FIELD;" + Nl));
+            sb.Append(Format(lvl+2, "public static string CsvSeperator = \",\";" + Nl));
+            sb.Append(Format(lvl+2, "public static string CsvEndLineSeperator = \";\";" + Nl));
             sb.Append(Nl);
 
             sb.Append(Format(lvl+2, "#region class TDataClass" + Nl));
@@ -800,7 +926,11 @@ namespace FBXpert.DataClasses
             sb.Append(Format(lvl+3, "public TColumns Item;" + Nl));
             sb.Append(Nl);
 
-            sb.Append(CreateDataClassConstructor(lvl+3,tc));
+            sb.Append(CreateDataClassConstructor(lvl + 3, tc));
+            sb.Append(Nl);
+
+
+            sb.Append(CreateGetCSVValues(lvl+3,tc));
             sb.Append(Nl);
 
             sb.Append(CreateTableClearMethod(lvl+3,tc));
@@ -814,6 +944,9 @@ namespace FBXpert.DataClasses
             sb.Append(Nl);
             
             sb.Append(CreateNewMethods(lvl+2,tc));
+            sb.Append(Nl);
+
+            sb.Append(CreateGetCSVHeader(lvl + 2, tc));
             sb.Append(Nl);
 
             sb.Append(CreateSerializeMethods(lvl+2));
