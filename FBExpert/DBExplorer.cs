@@ -74,7 +74,7 @@ namespace FBXpert
             DbExlorerNotify.Register4Info(NotifyInf_DBExplorer);           
             NotificationsForm.Instance().Show(Left + Width + 16, 64);            
         }
-
+        
         public void GetOpenConnections()
         { 
             int cnt = 0;
@@ -95,16 +95,18 @@ namespace FBXpert
                             cnt += reader.GetInt32(0);
                         }
                         cc.Close();
-                        tn.Text = $@"{dbreg.Alias} open:{cnt - 1}";
+
+                        tn.Text = dbreg.GetCaption(cnt);
                     }
                     else
                     {
-                        tn.Text = $@"{dbreg.Alias}";
+                        tn.Text = dbreg.GetCaption();
                     }
                 }
                 else
                 {
-                    tn.Text = $@"{dbreg.Alias}";
+
+                    tn.Text = dbreg.GetCaption();
                 }
             }
         }
@@ -124,11 +126,11 @@ namespace FBXpert
                     {
                         int cnt = reader.GetInt32(0);
                         cc.Close();
-                        return $@"{dbreg.Alias} open:{cnt - 1}";
+                        return dbreg.GetCaption(cnt);
                     }
                 }
             }
-            return $@"{dbreg.Alias}";
+            return (dbreg.GetCaption());
         }
 
         public void SetCaption()
@@ -161,7 +163,7 @@ namespace FBXpert
                     return;
                 }
                 if(_actRegNode == null) return;
-                _actRegNode.Text = dbReg.Alias;
+                _actRegNode.Text = dbReg.GetCaption();
                 _actRegNode.Tag = dbReg;
                 if(dbReg.Active) ReadDatabaseMetadata(_actRegNode);
             }
@@ -775,8 +777,8 @@ namespace FBXpert
             var drc = (DBRegistrationClass)tn.Tag;
             drc.Active = false;
             tn.Tag = drc;
-            tn.Text = drc.Alias;
-            ConnectionPoolClass.Instance.CloseAllConnections();            
+            tn.Text = drc.GetCaption();
+            ConnectionPoolClass.Instance.CloseAllConnections();
         }
        
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -784,7 +786,7 @@ namespace FBXpert
             _tnSelected = e.Node;
             if (e.Node?.Tag == null) return;
             int cmsLeft = this.Left+this.Width+4;
-            int cmsTop  = Cursor.Position.Y;                        
+            int cmsTop  = Cursor.Position.Y;
             var tnn = e.Node.Tag.GetType();
             var t = StaticTreeClass.Instance().FindPrevDBNode(e.Node);
 

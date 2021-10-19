@@ -149,6 +149,7 @@
             this.hsRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefresh.FlatAppearance.BorderSize = 0;
             this.hsRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
@@ -161,6 +162,8 @@
             this.hsRefresh.MarkMode = false;
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
+            this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 3;
             this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -196,6 +199,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -208,6 +212,8 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 2;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -302,8 +308,8 @@
         '\"',
         '\'',
         '\''};
-            this.fctSource.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n^\\s*(case|default)\\s*[^:]" +
-    "*(?<range>:)\\s*(?<range>[^;]+);\r\n";
+            this.fctSource.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:" +
+    "]*(?<range>:)\\s*(?<range>[^;]+);\r\n";
             this.fctSource.AutoScrollMinSize = new System.Drawing.Size(25, 14);
             this.fctSource.BackBrush = null;
             this.fctSource.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -344,6 +350,7 @@
             // 
             // tsTextSearch
             // 
+            this.tsTextSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tsTextSearch.Name = "tsTextSearch";
             this.tsTextSearch.Size = new System.Drawing.Size(100, 23);
             // 
@@ -386,6 +393,7 @@
             this.hsSave.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSave.FlatAppearance.BorderSize = 0;
             this.hsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSave.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSave.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
             this.hsSave.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
@@ -398,6 +406,8 @@
             this.hsSave.MarkMode = false;
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "";
+            this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(37, 56);
             this.hsSave.TabIndex = 11;
             this.hsSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -479,6 +489,7 @@
             this.hsSearchDown.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSearchDown.FlatAppearance.BorderSize = 0;
             this.hsSearchDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSearchDown.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSearchDown.Image = global::FBXpert.Properties.Resources.go_down22x;
             this.hsSearchDown.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
@@ -491,6 +502,8 @@
             this.hsSearchDown.MarkMode = false;
             this.hsSearchDown.Name = "hsSearchDown";
             this.hsSearchDown.NonMarkedText = "";
+            this.hsSearchDown.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDown.ShowShortcut = false;
             this.hsSearchDown.Size = new System.Drawing.Size(45, 56);
             this.hsSearchDown.TabIndex = 8;
             this.hsSearchDown.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -526,6 +539,7 @@
             this.hsSearchUp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSearchUp.FlatAppearance.BorderSize = 0;
             this.hsSearchUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearchUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSearchUp.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSearchUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.hsSearchUp.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
@@ -538,6 +552,8 @@
             this.hsSearchUp.MarkMode = false;
             this.hsSearchUp.Name = "hsSearchUp";
             this.hsSearchUp.NonMarkedText = "";
+            this.hsSearchUp.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUp.ShowShortcut = false;
             this.hsSearchUp.Size = new System.Drawing.Size(45, 56);
             this.hsSearchUp.TabIndex = 7;
             this.hsSearchUp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -573,6 +589,7 @@
             this.hsSeach.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSeach.FlatAppearance.BorderSize = 0;
             this.hsSeach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSeach.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSeach.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSeach.Image = global::FBXpert.Properties.Resources.lupe24x;
             this.hsSeach.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
@@ -585,6 +602,8 @@
             this.hsSeach.MarkMode = false;
             this.hsSeach.Name = "hsSeach";
             this.hsSeach.NonMarkedText = "";
+            this.hsSeach.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSeach.ShowShortcut = false;
             this.hsSeach.Size = new System.Drawing.Size(45, 56);
             this.hsSeach.TabIndex = 6;
             this.hsSeach.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -623,6 +642,7 @@
             // 
             // selDBObjects
             // 
+            this.selDBObjects.AlloweColumnFilterIndexChange = false;
             this.selDBObjects.AllowMultipleChecks = false;
             this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selDBObjects.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -634,12 +654,15 @@
             this.selDBObjects.CheckOnSelect = false;
             this.selDBObjects.CheckVisible = true;
             this.selDBObjects.CheckWith = 32;
+            this.selDBObjects.ColumnFilterIndex = 1;
             this.selDBObjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selDBObjects.FilterText = "";
             this.selDBObjects.IDVisible = false;
             this.selDBObjects.IDWith = 32;
             this.selDBObjects.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.selDBObjects.Location = new System.Drawing.Point(3, 124);
+            this.selDBObjects.MarkingColor = System.Drawing.Color.LightGreen;
             this.selDBObjects.Name = "selDBObjects";
             this.selDBObjects.SelectedIndex = -1;
             this.selDBObjects.ShowCaptions = true;
@@ -647,11 +670,15 @@
             this.selDBObjects.ShowCountInTitle = true;
             this.selDBObjects.ShowSelection = true;
             this.selDBObjects.Size = new System.Drawing.Size(230, 455);
+            this.selDBObjects.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selDBObjects.SQLKonjunktion = "AND";
             this.selDBObjects.TabIndex = 4;
             this.selDBObjects.Text = "Object list";
             this.selDBObjects.TextCaption = "text";
             this.selDBObjects.TextWith = 189;
             this.selDBObjects.Title = "";
+            this.selDBObjects.UseFiltering = false;
+            this.selDBObjects.UseFilteringAutocomplete = false;
             this.selDBObjects.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             this.selDBObjects.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selDBObjects_ItemSelect);
             // 
@@ -720,6 +747,7 @@
             this.hsCreateCVS.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreateCVS.FlatAppearance.BorderSize = 0;
             this.hsCreateCVS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreateCVS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateCVS.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCreateCVS.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
             this.hsCreateCVS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -733,6 +761,8 @@
             this.hsCreateCVS.MarkMode = false;
             this.hsCreateCVS.Name = "hsCreateCVS";
             this.hsCreateCVS.NonMarkedText = "Create CSV";
+            this.hsCreateCVS.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateCVS.ShowShortcut = false;
             this.hsCreateCVS.Size = new System.Drawing.Size(99, 56);
             this.hsCreateCVS.TabIndex = 7;
             this.hsCreateCVS.Text = "Create CSV";
@@ -769,6 +799,7 @@
             this.hsSaveSourceCodes.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSourceCodes.FlatAppearance.BorderSize = 0;
             this.hsSaveSourceCodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSourceCodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSourceCodes.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSourceCodes.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
             this.hsSaveSourceCodes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -782,6 +813,8 @@
             this.hsSaveSourceCodes.MarkMode = false;
             this.hsSaveSourceCodes.Name = "hsSaveSourceCodes";
             this.hsSaveSourceCodes.NonMarkedText = "Create sourcecode";
+            this.hsSaveSourceCodes.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSourceCodes.ShowShortcut = false;
             this.hsSaveSourceCodes.Size = new System.Drawing.Size(127, 56);
             this.hsSaveSourceCodes.TabIndex = 6;
             this.hsSaveSourceCodes.Text = "Create sourcecode";
@@ -835,6 +868,7 @@
             this.pnlXML_UPPER.Name = "pnlXML_UPPER";
             this.pnlXML_UPPER.Size = new System.Drawing.Size(1587, 61);
             this.pnlXML_UPPER.TabIndex = 1;
+            this.pnlXML_UPPER.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlXML_UPPER_Paint);
             // 
             // gbSourceCode
             // 
@@ -870,6 +904,7 @@
             this.hsSelectPath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSelectPath.FlatAppearance.BorderSize = 0;
             this.hsSelectPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSelectPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSelectPath.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSelectPath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsSelectPath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -882,6 +917,8 @@
             this.hsSelectPath.MarkMode = false;
             this.hsSelectPath.Name = "hsSelectPath";
             this.hsSelectPath.NonMarkedText = "";
+            this.hsSelectPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelectPath.ShowShortcut = false;
             this.hsSelectPath.Size = new System.Drawing.Size(65, 30);
             this.hsSelectPath.TabIndex = 4;
             this.hsSelectPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -917,6 +954,7 @@
             this.hsCreateClasses.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreateClasses.FlatAppearance.BorderSize = 0;
             this.hsCreateClasses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreateClasses.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateClasses.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCreateClasses.Image = global::FBXpert.Properties.Resources.applications_system;
             this.hsCreateClasses.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_32x;
@@ -929,6 +967,8 @@
             this.hsCreateClasses.MarkMode = false;
             this.hsCreateClasses.Name = "hsCreateClasses";
             this.hsCreateClasses.NonMarkedText = "";
+            this.hsCreateClasses.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateClasses.ShowShortcut = false;
             this.hsCreateClasses.Size = new System.Drawing.Size(45, 57);
             this.hsCreateClasses.TabIndex = 5;
             this.hsCreateClasses.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -964,6 +1004,7 @@
             this.hsSaveXML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveXML.FlatAppearance.BorderSize = 0;
             this.hsSaveXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveXML.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveXML.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
             this.hsSaveXML.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
@@ -976,6 +1017,8 @@
             this.hsSaveXML.MarkMode = false;
             this.hsSaveXML.Name = "hsSaveXML";
             this.hsSaveXML.NonMarkedText = "";
+            this.hsSaveXML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXML.ShowShortcut = false;
             this.hsSaveXML.Size = new System.Drawing.Size(45, 57);
             this.hsSaveXML.TabIndex = 4;
             this.hsSaveXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1035,6 +1078,7 @@
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1074,6 +1118,7 @@
             this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClearMessages.FlatAppearance.BorderSize = 0;
             this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1087,6 +1132,8 @@
             this.hsClearMessages.MarkMode = false;
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
+            this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShowShortcut = false;
             this.hsClearMessages.Size = new System.Drawing.Size(45, 42);
             this.hsClearMessages.TabIndex = 1;
             this.hsClearMessages.Text = "Clear";

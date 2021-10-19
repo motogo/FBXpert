@@ -58,12 +58,16 @@ namespace FBExpert.DataClasses
             if (node != null)
             {
                 node.Tag = obj;
-                node.Text = text;
-              
                 if (obj != null)
+                {
                     node.ToolTipText = obj.GetType().ToString();
+                    node.Text = (obj.GetType() == typeof(DBRegistrationClass)) ? ((DBRegistrationClass)obj).GetCaption() : text;
+                }
                 else
+                {
+                    node.Text = "object -> null";
                     node.ToolTipText = "object -> null";
+                }
             }
             return node;
         }
@@ -73,12 +77,7 @@ namespace FBExpert.DataClasses
             if (node != null)
             {
                 node.Tag = obj;
-               
-
-                if (obj != null)
-                    node.ToolTipText = obj.GetType().ToString();
-                else
-                    node.ToolTipText = "object -> null";
+                node.ToolTipText = (obj != null) ? obj.GetType().ToString() : "object -> null";
             }
             return node;
         }
@@ -88,7 +87,6 @@ namespace FBExpert.DataClasses
             if (node != null)
             {
                 node.Text= text;
-               
             }
             return node;
         }

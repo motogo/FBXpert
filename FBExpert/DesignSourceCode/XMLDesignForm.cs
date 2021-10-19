@@ -100,92 +100,10 @@ namespace FBXpert.SonstForms
             var serializer = new ConfigurationContainer().Create();
             var xml = serializer.Serialize(fs,_ddc);
 
-           
-
-//            var serializer = new XmlSerializer(typeof(DatabaseDesignClass));
-          //  var fs = new FileStream(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml", FileMode.Create);
-            //serializer.Serialize(_ddc,ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml");
             fs.Close();
             xmlEditStruktur.LoadXmlFromFile(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml");
         }
-        /*
-        public void RefreshXml2()
-        {
-            string cmd = SQLStatementsClass.Instance.GetForRefreshXML(_dbReg.Version);
-            try
-            {
-                var con2 = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
-                con2.Open();
-
-                var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
-                con.Open();
-
-                var fcmd = new FbCommand(cmd, con);
-                var dread = fcmd.ExecuteReader();
-                if (!dread.HasRows) return;
-
-
-                var strl = new StringBuilder();
-                strl.AppendLine("<SCHEMA Name='NewProfile'>");
-
-                var n = 0;
-                while (dread.Read())
-                {
-                    var ob = dread.GetValue(0);
-                    int tp = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), -1);
-
-                    var enc = System.Text.Encoding.Default;
-                    var vn = ob.ToString().Trim();
-
-                    if (tp == (int)FBRelationTypeIndex.Table)
-                    {
-                        strl.AppendLine("<TABLE Name='" + vn + "'>");
-                    }
-                    else if (tp == (int)FBRelationTypeIndex.View)
-                    {
-                        strl.AppendLine("<VIEW Name='" + vn + "'>");
-                    }
-
-                    string fcmd3 = SQLStatementsClass.Instance.GetFieldsForRefreshXML(_dbReg.Version, vn);
-
-                    var fcmd2 = new FbCommand(fcmd3, con2);
-                    var dread2 = fcmd2.ExecuteReader();
-                    if (dread2.HasRows)
-                    {
-                        var strl2 = new StringBuilder();
-                        while (dread2.Read())
-                        {
-                            var fieldname = dread2.GetValue(1);
-                            int length = StaticFunctionsClass.ToIntDef(dread2.GetValue(5).ToString().Trim(), 0);
-                            string type = dread2.GetValue(4).ToString().Trim();
-                            string virtualType = StaticVariablesClass.ConvertDesignType(type, length);
-                            int nullflag = StaticFunctionsClass.ToIntDef(dread2.GetValue(11).ToString().Trim(), 0);
-                            strl.AppendLine("    <FIELD Name='" + fieldname.ToString().Trim() + "'>");
-                            strl.AppendLine("        <TYP>" + virtualType + "</TYP>");
-                            strl.AppendLine("        <LENGTH>" + length.ToString() + "</LENGTH>");
-                            strl.AppendLine(nullflag <= 0 ? "        <NULLABLE>YES</NULLABLE>" : "        <NULLABLE>NO</NULLABLE>");
-                            strl.AppendLine("    </FIELD>");
-                        }
-                    }
-                    switch (tp)
-                    {
-                        case (int)FBRelationTypeIndex.Table:
-                            strl.AppendLine("</TABLE>");
-                            break;
-                        case (int)FBRelationTypeIndex.View:
-                            strl.AppendLine("</VIEW>");
-                            break;
-                    }
-                }
-                strl.AppendLine("</SCHEMA>");                    
-                n++;
-            }
-            catch (Exception ex)
-            {
-                _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->RefreshXML->" + ex.Message);
-            }
-        }
-        */
+        
         private void hsSave_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = @"XML|*.xml|All|*.*";
@@ -283,8 +201,11 @@ namespace FBXpert.SonstForms
             {             
                 selDBObjects.Add($@"Cb{tc.Name}", CheckState.Checked, tc);
             }
-            if(selDBObjects.ItemDatas.Count > 0)
-            selDBObjects.SelectedIndex = 0;
+            if (selDBObjects.ItemDatas.Count > 0)
+            {
+                selDBObjects.SelectedIndex = 0;
+                SelectObjectItems();
+            }
         }
 
         private void UpdateCodeAttributes()
@@ -349,8 +270,11 @@ namespace FBXpert.SonstForms
             }
             return st;
         }
-
         private void selDBObjects_ItemSelect(object sender, SelectItemEventArgs e)
+        {
+            SelectObjectItems();
+        }
+        private void SelectObjectItems()
         {
             fctSource.Clear();
             if (selDBObjects.SelectedIndex < 0) return;
@@ -402,10 +326,10 @@ namespace FBXpert.SonstForms
 
             try
             {
-                var fi = new FileInfo(txtSourceCodePath.Text + "\\DBGlobalFunctionsClass.cs");
+                var fi = new FileInfo($@"{txtSourceCodePath.Text}\DBGlobalFunctionsClass.cs");
                 if (fi.Directory != null && fi.Directory.Exists)
                 {
-                    File.WriteAllText(txtSourceCodePath.Text + "\\DBGlobalFunctionsClass.cs", gsource);
+                    File.WriteAllText($@"{txtSourceCodePath.Text}\DBGlobalFunctionsClass.cs", gsource);
                 }
             }
             catch(Exception ex)
@@ -420,10 +344,10 @@ namespace FBXpert.SonstForms
 
                 try
                 {
-                    var fi = new FileInfo(txtSourceCodePath.Text + "\\" + itm.Text + "Class.cs");
+                    var fi = new FileInfo($@"{txtSourceCodePath.Text}\{itm.Text}Class.cs");
                     if (fi.Directory != null && fi.Directory.Exists)
                     {
-                        File.WriteAllText(txtSourceCodePath.Text + "\\" + itm.Text + "Class.cs", source);
+                        File.WriteAllText($@"{txtSourceCodePath.Text}\{itm.Text}Class.cs", source);
                     }
                 }
                 catch(Exception ex)
@@ -434,7 +358,8 @@ namespace FBXpert.SonstForms
                 pbExport.Value++;
                 gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
                 Application.DoEvents();
-            }           
+            }
+            
         }
 
         private void XMLDesignForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -454,10 +379,8 @@ namespace FBXpert.SonstForms
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             if (!_codeAttributesChanged) return;
-
             object[] param = { Environment.NewLine };
             _codeAttributesChanged = false;
-            
         }
         
         private void cmsSourceCode_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -550,7 +473,7 @@ namespace FBXpert.SonstForms
                 MinFragmentLength = 1
             };
 
-            //generate 456976 words
+            //generate words
             var randomWords = new List<string>();            
             //set words as autocomplete source
             _popupMenu.Items.SetAutocompleteItems(randomWords);
@@ -662,8 +585,7 @@ namespace FBXpert.SonstForms
                         }
                     }
                 }
-                
-                
+
                 pbExport.Value++;
                 gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
                 Application.DoEvents();
@@ -677,17 +599,7 @@ namespace FBXpert.SonstForms
             {
                 fctSource.SaveToFile(saveFileDialog2.FileName,Encoding.UTF8);
             }
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-        {
-
-        }
+        }       
 
         private void tabPageCreateAttributes_Leave(object sender, EventArgs e)
         {
@@ -697,6 +609,11 @@ namespace FBXpert.SonstForms
         private void tabPageCreateAttributes_Enter(object sender, EventArgs e)
         {
             _codeAttributesChanged = false;
+        }
+
+        private void pnlXML_UPPER_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

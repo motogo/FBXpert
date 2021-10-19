@@ -129,7 +129,7 @@ namespace FBExpert
             _dbReg.SkipForSelect                        = StaticFunctionsClass.ToLongDef(txtSkipForSelect.Text, 1000);
             _dbReg.MaxRowsForSelect                     = StaticFunctionsClass.ToLongDef(txtTableMaxRows.Text, 0);
             */
-            _dbReg.SetClientLibrary(txtClientLibrary.Text);
+            _dbReg.ClientLibrary = txtClientLibrary.Text;
             _dbReg.CodeSettings.SourceCodeNamespace     = txtDBNamespace.Text;
             _dbReg.CodeSettings.SourceCodeOutputPath    = txtSourcecodeOutputPath.Text;
             SetServerDatas();
@@ -190,7 +190,7 @@ namespace FBExpert
 
 
             GetClientLibraryAndBinPath();
-            _dbReg.SetClientLibrary(txtClientLibrary.Text);
+            _dbReg.ClientLibrary = txtClientLibrary.Text;
             txtLocation.Text                    = _dbReg.DatabasePath;
             txtServer.Text                      = _dbReg.Server;
             //txtFirebirdBinaryPath.Text          = _dbReg._firebirdBinaryPath;            
@@ -318,7 +318,7 @@ namespace FBExpert
             txtMaxPoolSize.Text             = dc.MaxPoolSize.ToString();
             txtMinPoolSize.Text             = dc.MinPoolSize.ToString();
             txtConnectionLifetime.Text      = dc.ConnectionLifetime.ToString();
-            txtClientLibrary.Text           = dc.GetClientLibrary();            
+            txtClientLibrary.Text           = dc.ClientLibrary;            
             cbPooling.Checked               = dc.Pooling;
 
             SetServerUIVisiblies();
@@ -328,7 +328,7 @@ namespace FBExpert
         private void DatabaseConfigForm_Load(object sender, EventArgs e)
         {  
             oldserver = _dbReg.Server;
-            //fbdPath.SelectedPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\{_dbReg.Version}\fbclient.dll";
+            
             
             FormDesign.SetFormLeft(this);
             LanguageChanged();                

@@ -35,8 +35,15 @@ namespace FBXpert.Globals
                 string[] mldarr = mld.Trim().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (mldarr.Length > 1)
                 {                    
-                    int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1], -1);
-                    result = (n2 > 10) ? $@"5->{errorstring.Substring(n2 - 5, 10)}" : $@"{n2}->{errorstring.Substring(0, n2)}";
+                    int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1].Trim(), -1);
+                    if (n2 <= 0)
+                    {
+                        result = errorstring;
+                    }
+                    else
+                    {
+                        result = (n2 > 10) ? $@"5->{errorstring.Substring(n2 - 5, 10)}" : $@"{n2}->{errorstring.Substring(0, n2)}";
+                    }
                 }
             }
             return result;
@@ -69,10 +76,10 @@ namespace FBXpert.Globals
             int inx2 = errorString.LastIndexOf(" found");
             string estr = errorString.Substring(inx1+11,inx2-inx1-11);
             long.TryParse(estr, out long ecc);
-            string err = string.Empty;
+            
             if((ecc > 0)&&(DBReg.GetErrorCodes().Errors.Count > 0))
             {
-                if(DBReg.GetErrorCodes().Errors.TryGetValue(ecc,out err))
+                if(DBReg.GetErrorCodes().Errors.TryGetValue(ecc,out string err))
                 return errorString.Replace($@"{ecc} found",$@"Error Code:{err}").Replace("No message for error code","");
             }
             return errorString;            

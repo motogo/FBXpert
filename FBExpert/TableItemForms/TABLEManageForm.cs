@@ -1651,7 +1651,8 @@ namespace FBExpert
             bsTableContent.DataSource = dsTableContent;
             dgvResults.DataSource = bsTableContent;
             hsRefreshData.Enabled = true;
-            sfbTableData.Enabled = true;  
+            sfbTableData.Enabled = true;
+            if (dsTableContent.Tables.Count <= 0) return;
             if (bsTableContent.DataMember == null) return;
             
             bsTableContent.DataMember = "Table";

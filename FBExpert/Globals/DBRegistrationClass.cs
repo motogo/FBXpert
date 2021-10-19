@@ -82,7 +82,17 @@ namespace FBXpert.Globals
         {            
             return String.Format("{0,-30} ({1}) V{2}",  Alias, GetFullDatabasePath() , Version);
         }
-        
+
+        public string GetCaption(int cnt)
+        {
+            
+            return (ConnectionType == eConnectionType.embedded) ? $@"{Alias} open:{cnt - 1}, embedded" : $@"{Alias} open:{cnt - 1}";
+        }
+        public string GetCaption()
+        {
+            return (ConnectionType == eConnectionType.embedded) ? $@"{Alias} , embedded" : $@"{Alias}";
+        }
+
         public void SetNode(TreeNode tn)
         {
             _treeNode = tn;

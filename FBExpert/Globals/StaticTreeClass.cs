@@ -5454,6 +5454,8 @@ namespace FBExpert
             {
                 using (TransactionScope c = new TransactionScope())
                 {
+
+                    //con.ConnectionString = $@"User = SYSDBA; Password = masterkey; Database = D:\Projekte2015\Passwords\MainSource\bin\Debug\DATA\PDATA30.FDB; DataSource =; Port = 3050; Dialect = 3; Charset = NONE; Role =; Connection lifetime = 0; Connection timeout = 15; Pooling = True; MaxPoolSize = 15; MinPoolSize = 0; Packet Size = 8192; Server Type = 1; ClientLibrary = D:\Projekte2015\FBXpert\FBExpert\bin\Debug\ClientLibraries\FB3\X64\fbclient.dll";
                     con.Open();
 
                     var fcmd = new FbCommand(fields_cmd, con);
