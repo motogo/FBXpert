@@ -53,7 +53,9 @@ namespace FBExpert
             this.hsLoad = new SeControlsLib.HotSpot();
             this.gbPassword = new System.Windows.Forms.GroupBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.hsShowPassword = new SeControlsLib.HotSpot();
             this.gbPort = new System.Windows.Forms.GroupBox();
+            this.numPort = new System.Windows.Forms.NumericUpDown();
             this.gbUser = new System.Windows.Forms.GroupBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.gbConnectionType = new System.Windows.Forms.GroupBox();
@@ -62,6 +64,7 @@ namespace FBExpert
             this.txtServer = new System.Windows.Forms.TextBox();
             this.rbRemote = new System.Windows.Forms.RadioButton();
             this.gbPacketsize = new System.Windows.Forms.GroupBox();
+            this.numPacketSize = new System.Windows.Forms.NumericUpDown();
             this.tabXPertUsedAttributes = new System.Windows.Forms.TabPage();
             this.pnlAttributesCenter = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -110,14 +113,12 @@ namespace FBExpert
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormName = new System.Windows.Forms.Panel();
+            this.lblFormName = new System.Windows.Forms.Label();
             this.hsGlobalApplicationSettings = new SeControlsLib.HotSpot();
             this.hsClone = new SeControlsLib.HotSpot();
-            this.lblFormName = new System.Windows.Forms.Label();
             this.hsSave = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
-            this.numPort = new System.Windows.Forms.NumericUpDown();
-            this.numPacketSize = new System.Windows.Forms.NumericUpDown();
-            this.pnlFormName = new System.Windows.Forms.Panel();
             this.pnlCenter.SuspendLayout();
             this.tabcontrolConfig.SuspendLayout();
             this.tabBasicConf.SuspendLayout();
@@ -130,10 +131,12 @@ namespace FBExpert
             this.gbDatabaseLocation.SuspendLayout();
             this.gbPassword.SuspendLayout();
             this.gbPort.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.gbUser.SuspendLayout();
             this.gbConnectionType.SuspendLayout();
             this.gbServer.SuspendLayout();
             this.gbPacketsize.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPacketSize)).BeginInit();
             this.tabXPertUsedAttributes.SuspendLayout();
             this.pnlAttributesCenter.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -154,8 +157,6 @@ namespace FBExpert
             this.gbDatenbankAlias.SuspendLayout();
             this.gbLivettime.SuspendLayout();
             this.pnlUpper.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPacketSize)).BeginInit();
             this.pnlFormName.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,6 +229,7 @@ namespace FBExpert
             // txtCreateDatabaseLocationFile
             // 
             this.txtCreateDatabaseLocationFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCreateDatabaseLocationFile.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCreateDatabaseLocationFile.Location = new System.Drawing.Point(3, 16);
             this.txtCreateDatabaseLocationFile.Name = "txtCreateDatabaseLocationFile";
             this.txtCreateDatabaseLocationFile.Size = new System.Drawing.Size(592, 20);
@@ -352,7 +354,7 @@ namespace FBExpert
             // 
             this.txtConnectionString.BackColor = System.Drawing.SystemColors.Info;
             this.txtConnectionString.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtConnectionString.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConnectionString.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConnectionString.Location = new System.Drawing.Point(3, 16);
             this.txtConnectionString.Multiline = true;
             this.txtConnectionString.Name = "txtConnectionString";
@@ -372,6 +374,7 @@ namespace FBExpert
             // cbCollation
             // 
             this.cbCollation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbCollation.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCollation.FormattingEnabled = true;
             this.cbCollation.Items.AddRange(new object[] {
             "NONE",
@@ -390,9 +393,9 @@ namespace FBExpert
             // gbRole
             // 
             this.gbRole.Controls.Add(this.txtRole);
-            this.gbRole.Location = new System.Drawing.Point(415, 143);
+            this.gbRole.Location = new System.Drawing.Point(476, 143);
             this.gbRole.Name = "gbRole";
-            this.gbRole.Size = new System.Drawing.Size(199, 41);
+            this.gbRole.Size = new System.Drawing.Size(219, 41);
             this.gbRole.TabIndex = 7;
             this.gbRole.TabStop = false;
             this.gbRole.Text = "Role";
@@ -400,9 +403,10 @@ namespace FBExpert
             // txtRole
             // 
             this.txtRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRole.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRole.Location = new System.Drawing.Point(3, 16);
             this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(193, 20);
+            this.txtRole.Size = new System.Drawing.Size(213, 20);
             this.txtRole.TabIndex = 1;
             this.txtRole.TextChanged += new System.EventHandler(this.txtRole_TextChanged);
             // 
@@ -419,6 +423,7 @@ namespace FBExpert
             // cbCharSet
             // 
             this.cbCharSet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbCharSet.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCharSet.FormattingEnabled = true;
             this.cbCharSet.Items.AddRange(new object[] {
             "NONE",
@@ -452,6 +457,7 @@ namespace FBExpert
             // txtLocation
             // 
             this.txtLocation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLocation.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocation.Location = new System.Drawing.Point(3, 16);
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(637, 20);
@@ -564,9 +570,10 @@ namespace FBExpert
             // gbPassword
             // 
             this.gbPassword.Controls.Add(this.txtPassword);
+            this.gbPassword.Controls.Add(this.hsShowPassword);
             this.gbPassword.Location = new System.Drawing.Point(210, 143);
             this.gbPassword.Name = "gbPassword";
-            this.gbPassword.Size = new System.Drawing.Size(199, 41);
+            this.gbPassword.Size = new System.Drawing.Size(260, 41);
             this.gbPassword.TabIndex = 5;
             this.gbPassword.TabStop = false;
             this.gbPassword.Text = "Password";
@@ -574,13 +581,66 @@ namespace FBExpert
             // txtPassword
             // 
             this.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPassword.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(3, 16);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(193, 20);
+            this.txtPassword.Size = new System.Drawing.Size(215, 20);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "masterkey";
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            // 
+            // hsShowPassword
+            // 
+            this.hsShowPassword.BackColor = System.Drawing.Color.Transparent;
+            this.hsShowPassword.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsShowPassword.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsShowPassword.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsShowPassword.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsShowPassword.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsShowPassword.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsShowPassword.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsShowPassword.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsShowPassword.FlatAppearance.BorderSize = 0;
+            this.hsShowPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsShowPassword.ForeColor = System.Drawing.SystemColors.Info;
+            this.hsShowPassword.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsShowPassword.Image = global::FBXpert.Properties.Resources.augewatchoff_x24;
+            this.hsShowPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hsShowPassword.ImageHover = global::FBXpert.Properties.Resources.augewatch_x24;
+            this.hsShowPassword.ImageToggleOnSelect = false;
+            this.hsShowPassword.Location = new System.Drawing.Point(218, 16);
+            this.hsShowPassword.Marked = false;
+            this.hsShowPassword.MarkedColor = System.Drawing.Color.Transparent;
+            this.hsShowPassword.MarkedStyle = SeControlsLib.frameStyle.none;
+            this.hsShowPassword.MarkedText = "";
+            this.hsShowPassword.MarkMode = true;
+            this.hsShowPassword.Name = "hsShowPassword";
+            this.hsShowPassword.NonMarkedText = "";
+            this.hsShowPassword.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsShowPassword.ShowShortcut = false;
+            this.hsShowPassword.Size = new System.Drawing.Size(39, 22);
+            this.hsShowPassword.TabIndex = 4;
+            this.hsShowPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.hsShowPassword.ToolTipActive = false;
+            this.hsShowPassword.ToolTipAutomaticDelay = 500;
+            this.hsShowPassword.ToolTipAutoPopDelay = 5000;
+            this.hsShowPassword.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsShowPassword.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsShowPassword.ToolTipFor4ContextMenu = true;
+            this.hsShowPassword.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsShowPassword.ToolTipInitialDelay = 500;
+            this.hsShowPassword.ToolTipIsBallon = false;
+            this.hsShowPassword.ToolTipOwnerDraw = false;
+            this.hsShowPassword.ToolTipReshowDelay = 100;
+            this.hsShowPassword.ToolTipShowAlways = false;
+            this.hsShowPassword.ToolTipText = "";
+            this.hsShowPassword.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsShowPassword.ToolTipTitle = "";
+            this.hsShowPassword.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsShowPassword.UseVisualStyleBackColor = false;
+            this.hsShowPassword.MarkedReached += new System.EventHandler<SeControlsLib.MarkedEventArgs>(this.hsShowPassword_MarkedReached);
             // 
             // gbPort
             // 
@@ -591,6 +651,25 @@ namespace FBExpert
             this.gbPort.TabIndex = 6;
             this.gbPort.TabStop = false;
             this.gbPort.Text = "Port";
+            // 
+            // numPort
+            // 
+            this.numPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numPort.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numPort.Location = new System.Drawing.Point(3, 16);
+            this.numPort.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(67, 20);
+            this.numPort.TabIndex = 3;
+            this.numPort.Value = new decimal(new int[] {
+            3050,
+            0,
+            0,
+            0});
             // 
             // gbUser
             // 
@@ -605,6 +684,7 @@ namespace FBExpert
             // txtUser
             // 
             this.txtUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUser.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.Location = new System.Drawing.Point(3, 16);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(193, 20);
@@ -649,6 +729,7 @@ namespace FBExpert
             // txtServer
             // 
             this.txtServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtServer.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtServer.Location = new System.Drawing.Point(3, 16);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(193, 20);
@@ -676,6 +757,30 @@ namespace FBExpert
             this.gbPacketsize.TabIndex = 3;
             this.gbPacketsize.TabStop = false;
             this.gbPacketsize.Text = "Packetsize";
+            // 
+            // numPacketSize
+            // 
+            this.numPacketSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numPacketSize.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numPacketSize.Location = new System.Drawing.Point(3, 16);
+            this.numPacketSize.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numPacketSize.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.numPacketSize.Name = "numPacketSize";
+            this.numPacketSize.Size = new System.Drawing.Size(100, 20);
+            this.numPacketSize.TabIndex = 2;
+            this.numPacketSize.Value = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
             // 
             // tabXPertUsedAttributes
             // 
@@ -734,6 +839,7 @@ namespace FBExpert
             // txtConnectionLifetime
             // 
             this.txtConnectionLifetime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtConnectionLifetime.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConnectionLifetime.Location = new System.Drawing.Point(3, 16);
             this.txtConnectionLifetime.Name = "txtConnectionLifetime";
             this.txtConnectionLifetime.Size = new System.Drawing.Size(57, 20);
@@ -754,6 +860,7 @@ namespace FBExpert
             // txtMinPoolSize
             // 
             this.txtMinPoolSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMinPoolSize.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMinPoolSize.Location = new System.Drawing.Point(3, 16);
             this.txtMinPoolSize.Name = "txtMinPoolSize";
             this.txtMinPoolSize.Size = new System.Drawing.Size(64, 20);
@@ -774,6 +881,7 @@ namespace FBExpert
             // txtMaxPoolSize
             // 
             this.txtMaxPoolSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMaxPoolSize.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaxPoolSize.Location = new System.Drawing.Point(3, 16);
             this.txtMaxPoolSize.Multiline = true;
             this.txtMaxPoolSize.Name = "txtMaxPoolSize";
@@ -985,6 +1093,7 @@ namespace FBExpert
             // txtAlternativeSetTermCharacter
             // 
             this.txtAlternativeSetTermCharacter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtAlternativeSetTermCharacter.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAlternativeSetTermCharacter.Location = new System.Drawing.Point(3, 16);
             this.txtAlternativeSetTermCharacter.Name = "txtAlternativeSetTermCharacter";
             this.txtAlternativeSetTermCharacter.Size = new System.Drawing.Size(100, 20);
@@ -1057,6 +1166,7 @@ namespace FBExpert
             // txtClientLibrary
             // 
             this.txtClientLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtClientLibrary.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientLibrary.Location = new System.Drawing.Point(3, 16);
             this.txtClientLibrary.Name = "txtClientLibrary";
             this.txtClientLibrary.ReadOnly = true;
@@ -1078,6 +1188,7 @@ namespace FBExpert
             // txtFirebirdBinaryPath
             // 
             this.txtFirebirdBinaryPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFirebirdBinaryPath.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFirebirdBinaryPath.Location = new System.Drawing.Point(3, 16);
             this.txtFirebirdBinaryPath.Name = "txtFirebirdBinaryPath";
             this.txtFirebirdBinaryPath.ReadOnly = true;
@@ -1157,6 +1268,7 @@ namespace FBExpert
             // txtDatabaseAlias
             // 
             this.txtDatabaseAlias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDatabaseAlias.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDatabaseAlias.Location = new System.Drawing.Point(3, 16);
             this.txtDatabaseAlias.Name = "txtDatabaseAlias";
             this.txtDatabaseAlias.Size = new System.Drawing.Size(302, 20);
@@ -1228,6 +1340,7 @@ namespace FBExpert
             // 
             this.txtLifetime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLifetime.Enabled = false;
+            this.txtLifetime.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLifetime.Location = new System.Drawing.Point(3, 16);
             this.txtLifetime.Name = "txtLifetime";
             this.txtLifetime.Size = new System.Drawing.Size(110, 20);
@@ -1259,6 +1372,25 @@ namespace FBExpert
             this.pnlUpper.Name = "pnlUpper";
             this.pnlUpper.Size = new System.Drawing.Size(758, 51);
             this.pnlUpper.TabIndex = 3;
+            // 
+            // pnlFormName
+            // 
+            this.pnlFormName.Controls.Add(this.lblFormName);
+            this.pnlFormName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFormName.Location = new System.Drawing.Point(374, 0);
+            this.pnlFormName.Name = "pnlFormName";
+            this.pnlFormName.Size = new System.Drawing.Size(384, 51);
+            this.pnlFormName.TabIndex = 6;
+            // 
+            // lblFormName
+            // 
+            this.lblFormName.AutoSize = true;
+            this.lblFormName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormName.Location = new System.Drawing.Point(6, 18);
+            this.lblFormName.Name = "lblFormName";
+            this.lblFormName.Size = new System.Drawing.Size(97, 20);
+            this.lblFormName.TabIndex = 3;
+            this.lblFormName.Text = "Tablename";
             // 
             // hsGlobalApplicationSettings
             // 
@@ -1364,16 +1496,6 @@ namespace FBExpert
             this.hsClone.UseVisualStyleBackColor = false;
             this.hsClone.Click += new System.EventHandler(this.hsClone_Click);
             // 
-            // lblFormName
-            // 
-            this.lblFormName.AutoSize = true;
-            this.lblFormName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFormName.Location = new System.Drawing.Point(6, 18);
-            this.lblFormName.Name = "lblFormName";
-            this.lblFormName.Size = new System.Drawing.Size(97, 20);
-            this.lblFormName.TabIndex = 3;
-            this.lblFormName.Text = "Tablename";
-            // 
             // hsSave
             // 
             this.hsSave.BackColor = System.Drawing.Color.Transparent;
@@ -1476,56 +1598,6 @@ namespace FBExpert
             this.hsClose.UseVisualStyleBackColor = false;
             this.hsClose.Click += new System.EventHandler(this.hsClose_Click_1);
             // 
-            // numPort
-            // 
-            this.numPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPort.Location = new System.Drawing.Point(3, 16);
-            this.numPort.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(67, 20);
-            this.numPort.TabIndex = 3;
-            this.numPort.Value = new decimal(new int[] {
-            3050,
-            0,
-            0,
-            0});
-            // 
-            // numPacketSize
-            // 
-            this.numPacketSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numPacketSize.Location = new System.Drawing.Point(3, 16);
-            this.numPacketSize.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numPacketSize.Minimum = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
-            this.numPacketSize.Name = "numPacketSize";
-            this.numPacketSize.Size = new System.Drawing.Size(100, 20);
-            this.numPacketSize.TabIndex = 2;
-            this.numPacketSize.Value = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            // 
-            // pnlFormName
-            // 
-            this.pnlFormName.Controls.Add(this.lblFormName);
-            this.pnlFormName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFormName.Location = new System.Drawing.Point(374, 0);
-            this.pnlFormName.Name = "pnlFormName";
-            this.pnlFormName.Size = new System.Drawing.Size(384, 51);
-            this.pnlFormName.TabIndex = 6;
-            // 
             // DatabaseConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1555,6 +1627,7 @@ namespace FBExpert
             this.gbPassword.ResumeLayout(false);
             this.gbPassword.PerformLayout();
             this.gbPort.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.gbUser.ResumeLayout(false);
             this.gbUser.PerformLayout();
             this.gbConnectionType.ResumeLayout(false);
@@ -1562,6 +1635,7 @@ namespace FBExpert
             this.gbServer.ResumeLayout(false);
             this.gbServer.PerformLayout();
             this.gbPacketsize.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numPacketSize)).EndInit();
             this.tabXPertUsedAttributes.ResumeLayout(false);
             this.pnlAttributesCenter.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -1595,8 +1669,6 @@ namespace FBExpert
             this.gbLivettime.ResumeLayout(false);
             this.gbLivettime.PerformLayout();
             this.pnlUpper.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPacketSize)).EndInit();
             this.pnlFormName.ResumeLayout(false);
             this.pnlFormName.PerformLayout();
             this.ResumeLayout(false);
@@ -1691,5 +1763,6 @@ namespace FBExpert
         private System.Windows.Forms.NumericUpDown numPort;
         private System.Windows.Forms.NumericUpDown numPacketSize;
         private System.Windows.Forms.Panel pnlFormName;
+        private SeControlsLib.HotSpot hsShowPassword;
     }
 }

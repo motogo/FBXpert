@@ -702,6 +702,9 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_POSITION,");
               //  sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_SOURCE,");
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME,");
+
+                sb.Append($@"RDB$FIELDS.RDB$FIELD_SUB_TYPE,");
+                sb.Append($@"RDB$FIELDS.RDB$SEGMENT_LENGTH,");
                 sb.Append($@"RDB$FIELDS.RDB$CHARACTER_LENGTH,");
                 sb.Append($@"RDB$FIELDS.RDB$FIELD_NAME,");
                 sb.Append($@"RDB$FIELDS.RDB$FIELD_SCALE,");

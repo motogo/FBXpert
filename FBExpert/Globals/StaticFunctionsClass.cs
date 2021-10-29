@@ -21,6 +21,32 @@ namespace FBXpert.Globals
         }
     };
 
+    public static class AppStrings
+    {
+        private static int blocktab = 4;
+        public static string Frm(int lvl)
+        {
+            return "{0," + lvl * blocktab + "}{1}";
+        }
+        public static string Format(int lvl, string txt)
+        {
+            return String.Format(Frm(lvl), "", txt.Trim(' '));
+        }
+        public static string FormatTab(int lvl)
+        {
+            return String.Format(Frm(lvl), "","");
+        }
+        public static string BlockStart(int i)
+        {
+            return Format(i, "{ " + Environment.NewLine);
+        }
+
+        public static string BlockEnd(int i)
+        {
+            return Format(i, "} " + Environment.NewLine);
+        }
+    }
+
     public static class AppStaticFunctionsClass
     {
         public static string getErrorPosText(string errorstring)
@@ -255,11 +281,15 @@ namespace FBXpert.Globals
             return sb.ToString();
         }
 
+        
+
+
+
         public static string CreateComment()
         {
             var sbcomment = new StringBuilder();
             sbcomment.AppendLine($@"/* ############################### */");
-            sbcomment.AppendLine($@"/* # Create: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} # */");
+            sbcomment.AppendLine($@"/* # Create: {DateTime.Now.ToString("s")} # */");
             sbcomment.AppendLine($@"/* ############################### */");
             sbcomment.AppendLine("");
             return sbcomment.ToString();
@@ -293,8 +323,6 @@ namespace FBXpert.Globals
             sql = ReplaceButNotBefore(sql, "OUTER JOIN", dnot);
             sql = ReplaceButNotBefore(sql, "JOIN", dnot);
             sql = ReplaceButNotAfter(sql, "FROM", dnotfrom);
-                                               
-            //string cmd = string.Empty;
             int istart = 0;
             int level = 0;
             var strList = new List<string>();

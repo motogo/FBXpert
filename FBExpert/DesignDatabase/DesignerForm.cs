@@ -6,6 +6,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using Initialization;
 using MessageLibrary.SendMessages;
+using Polenter.Serialization;
 using SEListBox;
 using SharedStorages;
 using System;
@@ -15,6 +16,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace FBXDesigns
 {
@@ -91,6 +93,7 @@ namespace FBXDesigns
         {
             ddc = new DesDatabaseDesignClass
             {
+                Database = dbReg,
                 Views = new Dictionary<string, DesViewClass>(),
                 Tables = new Dictionary<string, DesTableClass>()
             };
@@ -560,6 +563,67 @@ namespace FBXDesigns
         private void CbDebug_CheckedChanged(object sender, EventArgs e)
         {
             UIDesignTableClass.debug = cbDebug.Checked;
+        }
+
+
+
+        public void SerializeCurrent()
+        {
+            int lvl = 1;
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.OmitXmlDeclaration = true;
+            settings.ConformanceLevel = ConformanceLevel.Fragment;
+            settings.CloseOutput = false;
+
+            using (XmlWriter writer = XmlWriter.Create($@"D:\temp\db.xml",settings))
+            {
+                //writer.WriteStartDocument(true);
+                //writer.WriteComment(Environment.NewLine);
+                writer.WriteString(Environment.NewLine);
+                writer.WriteStartElement(ddc.Database.Alias);
+                writer.WriteString(Environment.NewLine);
+                writer.WriteString(AppStrings.FormatTab(lvl)); writer.WriteStartElement("Tables");
+                
+                foreach (DesTableClass key in ddc.Tables.Values)
+                {
+                    writer.WriteString(Environment.NewLine);
+                    writer.WriteString(AppStrings.FormatTab(lvl + 1)); writer.WriteStartElement("Table");
+                    writer.WriteAttributeString("Name", key.Table.Name.ToString());
+                    writer.WriteString(Environment.NewLine);
+                    writer.WriteString(AppStrings.FormatTab(lvl + 2)); writer.WriteStartElement("Fields");
+                    foreach (TableFieldClass fld in key.Table.Fields.Values)
+                    {
+                        writer.WriteString(Environment.NewLine);
+                        writer.WriteString(AppStrings.FormatTab(lvl + 3)); writer.WriteStartElement("Field");
+                        writer.WriteString(Environment.NewLine);
+                        writer.WriteString(AppStrings.FormatTab(lvl + 4)); writer.WriteElementString("Name", fld.Name);
+                        writer.WriteString(Environment.NewLine);
+                        writer.WriteString(AppStrings.FormatTab(lvl + 4)); writer.WriteElementString("Type", TypeConvert.GetRawType(fld.Domain.FieldType,fld.Domain.Length));
+                        writer.WriteString(Environment.NewLine);
+                        if (key.Table.IsPrimary(fld.Name))
+                        {
+                            writer.WriteString(AppStrings.FormatTab(lvl + 4)); writer.WriteElementString("PK", key.Table.primary_constraint.Name);
+                            writer.WriteString(Environment.NewLine);
+                        }
+                        writer.WriteString(AppStrings.FormatTab(lvl + 3)); writer.WriteEndElement(); //Field
+                    }
+                    writer.WriteString(Environment.NewLine);
+                    writer.WriteString(AppStrings.FormatTab(lvl + 2)); writer.WriteEndElement(); //Fields
+                    writer.WriteString(Environment.NewLine);
+                    writer.WriteString(AppStrings.FormatTab(lvl + 1)); writer.WriteEndElement(); //Table
+                }
+                writer.WriteString(Environment.NewLine);
+                writer.WriteString(AppStrings.FormatTab(lvl)); writer.WriteEndElement(); //Tables
+                writer.WriteString(Environment.NewLine);
+                writer.WriteEndElement(); //Root
+                //writer.WriteEndDocument();
+            }
+
+        }
+
+        private void hsSaveDesign_Click(object sender, EventArgs e)
+        {
+            SerializeCurrent();
         }
     }
 }

@@ -456,6 +456,8 @@ namespace FBExpert
                                 StaticTreeClass.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
                                 tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                                 tfc.Domain.FieldType = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                                tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                                tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                                 tfc.Domain.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                                 tfc.Position = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;
                                 tfc.Domain.Name = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();

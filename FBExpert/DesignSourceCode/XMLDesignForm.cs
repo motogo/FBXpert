@@ -118,7 +118,7 @@ namespace FBXpert.SonstForms
             LanguageChanged();
             hsSearchDown.Enabled = false;
             hsSearchUp.Enabled   = false;
-            hsSeach.Enabled = txtSearchCode.TextLength > 0;           
+            hsSearch.Enabled = txtSearchCode.TextLength > 0;           
             fbdSourcePath.SelectedPath         = _dbReg.CodeSettings.SourceCodeOutputPath;
             txtSourceCodePath.Text             = _dbReg.CodeSettings.SourceCodeOutputPath;
             
@@ -536,7 +536,7 @@ namespace FBXpert.SonstForms
 
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
         {
-            hsSeach.Enabled = txtSearchCode.TextLength > 0;
+            hsSearch.Enabled = txtSearchCode.TextLength > 0;
             hsSearchDown.Enabled = false;
             hsSearchUp.Enabled = false;
         }

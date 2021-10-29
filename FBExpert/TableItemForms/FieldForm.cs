@@ -189,13 +189,6 @@ namespace FBExpert
                 return;
             }
 
-            bool FieldTypeChaned    = (OrgFieldObject.Name != FieldObject.Name);
-            bool PrimaryKeyChanged  = (OrgFieldObject.IsPrimary != FieldObject.IsPrimary);    
-            bool IsNUllChanged      = (OrgFieldObject.Domain.NotNull != FieldObject.Domain.NotNull);
-            bool PositionChanged    = ((OrgFieldObject.Position != FieldObject.Position)&&(FieldObject.Position > 0));
-            bool DefaultChanged     = (OrgFieldObject.Domain.DefaultValue != FieldObject.Domain.DefaultValue);
-            bool DescriptionChanged = (OrgFieldObject.Description != FieldObject.Description);
-
             var sb = new StringBuilder();
             string FieldName = txtFieldName.Text;
             
@@ -221,9 +214,9 @@ namespace FBExpert
                 else if (cbFieldTypes.Text == "BLOB")
                 {
                     // BLOB SUB_TYPE 0 SEGMENT SIZE 80
-                    int st = 0;
-                    if(cbBlobType.Text == "TEXT") st = 1;
-                    if(cbBlobType.Text == "BINARY") st = 0;
+                    int st = (int)eBlobSubType.BINARY;
+                    if (cbBlobType.Text == "TEXT") st = (int) eBlobSubType.TEXT;
+                    if(cbBlobType.Text == "BLR") st = (int)eBlobSubType.BLR; 
 
                     sb.Append($@" SUB_TYPE {st}");
                     int len = StaticFunctionsClass.ToIntDef(txtBlobSize.Text, 0);
@@ -310,6 +303,8 @@ namespace FBExpert
             
             bool FieldNameChanged   = (OrgFieldObject.Name != FieldObject.Name);
             bool FieldTypeChanged   = ((OrgFieldObject.Domain.FieldType != FieldObject.Domain.FieldType)
+                ||(OrgFieldObject.Domain.SubTypeNumber != FieldObject.Domain.SubTypeNumber)
+                ||(OrgFieldObject.Domain.SegmentLength != FieldObject.Domain.SegmentLength)
                 ||(OrgFieldObject.Domain.Precision != FieldObject.Domain.Precision)
                 ||(OrgFieldObject.Domain.Scale != FieldObject.Domain.Scale)
                 ||(OrgFieldObject.Domain.Length != FieldObject.Domain.Length)
@@ -346,13 +341,22 @@ namespace FBExpert
                     }
                     else if (tp == typeof (DBBlob)) 
                     {
-                       int len = StaticFunctionsClass.ToIntDef(txtBlobSize.Text, 0);
-                       string btstr = (cbBlobType.Text == "TEXT") ? $@" SUB_TYPE 1" : $@" SUB_TYPE 0";                       
-                       sb.Append(btstr);
-                       if (len > 0)
-                       {
-                           sb.Append($@" SEGMENT SIZE {len}");
-                       }
+                        int len = StaticFunctionsClass.ToIntDef(txtBlobSize.Text, 0);
+                        string btstr = $@" SUB_TYPE 0"; //binary
+                        if (cbBlobType.Text == "BLR")
+                        {
+                            btstr = $@" SUB_TYPE 2";
+                        }
+                        else if (cbBlobType.Text == "TEXT")
+                        {
+                            btstr = $@" SUB_TYPE 1";
+                        }
+
+                        sb.Append(btstr);
+                        if (len > 0)
+                        {
+                            sb.Append($@" SEGMENT SIZE {len}");
+                        }
                     }
 
                     if(!sb.ToString().EndsWith(";")) sb.Append(";");
@@ -477,23 +481,7 @@ namespace FBExpert
             gbCollate.Enabled = false;
             gbNULLDefault.Enabled = true;
 
-            bool FieldNameChanged = (OrgFieldObject.Name != FieldObject.Name);
-            bool FieldTypeChanged = ((OrgFieldObject.Domain.FieldType != FieldObject.Domain.FieldType)
-                || (OrgFieldObject.Domain.Precision != FieldObject.Domain.Precision)
-                || (OrgFieldObject.Domain.Scale != FieldObject.Domain.Scale)
-                || (OrgFieldObject.Domain.Length != FieldObject.Domain.Length)
-                || (OrgFieldObject.Domain.CharSet != FieldObject.Domain.CharSet)
-                || (OrgFieldObject.Domain.Collate != FieldObject.Domain.Collate));
-
-            bool PrimaryKeyChanged = (OrgFieldObject.IsPrimary != FieldObject.IsPrimary);
-            bool IsNUllChanged = (OrgFieldObject.Domain.NotNull != FieldObject.Domain.NotNull);
-            bool PositionChanged = ((OrgFieldObject.Position != FieldObject.Position) && (FieldObject.Position > 0));
-            bool DefaultChanged = (OrgFieldObject.Domain.DefaultValue != FieldObject.Domain.DefaultValue);
-            bool DescriptionChanged = (OrgFieldObject.Description != FieldObject.Description);
-
-            
-            
-
+           
             if (!string.IsNullOrEmpty(txtNULLDefault.Text))
             {
                 SQLScript.Add(Environment.NewLine);
@@ -581,13 +569,27 @@ namespace FBExpert
             var TempFieldobject = FieldObject;
             FieldObject = new TableFieldClass();
             FieldObject.Name                = txtFieldName.Text.Trim();
-            FieldObject.Position            = StaticFunctionsClass.ToIntDef(txtPosition.Text,OrgFieldObject.Position);                                  
+            FieldObject.Position            = StaticFunctionsClass.ToIntDef(txtPosition.Text,OrgFieldObject.Position);
             FieldObject.Domain.Precision    = StaticFunctionsClass.ToIntDef(txtPrecisionLength.Text,OrgFieldObject.Domain.Precision);
             FieldObject.Domain.Scale        = StaticFunctionsClass.ToIntDef(txtScale.Text,OrgFieldObject.Domain.Scale);
-            FieldObject.Description         = fctDescription.Text;            
+            FieldObject.Description         = fctDescription.Text;
             FieldObject.IsPrimary           = cbPrimaryKey.Checked;
             FieldObject.PK_ConstraintName   = txtPK.Text;
             FieldObject.Domain.FieldType    = StaticVariablesClass.ConvertRawNameToRawType(cbFieldTypes.Text);
+
+            if(cbBlobType.Text == "TEXT")
+            {
+                FieldObject.Domain.SubTypeNumber = (int)eBlobSubType.TEXT;
+            }
+            else if (cbBlobType.Text == "BINARY")
+            {
+                FieldObject.Domain.SubTypeNumber = (int)eBlobSubType.BINARY;
+            }
+            else if (cbBlobType.Text == "BLR")
+            {
+                FieldObject.Domain.SubTypeNumber = (int)eBlobSubType.BLR;
+            }
+            FieldObject.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(txtBlobSize.Text, 0);
             FieldObject.Domain.CharSet      = cbCharSet.Text.Trim();
             FieldObject.Domain.NotNull      = cbNotNull.Checked;
             FieldObject.Domain.Length       = StaticFunctionsClass.ToIntDef(txtLength.Text,OrgFieldObject.Domain.Length);
@@ -613,10 +615,26 @@ namespace FBExpert
             txtPK.Text              = string.IsNullOrEmpty(FieldObject.PK_ConstraintName) ? TableObject.primary_constraint?.Name : FieldObject.PK_ConstraintName;
             cbDOMAIN.Text           = FieldObject.Domain.Name;
             cbFieldTypes.Text       = StaticVariablesClass.ConvertRawTypeToRawName(FieldObject.Domain.FieldType);
+            if(FieldObject.Domain.FieldType ==  "BLOB")
+            {
+                if((FieldObject.Domain.SubTypeNumber == (int)eBlobSubType.BLR))
+                {
+                    cbBlobType.Text = "BLR";
+                }
+                else if ((FieldObject.Domain.SubTypeNumber == (int)eBlobSubType.TEXT))
+                {
+                    cbBlobType.Text = "TEXT";
+                }
+                else
+                {
+                    cbBlobType.Text = "BINARY";
+                }
+            }
             fctDescription.Text     = FieldObject.Description;
             cbCharSet.Text          = (FieldObject.Domain.CharSet == null) ? "NONE" : FieldObject.Domain.CharSet;
             cbCollate.Text          = (FieldObject.Domain.Collate == null) ? "NONE" : FieldObject.Domain.Collate;
             txtPosition.Text        = FieldObject.Position.ToString();
+            txtBlobSize.Text = FieldObject.Domain.SegmentLength.ToString();
         }
 
         private void FieldForm_Load(object sender, EventArgs e)
@@ -870,7 +888,8 @@ namespace FBExpert
 
         private void cbBlobType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!DataFilled || (tabControlFieldTypes.SelectedTab != tabPageFieldType)) return;                        
+            if (!DataFilled || (tabControlFieldTypes.SelectedTab != tabPageFieldType)) return;
+            
             MakeSQL(); 
         }
                 

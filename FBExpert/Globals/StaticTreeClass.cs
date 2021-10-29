@@ -26,16 +26,18 @@ namespace FBExpert
         public static int FieldPositionInx = 2;
         //
         public static int FieldTypeInx = 3;
-        public static int FieldLengthInx = 4;
-        public static int FieldDomainNameInx = 5;
-        public static int FieldDomainScaleInx = 6;
-        public static int FieldDefaultValueInx = 7;
-        public static int FieldDomainCollateInx = 8;
-        public static int FieldDomainCharSetInx = 9;
-        public static int FieldNotNullFlagInx = 10;
-        public static int FieldDomainDefaultValueInx = 11;
-        public static int FieldDescriptionInx = 12;
-        public static int FieldDomainDescriptionInx = 13;
+        public static int FieldSubTypeInx = 4;
+        public static int FieldSegmentLength = 5;
+        public static int FieldLengthInx = 6;
+        public static int FieldDomainNameInx = 7;
+        public static int FieldDomainScaleInx = 8;
+        public static int FieldDefaultValueInx = 9;
+        public static int FieldDomainCollateInx = 10;
+        public static int FieldDomainCharSetInx = 11;
+        public static int FieldNotNullFlagInx = 12;
+        public static int FieldDomainDefaultValueInx = 13;
+        public static int FieldDescriptionInx = 14;
+        public static int FieldDomainDescriptionInx = 15;
     }
 
     public class StaticTreeClass : object
@@ -259,6 +261,7 @@ namespace FBExpert
         public void RefreshPrimaryKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
         {
             var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var ViewNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.ViewsKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             //bool newnode = false;
@@ -1437,11 +1440,13 @@ namespace FBExpert
                             tc.Name         = dread.GetValue(0).ToString().Trim();
                             tc.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 0);
                             tc.TypeNumber   = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0);
-                            tc.FieldType    = dread.GetValue(3).ToString().Trim();
-                            tc.CharSet      = dread.GetValue(4).ToString().Trim();
-                            tc.Collate      = dread.GetValue(5).ToString().Trim();
+                            tc.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
+                            tc.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0);
+                            tc.FieldType    = dread.GetValue(5).ToString().Trim();
+                            tc.CharSet      = dread.GetValue(6).ToString().Trim();
+                            tc.Collate      = dread.GetValue(7).ToString().Trim();
                             tc.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tc.FieldType, tc.Length);
-                            tc.DefaultValue = dread.GetValue(6).ToString().Trim();
+                            tc.DefaultValue = dread.GetValue(8).ToString().Trim();
                             
                             if(tc.DefaultValue.Length > 0 )
                             {
@@ -1523,22 +1528,15 @@ namespace FBExpert
                             tc.Name = dread.GetValue(0).ToString().Trim();
                             tc.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 0);
                             tc.TypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0);
-                            tc.FieldType = dread.GetValue(3).ToString().Trim();
-                            tc.CharSet = dread.GetValue(4).ToString().Trim();
-                            tc.Collate = dread.GetValue(5).ToString().Trim();
+                            tc.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
+                            tc.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0);
+                            tc.FieldType = dread.GetValue(5).ToString().Trim();
+                            tc.CharSet = dread.GetValue(6).ToString().Trim();
+                            tc.Collate = dread.GetValue(7).ToString().Trim();
                             tc.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tc.FieldType, tc.Length);
                             tc.DefaultValue = string.Empty; // dread.GetValue(6).ToString().Trim();
                             tc.Description = string.Empty;
-                            /*
-                            if (tc.DefaultValue.Length > 0)
-                            {
-                                if (tc.DefaultValue.StartsWith("DEFAULT "))
-                                {
-                                    tc.DefaultValue = tc.DefaultValue.Substring(8).Trim();
-                                }
-                            }
-                            tc.Description = dread.GetValue(7).ToString().Trim();
-                            */
+                            
                             TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.SystemDomainsKeyStr, tc.Name, tc);
 
                             tn.Nodes.Add(tablen);
@@ -5109,6 +5107,20 @@ namespace FBExpert
             return table;
         }
 
+        public List<ViewClass> GetViewObjectsFromNode(TreeNode nd)
+        {
+            List<ViewClass> table = new List<ViewClass>();
+            if (nd != null)
+            {
+                foreach (TreeNode tc in nd.Nodes)
+                {
+                    table.Add((ViewClass)tc.Tag);
+                }
+            }
+            return table;
+        }
+
+
         public List<SystemTableClass> GetSystemTableObjectsFromNode(TreeNode nd)
         {
             List<SystemTableClass> table = new List<SystemTableClass>();
@@ -5185,6 +5197,8 @@ namespace FBExpert
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                         tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;                        
                         tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                        tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                         tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                         tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
                         tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
@@ -5259,6 +5273,8 @@ namespace FBExpert
                         };
                         tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                         tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                        tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                         tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                         tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0)+1;
                         tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
@@ -5490,6 +5506,8 @@ namespace FBExpert
                             tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                             tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
                             tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                            tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                            tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                             tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                             tfc.Domain.RawType      = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tfc.Domain.FieldType, tfc.Domain.Length);
                             tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
@@ -5581,6 +5599,8 @@ namespace FBExpert
                         tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                         tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
                         tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                        tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                         tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                         tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
                         tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
@@ -5981,6 +6001,8 @@ namespace FBExpert
                         tfc.Name                = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                         tfc.Position            = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldPositionInx).ToString().Trim(), 0) + 1;
                         tfc.Domain.FieldType    = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
+                        tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
+                        tfc.Domain.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSegmentLength).ToString().Trim(), 0);
                         tfc.Domain.Length       = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                         tfc.Domain.Name         = dread.GetValue(GetTableFieldsInx.FieldDomainNameInx).ToString().Trim();
                         tfc.Domain.Scale        = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldDomainScaleInx).ToString().Trim(), 0) * -1;
@@ -6261,11 +6283,13 @@ namespace FBExpert
                             tc.Name = dread.GetValue(0).ToString().Trim();
                             tc.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 0);
                             tc.TypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0);
-                            tc.FieldType = dread.GetValue(3).ToString().Trim();
-                            tc.CharSet = dread.GetValue(4).ToString().Trim();
-                            tc.Collate = dread.GetValue(5).ToString().Trim();
+                            tc.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
+                            tc.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0);
+                            tc.FieldType = dread.GetValue(5).ToString().Trim();
+                            tc.CharSet = dread.GetValue(6).ToString().Trim();
+                            tc.Collate = dread.GetValue(7).ToString().Trim();
                             tc.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tc.FieldType, tc.Length);
-                            tc.DefaultValue = dread.GetValue(6).ToString().Trim();
+                            tc.DefaultValue = dread.GetValue(8).ToString().Trim();
                             if(tc.DefaultValue.Length > 0 )
                             {
                                 if(tc.DefaultValue.StartsWith("DEFAULT "))
@@ -6274,7 +6298,7 @@ namespace FBExpert
                                 }
                                 
                             }
-                            tc.Description = dread.GetValue(7).ToString().Trim();
+                            tc.Description = dread.GetValue(9).ToString().Trim();
                             domains.Add(tc.Name,tc);
                             
                             n++;
@@ -6307,9 +6331,11 @@ namespace FBExpert
                             tc.Name = dread.GetValue(0).ToString().Trim();
                             tc.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 0);
                             tc.TypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(2).ToString().Trim(), 0);
-                            tc.FieldType = dread.GetValue(3).ToString().Trim();
-                            tc.CharSet = dread.GetValue(4).ToString().Trim();
-                            tc.Collate = dread.GetValue(5).ToString().Trim();
+                            tc.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
+                            tc.SegmentLength = StaticFunctionsClass.ToIntDef(dread.GetValue(4).ToString().Trim(), 0);
+                            tc.FieldType = dread.GetValue(5).ToString().Trim();
+                            tc.CharSet = dread.GetValue(6).ToString().Trim();
+                            tc.Collate = dread.GetValue(7).ToString().Trim();
                             tc.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(tc.FieldType, tc.Length);
                             domains.Add(tc.Name,tc);
 

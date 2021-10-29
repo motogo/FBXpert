@@ -2,7 +2,6 @@
 using FBXpert.DataClasses;
 using Initialization;
 using System.Text;
-using System.Windows.Forms;
 
 namespace FBXpert.Globals
 {
@@ -34,7 +33,7 @@ namespace FBXpert.Globals
         {
             if(name.ToUpper().StartsWith("VARCHAR"))
             {
-                return ("VARCHAR(" + length.ToString() + ")");
+                return ($@"VARCHAR({length})");
             }
             return name.ToUpper();
         }
@@ -84,6 +83,7 @@ namespace FBXpert.Globals
                     {
                         return "BLOB";
                     }
+                    
 
                     break;
             }
@@ -91,60 +91,7 @@ namespace FBXpert.Globals
             return "UNDEFINED";
         }
 
-        /*
-        public static string ConvertDesignType(string name, int length)
-        {
-            if (name == "LONG")
-            {
-                switch (length)
-                {
-                    case 4: return "NUMBER";
-                }
-            }
-            else if (name == "TIMESTAMP")
-            {
-                switch (length)
-                {
-                    case 8: return "TIMESTAMP";
-                }
-            }
-            else if (name == "VARYING")
-            {
-                return "VARCHAR2";
-
-            }
-            else if (name == "DOUBLE")
-            {
-                switch (length)
-                {
-                    case 8: return "DOUBLE PRECISION";
-                }
-
-            }
-            else if (name == "DATE")
-            {
-                return "DATE";
-            }
-            else if (name == "TIME")
-            {
-                return "TIME";
-            }
-            else if (name == "SHORT")
-            {
-                return "NUMBER";
-            }
-            else if (name == "BOOLEAN")
-            {
-                return "BOOLEAN";
-            }
-            else if (name == "BLOB")
-            {
-                return "BLOB";
-            }
-            NotifiesClass.Instance.AddToERROR($@"Datatype:{name} not defined !!! (StaticVariables->ConvertDiesignType)");
-            return "UNDEFINED";
-        }
-        */
+        
         public static string ConvertRawTypeToRawName(string name)
         {            
             if (name.StartsWith("VARCHAR")|| name.StartsWith("TEXT"))
@@ -159,6 +106,7 @@ namespace FBXpert.Globals
             {
                 return ("BOOLEAN");
             }
+            
             else if (name.StartsWith("BLOB"))
             {
                 return ("BLOB");
@@ -220,6 +168,7 @@ namespace FBXpert.Globals
             {
                 return ("BOOLEAN");
             }
+            
             else if (name.StartsWith("BLOB"))
             {
                 return ("BLOB");

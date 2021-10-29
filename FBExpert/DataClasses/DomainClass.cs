@@ -6,6 +6,8 @@ namespace FBExpert.DataClasses
     {        
         public int Length;
         public int TypeNumber;
+        public int SubTypeNumber;
+        public int SegmentLength;
         public string RawType;
         public int Precision;
         public int Scale;

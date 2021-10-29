@@ -57,7 +57,15 @@ namespace FBXpert.DataClasses
         [EnumDescription("NONE")]
         NONE = 2
     };
-
+    public enum eBlobSubType
+    {
+        [EnumDescription("BINARY")]
+        BINARY = 0,
+        [EnumDescription("TEXT")]
+        TEXT = 1,
+        [EnumDescription("BLR")]
+        BLR = 2
+    }
     public enum eConstraintType
     {
         [EnumDescription("NONE")]

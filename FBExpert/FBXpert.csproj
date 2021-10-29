@@ -142,6 +142,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\NullableComboBox\bin\Debug\NullableComboBox.dll</HintPath>
     </Reference>
+    <Reference Include="Polenter.SharpSerializer">
+      <HintPath>..\packages\SharpSerializer.3.0.1\lib\net452\Polenter.SharpSerializer.dll</HintPath>
+    </Reference>
     <Reference Include="SECaptionEditBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SECaptionEditBox\bin\Debug\SECaptionEditBox.dll</HintPath>
@@ -613,6 +616,9 @@
     <None Include="Resources\go-first_green24x.png" />
     <None Include="Resources\go-last_blue24x.png" />
     <None Include="Resources\go-last_green24x.png" />
+    <None Include="Resources\augewatch_2_x24.png" />
+    <None Include="Resources\augewatch_x24.png" />
+    <None Include="Resources\augewatchoff_x24.png" />
     <Content Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

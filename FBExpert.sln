@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQListApp", "..\SQLite\SQLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "..\SELibrariesSource\FastColoredTextBox\Tester\Tester.csproj", "{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEHotSpot", "..\SELibrariesSource\SEHotSpot\SEHotSpot.csproj", "{B2479835-D14F-4840-8C89-1A66699A9979}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,13 +125,33 @@ Global
 		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x64.ActiveCfg = Release|x86
 		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x86.ActiveCfg = Release|x86
 		{EBE443EE-F4C7-49E6-AC22-959CA62FAA05}.Release|x86.Build.0 = Release|x86
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|ARM.Build.0 = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|ARM64.Build.0 = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|x64.Build.0 = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2479835-D14F-4840-8C89-1A66699A9979}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_PrefixTranslations = False
-		RESX_NeutralResourcesLanguage = de-DE
 		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
+		RESX_NeutralResourcesLanguage = de-DE
+		RESX_PrefixTranslations = False
 	EndGlobalSection
 EndGlobal

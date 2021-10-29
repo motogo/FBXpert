@@ -335,7 +335,7 @@ namespace FBExpert
             ShowCaptions();
             GetClientLibraryAndBinPath();
             FileInfo fi = new FileInfo(_dbReg.DatabasePath);
-
+            SetPasswordMark();
             txtCreateDatabaseLocationFile.Text = fi.Exists ? $@"{fi.DirectoryName}\{fi.Name.Replace(fi.Extension, $@"_new{fi.Extension}")}"  : "dbnew.fdb";
         }
 
@@ -785,6 +785,21 @@ namespace FBExpert
         {
             var af = new AppSettingsForm( FbXpertMainForm.Instance());
             af.Show();
+        }
+        private void hsShowPassword_MarkedReached(object sender, SeControlsLib.MarkedEventArgs e)
+        {
+            SetPasswordMark();
+        }
+        private void SetPasswordMark()
+        {
+            if(hsShowPassword.IsMarked())
+            {
+                txtPassword.PasswordChar = '\0';
+            }
+            else
+            {
+                txtPassword.PasswordChar = '*';
+            }
         }
     }
 }

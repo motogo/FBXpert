@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlUpper = new System.Windows.Forms.Panel();
+            this.hsSaveDesign = new SeControlsLib.HotSpot();
             this.cbDebug = new System.Windows.Forms.CheckBox();
             this.hsRefreshStruktur = new SeControlsLib.HotSpot();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -70,6 +71,7 @@
             // pnlUpper
             // 
             this.pnlUpper.AutoScroll = true;
+            this.pnlUpper.Controls.Add(this.hsSaveDesign);
             this.pnlUpper.Controls.Add(this.cbDebug);
             this.pnlUpper.Controls.Add(this.hsRefreshStruktur);
             this.pnlUpper.Controls.Add(this.groupBox1);
@@ -79,8 +81,57 @@
             this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(2397, 34);
+            this.pnlUpper.Size = new System.Drawing.Size(2394, 34);
             this.pnlUpper.TabIndex = 1;
+            // 
+            // hsSaveDesign
+            // 
+            this.hsSaveDesign.BackColor = System.Drawing.Color.Transparent;
+            this.hsSaveDesign.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveDesign.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveDesign.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSaveDesign.ContextMenuXDirection = SeControlsLib.XDirection.Left;
+            this.hsSaveDesign.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSaveDesign.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSaveDesign.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSaveDesign.FlatAppearance.BorderSize = 0;
+            this.hsSaveDesign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveDesign.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSaveDesign.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSaveDesign.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.hsSaveDesign.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
+            this.hsSaveDesign.ImageToggleOnSelect = true;
+            this.hsSaveDesign.Location = new System.Drawing.Point(798, 5);
+            this.hsSaveDesign.Marked = false;
+            this.hsSaveDesign.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSaveDesign.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSaveDesign.MarkedText = "";
+            this.hsSaveDesign.MarkMode = false;
+            this.hsSaveDesign.Name = "hsSaveDesign";
+            this.hsSaveDesign.NonMarkedText = "";
+            this.hsSaveDesign.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveDesign.ShowShortcut = false;
+            this.hsSaveDesign.Size = new System.Drawing.Size(45, 26);
+            this.hsSaveDesign.TabIndex = 9;
+            this.hsSaveDesign.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSaveDesign.ToolTipActive = false;
+            this.hsSaveDesign.ToolTipAutomaticDelay = 500;
+            this.hsSaveDesign.ToolTipAutoPopDelay = 5000;
+            this.hsSaveDesign.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSaveDesign.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSaveDesign.ToolTipFor4ContextMenu = true;
+            this.hsSaveDesign.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSaveDesign.ToolTipInitialDelay = 500;
+            this.hsSaveDesign.ToolTipIsBallon = false;
+            this.hsSaveDesign.ToolTipOwnerDraw = false;
+            this.hsSaveDesign.ToolTipReshowDelay = 100;
+            this.hsSaveDesign.ToolTipShowAlways = false;
+            this.hsSaveDesign.ToolTipText = "";
+            this.hsSaveDesign.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSaveDesign.ToolTipTitle = "";
+            this.hsSaveDesign.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSaveDesign.UseVisualStyleBackColor = false;
+            this.hsSaveDesign.Click += new System.EventHandler(this.hsSaveDesign_Click);
             // 
             // cbDebug
             // 
@@ -530,6 +581,7 @@
             // 
             // selDBObjects
             // 
+            this.selDBObjects.AlloweColumnFilterIndexChange = false;
             this.selDBObjects.AllowMultipleChecks = false;
             this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selDBObjects.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -541,11 +593,14 @@
             this.selDBObjects.CheckOnSelect = false;
             this.selDBObjects.CheckVisible = true;
             this.selDBObjects.CheckWith = 32;
+            this.selDBObjects.ColumnFilterIndex = 2;
+            this.selDBObjects.FilterText = "";
             this.selDBObjects.IDVisible = false;
             this.selDBObjects.IDWith = 32;
             this.selDBObjects.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.selDBObjects.Location = new System.Drawing.Point(452, 66);
+            this.selDBObjects.MarkingColor = System.Drawing.Color.LightGreen;
             this.selDBObjects.Name = "selDBObjects";
             this.selDBObjects.SelectedIndex = -1;
             this.selDBObjects.ShowCaptions = true;
@@ -553,11 +608,15 @@
             this.selDBObjects.ShowCountInTitle = true;
             this.selDBObjects.ShowSelection = true;
             this.selDBObjects.Size = new System.Drawing.Size(230, 469);
+            this.selDBObjects.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selDBObjects.SQLKonjunktion = "AND";
             this.selDBObjects.TabIndex = 5;
             this.selDBObjects.Text = "Object list";
             this.selDBObjects.TextCaption = "text";
             this.selDBObjects.TextWith = 189;
             this.selDBObjects.Title = "";
+            this.selDBObjects.UseFiltering = false;
+            this.selDBObjects.UseFilteringAutocomplete = false;
             this.selDBObjects.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // pnlDBObjectsUpper
@@ -682,5 +741,6 @@
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsRefreshStruktur;
         private System.Windows.Forms.CheckBox cbDebug;
+        private SeControlsLib.HotSpot hsSaveDesign;
     }
 }

@@ -1100,8 +1100,19 @@ namespace FBXpert
             }
         }
 
-        public void SetActTableNode(TreeNode parent, string keyStr)
+        public List<TableClass> GetActTableNode(TreeNode parent, string keyStr)
         {            
+            var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
+            return StaticTreeClass.Instance().GetTableObjectsFromNode(newActTableNode);
+        }
+        public List<ViewClass> GetActViewNode(TreeNode parent, string keyStr)
+        {
+            var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
+            return StaticTreeClass.Instance().GetViewObjectsFromNode(newActTableNode);
+        }
+
+        public void SetActTableNode(TreeNode parent, string keyStr)
+        {
             var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
             if (_actTableNode == newActTableNode) return;
             _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(newActTableNode);
@@ -1125,7 +1136,7 @@ namespace FBXpert
             var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
             if (tnReg == null) return;
             if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
-
+            
             if (e.ClickedItem == tsmiClose)
             {
                 cmsDatabase.Close();
@@ -1273,11 +1284,20 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiDatabaseDesigner)
             {
                 cmsDatabase.Close();
+                _actTables =  GetActTableNode(tnReg, StaticVariablesClass.CommonTablesKeyGroupStr);
+                var actViews =  GetActViewNode(tnReg, StaticVariablesClass.ViewsKeyGroupStr);
+
                 Dictionary<string, TableClass> tab = new System.Collections.Generic.Dictionary<string, TableClass>();
                 foreach (var table in _actTables)
                 {
                     tab.Add(table.Name, table);
                 }
+                _actViews.Clear();
+                foreach (var table in actViews)
+                {
+                    _actViews.Add(table.Name, table);
+                }
+
                 var dbd = new DatabaseDesignForm();
                 dbd.SetDatas(dbReg, tab, _actViews);
                 dbd.SetParent(MdiParent);

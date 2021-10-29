@@ -204,6 +204,7 @@ namespace FBXpert.DataClasses
             }
             else if (domain.FieldType.StartsWith("BLOB"))
             {
+                if(domain.SubTypeNumber == (int) eBlobSubType.TEXT) return "string";
                 return "byte[]";
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
