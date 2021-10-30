@@ -142,6 +142,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\NullableComboBox\bin\Debug\NullableComboBox.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\..\SELibrariesSource\ObjectListViewDemo\ObjectListView\bin\Debug\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="Polenter.SharpSerializer">
       <HintPath>..\packages\SharpSerializer.3.0.1\lib\net452\Polenter.SharpSerializer.dll</HintPath>
     </Reference>
@@ -619,6 +622,8 @@
     <None Include="Resources\augewatch_2_x24.png" />
     <None Include="Resources\augewatch_x24.png" />
     <None Include="Resources\augewatchoff_x24.png" />
+    <None Include="Resources\help_about_blue_x16.png" />
+    <None Include="Resources\nichts_x22.png" />
     <Content Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

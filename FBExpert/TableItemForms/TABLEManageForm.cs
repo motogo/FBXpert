@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using BrightIdeasSoftware;
 using DBBasicClassLibrary;
 using Enums;
 using FBExpert.DataClasses;
@@ -15,6 +16,7 @@ using MessageFormLibrary;
 using SESpaltenEditor;
 using StateClasses;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -121,10 +123,6 @@ namespace FBExpert
             ac.Activate();
         }
 
-       
-
-        
-        
         public void RefreshLanguageText()
         {
             hsPageRefresh.Text           = LanguageClass.Instance.GetString("REFRESH");
@@ -413,24 +411,215 @@ namespace FBExpert
 
         public void DropField()
         {
-            if (lvFields.SelectedItems == null) return;            
-            if (lvFields.SelectedItems.Count <= 0) return;
-            
-            var tfc = (TableFieldClass)lvFields.SelectedItems[0].Tag;
+            if (fastObjectListView1.SelectedObject == null) return;            
+            var tfc = (TableFieldClass)fastObjectListView1.SelectedObject;
             string cmd = $@"ALTER TABLE {_tableObject.Name} DROP {tfc.Name}";
-
             SQLStatementsClass.Instance.ExecSql(cmd,_dbReg,_localNotify);                                                  
         }
-        
+
+
+        private BrightIdeasSoftware.OLVColumn colFieldname;
+        private BrightIdeasSoftware.OLVColumn colFieldPosition;
+        private BrightIdeasSoftware.OLVColumn colFieldType;
+        private BrightIdeasSoftware.OLVColumn colRawType;
+        private BrightIdeasSoftware.OLVColumn colPrimaryKey;
+        private BrightIdeasSoftware.OLVColumn colNotNull;
+
+        private BrightIdeasSoftware.OLVColumn colLength;
+        private BrightIdeasSoftware.OLVColumn colUnique;
+        private BrightIdeasSoftware.OLVColumn colCharset;
+        private BrightIdeasSoftware.OLVColumn colCollate;
+        private BrightIdeasSoftware.OLVColumn colForeingKey;
+        private BrightIdeasSoftware.OLVColumn colDomainName;
+       
+        private BrightIdeasSoftware.OLVColumn colSubtype;
+        private BrightIdeasSoftware.OLVColumn colDomainDefaultValue;
+        private BrightIdeasSoftware.OLVColumn colScale;
+
+
+        public void MakeFieldGrid()
+        {
+            colFieldname = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldPosition = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colRawType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colPrimaryKey = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colNotNull = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+
+            colLength               = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colUnique               = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colCharset              = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colCollate              = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colForeingKey           = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colDomainName           = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            
+            colSubtype              = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colDomainDefaultValue   = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colScale                = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+
+            colPrimaryKey.TextAlign = HorizontalAlignment.Center;
+            colNotNull.TextAlign = HorizontalAlignment.Center;
+            colUnique.TextAlign = HorizontalAlignment.Center;
+            colSubtype.TextAlign = HorizontalAlignment.Center;
+            colFieldType.TextAlign = HorizontalAlignment.Center;
+            colRawType.TextAlign = HorizontalAlignment.Center;
+            colFieldPosition.TextAlign = HorizontalAlignment.Right;
+            colFieldname.Text       = "Name";
+            colFieldPosition.Text   = "Pos";
+            colFieldType.Text       = "Type";
+            colRawType.Text         = "RAW Type";
+            colPrimaryKey.Text      = "PK";
+            colNotNull.Text         = "NotNull";
+            colLength.Text          = "Length";
+            colUnique.Text          = "UNQ";
+            colCharset.Text         = "Charset";
+            colCollate.Text         = "Collate";
+            colForeingKey.Text      = "FK";
+            colDomainName.Text      = "Domain";          
+            colSubtype.Text         = "SubType";
+            colDomainDefaultValue.Text = "DefaultValue";
+            colScale.Text           = "Scale";
+
+            colFieldPosition.Width = 40;
+            colFieldname.Width = 250;
+            colPrimaryKey.Width = 30;
+            colNotNull.Width = 60;
+            colFieldType.Width = 100;
+            colRawType.Width = 120;
+            colLength.Width = 60;
+            colUnique.Width = 40;
+            colCharset.Width = 100;
+            colCollate.Width = 100;
+            colForeingKey.Width = 120;
+            colDomainName.Width = 120;
+            colSubtype.Width = 60;
+            colDomainDefaultValue.Width = 100;
+            colScale.Width = 40;
+
+            // 
+            // fastObjectListView1
+            // 
+            fastObjectListView1.AllColumns.Add(this.colFieldname);
+            fastObjectListView1.AllColumns.Add(this.colFieldPosition);
+            fastObjectListView1.CellEditUseWholeCell = false;
+            fastObjectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            
+            colFieldPosition,
+            colFieldname,
+            colPrimaryKey,
+            colFieldType,
+            colLength,
+            colSubtype,
+            colRawType,
+            colNotNull,
+            colScale,
+            colUnique,
+            colCharset,
+            colCollate,
+            colForeingKey,
+            colDomainName,
+            colDomainDefaultValue
+
+            });
+            fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            fastObjectListView1.HideSelection = false;
+            fastObjectListView1.Location = new System.Drawing.Point(0, 0);
+            fastObjectListView1.Name = "fastObjectListView1";
+            fastObjectListView1.ShowGroups = false;
+            fastObjectListView1.TabIndex = 4;
+            fastObjectListView1.UseCompatibleStateImageBehavior = false;
+            fastObjectListView1.View = System.Windows.Forms.View.Details;
+            fastObjectListView1.VirtualMode = true;
+        }
+    
+        //Getters (Formatierungen, Zuweisungen der Objektvariablen zu dem ObjektListView
+        private void SetupColumns2()
+        {
+            this.colPrimaryKey.AspectGetter = delegate (object x) 
+            {
+                if(_tableObject.IsPrimary(((TableFieldClass)x).Name)) return "ISOK";
+                return "NOTOK";
+            };
+            this.colNotNull.AspectGetter = delegate (object x)
+            {
+                if (((TableFieldClass)x).Domain.NotNull) return "ISOK";
+                return "NOTOK";
+            };
+            colFieldname.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Name; };
+            colFieldPosition.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Position; };
+            colFieldType.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.FieldType; };
+            colRawType.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.RawType; };
+
+
+            colLength.AspectGetter = delegate (object x) 
+            {
+                if (((TableFieldClass)x).Domain.FieldType == "VARYING") return ((TableFieldClass)x).Domain.Length.ToString();
+                return "";
+            };
+            colSubtype.AspectGetter = delegate (object x) 
+            {
+                if (((TableFieldClass)x).Domain.FieldType == "BLOB") return EnumHelper.GetDescription((eBlobSubType)((TableFieldClass)x).Domain.SubTypeNumber);
+                return string.Empty;
+            };
+
+            colScale.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Scale.ToString(); };
+         
+            colUnique.AspectGetter = delegate (object x) 
+            {
+                if(_tableObject.IsNotNull(((TableFieldClass)x).Domain.Name)) return "ISOK";
+                return "NOTOK";
+            };
+            
+
+            this.colPrimaryKey.Renderer = new MappedImageRenderer(new Object[] {
+                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
+                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+            });
+            this.colNotNull.Renderer = new MappedImageRenderer(new Object[] {
+                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
+                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+            });
+            this.colUnique.Renderer = new MappedImageRenderer(new Object[] {
+                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
+                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+            });
+
+            colCharset.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.CharSet; };
+            colCollate.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Collate; };
+            colForeingKey.AspectGetter = delegate (object x) 
+            {
+                if(_tableObject.ForeignKeys == null) return string.Empty;
+                foreach (ForeignKeyClass fk in _tableObject.ForeignKeys.Values)
+                {
+                    fk.SourceFields.TryGetValue(((TableFieldClass)x).Name, out FieldClass fc);
+                    if (fc != null)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append($@"{fk.DestTableName}->");
+                        int i = 0;
+                        foreach(FieldClass df in fk.DestFields.Values)
+                        {
+                            sb.Append(i <= 0 ? $@"{df.Name}" : $@",{df.Name}");
+                            i++;
+                        }
+                        return sb.ToString();
+                    }
+                }
+                return String.Empty;  
+            };
+            colDomainName.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Name; };
+            colDomainDefaultValue.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.DefaultValue; };
+        }
+
         public int RefreshFields()
         {            
             if (string.IsNullOrEmpty(_tableObject.Name)) return 0;
             string _funcStr = $@"RefreshFields()";
-
-
             int n = 0;
             string cmd = SQLStatementsClass.Instance.GetTableFields(_dbReg.Version, _tableObject.Name);
-            lvFields.Items.Clear();
+         
+            fastObjectListView1.Items.Clear();
+            SetupColumns2();
             dgExportGrid.Rows.Clear();
             _tableObject.Fields = new Dictionary<string, TableFieldClass>();
 
@@ -451,7 +640,7 @@ namespace FBExpert
                             while (dread.Read())
                             {
                                 TableFieldClass tfc = new TableFieldClass();
-                                string TabName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
+                                //string TabName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
                                 tfc.Name = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
                                 StaticTreeClass.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
                                 tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
@@ -474,7 +663,6 @@ namespace FBExpert
 
                                 bool NNField  = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldNotNullFlagInx).ToString().Trim(), 0) > 0;
                                 bool NN = _tableObject.IsNotNull(tfc.Name);
-
                                 tfc.Domain.NotNull = NN;
                                 if (NNField != NN)
                                 {
@@ -487,27 +675,17 @@ namespace FBExpert
                                     {
                                         tfc.Domain.DefaultValue = tfc.Domain.DefaultValue.Substring(8).Trim();
                                     }
-                                    
                                 }
                                 tfc.Description = dread.GetValue(GetTableFieldsInx.FieldDescriptionInx).ToString().Trim();
                                 tfc.Domain.Description = dread.GetValue(GetTableFieldsInx.FieldDomainDescriptionInx).ToString().Trim();
                                 
                                 bool PK = _tableObject.IsPrimary(tfc.Name);
-                                bool UQ = _tableObject.IsUnique(tfc.Name);                                
-
-                                string[] obarr = { tfc.Position.ToString(), tfc.Name, tfc.Domain.FieldType, tfc.Domain.Length.ToString(), tfc.Domain.RawType, StaticVariablesClass.ToMark(NN), tfc.DefaultValue, tfc.Domain.Scale.ToString(), StaticVariablesClass.ToMark(PK), StaticVariablesClass.ToMark(UQ), tfc.Domain.CharSet, tfc.Domain.Collate, "1", tfc.Domain.Name, StaticVariablesClass.ToMark(NN), tfc.Domain.DefaultValue };
+                                bool UQ = _tableObject.IsUnique(tfc.Name);
+                                
                                 object[] obarr_export = { tfc.Position.ToString(), tfc.Name, !PK, PK };
 
-                                var lvi = new ListViewItem(obarr)
-                                {
-                                    Tag = tfc,
-                                    Checked = true
-                                };
-
-                                lvFields.Items.Add(lvi);
-
+                                fastObjectListView1.AddObject(tfc);
                                 dgExportGrid.Rows.Add(obarr_export);
-
                                 _tableObject.Fields.Add(tfc.Name,tfc);
                             }
                         }
@@ -521,7 +699,7 @@ namespace FBExpert
             {
                 _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}->RefreshFields()->{_dbReg.Alias}", ex));                    
             }
-               
+            fastObjectListView1.Show();
             return n;
         }
 
@@ -529,7 +707,6 @@ namespace FBExpert
         {
             var sp = SPALTENEditForm.Instance(this, null,true);
             sp.Notify.Register4Info(SpaltenNotify_SpaltenOnRaiseInfoHandler);
-
             sp.SetGrid(dgvResults,  _tableObject.Name, _dbReg.Alias);
             sp.ShowDialog();
         }
@@ -569,10 +746,9 @@ namespace FBExpert
         public string MakeFieldsCmd()
         {
             var sb = new StringBuilder();
-            foreach(ListViewItem lvi in lvFields.Items)
+            foreach(TableFieldClass obarr in fastObjectListView1.Objects)
             {
-                var obarr = (TableFieldClass) lvi.Tag;
-                if(obarr == null) continue;                
+              
                 if(sb.ToString().Length > 0) sb.Append(",");
                 
                 if(!string.IsNullOrEmpty(obarr.PK_ConstraintName))
@@ -1228,13 +1404,10 @@ namespace FBExpert
         {
             try
             {
-                if (lvFields.SelectedItems == null) return;                
-                if (lvFields.SelectedItems.Count <= 0) return;
-                
+                if (fastObjectListView1.SelectedObject == null) return;                
                 try
                 {
-                    ListViewItem lvi = lvFields.SelectedItems[0];
-                    TableFieldClass tfc = lvi.Tag as TableFieldClass;
+                    TableFieldClass tfc = (TableFieldClass) fastObjectListView1.SelectedObject;
                 }
                 catch (Exception ex)
                 {
@@ -1447,6 +1620,8 @@ namespace FBExpert
         
         private void TABLEManageForm_Load(object sender, EventArgs e)
         {
+            
+            MakeFieldGrid();
             FormDesign.SetFormLeft(this);
             _indexChanged = false;
             _tableChanged = false;
@@ -1590,15 +1765,7 @@ namespace FBExpert
             else RefreshStruct();
         }
 
-        private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            hsDropField.Enabled = (lvFields.SelectedItems != null);
-            if(lvFields.SelectedItems == null) return;            
-            if (lvFields.SelectedItems.Count <= 0) return;            
-            if (lvFields.SelectedItems[0].Tag == null) return;            
-            _actFieldObject = (TableFieldClass)lvFields.SelectedItems[0].Tag;                                  
-        }
-
+       
         private void hsEditField_Click(object sender, EventArgs e)
         {
             EditField();
@@ -2276,6 +2443,20 @@ namespace FBExpert
         private void ckGetDatas_CheckedChanged(object sender, EventArgs e)
         {
             getData = ckGetDatas.Checked;
+        }
+
+        private void fastObjectListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //hsDropField.Enabled = (lvFields.SelectedItems != null);
+            hsDropField.Enabled = (fastObjectListView1.SelectedObject != null);
+            if (fastObjectListView1.SelectedObject == null) return;
+            
+            _actFieldObject = (TableFieldClass)fastObjectListView1.SelectedObject;
+        }
+
+        private void fastObjectListView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EditField();
         }
     }
 }

@@ -18,7 +18,6 @@ namespace FBXpert.DataClasses
         public DBRegistrationClass Database;
         public Dictionary<string, TableClass> Tables;
         public Dictionary<string, ViewClass> Views;
-
     }
 
     [Serializable]
@@ -28,8 +27,6 @@ namespace FBXpert.DataClasses
         public DBRegistrationClass Database;
         public Dictionary<string,DesTableClass> Tables;
         public Dictionary<string,DesViewClass> Views;
-        
-        
     }
     
 

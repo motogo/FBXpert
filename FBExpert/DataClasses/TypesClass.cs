@@ -1,6 +1,5 @@
 ﻿using FBExpert.DataClasses;
 using System;
-using System.Numerics;
 
 namespace FBXpert.DataClasses
 {
@@ -41,15 +40,15 @@ namespace FBXpert.DataClasses
             }
             else if (DBType.StartsWith("VARYING"))
             {
-                return "VARCHAR("+length.ToString()+")";
+                return $@"VARCHAR({length})";
             }
             else if (DBType.StartsWith("TEXT"))
             {
-                return "VARCHAR(" + length.ToString() + ")";
+                return $@"VARCHAR({length})";
             }
             else if (DBType.StartsWith("CSTRING"))
             {
-                return "VARCHAR(" + length.ToString() + ")";
+                return $@"VARCHAR({length})";
             }
             else if ((DBType =="TIMESTAMP")&&(length == 8))
             {
@@ -71,7 +70,6 @@ namespace FBXpert.DataClasses
             {
                 return "FLOAT";
             }
-            
             return "";
         }
 
@@ -139,44 +137,32 @@ namespace FBXpert.DataClasses
             {
                 return "FLOAT";
             }
-            
             return "";
         }
 
 
         public static string DatabaseTOcsharpTypeAsString(DomainClass domain)
         {
-            string stype = "RawType_ToCSharpType_Error->" + domain.RawType;
+          
             if (domain.FieldType == "LONG")
             {
-                stype = "int";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "int" : "int?";
             }
             else if (domain.RawType == "BIGINT")
             {                
-                stype = "BigInteger";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "BigInteger" : "BigInteger?";
             }
             else if (domain.FieldType == "INT64")
             {
-                stype = "long";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "long"  : "long?";
             }
-            
             else if (domain.FieldType == "FLOAT")
             {                
-                stype = "float";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "float" : "float?";
             }
             else if (domain.FieldType == "SHORT")
             {
-                stype = "int";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "int" : "int?";
             }
             else if (domain.FieldType == "VARYING")
             {
@@ -204,45 +190,32 @@ namespace FBXpert.DataClasses
             }
             else if (domain.FieldType.StartsWith("BLOB"))
             {
-                if(domain.SubTypeNumber == (int) eBlobSubType.TEXT) return "string";
-                return "byte[]";
+                return (domain.SubTypeNumber == (int) eBlobSubType.TEXT) ? "string" : "byte[]";
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
             {
-                stype = "double";
-                if (!domain.NotNull) stype = stype + "?";
-                return stype;
+                return (!domain.NotNull) ? "double" : "double?";
             }
-
-            return stype;
+            return $@"RawType_ToCSharpType_Error->{domain.RawType}"; 
         }
 
         public static string DatabaseTOcsharpValueTypeAsString(DomainClass domain)
         {
-            string stype = "RawType_ToCSharpType_Error->" + domain.RawType;
             if (domain.FieldType == "LONG")
             {
-                stype = "int";
-                
-                return stype;
+                return "int";
             }
             else if (domain.FieldType == "INT64")
             {
-                stype = "int";
-                
-                return stype;
+                return "int";
             }
             else if (domain.FieldType == "FLOAT")
             {                
-                stype = "float";
-                
-                return stype;
+                return "float";
             }
             else if (domain.FieldType == "SHORT")
             {
-                stype = "int";
-                
-                return stype;
+                return "int";
             }
             else if (domain.FieldType == "VARYING")
             {
@@ -273,12 +246,11 @@ namespace FBXpert.DataClasses
                 return "byte[]";
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
-            {
-                stype = "double";                
-                return stype;
+            {            
+                return "double";
             }
-            
-            return stype;
+
+            return $@"RawType_ToCSharpType_Error->{domain.RawType}";
         }
 
         public static Type DatabaseTOcsharpType(DomainClass domain)

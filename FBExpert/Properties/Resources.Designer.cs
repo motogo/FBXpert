@@ -1243,6 +1243,16 @@ namespace FBXpert.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap help_about_blue_x16 {
+            get {
+                object obj = ResourceManager.GetObject("help_about_blue_x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap help_about_blue_x22 {
             get {
                 object obj = ResourceManager.GetObject("help_about_blue_x22", resourceCulture);
@@ -1496,6 +1506,16 @@ namespace FBXpert.Properties {
         internal static System.Drawing.Bitmap N1_blue_x24 {
             get {
                 object obj = ResourceManager.GetObject("N1_blue_x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nichts_x22 {
+            get {
+                object obj = ResourceManager.GetObject("nichts_x22", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

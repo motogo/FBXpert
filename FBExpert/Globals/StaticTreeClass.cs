@@ -7279,12 +7279,13 @@ namespace FBExpert
             }
         }
 
-        public void GetConstraintsObjectsForTable(eConstraintType ctyp, TableClass tc, DBRegistrationClass DBReg)
+        public bool GetConstraintsObjectsForTable(eConstraintType ctyp, TableClass tc, DBRegistrationClass DBReg)
         {
             string _funcStr = $@"GetConstraintsObjectsForTable(ctyp={ctyp},TableClass={tc},DBReg={DBReg})";
             string ctyp_string = EnumHelper.GetDescription(ctyp);
             string cmd = ConstraintsSQLStatementsClass.Instance.GetTableConstraintsByType(DBReg.Version, ctyp_string, tc.Name);
             var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
+            bool ok = false;
             try
             {
                 con.Open();
@@ -7293,7 +7294,7 @@ namespace FBExpert
             {
                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}", ex));
                 con.Close();
-                return;
+                return false;
             }
 
             if (con.State == System.Data.ConnectionState.Open)
@@ -7396,6 +7397,7 @@ namespace FBExpert
                                     }
                                 }
                             }
+                            ok = true;
                         }
                     }
                     dread.Close();
@@ -7410,6 +7412,7 @@ namespace FBExpert
             {
                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->connection not open"));
             }
+            return ok;
         }
 
         public void GetSystemTableConstraintsObjects(eConstraintType ctyp, Dictionary<string,SystemTableClass> tc, DBRegistrationClass DBReg)
