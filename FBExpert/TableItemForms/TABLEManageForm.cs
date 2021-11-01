@@ -16,7 +16,6 @@ using MessageFormLibrary;
 using SESpaltenEditor;
 using StateClasses;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -457,51 +456,52 @@ namespace FBExpert
             colDomainDefaultValue   = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             colScale                = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
 
-            colPrimaryKey.TextAlign = HorizontalAlignment.Center;
-            colNotNull.TextAlign = HorizontalAlignment.Center;
-            colUnique.TextAlign = HorizontalAlignment.Center;
-            colSubtype.TextAlign = HorizontalAlignment.Center;
-            colFieldType.TextAlign = HorizontalAlignment.Center;
-            colRawType.TextAlign = HorizontalAlignment.Center;
-            colFieldPosition.TextAlign = HorizontalAlignment.Right;
-            colFieldname.Text       = "Name";
-            colFieldPosition.Text   = "Pos";
-            colFieldType.Text       = "Type";
-            colRawType.Text         = "RAW Type";
-            colPrimaryKey.Text      = "PK";
-            colNotNull.Text         = "NotNull";
-            colLength.Text          = "Length";
-            colUnique.Text          = "UNQ";
-            colCharset.Text         = "Charset";
-            colCollate.Text         = "Collate";
-            colForeingKey.Text      = "FK";
-            colDomainName.Text      = "Domain";          
-            colSubtype.Text         = "SubType";
-            colDomainDefaultValue.Text = "DefaultValue";
-            colScale.Text           = "Scale";
+            colPrimaryKey.TextAlign     = HorizontalAlignment.Center;
+            colNotNull.TextAlign        = HorizontalAlignment.Center;
+            colUnique.TextAlign         = HorizontalAlignment.Center;
+            colSubtype.TextAlign        = HorizontalAlignment.Center;
+            colFieldType.TextAlign      = HorizontalAlignment.Center;
+            colRawType.TextAlign        = HorizontalAlignment.Center;
+            colFieldPosition.TextAlign  = HorizontalAlignment.Right;
+            colFieldname.Text           = "Name";
+            colFieldPosition.Text       = "Pos";
+            colFieldType.Text           = "Type";
+            colRawType.Text             = "RAW Type";
+            colPrimaryKey.Text          = "PK";
+            colNotNull.Text             = "NotNull";
+            colLength.Text              = "Length";
+            colUnique.Text              = "UNQ";
+            colCharset.Text             = "Charset";
+            colCollate.Text             = "Collate";
+            colForeingKey.Text          = "FK";
+            colDomainName.Text          = "Domain";
+            colSubtype.Text             = "SubType";
+            colDomainDefaultValue.Text  = "DefaultValue";
+            colScale.Text               = "Scale";
 
-            colFieldPosition.Width = 40;
-            colFieldname.Width = 250;
-            colPrimaryKey.Width = 30;
-            colNotNull.Width = 60;
-            colFieldType.Width = 100;
-            colRawType.Width = 120;
-            colLength.Width = 60;
-            colUnique.Width = 40;
-            colCharset.Width = 100;
-            colCollate.Width = 100;
-            colForeingKey.Width = 120;
-            colDomainName.Width = 120;
-            colSubtype.Width = 60;
+            colFieldPosition.Width      = 50;
+            colFieldname.Width          = 250;
+            colPrimaryKey.Width         = 50;
+            colNotNull.Width            = 70;
+            colFieldType.Width          = 100;
+            colRawType.Width            = 120;
+            colLength.Width             = 70;
+            colUnique.Width             = 60;
+            colCharset.Width            = 100;
+            colCollate.Width            = 100;
+            colForeingKey.Width         = 120;
+            colDomainName.Width         = 120;
+            colSubtype.Width            = 70;
             colDomainDefaultValue.Width = 100;
-            colScale.Width = 40;
+            colScale.Width              = 40;
 
             // 
             // fastObjectListView1
             // 
-            fastObjectListView1.AllColumns.Add(this.colFieldname);
-            fastObjectListView1.AllColumns.Add(this.colFieldPosition);
-            fastObjectListView1.CellEditUseWholeCell = false;
+            //fastObjectListView1.AllColumns.Add(this.colFieldname);
+            //fastObjectListView1.AllColumns.Add(this.colFieldPosition);
+
+            
             fastObjectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             
             colFieldPosition,
@@ -521,6 +521,7 @@ namespace FBExpert
             colDomainDefaultValue
 
             });
+            fastObjectListView1.CellEditUseWholeCell = false;
             fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             fastObjectListView1.HideSelection = false;
             fastObjectListView1.Location = new System.Drawing.Point(0, 0);
@@ -533,7 +534,7 @@ namespace FBExpert
         }
     
         //Getters (Formatierungen, Zuweisungen der Objektvariablen zu dem ObjektListView
-        private void SetupColumns2()
+        private void SetupColumns()
         {
             this.colPrimaryKey.AspectGetter = delegate (object x) 
             {
@@ -545,6 +546,10 @@ namespace FBExpert
                 if (((TableFieldClass)x).Domain.NotNull) return "ISOK";
                 return "NOTOK";
             };
+            this.colNotNull.Renderer = new MappedImageRenderer(new Object[] {
+                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
+                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+            });
             colFieldname.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Name; };
             colFieldPosition.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Position; };
             colFieldType.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.FieldType; };
@@ -562,7 +567,7 @@ namespace FBExpert
                 return string.Empty;
             };
 
-            colScale.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Scale.ToString(); };
+            colScale.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Scale; };
          
             colUnique.AspectGetter = delegate (object x) 
             {
@@ -575,14 +580,77 @@ namespace FBExpert
                 "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
                 "NOTOK", FBXpert.Properties.Resources.nichts_x22
             });
-            this.colNotNull.Renderer = new MappedImageRenderer(new Object[] {
-                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
-                "NOTOK", FBXpert.Properties.Resources.nichts_x22
-            });
+            
             this.colUnique.Renderer = new MappedImageRenderer(new Object[] {
                 "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
                 "NOTOK", FBXpert.Properties.Resources.nichts_x22
             });
+            /*
+            this.colFieldPosition.MakeGroupies(
+             new object[] { 0, 5, 10, 20 },
+             new string[] { "Pay to eat out", "Suggest take-away", "Passable", "Seek dinner invitation", "Hire as chef" },
+             new string[] { "not", "hamburger", "toast", "beef", "chef" },
+             new string[] {
+                    "Pay good money -- or flee the house -- rather than eat their homecooked food",
+                    "Offer to buy takeaway rather than risk what may appear on your plate",
+                    "Neither spectacular nor dangerous",
+                    "Try to visit at dinner time to wrangle an invitation to dinner",
+                    "Do whatever is necessary to procure their services"
+             },
+             new string[] { "Call 911", "Phone PizzaHut", "", "Open calendar", "Check bank balance" }
+             );
+            */
+            /*
+            this.colFieldPosition.Renderer = new MappedImageRenderer(new Object[] {
+                "not",FBXpert.Properties.Resources.help_about_blue_x22,
+                "hamburger", FBXpert.Properties.Resources.nichts_x22,
+                "toast", FBXpert.Properties.Resources.nichts_x22,
+                "beef", FBXpert.Properties.Resources.nichts_x22,
+                "chef", FBXpert.Properties.Resources.nichts_x22
+            });
+            */
+
+            /*
+              
+              this.olvColumn26.Renderer = new MultiImageRenderer(Resource1.star16, 5, 0, 40);
+                
+                
+            this.olvColumn26.MakeGroupies(
+             new object[] { 10, 20, 30, 40 },
+             new string[] { "Pay to eat out", "Suggest take-away", "Passable", "Seek dinner invitation", "Hire as chef" },
+             new string[] { "not", "hamburger", "toast", "beef", "chef" },
+             new string[] {
+                    "Pay good money -- or flee the house -- rather than eat their homecooked food",
+                    "Offer to buy takeaway rather than risk what may appear on your plate",
+                    "Neither spectacular nor dangerous",
+                    "Try to visit at dinner time to wrangle an invitation to dinner",
+                    "Do whatever is necessary to procure their services"
+             },
+             new string[] { "Call 911", "Phone PizzaHut", "", "Open calendar", "Check bank balance" }
+             );
+            
+            this.olvColumn27.AspectGetter = delegate (object x) { return ((Person)x).YearOfBirth; };
+
+            this.olvColumn28.AspectGetter = delegate (object x) { return ((Person)x).BirthDate; };
+            this.olvColumn28.ImageGetter = delegate (object row) {
+                Person p = (Person)row;
+                if ((p.BirthDate.Year % 10) == 4)
+                    return 3;
+                return -1; // no image
+            };
+
+            this.olvColumn29.AspectGetter = delegate (object x) { return ((Person)x).GetRate(); };
+            this.olvColumn29.AspectPutter = delegate (object x, object newValue) { ((Person)x).SetRate((double)newValue); };
+
+           
+            
+            this.olvColumn32.AspectGetter = delegate (object row) { return DateTime.Now - ((Person)row).BirthDate; };
+            this.olvColumn32.AspectToStringConverter = delegate (object aspect) { return ((TimeSpan)aspect).Days.ToString("#,##0"); };
+            */
+
+
+
+
 
             colCharset.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.CharSet; };
             colCollate.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Domain.Collate; };
@@ -618,8 +686,9 @@ namespace FBExpert
             int n = 0;
             string cmd = SQLStatementsClass.Instance.GetTableFields(_dbReg.Version, _tableObject.Name);
          
-            fastObjectListView1.Items.Clear();
-            SetupColumns2();
+            //fastObjectListView1.Items.Clear();
+            fastObjectListView1.SetObjects(null, false);
+            
             dgExportGrid.Rows.Clear();
             _tableObject.Fields = new Dictionary<string, TableFieldClass>();
 
@@ -1422,10 +1491,12 @@ namespace FBExpert
 
         private void EditField()
         {
-            if (_actFieldObject == null) return;            
+            if (_actFieldObject == null) return;
+            this.Cursor = Cursors.WaitCursor;
             var tff = new FieldForm(_dbReg,FbXpertMainForm.Instance(), _tnSelected, _actFieldObject, _localNotify, StateClasses.EditStateClass.eBearbeiten.eEdit);
             
-            tff.Show();                               
+            tff.Show();
+            this.Cursor = Cursors.Default;
         }
         
         public bool IsNullable(string colbez)
@@ -1622,6 +1693,7 @@ namespace FBExpert
         {
             
             MakeFieldGrid();
+            SetupColumns();
             FormDesign.SetFormLeft(this);
             _indexChanged = false;
             _tableChanged = false;
@@ -2418,7 +2490,6 @@ namespace FBExpert
                 dgvResults.Invalidate();
             }
         }
-
         private void txtRowHeight_TextChanged(object sender, EventArgs e)
         {
             if(cbRowManually.Checked)

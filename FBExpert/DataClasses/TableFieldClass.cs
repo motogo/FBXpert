@@ -69,6 +69,8 @@ namespace FBExpert.DataClasses
         public bool IS_PRIMARY;
         public bool IS_UNIQUE;
         public eObjectState State = eObjectState.none;
+        public string BaseField;
+        public int UpdateFlag;
     }
 
 }

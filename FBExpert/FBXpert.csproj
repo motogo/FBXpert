@@ -332,6 +332,12 @@
     <Compile Include="SonstForms\ExportViewsSQLForm.Designer.cs">
       <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SonstForms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SonstForms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="SonstForms\HelpInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -687,6 +693,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\ExportViewsSQLForm.resx">
       <DependentUpon>ExportViewsSQLForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SonstForms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SonstForms\HelpInfoForm.resx">
       <DependentUpon>HelpInfoForm.cs</DependentUpon>

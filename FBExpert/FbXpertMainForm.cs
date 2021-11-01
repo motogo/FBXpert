@@ -23,6 +23,9 @@ namespace FBXpert
         
         public DBRegistrationClass ActRegistrationObject = null;
         public TableClass ActTableObject = null;
+        public FieldClass ActFieldObject = null;
+        public TableFieldClass ActTableFieldObject = null;
+        public ViewFieldClass ActViewFieldObject = null;
         public ViewClass ActViewObject = null;
         public RoleClass ActRoleObject = null;
         public ConstraintsClass ActConstraintsObject = null;

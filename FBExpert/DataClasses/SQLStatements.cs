@@ -628,9 +628,17 @@ namespace FBXpert.DataClasses
             sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_POSITION,");
             sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_SOURCE,");
             sb.Append($@"RDB$TYPES.RDB$TYPE_NAME,");
-            sb.Append($@"RDB$FIELDS.RDB$CHARACTER_LENGTH ");
+            sb.Append($@"RDB$FIELDS.RDB$CHARACTER_LENGTH,");
+            sb.Append($@"RDB$RELATION_FIELDS.RDB$BASE_FIELD,");
+            sb.Append($@"RDB$FIELDS.RDB$NULL_FLAG,");
+            sb.Append($@"RDB$RELATION_FIELDS.RDB$UPDATE_FLAG,");
+            sb.Append($@"RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME,");
+            sb.Append($@"RDB$COLLATIONS.RDB$COLLATION_NAME ");
             sb.Append($@"{SQLConstants.FROM} RDB$RELATION_FIELDS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$FIELDS ON RDB$FIELDS.RDB$FIELD_NAME = RDB$RELATION_FIELDS.RDB$FIELD_SOURCE ");
+            sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$CHARACTER_SETS ON RDB$CHARACTER_SETS.RDB$CHARACTER_SET_ID = RDB$FIELDS.RDB$CHARACTER_SET_ID ");
+            sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$COLLATIONS ON RDB$COLLATIONS.RDB$COLLATION_ID = RDB$FIELDS.RDB$COLLATION_ID AND RDB$COLLATIONS.RDB$CHARACTER_SET_ID = RDB$FIELDS.RDB$CHARACTER_SET_ID ");
+
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FIELDS.RDB$FIELD_TYPE ");
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATION_NAME = '{viewName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");            
@@ -646,50 +654,13 @@ namespace FBXpert.DataClasses
             sb.Append($@"RDB$INDICES.rdb$unique_flag {SQLConstants.AS} Unique_Flag,");
             sb.Append($@"RDB$INDICES.rdb$index_inactive {SQLConstants.AS} Inactive_Flag ");
             sb.Append($@"{SQLConstants.FROM} RDB$INDEX_SEGMENTS ");
-            sb.Append($@"JOIN RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
+            sb.Append($@"{SQLConstants.JOIN} RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_FIELDS ON RDB$RELATION_FIELDS.rdb$field_position = (RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1)  {SQLConstants.AND} RDB$INDEX_SEGMENTS.RDB$FIELD_NAME = RDB$RELATION_FIELDS.rdb$field_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName}' {SQLConstants.AND}  RDB$INDICES.RDB$UNIQUE_FLAG > 0 {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'UNIQUE' ");
             sb.Append($@"{SQLConstants.GROUP_BY} RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$index_type,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive;");            
             return sb.ToString();
         }
-        
-        /*
-        public string GetTableForeignKeysForDataset(eDBVersion version, string tableName)
-        {
-            var sb = new StringBuilder();
-            sb.Append($@"{SQLConstants.SELECT} ");
-            sb.Append($@"inx.rdb$index_name  {SQLConstants.AS} Foreign_key_name,");
-            sb.Append($@"inx.rdb$relation_name {SQLConstants.AS} Relation_name,");
-            sb.Append($@"iseg.rdb$field_name {SQLConstants.AS} field_name,");
-            sb.Append($@"inx2.rdb$relation_name {SQLConstants.AS} To_relation_name,");
-            sb.Append($@"iseg2.rdb$field_name {SQLConstants.AS} To_field_name,");
-            sb.Append($@"refc.rdb$update_rule {SQLConstants.AS} update_rule,");
-            sb.Append($@"refc.rdb$delete_rule {SQLConstants.AS} delete_rule,");
-            sb.Append($@"inx.rdb$unique_flag {SQLConstants.AS} Is_Unique,");
-            sb.Append($@"inx.rdb$index_inactive {SQLConstants.AS} Is_Inactive,");
-            sb.Append($@"inx.rdb$foreign_key,inx.rdb$statistics {SQLConstants.AS} fk_stats,");
-            sb.Append($@"refc.rdb$const_name_uq,");
-            sb.Append($@"refc.rdb$match_option {SQLConstants.AS} match_option,");
-            sb.Append($@"relc.rdb$deferrable {SQLConstants.AS} deferrable,");
-            sb.Append($@"relc.rdb$initially_deferred {SQLConstants.AS} initially_deferred,");
-            sb.Append($@"inx2.rdb$unique_flag {SQLConstants.AS} To_Unique,");
-            sb.Append($@"inx2.rdb$index_inactive {SQLConstants.AS} To_inactive,");
-            sb.Append($@"inx2.rdb$statistics {SQLConstants.AS} To_stats ");
-            sb.Append($@"{SQLConstants.FROM} rdb$indices inx ");
-            sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$index_segments iseg ON iseg.rdb$index_name = inx.rdb$index_name ");
-            sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$ref_constraints refc ON refc.rdb$constraint_name = inx.rdb$index_name ");
-            sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$relation_constraints relc  ON relc.rdb$constraint_name = refc.rdb$constraint_name ");
-            sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$indices inx2 ON inx2.rdb$index_name = inx.rdb$foreign_key ");
-            sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$index_segments iseg2 ON iseg2.rdb$index_name = inx2.rdb$index_name ");
-            sb.Append($@"where inx.rdb$index_type = 0 and inx.rdb$foreign_key {SQLConstants.IS} {SQLConstants.NOT_NULL} and inx.rdb$relation_name = '{tableName}';");   
-            
-
-
-
-            return sb.ToString();
-        }
-        */        
 
         public string GetAllTables_Fields_Cmd(eDBVersion version)
         {
@@ -700,7 +671,7 @@ namespace FBXpert.DataClasses
                 sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_POSITION,");
-              //  sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_SOURCE,");
+              
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME,");
 
                 sb.Append($@"RDB$FIELDS.RDB$FIELD_SUB_TYPE,");
@@ -978,6 +949,6 @@ namespace FBXpert.DataClasses
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{viewName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");            
             return sb.ToString();
-        }                               
+        }
     }
 }

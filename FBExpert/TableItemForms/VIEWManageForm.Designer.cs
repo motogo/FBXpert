@@ -32,21 +32,14 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWManageForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWManageForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlViews = new System.Windows.Forms.TabControl();
             this.tabPageFIELDS = new System.Windows.Forms.TabPage();
-            this.lvFields = new System.Windows.Forms.ListView();
-            this.colFIELDPOSITION = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colFIELDNAME = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colTYPE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colLENGTH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
             this.cmsUpdateInsertText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiUpdateInsertCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUpdateInsertPaste = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +127,8 @@ namespace FBExpert
             this.gbMaxAllowedErrors = new System.Windows.Forms.GroupBox();
             this.txtMaxAllowedErrors = new System.Windows.Forms.TextBox();
             this.gbMaxRows = new System.Windows.Forms.GroupBox();
+            this.rbSQLDesc = new System.Windows.Forms.RadioButton();
+            this.rbSQLAsc = new System.Windows.Forms.RadioButton();
             this.txtMaxRows = new System.Windows.Forms.TextBox();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsPageRefresh = new SeControlsLib.HotSpot();
@@ -142,10 +137,9 @@ namespace FBExpert
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bwExport = new System.ComponentModel.BackgroundWorker();
-            this.rbSQLDesc = new System.Windows.Forms.RadioButton();
-            this.rbSQLAsc = new System.Windows.Forms.RadioButton();
             this.tabControlViews.SuspendLayout();
             this.tabPageFIELDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.cmsUpdateInsertText.SuspendLayout();
             this.tabPageDATA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
@@ -211,7 +205,7 @@ namespace FBExpert
             // 
             // tabPageFIELDS
             // 
-            this.tabPageFIELDS.Controls.Add(this.lvFields);
+            this.tabPageFIELDS.Controls.Add(this.fastObjectListView1);
             this.tabPageFIELDS.ImageIndex = 8;
             this.tabPageFIELDS.Location = new System.Drawing.Point(4, 23);
             this.tabPageFIELDS.Name = "tabPageFIELDS";
@@ -221,50 +215,35 @@ namespace FBExpert
             this.tabPageFIELDS.Text = "Fields";
             this.tabPageFIELDS.UseVisualStyleBackColor = true;
             // 
-            // lvFields
+            // fastObjectListView1
             // 
-            this.lvFields.AllowColumnReorder = true;
-            this.lvFields.AutoArrange = false;
-            this.lvFields.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lvFields.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colFIELDPOSITION,
-            this.colFIELDNAME,
-            this.colTYPE,
-            this.colLENGTH,
-            this.columnHeader3});
-            this.lvFields.ContextMenuStrip = this.cmsUpdateInsertText;
-            this.lvFields.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvFields.FullRowSelect = true;
-            this.lvFields.GridLines = true;
-            this.lvFields.HideSelection = false;
-            this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.lvFields.Location = new System.Drawing.Point(3, 3);
-            this.lvFields.Name = "lvFields";
-            this.lvFields.Size = new System.Drawing.Size(1261, 525);
-            this.lvFields.TabIndex = 0;
-            this.lvFields.UseCompatibleStateImageBehavior = false;
-            this.lvFields.View = System.Windows.Forms.View.Details;
-            // 
-            // colFIELDPOSITION
-            // 
-            this.colFIELDPOSITION.Text = "Pos";
-            this.colFIELDPOSITION.Width = 40;
-            // 
-            // colFIELDNAME
-            // 
-            this.colFIELDNAME.Text = "Field Name";
-            this.colFIELDNAME.Width = 300;
-            // 
-            // colTYPE
-            // 
-            this.colTYPE.Text = "FieldType";
-            this.colTYPE.Width = 120;
-            // 
-            // colLENGTH
-            // 
-            this.colLENGTH.Text = "Length";
+            this.fastObjectListView1.AllowColumnReorder = true;
+            this.fastObjectListView1.AlternateRowBackColor = System.Drawing.Color.LightGray;
+            this.fastObjectListView1.CellEditUseWholeCell = false;
+            this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastObjectListView1.FullRowSelect = true;
+            this.fastObjectListView1.GridLines = true;
+            this.fastObjectListView1.HeaderWordWrap = true;
+            this.fastObjectListView1.HideSelection = false;
+            this.fastObjectListView1.Location = new System.Drawing.Point(3, 3);
+            this.fastObjectListView1.MultiSelect = false;
+            this.fastObjectListView1.Name = "fastObjectListView1";
+            this.fastObjectListView1.PersistentCheckBoxes = false;
+            this.fastObjectListView1.SelectAllOnControlA = false;
+            this.fastObjectListView1.SelectColumnsMenuStaysOpen = false;
+            this.fastObjectListView1.SelectColumnsOnRightClick = false;
+            this.fastObjectListView1.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
+            this.fastObjectListView1.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.fastObjectListView1.SelectedForeColor = System.Drawing.SystemColors.Info;
+            this.fastObjectListView1.ShowGroups = false;
+            this.fastObjectListView1.Size = new System.Drawing.Size(1261, 525);
+            this.fastObjectListView1.TabIndex = 1;
+            this.fastObjectListView1.UseAlternatingBackColors = true;
+            this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
+            this.fastObjectListView1.UseHotControls = false;
+            this.fastObjectListView1.UseOverlays = false;
+            this.fastObjectListView1.View = System.Windows.Forms.View.Details;
+            this.fastObjectListView1.VirtualMode = true;
             // 
             // cmsUpdateInsertText
             // 
@@ -309,22 +288,22 @@ namespace FBExpert
             this.dgvResults.AllowUserToAddRows = false;
             this.dgvResults.AllowUserToDeleteRows = false;
             this.dgvResults.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsViewContent;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
             this.dgvResults.Location = new System.Drawing.Point(3, 89);
@@ -526,10 +505,12 @@ namespace FBExpert
             // 
             // sfbViewData
             // 
+            this.sfbViewData.AutocompleteList = new string[0];
             this.sfbViewData.Caption = "Spezialfilter";
             this.sfbViewData.cbChecked = false;
             this.sfbViewData.ClearFilterCaption = "Clear Filter";
             this.sfbViewData.dcFilter = null;
+            this.sfbViewData.dcOuterFilter = null;
             this.sfbViewData.Dock = System.Windows.Forms.DockStyle.Left;
             this.sfbViewData.EditCaption = "Edit filter";
             this.sfbViewData.EnableEdit = true;
@@ -546,6 +527,7 @@ namespace FBExpert
             this.sfbViewData.SQLKonjunktion = "WHERE";
             this.sfbViewData.SQLVorfilterCmd = "";
             this.sfbViewData.TabIndex = 6;
+            this.sfbViewData.UseAutocomplete = false;
             this.sfbViewData.UseTranslation = false;
             this.sfbViewData.CheckedChanged += new SeControlsLib.CheckedChangedHandler(this.spezialfilterBox1_CheckedChanged);
             // 
@@ -1024,22 +1006,22 @@ namespace FBExpert
             // 
             this.dgvDependencies.AllowUserToAddRows = false;
             this.dgvDependencies.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependencies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependencies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDependencies.AutoGenerateColumns = false;
             this.dgvDependencies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependencies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependencies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDependencies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependencies.DataSource = this.bsDependencies;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependencies.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependencies.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDependencies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependencies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependencies.EnableHeadersVisualStyles = false;
@@ -1737,6 +1719,28 @@ namespace FBExpert
             this.gbMaxRows.TabStop = false;
             this.gbMaxRows.Text = "Max Rows";
             // 
+            // rbSQLDesc
+            // 
+            this.rbSQLDesc.AutoSize = true;
+            this.rbSQLDesc.Checked = true;
+            this.rbSQLDesc.Location = new System.Drawing.Point(149, 19);
+            this.rbSQLDesc.Name = "rbSQLDesc";
+            this.rbSQLDesc.Size = new System.Drawing.Size(54, 17);
+            this.rbSQLDesc.TabIndex = 4;
+            this.rbSQLDesc.TabStop = true;
+            this.rbSQLDesc.Text = "DESC";
+            this.rbSQLDesc.UseVisualStyleBackColor = true;
+            // 
+            // rbSQLAsc
+            // 
+            this.rbSQLAsc.AutoSize = true;
+            this.rbSQLAsc.Location = new System.Drawing.Point(97, 18);
+            this.rbSQLAsc.Name = "rbSQLAsc";
+            this.rbSQLAsc.Size = new System.Drawing.Size(46, 17);
+            this.rbSQLAsc.TabIndex = 3;
+            this.rbSQLAsc.Text = "ASC";
+            this.rbSQLAsc.UseVisualStyleBackColor = true;
+            // 
             // txtMaxRows
             // 
             this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1884,28 +1888,6 @@ namespace FBExpert
             this.bwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExport_ProgressChanged);
             this.bwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExport_RunWorkerCompleted);
             // 
-            // rbSQLDesc
-            // 
-            this.rbSQLDesc.AutoSize = true;
-            this.rbSQLDesc.Checked = true;
-            this.rbSQLDesc.Location = new System.Drawing.Point(149, 19);
-            this.rbSQLDesc.Name = "rbSQLDesc";
-            this.rbSQLDesc.Size = new System.Drawing.Size(54, 17);
-            this.rbSQLDesc.TabIndex = 4;
-            this.rbSQLDesc.TabStop = true;
-            this.rbSQLDesc.Text = "DESC";
-            this.rbSQLDesc.UseVisualStyleBackColor = true;
-            // 
-            // rbSQLAsc
-            // 
-            this.rbSQLAsc.AutoSize = true;
-            this.rbSQLAsc.Location = new System.Drawing.Point(97, 18);
-            this.rbSQLAsc.Name = "rbSQLAsc";
-            this.rbSQLAsc.Size = new System.Drawing.Size(46, 17);
-            this.rbSQLAsc.TabIndex = 3;
-            this.rbSQLAsc.Text = "ASC";
-            this.rbSQLAsc.UseVisualStyleBackColor = true;
-            // 
             // VIEWManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1920,6 +1902,7 @@ namespace FBExpert
             this.Load += new System.EventHandler(this.VIEWManageForm_Load);
             this.tabControlViews.ResumeLayout(false);
             this.tabPageFIELDS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
             this.cmsUpdateInsertText.ResumeLayout(false);
             this.tabPageDATA.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
@@ -1979,17 +1962,11 @@ namespace FBExpert
 
         private System.Windows.Forms.TabControl tabControlViews;
         private System.Windows.Forms.TabPage tabPageFIELDS;
-        private System.Windows.Forms.ListView lvFields;
-        private System.Windows.Forms.ColumnHeader colFIELDNAME;
         private System.Windows.Forms.TabPage tabPageDATA;
         private System.Windows.Forms.Panel pnlUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsPageRefresh;
-        private System.Windows.Forms.ColumnHeader colFIELDPOSITION;
-        private System.Windows.Forms.ColumnHeader colTYPE;
-        private System.Windows.Forms.ColumnHeader colLENGTH;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.BindingSource bsViewContent;
         private System.Data.DataSet dsViewContent;
         private System.Data.DataTable Table;
@@ -2082,5 +2059,6 @@ namespace FBExpert
         private System.Windows.Forms.TextBox txtSQL;
         private System.Windows.Forms.RadioButton rbSQLDesc;
         private System.Windows.Forms.RadioButton rbSQLAsc;
+        private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
     }
 }

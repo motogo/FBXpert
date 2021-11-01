@@ -202,7 +202,7 @@ namespace FBExpert
             if (DependenciesTO != null)
             {
                 string oldInxName = string.Empty;
-                TreeNode depend_node = null;
+                TreeNode node = null;
                 string oldDependName = string.Empty;
                 TreeNode inx_node = null;
                 foreach (var inx in DependenciesTO.Values)
@@ -210,16 +210,15 @@ namespace FBExpert
                     if (oldDependName != inx.Name)
                     {
                         oldInxName = string.Empty;
-                        depend_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToKeyStr, inx.Name, inx);                        
-                        dependencyTO_list_Node.Add(depend_node);
+                        node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToKeyStr, inx.Name, inx);                        
+                        dependencyTO_list_Node.Add(node);
                         oldDependName = inx.Name;
                     }
 
                     if (oldInxName != inx.DependOnName)
                     {
                         inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToKeyStr, inx.DependOnName, inx);                        
-                        depend_node.Nodes.Add(inx_node);
-                        depend_node.ToolTipText = $@"{inx.Name}->{inx.FieldName} depend on {inx.DependOnName}";
+                        node.Nodes.Add(inx_node);
                         oldInxName = inx.DependOnName;
                     }                   
                     var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromKeyStr, inx.DependOnName + " -> " + inx.FieldName, inx);                        
@@ -264,7 +263,7 @@ namespace FBExpert
             var ViewNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.ViewsKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
-            //bool newnode = false;
+           
             if (group_node != null)
             {                
                 RemoveNodes(group_node);
@@ -287,8 +286,8 @@ namespace FBExpert
             pk_list.Sort(CompareString);
             akt_group_node.Text = $@"Primary Keys ({pk_list.Count})";
             akt_group_node.Nodes.AddRange(pk_list.ToArray());
-            //if(newnode) 
-                nd.Nodes.Add(akt_group_node);
+           
+            nd.Nodes.Add(akt_group_node);
         }
 
         public void RefreshPrimaryKeysFromSystemTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
@@ -319,8 +318,8 @@ namespace FBExpert
             pk_list.Sort(CompareString);
             akt_group_node.Text = $@"Primary System Keys ({pk_list.Count})";
             akt_group_node.Nodes.AddRange(pk_list.ToArray());
-            //if (newnode) 
-                nd.Nodes.Add(akt_group_node);
+           
+            nd.Nodes.Add(akt_group_node);
         }
 
         public void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode _tnSelected)
@@ -359,8 +358,7 @@ namespace FBExpert
                 foreach (var fc in tc.ForeignKeys.Values)
                 {
                     TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,fc.Name,fc);     
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                    tablen.ToolTipText = $@"This foreign key has relation to {fc.SourceTableName}";
+                    
                     fk_list.Add(tablen);
                 }                   
             }
@@ -1237,9 +1235,10 @@ namespace FBExpert
 
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.IndicesKeyStr) as IndexClass;
                             tc.Name = dread.GetValue(0).ToString().Trim();
-                            var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, tc.Name, tc);
-                            tablen.BackColor = tc.IsActive ? Color.Green : Color.Red;
-                            tn.Nodes.Add(tablen);
+                            var node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, tc.Name, tc);
+
+                            node.BackColor = tc.IsActive ? Color.Green : Color.Red;
+                            tn.Nodes.Add(node);
                             n++;
                         }
                         tn.Text = $@"Indices ({n})";
@@ -1289,25 +1288,10 @@ namespace FBExpert
 
             foreach (var fc in indecies.Values)
             {           
-               
                 Type tp = fc.GetType();
+                var node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, fc.Name, fc);
                 
-                var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, fc.Name, fc);
-                tablen.ToolTipText = string.Empty;
-                tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                if(fc.ConstraintName.Length > 0) 
-                {
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().ActiveHasConstraint : StaticTreeClass.Instance().InactiveHasConstraint;
-                    
-                    tablen.ToolTipText = $@"This index has {fc.ConstraintName} to {fc.RelationName}";
-                }
-                else
-                {
-                    //Index
-                    tablen.ToolTipText = $@"This index has relation to {fc.RelationName}";
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                }
-                inx_list.Add(tablen);
+                inx_list.Add(node);
                 TableClass tc = Tables.Find(X=>X.Name == fc.RelationName);
                 
                 if(tc != null)
@@ -1352,25 +1336,11 @@ namespace FBExpert
 
             foreach (var fc in indecies.Values)
             {
-
                 Type tp = fc.GetType();
 
-                var tablen = DataClassFactory.GetNewNode(StaticVariablesClass.SystemIndicesKeyStr, fc.Name, fc);
-                tablen.ToolTipText = string.Empty;
-                tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                if (fc.ConstraintName.Length > 0)
-                {
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().ActiveHasConstraint : StaticTreeClass.Instance().InactiveHasConstraint;
+                var node = DataClassFactory.GetNewNode(StaticVariablesClass.SystemIndicesKeyStr, fc.Name, fc);
 
-                    tablen.ToolTipText = $@"This index has {fc.ConstraintName} to {fc.RelationName}";
-                }
-                else
-                {
-                    //Index
-                    tablen.ToolTipText = $@"This index has relation to {fc.RelationName}";
-                    tablen.ForeColor = fc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                }
-                inx_list.Add(tablen);
+                inx_list.Add(node);
                 TableClass tc = Tables.Find(X => X.Name == fc.RelationName);
 
                 if (tc != null)
@@ -1456,13 +1426,12 @@ namespace FBExpert
                                 }                                
                             }
                             tc.Description = dread.GetValue(7).ToString().Trim();
-                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.DomainsKeyStr,tc.Name,tc);
-                            
-                            tn.Nodes.Add(tablen);
+                            TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.DomainsKeyStr,tc.Name,tc);
+                            tn.Nodes.Add(node);
                             n++;
                         }
                         tn.Text = $@"Domains ({n})";
-                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
 
                         NotifiesClass.Instance.AddToINFO($@"RefreshDomains->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
@@ -1537,13 +1506,12 @@ namespace FBExpert
                             tc.DefaultValue = string.Empty; // dread.GetValue(6).ToString().Trim();
                             tc.Description = string.Empty;
                             
-                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.SystemDomainsKeyStr, tc.Name, tc);
-
-                            tn.Nodes.Add(tablen);
+                            TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.SystemDomainsKeyStr, tc.Name, tc);
+                            tn.Nodes.Add(node);
                             n++;
                         }
                         tn.Text = $@"System Domains ({n})";
-                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
 
                         NotifiesClass.Instance.AddToINFO($@"RefreshDomains->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
@@ -1611,21 +1579,13 @@ namespace FBExpert
                         {
                             var tc = DataClassFactory.GetDataClass(StaticVariablesClass.ForeignKeyStr) as ForeignKeyClass;
                             tc.Name = dread.GetValue(2).ToString().Trim(); //ForeignKeyName
-                             
                             int inactive = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);                            
                             tc.IsActive = inactive == 0;
-                            
-                            
-                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,tc.Name,tc);
-                            tablen.ForeColor = tc.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
-                           
-
-                            tablen.ToolTipText = $@"This foreign key has relation to {tc.Name}";
-
-                            tn.Nodes.Add(tablen);
+                            TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,tc.Name,tc);
+                            tn.Nodes.Add(node);
                             n++;
                         }
-                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
                         NotifiesClass.Instance.AddToINFO($@"RefreshForeignKeys->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
                         tn.Text = $@"Foreign Keys ({n})";
@@ -1736,13 +1696,14 @@ namespace FBExpert
                                 tc.FieldNames.Add(fieldname,fieldname);                                                                
                             }
                         }
-                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
                         NotifiesClass.Instance.AddToINFO($@"RefreshConstraintItems->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
                         if (tc != null)
                         {
-                            TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyStr, tc.Name,tc);                            
-                            tn.Nodes.Add(tablen);
+                            TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.ConstraintsKeyStr, tc.Name,tc); 
+                           
+                            tn.Nodes.Add(node);
                         }
                         tn.Text = $@"{ctyp} ({n})";
                     }
@@ -1806,8 +1767,9 @@ namespace FBExpert
             var allprocedures = GetProcedureObjects(DBReg);
             foreach(var procedure in allprocedures.Values)
             {
-                 TreeNode tablen = DataClassFactory.GetNewNode(StaticVariablesClass.ProceduresKeyStr,procedure.Name,procedure);  
-                 nd.Nodes.Add(tablen);
+                TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.ProceduresKeyStr,procedure.Name,procedure);  
+              
+                nd.Nodes.Add(node);
             }
             nd.Text = $@"Procedures ({allprocedures.Count})";
         }
@@ -2204,7 +2166,7 @@ namespace FBExpert
                                 con2.Close();
                             }                            
                         }
-                        Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
+                        //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
                         NotifiesClass.Instance.AddToINFO($@"RefreshGeneratorsItems->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
                         nd.Text = $@"Generators ({n})";
@@ -2287,7 +2249,7 @@ namespace FBExpert
                  NotifiesClass.Instance.AddToINFO($@"Reading done {tc.Name}",eMessageGranularity.less, true);
                  
                  var table_node = DataClassFactory.GetNewNode(StaticVariablesClass.TablesKeyStr,tc.Name,tc);
-                
+                 
                  #region fields
 
                  int fields_cnt = 0;
@@ -2359,7 +2321,7 @@ namespace FBExpert
                 foreach (var fld in tc.Fields.Values)
                 {
                     TreeNode field_node = DataClassFactory.GetNewNode(StaticVariablesClass.FieldsKeyStr,fld.Name,fld);
-                    
+                  
                     //OPT
                      table_field_group_node.Text = $@"Fields ({tc.Fields.Count})";
                      table_field_group_node.Name = StaticVariablesClass.FieldsKeyGroupStr;
@@ -2370,26 +2332,21 @@ namespace FBExpert
                      foreach (var inx in tc.ForeignKeys.Values)
                      {
                         var fk_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr, inx.Name, inx);
-                        fk_node.ToolTipText = $@"This foreign key has relation to {tc.Name}";
-                        fk_node.ForeColor = inx.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+                      
                         table_fk_group_node.Nodes.Add(fk_node);                       
                      }
                  }
                  if (tc.primary_constraint != null)
                  {                    
-                    var pk_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyStr, tc.primary_constraint.Name, tc.primary_constraint);
+                    var pk_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyStr, tc.primary_constraint.Name, tc.primary_constraint, tc);
                     table_pk_group_node.Text = $@"Primary Key (1,{tc.primary_constraint.FieldNames.Count})";
-                    pk_node.ToolTipText = $@"This primary key has relation to {tc.Name}";
-                    
                     table_pk_group_node.Nodes.Add(pk_node);
                  }
                  if (tc.Indices != null)
                  {
                      foreach (var inx in tc.Indices.Values)
                      {
-                        var inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, inx.Name, inx);
-                        inx_node.ToolTipText = $@"This index has relation to {tc.Name}";
-                        inx_node.ForeColor = inx.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+                        var inx_node = DataClassFactory.GetNewNode(StaticVariablesClass.IndicesKeyStr, inx.Name, inx, tc);
                         table_indices_group_node.Nodes.Add(inx_node);
                      }
                  }
@@ -2397,9 +2354,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.uniques_constraints.Values)
                      {
-                        var u_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyStr, inx.Name, inx);
-                        u_node.ToolTipText = $@"This unique constraint has relation to {tc.Name}";
-                        
+                        var u_node = DataClassFactory.GetNewNode(StaticVariablesClass.UniquesKeyStr, inx.Name, inx, tc);
                         constraint_uniques_group_node.Nodes.Add(u_node);
                      }
                  }
@@ -2408,9 +2363,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.notnulls_constraints.Values)
                      {
-                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyStr, inx.Name, inx);
-                        nn_node.ToolTipText = $@"This not null constraint has relation to {tc.Name}";
-                        
+                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.NotNullKeyStr, inx.Name, inx,tc);
                         constraint_notnull_group_node.Nodes.Add(nn_node);
                      }
                  }
@@ -2419,18 +2372,14 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.check_constraints.Values)
                      {
-                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyStr, inx.Name, inx);
-                        nn_node.ToolTipText = $@"This not check constraint has relation to {tc.Name}";
-                        
+                        var nn_node = DataClassFactory.GetNewNode(StaticVariablesClass.ChecksKeyStr, inx.Name, inx, tc);
                         constraint_check_group_node.Nodes.Add(nn_node);
                      }
                  }
 
                  if (tc.primary_constraint != null)
                  {                   
-                    var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyStr, tc.primary_constraint.Name, tc.primary_constraint);
-                    p_node.ToolTipText = $@"This not primary constraint has relation to {tc.Name}";
-                    
+                    var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.PrimaryKeyStr, tc.primary_constraint.Name, tc.primary_constraint,tc);
                     constraint_pk_group_node.Nodes.Add(p_node);
                  }
 
@@ -2438,9 +2387,7 @@ namespace FBExpert
                  {
                      foreach (var inx in tc.Triggers.Values)
                      {
-                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.TriggersKeyStr, inx.Name, inx);
-                        p_node.ToolTipText = $@"This not trigger has relation to {tc.Name}";
-                        
+                        var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.TriggersKeyStr, inx.Name, inx,tc);
                         table_triggers_group_node.Nodes.Add(p_node);
                      }
                  }
@@ -2533,8 +2480,7 @@ namespace FBExpert
                             oldInxName = inx.DependOnName;
                         }
                         var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesToViewsKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);
-                        p_node.ToolTipText = string.Empty;
-                       
+
                         inx_node.Nodes.Add(p_node);
                      }
                  }
@@ -2553,7 +2499,7 @@ namespace FBExpert
                         }
 
                         var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromViewsKeyStr, inx.DependOnName, inx);
-                        p_node.ToolTipText = $@"{inx.Name} depent on view {inx.DependOnName}" ;
+                        
                         inx_node.Nodes.Add(p_node);
                     }
                 }
@@ -2571,7 +2517,7 @@ namespace FBExpert
                             oldInxName = inx.DependOnName;
                         }
                         var p_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesFromProceduresKeyStr, $@"{inx.Name}->{inx.FieldName}", inx);
-                        p_node.ToolTipText = string.Empty;
+                     
                         inx_node.Nodes.Add(p_node);
                      }
                  }
@@ -2745,8 +2691,7 @@ namespace FBExpert
                     foreach (var fk in tc.ForeignKeys.Values)
                     {
                         var fk_node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr, fk.Name, fk);
-                        fk_node.ToolTipText = $@"This foreign key has relation to {fk.Name}";
-                        fk_node.ForeColor = fk.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
+                        
                         table_fk_group_node.Nodes.Add(fk_node);
                     }
                 }
@@ -3383,6 +3328,7 @@ namespace FBExpert
                         {
                             var field_node = DataClassFactory.GetNewNode(StaticVariablesClass.ViewFieldsKeyStr, fld.Name, fld);
                             
+                           
                             fieldgroup_node.Text = $@"Fields ({tc.Fields.Count})";
                             fieldgroup_node.Nodes.Add(field_node);
                         }
@@ -3448,9 +3394,9 @@ namespace FBExpert
                 NotifiesClass.Instance.AddToINFO($@"Reading done {tc.Name}", eMessageGranularity.few, true);
                 
                 var view_node = DataClassFactory.GetNewNode(StaticVariablesClass.ViewsKeyStr, tc.Name,tc);
-                
+               
                 #region fields
-                              
+
                 int uc_cnt = 0;
                 int nn_cnt = 0;
                 int ck_cnt = 0;
@@ -3491,8 +3437,10 @@ namespace FBExpert
                
                 foreach (var fld in tc.Fields.Values)
                 {
-                    var field_node = DataClassFactory.GetNewNode(StaticVariablesClass.ViewFieldsKeyStr, fld.Name,fld);                    
+                    var field_node = DataClassFactory.GetNewNode(StaticVariablesClass.ViewFieldsKeyStr, fld.Name,fld);
+                   
                     fieldgroup_node.Text = $@"Fields ({tc.Fields.Count})";
+                    
                     fieldgroup_node.Nodes.Add(field_node);
                 }
                 
@@ -3703,7 +3651,7 @@ namespace FBExpert
                     foreach (var nodesObject in tcc.ForeignKeys.Values)
                     {
                         var subnode = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr, nodesObject.Name, nodesObject);
-                        subnode.ToolTipText = $@"This foreign key has relation to {nodesObject.Name}";
+                    
                         subnode.ForeColor = nodesObject.IsActive ? StaticTreeClass.Instance().Active : StaticTreeClass.Instance().Inactive;
                         group_node.Nodes.Add(subnode);
                     }

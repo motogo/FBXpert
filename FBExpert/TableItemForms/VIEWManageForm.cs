@@ -1,4 +1,5 @@
 ﻿using BasicClassLibrary;
+using BrightIdeasSoftware;
 using DBBasicClassLibrary;
 using Enums;
 using FBExpert.DataClasses;
@@ -33,7 +34,7 @@ namespace FBExpert
             return (instance);
         }
 
-        private ViewClass ViewObject = null;
+        private ViewClass _viewObject = null;
         private StreamWriter sw = null;
 
         private int messages_count = 0;
@@ -57,7 +58,7 @@ namespace FBExpert
             _localNofity.Register4Error(ErrorRaised);
             
             TnSelected = tnSelected;
-            ViewObject = (ViewClass)tnSelected.Tag;
+            _viewObject = (ViewClass)tnSelected.Tag;
 
             DBReg = drc;
             txtMaxRows.Text = AppSettingsClass.Instance.SQLVariables.MaxRowsForSelect.ToString();
@@ -119,7 +120,7 @@ namespace FBExpert
 
         public void ShowCaptions()
         {
-            lblTableName.Text = (ViewObject != null) ? $@"View: {ViewObject.Name}" : "View";            
+            lblTableName.Text = (_viewObject != null) ? $@"View: {_viewObject.Name}" : "View";            
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Manage Views");
         }
 
@@ -160,7 +161,7 @@ namespace FBExpert
             dsDependencies.Clear();
             dgvDependencies.AutoGenerateColumns = true;
 
-            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesTO(DBReg.Version, ViewObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesTO(DBReg.Version, _viewObject.Name);
             try
             { 
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
@@ -182,7 +183,7 @@ namespace FBExpert
         {                  
             dsDependencies.Clear();
             dgvDependencies.AutoGenerateColumns = true;
-            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesFROM(DBReg.Version, ViewObject.Name);
+            string cmd_index = SQLStatementsClass.Instance.GetViewManagerDependenciesFROM(DBReg.Version, _viewObject.Name);
             try
             { 
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
@@ -200,11 +201,14 @@ namespace FBExpert
 
         public int RefreshFields()
         {
-            if (string.IsNullOrEmpty(ViewObject.Name)) return lvFields.Items.Count;
+            if (string.IsNullOrEmpty(_viewObject.Name)) return fastObjectListView1.Items.Count;
             
-            string cmd =  SQLStatementsClass.Instance.GetViewFields(DBReg.Version, ViewObject.Name);
+            string cmd =  SQLStatementsClass.Instance.GetViewFields(DBReg.Version, _viewObject.Name);
+
+            fastObjectListView1.SetObjects(null,false);
+            //fastObjectListView1.Items.Clear();
             
-            lvFields.Items.Clear();
+
             dgExportGrid.Rows.Clear();
             try
             { 
@@ -218,23 +222,31 @@ namespace FBExpert
                     {                                                    
                         string fieldstr     =  dread.GetValue(0).ToString();
                         string posstr       = dread.GetValue(1).ToString();
+                        string domainname   = dread.GetValue(2).ToString();
                         string typename     = dread.GetValue(3).ToString();
                         string typelength   = dread.GetValue(4).ToString();
+                        string basefield = dread.GetValue(5).ToString();
+                        string nullflag = dread.GetValue(6).ToString();
+                        string updateflag = dread.GetValue(7).ToString();
+                        string charactersetname = dread.GetValue(8).ToString();
+                        string collatename = dread.GetValue(9).ToString();
 
                         ViewFieldClass vf = new ViewFieldClass()
                         {
-                            Name = fieldstr.Trim()
+                            Name = fieldstr.Trim(),
+                            Position = BasicClassLibrary.StaticFunctionsClass.ToIntDef(posstr.Trim(), -1),
+                            UpdateFlag = BasicClassLibrary.StaticFunctionsClass.ToIntDef(updateflag.Trim(), 0),
+                            BaseField = basefield.Trim()
                         };
-
-                        string[] obarr = { posstr.Trim(), fieldstr.Trim(), typename.Trim(), typelength.Trim() };
+                        vf.Domain.FieldType = typename.Trim();
+                        vf.Domain.Length = BasicClassLibrary.StaticFunctionsClass.ToIntDef(typelength, -1);
+                        vf.Domain.Name = domainname.Trim();
+                        vf.Domain.NotNull = (BasicClassLibrary.StaticFunctionsClass.ToIntDef(posstr, 0) == 1);
+                        vf.Domain.CharSet = charactersetname.Trim();
+                        vf.Domain.Collate = collatename.Trim();
                         object[] obarr_export = { posstr.Trim(), fieldstr.Trim(), true, true };
 
-                        var lvi = new ListViewItem(obarr)
-                        {
-                            Tag = vf,
-                            Checked = true
-                        };
-                        lvFields.Items.Add(lvi);
+                        fastObjectListView1.AddObject(vf);
                         dgExportGrid.Rows.Add(obarr_export);
                     }
                 }
@@ -244,32 +256,38 @@ namespace FBExpert
             {
                 NotifiesClass.Instance.AddToERROR($@"{BasicClassLibrary.StaticFunctionsClass.DateTimeNowStr()} {this.Name}->RefreshDependenciesFrom->{ex.Message}");
             }               
-            return lvFields.Items.Count;
+            return fastObjectListView1.Items.Count;
         }
        
+
+
+
+
         public string MakeFieldsCmd()
         {
             var sb = new StringBuilder();
-            foreach (ListViewItem lvi in lvFields.Items)
+            ViewFieldClass firstObject = null;
+            int i = 0;
+            foreach (ViewFieldClass lvi in fastObjectListView1.Objects)
             {
+                if (i == 0) firstObject = lvi;
+                i++;
                 if (sb.ToString().Length > 0)
                 {
                     sb.Append(",");
                 }
-                var obarr = (ViewFieldClass)lvi.Tag;
-                sb.Append(obarr.Name);
+               
+                sb.Append(lvi.Name);
             }
 
-            sb.Append($@" FROM {ViewObject.Name}");
+            sb.Append($@" FROM {_viewObject.Name}");
 
-            if (lvFields.Items.Count > 0)
+            if (firstObject != null)
             {
-                ListViewItem lvi_first = lvFields.Items[0];
-                var obarr = (ViewFieldClass)lvi_first.Tag;
                 if (rbSQLAsc.Checked)
-                    sb.Append($@" ORDER BY {obarr.Name} {EnumHelper.GetDescription(eSort.ASC)}");
+                    sb.Append($@" ORDER BY {firstObject.Name} {EnumHelper.GetDescription(eSort.ASC)}");
                 else if (rbSQLDesc.Checked)
-                    sb.Append($@" ORDER BY {obarr.Name} {EnumHelper.GetDescription(eSort.DESC)}");
+                    sb.Append($@" ORDER BY {firstObject.Name} {EnumHelper.GetDescription(eSort.DESC)}");
             }
             else
             {
@@ -289,6 +307,117 @@ namespace FBExpert
         }
 
         public FbConnection _dataConnection = null;
+
+        private BrightIdeasSoftware.OLVColumn colFieldname;
+        private BrightIdeasSoftware.OLVColumn colFieldPosition;
+        private BrightIdeasSoftware.OLVColumn colFieldType;
+        private BrightIdeasSoftware.OLVColumn colLength;
+        private BrightIdeasSoftware.OLVColumn colCharset;
+        private BrightIdeasSoftware.OLVColumn colCollate;
+        private BrightIdeasSoftware.OLVColumn colDomainName;
+        private BrightIdeasSoftware.OLVColumn colScale;
+        private BrightIdeasSoftware.OLVColumn colBaseField;
+        private BrightIdeasSoftware.OLVColumn colNotNull;
+        private BrightIdeasSoftware.OLVColumn colUpdateFlag;
+
+
+        public void MakeFieldGrid()
+        {
+            colFieldname = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldPosition = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colBaseField = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colNotNull = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colUpdateFlag = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colLength = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colCharset = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colCollate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colDomainName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colScale = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+
+            colFieldType.TextAlign = HorizontalAlignment.Center;
+            colFieldPosition.TextAlign = HorizontalAlignment.Right;
+            colFieldname.Text = "Name";
+            colFieldPosition.Text = "Pos";
+            colFieldType.Text = "Type";
+            colBaseField.Text = "Base Field";
+            colNotNull.Text = "NotNull";
+            colUpdateFlag.Text = "UpdFlag";
+            colLength.Text = "Length";
+            colCharset.Text = "Charset";
+            colCollate.Text = "Collate";
+            colDomainName.Text = "Domain";
+            colScale.Text = "Scale";
+
+            colFieldPosition.Width = 50;
+            colFieldname.Width = 250;
+            colBaseField.Width = 250;
+            colNotNull.Width = 70;
+            colFieldType.Width = 100;
+            colLength.Width = 70;
+            colCharset.Width = 100;
+            colCollate.Width = 100;
+            colDomainName.Width = 120;
+            colScale.Width = 40;
+            colUpdateFlag.Width = 70;
+
+            fastObjectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+
+            colFieldPosition,
+            colFieldname,
+            colFieldType,
+            colLength,
+            colNotNull,
+            colScale,
+            colCharset,
+            colCollate,
+            colDomainName,
+            colBaseField,
+            colUpdateFlag
+            });
+            fastObjectListView1.CellEditUseWholeCell = false;
+            fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            fastObjectListView1.HideSelection = false;
+            fastObjectListView1.Location = new System.Drawing.Point(0, 0);
+            fastObjectListView1.Name = "fastObjectListView1";
+            fastObjectListView1.ShowGroups = false;
+            fastObjectListView1.TabIndex = 4;
+            fastObjectListView1.UseCompatibleStateImageBehavior = false;
+            fastObjectListView1.View = System.Windows.Forms.View.Details;
+            fastObjectListView1.VirtualMode = true;
+        }
+
+        //Getters (Formatierungen, Zuweisungen der Objektvariablen zu dem ObjektListView
+        private void SetupColumns()
+        {
+            colFieldname.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Name; };
+            colBaseField.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).BaseField; };
+            colFieldPosition.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Position; };
+            colFieldType.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Domain.FieldType; };
+
+            colLength.AspectGetter = delegate (object x)
+            {
+                if (((ViewFieldClass)x).Domain.FieldType == "VARYING") return ((ViewFieldClass)x).Domain.Length.ToString();
+                return "";
+            };
+
+            this.colNotNull.AspectGetter = delegate (object x)
+            {
+                if (((ViewFieldClass)x).Domain.NotNull) return "ISOK";
+                return "NOTOK";
+            };
+            this.colNotNull.Renderer = new MappedImageRenderer(new Object[] {
+                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
+                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+            });
+
+            colUpdateFlag.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).UpdateFlag; };
+            colScale.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Domain.Scale; };
+            colCharset.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Domain.CharSet; };
+            colCollate.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Domain.Collate; };
+            colDomainName.AspectGetter = delegate (object x) { return ((ViewFieldClass)x).Domain.Name; };
+        }
+
 
         public void SetMaxRows(int maxrows)
         {
@@ -316,7 +445,7 @@ namespace FBExpert
         {
             int errorsCnt = 0;
             
-            if (string.IsNullOrEmpty(ViewObject.Name))  return dsViewContent.Tables[0].Rows.Count;            
+            if (string.IsNullOrEmpty(_viewObject.Name))  return dsViewContent.Tables[0].Rows.Count;            
             try
             {
                 dgvResults.AutoGenerateColumns = true;
@@ -380,10 +509,10 @@ namespace FBExpert
 
         private void RefreshDLL()
         {
-            fctDLL.Text = ViewObject.SQL;
+            fctDLL.Text = _viewObject.SQL;
             fctCREATEINSERTSQL.Text = (cbAlterView.Checked) 
-                ? (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(ViewObject.CREATEINSERT_SQL) : ViewObject.CREATEINSERT_SQL 
-                : (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(ViewObject.CREATE_SQL) : ViewObject.CREATE_SQL;
+                ? (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(_viewObject.CREATEINSERT_SQL) : _viewObject.CREATEINSERT_SQL 
+                : (cbPretty.Checked) ? AppStaticFunctionsClass.MakeSqlPretty(_viewObject.CREATE_SQL) : _viewObject.CREATE_SQL;
             if (!fctCREATEINSERTSQL.Text.Trim().EndsWith(";")) fctCREATEINSERTSQL.Text += ";";
         }
 
@@ -493,7 +622,7 @@ namespace FBExpert
             var sp = SPALTENEditForm.Instance(this, null,true);
             sp.Notify.Register4Info(SpaltenNotify_SpaltenOnRaiseInfoHandler);
 
-            sp.SetGrid(dgvResults, ViewObject.Name,DBReg.Alias);
+            sp.SetGrid(dgvResults, _viewObject.Name,DBReg.Alias);
             sp.ShowDialog();
         }
 
@@ -550,6 +679,8 @@ namespace FBExpert
         {
             
             FormDesign.SetFormLeft(this);
+            MakeFieldGrid();
+            SetupColumns();
             RefreshLanguageText();
             fctMessages.Clear();
             
@@ -590,7 +721,7 @@ namespace FBExpert
 
         private void hsSave_Click(object sender, EventArgs e)
         {
-            saveSQLFile.FileName = $@"{ViewObject.Name}.sql";
+            saveSQLFile.FileName = $@"{_viewObject.Name}.sql";
             if (saveSQLFile.ShowDialog() != DialogResult.OK) return;            
             fctCREATEINSERTSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);               
         }
@@ -834,7 +965,7 @@ namespace FBExpert
         }
         public ViewFieldClass FindField(string fname)
         {
-            ViewObject.Fields.TryGetValue(fname, out ViewFieldClass result);
+            _viewObject.Fields.TryGetValue(fname, out ViewFieldClass result);
             return result;
         }
 
@@ -868,7 +999,7 @@ namespace FBExpert
                 
                 string cmdpattern = (insertupdate) ? SQLPatterns.UpdateInsertPattern : SQLPatterns.InsertPattern;
                 
-                string tablename = ViewObject.Name;
+                string tablename = _viewObject.Name;
                 cmdpattern = cmdpattern.Replace(SQLPatterns.TableKey, tablename);
                 cmdpattern = cmdpattern.Replace(SQLPatterns.ColumnKey, cols.ToString());
                 bool first = true;
@@ -922,7 +1053,7 @@ namespace FBExpert
 
                 cmdpattern = SQLPatterns.UpdatePattern;
 
-                string tablename = ViewObject.Name;
+                string tablename = _viewObject.Name;
                 cmdpattern = cmdpattern.Replace(SQLPatterns.TableKey, tablename);
                 string primarystr = string.Empty;
                 bool first = true;

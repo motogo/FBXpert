@@ -1001,7 +1001,8 @@ namespace FBXpert
                 }
             }
             else if (tnn == typeof(ViewClass))
-            {                
+            {    
+               
                 SetActTableNode(t, StaticVariablesClass.CommonTablesKeyGroupStr);      
                 var vc = (ViewClass)_tnSelected.Tag;
                 FbXpertMainForm.Instance().ActViewObject = vc;
@@ -1018,6 +1019,28 @@ namespace FBXpert
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                   cmsTable.Show(cmsLeft,cmsTop);
+                }
+            }
+            else if (tnn == typeof(TableFieldClass))
+            {
+                SetActTableNode(t, StaticVariablesClass.FieldsKeyStr);
+                var vc = (TableFieldClass)_tnSelected.Tag;
+                FbXpertMainForm.Instance().ActTableFieldObject = vc;
+                FbXpertMainForm.Instance().ActFieldObject = (FieldClass) vc;
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                  cmsFields.Show(cmsLeft, cmsTop);
+                }
+            }
+            else if (tnn == typeof(ViewFieldClass))
+            {
+                SetActTableNode(t, StaticVariablesClass.FieldsKeyStr);
+                var vc = (ViewFieldClass)_tnSelected.Tag;
+                FbXpertMainForm.Instance().ActViewFieldObject = vc;
+                FbXpertMainForm.Instance().ActFieldObject = (FieldClass)vc;
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                    cmsFields.Show(cmsLeft, cmsTop);
                 }
             }
             else if (tnn == typeof(TableGroupClass))
@@ -2423,6 +2446,12 @@ namespace FBXpert
             GetOpenConnections();
         }
 
-        
+        private void cmsFields_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem == tsmiCopyFieldClipboard)
+            {
+                Clipboard.SetText(FbXpertMainForm.Instance().ActFieldObject.Name);
+            }
+        }
     }
 }

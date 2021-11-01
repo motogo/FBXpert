@@ -42,6 +42,8 @@
             this.tsmiOpenAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCloseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpenDBFilePath = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator33 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
@@ -229,16 +231,16 @@
             this.tsmiEditUserDefinedFunctions = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUserDefinedFunctionGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsNotNulls = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiEditNotNull = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsNotNullsGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropAllNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenDBFilePath = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator33 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsFields = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiCopyFieldClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsNotNulls = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiEditNotNull = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteNotNull = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDatabases.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.pnlUpper.SuspendLayout();
@@ -273,8 +275,9 @@
             this.cmsSystemTable.SuspendLayout();
             this.cmsUserDefinedFunctions.SuspendLayout();
             this.cmsUserDefinedFunctionGroup.SuspendLayout();
-            this.cmsNotNulls.SuspendLayout();
             this.cmsNotNullsGroup.SuspendLayout();
+            this.cmsFields.SuspendLayout();
+            this.cmsNotNulls.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatabases
@@ -382,7 +385,7 @@
             this.toolStripSeparator21,
             this.tsmiIDBBinaries});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(307, 928);
+            this.cmsDatabase.Size = new System.Drawing.Size(307, 906);
             this.cmsDatabase.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsMainGroupItems_Clicked);
             // 
             // tstDatabase
@@ -452,6 +455,18 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(303, 6);
+            // 
+            // tsmiOpenDBFilePath
+            // 
+            this.tsmiOpenDBFilePath.Image = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.tsmiOpenDBFilePath.Name = "tsmiOpenDBFilePath";
+            this.tsmiOpenDBFilePath.Size = new System.Drawing.Size(306, 26);
+            this.tsmiOpenDBFilePath.Text = "Pfad zu DB im Explorer öffnen";
+            // 
+            // toolStripSeparator33
+            // 
+            this.toolStripSeparator33.Name = "toolStripSeparator33";
+            this.toolStripSeparator33.Size = new System.Drawing.Size(303, 6);
             // 
             // tsmiMoveUp
             // 
@@ -2119,30 +2134,6 @@
             this.toolStripMenuItem5.Size = new System.Drawing.Size(150, 26);
             this.toolStripMenuItem5.Text = "Refresh UDF\'s";
             // 
-            // cmsNotNulls
-            // 
-            this.cmsNotNulls.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsNotNulls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEditNotNull,
-            this.tsmiDeleteNotNull});
-            this.cmsNotNulls.Name = "contextMenuStrip1";
-            this.cmsNotNulls.Size = new System.Drawing.Size(209, 56);
-            this.cmsNotNulls.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
-            // 
-            // tsmiEditNotNull
-            // 
-            this.tsmiEditNotNull.Image = global::FBXpert.Properties.Resources.format_text_direction_x22;
-            this.tsmiEditNotNull.Name = "tsmiEditNotNull";
-            this.tsmiEditNotNull.Size = new System.Drawing.Size(208, 26);
-            this.tsmiEditNotNull.Text = "Edit Not Null constraint";
-            // 
-            // tsmiDeleteNotNull
-            // 
-            this.tsmiDeleteNotNull.Image = global::FBXpert.Properties.Resources.cross_red_x20;
-            this.tsmiDeleteNotNull.Name = "tsmiDeleteNotNull";
-            this.tsmiDeleteNotNull.Size = new System.Drawing.Size(208, 26);
-            this.tsmiDeleteNotNull.Text = "Drop Not Null constraint";
-            // 
             // cmsNotNullsGroup
             // 
             this.cmsNotNullsGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -2181,17 +2172,45 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(224, 26);
             this.toolStripMenuItem4.Text = "Refresh";
             // 
-            // tsmiOpenDBFilePath
+            // cmsFields
             // 
-            this.tsmiOpenDBFilePath.Image = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.tsmiOpenDBFilePath.Name = "tsmiOpenDBFilePath";
-            this.tsmiOpenDBFilePath.Size = new System.Drawing.Size(306, 26);
-            this.tsmiOpenDBFilePath.Text = "Pfad zu DB im Explorer öffnen";
+            this.cmsFields.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsFields.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCopyFieldClipboard});
+            this.cmsFields.Name = "contextMenuStrip1";
+            this.cmsFields.Size = new System.Drawing.Size(211, 52);
+            this.cmsFields.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsFields_ItemClicked);
             // 
-            // toolStripSeparator33
+            // tsmiCopyFieldClipboard
             // 
-            this.toolStripSeparator33.Name = "toolStripSeparator33";
-            this.toolStripSeparator33.Size = new System.Drawing.Size(303, 6);
+            this.tsmiCopyFieldClipboard.Image = global::FBXpert.Properties.Resources.document_x24;
+            this.tsmiCopyFieldClipboard.Name = "tsmiCopyFieldClipboard";
+            this.tsmiCopyFieldClipboard.Size = new System.Drawing.Size(210, 26);
+            this.tsmiCopyFieldClipboard.Text = "Copy Name to Clipboard";
+            // 
+            // cmsNotNulls
+            // 
+            this.cmsNotNulls.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsNotNulls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditNotNull,
+            this.tsmiDeleteNotNull});
+            this.cmsNotNulls.Name = "contextMenuStrip1";
+            this.cmsNotNulls.Size = new System.Drawing.Size(209, 56);
+            this.cmsNotNulls.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ItemClickedEditLevel);
+            // 
+            // tsmiEditNotNull
+            // 
+            this.tsmiEditNotNull.Image = global::FBXpert.Properties.Resources.format_text_direction_x22;
+            this.tsmiEditNotNull.Name = "tsmiEditNotNull";
+            this.tsmiEditNotNull.Size = new System.Drawing.Size(208, 26);
+            this.tsmiEditNotNull.Text = "Edit Not Null constraint";
+            // 
+            // tsmiDeleteNotNull
+            // 
+            this.tsmiDeleteNotNull.Image = global::FBXpert.Properties.Resources.cross_red_x20;
+            this.tsmiDeleteNotNull.Name = "tsmiDeleteNotNull";
+            this.tsmiDeleteNotNull.Size = new System.Drawing.Size(208, 26);
+            this.tsmiDeleteNotNull.Text = "Drop Not Null constraint";
             // 
             // DbExplorerForm
             // 
@@ -2249,8 +2268,9 @@
             this.cmsSystemTable.ResumeLayout(false);
             this.cmsUserDefinedFunctions.ResumeLayout(false);
             this.cmsUserDefinedFunctionGroup.ResumeLayout(false);
-            this.cmsNotNulls.ResumeLayout(false);
             this.cmsNotNullsGroup.ResumeLayout(false);
+            this.cmsFields.ResumeLayout(false);
+            this.cmsNotNulls.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2425,9 +2445,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiActivateFK;
         private System.Windows.Forms.ToolStripMenuItem tsmiRecreateAllIndex;
         private System.Windows.Forms.ToolStripMenuItem tsmiRecreateIndex;
-        private System.Windows.Forms.ContextMenuStrip cmsNotNulls;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEditNotNull;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteNotNull;
         private System.Windows.Forms.ContextMenuStrip cmsNotNullsGroup;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewNotNull;
         private System.Windows.Forms.ToolStripMenuItem tsmiDropAllNotNull;
@@ -2466,5 +2483,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchInTables;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenDBFilePath;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator33;
+        private System.Windows.Forms.ContextMenuStrip cmsFields;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopyFieldClipboard;
+        private System.Windows.Forms.ContextMenuStrip cmsNotNulls;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEditNotNull;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteNotNull;
     }
 }
