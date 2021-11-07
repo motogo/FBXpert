@@ -32,7 +32,7 @@ namespace FBXpert
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserDefinedFunctionForm));
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlCenter = new System.Windows.Forms.Panel();
@@ -44,12 +44,16 @@ namespace FBXpert
             this.tabPageSQL = new System.Windows.Forms.TabPage();
             this.gbSQL = new System.Windows.Forms.GroupBox();
             this.fctSQL = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlSQL_UPPER = new System.Windows.Forms.Panel();
+            this.pnlSQLUpper = new System.Windows.Forms.Panel();
             this.gbUsedMilliseconds = new System.Windows.Forms.GroupBox();
             this.lblUsedMs = new System.Windows.Forms.Label();
             this.hsLoadSQL = new SeControlsLib.HotSpot();
             this.hsSaveSQL = new SeControlsLib.HotSpot();
             this.hsRunStatement = new SeControlsLib.HotSpot();
+            this.tabPageMessages = new System.Windows.Forms.TabPage();
+            this.pnlMessagesUpper = new System.Windows.Forms.Panel();
+            this.hsClearMessages = new SeControlsLib.HotSpot();
+            this.fctMessages = new FastColoredTextBoxNS.FastColoredTextBox();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.cmsParameters = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAddInputParameter = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,11 +68,7 @@ namespace FBXpert
             this.bsDependenciesFrom = new System.Windows.Forms.BindingSource(this.components);
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
-            this.tabPageMessages = new System.Windows.Forms.TabPage();
-            this.pnlMessagesUpper = new System.Windows.Forms.Panel();
-            this.hsClearMessages = new SeControlsLib.HotSpot();
-            this.fctMessages = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
             this.tabPageFieldEdit.SuspendLayout();
@@ -80,8 +80,11 @@ namespace FBXpert
             this.tabPageSQL.SuspendLayout();
             this.gbSQL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).BeginInit();
-            this.pnlSQL_UPPER.SuspendLayout();
+            this.pnlSQLUpper.SuspendLayout();
             this.gbUsedMilliseconds.SuspendLayout();
+            this.tabPageMessages.SuspendLayout();
+            this.pnlMessagesUpper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
             this.cmsParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesTo)).BeginInit();
@@ -89,27 +92,24 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
-            this.tabPageMessages.SuspendLayout();
-            this.pnlMessagesUpper.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1229, 42);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblCaption);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1229, 45);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // lblCaption
             // 
             this.lblCaption.AutoSize = true;
             this.lblCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaption.Location = new System.Drawing.Point(71, 10);
+            this.lblCaption.Location = new System.Drawing.Point(71, 11);
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(182, 20);
             this.lblCaption.TabIndex = 4;
@@ -128,6 +128,7 @@ namespace FBXpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -140,7 +141,10 @@ namespace FBXpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            this.hsClose.Size = new System.Drawing.Size(45, 42);
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
+            this.hsClose.Size = new System.Drawing.Size(45, 45);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -166,9 +170,9 @@ namespace FBXpert
             // 
             this.pnlCenter.Controls.Add(this.tabControlFields);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 42);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 45);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1229, 674);
+            this.pnlCenter.Size = new System.Drawing.Size(1229, 726);
             this.pnlCenter.TabIndex = 2;
             // 
             // tabControlFields
@@ -179,7 +183,7 @@ namespace FBXpert
             this.tabControlFields.Location = new System.Drawing.Point(0, 0);
             this.tabControlFields.Name = "tabControlFields";
             this.tabControlFields.SelectedIndex = 0;
-            this.tabControlFields.Size = new System.Drawing.Size(1229, 674);
+            this.tabControlFields.Size = new System.Drawing.Size(1229, 726);
             this.tabControlFields.TabIndex = 18;
             // 
             // tabPageFieldEdit
@@ -189,7 +193,7 @@ namespace FBXpert
             this.tabPageFieldEdit.Location = new System.Drawing.Point(4, 23);
             this.tabPageFieldEdit.Name = "tabPageFieldEdit";
             this.tabPageFieldEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFieldEdit.Size = new System.Drawing.Size(1221, 647);
+            this.tabPageFieldEdit.Size = new System.Drawing.Size(1221, 699);
             this.tabPageFieldEdit.TabIndex = 0;
             this.tabPageFieldEdit.Text = "Field Edit";
             this.tabPageFieldEdit.UseVisualStyleBackColor = true;
@@ -201,7 +205,7 @@ namespace FBXpert
             this.pnlFieldsCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlFieldsCenter.Name = "pnlFieldsCenter";
-            this.pnlFieldsCenter.Size = new System.Drawing.Size(1215, 641);
+            this.pnlFieldsCenter.Size = new System.Drawing.Size(1215, 693);
             this.pnlFieldsCenter.TabIndex = 2;
             // 
             // splitContainer1
@@ -214,7 +218,7 @@ namespace FBXpert
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1215, 641);
+            this.splitContainer1.Size = new System.Drawing.Size(1215, 693);
             this.splitContainer1.SplitterDistance = 40;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -227,18 +231,18 @@ namespace FBXpert
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1167, 637);
+            this.tabControl1.Size = new System.Drawing.Size(1167, 689);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPageSQL
             // 
             this.tabPageSQL.Controls.Add(this.gbSQL);
-            this.tabPageSQL.Controls.Add(this.pnlSQL_UPPER);
+            this.tabPageSQL.Controls.Add(this.pnlSQLUpper);
             this.tabPageSQL.ImageIndex = 5;
             this.tabPageSQL.Location = new System.Drawing.Point(4, 23);
             this.tabPageSQL.Name = "tabPageSQL";
             this.tabPageSQL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQL.Size = new System.Drawing.Size(1159, 610);
+            this.tabPageSQL.Size = new System.Drawing.Size(1159, 662);
             this.tabPageSQL.TabIndex = 0;
             this.tabPageSQL.Text = "SQL";
             this.tabPageSQL.UseVisualStyleBackColor = true;
@@ -247,9 +251,9 @@ namespace FBXpert
             // 
             this.gbSQL.Controls.Add(this.fctSQL);
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSQL.Location = new System.Drawing.Point(3, 43);
+            this.gbSQL.Location = new System.Drawing.Point(3, 46);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(1153, 564);
+            this.gbSQL.Size = new System.Drawing.Size(1153, 613);
             this.gbSQL.TabIndex = 9;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
@@ -281,38 +285,38 @@ namespace FBXpert
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
-            this.fctSQL.Location = new System.Drawing.Point(3, 16);
+            this.fctSQL.Location = new System.Drawing.Point(3, 18);
             this.fctSQL.Name = "fctSQL";
             this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.fctSQL.ReadOnly = true;
             this.fctSQL.RightBracket = ')';
             this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
-            this.fctSQL.Size = new System.Drawing.Size(1147, 545);
+            this.fctSQL.Size = new System.Drawing.Size(1147, 592);
             this.fctSQL.TabIndex = 0;
             this.fctSQL.Zoom = 100;
             this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
             // 
             // pnlSQL_UPPER
             // 
-            this.pnlSQL_UPPER.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlSQL_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlSQL_UPPER.Controls.Add(this.gbUsedMilliseconds);
-            this.pnlSQL_UPPER.Controls.Add(this.hsLoadSQL);
-            this.pnlSQL_UPPER.Controls.Add(this.hsSaveSQL);
-            this.pnlSQL_UPPER.Controls.Add(this.hsRunStatement);
-            this.pnlSQL_UPPER.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSQL_UPPER.Location = new System.Drawing.Point(3, 3);
-            this.pnlSQL_UPPER.Name = "pnlSQL_UPPER";
-            this.pnlSQL_UPPER.Size = new System.Drawing.Size(1153, 40);
-            this.pnlSQL_UPPER.TabIndex = 10;
+            this.pnlSQLUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlSQLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlSQLUpper.Controls.Add(this.gbUsedMilliseconds);
+            this.pnlSQLUpper.Controls.Add(this.hsLoadSQL);
+            this.pnlSQLUpper.Controls.Add(this.hsSaveSQL);
+            this.pnlSQLUpper.Controls.Add(this.hsRunStatement);
+            this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSQLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlSQLUpper.Name = "pnlSQL_UPPER";
+            this.pnlSQLUpper.Size = new System.Drawing.Size(1153, 43);
+            this.pnlSQLUpper.TabIndex = 10;
             // 
             // gbUsedMilliseconds
             // 
             this.gbUsedMilliseconds.Controls.Add(this.lblUsedMs);
             this.gbUsedMilliseconds.Location = new System.Drawing.Point(361, 3);
             this.gbUsedMilliseconds.Name = "gbUsedMilliseconds";
-            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 31);
+            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 33);
             this.gbUsedMilliseconds.TabIndex = 32;
             this.gbUsedMilliseconds.TabStop = false;
             this.gbUsedMilliseconds.Text = "Costs in milliseconds";
@@ -321,7 +325,7 @@ namespace FBXpert
             // 
             this.lblUsedMs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUsedMs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsedMs.Location = new System.Drawing.Point(3, 16);
+            this.lblUsedMs.Location = new System.Drawing.Point(3, 18);
             this.lblUsedMs.Name = "lblUsedMs";
             this.lblUsedMs.Size = new System.Drawing.Size(120, 12);
             this.lblUsedMs.TabIndex = 0;
@@ -341,6 +345,7 @@ namespace FBXpert
             this.hsLoadSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSQL.FlatAppearance.BorderSize = 0;
             this.hsLoadSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSQL.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadSQL.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -354,7 +359,10 @@ namespace FBXpert
             this.hsLoadSQL.MarkMode = false;
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
-            this.hsLoadSQL.Size = new System.Drawing.Size(124, 36);
+            this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
+            this.hsLoadSQL.ShowShortcut = false;
+            this.hsLoadSQL.Size = new System.Drawing.Size(124, 39);
             this.hsLoadSQL.TabIndex = 8;
             this.hsLoadSQL.Text = "Load SQL";
             this.hsLoadSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -389,6 +397,7 @@ namespace FBXpert
             this.hsSaveSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSQL.FlatAppearance.BorderSize = 0;
             this.hsSaveSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSQL.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSQL.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -402,7 +411,10 @@ namespace FBXpert
             this.hsSaveSQL.MarkMode = false;
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
-            this.hsSaveSQL.Size = new System.Drawing.Size(120, 36);
+            this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
+            this.hsSaveSQL.ShowShortcut = false;
+            this.hsSaveSQL.Size = new System.Drawing.Size(120, 39);
             this.hsSaveSQL.TabIndex = 7;
             this.hsSaveSQL.Text = "Save SQL";
             this.hsSaveSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -437,6 +449,7 @@ namespace FBXpert
             this.hsRunStatement.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRunStatement.FlatAppearance.BorderSize = 0;
             this.hsRunStatement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRunStatement.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRunStatement.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRunStatement.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsRunStatement.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -450,7 +463,10 @@ namespace FBXpert
             this.hsRunStatement.MarkMode = false;
             this.hsRunStatement.Name = "hsRunStatement";
             this.hsRunStatement.NonMarkedText = "Execute";
-            this.hsRunStatement.Size = new System.Drawing.Size(90, 36);
+            this.hsRunStatement.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunStatement.ShortcutNewline = false;
+            this.hsRunStatement.ShowShortcut = false;
+            this.hsRunStatement.Size = new System.Drawing.Size(90, 39);
             this.hsRunStatement.TabIndex = 6;
             this.hsRunStatement.Text = "Execute";
             this.hsRunStatement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -472,6 +488,120 @@ namespace FBXpert
             this.hsRunStatement.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsRunStatement.UseVisualStyleBackColor = false;
             this.hsRunStatement.Click += new System.EventHandler(this.hsRunStatement_Click);
+            // 
+            // tabPageMessages
+            // 
+            this.tabPageMessages.Controls.Add(this.pnlMessagesUpper);
+            this.tabPageMessages.Controls.Add(this.fctMessages);
+            this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
+            this.tabPageMessages.Name = "tabPageMessages";
+            this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMessages.Size = new System.Drawing.Size(1159, 662);
+            this.tabPageMessages.TabIndex = 1;
+            this.tabPageMessages.Text = "Messages";
+            this.tabPageMessages.UseVisualStyleBackColor = true;
+            // 
+            // pnlMessagesUpper
+            // 
+            this.pnlMessagesUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMessagesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMessagesUpper.Controls.Add(this.hsClearMessages);
+            this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlMessagesUpper.Name = "pnlMessagesUpper";
+            this.pnlMessagesUpper.Size = new System.Drawing.Size(1153, 43);
+            this.pnlMessagesUpper.TabIndex = 6;
+            // 
+            // hsClearMessages
+            // 
+            this.hsClearMessages.BackColor = System.Drawing.Color.Transparent;
+            this.hsClearMessages.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClearMessages.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClearMessages.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClearMessages.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClearMessages.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClearMessages.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClearMessages.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClearMessages.FlatAppearance.BorderSize = 0;
+            this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearMessages.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsClearMessages.ImageHover = global::FBXpert.Properties.Resources.seewp_ge22x;
+            this.hsClearMessages.ImageToggleOnSelect = true;
+            this.hsClearMessages.Location = new System.Drawing.Point(0, 0);
+            this.hsClearMessages.Marked = false;
+            this.hsClearMessages.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClearMessages.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClearMessages.MarkedText = "";
+            this.hsClearMessages.MarkMode = false;
+            this.hsClearMessages.Name = "hsClearMessages";
+            this.hsClearMessages.NonMarkedText = "Clear";
+            this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
+            this.hsClearMessages.ShowShortcut = false;
+            this.hsClearMessages.Size = new System.Drawing.Size(100, 39);
+            this.hsClearMessages.TabIndex = 1;
+            this.hsClearMessages.Text = "Clear";
+            this.hsClearMessages.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClearMessages.ToolTipActive = false;
+            this.hsClearMessages.ToolTipAutomaticDelay = 500;
+            this.hsClearMessages.ToolTipAutoPopDelay = 5000;
+            this.hsClearMessages.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClearMessages.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClearMessages.ToolTipFor4ContextMenu = true;
+            this.hsClearMessages.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClearMessages.ToolTipInitialDelay = 500;
+            this.hsClearMessages.ToolTipIsBallon = false;
+            this.hsClearMessages.ToolTipOwnerDraw = false;
+            this.hsClearMessages.ToolTipReshowDelay = 100;
+            this.hsClearMessages.ToolTipShowAlways = false;
+            this.hsClearMessages.ToolTipText = "";
+            this.hsClearMessages.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsClearMessages.ToolTipTitle = "";
+            this.hsClearMessages.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClearMessages.UseVisualStyleBackColor = false;
+            // 
+            // fctMessages
+            // 
+            this.fctMessages.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctMessages.AutoIndentCharsPatterns = "";
+            this.fctMessages.AutoScrollMinSize = new System.Drawing.Size(0, 14);
+            this.fctMessages.BackBrush = null;
+            this.fctMessages.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctMessages.CharHeight = 14;
+            this.fctMessages.CharWidth = 8;
+            this.fctMessages.CommentPrefix = "--";
+            this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctMessages.IsReplaceMode = false;
+            this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
+            this.fctMessages.LeftBracket = '(';
+            this.fctMessages.Location = new System.Drawing.Point(3, 3);
+            this.fctMessages.Name = "fctMessages";
+            this.fctMessages.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctMessages.ReadOnly = true;
+            this.fctMessages.RightBracket = ')';
+            this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctMessages.ServiceColors = null;
+            this.fctMessages.Size = new System.Drawing.Size(1153, 656);
+            this.fctMessages.TabIndex = 5;
+            this.fctMessages.WordWrap = true;
+            this.fctMessages.Zoom = 100;
             // 
             // ilTabControl
             // 
@@ -565,128 +695,20 @@ namespace FBXpert
             this.saveSQLFile.Filter = "SQL|*.sql|All|*.*";
             this.saveSQLFile.Title = "Save SQL ";
             // 
-            // tabPageMessages
-            // 
-            this.tabPageMessages.Controls.Add(this.pnlMessagesUpper);
-            this.tabPageMessages.Controls.Add(this.fctMessages);
-            this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
-            this.tabPageMessages.Name = "tabPageMessages";
-            this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessages.Size = new System.Drawing.Size(1159, 610);
-            this.tabPageMessages.TabIndex = 1;
-            this.tabPageMessages.Text = "Messages";
-            this.tabPageMessages.UseVisualStyleBackColor = true;
-            // 
-            // pnlMessagesUpper
-            // 
-            this.pnlMessagesUpper.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlMessagesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMessagesUpper.Controls.Add(this.hsClearMessages);
-            this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlMessagesUpper.Name = "pnlMessagesUpper";
-            this.pnlMessagesUpper.Size = new System.Drawing.Size(1153, 40);
-            this.pnlMessagesUpper.TabIndex = 6;
-            // 
-            // hsClearMessages
-            // 
-            this.hsClearMessages.BackColor = System.Drawing.Color.Transparent;
-            this.hsClearMessages.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsClearMessages.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsClearMessages.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsClearMessages.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsClearMessages.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsClearMessages.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsClearMessages.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsClearMessages.FlatAppearance.BorderSize = 0;
-            this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
-            this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsClearMessages.ImageHover = global::FBXpert.Properties.Resources.seewp_ge22x;
-            this.hsClearMessages.ImageToggleOnSelect = true;
-            this.hsClearMessages.Location = new System.Drawing.Point(0, 0);
-            this.hsClearMessages.Marked = false;
-            this.hsClearMessages.MarkedColor = System.Drawing.Color.Teal;
-            this.hsClearMessages.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsClearMessages.MarkedText = "";
-            this.hsClearMessages.MarkMode = false;
-            this.hsClearMessages.Name = "hsClearMessages";
-            this.hsClearMessages.NonMarkedText = "Clear";
-            this.hsClearMessages.Size = new System.Drawing.Size(100, 36);
-            this.hsClearMessages.TabIndex = 1;
-            this.hsClearMessages.Text = "Clear";
-            this.hsClearMessages.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsClearMessages.ToolTipActive = false;
-            this.hsClearMessages.ToolTipAutomaticDelay = 500;
-            this.hsClearMessages.ToolTipAutoPopDelay = 5000;
-            this.hsClearMessages.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsClearMessages.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsClearMessages.ToolTipFor4ContextMenu = true;
-            this.hsClearMessages.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsClearMessages.ToolTipInitialDelay = 500;
-            this.hsClearMessages.ToolTipIsBallon = false;
-            this.hsClearMessages.ToolTipOwnerDraw = false;
-            this.hsClearMessages.ToolTipReshowDelay = 100;
-            this.hsClearMessages.ToolTipShowAlways = false;
-            this.hsClearMessages.ToolTipText = "";
-            this.hsClearMessages.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsClearMessages.ToolTipTitle = "";
-            this.hsClearMessages.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsClearMessages.UseVisualStyleBackColor = false;
-            // 
-            // fctMessages
-            // 
-            this.fctMessages.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctMessages.AutoIndentCharsPatterns = "";
-            this.fctMessages.AutoScrollMinSize = new System.Drawing.Size(0, 14);
-            this.fctMessages.BackBrush = null;
-            this.fctMessages.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctMessages.CharHeight = 14;
-            this.fctMessages.CharWidth = 8;
-            this.fctMessages.CommentPrefix = "--";
-            this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.IsReplaceMode = false;
-            this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
-            this.fctMessages.LeftBracket = '(';
-            this.fctMessages.Location = new System.Drawing.Point(3, 3);
-            this.fctMessages.Name = "fctMessages";
-            this.fctMessages.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctMessages.ReadOnly = true;
-            this.fctMessages.RightBracket = ')';
-            this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
-            this.fctMessages.Size = new System.Drawing.Size(1153, 604);
-            this.fctMessages.TabIndex = 5;
-            this.fctMessages.WordWrap = true;
-            this.fctMessages.Zoom = 100;
-            // 
             // UserDefinedFunctionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1229, 716);
+            this.ClientSize = new System.Drawing.Size(1229, 771);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserDefinedFunctionForm";
             this.Text = "UserDefinedFunctionForm";
             this.Load += new System.EventHandler(this.UserDefinedFunctionForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlFields.ResumeLayout(false);
             this.tabPageFieldEdit.ResumeLayout(false);
@@ -698,8 +720,11 @@ namespace FBXpert
             this.tabPageSQL.ResumeLayout(false);
             this.gbSQL.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctSQL)).EndInit();
-            this.pnlSQL_UPPER.ResumeLayout(false);
+            this.pnlSQLUpper.ResumeLayout(false);
             this.gbUsedMilliseconds.ResumeLayout(false);
+            this.tabPageMessages.ResumeLayout(false);
+            this.pnlMessagesUpper.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
             this.cmsParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesTo)).EndInit();
@@ -707,16 +732,13 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).EndInit();
-            this.tabPageMessages.ResumeLayout(false);
-            this.pnlMessagesUpper.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
         private System.Windows.Forms.TabControl tabControlFields;
@@ -742,7 +764,7 @@ namespace FBXpert
         private System.Windows.Forms.TabPage tabPageSQL;
         private System.Windows.Forms.GroupBox gbSQL;
         private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
-        private System.Windows.Forms.Panel pnlSQL_UPPER;
+        private System.Windows.Forms.Panel pnlSQLUpper;
         private System.Windows.Forms.GroupBox gbUsedMilliseconds;
         private System.Windows.Forms.Label lblUsedMs;
         private SeControlsLib.HotSpot hsLoadSQL;

@@ -111,9 +111,17 @@ namespace FBXpert
         }
 
         string oldIndexName = string.Empty;
-        
+
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void ReplicationDesignForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
          

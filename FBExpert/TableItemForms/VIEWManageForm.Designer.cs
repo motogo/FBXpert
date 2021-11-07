@@ -40,13 +40,12 @@ namespace FBExpert
             this.tabControlViews = new System.Windows.Forms.TabControl();
             this.tabPageFIELDS = new System.Windows.Forms.TabPage();
             this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            this.cmsUpdateInsertText = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiUpdateInsertCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiUpdateInsertPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageDATA = new System.Windows.Forms.TabPage();
             this.dgvResults = new System.Windows.Forms.DataGridView();
             this.cmdDATA = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiSpaltenEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiReadAsBlob = new System.Windows.Forms.ToolStripMenuItem();
             this.bsViewContent = new System.Windows.Forms.BindingSource(this.components);
             this.dsViewContent = new System.Data.DataSet();
             this.Table = new System.Data.DataTable();
@@ -74,10 +73,13 @@ namespace FBExpert
             this.cmsDDLText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDDLCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDDLPaste = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDDL_UPPER = new System.Windows.Forms.Panel();
+            this.pnlDDLUpper = new System.Windows.Forms.Panel();
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.tabUpdateInsert = new System.Windows.Forms.TabPage();
             this.fctCREATEINSERTSQL = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.cmsUpdateInsertText = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiUpdateInsertCopyToClipboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUpdateInsertPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlUpdateInsertSQLUpper = new System.Windows.Forms.Panel();
             this.cbPretty = new System.Windows.Forms.CheckBox();
             this.cbAlterView = new System.Windows.Forms.CheckBox();
@@ -89,7 +91,7 @@ namespace FBExpert
             this.bsDependencies = new System.Windows.Forms.BindingSource(this.components);
             this.dsDependencies = new System.Data.DataSet();
             this.dataTable5 = new System.Data.DataTable();
-            this.pnlUpperDependenciesTo = new System.Windows.Forms.Panel();
+            this.pnlDependenciesToUpper = new System.Windows.Forms.Panel();
             this.hsRefreshDependenciesTo = new SeControlsLib.HotSpot();
             this.tabPageMessages = new System.Windows.Forms.TabPage();
             this.pnlMessagesCenter = new System.Windows.Forms.Panel();
@@ -120,7 +122,7 @@ namespace FBExpert
             this.hsExportData = new SeControlsLib.HotSpot();
             this.hsRefreshExportData = new SeControlsLib.HotSpot();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.ckGetDatas = new System.Windows.Forms.CheckBox();
             this.gnUsedTime = new System.Windows.Forms.GroupBox();
             this.txtUsedTime = new System.Windows.Forms.TextBox();
@@ -137,10 +139,10 @@ namespace FBExpert
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bwExport = new System.ComponentModel.BackgroundWorker();
+            this.gbReadData = new System.Windows.Forms.GroupBox();
             this.tabControlViews.SuspendLayout();
             this.tabPageFIELDS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
-            this.cmsUpdateInsertText.SuspendLayout();
             this.tabPageDATA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.cmdDATA.SuspendLayout();
@@ -156,16 +158,17 @@ namespace FBExpert
             this.pnlDDL_CENTER.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctDLL)).BeginInit();
             this.cmsDDLText.SuspendLayout();
-            this.pnlDDL_UPPER.SuspendLayout();
+            this.pnlDDLUpper.SuspendLayout();
             this.tabUpdateInsert.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctCREATEINSERTSQL)).BeginInit();
+            this.cmsUpdateInsertText.SuspendLayout();
             this.pnlUpdateInsertSQLUpper.SuspendLayout();
             this.tabPageDependenciesTo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDependencies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependencies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependencies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).BeginInit();
-            this.pnlUpperDependenciesTo.SuspendLayout();
+            this.pnlDependenciesToUpper.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             this.pnlMessagesCenter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
@@ -177,11 +180,12 @@ namespace FBExpert
             this.pnlExportDataUpper.SuspendLayout();
             this.gbExportFile.SuspendLayout();
             this.gbInsertUpdate.SuspendLayout();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
             this.gbMaxAllowedErrors.SuspendLayout();
             this.gbMaxRows.SuspendLayout();
             this.pnlCenter.SuspendLayout();
+            this.gbReadData.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlViews
@@ -198,7 +202,7 @@ namespace FBExpert
             this.tabControlViews.Location = new System.Drawing.Point(0, 0);
             this.tabControlViews.Name = "tabControlViews";
             this.tabControlViews.SelectedIndex = 0;
-            this.tabControlViews.Size = new System.Drawing.Size(1275, 558);
+            this.tabControlViews.Size = new System.Drawing.Size(1275, 601);
             this.tabControlViews.TabIndex = 0;
             this.tabControlViews.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControlViews.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -210,7 +214,7 @@ namespace FBExpert
             this.tabPageFIELDS.Location = new System.Drawing.Point(4, 23);
             this.tabPageFIELDS.Name = "tabPageFIELDS";
             this.tabPageFIELDS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFIELDS.Size = new System.Drawing.Size(1267, 531);
+            this.tabPageFIELDS.Size = new System.Drawing.Size(1267, 574);
             this.tabPageFIELDS.TabIndex = 0;
             this.tabPageFIELDS.Text = "Fields";
             this.tabPageFIELDS.UseVisualStyleBackColor = true;
@@ -236,7 +240,7 @@ namespace FBExpert
             this.fastObjectListView1.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.fastObjectListView1.SelectedForeColor = System.Drawing.SystemColors.Info;
             this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(1261, 525);
+            this.fastObjectListView1.Size = new System.Drawing.Size(1261, 568);
             this.fastObjectListView1.TabIndex = 1;
             this.fastObjectListView1.UseAlternatingBackColors = true;
             this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
@@ -244,29 +248,6 @@ namespace FBExpert
             this.fastObjectListView1.UseOverlays = false;
             this.fastObjectListView1.View = System.Windows.Forms.View.Details;
             this.fastObjectListView1.VirtualMode = true;
-            // 
-            // cmsUpdateInsertText
-            // 
-            this.cmsUpdateInsertText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiUpdateInsertCopyToClipboard,
-            this.tsmiUpdateInsertPaste});
-            this.cmsUpdateInsertText.Name = "cmsText";
-            this.cmsUpdateInsertText.Size = new System.Drawing.Size(172, 48);
-            this.cmsUpdateInsertText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsText_ItemClicked);
-            // 
-            // tsmiUpdateInsertCopyToClipboard
-            // 
-            this.tsmiUpdateInsertCopyToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
-            this.tsmiUpdateInsertCopyToClipboard.Name = "tsmiUpdateInsertCopyToClipboard";
-            this.tsmiUpdateInsertCopyToClipboard.Size = new System.Drawing.Size(171, 22);
-            this.tsmiUpdateInsertCopyToClipboard.Text = "Copy to Clipboard";
-            // 
-            // tsmiUpdateInsertPaste
-            // 
-            this.tsmiUpdateInsertPaste.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
-            this.tsmiUpdateInsertPaste.Name = "tsmiUpdateInsertPaste";
-            this.tsmiUpdateInsertPaste.Size = new System.Drawing.Size(171, 22);
-            this.tsmiUpdateInsertPaste.Text = "Paste";
             // 
             // tabPageDATA
             // 
@@ -278,7 +259,7 @@ namespace FBExpert
             this.tabPageDATA.Location = new System.Drawing.Point(4, 23);
             this.tabPageDATA.Name = "tabPageDATA";
             this.tabPageDATA.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDATA.Size = new System.Drawing.Size(1267, 531);
+            this.tabPageDATA.Size = new System.Drawing.Size(1267, 574);
             this.tabPageDATA.TabIndex = 1;
             this.tabPageDATA.Text = "Data";
             this.tabPageDATA.UseVisualStyleBackColor = true;
@@ -298,7 +279,7 @@ namespace FBExpert
             this.dgvResults.DataSource = this.bsViewContent;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -306,13 +287,13 @@ namespace FBExpert
             this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(3, 89);
+            this.dgvResults.Location = new System.Drawing.Point(3, 96);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
             this.dgvResults.RowHeadersVisible = false;
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.Size = new System.Drawing.Size(1261, 439);
+            this.dgvResults.Size = new System.Drawing.Size(1261, 475);
             this.dgvResults.TabIndex = 17;
             this.dgvResults.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
@@ -320,9 +301,11 @@ namespace FBExpert
             // 
             this.cmdDATA.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmdDATA.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSpaltenEdit});
+            this.tsmiSpaltenEdit,
+            this.toolStripSeparator5,
+            this.tsmiReadAsBlob});
             this.cmdDATA.Name = "cmsText";
-            this.cmdDATA.Size = new System.Drawing.Size(156, 30);
+            this.cmdDATA.Size = new System.Drawing.Size(156, 62);
             this.cmdDATA.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmdDATA_ItemClicked);
             // 
             // tsmiSpaltenEdit
@@ -331,6 +314,18 @@ namespace FBExpert
             this.tsmiSpaltenEdit.Name = "tsmiSpaltenEdit";
             this.tsmiSpaltenEdit.Size = new System.Drawing.Size(155, 26);
             this.tsmiSpaltenEdit.Text = "Spaltendeditor";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(152, 6);
+            // 
+            // tsmiReadAsBlob
+            // 
+            this.tsmiReadAsBlob.Image = global::FBXpert.Properties.Resources.bin_x24;
+            this.tsmiReadAsBlob.Name = "tsmiReadAsBlob";
+            this.tsmiReadAsBlob.Size = new System.Drawing.Size(155, 26);
+            this.tsmiReadAsBlob.Text = "Read as Blob";
             // 
             // bsViewContent
             // 
@@ -351,9 +346,9 @@ namespace FBExpert
             // 
             this.gbSQL.Controls.Add(this.txtSQL);
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbSQL.Location = new System.Drawing.Point(3, 43);
+            this.gbSQL.Location = new System.Drawing.Point(3, 46);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(1261, 46);
+            this.gbSQL.Size = new System.Drawing.Size(1261, 50);
             this.gbSQL.TabIndex = 21;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "Select command";
@@ -363,7 +358,7 @@ namespace FBExpert
             this.txtSQL.BackColor = System.Drawing.SystemColors.Info;
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQL.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSQL.Location = new System.Drawing.Point(3, 16);
+            this.txtSQL.Location = new System.Drawing.Point(3, 18);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Size = new System.Drawing.Size(1255, 20);
             this.txtSQL.TabIndex = 0;
@@ -379,7 +374,7 @@ namespace FBExpert
             this.pnlDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDataUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlDataUpper.Name = "pnlDataUpper";
-            this.pnlDataUpper.Size = new System.Drawing.Size(1261, 40);
+            this.pnlDataUpper.Size = new System.Drawing.Size(1261, 43);
             this.pnlDataUpper.TabIndex = 18;
             // 
             // gbBnView
@@ -388,7 +383,7 @@ namespace FBExpert
             this.gbBnView.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbBnView.Location = new System.Drawing.Point(351, 0);
             this.gbBnView.Name = "gbBnView";
-            this.gbBnView.Size = new System.Drawing.Size(256, 36);
+            this.gbBnView.Size = new System.Drawing.Size(256, 39);
             this.gbBnView.TabIndex = 30;
             this.gbBnView.TabStop = false;
             // 
@@ -410,21 +405,21 @@ namespace FBExpert
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bnView.Location = new System.Drawing.Point(3, 16);
+            this.bnView.Location = new System.Drawing.Point(3, 18);
             this.bnView.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bnView.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bnView.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bnView.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bnView.Name = "bnView";
             this.bnView.PositionItem = this.bindingNavigatorPositionItem;
-            this.bnView.Size = new System.Drawing.Size(250, 17);
+            this.bnView.Size = new System.Drawing.Size(250, 18);
             this.bnView.TabIndex = 0;
             this.bnView.Text = "bindingNavigator1";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(44, 14);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(44, 15);
             this.bindingNavigatorCountItem.Text = "von {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -434,7 +429,7 @@ namespace FBExpert
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 14);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 15);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -443,13 +438,13 @@ namespace FBExpert
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 14);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 15);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 17);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 18);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -464,7 +459,7 @@ namespace FBExpert
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 17);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 18);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -472,7 +467,7 @@ namespace FBExpert
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 14);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 15);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -481,13 +476,13 @@ namespace FBExpert
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 14);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 15);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 17);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 18);
             // 
             // cbCAuto
             // 
@@ -495,9 +490,9 @@ namespace FBExpert
             this.cbCAuto.Checked = true;
             this.cbCAuto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCAuto.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cbCAuto.Location = new System.Drawing.Point(1154, 0);
+            this.cbCAuto.Location = new System.Drawing.Point(1140, 0);
             this.cbCAuto.Name = "cbCAuto";
-            this.cbCAuto.Size = new System.Drawing.Size(103, 36);
+            this.cbCAuto.Size = new System.Drawing.Size(117, 39);
             this.cbCAuto.TabIndex = 29;
             this.cbCAuto.Text = "Columnsize auto";
             this.cbCAuto.UseVisualStyleBackColor = true;
@@ -523,7 +518,7 @@ namespace FBExpert
             this.sfbViewData.SaveFilterCaption = "Save Filter";
             this.sfbViewData.SearchMode = SeControlsLib.eSearchMode.NotCaseSensitive;
             this.sfbViewData.ShowCheckbox = false;
-            this.sfbViewData.Size = new System.Drawing.Size(236, 36);
+            this.sfbViewData.Size = new System.Drawing.Size(236, 39);
             this.sfbViewData.SQLKonjunktion = "WHERE";
             this.sfbViewData.SQLVorfilterCmd = "";
             this.sfbViewData.TabIndex = 6;
@@ -559,8 +554,9 @@ namespace FBExpert
             this.hsCancelGettingData.Name = "hsCancelGettingData";
             this.hsCancelGettingData.NonMarkedText = "Cancel reading";
             this.hsCancelGettingData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCancelGettingData.ShortcutNewline = false;
             this.hsCancelGettingData.ShowShortcut = false;
-            this.hsCancelGettingData.Size = new System.Drawing.Size(115, 36);
+            this.hsCancelGettingData.Size = new System.Drawing.Size(115, 39);
             this.hsCancelGettingData.TabIndex = 7;
             this.hsCancelGettingData.Text = "Cancel reading";
             this.hsCancelGettingData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -587,20 +583,20 @@ namespace FBExpert
             // 
             this.panel1.BackgroundImage = global::FBXpert.Properties.Resources.waiting2;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(474, 78);
+            this.panel1.Location = new System.Drawing.Point(474, 84);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 220);
+            this.panel1.Size = new System.Drawing.Size(230, 237);
             this.panel1.TabIndex = 20;
             // 
             // tabDDL
             // 
             this.tabDDL.Controls.Add(this.pnlDDL_CENTER);
-            this.tabDDL.Controls.Add(this.pnlDDL_UPPER);
+            this.tabDDL.Controls.Add(this.pnlDDLUpper);
             this.tabDDL.ImageIndex = 5;
             this.tabDDL.Location = new System.Drawing.Point(4, 23);
             this.tabDDL.Name = "tabDDL";
             this.tabDDL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDDL.Size = new System.Drawing.Size(1267, 531);
+            this.tabDDL.Size = new System.Drawing.Size(1267, 574);
             this.tabDDL.TabIndex = 2;
             this.tabDDL.Text = "DDL";
             this.tabDDL.UseVisualStyleBackColor = true;
@@ -609,9 +605,9 @@ namespace FBExpert
             // 
             this.pnlDDL_CENTER.Controls.Add(this.fctDLL);
             this.pnlDDL_CENTER.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDDL_CENTER.Location = new System.Drawing.Point(3, 50);
+            this.pnlDDL_CENTER.Location = new System.Drawing.Point(3, 53);
             this.pnlDDL_CENTER.Name = "pnlDDL_CENTER";
-            this.pnlDDL_CENTER.Size = new System.Drawing.Size(1261, 478);
+            this.pnlDDL_CENTER.Size = new System.Drawing.Size(1261, 518);
             this.pnlDDL_CENTER.TabIndex = 1;
             // 
             // fctDLL
@@ -638,7 +634,6 @@ namespace FBExpert
             this.fctDLL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctDLL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctDLL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctDLL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctDLL.IsReplaceMode = false;
             this.fctDLL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctDLL.LeftBracket = '(';
@@ -648,7 +643,7 @@ namespace FBExpert
             this.fctDLL.RightBracket = ')';
             this.fctDLL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctDLL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctDLL.ServiceColors")));
-            this.fctDLL.Size = new System.Drawing.Size(1261, 478);
+            this.fctDLL.Size = new System.Drawing.Size(1261, 518);
             this.fctDLL.TabIndex = 1;
             this.fctDLL.WordWrap = true;
             this.fctDLL.Zoom = 100;
@@ -676,16 +671,16 @@ namespace FBExpert
             this.tsmiDDLPaste.Size = new System.Drawing.Size(171, 22);
             this.tsmiDDLPaste.Text = "Paste";
             // 
-            // pnlDDL_UPPER
+            // pnlDDLUpper
             // 
-            this.pnlDDL_UPPER.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlDDL_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlDDL_UPPER.Controls.Add(this.hotSpot1);
-            this.pnlDDL_UPPER.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDDL_UPPER.Location = new System.Drawing.Point(3, 3);
-            this.pnlDDL_UPPER.Name = "pnlDDL_UPPER";
-            this.pnlDDL_UPPER.Size = new System.Drawing.Size(1261, 47);
-            this.pnlDDL_UPPER.TabIndex = 0;
+            this.pnlDDLUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDDLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlDDLUpper.Controls.Add(this.hotSpot1);
+            this.pnlDDLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDDLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlDDLUpper.Name = "pnlDDLUpper";
+            this.pnlDDLUpper.Size = new System.Drawing.Size(1261, 50);
+            this.pnlDDLUpper.TabIndex = 0;
             // 
             // hotSpot1
             // 
@@ -715,8 +710,9 @@ namespace FBExpert
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Clear";
             this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShortcutNewline = false;
             this.hotSpot1.ShowShortcut = false;
-            this.hotSpot1.Size = new System.Drawing.Size(45, 43);
+            this.hotSpot1.Size = new System.Drawing.Size(45, 46);
             this.hotSpot1.TabIndex = 2;
             this.hotSpot1.Text = "Clear";
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -747,7 +743,7 @@ namespace FBExpert
             this.tabUpdateInsert.Location = new System.Drawing.Point(4, 23);
             this.tabUpdateInsert.Name = "tabUpdateInsert";
             this.tabUpdateInsert.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdateInsert.Size = new System.Drawing.Size(1267, 531);
+            this.tabUpdateInsert.Size = new System.Drawing.Size(1267, 574);
             this.tabUpdateInsert.TabIndex = 3;
             this.tabUpdateInsert.Text = "CREATE/ALTER";
             this.tabUpdateInsert.UseVisualStyleBackColor = true;
@@ -776,21 +772,43 @@ namespace FBExpert
             this.fctCREATEINSERTSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctCREATEINSERTSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctCREATEINSERTSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctCREATEINSERTSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctCREATEINSERTSQL.IsReplaceMode = false;
             this.fctCREATEINSERTSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctCREATEINSERTSQL.LeftBracket = '(';
-            this.fctCREATEINSERTSQL.Location = new System.Drawing.Point(3, 48);
+            this.fctCREATEINSERTSQL.Location = new System.Drawing.Point(3, 51);
             this.fctCREATEINSERTSQL.Name = "fctCREATEINSERTSQL";
             this.fctCREATEINSERTSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.fctCREATEINSERTSQL.RightBracket = ')';
             this.fctCREATEINSERTSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctCREATEINSERTSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctCREATEINSERTSQL.ServiceColors")));
-            this.fctCREATEINSERTSQL.Size = new System.Drawing.Size(1261, 480);
+            this.fctCREATEINSERTSQL.Size = new System.Drawing.Size(1261, 520);
             this.fctCREATEINSERTSQL.TabIndex = 3;
             this.fctCREATEINSERTSQL.WordWrap = true;
             this.fctCREATEINSERTSQL.Zoom = 100;
             this.fctCREATEINSERTSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctCREATEINSERTSQL_KeyDown);
+            // 
+            // cmsUpdateInsertText
+            // 
+            this.cmsUpdateInsertText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiUpdateInsertCopyToClipboard,
+            this.tsmiUpdateInsertPaste});
+            this.cmsUpdateInsertText.Name = "cmsText";
+            this.cmsUpdateInsertText.Size = new System.Drawing.Size(172, 48);
+            this.cmsUpdateInsertText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsText_ItemClicked);
+            // 
+            // tsmiUpdateInsertCopyToClipboard
+            // 
+            this.tsmiUpdateInsertCopyToClipboard.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
+            this.tsmiUpdateInsertCopyToClipboard.Name = "tsmiUpdateInsertCopyToClipboard";
+            this.tsmiUpdateInsertCopyToClipboard.Size = new System.Drawing.Size(171, 22);
+            this.tsmiUpdateInsertCopyToClipboard.Text = "Copy to Clipboard";
+            // 
+            // tsmiUpdateInsertPaste
+            // 
+            this.tsmiUpdateInsertPaste.Image = global::FBXpert.Properties.Resources.format_indent_more_2_32x;
+            this.tsmiUpdateInsertPaste.Name = "tsmiUpdateInsertPaste";
+            this.tsmiUpdateInsertPaste.Size = new System.Drawing.Size(171, 22);
+            this.tsmiUpdateInsertPaste.Text = "Paste";
             // 
             // pnlUpdateInsertSQLUpper
             // 
@@ -804,7 +822,7 @@ namespace FBExpert
             this.pnlUpdateInsertSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpdateInsertSQLUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlUpdateInsertSQLUpper.Name = "pnlUpdateInsertSQLUpper";
-            this.pnlUpdateInsertSQLUpper.Size = new System.Drawing.Size(1261, 45);
+            this.pnlUpdateInsertSQLUpper.Size = new System.Drawing.Size(1261, 48);
             this.pnlUpdateInsertSQLUpper.TabIndex = 2;
             // 
             // cbPretty
@@ -812,9 +830,9 @@ namespace FBExpert
             this.cbPretty.AutoSize = true;
             this.cbPretty.Checked = true;
             this.cbPretty.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPretty.Location = new System.Drawing.Point(440, 22);
+            this.cbPretty.Location = new System.Drawing.Point(440, 24);
             this.cbPretty.Name = "cbPretty";
-            this.cbPretty.Size = new System.Drawing.Size(53, 17);
+            this.cbPretty.Size = new System.Drawing.Size(56, 18);
             this.cbPretty.TabIndex = 7;
             this.cbPretty.Text = "Pretty";
             this.cbPretty.UseVisualStyleBackColor = true;
@@ -825,9 +843,9 @@ namespace FBExpert
             this.cbAlterView.AutoSize = true;
             this.cbAlterView.Checked = true;
             this.cbAlterView.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAlterView.Location = new System.Drawing.Point(342, 21);
+            this.cbAlterView.Location = new System.Drawing.Point(342, 23);
             this.cbAlterView.Name = "cbAlterView";
-            this.cbAlterView.Size = new System.Drawing.Size(73, 17);
+            this.cbAlterView.Size = new System.Drawing.Size(82, 18);
             this.cbAlterView.TabIndex = 6;
             this.cbAlterView.Text = "Alter View";
             this.cbAlterView.UseVisualStyleBackColor = true;
@@ -861,8 +879,9 @@ namespace FBExpert
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
             this.hsLoadSQL.ShowShortcut = false;
-            this.hsLoadSQL.Size = new System.Drawing.Size(112, 41);
+            this.hsLoadSQL.Size = new System.Drawing.Size(112, 44);
             this.hsLoadSQL.TabIndex = 5;
             this.hsLoadSQL.Text = "Load SQL";
             this.hsLoadSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -913,8 +932,9 @@ namespace FBExpert
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
             this.hsSaveSQL.ShowShortcut = false;
-            this.hsSaveSQL.Size = new System.Drawing.Size(122, 41);
+            this.hsSaveSQL.Size = new System.Drawing.Size(122, 44);
             this.hsSaveSQL.TabIndex = 3;
             this.hsSaveSQL.Text = "Save SQL";
             this.hsSaveSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -965,8 +985,9 @@ namespace FBExpert
             this.hsRunStatement.Name = "hsRunStatement";
             this.hsRunStatement.NonMarkedText = "Execute";
             this.hsRunStatement.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunStatement.ShortcutNewline = false;
             this.hsRunStatement.ShowShortcut = false;
-            this.hsRunStatement.Size = new System.Drawing.Size(90, 41);
+            this.hsRunStatement.Size = new System.Drawing.Size(90, 44);
             this.hsRunStatement.TabIndex = 2;
             this.hsRunStatement.Text = "Execute";
             this.hsRunStatement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -992,12 +1013,12 @@ namespace FBExpert
             // tabPageDependenciesTo
             // 
             this.tabPageDependenciesTo.Controls.Add(this.dgvDependencies);
-            this.tabPageDependenciesTo.Controls.Add(this.pnlUpperDependenciesTo);
+            this.tabPageDependenciesTo.Controls.Add(this.pnlDependenciesToUpper);
             this.tabPageDependenciesTo.ImageIndex = 11;
             this.tabPageDependenciesTo.Location = new System.Drawing.Point(4, 23);
             this.tabPageDependenciesTo.Name = "tabPageDependenciesTo";
             this.tabPageDependenciesTo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDependenciesTo.Size = new System.Drawing.Size(1267, 531);
+            this.tabPageDependenciesTo.Size = new System.Drawing.Size(1267, 574);
             this.tabPageDependenciesTo.TabIndex = 5;
             this.tabPageDependenciesTo.Text = "Dependencies";
             this.tabPageDependenciesTo.UseVisualStyleBackColor = true;
@@ -1016,7 +1037,7 @@ namespace FBExpert
             this.dgvDependencies.DataSource = this.bsDependencies;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1025,13 +1046,13 @@ namespace FBExpert
             this.dgvDependencies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependencies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependencies.EnableHeadersVisualStyles = false;
-            this.dgvDependencies.Location = new System.Drawing.Point(3, 49);
+            this.dgvDependencies.Location = new System.Drawing.Point(3, 52);
             this.dgvDependencies.MultiSelect = false;
             this.dgvDependencies.Name = "dgvDependencies";
             this.dgvDependencies.ReadOnly = true;
             this.dgvDependencies.RowHeadersVisible = false;
             this.dgvDependencies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDependencies.Size = new System.Drawing.Size(1261, 479);
+            this.dgvDependencies.Size = new System.Drawing.Size(1261, 519);
             this.dgvDependencies.TabIndex = 22;
             // 
             // bsDependencies
@@ -1049,16 +1070,16 @@ namespace FBExpert
             // 
             this.dataTable5.TableName = "Table";
             // 
-            // pnlUpperDependenciesTo
+            // pnlDependenciesToUpper
             // 
-            this.pnlUpperDependenciesTo.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlUpperDependenciesTo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlUpperDependenciesTo.Controls.Add(this.hsRefreshDependenciesTo);
-            this.pnlUpperDependenciesTo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperDependenciesTo.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperDependenciesTo.Name = "pnlUpperDependenciesTo";
-            this.pnlUpperDependenciesTo.Size = new System.Drawing.Size(1261, 46);
-            this.pnlUpperDependenciesTo.TabIndex = 21;
+            this.pnlDependenciesToUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDependenciesToUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlDependenciesToUpper.Controls.Add(this.hsRefreshDependenciesTo);
+            this.pnlDependenciesToUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDependenciesToUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlDependenciesToUpper.Name = "pnlDependenciesToUpper";
+            this.pnlDependenciesToUpper.Size = new System.Drawing.Size(1261, 49);
+            this.pnlDependenciesToUpper.TabIndex = 21;
             // 
             // hsRefreshDependenciesTo
             // 
@@ -1088,8 +1109,9 @@ namespace FBExpert
             this.hsRefreshDependenciesTo.Name = "hsRefreshDependenciesTo";
             this.hsRefreshDependenciesTo.NonMarkedText = "Refresh dependencies";
             this.hsRefreshDependenciesTo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependenciesTo.ShortcutNewline = false;
             this.hsRefreshDependenciesTo.ShowShortcut = false;
-            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(130, 42);
+            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(130, 45);
             this.hsRefreshDependenciesTo.TabIndex = 2;
             this.hsRefreshDependenciesTo.Text = "Refresh dependencies";
             this.hsRefreshDependenciesTo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1120,7 +1142,7 @@ namespace FBExpert
             this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
             this.tabPageMessages.Name = "tabPageMessages";
             this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessages.Size = new System.Drawing.Size(1267, 531);
+            this.tabPageMessages.Size = new System.Drawing.Size(1267, 574);
             this.tabPageMessages.TabIndex = 4;
             this.tabPageMessages.Text = "Messages (0) / Errors (0)";
             this.tabPageMessages.UseVisualStyleBackColor = true;
@@ -1129,9 +1151,9 @@ namespace FBExpert
             // 
             this.pnlMessagesCenter.Controls.Add(this.fctMessages);
             this.pnlMessagesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMessagesCenter.Location = new System.Drawing.Point(3, 49);
+            this.pnlMessagesCenter.Location = new System.Drawing.Point(3, 52);
             this.pnlMessagesCenter.Name = "pnlMessagesCenter";
-            this.pnlMessagesCenter.Size = new System.Drawing.Size(1261, 479);
+            this.pnlMessagesCenter.Size = new System.Drawing.Size(1261, 519);
             this.pnlMessagesCenter.TabIndex = 3;
             // 
             // fctMessages
@@ -1158,7 +1180,6 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1169,7 +1190,7 @@ namespace FBExpert
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
-            this.fctMessages.Size = new System.Drawing.Size(1261, 479);
+            this.fctMessages.Size = new System.Drawing.Size(1261, 519);
             this.fctMessages.TabIndex = 1;
             this.fctMessages.WordWrap = true;
             this.fctMessages.Zoom = 100;
@@ -1205,7 +1226,7 @@ namespace FBExpert
             this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlMessagesUpper.Name = "pnlMessagesUpper";
-            this.pnlMessagesUpper.Size = new System.Drawing.Size(1261, 46);
+            this.pnlMessagesUpper.Size = new System.Drawing.Size(1261, 49);
             this.pnlMessagesUpper.TabIndex = 2;
             // 
             // hsClearMessages
@@ -1236,8 +1257,9 @@ namespace FBExpert
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
             this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
             this.hsClearMessages.ShowShortcut = false;
-            this.hsClearMessages.Size = new System.Drawing.Size(45, 42);
+            this.hsClearMessages.Size = new System.Drawing.Size(45, 45);
             this.hsClearMessages.TabIndex = 1;
             this.hsClearMessages.Text = "Clear";
             this.hsClearMessages.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1270,7 +1292,7 @@ namespace FBExpert
             this.tabPageExport.Location = new System.Drawing.Point(4, 23);
             this.tabPageExport.Name = "tabPageExport";
             this.tabPageExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExport.Size = new System.Drawing.Size(1267, 531);
+            this.tabPageExport.Size = new System.Drawing.Size(1267, 574);
             this.tabPageExport.TabIndex = 6;
             this.tabPageExport.Text = "Export data";
             this.tabPageExport.UseVisualStyleBackColor = true;
@@ -1289,7 +1311,7 @@ namespace FBExpert
         '\'',
         '\''};
             this.fcbExport.AutoIndentCharsPatterns = "";
-            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fcbExport.BackBrush = null;
             this.fcbExport.CharHeight = 14;
             this.fcbExport.CharWidth = 8;
@@ -1297,17 +1319,16 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';
-            this.fcbExport.Location = new System.Drawing.Point(272, 45);
+            this.fcbExport.Location = new System.Drawing.Point(272, 48);
             this.fcbExport.Name = "fcbExport";
             this.fcbExport.Paddings = new System.Windows.Forms.Padding(0);
             this.fcbExport.RightBracket = ')';
             this.fcbExport.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbExport.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbExport.ServiceColors")));
-            this.fcbExport.Size = new System.Drawing.Size(992, 465);
+            this.fcbExport.Size = new System.Drawing.Size(992, 504);
             this.fcbExport.TabIndex = 4;
             this.fcbExport.Zoom = 100;
             // 
@@ -1322,10 +1343,10 @@ namespace FBExpert
             this.colExportActive,
             this.colExportWhere});
             this.dgExportGrid.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgExportGrid.Location = new System.Drawing.Point(3, 45);
+            this.dgExportGrid.Location = new System.Drawing.Point(3, 48);
             this.dgExportGrid.Name = "dgExportGrid";
             this.dgExportGrid.RowHeadersVisible = false;
-            this.dgExportGrid.Size = new System.Drawing.Size(269, 465);
+            this.dgExportGrid.Size = new System.Drawing.Size(269, 504);
             this.dgExportGrid.TabIndex = 6;
             // 
             // colPOS
@@ -1359,9 +1380,9 @@ namespace FBExpert
             // pbExport
             // 
             this.pbExport.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbExport.Location = new System.Drawing.Point(3, 510);
+            this.pbExport.Location = new System.Drawing.Point(3, 552);
             this.pbExport.Name = "pbExport";
-            this.pbExport.Size = new System.Drawing.Size(1261, 18);
+            this.pbExport.Size = new System.Drawing.Size(1261, 19);
             this.pbExport.TabIndex = 7;
             // 
             // pnlExportDataUpper
@@ -1377,7 +1398,7 @@ namespace FBExpert
             this.pnlExportDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExportDataUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlExportDataUpper.Name = "pnlExportDataUpper";
-            this.pnlExportDataUpper.Size = new System.Drawing.Size(1261, 42);
+            this.pnlExportDataUpper.Size = new System.Drawing.Size(1261, 45);
             this.pnlExportDataUpper.TabIndex = 5;
             // 
             // gbExportFile
@@ -1387,7 +1408,7 @@ namespace FBExpert
             this.gbExportFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbExportFile.Location = new System.Drawing.Point(389, 0);
             this.gbExportFile.Name = "gbExportFile";
-            this.gbExportFile.Size = new System.Drawing.Size(326, 38);
+            this.gbExportFile.Size = new System.Drawing.Size(326, 41);
             this.gbExportFile.TabIndex = 22;
             this.gbExportFile.TabStop = false;
             this.gbExportFile.Text = "File";
@@ -1396,17 +1417,17 @@ namespace FBExpert
             // 
             this.cbCharSet.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbCharSet.FormattingEnabled = true;
-            this.cbCharSet.Location = new System.Drawing.Point(148, 16);
+            this.cbCharSet.Location = new System.Drawing.Point(148, 18);
             this.cbCharSet.Name = "cbCharSet";
-            this.cbCharSet.Size = new System.Drawing.Size(175, 21);
+            this.cbCharSet.Size = new System.Drawing.Size(175, 22);
             this.cbCharSet.TabIndex = 12;
             // 
             // cbExportToFile
             // 
             this.cbExportToFile.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cbExportToFile.Location = new System.Drawing.Point(3, 16);
+            this.cbExportToFile.Location = new System.Drawing.Point(3, 18);
             this.cbExportToFile.Name = "cbExportToFile";
-            this.cbExportToFile.Size = new System.Drawing.Size(133, 19);
+            this.cbExportToFile.Size = new System.Drawing.Size(133, 20);
             this.cbExportToFile.TabIndex = 11;
             this.cbExportToFile.Text = "Export to file";
             this.cbExportToFile.UseVisualStyleBackColor = true;
@@ -1418,7 +1439,7 @@ namespace FBExpert
             this.cbExportToScreen.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbExportToScreen.Location = new System.Drawing.Point(240, 0);
             this.cbExportToScreen.Name = "cbExportToScreen";
-            this.cbExportToScreen.Size = new System.Drawing.Size(149, 38);
+            this.cbExportToScreen.Size = new System.Drawing.Size(149, 41);
             this.cbExportToScreen.TabIndex = 12;
             this.cbExportToScreen.Text = "Export to screen";
             this.cbExportToScreen.UseVisualStyleBackColor = true;
@@ -1431,7 +1452,7 @@ namespace FBExpert
             this.gbInsertUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbInsertUpdate.Location = new System.Drawing.Point(794, 0);
             this.gbInsertUpdate.Name = "gbInsertUpdate";
-            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 38);
+            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 41);
             this.gbInsertUpdate.TabIndex = 10;
             this.gbInsertUpdate.TabStop = false;
             this.gbInsertUpdate.Text = "FieldType of statments";
@@ -1439,9 +1460,9 @@ namespace FBExpert
             // rbUPDATE
             // 
             this.rbUPDATE.AutoSize = true;
-            this.rbUPDATE.Location = new System.Drawing.Point(228, 16);
+            this.rbUPDATE.Location = new System.Drawing.Point(228, 17);
             this.rbUPDATE.Name = "rbUPDATE";
-            this.rbUPDATE.Size = new System.Drawing.Size(69, 17);
+            this.rbUPDATE.Size = new System.Drawing.Size(65, 18);
             this.rbUPDATE.TabIndex = 2;
             this.rbUPDATE.Text = "UPDATE";
             this.rbUPDATE.UseVisualStyleBackColor = true;
@@ -1449,9 +1470,9 @@ namespace FBExpert
             // rbINSERTUPDATE
             // 
             this.rbINSERTUPDATE.AutoSize = true;
-            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 16);
+            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 17);
             this.rbINSERTUPDATE.Name = "rbINSERTUPDATE";
-            this.rbINSERTUPDATE.Size = new System.Drawing.Size(124, 17);
+            this.rbINSERTUPDATE.Size = new System.Drawing.Size(119, 18);
             this.rbINSERTUPDATE.TabIndex = 1;
             this.rbINSERTUPDATE.Text = "INSERT or UPDATE";
             this.rbINSERTUPDATE.UseVisualStyleBackColor = true;
@@ -1460,9 +1481,9 @@ namespace FBExpert
             // 
             this.rbINSERT.AutoSize = true;
             this.rbINSERT.Checked = true;
-            this.rbINSERT.Location = new System.Drawing.Point(6, 16);
+            this.rbINSERT.Location = new System.Drawing.Point(6, 17);
             this.rbINSERT.Name = "rbINSERT";
-            this.rbINSERT.Size = new System.Drawing.Size(65, 17);
+            this.rbINSERT.Size = new System.Drawing.Size(62, 18);
             this.rbINSERT.TabIndex = 0;
             this.rbINSERT.TabStop = true;
             this.rbINSERT.Text = "INSERT";
@@ -1496,8 +1517,9 @@ namespace FBExpert
             this.hsCancelExport.Name = "hsCancelExport";
             this.hsCancelExport.NonMarkedText = "Cancel reading";
             this.hsCancelExport.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCancelExport.ShortcutNewline = false;
             this.hsCancelExport.ShowShortcut = false;
-            this.hsCancelExport.Size = new System.Drawing.Size(140, 38);
+            this.hsCancelExport.Size = new System.Drawing.Size(140, 41);
             this.hsCancelExport.TabIndex = 21;
             this.hsCancelExport.Text = "Cancel reading";
             this.hsCancelExport.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1547,8 +1569,9 @@ namespace FBExpert
             this.hsExportData.Name = "hsExportData";
             this.hsExportData.NonMarkedText = "Export";
             this.hsExportData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportData.ShortcutNewline = false;
             this.hsExportData.ShowShortcut = false;
-            this.hsExportData.Size = new System.Drawing.Size(100, 38);
+            this.hsExportData.Size = new System.Drawing.Size(100, 41);
             this.hsExportData.TabIndex = 9;
             this.hsExportData.Text = "Export";
             this.hsExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1599,8 +1622,9 @@ namespace FBExpert
             this.hsRefreshExportData.Name = "hsRefreshExportData";
             this.hsRefreshExportData.NonMarkedText = "Refresh Data";
             this.hsRefreshExportData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshExportData.ShortcutNewline = false;
             this.hsRefreshExportData.ShowShortcut = false;
-            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 38);
+            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 41);
             this.hsRefreshExportData.TabIndex = 3;
             this.hsRefreshExportData.Text = "Refresh Data";
             this.hsRefreshExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1640,28 +1664,28 @@ namespace FBExpert
             this.ilTabControl.Images.SetKeyName(11, "media_playlist_shuffle_x32.png");
             this.ilTabControl.Images.SetKeyName(12, "format_indent_more_2_22x.png");
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.ckGetDatas);
-            this.pnlUpper.Controls.Add(this.gnUsedTime);
-            this.pnlUpper.Controls.Add(this.gbMaxAllowedErrors);
-            this.pnlUpper.Controls.Add(this.gbMaxRows);
-            this.pnlUpper.Controls.Add(this.lblTableName);
-            this.pnlUpper.Controls.Add(this.hsPageRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1275, 40);
-            this.pnlUpper.TabIndex = 1;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.gbReadData);
+            this.pnlFormUpper.Controls.Add(this.gnUsedTime);
+            this.pnlFormUpper.Controls.Add(this.gbMaxAllowedErrors);
+            this.pnlFormUpper.Controls.Add(this.gbMaxRows);
+            this.pnlFormUpper.Controls.Add(this.lblTableName);
+            this.pnlFormUpper.Controls.Add(this.hsPageRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1275, 43);
+            this.pnlFormUpper.TabIndex = 1;
             // 
             // ckGetDatas
             // 
             this.ckGetDatas.AutoSize = true;
-            this.ckGetDatas.Location = new System.Drawing.Point(1086, 11);
+            this.ckGetDatas.Location = new System.Drawing.Point(6, 15);
             this.ckGetDatas.Name = "ckGetDatas";
-            this.ckGetDatas.Size = new System.Drawing.Size(83, 17);
+            this.ckGetDatas.Size = new System.Drawing.Size(89, 18);
             this.ckGetDatas.TabIndex = 9;
             this.ckGetDatas.Text = "Read Datas";
             this.ckGetDatas.UseVisualStyleBackColor = true;
@@ -1672,7 +1696,7 @@ namespace FBExpert
             this.gnUsedTime.Controls.Add(this.txtUsedTime);
             this.gnUsedTime.Location = new System.Drawing.Point(339, -1);
             this.gnUsedTime.Name = "gnUsedTime";
-            this.gnUsedTime.Size = new System.Drawing.Size(116, 41);
+            this.gnUsedTime.Size = new System.Drawing.Size(116, 44);
             this.gnUsedTime.TabIndex = 6;
             this.gnUsedTime.TabStop = false;
             this.gnUsedTime.Text = "Used time (ms)";
@@ -1681,10 +1705,10 @@ namespace FBExpert
             // 
             this.txtUsedTime.BackColor = System.Drawing.SystemColors.Info;
             this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
+            this.txtUsedTime.Location = new System.Drawing.Point(3, 18);
             this.txtUsedTime.Name = "txtUsedTime";
             this.txtUsedTime.ReadOnly = true;
-            this.txtUsedTime.Size = new System.Drawing.Size(110, 20);
+            this.txtUsedTime.Size = new System.Drawing.Size(110, 22);
             this.txtUsedTime.TabIndex = 0;
             this.txtUsedTime.Text = "0";
             // 
@@ -1693,7 +1717,7 @@ namespace FBExpert
             this.gbMaxAllowedErrors.Controls.Add(this.txtMaxAllowedErrors);
             this.gbMaxAllowedErrors.Location = new System.Drawing.Point(462, 0);
             this.gbMaxAllowedErrors.Name = "gbMaxAllowedErrors";
-            this.gbMaxAllowedErrors.Size = new System.Drawing.Size(116, 41);
+            this.gbMaxAllowedErrors.Size = new System.Drawing.Size(116, 44);
             this.gbMaxAllowedErrors.TabIndex = 5;
             this.gbMaxAllowedErrors.TabStop = false;
             this.gbMaxAllowedErrors.Text = "Max allowed errors";
@@ -1701,9 +1725,9 @@ namespace FBExpert
             // txtMaxAllowedErrors
             // 
             this.txtMaxAllowedErrors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMaxAllowedErrors.Location = new System.Drawing.Point(3, 16);
+            this.txtMaxAllowedErrors.Location = new System.Drawing.Point(3, 18);
             this.txtMaxAllowedErrors.Name = "txtMaxAllowedErrors";
-            this.txtMaxAllowedErrors.Size = new System.Drawing.Size(110, 20);
+            this.txtMaxAllowedErrors.Size = new System.Drawing.Size(110, 22);
             this.txtMaxAllowedErrors.TabIndex = 0;
             this.txtMaxAllowedErrors.Text = "100";
             // 
@@ -1714,7 +1738,7 @@ namespace FBExpert
             this.gbMaxRows.Controls.Add(this.txtMaxRows);
             this.gbMaxRows.Location = new System.Drawing.Point(585, 0);
             this.gbMaxRows.Name = "gbMaxRows";
-            this.gbMaxRows.Size = new System.Drawing.Size(218, 41);
+            this.gbMaxRows.Size = new System.Drawing.Size(218, 44);
             this.gbMaxRows.TabIndex = 4;
             this.gbMaxRows.TabStop = false;
             this.gbMaxRows.Text = "Max Rows";
@@ -1723,9 +1747,9 @@ namespace FBExpert
             // 
             this.rbSQLDesc.AutoSize = true;
             this.rbSQLDesc.Checked = true;
-            this.rbSQLDesc.Location = new System.Drawing.Point(149, 19);
+            this.rbSQLDesc.Location = new System.Drawing.Point(149, 20);
             this.rbSQLDesc.Name = "rbSQLDesc";
-            this.rbSQLDesc.Size = new System.Drawing.Size(54, 17);
+            this.rbSQLDesc.Size = new System.Drawing.Size(51, 18);
             this.rbSQLDesc.TabIndex = 4;
             this.rbSQLDesc.TabStop = true;
             this.rbSQLDesc.Text = "DESC";
@@ -1734,9 +1758,9 @@ namespace FBExpert
             // rbSQLAsc
             // 
             this.rbSQLAsc.AutoSize = true;
-            this.rbSQLAsc.Location = new System.Drawing.Point(97, 18);
+            this.rbSQLAsc.Location = new System.Drawing.Point(97, 19);
             this.rbSQLAsc.Name = "rbSQLAsc";
-            this.rbSQLAsc.Size = new System.Drawing.Size(46, 17);
+            this.rbSQLAsc.Size = new System.Drawing.Size(44, 18);
             this.rbSQLAsc.TabIndex = 3;
             this.rbSQLAsc.Text = "ASC";
             this.rbSQLAsc.UseVisualStyleBackColor = true;
@@ -1744,9 +1768,9 @@ namespace FBExpert
             // txtMaxRows
             // 
             this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtMaxRows.Location = new System.Drawing.Point(3, 16);
+            this.txtMaxRows.Location = new System.Drawing.Point(3, 18);
             this.txtMaxRows.Name = "txtMaxRows";
-            this.txtMaxRows.Size = new System.Drawing.Size(88, 20);
+            this.txtMaxRows.Size = new System.Drawing.Size(88, 22);
             this.txtMaxRows.TabIndex = 0;
             this.txtMaxRows.Text = "2000";
             // 
@@ -1754,7 +1778,7 @@ namespace FBExpert
             // 
             this.lblTableName.AutoSize = true;
             this.lblTableName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableName.Location = new System.Drawing.Point(76, 11);
+            this.lblTableName.Location = new System.Drawing.Point(76, 12);
             this.lblTableName.Name = "lblTableName";
             this.lblTableName.Size = new System.Drawing.Size(97, 20);
             this.lblTableName.TabIndex = 3;
@@ -1779,7 +1803,7 @@ namespace FBExpert
             this.hsPageRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsPageRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.hsPageRefresh.ImageToggleOnSelect = true;
-            this.hsPageRefresh.Location = new System.Drawing.Point(1175, 0);
+            this.hsPageRefresh.Location = new System.Drawing.Point(1208, 0);
             this.hsPageRefresh.Marked = false;
             this.hsPageRefresh.MarkedColor = System.Drawing.Color.Teal;
             this.hsPageRefresh.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1788,8 +1812,9 @@ namespace FBExpert
             this.hsPageRefresh.Name = "hsPageRefresh";
             this.hsPageRefresh.NonMarkedText = "";
             this.hsPageRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPageRefresh.ShortcutNewline = false;
             this.hsPageRefresh.ShowShortcut = false;
-            this.hsPageRefresh.Size = new System.Drawing.Size(100, 40);
+            this.hsPageRefresh.Size = new System.Drawing.Size(67, 43);
             this.hsPageRefresh.TabIndex = 1;
             this.hsPageRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsPageRefresh.ToolTipActive = false;
@@ -1838,8 +1863,9 @@ namespace FBExpert
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(45, 40);
+            this.hsClose.Size = new System.Drawing.Size(45, 43);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -1865,9 +1891,9 @@ namespace FBExpert
             // 
             this.pnlCenter.Controls.Add(this.tabControlViews);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 40);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 43);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1275, 558);
+            this.pnlCenter.Size = new System.Drawing.Size(1275, 601);
             this.pnlCenter.TabIndex = 3;
             // 
             // saveSQLFile
@@ -1888,13 +1914,24 @@ namespace FBExpert
             this.bwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExport_ProgressChanged);
             this.bwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExport_RunWorkerCompleted);
             // 
+            // gbReadData
+            // 
+            this.gbReadData.Controls.Add(this.ckGetDatas);
+            this.gbReadData.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbReadData.Location = new System.Drawing.Point(1092, 0);
+            this.gbReadData.Name = "gbReadData";
+            this.gbReadData.Size = new System.Drawing.Size(116, 43);
+            this.gbReadData.TabIndex = 10;
+            this.gbReadData.TabStop = false;
+            // 
             // VIEWManageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 598);
+            this.ClientSize = new System.Drawing.Size(1275, 644);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VIEWManageForm";
             this.Text = "VIEWManageForm";
@@ -1903,7 +1940,6 @@ namespace FBExpert
             this.tabControlViews.ResumeLayout(false);
             this.tabPageFIELDS.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
-            this.cmsUpdateInsertText.ResumeLayout(false);
             this.tabPageDATA.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             this.cmdDATA.ResumeLayout(false);
@@ -1922,9 +1958,10 @@ namespace FBExpert
             this.pnlDDL_CENTER.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctDLL)).EndInit();
             this.cmsDDLText.ResumeLayout(false);
-            this.pnlDDL_UPPER.ResumeLayout(false);
+            this.pnlDDLUpper.ResumeLayout(false);
             this.tabUpdateInsert.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctCREATEINSERTSQL)).EndInit();
+            this.cmsUpdateInsertText.ResumeLayout(false);
             this.pnlUpdateInsertSQLUpper.ResumeLayout(false);
             this.pnlUpdateInsertSQLUpper.PerformLayout();
             this.tabPageDependenciesTo.ResumeLayout(false);
@@ -1932,7 +1969,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsDependencies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependencies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).EndInit();
-            this.pnlUpperDependenciesTo.ResumeLayout(false);
+            this.pnlDependenciesToUpper.ResumeLayout(false);
             this.tabPageMessages.ResumeLayout(false);
             this.pnlMessagesCenter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
@@ -1945,8 +1982,8 @@ namespace FBExpert
             this.gbExportFile.ResumeLayout(false);
             this.gbInsertUpdate.ResumeLayout(false);
             this.gbInsertUpdate.PerformLayout();
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gnUsedTime.ResumeLayout(false);
             this.gnUsedTime.PerformLayout();
             this.gbMaxAllowedErrors.ResumeLayout(false);
@@ -1954,6 +1991,8 @@ namespace FBExpert
             this.gbMaxRows.ResumeLayout(false);
             this.gbMaxRows.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
+            this.gbReadData.ResumeLayout(false);
+            this.gbReadData.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1963,7 +2002,7 @@ namespace FBExpert
         private System.Windows.Forms.TabControl tabControlViews;
         private System.Windows.Forms.TabPage tabPageFIELDS;
         private System.Windows.Forms.TabPage tabPageDATA;
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsPageRefresh;
@@ -1974,7 +2013,7 @@ namespace FBExpert
         private System.Windows.Forms.Panel pnlDataUpper;
         private System.Windows.Forms.TabPage tabDDL;
         private System.Windows.Forms.Panel pnlDDL_CENTER;
-        private System.Windows.Forms.Panel pnlDDL_UPPER;
+        private System.Windows.Forms.Panel pnlDDLUpper;
         private FastColoredTextBoxNS.FastColoredTextBox fctDLL;
         private System.Windows.Forms.TabPage tabUpdateInsert;
         private System.Windows.Forms.Panel pnlUpdateInsertSQLUpper;
@@ -2013,7 +2052,7 @@ namespace FBExpert
         private System.Windows.Forms.BindingSource bsDependencies;
         private System.Data.DataSet dsDependencies;
         private System.Data.DataTable dataTable5;
-        private System.Windows.Forms.Panel pnlUpperDependenciesTo;
+        private System.Windows.Forms.Panel pnlDependenciesToUpper;
         private SeControlsLib.HotSpot hsRefreshDependenciesTo;
         private SeControlsLib.HotSpot hsLoadSQL;
         private System.Windows.Forms.OpenFileDialog ofdSQL;
@@ -2060,5 +2099,8 @@ namespace FBExpert
         private System.Windows.Forms.RadioButton rbSQLDesc;
         private System.Windows.Forms.RadioButton rbSQLAsc;
         private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiReadAsBlob;
+        private System.Windows.Forms.GroupBox gbReadData;
     }
 }

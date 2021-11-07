@@ -1,9 +1,12 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using FBExpert;
+using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace FBXpert.Globals
 {
@@ -38,12 +41,12 @@ namespace FBXpert.Globals
         }
         public static string BlockStart(int i)
         {
-            return Format(i, "{ " + Environment.NewLine);
+            return Format(i, $@"{{{Environment.NewLine}");
         }
 
         public static string BlockEnd(int i)
         {
-            return Format(i, "} " + Environment.NewLine);
+            return Format(i, $@"}}{Environment.NewLine}");
         }
     }
 
@@ -60,7 +63,7 @@ namespace FBXpert.Globals
                 mld = mld.Replace("column", "").Replace("\r\n", "").Replace(".", "");
                 string[] mldarr = mld.Trim().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (mldarr.Length > 1)
-                {                    
+                {
                     int n2 = BasicClassLibrary.StaticFunctionsClass.ToIntDef(mldarr[1].Trim(), -1);
                     if (n2 <= 0)
                     {
@@ -93,22 +96,22 @@ namespace FBXpert.Globals
             return costs;
         }
 
-        public static string GetErrorCodeString(string errorString,DBRegistrationClass DBReg)
+        public static string GetErrorCodeString(string errorString, DBRegistrationClass DBReg)
         {
-            if(DBReg.GetErrorCodes().Errors.Count <= 0) return errorString;
-            if(!errorString.Contains("No message for error code")) return errorString;
-                        
+            if (DBReg.GetErrorCodes().Errors.Count <= 0) return errorString;
+            if (!errorString.Contains("No message for error code")) return errorString;
+
             int inx1 = errorString.IndexOf("error code ");
             int inx2 = errorString.LastIndexOf(" found");
-            string estr = errorString.Substring(inx1+11,inx2-inx1-11);
+            string estr = errorString.Substring(inx1 + 11, inx2 - inx1 - 11);
             long.TryParse(estr, out long ecc);
-            
-            if((ecc > 0)&&(DBReg.GetErrorCodes().Errors.Count > 0))
+
+            if ((ecc > 0) && (DBReg.GetErrorCodes().Errors.Count > 0))
             {
-                if(DBReg.GetErrorCodes().Errors.TryGetValue(ecc,out string err))
-                return errorString.Replace($@"{ecc} found",$@"Error Code:{err}").Replace("No message for error code","");
+                if (DBReg.GetErrorCodes().Errors.TryGetValue(ecc, out string err))
+                    return errorString.Replace($@"{ecc} found", $@"Error Code:{err}").Replace("No message for error code", "");
             }
-            return errorString;            
+            return errorString;
         }
         public static string GetFormattedError(string info)
         {
@@ -121,21 +124,21 @@ namespace FBXpert.Globals
         }
 
         public static string GetFormattedError(string info, string message)
-        {            
-            if(string.IsNullOrEmpty(message)) return $@"{info}";
+        {
+            if (string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
         }
 
         public static string GetLifetime(string cnString, bool withMon)
         {
             string _funcStr = "GetLifetime";
-            var con = new FbConnection(cnString);            
+            var con = new FbConnection(cnString);
             string lifetimeText = string.Empty;
             try
-            {     
+            {
                 con.Open();
-                if(withMon)
-                { 
+                if (withMon)
+                {
                     string cmd = "select mon$next_transaction livetime from mon$database;";
                     var fcmd = new FbCommand(cmd, con);
                     fcmd.CommandTimeout = 10;
@@ -157,25 +160,25 @@ namespace FBXpert.Globals
             catch (Exception ex)
             {
                 lifetimeText = "-1";
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{ex.Message}->{_funcStr}", ex),_funcStr);
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{ex.Message}->{_funcStr}", ex), _funcStr);
             }
             finally
-            { 
-              con.Close();
+            {
+                con.Close();
             }
             return lifetimeText;
         }
-        
+
         public static string GetFormattedInfo(string info, string message)
-        {            
-            if(string.IsNullOrEmpty(message)) return $@"{info}";
+        {
+            if (string.IsNullOrEmpty(message)) return $@"{info}";
             return $@"{info}{Environment.NewLine}    ->msg:{message}";
         }
 
         static string ReplaceButNotBefore(string sql, string cmd, string[] notcmd)
         {
             int n = 0;
-            int inx = sql.ToUpper().IndexOf($@" {cmd} ",n, StringComparison.Ordinal);
+            int inx = sql.ToUpper().IndexOf($@" {cmd} ", n, StringComparison.Ordinal);
 
             while (inx >= 0)
             {
@@ -183,7 +186,7 @@ namespace FBXpert.Globals
                 for (int i = 0; i < notcmd.Length; i++)
                 {
                     string nstr = notcmd[i];
-                    int inxnot = sql.ToUpper().IndexOf(nstr,inx-nstr.Length-1, StringComparison.Ordinal);
+                    int inxnot = sql.ToUpper().IndexOf(nstr, inx - nstr.Length - 1, StringComparison.Ordinal);
                     if ((inxnot + nstr.Length) == inx)
                     {
                         donot = true;
@@ -195,8 +198,8 @@ namespace FBXpert.Globals
                 {
                     sql = sql.Insert(inx + 1, Environment.NewLine);
                 }
-                
-                inx = sql.ToUpper().IndexOf($@" {cmd} ",inx+1, StringComparison.Ordinal);
+
+                inx = sql.ToUpper().IndexOf($@" {cmd} ", inx + 1, StringComparison.Ordinal);
             }
             return sql;
         }
@@ -204,7 +207,7 @@ namespace FBXpert.Globals
         static string ReplaceButNotAfter(string sql, string cmd, string[] notcmd)
         {
             int n = 0;
-            int inx = sql.ToUpper().IndexOf($@" {cmd} ",n, StringComparison.Ordinal);
+            int inx = sql.ToUpper().IndexOf($@" {cmd} ", n, StringComparison.Ordinal);
 
             while (inx >= 0)
             {
@@ -212,8 +215,8 @@ namespace FBXpert.Globals
                 for (int i = 0; i < notcmd.Length; i++)
                 {
                     string nstr = notcmd[i];
-                    int inxnot = sql.ToUpper().IndexOf(nstr,inx, StringComparison.Ordinal);
-                    if (inxnot == inx+cmd.Length+2)
+                    int inxnot = sql.ToUpper().IndexOf(nstr, inx, StringComparison.Ordinal);
+                    if (inxnot == inx + cmd.Length + 2)
                     {
                         donot = true;
                         break;
@@ -224,7 +227,7 @@ namespace FBXpert.Globals
                 {
                     sql = sql.Insert(inx + 1, Environment.NewLine);
                 }
-                inx = sql.ToUpper().IndexOf($@" {cmd} ",inx+1, StringComparison.Ordinal);
+                inx = sql.ToUpper().IndexOf($@" {cmd} ", inx + 1, StringComparison.Ordinal);
             }
             return sql;
         }
@@ -232,7 +235,7 @@ namespace FBXpert.Globals
         static string Replace(string sql, string cmd)
         {
             int inx = sql.ToUpper().IndexOf($@" {cmd} ", StringComparison.Ordinal);
-            
+
             while (inx >= 0)
             {
                 sql = sql.Insert(inx + 1, Environment.NewLine);
@@ -243,7 +246,7 @@ namespace FBXpert.Globals
         static string ReplaceL(string sql, string cmd)
         {
             int inx = sql.ToUpper().IndexOf($@"{cmd} ", StringComparison.Ordinal);
-            
+
             if (inx >= 0)
             {
                 sql = sql.Insert(inx, Environment.NewLine);
@@ -254,7 +257,7 @@ namespace FBXpert.Globals
         static string Spaces(int depth)
         {
             var sb = new StringBuilder();
-            for(int i = 0; i < depth; i++)
+            for (int i = 0; i < depth; i++)
             {
                 sb.Append("    ");
             }
@@ -271,7 +274,7 @@ namespace FBXpert.Globals
             string[] strList = sql.Split(sts);
             var sb = new StringBuilder();
             int depth = 0;
-            foreach(string st in strList)
+            foreach (string st in strList)
             {
                 if (st.Length <= 0) continue;
                 if (st.StartsWith(")")) depth--;
@@ -280,10 +283,6 @@ namespace FBXpert.Globals
             }
             return sb.ToString();
         }
-
-        
-
-
 
         public static string CreateComment()
         {
@@ -298,19 +297,19 @@ namespace FBXpert.Globals
         public static string MakeSqlPretty(string sqlCmd)
         {
             string sql = sqlCmd;
-            
-            while(sql.IndexOf("  ", StringComparison.Ordinal) >= 0)
+
+            while (sql.IndexOf("  ", StringComparison.Ordinal) >= 0)
             {
                 sql = sql.Replace("  ", " ");
             }
 
-            while(sql.IndexOf(" , ", StringComparison.Ordinal) >= 0)
+            while (sql.IndexOf(" , ", StringComparison.Ordinal) >= 0)
             {
                 sql = sql.Replace(" , ", ", ");
             }
-           
-            string[] dnot = { "LEFT", "RIGHT","CROSS","NATURAL","FULL","OUTER" };
-            string[] dnotfrom = { "CAST"};
+
+            string[] dnot = { "LEFT", "RIGHT", "CROSS", "NATURAL", "FULL", "OUTER" };
+            string[] dnotfrom = { "CAST" };
 
             sql = Replace(sql, "GROUP BY");
             sql = Replace(sql, "ORDER BY");
@@ -326,12 +325,12 @@ namespace FBXpert.Globals
             int istart = 0;
             int level = 0;
             var strList = new List<string>();
-           
-            for(int i = 0; i < sql.Length; i++)
+
+            for (int i = 0; i < sql.Length; i++)
             {
-                if(sql[i] == '(')
+                if (sql[i] == '(')
                 {
-                    if(level == 0)
+                    if (level == 0)
                     {
                         string cmd1 = sql.Substring(istart, i - istart);
                         cmd1 = Replace(cmd1, "CASE");
@@ -339,25 +338,92 @@ namespace FBXpert.Globals
                         strList.Add(cmd1);
                         istart = i;
                     }
-                    level ++;
+                    level++;
                 }
-                else if(sql[i] == ')')
+                else if (sql[i] == ')')
                 {
-                   level--;
-                   if(level == 0)
-                   {
-                        string cmd2 = sql.Substring(istart,i-istart+1);
+                    level--;
+                    if (level == 0)
+                    {
+                        string cmd2 = sql.Substring(istart, i - istart + 1);
                         cmd2 = ReplaceL(cmd2, "(SELECT");
                         cmd2 = ReplaceL(cmd2, " IIF");
                         strList.Add(cmd2);
-                        istart = i+1;
-                   }
+                        istart = i + 1;
+                    }
                 }
             }
             string cmd = sql.Substring(istart);
             cmd = Replace(cmd, "FROM");
             strList.Add(cmd);
             return sql;
+        }
+
+        public static void GetDatabases(ComboBox cbConnection, DBRegistrationClass regDB)
+        {
+            cbConnection.Items.Clear();
+            foreach (var dbr in DatabaseDefinitions.Instance.Databases)
+            {
+                cbConnection.Items.Add(dbr);
+            }
+            if (FbXpertMainForm.Instance().ActRegistrationObject != null)
+            {
+                int n = cbConnection.FindString(regDB.ToString());
+                cbConnection.SelectedIndex = n;
+            }
+        }
+
+
+        public static void CreateAndShowBinaryEdit(object v, string tableName, string FieldName)
+        {
+            Type tp = v.GetType();
+            if (tp == typeof(System.DBNull)) return;
+            string typestr = tp.FullName;
+            byte[] blob = null;
+            if (tp == typeof(System.Byte[]))
+            {
+                blob = (byte[])v;
+            }
+            else if (tp == typeof(System.String))
+            {
+                string vv = v.ToString();
+                char[] chr = vv.ToCharArray();
+                blob = new byte[chr.Length];
+                for (int i = 0; i < chr.Length; i++)
+                {
+                    blob[i] = (byte)chr[i];
+                }
+            }
+            else if (tp == typeof(System.Int16))
+            {
+                blob = BitConverter.GetBytes((Int16)v);
+            }
+            else if (tp == typeof(System.Int32))
+            {
+                blob = BitConverter.GetBytes((Int32)v);
+            }
+            else if (tp == typeof(System.Int64))
+            {
+                blob = BitConverter.GetBytes((Int64)v);
+            }
+            else if (tp == typeof(System.Double))
+            {
+                blob = BitConverter.GetBytes((Double)v);
+            }
+            else if (tp == typeof(System.Boolean))
+            {
+                blob = BitConverter.GetBytes((bool)v);
+            }
+            else if (tp == typeof(System.DateTime))
+            {
+                blob = BitConverter.GetBytes(((DateTime)v).Ticks);
+                typestr += "as Ticks (100ns)";
+            }
+            BlobEditForm bef = new BlobEditForm(typestr, $@"Field:{tableName}->{FieldName}");
+            bef.SetBytes(blob);
+            bef.ShowDialog();
+            blob = null;
+            GC.Collect();
         }
     }
 }

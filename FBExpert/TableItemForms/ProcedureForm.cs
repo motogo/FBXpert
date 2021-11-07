@@ -21,7 +21,7 @@ namespace FBXpert
         private TreeNode _tn = null;
         private ContextMenuStrip _cm = null;
         private NotifiesClass _localNotify = new NotifiesClass();
-        private NotifiesClass _localEventNotify = new NotifiesClass();
+        
         private AutocompleteClass _ac = null;
         private int _messagesCount = 0;
         private int _errorCount = 0;
@@ -93,7 +93,7 @@ namespace FBXpert
 
         private void MakeSQL()
         {
-            int n = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) ? MakeSQLAlter() : MakeSQLNew();
+            if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) MakeSQLAlter(); else MakeSQLNew();
 
             ShowCaptions();
             hsCreate.Enabled = (_procedureObject.Name.Length > 0);
@@ -179,9 +179,17 @@ namespace FBXpert
         {
             
         }
-               
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlProcedureAttributesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void ProcedureForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();            
             SetEnables();            

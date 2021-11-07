@@ -12,7 +12,7 @@ using FBXpert.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
-using MessageFormLibrary;
+using SEMessageBoxLibrary;
 using SESpaltenEditor;
 using StateClasses;
 using System;
@@ -75,6 +75,11 @@ namespace FBExpert
 
         private AutocompleteClass ac;
         private GridStoreClass gridStore;
+        private int PrimaryKeys;
+        private int ForeignKeys;
+        private int Uniques;
+        private int DependenciesTo;
+        private int DependenciesFrom;
 
         public void SetMDIParent(Form parent)
         {
@@ -89,6 +94,7 @@ namespace FBExpert
         public TABLEManageForm(Form parent, DBRegistrationClass drc, TreeNode tnSelected, List<TableClass> actTables)
         {
             InitializeComponent();
+            FormEvents.ClearEvents(this);
             this.MdiParent = parent;
             _tnSelected = tnSelected;
             var tc = (TableClass)tnSelected.Tag;
@@ -110,8 +116,24 @@ namespace FBExpert
             this.GetDataWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwGetData_RunWorkerCompleted);
             gridStore = new GridStoreClass(dgvResults);
         }
-        
 
+        public void SetControlSizes()
+        {
+            pnlDataUpper.Height             = AppSizeConstants.UpperFormBandHeight;
+            pnlTableFieldUpper.Height       = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height             = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height         = AppSizeConstants.UpperFormBandHeight;
+            pnlForeignKeysUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+            pnlExportDataUpper.Height       = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesToUpper.Height   = AppSizeConstants.UpperFormBandHeight;
+            pnlConstraintsUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+            pnlUniquesUpper.Height          = AppSizeConstants.UpperFormBandHeight;
+            pnlTableFieldUpper.Height       = AppSizeConstants.UpperFormBandHeight;
+            pnlIndiciesUpper.Height         = AppSizeConstants.UpperFormBandHeight;
+            pnlStatisticsUpper.Height       = AppSizeConstants.UpperFormBandHeight;
+            pnlChecksUpper.Height           = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesFromUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables)
         {
             ac = new AutocompleteClass(fctTableCreateDLL, _dbReg);
@@ -543,12 +565,12 @@ namespace FBExpert
             };
             this.colNotNull.AspectGetter = delegate (object x)
             {
-                if (((TableFieldClass)x).Domain.NotNull) return "ISOK";
-                return "NOTOK";
+                if (((TableFieldClass)x).Domain.NotNull) return "NOTNULL";
+                return "ISNULL";
             };
             this.colNotNull.Renderer = new MappedImageRenderer(new Object[] {
-                "ISOK",FBXpert.Properties.Resources.help_about_blue_x22,
-                "NOTOK", FBXpert.Properties.Resources.nichts_x22
+                "NOTNULL",FBXpert.Properties.Resources.help_about_blue_x22,
+                "ISNULL", FBXpert.Properties.Resources.nichts_x22
             });
             colFieldname.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Name; };
             colFieldPosition.AspectGetter = delegate (object x) { return ((TableFieldClass)x).Position; };
@@ -811,27 +833,24 @@ namespace FBExpert
         {
             fctTableCreateDLL.Text = AppStaticFunctionsClass.CreateComment() + CreateDLLClass.CreateTabelDLL(_tableObject,eCreateMode.create);
         }
-
+        /// <summary>
+        /// Makes select command for getting the tabledatas.
+        /// If there is a BLOB  field the datas will not be loaded, instead it creates a string placeholder like <BLOB>Binary[ID]
+        /// </summary>
+        /// <returns></returns>
         public string MakeFieldsCmd()
         {
             var sb = new StringBuilder();
             foreach(TableFieldClass obarr in fastObjectListView1.Objects)
             {
-              
                 if(sb.ToString().Length > 0) sb.Append(",");
                 
                 if(!string.IsNullOrEmpty(obarr.PK_ConstraintName))
                 {
                    if(string.IsNullOrEmpty(cn)) cn = obarr.Name;
                 }
-                if(obarr.Domain.FieldType ==  "BLOB")
-                {
-                    sb.Append($@"'<BLOB>{cn}' as {obarr.Name}");
-                }
-                else
-                {
-                   sb.Append(obarr.Name);
-                }
+                string fieldname = (obarr.Domain.FieldType == "BLOB") ? $@"'{FieldTypesStrings.BLOBKey}({EnumHelper.GetDescription((eBlobSubType)obarr.Domain.SubTypeNumber)})[{cn}]' as {obarr.Name}" : obarr.Name;
+                sb.Append(fieldname);
             }
             
             sb.Append($@" FROM {_tableObject.Name}");
@@ -853,11 +872,8 @@ namespace FBExpert
                 rbSQLAsc.Checked = false;
                 rbSQLDesc.Checked = false;
             }
-            
             string cmd = $@"{sb};";
-            
             txtSQL.Text = $@"SELECT {cmd}";
-            
             return cmd;
         }
         bool getData;
@@ -924,15 +940,12 @@ namespace FBExpert
 
            if (maxRows > 0)
            {
-                
                 GetDataWorker.ReportProgress(0, $@"SELECT FIRST {maxRows} {cmd.Trim()}");
-            }
+           }
            else
            {
-                
                 GetDataWorker.ReportProgress(0, $@"SELECT {cmd.Trim()}");
-            }
-            
+           }
 
            while ((cnt >= sk)&&(skip < maxRows||maxRows <= 0))
            {
@@ -956,7 +969,6 @@ namespace FBExpert
                     }
                }
            }                              
-           
         }
 
         private void SelectIndexID()
@@ -1026,7 +1038,6 @@ namespace FBExpert
             if (!FKDataFilled) return;            
             var ob = (DataRowView)  bsForeignKeys.Current;
             if (ob == null) return;
-            //SelectedFKConstraintName = ob.Row["FOREIGN_KEY_NAME"].ToString().Trim(); 
             SelectedFKConstraintName = ob.Row["CONSTRAINT_NAME"].ToString().Trim();
             
             if(string.IsNullOrEmpty(SelectedFKConstraintName))
@@ -1067,7 +1078,6 @@ namespace FBExpert
         {
             var tff = new IndexForm(FbXpertMainForm.Instance(), _tableObject, _dbReg, _actTables);
             tff.RegisterNotify(InfoRaised);
-            
             tff.Show();
             _indexChanged = true;
         }
@@ -1139,10 +1149,7 @@ namespace FBExpert
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eInsert);
                 tff.Show();
             }
-            
-            
-
-            
+ 
             _indexChanged = true;
         }
 
@@ -1153,8 +1160,8 @@ namespace FBExpert
             if(result.commandDone)
             {            
                  SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "IndexDeletedTitle","IndexDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;
-                if (getData) RefreshAll();
-                else RefreshStruct();
+                 if (getData) RefreshAll();
+                 else RefreshStruct();
                 _indexChanged = true;
                  
                  return;
@@ -1180,9 +1187,7 @@ namespace FBExpert
 
         private void DropFKConstraint()
         {
-            
             var result = SQLStatementsClass.Instance.DropTableConstraint(_tableObject.Name, SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
-           // var result = SQLStatementsClass.Instance.DropConstraint(SelectedFKConstraintName.Trim(), _dbReg, _localNotify);
             object[] p = { SelectedFKConstraintName.Trim(), _dbReg.Alias, Environment.NewLine };
             if(result.commandDone)
             {            
@@ -1206,7 +1211,6 @@ namespace FBExpert
                  if (getData) RefreshAll();
                  else RefreshStruct();
                 _indexChanged = true;
-                 
                  return;
             }
             SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintNotDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;  
@@ -1222,7 +1226,6 @@ namespace FBExpert
                  if (getData) RefreshAll();
                  else RefreshStruct();
                 _indexChanged = true;
-                 
                  return;
             }
             SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "ConstraintDeletedTitle","ConstraintNotDeleted", FormStartPosition.CenterScreen,SEMessageBoxButtons.OK, SEMessageBoxIcon.Information, null, p) ;  
@@ -1275,9 +1278,6 @@ namespace FBExpert
                 tff._localNotify.Register4Info(InfoRaised);
                 tff.SetDataBearbeitenMode(StateClasses.EditStateClass.eBearbeiten.eEdit);
                 tff.Show();
-
-                
-                
             }
             else if(tabControlConstraints.SelectedTab == tabPageChecks)
             {
@@ -1288,8 +1288,6 @@ namespace FBExpert
                 tff.RegisterNotify(InfoRaised);
                 tff.Show();                
             }
-
-           
             _constraintChanged = true;
             AnzeigeConstraints();
         }
@@ -1315,11 +1313,7 @@ namespace FBExpert
             tabControl.TabPages.Add(tabPageTablestatistics);
         }
 
-        int PrimaryKeys;
-        int ForeignKeys;
-        int Uniques;
-        int DependenciesTo;
-        int DependenciesFrom;
+
         private void AnzeigeConstraints()
         {
             tabPagePrimaryKeys.Text = $@"Primary Keys ({PrimaryKeys})";
@@ -1388,28 +1382,24 @@ namespace FBExpert
             GetDataWorker.CancelGettingData();
             if (GetDataWorker.CancellingDone())
             {
-
                 ClearDataGrid();
-
-
-                PrimaryKeys = RefreshPrimaryKeys();
-                ForeignKeys = RefreshForeignKeys();
-                Uniques = RefreshUniques();
-                DependenciesTo = RefreshDependenciesTo();
-                DependenciesFrom = RefreshDependenciesFrom();
+                PrimaryKeys         = RefreshPrimaryKeys();
+                ForeignKeys         = RefreshForeignKeys();
+                Uniques             = RefreshUniques();
+                DependenciesTo      = RefreshDependenciesTo();
+                DependenciesFrom    = RefreshDependenciesFrom();
 
                 AnzeigeConstraints();
 
-                tabIndicies.Text = $@"Indicies ({RefreshIndices()})";
-                tabPageDependenciesTo.Text = $@"Dependencies ({DependenciesTo})";
-                tabPageDependenciesFrom.Text = $@"Dependencies ({DependenciesFrom})";
+                tabIndicies.Text = $@"{LanguageClass.Instance.GetString("Indicies")} ({RefreshIndices()})";
+                tabPageDependenciesTo.Text = $@"{LanguageClass.Instance.GetString("Dependencies")} ({DependenciesTo})";
+                tabPageDependenciesFrom.Text = $@"{LanguageClass.Instance.GetString("DependenciesFrom")} ({DependenciesFrom})";
 
                 RefreshDLL();
                 cbEditMode.Checked = !cbEditMode.Checked;
                 cbEditMode.Checked = !cbEditMode.Checked;
                 ShowCaptions();
                 this.Cursor = Cursors.Default;
-                //GetDataWorker.RunWorkerAsync();
                 DataFilled = true;
                 SelectID();
             }
@@ -1426,7 +1416,7 @@ namespace FBExpert
         private void RefreshTableData()
         {          
             MakeFieldsCmd();
-            bsTableContent.DataMember   = null;          
+            bsTableContent.DataMember   = null;
             hsRefreshData.Enabled       = false;
             sfbTableData.Enabled        = false;
             Application.DoEvents();
@@ -1434,8 +1424,8 @@ namespace FBExpert
             if (GetDataWorker.IsBusy) return;
             
             ClearDataGrid();
-            dgvResults.RowTemplate.Height = 30;
-            GetDataWorker.RunWorkerAsync();                                
+            dgvResults.RowTemplate.Height = AppSizeConstants.DatagridRowHeight;
+            GetDataWorker.RunWorkerAsync();
         }
 
         public void SetButtonDefaults()
@@ -1611,7 +1601,7 @@ namespace FBExpert
                     string scmd = string.Empty;
                     string valuestr = dr[str.Name].ToString();
 
-                    if (str.Domain.FieldType.StartsWith("VAR") || str.Domain.FieldType.StartsWith("TIME") || str.Domain.FieldType.StartsWith("DATE"))
+                    if (str.Domain.FieldType.StartsWith(FieldTypesStrings.VAR) || str.Domain.FieldType.StartsWith(FieldTypesStrings.TIME) || str.Domain.FieldType.StartsWith(FieldTypesStrings.DATE))
                     {
                         if (valuestr.Length <= 0) scmd = $@"{str.Name} = null";
                         else                      scmd = $@"{str.Name} = '{valuestr}'";
@@ -1691,7 +1681,7 @@ namespace FBExpert
         
         private void TABLEManageForm_Load(object sender, EventArgs e)
         {
-            
+            SetControlSizes();
             MakeFieldGrid();
             SetupColumns();
             FormDesign.SetFormLeft(this);
@@ -1716,7 +1706,8 @@ namespace FBExpert
         }
 
         private void SaveDataset_Click(object sender, EventArgs e)
-        {            
+        {
+            string func = "SaveDataset_Click(object sender, EventArgs e)";
             try
             {
                 DataSet dsUpdate = dsTableContent.GetChanges(DataRowState.Modified);
@@ -1759,16 +1750,16 @@ namespace FBExpert
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> Savedataset_Click()", ex));                                        
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}->{func}", ex));
             }
-            bsTableContent.DataMember = null;                                
+            bsTableContent.DataMember = null;
             if (!cbAutoRefresh.Checked) return;
             
             MakeFieldsCmd();
             if (GetDataWorker.IsBusy) return;
             
             ClearDataGrid();
-            GetDataWorker.RunWorkerAsync();                                    
+            GetDataWorker.RunWorkerAsync();
         }
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -1966,11 +1957,11 @@ namespace FBExpert
             }
             if(_indexChanged || _tableChanged || _constraintChanged) 
             {
-                DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadAllTables,$@"Proc:{this.Name}"); 
+                DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(Name, StaticVariablesClass.ReloadAllTables,$@"Proc:{this.Name}->TableChanged"); 
             }
 
-            _localNotify.Notify.OnRaiseInfoHandler  -= new NotifyInfos.RaiseNotifyHandler(InfoRaised);
-            _localNotify.Notify.OnRaiseErrorHandler -= new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
+            _localNotify.Unegister4Info(InfoRaised);
+            _localNotify.Unegister4Error(ErrorRaised);
         }
         
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -2026,8 +2017,13 @@ namespace FBExpert
 
         private void cmdDATA_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            if (e.ClickedItem == tsmiSpaltenEdit)
+            {
+                SpaltenEdit();
+            }
             if (dgvResults.CurrentCell == null) return;
-            if(e.ClickedItem == tsmiSetToNULL)
+            if (dgvResults.CurrentCell.Value.GetType() == typeof(System.DBNull)) return;
+            if (e.ClickedItem == tsmiSetToNULL)
             {
                 dgvResults.BeginEdit(false);
                 if (dgvResults.CurrentCell.ValueType.Name == "String")
@@ -2042,102 +2038,42 @@ namespace FBExpert
                     }                    
                 }
                 dgvResults.EndEdit();                
-                dgvResults.InvalidateCell(dgvResults.CurrentCell);            
-            }
-            else if(e.ClickedItem == tsmiSpaltenEdit)
-            {
-                SpaltenEdit();
+                dgvResults.InvalidateCell(dgvResults.CurrentCell);
             }
             else if(e.ClickedItem == tsmiReadBLOB)
-            {                                                                       
-                       
-                if (dgvResults.CurrentCell.Value.GetType().Name != "DBNull")
-                {                    
-                    string kenner = "<BLOB>";
-                    string cl = (dgvResults.CurrentCell.Value.ToString().StartsWith(kenner)) ? dgvResults.CurrentCell.Value.ToString().Substring(kenner.Length) : "ID";                                        
-                    string cmd = $@"SELECT {dgvResults.CurrentCell.OwningColumn.Name} FROM {_tableObject.Name} WHERE {cl} = '{dgvResults.CurrentRow.Cells[cl].Value}'";
-                  
-                    var fbCommand = new FbCommand(cmd, _dataConnection);
-                    var fbDataReader = fbCommand.ExecuteReader();
-                    if (fbDataReader.Read()) 
-                    {
-                        var v = fbDataReader[0];
-                        Type tp = v.GetType();
-                        
-                        if(tp.FullName.StartsWith("System."))
-                        {
-                            byte[] blob = null;
-                            if(tp.FullName ==  "System.Byte[]")
-                            {
-                                blob = (byte[]) v;                                    
-                            }
-                            else if(tp.FullName ==  "System.String")
-                            {
-                                string vv = v.ToString();                                    
-                                char[] chr = vv.ToCharArray();
-                                blob = new byte[chr.Length];
-                                for(int i = 0; i < chr.Length; i++)
-                                {
-                                    blob[i] = (byte)chr[i];
-                                }                               
-                            }
-                            else if(tp.FullName.StartsWith("System.Int"))
-                            {                                                                        
-                                if(tp.FullName == "System.Int16")
-                                {
-                                    var vv = (Int16) v;
-                                    blob =  BitConverter.GetBytes(vv);        
-                                }
-                                else if(tp.FullName == "System.Int32")
-                                {
-                                    var vv = (Int32) v;
-                                    blob =  BitConverter.GetBytes(vv);        
-                                }
-                                else if(tp.FullName == "System.Int64")
-                                {
-                                    var vv = (Int64) v;
-                                    blob =  BitConverter.GetBytes(vv);        
-                                }                 
-                            }
-                            else if(tp.FullName == "System.Double")
-                            {                                                                 
-                                var vv = (Double) v;
-                                blob =  BitConverter.GetBytes(vv);                                 
-                            }
-                            else if(tp.FullName.StartsWith("System.Bool"))
-                            {                                                                 
-                                var vv = (bool) v;
-                                blob =  BitConverter.GetBytes(vv);                                 
-                            }
-                            else if(tp.FullName == "System.DateTime")
-                            {                                                                   
-                                var vv = (DateTime) v;
-                                blob =  BitConverter.GetBytes(vv.Ticks);                                                                                        
-                            }
-                            BlobEditForm bef = new BlobEditForm();
-                            bef.SetBytes(blob);
-                            bef.ShowDialog();  
-                            blob = null;
-                        }                            
-                    }                   
-                }                    
+            {
+                string kenner = FieldTypesStrings.BLOBKey;
+                string cl = "ID";
+                if(dgvResults.CurrentCell.Value.ToString().StartsWith(kenner))
+                {
+                    int inx1 = dgvResults.CurrentCell.Value.ToString().IndexOf("[");
+                    int inx2 = dgvResults.CurrentCell.Value.ToString().IndexOf("]");
+                    cl = dgvResults.CurrentCell.Value.ToString().Substring(inx1+1, inx2 - inx1 -1);
+                }
+                                       
+                string cmd = $@"SELECT {dgvResults.CurrentCell.OwningColumn.Name} FROM {_tableObject.Name} WHERE {cl} = '{dgvResults.CurrentRow.Cells[cl].Value}'";
+                
+                var fbCommand = new FbCommand(cmd, _dataConnection);
+                var fbDataReader = fbCommand.ExecuteReader();
+                if (fbDataReader.Read()) 
+                {
+                    var v = fbDataReader[0];
+                    AppStaticFunctionsClass.CreateAndShowBinaryEdit(v, _tableObject.Name, dgvResults.CurrentCell.OwningColumn.Name);
+                }
             }
             else if(e.ClickedItem == tsmiDate)
             {
                 DateTime dt = DateTime.Now;               
                 if (dt.GetType() == dgvResults.CurrentCell.ValueType)
                 {
-                    if (dgvResults.CurrentCell.Value.GetType().Name != "DBNull")
-                    {
-                        dt = (DateTime)dgvResults.CurrentCell.Value;
-                    }
+                    dt = (DateTime)dgvResults.CurrentCell.Value;
                     DateTimeForm df = new DateTimeForm(this.MdiParent,dt);
                     df.ShowDialog();
                     if(df.Value > DateTime.MinValue)
                     {
                         dgvResults.CurrentCell.Value = df.Value;
                         dgvResults.CurrentCell.ValueType = dt.GetType();
-                    }                    
+                    }
                 }
             }
             else if(e.ClickedItem == tsmiInsertGUID)
@@ -2172,11 +2108,6 @@ namespace FBExpert
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //object ob = dgvResults.CurrentCell.Value;
-        }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {       
             if(e.ColumnIndex < 0) return;
@@ -2185,7 +2116,6 @@ namespace FBExpert
             string tn = dgvResults.CurrentCell.ValueType.Name;
             tsmiDate.Visible = (tn == "DateTime")||((tn == "DateTime")&&(obt == "DBNull"));
             tsmiSetToNULL.Visible = IsNullable(dgvResults.Columns[e.ColumnIndex].Name);
-                       
             this.Text = $@"CellClick  {e.ColumnIndex} {e.RowIndex}{dgvResults.CurrentCell.Value} {dgvResults.CurrentCell.ValueType}";
         }
 
@@ -2214,7 +2144,6 @@ namespace FBExpert
                     if (string.IsNullOrEmpty(s)) continue;
                     cmd2.Add(s);
                 }
-
 
                 var ri = SQLcommand.ExecuteCommand(cmd2,false);
                 lblUsedMs.Text = ri.costs.ToString();
@@ -2397,9 +2326,9 @@ namespace FBExpert
 
         private void fctTableCreateDLL_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyData != (Keys.K | Keys.Control))) return;                                                           
-            if(ac != null) ac.Show();              
-            e.Handled = true;               
+            if ((e.KeyData != (Keys.K | Keys.Control))) return;
+            if(ac != null) ac.Show();
+            e.Handled = true;
         }
         
         private void hsDropIndex_Click(object sender, EventArgs e)
@@ -2424,7 +2353,6 @@ namespace FBExpert
 
         private void hsDropConstraint_Click(object sender, EventArgs e)
         {
-            //DropPKConstraint();
             if(tabControlConstraints.SelectedTab == tabPagePrimaryKeys)
             {
                DropPKConstraint();
@@ -2518,10 +2446,8 @@ namespace FBExpert
 
         private void fastObjectListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //hsDropField.Enabled = (lvFields.SelectedItems != null);
             hsDropField.Enabled = (fastObjectListView1.SelectedObject != null);
             if (fastObjectListView1.SelectedObject == null) return;
-            
             _actFieldObject = (TableFieldClass)fastObjectListView1.SelectedObject;
         }
 

@@ -5,9 +5,11 @@ namespace FBXpert.ValuesEditForms
 {
     public partial class BlobEditForm : Form
     {
-        public BlobEditForm()
+        public BlobEditForm(string datatype, string info)
         {
-            InitializeComponent();                              
+            InitializeComponent();        
+            this.Text = $@"Binary Editor, Data = {info}";   
+            this.label3.Text = $@"HEX ->{datatype}";
         }
         public void SetBytes(Byte[] values)
         {

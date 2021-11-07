@@ -98,6 +98,7 @@ namespace FBXpert.SQLView
             this.cbCommitEachCmd = new System.Windows.Forms.CheckBox();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.sfSQL = new System.Windows.Forms.SaveFileDialog();
+            this.hsLifeTime = new SeControlsLib.HotSpot();
             this.pnlUpper.SuspendLayout();
             this.bnConnection.SuspendLayout();
             this.pnlLower.SuspendLayout();
@@ -136,6 +137,7 @@ namespace FBXpert.SQLView
             // 
             this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlUpper.Controls.Add(this.hsLifeTime);
             this.pnlUpper.Controls.Add(this.bnConnection);
             this.pnlUpper.Controls.Add(this.lblCaption);
             this.pnlUpper.Controls.Add(this.hsClose);
@@ -143,18 +145,18 @@ namespace FBXpert.SQLView
             this.pnlUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlUpper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1210, 48);
+            this.pnlUpper.Size = new System.Drawing.Size(1210, 49);
             this.pnlUpper.TabIndex = 0;
             // 
             // bnConnection
             // 
             this.bnConnection.Controls.Add(this.cbConnection);
-            this.bnConnection.Dock = System.Windows.Forms.DockStyle.Right;
-            this.bnConnection.Location = new System.Drawing.Point(358, 0);
+            this.bnConnection.Dock = System.Windows.Forms.DockStyle.Left;
+            this.bnConnection.Location = new System.Drawing.Point(52, 0);
             this.bnConnection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bnConnection.Name = "bnConnection";
             this.bnConnection.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bnConnection.Size = new System.Drawing.Size(848, 44);
+            this.bnConnection.Size = new System.Drawing.Size(848, 45);
             this.bnConnection.TabIndex = 4;
             this.bnConnection.TabStop = false;
             this.bnConnection.Text = "Use connection";
@@ -210,8 +212,9 @@ namespace FBXpert.SQLView
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.F12;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(52, 44);
+            this.hsClose.Size = new System.Drawing.Size(52, 45);
             this.hsClose.TabIndex = 1;
             this.hsClose.Text = " (F12)";
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -260,6 +263,8 @@ namespace FBXpert.SQLView
         '\"',
         '\'',
         '\''};
+            this.fcbNotify.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\n^\\s*(case|default)\\s*[^:]*(" +
+    "?<range>:)\\s*(?<range>[^;]+);";
             this.fcbNotify.AutoScrollMinSize = new System.Drawing.Size(25, 12);
             this.fcbNotify.BackBrush = null;
             this.fcbNotify.CharHeight = 12;
@@ -314,10 +319,10 @@ namespace FBXpert.SQLView
             this.pnlCenter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlCenter.Controls.Add(this.splitScript);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 48);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 49);
             this.pnlCenter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1210, 346);
+            this.pnlCenter.Size = new System.Drawing.Size(1210, 345);
             this.pnlCenter.TabIndex = 2;
             // 
             // splitScript
@@ -335,7 +340,7 @@ namespace FBXpert.SQLView
             // 
             this.splitScript.Panel2.Controls.Add(this.gbCommandsDone);
             this.splitScript.Panel2.Controls.Add(this.pnlLeftCommands);
-            this.splitScript.Size = new System.Drawing.Size(1206, 342);
+            this.splitScript.Size = new System.Drawing.Size(1206, 341);
             this.splitScript.SplitterDistance = 500;
             this.splitScript.SplitterWidth = 5;
             this.splitScript.TabIndex = 2;
@@ -350,7 +355,7 @@ namespace FBXpert.SQLView
             this.tabScripting.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabScripting.Name = "tabScripting";
             this.tabScripting.SelectedIndex = 0;
-            this.tabScripting.Size = new System.Drawing.Size(500, 342);
+            this.tabScripting.Size = new System.Drawing.Size(500, 341);
             this.tabScripting.TabIndex = 18;
             this.tabScripting.SelectedIndexChanged += new System.EventHandler(this.tabScripting_SelectedIndexChanged);
             // 
@@ -361,7 +366,7 @@ namespace FBXpert.SQLView
             this.tabSQL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabSQL.Name = "tabSQL";
             this.tabSQL.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabSQL.Size = new System.Drawing.Size(492, 314);
+            this.tabSQL.Size = new System.Drawing.Size(492, 313);
             this.tabSQL.TabIndex = 0;
             this.tabSQL.Text = "Script";
             this.tabSQL.UseVisualStyleBackColor = true;
@@ -375,7 +380,7 @@ namespace FBXpert.SQLView
             this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 4);
             this.pnlFieldsCenter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlFieldsCenter.Name = "pnlFieldsCenter";
-            this.pnlFieldsCenter.Size = new System.Drawing.Size(486, 306);
+            this.pnlFieldsCenter.Size = new System.Drawing.Size(486, 305);
             this.pnlFieldsCenter.TabIndex = 2;
             // 
             // gbSQL
@@ -387,7 +392,7 @@ namespace FBXpert.SQLView
             this.gbSQL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQL.Name = "gbSQL";
             this.gbSQL.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQL.Size = new System.Drawing.Size(486, 306);
+            this.gbSQL.Size = new System.Drawing.Size(486, 305);
             this.gbSQL.TabIndex = 2;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL Commands";
@@ -397,11 +402,11 @@ namespace FBXpert.SQLView
             this.gbSQLText.Controls.Add(this.fcbSQL);
             this.gbSQLText.Controls.Add(this.gbScriptRightPanel);
             this.gbSQLText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSQLText.Location = new System.Drawing.Point(3, 59);
+            this.gbSQLText.Location = new System.Drawing.Point(3, 56);
             this.gbSQLText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLText.Name = "gbSQLText";
             this.gbSQLText.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLText.Size = new System.Drawing.Size(480, 243);
+            this.gbSQLText.Size = new System.Drawing.Size(480, 245);
             this.gbSQLText.TabIndex = 2;
             this.gbSQLText.TabStop = false;
             this.gbSQLText.Text = "SQL";
@@ -442,7 +447,7 @@ namespace FBXpert.SQLView
             this.fcbSQL.RightBracket = ')';
             this.fcbSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbSQL.ServiceColors")));
-            this.fcbSQL.Size = new System.Drawing.Size(381, 219);
+            this.fcbSQL.Size = new System.Drawing.Size(394, 221);
             this.fcbSQL.TabIndex = 2;
             this.fcbSQL.Text = "INSERT into";
             this.fcbSQL.WordWrap = true;
@@ -478,11 +483,11 @@ namespace FBXpert.SQLView
             this.gbScriptRightPanel.Controls.Add(this.hsPrepareCommands);
             this.gbScriptRightPanel.Controls.Add(this.hsRunSQLDirect);
             this.gbScriptRightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbScriptRightPanel.Location = new System.Drawing.Point(384, 20);
+            this.gbScriptRightPanel.Location = new System.Drawing.Point(397, 20);
             this.gbScriptRightPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbScriptRightPanel.Name = "gbScriptRightPanel";
             this.gbScriptRightPanel.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbScriptRightPanel.Size = new System.Drawing.Size(93, 219);
+            this.gbScriptRightPanel.Size = new System.Drawing.Size(80, 221);
             this.gbScriptRightPanel.TabIndex = 12;
             this.gbScriptRightPanel.TabStop = false;
             this.gbScriptRightPanel.Text = "Run";
@@ -506,7 +511,7 @@ namespace FBXpert.SQLView
             this.hsPrepareCommands.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsPrepareCommands.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsPrepareCommands.ImageToggleOnSelect = false;
-            this.hsPrepareCommands.Location = new System.Drawing.Point(3, 80);
+            this.hsPrepareCommands.Location = new System.Drawing.Point(3, 76);
             this.hsPrepareCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsPrepareCommands.Marked = false;
             this.hsPrepareCommands.MarkedColor = System.Drawing.Color.Teal;
@@ -516,8 +521,9 @@ namespace FBXpert.SQLView
             this.hsPrepareCommands.Name = "hsPrepareCommands";
             this.hsPrepareCommands.NonMarkedText = "Prepare SQL";
             this.hsPrepareCommands.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPrepareCommands.ShortcutNewline = false;
             this.hsPrepareCommands.ShowShortcut = false;
-            this.hsPrepareCommands.Size = new System.Drawing.Size(87, 62);
+            this.hsPrepareCommands.Size = new System.Drawing.Size(74, 58);
             this.hsPrepareCommands.TabIndex = 6;
             this.hsPrepareCommands.Text = "Prepare SQL";
             this.hsPrepareCommands.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -569,8 +575,9 @@ namespace FBXpert.SQLView
             this.hsRunSQLDirect.Name = "hsRunSQLDirect";
             this.hsRunSQLDirect.NonMarkedText = "Run direct";
             this.hsRunSQLDirect.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunSQLDirect.ShortcutNewline = false;
             this.hsRunSQLDirect.ShowShortcut = false;
-            this.hsRunSQLDirect.Size = new System.Drawing.Size(87, 60);
+            this.hsRunSQLDirect.Size = new System.Drawing.Size(74, 56);
             this.hsRunSQLDirect.TabIndex = 5;
             this.hsRunSQLDirect.Text = "Run direct";
             this.hsRunSQLDirect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -602,7 +609,7 @@ namespace FBXpert.SQLView
             this.pnlUpperSQL.Location = new System.Drawing.Point(3, 20);
             this.pnlUpperSQL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlUpperSQL.Name = "pnlUpperSQL";
-            this.pnlUpperSQL.Size = new System.Drawing.Size(480, 39);
+            this.pnlUpperSQL.Size = new System.Drawing.Size(480, 36);
             this.pnlUpperSQL.TabIndex = 1;
             // 
             // hsClearSQL
@@ -624,7 +631,7 @@ namespace FBXpert.SQLView
             this.hsClearSQL.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsClearSQL.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearSQL.ImageToggleOnSelect = true;
-            this.hsClearSQL.Location = new System.Drawing.Point(242, 0);
+            this.hsClearSQL.Location = new System.Drawing.Point(207, 0);
             this.hsClearSQL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsClearSQL.Marked = false;
             this.hsClearSQL.MarkedColor = System.Drawing.Color.Teal;
@@ -634,8 +641,9 @@ namespace FBXpert.SQLView
             this.hsClearSQL.Name = "hsClearSQL";
             this.hsClearSQL.NonMarkedText = "Clear";
             this.hsClearSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearSQL.ShortcutNewline = false;
             this.hsClearSQL.ShowShortcut = false;
-            this.hsClearSQL.Size = new System.Drawing.Size(76, 39);
+            this.hsClearSQL.Size = new System.Drawing.Size(65, 36);
             this.hsClearSQL.TabIndex = 35;
             this.hsClearSQL.Text = "Clear";
             this.hsClearSQL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -677,7 +685,7 @@ namespace FBXpert.SQLView
             this.hsSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsSave.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSave.ImageToggleOnSelect = false;
-            this.hsSave.Location = new System.Drawing.Point(131, 0);
+            this.hsSave.Location = new System.Drawing.Point(112, 0);
             this.hsSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsSave.Marked = false;
             this.hsSave.MarkedColor = System.Drawing.Color.Teal;
@@ -687,8 +695,9 @@ namespace FBXpert.SQLView
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "Save to file";
             this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShortcutNewline = false;
             this.hsSave.ShowShortcut = false;
-            this.hsSave.Size = new System.Drawing.Size(111, 39);
+            this.hsSave.Size = new System.Drawing.Size(95, 36);
             this.hsSave.TabIndex = 1;
             this.hsSave.Text = "Save to file";
             this.hsSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -740,8 +749,9 @@ namespace FBXpert.SQLView
             this.hsLoadScript.Name = "hsLoadScript";
             this.hsLoadScript.NonMarkedText = "Load from File";
             this.hsLoadScript.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadScript.ShortcutNewline = false;
             this.hsLoadScript.ShowShortcut = false;
-            this.hsLoadScript.Size = new System.Drawing.Size(131, 39);
+            this.hsLoadScript.Size = new System.Drawing.Size(112, 36);
             this.hsLoadScript.TabIndex = 4;
             this.hsLoadScript.Text = "Load from File";
             this.hsLoadScript.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -771,7 +781,7 @@ namespace FBXpert.SQLView
             this.tabPageFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageFiles.Name = "tabPageFiles";
             this.tabPageFiles.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageFiles.Size = new System.Drawing.Size(492, 314);
+            this.tabPageFiles.Size = new System.Drawing.Size(492, 313);
             this.tabPageFiles.TabIndex = 1;
             this.tabPageFiles.Text = "Files";
             this.tabPageFiles.UseVisualStyleBackColor = true;
@@ -784,7 +794,7 @@ namespace FBXpert.SQLView
             this.pnlOptionsCenter.Location = new System.Drawing.Point(3, 4);
             this.pnlOptionsCenter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlOptionsCenter.Name = "pnlOptionsCenter";
-            this.pnlOptionsCenter.Size = new System.Drawing.Size(486, 306);
+            this.pnlOptionsCenter.Size = new System.Drawing.Size(486, 305);
             this.pnlOptionsCenter.TabIndex = 22;
             // 
             // gbSQLFiles
@@ -797,7 +807,7 @@ namespace FBXpert.SQLView
             this.gbSQLFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLFiles.Name = "gbSQLFiles";
             this.gbSQLFiles.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLFiles.Size = new System.Drawing.Size(486, 306);
+            this.gbSQLFiles.Size = new System.Drawing.Size(486, 305);
             this.gbSQLFiles.TabIndex = 11;
             this.gbSQLFiles.TabStop = false;
             this.gbSQLFiles.Text = "SQL Files";
@@ -814,7 +824,7 @@ namespace FBXpert.SQLView
             this.lvFiles.Location = new System.Drawing.Point(3, 20);
             this.lvFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvFiles.Name = "lvFiles";
-            this.lvFiles.Size = new System.Drawing.Size(355, 183);
+            this.lvFiles.Size = new System.Drawing.Size(373, 189);
             this.lvFiles.TabIndex = 0;
             this.lvFiles.UseCompatibleStateImageBehavior = false;
             this.lvFiles.View = System.Windows.Forms.View.Details;
@@ -836,11 +846,11 @@ namespace FBXpert.SQLView
             this.gbSQLFilesRight.Controls.Add(this.hsPrepareSQLFromFiles);
             this.gbSQLFilesRight.Controls.Add(this.hsRunFilesDirect);
             this.gbSQLFilesRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbSQLFilesRight.Location = new System.Drawing.Point(358, 20);
+            this.gbSQLFilesRight.Location = new System.Drawing.Point(376, 20);
             this.gbSQLFilesRight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLFilesRight.Name = "gbSQLFilesRight";
             this.gbSQLFilesRight.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLFilesRight.Size = new System.Drawing.Size(125, 183);
+            this.gbSQLFilesRight.Size = new System.Drawing.Size(107, 189);
             this.gbSQLFilesRight.TabIndex = 14;
             this.gbSQLFilesRight.TabStop = false;
             // 
@@ -863,7 +873,7 @@ namespace FBXpert.SQLView
             this.hsPrepareSQLFromFiles.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsPrepareSQLFromFiles.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsPrepareSQLFromFiles.ImageToggleOnSelect = false;
-            this.hsPrepareSQLFromFiles.Location = new System.Drawing.Point(3, 79);
+            this.hsPrepareSQLFromFiles.Location = new System.Drawing.Point(3, 75);
             this.hsPrepareSQLFromFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsPrepareSQLFromFiles.Marked = false;
             this.hsPrepareSQLFromFiles.MarkedColor = System.Drawing.Color.Teal;
@@ -873,8 +883,9 @@ namespace FBXpert.SQLView
             this.hsPrepareSQLFromFiles.Name = "hsPrepareSQLFromFiles";
             this.hsPrepareSQLFromFiles.NonMarkedText = "Prepare SQL";
             this.hsPrepareSQLFromFiles.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPrepareSQLFromFiles.ShortcutNewline = false;
             this.hsPrepareSQLFromFiles.ShowShortcut = false;
-            this.hsPrepareSQLFromFiles.Size = new System.Drawing.Size(119, 55);
+            this.hsPrepareSQLFromFiles.Size = new System.Drawing.Size(101, 51);
             this.hsPrepareSQLFromFiles.TabIndex = 6;
             this.hsPrepareSQLFromFiles.Text = "Prepare SQL";
             this.hsPrepareSQLFromFiles.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -925,8 +936,9 @@ namespace FBXpert.SQLView
             this.hsRunFilesDirect.Name = "hsRunFilesDirect";
             this.hsRunFilesDirect.NonMarkedText = "Run file(s)";
             this.hsRunFilesDirect.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunFilesDirect.ShortcutNewline = false;
             this.hsRunFilesDirect.ShowShortcut = false;
-            this.hsRunFilesDirect.Size = new System.Drawing.Size(119, 59);
+            this.hsRunFilesDirect.Size = new System.Drawing.Size(101, 55);
             this.hsRunFilesDirect.TabIndex = 5;
             this.hsRunFilesDirect.Text = "Run file(s) direct";
             this.hsRunFilesDirect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -955,11 +967,11 @@ namespace FBXpert.SQLView
             this.gbAddFile.Controls.Add(this.hsAddBackupFile);
             this.gbAddFile.Controls.Add(this.hsRemoveBackupFile);
             this.gbAddFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbAddFile.Location = new System.Drawing.Point(3, 203);
+            this.gbAddFile.Location = new System.Drawing.Point(3, 209);
             this.gbAddFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbAddFile.Name = "gbAddFile";
             this.gbAddFile.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbAddFile.Size = new System.Drawing.Size(480, 99);
+            this.gbAddFile.Size = new System.Drawing.Size(480, 92);
             this.gbAddFile.TabIndex = 13;
             this.gbAddFile.TabStop = false;
             // 
@@ -968,10 +980,10 @@ namespace FBXpert.SQLView
             this.pnlSQLFileLower.Controls.Add(this.gbSQLLocation);
             this.pnlSQLFileLower.Controls.Add(this.gbOptionsFilesize);
             this.pnlSQLFileLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSQLFileLower.Location = new System.Drawing.Point(3, 45);
+            this.pnlSQLFileLower.Location = new System.Drawing.Point(3, 41);
             this.pnlSQLFileLower.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlSQLFileLower.Name = "pnlSQLFileLower";
-            this.pnlSQLFileLower.Size = new System.Drawing.Size(474, 50);
+            this.pnlSQLFileLower.Size = new System.Drawing.Size(474, 47);
             this.pnlSQLFileLower.TabIndex = 14;
             // 
             // gbSQLLocation
@@ -983,7 +995,7 @@ namespace FBXpert.SQLView
             this.gbSQLLocation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbSQLLocation.Name = "gbSQLLocation";
             this.gbSQLLocation.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbSQLLocation.Size = new System.Drawing.Size(353, 50);
+            this.gbSQLLocation.Size = new System.Drawing.Size(370, 47);
             this.gbSQLLocation.TabIndex = 2;
             this.gbSQLLocation.TabStop = false;
             this.gbSQLLocation.Text = "SQLFile";
@@ -994,7 +1006,7 @@ namespace FBXpert.SQLView
             this.txtSQLLocation.Location = new System.Drawing.Point(3, 20);
             this.txtSQLLocation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSQLLocation.Name = "txtSQLLocation";
-            this.txtSQLLocation.Size = new System.Drawing.Size(313, 23);
+            this.txtSQLLocation.Size = new System.Drawing.Size(335, 23);
             this.txtSQLLocation.TabIndex = 0;
             this.txtSQLLocation.TextChanged += new System.EventHandler(this.txtSQLLocation_TextChanged);
             // 
@@ -1017,7 +1029,7 @@ namespace FBXpert.SQLView
             this.hsLoad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsLoad.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoad.ImageToggleOnSelect = false;
-            this.hsLoad.Location = new System.Drawing.Point(316, 20);
+            this.hsLoad.Location = new System.Drawing.Point(338, 20);
             this.hsLoad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsLoad.Marked = false;
             this.hsLoad.MarkedColor = System.Drawing.Color.Teal;
@@ -1027,8 +1039,9 @@ namespace FBXpert.SQLView
             this.hsLoad.Name = "hsLoad";
             this.hsLoad.NonMarkedText = "";
             this.hsLoad.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoad.ShortcutNewline = false;
             this.hsLoad.ShowShortcut = false;
-            this.hsLoad.Size = new System.Drawing.Size(34, 26);
+            this.hsLoad.Size = new System.Drawing.Size(29, 23);
             this.hsLoad.TabIndex = 3;
             this.hsLoad.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoad.ToolTipActive = false;
@@ -1054,11 +1067,11 @@ namespace FBXpert.SQLView
             // 
             this.gbOptionsFilesize.Controls.Add(this.txtFileSize);
             this.gbOptionsFilesize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbOptionsFilesize.Location = new System.Drawing.Point(353, 0);
+            this.gbOptionsFilesize.Location = new System.Drawing.Point(370, 0);
             this.gbOptionsFilesize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbOptionsFilesize.Name = "gbOptionsFilesize";
             this.gbOptionsFilesize.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbOptionsFilesize.Size = new System.Drawing.Size(121, 50);
+            this.gbOptionsFilesize.Size = new System.Drawing.Size(104, 47);
             this.gbOptionsFilesize.TabIndex = 13;
             this.gbOptionsFilesize.TabStop = false;
             this.gbOptionsFilesize.Text = "Filesize (kb)";
@@ -1069,7 +1082,7 @@ namespace FBXpert.SQLView
             this.txtFileSize.Location = new System.Drawing.Point(3, 20);
             this.txtFileSize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFileSize.Name = "txtFileSize";
-            this.txtFileSize.Size = new System.Drawing.Size(115, 23);
+            this.txtFileSize.Size = new System.Drawing.Size(98, 23);
             this.txtFileSize.TabIndex = 1;
             this.txtFileSize.Text = "4096";
             // 
@@ -1090,7 +1103,7 @@ namespace FBXpert.SQLView
             this.hsAddBackupFile.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddBackupFile.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsAddBackupFile.ImageToggleOnSelect = true;
-            this.hsAddBackupFile.Location = new System.Drawing.Point(7, 7);
+            this.hsAddBackupFile.Location = new System.Drawing.Point(6, 7);
             this.hsAddBackupFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsAddBackupFile.Marked = false;
             this.hsAddBackupFile.MarkedColor = System.Drawing.Color.Teal;
@@ -1100,8 +1113,9 @@ namespace FBXpert.SQLView
             this.hsAddBackupFile.Name = "hsAddBackupFile";
             this.hsAddBackupFile.NonMarkedText = "";
             this.hsAddBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddBackupFile.ShortcutNewline = false;
             this.hsAddBackupFile.ShowShortcut = false;
-            this.hsAddBackupFile.Size = new System.Drawing.Size(52, 37);
+            this.hsAddBackupFile.Size = new System.Drawing.Size(45, 35);
             this.hsAddBackupFile.TabIndex = 11;
             this.hsAddBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddBackupFile.ToolTipActive = false;
@@ -1140,7 +1154,7 @@ namespace FBXpert.SQLView
             this.hsRemoveBackupFile.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveBackupFile.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
             this.hsRemoveBackupFile.ImageToggleOnSelect = true;
-            this.hsRemoveBackupFile.Location = new System.Drawing.Point(72, 7);
+            this.hsRemoveBackupFile.Location = new System.Drawing.Point(62, 7);
             this.hsRemoveBackupFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsRemoveBackupFile.Marked = false;
             this.hsRemoveBackupFile.MarkedColor = System.Drawing.Color.Teal;
@@ -1150,8 +1164,9 @@ namespace FBXpert.SQLView
             this.hsRemoveBackupFile.Name = "hsRemoveBackupFile";
             this.hsRemoveBackupFile.NonMarkedText = "";
             this.hsRemoveBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveBackupFile.ShortcutNewline = false;
             this.hsRemoveBackupFile.ShowShortcut = false;
-            this.hsRemoveBackupFile.Size = new System.Drawing.Size(52, 37);
+            this.hsRemoveBackupFile.Size = new System.Drawing.Size(45, 35);
             this.hsRemoveBackupFile.TabIndex = 12;
             this.hsRemoveBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveBackupFile.ToolTipActive = false;
@@ -1177,11 +1192,11 @@ namespace FBXpert.SQLView
             // 
             this.tabPagePreparedCommands.BackColor = System.Drawing.Color.Gainsboro;
             this.tabPagePreparedCommands.Controls.Add(this.lvCommands);
-            this.tabPagePreparedCommands.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePreparedCommands.Location = new System.Drawing.Point(4, 23);
             this.tabPagePreparedCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPagePreparedCommands.Name = "tabPagePreparedCommands";
             this.tabPagePreparedCommands.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPagePreparedCommands.Size = new System.Drawing.Size(492, 316);
+            this.tabPagePreparedCommands.Size = new System.Drawing.Size(421, 292);
             this.tabPagePreparedCommands.TabIndex = 2;
             this.tabPagePreparedCommands.Text = "Prepared commands";
             // 
@@ -1198,7 +1213,7 @@ namespace FBXpert.SQLView
             this.lvCommands.Location = new System.Drawing.Point(3, 4);
             this.lvCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvCommands.Name = "lvCommands";
-            this.lvCommands.Size = new System.Drawing.Size(486, 308);
+            this.lvCommands.Size = new System.Drawing.Size(415, 284);
             this.lvCommands.TabIndex = 4;
             this.lvCommands.UseCompatibleStateImageBehavior = false;
             this.lvCommands.View = System.Windows.Forms.View.Details;
@@ -1229,11 +1244,11 @@ namespace FBXpert.SQLView
             this.gbCommandsDone.Controls.Add(this.fcbCommands);
             this.gbCommandsDone.Controls.Add(this.pnlCommandsUpper);
             this.gbCommandsDone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbCommandsDone.Location = new System.Drawing.Point(178, 0);
+            this.gbCommandsDone.Location = new System.Drawing.Point(153, 0);
             this.gbCommandsDone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbCommandsDone.Name = "gbCommandsDone";
             this.gbCommandsDone.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbCommandsDone.Size = new System.Drawing.Size(523, 342);
+            this.gbCommandsDone.Size = new System.Drawing.Size(548, 341);
             this.gbCommandsDone.TabIndex = 2;
             this.gbCommandsDone.TabStop = false;
             this.gbCommandsDone.Text = "Commands ";
@@ -1266,14 +1281,14 @@ namespace FBXpert.SQLView
             this.fcbCommands.IsReplaceMode = false;
             this.fcbCommands.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbCommands.LeftBracket = '(';
-            this.fcbCommands.Location = new System.Drawing.Point(3, 59);
+            this.fcbCommands.Location = new System.Drawing.Point(3, 56);
             this.fcbCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fcbCommands.Name = "fcbCommands";
             this.fcbCommands.Paddings = new System.Windows.Forms.Padding(0);
             this.fcbCommands.RightBracket = ')';
             this.fcbCommands.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbCommands.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbCommands.ServiceColors")));
-            this.fcbCommands.Size = new System.Drawing.Size(517, 279);
+            this.fcbCommands.Size = new System.Drawing.Size(542, 281);
             this.fcbCommands.TabIndex = 1;
             this.fcbCommands.Text = "INSERT into";
             this.fcbCommands.WordWrap = true;
@@ -1291,7 +1306,7 @@ namespace FBXpert.SQLView
             this.pnlCommandsUpper.Location = new System.Drawing.Point(3, 20);
             this.pnlCommandsUpper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlCommandsUpper.Name = "pnlCommandsUpper";
-            this.pnlCommandsUpper.Size = new System.Drawing.Size(517, 39);
+            this.pnlCommandsUpper.Size = new System.Drawing.Size(542, 36);
             this.pnlCommandsUpper.TabIndex = 2;
             // 
             // hsRunAllCommands
@@ -1313,7 +1328,7 @@ namespace FBXpert.SQLView
             this.hsRunAllCommands.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsRunAllCommands.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsRunAllCommands.ImageToggleOnSelect = false;
-            this.hsRunAllCommands.Location = new System.Drawing.Point(168, 0);
+            this.hsRunAllCommands.Location = new System.Drawing.Point(243, 0);
             this.hsRunAllCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsRunAllCommands.Marked = false;
             this.hsRunAllCommands.MarkedColor = System.Drawing.Color.Teal;
@@ -1323,8 +1338,9 @@ namespace FBXpert.SQLView
             this.hsRunAllCommands.Name = "hsRunAllCommands";
             this.hsRunAllCommands.NonMarkedText = "Run all commands";
             this.hsRunAllCommands.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunAllCommands.ShortcutNewline = false;
             this.hsRunAllCommands.ShowShortcut = false;
-            this.hsRunAllCommands.Size = new System.Drawing.Size(125, 39);
+            this.hsRunAllCommands.Size = new System.Drawing.Size(107, 36);
             this.hsRunAllCommands.TabIndex = 37;
             this.hsRunAllCommands.Text = "Run all commands";
             this.hsRunAllCommands.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1366,7 +1382,7 @@ namespace FBXpert.SQLView
             this.hsRunActualCommand.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsRunActualCommand.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsRunActualCommand.ImageToggleOnSelect = false;
-            this.hsRunActualCommand.Location = new System.Drawing.Point(293, 0);
+            this.hsRunActualCommand.Location = new System.Drawing.Point(350, 0);
             this.hsRunActualCommand.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsRunActualCommand.Marked = false;
             this.hsRunActualCommand.MarkedColor = System.Drawing.Color.Teal;
@@ -1376,8 +1392,9 @@ namespace FBXpert.SQLView
             this.hsRunActualCommand.Name = "hsRunActualCommand";
             this.hsRunActualCommand.NonMarkedText = "Run actual command";
             this.hsRunActualCommand.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunActualCommand.ShortcutNewline = false;
             this.hsRunActualCommand.ShowShortcut = false;
-            this.hsRunActualCommand.Size = new System.Drawing.Size(146, 39);
+            this.hsRunActualCommand.Size = new System.Drawing.Size(125, 36);
             this.hsRunActualCommand.TabIndex = 36;
             this.hsRunActualCommand.Text = "Run actual command";
             this.hsRunActualCommand.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1403,7 +1420,7 @@ namespace FBXpert.SQLView
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 13);
+            this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 15);
             this.label1.TabIndex = 35;
@@ -1428,7 +1445,7 @@ namespace FBXpert.SQLView
             this.hsClearCmds.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsClearCmds.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearCmds.ImageToggleOnSelect = true;
-            this.hsClearCmds.Location = new System.Drawing.Point(439, 0);
+            this.hsClearCmds.Location = new System.Drawing.Point(475, 0);
             this.hsClearCmds.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hsClearCmds.Marked = false;
             this.hsClearCmds.MarkedColor = System.Drawing.Color.Teal;
@@ -1438,8 +1455,9 @@ namespace FBXpert.SQLView
             this.hsClearCmds.Name = "hsClearCmds";
             this.hsClearCmds.NonMarkedText = "Clear";
             this.hsClearCmds.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearCmds.ShortcutNewline = false;
             this.hsClearCmds.ShowShortcut = false;
-            this.hsClearCmds.Size = new System.Drawing.Size(78, 39);
+            this.hsClearCmds.Size = new System.Drawing.Size(67, 36);
             this.hsClearCmds.TabIndex = 34;
             this.hsClearCmds.Text = "Clear";
             this.hsClearCmds.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1464,10 +1482,10 @@ namespace FBXpert.SQLView
             // 
             // txtClear
             // 
-            this.txtClear.Location = new System.Drawing.Point(116, 10);
+            this.txtClear.Location = new System.Drawing.Point(99, 9);
             this.txtClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtClear.Name = "txtClear";
-            this.txtClear.Size = new System.Drawing.Size(46, 23);
+            this.txtClear.Size = new System.Drawing.Size(40, 23);
             this.txtClear.TabIndex = 10;
             this.txtClear.Text = "10000";
             // 
@@ -1480,7 +1498,7 @@ namespace FBXpert.SQLView
             this.pnlLeftCommands.Location = new System.Drawing.Point(0, 0);
             this.pnlLeftCommands.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlLeftCommands.Name = "pnlLeftCommands";
-            this.pnlLeftCommands.Size = new System.Drawing.Size(178, 342);
+            this.pnlLeftCommands.Size = new System.Drawing.Size(153, 341);
             this.pnlLeftCommands.TabIndex = 3;
             // 
             // cbClearBeforePreparing
@@ -1488,7 +1506,7 @@ namespace FBXpert.SQLView
             this.cbClearBeforePreparing.AutoSize = true;
             this.cbClearBeforePreparing.Checked = true;
             this.cbClearBeforePreparing.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbClearBeforePreparing.Location = new System.Drawing.Point(6, 52);
+            this.cbClearBeforePreparing.Location = new System.Drawing.Point(5, 49);
             this.cbClearBeforePreparing.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbClearBeforePreparing.Name = "cbClearBeforePreparing";
             this.cbClearBeforePreparing.Size = new System.Drawing.Size(150, 19);
@@ -1501,7 +1519,7 @@ namespace FBXpert.SQLView
             this.cbReopenConnectionEachCommand.AutoSize = true;
             this.cbReopenConnectionEachCommand.Checked = true;
             this.cbReopenConnectionEachCommand.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReopenConnectionEachCommand.Location = new System.Drawing.Point(7, 79);
+            this.cbReopenConnectionEachCommand.Location = new System.Drawing.Point(6, 74);
             this.cbReopenConnectionEachCommand.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbReopenConnectionEachCommand.Name = "cbReopenConnectionEachCommand";
             this.cbReopenConnectionEachCommand.Size = new System.Drawing.Size(130, 19);
@@ -1514,7 +1532,7 @@ namespace FBXpert.SQLView
             this.cbCommitEachCmd.AutoSize = true;
             this.cbCommitEachCmd.Checked = true;
             this.cbCommitEachCmd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCommitEachCmd.Location = new System.Drawing.Point(7, 105);
+            this.cbCommitEachCmd.Location = new System.Drawing.Point(6, 98);
             this.cbCommitEachCmd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbCommitEachCmd.Name = "cbCommitEachCmd";
             this.cbCommitEachCmd.Size = new System.Drawing.Size(154, 19);
@@ -1532,6 +1550,57 @@ namespace FBXpert.SQLView
             // sfSQL
             // 
             this.sfSQL.Filter = "SQL|*.SQL|All|*.*";
+            // 
+            // hsLifeTime
+            // 
+            this.hsLifeTime.BackColor = System.Drawing.Color.OrangeRed;
+            this.hsLifeTime.BackColorHover = System.Drawing.Color.OrangeRed;
+            this.hsLifeTime.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsLifeTime.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsLifeTime.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsLifeTime.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsLifeTime.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsLifeTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsLifeTime.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.hsLifeTime.FlatAppearance.BorderSize = 2;
+            this.hsLifeTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLifeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsLifeTime.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsLifeTime.Image = null;
+            this.hsLifeTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsLifeTime.ImageHover = null;
+            this.hsLifeTime.ImageToggleOnSelect = true;
+            this.hsLifeTime.Location = new System.Drawing.Point(900, 0);
+            this.hsLifeTime.Marked = true;
+            this.hsLifeTime.MarkedColor = System.Drawing.Color.Lime;
+            this.hsLifeTime.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsLifeTime.MarkedText = "";
+            this.hsLifeTime.MarkMode = true;
+            this.hsLifeTime.Name = "hsLifeTime";
+            this.hsLifeTime.NonMarkedText = "";
+            this.hsLifeTime.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLifeTime.ShortcutNewline = false;
+            this.hsLifeTime.ShowShortcut = false;
+            this.hsLifeTime.Size = new System.Drawing.Size(87, 45);
+            this.hsLifeTime.TabIndex = 35;
+            this.hsLifeTime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsLifeTime.ToolTipActive = false;
+            this.hsLifeTime.ToolTipAutomaticDelay = 500;
+            this.hsLifeTime.ToolTipAutoPopDelay = 5000;
+            this.hsLifeTime.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsLifeTime.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsLifeTime.ToolTipFor4ContextMenu = true;
+            this.hsLifeTime.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsLifeTime.ToolTipInitialDelay = 500;
+            this.hsLifeTime.ToolTipIsBallon = false;
+            this.hsLifeTime.ToolTipOwnerDraw = false;
+            this.hsLifeTime.ToolTipReshowDelay = 100;
+            this.hsLifeTime.ToolTipShowAlways = false;
+            this.hsLifeTime.ToolTipText = "";
+            this.hsLifeTime.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsLifeTime.ToolTipTitle = "";
+            this.hsLifeTime.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsLifeTime.UseVisualStyleBackColor = false;
             // 
             // ScriptingForm
             // 
@@ -1657,5 +1726,6 @@ namespace FBXpert.SQLView
         private System.Windows.Forms.GroupBox gbSQLFilesRight;
         private SeControlsLib.HotSpot hsPrepareSQLFromFiles;
         private SeControlsLib.HotSpot hsRunFilesDirect;
+        private SeControlsLib.HotSpot hsLifeTime;
     }
 }

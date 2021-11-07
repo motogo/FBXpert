@@ -72,6 +72,17 @@ namespace FBXpert
             fctMessages.ScrollLeft();
         }
 
+        public void SetControlSizes()
+        {
+            pnlMessagesUpper.Height             = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height                = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height             = AppSizeConstants.UpperFormBandHeight;
+            pnlInfoUpper.Height                 = AppSizeConstants.UpperFormBandHeight;
+            pnlProcedureAttributesUpper.Height  = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height                  = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height                 = AppSizeConstants.UpperFormBandHeight;
+        }
+
         public void MakeSQL()
         {
             
@@ -104,7 +115,6 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " DROP CONSTRAINT " + ForeignKeyObject.Name);
             sb.Append(";");
-            StringBuilder sbs = new StringBuilder();
             sb.Append(Environment.NewLine);
             sb.Append(SQLPatterns.Commit);
             SQLScript.Add(sb.ToString());
@@ -165,7 +175,6 @@ namespace FBXpert
                 }
             }
             sb.Append(";");
-            StringBuilder sbs = new StringBuilder();
             sb.Append(Environment.NewLine);
             sb.Append(SQLPatterns.Commit);
             SQLScript.Add(sb.ToString());
@@ -234,11 +243,7 @@ namespace FBXpert
                     sb.Append($@"){Environment.NewLine}USING INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
                 }
             }
-
-
-            sb.Append(";");
-
-            StringBuilder sbs = new StringBuilder();           
+            sb.Append(";");  
             sb.Append(Environment.NewLine);
             sb.Append($@"{SQLPatterns.Commit}");
             SQLScript.Add(sb.ToString());           
@@ -445,6 +450,7 @@ namespace FBXpert
 
         private void ForeignKeyForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataFilled = false;
 

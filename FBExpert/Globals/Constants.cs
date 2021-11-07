@@ -21,8 +21,19 @@
         public static readonly string NOT_NULL = "NOT NULL";
         public static readonly string NULL = "NULL";
         public static readonly string IS = "IS";
-        
+    }
+
+    public static class AppSizeConstants
+    {
+        public static readonly int DatagridRowHeight = 30;
+        public static readonly int UpperFormBandHeight = 50;
+    }
+    public static class FieldTypesStrings
+    {
+        public static readonly string VAR = "VAR";
+        public static readonly string TIME = "TIME";
+        public static readonly string DATE= "DATE";
+        public static readonly string BLOBKey = "<BLOB>";
 
     }
-    
 }

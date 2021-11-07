@@ -67,6 +67,15 @@ namespace FBXpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Manage Constraints");
         }
 
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
 
         public void EditToData()
         {
@@ -271,6 +280,7 @@ namespace FBXpert
         
         private void NotNullForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
             txtConstraintName.Text = initialConstraintName;

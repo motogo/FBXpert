@@ -19,8 +19,7 @@ namespace FBXpert
         UserDefinedFunctionClass OldUserDefinedFunctionObject = null;
         DBRegistrationClass _dbReg = null;
         AutocompleteClass ac = null;
-        TreeNode Tn = null;
-        ContextMenuStrip Cm = null;
+        
         NotifiesClass _localNotify = new NotifiesClass();
         int messages_count = 0;
         int error_count = 0;
@@ -29,8 +28,7 @@ namespace FBXpert
         {
             InitializeComponent();
             this.MdiParent = parent;
-            Cm = cm;
-            Tn = tn;
+            
             
             try
             {
@@ -127,16 +125,24 @@ namespace FBXpert
                 var pci = new ParameterListItem();
                 pci.direction = eParameterTypDirection.dout;
                 pci.pc = pc;
-                lvi.Tag = pci;                              
+                lvi.Tag = pci;
             }
         }
         public void EditToData()
         {
             
         }
-               
+
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height     = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+        }
+
         private void UserDefinedFunctionForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
             SetEnables();            
@@ -153,7 +159,6 @@ namespace FBXpert
         
         private void Create()
         {
-            //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
 

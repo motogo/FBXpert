@@ -9,11 +9,13 @@ using FBXpert.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
-using MessageFormLibrary;
+using SEMessageBoxLibrary;
+using SESpaltenEditor;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -29,7 +31,7 @@ namespace SQLView
         private eColorDesigns _appDesign = eColorDesigns.Gray;
         private eColorDesigns _developDesign = eColorDesigns.Gray;
         private readonly DBRegistrationClass _dbRegOrg = null;
-        private readonly DBRegistrationClass _dbrRegLocal = null;
+        private DBRegistrationClass _dbrRegLocal = null;
         private string _cmd = string.Empty;
         private int _cmdDone = 0;
         private int _cmdError = 0;
@@ -53,6 +55,7 @@ namespace SQLView
             _appDesign = appDesign;
             _developDesign = developDesign;
             InitializeComponent();
+            FormEvents.ClearEvents(this);
             if (cbErrors.Checked) SQLnotify.Register4Error(ErrorRaised);
             if (cbMeldungen.Checked) SQLnotify.Register4Info(InfoRaised);
                         
@@ -67,6 +70,7 @@ namespace SQLView
             cbTestlauf.Visible = testMode;
             LanguageChanged();
             LanguageClass.Instance.RegisterChangeNotifiy(OnRaiseLanguageChangedHandler);
+            gridStore = new GridStoreClass(dgvResults);
         }
 
         private void OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
@@ -151,29 +155,7 @@ namespace SQLView
             }
         }
 
-        private void ExecSql()
-        {
-            ExecSqlTh(HistoryMode.NoHistory, (string[])txtSQL.Lines);
-        }
-
-        private string GetTerm(string[] cmds)
-        {
-            string term = "";
-
-            for (int i = cmds.Length - 1; i > 0; i--)
-            {
-                if (cmds[i].Trim().Length > 0)
-                {
-                    term = cmds[i].Trim().Substring(cmds[i].Trim().Length - 1, 1);
-                    break;
-                }
-            }
-            if (term.Trim().Length <= 0)
-            {
-                return (";");
-            }
-            return (term);
-        }
+        
 
         private string HistoryFile
         {
@@ -182,8 +164,6 @@ namespace SQLView
                 return $@"{ApplicationPathClass.Instance.ApplicationPath}\SQL\{_dbRegOrg.Alias}_SQLHistoryData.db";
             }
         }
-
-       
 
         private bool AddToHistory(HistoryMode toHistory, string cmd)
         {
@@ -295,7 +275,6 @@ namespace SQLView
             dsResults = ri.dataSet;
             bsResults.DataMember = "Table";
         }
-
 
         private SQLCommandsReturnInfoClass ExecSql(HistoryMode toHistory)
         {
@@ -496,10 +475,10 @@ namespace SQLView
             txtSQL.SaveToFile(sfdSQL.FileName, Encoding.UTF8);
         }
 
-        public bool TestOpen(string databaseString, DBRegistrationClass dbReg)
+        public bool TestOpen(DBRegistrationClass dbReg)
         {            
-            string server = dbReg.MakeServerFromText(txtDatabase.Text);
-            string path = dbReg.MakeDatabasepathFromText(txtDatabase.Text);
+            string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
+            string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
 
             _sqLcommand.ReplaceConnection(server, path);
             _dbrRegLocal.Server = server;
@@ -512,16 +491,38 @@ namespace SQLView
             hsLifeTime.Text = lifeTime;
             return (lifeTime != "-1");
         }
+
+        public void SetControlSizes()
+        {
+            pnlResultUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlErrorsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlHistoryUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlResultUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlRelpacesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlPlanUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLDataUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLSchemeUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlPerformanceUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
+            FormEvents.DisableEvents(this, $@"SQLViewForm_Load(object {sender}, EventArgs e)");
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             txtSQL.Clear();
             UserStart();
            
             EditMode(cbEditMode.Checked);
+            AppStaticFunctionsClass.GetDatabases(cbConnection, _dbrRegLocal);
+            
             this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
-            txtDatabase.Text = _dbrRegLocal.GetFullDatabasePath();
-            TestOpen(txtDatabase.Text, _dbrRegLocal);
+            //txtDatabase.Text = _dbrRegLocal.GetFullDatabasePath();
+
+            TestOpen(_dbrRegLocal);
             hsBreak.Enabled = false;
 
             LoadHistory(_lastSort);
@@ -531,6 +532,7 @@ namespace SQLView
             txtSQL.Focus();
             SetEncoding();
             SetAutocompeteObjects(_tables);
+            FormEvents.EnableEvents(this);
         }
 
         public void SetAutocompeteObjects(List<TableClass> tables)
@@ -898,7 +900,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             if (!hsLifeTime.Marked)
             {
                 //Datenbank wurde geändert, neu einloggen -> bei fehler return
-                if (!TestOpen(txtDatabase.Text, _dbrRegLocal)) return;
+                if (!TestOpen(_dbrRegLocal)) return;
             }
 
             stopwatch.Restart();
@@ -1155,12 +1157,75 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void dgvResults_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            //int rh = StaticFunctionsClass.ToIntDef(txtRowHeight.Text, dgvResults.RowTemplate.Height);
-            foreach (DataGridViewRow x in dgvResults.Rows)
+            if (cbRowManually.Checked)
             {
-                x.MinimumHeight = rh;
+                foreach (DataGridViewRow x in dgvResults.Rows)
+                {
+                    x.MinimumHeight = rh;
+                }
+            }
+            if (e == null) return;
+            if (e.Value == null || e.RowIndex < 0) return;
+            if (dgvResults.CurrentCell == null) return;
+            if (e.RowIndex >= 0)
+            {
+                if ((e.State & DataGridViewElementStates.Displayed) > 0)
+                {
+                    object o = e.Value;
+                    var os = o.GetType();
+                    if (os == typeof(System.Byte[]))
+                    {
+                        //Brush brf = ((e.State & DataGridViewElementStates.Selected) > 0) ? new SolidBrush(e.CellStyle.SelectionBackColor) : new SolidBrush(e.CellStyle.BackColor);
+                        Brush brfs = ((e.State & DataGridViewElementStates.Selected) > 0) ? Brushes.White : Brushes.Black;
+                        Font ft = e.CellStyle.Font;
+
+                        Rectangle oldCellBounds = new Rectangle(e.CellBounds.X + 1, e.CellBounds.Y, e.CellBounds.Width - 2, e.CellBounds.Height - 2);
+                        //Rectangle oldCellBounds2 = new Rectangle(e.CellBounds.X, e.CellBounds.Y - 1, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
+
+                        try
+                        {
+                            Rectangle newRect;
+
+                            if (e.Value == null || e.RowIndex < 0) return;
+                            newRect = new Rectangle(e.CellBounds.X + 1,
+                                e.CellBounds.Y + 1, e.CellBounds.Width - 4,
+                                e.CellBounds.Height - 4);
+
+                            using (Brush gridBrush = new SolidBrush(this.dgvResults.GridColor), backColorBrush = new SolidBrush(e.CellStyle.BackColor))
+                            {
+                                using (Pen gridLinePen = new Pen(gridBrush))
+                                {
+                                    e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+                                    if ((e.ColumnIndex == dgvResults.CurrentCell.ColumnIndex) && (e.RowIndex == dgvResults.CurrentCell.RowIndex))
+                                    {
+                                        e.PaintBackground(e.CellBounds, true);
+                                    }
+
+                                    e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left,
+                                        e.CellBounds.Bottom - 1, e.CellBounds.Right - 1,
+                                        e.CellBounds.Bottom - 1);
+                                    e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1,
+                                        e.CellBounds.Top, e.CellBounds.Right - 1,
+                                        e.CellBounds.Bottom);
+
+                                    e.Graphics.DrawString(FieldTypesStrings.BLOBKey, ft, brfs, oldCellBounds.X + 2, oldCellBounds.Y + 4, StringFormat.GenericDefault);
+                                    e.Handled = true;
+                                }
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            // _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> dataGridView1_CellPainting()", ex));
+                            MessageEventArgs ma = new MessageEventArgs(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> dataGridView1_CellPainting()", ex), "", null, eLevel.error);
+
+                            NotifiesClass.Instance.Notify.OnRaiseError(ma);
+                        }
+                    }
+                }
             }
         }
+
         int rh = 22;
         private void txtRowHeight_TextChanged(object sender, EventArgs e)
         {
@@ -1185,7 +1250,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void hsLifeTime_Click(object sender, EventArgs e)
         {
-            TestOpen(txtDatabase.Text, _dbrRegLocal);
+            TestOpen(_dbrRegLocal);
         }
 
         private void txtDatabase_TextChanged(object sender, EventArgs e)
@@ -1660,6 +1725,117 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 if (rt != null) rt.Show();
                 e.Handled = true;
+            }
+        }
+        private void SpaltenNotify_SpaltenOnRaiseInfoHandler(object sender, MessageEventArgs k)
+        {
+            if (k.Key.ToString() == SESpaltenEditor.Consts.ChangeCheckKey)
+            {
+                int n = StaticFunctionsClass.ToIntDef(k.Meldung, -1);
+                if ((n >= 0) && (dgvResults.Columns.Count > n))
+                {
+                    dgvResults.Columns[n].Visible = (bool)k.Data;
+                }
+            }
+            else if (k.Key.ToString() == SESpaltenEditor.Consts.SwapItemKey)
+            {
+                //Columns swapped
+                Point pt = (Point)k.Data;
+                int d1 = dgvResults.Columns[pt.X].DisplayIndex;
+                int d2 = dgvResults.Columns[pt.Y].DisplayIndex;
+
+                dgvResults.Columns[pt.X].DisplayIndex = d2;
+                dgvResults.Columns[pt.Y].DisplayIndex = d1;
+
+            }
+            else if (k.Key.ToString() == SESpaltenEditor.Consts.CloseForm)
+            {
+                //gridStore.StoreGridDesign();
+            }
+        }
+
+        private GridStoreClass gridStore;
+        public void SpaltenEdit()
+        {
+            var sp = SPALTENEditForm.Instance(this, null, true);
+            sp.Notify.Register4Info(SpaltenNotify_SpaltenOnRaiseInfoHandler);
+            sp.SetGrid(dgvResults, "SQLSelect", "SQLSelect");
+            sp.ShowDialog();
+        }
+        private void cmdDATA_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == tsmiSpaltenEdit)
+            {
+                SpaltenEdit();
+            }
+            if (dgvResults.CurrentCell == null) return;
+            if (dgvResults.CurrentCell.Value.GetType() == typeof(System.DBNull)) return;
+
+            if (e.ClickedItem == tsmiSetToNULL)
+            {
+                dgvResults.BeginEdit(false);
+                dgvResults.CurrentCell.Value =  (dgvResults.CurrentCell.ValueType == typeof(System.String))  ? dgvResults.CurrentCell.DefaultNewRowValue : System.DBNull.Value;
+                dgvResults.EndEdit();
+                dgvResults.InvalidateCell(dgvResults.CurrentCell);
+            }
+            else if (e.ClickedItem == tsmiReadBLOB)
+            {
+                var v = dgvResults.CurrentCell.Value;
+                AppStaticFunctionsClass.CreateAndShowBinaryEdit(v, "SQL View", dgvResults.CurrentCell.OwningColumn.Name);
+            }
+            else if (e.ClickedItem == tsmiDate)
+            {
+                if (dgvResults.CurrentCell.ValueType == typeof(System.DateTime))
+                {
+                    DateTime dt = (DateTime)dgvResults.CurrentCell.Value;
+                    DateTimeForm df = new DateTimeForm(this.MdiParent, dt);
+                    df.ShowDialog();
+                    if (df.Value > DateTime.MinValue)
+                    {
+                        dgvResults.CurrentCell.Value = df.Value;
+                        dgvResults.CurrentCell.ValueType = dt.GetType();
+                    }
+                }
+            }
+            else if (e.ClickedItem == tsmiInsertGUID)
+            {
+                string guid = StaticFunctionsClass.GetNewGUID();
+                dgvResults.CurrentCell.Value = guid;
+                dgvResults.CurrentCell.ValueType = guid.GetType();
+            }
+            else if (e.ClickedItem == tsmiInsertGUIDHEX)
+            {
+                string guid = StaticFunctionsClass.GetNewGUIDHEX();
+                dgvResults.CurrentCell.Value = guid;
+                dgvResults.CurrentCell.ValueType = guid.GetType();
+            }
+            else if (e.ClickedItem == tsmiInsertNow)
+            {
+                DateTime dt = DateTime.Now;
+                dgvResults.CurrentCell.Value = dt;
+                dgvResults.CurrentCell.ValueType = dt.GetType();
+            }
+            else if (e.ClickedItem == tsmiInsert0)
+            {
+                int x = 0;
+                dgvResults.CurrentCell.Value = x;
+                dgvResults.CurrentCell.ValueType = x.GetType();
+            }
+            else if (e.ClickedItem == tsmiInsert1)
+            {
+                int x = 1;
+                dgvResults.CurrentCell.Value = x;
+                dgvResults.CurrentCell.ValueType = x.GetType();
+            }
+        }
+
+        private void cbConnection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (FormEvents.IsActive(this, "cbConnection_SelectedIndexChan->" + ((Control)sender).Name.ToString()))
+            {
+                if (cbConnection.SelectedItem == null) return;
+                _dbrRegLocal = (DBRegistrationClass)cbConnection.SelectedItem;
+                TestOpen(_dbrRegLocal);
             }
         }
     }

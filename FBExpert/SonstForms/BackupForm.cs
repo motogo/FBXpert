@@ -1,9 +1,10 @@
 ﻿using BasicClassLibrary;
+using BasicFormClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert.Globals;
 using FormInterfaces;
-using MessageFormLibrary;
+using SEMessageBoxLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -143,9 +144,8 @@ namespace FBXpert
         
         private void Backup_ServiceOutput(object sender, FirebirdSql.Data.Services.ServiceOutputEventArgs e)
         {
-           
             n++;
-            StaticFunctionsClass.SetDoubleBuffered(lvBackupMessage);
+            StaticFormsFunctionsClass.SetDoubleBuffered(lvBackupMessage);
         
             lvBackupMessage.BeginUpdate();
             string[] m = {n.ToString(), e.Message, StaticFunctionsClass.DateTimeNowStr() };
@@ -163,7 +163,7 @@ namespace FBXpert
         private void Restore_ServiceOutput(object sender, FirebirdSql.Data.Services.ServiceOutputEventArgs e)
         {
             n++;
-            StaticFunctionsClass.SetDoubleBuffered(lvBackupMessage);
+            StaticFormsFunctionsClass.SetDoubleBuffered(lvBackupMessage);
             lvBackupMessage.BeginUpdate();
 
             string[] m = { n.ToString(), e.Message, StaticFunctionsClass.DateTimeNowStr() };
@@ -268,10 +268,9 @@ namespace FBXpert
         private void hsRemoveFile_Click(object sender, EventArgs e)
         {
             if(lvBackup.SelectedItems.Count <= 0) return;
-            
             ListViewItem lvi = lvBackup.SelectedItems[0];
             lvi = null;
-            lvBackup.SelectedItems[0].Remove();            
+            lvBackup.SelectedItems[0].Remove();
         }
 
         private void hsAddRestoreFile_Click(object sender, EventArgs e)

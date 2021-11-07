@@ -834,7 +834,7 @@ namespace FBExpert
             openFileDialog1.Filter = "CSV|*.csv|ALL|*.*";
             openFileDialog1.FileName = string.Empty;
             openFileDialog1.Title = "Reading CSV file, converting to XML";
-            Encoding enc = GetCharsetEncodingFromName(cbEncodingCSV.Text);
+            //Encoding enc = GetCharsetEncodingFromName(cbEncodingCSV.Text);
            
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1060,7 +1060,7 @@ namespace FBExpert
                 txt.Text = txtSQLAll.SelectedText;
                 foreach(string tx in txt.Lines)
                 {
-                    var cmddone = ExecSql($@"{tx}");
+                    ExecSql($@"{tx}");
                 }
 
             }

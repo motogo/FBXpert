@@ -32,9 +32,9 @@ namespace FBXpert
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FunctionForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlCenter = new System.Windows.Forms.Panel();
@@ -44,7 +44,7 @@ namespace FBXpert
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gbGenDescription = new System.Windows.Forms.GroupBox();
             this.fctGenDescription = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlProcedureAttributesUpper = new System.Windows.Forms.Panel();
+            this.pnlProcedureAttributes = new System.Windows.Forms.Panel();
             this.gbGenName = new System.Windows.Forms.GroupBox();
             this.txtFuncName = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -84,7 +84,7 @@ namespace FBXpert
             this.hsNew = new SeControlsLib.HotSpot();
             this.tabPageMessages = new System.Windows.Forms.TabPage();
             this.fctMessages = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlDependenciesUpper = new System.Windows.Forms.Panel();
+            this.pnlMessagesUpper = new System.Windows.Forms.Panel();
             this.hsClearMessages = new SeControlsLib.HotSpot();
             this.hsRefreshDependencies = new SeControlsLib.HotSpot();
             this.bsDependenciesTo = new System.Windows.Forms.BindingSource(this.components);
@@ -95,7 +95,7 @@ namespace FBXpert
             this.bsDependenciesFrom = new System.Windows.Forms.BindingSource(this.components);
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
             this.tabPageFieldEdit.SuspendLayout();
@@ -106,7 +106,7 @@ namespace FBXpert
             this.splitContainer1.SuspendLayout();
             this.gbGenDescription.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctGenDescription)).BeginInit();
-            this.pnlProcedureAttributesUpper.SuspendLayout();
+            this.pnlProcedureAttributes.SuspendLayout();
             this.gbGenName.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageSQL.SuspendLayout();
@@ -128,7 +128,7 @@ namespace FBXpert
             this.pnlFieldUpper.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
-            this.pnlDependenciesUpper.SuspendLayout();
+            this.pnlMessagesUpper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).BeginInit();
@@ -137,22 +137,22 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1229, 42);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblCaption);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1229, 45);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // lblCaption
             // 
             this.lblCaption.AutoSize = true;
             this.lblCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaption.Location = new System.Drawing.Point(71, 10);
+            this.lblCaption.Location = new System.Drawing.Point(71, 11);
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(135, 20);
             this.lblCaption.TabIndex = 4;
@@ -171,6 +171,7 @@ namespace FBXpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -183,7 +184,10 @@ namespace FBXpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            this.hsClose.Size = new System.Drawing.Size(45, 42);
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
+            this.hsClose.Size = new System.Drawing.Size(45, 45);
             this.hsClose.TabIndex = 1;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
@@ -196,7 +200,6 @@ namespace FBXpert
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -209,9 +212,9 @@ namespace FBXpert
             // 
             this.pnlCenter.Controls.Add(this.tabControlFields);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 42);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 45);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1229, 674);
+            this.pnlCenter.Size = new System.Drawing.Size(1229, 726);
             this.pnlCenter.TabIndex = 2;
             // 
             // tabControlFields
@@ -223,7 +226,7 @@ namespace FBXpert
             this.tabControlFields.Location = new System.Drawing.Point(0, 0);
             this.tabControlFields.Name = "tabControlFields";
             this.tabControlFields.SelectedIndex = 0;
-            this.tabControlFields.Size = new System.Drawing.Size(1229, 674);
+            this.tabControlFields.Size = new System.Drawing.Size(1229, 726);
             this.tabControlFields.TabIndex = 18;
             // 
             // tabPageFieldEdit
@@ -234,7 +237,7 @@ namespace FBXpert
             this.tabPageFieldEdit.Location = new System.Drawing.Point(4, 23);
             this.tabPageFieldEdit.Name = "tabPageFieldEdit";
             this.tabPageFieldEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFieldEdit.Size = new System.Drawing.Size(1221, 647);
+            this.tabPageFieldEdit.Size = new System.Drawing.Size(1221, 699);
             this.tabPageFieldEdit.TabIndex = 0;
             this.tabPageFieldEdit.Text = "Field Edit";
             this.tabPageFieldEdit.UseVisualStyleBackColor = true;
@@ -244,9 +247,9 @@ namespace FBXpert
             this.pnlFieldsCenter.BackColor = System.Drawing.SystemColors.Control;
             this.pnlFieldsCenter.Controls.Add(this.splitContainer1);
             this.pnlFieldsCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 43);
+            this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 46);
             this.pnlFieldsCenter.Name = "pnlFieldsCenter";
-            this.pnlFieldsCenter.Size = new System.Drawing.Size(1215, 601);
+            this.pnlFieldsCenter.Size = new System.Drawing.Size(1215, 650);
             this.pnlFieldsCenter.TabIndex = 2;
             // 
             // splitContainer1
@@ -259,12 +262,12 @@ namespace FBXpert
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.gbGenDescription);
-            this.splitContainer1.Panel1.Controls.Add(this.pnlProcedureAttributesUpper);
+            this.splitContainer1.Panel1.Controls.Add(this.pnlProcedureAttributes);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1215, 601);
+            this.splitContainer1.Size = new System.Drawing.Size(1215, 650);
             this.splitContainer1.SplitterDistance = 316;
             this.splitContainer1.TabIndex = 19;
             // 
@@ -272,9 +275,9 @@ namespace FBXpert
             // 
             this.gbGenDescription.Controls.Add(this.fctGenDescription);
             this.gbGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbGenDescription.Location = new System.Drawing.Point(0, 361);
+            this.gbGenDescription.Location = new System.Drawing.Point(0, 389);
             this.gbGenDescription.Name = "gbGenDescription";
-            this.gbGenDescription.Size = new System.Drawing.Size(312, 236);
+            this.gbGenDescription.Size = new System.Drawing.Size(312, 257);
             this.gbGenDescription.TabIndex = 11;
             this.gbGenDescription.TabStop = false;
             this.gbGenDescription.Text = "Procedure description";
@@ -292,7 +295,9 @@ namespace FBXpert
         '\"',
         '\'',
         '\''};
-            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctGenDescription.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\n^\\s*(case|default)\\s*[^:]*(" +
+    "?<range>:)\\s*(?<range>[^;]+);";
+            this.fctGenDescription.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctGenDescription.BackBrush = null;
             this.fctGenDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctGenDescription.CharHeight = 14;
@@ -301,31 +306,31 @@ namespace FBXpert
             this.fctGenDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctGenDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fctGenDescription.IsReplaceMode = false;
-            this.fctGenDescription.Location = new System.Drawing.Point(3, 16);
+            this.fctGenDescription.Location = new System.Drawing.Point(3, 18);
             this.fctGenDescription.Name = "fctGenDescription";
             this.fctGenDescription.Paddings = new System.Windows.Forms.Padding(0);
             this.fctGenDescription.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctGenDescription.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctGenDescription.ServiceColors")));
-            this.fctGenDescription.Size = new System.Drawing.Size(306, 217);
+            this.fctGenDescription.Size = new System.Drawing.Size(306, 236);
             this.fctGenDescription.TabIndex = 7;
             this.fctGenDescription.Zoom = 100;
             this.fctGenDescription.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.fctGenDescription_TextChanged);
             // 
-            // pnlProcedureAttributesUpper
+            // pnlProcedureAttributes
             // 
-            this.pnlProcedureAttributesUpper.Controls.Add(this.gbGenName);
-            this.pnlProcedureAttributesUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlProcedureAttributesUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlProcedureAttributesUpper.Name = "pnlProcedureAttributesUpper";
-            this.pnlProcedureAttributesUpper.Size = new System.Drawing.Size(312, 361);
-            this.pnlProcedureAttributesUpper.TabIndex = 0;
+            this.pnlProcedureAttributes.Controls.Add(this.gbGenName);
+            this.pnlProcedureAttributes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlProcedureAttributes.Location = new System.Drawing.Point(0, 0);
+            this.pnlProcedureAttributes.Name = "pnlProcedureAttributes";
+            this.pnlProcedureAttributes.Size = new System.Drawing.Size(312, 389);
+            this.pnlProcedureAttributes.TabIndex = 0;
             // 
             // gbGenName
             // 
             this.gbGenName.Controls.Add(this.txtFuncName);
             this.gbGenName.Location = new System.Drawing.Point(3, 6);
             this.gbGenName.Name = "gbGenName";
-            this.gbGenName.Size = new System.Drawing.Size(310, 42);
+            this.gbGenName.Size = new System.Drawing.Size(310, 45);
             this.gbGenName.TabIndex = 0;
             this.gbGenName.TabStop = false;
             this.gbGenName.Text = "Function name";
@@ -333,9 +338,9 @@ namespace FBXpert
             // txtFuncName
             // 
             this.txtFuncName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFuncName.Location = new System.Drawing.Point(3, 16);
+            this.txtFuncName.Location = new System.Drawing.Point(3, 18);
             this.txtFuncName.Name = "txtFuncName";
-            this.txtFuncName.Size = new System.Drawing.Size(304, 20);
+            this.txtFuncName.Size = new System.Drawing.Size(304, 22);
             this.txtFuncName.TabIndex = 0;
             this.txtFuncName.Text = "NEW_PROC";
             this.txtFuncName.TextChanged += new System.EventHandler(this.txtGenName_TextChanged);
@@ -349,7 +354,7 @@ namespace FBXpert
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(891, 597);
+            this.tabControl1.Size = new System.Drawing.Size(891, 646);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPageSQL
@@ -360,7 +365,7 @@ namespace FBXpert
             this.tabPageSQL.Location = new System.Drawing.Point(4, 23);
             this.tabPageSQL.Name = "tabPageSQL";
             this.tabPageSQL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSQL.Size = new System.Drawing.Size(883, 570);
+            this.tabPageSQL.Size = new System.Drawing.Size(883, 619);
             this.tabPageSQL.TabIndex = 0;
             this.tabPageSQL.Text = "SQL";
             this.tabPageSQL.UseVisualStyleBackColor = true;
@@ -369,9 +374,9 @@ namespace FBXpert
             // 
             this.gbSQL.Controls.Add(this.fctSQL);
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSQL.Location = new System.Drawing.Point(3, 46);
+            this.gbSQL.Location = new System.Drawing.Point(3, 49);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(877, 521);
+            this.gbSQL.Size = new System.Drawing.Size(877, 567);
             this.gbSQL.TabIndex = 9;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "SQL";
@@ -403,13 +408,13 @@ namespace FBXpert
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
-            this.fctSQL.Location = new System.Drawing.Point(3, 16);
+            this.fctSQL.Location = new System.Drawing.Point(3, 18);
             this.fctSQL.Name = "fctSQL";
             this.fctSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.fctSQL.RightBracket = ')';
             this.fctSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSQL.ServiceColors")));
-            this.fctSQL.Size = new System.Drawing.Size(871, 502);
+            this.fctSQL.Size = new System.Drawing.Size(871, 546);
             this.fctSQL.TabIndex = 0;
             this.fctSQL.Zoom = 100;
             this.fctSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctSQL_KeyDown);
@@ -423,7 +428,7 @@ namespace FBXpert
             this.pnlSQLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSQLUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlSQLUpper.Name = "pnlSQLUpper";
-            this.pnlSQLUpper.Size = new System.Drawing.Size(877, 43);
+            this.pnlSQLUpper.Size = new System.Drawing.Size(877, 46);
             this.pnlSQLUpper.TabIndex = 10;
             // 
             // hsCreate
@@ -439,6 +444,7 @@ namespace FBXpert
             this.hsCreate.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreate.FlatAppearance.BorderSize = 0;
             this.hsCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreate.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreate.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCreate.Image = global::FBXpert.Properties.Resources.applications_system_22x;
             this.hsCreate.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -452,7 +458,10 @@ namespace FBXpert
             this.hsCreate.MarkMode = false;
             this.hsCreate.Name = "hsCreate";
             this.hsCreate.NonMarkedText = "Execute";
-            this.hsCreate.Size = new System.Drawing.Size(94, 43);
+            this.hsCreate.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreate.ShortcutNewline = false;
+            this.hsCreate.ShowShortcut = false;
+            this.hsCreate.Size = new System.Drawing.Size(94, 46);
             this.hsCreate.TabIndex = 1;
             this.hsCreate.Text = "Execute";
             this.hsCreate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -467,7 +476,6 @@ namespace FBXpert
             this.hsCreate.ToolTipIsBallon = false;
             this.hsCreate.ToolTipOwnerDraw = false;
             this.hsCreate.ToolTipReshowDelay = 100;
-            
             this.hsCreate.ToolTipShowAlways = false;
             this.hsCreate.ToolTipText = "";
             this.hsCreate.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -489,6 +497,7 @@ namespace FBXpert
             this.hsLoadSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSQL.FlatAppearance.BorderSize = 0;
             this.hsLoadSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSQL.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLoadSQL.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -502,7 +511,10 @@ namespace FBXpert
             this.hsLoadSQL.MarkMode = false;
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
-            this.hsLoadSQL.Size = new System.Drawing.Size(82, 43);
+            this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
+            this.hsLoadSQL.ShowShortcut = false;
+            this.hsLoadSQL.Size = new System.Drawing.Size(82, 46);
             this.hsLoadSQL.TabIndex = 7;
             this.hsLoadSQL.Text = "Load SQL";
             this.hsLoadSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -517,7 +529,6 @@ namespace FBXpert
             this.hsLoadSQL.ToolTipIsBallon = false;
             this.hsLoadSQL.ToolTipOwnerDraw = false;
             this.hsLoadSQL.ToolTipReshowDelay = 100;
-            
             this.hsLoadSQL.ToolTipShowAlways = false;
             this.hsLoadSQL.ToolTipText = "";
             this.hsLoadSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -539,6 +550,7 @@ namespace FBXpert
             this.hsSaveSQL.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveSQL.FlatAppearance.BorderSize = 0;
             this.hsSaveSQL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveSQL.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSQL.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSaveSQL.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -552,7 +564,10 @@ namespace FBXpert
             this.hsSaveSQL.MarkMode = false;
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
-            this.hsSaveSQL.Size = new System.Drawing.Size(80, 43);
+            this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
+            this.hsSaveSQL.ShowShortcut = false;
+            this.hsSaveSQL.Size = new System.Drawing.Size(80, 46);
             this.hsSaveSQL.TabIndex = 6;
             this.hsSaveSQL.Text = "Save SQL";
             this.hsSaveSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -567,7 +582,6 @@ namespace FBXpert
             this.hsSaveSQL.ToolTipIsBallon = false;
             this.hsSaveSQL.ToolTipOwnerDraw = false;
             this.hsSaveSQL.ToolTipReshowDelay = 100;
-            
             this.hsSaveSQL.ToolTipShowAlways = false;
             this.hsSaveSQL.ToolTipText = "";
             this.hsSaveSQL.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -583,7 +597,7 @@ namespace FBXpert
             this.tabProcedureDefinition.Location = new System.Drawing.Point(4, 23);
             this.tabProcedureDefinition.Name = "tabProcedureDefinition";
             this.tabProcedureDefinition.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProcedureDefinition.Size = new System.Drawing.Size(883, 570);
+            this.tabProcedureDefinition.Size = new System.Drawing.Size(883, 619);
             this.tabProcedureDefinition.TabIndex = 1;
             this.tabProcedureDefinition.Text = "Function Definition";
             this.tabProcedureDefinition.UseVisualStyleBackColor = true;
@@ -602,7 +616,7 @@ namespace FBXpert
             // spcProcedureSQL.Panel2
             // 
             this.spcProcedureSQL.Panel2.Controls.Add(this.gbProcedureDefinitionSQL);
-            this.spcProcedureSQL.Size = new System.Drawing.Size(877, 564);
+            this.spcProcedureSQL.Size = new System.Drawing.Size(877, 613);
             this.spcProcedureSQL.SplitterDistance = 358;
             this.spcProcedureSQL.TabIndex = 11;
             // 
@@ -619,12 +633,13 @@ namespace FBXpert
             this.lvFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvFields.FullRowSelect = true;
             this.lvFields.GridLines = true;
+            this.lvFields.HideSelection = false;
             this.lvFields.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.lvFields.Location = new System.Drawing.Point(0, 0);
             this.lvFields.Name = "lvFields";
-            this.lvFields.Size = new System.Drawing.Size(358, 422);
+            this.lvFields.Size = new System.Drawing.Size(358, 460);
             this.lvFields.TabIndex = 1;
             this.lvFields.UseCompatibleStateImageBehavior = false;
             this.lvFields.View = System.Windows.Forms.View.Details;
@@ -688,9 +703,9 @@ namespace FBXpert
             this.pnlParameterLower.Controls.Add(this.groupBox1);
             this.pnlParameterLower.Controls.Add(this.gbParameterName);
             this.pnlParameterLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlParameterLower.Location = new System.Drawing.Point(0, 422);
+            this.pnlParameterLower.Location = new System.Drawing.Point(0, 460);
             this.pnlParameterLower.Name = "pnlParameterLower";
-            this.pnlParameterLower.Size = new System.Drawing.Size(358, 142);
+            this.pnlParameterLower.Size = new System.Drawing.Size(358, 153);
             this.pnlParameterLower.TabIndex = 2;
             // 
             // gbParamTyp
@@ -698,18 +713,18 @@ namespace FBXpert
             this.gbParamTyp.Controls.Add(this.txtPrecision);
             this.gbParamTyp.Controls.Add(this.cbDatatype);
             this.gbParamTyp.Controls.Add(this.txtDatatypeLength);
-            this.gbParamTyp.Location = new System.Drawing.Point(6, 93);
+            this.gbParamTyp.Location = new System.Drawing.Point(6, 100);
             this.gbParamTyp.Name = "gbParamTyp";
-            this.gbParamTyp.Size = new System.Drawing.Size(351, 42);
+            this.gbParamTyp.Size = new System.Drawing.Size(351, 45);
             this.gbParamTyp.TabIndex = 3;
             this.gbParamTyp.TabStop = false;
             this.gbParamTyp.Text = "Datatype                    Length          Precision";
             // 
             // txtPrecision
             // 
-            this.txtPrecision.Location = new System.Drawing.Point(177, 16);
+            this.txtPrecision.Location = new System.Drawing.Point(177, 17);
             this.txtPrecision.Name = "txtPrecision";
-            this.txtPrecision.Size = new System.Drawing.Size(61, 20);
+            this.txtPrecision.Size = new System.Drawing.Size(61, 22);
             this.txtPrecision.TabIndex = 2;
             // 
             // cbDatatype
@@ -720,17 +735,17 @@ namespace FBXpert
             "INTEGER",
             "DOUBLE PRECISION",
             "VARCHAR"});
-            this.cbDatatype.Location = new System.Drawing.Point(3, 16);
+            this.cbDatatype.Location = new System.Drawing.Point(3, 18);
             this.cbDatatype.Name = "cbDatatype";
-            this.cbDatatype.Size = new System.Drawing.Size(101, 21);
+            this.cbDatatype.Size = new System.Drawing.Size(101, 22);
             this.cbDatatype.TabIndex = 1;
             this.cbDatatype.Text = "INTEGER";
             // 
             // txtDatatypeLength
             // 
-            this.txtDatatypeLength.Location = new System.Drawing.Point(110, 16);
+            this.txtDatatypeLength.Location = new System.Drawing.Point(110, 17);
             this.txtDatatypeLength.Name = "txtDatatypeLength";
-            this.txtDatatypeLength.Size = new System.Drawing.Size(61, 20);
+            this.txtDatatypeLength.Size = new System.Drawing.Size(61, 22);
             this.txtDatatypeLength.TabIndex = 0;
             // 
             // groupBox1
@@ -740,7 +755,7 @@ namespace FBXpert
             this.groupBox1.Controls.Add(this.rbIN);
             this.groupBox1.Location = new System.Drawing.Point(257, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(100, 82);
+            this.groupBox1.Size = new System.Drawing.Size(100, 88);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parameter name";
@@ -748,9 +763,9 @@ namespace FBXpert
             // rbVAR
             // 
             this.rbVAR.AutoSize = true;
-            this.rbVAR.Location = new System.Drawing.Point(22, 59);
+            this.rbVAR.Location = new System.Drawing.Point(22, 64);
             this.rbVAR.Name = "rbVAR";
-            this.rbVAR.Size = new System.Drawing.Size(41, 17);
+            this.rbVAR.Size = new System.Drawing.Size(42, 18);
             this.rbVAR.TabIndex = 2;
             this.rbVAR.Text = "Var";
             this.rbVAR.UseVisualStyleBackColor = true;
@@ -758,9 +773,9 @@ namespace FBXpert
             // rbOUT
             // 
             this.rbOUT.AutoSize = true;
-            this.rbOUT.Location = new System.Drawing.Point(22, 41);
+            this.rbOUT.Location = new System.Drawing.Point(22, 44);
             this.rbOUT.Name = "rbOUT";
-            this.rbOUT.Size = new System.Drawing.Size(48, 17);
+            this.rbOUT.Size = new System.Drawing.Size(47, 18);
             this.rbOUT.TabIndex = 1;
             this.rbOUT.Text = "OUT";
             this.rbOUT.UseVisualStyleBackColor = true;
@@ -769,9 +784,9 @@ namespace FBXpert
             // 
             this.rbIN.AutoSize = true;
             this.rbIN.Checked = true;
-            this.rbIN.Location = new System.Drawing.Point(22, 24);
+            this.rbIN.Location = new System.Drawing.Point(22, 26);
             this.rbIN.Name = "rbIN";
-            this.rbIN.Size = new System.Drawing.Size(36, 17);
+            this.rbIN.Size = new System.Drawing.Size(37, 18);
             this.rbIN.TabIndex = 0;
             this.rbIN.TabStop = true;
             this.rbIN.Text = "IN";
@@ -780,9 +795,9 @@ namespace FBXpert
             // gbParameterName
             // 
             this.gbParameterName.Controls.Add(this.txtParameter);
-            this.gbParameterName.Location = new System.Drawing.Point(3, 45);
+            this.gbParameterName.Location = new System.Drawing.Point(3, 48);
             this.gbParameterName.Name = "gbParameterName";
-            this.gbParameterName.Size = new System.Drawing.Size(174, 42);
+            this.gbParameterName.Size = new System.Drawing.Size(174, 45);
             this.gbParameterName.TabIndex = 1;
             this.gbParameterName.TabStop = false;
             this.gbParameterName.Text = "Parameter name";
@@ -790,9 +805,9 @@ namespace FBXpert
             // txtParameter
             // 
             this.txtParameter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtParameter.Location = new System.Drawing.Point(3, 16);
+            this.txtParameter.Location = new System.Drawing.Point(3, 18);
             this.txtParameter.Name = "txtParameter";
-            this.txtParameter.Size = new System.Drawing.Size(168, 20);
+            this.txtParameter.Size = new System.Drawing.Size(168, 22);
             this.txtParameter.TabIndex = 0;
             // 
             // gbProcedureDefinitionSQL
@@ -801,7 +816,7 @@ namespace FBXpert
             this.gbProcedureDefinitionSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbProcedureDefinitionSQL.Location = new System.Drawing.Point(0, 0);
             this.gbProcedureDefinitionSQL.Name = "gbProcedureDefinitionSQL";
-            this.gbProcedureDefinitionSQL.Size = new System.Drawing.Size(515, 564);
+            this.gbProcedureDefinitionSQL.Size = new System.Drawing.Size(515, 613);
             this.gbProcedureDefinitionSQL.TabIndex = 10;
             this.gbProcedureDefinitionSQL.TabStop = false;
             this.gbProcedureDefinitionSQL.Text = "Procedure - SQL";
@@ -833,13 +848,13 @@ namespace FBXpert
             this.fcbFunctionDefinitionSQL.IsReplaceMode = false;
             this.fcbFunctionDefinitionSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbFunctionDefinitionSQL.LeftBracket = '(';
-            this.fcbFunctionDefinitionSQL.Location = new System.Drawing.Point(3, 16);
+            this.fcbFunctionDefinitionSQL.Location = new System.Drawing.Point(3, 18);
             this.fcbFunctionDefinitionSQL.Name = "fcbFunctionDefinitionSQL";
             this.fcbFunctionDefinitionSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.fcbFunctionDefinitionSQL.RightBracket = ')';
             this.fcbFunctionDefinitionSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbFunctionDefinitionSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbFunctionDefinitionSQL.ServiceColors")));
-            this.fcbFunctionDefinitionSQL.Size = new System.Drawing.Size(509, 545);
+            this.fcbFunctionDefinitionSQL.Size = new System.Drawing.Size(509, 592);
             this.fcbFunctionDefinitionSQL.TabIndex = 0;
             this.fcbFunctionDefinitionSQL.Zoom = 100;
             // 
@@ -867,7 +882,7 @@ namespace FBXpert
             this.pnlFieldUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFieldUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlFieldUpper.Name = "pnlFieldUpper";
-            this.pnlFieldUpper.Size = new System.Drawing.Size(1215, 40);
+            this.pnlFieldUpper.Size = new System.Drawing.Size(1215, 43);
             this.pnlFieldUpper.TabIndex = 1;
             // 
             // hsNew
@@ -883,6 +898,7 @@ namespace FBXpert
             this.hsNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsNew.FlatAppearance.BorderSize = 0;
             this.hsNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsNew.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsNew.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsNew.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -896,7 +912,10 @@ namespace FBXpert
             this.hsNew.MarkMode = false;
             this.hsNew.Name = "hsNew";
             this.hsNew.NonMarkedText = "New";
-            this.hsNew.Size = new System.Drawing.Size(52, 36);
+            this.hsNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNew.ShortcutNewline = false;
+            this.hsNew.ShowShortcut = false;
+            this.hsNew.Size = new System.Drawing.Size(52, 39);
             this.hsNew.TabIndex = 3;
             this.hsNew.Text = "New";
             this.hsNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -911,7 +930,6 @@ namespace FBXpert
             this.hsNew.ToolTipIsBallon = false;
             this.hsNew.ToolTipOwnerDraw = false;
             this.hsNew.ToolTipReshowDelay = 100;
-            
             this.hsNew.ToolTipShowAlways = false;
             this.hsNew.ToolTipText = "";
             this.hsNew.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -923,12 +941,12 @@ namespace FBXpert
             // tabPageMessages
             // 
             this.tabPageMessages.Controls.Add(this.fctMessages);
-            this.tabPageMessages.Controls.Add(this.pnlDependenciesUpper);
+            this.tabPageMessages.Controls.Add(this.pnlMessagesUpper);
             this.tabPageMessages.ImageIndex = 9;
             this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
             this.tabPageMessages.Name = "tabPageMessages";
             this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessages.Size = new System.Drawing.Size(1221, 647);
+            this.tabPageMessages.Size = new System.Drawing.Size(1221, 699);
             this.tabPageMessages.TabIndex = 1;
             this.tabPageMessages.Text = "Messages";
             this.tabPageMessages.UseVisualStyleBackColor = true;
@@ -959,29 +977,29 @@ namespace FBXpert
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
-            this.fctMessages.Location = new System.Drawing.Point(3, 53);
+            this.fctMessages.Location = new System.Drawing.Point(3, 57);
             this.fctMessages.Name = "fctMessages";
             this.fctMessages.Paddings = new System.Windows.Forms.Padding(0);
             this.fctMessages.ReadOnly = true;
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
-            this.fctMessages.Size = new System.Drawing.Size(1215, 591);
+            this.fctMessages.Size = new System.Drawing.Size(1215, 639);
             this.fctMessages.TabIndex = 22;
             this.fctMessages.WordWrap = true;
             this.fctMessages.Zoom = 100;
             // 
-            // pnlDependenciesUpper
+            // pnlMessagesUpper
             // 
-            this.pnlDependenciesUpper.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlDependenciesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlDependenciesUpper.Controls.Add(this.hsClearMessages);
-            this.pnlDependenciesUpper.Controls.Add(this.hsRefreshDependencies);
-            this.pnlDependenciesUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDependenciesUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlDependenciesUpper.Name = "pnlDependenciesUpper";
-            this.pnlDependenciesUpper.Size = new System.Drawing.Size(1215, 50);
-            this.pnlDependenciesUpper.TabIndex = 21;
+            this.pnlMessagesUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMessagesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMessagesUpper.Controls.Add(this.hsClearMessages);
+            this.pnlMessagesUpper.Controls.Add(this.hsRefreshDependencies);
+            this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlMessagesUpper.Name = "pnlMessagesUpper";
+            this.pnlMessagesUpper.Size = new System.Drawing.Size(1215, 54);
+            this.pnlMessagesUpper.TabIndex = 21;
             // 
             // hsClearMessages
             // 
@@ -996,6 +1014,7 @@ namespace FBXpert
             this.hsClearMessages.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClearMessages.FlatAppearance.BorderSize = 0;
             this.hsClearMessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearMessages.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClearMessages.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClearMessages.Image = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearMessages.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1009,7 +1028,10 @@ namespace FBXpert
             this.hsClearMessages.MarkMode = false;
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
-            this.hsClearMessages.Size = new System.Drawing.Size(45, 46);
+            this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
+            this.hsClearMessages.ShowShortcut = false;
+            this.hsClearMessages.Size = new System.Drawing.Size(45, 50);
             this.hsClearMessages.TabIndex = 3;
             this.hsClearMessages.Text = "Clear";
             this.hsClearMessages.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1024,7 +1046,6 @@ namespace FBXpert
             this.hsClearMessages.ToolTipIsBallon = false;
             this.hsClearMessages.ToolTipOwnerDraw = false;
             this.hsClearMessages.ToolTipReshowDelay = 100;
-            
             this.hsClearMessages.ToolTipShowAlways = false;
             this.hsClearMessages.ToolTipText = "";
             this.hsClearMessages.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1046,6 +1067,7 @@ namespace FBXpert
             this.hsRefreshDependencies.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshDependencies.FlatAppearance.BorderSize = 0;
             this.hsRefreshDependencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDependencies.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshDependencies.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshDependencies.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshDependencies.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
@@ -1058,7 +1080,10 @@ namespace FBXpert
             this.hsRefreshDependencies.MarkMode = false;
             this.hsRefreshDependencies.Name = "hsRefreshDependencies";
             this.hsRefreshDependencies.NonMarkedText = "";
-            this.hsRefreshDependencies.Size = new System.Drawing.Size(45, 46);
+            this.hsRefreshDependencies.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependencies.ShortcutNewline = false;
+            this.hsRefreshDependencies.ShowShortcut = false;
+            this.hsRefreshDependencies.Size = new System.Drawing.Size(45, 50);
             this.hsRefreshDependencies.TabIndex = 2;
             this.hsRefreshDependencies.ToolTipActive = false;
             this.hsRefreshDependencies.ToolTipAutomaticDelay = 500;
@@ -1071,7 +1096,6 @@ namespace FBXpert
             this.hsRefreshDependencies.ToolTipIsBallon = false;
             this.hsRefreshDependencies.ToolTipOwnerDraw = false;
             this.hsRefreshDependencies.ToolTipReshowDelay = 100;
-            
             this.hsRefreshDependencies.ToolTipShowAlways = false;
             this.hsRefreshDependencies.ToolTipText = "";
             this.hsRefreshDependencies.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -1121,17 +1145,18 @@ namespace FBXpert
             // 
             // FunctionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1229, 716);
+            this.ClientSize = new System.Drawing.Size(1229, 771);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FunctionForm";
             this.Text = "FunctionForm";
             this.Load += new System.EventHandler(this.FunctionForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlFields.ResumeLayout(false);
             this.tabPageFieldEdit.ResumeLayout(false);
@@ -1142,7 +1167,7 @@ namespace FBXpert
             this.splitContainer1.ResumeLayout(false);
             this.gbGenDescription.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctGenDescription)).EndInit();
-            this.pnlProcedureAttributesUpper.ResumeLayout(false);
+            this.pnlProcedureAttributes.ResumeLayout(false);
             this.gbGenName.ResumeLayout(false);
             this.gbGenName.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1168,7 +1193,7 @@ namespace FBXpert
             this.pnlFieldUpper.ResumeLayout(false);
             this.tabPageMessages.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
-            this.pnlDependenciesUpper.ResumeLayout(false);
+            this.pnlMessagesUpper.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).EndInit();
@@ -1181,7 +1206,7 @@ namespace FBXpert
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
         private System.Windows.Forms.TabControl tabControlFields;
@@ -1195,7 +1220,7 @@ namespace FBXpert
         private System.Windows.Forms.Panel pnlFieldUpper;
         private SeControlsLib.HotSpot hsCreate;
         private System.Windows.Forms.TabPage tabPageMessages;
-        private System.Windows.Forms.Panel pnlDependenciesUpper;
+        private System.Windows.Forms.Panel pnlMessagesUpper;
         private SeControlsLib.HotSpot hsRefreshDependencies;
         private System.Windows.Forms.BindingSource bsDependenciesTo;
         private System.Data.DataSet dsDependenciesTo;
@@ -1205,7 +1230,7 @@ namespace FBXpert
         private System.Windows.Forms.BindingSource bsDependenciesFrom;
         private FastColoredTextBoxNS.FastColoredTextBox fctSQL;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel pnlProcedureAttributesUpper;
+        private System.Windows.Forms.Panel pnlProcedureAttributes;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageSQL;
         private System.Windows.Forms.TabPage tabProcedureDefinition;

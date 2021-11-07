@@ -447,4 +447,16 @@
   <data name="SELECT_DATABASE_FOR_NEW" xml:space="preserve">
     <value>Neue Datenbank</value>
   </data>
+  <data name="SPALTENEditForm" xml:space="preserve">
+    <value>Spalten Editor</value>
+  </data>
+  <data name="Dependencies" xml:space="preserve">
+    <value>Dependencies</value>
+  </data>
+  <data name="DependenciesFrom" xml:space="preserve">
+    <value>Dependencies from</value>
+  </data>
+  <data name="Indicies" xml:space="preserve">
+    <value>Indicies</value>
+  </data>
 </root>

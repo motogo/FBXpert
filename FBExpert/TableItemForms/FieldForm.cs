@@ -639,6 +639,7 @@ namespace FBExpert
 
         private void FieldForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataFilled = false;
             
@@ -777,9 +778,18 @@ namespace FBExpert
             
             string info = (riFailure==null) 
                 ? $@"Fields for {_dbReg.Alias}->{FieldObject.TableName} updated." 
-                : $@"Fields for {_dbReg.Alias}->{FieldObject.TableName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors";                                            
+                : $@"Fields for {_dbReg.Alias}->{FieldObject.TableName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors";
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadFields,$@"->Proc:{Name}->ExecueteSQL()");
             _localTableNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadFields);
+        }
+
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height         = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height        = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessageUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height          = AppSizeConstants.UpperFormBandHeight;
         }
 
         private void hsClearMessages_Click(object sender, EventArgs e)

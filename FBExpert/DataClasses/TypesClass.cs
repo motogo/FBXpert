@@ -143,26 +143,26 @@ namespace FBXpert.DataClasses
 
         public static string DatabaseTOcsharpTypeAsString(DomainClass domain)
         {
-          
+          //NotNull CHanged
             if (domain.FieldType == "LONG")
             {
-                return (!domain.NotNull) ? "int" : "int?";
+                return (domain.NotNull) ? "int" : "int?";
             }
             else if (domain.RawType == "BIGINT")
             {                
-                return (!domain.NotNull) ? "BigInteger" : "BigInteger?";
+                return (domain.NotNull) ? "BigInteger" : "BigInteger?";
             }
             else if (domain.FieldType == "INT64")
             {
-                return (!domain.NotNull) ? "long"  : "long?";
+                return (domain.NotNull) ? "long"  : "long?";
             }
             else if (domain.FieldType == "FLOAT")
             {                
-                return (!domain.NotNull) ? "float" : "float?";
+                return (domain.NotNull) ? "float" : "float?";
             }
             else if (domain.FieldType == "SHORT")
             {
-                return (!domain.NotNull) ? "int" : "int?";
+                return (domain.NotNull) ? "int" : "int?";
             }
             else if (domain.FieldType == "VARYING")
             {
@@ -194,7 +194,7 @@ namespace FBXpert.DataClasses
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
             {
-                return (!domain.NotNull) ? "double" : "double?";
+                return (domain.NotNull) ? "double" : "double?";
             }
             return $@"RawType_ToCSharpType_Error->{domain.RawType}"; 
         }
@@ -258,18 +258,15 @@ namespace FBXpert.DataClasses
             string stype = "RawType_ToCSharpType_Error->" + domain.RawType;
             if (domain.FieldType == "LONG")
             {
-                if (!domain.NotNull) return typeof(int?);
-                return typeof(int);
+                return (domain.NotNull) ? typeof(int) : typeof(int?);
             }
             else if (domain.FieldType == "INT64")
             {
-                if (!domain.NotNull) return typeof(long?);
-                return typeof(long);
+                return (domain.NotNull) ? typeof(long) : typeof(long?);
             }
             else if (domain.FieldType == "SHORT")
             {
-                if (!domain.NotNull) return typeof(int?);
-                return typeof(int);
+                return (domain.NotNull) ? typeof(int) : typeof(int?);
             }
             else if (domain.FieldType == "VARYING")
             {
@@ -301,19 +298,14 @@ namespace FBXpert.DataClasses
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
             {
-                if (!domain.NotNull) return typeof(double?);
-                return typeof(double);
+                return (domain.NotNull) ? typeof(double) : typeof(double?);
             }
             else if (domain.FieldType.StartsWith("FLOAT"))
             {
-                if (!domain.NotNull) return typeof(float?);
-                return typeof(float);
+                return (domain.NotNull) ? typeof(float) : typeof(float?);
             }
-           
             return null;
         }
-
-        
 
         public static eLogicalType ToLogicalType(DomainClass domain)
         {
@@ -379,8 +371,7 @@ namespace FBXpert.DataClasses
             }
             else if (ltyp == eLogicalType.NUMBER)
             {
-                if (!domain.NotNull) return "null";
-                return "0";
+                return (domain.NotNull) ? "0" : "null";
             }
             else if (ltyp == eLogicalType.TEXT)
             {
@@ -388,8 +379,7 @@ namespace FBXpert.DataClasses
             }
             else if (ltyp == eLogicalType.POINTNUMBER)
             {
-                if (!domain.NotNull) return "null";
-                return "0.0";
+                return (domain.NotNull) ? "0.0" : "null";
             }
             else if (ltyp == eLogicalType.BOOL)
             {               
@@ -413,8 +403,7 @@ namespace FBXpert.DataClasses
             }
             else if (ltyp == eLogicalType.NUMBER)
             {
-                if (!domain.NotNull) return "null";
-                return "DBNULLasINT";
+                return (domain.NotNull) ? "DBNULLasINT" : "null";
             }
             else if (ltyp == eLogicalType.TEXT)
             {
@@ -430,8 +419,7 @@ namespace FBXpert.DataClasses
             }
             else if (ltyp == eLogicalType.POINTNUMBER)
             {
-                if (!domain.NotNull) return "null";
-                return "0.0";
+                return (domain.NotNull) ? "0.0" : "null";
             }
             return "TypeDBNullError_" + domain.FieldType;
         }

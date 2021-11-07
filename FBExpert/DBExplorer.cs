@@ -9,6 +9,7 @@ using FBXpert.SonstForms;
 using FBXpert.SQLStatements;
 using FBXpert.SQLView;
 using MessageFormLibrary;
+using SEMessageBoxLibrary;
 using SQLView;
 using StateClasses;
 using System;
@@ -179,57 +180,47 @@ namespace FBXpert
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadIndex)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshTableIndicesFromOneTable(dbReg, treeView1.SelectedNode);
+                StaticTreeClass.Instance().RefreshTableIndicesFromOneTable(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllIndex)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;                
-                StaticTreeClass.Instance().RefreshAllIndicies(dbReg, _actRegNode, treeView1.SelectedNode);                
+                StaticTreeClass.Instance().RefreshAllIndicies(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadConstraits)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshConstraints(dbReg, treeView1.SelectedNode);
+                StaticTreeClass.Instance().RefreshConstraints(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllConstraits)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(dbReg, _actRegNode, treeView1.SelectedNode);
+                StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() ==  StaticVariablesClass.ReloadGenerators)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshGenerators(dbReg, _actRegNode);
+                StaticTreeClass.Instance().RefreshGenerators(_actRegNode);
             }            
             else if (k.Key.ToString() == StaticVariablesClass.ReloadProcedures)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshProcedures(dbReg, _actRegNode);
+                StaticTreeClass.Instance().RefreshProcedures(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadFunctions)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshInternalFunctions(dbReg, _actRegNode);
+                StaticTreeClass.Instance().RefreshInternalFunctions(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadDomains)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshDomains(dbReg, _actRegNode);
+                StaticTreeClass.Instance().RefreshDomains(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadViews)
             {
-                var nd = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
-                if (nd != null)
+                var regNode = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
+                if (regNode != null)
                 {
-                    var dbReg = (DBRegistrationClass)nd.Tag;
                     var tn = k.Data as TreeNode;
-                    StaticTreeClass.Instance().RefreshView(dbReg, tn);
+                    StaticTreeClass.Instance().RefreshView(regNode, tn);
                 }
                 else if(_actRegNode != null)
                 {
-                    var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                    StaticTreeClass.Instance().RefreshAllViews(dbReg, _actRegNode);
+                    StaticTreeClass.Instance().RefreshAllViews(_actRegNode);
                 }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllViews)
@@ -237,9 +228,9 @@ namespace FBXpert
                 var nd = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
                 if (nd != null)
                 {
-                    var dbReg = (DBRegistrationClass)nd.Tag;
+                    
                     NotificationsForm.Instance().Show(Width + 4, 40);
-                    StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
+                    StaticTreeClass.Instance().RefreshAllViews(nd);
                 }
                 NotificationsForm.Instance().Hide();
             }
@@ -248,8 +239,7 @@ namespace FBXpert
                 var nd = StaticTreeClass.Instance().FindPrevTableNode(_tnSelected);
                 if(nd != null)
                 {
-                    var dbReg = (DBRegistrationClass) _actRegNode.Tag;
-                    StaticTreeClass.Instance().RefreshTable( dbReg, nd);
+                    StaticTreeClass.Instance().RefreshTable(_actRegNode, nd);
                 }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllTables)
@@ -257,87 +247,82 @@ namespace FBXpert
                 var nd = StaticTreeClass.Instance().FindPrevTableGroupNode(_tnSelected);
                 if (nd != null)
                 {
-                    var rnd = StaticTreeClass.Instance().FindPrevDBNode(nd);
-                    var dbReg = (DBRegistrationClass)rnd.Tag;
-
                     NotificationsForm.Instance().Show();
-                    StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);
+                    StaticTreeClass.Instance().RefreshNonSystemTables(nd);
                 }
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadForeignKeys)
             {                
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshForeignKeys(dbReg,_tnSelected);
+                StaticTreeClass.Instance().RefreshForeignKeys4OneTable(_actRegNode, _tnSelected);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllForeignKeys)
             {
-                var dbReg = (DBRegistrationClass)_actRegNode.Tag;
-                StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(dbReg, _actRegNode, _tnSelected);
+                StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(_actRegNode, _tnSelected);
             }
         }
 
-        public bool ReadDatabaseMetadata(TreeNode nd)
+        public bool ReadDatabaseMetadata(TreeNode regNode)
         {
-            nd.ToolTipText = "test";
+            regNode.ToolTipText = "test";
             Application.DoEvents();
-            var dbReg = (DBRegistrationClass)nd.Tag;
+            var dbReg = (DBRegistrationClass)regNode.Tag;
 
             try
             {
-                nd.ToolTipText = dbReg.GetFullDatabasePath();
+                regNode.ToolTipText = dbReg.GetFullDatabasePath();
 
                 NotificationsForm.Instance().SetTitle(DevelopmentClass.Instance().GetDBInfo(dbReg, "Notifications "));
                 NotificationsForm.Instance().SetMDIForm(MdiParent);
                 NotificationsForm.Instance().Show(Left + Width + 16, 64);
             
-                _actRegNode = nd;
+                _actRegNode = regNode;
                 _actTables.Clear();
                 _actSystemTables.Clear();
                 NotifiesClass.Instance.AddToINFO($@"Open Database {dbReg.Alias}");
                            
-                var tb = StaticTreeClass.Instance().RefreshNonSystemTables(dbReg, nd);            
-                _actViews = StaticTreeClass.Instance().RefreshAllViews(dbReg, nd);
+                var tb = StaticTreeClass.Instance().RefreshNonSystemTables(regNode);
+                _actViews = StaticTreeClass.Instance().RefreshAllViews(regNode);
 
                 if (tb != null)
                 {
                     _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(tb);
                     if (_actTables != null)
                     {
-                        StaticTreeClass.Instance().RefreshDomains(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshPrimaryKeysFromTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshTriggersFromTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshAllIndicies(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshDependenciesFromTableNodes(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshProcedures(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshInternalFunctions(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshUserDefinedFunctions(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshGenerators(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshRoles(dbReg, nd);
+                        StaticTreeClass.Instance().RefreshDomains(regNode);
+                        StaticTreeClass.Instance().RefreshPrimaryKeysFromTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshTriggersFromTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshAllIndicies(regNode, null);
+                        StaticTreeClass.Instance().RefreshDependenciesFromTableNodes(regNode);
+                        StaticTreeClass.Instance().RefreshProcedures(regNode);
+                        StaticTreeClass.Instance().RefreshInternalFunctions(regNode);
+                        StaticTreeClass.Instance().RefreshUserDefinedFunctions(regNode);
+                        StaticTreeClass.Instance().RefreshGenerators(regNode);
+                        StaticTreeClass.Instance().RefreshRoles(regNode);
                     }
                 }
 
-                var tbs = StaticTreeClass.Instance().RefreshSystemTables(dbReg, nd);
+                var tbs = StaticTreeClass.Instance().RefreshSystemTables(regNode);
                 if (tbs != null)
                 {
                     _actSystemTables = StaticTreeClass.Instance().GetSystemTableObjectsFromNode(tbs);
                     if (_actSystemTables != null)
                     {
-                        StaticTreeClass.Instance().RefreshSystemDomains(dbReg, nd);
-                        StaticTreeClass.Instance().RefreshPrimaryKeysFromSystemTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshSystemTriggersFromTableNodes(dbReg, nd, null);
-                        StaticTreeClass.Instance().RefreshAllSystemIndicies(dbReg, nd, null);
+                        StaticTreeClass.Instance().RefreshSystemDomains(regNode);
+                        StaticTreeClass.Instance().RefreshPrimaryKeysFromSystemTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshSystemTriggersFromTableNodes(regNode, null);
+                        StaticTreeClass.Instance().RefreshAllSystemIndicies(regNode, null);
                     }
                 }
 
                 NotifiesClass.Instance.AddToINFO($@"Database {dbReg.Alias} opend !!!");
 
                 dbReg.Active = true;
-                nd.Tag = dbReg;              
+                regNode.Tag = dbReg;              
                 SetCmsForDatabase(true);
-                nd.Text = GetOpenConnections(dbReg);
+                regNode.Text = GetOpenConnections(dbReg);
             }
             catch (Exception e)
             {
@@ -442,8 +427,8 @@ namespace FBXpert
       
         private void DBExplorer_Load(object sender, EventArgs e)
         {        
-            Dock = DockStyle.Left;                                   
-            Application.DoEvents();           
+            Dock = DockStyle.Left;
+            Application.DoEvents();
             NotificationsForm.Instance().SetLeft = Width + 16;
             pnlUpper.Select();
             ExtensionMethods.DoubleBuffered(treeView1,true);
@@ -467,7 +452,7 @@ namespace FBXpert
             switch (_tnSelected.Level)
             {
                 case 0:
-                    ebene0dblClick(_tnSelected);                                            
+                    ebene0dblClick(_tnSelected);
                     break;
                 case 1:
                     //Console.WriteLine();
@@ -476,7 +461,7 @@ namespace FBXpert
                     ebene2dblClick(_tnSelected);
                     break;
                 case 3:
-                    ebene3dblClick(_tnSelected);                    
+                    ebene3dblClick(_tnSelected);
                     break;                   
                 case 4:
                     ebene4dblClick(_tnSelected);
@@ -484,7 +469,7 @@ namespace FBXpert
                 case 5:
                     ebene5dblClick(_tnSelected);
                     break;
-            }            
+            }
         }
 
         private void ebene0dblClick(TreeNode tn)
@@ -590,7 +575,7 @@ namespace FBXpert
              else if (tnn == typeof(UserDefinedFunctionClass))
              {
                  var tmf = new UserDefinedFunctionForm(MdiParent, drc, tn, cmsUserDefinedFunctions,EditStateClass.eBearbeiten.eEdit);
-                 
+
                  tmf.Show();
              }
              else if (tnn == typeof(TriggerClass))
@@ -611,7 +596,7 @@ namespace FBXpert
              }
              else if (tnn == typeof(IndexClass))
              {
-                 var tff = new IndexForm(MdiParent,(IndexClass) tn.Tag, drc, _actTables);                 
+                 var tff = new IndexForm(MdiParent,(IndexClass) tn.Tag, drc, _actTables);
                  tff.Show(); 
              }
              this.Cursor = Cursors.Default;
@@ -751,7 +736,6 @@ namespace FBXpert
         {
             if (!FbXpertMainForm.FormOnClosing)
             {
-                
                 FbXpertMainForm.Instance().Close();
             }
         }
@@ -1002,7 +986,6 @@ namespace FBXpert
             }
             else if (tnn == typeof(ViewClass))
             {    
-               
                 SetActTableNode(t, StaticVariablesClass.CommonTablesKeyGroupStr);      
                 var vc = (ViewClass)_tnSelected.Tag;
                 FbXpertMainForm.Instance().ActViewObject = vc;
@@ -1544,14 +1527,11 @@ namespace FBXpert
             else if (e.ClickedItem ==  tsmiEditNotNull)
             {                           
                var obj = _tnSelected.Tag as NotNullsClass;
-                //TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
-                //TableClass tableObject = _actTables.Find(X=>X.Name == obj.TableName);
                var cf = new NotNullForm(MdiParent, dbReg, _actTables,obj, cmsConstrainsGroup,cmsConstraints)
                {
                    BearbeitenMode = EditStateClass.eBearbeiten.eEdit 
                };
                cf.Show();  
-                                        
             }
             else if (e.ClickedItem == tsmiEditPrimaryKey)
             {                                                
@@ -1601,8 +1581,6 @@ namespace FBXpert
                 var tmf = new VIEWManageForm(MdiParent, dbReg, _tnSelected);
                 
                 tmf.GetData = false;
-               //     tmf.SetMaxRows(0);
-               //     tmf.SetAutocompeteObjects(_actTables);
                 tmf.Show();
                 
             }

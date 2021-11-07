@@ -164,6 +164,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SEListBox\Dev\bin\Debug\SEListBox.dll</HintPath>
     </Reference>
+    <Reference Include="SEMessageBoxLibrary">
+      <HintPath>..\..\SELibrariesSource\SEMessageBoxLibrary\bin\Debug\SEMessageBoxLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="SESpaltenEditor, Version=2020.2.12.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SESpaltenEditor\bin\Debug\SESpaltenEditor.dll</HintPath>

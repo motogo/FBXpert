@@ -1,7 +1,7 @@
 ﻿using FBXpert;
 using FBXpert.Globals;
 using Initialization;
-using MessageFormLibrary;
+using SEMessageBoxLibrary;
 using StateClasses;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace FBExpert
     public class DatabaseDefinitions : ApplicationPathClass
     {
         public string Reason;
-       // public int OpenDatabaseCount = 0;
+      
         private EditStateClass.eDataState _dataState = EditStateClass.eDataState.UnSaved;
         public EditStateClass.eDataState DataState
         {
@@ -32,12 +32,10 @@ namespace FBExpert
         } 
 
         public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();  
-      
         private DatabaseDefinitions()
         {
            
         }
-
 
         private static readonly Lazy<DatabaseDefinitions> lazy = new Lazy<DatabaseDefinitions>(() => new DatabaseDefinitions());
         public static DatabaseDefinitions Instance
@@ -47,7 +45,7 @@ namespace FBExpert
                 return lazy.Value;
             }
         }
-
+        
         public void MarkDatabasesActiv(bool active)
         {                        
             foreach (var datab in Databases)
@@ -55,8 +53,6 @@ namespace FBExpert
                 datab.Active = active;
             }
         }
-
-
 
         public bool IsRegistration(TreeNode nd)
         {

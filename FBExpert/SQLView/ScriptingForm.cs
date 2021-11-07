@@ -6,7 +6,7 @@ using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
-using MessageFormLibrary;
+using SEMessageBoxLibrary;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,6 +29,7 @@ namespace FBXpert.SQLView
         public ScriptingForm(DBRegistrationClass drc)
         {
             InitializeComponent();
+            FormEvents.ClearEvents(this);
             MdiParent = FbXpertMainForm.Instance();
             _actScriptingDbReg = drc;
             _lastDirectory = AppSettingsClass.Instance.PathSettings.ScriptingPath;
@@ -150,12 +151,29 @@ namespace FBXpert.SQLView
         {
             Close();
         }
-       
+
+        public bool TestOpen(DBRegistrationClass dbReg)
+        {
+            string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
+            string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
+            _actScriptingDbReg.Server = server;
+            _actScriptingDbReg.DatabasePath = path;
+            string connectionString = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
+            string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString, (int)_actScriptingDbReg.Version >= (int)eDBVersion.FB3_32);
+            hsLifeTime.ToolTipActive = true;
+            hsLifeTime.ToolTipText = connectionString;
+            hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);
+            hsLifeTime.Text = lifeTime;
+            return (lifeTime != "-1");
+        }
+
         private void DefaultForm_Load(object sender, EventArgs e)
         {
+            FormEvents.DisableEvents(this, $@"DefaultForm_Load(object {sender}, EventArgs e)");
             FormDesign.SetFormLeft(this);
             ofdSQL.InitialDirectory = DBStaticData.ChangeToFullPath(AppSettingsClass.Instance.PathSettings.ScriptingPath);
-            GetDatabases();
+            AppStaticFunctionsClass.GetDatabases(cbConnection, _actScriptingDbReg);
+            TestOpen(_actScriptingDbReg);
             ShowCaptions();
             Anzeige();
             SetFilesVibibilies();    
@@ -164,9 +182,10 @@ namespace FBXpert.SQLView
             if(fcbSQL.Lines.Count > 0) fcbSQL.Enabled = true;
             hsRunSQLDirect.Enabled = false;
             hsPrepareCommands.Enabled = fcbSQL.LinesCount > 0;
-          //  SEHotSpot.Controller.Instance().SetHookForm(this);
-          //  SEHotSpot.Controller.Instance().SetupKeyboardHooks(this); // ctrl = new SEHotSpot.Controller();
+            //  SEHotSpot.Controller.Instance().SetHookForm(this);
+            //  SEHotSpot.Controller.Instance().SetupKeyboardHooks(this); // ctrl = new SEHotSpot.Controller();
             //ctrl.SetupKeyboardHooks(this);
+            FormEvents.EnableEvents(this);
         }
 
         private void GetDatabases()
@@ -627,11 +646,15 @@ namespace FBXpert.SQLView
        
         private void cbConnection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _actScriptingDbReg = cbConnection.SelectedItem as DBRegistrationClass;
-            _ac = new AutocompleteClass(fcbSQL, _actScriptingDbReg);
-            _ac.RefreshAutocompleteForDatabase();
-           // _ac2 = new AutocompleteClass(fcbCommands, _actScriptingDbReg);
-            _ac.AssignToObject(fcbCommands);
+            if (FormEvents.IsActive(this, "cbConnection_SelectedIndexChanged->" + ((Control)sender).Name.ToString()))
+            {
+                if (cbConnection.SelectedItem == null) return;
+                _actScriptingDbReg = (DBRegistrationClass)cbConnection.SelectedItem;
+                TestOpen(_actScriptingDbReg);
+                _ac = new AutocompleteClass(fcbSQL, _actScriptingDbReg);
+                _ac.RefreshAutocompleteForDatabase();
+                _ac.AssignToObject(fcbCommands);
+            }  
         }
 
         private void fcbSQL_KeyDown(object sender, KeyEventArgs e)

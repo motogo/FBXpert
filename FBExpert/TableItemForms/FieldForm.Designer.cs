@@ -32,9 +32,9 @@ namespace FBExpert
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FieldForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsCancel = new SeControlsLib.HotSpot();
             this.pnlCenter = new System.Windows.Forms.Panel();
@@ -84,6 +84,7 @@ namespace FBExpert
             this.gbTypes = new System.Windows.Forms.GroupBox();
             this.cbFieldTypes = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.hsToggleNotNull = new SeControlsLib.HotSpot();
             this.txtPK = new System.Windows.Forms.TextBox();
             this.cbNotNull = new System.Windows.Forms.CheckBox();
             this.cbPrimaryKey = new System.Windows.Forms.CheckBox();
@@ -109,8 +110,7 @@ namespace FBExpert
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.saveSQLFile = new System.Windows.Forms.SaveFileDialog();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
-            this.hsToggleNotNull = new SeControlsLib.HotSpot();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
             this.tabPageFieldEdit.SuspendLayout();
@@ -154,17 +154,17 @@ namespace FBExpert
             this.pnlDependenciesUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsCancel);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1520, 52);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblCaption);
+            this.pnlFormUpper.Controls.Add(this.hsCancel);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1520, 52);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // lblCaption
             // 
@@ -204,6 +204,7 @@ namespace FBExpert
             this.hsCancel.Name = "hsCancel";
             this.hsCancel.NonMarkedText = "";
             this.hsCancel.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCancel.ShortcutNewline = false;
             this.hsCancel.ShowShortcut = false;
             this.hsCancel.Size = new System.Drawing.Size(53, 52);
             this.hsCancel.TabIndex = 2;
@@ -314,7 +315,6 @@ namespace FBExpert
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -373,6 +373,7 @@ namespace FBExpert
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
             this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(96, 41);
             this.hsLoadSQL.TabIndex = 9;
@@ -426,6 +427,7 @@ namespace FBExpert
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
             this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(93, 41);
             this.hsSaveSQL.TabIndex = 8;
@@ -479,6 +481,7 @@ namespace FBExpert
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "Execute";
             this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShortcutNewline = false;
             this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(67, 41);
             this.hsSave.TabIndex = 1;
@@ -542,7 +545,9 @@ namespace FBExpert
         '\"',
         '\'',
         '\''};
-            this.fctDescription.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctDescription.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\n^\\s*(case|default)\\s*[^:]*(" +
+    "?<range>:)\\s*(?<range>[^;]+);";
+            this.fctDescription.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctDescription.BackBrush = null;
             this.fctDescription.BackColor = System.Drawing.SystemColors.Window;
             this.fctDescription.CharHeight = 14;
@@ -550,7 +555,6 @@ namespace FBExpert
             this.fctDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctDescription.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctDescription.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctDescription.IsReplaceMode = false;
             this.fctDescription.Location = new System.Drawing.Point(3, 20);
             this.fctDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -615,6 +619,7 @@ namespace FBExpert
             this.hsGetNullDatasDefaults.Name = "hsGetNullDatasDefaults";
             this.hsGetNullDatasDefaults.NonMarkedText = "";
             this.hsGetNullDatasDefaults.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsGetNullDatasDefaults.ShortcutNewline = false;
             this.hsGetNullDatasDefaults.ShowShortcut = false;
             this.hsGetNullDatasDefaults.Size = new System.Drawing.Size(36, 23);
             this.hsGetNullDatasDefaults.TabIndex = 3;
@@ -690,6 +695,7 @@ namespace FBExpert
             this.hsSelectDefault.Name = "hsSelectDefault";
             this.hsSelectDefault.NonMarkedText = "";
             this.hsSelectDefault.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelectDefault.ShortcutNewline = false;
             this.hsSelectDefault.ShowShortcut = false;
             this.hsSelectDefault.Size = new System.Drawing.Size(36, 23);
             this.hsSelectDefault.TabIndex = 2;
@@ -804,6 +810,7 @@ namespace FBExpert
             this.hsNewDomain.Name = "hsNewDomain";
             this.hsNewDomain.NonMarkedText = "";
             this.hsNewDomain.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNewDomain.ShortcutNewline = false;
             this.hsNewDomain.ShowShortcut = false;
             this.hsNewDomain.Size = new System.Drawing.Size(36, 23);
             this.hsNewDomain.TabIndex = 4;
@@ -855,6 +862,7 @@ namespace FBExpert
             this.hsEditDomain.Name = "hsEditDomain";
             this.hsEditDomain.NonMarkedText = "";
             this.hsEditDomain.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditDomain.ShortcutNewline = false;
             this.hsEditDomain.ShowShortcut = false;
             this.hsEditDomain.Size = new System.Drawing.Size(36, 23);
             this.hsEditDomain.TabIndex = 2;
@@ -1145,6 +1153,59 @@ namespace FBExpert
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Key";
             // 
+            // hsToggleNotNull
+            // 
+            this.hsToggleNotNull.BackColor = System.Drawing.Color.Transparent;
+            this.hsToggleNotNull.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsToggleNotNull.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsToggleNotNull.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsToggleNotNull.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsToggleNotNull.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsToggleNotNull.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsToggleNotNull.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsToggleNotNull.FlatAppearance.BorderSize = 0;
+            this.hsToggleNotNull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsToggleNotNull.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsToggleNotNull.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsToggleNotNull.Image = global::FBXpert.Properties.Resources.applications_system_22x;
+            this.hsToggleNotNull.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hsToggleNotNull.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
+            this.hsToggleNotNull.ImageToggleOnSelect = false;
+            this.hsToggleNotNull.Location = new System.Drawing.Point(102, 43);
+            this.hsToggleNotNull.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.hsToggleNotNull.Marked = false;
+            this.hsToggleNotNull.MarkedColor = System.Drawing.Color.Teal;
+            this.hsToggleNotNull.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsToggleNotNull.MarkedText = "";
+            this.hsToggleNotNull.MarkMode = false;
+            this.hsToggleNotNull.Name = "hsToggleNotNull";
+            this.hsToggleNotNull.NonMarkedText = "Toggle";
+            this.hsToggleNotNull.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsToggleNotNull.ShortcutNewline = false;
+            this.hsToggleNotNull.ShowShortcut = false;
+            this.hsToggleNotNull.Size = new System.Drawing.Size(70, 29);
+            this.hsToggleNotNull.TabIndex = 17;
+            this.hsToggleNotNull.Text = "Toggle";
+            this.hsToggleNotNull.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.hsToggleNotNull.ToolTipActive = false;
+            this.hsToggleNotNull.ToolTipAutomaticDelay = 500;
+            this.hsToggleNotNull.ToolTipAutoPopDelay = 5000;
+            this.hsToggleNotNull.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsToggleNotNull.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsToggleNotNull.ToolTipFor4ContextMenu = true;
+            this.hsToggleNotNull.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsToggleNotNull.ToolTipInitialDelay = 500;
+            this.hsToggleNotNull.ToolTipIsBallon = false;
+            this.hsToggleNotNull.ToolTipOwnerDraw = false;
+            this.hsToggleNotNull.ToolTipReshowDelay = 100;
+            this.hsToggleNotNull.ToolTipShowAlways = false;
+            this.hsToggleNotNull.ToolTipText = "";
+            this.hsToggleNotNull.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsToggleNotNull.ToolTipTitle = "";
+            this.hsToggleNotNull.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsToggleNotNull.UseVisualStyleBackColor = false;
+            this.hsToggleNotNull.Click += new System.EventHandler(this.hsToggleNotNull_Click);
+            // 
             // txtPK
             // 
             this.txtPK.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1268,6 +1329,7 @@ namespace FBExpert
             this.hsOrg.Name = "hsOrg";
             this.hsOrg.NonMarkedText = "New";
             this.hsOrg.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsOrg.ShortcutNewline = false;
             this.hsOrg.ShowShortcut = false;
             this.hsOrg.Size = new System.Drawing.Size(64, 41);
             this.hsOrg.TabIndex = 6;
@@ -1321,6 +1383,7 @@ namespace FBExpert
             this.hsNew.Name = "hsNew";
             this.hsNew.NonMarkedText = "New";
             this.hsNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNew.ShortcutNewline = false;
             this.hsNew.ShowShortcut = false;
             this.hsNew.Size = new System.Drawing.Size(64, 41);
             this.hsNew.TabIndex = 5;
@@ -1373,7 +1436,7 @@ namespace FBExpert
         '\'',
         '\''};
             this.fctMessages.AutoIndentCharsPatterns = "";
-            this.fctMessages.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctMessages.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctMessages.BackBrush = null;
             this.fctMessages.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctMessages.CharHeight = 14;
@@ -1382,7 +1445,6 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -1439,6 +1501,7 @@ namespace FBExpert
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
             this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
             this.hsClearMessages.ShowShortcut = false;
             this.hsClearMessages.Size = new System.Drawing.Size(53, 50);
             this.hsClearMessages.TabIndex = 3;
@@ -1491,6 +1554,7 @@ namespace FBExpert
             this.hsRefreshDependencies.Name = "hsRefreshDependencies";
             this.hsRefreshDependencies.NonMarkedText = "";
             this.hsRefreshDependencies.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependencies.ShortcutNewline = false;
             this.hsRefreshDependencies.ShowShortcut = false;
             this.hsRefreshDependencies.Size = new System.Drawing.Size(53, 50);
             this.hsRefreshDependencies.TabIndex = 2;
@@ -1532,21 +1596,21 @@ namespace FBExpert
             // 
             this.dgvDependenciesTo.AllowUserToAddRows = false;
             this.dgvDependenciesTo.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDependenciesTo.AutoGenerateColumns = false;
             this.dgvDependenciesTo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependenciesTo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependenciesTo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependenciesTo.DataSource = this.bsDependencies;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDependenciesTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesTo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesTo.EnableHeadersVisualStyles = false;
@@ -1614,6 +1678,7 @@ namespace FBExpert
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "";
             this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShortcutNewline = false;
             this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(53, 43);
             this.hotSpot1.TabIndex = 2;
@@ -1663,72 +1728,20 @@ namespace FBExpert
             // 
             this.ofdSQL.Filter = "SQL|*.sql|All|*.*";
             // 
-            // hsToggleNotNull
-            // 
-            this.hsToggleNotNull.BackColor = System.Drawing.Color.Transparent;
-            this.hsToggleNotNull.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsToggleNotNull.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsToggleNotNull.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsToggleNotNull.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsToggleNotNull.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsToggleNotNull.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsToggleNotNull.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsToggleNotNull.FlatAppearance.BorderSize = 0;
-            this.hsToggleNotNull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsToggleNotNull.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsToggleNotNull.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsToggleNotNull.Image = global::FBXpert.Properties.Resources.applications_system_22x;
-            this.hsToggleNotNull.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hsToggleNotNull.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
-            this.hsToggleNotNull.ImageToggleOnSelect = false;
-            this.hsToggleNotNull.Location = new System.Drawing.Point(102, 43);
-            this.hsToggleNotNull.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.hsToggleNotNull.Marked = false;
-            this.hsToggleNotNull.MarkedColor = System.Drawing.Color.Teal;
-            this.hsToggleNotNull.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsToggleNotNull.MarkedText = "";
-            this.hsToggleNotNull.MarkMode = false;
-            this.hsToggleNotNull.Name = "hsToggleNotNull";
-            this.hsToggleNotNull.NonMarkedText = "Toggle";
-            this.hsToggleNotNull.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsToggleNotNull.ShowShortcut = false;
-            this.hsToggleNotNull.Size = new System.Drawing.Size(70, 29);
-            this.hsToggleNotNull.TabIndex = 17;
-            this.hsToggleNotNull.Text = "Toggle";
-            this.hsToggleNotNull.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.hsToggleNotNull.ToolTipActive = false;
-            this.hsToggleNotNull.ToolTipAutomaticDelay = 500;
-            this.hsToggleNotNull.ToolTipAutoPopDelay = 5000;
-            this.hsToggleNotNull.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsToggleNotNull.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsToggleNotNull.ToolTipFor4ContextMenu = true;
-            this.hsToggleNotNull.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsToggleNotNull.ToolTipInitialDelay = 500;
-            this.hsToggleNotNull.ToolTipIsBallon = false;
-            this.hsToggleNotNull.ToolTipOwnerDraw = false;
-            this.hsToggleNotNull.ToolTipReshowDelay = 100;
-            this.hsToggleNotNull.ToolTipShowAlways = false;
-            this.hsToggleNotNull.ToolTipText = "";
-            this.hsToggleNotNull.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsToggleNotNull.ToolTipTitle = "";
-            this.hsToggleNotNull.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsToggleNotNull.UseVisualStyleBackColor = false;
-            this.hsToggleNotNull.Click += new System.EventHandler(this.hsToggleNotNull_Click);
-            // 
             // FieldForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1520, 877);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FieldForm";
             this.Text = "FieldForm";
             this.Load += new System.EventHandler(this.FieldForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlFields.ResumeLayout(false);
             this.tabPageFieldEdit.ResumeLayout(false);
@@ -1785,7 +1798,7 @@ namespace FBExpert
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.GroupBox gbFieldName;
         private System.Windows.Forms.TextBox txtFieldName;

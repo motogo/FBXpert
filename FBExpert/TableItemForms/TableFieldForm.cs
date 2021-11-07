@@ -77,28 +77,17 @@ namespace FBExpert
                     int n = 0;
                     while (cc.Read())
                     {
-
                         DomainObject = DataClassFactory.GetDataClass(StaticVariablesClass.DomainsKeyStr) as DomainClass;
-                        DomainObject.Name = cc.GetValue(0).ToString().Trim();
-                        DomainObject.Length = StaticFunctionsClass.ToIntDef(cc.GetValue(1).ToString().Trim(), 0);
-                        DomainObject.Scale = StaticFunctionsClass.ToIntDef(cc.GetValue(2).ToString().Trim(), 0);
-                        DomainObject.Precision = StaticFunctionsClass.ToIntDef(cc.GetValue(3).ToString().Trim(), 0);
-                        DomainObject.TypeNumber = StaticFunctionsClass.ToIntDef(cc.GetValue(4).ToString().Trim(), 0);
-                        DomainObject.FieldType = cc.GetValue(6).ToString().Trim();
-                        DomainObject.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(DomainObject.FieldType, DomainObject.Length);
-                        
-                        object ob = cc.GetValue(5);
-                        DomainObject.Description = cc.GetValue(5).ToString().Trim();
-                        /*                                              
-                        if (!string.IsNullOrEmpty(ob.ToString()))
-                        {
-                            byte[] bytetext = (byte[])cc.DBProvider.DataReader[3];
-                            DomainObject.Description = System.Text.Encoding.UTF8.GetString(bytetext);
-                        }
-                        */
+                        DomainObject.Name           = cc.GetValue(0).ToString().Trim();
+                        DomainObject.Length         = StaticFunctionsClass.ToIntDef(cc.GetValue(1).ToString().Trim(), 0);
+                        DomainObject.Scale          = StaticFunctionsClass.ToIntDef(cc.GetValue(2).ToString().Trim(), 0);
+                        DomainObject.Precision      = StaticFunctionsClass.ToIntDef(cc.GetValue(3).ToString().Trim(), 0);
+                        DomainObject.TypeNumber     = StaticFunctionsClass.ToIntDef(cc.GetValue(4).ToString().Trim(), 0);
+                        DomainObject.FieldType      = cc.GetValue(6).ToString().Trim();
+                        DomainObject.RawType        = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(DomainObject.FieldType, DomainObject.Length);
+                        DomainObject.Description    = cc.GetValue(5).ToString().Trim();
                         n++;
                     }
-                 
                 }
                 cc.CloseConnection();
             }
@@ -203,16 +192,19 @@ namespace FBExpert
             hi.AddTab();
             hi.AddLine("Database constraints are rules that define interrelations between tables and can check and modify the data in a database.");
 
-            
-
-
-
             hi.Set();
             hi.ShowDialog();
         }
 
+        public void SetControlSizes()
+        {
+           pnlIndiciesUpper.Height  = AppSizeConstants.UpperFormBandHeight;
+           pnlDomainUpper.Height    = AppSizeConstants.UpperFormBandHeight;
+           pnlFormUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+        }
         private void TableFieldForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             ShowCaptions();
             GetConstraints();

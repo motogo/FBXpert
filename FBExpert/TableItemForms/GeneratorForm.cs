@@ -62,7 +62,14 @@ namespace FBXpert
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
-                       
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLGeneratorUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
         public void MakeSQL()
         {
             hsSave.Enabled = (txtGenName.Text.Length > 0);
@@ -200,6 +207,7 @@ namespace FBXpert
         
         private void GeneratorForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
             SetEnables();

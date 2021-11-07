@@ -20,7 +20,7 @@ namespace FBXpert
         
         DBRegistrationClass _dbReg = null;
         string IndexName = string.Empty;
-        string TableName = string.Empty;
+        
         int messages_count = 0;
         int error_count = 0;
         NotifiesClass _localNotify = new NotifiesClass();
@@ -125,8 +125,6 @@ namespace FBXpert
 
             try
             {
-               
-               
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
                 con.Open();
                 string PkColumn = string.Empty;
@@ -141,30 +139,22 @@ namespace FBXpert
                 {
                     while (dread.Read())
                     {
-                        TableName = dread.GetValue(0).ToString().Trim();
+                        //TableName = dread.GetValue(0).ToString().Trim();
                         IndexColumnName = dread.GetValue(2).ToString().Trim();
                         Unique = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
                       
                         string[] lv = new string[1];
                         lv[0] = IndexColumnName;
-                        
-                        
-                                            
                     }
                     DataFilled = true;
                 }
                 con.Close();
-                
             }
             catch (Exception ex)
             {
               _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->UniqueForm->RefreshIndices()->" + ex.Message);
             }
-           
-
         }
-
-
 
         public List<string> SQLScript = new List<string>();
 
@@ -182,7 +172,6 @@ namespace FBXpert
             SQLScript.Clear();
             
             SQLToUI();
-
         }
 
         public void MakeSQOAlter()
@@ -236,9 +225,20 @@ namespace FBXpert
         }
 
         string OldConstraintName = string.Empty;
-        
+
+        public void SetControlSizes()
+        {
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlUpperInfo.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
         private void UniqueForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
             OldConstraintName = txtConstraintName.Text.Trim();
@@ -292,22 +292,7 @@ namespace FBXpert
                                             
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);  
-
-
         }
-
-        private void hsAddField_Click(object sender, EventArgs e)
-        {
-            String fieldName = cbFields.SelectedItem.ToString();
-            
-        }
-
-        private void hsRemoveField_Click(object sender, EventArgs e)
-        {
-            String fieldName = cbFields.SelectedItem.ToString();
-           
-        }
-
 
         string NewConstraintName = string.Empty;
         private void txtIndexName_TextChanged(object sender, EventArgs e)

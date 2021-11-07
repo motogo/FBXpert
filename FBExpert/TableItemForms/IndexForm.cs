@@ -107,6 +107,16 @@ namespace FBXpert
             _dataFilled = true;
         }
 
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
+
         private void cbSorting_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_dataFilled) return;
@@ -409,6 +419,7 @@ namespace FBXpert
         
         private void IndexForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             _dataFilled = false;
             cbTables.Items.Clear();

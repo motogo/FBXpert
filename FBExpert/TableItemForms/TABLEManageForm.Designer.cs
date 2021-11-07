@@ -31,23 +31,23 @@ namespace FBExpert
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TABLEManageForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageFIELDS = new System.Windows.Forms.TabPage();
             this.pnlTableFieldCenter = new System.Windows.Forms.Panel();
@@ -126,7 +126,7 @@ namespace FBExpert
             this.bsPrimaryKeys = new System.Windows.Forms.BindingSource(this.components);
             this.dsPrimaryKeys = new System.Data.DataSet();
             this.dataTable1 = new System.Data.DataTable();
-            this.pnlUpperConstraints = new System.Windows.Forms.Panel();
+            this.pnlConstraintsUpper = new System.Windows.Forms.Panel();
             this.tabPageForeignKeys = new System.Windows.Forms.TabPage();
             this.dgvForeignKeys = new System.Windows.Forms.DataGridView();
             this.bsForeignKeys = new System.Windows.Forms.BindingSource(this.components);
@@ -152,7 +152,7 @@ namespace FBExpert
             this.bsIndicies = new System.Windows.Forms.BindingSource(this.components);
             this.dsIndicies = new System.Data.DataSet();
             this.dataTable2 = new System.Data.DataTable();
-            this.pnlUpperIndicies = new System.Windows.Forms.Panel();
+            this.pnlIndiciesUpper = new System.Windows.Forms.Panel();
             this.hsEditIndex = new SeControlsLib.HotSpot();
             this.hsDropIndex = new SeControlsLib.HotSpot();
             this.hsAddIndex = new SeControlsLib.HotSpot();
@@ -168,7 +168,7 @@ namespace FBExpert
             this.bsDependenciesFrom = new System.Windows.Forms.BindingSource(this.components);
             this.dsDependenciesFrom = new System.Data.DataSet();
             this.dataTable6 = new System.Data.DataTable();
-            this.pnlDependenciesUpper = new System.Windows.Forms.Panel();
+            this.pnlDependenciesFromUpper = new System.Windows.Forms.Panel();
             this.hsRefreshDependenciesFrom = new SeControlsLib.HotSpot();
             this.tabPageMessages = new System.Windows.Forms.TabPage();
             this.pnlMessagesCenter = new System.Windows.Forms.Panel();
@@ -205,9 +205,9 @@ namespace FBExpert
             this.hsRefreshExportData = new SeControlsLib.HotSpot();
             this.tabPageTablestatistics = new System.Windows.Forms.TabPage();
             this.fctTableStatistics = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlUpperStatistics = new System.Windows.Forms.Panel();
+            this.pnlStatisticsUpper = new System.Windows.Forms.Panel();
             this.hsRefreshTableStatistics = new SeControlsLib.HotSpot();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.ckGetDatas = new System.Windows.Forms.CheckBox();
             this.gnUsedTime = new System.Windows.Forms.GroupBox();
             this.txtUsedTime = new System.Windows.Forms.TextBox();
@@ -279,7 +279,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsIndicies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsIndicies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable2)).BeginInit();
-            this.pnlUpperIndicies.SuspendLayout();
+            this.pnlIndiciesUpper.SuspendLayout();
             this.tabPageDependenciesTo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDependenciesTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).BeginInit();
@@ -291,7 +291,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).BeginInit();
-            this.pnlDependenciesUpper.SuspendLayout();
+            this.pnlDependenciesFromUpper.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             this.pnlMessagesCenter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
@@ -308,8 +308,8 @@ namespace FBExpert
             this.gbInsertUpdate.SuspendLayout();
             this.tabPageTablestatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctTableStatistics)).BeginInit();
-            this.pnlUpperStatistics.SuspendLayout();
-            this.pnlUpper.SuspendLayout();
+            this.pnlStatisticsUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
             this.gbMaxAllowedErrors.SuspendLayout();
             this.gbMaxRows.SuspendLayout();
@@ -333,7 +333,7 @@ namespace FBExpert
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1307, 582);
+            this.tabControl.Size = new System.Drawing.Size(1307, 626);
             this.tabControl.TabIndex = 0;
             this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -346,7 +346,7 @@ namespace FBExpert
             this.tabPageFIELDS.Location = new System.Drawing.Point(4, 23);
             this.tabPageFIELDS.Name = "tabPageFIELDS";
             this.tabPageFIELDS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFIELDS.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageFIELDS.Size = new System.Drawing.Size(1299, 599);
             this.tabPageFIELDS.TabIndex = 0;
             this.tabPageFIELDS.Text = "Fields";
             this.tabPageFIELDS.UseVisualStyleBackColor = true;
@@ -356,9 +356,9 @@ namespace FBExpert
             this.pnlTableFieldCenter.BackColor = System.Drawing.SystemColors.Control;
             this.pnlTableFieldCenter.Controls.Add(this.fastObjectListView1);
             this.pnlTableFieldCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTableFieldCenter.Location = new System.Drawing.Point(3, 52);
+            this.pnlTableFieldCenter.Location = new System.Drawing.Point(3, 55);
             this.pnlTableFieldCenter.Name = "pnlTableFieldCenter";
-            this.pnlTableFieldCenter.Size = new System.Drawing.Size(1293, 500);
+            this.pnlTableFieldCenter.Size = new System.Drawing.Size(1293, 541);
             this.pnlTableFieldCenter.TabIndex = 2;
             // 
             // fastObjectListView1
@@ -382,7 +382,7 @@ namespace FBExpert
             this.fastObjectListView1.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.fastObjectListView1.SelectedForeColor = System.Drawing.SystemColors.Info;
             this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(1293, 500);
+            this.fastObjectListView1.Size = new System.Drawing.Size(1293, 541);
             this.fastObjectListView1.TabIndex = 0;
             this.fastObjectListView1.UseAlternatingBackColors = true;
             this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
@@ -404,7 +404,7 @@ namespace FBExpert
             this.pnlTableFieldUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTableFieldUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlTableFieldUpper.Name = "pnlTableFieldUpper";
-            this.pnlTableFieldUpper.Size = new System.Drawing.Size(1293, 49);
+            this.pnlTableFieldUpper.Size = new System.Drawing.Size(1293, 52);
             this.pnlTableFieldUpper.TabIndex = 1;
             // 
             // hsEditField
@@ -435,8 +435,9 @@ namespace FBExpert
             this.hsEditField.Name = "hsEditField";
             this.hsEditField.NonMarkedText = "Edit Field";
             this.hsEditField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditField.ShortcutNewline = false;
             this.hsEditField.ShowShortcut = false;
-            this.hsEditField.Size = new System.Drawing.Size(100, 45);
+            this.hsEditField.Size = new System.Drawing.Size(100, 48);
             this.hsEditField.TabIndex = 5;
             this.hsEditField.Text = "Edit Field";
             this.hsEditField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -487,8 +488,9 @@ namespace FBExpert
             this.hsDropField.Name = "hsDropField";
             this.hsDropField.NonMarkedText = "Drop Field";
             this.hsDropField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDropField.ShortcutNewline = false;
             this.hsDropField.ShowShortcut = false;
-            this.hsDropField.Size = new System.Drawing.Size(100, 45);
+            this.hsDropField.Size = new System.Drawing.Size(100, 48);
             this.hsDropField.TabIndex = 4;
             this.hsDropField.Text = "Drop Field";
             this.hsDropField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -538,8 +540,9 @@ namespace FBExpert
             this.hsFieldRefresh.Name = "hsFieldRefresh";
             this.hsFieldRefresh.NonMarkedText = "Refresh Data";
             this.hsFieldRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsFieldRefresh.ShortcutNewline = false;
             this.hsFieldRefresh.ShowShortcut = false;
-            this.hsFieldRefresh.Size = new System.Drawing.Size(133, 45);
+            this.hsFieldRefresh.Size = new System.Drawing.Size(133, 48);
             this.hsFieldRefresh.TabIndex = 3;
             this.hsFieldRefresh.Text = "Refresh Field Data";
             this.hsFieldRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -590,8 +593,9 @@ namespace FBExpert
             this.hsNewField.Name = "hsNewField";
             this.hsNewField.NonMarkedText = "Add Field";
             this.hsNewField.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNewField.ShortcutNewline = false;
             this.hsNewField.ShowShortcut = false;
-            this.hsNewField.Size = new System.Drawing.Size(100, 45);
+            this.hsNewField.Size = new System.Drawing.Size(100, 48);
             this.hsNewField.TabIndex = 1;
             this.hsNewField.Text = "Add Field";
             this.hsNewField.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -624,40 +628,39 @@ namespace FBExpert
             this.tabPageDATA.Location = new System.Drawing.Point(4, 23);
             this.tabPageDATA.Name = "tabPageDATA";
             this.tabPageDATA.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDATA.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageDATA.Size = new System.Drawing.Size(1299, 599);
             this.tabPageDATA.TabIndex = 1;
             this.tabPageDATA.Text = "Data";
             this.tabPageDATA.UseVisualStyleBackColor = true;
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle73.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsTableContent;
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle74.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle74.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle74.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle74.NullValue = "<null>";
-            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.NullValue = "<null>";
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(3, 97);
+            this.dgvResults.Location = new System.Drawing.Point(3, 104);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.Size = new System.Drawing.Size(1293, 455);
+            this.dgvResults.Size = new System.Drawing.Size(1293, 492);
             this.dgvResults.TabIndex = 17;
             this.dgvResults.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dgvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dgvResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dgvResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dgvResults.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
@@ -789,9 +792,9 @@ namespace FBExpert
             // 
             this.gbSQL.Controls.Add(this.txtSQL);
             this.gbSQL.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbSQL.Location = new System.Drawing.Point(3, 51);
+            this.gbSQL.Location = new System.Drawing.Point(3, 54);
             this.gbSQL.Name = "gbSQL";
-            this.gbSQL.Size = new System.Drawing.Size(1293, 46);
+            this.gbSQL.Size = new System.Drawing.Size(1293, 50);
             this.gbSQL.TabIndex = 0;
             this.gbSQL.TabStop = false;
             this.gbSQL.Text = "Select command";
@@ -801,7 +804,7 @@ namespace FBExpert
             this.txtSQL.BackColor = System.Drawing.SystemColors.Info;
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQL.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSQL.Location = new System.Drawing.Point(3, 16);
+            this.txtSQL.Location = new System.Drawing.Point(3, 18);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Size = new System.Drawing.Size(1287, 20);
             this.txtSQL.TabIndex = 0;
@@ -820,7 +823,7 @@ namespace FBExpert
             this.pnlDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDataUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlDataUpper.Name = "pnlDataUpper";
-            this.pnlDataUpper.Size = new System.Drawing.Size(1293, 48);
+            this.pnlDataUpper.Size = new System.Drawing.Size(1293, 51);
             this.pnlDataUpper.TabIndex = 18;
             // 
             // gbRowHeight
@@ -830,7 +833,7 @@ namespace FBExpert
             this.gbRowHeight.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbRowHeight.Location = new System.Drawing.Point(898, 0);
             this.gbRowHeight.Name = "gbRowHeight";
-            this.gbRowHeight.Size = new System.Drawing.Size(79, 44);
+            this.gbRowHeight.Size = new System.Drawing.Size(79, 47);
             this.gbRowHeight.TabIndex = 36;
             this.gbRowHeight.TabStop = false;
             this.gbRowHeight.Text = "Row height";
@@ -838,9 +841,9 @@ namespace FBExpert
             // txtRowHeight
             // 
             this.txtRowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRowHeight.Location = new System.Drawing.Point(29, 16);
+            this.txtRowHeight.Location = new System.Drawing.Point(29, 18);
             this.txtRowHeight.Name = "txtRowHeight";
-            this.txtRowHeight.Size = new System.Drawing.Size(47, 20);
+            this.txtRowHeight.Size = new System.Drawing.Size(47, 22);
             this.txtRowHeight.TabIndex = 30;
             this.txtRowHeight.TextChanged += new System.EventHandler(this.txtRowHeight_TextChanged);
             this.txtRowHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRowHeight_KeyDown);
@@ -850,9 +853,9 @@ namespace FBExpert
             this.cbRowManually.Checked = true;
             this.cbRowManually.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbRowManually.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cbRowManually.Location = new System.Drawing.Point(3, 16);
+            this.cbRowManually.Location = new System.Drawing.Point(3, 18);
             this.cbRowManually.Name = "cbRowManually";
-            this.cbRowManually.Size = new System.Drawing.Size(26, 25);
+            this.cbRowManually.Size = new System.Drawing.Size(26, 26);
             this.cbRowManually.TabIndex = 29;
             this.cbRowManually.UseVisualStyleBackColor = true;
             this.cbRowManually.CheckedChanged += new System.EventHandler(this.cbRowManually_CheckedChanged);
@@ -885,8 +888,9 @@ namespace FBExpert
             this.hsSaveDataset.Name = "hsSaveDataset";
             this.hsSaveDataset.NonMarkedText = "Update";
             this.hsSaveDataset.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveDataset.ShortcutNewline = false;
             this.hsSaveDataset.ShowShortcut = false;
-            this.hsSaveDataset.Size = new System.Drawing.Size(88, 44);
+            this.hsSaveDataset.Size = new System.Drawing.Size(88, 47);
             this.hsSaveDataset.TabIndex = 3;
             this.hsSaveDataset.Text = "Update";
             this.hsSaveDataset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -915,7 +919,7 @@ namespace FBExpert
             this.gbEditMode.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbEditMode.Location = new System.Drawing.Point(734, 0);
             this.gbEditMode.Name = "gbEditMode";
-            this.gbEditMode.Size = new System.Drawing.Size(76, 44);
+            this.gbEditMode.Size = new System.Drawing.Size(76, 47);
             this.gbEditMode.TabIndex = 31;
             this.gbEditMode.TabStop = false;
             this.gbEditMode.Text = "Edit mode";
@@ -926,9 +930,9 @@ namespace FBExpert
             this.cbEditMode.Checked = true;
             this.cbEditMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbEditMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEditMode.Location = new System.Drawing.Point(3, 16);
+            this.cbEditMode.Location = new System.Drawing.Point(3, 18);
             this.cbEditMode.Name = "cbEditMode";
-            this.cbEditMode.Size = new System.Drawing.Size(70, 25);
+            this.cbEditMode.Size = new System.Drawing.Size(70, 26);
             this.cbEditMode.TabIndex = 29;
             this.cbEditMode.UseVisualStyleBackColor = true;
             this.cbEditMode.CheckedChanged += new System.EventHandler(this.cbEditMode_CheckedChanged);
@@ -939,7 +943,7 @@ namespace FBExpert
             this.gbBnView.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbBnView.Location = new System.Drawing.Point(400, 0);
             this.gbBnView.Name = "gbBnView";
-            this.gbBnView.Size = new System.Drawing.Size(334, 44);
+            this.gbBnView.Size = new System.Drawing.Size(334, 47);
             this.gbBnView.TabIndex = 30;
             this.gbBnView.TabStop = false;
             this.gbBnView.Text = "Navigator";
@@ -963,21 +967,21 @@ namespace FBExpert
             this.bnTableContentMoveLastItem,
             this.bnTableContentSeparator2,
             this.bnTableContentDeleteItem});
-            this.bnTableContent.Location = new System.Drawing.Point(3, 16);
+            this.bnTableContent.Location = new System.Drawing.Point(3, 18);
             this.bnTableContent.MoveFirstItem = this.bnTableContentMoveFirstItem;
             this.bnTableContent.MoveLastItem = this.bnTableContentMoveLastItem;
             this.bnTableContent.MoveNextItem = this.bnTableContentMoveNextItem;
             this.bnTableContent.MovePreviousItem = this.bnTableContentMovePreviousItem;
             this.bnTableContent.Name = "bnTableContent";
             this.bnTableContent.PositionItem = this.bnTableContentPositionItem;
-            this.bnTableContent.Size = new System.Drawing.Size(328, 25);
+            this.bnTableContent.Size = new System.Drawing.Size(328, 26);
             this.bnTableContent.TabIndex = 0;
             this.bnTableContent.Text = "bindingNavigator1";
             // 
             // bnTableContentCountItem
             // 
             this.bnTableContentCountItem.Name = "bnTableContentCountItem";
-            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 22);
+            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 23);
             this.bnTableContentCountItem.Text = "von {0}";
             this.bnTableContentCountItem.ToolTipText = "Total number of items";
             // 
@@ -998,7 +1002,7 @@ namespace FBExpert
             this.bnTableContentMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveFirstItem.Image")));
             this.bnTableContentMoveFirstItem.Name = "bnTableContentMoveFirstItem";
             this.bnTableContentMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveFirstItem.Size = new System.Drawing.Size(24, 22);
+            this.bnTableContentMoveFirstItem.Size = new System.Drawing.Size(24, 23);
             this.bnTableContentMoveFirstItem.Text = "Move first";
             // 
             // bnTableContentMovePreviousItem
@@ -1007,13 +1011,13 @@ namespace FBExpert
             this.bnTableContentMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMovePreviousItem.Image")));
             this.bnTableContentMovePreviousItem.Name = "bnTableContentMovePreviousItem";
             this.bnTableContentMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMovePreviousItem.Size = new System.Drawing.Size(24, 22);
+            this.bnTableContentMovePreviousItem.Size = new System.Drawing.Size(24, 23);
             this.bnTableContentMovePreviousItem.Text = "Move previous";
             // 
             // bnTableContentSeparator
             // 
             this.bnTableContentSeparator.Name = "bnTableContentSeparator";
-            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 25);
+            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 26);
             // 
             // bnTableContentPositionItem
             // 
@@ -1028,7 +1032,7 @@ namespace FBExpert
             // bnTableContentSeparator1
             // 
             this.bnTableContentSeparator1.Name = "bnTableContentSeparator1";
-            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 26);
             // 
             // bnTableContentMoveNextItem
             // 
@@ -1036,7 +1040,7 @@ namespace FBExpert
             this.bnTableContentMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveNextItem.Image")));
             this.bnTableContentMoveNextItem.Name = "bnTableContentMoveNextItem";
             this.bnTableContentMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveNextItem.Size = new System.Drawing.Size(24, 22);
+            this.bnTableContentMoveNextItem.Size = new System.Drawing.Size(24, 23);
             this.bnTableContentMoveNextItem.Text = "Move next";
             // 
             // bnTableContentMoveLastItem
@@ -1045,13 +1049,13 @@ namespace FBExpert
             this.bnTableContentMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveLastItem.Image")));
             this.bnTableContentMoveLastItem.Name = "bnTableContentMoveLastItem";
             this.bnTableContentMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveLastItem.Size = new System.Drawing.Size(24, 22);
+            this.bnTableContentMoveLastItem.Size = new System.Drawing.Size(24, 23);
             this.bnTableContentMoveLastItem.Text = "Move last";
             // 
             // bnTableContentSeparator2
             // 
             this.bnTableContentSeparator2.Name = "bnTableContentSeparator2";
-            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 26);
             // 
             // sfbTableData
             // 
@@ -1073,7 +1077,7 @@ namespace FBExpert
             this.sfbTableData.SaveFilterCaption = "Save filter";
             this.sfbTableData.SearchMode = SeControlsLib.eSearchMode.NotCaseSensitive;
             this.sfbTableData.ShowCheckbox = false;
-            this.sfbTableData.Size = new System.Drawing.Size(283, 44);
+            this.sfbTableData.Size = new System.Drawing.Size(283, 47);
             this.sfbTableData.SQLKonjunktion = "AND";
             this.sfbTableData.SQLVorfilterCmd = "";
             this.sfbTableData.TabIndex = 5;
@@ -1109,8 +1113,9 @@ namespace FBExpert
             this.hsCancelGettingData.Name = "hsCancelGettingData";
             this.hsCancelGettingData.NonMarkedText = "Cancel reading";
             this.hsCancelGettingData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCancelGettingData.ShortcutNewline = false;
             this.hsCancelGettingData.ShowShortcut = false;
-            this.hsCancelGettingData.Size = new System.Drawing.Size(117, 44);
+            this.hsCancelGettingData.Size = new System.Drawing.Size(117, 47);
             this.hsCancelGettingData.TabIndex = 20;
             this.hsCancelGettingData.Text = "Cancel reading";
             this.hsCancelGettingData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1139,7 +1144,7 @@ namespace FBExpert
             this.pnlTableDataAutoRefresh.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTableDataAutoRefresh.Location = new System.Drawing.Point(1052, 0);
             this.pnlTableDataAutoRefresh.Name = "pnlTableDataAutoRefresh";
-            this.pnlTableDataAutoRefresh.Size = new System.Drawing.Size(110, 44);
+            this.pnlTableDataAutoRefresh.Size = new System.Drawing.Size(110, 47);
             this.pnlTableDataAutoRefresh.TabIndex = 19;
             // 
             // cbAutoRefresh
@@ -1147,9 +1152,9 @@ namespace FBExpert
             this.cbAutoRefresh.AutoSize = true;
             this.cbAutoRefresh.Checked = true;
             this.cbAutoRefresh.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoRefresh.Location = new System.Drawing.Point(21, 13);
+            this.cbAutoRefresh.Location = new System.Drawing.Point(21, 14);
             this.cbAutoRefresh.Name = "cbAutoRefresh";
-            this.cbAutoRefresh.Size = new System.Drawing.Size(80, 17);
+            this.cbAutoRefresh.Size = new System.Drawing.Size(90, 18);
             this.cbAutoRefresh.TabIndex = 4;
             this.cbAutoRefresh.Text = "Autorefresh";
             this.cbAutoRefresh.UseVisualStyleBackColor = true;
@@ -1182,8 +1187,9 @@ namespace FBExpert
             this.hsRefreshData.Name = "hsRefreshData";
             this.hsRefreshData.NonMarkedText = "Refresh Data";
             this.hsRefreshData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshData.ShortcutNewline = false;
             this.hsRefreshData.ShowShortcut = false;
-            this.hsRefreshData.Size = new System.Drawing.Size(127, 44);
+            this.hsRefreshData.Size = new System.Drawing.Size(127, 47);
             this.hsRefreshData.TabIndex = 2;
             this.hsRefreshData.Text = "Refresh Data";
             this.hsRefreshData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1210,9 +1216,9 @@ namespace FBExpert
             // 
             this.panel1.BackgroundImage = global::FBXpert.Properties.Resources.waiting2;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(495, 135);
+            this.panel1.Location = new System.Drawing.Point(495, 145);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 220);
+            this.panel1.Size = new System.Drawing.Size(230, 237);
             this.panel1.TabIndex = 19;
             // 
             // tabDDL
@@ -1223,7 +1229,7 @@ namespace FBExpert
             this.tabDDL.Location = new System.Drawing.Point(4, 23);
             this.tabDDL.Name = "tabDDL";
             this.tabDDL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDDL.Size = new System.Drawing.Size(1299, 555);
+            this.tabDDL.Size = new System.Drawing.Size(1299, 599);
             this.tabDDL.TabIndex = 2;
             this.tabDDL.Text = "DDL";
             this.tabDDL.UseVisualStyleBackColor = true;
@@ -1232,9 +1238,9 @@ namespace FBExpert
             // 
             this.pnlDDL_CENTER.Controls.Add(this.fctTableCreateDLL);
             this.pnlDDL_CENTER.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDDL_CENTER.Location = new System.Drawing.Point(3, 43);
+            this.pnlDDL_CENTER.Location = new System.Drawing.Point(3, 46);
             this.pnlDDL_CENTER.Name = "pnlDDL_CENTER";
-            this.pnlDDL_CENTER.Size = new System.Drawing.Size(1293, 509);
+            this.pnlDDL_CENTER.Size = new System.Drawing.Size(1293, 550);
             this.pnlDDL_CENTER.TabIndex = 1;
             // 
             // fctTableCreateDLL
@@ -1260,6 +1266,7 @@ namespace FBExpert
             this.fctTableCreateDLL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctTableCreateDLL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctTableCreateDLL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctTableCreateDLL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctTableCreateDLL.IsReplaceMode = false;
             this.fctTableCreateDLL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctTableCreateDLL.LeftBracket = '(';
@@ -1269,7 +1276,7 @@ namespace FBExpert
             this.fctTableCreateDLL.RightBracket = ')';
             this.fctTableCreateDLL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctTableCreateDLL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctTableCreateDLL.ServiceColors")));
-            this.fctTableCreateDLL.Size = new System.Drawing.Size(1293, 509);
+            this.fctTableCreateDLL.Size = new System.Drawing.Size(1293, 550);
             this.fctTableCreateDLL.TabIndex = 0;
             this.fctTableCreateDLL.Zoom = 100;
             this.fctTableCreateDLL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctTableCreateDLL_KeyDown);
@@ -1309,7 +1316,7 @@ namespace FBExpert
             this.pnlDDL_UPPER.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDDL_UPPER.Location = new System.Drawing.Point(3, 3);
             this.pnlDDL_UPPER.Name = "pnlDDL_UPPER";
-            this.pnlDDL_UPPER.Size = new System.Drawing.Size(1293, 40);
+            this.pnlDDL_UPPER.Size = new System.Drawing.Size(1293, 43);
             this.pnlDDL_UPPER.TabIndex = 0;
             // 
             // gbUsedMilliseconds
@@ -1317,7 +1324,7 @@ namespace FBExpert
             this.gbUsedMilliseconds.Controls.Add(this.lblUsedMs);
             this.gbUsedMilliseconds.Location = new System.Drawing.Point(361, 3);
             this.gbUsedMilliseconds.Name = "gbUsedMilliseconds";
-            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 31);
+            this.gbUsedMilliseconds.Size = new System.Drawing.Size(126, 33);
             this.gbUsedMilliseconds.TabIndex = 32;
             this.gbUsedMilliseconds.TabStop = false;
             this.gbUsedMilliseconds.Text = "Costs in milliseconds";
@@ -1326,7 +1333,7 @@ namespace FBExpert
             // 
             this.lblUsedMs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUsedMs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsedMs.Location = new System.Drawing.Point(3, 16);
+            this.lblUsedMs.Location = new System.Drawing.Point(3, 18);
             this.lblUsedMs.Name = "lblUsedMs";
             this.lblUsedMs.Size = new System.Drawing.Size(120, 12);
             this.lblUsedMs.TabIndex = 0;
@@ -1361,8 +1368,9 @@ namespace FBExpert
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
             this.hsLoadSQL.ShowShortcut = false;
-            this.hsLoadSQL.Size = new System.Drawing.Size(124, 36);
+            this.hsLoadSQL.Size = new System.Drawing.Size(124, 39);
             this.hsLoadSQL.TabIndex = 8;
             this.hsLoadSQL.Text = "Load SQL";
             this.hsLoadSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1413,8 +1421,9 @@ namespace FBExpert
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
             this.hsSaveSQL.ShowShortcut = false;
-            this.hsSaveSQL.Size = new System.Drawing.Size(120, 36);
+            this.hsSaveSQL.Size = new System.Drawing.Size(120, 39);
             this.hsSaveSQL.TabIndex = 7;
             this.hsSaveSQL.Text = "Save SQL";
             this.hsSaveSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1465,8 +1474,9 @@ namespace FBExpert
             this.hsRunStatement.Name = "hsRunStatement";
             this.hsRunStatement.NonMarkedText = "Execute";
             this.hsRunStatement.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunStatement.ShortcutNewline = false;
             this.hsRunStatement.ShowShortcut = false;
-            this.hsRunStatement.Size = new System.Drawing.Size(90, 36);
+            this.hsRunStatement.Size = new System.Drawing.Size(90, 39);
             this.hsRunStatement.TabIndex = 6;
             this.hsRunStatement.Text = "Execute";
             this.hsRunStatement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1496,7 +1506,7 @@ namespace FBExpert
             this.tabConstraints.Location = new System.Drawing.Point(4, 23);
             this.tabConstraints.Name = "tabConstraints";
             this.tabConstraints.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConstraints.Size = new System.Drawing.Size(1299, 555);
+            this.tabConstraints.Size = new System.Drawing.Size(1299, 599);
             this.tabConstraints.TabIndex = 3;
             this.tabConstraints.Text = "Constraints";
             this.tabConstraints.UseVisualStyleBackColor = true;
@@ -1511,7 +1521,7 @@ namespace FBExpert
             this.pnlCenterConstraints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCenterConstraints.Location = new System.Drawing.Point(3, 3);
             this.pnlCenterConstraints.Name = "pnlCenterConstraints";
-            this.pnlCenterConstraints.Size = new System.Drawing.Size(1293, 549);
+            this.pnlCenterConstraints.Size = new System.Drawing.Size(1293, 593);
             this.pnlCenterConstraints.TabIndex = 3;
             // 
             // hsEditConstraint
@@ -1533,7 +1543,7 @@ namespace FBExpert
             this.hsEditConstraint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsEditConstraint.ImageHover = global::FBXpert.Properties.Resources.format_text_direction_blue_x22;
             this.hsEditConstraint.ImageToggleOnSelect = true;
-            this.hsEditConstraint.Location = new System.Drawing.Point(0, 84);
+            this.hsEditConstraint.Location = new System.Drawing.Point(0, 90);
             this.hsEditConstraint.Marked = false;
             this.hsEditConstraint.MarkedColor = System.Drawing.Color.Teal;
             this.hsEditConstraint.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1542,8 +1552,9 @@ namespace FBExpert
             this.hsEditConstraint.Name = "hsEditConstraint";
             this.hsEditConstraint.NonMarkedText = "Edit Constraint";
             this.hsEditConstraint.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditConstraint.ShortcutNewline = false;
             this.hsEditConstraint.ShowShortcut = false;
-            this.hsEditConstraint.Size = new System.Drawing.Size(137, 41);
+            this.hsEditConstraint.Size = new System.Drawing.Size(137, 44);
             this.hsEditConstraint.TabIndex = 21;
             this.hsEditConstraint.Text = "Edit Constraint";
             this.hsEditConstraint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1585,7 +1596,7 @@ namespace FBExpert
             this.hsDropConstraint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsDropConstraint.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
             this.hsDropConstraint.ImageToggleOnSelect = true;
-            this.hsDropConstraint.Location = new System.Drawing.Point(0, 40);
+            this.hsDropConstraint.Location = new System.Drawing.Point(0, 43);
             this.hsDropConstraint.Marked = false;
             this.hsDropConstraint.MarkedColor = System.Drawing.Color.Teal;
             this.hsDropConstraint.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1594,8 +1605,9 @@ namespace FBExpert
             this.hsDropConstraint.Name = "hsDropConstraint";
             this.hsDropConstraint.NonMarkedText = "Drop Constraint";
             this.hsDropConstraint.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDropConstraint.ShortcutNewline = false;
             this.hsDropConstraint.ShowShortcut = false;
-            this.hsDropConstraint.Size = new System.Drawing.Size(137, 44);
+            this.hsDropConstraint.Size = new System.Drawing.Size(137, 47);
             this.hsDropConstraint.TabIndex = 22;
             this.hsDropConstraint.Text = "Drop Constraint";
             this.hsDropConstraint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1646,8 +1658,9 @@ namespace FBExpert
             this.hsAddConstraint.Name = "hsAddConstraint";
             this.hsAddConstraint.NonMarkedText = "Add Constraint";
             this.hsAddConstraint.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddConstraint.ShortcutNewline = false;
             this.hsAddConstraint.ShowShortcut = false;
-            this.hsAddConstraint.Size = new System.Drawing.Size(137, 40);
+            this.hsAddConstraint.Size = new System.Drawing.Size(137, 43);
             this.hsAddConstraint.TabIndex = 20;
             this.hsAddConstraint.Text = "Add Constraint";
             this.hsAddConstraint.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1681,19 +1694,19 @@ namespace FBExpert
             this.tabControlConstraints.Location = new System.Drawing.Point(137, 0);
             this.tabControlConstraints.Name = "tabControlConstraints";
             this.tabControlConstraints.SelectedIndex = 0;
-            this.tabControlConstraints.Size = new System.Drawing.Size(1156, 549);
+            this.tabControlConstraints.Size = new System.Drawing.Size(1156, 593);
             this.tabControlConstraints.TabIndex = 19;
             this.tabControlConstraints.SelectedIndexChanged += new System.EventHandler(this.tabControlConstraints_SelectedIndexChanged);
             // 
             // tabPagePrimaryKeys
             // 
             this.tabPagePrimaryKeys.Controls.Add(this.dgvPrimaryKeys);
-            this.tabPagePrimaryKeys.Controls.Add(this.pnlUpperConstraints);
+            this.tabPagePrimaryKeys.Controls.Add(this.pnlConstraintsUpper);
             this.tabPagePrimaryKeys.ImageIndex = 15;
             this.tabPagePrimaryKeys.Location = new System.Drawing.Point(4, 23);
             this.tabPagePrimaryKeys.Name = "tabPagePrimaryKeys";
             this.tabPagePrimaryKeys.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePrimaryKeys.Size = new System.Drawing.Size(1148, 522);
+            this.tabPagePrimaryKeys.Size = new System.Drawing.Size(1148, 566);
             this.tabPagePrimaryKeys.TabIndex = 0;
             this.tabPagePrimaryKeys.Text = "Primary Keys";
             this.tabPagePrimaryKeys.UseVisualStyleBackColor = true;
@@ -1702,31 +1715,31 @@ namespace FBExpert
             // 
             this.dgvPrimaryKeys.AllowUserToAddRows = false;
             this.dgvPrimaryKeys.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle59.BackColor = System.Drawing.Color.Khaki;
-            this.dgvPrimaryKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
+            this.dgvPrimaryKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPrimaryKeys.AutoGenerateColumns = false;
             this.dgvPrimaryKeys.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPrimaryKeys.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPrimaryKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrimaryKeys.DataSource = this.bsPrimaryKeys;
-            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle60.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle60.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle60.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPrimaryKeys.DefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPrimaryKeys.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPrimaryKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPrimaryKeys.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvPrimaryKeys.EnableHeadersVisualStyles = false;
-            this.dgvPrimaryKeys.Location = new System.Drawing.Point(3, 41);
+            this.dgvPrimaryKeys.Location = new System.Drawing.Point(3, 44);
             this.dgvPrimaryKeys.MultiSelect = false;
             this.dgvPrimaryKeys.Name = "dgvPrimaryKeys";
             this.dgvPrimaryKeys.ReadOnly = true;
             this.dgvPrimaryKeys.RowHeadersVisible = false;
             this.dgvPrimaryKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrimaryKeys.Size = new System.Drawing.Size(1142, 478);
+            this.dgvPrimaryKeys.Size = new System.Drawing.Size(1142, 519);
             this.dgvPrimaryKeys.TabIndex = 18;
             // 
             // bsPrimaryKeys
@@ -1745,15 +1758,15 @@ namespace FBExpert
             // 
             this.dataTable1.TableName = "Table";
             // 
-            // pnlUpperConstraints
+            // pnlConstraintsUpper
             // 
-            this.pnlUpperConstraints.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlUpperConstraints.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlUpperConstraints.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperConstraints.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperConstraints.Name = "pnlUpperConstraints";
-            this.pnlUpperConstraints.Size = new System.Drawing.Size(1142, 38);
-            this.pnlUpperConstraints.TabIndex = 2;
+            this.pnlConstraintsUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlConstraintsUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlConstraintsUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlConstraintsUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlConstraintsUpper.Name = "pnlConstraintsUpper";
+            this.pnlConstraintsUpper.Size = new System.Drawing.Size(1142, 41);
+            this.pnlConstraintsUpper.TabIndex = 2;
             // 
             // tabPageForeignKeys
             // 
@@ -1763,7 +1776,7 @@ namespace FBExpert
             this.tabPageForeignKeys.Location = new System.Drawing.Point(4, 23);
             this.tabPageForeignKeys.Name = "tabPageForeignKeys";
             this.tabPageForeignKeys.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageForeignKeys.Size = new System.Drawing.Size(1148, 522);
+            this.tabPageForeignKeys.Size = new System.Drawing.Size(1148, 566);
             this.tabPageForeignKeys.TabIndex = 1;
             this.tabPageForeignKeys.Text = "Foreign Keys";
             this.tabPageForeignKeys.UseVisualStyleBackColor = true;
@@ -1772,31 +1785,31 @@ namespace FBExpert
             // 
             this.dgvForeignKeys.AllowUserToAddRows = false;
             this.dgvForeignKeys.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle75.BackColor = System.Drawing.Color.Khaki;
-            this.dgvForeignKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Khaki;
+            this.dgvForeignKeys.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvForeignKeys.AutoGenerateColumns = false;
             this.dgvForeignKeys.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvForeignKeys.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvForeignKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvForeignKeys.DataSource = this.bsForeignKeys;
-            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle76.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle76.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle76.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle76.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle76.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle76.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvForeignKeys.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvForeignKeys.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvForeignKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvForeignKeys.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvForeignKeys.EnableHeadersVisualStyles = false;
-            this.dgvForeignKeys.Location = new System.Drawing.Point(3, 40);
+            this.dgvForeignKeys.Location = new System.Drawing.Point(3, 43);
             this.dgvForeignKeys.MultiSelect = false;
             this.dgvForeignKeys.Name = "dgvForeignKeys";
             this.dgvForeignKeys.ReadOnly = true;
             this.dgvForeignKeys.RowHeadersVisible = false;
             this.dgvForeignKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvForeignKeys.Size = new System.Drawing.Size(1142, 479);
+            this.dgvForeignKeys.Size = new System.Drawing.Size(1142, 520);
             this.dgvForeignKeys.TabIndex = 20;
             // 
             // bsForeignKeys
@@ -1822,7 +1835,7 @@ namespace FBExpert
             this.pnlForeignKeysUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlForeignKeysUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlForeignKeysUpper.Name = "pnlForeignKeysUpper";
-            this.pnlForeignKeysUpper.Size = new System.Drawing.Size(1142, 37);
+            this.pnlForeignKeysUpper.Size = new System.Drawing.Size(1142, 40);
             this.pnlForeignKeysUpper.TabIndex = 19;
             // 
             // tabPageUniques
@@ -1833,7 +1846,7 @@ namespace FBExpert
             this.tabPageUniques.Location = new System.Drawing.Point(4, 23);
             this.tabPageUniques.Name = "tabPageUniques";
             this.tabPageUniques.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUniques.Size = new System.Drawing.Size(1148, 522);
+            this.tabPageUniques.Size = new System.Drawing.Size(1148, 566);
             this.tabPageUniques.TabIndex = 2;
             this.tabPageUniques.Text = "Unique";
             this.tabPageUniques.UseVisualStyleBackColor = true;
@@ -1842,31 +1855,31 @@ namespace FBExpert
             // 
             this.dgvUniques.AllowUserToAddRows = false;
             this.dgvUniques.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle77.BackColor = System.Drawing.Color.Khaki;
-            this.dgvUniques.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Khaki;
+            this.dgvUniques.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvUniques.AutoGenerateColumns = false;
             this.dgvUniques.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvUniques.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvUniques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUniques.DataSource = this.bsUniques;
-            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle78.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle78.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUniques.DefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUniques.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvUniques.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUniques.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvUniques.EnableHeadersVisualStyles = false;
-            this.dgvUniques.Location = new System.Drawing.Point(3, 40);
+            this.dgvUniques.Location = new System.Drawing.Point(3, 43);
             this.dgvUniques.MultiSelect = false;
             this.dgvUniques.Name = "dgvUniques";
             this.dgvUniques.ReadOnly = true;
             this.dgvUniques.RowHeadersVisible = false;
             this.dgvUniques.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUniques.Size = new System.Drawing.Size(1142, 479);
+            this.dgvUniques.Size = new System.Drawing.Size(1142, 520);
             this.dgvUniques.TabIndex = 20;
             // 
             // bsUniques
@@ -1892,7 +1905,7 @@ namespace FBExpert
             this.pnlUniquesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUniquesUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlUniquesUpper.Name = "pnlUniquesUpper";
-            this.pnlUniquesUpper.Size = new System.Drawing.Size(1142, 37);
+            this.pnlUniquesUpper.Size = new System.Drawing.Size(1142, 40);
             this.pnlUniquesUpper.TabIndex = 19;
             // 
             // tabPageChecks
@@ -1903,7 +1916,7 @@ namespace FBExpert
             this.tabPageChecks.Location = new System.Drawing.Point(4, 23);
             this.tabPageChecks.Name = "tabPageChecks";
             this.tabPageChecks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageChecks.Size = new System.Drawing.Size(1148, 522);
+            this.tabPageChecks.Size = new System.Drawing.Size(1148, 566);
             this.tabPageChecks.TabIndex = 3;
             this.tabPageChecks.Text = "Checks";
             this.tabPageChecks.UseVisualStyleBackColor = true;
@@ -1912,31 +1925,31 @@ namespace FBExpert
             // 
             this.dgvChecks.AllowUserToAddRows = false;
             this.dgvChecks.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle79.BackColor = System.Drawing.Color.Khaki;
-            this.dgvChecks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Khaki;
+            this.dgvChecks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvChecks.AutoGenerateColumns = false;
             this.dgvChecks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvChecks.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvChecks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChecks.DataSource = this.bsChecks;
-            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle80.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle80.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle80.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle80.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChecks.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChecks.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvChecks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvChecks.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvChecks.EnableHeadersVisualStyles = false;
-            this.dgvChecks.Location = new System.Drawing.Point(3, 40);
+            this.dgvChecks.Location = new System.Drawing.Point(3, 53);
             this.dgvChecks.MultiSelect = false;
             this.dgvChecks.Name = "dgvChecks";
             this.dgvChecks.ReadOnly = true;
             this.dgvChecks.RowHeadersVisible = false;
             this.dgvChecks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChecks.Size = new System.Drawing.Size(1142, 479);
+            this.dgvChecks.Size = new System.Drawing.Size(1142, 510);
             this.dgvChecks.TabIndex = 20;
             // 
             // bsChecks
@@ -1962,7 +1975,7 @@ namespace FBExpert
             this.pnlChecksUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlChecksUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlChecksUpper.Name = "pnlChecksUpper";
-            this.pnlChecksUpper.Size = new System.Drawing.Size(1142, 37);
+            this.pnlChecksUpper.Size = new System.Drawing.Size(1142, 50);
             this.pnlChecksUpper.TabIndex = 19;
             // 
             // ilTabControl
@@ -1989,12 +2002,12 @@ namespace FBExpert
             // tabIndicies
             // 
             this.tabIndicies.Controls.Add(this.pnpCenterIndicies);
-            this.tabIndicies.Controls.Add(this.pnlUpperIndicies);
+            this.tabIndicies.Controls.Add(this.pnlIndiciesUpper);
             this.tabIndicies.ImageKey = "view-sort-descending_x24.png";
             this.tabIndicies.Location = new System.Drawing.Point(4, 23);
             this.tabIndicies.Name = "tabIndicies";
             this.tabIndicies.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndicies.Size = new System.Drawing.Size(1299, 555);
+            this.tabIndicies.Size = new System.Drawing.Size(1299, 599);
             this.tabIndicies.TabIndex = 4;
             this.tabIndicies.Text = "Indicies";
             this.tabIndicies.UseVisualStyleBackColor = true;
@@ -2004,30 +2017,30 @@ namespace FBExpert
             this.pnpCenterIndicies.BackColor = System.Drawing.SystemColors.Control;
             this.pnpCenterIndicies.Controls.Add(this.dgvIndicies);
             this.pnpCenterIndicies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnpCenterIndicies.Location = new System.Drawing.Point(3, 43);
+            this.pnpCenterIndicies.Location = new System.Drawing.Point(3, 46);
             this.pnpCenterIndicies.Name = "pnpCenterIndicies";
-            this.pnpCenterIndicies.Size = new System.Drawing.Size(1293, 509);
+            this.pnpCenterIndicies.Size = new System.Drawing.Size(1293, 550);
             this.pnpCenterIndicies.TabIndex = 3;
             // 
             // dgvIndicies
             // 
             this.dgvIndicies.AllowUserToAddRows = false;
             this.dgvIndicies.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle81.BackColor = System.Drawing.Color.Khaki;
-            this.dgvIndicies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle81;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Khaki;
+            this.dgvIndicies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvIndicies.AutoGenerateColumns = false;
             this.dgvIndicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvIndicies.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvIndicies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvIndicies.DataSource = this.bsIndicies;
-            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle82.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle82.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle82.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle82.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle82.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle82.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvIndicies.DefaultCellStyle = dataGridViewCellStyle82;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvIndicies.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvIndicies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIndicies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvIndicies.EnableHeadersVisualStyles = false;
@@ -2037,7 +2050,7 @@ namespace FBExpert
             this.dgvIndicies.ReadOnly = true;
             this.dgvIndicies.RowHeadersVisible = false;
             this.dgvIndicies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvIndicies.Size = new System.Drawing.Size(1293, 509);
+            this.dgvIndicies.Size = new System.Drawing.Size(1293, 550);
             this.dgvIndicies.TabIndex = 19;
             // 
             // bsIndicies
@@ -2056,18 +2069,18 @@ namespace FBExpert
             // 
             this.dataTable2.TableName = "Table";
             // 
-            // pnlUpperIndicies
+            // pnlIndiciesUpper
             // 
-            this.pnlUpperIndicies.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlUpperIndicies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlUpperIndicies.Controls.Add(this.hsEditIndex);
-            this.pnlUpperIndicies.Controls.Add(this.hsDropIndex);
-            this.pnlUpperIndicies.Controls.Add(this.hsAddIndex);
-            this.pnlUpperIndicies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperIndicies.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperIndicies.Name = "pnlUpperIndicies";
-            this.pnlUpperIndicies.Size = new System.Drawing.Size(1293, 40);
-            this.pnlUpperIndicies.TabIndex = 2;
+            this.pnlIndiciesUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlIndiciesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlIndiciesUpper.Controls.Add(this.hsEditIndex);
+            this.pnlIndiciesUpper.Controls.Add(this.hsDropIndex);
+            this.pnlIndiciesUpper.Controls.Add(this.hsAddIndex);
+            this.pnlIndiciesUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlIndiciesUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlIndiciesUpper.Name = "pnlIndiciesUpper";
+            this.pnlIndiciesUpper.Size = new System.Drawing.Size(1293, 43);
+            this.pnlIndiciesUpper.TabIndex = 2;
             // 
             // hsEditIndex
             // 
@@ -2097,8 +2110,9 @@ namespace FBExpert
             this.hsEditIndex.Name = "hsEditIndex";
             this.hsEditIndex.NonMarkedText = "Edit Index";
             this.hsEditIndex.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditIndex.ShortcutNewline = false;
             this.hsEditIndex.ShowShortcut = false;
-            this.hsEditIndex.Size = new System.Drawing.Size(100, 36);
+            this.hsEditIndex.Size = new System.Drawing.Size(100, 39);
             this.hsEditIndex.TabIndex = 6;
             this.hsEditIndex.Text = "Edit Index";
             this.hsEditIndex.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2149,8 +2163,9 @@ namespace FBExpert
             this.hsDropIndex.Name = "hsDropIndex";
             this.hsDropIndex.NonMarkedText = "Drop Index";
             this.hsDropIndex.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDropIndex.ShortcutNewline = false;
             this.hsDropIndex.ShowShortcut = false;
-            this.hsDropIndex.Size = new System.Drawing.Size(100, 36);
+            this.hsDropIndex.Size = new System.Drawing.Size(100, 39);
             this.hsDropIndex.TabIndex = 7;
             this.hsDropIndex.Text = "Drop Index";
             this.hsDropIndex.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2201,8 +2216,9 @@ namespace FBExpert
             this.hsAddIndex.Name = "hsAddIndex";
             this.hsAddIndex.NonMarkedText = "Add Index";
             this.hsAddIndex.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddIndex.ShortcutNewline = false;
             this.hsAddIndex.ShowShortcut = false;
-            this.hsAddIndex.Size = new System.Drawing.Size(100, 36);
+            this.hsAddIndex.Size = new System.Drawing.Size(100, 39);
             this.hsAddIndex.TabIndex = 2;
             this.hsAddIndex.Text = "Add Index";
             this.hsAddIndex.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2233,7 +2249,7 @@ namespace FBExpert
             this.tabPageDependenciesTo.Location = new System.Drawing.Point(4, 23);
             this.tabPageDependenciesTo.Name = "tabPageDependenciesTo";
             this.tabPageDependenciesTo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDependenciesTo.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageDependenciesTo.Size = new System.Drawing.Size(1299, 599);
             this.tabPageDependenciesTo.TabIndex = 6;
             this.tabPageDependenciesTo.Text = "Dependencies";
             this.tabPageDependenciesTo.UseVisualStyleBackColor = true;
@@ -2242,31 +2258,31 @@ namespace FBExpert
             // 
             this.dgvDependenciesTo.AllowUserToAddRows = false;
             this.dgvDependenciesTo.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle83.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle83;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependenciesTo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvDependenciesTo.AutoGenerateColumns = false;
             this.dgvDependenciesTo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependenciesTo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependenciesTo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependenciesTo.DataSource = this.bsDependenciesTo;
-            dataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle84.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle84.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle84.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle84.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle84.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle84.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle84;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependenciesTo.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvDependenciesTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesTo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesTo.EnableHeadersVisualStyles = false;
-            this.dgvDependenciesTo.Location = new System.Drawing.Point(3, 43);
+            this.dgvDependenciesTo.Location = new System.Drawing.Point(3, 46);
             this.dgvDependenciesTo.MultiSelect = false;
             this.dgvDependenciesTo.Name = "dgvDependenciesTo";
             this.dgvDependenciesTo.ReadOnly = true;
             this.dgvDependenciesTo.RowHeadersVisible = false;
             this.dgvDependenciesTo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDependenciesTo.Size = new System.Drawing.Size(1293, 509);
+            this.dgvDependenciesTo.Size = new System.Drawing.Size(1293, 550);
             this.dgvDependenciesTo.TabIndex = 20;
             // 
             // bsDependenciesTo
@@ -2292,7 +2308,7 @@ namespace FBExpert
             this.pnlDependenciesToUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDependenciesToUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlDependenciesToUpper.Name = "pnlDependenciesToUpper";
-            this.pnlDependenciesToUpper.Size = new System.Drawing.Size(1293, 40);
+            this.pnlDependenciesToUpper.Size = new System.Drawing.Size(1293, 43);
             this.pnlDependenciesToUpper.TabIndex = 19;
             // 
             // hsRefreshDependenciesTo
@@ -2323,8 +2339,9 @@ namespace FBExpert
             this.hsRefreshDependenciesTo.Name = "hsRefreshDependenciesTo";
             this.hsRefreshDependenciesTo.NonMarkedText = "Refresh";
             this.hsRefreshDependenciesTo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependenciesTo.ShortcutNewline = false;
             this.hsRefreshDependenciesTo.ShowShortcut = false;
-            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(101, 36);
+            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(101, 39);
             this.hsRefreshDependenciesTo.TabIndex = 3;
             this.hsRefreshDependenciesTo.Text = "Refresh";
             this.hsRefreshDependenciesTo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2350,12 +2367,12 @@ namespace FBExpert
             // tabPageDependenciesFrom
             // 
             this.tabPageDependenciesFrom.Controls.Add(this.dgvDependenciesFrom);
-            this.tabPageDependenciesFrom.Controls.Add(this.pnlDependenciesUpper);
+            this.tabPageDependenciesFrom.Controls.Add(this.pnlDependenciesFromUpper);
             this.tabPageDependenciesFrom.ImageKey = "go_previous22x.png";
             this.tabPageDependenciesFrom.Location = new System.Drawing.Point(4, 23);
             this.tabPageDependenciesFrom.Name = "tabPageDependenciesFrom";
             this.tabPageDependenciesFrom.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDependenciesFrom.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageDependenciesFrom.Size = new System.Drawing.Size(1299, 599);
             this.tabPageDependenciesFrom.TabIndex = 7;
             this.tabPageDependenciesFrom.Text = "Dependencies From";
             this.tabPageDependenciesFrom.UseVisualStyleBackColor = true;
@@ -2364,31 +2381,31 @@ namespace FBExpert
             // 
             this.dgvDependenciesFrom.AllowUserToAddRows = false;
             this.dgvDependenciesFrom.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle85.BackColor = System.Drawing.Color.Khaki;
-            this.dgvDependenciesFrom.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle85;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Khaki;
+            this.dgvDependenciesFrom.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvDependenciesFrom.AutoGenerateColumns = false;
             this.dgvDependenciesFrom.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDependenciesFrom.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvDependenciesFrom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependenciesFrom.DataSource = this.bsDependenciesFrom;
-            dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle86.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle86.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle86.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle86.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle86.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle86.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDependenciesFrom.DefaultCellStyle = dataGridViewCellStyle86;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependenciesFrom.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvDependenciesFrom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesFrom.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesFrom.EnableHeadersVisualStyles = false;
-            this.dgvDependenciesFrom.Location = new System.Drawing.Point(3, 43);
+            this.dgvDependenciesFrom.Location = new System.Drawing.Point(3, 46);
             this.dgvDependenciesFrom.MultiSelect = false;
             this.dgvDependenciesFrom.Name = "dgvDependenciesFrom";
             this.dgvDependenciesFrom.ReadOnly = true;
             this.dgvDependenciesFrom.RowHeadersVisible = false;
             this.dgvDependenciesFrom.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDependenciesFrom.Size = new System.Drawing.Size(1293, 509);
+            this.dgvDependenciesFrom.Size = new System.Drawing.Size(1293, 550);
             this.dgvDependenciesFrom.TabIndex = 22;
             // 
             // bsDependenciesFrom
@@ -2408,14 +2425,14 @@ namespace FBExpert
             // 
             // pnlDependenciesUpper
             // 
-            this.pnlDependenciesUpper.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlDependenciesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlDependenciesUpper.Controls.Add(this.hsRefreshDependenciesFrom);
-            this.pnlDependenciesUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDependenciesUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlDependenciesUpper.Name = "pnlDependenciesUpper";
-            this.pnlDependenciesUpper.Size = new System.Drawing.Size(1293, 40);
-            this.pnlDependenciesUpper.TabIndex = 21;
+            this.pnlDependenciesFromUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDependenciesFromUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlDependenciesFromUpper.Controls.Add(this.hsRefreshDependenciesFrom);
+            this.pnlDependenciesFromUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDependenciesFromUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlDependenciesFromUpper.Name = "pnlDependenciesUpper";
+            this.pnlDependenciesFromUpper.Size = new System.Drawing.Size(1293, 43);
+            this.pnlDependenciesFromUpper.TabIndex = 21;
             // 
             // hsRefreshDependenciesFrom
             // 
@@ -2445,8 +2462,9 @@ namespace FBExpert
             this.hsRefreshDependenciesFrom.Name = "hsRefreshDependenciesFrom";
             this.hsRefreshDependenciesFrom.NonMarkedText = "Refresh";
             this.hsRefreshDependenciesFrom.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependenciesFrom.ShortcutNewline = false;
             this.hsRefreshDependenciesFrom.ShowShortcut = false;
-            this.hsRefreshDependenciesFrom.Size = new System.Drawing.Size(100, 36);
+            this.hsRefreshDependenciesFrom.Size = new System.Drawing.Size(100, 39);
             this.hsRefreshDependenciesFrom.TabIndex = 3;
             this.hsRefreshDependenciesFrom.Text = "Refresh";
             this.hsRefreshDependenciesFrom.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2477,7 +2495,7 @@ namespace FBExpert
             this.tabPageMessages.Location = new System.Drawing.Point(4, 23);
             this.tabPageMessages.Name = "tabPageMessages";
             this.tabPageMessages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessages.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageMessages.Size = new System.Drawing.Size(1299, 599);
             this.tabPageMessages.TabIndex = 5;
             this.tabPageMessages.Text = "Messages";
             this.tabPageMessages.UseVisualStyleBackColor = true;
@@ -2486,9 +2504,9 @@ namespace FBExpert
             // 
             this.pnlMessagesCenter.Controls.Add(this.fctMessages);
             this.pnlMessagesCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMessagesCenter.Location = new System.Drawing.Point(3, 43);
+            this.pnlMessagesCenter.Location = new System.Drawing.Point(3, 46);
             this.pnlMessagesCenter.Name = "pnlMessagesCenter";
-            this.pnlMessagesCenter.Size = new System.Drawing.Size(1293, 509);
+            this.pnlMessagesCenter.Size = new System.Drawing.Size(1293, 550);
             this.pnlMessagesCenter.TabIndex = 5;
             // 
             // fctMessages
@@ -2515,6 +2533,7 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -2525,7 +2544,7 @@ namespace FBExpert
             this.fctMessages.RightBracket = ')';
             this.fctMessages.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctMessages.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctMessages.ServiceColors")));
-            this.fctMessages.Size = new System.Drawing.Size(1293, 509);
+            this.fctMessages.Size = new System.Drawing.Size(1293, 550);
             this.fctMessages.TabIndex = 1;
             this.fctMessages.WordWrap = true;
             this.fctMessages.Zoom = 100;
@@ -2562,7 +2581,7 @@ namespace FBExpert
             this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlMessagesUpper.Name = "pnlMessagesUpper";
-            this.pnlMessagesUpper.Size = new System.Drawing.Size(1293, 40);
+            this.pnlMessagesUpper.Size = new System.Drawing.Size(1293, 43);
             this.pnlMessagesUpper.TabIndex = 4;
             // 
             // hsClearMessages
@@ -2593,8 +2612,9 @@ namespace FBExpert
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
             this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
             this.hsClearMessages.ShowShortcut = false;
-            this.hsClearMessages.Size = new System.Drawing.Size(100, 36);
+            this.hsClearMessages.Size = new System.Drawing.Size(100, 39);
             this.hsClearMessages.TabIndex = 1;
             this.hsClearMessages.Text = "Clear";
             this.hsClearMessages.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2625,7 +2645,7 @@ namespace FBExpert
             this.tabPageExport.Location = new System.Drawing.Point(4, 23);
             this.tabPageExport.Name = "tabPageExport";
             this.tabPageExport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExport.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageExport.Size = new System.Drawing.Size(1299, 599);
             this.tabPageExport.TabIndex = 8;
             this.tabPageExport.Text = "Export Data";
             this.tabPageExport.UseVisualStyleBackColor = true;
@@ -2635,9 +2655,9 @@ namespace FBExpert
             this.pnlExportCenter.Controls.Add(this.fcbExport);
             this.pnlExportCenter.Controls.Add(this.dgExportGrid);
             this.pnlExportCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExportCenter.Location = new System.Drawing.Point(3, 45);
+            this.pnlExportCenter.Location = new System.Drawing.Point(3, 48);
             this.pnlExportCenter.Name = "pnlExportCenter";
-            this.pnlExportCenter.Size = new System.Drawing.Size(1293, 489);
+            this.pnlExportCenter.Size = new System.Drawing.Size(1293, 529);
             this.pnlExportCenter.TabIndex = 3;
             // 
             // fcbExport
@@ -2654,7 +2674,7 @@ namespace FBExpert
         '\'',
         '\''};
             this.fcbExport.AutoIndentCharsPatterns = "";
-            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fcbExport.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fcbExport.BackBrush = null;
             this.fcbExport.CharHeight = 14;
             this.fcbExport.CharWidth = 8;
@@ -2663,6 +2683,7 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';
@@ -2672,7 +2693,7 @@ namespace FBExpert
             this.fcbExport.RightBracket = ')';
             this.fcbExport.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcbExport.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcbExport.ServiceColors")));
-            this.fcbExport.Size = new System.Drawing.Size(1024, 489);
+            this.fcbExport.Size = new System.Drawing.Size(1024, 529);
             this.fcbExport.TabIndex = 1;
             this.fcbExport.Zoom = 100;
             // 
@@ -2714,7 +2735,7 @@ namespace FBExpert
             this.dgExportGrid.Location = new System.Drawing.Point(0, 0);
             this.dgExportGrid.Name = "dgExportGrid";
             this.dgExportGrid.RowHeadersVisible = false;
-            this.dgExportGrid.Size = new System.Drawing.Size(269, 489);
+            this.dgExportGrid.Size = new System.Drawing.Size(269, 529);
             this.dgExportGrid.TabIndex = 3;
             // 
             // colExportGridPOS
@@ -2750,9 +2771,9 @@ namespace FBExpert
             // 
             this.pnlExportBottom.Controls.Add(this.pbExport);
             this.pnlExportBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlExportBottom.Location = new System.Drawing.Point(3, 534);
+            this.pnlExportBottom.Location = new System.Drawing.Point(3, 577);
             this.pnlExportBottom.Name = "pnlExportBottom";
-            this.pnlExportBottom.Size = new System.Drawing.Size(1293, 18);
+            this.pnlExportBottom.Size = new System.Drawing.Size(1293, 19);
             this.pnlExportBottom.TabIndex = 4;
             // 
             // pbExport
@@ -2760,7 +2781,7 @@ namespace FBExpert
             this.pbExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbExport.Location = new System.Drawing.Point(0, 0);
             this.pbExport.Name = "pbExport";
-            this.pbExport.Size = new System.Drawing.Size(1293, 18);
+            this.pbExport.Size = new System.Drawing.Size(1293, 19);
             this.pbExport.TabIndex = 0;
             // 
             // pnlExportDataUpper
@@ -2776,7 +2797,7 @@ namespace FBExpert
             this.pnlExportDataUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExportDataUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlExportDataUpper.Name = "pnlExportDataUpper";
-            this.pnlExportDataUpper.Size = new System.Drawing.Size(1293, 42);
+            this.pnlExportDataUpper.Size = new System.Drawing.Size(1293, 45);
             this.pnlExportDataUpper.TabIndex = 2;
             // 
             // gbExportFile
@@ -2786,7 +2807,7 @@ namespace FBExpert
             this.gbExportFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbExportFile.Location = new System.Drawing.Point(389, 0);
             this.gbExportFile.Name = "gbExportFile";
-            this.gbExportFile.Size = new System.Drawing.Size(326, 38);
+            this.gbExportFile.Size = new System.Drawing.Size(326, 41);
             this.gbExportFile.TabIndex = 22;
             this.gbExportFile.TabStop = false;
             this.gbExportFile.Text = "File";
@@ -2795,17 +2816,17 @@ namespace FBExpert
             // 
             this.cbCharSet.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbCharSet.FormattingEnabled = true;
-            this.cbCharSet.Location = new System.Drawing.Point(114, 16);
+            this.cbCharSet.Location = new System.Drawing.Point(114, 18);
             this.cbCharSet.Name = "cbCharSet";
-            this.cbCharSet.Size = new System.Drawing.Size(209, 21);
+            this.cbCharSet.Size = new System.Drawing.Size(209, 22);
             this.cbCharSet.TabIndex = 12;
             // 
             // cbExportToFile
             // 
             this.cbExportToFile.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cbExportToFile.Location = new System.Drawing.Point(3, 16);
+            this.cbExportToFile.Location = new System.Drawing.Point(3, 18);
             this.cbExportToFile.Name = "cbExportToFile";
-            this.cbExportToFile.Size = new System.Drawing.Size(105, 19);
+            this.cbExportToFile.Size = new System.Drawing.Size(105, 20);
             this.cbExportToFile.TabIndex = 11;
             this.cbExportToFile.Text = "Export to file";
             this.cbExportToFile.UseVisualStyleBackColor = true;
@@ -2818,7 +2839,7 @@ namespace FBExpert
             this.cbExportToScreen.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbExportToScreen.Location = new System.Drawing.Point(240, 0);
             this.cbExportToScreen.Name = "cbExportToScreen";
-            this.cbExportToScreen.Size = new System.Drawing.Size(149, 38);
+            this.cbExportToScreen.Size = new System.Drawing.Size(149, 41);
             this.cbExportToScreen.TabIndex = 12;
             this.cbExportToScreen.Text = "Export to screen";
             this.cbExportToScreen.UseVisualStyleBackColor = true;
@@ -2831,7 +2852,7 @@ namespace FBExpert
             this.gbInsertUpdate.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbInsertUpdate.Location = new System.Drawing.Point(826, 0);
             this.gbInsertUpdate.Name = "gbInsertUpdate";
-            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 38);
+            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 41);
             this.gbInsertUpdate.TabIndex = 10;
             this.gbInsertUpdate.TabStop = false;
             this.gbInsertUpdate.Text = "FieldType of statments";
@@ -2839,9 +2860,9 @@ namespace FBExpert
             // rbUPDATE
             // 
             this.rbUPDATE.AutoSize = true;
-            this.rbUPDATE.Location = new System.Drawing.Point(228, 16);
+            this.rbUPDATE.Location = new System.Drawing.Point(228, 17);
             this.rbUPDATE.Name = "rbUPDATE";
-            this.rbUPDATE.Size = new System.Drawing.Size(69, 17);
+            this.rbUPDATE.Size = new System.Drawing.Size(65, 18);
             this.rbUPDATE.TabIndex = 2;
             this.rbUPDATE.Text = "UPDATE";
             this.rbUPDATE.UseVisualStyleBackColor = true;
@@ -2849,9 +2870,9 @@ namespace FBExpert
             // rbINSERTUPDATE
             // 
             this.rbINSERTUPDATE.AutoSize = true;
-            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 16);
+            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 17);
             this.rbINSERTUPDATE.Name = "rbINSERTUPDATE";
-            this.rbINSERTUPDATE.Size = new System.Drawing.Size(124, 17);
+            this.rbINSERTUPDATE.Size = new System.Drawing.Size(119, 18);
             this.rbINSERTUPDATE.TabIndex = 1;
             this.rbINSERTUPDATE.Text = "INSERT or UPDATE";
             this.rbINSERTUPDATE.UseVisualStyleBackColor = true;
@@ -2860,9 +2881,9 @@ namespace FBExpert
             // 
             this.rbINSERT.AutoSize = true;
             this.rbINSERT.Checked = true;
-            this.rbINSERT.Location = new System.Drawing.Point(6, 16);
+            this.rbINSERT.Location = new System.Drawing.Point(6, 17);
             this.rbINSERT.Name = "rbINSERT";
-            this.rbINSERT.Size = new System.Drawing.Size(65, 17);
+            this.rbINSERT.Size = new System.Drawing.Size(62, 18);
             this.rbINSERT.TabIndex = 0;
             this.rbINSERT.TabStop = true;
             this.rbINSERT.Text = "INSERT";
@@ -2896,8 +2917,9 @@ namespace FBExpert
             this.hsCancelExport.Name = "hsCancelExport";
             this.hsCancelExport.NonMarkedText = "Cancel reading";
             this.hsCancelExport.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCancelExport.ShortcutNewline = false;
             this.hsCancelExport.ShowShortcut = false;
-            this.hsCancelExport.Size = new System.Drawing.Size(140, 38);
+            this.hsCancelExport.Size = new System.Drawing.Size(140, 41);
             this.hsCancelExport.TabIndex = 21;
             this.hsCancelExport.Text = "Cancel reading";
             this.hsCancelExport.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2948,8 +2970,9 @@ namespace FBExpert
             this.hsExportData.Name = "hsExportData";
             this.hsExportData.NonMarkedText = "Export";
             this.hsExportData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportData.ShortcutNewline = false;
             this.hsExportData.ShowShortcut = false;
-            this.hsExportData.Size = new System.Drawing.Size(100, 38);
+            this.hsExportData.Size = new System.Drawing.Size(100, 41);
             this.hsExportData.TabIndex = 9;
             this.hsExportData.Text = "Export";
             this.hsExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3000,8 +3023,9 @@ namespace FBExpert
             this.hsRefreshExportData.Name = "hsRefreshExportData";
             this.hsRefreshExportData.NonMarkedText = "Refresh Data";
             this.hsRefreshExportData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshExportData.ShortcutNewline = false;
             this.hsRefreshExportData.ShowShortcut = false;
-            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 38);
+            this.hsRefreshExportData.Size = new System.Drawing.Size(133, 41);
             this.hsRefreshExportData.TabIndex = 3;
             this.hsRefreshExportData.Text = "Refresh Data";
             this.hsRefreshExportData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3026,11 +3050,11 @@ namespace FBExpert
             // tabPageTablestatistics
             // 
             this.tabPageTablestatistics.Controls.Add(this.fctTableStatistics);
-            this.tabPageTablestatistics.Controls.Add(this.pnlUpperStatistics);
+            this.tabPageTablestatistics.Controls.Add(this.pnlStatisticsUpper);
             this.tabPageTablestatistics.Location = new System.Drawing.Point(4, 23);
             this.tabPageTablestatistics.Name = "tabPageTablestatistics";
             this.tabPageTablestatistics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTablestatistics.Size = new System.Drawing.Size(1299, 555);
+            this.tabPageTablestatistics.Size = new System.Drawing.Size(1299, 599);
             this.tabPageTablestatistics.TabIndex = 9;
             this.tabPageTablestatistics.Text = "Table Statistics";
             this.tabPageTablestatistics.UseVisualStyleBackColor = true;
@@ -3063,28 +3087,28 @@ namespace FBExpert
             this.fctTableStatistics.IsReplaceMode = false;
             this.fctTableStatistics.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctTableStatistics.LeftBracket = '(';
-            this.fctTableStatistics.Location = new System.Drawing.Point(3, 43);
+            this.fctTableStatistics.Location = new System.Drawing.Point(3, 46);
             this.fctTableStatistics.Name = "fctTableStatistics";
             this.fctTableStatistics.Paddings = new System.Windows.Forms.Padding(0);
             this.fctTableStatistics.ReadOnly = true;
             this.fctTableStatistics.RightBracket = ')';
             this.fctTableStatistics.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctTableStatistics.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctTableStatistics.ServiceColors")));
-            this.fctTableStatistics.Size = new System.Drawing.Size(1293, 509);
+            this.fctTableStatistics.Size = new System.Drawing.Size(1293, 550);
             this.fctTableStatistics.TabIndex = 21;
             this.fctTableStatistics.WordWrap = true;
             this.fctTableStatistics.Zoom = 100;
             // 
-            // pnlUpperStatistics
+            // pnlStatisticsUpper
             // 
-            this.pnlUpperStatistics.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlUpperStatistics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlUpperStatistics.Controls.Add(this.hsRefreshTableStatistics);
-            this.pnlUpperStatistics.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperStatistics.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperStatistics.Name = "pnlUpperStatistics";
-            this.pnlUpperStatistics.Size = new System.Drawing.Size(1293, 40);
-            this.pnlUpperStatistics.TabIndex = 20;
+            this.pnlStatisticsUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlStatisticsUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlStatisticsUpper.Controls.Add(this.hsRefreshTableStatistics);
+            this.pnlStatisticsUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlStatisticsUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlStatisticsUpper.Name = "pnlStatisticsUpper";
+            this.pnlStatisticsUpper.Size = new System.Drawing.Size(1293, 43);
+            this.pnlStatisticsUpper.TabIndex = 20;
             // 
             // hsRefreshTableStatistics
             // 
@@ -3114,8 +3138,9 @@ namespace FBExpert
             this.hsRefreshTableStatistics.Name = "hsRefreshTableStatistics";
             this.hsRefreshTableStatistics.NonMarkedText = "Refresh";
             this.hsRefreshTableStatistics.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshTableStatistics.ShortcutNewline = false;
             this.hsRefreshTableStatistics.ShowShortcut = false;
-            this.hsRefreshTableStatistics.Size = new System.Drawing.Size(101, 36);
+            this.hsRefreshTableStatistics.Size = new System.Drawing.Size(101, 39);
             this.hsRefreshTableStatistics.TabIndex = 3;
             this.hsRefreshTableStatistics.Text = "Refresh";
             this.hsRefreshTableStatistics.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3138,28 +3163,28 @@ namespace FBExpert
             this.hsRefreshTableStatistics.UseVisualStyleBackColor = false;
             this.hsRefreshTableStatistics.Click += new System.EventHandler(this.hsRefreshTableStatistics_Click);
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.ckGetDatas);
-            this.pnlUpper.Controls.Add(this.gnUsedTime);
-            this.pnlUpper.Controls.Add(this.gbMaxAllowedErrors);
-            this.pnlUpper.Controls.Add(this.gbMaxRows);
-            this.pnlUpper.Controls.Add(this.lblTableName);
-            this.pnlUpper.Controls.Add(this.hsPageRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1307, 48);
-            this.pnlUpper.TabIndex = 1;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.ckGetDatas);
+            this.pnlFormUpper.Controls.Add(this.gnUsedTime);
+            this.pnlFormUpper.Controls.Add(this.gbMaxAllowedErrors);
+            this.pnlFormUpper.Controls.Add(this.gbMaxRows);
+            this.pnlFormUpper.Controls.Add(this.lblTableName);
+            this.pnlFormUpper.Controls.Add(this.hsPageRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1307, 52);
+            this.pnlFormUpper.TabIndex = 1;
             // 
             // ckGetDatas
             // 
             this.ckGetDatas.AutoSize = true;
-            this.ckGetDatas.Location = new System.Drawing.Point(1068, 19);
+            this.ckGetDatas.Location = new System.Drawing.Point(1068, 20);
             this.ckGetDatas.Name = "ckGetDatas";
-            this.ckGetDatas.Size = new System.Drawing.Size(83, 17);
+            this.ckGetDatas.Size = new System.Drawing.Size(89, 18);
             this.ckGetDatas.TabIndex = 8;
             this.ckGetDatas.Text = "Read Datas";
             this.ckGetDatas.UseVisualStyleBackColor = true;
@@ -3170,7 +3195,7 @@ namespace FBExpert
             this.gnUsedTime.Controls.Add(this.txtUsedTime);
             this.gnUsedTime.Location = new System.Drawing.Point(371, 4);
             this.gnUsedTime.Name = "gnUsedTime";
-            this.gnUsedTime.Size = new System.Drawing.Size(116, 41);
+            this.gnUsedTime.Size = new System.Drawing.Size(116, 44);
             this.gnUsedTime.TabIndex = 7;
             this.gnUsedTime.TabStop = false;
             this.gnUsedTime.Text = "Used time (ms)";
@@ -3179,10 +3204,10 @@ namespace FBExpert
             // 
             this.txtUsedTime.BackColor = System.Drawing.SystemColors.Info;
             this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
+            this.txtUsedTime.Location = new System.Drawing.Point(3, 18);
             this.txtUsedTime.Name = "txtUsedTime";
             this.txtUsedTime.ReadOnly = true;
-            this.txtUsedTime.Size = new System.Drawing.Size(110, 20);
+            this.txtUsedTime.Size = new System.Drawing.Size(110, 22);
             this.txtUsedTime.TabIndex = 0;
             this.txtUsedTime.Text = "0";
             // 
@@ -3191,7 +3216,7 @@ namespace FBExpert
             this.gbMaxAllowedErrors.Controls.Add(this.txtMaxAllowedErrors);
             this.gbMaxAllowedErrors.Location = new System.Drawing.Point(497, 4);
             this.gbMaxAllowedErrors.Name = "gbMaxAllowedErrors";
-            this.gbMaxAllowedErrors.Size = new System.Drawing.Size(116, 41);
+            this.gbMaxAllowedErrors.Size = new System.Drawing.Size(116, 44);
             this.gbMaxAllowedErrors.TabIndex = 6;
             this.gbMaxAllowedErrors.TabStop = false;
             this.gbMaxAllowedErrors.Text = "Max allowed errors";
@@ -3199,9 +3224,9 @@ namespace FBExpert
             // txtMaxAllowedErrors
             // 
             this.txtMaxAllowedErrors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMaxAllowedErrors.Location = new System.Drawing.Point(3, 16);
+            this.txtMaxAllowedErrors.Location = new System.Drawing.Point(3, 18);
             this.txtMaxAllowedErrors.Name = "txtMaxAllowedErrors";
-            this.txtMaxAllowedErrors.Size = new System.Drawing.Size(110, 20);
+            this.txtMaxAllowedErrors.Size = new System.Drawing.Size(110, 22);
             this.txtMaxAllowedErrors.TabIndex = 0;
             this.txtMaxAllowedErrors.Text = "100";
             // 
@@ -3212,7 +3237,7 @@ namespace FBExpert
             this.gbMaxRows.Controls.Add(this.txtMaxRows);
             this.gbMaxRows.Location = new System.Drawing.Point(624, 3);
             this.gbMaxRows.Name = "gbMaxRows";
-            this.gbMaxRows.Size = new System.Drawing.Size(212, 41);
+            this.gbMaxRows.Size = new System.Drawing.Size(212, 44);
             this.gbMaxRows.TabIndex = 3;
             this.gbMaxRows.TabStop = false;
             this.gbMaxRows.Text = "Max Rows";
@@ -3221,9 +3246,9 @@ namespace FBExpert
             // 
             this.rbSQLDesc.AutoSize = true;
             this.rbSQLDesc.Checked = true;
-            this.rbSQLDesc.Location = new System.Drawing.Point(149, 18);
+            this.rbSQLDesc.Location = new System.Drawing.Point(149, 19);
             this.rbSQLDesc.Name = "rbSQLDesc";
-            this.rbSQLDesc.Size = new System.Drawing.Size(54, 17);
+            this.rbSQLDesc.Size = new System.Drawing.Size(51, 18);
             this.rbSQLDesc.TabIndex = 2;
             this.rbSQLDesc.TabStop = true;
             this.rbSQLDesc.Text = "DESC";
@@ -3232,9 +3257,9 @@ namespace FBExpert
             // rbSQLAsc
             // 
             this.rbSQLAsc.AutoSize = true;
-            this.rbSQLAsc.Location = new System.Drawing.Point(97, 18);
+            this.rbSQLAsc.Location = new System.Drawing.Point(97, 19);
             this.rbSQLAsc.Name = "rbSQLAsc";
-            this.rbSQLAsc.Size = new System.Drawing.Size(46, 17);
+            this.rbSQLAsc.Size = new System.Drawing.Size(44, 18);
             this.rbSQLAsc.TabIndex = 1;
             this.rbSQLAsc.Text = "ASC";
             this.rbSQLAsc.UseVisualStyleBackColor = true;
@@ -3242,9 +3267,9 @@ namespace FBExpert
             // txtMaxRows
             // 
             this.txtMaxRows.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtMaxRows.Location = new System.Drawing.Point(3, 16);
+            this.txtMaxRows.Location = new System.Drawing.Point(3, 18);
             this.txtMaxRows.Name = "txtMaxRows";
-            this.txtMaxRows.Size = new System.Drawing.Size(88, 20);
+            this.txtMaxRows.Size = new System.Drawing.Size(88, 22);
             this.txtMaxRows.TabIndex = 0;
             this.txtMaxRows.Text = "10000";
             // 
@@ -3252,7 +3277,7 @@ namespace FBExpert
             // 
             this.lblTableName.AutoSize = true;
             this.lblTableName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableName.Location = new System.Drawing.Point(81, 16);
+            this.lblTableName.Location = new System.Drawing.Point(81, 17);
             this.lblTableName.Name = "lblTableName";
             this.lblTableName.Size = new System.Drawing.Size(97, 20);
             this.lblTableName.TabIndex = 2;
@@ -3286,8 +3311,9 @@ namespace FBExpert
             this.hsPageRefresh.Name = "hsPageRefresh";
             this.hsPageRefresh.NonMarkedText = "Refresh";
             this.hsPageRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPageRefresh.ShortcutNewline = false;
             this.hsPageRefresh.ShowShortcut = false;
-            this.hsPageRefresh.Size = new System.Drawing.Size(150, 48);
+            this.hsPageRefresh.Size = new System.Drawing.Size(150, 52);
             this.hsPageRefresh.TabIndex = 1;
             this.hsPageRefresh.Text = "Refresh all datas";
             this.hsPageRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -3337,8 +3363,9 @@ namespace FBExpert
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(45, 48);
+            this.hsClose.Size = new System.Drawing.Size(45, 52);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -3364,9 +3391,9 @@ namespace FBExpert
             // 
             this.pnlCenter.Controls.Add(this.tabControl);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 48);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 52);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1307, 582);
+            this.pnlCenter.Size = new System.Drawing.Size(1307, 626);
             this.pnlCenter.TabIndex = 3;
             // 
             // saveSQLFile
@@ -3396,11 +3423,12 @@ namespace FBExpert
             // 
             // TABLEManageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1307, 630);
+            this.ClientSize = new System.Drawing.Size(1307, 678);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TABLEManageForm";
             this.Text = "TABLEManageForm";
@@ -3465,7 +3493,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsIndicies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsIndicies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable2)).EndInit();
-            this.pnlUpperIndicies.ResumeLayout(false);
+            this.pnlIndiciesUpper.ResumeLayout(false);
             this.tabPageDependenciesTo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDependenciesTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesTo)).EndInit();
@@ -3477,7 +3505,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDependenciesFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable6)).EndInit();
-            this.pnlDependenciesUpper.ResumeLayout(false);
+            this.pnlDependenciesFromUpper.ResumeLayout(false);
             this.tabPageMessages.ResumeLayout(false);
             this.pnlMessagesCenter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).EndInit();
@@ -3495,9 +3523,9 @@ namespace FBExpert
             this.gbInsertUpdate.PerformLayout();
             this.tabPageTablestatistics.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctTableStatistics)).EndInit();
-            this.pnlUpperStatistics.ResumeLayout(false);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlStatisticsUpper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gnUsedTime.ResumeLayout(false);
             this.gnUsedTime.PerformLayout();
             this.gbMaxAllowedErrors.ResumeLayout(false);
@@ -3515,7 +3543,7 @@ namespace FBExpert
         private System.Windows.Forms.TabPage tabPageFIELDS;
         
         private System.Windows.Forms.TabPage tabPageDATA;
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsPageRefresh;
@@ -3560,13 +3588,13 @@ namespace FBExpert
         private System.Windows.Forms.BindingSource bsPrimaryKeys;
         private System.Data.DataSet dsPrimaryKeys;
         private System.Data.DataTable dataTable1;
-        private System.Windows.Forms.Panel pnlUpperConstraints;
+        private System.Windows.Forms.Panel pnlConstraintsUpper;
         private System.Windows.Forms.Panel pnpCenterIndicies;
         private System.Windows.Forms.DataGridView dgvIndicies;
         private System.Windows.Forms.BindingSource bsIndicies;
         private System.Data.DataSet dsIndicies;
         private System.Data.DataTable dataTable2;
-        private System.Windows.Forms.Panel pnlUpperIndicies;
+        private System.Windows.Forms.Panel pnlIndiciesUpper;
         private SeControlsLib.HotSpot hsDropField;
         private SeControlsLib.HotSpot hsEditField;
         private System.Windows.Forms.TabControl tabControlConstraints;
@@ -3610,7 +3638,7 @@ namespace FBExpert
         private System.Windows.Forms.BindingSource bsDependenciesFrom;
         private System.Data.DataSet dsDependenciesFrom;
         private System.Data.DataTable dataTable6;
-        private System.Windows.Forms.Panel pnlDependenciesUpper;
+        private System.Windows.Forms.Panel pnlDependenciesFromUpper;
         private SeControlsLib.HotSpot hsRefreshDependenciesFrom;
         private System.Windows.Forms.ImageList ilTabControl;
         private SeControlsLib.HotSpot hsAddIndex;
@@ -3663,7 +3691,7 @@ namespace FBExpert
         private System.Windows.Forms.Label lblUsedMs;
         private System.Windows.Forms.TabPage tabPageTablestatistics;
         private FastColoredTextBoxNS.FastColoredTextBox fctTableStatistics;
-        private System.Windows.Forms.Panel pnlUpperStatistics;
+        private System.Windows.Forms.Panel pnlStatisticsUpper;
         private SeControlsLib.HotSpot hsRefreshTableStatistics;
         private System.Windows.Forms.ToolStripMenuItem tsmiReadBLOB;
         private System.Windows.Forms.GroupBox gbMaxAllowedErrors;

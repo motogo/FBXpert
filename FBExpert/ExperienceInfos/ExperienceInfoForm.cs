@@ -2,16 +2,16 @@ using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
+using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using FormInterfaces;
-using System;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using MessageFormLibrary;
-using FBXpert;
 using Initialization;
+using SEMessageBoxLibrary;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SQLView
 {
@@ -32,7 +32,7 @@ namespace SQLView
         private string _dbfile = string.Empty;
         private string _dblocalfile = string.Empty;
 
-        public ExperienceInfoForm(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray, bool testMode = false)
+        public ExperienceInfoForm(DBRegistrationClass ca, List<TableClass> tables, Form mdiParent = null, eColorDesigns appDesign = eColorDesigns.Gray, eColorDesigns developDesign = eColorDesigns.Gray)
         {
             MdiParent = mdiParent;
           
@@ -154,7 +154,7 @@ namespace SQLView
                 exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                 txtDatabase.Text = _dbfile;
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
                
             }
@@ -170,7 +170,7 @@ namespace SQLView
                 explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
                 txtLocalDatabase.Text = _dblocalfile;
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
 
             }
@@ -216,7 +216,7 @@ namespace SQLView
                exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
                exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
                
             }
@@ -229,7 +229,7 @@ namespace SQLView
                 explocal.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
                 explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
 
             }
@@ -363,7 +363,7 @@ namespace SQLView
                         exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
                         exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                     }
-                    catch (Exception ex)
+                    catch// (Exception ex)
                     {
                       
                     }

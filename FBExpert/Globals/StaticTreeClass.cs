@@ -257,7 +257,7 @@ namespace FBExpert
 
     #region REFRESH_NODES_FROM_TABLES
 
-        public void RefreshPrimaryKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshPrimaryKeysFromTableNodes(TreeNode nd, TreeNode group_node)
         {
             var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
             var ViewNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.ViewsKeyGroupStr);
@@ -290,9 +290,10 @@ namespace FBExpert
             nd.Nodes.Add(akt_group_node);
         }
 
-        public void RefreshPrimaryKeysFromSystemTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshPrimaryKeysFromSystemTableNodes(TreeNode regNode, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.SystemTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.SystemTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             TreeNode akt_group_node;
             //bool newnode = false;
@@ -319,10 +320,10 @@ namespace FBExpert
             akt_group_node.Text = $@"Primary System Keys ({pk_list.Count})";
             akt_group_node.Nodes.AddRange(pk_list.ToArray());
            
-            nd.Nodes.Add(akt_group_node);
+            regNode.Nodes.Add(akt_group_node);
         }
 
-        public void RefreshForeignKeysFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode _tnSelected)
+        public void RefreshForeignKeysFromTableNodes(TreeNode nd, TreeNode _tnSelected)
         {
 
             var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
@@ -368,7 +369,7 @@ namespace FBExpert
             if(newnode)  nd.Nodes.Add(akt_group_node);
         }
         
-        public void RefreshConstraintsFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshConstraintsFromTableNodes(TreeNode regNode, TreeNode group_node)
         {
             /*
             constaraints
@@ -377,8 +378,8 @@ namespace FBExpert
                ------------not nulls
                ------------checks
             */
-
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.CommonTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             TreeNode akt_group_node;
@@ -459,7 +460,7 @@ namespace FBExpert
             uniques_group_node.Nodes.AddRange(cu_list.ToArray());
             uniques_group_node.Text = $@"Uniques ({cu_list.Count})";
  
-            if(newnode)  nd.Nodes.Add(akt_group_node);
+            if(newnode)  regNode.Nodes.Add(akt_group_node);
 
             akt_group_node.Text = $@"Constraints ({(cpk_list.Count + cnn_list.Count + cu_list.Count)})";
             akt_group_node.Nodes.Add(pk_constrainr_group_node);
@@ -469,9 +470,10 @@ namespace FBExpert
             akt_group_node.Collapse();
         }
 
-        public void RefreshTriggersFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshTriggersFromTableNodes(TreeNode regNode, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.CommonTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             TreeNode akt_group_node;
@@ -504,12 +506,13 @@ namespace FBExpert
             akt_group_node.Nodes.AddRange(trigger_list.ToArray());
             akt_group_node.Text = $@"Triggers ({trigger_list.Count})";
             
-            if(newnode) nd.Nodes.Add(akt_group_node);
+            if(newnode) regNode.Nodes.Add(akt_group_node);
         }
 
-        public void RefreshSystemTriggersFromTableNodes(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshSystemTriggersFromTableNodes(TreeNode regNode, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.SystemTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.SystemTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             TreeNode akt_group_node;
@@ -542,13 +545,13 @@ namespace FBExpert
             akt_group_node.Nodes.AddRange(trigger_list.ToArray());
             akt_group_node.Text = $@"System Triggers ({trigger_list.Count})";
 
-            if (newnode) nd.Nodes.Add(akt_group_node);
+            if (newnode) regNode.Nodes.Add(akt_group_node);
         }
 
-        public void RefreshDependenciesFromTableNodes(DBRegistrationClass DBReg, TreeNode nd)
-        {           
-                
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+        public void RefreshDependenciesFromTableNodes(TreeNode regNode)
+        {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.CommonTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
             
             var dependencies_group_node = DataClassFactory.GetNewNode(StaticVariablesClass.DependenciesKeyGroupStr);
@@ -620,7 +623,7 @@ namespace FBExpert
             dependenciesFROMProcedures_group_node.Nodes.AddRange(dependencyFROMProcedures_list.ToArray());
             dependenciesFROMProcedures_group_node.Text = "Dependencies From (" + dependencyFROMProcedures_list.Count.ToString() + ")";
                                    
-            nd.Nodes.Add(dependencies_group_node);
+            regNode.Nodes.Add(dependencies_group_node);
             
             dependencies_group_node.Text = "Dependencies (" + (dependencyTOTables_list.Count + dependencyFROMTables_list.Count+ dependencyTOTriggers_list.Count + dependencyFROMTriggers_list.Count+ dependencyTOViews_list.Count + dependencyFROMViews_list.Count+ dependencyTOProcedures_list.Count + dependencyFROMProcedures_list.Count).ToString() + ")";
             dependencies_group_node.Nodes.Add(dependencies_Tables_group_node);
@@ -1190,8 +1193,9 @@ namespace FBExpert
         }
         
         //Holt alle Indeces für die dem Knoten nd übergeordneten Table
-        public void RefreshTableIndicesFromOneTable(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshTableIndicesFromOneTable(TreeNode regNode, TreeNode nd)
         {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             var tnn = FindPrevTableNode(nd);
             if(tnn == null) return;
 
@@ -1261,9 +1265,10 @@ namespace FBExpert
         }
 
         //Liest alle Indicies únd erzeugt den TreeGroupNode Indeces und Restauriert die indeces der TableNodes
-        public void RefreshAllIndicies(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshAllIndicies(TreeNode regNode, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.CommonTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
            
             Dictionary<string,IndexClass> indecies = GetIndecesObjects(DBReg);
@@ -1308,12 +1313,13 @@ namespace FBExpert
             inx_list.Sort(CompareString);
             akt_group_node.Nodes.AddRange(inx_list.ToArray());
             akt_group_node.Text = $@"Indices all ({inx_list.Count})";
-            if (newnode) nd.Nodes.Add(akt_group_node);
+            if (newnode) regNode.Nodes.Add(akt_group_node);
         }
 
-        public void RefreshAllSystemIndicies(DBRegistrationClass DBReg, TreeNode nd, TreeNode group_node)
+        public void RefreshAllSystemIndicies(TreeNode regNode, TreeNode group_node)
         {
-            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.SystemTablesKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var TableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(regNode, StaticVariablesClass.SystemTablesKeyGroupStr);
             var Tables = StaticTreeClass.Instance().GetTableObjectsFromNode(TableNode);
 
             Dictionary<string, IndexClass> indecies = GetSystemIndecesObjects(DBReg);
@@ -1357,15 +1363,16 @@ namespace FBExpert
             inx_list.Sort(CompareString);
             akt_group_node.Nodes.AddRange(inx_list.ToArray());
             akt_group_node.Text = $@"System Indices all ({inx_list.Count})";
-            if (newnode) nd.Nodes.Add(akt_group_node);
+            if (newnode) regNode.Nodes.Add(akt_group_node);
         }
 
 
         #endregion
 
 
-        public void RefreshDomains(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshDomains(TreeNode nd)
         {
+            var DBReg = (DBRegistrationClass)nd.Tag;
             string _funcStr = $@"RefreshDomains(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance.RefreshNonSystemDomains(DBReg.Version);          
             var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
@@ -1451,8 +1458,9 @@ namespace FBExpert
             }
         }
 
-        public void RefreshSystemDomains(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshSystemDomains(TreeNode regNode)
         {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             string _funcStr = $@"RefreshDomains(DBReg={DBReg})";
             string cmd = DomainSQLStatementsClass.Instance.RefreshSystemDomains(DBReg.Version);
             var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
@@ -1473,11 +1481,11 @@ namespace FBExpert
 
                 if (dread != null)
                 {
-                    var tn = FindNode(nd, StaticVariablesClass.SystemDomainsKeyGroupStr);
+                    var tn = FindNode(regNode, StaticVariablesClass.SystemDomainsKeyGroupStr);
                     if (tn == null)
                     {
                         tn = DataClassFactory.GetNewNode(StaticVariablesClass.SystemDomainsKeyGroupStr);
-                        nd.Nodes.Add(tn);
+                        regNode.Nodes.Add(tn);
                     }
                     else
                     {
@@ -1523,7 +1531,7 @@ namespace FBExpert
                     NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->dreade==null"));
                 }
                 con.Close();
-                nd.Expand();
+                regNode.Expand();
             }
             else
             {
@@ -1531,14 +1539,14 @@ namespace FBExpert
             }
         }
 
-        public void RefreshForeignKeys(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshForeignKeys4OneTable(TreeNode regNode, TreeNode tablenode)
         {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             string _funcStr = $@"RefreshForeignKeys(DBReg={DBReg})";
-            var tn = FindNode(nd, StaticVariablesClass.ForeignKeyGroupStr);
-            var tablenode = FindPrevTableNode(nd);            
             var table = (TableClass)tablenode.Tag;
-            
-            //string cmd = SQLStatementsClass.Instance.GetTableForeignKeys(DBReg.Version, table.Name);
+            var nodeForeignKeyGroup = FindNode(tablenode, StaticVariablesClass.ForeignKeyGroupStr);
+            //var tablenode = FindPrevTableNode(tableGroupNode);            
+
             string cmd = SQLStatementsClass.Instance.GetAllTableForeignKeys(DBReg.Version, eTableType.withoutsystem, table.Name);
             
             var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
@@ -1558,15 +1566,15 @@ namespace FBExpert
                 var dread = fcmd.ExecuteReader();
                 if (dread != null)
                 {                                       
-                    if (tn == null)
+                    if (nodeForeignKeyGroup == null)
                     {
-                        tn = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr);                        
-                        nd.Nodes.Add(tn);
+                        nodeForeignKeyGroup = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyGroupStr);
+                        tablenode.Nodes.Add(nodeForeignKeyGroup);
                     }
                     else
                     {
-                        tn.Text = "Foreign Keys";
-                        tn.Nodes.Clear();
+                        nodeForeignKeyGroup.Text = "Foreign Keys";
+                        nodeForeignKeyGroup.Nodes.Clear();
                     }
 
                     if (dread.HasRows)
@@ -1582,13 +1590,13 @@ namespace FBExpert
                             int inactive = StaticFunctionsClass.ToIntDef(dread.GetValue(1).ToString().Trim(), 1);                            
                             tc.IsActive = inactive == 0;
                             TreeNode node = DataClassFactory.GetNewNode(StaticVariablesClass.ForeignKeyStr,tc.Name,tc);
-                            tn.Nodes.Add(node);
+                            nodeForeignKeyGroup.Nodes.Add(node);
                             n++;
                         }
                         //Console.WriteLine($@"{_funcStr} used Time {n}:{sw.ElapsedMilliseconds}");
                         NotifiesClass.Instance.AddToINFO($@"RefreshForeignKeys->Rows {n} -> used time {sw.ElapsedMilliseconds} ms", eMessageGranularity.few, true);
                         sw.Stop();
-                        tn.Text = $@"Foreign Keys ({n})";
+                        nodeForeignKeyGroup.Text = $@"Foreign Keys ({n})";
                     }
                     dread.Close();
                 }
@@ -1597,7 +1605,7 @@ namespace FBExpert
                     NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->dread==null"));
                 }
                 con.Close();
-                nd.Expand();
+                tablenode.Expand();
             }
             else
             {
@@ -1723,8 +1731,9 @@ namespace FBExpert
             return n;
         }
 
-        public void RefreshConstraints(DBRegistrationClass DBReg, TreeNode nconstr)
+        public void RefreshConstraints(TreeNode regNode, TreeNode nconstr)
         {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             var tablenode = FindPrevTableNode(nconstr);
             var tc =  (TableClass)tablenode.Tag;
             var tn = FindNode(tablenode, StaticVariablesClass.ConstraintsKeyGroupStr);
@@ -1744,13 +1753,14 @@ namespace FBExpert
             tn.Collapse();
         }
 
-        public void RefreshProcedures(DBRegistrationClass DBReg,  TreeNode nd)
-        {            
-            TreeNode tn = FindNode(nd, StaticVariablesClass.ProceduresKeyGroupStr);
+        public void RefreshProcedures(TreeNode regNode)
+        {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            TreeNode tn = FindNode(regNode, StaticVariablesClass.ProceduresKeyGroupStr);
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.ProceduresKeyGroupStr);                
-                nd.Nodes.Add(tn);
+                regNode.Nodes.Add(tn);
             }
             else
             {
@@ -1758,7 +1768,7 @@ namespace FBExpert
                 tn.Nodes.Clear();
             }
             RefreshProceduresItems(DBReg,tn);
-            nd.Expand();           
+            regNode.Expand();           
         }
 
         public void RefreshProceduresItems(DBRegistrationClass DBReg,  TreeNode nd)
@@ -1878,13 +1888,14 @@ namespace FBExpert
             }         
         }
 
-        public void RefreshInternalFunctions(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshInternalFunctions(TreeNode regNode)
         {
-            TreeNode tn = FindNode(nd, StaticVariablesClass.FunctionsKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            TreeNode tn = FindNode(regNode, StaticVariablesClass.FunctionsKeyGroupStr);
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.FunctionsKeyGroupStr);
-                nd.Nodes.Add(tn);
+                regNode.Nodes.Add(tn);
             }
             else
             {
@@ -1893,7 +1904,7 @@ namespace FBExpert
             }
 
             RefreshInternalFunctionsItems(DBReg, tn);
-            nd.Expand();
+            regNode.Expand();
         }
 
         public void RefreshInternalFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
@@ -1908,13 +1919,14 @@ namespace FBExpert
             nd.Text = $@"Functions ({allObjects.Count})";            
         }
 
-        public void RefreshUserDefinedFunctions(DBRegistrationClass DBReg, TreeNode nd)
+        public void RefreshUserDefinedFunctions(TreeNode regNode)
         {
-            TreeNode tn = FindNode(nd, StaticVariablesClass.UserDefinedFunctionsKeyGroupStr);
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            TreeNode tn = FindNode(regNode, StaticVariablesClass.UserDefinedFunctionsKeyGroupStr);
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.UserDefinedFunctionsKeyGroupStr);
-                nd.Nodes.Add(tn);
+                regNode.Nodes.Add(tn);
             }
             else
             {
@@ -1922,7 +1934,7 @@ namespace FBExpert
                 tn.Nodes.Clear();
             }
             RefreshUserDefinedFunctionsItems(DBReg, tn);
-            nd.Expand();
+            regNode.Expand();
         }
 
         public void RefreshUserDefinedFunctionsItems(DBRegistrationClass DBReg, TreeNode nd)
@@ -2014,8 +2026,9 @@ namespace FBExpert
             }
         }
         
-        public void RefreshRoles(DBRegistrationClass DBReg,  TreeNode nd)
+        public void RefreshRoles(TreeNode regNode)
         {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             string _funcStr = $@"RefreshRoles(DBReg={DBReg})";
             NotifiesClass.Instance.AddToINFO($@"Refresh Roles for {DBReg.Alias}",eMessageGranularity.few, true);
             string cmd = SQLStatementsClass.Instance.RefreshRoles(DBReg.Version);
@@ -2037,11 +2050,11 @@ namespace FBExpert
                 var dread = fcmd.ExecuteReader();
                 if (dread != null)
                 {                   
-                    var tn = FindNode(nd, StaticVariablesClass.RolesKeyGroupStr);
+                    var tn = FindNode(regNode, StaticVariablesClass.RolesKeyGroupStr);
                     if (tn == null)
                     {
                         tn = DataClassFactory.GetNewNode(StaticVariablesClass.RolesKeyGroupStr);                       
-                        nd.Nodes.Add(tn);
+                        regNode.Nodes.Add(tn);
                     }
                     else
                     {
@@ -2077,7 +2090,7 @@ namespace FBExpert
                     NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{this.GetType()}->{_funcStr}->dread==null"));
                 }
                 con.Close();
-                nd.Expand();
+                regNode.Expand();
             }
             else
             {
@@ -2085,13 +2098,14 @@ namespace FBExpert
             }
         }
 
-        public void RefreshGenerators(DBRegistrationClass DBReg,  TreeNode nd)
-        {           
-            var tn = FindNode(nd, StaticVariablesClass.GeneratorsKeyGroupStr);
+        public void RefreshGenerators(TreeNode regNode)
+        {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
+            var tn = FindNode(regNode, StaticVariablesClass.GeneratorsKeyGroupStr);
             if (tn == null)
             {
                 tn = DataClassFactory.GetNewNode(StaticVariablesClass.GeneratorsKeyGroupStr);
-                nd.Nodes.Add(tn);
+                regNode.Nodes.Add(tn);
             }
             else
             {
@@ -2100,7 +2114,7 @@ namespace FBExpert
             }
 
             RefreshGeneratorsItems(DBReg,tn);            
-            nd.Expand();
+            regNode.Expand();
         }
 
         public void RefreshGeneratorsItems(DBRegistrationClass DBReg, TreeNode nd)
@@ -2186,20 +2200,13 @@ namespace FBExpert
             }            
         }
                 
-        public TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode TableGroupNode, string TableName)
+       
+        public TreeNode RefreshTable(TreeNode regNode, TreeNode tableNode)
         {
-            var tablenode = FindNode(TableGroupNode, TableName);
-            return RefreshTable(DBReg, tablenode);
-        }
-
-        public TreeNode RefreshTable(DBRegistrationClass DBReg, TreeNode tableNode)
-        {          
-            
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             var fieldgroup_node = FindNode(tableNode, StaticVariablesClass.FieldsKeyGroupStr);
             var tc = tableNode.Tag as TableClass;            
-            
             NotifiesClass.Instance.AddToINFO($@"Refresh Table {DBReg.Alias}->{tc.Name}");
-            
             var tcc = GetTableObject(DBReg,tc);
             tableNode.Tag = tcc;
             if (tableNode.Parent != null)
@@ -2213,19 +2220,36 @@ namespace FBExpert
                 }
             }
 
-            RefreshForeignKeys(DBReg, tableNode);
+            RefreshForeignKeys4OneTable(regNode,tableNode);
             return fieldgroup_node;
         }
         
-        public TreeNode RefreshNonSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
+        /// <summary>
+        /// Liest alle nicht sytsem tables ein
+        /// Erzeugt alle Tree nodes
+        /// Bastelt Tree zusammen
+        /// </summary>
+        /// <param name="DBRegx"></param>
+        /// <param name="ndx"></param>
+        /// <returns></returns>
+        public TreeNode RefreshNonSystemTables(TreeNode ndx)
         {                               
             var nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);            
             var DBReg = (DBRegistrationClass)nd.Tag;
 
+            
+            NotifiesClass.Instance.AddToINFO($@"Reading common tables for {DBReg.Alias}",eMessageGranularity.more, true);
+            
+            var tableList =  GetAllNonSystemTableObjectsComplete(DBReg);
+            if (tableList == null) return null;
+            if (tableList.Count <= 0) return null;
+
+
+            //Lege TableGroup Knoten an
             TreeNode tn = FindNode(nd, StaticVariablesClass.CommonTablesKeyGroupStr);
             if (tn == null)
             {
-                tn = DataClassFactory.GetNewNode(StaticVariablesClass.CommonTablesKeyGroupStr);                
+                tn = DataClassFactory.GetNewNode(StaticVariablesClass.CommonTablesKeyGroupStr);
                 nd.Nodes.Add(tn);
             }
             tn.Nodes.Clear();
@@ -2234,14 +2258,8 @@ namespace FBExpert
                 Name = $@"TableGroup_{DBReg.Alias}"
             };
             tn.Tag = vgc;
-            
-            NotifiesClass.Instance.AddToINFO($@"Reading common tables for {DBReg.Alias}",eMessageGranularity.more, true);
-            
-            var tableList =  GetAllNonSystemTableObjectsComplete(DBReg);
 
-            if (tableList == null) return null;
-            if (tableList.Count <= 0) return null;
-            
+
             int n = 0;
             
             foreach (var tc in tableList.Values)
@@ -2271,11 +2289,11 @@ namespace FBExpert
                  int dependenciesFROMProcedures_cnt = 0;
 
                  if (tc.Fields != null) fields_cnt = tc.Fields.Count;
-                 if (tc.primary_constraint != null) pk_cnt = 1; // tc.primary_constraint.Count;
+                 if (tc.primary_constraint != null) pk_cnt = 1; 
                  if (tc.ForeignKeys != null) fk_cnt = tc.ForeignKeys.Count;
                  if (tc.uniques_constraints != null) uc_cnt = tc.uniques_constraints.Count;
                  if (tc.notnulls_constraints != null) nn_cnt = tc.notnulls_constraints.Count;
-                 if (tc.primary_constraint != null) constraints_pk_cnt = 1; // tc.primary_constraint.Count;
+                 if (tc.primary_constraint != null) constraints_pk_cnt = 1; 
                  if (tc.check_constraints != null) ck_cnt = tc.check_constraints.Count;
                  if (tc.Indices != null) indices_cnt = tc.Indices.Count;
                  if (tc.Triggers != null) triggers_cnt = tc.Triggers.Count;
@@ -2576,9 +2594,9 @@ namespace FBExpert
             return tn;
         }
 
-        public TreeNode RefreshSystemTables(DBRegistrationClass DBRegx, TreeNode ndx)
+        public TreeNode RefreshSystemTables(TreeNode regNode)
         {
-            var nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);
+            var nd = StaticTreeClass.Instance().FindPrevDBNode(regNode);
             var DBReg = (DBRegistrationClass)nd.Tag;
 
             TreeNode tn = FindNode(nd, StaticVariablesClass.SystemTablesKeyGroupStr);
@@ -3305,8 +3323,9 @@ namespace FBExpert
             return tableList; //tn;
         }
 */
-        public TreeNode RefreshView(DBRegistrationClass DBReg, TreeNode ndx)
-        {           
+        public TreeNode RefreshView(TreeNode regNode, TreeNode ndx)
+        {
+            var DBReg = (DBRegistrationClass)regNode.Tag;
             string _funcStr = $@"RefreshView(DBReg={DBReg})";
             TreeNode fieldgroup_node = FindNode(ndx,StaticVariablesClass.FieldsKeyGroupStr);
             if (ndx.Tag != null)
@@ -3353,7 +3372,7 @@ namespace FBExpert
         /// <param name="DBRegx"></param>
         /// <param name="ndx"></param>
         /// <returns></returns>
-        public Dictionary<string,ViewClass> RefreshAllViews(DBRegistrationClass DBRegx, TreeNode ndx)
+        public Dictionary<string,ViewClass> RefreshAllViews(TreeNode ndx)
         {                        
             TreeNode nd = StaticTreeClass.Instance().FindPrevDBNode(ndx);            
             DBRegistrationClass DBReg = (DBRegistrationClass)nd.Tag;

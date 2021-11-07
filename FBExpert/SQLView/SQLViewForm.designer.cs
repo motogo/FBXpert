@@ -9,7 +9,7 @@ namespace SQLView
     /// </summary>
     partial class SQLViewForm1 : BasicNormalFormClass
     {
-        private System.Windows.Forms.Panel pnl_upper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnl_center;
 
 
@@ -35,13 +35,12 @@ namespace SQLView
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLViewForm1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnl_upper = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsLifeTime = new SeControlsLib.HotSpot();
-            this.gbDatabase = new System.Windows.Forms.GroupBox();
-            this.txtDatabase = new System.Windows.Forms.TextBox();
-            this.hsLoadDatabasePath = new SeControlsLib.HotSpot();
+            this.bnConnection = new System.Windows.Forms.GroupBox();
+            this.cbConnection = new System.Windows.Forms.ComboBox();
             this.hsPageRefresh = new SeControlsLib.HotSpot();
             this.gnUsedTime = new System.Windows.Forms.GroupBox();
             this.txtUsedTime = new System.Windows.Forms.TextBox();
@@ -77,6 +76,20 @@ namespace SQLView
             this.pbRunSQL = new System.Windows.Forms.ProgressBar();
             this.tabRESULT = new System.Windows.Forms.TabPage();
             this.dgvResults = new System.Windows.Forms.DataGridView();
+            this.cmdDATA = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSpaltenEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsertNow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiInsertGUID = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsertGUIDHEX = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSetToNULL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsert0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsert1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiReadBLOB = new System.Windows.Forms.ToolStripMenuItem();
             this.bsResults = new System.Windows.Forms.BindingSource(this.components);
             this.dsResults = new System.Data.DataSet();
             this.Table = new System.Data.DataTable();
@@ -115,7 +128,7 @@ namespace SQLView
             this.tabMELDUNG = new System.Windows.Forms.TabPage();
             this.pnlInfoCenter = new System.Windows.Forms.Panel();
             this.rtfMELDUNG = new System.Windows.Forms.RichTextBox();
-            this.pnlMessages = new System.Windows.Forms.Panel();
+            this.pnlMessagesUpper = new System.Windows.Forms.Panel();
             this.hsClearInfo = new SeControlsLib.HotSpot();
             this.cbAutoScroll = new System.Windows.Forms.CheckBox();
             this.tabERRORS = new System.Windows.Forms.TabPage();
@@ -193,7 +206,7 @@ namespace SQLView
             this.pbExport = new System.Windows.Forms.ProgressBar();
             this.tabPageXMLScheme = new System.Windows.Forms.TabPage();
             this.fctXMLScheme = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlXMLScheme = new System.Windows.Forms.Panel();
+            this.pnlXMLSchemeUpper = new System.Windows.Forms.Panel();
             this.hsSaveXMLScheme = new SeControlsLib.HotSpot();
             this.hsRefreshXMLScheme = new SeControlsLib.HotSpot();
             this.tabPagePerformance = new System.Windows.Forms.TabPage();
@@ -207,7 +220,7 @@ namespace SQLView
             this.colUPDATES = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDELETES = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCONFLICTS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pnlPerformance = new System.Windows.Forms.Panel();
+            this.pnlPerformanceUpper = new System.Windows.Forms.Panel();
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.hsRefreshPerformance = new SeControlsLib.HotSpot();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
@@ -234,8 +247,8 @@ namespace SQLView
             this.saveFileDialogXML = new System.Windows.Forms.SaveFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialogCSV = new System.Windows.Forms.SaveFileDialog();
-            this.pnl_upper.SuspendLayout();
-            this.gbDatabase.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
+            this.bnConnection.SuspendLayout();
             this.gnUsedTime.SuspendLayout();
             this.pnl_center.SuspendLayout();
             this.tcSQLCONTROL.SuspendLayout();
@@ -247,6 +260,7 @@ namespace SQLView
             this.gbEncoding.SuspendLayout();
             this.tabRESULT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
+            this.cmdDATA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).BeginInit();
@@ -261,7 +275,7 @@ namespace SQLView
             this.gbUsedMilliseconds.SuspendLayout();
             this.tabMELDUNG.SuspendLayout();
             this.pnlInfoCenter.SuspendLayout();
-            this.pnlMessages.SuspendLayout();
+            this.pnlMessagesUpper.SuspendLayout();
             this.tabERRORS.SuspendLayout();
             this.pnlErrorUpper.SuspendLayout();
             this.pnlErrorsUpper.SuspendLayout();
@@ -292,10 +306,10 @@ namespace SQLView
             this.gbExportProgress.SuspendLayout();
             this.tabPageXMLScheme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLScheme)).BeginInit();
-            this.pnlXMLScheme.SuspendLayout();
+            this.pnlXMLSchemeUpper.SuspendLayout();
             this.tabPagePerformance.SuspendLayout();
             this.gbPerformance.SuspendLayout();
-            this.pnlPerformance.SuspendLayout();
+            this.pnlPerformanceUpper.SuspendLayout();
             this.tabPageInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).BeginInit();
             this.cmdExperienceInfo.SuspendLayout();
@@ -304,20 +318,20 @@ namespace SQLView
             this.gbExperienceInfoKey.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnl_upper
+            // pnlFormUpper
             // 
-            this.pnl_upper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnl_upper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_upper.Controls.Add(this.hsLifeTime);
-            this.pnl_upper.Controls.Add(this.gbDatabase);
-            this.pnl_upper.Controls.Add(this.hsPageRefresh);
-            this.pnl_upper.Controls.Add(this.gnUsedTime);
-            this.pnl_upper.Controls.Add(this.hsClose);
-            this.pnl_upper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_upper.Location = new System.Drawing.Point(0, 0);
-            this.pnl_upper.Name = "pnl_upper";
-            this.pnl_upper.Size = new System.Drawing.Size(1604, 49);
-            this.pnl_upper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFormUpper.Controls.Add(this.hsLifeTime);
+            this.pnlFormUpper.Controls.Add(this.bnConnection);
+            this.pnlFormUpper.Controls.Add(this.hsPageRefresh);
+            this.pnlFormUpper.Controls.Add(this.gnUsedTime);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1604, 49);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsLifeTime
             // 
@@ -338,7 +352,7 @@ namespace SQLView
             this.hsLifeTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsLifeTime.ImageHover = null;
             this.hsLifeTime.ImageToggleOnSelect = true;
-            this.hsLifeTime.Location = new System.Drawing.Point(651, 0);
+            this.hsLifeTime.Location = new System.Drawing.Point(893, 0);
             this.hsLifeTime.Marked = true;
             this.hsLifeTime.MarkedColor = System.Drawing.Color.Lime;
             this.hsLifeTime.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -347,6 +361,7 @@ namespace SQLView
             this.hsLifeTime.Name = "hsLifeTime";
             this.hsLifeTime.NonMarkedText = "";
             this.hsLifeTime.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLifeTime.ShortcutNewline = false;
             this.hsLifeTime.ShowShortcut = false;
             this.hsLifeTime.Size = new System.Drawing.Size(87, 47);
             this.hsLifeTime.TabIndex = 34;
@@ -370,76 +385,31 @@ namespace SQLView
             this.hsLifeTime.UseVisualStyleBackColor = false;
             this.hsLifeTime.Click += new System.EventHandler(this.hsLifeTime_Click);
             // 
-            // gbDatabase
+            // bnConnection
             // 
-            this.gbDatabase.Controls.Add(this.txtDatabase);
-            this.gbDatabase.Controls.Add(this.hsLoadDatabasePath);
-            this.gbDatabase.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbDatabase.Location = new System.Drawing.Point(45, 0);
-            this.gbDatabase.Name = "gbDatabase";
-            this.gbDatabase.Size = new System.Drawing.Size(606, 47);
-            this.gbDatabase.TabIndex = 29;
-            this.gbDatabase.TabStop = false;
-            this.gbDatabase.Text = "Database";
+            this.bnConnection.Controls.Add(this.cbConnection);
+            this.bnConnection.Dock = System.Windows.Forms.DockStyle.Left;
+            this.bnConnection.Location = new System.Drawing.Point(45, 0);
+            this.bnConnection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bnConnection.Name = "bnConnection";
+            this.bnConnection.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bnConnection.Size = new System.Drawing.Size(848, 47);
+            this.bnConnection.TabIndex = 35;
+            this.bnConnection.TabStop = false;
+            this.bnConnection.Text = "Use connection";
             // 
-            // txtDatabase
+            // cbConnection
             // 
-            this.txtDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDatabase.Location = new System.Drawing.Point(3, 16);
-            this.txtDatabase.Name = "txtDatabase";
-            this.txtDatabase.Size = new System.Drawing.Size(555, 20);
-            this.txtDatabase.TabIndex = 1;
-            this.txtDatabase.TextChanged += new System.EventHandler(this.txtDatabase_TextChanged);
-            // 
-            // hsLoadDatabasePath
-            // 
-            this.hsLoadDatabasePath.BackColor = System.Drawing.Color.Transparent;
-            this.hsLoadDatabasePath.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsLoadDatabasePath.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsLoadDatabasePath.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsLoadDatabasePath.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsLoadDatabasePath.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsLoadDatabasePath.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsLoadDatabasePath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsLoadDatabasePath.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsLoadDatabasePath.FlatAppearance.BorderSize = 0;
-            this.hsLoadDatabasePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsLoadDatabasePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsLoadDatabasePath.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsLoadDatabasePath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hsLoadDatabasePath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hsLoadDatabasePath.ImageToggleOnSelect = true;
-            this.hsLoadDatabasePath.Location = new System.Drawing.Point(558, 16);
-            this.hsLoadDatabasePath.Marked = false;
-            this.hsLoadDatabasePath.MarkedColor = System.Drawing.Color.Teal;
-            this.hsLoadDatabasePath.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsLoadDatabasePath.MarkedText = "";
-            this.hsLoadDatabasePath.MarkMode = false;
-            this.hsLoadDatabasePath.Name = "hsLoadDatabasePath";
-            this.hsLoadDatabasePath.NonMarkedText = "";
-            this.hsLoadDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsLoadDatabasePath.ShowShortcut = false;
-            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 28);
-            this.hsLoadDatabasePath.TabIndex = 3;
-            this.hsLoadDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsLoadDatabasePath.ToolTipActive = false;
-            this.hsLoadDatabasePath.ToolTipAutomaticDelay = 500;
-            this.hsLoadDatabasePath.ToolTipAutoPopDelay = 5000;
-            this.hsLoadDatabasePath.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsLoadDatabasePath.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsLoadDatabasePath.ToolTipFor4ContextMenu = true;
-            this.hsLoadDatabasePath.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsLoadDatabasePath.ToolTipInitialDelay = 500;
-            this.hsLoadDatabasePath.ToolTipIsBallon = false;
-            this.hsLoadDatabasePath.ToolTipOwnerDraw = false;
-            this.hsLoadDatabasePath.ToolTipReshowDelay = 100;
-            this.hsLoadDatabasePath.ToolTipShowAlways = false;
-            this.hsLoadDatabasePath.ToolTipText = "";
-            this.hsLoadDatabasePath.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsLoadDatabasePath.ToolTipTitle = "";
-            this.hsLoadDatabasePath.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsLoadDatabasePath.UseVisualStyleBackColor = false;
-            this.hsLoadDatabasePath.Click += new System.EventHandler(this.hsLoadDatabasePath_Click);
+            this.cbConnection.BackColor = System.Drawing.SystemColors.Info;
+            this.cbConnection.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbConnection.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbConnection.FormattingEnabled = true;
+            this.cbConnection.Location = new System.Drawing.Point(3, 19);
+            this.cbConnection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbConnection.Name = "cbConnection";
+            this.cbConnection.Size = new System.Drawing.Size(842, 21);
+            this.cbConnection.TabIndex = 0;
+            this.cbConnection.SelectedIndexChanged += new System.EventHandler(this.cbConnection_SelectedIndexChanged);
             // 
             // hsPageRefresh
             // 
@@ -457,10 +427,10 @@ namespace SQLView
             this.hsPageRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsPageRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsPageRefresh.Image = global::FBXpert.Properties.Resources.view_refresh22x;
-            this.hsPageRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsPageRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsPageRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
-            this.hsPageRefresh.ImageToggleOnSelect = true;
-            this.hsPageRefresh.Location = new System.Drawing.Point(1397, 0);
+            this.hsPageRefresh.ImageToggleOnSelect = false;
+            this.hsPageRefresh.Location = new System.Drawing.Point(1370, 0);
             this.hsPageRefresh.Marked = false;
             this.hsPageRefresh.MarkedColor = System.Drawing.Color.Teal;
             this.hsPageRefresh.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -469,11 +439,11 @@ namespace SQLView
             this.hsPageRefresh.Name = "hsPageRefresh";
             this.hsPageRefresh.NonMarkedText = "Refresh";
             this.hsPageRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPageRefresh.ShortcutNewline = false;
             this.hsPageRefresh.ShowShortcut = false;
-            this.hsPageRefresh.Size = new System.Drawing.Size(89, 47);
+            this.hsPageRefresh.Size = new System.Drawing.Size(116, 47);
             this.hsPageRefresh.TabIndex = 28;
             this.hsPageRefresh.Text = "Refresh";
-            this.hsPageRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsPageRefresh.ToolTipActive = false;
             this.hsPageRefresh.ToolTipAutomaticDelay = 500;
             this.hsPageRefresh.ToolTipAutoPopDelay = 5000;
@@ -508,10 +478,10 @@ namespace SQLView
             // 
             this.txtUsedTime.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtUsedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUsedTime.Location = new System.Drawing.Point(3, 16);
+            this.txtUsedTime.Location = new System.Drawing.Point(3, 18);
             this.txtUsedTime.Name = "txtUsedTime";
             this.txtUsedTime.ReadOnly = true;
-            this.txtUsedTime.Size = new System.Drawing.Size(110, 20);
+            this.txtUsedTime.Size = new System.Drawing.Size(110, 22);
             this.txtUsedTime.TabIndex = 0;
             this.txtUsedTime.Text = "0";
             // 
@@ -542,6 +512,7 @@ namespace SQLView
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 47);
             this.hsClose.TabIndex = 26;
@@ -590,7 +561,7 @@ namespace SQLView
             this.cbHistory.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbHistory.Location = new System.Drawing.Point(17, 70);
             this.cbHistory.Name = "cbHistory";
-            this.cbHistory.Size = new System.Drawing.Size(58, 17);
+            this.cbHistory.Size = new System.Drawing.Size(64, 18);
             this.cbHistory.TabIndex = 27;
             this.cbHistory.Text = "History";
             this.cbHistory.UseVisualStyleBackColor = false;
@@ -604,7 +575,7 @@ namespace SQLView
             this.cbErrors.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbErrors.Location = new System.Drawing.Point(17, 19);
             this.cbErrors.Name = "cbErrors";
-            this.cbErrors.Size = new System.Drawing.Size(53, 17);
+            this.cbErrors.Size = new System.Drawing.Size(57, 18);
             this.cbErrors.TabIndex = 26;
             this.cbErrors.Text = "Errors";
             this.cbErrors.UseVisualStyleBackColor = false;
@@ -618,7 +589,7 @@ namespace SQLView
             this.cbMeldungen.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbMeldungen.Location = new System.Drawing.Point(17, 46);
             this.cbMeldungen.Name = "cbMeldungen";
-            this.cbMeldungen.Size = new System.Drawing.Size(52, 17);
+            this.cbMeldungen.Size = new System.Drawing.Size(58, 18);
             this.cbMeldungen.TabIndex = 25;
             this.cbMeldungen.Text = "Alerts";
             this.cbMeldungen.UseVisualStyleBackColor = false;
@@ -703,6 +674,7 @@ namespace SQLView
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -833,7 +805,7 @@ namespace SQLView
             this.hsBreak.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsBreak.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
             this.hsBreak.ImageToggleOnSelect = true;
-            this.hsBreak.Location = new System.Drawing.Point(531, 0);
+            this.hsBreak.Location = new System.Drawing.Point(591, 0);
             this.hsBreak.Marked = false;
             this.hsBreak.MarkedColor = System.Drawing.Color.Teal;
             this.hsBreak.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -842,6 +814,7 @@ namespace SQLView
             this.hsBreak.Name = "hsBreak";
             this.hsBreak.NonMarkedText = "Break";
             this.hsBreak.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsBreak.ShortcutNewline = false;
             this.hsBreak.ShowShortcut = false;
             this.hsBreak.Size = new System.Drawing.Size(68, 41);
             this.hsBreak.TabIndex = 33;
@@ -885,7 +858,7 @@ namespace SQLView
             this.hsReplaceText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsReplaceText.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsReplaceText.ImageToggleOnSelect = true;
-            this.hsReplaceText.Location = new System.Drawing.Point(435, 0);
+            this.hsReplaceText.Location = new System.Drawing.Point(495, 0);
             this.hsReplaceText.Marked = false;
             this.hsReplaceText.MarkedColor = System.Drawing.Color.Teal;
             this.hsReplaceText.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -894,6 +867,7 @@ namespace SQLView
             this.hsReplaceText.Name = "hsReplaceText";
             this.hsReplaceText.NonMarkedText = "Replace Text";
             this.hsReplaceText.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsReplaceText.ShortcutNewline = false;
             this.hsReplaceText.ShowShortcut = false;
             this.hsReplaceText.Size = new System.Drawing.Size(96, 41);
             this.hsReplaceText.TabIndex = 32;
@@ -937,7 +911,7 @@ namespace SQLView
             this.hsSaveSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsSaveSQL.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSaveSQL.ImageToggleOnSelect = true;
-            this.hsSaveSQL.Location = new System.Drawing.Point(367, 0);
+            this.hsSaveSQL.Location = new System.Drawing.Point(418, 0);
             this.hsSaveSQL.Marked = false;
             this.hsSaveSQL.MarkedColor = System.Drawing.Color.Teal;
             this.hsSaveSQL.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -946,8 +920,9 @@ namespace SQLView
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
             this.hsSaveSQL.ShowShortcut = false;
-            this.hsSaveSQL.Size = new System.Drawing.Size(68, 41);
+            this.hsSaveSQL.Size = new System.Drawing.Size(77, 41);
             this.hsSaveSQL.TabIndex = 31;
             this.hsSaveSQL.Text = "Save SQL";
             this.hsSaveSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -989,7 +964,7 @@ namespace SQLView
             this.hsLoadSQL.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsLoadSQL.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadSQL.ImageToggleOnSelect = true;
-            this.hsLoadSQL.Location = new System.Drawing.Point(299, 0);
+            this.hsLoadSQL.Location = new System.Drawing.Point(341, 0);
             this.hsLoadSQL.Marked = false;
             this.hsLoadSQL.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadSQL.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -998,8 +973,9 @@ namespace SQLView
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
             this.hsLoadSQL.ShowShortcut = false;
-            this.hsLoadSQL.Size = new System.Drawing.Size(68, 41);
+            this.hsLoadSQL.Size = new System.Drawing.Size(77, 41);
             this.hsLoadSQL.TabIndex = 30;
             this.hsLoadSQL.Text = "Load SQL";
             this.hsLoadSQL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1041,7 +1017,7 @@ namespace SQLView
             this.hsRunSQLfromFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRunSQLfromFile.ImageHover = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
             this.hsRunSQLfromFile.ImageToggleOnSelect = true;
-            this.hsRunSQLfromFile.Location = new System.Drawing.Point(198, 0);
+            this.hsRunSQLfromFile.Location = new System.Drawing.Point(214, 0);
             this.hsRunSQLfromFile.Marked = false;
             this.hsRunSQLfromFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsRunSQLfromFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1050,8 +1026,9 @@ namespace SQLView
             this.hsRunSQLfromFile.Name = "hsRunSQLfromFile";
             this.hsRunSQLfromFile.NonMarkedText = "Run SQL from File";
             this.hsRunSQLfromFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunSQLfromFile.ShortcutNewline = false;
             this.hsRunSQLfromFile.ShowShortcut = false;
-            this.hsRunSQLfromFile.Size = new System.Drawing.Size(101, 41);
+            this.hsRunSQLfromFile.Size = new System.Drawing.Size(127, 41);
             this.hsRunSQLfromFile.TabIndex = 29;
             this.hsRunSQLfromFile.Text = "Run SQL from File";
             this.hsRunSQLfromFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1102,8 +1079,9 @@ namespace SQLView
             this.hsClearText.Name = "hsClearText";
             this.hsClearText.NonMarkedText = "Clear Text";
             this.hsClearText.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearText.ShortcutNewline = false;
             this.hsClearText.ShowShortcut = false;
-            this.hsClearText.Size = new System.Drawing.Size(68, 41);
+            this.hsClearText.Size = new System.Drawing.Size(84, 41);
             this.hsClearText.TabIndex = 28;
             this.hsClearText.Text = "Clear Text";
             this.hsClearText.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1154,6 +1132,7 @@ namespace SQLView
             this.hsRunSQL.Name = "hsRunSQL";
             this.hsRunSQL.NonMarkedText = "Run SQL";
             this.hsRunSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRunSQL.ShortcutNewline = false;
             this.hsRunSQL.ShowShortcut = false;
             this.hsRunSQL.Size = new System.Drawing.Size(130, 41);
             this.hsRunSQL.TabIndex = 27;
@@ -1199,9 +1178,9 @@ namespace SQLView
             "UTF8",
             "ASCII",
             "ISO8859_1"});
-            this.cbEncoding.Location = new System.Drawing.Point(3, 16);
+            this.cbEncoding.Location = new System.Drawing.Point(3, 18);
             this.cbEncoding.Name = "cbEncoding";
-            this.cbEncoding.Size = new System.Drawing.Size(116, 21);
+            this.cbEncoding.Size = new System.Drawing.Size(116, 22);
             this.cbEncoding.TabIndex = 34;
             this.cbEncoding.Text = "UTF8";
             // 
@@ -1230,24 +1209,25 @@ namespace SQLView
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsResults;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(3, 50);
+            this.dgvResults.Location = new System.Drawing.Point(3, 56);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
@@ -1255,10 +1235,115 @@ namespace SQLView
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResults.ShowCellErrors = false;
             this.dgvResults.ShowRowErrors = false;
-            this.dgvResults.Size = new System.Drawing.Size(1588, 543);
+            this.dgvResults.Size = new System.Drawing.Size(1588, 537);
             this.dgvResults.TabIndex = 16;
             this.dgvResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvResults_CellPainting);
             this.dgvResults.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvResults_DataError);
+            // 
+            // cmdDATA
+            // 
+            this.cmdDATA.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmdDATA.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSpaltenEdit,
+            this.toolStripSeparator4,
+            this.tsmiDate,
+            this.tsmiInsertNow,
+            this.toolStripSeparator5,
+            this.tsmiInsertGUID,
+            this.tsmiInsertGUIDHEX,
+            this.toolStripSeparator6,
+            this.tsmiSetToNULL,
+            this.tsmiInsert0,
+            this.tsmiInsert1,
+            this.toolStripSeparator7,
+            this.tsmiReadBLOB});
+            this.cmdDATA.Name = "cmsText";
+            this.cmdDATA.Size = new System.Drawing.Size(189, 262);
+            this.cmdDATA.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmdDATA_ItemClicked);
+            // 
+            // tsmiSpaltenEdit
+            // 
+            this.tsmiSpaltenEdit.Image = global::FBXpert.Properties.Resources.Table_x24;
+            this.tsmiSpaltenEdit.Name = "tsmiSpaltenEdit";
+            this.tsmiSpaltenEdit.Size = new System.Drawing.Size(188, 26);
+            this.tsmiSpaltenEdit.Text = "Spaltendeditor";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(185, 6);
+            // 
+            // tsmiDate
+            // 
+            this.tsmiDate.Image = global::FBXpert.Properties.Resources.calendar01_22x;
+            this.tsmiDate.Name = "tsmiDate";
+            this.tsmiDate.Size = new System.Drawing.Size(188, 26);
+            this.tsmiDate.Text = "DateTime";
+            // 
+            // tsmiInsertNow
+            // 
+            this.tsmiInsertNow.Image = global::FBXpert.Properties.Resources.appointment_new_24;
+            this.tsmiInsertNow.Name = "tsmiInsertNow";
+            this.tsmiInsertNow.Size = new System.Drawing.Size(188, 26);
+            this.tsmiInsertNow.Text = "Insert DateTime Now";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(185, 6);
+            // 
+            // tsmiInsertGUID
+            // 
+            this.tsmiInsertGUID.Image = global::FBXpert.Properties.Resources.font2_x241;
+            this.tsmiInsertGUID.Name = "tsmiInsertGUID";
+            this.tsmiInsertGUID.Size = new System.Drawing.Size(188, 26);
+            this.tsmiInsertGUID.Text = "Insert GUID";
+            // 
+            // tsmiInsertGUIDHEX
+            // 
+            this.tsmiInsertGUIDHEX.Image = global::FBXpert.Properties.Resources.font_x24;
+            this.tsmiInsertGUIDHEX.Name = "tsmiInsertGUIDHEX";
+            this.tsmiInsertGUIDHEX.Size = new System.Drawing.Size(188, 26);
+            this.tsmiInsertGUIDHEX.Text = "Insert GUID-HEX";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(185, 6);
+            // 
+            // tsmiSetToNULL
+            // 
+            this.tsmiSetToNULL.Image = global::FBXpert.Properties.Resources.NULL_blue_x24;
+            this.tsmiSetToNULL.Name = "tsmiSetToNULL";
+            this.tsmiSetToNULL.Size = new System.Drawing.Size(188, 26);
+            this.tsmiSetToNULL.Text = "Set to NULL";
+            // 
+            // tsmiInsert0
+            // 
+            this.tsmiInsert0.Image = global::FBXpert.Properties.Resources.N0_blue_x24;
+            this.tsmiInsert0.Name = "tsmiInsert0";
+            this.tsmiInsert0.Size = new System.Drawing.Size(188, 26);
+            this.tsmiInsert0.Text = "Set to 0";
+            // 
+            // tsmiInsert1
+            // 
+            this.tsmiInsert1.Image = global::FBXpert.Properties.Resources.N1_blue_x24;
+            this.tsmiInsert1.Name = "tsmiInsert1";
+            this.tsmiInsert1.Size = new System.Drawing.Size(188, 26);
+            this.tsmiInsert1.Text = "Set to 1";
+            this.tsmiInsert1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(185, 6);
+            // 
+            // tsmiReadBLOB
+            // 
+            this.tsmiReadBLOB.Image = global::FBXpert.Properties.Resources.bin_x24;
+            this.tsmiReadBLOB.Name = "tsmiReadBLOB";
+            this.tsmiReadBLOB.Size = new System.Drawing.Size(188, 26);
+            this.tsmiReadBLOB.Text = "Read as BLOB";
             // 
             // bsResults
             // 
@@ -1382,7 +1467,7 @@ namespace SQLView
             this.pnlResultUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlResultUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlResultUpper.Name = "pnlResultUpper";
-            this.pnlResultUpper.Size = new System.Drawing.Size(1588, 47);
+            this.pnlResultUpper.Size = new System.Drawing.Size(1588, 53);
             this.pnlResultUpper.TabIndex = 25;
             // 
             // gbRowHeight
@@ -1390,9 +1475,9 @@ namespace SQLView
             this.gbRowHeight.Controls.Add(this.txtRowHeight);
             this.gbRowHeight.Controls.Add(this.cbRowManually);
             this.gbRowHeight.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbRowHeight.Location = new System.Drawing.Point(603, 0);
+            this.gbRowHeight.Location = new System.Drawing.Point(649, 0);
             this.gbRowHeight.Name = "gbRowHeight";
-            this.gbRowHeight.Size = new System.Drawing.Size(79, 43);
+            this.gbRowHeight.Size = new System.Drawing.Size(112, 49);
             this.gbRowHeight.TabIndex = 35;
             this.gbRowHeight.TabStop = false;
             this.gbRowHeight.Text = "Row height";
@@ -1400,9 +1485,9 @@ namespace SQLView
             // txtRowHeight
             // 
             this.txtRowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRowHeight.Location = new System.Drawing.Point(29, 16);
+            this.txtRowHeight.Location = new System.Drawing.Point(29, 18);
             this.txtRowHeight.Name = "txtRowHeight";
-            this.txtRowHeight.Size = new System.Drawing.Size(47, 20);
+            this.txtRowHeight.Size = new System.Drawing.Size(80, 22);
             this.txtRowHeight.TabIndex = 30;
             this.txtRowHeight.TextChanged += new System.EventHandler(this.txtRowHeight_TextChanged);
             this.txtRowHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRowHeight_KeyDown);
@@ -1412,9 +1497,9 @@ namespace SQLView
             this.cbRowManually.Checked = true;
             this.cbRowManually.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbRowManually.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cbRowManually.Location = new System.Drawing.Point(3, 16);
+            this.cbRowManually.Location = new System.Drawing.Point(3, 18);
             this.cbRowManually.Name = "cbRowManually";
-            this.cbRowManually.Size = new System.Drawing.Size(26, 24);
+            this.cbRowManually.Size = new System.Drawing.Size(26, 28);
             this.cbRowManually.TabIndex = 29;
             this.cbRowManually.UseVisualStyleBackColor = true;
             this.cbRowManually.CheckedChanged += new System.EventHandler(this.cbRowManually_CheckedChanged);
@@ -1447,11 +1532,11 @@ namespace SQLView
             this.hsUpdateDataset.Name = "hsUpdateDataset";
             this.hsUpdateDataset.NonMarkedText = "Update";
             this.hsUpdateDataset.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateDataset.ShortcutNewline = false;
             this.hsUpdateDataset.ShowShortcut = false;
-            this.hsUpdateDataset.Size = new System.Drawing.Size(111, 43);
+            this.hsUpdateDataset.Size = new System.Drawing.Size(157, 49);
             this.hsUpdateDataset.TabIndex = 30;
             this.hsUpdateDataset.Text = "Update dataset";
-            this.hsUpdateDataset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.hsUpdateDataset.ToolTipActive = false;
             this.hsUpdateDataset.ToolTipAutomaticDelay = 500;
             this.hsUpdateDataset.ToolTipAutoPopDelay = 5000;
@@ -1477,7 +1562,7 @@ namespace SQLView
             this.gbEditMode.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbEditMode.Location = new System.Drawing.Point(416, 0);
             this.gbEditMode.Name = "gbEditMode";
-            this.gbEditMode.Size = new System.Drawing.Size(76, 43);
+            this.gbEditMode.Size = new System.Drawing.Size(76, 49);
             this.gbEditMode.TabIndex = 34;
             this.gbEditMode.TabStop = false;
             this.gbEditMode.Text = "Edit mode";
@@ -1488,9 +1573,9 @@ namespace SQLView
             this.cbEditMode.Checked = true;
             this.cbEditMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbEditMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbEditMode.Location = new System.Drawing.Point(3, 16);
+            this.cbEditMode.Location = new System.Drawing.Point(3, 18);
             this.cbEditMode.Name = "cbEditMode";
-            this.cbEditMode.Size = new System.Drawing.Size(70, 24);
+            this.cbEditMode.Size = new System.Drawing.Size(70, 28);
             this.cbEditMode.TabIndex = 29;
             this.cbEditMode.UseVisualStyleBackColor = true;
             this.cbEditMode.CheckedChanged += new System.EventHandler(this.cbEditMode_CheckedChanged);
@@ -1501,7 +1586,7 @@ namespace SQLView
             this.gbNavigator.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbNavigator.Location = new System.Drawing.Point(94, 0);
             this.gbNavigator.Name = "gbNavigator";
-            this.gbNavigator.Size = new System.Drawing.Size(322, 43);
+            this.gbNavigator.Size = new System.Drawing.Size(322, 49);
             this.gbNavigator.TabIndex = 33;
             this.gbNavigator.TabStop = false;
             this.gbNavigator.Text = "Navigator";
@@ -1525,21 +1610,21 @@ namespace SQLView
             this.bnTableContentMoveLastItem,
             this.bnTableContentSeparator2,
             this.bnTableContentDeleteItem});
-            this.bnTableContent.Location = new System.Drawing.Point(3, 16);
+            this.bnTableContent.Location = new System.Drawing.Point(3, 18);
             this.bnTableContent.MoveFirstItem = this.bnTableContentMoveFirstItem;
             this.bnTableContent.MoveLastItem = this.bnTableContentMoveLastItem;
             this.bnTableContent.MoveNextItem = this.bnTableContentMoveNextItem;
             this.bnTableContent.MovePreviousItem = this.bnTableContentMovePreviousItem;
             this.bnTableContent.Name = "bnTableContent";
             this.bnTableContent.PositionItem = this.bnTableContentPositionItem;
-            this.bnTableContent.Size = new System.Drawing.Size(316, 24);
+            this.bnTableContent.Size = new System.Drawing.Size(316, 28);
             this.bnTableContent.TabIndex = 26;
             this.bnTableContent.Text = "bindingNavigator1";
             // 
             // bnTableContentCountItem
             // 
             this.bnTableContentCountItem.Name = "bnTableContentCountItem";
-            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 21);
+            this.bnTableContentCountItem.Size = new System.Drawing.Size(44, 25);
             this.bnTableContentCountItem.Text = "von {0}";
             this.bnTableContentCountItem.ToolTipText = "Total number of items";
             // 
@@ -1560,7 +1645,7 @@ namespace SQLView
             this.bnTableContentMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveFirstItem.Image")));
             this.bnTableContentMoveFirstItem.Name = "bnTableContentMoveFirstItem";
             this.bnTableContentMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveFirstItem.Size = new System.Drawing.Size(24, 21);
+            this.bnTableContentMoveFirstItem.Size = new System.Drawing.Size(24, 25);
             this.bnTableContentMoveFirstItem.Text = "Move first";
             // 
             // bnTableContentMovePreviousItem
@@ -1569,13 +1654,13 @@ namespace SQLView
             this.bnTableContentMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMovePreviousItem.Image")));
             this.bnTableContentMovePreviousItem.Name = "bnTableContentMovePreviousItem";
             this.bnTableContentMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMovePreviousItem.Size = new System.Drawing.Size(24, 21);
+            this.bnTableContentMovePreviousItem.Size = new System.Drawing.Size(24, 25);
             this.bnTableContentMovePreviousItem.Text = "Move previous";
             // 
             // bnTableContentSeparator
             // 
             this.bnTableContentSeparator.Name = "bnTableContentSeparator";
-            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 24);
+            this.bnTableContentSeparator.Size = new System.Drawing.Size(6, 28);
             // 
             // bnTableContentPositionItem
             // 
@@ -1591,7 +1676,7 @@ namespace SQLView
             // bnTableContentSeparator1
             // 
             this.bnTableContentSeparator1.Name = "bnTableContentSeparator1";
-            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 24);
+            this.bnTableContentSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // bnTableContentMoveNextItem
             // 
@@ -1599,7 +1684,7 @@ namespace SQLView
             this.bnTableContentMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveNextItem.Image")));
             this.bnTableContentMoveNextItem.Name = "bnTableContentMoveNextItem";
             this.bnTableContentMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveNextItem.Size = new System.Drawing.Size(24, 21);
+            this.bnTableContentMoveNextItem.Size = new System.Drawing.Size(24, 25);
             this.bnTableContentMoveNextItem.Text = "Move next";
             // 
             // bnTableContentMoveLastItem
@@ -1608,13 +1693,13 @@ namespace SQLView
             this.bnTableContentMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bnTableContentMoveLastItem.Image")));
             this.bnTableContentMoveLastItem.Name = "bnTableContentMoveLastItem";
             this.bnTableContentMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bnTableContentMoveLastItem.Size = new System.Drawing.Size(24, 21);
+            this.bnTableContentMoveLastItem.Size = new System.Drawing.Size(24, 25);
             this.bnTableContentMoveLastItem.Text = "Move last";
             // 
             // bnTableContentSeparator2
             // 
             this.bnTableContentSeparator2.Name = "bnTableContentSeparator2";
-            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 24);
+            this.bnTableContentSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
             // gbUsedMilliseconds
             // 
@@ -1622,7 +1707,7 @@ namespace SQLView
             this.gbUsedMilliseconds.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbUsedMilliseconds.Location = new System.Drawing.Point(0, 0);
             this.gbUsedMilliseconds.Name = "gbUsedMilliseconds";
-            this.gbUsedMilliseconds.Size = new System.Drawing.Size(94, 43);
+            this.gbUsedMilliseconds.Size = new System.Drawing.Size(94, 49);
             this.gbUsedMilliseconds.TabIndex = 31;
             this.gbUsedMilliseconds.TabStop = false;
             this.gbUsedMilliseconds.Text = "DB costs (ms)";
@@ -1631,9 +1716,9 @@ namespace SQLView
             // 
             this.lblUsedMs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUsedMs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsedMs.Location = new System.Drawing.Point(3, 16);
+            this.lblUsedMs.Location = new System.Drawing.Point(3, 18);
             this.lblUsedMs.Name = "lblUsedMs";
-            this.lblUsedMs.Size = new System.Drawing.Size(88, 24);
+            this.lblUsedMs.Size = new System.Drawing.Size(88, 28);
             this.lblUsedMs.TabIndex = 0;
             this.lblUsedMs.Text = "0";
             this.lblUsedMs.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1651,7 +1736,7 @@ namespace SQLView
             // 
             this.tabMELDUNG.BackColor = System.Drawing.SystemColors.Control;
             this.tabMELDUNG.Controls.Add(this.pnlInfoCenter);
-            this.tabMELDUNG.Controls.Add(this.pnlMessages);
+            this.tabMELDUNG.Controls.Add(this.pnlMessagesUpper);
             this.tabMELDUNG.ImageKey = "info_blue_22x.png";
             this.tabMELDUNG.Location = new System.Drawing.Point(4, 23);
             this.tabMELDUNG.Name = "tabMELDUNG";
@@ -1680,16 +1765,16 @@ namespace SQLView
             this.rtfMELDUNG.TabIndex = 0;
             this.rtfMELDUNG.Text = "";
             // 
-            // pnlMessages
+            // pnlMessagesUpper
             // 
-            this.pnlMessages.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlMessages.Controls.Add(this.hsClearInfo);
-            this.pnlMessages.Controls.Add(this.cbAutoScroll);
-            this.pnlMessages.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMessages.Location = new System.Drawing.Point(3, 3);
-            this.pnlMessages.Name = "pnlMessages";
-            this.pnlMessages.Size = new System.Drawing.Size(1588, 47);
-            this.pnlMessages.TabIndex = 24;
+            this.pnlMessagesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMessagesUpper.Controls.Add(this.hsClearInfo);
+            this.pnlMessagesUpper.Controls.Add(this.cbAutoScroll);
+            this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlMessagesUpper.Name = "pnlMessagesUpper";
+            this.pnlMessagesUpper.Size = new System.Drawing.Size(1588, 47);
+            this.pnlMessagesUpper.TabIndex = 24;
             // 
             // hsClearInfo
             // 
@@ -1719,6 +1804,7 @@ namespace SQLView
             this.hsClearInfo.Name = "hsClearInfo";
             this.hsClearInfo.NonMarkedText = "Clear";
             this.hsClearInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearInfo.ShortcutNewline = false;
             this.hsClearInfo.ShowShortcut = false;
             this.hsClearInfo.Size = new System.Drawing.Size(69, 43);
             this.hsClearInfo.TabIndex = 27;
@@ -1750,7 +1836,7 @@ namespace SQLView
             this.cbAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAutoScroll.Location = new System.Drawing.Point(98, 22);
             this.cbAutoScroll.Name = "cbAutoScroll";
-            this.cbAutoScroll.Size = new System.Drawing.Size(72, 17);
+            this.cbAutoScroll.Size = new System.Drawing.Size(81, 18);
             this.cbAutoScroll.TabIndex = 19;
             this.cbAutoScroll.Text = "Autoscroll";
             this.cbAutoScroll.UseVisualStyleBackColor = true;
@@ -1806,7 +1892,7 @@ namespace SQLView
             this.cbAutoSrcollErr.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAutoSrcollErr.Location = new System.Drawing.Point(100, 22);
             this.cbAutoSrcollErr.Name = "cbAutoSrcollErr";
-            this.cbAutoSrcollErr.Size = new System.Drawing.Size(72, 17);
+            this.cbAutoSrcollErr.Size = new System.Drawing.Size(81, 18);
             this.cbAutoSrcollErr.TabIndex = 20;
             this.cbAutoSrcollErr.Text = "Autoscroll";
             this.cbAutoSrcollErr.UseVisualStyleBackColor = true;
@@ -1839,6 +1925,7 @@ namespace SQLView
             this.hsClearErrorAll.Name = "hsClearErrorAll";
             this.hsClearErrorAll.NonMarkedText = "Clear All";
             this.hsClearErrorAll.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearErrorAll.ShortcutNewline = false;
             this.hsClearErrorAll.ShowShortcut = false;
             this.hsClearErrorAll.Size = new System.Drawing.Size(78, 43);
             this.hsClearErrorAll.TabIndex = 30;
@@ -1981,6 +2068,7 @@ namespace SQLView
             this.hsClearHistory.Name = "hsClearHistory";
             this.hsClearHistory.NonMarkedText = "Clear History";
             this.hsClearHistory.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearHistory.ShortcutNewline = false;
             this.hsClearHistory.ShowShortcut = false;
             this.hsClearHistory.Size = new System.Drawing.Size(90, 45);
             this.hsClearHistory.TabIndex = 37;
@@ -2012,7 +2100,7 @@ namespace SQLView
             this.cbSQLfailed.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSQLfailed.Location = new System.Drawing.Point(550, 15);
             this.cbSQLfailed.Name = "cbSQLfailed";
-            this.cbSQLfailed.Size = new System.Drawing.Size(75, 17);
+            this.cbSQLfailed.Size = new System.Drawing.Size(81, 18);
             this.cbSQLfailed.TabIndex = 36;
             this.cbSQLfailed.Text = "SQL failed";
             this.cbSQLfailed.UseVisualStyleBackColor = true;
@@ -2025,7 +2113,7 @@ namespace SQLView
             this.cbSQLsucceded.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSQLsucceded.Location = new System.Drawing.Point(405, 15);
             this.cbSQLsucceded.Name = "cbSQLsucceded";
-            this.cbSQLsucceded.Size = new System.Drawing.Size(100, 17);
+            this.cbSQLsucceded.Size = new System.Drawing.Size(105, 18);
             this.cbSQLsucceded.TabIndex = 35;
             this.cbSQLsucceded.Text = "SQL successful";
             this.cbSQLsucceded.UseVisualStyleBackColor = true;
@@ -2036,7 +2124,7 @@ namespace SQLView
             this.cbAllHistory.AutoSize = true;
             this.cbAllHistory.Location = new System.Drawing.Point(226, 15);
             this.cbAllHistory.Name = "cbAllHistory";
-            this.cbAllHistory.Size = new System.Drawing.Size(146, 17);
+            this.cbAllHistory.Size = new System.Drawing.Size(166, 18);
             this.cbAllHistory.TabIndex = 34;
             this.cbAllHistory.Text = "Alle History Datenbanken";
             this.cbAllHistory.UseVisualStyleBackColor = true;
@@ -2070,6 +2158,7 @@ namespace SQLView
             this.hsRefreshHistory.Name = "hsRefreshHistory";
             this.hsRefreshHistory.NonMarkedText = "Refresh";
             this.hsRefreshHistory.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshHistory.ShortcutNewline = false;
             this.hsRefreshHistory.ShowShortcut = false;
             this.hsRefreshHistory.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshHistory.TabIndex = 33;
@@ -2122,6 +2211,7 @@ namespace SQLView
             this.hsExecuteHistorySelected.Name = "hsExecuteHistorySelected";
             this.hsExecuteHistorySelected.NonMarkedText = "Execute";
             this.hsExecuteHistorySelected.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExecuteHistorySelected.ShortcutNewline = false;
             this.hsExecuteHistorySelected.ShowShortcut = false;
             this.hsExecuteHistorySelected.Size = new System.Drawing.Size(90, 45);
             this.hsExecuteHistorySelected.TabIndex = 28;
@@ -2217,6 +2307,7 @@ namespace SQLView
             this.hsLoadListReplaces.Name = "hsLoadListReplaces";
             this.hsLoadListReplaces.NonMarkedText = "Load List";
             this.hsLoadListReplaces.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadListReplaces.ShortcutNewline = false;
             this.hsLoadListReplaces.ShowShortcut = false;
             this.hsLoadListReplaces.Size = new System.Drawing.Size(68, 44);
             this.hsLoadListReplaces.TabIndex = 31;
@@ -2265,7 +2356,7 @@ namespace SQLView
             this.cbClearListBeforeExcecute.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbClearListBeforeExcecute.Location = new System.Drawing.Point(170, 250);
             this.cbClearListBeforeExcecute.Name = "cbClearListBeforeExcecute";
-            this.cbClearListBeforeExcecute.Size = new System.Drawing.Size(144, 17);
+            this.cbClearListBeforeExcecute.Size = new System.Drawing.Size(165, 18);
             this.cbClearListBeforeExcecute.TabIndex = 28;
             this.cbClearListBeforeExcecute.Text = "Clear lists before execute";
             this.cbClearListBeforeExcecute.UseVisualStyleBackColor = false;
@@ -2356,6 +2447,7 @@ namespace SQLView
             this.hsRefreshConfig.Name = "hsRefreshConfig";
             this.hsRefreshConfig.NonMarkedText = "";
             this.hsRefreshConfig.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshConfig.ShortcutNewline = false;
             this.hsRefreshConfig.ShowShortcut = false;
             this.hsRefreshConfig.Size = new System.Drawing.Size(45, 45);
             this.hsRefreshConfig.TabIndex = 1;
@@ -2426,7 +2518,7 @@ namespace SQLView
             this.rbErrInsert.AutoSize = true;
             this.rbErrInsert.Location = new System.Drawing.Point(6, 19);
             this.rbErrInsert.Name = "rbErrInsert";
-            this.rbErrInsert.Size = new System.Drawing.Size(84, 17);
+            this.rbErrInsert.Size = new System.Drawing.Size(96, 18);
             this.rbErrInsert.TabIndex = 1;
             this.rbErrInsert.Text = "On top of list";
             this.rbErrInsert.UseVisualStyleBackColor = true;
@@ -2437,7 +2529,7 @@ namespace SQLView
             this.rbErrAppend.Checked = true;
             this.rbErrAppend.Location = new System.Drawing.Point(6, 42);
             this.rbErrAppend.Name = "rbErrAppend";
-            this.rbErrAppend.Size = new System.Drawing.Size(101, 17);
+            this.rbErrAppend.Size = new System.Drawing.Size(117, 18);
             this.rbErrAppend.TabIndex = 0;
             this.rbErrAppend.TabStop = true;
             this.rbErrAppend.Text = "On bottom of list";
@@ -2473,7 +2565,7 @@ namespace SQLView
             this.rbMeldInsert.AutoSize = true;
             this.rbMeldInsert.Location = new System.Drawing.Point(6, 19);
             this.rbMeldInsert.Name = "rbMeldInsert";
-            this.rbMeldInsert.Size = new System.Drawing.Size(84, 17);
+            this.rbMeldInsert.Size = new System.Drawing.Size(96, 18);
             this.rbMeldInsert.TabIndex = 1;
             this.rbMeldInsert.Text = "On top of list";
             this.rbMeldInsert.UseVisualStyleBackColor = true;
@@ -2484,7 +2576,7 @@ namespace SQLView
             this.rbMeldAppend.Checked = true;
             this.rbMeldAppend.Location = new System.Drawing.Point(6, 42);
             this.rbMeldAppend.Name = "rbMeldAppend";
-            this.rbMeldAppend.Size = new System.Drawing.Size(101, 17);
+            this.rbMeldAppend.Size = new System.Drawing.Size(117, 18);
             this.rbMeldAppend.TabIndex = 0;
             this.rbMeldAppend.TabStop = true;
             this.rbMeldAppend.Text = "On bottom of list";
@@ -2536,6 +2628,7 @@ namespace SQLView
             this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctPlan.IsReplaceMode = false;
             this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctPlan.LeftBracket = '(';
@@ -2596,10 +2689,10 @@ namespace SQLView
             this.tabPageXML.Controls.Add(this.fctXMLData);
             this.tabPageXML.Controls.Add(this.pnlXMLDataUpper);
             this.tabPageXML.Controls.Add(this.gbExportProgress);
-            this.tabPageXML.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXML.Location = new System.Drawing.Point(4, 23);
             this.tabPageXML.Name = "tabPageXML";
             this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXML.Size = new System.Drawing.Size(1580, 589);
+            this.tabPageXML.Size = new System.Drawing.Size(1580, 588);
             this.tabPageXML.TabIndex = 0;
             this.tabPageXML.Text = "XML-Data";
             this.tabPageXML.UseVisualStyleBackColor = true;
@@ -2618,7 +2711,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -2627,6 +2720,7 @@ namespace SQLView
             this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLData.IsReplaceMode = false;
             this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLData.LeftBracket = '(';
@@ -2636,7 +2730,7 @@ namespace SQLView
             this.fctXMLData.RightBracket = ')';
             this.fctXMLData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLData.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLData.ServiceColors")));
-            this.fctXMLData.Size = new System.Drawing.Size(1574, 504);
+            this.fctXMLData.Size = new System.Drawing.Size(1574, 503);
             this.fctXMLData.TabIndex = 7;
             this.fctXMLData.Zoom = 100;
             // 
@@ -2671,7 +2765,7 @@ namespace SQLView
             this.cbShowExportProgress.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowExportProgress.Location = new System.Drawing.Point(1312, 5);
             this.cbShowExportProgress.Name = "cbShowExportProgress";
-            this.cbShowExportProgress.Size = new System.Drawing.Size(96, 17);
+            this.cbShowExportProgress.Size = new System.Drawing.Size(105, 18);
             this.cbShowExportProgress.TabIndex = 45;
             this.cbShowExportProgress.Text = "Show progress";
             this.cbShowExportProgress.UseVisualStyleBackColor = true;
@@ -2704,6 +2798,7 @@ namespace SQLView
             this.hsExportBreak.Name = "hsExportBreak";
             this.hsExportBreak.NonMarkedText = "Break";
             this.hsExportBreak.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportBreak.ShortcutNewline = false;
             this.hsExportBreak.ShowShortcut = false;
             this.hsExportBreak.Size = new System.Drawing.Size(68, 44);
             this.hsExportBreak.TabIndex = 44;
@@ -2742,9 +2837,9 @@ namespace SQLView
             // 
             this.lblExportCosts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblExportCosts.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportCosts.Location = new System.Drawing.Point(3, 16);
+            this.lblExportCosts.Location = new System.Drawing.Point(3, 18);
             this.lblExportCosts.Name = "lblExportCosts";
-            this.lblExportCosts.Size = new System.Drawing.Size(115, 24);
+            this.lblExportCosts.Size = new System.Drawing.Size(115, 22);
             this.lblExportCosts.TabIndex = 0;
             this.lblExportCosts.Text = "0";
             this.lblExportCosts.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2757,7 +2852,7 @@ namespace SQLView
             this.ckClearExportListBeforeExecute.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckClearExportListBeforeExecute.Location = new System.Drawing.Point(1147, 4);
             this.ckClearExportListBeforeExecute.Name = "ckClearExportListBeforeExecute";
-            this.ckClearExportListBeforeExecute.Size = new System.Drawing.Size(144, 17);
+            this.ckClearExportListBeforeExecute.Size = new System.Drawing.Size(165, 18);
             this.ckClearExportListBeforeExecute.TabIndex = 42;
             this.ckClearExportListBeforeExecute.Text = "Clear lists before execute";
             this.ckClearExportListBeforeExecute.UseVisualStyleBackColor = false;
@@ -2767,7 +2862,7 @@ namespace SQLView
             this.ckMaskData.AutoSize = true;
             this.ckMaskData.Location = new System.Drawing.Point(1147, 25);
             this.ckMaskData.Name = "ckMaskData";
-            this.ckMaskData.Size = new System.Drawing.Size(101, 17);
+            this.ckMaskData.Size = new System.Drawing.Size(108, 18);
             this.ckMaskData.TabIndex = 41;
             this.ckMaskData.Text = "Mask Datas \"x\"";
             this.ckMaskData.UseVisualStyleBackColor = true;
@@ -2786,9 +2881,9 @@ namespace SQLView
             // 
             this.lblExportLinesCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblExportLinesCount.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportLinesCount.Location = new System.Drawing.Point(3, 16);
+            this.lblExportLinesCount.Location = new System.Drawing.Point(3, 18);
             this.lblExportLinesCount.Name = "lblExportLinesCount";
-            this.lblExportLinesCount.Size = new System.Drawing.Size(95, 21);
+            this.lblExportLinesCount.Size = new System.Drawing.Size(95, 19);
             this.lblExportLinesCount.TabIndex = 0;
             this.lblExportLinesCount.Text = "0";
             this.lblExportLinesCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2821,6 +2916,7 @@ namespace SQLView
             this.hotSpot2.Name = "hotSpot2";
             this.hotSpot2.NonMarkedText = "Run SQL and Export as CSV";
             this.hotSpot2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot2.ShortcutNewline = false;
             this.hotSpot2.ShowShortcut = false;
             this.hotSpot2.Size = new System.Drawing.Size(172, 44);
             this.hotSpot2.TabIndex = 39;
@@ -2850,7 +2946,7 @@ namespace SQLView
             this.ckExportToScreen.AutoSize = true;
             this.ckExportToScreen.Location = new System.Drawing.Point(1018, 5);
             this.ckExportToScreen.Name = "ckExportToScreen";
-            this.ckExportToScreen.Size = new System.Drawing.Size(103, 17);
+            this.ckExportToScreen.Size = new System.Drawing.Size(112, 18);
             this.ckExportToScreen.TabIndex = 38;
             this.ckExportToScreen.Text = "Export to screen";
             this.ckExportToScreen.UseVisualStyleBackColor = true;
@@ -2862,7 +2958,7 @@ namespace SQLView
             this.ckExportToFile.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckExportToFile.Location = new System.Drawing.Point(1018, 25);
             this.ckExportToFile.Name = "ckExportToFile";
-            this.ckExportToFile.Size = new System.Drawing.Size(84, 17);
+            this.ckExportToFile.Size = new System.Drawing.Size(93, 18);
             this.ckExportToFile.TabIndex = 37;
             this.ckExportToFile.Text = "Export to file";
             this.ckExportToFile.UseVisualStyleBackColor = true;
@@ -2895,6 +2991,7 @@ namespace SQLView
             this.hsExportHTML.Name = "hsExportHTML";
             this.hsExportHTML.NonMarkedText = "Export as HTML";
             this.hsExportHTML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportHTML.ShortcutNewline = false;
             this.hsExportHTML.ShowShortcut = false;
             this.hsExportHTML.Size = new System.Drawing.Size(111, 44);
             this.hsExportHTML.TabIndex = 36;
@@ -2937,9 +3034,9 @@ namespace SQLView
             ";",
             ",",
             "#"});
-            this.cbCSVSeperator.Location = new System.Drawing.Point(3, 16);
+            this.cbCSVSeperator.Location = new System.Drawing.Point(3, 18);
             this.cbCSVSeperator.Name = "cbCSVSeperator";
-            this.cbCSVSeperator.Size = new System.Drawing.Size(32, 21);
+            this.cbCSVSeperator.Size = new System.Drawing.Size(32, 22);
             this.cbCSVSeperator.TabIndex = 34;
             this.cbCSVSeperator.Text = ";";
             // 
@@ -2971,6 +3068,7 @@ namespace SQLView
             this.hsExportCSV.Name = "hsExportCSV";
             this.hsExportCSV.NonMarkedText = "Export results as CSV";
             this.hsExportCSV.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportCSV.ShortcutNewline = false;
             this.hsExportCSV.ShowShortcut = false;
             this.hsExportCSV.Size = new System.Drawing.Size(152, 44);
             this.hsExportCSV.TabIndex = 33;
@@ -3023,6 +3121,7 @@ namespace SQLView
             this.hsSaveXML.Name = "hsSaveXML";
             this.hsSaveXML.NonMarkedText = "Save XML-Data";
             this.hsSaveXML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXML.ShortcutNewline = false;
             this.hsSaveXML.ShowShortcut = false;
             this.hsSaveXML.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXML.TabIndex = 32;
@@ -3074,6 +3173,7 @@ namespace SQLView
             this.hsRefreshXMLData.Name = "hsRefreshXMLData";
             this.hsRefreshXMLData.NonMarkedText = "";
             this.hsRefreshXMLData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshXMLData.ShortcutNewline = false;
             this.hsRefreshXMLData.ShowShortcut = false;
             this.hsRefreshXMLData.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLData.TabIndex = 3;
@@ -3101,7 +3201,7 @@ namespace SQLView
             // 
             this.gbExportProgress.Controls.Add(this.pbExport);
             this.gbExportProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbExportProgress.Location = new System.Drawing.Point(3, 555);
+            this.gbExportProgress.Location = new System.Drawing.Point(3, 554);
             this.gbExportProgress.Name = "gbExportProgress";
             this.gbExportProgress.Size = new System.Drawing.Size(1574, 31);
             this.gbExportProgress.TabIndex = 8;
@@ -3111,19 +3211,19 @@ namespace SQLView
             // pbExport
             // 
             this.pbExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbExport.Location = new System.Drawing.Point(3, 16);
+            this.pbExport.Location = new System.Drawing.Point(3, 18);
             this.pbExport.Name = "pbExport";
-            this.pbExport.Size = new System.Drawing.Size(1568, 12);
+            this.pbExport.Size = new System.Drawing.Size(1568, 10);
             this.pbExport.TabIndex = 0;
             // 
             // tabPageXMLScheme
             // 
             this.tabPageXMLScheme.Controls.Add(this.fctXMLScheme);
-            this.tabPageXMLScheme.Controls.Add(this.pnlXMLScheme);
-            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXMLScheme.Controls.Add(this.pnlXMLSchemeUpper);
+            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 23);
             this.tabPageXMLScheme.Name = "tabPageXMLScheme";
             this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 589);
+            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 588);
             this.tabPageXMLScheme.TabIndex = 1;
             this.tabPageXMLScheme.Text = "XML-Schema";
             this.tabPageXMLScheme.UseVisualStyleBackColor = true;
@@ -3142,7 +3242,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLScheme.AutoIndentCharsPatterns = "";
-            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctXMLScheme.BackBrush = null;
             this.fctXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLScheme.CharHeight = 14;
@@ -3151,6 +3251,7 @@ namespace SQLView
             this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXMLScheme.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLScheme.IsReplaceMode = false;
             this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLScheme.LeftBracket = '(';
@@ -3160,21 +3261,21 @@ namespace SQLView
             this.fctXMLScheme.RightBracket = ')';
             this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
-            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 535);
+            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 534);
             this.fctXMLScheme.TabIndex = 9;
             this.fctXMLScheme.Zoom = 100;
             // 
-            // pnlXMLScheme
+            // pnlXMLSchemeUpper
             // 
-            this.pnlXMLScheme.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pnlXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlXMLScheme.Controls.Add(this.hsSaveXMLScheme);
-            this.pnlXMLScheme.Controls.Add(this.hsRefreshXMLScheme);
-            this.pnlXMLScheme.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXMLScheme.Location = new System.Drawing.Point(3, 3);
-            this.pnlXMLScheme.Name = "pnlXMLScheme";
-            this.pnlXMLScheme.Size = new System.Drawing.Size(1574, 48);
-            this.pnlXMLScheme.TabIndex = 8;
+            this.pnlXMLSchemeUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlXMLSchemeUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLSchemeUpper.Controls.Add(this.hsSaveXMLScheme);
+            this.pnlXMLSchemeUpper.Controls.Add(this.hsRefreshXMLScheme);
+            this.pnlXMLSchemeUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLSchemeUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLSchemeUpper.Name = "pnlXMLSchemeUpper";
+            this.pnlXMLSchemeUpper.Size = new System.Drawing.Size(1574, 48);
+            this.pnlXMLSchemeUpper.TabIndex = 8;
             // 
             // hsSaveXMLScheme
             // 
@@ -3204,6 +3305,7 @@ namespace SQLView
             this.hsSaveXMLScheme.Name = "hsSaveXMLScheme";
             this.hsSaveXMLScheme.NonMarkedText = "Save XML-Scheme";
             this.hsSaveXMLScheme.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXMLScheme.ShortcutNewline = false;
             this.hsSaveXMLScheme.ShowShortcut = false;
             this.hsSaveXMLScheme.Size = new System.Drawing.Size(111, 44);
             this.hsSaveXMLScheme.TabIndex = 33;
@@ -3255,6 +3357,7 @@ namespace SQLView
             this.hsRefreshXMLScheme.Name = "hsRefreshXMLScheme";
             this.hsRefreshXMLScheme.NonMarkedText = "";
             this.hsRefreshXMLScheme.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshXMLScheme.ShortcutNewline = false;
             this.hsRefreshXMLScheme.ShowShortcut = false;
             this.hsRefreshXMLScheme.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshXMLScheme.TabIndex = 3;
@@ -3281,7 +3384,7 @@ namespace SQLView
             // tabPagePerformance
             // 
             this.tabPagePerformance.Controls.Add(this.gbPerformance);
-            this.tabPagePerformance.Controls.Add(this.pnlPerformance);
+            this.tabPagePerformance.Controls.Add(this.pnlPerformanceUpper);
             this.tabPagePerformance.ImageIndex = 16;
             this.tabPagePerformance.Location = new System.Drawing.Point(4, 23);
             this.tabPagePerformance.Name = "tabPagePerformance";
@@ -3315,9 +3418,9 @@ namespace SQLView
             this.lvPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvPerformance.GridLines = true;
             this.lvPerformance.HideSelection = false;
-            this.lvPerformance.Location = new System.Drawing.Point(3, 16);
+            this.lvPerformance.Location = new System.Drawing.Point(3, 18);
             this.lvPerformance.Name = "lvPerformance";
-            this.lvPerformance.Size = new System.Drawing.Size(1582, 548);
+            this.lvPerformance.Size = new System.Drawing.Size(1582, 546);
             this.lvPerformance.TabIndex = 0;
             this.lvPerformance.UseCompatibleStateImageBehavior = false;
             this.lvPerformance.View = System.Windows.Forms.View.Details;
@@ -3358,17 +3461,17 @@ namespace SQLView
             // 
             this.colCONFLICTS.Text = "write conflicts";
             // 
-            // pnlPerformance
+            // pnlPerformanceUpper
             // 
-            this.pnlPerformance.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pnlPerformance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlPerformance.Controls.Add(this.hotSpot1);
-            this.pnlPerformance.Controls.Add(this.hsRefreshPerformance);
-            this.pnlPerformance.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPerformance.Location = new System.Drawing.Point(3, 3);
-            this.pnlPerformance.Name = "pnlPerformance";
-            this.pnlPerformance.Size = new System.Drawing.Size(1588, 48);
-            this.pnlPerformance.TabIndex = 7;
+            this.pnlPerformanceUpper.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlPerformanceUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlPerformanceUpper.Controls.Add(this.hotSpot1);
+            this.pnlPerformanceUpper.Controls.Add(this.hsRefreshPerformance);
+            this.pnlPerformanceUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPerformanceUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlPerformanceUpper.Name = "pnlPerformanceUpper";
+            this.pnlPerformanceUpper.Size = new System.Drawing.Size(1588, 48);
+            this.pnlPerformanceUpper.TabIndex = 7;
             // 
             // hotSpot1
             // 
@@ -3398,6 +3501,7 @@ namespace SQLView
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Save XML-Data";
             this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShortcutNewline = false;
             this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(111, 44);
             this.hotSpot1.TabIndex = 32;
@@ -3448,6 +3552,7 @@ namespace SQLView
             this.hsRefreshPerformance.Name = "hsRefreshPerformance";
             this.hsRefreshPerformance.NonMarkedText = "";
             this.hsRefreshPerformance.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshPerformance.ShortcutNewline = false;
             this.hsRefreshPerformance.ShowShortcut = false;
             this.hsRefreshPerformance.Size = new System.Drawing.Size(45, 44);
             this.hsRefreshPerformance.TabIndex = 3;
@@ -3562,7 +3667,6 @@ namespace SQLView
             this.txtExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExperienceInfo.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtExperienceInfo.IsReplaceMode = false;
             this.txtExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtExperienceInfo.LeftBracket = '(';
@@ -3620,6 +3724,7 @@ namespace SQLView
             this.hsUpdateExperienceInfo.Name = "hsUpdateExperienceInfo";
             this.hsUpdateExperienceInfo.NonMarkedText = "Execute";
             this.hsUpdateExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateExperienceInfo.ShortcutNewline = false;
             this.hsUpdateExperienceInfo.ShowShortcut = false;
             this.hsUpdateExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsUpdateExperienceInfo.TabIndex = 41;
@@ -3671,6 +3776,7 @@ namespace SQLView
             this.hsDeleteExperienceInfo.Name = "hsDeleteExperienceInfo";
             this.hsDeleteExperienceInfo.NonMarkedText = "Execute";
             this.hsDeleteExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDeleteExperienceInfo.ShortcutNewline = false;
             this.hsDeleteExperienceInfo.ShowShortcut = false;
             this.hsDeleteExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsDeleteExperienceInfo.TabIndex = 40;
@@ -3731,6 +3837,7 @@ namespace SQLView
             this.hsClearExperienceInfoFields.Name = "hsClearExperienceInfoFields";
             this.hsClearExperienceInfoFields.NonMarkedText = "Clear Fields";
             this.hsClearExperienceInfoFields.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearExperienceInfoFields.ShortcutNewline = false;
             this.hsClearExperienceInfoFields.ShowShortcut = false;
             this.hsClearExperienceInfoFields.Size = new System.Drawing.Size(75, 45);
             this.hsClearExperienceInfoFields.TabIndex = 37;
@@ -3782,6 +3889,7 @@ namespace SQLView
             this.hsRefreshExperienceInfo.Name = "hsRefreshExperienceInfo";
             this.hsRefreshExperienceInfo.NonMarkedText = "Refresh";
             this.hsRefreshExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshExperienceInfo.ShortcutNewline = false;
             this.hsRefreshExperienceInfo.ShowShortcut = false;
             this.hsRefreshExperienceInfo.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshExperienceInfo.TabIndex = 33;
@@ -3833,6 +3941,7 @@ namespace SQLView
             this.hsInsertExperienceInfo.Name = "hsInsertExperienceInfo";
             this.hsInsertExperienceInfo.NonMarkedText = "Execute";
             this.hsInsertExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInsertExperienceInfo.ShortcutNewline = false;
             this.hsInsertExperienceInfo.ShowShortcut = false;
             this.hsInsertExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsInsertExperienceInfo.TabIndex = 28;
@@ -3915,7 +4024,8 @@ namespace SQLView
             // 
             this.ClientSize = new System.Drawing.Size(1604, 699);
             this.Controls.Add(this.pnl_center);
-            this.Controls.Add(this.pnl_upper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpMain.SetHelpKeyword(this, "Workflow Bestellung");
             this.helpMain.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.helpMain.SetHelpString(this, "");
@@ -3927,9 +4037,8 @@ namespace SQLView
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SQLViewForm_FormClosing);
             this.Load += new System.EventHandler(this.SQLViewForm_Load);
             this.Enter += new System.EventHandler(this.SQLViewForm1_Enter);
-            this.pnl_upper.ResumeLayout(false);
-            this.gbDatabase.ResumeLayout(false);
-            this.gbDatabase.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.bnConnection.ResumeLayout(false);
             this.gnUsedTime.ResumeLayout(false);
             this.gnUsedTime.PerformLayout();
             this.pnl_center.ResumeLayout(false);
@@ -3943,6 +4052,7 @@ namespace SQLView
             this.tabRESULT.ResumeLayout(false);
             this.tabRESULT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
+            this.cmdDATA.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).EndInit();
@@ -3961,8 +4071,8 @@ namespace SQLView
             this.gbUsedMilliseconds.ResumeLayout(false);
             this.tabMELDUNG.ResumeLayout(false);
             this.pnlInfoCenter.ResumeLayout(false);
-            this.pnlMessages.ResumeLayout(false);
-            this.pnlMessages.PerformLayout();
+            this.pnlMessagesUpper.ResumeLayout(false);
+            this.pnlMessagesUpper.PerformLayout();
             this.tabERRORS.ResumeLayout(false);
             this.pnlErrorUpper.ResumeLayout(false);
             this.pnlErrorsUpper.ResumeLayout(false);
@@ -4000,10 +4110,10 @@ namespace SQLView
             this.gbExportProgress.ResumeLayout(false);
             this.tabPageXMLScheme.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctXMLScheme)).EndInit();
-            this.pnlXMLScheme.ResumeLayout(false);
+            this.pnlXMLSchemeUpper.ResumeLayout(false);
             this.tabPagePerformance.ResumeLayout(false);
             this.gbPerformance.ResumeLayout(false);
-            this.pnlPerformance.ResumeLayout(false);
+            this.pnlPerformanceUpper.ResumeLayout(false);
             this.tabPageInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).EndInit();
             this.cmdExperienceInfo.ResumeLayout(false);
@@ -4071,7 +4181,7 @@ namespace SQLView
         private SeControlsLib.HotSpot hsReplaceText;
         private SeControlsLib.HotSpot hsBreak;
         private ComboBox cbEncoding;
-        private Panel pnlMessages;
+        private Panel pnlMessagesUpper;
         private SeControlsLib.HotSpot hsClearInfo;
         private Panel pnlInfoCenter;
         private Panel pnlHistoryUpper;
@@ -4103,7 +4213,7 @@ namespace SQLView
         private Panel pnlXMLDataUpper;
         private TabPage tabPageXMLScheme;
         private FastColoredTextBoxNS.FastColoredTextBox fctXMLScheme;
-        private Panel pnlXMLScheme;
+        private Panel pnlXMLSchemeUpper;
         private SeControlsLib.HotSpot hsRefreshXMLData;
         private SeControlsLib.HotSpot hsRefreshXMLScheme;
         private SeControlsLib.HotSpot hsSaveXML;
@@ -4124,7 +4234,7 @@ namespace SQLView
         private ListView lvPerformance;
         private ColumnHeader colSQL;
         private ColumnHeader colMEMUSAGE;
-        private Panel pnlPerformance;
+        private Panel pnlPerformanceUpper;
         private SeControlsLib.HotSpot hotSpot1;
         private SeControlsLib.HotSpot hsRefreshPerformance;
         private ColumnHeader colSEQ_READS;
@@ -4161,9 +4271,6 @@ namespace SQLView
         private TextBox txtUsedTime;
         private SeControlsLib.HotSpot hsPageRefresh;
         private Panel pnlWatch;
-        private GroupBox gbDatabase;
-        private TextBox txtDatabase;
-        private SeControlsLib.HotSpot hsLoadDatabasePath;
         private FolderBrowserDialog fbdPath;
         private SeControlsLib.HotSpot hsLifeTime;
         private SeControlsLib.HotSpot hsExportCSV;
@@ -4212,5 +4319,21 @@ namespace SQLView
         private ToolStripMenuItem tsmiDeleteExperienceInfo;
         private SeControlsLib.HotSpot hsUpdateExperienceInfo;
         private FastColoredTextBoxNS.FastColoredTextBox txtExperienceInfo;
+        private ContextMenuStrip cmdDATA;
+        private ToolStripMenuItem tsmiSpaltenEdit;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem tsmiDate;
+        private ToolStripMenuItem tsmiInsertNow;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem tsmiInsertGUID;
+        private ToolStripMenuItem tsmiInsertGUIDHEX;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem tsmiSetToNULL;
+        private ToolStripMenuItem tsmiInsert0;
+        private ToolStripMenuItem tsmiInsert1;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripMenuItem tsmiReadBLOB;
+        private GroupBox bnConnection;
+        private ComboBox cbConnection;
     }
 }

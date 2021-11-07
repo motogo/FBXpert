@@ -172,7 +172,7 @@ namespace FBExpert
             sb.AppendLine($@";");
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}");
 
-            if(ckCheck.Checked)
+            if(ckNotNullCheck.Checked)
             {                
                 sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK ({txtCheck}"); 
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
@@ -222,16 +222,16 @@ namespace FBExpert
             if(txtCheck.Text.Length > 0)
             {
                 sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */"); 
-                if(ckCheck.Checked)
+                if(ckNotNullCheck.Checked)
                 {
                     sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK ({txtCheck.Text}); /* adds not null flag to domain */");
                 }
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
-            else if(ckCheck.Checked != DomainObject.NotNull)
+            else if(ckNotNullCheck.Checked == DomainObject.NotNull)
             {
                 sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */"); 
-                if(ckCheck.Checked)
+                if(ckNotNullCheck.Checked)
                 {
                     sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK (VALUE IS NOT NULL); /* adds not null flag to domain */");
                 }
@@ -268,7 +268,7 @@ namespace FBExpert
             txtName.Text        = "NEW_DOMAINNAME";
             cbTypes.Text        = "INTEGER";
             txtCheck.Text       = string.Empty;
-            ckCheck.Checked   = false;
+            ckNotNullCheck.Checked   = false;
             txtDefault.Text     = string.Empty;
             cbCharSet.Text      = _dbReg.CharSet;
             cbCollate.Text      = _dbReg.Collation;
@@ -314,7 +314,7 @@ namespace FBExpert
             cbCharSet.Text      = DomainObject.CharSet.Length > 0 ? DomainObject.CharSet : "NONE";
             cbCollate.Text      = DomainObject.Collate.Length > 0 ? DomainObject.Collate : "NONE";
             txtCheck.Text       = DomainObject.Check;
-            ckCheck.Checked   = DomainObject.NotNull;
+            ckNotNullCheck.Checked   = DomainObject.NotNull;
             SetControlsEnabled();
             MakeSQL();
         }
@@ -323,7 +323,7 @@ namespace FBExpert
             DomainObject.FieldType    = cbTypes.Text;
             DomainObject.Description  = fctDescription.Text;
             DomainObject.DefaultValue = txtDefault.Text;
-            DomainObject.NotNull      = ckCheck.Checked;
+            DomainObject.NotNull      = ckNotNullCheck.Checked;
             DomainObject.CharSet      = cbCharSet.Text;
             DomainObject.Collate      = cbCollate.Text;
         }
@@ -507,7 +507,7 @@ namespace FBExpert
         private void txtCheck_TextChanged(object sender, EventArgs e)
         {
             if (!DataFilled) return;
-            ckCheck.Enabled = (txtCheck.Text.Length > 0 );
+            ckNotNullCheck.Enabled = (txtCheck.Text.Length > 0 );
             MakeSQL();
         }
 

@@ -21,15 +21,12 @@ namespace FBXpert.DataClasses
     }
 
     [Serializable]
-    
     public class DesDatabaseDesignClass
     {
         public DBRegistrationClass Database;
         public Dictionary<string,DesTableClass> Tables;
         public Dictionary<string,DesViewClass> Views;
     }
-    
-
 
     public class ObjectDesignClass
     {
@@ -61,7 +58,6 @@ namespace FBXpert.DataClasses
             return View.Name;
         }
     }
-    
 
     public enum eCodePrimaryFieldType {GenID=0, GenGUID=1, GenGUIDHEX=2, GenOID=3, GenUUID=4};
 
@@ -81,6 +77,7 @@ namespace FBXpert.DataClasses
         const string a = "\"";
         const string bb = "{";
         const string be = "}";
+        public string Nl => Environment.NewLine;
 
         public static CodeFactory Instance()
         {
@@ -195,18 +192,10 @@ namespace FBXpert.DataClasses
                 sb.Append(AppStrings.BlockStart(lvl));
                 sb.Append(AppStrings.Format(lvl+1,"eTDataClass DP;" + Nl));
                 sb.Append(AppStrings.Format(lvl+1,"StringBuilder txt = new StringBuilder();" + Nl));
-                sb.Append(AppStrings.Format(lvl+1,"string first = string.Empty;" + Nl));
-                sb.Append(AppStrings.Format(lvl+1,"string last = string.Empty;" + Nl));
                 sb.Append(AppStrings.Format(lvl+1,"for (int i = 0; i < (int)DisplayMemberData.DataLength; i++)" + Nl));
                 sb.Append(AppStrings.BlockStart(lvl+1));
-                sb.Append(AppStrings.Format(lvl+2,"if (DisplayMemberData.BorderStart[i].Length > 0)" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"first = DisplayMemberData.BorderStart[i];" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"else" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"first = string.Empty;" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"if (DisplayMemberData.BorderEnd[i].Length > 0)" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"last = DisplayMemberData.BorderEnd[i];" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"else" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"last = string.Empty;" + Nl));
+                sb.Append(AppStrings.Format(lvl + 3, "string first = (DisplayMemberData.BorderStart[i].Length > 0) ? DisplayMemberData.BorderStart[i] : string.Empty;" + Nl));
+                sb.Append(AppStrings.Format(lvl + 3, "string last = (DisplayMemberData.BorderEnd[i].Length > 0) ? DisplayMemberData.BorderEnd[i] : string.Empty;" + Nl));
                 sb.Append(AppStrings.Format(lvl+2,"DP = (eTDataClass)DisplayMemberData.Data[i];" + Nl));
                 sb.Append(AppStrings.Format(lvl+2,"switch (DP)" + Nl));
                 sb.Append(AppStrings.BlockStart(lvl+2));
@@ -222,7 +211,6 @@ namespace FBXpert.DataClasses
                     sb.Append(AppStrings.Format(lvl+4,"txt.Append(DisplayMemberData.FormatMember($@\"{first}" + fvar + "{last}\", DisplayMemberData.Format[i]));" + Nl));
                     sb.Append(AppStrings.Format(lvl+4,"break;" + Nl));
                 }
-
                 sb.Append(AppStrings.BlockEnd(lvl+2));
                 sb.Append(AppStrings.BlockEnd(lvl+1));
                 sb.Append(Nl);                
@@ -238,18 +226,10 @@ namespace FBXpert.DataClasses
                 sb.Append(AppStrings.BlockStart(lvl));
                 sb.Append(AppStrings.Format(lvl+1,"eTDataClass DP;" + Nl));
                 sb.Append(AppStrings.Format(lvl+1,"StringBuilder txt = new StringBuilder();" + Nl));
-                sb.Append(AppStrings.Format(lvl+1,"string first = string.Empty;" + Nl));
-                sb.Append(AppStrings.Format(lvl+1,"string last = string.Empty;" + Nl));
                 sb.Append(AppStrings.Format(lvl+1,"for (int i = 0; i < (int)DisplayMemberData.DataLength; i++)" + Nl));
                 sb.Append(AppStrings.BlockStart(lvl+1));
-                sb.Append(AppStrings.Format(lvl+2,"if (DisplayMemberData.BorderStart[i].Length > 0)" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"first = DisplayMemberData.BorderStart[i];" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"else" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"first = string.Empty;" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"if (DisplayMemberData.BorderEnd[i].Length > 0)" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"last = DisplayMemberData.BorderEnd[i];" + Nl));
-                sb.Append(AppStrings.Format(lvl+2,"else" + Nl));
-                sb.Append(AppStrings.Format(lvl+3,"last = string.Empty;" + Nl));
+                sb.Append(AppStrings.Format(lvl + 3, "string first = (DisplayMemberData.BorderStart[i].Length > 0) ? DisplayMemberData.BorderStart[i] : string.Empty;" + Nl));
+                sb.Append(AppStrings.Format(lvl + 3, "string last = (DisplayMemberData.BorderEnd[i].Length > 0) ? DisplayMemberData.BorderEnd[i] : string.Empty;" + Nl));
                 sb.Append(AppStrings.Format(lvl+2,"DP = (eTDataClass)DisplayMemberData.Data[i];" + Nl));
                 sb.Append(AppStrings.Format(lvl+2,"switch (DP)" + Nl));
                 sb.Append(AppStrings.BlockStart(lvl+2));
@@ -274,12 +254,6 @@ namespace FBXpert.DataClasses
             }
             return (sb.ToString());
         }
-                
-        
-
-        
-
-       
 
         public string CreateMethodCloneIt(int lvl, DataObjectClass tc)
         {
@@ -334,7 +308,6 @@ namespace FBXpert.DataClasses
             if (obj.GetType() == typeof(TableClass))
             {
                 var tc = obj as TableClass;
-
                 sb.Append(AppStrings.Format(lvl, $@"public object[] DataList = new object[(int)eTDataClass.NO_FIELD];{Nl}"));
                 foreach (var tfc in tc.Fields.Values)
                 {
@@ -361,7 +334,7 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string Nl => Environment.NewLine;       
+        
 
         public string CreateTColumnsClass(int lvl, DataObjectClass obj)
         {
@@ -424,53 +397,49 @@ namespace FBXpert.DataClasses
             if (obj == null) return Empty;
 
             var sb = new StringBuilder();
+            sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// First constructor" + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
             if (obj.GetType() == typeof(TableClass))
-            {                
+            {
                 var table = obj;
-                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// First constructor" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
-                
                 sb.Append(AppStrings.Format(lvl, "public " + table.Name + "Class(ConnectionClass con, bool usetrans) : base(con, usetrans)" + Nl));
                 sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
                 sb.Append(AppStrings.Format(lvl+1, "TableName = \"" + table.Name + "\";" + Nl));
-                sb.Append(AppStrings.Format(lvl+1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
-                sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
-                sb.Append(Nl);
-                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// Second constructor" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "public " + table.Name + "Class(ConnectionClass con) : base(con, DefaultUseTransactions)" + Nl));
-                sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
-                sb.Append(AppStrings.Format(lvl+1, "TableName = \"" + table.Name + "\";" + Nl));
-                sb.Append(AppStrings.Format(lvl+1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
-                sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
                 var table = obj as ViewClass;
-                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// First constuctor" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
                 sb.Append(AppStrings.Format(lvl, "public " + table.Name + "Class(ConnectionClass con, bool usetrans) : base(con, usetrans)" + Nl));
                 sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
                 sb.Append(AppStrings.Format(lvl+1, "TableName = \"" + table.Name + "\";" + Nl));
-                sb.Append(AppStrings.Format(lvl+1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
-                sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
-                sb.Append(Nl);
-                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// Second constructor" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
+            }
+            sb.Append(AppStrings.Format(lvl + 1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
+            sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
+            sb.Append(Nl);
+
+            sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// Second constructor" + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
+            if (obj.GetType() == typeof(TableClass))
+            {
+                var table = obj;
                 sb.Append(AppStrings.Format(lvl, "public " + table.Name + "Class(ConnectionClass con) : base(con, DefaultUseTransactions)" + Nl));
                 sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
-                sb.Append(AppStrings.Format(lvl+1, "TableName = \"" + table.Name + "\";" + Nl));
-                sb.Append(AppStrings.Format(lvl+1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
-                sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
+                sb.Append(AppStrings.Format(lvl + 1, "TableName = \"" + table.Name + "\";" + Nl));
             }
+            else if (obj.GetType() == typeof(ViewClass))
+            {
+                var table = obj as ViewClass;
+                sb.Append(AppStrings.Format(lvl, "public " + table.Name + "Class(ConnectionClass con) : base(con, DefaultUseTransactions)" + Nl));
+                sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
+                sb.Append(AppStrings.Format(lvl + 1, "TableName = \"" + table.Name + "\";" + Nl));
+            }
+            sb.Append(AppStrings.Format(lvl + 1, "DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
+            sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
             return sb.ToString();
         }
 
-        
         public string CreateGetCSVHeader(int lvl, DataObjectClass obj)
         {
             if (obj == null) return Empty;
@@ -532,20 +501,17 @@ namespace FBXpert.DataClasses
             if (obj == null) return Empty;
             var sb = new StringBuilder();
 
-            
-                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// Gets a string represents the cvs header of data." + Nl));
-                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
-                sb.Append(AppStrings.Format(lvl, "public string GetXMLHeader()" + Nl));
-                sb.Append(AppStrings.BlockStart(lvl));
-                sb.Append(AppStrings.Format(lvl + 1, "XmlDeclaration xmldecl;" + Nl));
-                sb.Append(AppStrings.Format(lvl + 1, "XmlDocument xmlDocument = new XmlDocument();" + Nl));
-                sb.Append(AppStrings.Format(lvl + 1, "xmldecl = xmlDocument.CreateXmlDeclaration(\"1.0\", \"UTF - 8\", null);" + Nl));
-               
-                sb.Append(AppStrings.Format(lvl + 1, "return xmldecl.OuterXml;" + Nl));
-                sb.Append(AppStrings.BlockEnd(lvl));
-           
-            
+            sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// Gets a string represents the cvs header of data." + Nl));
+            sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
+            sb.Append(AppStrings.Format(lvl, "public string GetXMLHeader()" + Nl));
+            sb.Append(AppStrings.BlockStart(lvl));
+            sb.Append(AppStrings.Format(lvl + 1, "XmlDeclaration xmldecl;" + Nl));
+            sb.Append(AppStrings.Format(lvl + 1, "XmlDocument xmlDocument = new XmlDocument();" + Nl));
+            sb.Append(AppStrings.Format(lvl + 1, "xmldecl = xmlDocument.CreateXmlDeclaration(\"1.0\", \"UTF - 8\", null);" + Nl));
+            sb.Append(AppStrings.Format(lvl + 1, "return xmldecl.OuterXml;" + Nl));
+            sb.Append(AppStrings.BlockEnd(lvl));
+
             return sb.ToString();
         }
 
@@ -656,7 +622,6 @@ namespace FBXpert.DataClasses
 
             if (obj.GetType() == typeof(TableClass))
             {
-                var table = obj as TableClass;
                 sb.Append(AppStrings.Format(lvl,"/// <summary>" + Nl));
                 sb.Append(AppStrings.Format(lvl,"/// Constructor of data class" + Nl));
                 sb.Append(AppStrings.Format(lvl,"/// </summary>" + Nl));
@@ -687,11 +652,9 @@ namespace FBXpert.DataClasses
                 sb.Append(AppStrings.BlockStart(lvl));
                 sb.Append(AppStrings.Format(lvl+1,"// Destructor" + Nl));
                 sb.Append(AppStrings.BlockEnd(lvl));
-                
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
-                var table = obj as ViewClass;
                 sb.Append(AppStrings.Format(lvl,"/// <summary>" + Nl));
                 sb.Append(AppStrings.Format(lvl,"/// Constructor of data class" + Nl));
                 sb.Append(AppStrings.Format(lvl,"/// </summary>" + Nl));
@@ -722,7 +685,6 @@ namespace FBXpert.DataClasses
                 sb.Append(AppStrings.BlockStart(lvl));
                 sb.Append(AppStrings.Format(lvl+1,"// Destructor" + Nl));
                 sb.Append(AppStrings.BlockEnd(lvl));
-                
             }
             return sb.ToString();
         }
@@ -920,8 +882,6 @@ namespace FBXpert.DataClasses
         }
         public string CreateDesignForViewTable(int lvl, DataObjectClass tc, StringBuilder sb)
         {
-            //var sb = new StringBuilder();
-            //sb.Append(CreateTableUsings(lvl));
             sb.Append(CreateCopyright(lvl,tc.Name));
             sb.Append(AppStrings.Format(lvl, "namespace " + CodeCreateAttribute.CodeNamespace + Nl));
             sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
@@ -1127,7 +1087,7 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        public string CreateCbSetComboDataMembers(int lvl, DataObjectClass tc)
+        public string CreateCbSetComboDataMembers(int lvl)
         {
             var sb = new StringBuilder();
             sb.Append(AppStrings.Format(lvl+2, "public override void SetComboData(string cmd)" + Nl));
@@ -1256,82 +1216,77 @@ namespace FBXpert.DataClasses
             var sb = new StringBuilder();
             sb.Append(CreateCbTableUsings(lvl));
             sb.Append(CreateCopyright(lvl,tc.Name));
-            sb.Append(AppStrings.Format(lvl,"namespace "+ CodeCreateAttribute.CodeNamespace + Nl));
+            sb.Append(AppStrings.Format(lvl,$@"namespace {CodeCreateAttribute.CodeNamespace}{Nl}"));
             sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
-            sb.Append(AppStrings.Format(lvl+1,"/// <summary>" + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"/// Klasse die Daten der relationalen Datenbanktabelle " + tc.Name + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"/// als Objekte darstellt und verwaltet." + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"/// </summary>" + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"///" + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"public class Cb" + tc.Name + "Class : SELibraries.WindowsForms.cbMainClass" + Nl));
+            sb.Append(AppStrings.Format(lvl+1, $@"/// <summary>{Nl}"));
+            sb.Append(AppStrings.Format(lvl+1, $@"/// Klasse die Daten der relationalen Datenbanktabelle {tc.Name}{Nl}"));
+            sb.Append(AppStrings.Format(lvl+1, $@"/// als Objekte darstellt und verwaltet.{Nl}"));
+            sb.Append(AppStrings.Format(lvl+1, $@"/// </summary>{Nl}"));
+            sb.Append(AppStrings.Format(lvl+1, $@"///{Nl}"));
+            sb.Append(AppStrings.Format(lvl+1,$@"public class Cb{tc.Name}Class : SELibraries.WindowsForms.cbMainClass{Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+1));
-            sb.Append(AppStrings.Format(lvl+2,"private "+tc.Name+ "Class DATA = new " + tc.Name + "Class(ConnectionPoolClass.Instance.GetConnection(GlobalsCon.MainCon));" + Nl));
+            sb.Append(AppStrings.Format(lvl+2,$@"private {tc.Name}Class DATA = new {tc.Name}Class(ConnectionPoolClass.Instance.GetConnection(GlobalsCon.MainCon));{Nl}"));
             sb.Append(Nl);
             sb.Append(CreateCbConstructors(lvl+2,tc));
             sb.Append(Nl);
-            sb.Append(CreateCbRefreshDisplayMembers(lvl+2, tc));                        
+            sb.Append(CreateCbRefreshDisplayMembers(lvl+2, tc));
             sb.Append(Nl);
-            sb.Append(CreateCbSetComboDataMembers(lvl+2, tc));            
+            sb.Append(CreateCbSetComboDataMembers(lvl+2));
             sb.Append(Nl);
-
-            sb.Append(AppStrings.Format(lvl+2,"public sealed override void SetDefaultAttributes()" + Nl));
+            sb.Append(AppStrings.Format(lvl+2, $@"public sealed override void SetDefaultAttributes(){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));
-            sb.Append(AppStrings.Format(lvl+3,"base.SetDefaultAttributes();" + Nl));
-            sb.Append(AppStrings.Format(lvl+3,"base.AktCmd = \"SELECT * FROM "+tc.Name+" ORDER BY ID\";" + Nl));
-            sb.Append(AppStrings.Format(lvl+3,"DATA.SetDisplayMembers(DisplayMemberDef);" + Nl));
+            sb.Append(AppStrings.Format(lvl+3, $@"base.SetDefaultAttributes();{Nl}"));
+            sb.Append(AppStrings.Format(lvl+3, $@"base.AktCmd = ""SELECT * FROM {tc.Name} ORDER BY ID"";{Nl}"));
+            sb.Append(AppStrings.Format(lvl+3, $@"DATA.SetDisplayMembers(DisplayMemberDef);{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+2));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+2,"public override void SetDATA_ID(object id, bool refreshCombo)" + Nl));
+            sb.Append(AppStrings.Format(lvl+2, $@"public override void SetDATA_ID(object id, bool refreshCombo){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));
-            sb.Append(AppStrings.Format(lvl+3,"if (!refreshCombo) return;" + Nl));            
-            sb.Append(AppStrings.Format(lvl+3,"AktData = DATA.LeseComboData(ComboBoxObject, AktCmd, id);" + Nl));
-            sb.Append(AppStrings.Format(lvl+3,"if (CheckBoxObject != null)" + Nl));
-            sb.Append(AppStrings.Format(lvl+4,"CheckBoxObject.Checked = (AktData != null);" + Nl));            
+            sb.Append(AppStrings.Format(lvl+3, $@"if (!refreshCombo) return;{Nl}"));
+            sb.Append(AppStrings.Format(lvl+3, $@"AktData = DATA.LeseComboData(ComboBoxObject, AktCmd, id);{Nl}"));
+            sb.Append(AppStrings.Format(lvl+3, $@"if (CheckBoxObject != null){Nl}"));
+            sb.Append(AppStrings.Format(lvl+4, $@"CheckBoxObject.Checked = (AktData != null);{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+2));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+2,"public override void SetKeyIndex(int kn)" + Nl));
+            sb.Append(AppStrings.Format(lvl+2,$@"public override void SetKeyIndex(int kn){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));
-            sb.Append(AppStrings.Format(lvl+3,"DisplayMemberDef.KeyIndex = kn;" + Nl));
+            sb.Append(AppStrings.Format(lvl+3,$@"DisplayMemberDef.KeyIndex = kn;{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+2));
-
             sb.Append(Nl);
             sb.Append(CreateSearchSchluessel(lvl+2,tc));
             sb.Append(Nl);
-            sb.Append(CreateSearchCbDefaultClasses(lvl+2,tc));            
+            sb.Append(CreateSearchCbDefaultClasses(lvl+2,tc));
             sb.Append(Nl);
             sb.Append(CreateSearchCbDataClasses(lvl+2, tc));
             
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+2,"protected override object AktID()" + Nl));
+            sb.Append(AppStrings.Format(lvl+2, $@"protected override object AktID(){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));            
-            sb.Append(AppStrings.Format(lvl+3,"return ((" + tc.Name + "Class.TDataClass.TColumns) AktData)?.ID;" + Nl));
+            sb.Append(AppStrings.Format(lvl+3, $@"return (({tc.Name}Class.TDataClass.TColumns) AktData)?.ID;{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+2));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+1,"#region Events" + Nl));
+            sb.Append(AppStrings.Format(lvl+1, $@"#region Events{Nl}"));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+2,"public override void cbSelectedIndexChanged()" + Nl));
+            sb.Append(AppStrings.Format(lvl+2, $@"public override void cbSelectedIndexChanged(){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));
-            sb.Append(AppStrings.Format(lvl+3,"if (ComboBoxObject.SelectedIndex >= 0)" + Nl));
+            sb.Append(AppStrings.Format(lvl+3, $@"if (ComboBoxObject.SelectedIndex >= 0){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+3));
-            sb.Append(AppStrings.Format(lvl+4,"AktData = ("+tc.Name+"Class.TDataClass.TColumns)ComboBoxObject.SelectedItem;" + Nl));
+            sb.Append(AppStrings.Format(lvl+4, $@"AktData = ({tc.Name}Class.TDataClass.TColumns)ComboBoxObject.SelectedItem;{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+3));
-            sb.Append(AppStrings.Format(lvl+3,"else" + Nl));
+            sb.Append(AppStrings.Format(lvl+3, $@"else{Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+3));
-            sb.Append(AppStrings.Format(lvl+4,"AktData = null;" + Nl));
+            sb.Append(AppStrings.Format(lvl+4, $@"AktData = null;{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+3));
-            sb.Append(AppStrings.Format(lvl+3,"ComboBoxObject.Enabled = AktData != null;" + Nl));
+            sb.Append(AppStrings.Format(lvl+3, $@"ComboBoxObject.Enabled = AktData != null;{Nl}"));
             sb.Append(AppStrings.BlockEnd(lvl+2));
-
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+2,"public override void cbMouseClick()" + Nl));
+            sb.Append(AppStrings.Format(lvl+2, $@"public override void cbMouseClick(){Nl}"));
             sb.Append(AppStrings.BlockStart(lvl+2));            
             sb.Append(AppStrings.BlockEnd(lvl+2));
-
-
-            sb.Append(AppStrings.Format(lvl+1,"        #endregion" + Nl));
+            sb.Append(AppStrings.Format(lvl+1,$@"#endregion{Nl}"));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl+1,"}  //class" + Nl));
-            sb.Append(AppStrings.Format(lvl,  "}  //namespace" + Nl));
+            sb.Append(AppStrings.Format(lvl+1, $@"}} //class{Nl}"));
+            sb.Append(AppStrings.Format(lvl, $@"}} //namespace{Nl}"));
             return sb.ToString();
         }
         private string _basename = string.Empty;
@@ -1543,7 +1498,7 @@ namespace FBXpert.DataClasses
         {
             var sb = new StringBuilder();
             PrimaryKeyClass pk = null;
-            string pkName = string.Empty;
+
             if (obj.GetType() == typeof(TableClass))
             {
                 pk = ((TableClass) obj).primary_constraint;
@@ -1554,26 +1509,25 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
             sb.Append(AppStrings.Format(lvl, "public override ReturnInfo DeleteData(eDataDeleteMode dataMode)" + Nl));
             sb.Append(AppStrings.Format(lvl, AppStrings.BlockStart(lvl)));
-            sb.Append(AppStrings.Format(lvl+1, "ReturnInfo rt = null;" + Nl));
-            sb.Append(AppStrings.Format(lvl+1, "" + obj.Name + "Class.TDataClass dc = (" + obj.Name + "Class.TDataClass)CurrentData;" + Nl));
+            sb.Append(AppStrings.Format(lvl+1, $@"{obj.Name}Class.TDataClass dc = ({obj.Name}Class.TDataClass)CurrentData;" + Nl));
 
             if(obj.GetType() == typeof(ViewClass))
             {
                 string fld = GetFirstViewField(((ViewClass)obj).Fields);
-                sb.Append(AppStrings.Format(lvl + 1, $@"rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
+                sb.Append(AppStrings.Format(lvl + 1, $@"ReturnInfo rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
             }
             else if (pk == null)
             {
                 string fld = GetFirstTableField(((TableClass)obj).Fields);
                 _localNotifies?.AddToERROR($@"No PrimaryKey in table {obj.Name}, using field {fld} instead in method:  public override ReturnInfo DeleteData(eDataDeleteMode dataMode)");
-                sb.Append(AppStrings.Format(lvl+1, $@"rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
+                sb.Append(AppStrings.Format(lvl+1, $@"ReturnInfo rt = DeleteData(dc.Item.{fld},dataMode);{Nl}"));
             }
             else
             {
                 string fn = StaticFunctionsClass.GetFirstDictionaryEntry(pk.FieldNames);
                 if(!string.IsNullOrEmpty(fn))
                 {
-                    sb.Append(AppStrings.Format(lvl+1, $@"rt = DeleteData(dc.Item.{fn},dataMode);{Nl}"));
+                    sb.Append(AppStrings.Format(lvl+1, $@"ReturnInfo rt = DeleteData(dc.Item.{fn},dataMode);{Nl}"));
                 }
             }
             sb.Append(AppStrings.Format(lvl+1, "if (rt.Done)" + Nl));
@@ -1643,10 +1597,9 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.Format(lvl+3,"if ((duplicates != null) && (duplicates.Length > 0))" + Nl));
             sb.Append(AppStrings.Format(lvl+3, AppStrings.BlockStart(lvl)));
             sb.Append(AppStrings.Format(lvl+4,"object x = kd.Item.DataList[duplicates[0]];" + Nl));
-            sb.Append(AppStrings.Format(lvl+4,"object y = null;" + Nl));
             sb.Append(AppStrings.Format(lvl+4,"foreach (TDataClass.TColumns ki in cb.Items)" + Nl));
             sb.Append(AppStrings.Format(lvl+4, AppStrings.BlockStart(lvl)));
-            sb.Append(AppStrings.Format(lvl+5,"y = ki.DataList[duplicates[0]];" + Nl));
+            sb.Append(AppStrings.Format(lvl+5, "object y = ki.DataList[duplicates[0]];" + Nl));
             sb.Append(AppStrings.Format(lvl+5,"if (y.ToString() == x.ToString())" + Nl));
             sb.Append(AppStrings.Format(lvl+5, AppStrings.BlockStart(lvl)));
             sb.Append(AppStrings.Format(lvl+6,"dup = true;" + Nl));
@@ -1731,18 +1684,18 @@ namespace FBXpert.DataClasses
                         }
                         else if (tfc.Domain.SubTypeNumber == (int)eBlobSubType.BINARY)
                         {
-                            sb.Append(AppStrings.Format(lvl + 3, "data = dataTypeStr == typeof(" + csValueType + ") ? (" + csValueType + ") ob : null;" + Nl));
+                            sb.Append(AppStrings.Format(lvl + 3, $@"data = dataTypeStr == typeof({csValueType}) ? ({csValueType}) ob : null;{Nl}"));
                         }
                     }
                     else
                     {
-                        sb.Append(AppStrings.Format(lvl+3,"data = dataTypeStr == typeof(" + csValueType + ") ? (" + csValueType +") ob : " + csValueType + ".Parse(ob.ToString());" + Nl));                        
+                        sb.Append(AppStrings.Format(lvl+3,$@"data = dataTypeStr == typeof({csValueType}) ? ({csValueType}) ob : {csValueType}.Parse(ob.ToString());{Nl}"));                        
                     }
                     sb.Append(AppStrings.BlockEnd(lvl+2));
                     sb.Append(AppStrings.BlockEnd(lvl+1));
                     sb.Append(AppStrings.Format(lvl+1,"catch (Exception ex)" + Nl));
                     sb.Append(AppStrings.BlockStart(lvl+1));
-                    sb.Append(AppStrings.Format(lvl+2,$"TMessages.Instance.HandleKonvertException(ex.Message, \"{tc.Name}->get{tfc.Name}()\");{Nl}"));
+                    sb.Append(AppStrings.Format(lvl+2,$@"TMessages.Instance.HandleKonvertException(ex.Message, ""{tc.Name}Class->get{tfc.Name}()"");{Nl}"));
                     sb.Append(AppStrings.BlockEnd(lvl+1));
                     sb.Append(AppStrings.Format(lvl+1,"return (data);" + Nl));
                     sb.Append(AppStrings.BlockEnd(lvl));
@@ -1756,18 +1709,18 @@ namespace FBXpert.DataClasses
                 {
                     var cstype = TypeConvert.DatabaseTOcsharpTypeAsString(tfc.Domain);
                     var csValueType = TypeConvert.DatabaseTOcsharpValueTypeAsString(tfc.Domain);
-                    sb.Append(AppStrings.Format(lvl,"/// <summary>" + Nl));
-                    sb.Append(AppStrings.Format(lvl,"/// Return's type and value of database column " + tfc.Name + Nl));
-                    sb.Append(AppStrings.Format(lvl,"/// </summary>" + Nl));
-                    sb.Append(AppStrings.Format(lvl,"/// <returns>value of database column " + tfc.Name + "</returns>" + Nl));
-                    sb.Append(AppStrings.Format(lvl,"public " + cstype + " get" + tfc.Name + "()" + Nl));
+                    sb.Append(AppStrings.Format(lvl, $@"/// <summary>{Nl}"));
+                    sb.Append(AppStrings.Format(lvl, $@"/// Return's type and value of database column {tfc.Name}{Nl}"));
+                    sb.Append(AppStrings.Format(lvl, $@"/// </summary>{Nl}"));
+                    sb.Append(AppStrings.Format(lvl, $@"/// <returns>value of database column {tfc.Name}</returns>{Nl}"));
+                    sb.Append(AppStrings.Format(lvl, $@"public {cstype} get{tfc.Name}(){Nl}"));
                     sb.Append(AppStrings.BlockStart(lvl));                                        
-                    sb.Append(AppStrings.Format(lvl+1,"" + cstype + " data = " + TypeConvert.ToDefaultDBNull(tfc.Domain) + ";" + Nl));                   
-                    sb.Append(AppStrings.Format(lvl+1,"try" + Nl));
+                    sb.Append(AppStrings.Format(lvl+1, $@"{cstype} data = {TypeConvert.ToDefaultDBNull(tfc.Domain)};{Nl}"));                   
+                    sb.Append(AppStrings.Format(lvl+1, $@"try{Nl}"));
                     sb.Append(AppStrings.BlockStart(lvl+1));
-                    sb.Append(AppStrings.Format(lvl+2,"var ob = ConnectionData.GetValue((int)eTDataClass." + tfc.Name + ");" + Nl));
-                    sb.Append(AppStrings.Format(lvl+2,"var dataTypeStr = ob.GetType();" + Nl));
-                    sb.Append(AppStrings.Format(lvl+2,"if (dataTypeStr != typeof(System.DBNull))" + Nl));
+                    sb.Append(AppStrings.Format(lvl+2, $@"var ob = ConnectionData.GetValue((int)eTDataClass.{tfc.Name});{Nl}"));
+                    sb.Append(AppStrings.Format(lvl+2, $@"var dataTypeStr = ob.GetType();{Nl}"));
+                    sb.Append(AppStrings.Format(lvl+2, $@"if (dataTypeStr != typeof(System.DBNull)){Nl}"));
                     sb.Append(AppStrings.BlockStart(lvl+2));
                     if ((cstype == "string") || (cstype == "DateTime"))
                     {
@@ -1781,7 +1734,7 @@ namespace FBXpert.DataClasses
                     sb.Append(AppStrings.Format(lvl+1, AppStrings.BlockEnd(lvl)));
                     sb.Append(AppStrings.Format(lvl+1, $@"catch (Exception ex){Nl}"));
                     sb.Append(AppStrings.Format(lvl+1, AppStrings.BlockStart(lvl)));
-                    sb.Append(AppStrings.Format(lvl+2,$@"TMessages.Instance.HandleKonvertException(ex.Message, {a}{vc.Name}->get{tfc.Name}(){a});{Nl}"));
+                    sb.Append(AppStrings.Format(lvl+2,$@"TMessages.Instance.HandleKonvertException(ex.Message, {a}{vc.Name}Class->get{tfc.Name}(){a});{Nl}"));
                     sb.Append(AppStrings.Format(lvl+1, AppStrings.BlockEnd(lvl)));
                     sb.Append(AppStrings.Format(lvl+1, $@"return (data);{Nl}"));
                     sb.Append(AppStrings.Format(lvl, AppStrings.BlockEnd(lvl)));
@@ -1796,17 +1749,14 @@ namespace FBXpert.DataClasses
             var sb = new StringBuilder();
             if (dataTypeStr.StartsWith("double"))
             {
-                //sb.Append(AppStrings.Format(lvl,"ConnectionData.AddParam(@\"@" + fieldName + "\", TDataBasis.ToSQLString(dc.Item." + fieldName + "));" + Nl));
                 sb.Append(AppStrings.Format(lvl, $@"ConnectionData.AddParam(@{a}@{fieldName}{a}, TDataBasis.ToSQLString(dc.Item.{fieldName}));{Nl}"));
             }
             else if (dataTypeStr == "DateTime")
             {
-                //sb.Append(AppStrings.Format(lvl,"ConnectionData.AddParam(@\"@" + fieldName + "\", GetDatumZeitStr(dc.Item." + fieldName + "));" + Nl));
                 sb.Append(AppStrings.Format(lvl, $@"ConnectionData.AddParam(@{a}@{fieldName}{a}, GetDatumZeitStr(dc.Item.{fieldName}));{Nl}"));
             }
             else
             {
-                //sb.Append(AppStrings.Format(lvl,"ConnectionData.AddParam(@\"@" + fieldName + "\", dc.Item." + fieldName + ");" + Nl));
                 sb.Append(AppStrings.Format(lvl, $@"ConnectionData.AddParam(@{a}@{fieldName}{a}, dc.Item.{fieldName});{Nl}"));
             }
             return sb.ToString();
@@ -1904,8 +1854,6 @@ namespace FBXpert.DataClasses
             return sb.ToString();
         }
 
-        
-
         public string CreateUpdateDataMethods(int lvl,DataObjectClass obj)
         {
             var sb = new StringBuilder();
@@ -1928,10 +1876,7 @@ namespace FBXpert.DataClasses
                 int n = 0;
                 foreach (var tfc in table.Fields.Values)
                 {
-                    //string s10 = "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + ",\");" + Nl;
                     string s1 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name},{a});{Nl}";
-                    
-                    //string s20 = "sql.Append(@\"" + tfc.Name + " = @" + tfc.Name + "\");" + Nl;
                     string s2 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name}{a});{Nl}";
                     sb.Append(++n < table.Fields.Count ? AppStrings.Format(lvl + 2, s1) : AppStrings.Format(lvl + 2, s2));
                 }
@@ -1942,7 +1887,6 @@ namespace FBXpert.DataClasses
                         string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
                         if(!string.IsNullOrEmpty(fn))
                         {                             
-                           //sb.Append(AppStrings.Format(lvl+2,$@"sql.Append(@{a} WHERE {fn} = '{a} + dc.Item.{fn}.ToString() + {a}'; {a});{Nl}"));
                            sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE {fn} = '{{dc.Item.{fn}}}'; {a});{Nl}"));
                         }
                     }
@@ -1950,7 +1894,6 @@ namespace FBXpert.DataClasses
                     {
                         string fld = GetFirstTableField(((TableClass)obj).Fields);
                         _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
-                        //sb.Append(AppStrings.Format(lvl+2,$@"sql.Append(@{a} WHERE {fld} = '{a} + dc.Item.{fld}.ToString() + {a}'; {a});{Nl}"));
                         sb.Append(AppStrings.Format(lvl + 2, $@"sql.Append($@{a} WHERE {fld} = '{{dc.Item.{fld}}}'; {a});{Nl}"));
                     }
                 }
@@ -1961,7 +1904,6 @@ namespace FBXpert.DataClasses
                         string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
                         if(!string.IsNullOrEmpty(fn))
                         {
-                           //sb.Append(AppStrings.Format(lvl+2,"sql.Append(@\" WHERE " + fn + " = \" + dc.Item." + fn + ".ToString() + \"; \");" + Nl));
                            sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE {fn} = {{dc.Item.{fn}}}; {a});{Nl}"));
                         }
                     }
@@ -1969,7 +1911,6 @@ namespace FBXpert.DataClasses
                     {
                         string fld = GetFirstTableField(((TableClass)obj).Fields);
                         _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
-                        //sb.Append(AppStrings.Format(lvl+2,"sql.Append(@\" WHERE "+fld+" = \" + dc.Item."+fld+".ToString() + \"; \");" + Nl));
                         sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE {fld} = {{dc.Item.{fld}}}; {a});{Nl}"));
                     }
                 }
@@ -1980,7 +1921,6 @@ namespace FBXpert.DataClasses
                         string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
                         if(!string.IsNullOrEmpty(fn))
                         { 
-                            //sb.Append(AppStrings.Format(lvl+2,"sql.Append(@\" WHERE " + fn + " = \" + dc.Item." + fn + ".ToString() + \"; \");" + Nl));
                             sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE {fn} = {{dc.Item.{fn}}}; {a});{Nl}"));
                         }
                     }
@@ -1988,7 +1928,6 @@ namespace FBXpert.DataClasses
                     {
                         string fld = GetFirstTableField(((TableClass)obj).Fields);
                         _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public override ReturnInfo UpdateData()");
-                        //sb.Append(AppStrings.Format(lvl+2,"sql.Append(@\" WHERE "+fld+" = \" + dc.Item."+fld+".ToString() + \"; \");" + Nl));
                         sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE {fld} = {{dc.Item.{fld}}}; {a});{Nl}"));
                     }
                 }
@@ -2028,16 +1967,10 @@ namespace FBXpert.DataClasses
                 int n = 0;
                 foreach (var tfc in table.Fields.Values)
                 {
-                    /*
-                    sb.Append(++n < table.Fields.Count 
-                        ? AppStrings.Format(lvl + 2, "sql.Appendx(@\"" + tfc.Name + " = @" + tfc.Name + ",\");") 
-                        : AppStrings.Format(lvl + 2, "sql.Appendx(@\"" + tfc.Name + " = @" + tfc.Name + "\");"));
-                    */
                     string s1 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name},{a});{Nl}";
                     string s2 = $@"sql.Append(@{a}{tfc.Name} = @{tfc.Name}{a});{Nl}";
                     sb.Append(++n < table.Fields.Count ? AppStrings.Format(lvl + 2, s1) : AppStrings.Format(lvl + 2, s2));
                 }                
-                //sb.Append(AppStrings.Format(lvl+2,"sql.Appendx(@\" WHERE ID = \" + dc.Item.ID.ToString() + \"; \");" + Nl));
                 sb.Append(AppStrings.Format(lvl+2,$@"sql.Append($@{a} WHERE ID = {{dc.Item.ID}}; {a});{Nl}"));
                 sb.Append(AppStrings.Format(lvl+2,$@"ConnectionData.CreateCommand(sql.ToString());{Nl}"));
                 sb.Append(AppStrings.Format(lvl+2,$@"//Fill parameters{Nl}"));
@@ -2112,7 +2045,8 @@ namespace FBXpert.DataClasses
 
             var sb = new StringBuilder();
             var newIdMethod = "GetNewID()";
-            if(CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenGUID)
+            
+            if (CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenGUID)
             {
                 newIdMethod = "GetNewGUID()";
             }
@@ -2164,49 +2098,55 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.BlockEnd(lvl+1));
             sb.Append(AppStrings.Format(lvl+1,"catch (Exception ex)" + Nl));
             sb.Append(AppStrings.BlockStart(lvl+1));
-            sb.Append(AppStrings.Format(lvl+2,"TMessages.Instance.HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));
+            sb.Append(AppStrings.Format(lvl+2,$@"TMessages.Instance.HandleAndShowDBException(ex.Message,""{table.Name}Class->GetNewData()"");{Nl}"));
             sb.Append(AppStrings.Format(lvl+2,"Application.Exit();" + Nl));
             sb.Append(AppStrings.BlockEnd(lvl+1));
             sb.Append(AppStrings.Format(lvl+1,"return (aktData);" + Nl));
             sb.Append(AppStrings.BlockEnd(lvl));
             sb.Append(Nl);
-            sb.Append(AppStrings.Format(lvl,"/// <summary>" + Nl));
-            sb.Append(AppStrings.Format(lvl,"/// Creates new object with unique ID." + Nl));
-            sb.Append(AppStrings.Format(lvl,"/// Preceding an group-prefix to ID." + Nl));
-            sb.Append(AppStrings.Format(lvl,"/// </summary>" + Nl));
-            sb.Append(AppStrings.Format(lvl,"/// <returns>Object of TDataClass</returns>" + Nl));
-            sb.Append(AppStrings.Format(lvl,"public TDataClass GetNewData(int gruppe)" + Nl));
-            sb.Append(AppStrings.BlockStart(lvl));
-            sb.Append(AppStrings.Format(lvl+1,"var aktData = new TDataClass(DisplayMemberDef);" + Nl));
-            sb.Append(AppStrings.Format(lvl+1,"try" + Nl));
-            sb.Append(AppStrings.BlockStart(lvl+1));
-            sb.Append(AppStrings.Format(lvl+2,"aktData.Clear();" + Nl));
-            if (table?.primary_constraint == null)
+
+            //Gruppenbildung für ID geht nur bei Generierten ID's vom typ integer
+            if (CodeCreateAttribute.PrimaryFieldType == eCodePrimaryFieldType.GenID)
             {
-                string fld = GetFirstTableField(((TableClass)obj).Fields);
-                _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public TDataClass GetNewData(int gruppe)");
-                sb.Append(AppStrings.Format(lvl+2,$@"aktData.Item.{fld} = {newIdMethod};" + Nl));
-            }
-            else
-            {              
-                string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
-                if(!string.IsNullOrEmpty(fn))                
-                { 
-                    sb.Append(AppStrings.Format(lvl+2,$@"aktData.Item.{fn} = {newIdMethod};" + Nl));
+                var newGroupIdMethod = "GetNewID(gruppe)";
+                sb.Append(AppStrings.Format(lvl, "/// <summary>" + Nl));
+                sb.Append(AppStrings.Format(lvl, "/// Creates new object with unique ID." + Nl));
+                sb.Append(AppStrings.Format(lvl, "/// Preceding an group-prefix to ID." + Nl));
+                sb.Append(AppStrings.Format(lvl, "/// </summary>" + Nl));
+                sb.Append(AppStrings.Format(lvl, "/// <returns>Object of TDataClass</returns>" + Nl));
+                sb.Append(AppStrings.Format(lvl, "public TDataClass GetNewData(int gruppe)" + Nl));
+                sb.Append(AppStrings.BlockStart(lvl));
+                sb.Append(AppStrings.Format(lvl + 1, "var aktData = new TDataClass(DisplayMemberDef);" + Nl));
+                sb.Append(AppStrings.Format(lvl + 1, "try" + Nl));
+                sb.Append(AppStrings.BlockStart(lvl + 1));
+                sb.Append(AppStrings.Format(lvl + 2, "aktData.Clear();" + Nl));
+                if (table?.primary_constraint == null)
+                {
+                    string fld = GetFirstTableField(((TableClass)obj).Fields);
+                    _localNotifies?.AddToERROR($@"No PrimaryKey in Table {table.Name}, using field {fld} instead in method:  public TDataClass GetNewData(int gruppe)");
+                    sb.Append(AppStrings.Format(lvl + 2, $@"aktData.Item.{fld} = {newGroupIdMethod};" + Nl));
                 }
+                else
+                {
+                    string fn = StaticFunctionsClass.GetFirstDictionaryEntry(table.primary_constraint.FieldNames);
+                    if (!string.IsNullOrEmpty(fn))
+                    {
+                        sb.Append(AppStrings.Format(lvl + 2, $@"aktData.Item.{fn} = {newGroupIdMethod};{Nl}"));
+                    }
+                }
+                sb.Append(AppStrings.Format(lvl + 2, "aktData.SetInsertMode();" + Nl));
+                sb.Append(AppStrings.Format(lvl + 2, "Datas.Clear();" + Nl));
+                sb.Append(AppStrings.Format(lvl + 2, "CurrentData = aktData;" + Nl));
+                sb.Append(AppStrings.Format(lvl + 2, "Datas.Add(aktData);" + Nl));
+                sb.Append(AppStrings.BlockEnd(lvl + 1));
+                sb.Append(AppStrings.Format(lvl + 1, "catch (Exception ex)" + Nl));
+                sb.Append(AppStrings.BlockStart(lvl + 1));
+                sb.Append(AppStrings.Format(lvl + 2, $@"TMessages.Instance.HandleAndShowDBException(ex.Message,""{table.Name}Class->GetNewData(gruppe)"");{Nl}"));
+                sb.Append(AppStrings.Format(lvl + 2, "Application.Exit();" + Nl));
+                sb.Append(AppStrings.BlockEnd(lvl + 1));
+                sb.Append(AppStrings.Format(lvl + 1, "return(aktData);" + Nl));
+                sb.Append(AppStrings.BlockEnd(lvl));
             }
-            sb.Append(AppStrings.Format(lvl+2,"aktData.SetInsertMode();" + Nl));
-            sb.Append(AppStrings.Format(lvl+2,"Datas.Clear();" + Nl));
-            sb.Append(AppStrings.Format(lvl+2,"CurrentData = aktData;" + Nl));
-            sb.Append(AppStrings.Format(lvl+2,"Datas.Add(aktData);" + Nl));
-            sb.Append(AppStrings.BlockEnd(lvl+1));
-            sb.Append(AppStrings.Format(lvl+1,"catch (Exception ex)" + Nl));
-            sb.Append(AppStrings.BlockStart(lvl+1));
-            sb.Append(AppStrings.Format(lvl+2,"TMessages.Instance.HandleAndShowDBException(ex.Message,\""+table.Name+"->GetNewData()\");" + Nl));
-            sb.Append(AppStrings.Format(lvl+2,"Application.Exit();" + Nl));
-            sb.Append(AppStrings.BlockEnd(lvl+1));
-            sb.Append(AppStrings.Format(lvl+1,"return (aktData);" + Nl));
-            sb.Append(AppStrings.BlockEnd(lvl));
             return sb.ToString();
         }
 
@@ -2228,8 +2168,8 @@ namespace FBXpert.DataClasses
                 {
                     sb.Append($@"{tfc.Name} = {n++},");
                 }
-                sb.Append(AppStrings.Format(lvl," NO_FIELD = " + n.ToString()));
-                sb.Append(AppStrings.BlockEnd(lvl));
+                sb.Append($@"NO_FIELD = {n}");
+                sb.Append(AppStrings.BlockEnd(0));
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
@@ -2243,9 +2183,8 @@ namespace FBXpert.DataClasses
                 {                    
                     sb.Append($@"{tfc.Name} = {n++},");
                 }
-                sb.Append(AppStrings.Format(lvl, " NO_FIELD = " + n.ToString()));
-                sb.Append(AppStrings.BlockEnd(lvl));
-                //sb.Append(AppStrings.Format(lvl, $@"PrimaryFieldInx = 0;" + Nl));
+                sb.Append($@"NO_FIELD = {n}");
+                sb.Append(AppStrings.BlockEnd(0));
             }
             return sb.ToString();
         }
@@ -2283,7 +2222,6 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.Format(lvl, "using System.Xml.Serialization;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using System.Xml;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using System.Windows.Forms;" + Nl));
-            //sb.Append(AppStrings.Format(lvl, "using System.Numerics;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using DBBasicClassLibrary;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using MessageLibrary.Messages;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using BasicClassLibrary;" + Nl));
@@ -2302,7 +2240,6 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.Format(lvl, "using System.Xml.Serialization;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using System.Xml;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using System.Windows.Forms;" + Nl));
-            //sb.Append(AppStrings.Format(lvl, "using System.Numerics;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using DBBasicClassLibrary;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using MessageLibrary.Messages;" + Nl));
             sb.Append(AppStrings.Format(lvl, "using BasicClassLibrary;" + Nl));
@@ -2316,7 +2253,6 @@ namespace FBXpert.DataClasses
             sb.Append(AppStrings.Format(lvl,"#region Using directives" + Nl));
             sb.Append(AppStrings.Format(lvl,"using System;" + Nl));
             sb.Append(AppStrings.Format(lvl,"using System.Windows.Forms;" + Nl));
-            //sb.Append(AppStrings.Format(lvl,"using System.Numerics;" + Nl));
             sb.Append(AppStrings.Format(lvl,"using DBBasicClassLibrary;" + Nl));
             sb.Append(AppStrings.Format(lvl,"#endregion" + Nl));
             return sb.ToString();

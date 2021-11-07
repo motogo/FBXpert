@@ -93,6 +93,13 @@ namespace FBXpert
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
 
         public void MakeSQL()
         {
@@ -173,6 +180,7 @@ namespace FBXpert
                
         private void FunctionForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
             SetEnables();            

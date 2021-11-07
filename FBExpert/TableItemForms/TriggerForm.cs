@@ -72,7 +72,11 @@ namespace FBXpert
         public void MakeSQL()
         {          
             EditToData();
-            bool ok =  (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) ? MakeSQLAlter() : MakeSQLNew();            
+            if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
+                MakeSQLAlter();
+            else
+                MakeSQLNew();
+
             ShowCaptions();
         }
 
@@ -212,8 +216,6 @@ namespace FBXpert
             TriggerObject.Active = cbIsActive.Checked;
 
             eTriggerType typ = eTriggerType.none;
-
-            string temp = rbBEFORE.Checked ? "BEFORE" : "AFTER";
             if (cbINSERT.Checked)
             {
                 typ = (rbBEFORE.Checked) ? eTriggerType.beforeInsert : eTriggerType.afterInsert;
@@ -276,9 +278,17 @@ namespace FBXpert
             return 0;
         }
 
-        
+        public void SetControlSizes()
+        {
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void TriggerForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             SetComboBox();
             DataToEdit();

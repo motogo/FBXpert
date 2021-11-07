@@ -321,11 +321,20 @@ namespace FBXpert
            cbSorting.SelectedItem  = _tableObject.primary_constraint.Sorting;
                        
            FillObjectToConstraintFields();
-        }    
-                
-        
+        }
+
+        public void SetControlSizes()
+        {
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+         
+        }
         private void PrimaryKeyForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             _dataFilled = false;
             DataToEdit();
