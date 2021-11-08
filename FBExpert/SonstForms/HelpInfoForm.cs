@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FBXpert.Globals;
+using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -82,5 +83,14 @@ namespace FBXpert
             this.Text = title;
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
+        private void HelpInfoForm_Load(object sender, EventArgs e)
+        {
+            SetControlSizes();
+        }
     }
 }

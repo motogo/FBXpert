@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseCompareFrom));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsRefresh = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
@@ -81,7 +81,7 @@
             this.gbDatabase1 = new System.Windows.Forms.GroupBox();
             this.slbDatabase1 = new SEListBox.SEListBox();
             this.pnlUpperDatabase1 = new System.Windows.Forms.Panel();
-            this.pnlXML_UPPER = new System.Windows.Forms.Panel();
+            this.pnlXMLUpper = new System.Windows.Forms.Panel();
             this.ckPK = new System.Windows.Forms.CheckBox();
             this.ckDepent = new System.Windows.Forms.CheckBox();
             this.ckFK = new System.Windows.Forms.CheckBox();
@@ -113,7 +113,7 @@
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fbdSourcePath = new System.Windows.Forms.FolderBrowserDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDatabases.SuspendLayout();
@@ -133,7 +133,7 @@
             this.pnlDatabases.SuspendLayout();
             this.gbDatabase2.SuspendLayout();
             this.gbDatabase1.SuspendLayout();
-            this.pnlXML_UPPER.SuspendLayout();
+            this.pnlXMLUpper.SuspendLayout();
             this.tabPageObjects.SuspendLayout();
             this.pnlObjects.SuspendLayout();
             this.gbDBObjets1.SuspendLayout();
@@ -142,17 +142,17 @@
             this.pnlUpperObjects1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1234, 42);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblCaption);
+            this.pnlFormUpper.Controls.Add(this.hsRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1234, 42);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // lblCaption
             // 
@@ -191,6 +191,7 @@
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
             this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShortcutNewline = false;
             this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 3;
@@ -241,6 +242,7 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 2;
@@ -298,7 +300,7 @@
             // 
             this.tabPageDatabases.Controls.Add(this.pnlSourceCode);
             this.tabPageDatabases.Controls.Add(this.pnlDatabases);
-            this.tabPageDatabases.Controls.Add(this.pnlXML_UPPER);
+            this.tabPageDatabases.Controls.Add(this.pnlXMLUpper);
             this.tabPageDatabases.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageDatabases.ImageIndex = 1;
             this.tabPageDatabases.Location = new System.Drawing.Point(4, 23);
@@ -516,6 +518,7 @@
             this.hsSearchDownForward.Name = "hsSearchDownForward";
             this.hsSearchDownForward.NonMarkedText = "";
             this.hsSearchDownForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDownForward.ShortcutNewline = false;
             this.hsSearchDownForward.ShowShortcut = false;
             this.hsSearchDownForward.Size = new System.Drawing.Size(45, 59);
             this.hsSearchDownForward.TabIndex = 8;
@@ -566,6 +569,7 @@
             this.hsSearchUpForward.Name = "hsSearchUpForward";
             this.hsSearchUpForward.NonMarkedText = "";
             this.hsSearchUpForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUpForward.ShortcutNewline = false;
             this.hsSearchUpForward.ShowShortcut = false;
             this.hsSearchUpForward.Size = new System.Drawing.Size(45, 59);
             this.hsSearchUpForward.TabIndex = 7;
@@ -616,6 +620,7 @@
             this.hsSeachForward.Name = "hsSeachForward";
             this.hsSeachForward.NonMarkedText = "";
             this.hsSeachForward.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSeachForward.ShortcutNewline = false;
             this.hsSeachForward.ShowShortcut = false;
             this.hsSeachForward.Size = new System.Drawing.Size(45, 59);
             this.hsSeachForward.TabIndex = 6;
@@ -779,6 +784,7 @@
             this.hsSearchDownReverse.Name = "hsSearchDownReverse";
             this.hsSearchDownReverse.NonMarkedText = "";
             this.hsSearchDownReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDownReverse.ShortcutNewline = false;
             this.hsSearchDownReverse.ShowShortcut = false;
             this.hsSearchDownReverse.Size = new System.Drawing.Size(45, 59);
             this.hsSearchDownReverse.TabIndex = 8;
@@ -829,6 +835,7 @@
             this.hsSearchUpReverse.Name = "hsSearchUpReverse";
             this.hsSearchUpReverse.NonMarkedText = "";
             this.hsSearchUpReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUpReverse.ShortcutNewline = false;
             this.hsSearchUpReverse.ShowShortcut = false;
             this.hsSearchUpReverse.Size = new System.Drawing.Size(45, 59);
             this.hsSearchUpReverse.TabIndex = 7;
@@ -879,6 +886,7 @@
             this.hsSeachReverse.Name = "hsSeachReverse";
             this.hsSeachReverse.NonMarkedText = "";
             this.hsSeachReverse.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSeachReverse.ShortcutNewline = false;
             this.hsSeachReverse.ShowShortcut = false;
             this.hsSeachReverse.Size = new System.Drawing.Size(45, 59);
             this.hsSeachReverse.TabIndex = 6;
@@ -927,8 +935,9 @@
             // 
             // slbDatabase2
             // 
+            this.slbDatabase2.AlloweColumnFilterIndexChange = false;
             this.slbDatabase2.AllowMultipleChecks = false;
-            this.slbDatabase2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle25;
+            this.slbDatabase2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.slbDatabase2.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDatabase2.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDatabase2.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -938,12 +947,15 @@
             this.slbDatabase2.CheckOnSelect = false;
             this.slbDatabase2.CheckVisible = false;
             this.slbDatabase2.CheckWith = 32;
+            this.slbDatabase2.ColumnFilterIndex = 1;
             this.slbDatabase2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.slbDatabase2.FilterText = "";
             this.slbDatabase2.IDVisible = false;
             this.slbDatabase2.IDWith = 32;
             this.slbDatabase2.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDatabase2.ListEntriesDefaultCellStyle = dataGridViewCellStyle26;
+            this.slbDatabase2.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
             this.slbDatabase2.Location = new System.Drawing.Point(3, 58);
+            this.slbDatabase2.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDatabase2.Name = "slbDatabase2";
             this.slbDatabase2.SelectedIndex = -1;
             this.slbDatabase2.ShowCaptions = true;
@@ -951,13 +963,16 @@
             this.slbDatabase2.ShowCountInTitle = true;
             this.slbDatabase2.ShowSelection = true;
             this.slbDatabase2.Size = new System.Drawing.Size(194, 751);
+            this.slbDatabase2.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.slbDatabase2.SQLKonjunktion = "AND";
             this.slbDatabase2.TabIndex = 4;
             this.slbDatabase2.Text = "Object list";
             this.slbDatabase2.TextCaption = "Name";
             this.slbDatabase2.TextWith = 189;
             this.slbDatabase2.Title = "Database 2";
+            this.slbDatabase2.UseFiltering = false;
+            this.slbDatabase2.UseFilteringAutocomplete = false;
             this.slbDatabase2.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
-            
             // 
             // pnlUpperDatabase2
             // 
@@ -982,8 +997,9 @@
             // 
             // slbDatabase1
             // 
+            this.slbDatabase1.AlloweColumnFilterIndexChange = false;
             this.slbDatabase1.AllowMultipleChecks = false;
-            this.slbDatabase1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle27;
+            this.slbDatabase1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
             this.slbDatabase1.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDatabase1.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDatabase1.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -993,12 +1009,15 @@
             this.slbDatabase1.CheckOnSelect = false;
             this.slbDatabase1.CheckVisible = false;
             this.slbDatabase1.CheckWith = 32;
+            this.slbDatabase1.ColumnFilterIndex = 1;
             this.slbDatabase1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.slbDatabase1.FilterText = "";
             this.slbDatabase1.IDVisible = false;
             this.slbDatabase1.IDWith = 32;
             this.slbDatabase1.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDatabase1.ListEntriesDefaultCellStyle = dataGridViewCellStyle28;
+            this.slbDatabase1.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
             this.slbDatabase1.Location = new System.Drawing.Point(3, 58);
+            this.slbDatabase1.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDatabase1.Name = "slbDatabase1";
             this.slbDatabase1.SelectedIndex = -1;
             this.slbDatabase1.ShowCaptions = true;
@@ -1006,13 +1025,16 @@
             this.slbDatabase1.ShowCountInTitle = true;
             this.slbDatabase1.ShowSelection = true;
             this.slbDatabase1.Size = new System.Drawing.Size(194, 751);
+            this.slbDatabase1.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.slbDatabase1.SQLKonjunktion = "AND";
             this.slbDatabase1.TabIndex = 4;
             this.slbDatabase1.Text = "Object list";
             this.slbDatabase1.TextCaption = "Name";
             this.slbDatabase1.TextWith = 189;
             this.slbDatabase1.Title = "Database 1";
+            this.slbDatabase1.UseFiltering = false;
+            this.slbDatabase1.UseFilteringAutocomplete = false;
             this.slbDatabase1.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
-           
             // 
             // pnlUpperDatabase1
             // 
@@ -1024,27 +1046,27 @@
             // 
             // pnlXML_UPPER
             // 
-            this.pnlXML_UPPER.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlXML_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlXML_UPPER.Controls.Add(this.ckPK);
-            this.pnlXML_UPPER.Controls.Add(this.ckDepent);
-            this.pnlXML_UPPER.Controls.Add(this.ckFK);
-            this.pnlXML_UPPER.Controls.Add(this.ckFuntions);
-            this.pnlXML_UPPER.Controls.Add(this.ckGenerators);
-            this.pnlXML_UPPER.Controls.Add(this.ckTables);
-            this.pnlXML_UPPER.Controls.Add(this.ckViews);
-            this.pnlXML_UPPER.Controls.Add(this.ckProcedures);
-            this.pnlXML_UPPER.Controls.Add(this.cbChangeToUppercase);
-            this.pnlXML_UPPER.Controls.Add(this.cbForwardRun);
-            this.pnlXML_UPPER.Controls.Add(this.ckReverseRun);
-            this.pnlXML_UPPER.Controls.Add(this.cbOnlyFailures);
-            this.pnlXML_UPPER.Controls.Add(this.hsDoCompare);
-            this.pnlXML_UPPER.Controls.Add(this.hsSaveResults);
-            this.pnlXML_UPPER.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXML_UPPER.Location = new System.Drawing.Point(3, 3);
-            this.pnlXML_UPPER.Name = "pnlXML_UPPER";
-            this.pnlXML_UPPER.Size = new System.Drawing.Size(1220, 51);
-            this.pnlXML_UPPER.TabIndex = 1;
+            this.pnlXMLUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlXMLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLUpper.Controls.Add(this.ckPK);
+            this.pnlXMLUpper.Controls.Add(this.ckDepent);
+            this.pnlXMLUpper.Controls.Add(this.ckFK);
+            this.pnlXMLUpper.Controls.Add(this.ckFuntions);
+            this.pnlXMLUpper.Controls.Add(this.ckGenerators);
+            this.pnlXMLUpper.Controls.Add(this.ckTables);
+            this.pnlXMLUpper.Controls.Add(this.ckViews);
+            this.pnlXMLUpper.Controls.Add(this.ckProcedures);
+            this.pnlXMLUpper.Controls.Add(this.cbChangeToUppercase);
+            this.pnlXMLUpper.Controls.Add(this.cbForwardRun);
+            this.pnlXMLUpper.Controls.Add(this.ckReverseRun);
+            this.pnlXMLUpper.Controls.Add(this.cbOnlyFailures);
+            this.pnlXMLUpper.Controls.Add(this.hsDoCompare);
+            this.pnlXMLUpper.Controls.Add(this.hsSaveResults);
+            this.pnlXMLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLUpper.Name = "pnlXML_UPPER";
+            this.pnlXMLUpper.Size = new System.Drawing.Size(1220, 51);
+            this.pnlXMLUpper.TabIndex = 1;
             // 
             // ckPK
             // 
@@ -1217,6 +1239,7 @@
             this.hsDoCompare.Name = "hsDoCompare";
             this.hsDoCompare.NonMarkedText = "";
             this.hsDoCompare.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDoCompare.ShortcutNewline = false;
             this.hsDoCompare.ShowShortcut = false;
             this.hsDoCompare.Size = new System.Drawing.Size(45, 47);
             this.hsDoCompare.TabIndex = 5;
@@ -1267,6 +1290,7 @@
             this.hsSaveResults.Name = "hsSaveResults";
             this.hsSaveResults.NonMarkedText = "";
             this.hsSaveResults.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveResults.ShortcutNewline = false;
             this.hsSaveResults.ShowShortcut = false;
             this.hsSaveResults.Size = new System.Drawing.Size(45, 47);
             this.hsSaveResults.TabIndex = 4;
@@ -1330,8 +1354,9 @@
             // 
             // slbDbObjects2
             // 
+            this.slbDbObjects2.AlloweColumnFilterIndexChange = false;
             this.slbDbObjects2.AllowMultipleChecks = false;
-            this.slbDbObjects2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle29;
+            this.slbDbObjects2.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle5;
             this.slbDbObjects2.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDbObjects2.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDbObjects2.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1341,12 +1366,15 @@
             this.slbDbObjects2.CheckOnSelect = false;
             this.slbDbObjects2.CheckVisible = true;
             this.slbDbObjects2.CheckWith = 32;
+            this.slbDbObjects2.ColumnFilterIndex = 1;
             this.slbDbObjects2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.slbDbObjects2.FilterText = "";
             this.slbDbObjects2.IDVisible = false;
             this.slbDbObjects2.IDWith = 32;
             this.slbDbObjects2.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDbObjects2.ListEntriesDefaultCellStyle = dataGridViewCellStyle30;
+            this.slbDbObjects2.ListEntriesDefaultCellStyle = dataGridViewCellStyle6;
             this.slbDbObjects2.Location = new System.Drawing.Point(3, 58);
+            this.slbDbObjects2.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDbObjects2.Name = "slbDbObjects2";
             this.slbDbObjects2.SelectedIndex = -1;
             this.slbDbObjects2.ShowCaptions = true;
@@ -1354,11 +1382,15 @@
             this.slbDbObjects2.ShowCountInTitle = true;
             this.slbDbObjects2.ShowSelection = true;
             this.slbDbObjects2.Size = new System.Drawing.Size(275, 756);
+            this.slbDbObjects2.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.slbDbObjects2.SQLKonjunktion = "AND";
             this.slbDbObjects2.TabIndex = 4;
             this.slbDbObjects2.Text = "Object list";
             this.slbDbObjects2.TextCaption = "text";
             this.slbDbObjects2.TextWith = 189;
             this.slbDbObjects2.Title = "Objects of database2";
+            this.slbDbObjects2.UseFiltering = false;
+            this.slbDbObjects2.UseFilteringAutocomplete = false;
             this.slbDbObjects2.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // pnlUpperObjects2
@@ -1399,6 +1431,7 @@
             this.hsUnselObjects2.Name = "hsUnselObjects2";
             this.hsUnselObjects2.NonMarkedText = "Uncheck all";
             this.hsUnselObjects2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselObjects2.ShortcutNewline = false;
             this.hsUnselObjects2.ShowShortcut = false;
             this.hsUnselObjects2.Size = new System.Drawing.Size(112, 42);
             this.hsUnselObjects2.TabIndex = 5;
@@ -1451,6 +1484,7 @@
             this.hsSelObjects2.Name = "hsSelObjects2";
             this.hsSelObjects2.NonMarkedText = "Check all";
             this.hsSelObjects2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelObjects2.ShortcutNewline = false;
             this.hsSelObjects2.ShowShortcut = false;
             this.hsSelObjects2.Size = new System.Drawing.Size(96, 42);
             this.hsSelObjects2.TabIndex = 4;
@@ -1498,8 +1532,9 @@
             // 
             // slbDbObjects1
             // 
+            this.slbDbObjects1.AlloweColumnFilterIndexChange = false;
             this.slbDbObjects1.AllowMultipleChecks = false;
-            this.slbDbObjects1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle31;
+            this.slbDbObjects1.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle7;
             this.slbDbObjects1.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.slbDbObjects1.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.slbDbObjects1.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -1509,12 +1544,15 @@
             this.slbDbObjects1.CheckOnSelect = false;
             this.slbDbObjects1.CheckVisible = true;
             this.slbDbObjects1.CheckWith = 32;
+            this.slbDbObjects1.ColumnFilterIndex = 1;
             this.slbDbObjects1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.slbDbObjects1.FilterText = "";
             this.slbDbObjects1.IDVisible = false;
             this.slbDbObjects1.IDWith = 32;
             this.slbDbObjects1.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.slbDbObjects1.ListEntriesDefaultCellStyle = dataGridViewCellStyle32;
+            this.slbDbObjects1.ListEntriesDefaultCellStyle = dataGridViewCellStyle8;
             this.slbDbObjects1.Location = new System.Drawing.Point(3, 58);
+            this.slbDbObjects1.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDbObjects1.Name = "slbDbObjects1";
             this.slbDbObjects1.SelectedIndex = -1;
             this.slbDbObjects1.ShowCaptions = true;
@@ -1522,11 +1560,15 @@
             this.slbDbObjects1.ShowCountInTitle = true;
             this.slbDbObjects1.ShowSelection = true;
             this.slbDbObjects1.Size = new System.Drawing.Size(277, 756);
+            this.slbDbObjects1.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.slbDbObjects1.SQLKonjunktion = "AND";
             this.slbDbObjects1.TabIndex = 4;
             this.slbDbObjects1.Text = "Object list";
             this.slbDbObjects1.TextCaption = "text";
             this.slbDbObjects1.TextWith = 189;
             this.slbDbObjects1.Title = "Objects of database1";
+            this.slbDbObjects1.UseFiltering = false;
+            this.slbDbObjects1.UseFilteringAutocomplete = false;
             this.slbDbObjects1.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // pnlUpperObjects1
@@ -1567,6 +1609,7 @@
             this.hsUnselObjects1.Name = "hsUnselObjects1";
             this.hsUnselObjects1.NonMarkedText = "Uncheck all";
             this.hsUnselObjects1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselObjects1.ShortcutNewline = false;
             this.hsUnselObjects1.ShowShortcut = false;
             this.hsUnselObjects1.Size = new System.Drawing.Size(108, 42);
             this.hsUnselObjects1.TabIndex = 5;
@@ -1619,6 +1662,7 @@
             this.hsSelObjects1.Name = "hsSelObjects1";
             this.hsSelObjects1.NonMarkedText = "Check all";
             this.hsSelObjects1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelObjects1.ShortcutNewline = false;
             this.hsSelObjects1.ShowShortcut = false;
             this.hsSelObjects1.Size = new System.Drawing.Size(96, 42);
             this.hsSelObjects1.TabIndex = 4;
@@ -1675,14 +1719,14 @@
             this.ClientSize = new System.Drawing.Size(1234, 961);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DatabaseCompareFrom";
             this.Text = "DatabaseCompareFrom";
             this.Load += new System.EventHandler(this.DatabaseCompareFrom_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageDatabases.ResumeLayout(false);
@@ -1704,8 +1748,8 @@
             this.pnlDatabases.ResumeLayout(false);
             this.gbDatabase2.ResumeLayout(false);
             this.gbDatabase1.ResumeLayout(false);
-            this.pnlXML_UPPER.ResumeLayout(false);
-            this.pnlXML_UPPER.PerformLayout();
+            this.pnlXMLUpper.ResumeLayout(false);
+            this.pnlXMLUpper.PerformLayout();
             this.tabPageObjects.ResumeLayout(false);
             this.pnlObjects.ResumeLayout(false);
             this.gbDBObjets1.ResumeLayout(false);
@@ -1718,7 +1762,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlLower;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsRefresh;
@@ -1730,7 +1774,7 @@
         private System.Windows.Forms.TabPage tabPageObjects;
         private System.Windows.Forms.ImageList ilTabControl;
         private System.Windows.Forms.Panel pnlMessagesUpper;
-        private System.Windows.Forms.Panel pnlXML_UPPER;
+        private System.Windows.Forms.Panel pnlXMLUpper;
         private System.Windows.Forms.Label lblCaption;
         private SeControlsLib.HotSpot hsDoCompare;
         private FastColoredTextBoxNS.FastColoredTextBox fctSourceForward;

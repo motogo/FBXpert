@@ -5,7 +5,7 @@ namespace FBXpert.KonfigurationForms
     /// </summary>
     partial class XMLTreeForm : System.Windows.Forms.Form
     {
-        private System.Windows.Forms.Panel pnl_upper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnl_center;
 
 
@@ -29,31 +29,33 @@ namespace FBXpert.KonfigurationForms
 
         private void InitializeComponent()
         {
-            this.pnl_upper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsReload = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnl_center = new System.Windows.Forms.Panel();
             this.xmlEdit = new XMLSimlpeEdit.XMLEditSimpleUserControl();
-            this.pnl_upper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnl_center.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnl_upper
+            // pnlFormUpper
             // 
-            this.pnl_upper.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pnl_upper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_upper.Controls.Add(this.hsReload);
-            this.pnl_upper.Controls.Add(this.hsClose);
-            this.pnl_upper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_upper.Location = new System.Drawing.Point(0, 0);
-            this.pnl_upper.Name = "pnl_upper";
-            this.pnl_upper.Size = new System.Drawing.Size(768, 42);
-            this.pnl_upper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pnlFormUpper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFormUpper.Controls.Add(this.hsReload);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(802, 42);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsReload
             // 
             this.hsReload.BackColor = System.Drawing.Color.Transparent;
             this.hsReload.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsReload.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsReload.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsReload.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsReload.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -62,9 +64,10 @@ namespace FBXpert.KonfigurationForms
             this.hsReload.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsReload.FlatAppearance.BorderSize = 0;
             this.hsReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsReload.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsReload.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
-            this.hsReload.Image = global::FBXpert.Properties.Resources.view_refresh32x;
-            this.hsReload.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
+            this.hsReload.Image = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hsReload.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.hsReload.ImageToggleOnSelect = false;
             this.hsReload.Location = new System.Drawing.Point(45, 0);
             this.hsReload.Marked = false;
@@ -74,6 +77,9 @@ namespace FBXpert.KonfigurationForms
             this.hsReload.MarkMode = false;
             this.hsReload.Name = "hsReload";
             this.hsReload.NonMarkedText = "";
+            this.hsReload.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsReload.ShortcutNewline = false;
+            this.hsReload.ShowShortcut = false;
             this.hsReload.Size = new System.Drawing.Size(45, 40);
             this.hsReload.TabIndex = 89;
             this.hsReload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -88,7 +94,6 @@ namespace FBXpert.KonfigurationForms
             this.hsReload.ToolTipIsBallon = false;
             this.hsReload.ToolTipOwnerDraw = false;
             this.hsReload.ToolTipReshowDelay = 100;
-            
             this.hsReload.ToolTipShowAlways = false;
             this.hsReload.ToolTipText = "Formular schlieﬂen";
             this.hsReload.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -101,6 +106,7 @@ namespace FBXpert.KonfigurationForms
             // 
             this.hsClose.BackColor = System.Drawing.Color.Transparent;
             this.hsClose.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClose.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsClose.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsClose.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsClose.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -109,6 +115,7 @@ namespace FBXpert.KonfigurationForms
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous22x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_previous22x;
@@ -121,6 +128,9 @@ namespace FBXpert.KonfigurationForms
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 40);
             this.hsClose.TabIndex = 88;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -135,7 +145,6 @@ namespace FBXpert.KonfigurationForms
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "Formular schlieﬂen";
             this.hsClose.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -152,7 +161,7 @@ namespace FBXpert.KonfigurationForms
             this.pnl_center.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_center.Location = new System.Drawing.Point(0, 42);
             this.pnl_center.Name = "pnl_center";
-            this.pnl_center.Size = new System.Drawing.Size(768, 671);
+            this.pnl_center.Size = new System.Drawing.Size(802, 671);
             this.pnl_center.TabIndex = 2;
             // 
             // xmlEdit
@@ -170,21 +179,21 @@ namespace FBXpert.KonfigurationForms
             this.xmlEdit.Margin = new System.Windows.Forms.Padding(0);
             this.xmlEdit.MinimumSize = new System.Drawing.Size(200, 100);
             this.xmlEdit.Name = "xmlEdit";
-            this.xmlEdit.Size = new System.Drawing.Size(766, 669);
+            this.xmlEdit.Size = new System.Drawing.Size(800, 669);
             this.xmlEdit.TabIndex = 0;
             // 
             // XMLTreeForm
             // 
-            this.ClientSize = new System.Drawing.Size(768, 713);
+            this.ClientSize = new System.Drawing.Size(802, 713);
             this.Controls.Add(this.pnl_center);
-            this.Controls.Add(this.pnl_upper);
+            this.Controls.Add(this.pnlFormUpper);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "XMLTreeForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XML-Tree";
-            this.Load += new System.EventHandler(this.PFADEForm_Load);
-            this.pnl_upper.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.XMLTreeForm_Load);
+            this.pnlFormUpper.ResumeLayout(false);
             this.pnl_center.ResumeLayout(false);
             this.ResumeLayout(false);
 

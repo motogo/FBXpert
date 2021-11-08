@@ -112,21 +112,28 @@ namespace FBXpert.SonstForms
             xmlEditStruktur.SaveXmlToFile(saveFileDialog1.FileName);
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height         = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height     = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLUpper.Height          = AppSizeConstants.UpperFormBandHeight;
+            pnlSourceCodeUpper.Height   = AppSizeConstants.UpperFormBandHeight;
+            pnlUpperDBObjects.Height    = AppSizeConstants.UpperFormBandHeight;
+        }
         private void XMLDesignForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             LanguageChanged();
             hsSearchDown.Enabled = false;
             hsSearchUp.Enabled   = false;
-            hsSearch.Enabled = txtSearchCode.TextLength > 0;           
+            hsSearch.Enabled                   = txtSearchCode.TextLength > 0;           
             fbdSourcePath.SelectedPath         = _dbReg.CodeSettings.SourceCodeOutputPath;
             txtSourceCodePath.Text             = _dbReg.CodeSettings.SourceCodeOutputPath;
-            
             rbGenerateInrWithGenerator.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger;
             rbGenerateGUID.Checked             = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID;
             rbGenerateOID.Checked              = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID;
             rbGUIDHEXGeneration.Checked        = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID;
-
             txtDBNamespace.Text                = _dbReg.CodeSettings.SourceCodeNamespace;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
@@ -160,17 +167,13 @@ namespace FBXpert.SonstForms
             var ddc = (DatabaseDesignClass) serializer.Deserialize<DatabaseDesignClass>(fs);
             fs.Close();           
             fctSource.Clear();
-            /*
-            CodeFactory.Instance().Init(_localNotify);
-            CodeFactory.Instance().CodeCreateAttribute.PrimaryFieldType = rbGenerateInrWithGenerator.Checked ? eCodePrimaryFieldType.GenID : eCodePrimaryFieldType.GenUUID;
-            */
             selDBObjects.ClearItems();
 
             foreach (var tc in ddc.Tables.Values)
             {
                 foreach(var fld in tc.Fields)
                 {
-                    if (fld.Value.Domain.RawType.Length > 0) continue;                    
+                    if (fld.Value.Domain.RawType.Length > 0) continue;
                 }
             }
 
@@ -178,7 +181,7 @@ namespace FBXpert.SonstForms
             {
                 foreach (var fld in tc.Fields.Values)
                 {
-                    if (fld.Domain.RawType.Length > 0) continue;                    
+                    if (fld.Domain.RawType.Length > 0) continue;
                 }
             }
 
@@ -229,7 +232,6 @@ namespace FBXpert.SonstForms
             }
             CodeFactory.Instance().CodeCreateAttribute.CodeNamespace = txtDBNamespace.Text.Trim();                        
         }
-
         private string MakeGlobalCode()
         {
             var items = selDBObjects.CheckedItemDatas;

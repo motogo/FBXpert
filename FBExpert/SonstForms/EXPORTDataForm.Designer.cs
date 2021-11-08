@@ -85,7 +85,7 @@ namespace FBExpert
             this.bsUniques = new System.Windows.Forms.BindingSource(this.components);
             this.dsUniques = new System.Data.DataSet();
             this.dataTable3 = new System.Data.DataTable();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblTableName = new System.Windows.Forms.Label();
             this.hsRefresh = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
@@ -177,7 +177,6 @@ namespace FBExpert
             this.pnlUpperExportStructureObjects = new System.Windows.Forms.Panel();
             this.hotSpot15 = new SeControlsLib.HotSpot();
             this.hotSpot14 = new SeControlsLib.HotSpot();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.ofdSQL = new System.Windows.Forms.OpenFileDialog();
             this.bsTableContent = new System.Windows.Forms.BindingSource(this.components);
             this.dsTableContent = new System.Data.DataSet();
@@ -198,7 +197,7 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsUniques)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsUniques)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable3)).BeginInit();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.gbFileExport.SuspendLayout();
             this.gbFileName.SuspendLayout();
@@ -253,7 +252,7 @@ namespace FBExpert
             this.tabControl.Location = new System.Drawing.Point(3, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(464, 570);
+            this.tabControl.Size = new System.Drawing.Size(464, 616);
             this.tabControl.TabIndex = 0;
             this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -267,7 +266,7 @@ namespace FBExpert
             this.tabTableExports.Location = new System.Drawing.Point(4, 23);
             this.tabTableExports.Name = "tabTableExports";
             this.tabTableExports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTableExports.Size = new System.Drawing.Size(456, 543);
+            this.tabTableExports.Size = new System.Drawing.Size(456, 589);
             this.tabTableExports.TabIndex = 0;
             this.tabTableExports.Text = "Table data export";
             // 
@@ -279,13 +278,14 @@ namespace FBExpert
             this.gbTableFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTableFields.Location = new System.Drawing.Point(208, 3);
             this.gbTableFields.Name = "gbTableFields";
-            this.gbTableFields.Size = new System.Drawing.Size(245, 537);
+            this.gbTableFields.Size = new System.Drawing.Size(245, 583);
             this.gbTableFields.TabIndex = 4;
             this.gbTableFields.TabStop = false;
             this.gbTableFields.Text = "Fields";
             // 
             // selFields
             // 
+            this.selFields.AlloweColumnFilterIndexChange = false;
             this.selFields.AllowMultipleChecks = true;
             this.selFields.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
             this.selFields.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -297,36 +297,43 @@ namespace FBExpert
             this.selFields.CheckOnSelect = true;
             this.selFields.CheckVisible = true;
             this.selFields.CheckWith = 32;
+            this.selFields.ColumnFilterIndex = 1;
             this.selFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selFields.FilterText = "";
             this.selFields.IDVisible = false;
             this.selFields.IDWith = 32;
             this.selFields.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selFields.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
-            this.selFields.Location = new System.Drawing.Point(3, 58);
+            this.selFields.Location = new System.Drawing.Point(3, 71);
+            this.selFields.MarkingColor = System.Drawing.Color.LightGreen;
             this.selFields.Name = "selFields";
             this.selFields.SelectedIndex = -1;
             this.selFields.ShowCaptions = false;
             this.selFields.ShowCellToolTips = true;
             this.selFields.ShowCountInTitle = true;
             this.selFields.ShowSelection = false;
-            this.selFields.Size = new System.Drawing.Size(239, 476);
+            this.selFields.Size = new System.Drawing.Size(239, 509);
+            this.selFields.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selFields.SQLKonjunktion = "AND";
             this.selFields.TabIndex = 19;
             this.selFields.Text = "selFields";
             this.selFields.TextCaption = "text";
             this.selFields.TextWith = 100;
             this.selFields.Title = "gbMain";
+            this.selFields.UseFiltering = false;
+            this.selFields.UseFilteringAutocomplete = false;
             this.selFields.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
-            this.selFields.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selFields_SelectItem);
             this.selFields.ItemCheckChanged += new SEListBox.SEListBox.CheckItemEventHandler(this.selFields_ItemCheckChanged);
+            this.selFields.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selFields_SelectItem);
             // 
             // pnlTableFieldsUpper
             // 
             this.pnlTableFieldsUpper.Controls.Add(this.hsUncheckAllTableFields);
             this.pnlTableFieldsUpper.Controls.Add(this.hsCheckAllTableFields);
             this.pnlTableFieldsUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTableFieldsUpper.Location = new System.Drawing.Point(3, 16);
+            this.pnlTableFieldsUpper.Location = new System.Drawing.Point(3, 18);
             this.pnlTableFieldsUpper.Name = "pnlTableFieldsUpper";
-            this.pnlTableFieldsUpper.Size = new System.Drawing.Size(239, 42);
+            this.pnlTableFieldsUpper.Size = new System.Drawing.Size(239, 53);
             this.pnlTableFieldsUpper.TabIndex = 1;
             // 
             // hsUncheckAllTableFields
@@ -342,6 +349,7 @@ namespace FBExpert
             this.hsUncheckAllTableFields.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUncheckAllTableFields.FlatAppearance.BorderSize = 0;
             this.hsUncheckAllTableFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUncheckAllTableFields.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUncheckAllTableFields.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUncheckAllTableFields.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUncheckAllTableFields.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -355,7 +363,10 @@ namespace FBExpert
             this.hsUncheckAllTableFields.MarkMode = false;
             this.hsUncheckAllTableFields.Name = "hsUncheckAllTableFields";
             this.hsUncheckAllTableFields.NonMarkedText = "Uncheck all";
-            this.hsUncheckAllTableFields.Size = new System.Drawing.Size(96, 42);
+            this.hsUncheckAllTableFields.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUncheckAllTableFields.ShortcutNewline = false;
+            this.hsUncheckAllTableFields.ShowShortcut = false;
+            this.hsUncheckAllTableFields.Size = new System.Drawing.Size(96, 53);
             this.hsUncheckAllTableFields.TabIndex = 3;
             this.hsUncheckAllTableFields.Text = "Uncheck all";
             this.hsUncheckAllTableFields.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -391,6 +402,7 @@ namespace FBExpert
             this.hsCheckAllTableFields.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCheckAllTableFields.FlatAppearance.BorderSize = 0;
             this.hsCheckAllTableFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCheckAllTableFields.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCheckAllTableFields.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCheckAllTableFields.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsCheckAllTableFields.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -404,7 +416,10 @@ namespace FBExpert
             this.hsCheckAllTableFields.MarkMode = false;
             this.hsCheckAllTableFields.Name = "hsCheckAllTableFields";
             this.hsCheckAllTableFields.NonMarkedText = "Check all";
-            this.hsCheckAllTableFields.Size = new System.Drawing.Size(96, 42);
+            this.hsCheckAllTableFields.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCheckAllTableFields.ShortcutNewline = false;
+            this.hsCheckAllTableFields.ShowShortcut = false;
+            this.hsCheckAllTableFields.Size = new System.Drawing.Size(96, 53);
             this.hsCheckAllTableFields.TabIndex = 2;
             this.hsCheckAllTableFields.Text = "Check all";
             this.hsCheckAllTableFields.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -435,13 +450,14 @@ namespace FBExpert
             this.gbTablesDataExport.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbTablesDataExport.Location = new System.Drawing.Point(3, 3);
             this.gbTablesDataExport.Name = "gbTablesDataExport";
-            this.gbTablesDataExport.Size = new System.Drawing.Size(205, 537);
+            this.gbTablesDataExport.Size = new System.Drawing.Size(205, 583);
             this.gbTablesDataExport.TabIndex = 3;
             this.gbTablesDataExport.TabStop = false;
             this.gbTablesDataExport.Text = "Tables";
             // 
             // selTables
             // 
+            this.selTables.AlloweColumnFilterIndexChange = false;
             this.selTables.AllowMultipleChecks = true;
             this.selTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
             this.selTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -453,24 +469,31 @@ namespace FBExpert
             this.selTables.CheckOnSelect = false;
             this.selTables.CheckVisible = true;
             this.selTables.CheckWith = 32;
+            this.selTables.ColumnFilterIndex = 1;
             this.selTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selTables.FilterText = "";
             this.selTables.IDVisible = false;
             this.selTables.IDWith = 32;
             this.selTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
-            this.selTables.Location = new System.Drawing.Point(3, 58);
+            this.selTables.Location = new System.Drawing.Point(3, 74);
+            this.selTables.MarkingColor = System.Drawing.Color.LightGreen;
             this.selTables.Name = "selTables";
             this.selTables.SelectedIndex = -1;
             this.selTables.ShowCaptions = false;
             this.selTables.ShowCellToolTips = true;
             this.selTables.ShowCountInTitle = true;
             this.selTables.ShowSelection = true;
-            this.selTables.Size = new System.Drawing.Size(199, 476);
+            this.selTables.Size = new System.Drawing.Size(199, 506);
+            this.selTables.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selTables.SQLKonjunktion = "AND";
             this.selTables.TabIndex = 20;
             this.selTables.Text = "seListBox1";
             this.selTables.TextCaption = "text";
             this.selTables.TextWith = 100;
             this.selTables.Title = "gbMain";
+            this.selTables.UseFiltering = false;
+            this.selTables.UseFilteringAutocomplete = false;
             this.selTables.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             this.selTables.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selTables_SelectItem);
             // 
@@ -479,9 +502,9 @@ namespace FBExpert
             this.pnlTableUpper.Controls.Add(this.hsUncheckAlltables);
             this.pnlTableUpper.Controls.Add(this.hsCheckAllTables);
             this.pnlTableUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTableUpper.Location = new System.Drawing.Point(3, 16);
+            this.pnlTableUpper.Location = new System.Drawing.Point(3, 18);
             this.pnlTableUpper.Name = "pnlTableUpper";
-            this.pnlTableUpper.Size = new System.Drawing.Size(199, 42);
+            this.pnlTableUpper.Size = new System.Drawing.Size(199, 56);
             this.pnlTableUpper.TabIndex = 2;
             // 
             // hsUncheckAlltables
@@ -497,6 +520,7 @@ namespace FBExpert
             this.hsUncheckAlltables.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUncheckAlltables.FlatAppearance.BorderSize = 0;
             this.hsUncheckAlltables.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUncheckAlltables.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUncheckAlltables.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUncheckAlltables.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUncheckAlltables.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -510,7 +534,10 @@ namespace FBExpert
             this.hsUncheckAlltables.MarkMode = false;
             this.hsUncheckAlltables.Name = "hsUncheckAlltables";
             this.hsUncheckAlltables.NonMarkedText = "Uncheck all";
-            this.hsUncheckAlltables.Size = new System.Drawing.Size(96, 42);
+            this.hsUncheckAlltables.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUncheckAlltables.ShortcutNewline = false;
+            this.hsUncheckAlltables.ShowShortcut = false;
+            this.hsUncheckAlltables.Size = new System.Drawing.Size(96, 56);
             this.hsUncheckAlltables.TabIndex = 3;
             this.hsUncheckAlltables.Text = "Uncheck all";
             this.hsUncheckAlltables.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -546,6 +573,7 @@ namespace FBExpert
             this.hsCheckAllTables.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCheckAllTables.FlatAppearance.BorderSize = 0;
             this.hsCheckAllTables.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCheckAllTables.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCheckAllTables.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCheckAllTables.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsCheckAllTables.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -559,7 +587,10 @@ namespace FBExpert
             this.hsCheckAllTables.MarkMode = false;
             this.hsCheckAllTables.Name = "hsCheckAllTables";
             this.hsCheckAllTables.NonMarkedText = "Check all";
-            this.hsCheckAllTables.Size = new System.Drawing.Size(96, 42);
+            this.hsCheckAllTables.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCheckAllTables.ShortcutNewline = false;
+            this.hsCheckAllTables.ShowShortcut = false;
+            this.hsCheckAllTables.Size = new System.Drawing.Size(96, 56);
             this.hsCheckAllTables.TabIndex = 2;
             this.hsCheckAllTables.Text = "Check all";
             this.hsCheckAllTables.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -588,7 +619,7 @@ namespace FBExpert
             this.tabExtExports.Location = new System.Drawing.Point(4, 23);
             this.tabExtExports.Name = "tabExtExports";
             this.tabExtExports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExtExports.Size = new System.Drawing.Size(456, 543);
+            this.tabExtExports.Size = new System.Drawing.Size(456, 589);
             this.tabExtExports.TabIndex = 1;
             this.tabExtExports.Text = "Extended exports";
             // 
@@ -620,12 +651,13 @@ namespace FBExpert
             this.hsExportTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsExportTable.FlatAppearance.BorderSize = 0;
             this.hsExportTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportTable.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsExportTable.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsExportTable.Image = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsExportTable.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsExportTable.ImageHover = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsExportTable.ImageToggleOnSelect = true;
-            this.hsExportTable.Location = new System.Drawing.Point(149, 103);
+            this.hsExportTable.Location = new System.Drawing.Point(149, 111);
             this.hsExportTable.Marked = false;
             this.hsExportTable.MarkedColor = System.Drawing.Color.Teal;
             this.hsExportTable.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -633,7 +665,10 @@ namespace FBExpert
             this.hsExportTable.MarkMode = false;
             this.hsExportTable.Name = "hsExportTable";
             this.hsExportTable.NonMarkedText = "Export";
-            this.hsExportTable.Size = new System.Drawing.Size(114, 52);
+            this.hsExportTable.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportTable.ShortcutNewline = false;
+            this.hsExportTable.ShowShortcut = false;
+            this.hsExportTable.Size = new System.Drawing.Size(114, 56);
             this.hsExportTable.TabIndex = 1;
             this.hsExportTable.Text = "Export table";
             this.hsExportTable.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -709,19 +744,19 @@ namespace FBExpert
             this.tsmiSetToNULL,
             this.tsmiDate});
             this.cmdDATA.Name = "cmsText";
-            this.cmdDATA.Size = new System.Drawing.Size(143, 56);
+            this.cmdDATA.Size = new System.Drawing.Size(142, 56);
             // 
             // tsmiSetToNULL
             // 
             this.tsmiSetToNULL.Image = global::FBXpert.Properties.Resources.format_indent_less32x;
             this.tsmiSetToNULL.Name = "tsmiSetToNULL";
-            this.tsmiSetToNULL.Size = new System.Drawing.Size(142, 26);
+            this.tsmiSetToNULL.Size = new System.Drawing.Size(141, 26);
             this.tsmiSetToNULL.Text = "Set To NULL";
             // 
             // tsmiDate
             // 
             this.tsmiDate.Name = "tsmiDate";
-            this.tsmiDate.Size = new System.Drawing.Size(142, 26);
+            this.tsmiDate.Size = new System.Drawing.Size(141, 26);
             this.tsmiDate.Text = "DateTime";
             // 
             // cmsDDLText
@@ -762,23 +797,23 @@ namespace FBExpert
             // 
             this.dataTable3.TableName = "Table";
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblTableName);
-            this.pnlUpper.Controls.Add(this.hsRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1296, 44);
-            this.pnlUpper.TabIndex = 1;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblTableName);
+            this.pnlFormUpper.Controls.Add(this.hsRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1296, 47);
+            this.pnlFormUpper.TabIndex = 1;
             // 
             // lblTableName
             // 
             this.lblTableName.AutoSize = true;
             this.lblTableName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableName.Location = new System.Drawing.Point(81, 16);
+            this.lblTableName.Location = new System.Drawing.Point(81, 17);
             this.lblTableName.Name = "lblTableName";
             this.lblTableName.Size = new System.Drawing.Size(97, 20);
             this.lblTableName.TabIndex = 2;
@@ -797,6 +832,7 @@ namespace FBExpert
             this.hsRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefresh.FlatAppearance.BorderSize = 0;
             this.hsRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefresh.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
@@ -809,7 +845,10 @@ namespace FBExpert
             this.hsRefresh.MarkMode = false;
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
-            this.hsRefresh.Size = new System.Drawing.Size(45, 44);
+            this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShortcutNewline = false;
+            this.hsRefresh.ShowShortcut = false;
+            this.hsRefresh.Size = new System.Drawing.Size(45, 47);
             this.hsRefresh.TabIndex = 1;
             this.hsRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRefresh.ToolTipActive = false;
@@ -843,6 +882,7 @@ namespace FBExpert
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -855,7 +895,10 @@ namespace FBExpert
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            this.hsClose.Size = new System.Drawing.Size(45, 44);
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
+            this.hsClose.Size = new System.Drawing.Size(45, 47);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -881,9 +924,9 @@ namespace FBExpert
             // 
             this.pnlLower.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlLower.Location = new System.Drawing.Point(0, 646);
+            this.pnlLower.Location = new System.Drawing.Point(0, 696);
             this.pnlLower.Name = "pnlLower";
-            this.pnlLower.Size = new System.Drawing.Size(1296, 16);
+            this.pnlLower.Size = new System.Drawing.Size(1296, 17);
             this.pnlLower.TabIndex = 2;
             // 
             // pnlCenter
@@ -891,9 +934,9 @@ namespace FBExpert
             this.pnlCenter.Controls.Add(this.gbFileExport);
             this.pnlCenter.Controls.Add(this.tabControl1);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 44);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 47);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1296, 602);
+            this.pnlCenter.Size = new System.Drawing.Size(1296, 649);
             this.pnlCenter.TabIndex = 3;
             // 
             // gbFileExport
@@ -904,7 +947,7 @@ namespace FBExpert
             this.gbFileExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbFileExport.Location = new System.Drawing.Point(822, 0);
             this.gbFileExport.Name = "gbFileExport";
-            this.gbFileExport.Size = new System.Drawing.Size(474, 602);
+            this.gbFileExport.Size = new System.Drawing.Size(474, 649);
             this.gbFileExport.TabIndex = 15;
             this.gbFileExport.TabStop = false;
             // 
@@ -912,9 +955,9 @@ namespace FBExpert
             // 
             this.gbFileName.Controls.Add(this.txtFileName);
             this.gbFileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbFileName.Location = new System.Drawing.Point(3, 116);
+            this.gbFileName.Location = new System.Drawing.Point(3, 126);
             this.gbFileName.Name = "gbFileName";
-            this.gbFileName.Size = new System.Drawing.Size(468, 45);
+            this.gbFileName.Size = new System.Drawing.Size(468, 48);
             this.gbFileName.TabIndex = 1;
             this.gbFileName.TabStop = false;
             this.gbFileName.Text = "File Name";
@@ -922,9 +965,9 @@ namespace FBExpert
             // txtFileName
             // 
             this.txtFileName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtFileName.Location = new System.Drawing.Point(3, 22);
+            this.txtFileName.Location = new System.Drawing.Point(3, 23);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(462, 20);
+            this.txtFileName.Size = new System.Drawing.Size(462, 22);
             this.txtFileName.TabIndex = 4;
             this.txtFileName.Text = "structure_out.sql";
             // 
@@ -933,9 +976,9 @@ namespace FBExpert
             this.gbDirectory.Controls.Add(this.hsExportFolder);
             this.gbDirectory.Controls.Add(this.txtExportDirectory);
             this.gbDirectory.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbDirectory.Location = new System.Drawing.Point(3, 70);
+            this.gbDirectory.Location = new System.Drawing.Point(3, 76);
             this.gbDirectory.Name = "gbDirectory";
-            this.gbDirectory.Size = new System.Drawing.Size(468, 46);
+            this.gbDirectory.Size = new System.Drawing.Size(468, 50);
             this.gbDirectory.TabIndex = 14;
             this.gbDirectory.TabStop = false;
             this.gbDirectory.Text = "Directory Name";
@@ -953,11 +996,12 @@ namespace FBExpert
             this.hsExportFolder.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsExportFolder.FlatAppearance.BorderSize = 0;
             this.hsExportFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportFolder.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsExportFolder.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsExportFolder.Image = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsExportFolder.ImageHover = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsExportFolder.ImageToggleOnSelect = true;
-            this.hsExportFolder.Location = new System.Drawing.Point(420, 16);
+            this.hsExportFolder.Location = new System.Drawing.Point(420, 18);
             this.hsExportFolder.Marked = false;
             this.hsExportFolder.MarkedColor = System.Drawing.Color.Teal;
             this.hsExportFolder.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -965,7 +1009,10 @@ namespace FBExpert
             this.hsExportFolder.MarkMode = false;
             this.hsExportFolder.Name = "hsExportFolder";
             this.hsExportFolder.NonMarkedText = "";
-            this.hsExportFolder.Size = new System.Drawing.Size(45, 27);
+            this.hsExportFolder.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportFolder.ShortcutNewline = false;
+            this.hsExportFolder.ShowShortcut = false;
+            this.hsExportFolder.Size = new System.Drawing.Size(45, 29);
             this.hsExportFolder.TabIndex = 7;
             this.hsExportFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsExportFolder.ToolTipActive = false;
@@ -990,9 +1037,9 @@ namespace FBExpert
             // txtExportDirectory
             // 
             this.txtExportDirectory.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtExportDirectory.Location = new System.Drawing.Point(3, 16);
+            this.txtExportDirectory.Location = new System.Drawing.Point(3, 18);
             this.txtExportDirectory.Name = "txtExportDirectory";
-            this.txtExportDirectory.Size = new System.Drawing.Size(411, 20);
+            this.txtExportDirectory.Size = new System.Drawing.Size(411, 22);
             this.txtExportDirectory.TabIndex = 4;
             // 
             // gbFolder
@@ -1001,9 +1048,9 @@ namespace FBExpert
             this.gbFolder.Controls.Add(this.hsLastFolder);
             this.gbFolder.Controls.Add(this.gbCharset);
             this.gbFolder.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbFolder.Location = new System.Drawing.Point(3, 16);
+            this.gbFolder.Location = new System.Drawing.Point(3, 18);
             this.gbFolder.Name = "gbFolder";
-            this.gbFolder.Size = new System.Drawing.Size(468, 54);
+            this.gbFolder.Size = new System.Drawing.Size(468, 58);
             this.gbFolder.TabIndex = 13;
             this.gbFolder.TabStop = false;
             this.gbFolder.Text = "Location for file export";
@@ -1020,11 +1067,12 @@ namespace FBExpert
             this.hotSpot2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot2.FlatAppearance.BorderSize = 0;
             this.hotSpot2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot2.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot2.Image = global::FBXpert.Properties.Resources.go_up_blue22x;
             this.hotSpot2.ImageHover = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.hotSpot2.ImageToggleOnSelect = true;
-            this.hotSpot2.Location = new System.Drawing.Point(-1, 19);
+            this.hotSpot2.Location = new System.Drawing.Point(-1, 20);
             this.hotSpot2.Marked = false;
             this.hotSpot2.MarkedColor = System.Drawing.Color.Teal;
             this.hotSpot2.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1032,7 +1080,10 @@ namespace FBExpert
             this.hotSpot2.MarkMode = false;
             this.hotSpot2.Name = "hotSpot2";
             this.hotSpot2.NonMarkedText = "";
-            this.hotSpot2.Size = new System.Drawing.Size(45, 21);
+            this.hotSpot2.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot2.ShortcutNewline = false;
+            this.hotSpot2.ShowShortcut = false;
+            this.hotSpot2.Size = new System.Drawing.Size(45, 23);
             this.hotSpot2.TabIndex = 7;
             this.hotSpot2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hotSpot2.ToolTipActive = false;
@@ -1065,11 +1116,12 @@ namespace FBExpert
             this.hsLastFolder.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLastFolder.FlatAppearance.BorderSize = 0;
             this.hsLastFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLastFolder.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLastFolder.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsLastFolder.Image = global::FBXpert.Properties.Resources.go_left_blue22x;
             this.hsLastFolder.ImageHover = global::FBXpert.Properties.Resources.go_previous22x;
             this.hsLastFolder.ImageToggleOnSelect = true;
-            this.hsLastFolder.Location = new System.Drawing.Point(46, 19);
+            this.hsLastFolder.Location = new System.Drawing.Point(46, 20);
             this.hsLastFolder.Marked = false;
             this.hsLastFolder.MarkedColor = System.Drawing.Color.Teal;
             this.hsLastFolder.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1077,7 +1129,10 @@ namespace FBExpert
             this.hsLastFolder.MarkMode = false;
             this.hsLastFolder.Name = "hsLastFolder";
             this.hsLastFolder.NonMarkedText = "";
-            this.hsLastFolder.Size = new System.Drawing.Size(45, 21);
+            this.hsLastFolder.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLastFolder.ShortcutNewline = false;
+            this.hsLastFolder.ShowShortcut = false;
+            this.hsLastFolder.Size = new System.Drawing.Size(45, 23);
             this.hsLastFolder.TabIndex = 6;
             this.hsLastFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLastFolder.ToolTipActive = false;
@@ -1101,9 +1156,9 @@ namespace FBExpert
             // gbCharset
             // 
             this.gbCharset.Controls.Add(this.cbCharSet);
-            this.gbCharset.Location = new System.Drawing.Point(111, 8);
+            this.gbCharset.Location = new System.Drawing.Point(111, 9);
             this.gbCharset.Name = "gbCharset";
-            this.gbCharset.Size = new System.Drawing.Size(200, 43);
+            this.gbCharset.Size = new System.Drawing.Size(200, 46);
             this.gbCharset.TabIndex = 12;
             this.gbCharset.TabStop = false;
             this.gbCharset.Text = "Charset";
@@ -1112,9 +1167,9 @@ namespace FBExpert
             // 
             this.cbCharSet.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cbCharSet.FormattingEnabled = true;
-            this.cbCharSet.Location = new System.Drawing.Point(3, 19);
+            this.cbCharSet.Location = new System.Drawing.Point(3, 21);
             this.cbCharSet.Name = "cbCharSet";
-            this.cbCharSet.Size = new System.Drawing.Size(194, 21);
+            this.cbCharSet.Size = new System.Drawing.Size(194, 22);
             this.cbCharSet.TabIndex = 0;
             // 
             // tabControl1
@@ -1125,17 +1180,17 @@ namespace FBExpert
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(822, 602);
+            this.tabControl1.Size = new System.Drawing.Size(822, 649);
             this.tabControl1.TabIndex = 4;
             // 
             // tabDataExports
             // 
             this.tabDataExports.Controls.Add(this.tabControl);
             this.tabDataExports.Controls.Add(this.pnlTableRight);
-            this.tabDataExports.Location = new System.Drawing.Point(4, 22);
+            this.tabDataExports.Location = new System.Drawing.Point(4, 23);
             this.tabDataExports.Name = "tabDataExports";
             this.tabDataExports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDataExports.Size = new System.Drawing.Size(814, 576);
+            this.tabDataExports.Size = new System.Drawing.Size(814, 622);
             this.tabDataExports.TabIndex = 0;
             this.tabDataExports.Text = "Data exports";
             this.tabDataExports.UseVisualStyleBackColor = true;
@@ -1147,7 +1202,7 @@ namespace FBExpert
             this.pnlTableRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTableRight.Location = new System.Drawing.Point(467, 3);
             this.pnlTableRight.Name = "pnlTableRight";
-            this.pnlTableRight.Size = new System.Drawing.Size(344, 570);
+            this.pnlTableRight.Size = new System.Drawing.Size(344, 616);
             this.pnlTableRight.TabIndex = 3;
             // 
             // gbExportAttributes
@@ -1159,7 +1214,7 @@ namespace FBExpert
             this.gbExportAttributes.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbExportAttributes.Location = new System.Drawing.Point(0, 0);
             this.gbExportAttributes.Name = "gbExportAttributes";
-            this.gbExportAttributes.Size = new System.Drawing.Size(344, 169);
+            this.gbExportAttributes.Size = new System.Drawing.Size(344, 182);
             this.gbExportAttributes.TabIndex = 16;
             this.gbExportAttributes.TabStop = false;
             this.gbExportAttributes.Text = "Export attributes";
@@ -1169,9 +1224,9 @@ namespace FBExpert
             this.cbViewInScript.AutoSize = true;
             this.cbViewInScript.Checked = true;
             this.cbViewInScript.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbViewInScript.Location = new System.Drawing.Point(13, 113);
+            this.cbViewInScript.Location = new System.Drawing.Point(13, 122);
             this.cbViewInScript.Name = "cbViewInScript";
-            this.cbViewInScript.Size = new System.Drawing.Size(93, 17);
+            this.cbViewInScript.Size = new System.Drawing.Size(106, 18);
             this.cbViewInScript.TabIndex = 14;
             this.cbViewInScript.Text = "View in scripts";
             this.cbViewInScript.UseVisualStyleBackColor = true;
@@ -1179,9 +1234,9 @@ namespace FBExpert
             // cbExportToFile
             // 
             this.cbExportToFile.AutoSize = true;
-            this.cbExportToFile.Location = new System.Drawing.Point(13, 136);
+            this.cbExportToFile.Location = new System.Drawing.Point(13, 146);
             this.cbExportToFile.Name = "cbExportToFile";
-            this.cbExportToFile.Size = new System.Drawing.Size(84, 17);
+            this.cbExportToFile.Size = new System.Drawing.Size(93, 18);
             this.cbExportToFile.TabIndex = 13;
             this.cbExportToFile.Text = "Export to file";
             this.cbExportToFile.UseVisualStyleBackColor = true;
@@ -1192,9 +1247,9 @@ namespace FBExpert
             this.gbInsertUpdate.Controls.Add(this.rbUPDATE);
             this.gbInsertUpdate.Controls.Add(this.rbINSERTUPDATE);
             this.gbInsertUpdate.Controls.Add(this.rbINSERT);
-            this.gbInsertUpdate.Location = new System.Drawing.Point(13, 28);
+            this.gbInsertUpdate.Location = new System.Drawing.Point(13, 30);
             this.gbInsertUpdate.Name = "gbInsertUpdate";
-            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 38);
+            this.gbInsertUpdate.Size = new System.Drawing.Size(330, 41);
             this.gbInsertUpdate.TabIndex = 11;
             this.gbInsertUpdate.TabStop = false;
             this.gbInsertUpdate.Text = "FieldType of statments";
@@ -1202,9 +1257,9 @@ namespace FBExpert
             // rbUPDATE
             // 
             this.rbUPDATE.AutoSize = true;
-            this.rbUPDATE.Location = new System.Drawing.Point(228, 16);
+            this.rbUPDATE.Location = new System.Drawing.Point(228, 17);
             this.rbUPDATE.Name = "rbUPDATE";
-            this.rbUPDATE.Size = new System.Drawing.Size(69, 17);
+            this.rbUPDATE.Size = new System.Drawing.Size(65, 18);
             this.rbUPDATE.TabIndex = 2;
             this.rbUPDATE.Text = "UPDATE";
             this.rbUPDATE.UseVisualStyleBackColor = true;
@@ -1212,9 +1267,9 @@ namespace FBExpert
             // rbINSERTUPDATE
             // 
             this.rbINSERTUPDATE.AutoSize = true;
-            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 16);
+            this.rbINSERTUPDATE.Location = new System.Drawing.Point(87, 17);
             this.rbINSERTUPDATE.Name = "rbINSERTUPDATE";
-            this.rbINSERTUPDATE.Size = new System.Drawing.Size(124, 17);
+            this.rbINSERTUPDATE.Size = new System.Drawing.Size(119, 18);
             this.rbINSERTUPDATE.TabIndex = 1;
             this.rbINSERTUPDATE.Text = "INSERT or UPDATE";
             this.rbINSERTUPDATE.UseVisualStyleBackColor = true;
@@ -1223,9 +1278,9 @@ namespace FBExpert
             // 
             this.rbINSERT.AutoSize = true;
             this.rbINSERT.Checked = true;
-            this.rbINSERT.Location = new System.Drawing.Point(6, 16);
+            this.rbINSERT.Location = new System.Drawing.Point(6, 17);
             this.rbINSERT.Name = "rbINSERT";
-            this.rbINSERT.Size = new System.Drawing.Size(65, 17);
+            this.rbINSERT.Size = new System.Drawing.Size(62, 18);
             this.rbINSERT.TabIndex = 0;
             this.rbINSERT.TabStop = true;
             this.rbINSERT.Text = "INSERT";
@@ -1234,11 +1289,10 @@ namespace FBExpert
             // tabStructureExports
             // 
             this.tabStructureExports.Controls.Add(this.pnlStructureCenter);
-            this.tabStructureExports.Controls.Add(this.panel1);
-            this.tabStructureExports.Location = new System.Drawing.Point(4, 22);
+            this.tabStructureExports.Location = new System.Drawing.Point(4, 23);
             this.tabStructureExports.Name = "tabStructureExports";
             this.tabStructureExports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStructureExports.Size = new System.Drawing.Size(814, 576);
+            this.tabStructureExports.Size = new System.Drawing.Size(814, 622);
             this.tabStructureExports.TabIndex = 1;
             this.tabStructureExports.Text = "Structure exports";
             this.tabStructureExports.UseVisualStyleBackColor = true;
@@ -1248,9 +1302,9 @@ namespace FBExpert
             this.pnlStructureCenter.Controls.Add(this.tabControlStructures);
             this.pnlStructureCenter.Controls.Add(this.pnlOnjectExportAttributes);
             this.pnlStructureCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStructureCenter.Location = new System.Drawing.Point(3, 13);
+            this.pnlStructureCenter.Location = new System.Drawing.Point(3, 3);
             this.pnlStructureCenter.Name = "pnlStructureCenter";
-            this.pnlStructureCenter.Size = new System.Drawing.Size(808, 560);
+            this.pnlStructureCenter.Size = new System.Drawing.Size(808, 616);
             this.pnlStructureCenter.TabIndex = 3;
             // 
             // tabControlStructures
@@ -1264,17 +1318,17 @@ namespace FBExpert
             this.tabControlStructures.Location = new System.Drawing.Point(0, 0);
             this.tabControlStructures.Name = "tabControlStructures";
             this.tabControlStructures.SelectedIndex = 0;
-            this.tabControlStructures.Size = new System.Drawing.Size(413, 560);
+            this.tabControlStructures.Size = new System.Drawing.Size(413, 616);
             this.tabControlStructures.TabIndex = 17;
             // 
             // tabPageStructureTables
             // 
             this.tabPageStructureTables.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabPageStructureTables.Controls.Add(this.gbStructureTables);
-            this.tabPageStructureTables.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStructureTables.Location = new System.Drawing.Point(4, 23);
             this.tabPageStructureTables.Name = "tabPageStructureTables";
             this.tabPageStructureTables.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStructureTables.Size = new System.Drawing.Size(405, 534);
+            this.tabPageStructureTables.Size = new System.Drawing.Size(405, 589);
             this.tabPageStructureTables.TabIndex = 0;
             this.tabPageStructureTables.Text = "Tables";
             // 
@@ -1285,12 +1339,13 @@ namespace FBExpert
             this.gbStructureTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbStructureTables.Location = new System.Drawing.Point(3, 3);
             this.gbStructureTables.Name = "gbStructureTables";
-            this.gbStructureTables.Size = new System.Drawing.Size(399, 528);
+            this.gbStructureTables.Size = new System.Drawing.Size(399, 583);
             this.gbStructureTables.TabIndex = 4;
             this.gbStructureTables.TabStop = false;
             // 
             // selStructureTables
             // 
+            this.selStructureTables.AlloweColumnFilterIndexChange = false;
             this.selStructureTables.AllowMultipleChecks = true;
             this.selStructureTables.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle5;
             this.selStructureTables.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -1302,24 +1357,31 @@ namespace FBExpert
             this.selStructureTables.CheckOnSelect = true;
             this.selStructureTables.CheckVisible = true;
             this.selStructureTables.CheckWith = 32;
+            this.selStructureTables.ColumnFilterIndex = 1;
             this.selStructureTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selStructureTables.FilterText = "";
             this.selStructureTables.IDVisible = false;
             this.selStructureTables.IDWith = 32;
             this.selStructureTables.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selStructureTables.ListEntriesDefaultCellStyle = dataGridViewCellStyle6;
-            this.selStructureTables.Location = new System.Drawing.Point(3, 58);
+            this.selStructureTables.Location = new System.Drawing.Point(3, 68);
+            this.selStructureTables.MarkingColor = System.Drawing.Color.LightGreen;
             this.selStructureTables.Name = "selStructureTables";
             this.selStructureTables.SelectedIndex = -1;
             this.selStructureTables.ShowCaptions = false;
             this.selStructureTables.ShowCellToolTips = true;
             this.selStructureTables.ShowCountInTitle = true;
             this.selStructureTables.ShowSelection = false;
-            this.selStructureTables.Size = new System.Drawing.Size(393, 467);
+            this.selStructureTables.Size = new System.Drawing.Size(393, 512);
+            this.selStructureTables.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selStructureTables.SQLKonjunktion = "AND";
             this.selStructureTables.TabIndex = 17;
             this.selStructureTables.Text = "seListBox1";
             this.selStructureTables.TextCaption = "text";
             this.selStructureTables.TextWith = 157;
             this.selStructureTables.Title = "gbMain";
+            this.selStructureTables.UseFiltering = false;
+            this.selStructureTables.UseFilteringAutocomplete = false;
             this.selStructureTables.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             this.selStructureTables.ItemSelect += new SEListBox.SEListBox.SelectItemEventHandler(this.selStructureTables_SelectItem);
             // 
@@ -1328,9 +1390,9 @@ namespace FBExpert
             this.pnlStructureObjectsUpper.Controls.Add(this.hsUnselectStructureObjects);
             this.pnlStructureObjectsUpper.Controls.Add(this.hsSelectStructureObjects);
             this.pnlStructureObjectsUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlStructureObjectsUpper.Location = new System.Drawing.Point(3, 16);
+            this.pnlStructureObjectsUpper.Location = new System.Drawing.Point(3, 18);
             this.pnlStructureObjectsUpper.Name = "pnlStructureObjectsUpper";
-            this.pnlStructureObjectsUpper.Size = new System.Drawing.Size(393, 42);
+            this.pnlStructureObjectsUpper.Size = new System.Drawing.Size(393, 50);
             this.pnlStructureObjectsUpper.TabIndex = 2;
             // 
             // hsUnselectStructureObjects
@@ -1346,6 +1408,7 @@ namespace FBExpert
             this.hsUnselectStructureObjects.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUnselectStructureObjects.FlatAppearance.BorderSize = 0;
             this.hsUnselectStructureObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUnselectStructureObjects.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUnselectStructureObjects.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUnselectStructureObjects.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUnselectStructureObjects.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1359,7 +1422,10 @@ namespace FBExpert
             this.hsUnselectStructureObjects.MarkMode = false;
             this.hsUnselectStructureObjects.Name = "hsUnselectStructureObjects";
             this.hsUnselectStructureObjects.NonMarkedText = "Uncheck all";
-            this.hsUnselectStructureObjects.Size = new System.Drawing.Size(96, 42);
+            this.hsUnselectStructureObjects.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselectStructureObjects.ShortcutNewline = false;
+            this.hsUnselectStructureObjects.ShowShortcut = false;
+            this.hsUnselectStructureObjects.Size = new System.Drawing.Size(96, 50);
             this.hsUnselectStructureObjects.TabIndex = 3;
             this.hsUnselectStructureObjects.Text = "Uncheck all";
             this.hsUnselectStructureObjects.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1395,6 +1461,7 @@ namespace FBExpert
             this.hsSelectStructureObjects.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSelectStructureObjects.FlatAppearance.BorderSize = 0;
             this.hsSelectStructureObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSelectStructureObjects.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSelectStructureObjects.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSelectStructureObjects.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsSelectStructureObjects.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1408,7 +1475,10 @@ namespace FBExpert
             this.hsSelectStructureObjects.MarkMode = false;
             this.hsSelectStructureObjects.Name = "hsSelectStructureObjects";
             this.hsSelectStructureObjects.NonMarkedText = "Check all";
-            this.hsSelectStructureObjects.Size = new System.Drawing.Size(96, 42);
+            this.hsSelectStructureObjects.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelectStructureObjects.ShortcutNewline = false;
+            this.hsSelectStructureObjects.ShowShortcut = false;
+            this.hsSelectStructureObjects.Size = new System.Drawing.Size(96, 50);
             this.hsSelectStructureObjects.TabIndex = 2;
             this.hsSelectStructureObjects.Text = "Check all";
             this.hsSelectStructureObjects.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1435,10 +1505,10 @@ namespace FBExpert
             // 
             this.tabPageStructureViews.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabPageStructureViews.Controls.Add(this.gbStructureViews);
-            this.tabPageStructureViews.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStructureViews.Location = new System.Drawing.Point(4, 23);
             this.tabPageStructureViews.Name = "tabPageStructureViews";
             this.tabPageStructureViews.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStructureViews.Size = new System.Drawing.Size(405, 534);
+            this.tabPageStructureViews.Size = new System.Drawing.Size(405, 576);
             this.tabPageStructureViews.TabIndex = 1;
             this.tabPageStructureViews.Text = "Views";
             // 
@@ -1449,12 +1519,13 @@ namespace FBExpert
             this.gbStructureViews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbStructureViews.Location = new System.Drawing.Point(3, 3);
             this.gbStructureViews.Name = "gbStructureViews";
-            this.gbStructureViews.Size = new System.Drawing.Size(399, 528);
+            this.gbStructureViews.Size = new System.Drawing.Size(399, 570);
             this.gbStructureViews.TabIndex = 6;
             this.gbStructureViews.TabStop = false;
             // 
             // selStructureViews
             // 
+            this.selStructureViews.AlloweColumnFilterIndexChange = false;
             this.selStructureViews.AllowMultipleChecks = true;
             this.selStructureViews.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle7;
             this.selStructureViews.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -1466,24 +1537,31 @@ namespace FBExpert
             this.selStructureViews.CheckOnSelect = true;
             this.selStructureViews.CheckVisible = true;
             this.selStructureViews.CheckWith = 32;
+            this.selStructureViews.ColumnFilterIndex = 1;
             this.selStructureViews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selStructureViews.FilterText = "";
             this.selStructureViews.IDVisible = false;
             this.selStructureViews.IDWith = 32;
             this.selStructureViews.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selStructureViews.ListEntriesDefaultCellStyle = dataGridViewCellStyle8;
-            this.selStructureViews.Location = new System.Drawing.Point(3, 58);
+            this.selStructureViews.Location = new System.Drawing.Point(3, 63);
+            this.selStructureViews.MarkingColor = System.Drawing.Color.LightGreen;
             this.selStructureViews.Name = "selStructureViews";
             this.selStructureViews.SelectedIndex = -1;
             this.selStructureViews.ShowCaptions = false;
             this.selStructureViews.ShowCellToolTips = true;
             this.selStructureViews.ShowCountInTitle = true;
             this.selStructureViews.ShowSelection = false;
-            this.selStructureViews.Size = new System.Drawing.Size(393, 467);
+            this.selStructureViews.Size = new System.Drawing.Size(393, 504);
+            this.selStructureViews.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selStructureViews.SQLKonjunktion = "AND";
             this.selStructureViews.TabIndex = 18;
             this.selStructureViews.Text = "selStructureViews";
             this.selStructureViews.TextCaption = "text";
             this.selStructureViews.TextWith = 100;
             this.selStructureViews.Title = "gbMain";
+            this.selStructureViews.UseFiltering = false;
+            this.selStructureViews.UseFilteringAutocomplete = false;
             this.selStructureViews.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel2
@@ -1491,9 +1569,9 @@ namespace FBExpert
             this.panel2.Controls.Add(this.hsUnselectAllViews);
             this.panel2.Controls.Add(this.hsSelectAllViews);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 16);
+            this.panel2.Location = new System.Drawing.Point(3, 18);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(393, 42);
+            this.panel2.Size = new System.Drawing.Size(393, 45);
             this.panel2.TabIndex = 2;
             // 
             // hsUnselectAllViews
@@ -1509,6 +1587,7 @@ namespace FBExpert
             this.hsUnselectAllViews.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsUnselectAllViews.FlatAppearance.BorderSize = 0;
             this.hsUnselectAllViews.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUnselectAllViews.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsUnselectAllViews.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsUnselectAllViews.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hsUnselectAllViews.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1522,7 +1601,10 @@ namespace FBExpert
             this.hsUnselectAllViews.MarkMode = false;
             this.hsUnselectAllViews.Name = "hsUnselectAllViews";
             this.hsUnselectAllViews.NonMarkedText = "Uncheck all";
-            this.hsUnselectAllViews.Size = new System.Drawing.Size(96, 42);
+            this.hsUnselectAllViews.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUnselectAllViews.ShortcutNewline = false;
+            this.hsUnselectAllViews.ShowShortcut = false;
+            this.hsUnselectAllViews.Size = new System.Drawing.Size(96, 45);
             this.hsUnselectAllViews.TabIndex = 3;
             this.hsUnselectAllViews.Text = "Uncheck all";
             this.hsUnselectAllViews.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1558,6 +1640,7 @@ namespace FBExpert
             this.hsSelectAllViews.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSelectAllViews.FlatAppearance.BorderSize = 0;
             this.hsSelectAllViews.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSelectAllViews.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSelectAllViews.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsSelectAllViews.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hsSelectAllViews.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1571,7 +1654,10 @@ namespace FBExpert
             this.hsSelectAllViews.MarkMode = false;
             this.hsSelectAllViews.Name = "hsSelectAllViews";
             this.hsSelectAllViews.NonMarkedText = "Check all";
-            this.hsSelectAllViews.Size = new System.Drawing.Size(96, 42);
+            this.hsSelectAllViews.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelectAllViews.ShortcutNewline = false;
+            this.hsSelectAllViews.ShowShortcut = false;
+            this.hsSelectAllViews.Size = new System.Drawing.Size(96, 45);
             this.hsSelectAllViews.TabIndex = 2;
             this.hsSelectAllViews.Text = "Check all";
             this.hsSelectAllViews.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1599,10 +1685,10 @@ namespace FBExpert
             this.tabIndecesStructur.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabIndecesStructur.Controls.Add(this.groupBox2);
             this.tabIndecesStructur.Controls.Add(this.gbDomains);
-            this.tabIndecesStructur.Location = new System.Drawing.Point(4, 22);
+            this.tabIndecesStructur.Location = new System.Drawing.Point(4, 23);
             this.tabIndecesStructur.Name = "tabIndecesStructur";
             this.tabIndecesStructur.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIndecesStructur.Size = new System.Drawing.Size(405, 534);
+            this.tabIndecesStructur.Size = new System.Drawing.Size(405, 576);
             this.tabIndecesStructur.TabIndex = 2;
             this.tabIndecesStructur.Text = "Domains/Indeces";
             // 
@@ -1613,13 +1699,14 @@ namespace FBExpert
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(193, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(209, 528);
+            this.groupBox2.Size = new System.Drawing.Size(209, 570);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Indeces";
             // 
             // selIndeces
             // 
+            this.selIndeces.AlloweColumnFilterIndexChange = false;
             this.selIndeces.AllowMultipleChecks = true;
             this.selIndeces.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle9;
             this.selIndeces.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -1631,24 +1718,31 @@ namespace FBExpert
             this.selIndeces.CheckOnSelect = true;
             this.selIndeces.CheckVisible = true;
             this.selIndeces.CheckWith = 32;
+            this.selIndeces.ColumnFilterIndex = 1;
             this.selIndeces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selIndeces.FilterText = "";
             this.selIndeces.IDVisible = false;
             this.selIndeces.IDWith = 32;
             this.selIndeces.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selIndeces.ListEntriesDefaultCellStyle = dataGridViewCellStyle10;
-            this.selIndeces.Location = new System.Drawing.Point(3, 58);
+            this.selIndeces.Location = new System.Drawing.Point(3, 63);
+            this.selIndeces.MarkingColor = System.Drawing.Color.LightGreen;
             this.selIndeces.Name = "selIndeces";
             this.selIndeces.SelectedIndex = -1;
             this.selIndeces.ShowCaptions = false;
             this.selIndeces.ShowCellToolTips = true;
             this.selIndeces.ShowCountInTitle = true;
             this.selIndeces.ShowSelection = false;
-            this.selIndeces.Size = new System.Drawing.Size(203, 467);
+            this.selIndeces.Size = new System.Drawing.Size(203, 504);
+            this.selIndeces.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selIndeces.SQLKonjunktion = "AND";
             this.selIndeces.TabIndex = 17;
             this.selIndeces.Text = "seListBox1";
             this.selIndeces.TextCaption = "text";
             this.selIndeces.TextWith = 100;
             this.selIndeces.Title = "gbMain";
+            this.selIndeces.UseFiltering = false;
+            this.selIndeces.UseFilteringAutocomplete = false;
             this.selIndeces.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel4
@@ -1656,9 +1750,9 @@ namespace FBExpert
             this.panel4.Controls.Add(this.hotSpot1);
             this.panel4.Controls.Add(this.hotSpot5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 16);
+            this.panel4.Location = new System.Drawing.Point(3, 18);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(203, 42);
+            this.panel4.Size = new System.Drawing.Size(203, 45);
             this.panel4.TabIndex = 2;
             // 
             // hotSpot1
@@ -1674,6 +1768,7 @@ namespace FBExpert
             this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot1.FlatAppearance.BorderSize = 0;
             this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot1.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1687,7 +1782,10 @@ namespace FBExpert
             this.hotSpot1.MarkMode = false;
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Uncheck all";
-            this.hotSpot1.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShortcutNewline = false;
+            this.hotSpot1.ShowShortcut = false;
+            this.hotSpot1.Size = new System.Drawing.Size(96, 45);
             this.hotSpot1.TabIndex = 3;
             this.hotSpot1.Text = "Uncheck all";
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1723,6 +1821,7 @@ namespace FBExpert
             this.hotSpot5.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot5.FlatAppearance.BorderSize = 0;
             this.hotSpot5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot5.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot5.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1736,7 +1835,10 @@ namespace FBExpert
             this.hotSpot5.MarkMode = false;
             this.hotSpot5.Name = "hotSpot5";
             this.hotSpot5.NonMarkedText = "Check all";
-            this.hotSpot5.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot5.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot5.ShortcutNewline = false;
+            this.hotSpot5.ShowShortcut = false;
+            this.hotSpot5.Size = new System.Drawing.Size(96, 45);
             this.hotSpot5.TabIndex = 2;
             this.hotSpot5.Text = "Check all";
             this.hotSpot5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1766,13 +1868,14 @@ namespace FBExpert
             this.gbDomains.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbDomains.Location = new System.Drawing.Point(3, 3);
             this.gbDomains.Name = "gbDomains";
-            this.gbDomains.Size = new System.Drawing.Size(190, 528);
+            this.gbDomains.Size = new System.Drawing.Size(190, 570);
             this.gbDomains.TabIndex = 5;
             this.gbDomains.TabStop = false;
             this.gbDomains.Text = "Domains";
             // 
             // selDomains
             // 
+            this.selDomains.AlloweColumnFilterIndexChange = false;
             this.selDomains.AllowMultipleChecks = true;
             this.selDomains.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle11;
             this.selDomains.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -1784,24 +1887,31 @@ namespace FBExpert
             this.selDomains.CheckOnSelect = true;
             this.selDomains.CheckVisible = true;
             this.selDomains.CheckWith = 32;
+            this.selDomains.ColumnFilterIndex = 1;
             this.selDomains.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selDomains.FilterText = "";
             this.selDomains.IDVisible = false;
             this.selDomains.IDWith = 32;
             this.selDomains.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selDomains.ListEntriesDefaultCellStyle = dataGridViewCellStyle12;
-            this.selDomains.Location = new System.Drawing.Point(3, 58);
+            this.selDomains.Location = new System.Drawing.Point(3, 63);
+            this.selDomains.MarkingColor = System.Drawing.Color.LightGreen;
             this.selDomains.Name = "selDomains";
             this.selDomains.SelectedIndex = -1;
             this.selDomains.ShowCaptions = false;
             this.selDomains.ShowCellToolTips = true;
             this.selDomains.ShowCountInTitle = true;
             this.selDomains.ShowSelection = false;
-            this.selDomains.Size = new System.Drawing.Size(184, 467);
+            this.selDomains.Size = new System.Drawing.Size(184, 504);
+            this.selDomains.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selDomains.SQLKonjunktion = "AND";
             this.selDomains.TabIndex = 17;
             this.selDomains.Text = "seListBox1";
             this.selDomains.TextCaption = "text";
             this.selDomains.TextWith = 100;
             this.selDomains.Title = "gbMain";
+            this.selDomains.UseFiltering = false;
+            this.selDomains.UseFilteringAutocomplete = false;
             this.selDomains.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel3
@@ -1809,9 +1919,9 @@ namespace FBExpert
             this.panel3.Controls.Add(this.hotSpot3);
             this.panel3.Controls.Add(this.hotSpot4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 16);
+            this.panel3.Location = new System.Drawing.Point(3, 18);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(184, 42);
+            this.panel3.Size = new System.Drawing.Size(184, 45);
             this.panel3.TabIndex = 2;
             // 
             // hotSpot3
@@ -1827,6 +1937,7 @@ namespace FBExpert
             this.hotSpot3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot3.FlatAppearance.BorderSize = 0;
             this.hotSpot3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot3.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot3.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1840,7 +1951,10 @@ namespace FBExpert
             this.hotSpot3.MarkMode = false;
             this.hotSpot3.Name = "hotSpot3";
             this.hotSpot3.NonMarkedText = "Uncheck all";
-            this.hotSpot3.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot3.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot3.ShortcutNewline = false;
+            this.hotSpot3.ShowShortcut = false;
+            this.hotSpot3.Size = new System.Drawing.Size(96, 45);
             this.hotSpot3.TabIndex = 3;
             this.hotSpot3.Text = "Uncheck all";
             this.hotSpot3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1876,6 +1990,7 @@ namespace FBExpert
             this.hotSpot4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot4.FlatAppearance.BorderSize = 0;
             this.hotSpot4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot4.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot4.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1889,7 +2004,10 @@ namespace FBExpert
             this.hotSpot4.MarkMode = false;
             this.hotSpot4.Name = "hotSpot4";
             this.hotSpot4.NonMarkedText = "Check all";
-            this.hotSpot4.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot4.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot4.ShortcutNewline = false;
+            this.hotSpot4.ShowShortcut = false;
+            this.hotSpot4.Size = new System.Drawing.Size(96, 45);
             this.hotSpot4.TabIndex = 2;
             this.hotSpot4.Text = "Check all";
             this.hotSpot4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1917,10 +2035,10 @@ namespace FBExpert
             this.tabGeneratorStructure.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabGeneratorStructure.Controls.Add(this.gbTriggersStructrue);
             this.tabGeneratorStructure.Controls.Add(this.gbGenaratorsSturcture);
-            this.tabGeneratorStructure.Location = new System.Drawing.Point(4, 22);
+            this.tabGeneratorStructure.Location = new System.Drawing.Point(4, 23);
             this.tabGeneratorStructure.Name = "tabGeneratorStructure";
             this.tabGeneratorStructure.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneratorStructure.Size = new System.Drawing.Size(405, 534);
+            this.tabGeneratorStructure.Size = new System.Drawing.Size(405, 576);
             this.tabGeneratorStructure.TabIndex = 3;
             this.tabGeneratorStructure.Text = "Generators/Triggers";
             // 
@@ -1931,13 +2049,14 @@ namespace FBExpert
             this.gbTriggersStructrue.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbTriggersStructrue.Location = new System.Drawing.Point(202, 3);
             this.gbTriggersStructrue.Name = "gbTriggersStructrue";
-            this.gbTriggersStructrue.Size = new System.Drawing.Size(200, 528);
+            this.gbTriggersStructrue.Size = new System.Drawing.Size(200, 570);
             this.gbTriggersStructrue.TabIndex = 7;
             this.gbTriggersStructrue.TabStop = false;
             this.gbTriggersStructrue.Text = "Triggers";
             // 
             // selTriggerStructure
             // 
+            this.selTriggerStructure.AlloweColumnFilterIndexChange = false;
             this.selTriggerStructure.AllowMultipleChecks = true;
             this.selTriggerStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle13;
             this.selTriggerStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -1949,24 +2068,31 @@ namespace FBExpert
             this.selTriggerStructure.CheckOnSelect = true;
             this.selTriggerStructure.CheckVisible = true;
             this.selTriggerStructure.CheckWith = 32;
+            this.selTriggerStructure.ColumnFilterIndex = 1;
             this.selTriggerStructure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selTriggerStructure.FilterText = "";
             this.selTriggerStructure.IDVisible = false;
             this.selTriggerStructure.IDWith = 32;
             this.selTriggerStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selTriggerStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle14;
-            this.selTriggerStructure.Location = new System.Drawing.Point(3, 58);
+            this.selTriggerStructure.Location = new System.Drawing.Point(3, 63);
+            this.selTriggerStructure.MarkingColor = System.Drawing.Color.LightGreen;
             this.selTriggerStructure.Name = "selTriggerStructure";
             this.selTriggerStructure.SelectedIndex = -1;
             this.selTriggerStructure.ShowCaptions = false;
             this.selTriggerStructure.ShowCellToolTips = true;
             this.selTriggerStructure.ShowCountInTitle = true;
             this.selTriggerStructure.ShowSelection = false;
-            this.selTriggerStructure.Size = new System.Drawing.Size(194, 467);
+            this.selTriggerStructure.Size = new System.Drawing.Size(194, 504);
+            this.selTriggerStructure.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selTriggerStructure.SQLKonjunktion = "AND";
             this.selTriggerStructure.TabIndex = 17;
             this.selTriggerStructure.Text = "Generators";
             this.selTriggerStructure.TextCaption = "text";
             this.selTriggerStructure.TextWith = 100;
             this.selTriggerStructure.Title = "gbMain";
+            this.selTriggerStructure.UseFiltering = false;
+            this.selTriggerStructure.UseFilteringAutocomplete = false;
             this.selTriggerStructure.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel6
@@ -1974,9 +2100,9 @@ namespace FBExpert
             this.panel6.Controls.Add(this.hotSpot8);
             this.panel6.Controls.Add(this.hotSpot9);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(3, 16);
+            this.panel6.Location = new System.Drawing.Point(3, 18);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(194, 42);
+            this.panel6.Size = new System.Drawing.Size(194, 45);
             this.panel6.TabIndex = 2;
             // 
             // hotSpot8
@@ -1992,6 +2118,7 @@ namespace FBExpert
             this.hotSpot8.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot8.FlatAppearance.BorderSize = 0;
             this.hotSpot8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot8.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot8.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot8.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2005,7 +2132,10 @@ namespace FBExpert
             this.hotSpot8.MarkMode = false;
             this.hotSpot8.Name = "hotSpot8";
             this.hotSpot8.NonMarkedText = "Uncheck all";
-            this.hotSpot8.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot8.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot8.ShortcutNewline = false;
+            this.hotSpot8.ShowShortcut = false;
+            this.hotSpot8.Size = new System.Drawing.Size(96, 45);
             this.hotSpot8.TabIndex = 3;
             this.hotSpot8.Text = "Uncheck all";
             this.hotSpot8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2040,6 +2170,7 @@ namespace FBExpert
             this.hotSpot9.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot9.FlatAppearance.BorderSize = 0;
             this.hotSpot9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot9.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot9.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot9.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot9.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2053,7 +2184,10 @@ namespace FBExpert
             this.hotSpot9.MarkMode = false;
             this.hotSpot9.Name = "hotSpot9";
             this.hotSpot9.NonMarkedText = "Check all";
-            this.hotSpot9.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot9.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot9.ShortcutNewline = false;
+            this.hotSpot9.ShowShortcut = false;
+            this.hotSpot9.Size = new System.Drawing.Size(96, 45);
             this.hotSpot9.TabIndex = 2;
             this.hotSpot9.Text = "Check all";
             this.hotSpot9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2082,13 +2216,14 @@ namespace FBExpert
             this.gbGenaratorsSturcture.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbGenaratorsSturcture.Location = new System.Drawing.Point(3, 3);
             this.gbGenaratorsSturcture.Name = "gbGenaratorsSturcture";
-            this.gbGenaratorsSturcture.Size = new System.Drawing.Size(199, 528);
+            this.gbGenaratorsSturcture.Size = new System.Drawing.Size(199, 570);
             this.gbGenaratorsSturcture.TabIndex = 6;
             this.gbGenaratorsSturcture.TabStop = false;
             this.gbGenaratorsSturcture.Text = "Generators";
             // 
             // selGenerators
             // 
+            this.selGenerators.AlloweColumnFilterIndexChange = false;
             this.selGenerators.AllowMultipleChecks = true;
             this.selGenerators.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle15;
             this.selGenerators.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -2100,24 +2235,31 @@ namespace FBExpert
             this.selGenerators.CheckOnSelect = true;
             this.selGenerators.CheckVisible = true;
             this.selGenerators.CheckWith = 32;
+            this.selGenerators.ColumnFilterIndex = 1;
             this.selGenerators.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selGenerators.FilterText = "";
             this.selGenerators.IDVisible = false;
             this.selGenerators.IDWith = 32;
             this.selGenerators.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selGenerators.ListEntriesDefaultCellStyle = dataGridViewCellStyle16;
-            this.selGenerators.Location = new System.Drawing.Point(3, 58);
+            this.selGenerators.Location = new System.Drawing.Point(3, 63);
+            this.selGenerators.MarkingColor = System.Drawing.Color.LightGreen;
             this.selGenerators.Name = "selGenerators";
             this.selGenerators.SelectedIndex = -1;
             this.selGenerators.ShowCaptions = false;
             this.selGenerators.ShowCellToolTips = true;
             this.selGenerators.ShowCountInTitle = true;
             this.selGenerators.ShowSelection = false;
-            this.selGenerators.Size = new System.Drawing.Size(193, 467);
+            this.selGenerators.Size = new System.Drawing.Size(193, 504);
+            this.selGenerators.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selGenerators.SQLKonjunktion = "AND";
             this.selGenerators.TabIndex = 17;
             this.selGenerators.Text = "Generators";
             this.selGenerators.TextCaption = "text";
             this.selGenerators.TextWith = 100;
             this.selGenerators.Title = "gbMain";
+            this.selGenerators.UseFiltering = false;
+            this.selGenerators.UseFilteringAutocomplete = false;
             this.selGenerators.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel5
@@ -2125,9 +2267,9 @@ namespace FBExpert
             this.panel5.Controls.Add(this.hotSpot6);
             this.panel5.Controls.Add(this.hotSpot7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 16);
+            this.panel5.Location = new System.Drawing.Point(3, 18);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(193, 42);
+            this.panel5.Size = new System.Drawing.Size(193, 45);
             this.panel5.TabIndex = 2;
             // 
             // hotSpot6
@@ -2143,6 +2285,7 @@ namespace FBExpert
             this.hotSpot6.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot6.FlatAppearance.BorderSize = 0;
             this.hotSpot6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot6.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot6.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot6.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot6.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2156,7 +2299,10 @@ namespace FBExpert
             this.hotSpot6.MarkMode = false;
             this.hotSpot6.Name = "hotSpot6";
             this.hotSpot6.NonMarkedText = "Uncheck all";
-            this.hotSpot6.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot6.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot6.ShortcutNewline = false;
+            this.hotSpot6.ShowShortcut = false;
+            this.hotSpot6.Size = new System.Drawing.Size(96, 45);
             this.hotSpot6.TabIndex = 3;
             this.hotSpot6.Text = "Uncheck all";
             this.hotSpot6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2192,6 +2338,7 @@ namespace FBExpert
             this.hotSpot7.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot7.FlatAppearance.BorderSize = 0;
             this.hotSpot7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot7.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot7.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot7.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot7.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2205,7 +2352,10 @@ namespace FBExpert
             this.hotSpot7.MarkMode = false;
             this.hotSpot7.Name = "hotSpot7";
             this.hotSpot7.NonMarkedText = "Check all";
-            this.hotSpot7.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot7.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot7.ShortcutNewline = false;
+            this.hotSpot7.ShowShortcut = false;
+            this.hotSpot7.Size = new System.Drawing.Size(96, 45);
             this.hotSpot7.TabIndex = 2;
             this.hotSpot7.Text = "Check all";
             this.hotSpot7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2233,10 +2383,10 @@ namespace FBExpert
             this.tabPageProcedureStructure.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabPageProcedureStructure.Controls.Add(this.gbFunctionsStructure);
             this.tabPageProcedureStructure.Controls.Add(this.gbProcedures);
-            this.tabPageProcedureStructure.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProcedureStructure.Location = new System.Drawing.Point(4, 23);
             this.tabPageProcedureStructure.Name = "tabPageProcedureStructure";
             this.tabPageProcedureStructure.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProcedureStructure.Size = new System.Drawing.Size(405, 534);
+            this.tabPageProcedureStructure.Size = new System.Drawing.Size(405, 576);
             this.tabPageProcedureStructure.TabIndex = 4;
             this.tabPageProcedureStructure.Text = "Procedures/Functions";
             // 
@@ -2247,13 +2397,14 @@ namespace FBExpert
             this.gbFunctionsStructure.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbFunctionsStructure.Location = new System.Drawing.Point(202, 3);
             this.gbFunctionsStructure.Name = "gbFunctionsStructure";
-            this.gbFunctionsStructure.Size = new System.Drawing.Size(199, 528);
+            this.gbFunctionsStructure.Size = new System.Drawing.Size(199, 570);
             this.gbFunctionsStructure.TabIndex = 8;
             this.gbFunctionsStructure.TabStop = false;
             this.gbFunctionsStructure.Text = "Functions";
             // 
             // selFunctionsStructure
             // 
+            this.selFunctionsStructure.AlloweColumnFilterIndexChange = false;
             this.selFunctionsStructure.AllowMultipleChecks = true;
             this.selFunctionsStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle17;
             this.selFunctionsStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -2265,24 +2416,31 @@ namespace FBExpert
             this.selFunctionsStructure.CheckOnSelect = true;
             this.selFunctionsStructure.CheckVisible = true;
             this.selFunctionsStructure.CheckWith = 32;
+            this.selFunctionsStructure.ColumnFilterIndex = 1;
             this.selFunctionsStructure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selFunctionsStructure.FilterText = "";
             this.selFunctionsStructure.IDVisible = false;
             this.selFunctionsStructure.IDWith = 32;
             this.selFunctionsStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selFunctionsStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle18;
-            this.selFunctionsStructure.Location = new System.Drawing.Point(3, 58);
+            this.selFunctionsStructure.Location = new System.Drawing.Point(3, 63);
+            this.selFunctionsStructure.MarkingColor = System.Drawing.Color.LightGreen;
             this.selFunctionsStructure.Name = "selFunctionsStructure";
             this.selFunctionsStructure.SelectedIndex = -1;
             this.selFunctionsStructure.ShowCaptions = false;
             this.selFunctionsStructure.ShowCellToolTips = true;
             this.selFunctionsStructure.ShowCountInTitle = true;
             this.selFunctionsStructure.ShowSelection = false;
-            this.selFunctionsStructure.Size = new System.Drawing.Size(193, 467);
+            this.selFunctionsStructure.Size = new System.Drawing.Size(193, 504);
+            this.selFunctionsStructure.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selFunctionsStructure.SQLKonjunktion = "AND";
             this.selFunctionsStructure.TabIndex = 17;
             this.selFunctionsStructure.Text = "Procedures";
             this.selFunctionsStructure.TextCaption = "text";
             this.selFunctionsStructure.TextWith = 100;
             this.selFunctionsStructure.Title = "gbMain";
+            this.selFunctionsStructure.UseFiltering = false;
+            this.selFunctionsStructure.UseFilteringAutocomplete = false;
             this.selFunctionsStructure.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel8
@@ -2290,9 +2448,9 @@ namespace FBExpert
             this.panel8.Controls.Add(this.hotSpot12);
             this.panel8.Controls.Add(this.hotSpot13);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(3, 16);
+            this.panel8.Location = new System.Drawing.Point(3, 18);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(193, 42);
+            this.panel8.Size = new System.Drawing.Size(193, 45);
             this.panel8.TabIndex = 2;
             // 
             // hotSpot12
@@ -2308,6 +2466,7 @@ namespace FBExpert
             this.hotSpot12.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot12.FlatAppearance.BorderSize = 0;
             this.hotSpot12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot12.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot12.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot12.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot12.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2321,7 +2480,10 @@ namespace FBExpert
             this.hotSpot12.MarkMode = false;
             this.hotSpot12.Name = "hotSpot12";
             this.hotSpot12.NonMarkedText = "Uncheck all";
-            this.hotSpot12.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot12.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot12.ShortcutNewline = false;
+            this.hotSpot12.ShowShortcut = false;
+            this.hotSpot12.Size = new System.Drawing.Size(96, 45);
             this.hotSpot12.TabIndex = 3;
             this.hotSpot12.Text = "Uncheck all";
             this.hotSpot12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2356,6 +2518,7 @@ namespace FBExpert
             this.hotSpot13.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot13.FlatAppearance.BorderSize = 0;
             this.hotSpot13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot13.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot13.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot13.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot13.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2369,7 +2532,10 @@ namespace FBExpert
             this.hotSpot13.MarkMode = false;
             this.hotSpot13.Name = "hotSpot13";
             this.hotSpot13.NonMarkedText = "Check all";
-            this.hotSpot13.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot13.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot13.ShortcutNewline = false;
+            this.hotSpot13.ShowShortcut = false;
+            this.hotSpot13.Size = new System.Drawing.Size(96, 45);
             this.hotSpot13.TabIndex = 2;
             this.hotSpot13.Text = "Check all";
             this.hotSpot13.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2398,13 +2564,14 @@ namespace FBExpert
             this.gbProcedures.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbProcedures.Location = new System.Drawing.Point(3, 3);
             this.gbProcedures.Name = "gbProcedures";
-            this.gbProcedures.Size = new System.Drawing.Size(199, 528);
+            this.gbProcedures.Size = new System.Drawing.Size(199, 570);
             this.gbProcedures.TabIndex = 7;
             this.gbProcedures.TabStop = false;
             this.gbProcedures.Text = "Procedures";
             // 
             // selProceduresStructure
             // 
+            this.selProceduresStructure.AlloweColumnFilterIndexChange = false;
             this.selProceduresStructure.AllowMultipleChecks = true;
             this.selProceduresStructure.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle19;
             this.selProceduresStructure.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
@@ -2416,24 +2583,31 @@ namespace FBExpert
             this.selProceduresStructure.CheckOnSelect = true;
             this.selProceduresStructure.CheckVisible = true;
             this.selProceduresStructure.CheckWith = 32;
+            this.selProceduresStructure.ColumnFilterIndex = 1;
             this.selProceduresStructure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selProceduresStructure.FilterText = "";
             this.selProceduresStructure.IDVisible = false;
             this.selProceduresStructure.IDWith = 32;
             this.selProceduresStructure.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selProceduresStructure.ListEntriesDefaultCellStyle = dataGridViewCellStyle20;
-            this.selProceduresStructure.Location = new System.Drawing.Point(3, 58);
+            this.selProceduresStructure.Location = new System.Drawing.Point(3, 63);
+            this.selProceduresStructure.MarkingColor = System.Drawing.Color.LightGreen;
             this.selProceduresStructure.Name = "selProceduresStructure";
             this.selProceduresStructure.SelectedIndex = -1;
             this.selProceduresStructure.ShowCaptions = false;
             this.selProceduresStructure.ShowCellToolTips = true;
             this.selProceduresStructure.ShowCountInTitle = true;
             this.selProceduresStructure.ShowSelection = false;
-            this.selProceduresStructure.Size = new System.Drawing.Size(193, 467);
+            this.selProceduresStructure.Size = new System.Drawing.Size(193, 504);
+            this.selProceduresStructure.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selProceduresStructure.SQLKonjunktion = "AND";
             this.selProceduresStructure.TabIndex = 17;
             this.selProceduresStructure.Text = "Procedures";
             this.selProceduresStructure.TextCaption = "text";
             this.selProceduresStructure.TextWith = 100;
             this.selProceduresStructure.Title = "gbMain";
+            this.selProceduresStructure.UseFiltering = false;
+            this.selProceduresStructure.UseFilteringAutocomplete = false;
             this.selProceduresStructure.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // panel7
@@ -2441,9 +2615,9 @@ namespace FBExpert
             this.panel7.Controls.Add(this.hotSpot10);
             this.panel7.Controls.Add(this.hotSpot11);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(3, 16);
+            this.panel7.Location = new System.Drawing.Point(3, 18);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(193, 42);
+            this.panel7.Size = new System.Drawing.Size(193, 45);
             this.panel7.TabIndex = 2;
             // 
             // hotSpot10
@@ -2459,6 +2633,7 @@ namespace FBExpert
             this.hotSpot10.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot10.FlatAppearance.BorderSize = 0;
             this.hotSpot10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot10.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot10.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot10.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot10.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2472,7 +2647,10 @@ namespace FBExpert
             this.hotSpot10.MarkMode = false;
             this.hotSpot10.Name = "hotSpot10";
             this.hotSpot10.NonMarkedText = "Uncheck all";
-            this.hotSpot10.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot10.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot10.ShortcutNewline = false;
+            this.hotSpot10.ShowShortcut = false;
+            this.hotSpot10.Size = new System.Drawing.Size(96, 45);
             this.hotSpot10.TabIndex = 3;
             this.hotSpot10.Text = "Uncheck all";
             this.hotSpot10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2507,6 +2685,7 @@ namespace FBExpert
             this.hotSpot11.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot11.FlatAppearance.BorderSize = 0;
             this.hotSpot11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot11.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot11.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot11.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2520,7 +2699,10 @@ namespace FBExpert
             this.hotSpot11.MarkMode = false;
             this.hotSpot11.Name = "hotSpot11";
             this.hotSpot11.NonMarkedText = "Check all";
-            this.hotSpot11.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot11.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot11.ShortcutNewline = false;
+            this.hotSpot11.ShowShortcut = false;
+            this.hotSpot11.Size = new System.Drawing.Size(96, 45);
             this.hotSpot11.TabIndex = 2;
             this.hotSpot11.Text = "Check all";
             this.hotSpot11.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2550,7 +2732,7 @@ namespace FBExpert
             this.pnlOnjectExportAttributes.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlOnjectExportAttributes.Location = new System.Drawing.Point(413, 0);
             this.pnlOnjectExportAttributes.Name = "pnlOnjectExportAttributes";
-            this.pnlOnjectExportAttributes.Size = new System.Drawing.Size(395, 560);
+            this.pnlOnjectExportAttributes.Size = new System.Drawing.Size(395, 616);
             this.pnlOnjectExportAttributes.TabIndex = 5;
             // 
             // pnlStructureAttributesUpper
@@ -2558,13 +2740,14 @@ namespace FBExpert
             this.pnlStructureAttributesUpper.Controls.Add(this.selExportStructureList);
             this.pnlStructureAttributesUpper.Controls.Add(this.setExportStructureAttributes);
             this.pnlStructureAttributesUpper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStructureAttributesUpper.Location = new System.Drawing.Point(0, 83);
+            this.pnlStructureAttributesUpper.Location = new System.Drawing.Point(0, 94);
             this.pnlStructureAttributesUpper.Name = "pnlStructureAttributesUpper";
-            this.pnlStructureAttributesUpper.Size = new System.Drawing.Size(395, 477);
+            this.pnlStructureAttributesUpper.Size = new System.Drawing.Size(395, 522);
             this.pnlStructureAttributesUpper.TabIndex = 1;
             // 
             // selExportStructureList
             // 
+            this.selExportStructureList.AlloweColumnFilterIndexChange = false;
             this.selExportStructureList.AllowMultipleChecks = true;
             dataGridViewCellStyle21.BackColor = System.Drawing.Color.AntiqueWhite;
             dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.AntiqueWhite;
@@ -2578,24 +2761,31 @@ namespace FBExpert
             this.selExportStructureList.CheckOnSelect = true;
             this.selExportStructureList.CheckVisible = true;
             this.selExportStructureList.CheckWith = 32;
+            this.selExportStructureList.ColumnFilterIndex = 1;
             this.selExportStructureList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selExportStructureList.FilterText = "";
             this.selExportStructureList.IDVisible = false;
             this.selExportStructureList.IDWith = 32;
             this.selExportStructureList.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selExportStructureList.ListEntriesDefaultCellStyle = dataGridViewCellStyle22;
             this.selExportStructureList.Location = new System.Drawing.Point(0, 0);
+            this.selExportStructureList.MarkingColor = System.Drawing.Color.LightGreen;
             this.selExportStructureList.Name = "selExportStructureList";
             this.selExportStructureList.SelectedIndex = -1;
             this.selExportStructureList.ShowCaptions = false;
             this.selExportStructureList.ShowCellToolTips = true;
             this.selExportStructureList.ShowCountInTitle = true;
             this.selExportStructureList.ShowSelection = false;
-            this.selExportStructureList.Size = new System.Drawing.Size(213, 477);
+            this.selExportStructureList.Size = new System.Drawing.Size(213, 522);
+            this.selExportStructureList.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            this.selExportStructureList.SQLKonjunktion = "AND";
             this.selExportStructureList.TabIndex = 0;
             this.selExportStructureList.Text = "seListBox1";
             this.selExportStructureList.TextCaption = "text";
             this.selExportStructureList.TextWith = 174;
             this.selExportStructureList.Title = "Objects to export";
+            this.selExportStructureList.UseFiltering = false;
+            this.selExportStructureList.UseFilteringAutocomplete = false;
             this.selExportStructureList.WordWrap = System.Windows.Forms.DataGridViewTriState.NotSet;
             // 
             // setExportStructureAttributes
@@ -2611,7 +2801,7 @@ namespace FBExpert
             this.setExportStructureAttributes.Dock = System.Windows.Forms.DockStyle.Right;
             this.setExportStructureAttributes.Location = new System.Drawing.Point(213, 0);
             this.setExportStructureAttributes.Name = "setExportStructureAttributes";
-            this.setExportStructureAttributes.Size = new System.Drawing.Size(182, 477);
+            this.setExportStructureAttributes.Size = new System.Drawing.Size(182, 522);
             this.setExportStructureAttributes.TabIndex = 16;
             this.setExportStructureAttributes.TabStop = false;
             this.setExportStructureAttributes.Text = "Export attributes";
@@ -2619,9 +2809,9 @@ namespace FBExpert
             // ckWriteFileForEVeryObject
             // 
             this.ckWriteFileForEVeryObject.AutoSize = true;
-            this.ckWriteFileForEVeryObject.Location = new System.Drawing.Point(11, 230);
+            this.ckWriteFileForEVeryObject.Location = new System.Drawing.Point(11, 248);
             this.ckWriteFileForEVeryObject.Name = "ckWriteFileForEVeryObject";
-            this.ckWriteFileForEVeryObject.Size = new System.Drawing.Size(143, 17);
+            this.ckWriteFileForEVeryObject.Size = new System.Drawing.Size(161, 18);
             this.ckWriteFileForEVeryObject.TabIndex = 19;
             this.ckWriteFileForEVeryObject.Text = "Write file for every object";
             this.ckWriteFileForEVeryObject.UseVisualStyleBackColor = true;
@@ -2629,9 +2819,9 @@ namespace FBExpert
             // cbStructureCommit
             // 
             this.cbStructureCommit.AutoSize = true;
-            this.cbStructureCommit.Location = new System.Drawing.Point(12, 205);
+            this.cbStructureCommit.Location = new System.Drawing.Point(12, 221);
             this.cbStructureCommit.Name = "cbStructureCommit";
-            this.cbStructureCommit.Size = new System.Drawing.Size(160, 17);
+            this.cbStructureCommit.Size = new System.Drawing.Size(181, 18);
             this.cbStructureCommit.TabIndex = 18;
             this.cbStructureCommit.Text = "Commt after every statement";
             this.cbStructureCommit.UseVisualStyleBackColor = true;
@@ -2639,9 +2829,9 @@ namespace FBExpert
             // cbStructureConnectiionStatement
             // 
             this.cbStructureConnectiionStatement.AutoSize = true;
-            this.cbStructureConnectiionStatement.Location = new System.Drawing.Point(12, 182);
+            this.cbStructureConnectiionStatement.Location = new System.Drawing.Point(12, 196);
             this.cbStructureConnectiionStatement.Name = "cbStructureConnectiionStatement";
-            this.cbStructureConnectiionStatement.Size = new System.Drawing.Size(162, 17);
+            this.cbStructureConnectiionStatement.Size = new System.Drawing.Size(182, 18);
             this.cbStructureConnectiionStatement.TabIndex = 17;
             this.cbStructureConnectiionStatement.Text = "Create connection statement";
             this.cbStructureConnectiionStatement.UseVisualStyleBackColor = true;
@@ -2658,12 +2848,13 @@ namespace FBExpert
             this.hsExportStructure.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsExportStructure.FlatAppearance.BorderSize = 0;
             this.hsExportStructure.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsExportStructure.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsExportStructure.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsExportStructure.Image = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsExportStructure.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsExportStructure.ImageHover = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsExportStructure.ImageToggleOnSelect = true;
-            this.hsExportStructure.Location = new System.Drawing.Point(8, 254);
+            this.hsExportStructure.Location = new System.Drawing.Point(8, 274);
             this.hsExportStructure.Marked = false;
             this.hsExportStructure.MarkedColor = System.Drawing.Color.Teal;
             this.hsExportStructure.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2671,7 +2862,10 @@ namespace FBExpert
             this.hsExportStructure.MarkMode = false;
             this.hsExportStructure.Name = "hsExportStructure";
             this.hsExportStructure.NonMarkedText = "Export structure for objects";
-            this.hsExportStructure.Size = new System.Drawing.Size(166, 48);
+            this.hsExportStructure.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportStructure.ShortcutNewline = false;
+            this.hsExportStructure.ShowShortcut = false;
+            this.hsExportStructure.Size = new System.Drawing.Size(166, 52);
             this.hsExportStructure.TabIndex = 1;
             this.hsExportStructure.Text = "Export structure for objects";
             this.hsExportStructure.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2697,9 +2891,9 @@ namespace FBExpert
             // cbStructureCreateDatabaseStatement
             // 
             this.cbStructureCreateDatabaseStatement.AutoSize = true;
-            this.cbStructureCreateDatabaseStatement.Location = new System.Drawing.Point(13, 159);
+            this.cbStructureCreateDatabaseStatement.Location = new System.Drawing.Point(13, 171);
             this.cbStructureCreateDatabaseStatement.Name = "cbStructureCreateDatabaseStatement";
-            this.cbStructureCreateDatabaseStatement.Size = new System.Drawing.Size(153, 17);
+            this.cbStructureCreateDatabaseStatement.Size = new System.Drawing.Size(175, 18);
             this.cbStructureCreateDatabaseStatement.TabIndex = 16;
             this.cbStructureCreateDatabaseStatement.Text = "Create database statement";
             this.cbStructureCreateDatabaseStatement.UseVisualStyleBackColor = true;
@@ -2708,9 +2902,9 @@ namespace FBExpert
             // 
             this.groupBox3.Controls.Add(this.rbCREATEObject);
             this.groupBox3.Controls.Add(this.rbRECREATEObject);
-            this.groupBox3.Location = new System.Drawing.Point(6, 35);
+            this.groupBox3.Location = new System.Drawing.Point(6, 38);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(160, 72);
+            this.groupBox3.Size = new System.Drawing.Size(160, 78);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Create mode";
@@ -2719,9 +2913,9 @@ namespace FBExpert
             // 
             this.rbCREATEObject.AutoSize = true;
             this.rbCREATEObject.Checked = true;
-            this.rbCREATEObject.Location = new System.Drawing.Point(6, 23);
+            this.rbCREATEObject.Location = new System.Drawing.Point(6, 25);
             this.rbCREATEObject.Name = "rbCREATEObject";
-            this.rbCREATEObject.Size = new System.Drawing.Size(68, 17);
+            this.rbCREATEObject.Size = new System.Drawing.Size(62, 18);
             this.rbCREATEObject.TabIndex = 1;
             this.rbCREATEObject.TabStop = true;
             this.rbCREATEObject.Text = "CREATE";
@@ -2730,9 +2924,9 @@ namespace FBExpert
             // rbRECREATEObject
             // 
             this.rbRECREATEObject.AutoSize = true;
-            this.rbRECREATEObject.Location = new System.Drawing.Point(6, 46);
+            this.rbRECREATEObject.Location = new System.Drawing.Point(6, 50);
             this.rbRECREATEObject.Name = "rbRECREATEObject";
-            this.rbRECREATEObject.Size = new System.Drawing.Size(123, 17);
+            this.rbRECREATEObject.Size = new System.Drawing.Size(110, 18);
             this.rbRECREATEObject.TabIndex = 0;
             this.rbRECREATEObject.Text = "RECREATE/ALTER";
             this.rbRECREATEObject.UseVisualStyleBackColor = true;
@@ -2742,9 +2936,9 @@ namespace FBExpert
             this.cbViewObjectScript.AutoSize = true;
             this.cbViewObjectScript.Checked = true;
             this.cbViewObjectScript.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbViewObjectScript.Location = new System.Drawing.Point(13, 113);
+            this.cbViewObjectScript.Location = new System.Drawing.Point(13, 122);
             this.cbViewObjectScript.Name = "cbViewObjectScript";
-            this.cbViewObjectScript.Size = new System.Drawing.Size(93, 17);
+            this.cbViewObjectScript.Size = new System.Drawing.Size(106, 18);
             this.cbViewObjectScript.TabIndex = 14;
             this.cbViewObjectScript.Text = "View in scripts";
             this.cbViewObjectScript.UseVisualStyleBackColor = true;
@@ -2752,9 +2946,9 @@ namespace FBExpert
             // cbObjectExportToFile
             // 
             this.cbObjectExportToFile.AutoSize = true;
-            this.cbObjectExportToFile.Location = new System.Drawing.Point(13, 136);
+            this.cbObjectExportToFile.Location = new System.Drawing.Point(13, 146);
             this.cbObjectExportToFile.Name = "cbObjectExportToFile";
-            this.cbObjectExportToFile.Size = new System.Drawing.Size(84, 17);
+            this.cbObjectExportToFile.Size = new System.Drawing.Size(93, 18);
             this.cbObjectExportToFile.TabIndex = 13;
             this.cbObjectExportToFile.Text = "Export to file";
             this.cbObjectExportToFile.UseVisualStyleBackColor = true;
@@ -2766,7 +2960,7 @@ namespace FBExpert
             this.pnlUpperExportStructureObjects.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpperExportStructureObjects.Location = new System.Drawing.Point(0, 0);
             this.pnlUpperExportStructureObjects.Name = "pnlUpperExportStructureObjects";
-            this.pnlUpperExportStructureObjects.Size = new System.Drawing.Size(395, 83);
+            this.pnlUpperExportStructureObjects.Size = new System.Drawing.Size(395, 94);
             this.pnlUpperExportStructureObjects.TabIndex = 19;
             // 
             // hotSpot15
@@ -2781,12 +2975,13 @@ namespace FBExpert
             this.hotSpot15.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot15.FlatAppearance.BorderSize = 0;
             this.hotSpot15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot15.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot15.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot15.Image = global::FBXpert.Properties.Resources.cross_red_x22;
             this.hotSpot15.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hotSpot15.ImageHover = global::FBXpert.Properties.Resources.cross_blue_x22;
             this.hotSpot15.ImageToggleOnSelect = true;
-            this.hotSpot15.Location = new System.Drawing.Point(104, 41);
+            this.hotSpot15.Location = new System.Drawing.Point(104, 44);
             this.hotSpot15.Marked = false;
             this.hotSpot15.MarkedColor = System.Drawing.Color.Teal;
             this.hotSpot15.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2794,7 +2989,10 @@ namespace FBExpert
             this.hotSpot15.MarkMode = false;
             this.hotSpot15.Name = "hotSpot15";
             this.hotSpot15.NonMarkedText = "Uncheck all";
-            this.hotSpot15.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot15.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot15.ShortcutNewline = false;
+            this.hotSpot15.ShowShortcut = false;
+            this.hotSpot15.Size = new System.Drawing.Size(96, 45);
             this.hotSpot15.TabIndex = 18;
             this.hotSpot15.Text = "Uncheck all";
             this.hotSpot15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2829,12 +3027,13 @@ namespace FBExpert
             this.hotSpot14.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hotSpot14.FlatAppearance.BorderSize = 0;
             this.hotSpot14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot14.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hotSpot14.HoverStyle = SeControlsLib.frameStyle.none;
             this.hotSpot14.Image = global::FBXpert.Properties.Resources.ok_gn22x;
             this.hotSpot14.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hotSpot14.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
             this.hotSpot14.ImageToggleOnSelect = true;
-            this.hotSpot14.Location = new System.Drawing.Point(2, 41);
+            this.hotSpot14.Location = new System.Drawing.Point(2, 44);
             this.hotSpot14.Marked = false;
             this.hotSpot14.MarkedColor = System.Drawing.Color.Teal;
             this.hotSpot14.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -2842,7 +3041,10 @@ namespace FBExpert
             this.hotSpot14.MarkMode = false;
             this.hotSpot14.Name = "hotSpot14";
             this.hotSpot14.NonMarkedText = "Check all";
-            this.hotSpot14.Size = new System.Drawing.Size(96, 42);
+            this.hotSpot14.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot14.ShortcutNewline = false;
+            this.hotSpot14.ShowShortcut = false;
+            this.hotSpot14.Size = new System.Drawing.Size(96, 45);
             this.hotSpot14.TabIndex = 17;
             this.hotSpot14.Text = "Check all";
             this.hotSpot14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2864,15 +3066,6 @@ namespace FBExpert
             this.hotSpot14.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hotSpot14.UseVisualStyleBackColor = false;
             this.hotSpot14.Click += new System.EventHandler(this.hotSpot14_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(808, 10);
-            this.panel1.TabIndex = 2;
             // 
             // ofdSQL
             // 
@@ -2908,12 +3101,13 @@ namespace FBExpert
             // 
             // EXPORTDataForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1296, 662);
+            this.ClientSize = new System.Drawing.Size(1296, 713);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EXPORTDataForm";
             this.Text = "EXPORTDataForm";
@@ -2932,8 +3126,8 @@ namespace FBExpert
             ((System.ComponentModel.ISupportInitialize)(this.bsUniques)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsUniques)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable3)).EndInit();
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.gbFileExport.ResumeLayout(false);
             this.gbFileName.ResumeLayout(false);
@@ -2991,7 +3185,7 @@ namespace FBExpert
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabTableExports;
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlLower;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
@@ -3051,7 +3245,6 @@ namespace FBExpert
         private System.Windows.Forms.Panel pnlStructureObjectsUpper;
         private SeControlsLib.HotSpot hsUnselectStructureObjects;
         private SeControlsLib.HotSpot hsSelectStructureObjects;
-        private System.Windows.Forms.Panel panel1;
         private SeControlsLib.HotSpot hsExportStructure;
         private System.Windows.Forms.Panel pnlOnjectExportAttributes;
         private System.Windows.Forms.GroupBox setExportStructureAttributes;

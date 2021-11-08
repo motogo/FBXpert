@@ -37,7 +37,7 @@ namespace FBXpert.ValuesEditForms
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.hsShowAsImage = new SeControlsLib.HotSpot();
             this.hsEXCEL = new SeControlsLib.HotSpot();
@@ -47,16 +47,16 @@ namespace FBXpert.ValuesEditForms
             this.pnlCenter.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.pnlUpperContent.SuspendLayout();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlCenter
             // 
             this.pnlCenter.Controls.Add(this.groupBox1);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 58);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 50);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(708, 601);
+            this.pnlCenter.Size = new System.Drawing.Size(708, 609);
             this.pnlCenter.TabIndex = 0;
             this.pnlCenter.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCenter_Paint);
             // 
@@ -67,7 +67,7 @@ namespace FBXpert.ValuesEditForms
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(708, 601);
+            this.groupBox1.Size = new System.Drawing.Size(708, 609);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -75,6 +75,7 @@ namespace FBXpert.ValuesEditForms
             // 
             this.bv.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.bv.ColumnCount = 1;
+            this.bv.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.bv.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.bv.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.bv.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -98,7 +99,8 @@ namespace FBXpert.ValuesEditForms
             this.bv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.bv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.bv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.bv.Size = new System.Drawing.Size(702, 554);
+            this.bv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.bv.Size = new System.Drawing.Size(702, 562);
             this.bv.TabIndex = 1;
             // 
             // pnlUpperContent
@@ -139,20 +141,20 @@ namespace FBXpert.ValuesEditForms
             this.label1.TabIndex = 0;
             this.label1.Text = "ASCII";
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.hotSpot1);
-            this.pnlUpper.Controls.Add(this.hsShowAsImage);
-            this.pnlUpper.Controls.Add(this.hsEXCEL);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Controls.Add(this.hsText);
-            this.pnlUpper.Controls.Add(this.hsPDF);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(708, 58);
-            this.pnlUpper.TabIndex = 2;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.hotSpot1);
+            this.pnlFormUpper.Controls.Add(this.hsShowAsImage);
+            this.pnlFormUpper.Controls.Add(this.hsEXCEL);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Controls.Add(this.hsText);
+            this.pnlFormUpper.Controls.Add(this.hsPDF);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(708, 50);
+            this.pnlFormUpper.TabIndex = 2;
             // 
             // hotSpot1
             // 
@@ -184,7 +186,7 @@ namespace FBXpert.ValuesEditForms
             this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hotSpot1.ShortcutNewline = false;
             this.hotSpot1.ShowShortcut = false;
-            this.hotSpot1.Size = new System.Drawing.Size(83, 58);
+            this.hotSpot1.Size = new System.Drawing.Size(83, 50);
             this.hotSpot1.TabIndex = 6;
             this.hotSpot1.Text = "Word (doc)";
             this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -237,7 +239,7 @@ namespace FBXpert.ValuesEditForms
             this.hsShowAsImage.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsShowAsImage.ShortcutNewline = false;
             this.hsShowAsImage.ShowShortcut = false;
-            this.hsShowAsImage.Size = new System.Drawing.Size(83, 58);
+            this.hsShowAsImage.Size = new System.Drawing.Size(83, 50);
             this.hsShowAsImage.TabIndex = 5;
             this.hsShowAsImage.Text = "Image";
             this.hsShowAsImage.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -290,7 +292,7 @@ namespace FBXpert.ValuesEditForms
             this.hsEXCEL.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsEXCEL.ShortcutNewline = false;
             this.hsEXCEL.ShowShortcut = false;
-            this.hsEXCEL.Size = new System.Drawing.Size(83, 58);
+            this.hsEXCEL.Size = new System.Drawing.Size(83, 50);
             this.hsEXCEL.TabIndex = 4;
             this.hsEXCEL.Text = "Excel";
             this.hsEXCEL.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -342,7 +344,7 @@ namespace FBXpert.ValuesEditForms
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(45, 58);
+            this.hsClose.Size = new System.Drawing.Size(45, 50);
             this.hsClose.TabIndex = 0;
             this.hsClose.ToolTipActive = false;
             this.hsClose.ToolTipAutomaticDelay = 500;
@@ -393,7 +395,7 @@ namespace FBXpert.ValuesEditForms
             this.hsText.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsText.ShortcutNewline = false;
             this.hsText.ShowShortcut = false;
-            this.hsText.Size = new System.Drawing.Size(69, 58);
+            this.hsText.Size = new System.Drawing.Size(69, 50);
             this.hsText.TabIndex = 3;
             this.hsText.Text = "Text";
             this.hsText.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -446,7 +448,7 @@ namespace FBXpert.ValuesEditForms
             this.hsPDF.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsPDF.ShortcutNewline = false;
             this.hsPDF.ShowShortcut = false;
-            this.hsPDF.Size = new System.Drawing.Size(71, 58);
+            this.hsPDF.Size = new System.Drawing.Size(71, 50);
             this.hsPDF.TabIndex = 2;
             this.hsPDF.Text = "PDF";
             this.hsPDF.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -475,14 +477,15 @@ namespace FBXpert.ValuesEditForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 659);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Name = "BlobEditForm";
             this.Text = "BlobEditForm";
+            this.Load += new System.EventHandler(this.BlobEditForm_Load);
             this.pnlCenter.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.pnlUpperContent.ResumeLayout(false);
             this.pnlUpperContent.PerformLayout();
-            this.pnlUpper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -491,7 +494,7 @@ namespace FBXpert.ValuesEditForms
 
         private System.Windows.Forms.Panel pnlCenter;
         private ByteViewer bv;
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsPDF;
         private SeControlsLib.HotSpot hsText;

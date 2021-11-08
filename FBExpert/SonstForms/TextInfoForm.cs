@@ -1,4 +1,5 @@
 ﻿using FBXpert.DataClasses;
+using FBXpert.Globals;
 using FBXpert.MiscClasses;
 using System;
 using System.Windows.Forms;
@@ -99,9 +100,13 @@ namespace FBXpert
             SearchFCT.NewSearchPattern(txtSearchPattern.Text);
             gbNavigate.Enabled = false;
         }
-
+        public void SetControlSizes()
+        {
+            flpFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void TextInfoForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             gbNavigate.Enabled = false;
             FindPattern();
             

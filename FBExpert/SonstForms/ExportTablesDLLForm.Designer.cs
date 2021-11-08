@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.ckDeleteAllFiles = new System.Windows.Forms.CheckBox();
             this.ckCreateAlterTable = new System.Windows.Forms.CheckBox();
             this.ckCreateTableDLL = new System.Windows.Forms.CheckBox();
@@ -39,22 +39,22 @@
             this.hsInitialSQLExportPath = new SeControlsLib.HotSpot();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gbDefaultSQLExportPath.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.ckDeleteAllFiles);
-            this.pnlUpper.Controls.Add(this.ckCreateAlterTable);
-            this.pnlUpper.Controls.Add(this.ckCreateTableDLL);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(641, 44);
-            this.pnlUpper.TabIndex = 2;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.ckDeleteAllFiles);
+            this.pnlFormUpper.Controls.Add(this.ckCreateAlterTable);
+            this.pnlFormUpper.Controls.Add(this.ckCreateTableDLL);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(641, 44);
+            this.pnlFormUpper.TabIndex = 2;
             // 
             // ckDeleteAllFiles
             // 
@@ -118,6 +118,7 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 44);
             this.hsClose.TabIndex = 0;
@@ -168,6 +169,7 @@
             this.hsExportTables.Name = "hsExportTables";
             this.hsExportTables.NonMarkedText = "Export";
             this.hsExportTables.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportTables.ShortcutNewline = false;
             this.hsExportTables.ShowShortcut = false;
             this.hsExportTables.Size = new System.Drawing.Size(114, 52);
             this.hsExportTables.TabIndex = 3;
@@ -238,6 +240,7 @@
             this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
             this.hsInitialSQLExportPath.NonMarkedText = "";
             this.hsInitialSQLExportPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInitialSQLExportPath.ShortcutNewline = false;
             this.hsInitialSQLExportPath.ShowShortcut = false;
             this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
             this.hsInitialSQLExportPath.TabIndex = 3;
@@ -277,12 +280,12 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.gbDefaultSQLExportPath);
             this.Controls.Add(this.hsExportTables);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Name = "ExportTablesDLLForm";
             this.Text = "ExportTablesDLLForm";
             this.Load += new System.EventHandler(this.ExportTablesDLLForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gbDefaultSQLExportPath.ResumeLayout(false);
             this.gbDefaultSQLExportPath.PerformLayout();
             this.ResumeLayout(false);
@@ -291,7 +294,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsExportTables;
         private System.Windows.Forms.GroupBox gbDefaultSQLExportPath;

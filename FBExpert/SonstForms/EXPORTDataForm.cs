@@ -172,16 +172,24 @@ namespace FBExpert
         {
             Close();
         }
-                                       
         
         public void ShowCaptions()
         {
             lblTableName.Text = (TableObject != null) ? $@"Export Table: {TableObject.Name}" : "Export Table";
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Export Table");
         }
-        
+
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlTableUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlUpperExportStructureObjects.Height = AppSizeConstants.UpperFormBandHeight+44;
+            pnlStructureObjectsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlTableFieldsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void EXPORTDataForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)

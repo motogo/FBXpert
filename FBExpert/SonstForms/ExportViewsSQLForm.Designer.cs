@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
+            this.ckDeleteAllFiles = new System.Windows.Forms.CheckBox();
+            this.ckCreateView = new System.Windows.Forms.CheckBox();
+            this.ckAlterView = new System.Windows.Forms.CheckBox();
             this.hsClose = new SeControlsLib.HotSpot();
             this.hsExportViews = new SeControlsLib.HotSpot();
             this.gbDefaultSQLExportPath = new System.Windows.Forms.GroupBox();
@@ -36,25 +39,56 @@
             this.hsInitialSQLExportPath = new SeControlsLib.HotSpot();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.ckAlterView = new System.Windows.Forms.CheckBox();
-            this.ckCreateView = new System.Windows.Forms.CheckBox();
-            this.ckDeleteAllFiles = new System.Windows.Forms.CheckBox();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gbDefaultSQLExportPath.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.ckDeleteAllFiles);
-            this.pnlUpper.Controls.Add(this.ckCreateView);
-            this.pnlUpper.Controls.Add(this.ckAlterView);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(641, 44);
-            this.pnlUpper.TabIndex = 2;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.ckDeleteAllFiles);
+            this.pnlFormUpper.Controls.Add(this.ckCreateView);
+            this.pnlFormUpper.Controls.Add(this.ckAlterView);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(641, 44);
+            this.pnlFormUpper.TabIndex = 2;
+            // 
+            // ckDeleteAllFiles
+            // 
+            this.ckDeleteAllFiles.AutoSize = true;
+            this.ckDeleteAllFiles.Checked = true;
+            this.ckDeleteAllFiles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckDeleteAllFiles.Location = new System.Drawing.Point(387, 14);
+            this.ckDeleteAllFiles.Name = "ckDeleteAllFiles";
+            this.ckDeleteAllFiles.Size = new System.Drawing.Size(150, 17);
+            this.ckDeleteAllFiles.TabIndex = 3;
+            this.ckDeleteAllFiles.Text = "Delete all SQL files in path";
+            this.ckDeleteAllFiles.UseVisualStyleBackColor = true;
+            // 
+            // ckCreateView
+            // 
+            this.ckCreateView.AutoSize = true;
+            this.ckCreateView.Location = new System.Drawing.Point(284, 14);
+            this.ckCreateView.Name = "ckCreateView";
+            this.ckCreateView.Size = new System.Drawing.Size(73, 17);
+            this.ckCreateView.TabIndex = 2;
+            this.ckCreateView.Text = "Alter View";
+            this.ckCreateView.UseVisualStyleBackColor = true;
+            // 
+            // ckAlterView
+            // 
+            this.ckAlterView.AutoSize = true;
+            this.ckAlterView.Checked = true;
+            this.ckAlterView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckAlterView.Location = new System.Drawing.Point(97, 12);
+            this.ckAlterView.Name = "ckAlterView";
+            this.ckAlterView.Size = new System.Drawing.Size(73, 17);
+            this.ckAlterView.TabIndex = 1;
+            this.ckAlterView.Text = "Alter View";
+            this.ckAlterView.UseVisualStyleBackColor = true;
             // 
             // hsClose
             // 
@@ -82,6 +116,9 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 44);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -130,6 +167,9 @@
             this.hsExportViews.MarkMode = false;
             this.hsExportViews.Name = "hsExportViews";
             this.hsExportViews.NonMarkedText = "Export";
+            this.hsExportViews.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExportViews.ShortcutNewline = false;
+            this.hsExportViews.ShowShortcut = false;
             this.hsExportViews.Size = new System.Drawing.Size(114, 52);
             this.hsExportViews.TabIndex = 3;
             this.hsExportViews.Text = "Export Views";
@@ -198,6 +238,9 @@
             this.hsInitialSQLExportPath.MarkMode = false;
             this.hsInitialSQLExportPath.Name = "hsInitialSQLExportPath";
             this.hsInitialSQLExportPath.NonMarkedText = "";
+            this.hsInitialSQLExportPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInitialSQLExportPath.ShortcutNewline = false;
+            this.hsInitialSQLExportPath.ShowShortcut = false;
             this.hsInitialSQLExportPath.Size = new System.Drawing.Size(45, 25);
             this.hsInitialSQLExportPath.TabIndex = 3;
             this.hsInitialSQLExportPath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -228,40 +271,6 @@
             this.progressBar1.Size = new System.Drawing.Size(641, 23);
             this.progressBar1.TabIndex = 8;
             // 
-            // ckAlterView
-            // 
-            this.ckAlterView.AutoSize = true;
-            this.ckAlterView.Checked = true;
-            this.ckAlterView.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckAlterView.Location = new System.Drawing.Point(97, 12);
-            this.ckAlterView.Name = "ckAlterView";
-            this.ckAlterView.Size = new System.Drawing.Size(73, 17);
-            this.ckAlterView.TabIndex = 1;
-            this.ckAlterView.Text = "Alter View";
-            this.ckAlterView.UseVisualStyleBackColor = true;
-            // 
-            // ckCreateView
-            // 
-            this.ckCreateView.AutoSize = true;
-            this.ckCreateView.Location = new System.Drawing.Point(284, 14);
-            this.ckCreateView.Name = "ckCreateView";
-            this.ckCreateView.Size = new System.Drawing.Size(73, 17);
-            this.ckCreateView.TabIndex = 2;
-            this.ckCreateView.Text = "Alter View";
-            this.ckCreateView.UseVisualStyleBackColor = true;
-            // 
-            // ckDeleteAllFiles
-            // 
-            this.ckDeleteAllFiles.AutoSize = true;
-            this.ckDeleteAllFiles.Checked = true;
-            this.ckDeleteAllFiles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckDeleteAllFiles.Location = new System.Drawing.Point(387, 14);
-            this.ckDeleteAllFiles.Name = "ckDeleteAllFiles";
-            this.ckDeleteAllFiles.Size = new System.Drawing.Size(150, 17);
-            this.ckDeleteAllFiles.TabIndex = 3;
-            this.ckDeleteAllFiles.Text = "Delete all SQL files in path";
-            this.ckDeleteAllFiles.UseVisualStyleBackColor = true;
-            // 
             // ExportViewsSQLForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,12 +279,12 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.gbDefaultSQLExportPath);
             this.Controls.Add(this.hsExportViews);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Name = "ExportViewsSQLForm";
             this.Text = "ExportViewsSQLForm";
             this.Load += new System.EventHandler(this.ExportViewsSQLForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gbDefaultSQLExportPath.ResumeLayout(false);
             this.gbDefaultSQLExportPath.PerformLayout();
             this.ResumeLayout(false);
@@ -284,7 +293,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsExportViews;
         private System.Windows.Forms.GroupBox gbDefaultSQLExportPath;

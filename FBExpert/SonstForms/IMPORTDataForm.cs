@@ -78,8 +78,18 @@ namespace FBExpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database import into Table");
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlImportUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlTableUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlTableFieldsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLAllUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlImportfilesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void IMPORTDataForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)

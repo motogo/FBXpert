@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportDesignForm));
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.gpRepoertFileName = new System.Windows.Forms.GroupBox();
             this.cbReportFile = new System.Windows.Forms.ComboBox();
@@ -44,7 +44,14 @@
             this.pnlFRXUpper = new System.Windows.Forms.Panel();
             this.hsSaveFRX = new SeControlsLib.HotSpot();
             this.tabPageXSD = new System.Windows.Forms.TabPage();
-            this.pnlUpperEditDesign = new System.Windows.Forms.Panel();
+            this.fctXSD = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.pnlXSDUpper = new System.Windows.Forms.Panel();
+            this.hsSaveXSD = new SeControlsLib.HotSpot();
+            this.tabPageXML = new System.Windows.Forms.TabPage();
+            this.fctXML = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.pnlXMLUpper = new System.Windows.Forms.Panel();
+            this.hsSaveXML = new SeControlsLib.HotSpot();
+            this.pnlEditDesign = new System.Windows.Forms.Panel();
             this.hsDesignEdit = new SeControlsLib.HotSpot();
             this.hsBlankReport = new SeControlsLib.HotSpot();
             this.gbXMLData = new System.Windows.Forms.GroupBox();
@@ -70,7 +77,7 @@
             this.colCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSQL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDataName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pnlUpperCreateStatements = new System.Windows.Forms.Panel();
+            this.pnlCreateStatementsUpper = new System.Windows.Forms.Panel();
             this.gbNewDataXLS = new System.Windows.Forms.GroupBox();
             this.txtXMLDataFileNew = new System.Windows.Forms.TextBox();
             this.hsDataFileNew = new SeControlsLib.HotSpot();
@@ -92,15 +99,8 @@
             this.ofdXSDSchemaFile = new System.Windows.Forms.OpenFileDialog();
             this.pnlAllDesignUpper = new System.Windows.Forms.Panel();
             this.report1 = new FastReport.Report();
-            this.fctXSD = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlUpperXSD = new System.Windows.Forms.Panel();
-            this.hsSaveXSD = new SeControlsLib.HotSpot();
-            this.tabPageXML = new System.Windows.Forms.TabPage();
-            this.fctXML = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.pnlXMLUpper = new System.Windows.Forms.Panel();
-            this.hsSaveXML = new SeControlsLib.HotSpot();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gpRepoertFileName.SuspendLayout();
             this.tabDesignControl.SuspendLayout();
             this.tabEditDesign.SuspendLayout();
@@ -109,7 +109,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.fctFRX)).BeginInit();
             this.pnlFRXUpper.SuspendLayout();
             this.tabPageXSD.SuspendLayout();
-            this.pnlUpperEditDesign.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctXSD)).BeginInit();
+            this.pnlXSDUpper.SuspendLayout();
+            this.tabPageXML.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fctXML)).BeginInit();
+            this.pnlXMLUpper.SuspendLayout();
+            this.pnlEditDesign.SuspendLayout();
             this.gbXMLData.SuspendLayout();
             this.dbDataSchema.SuspendLayout();
             this.tabPageDataSelect.SuspendLayout();
@@ -118,29 +123,24 @@
             this.gbType.SuspendLayout();
             this.gbDateName.SuspendLayout();
             this.gbStatement.SuspendLayout();
-            this.pnlUpperCreateStatements.SuspendLayout();
+            this.pnlCreateStatementsUpper.SuspendLayout();
             this.gbNewDataXLS.SuspendLayout();
             this.gbNewDataXML.SuspendLayout();
             this.gbReportFileNew.SuspendLayout();
             this.gbDesignOptions.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.report1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fctXSD)).BeginInit();
-            this.pnlUpperXSD.SuspendLayout();
-            this.tabPageXML.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fctXML)).BeginInit();
-            this.pnlXMLUpper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1272, 42);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1272, 42);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsClose
             // 
@@ -155,6 +155,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_previous22x;
@@ -167,6 +168,9 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 90;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -181,7 +185,6 @@
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "Formular schließen";
             this.hsClose.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -225,6 +228,7 @@
             this.hsXMLReport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsXMLReport.FlatAppearance.BorderSize = 0;
             this.hsXMLReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsXMLReport.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsXMLReport.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsXMLReport.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsXMLReport.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -237,6 +241,9 @@
             this.hsXMLReport.MarkMode = false;
             this.hsXMLReport.Name = "hsXMLReport";
             this.hsXMLReport.NonMarkedText = "";
+            this.hsXMLReport.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsXMLReport.ShortcutNewline = false;
+            this.hsXMLReport.ShowShortcut = false;
             this.hsXMLReport.Size = new System.Drawing.Size(28, 21);
             this.hsXMLReport.TabIndex = 89;
             this.hsXMLReport.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -251,7 +258,6 @@
             this.hsXMLReport.ToolTipIsBallon = false;
             this.hsXMLReport.ToolTipOwnerDraw = false;
             this.hsXMLReport.ToolTipReshowDelay = 100;
-            
             this.hsXMLReport.ToolTipShowAlways = false;
             this.hsXMLReport.ToolTipText = "Drucken";
             this.hsXMLReport.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -273,6 +279,7 @@
             this.hsReportFileWahl.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsReportFileWahl.FlatAppearance.BorderSize = 0;
             this.hsReportFileWahl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsReportFileWahl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsReportFileWahl.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsReportFileWahl.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsReportFileWahl.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -285,6 +292,9 @@
             this.hsReportFileWahl.MarkMode = false;
             this.hsReportFileWahl.Name = "hsReportFileWahl";
             this.hsReportFileWahl.NonMarkedText = "";
+            this.hsReportFileWahl.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsReportFileWahl.ShortcutNewline = false;
+            this.hsReportFileWahl.ShowShortcut = false;
             this.hsReportFileWahl.Size = new System.Drawing.Size(28, 21);
             this.hsReportFileWahl.TabIndex = 88;
             this.hsReportFileWahl.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -299,7 +309,6 @@
             this.hsReportFileWahl.ToolTipIsBallon = false;
             this.hsReportFileWahl.ToolTipOwnerDraw = false;
             this.hsReportFileWahl.ToolTipReshowDelay = 100;
-            
             this.hsReportFileWahl.ToolTipShowAlways = false;
             this.hsReportFileWahl.ToolTipText = "Drucken";
             this.hsReportFileWahl.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -322,7 +331,7 @@
             // tabEditDesign
             // 
             this.tabEditDesign.Controls.Add(this.tabControlEditDesign);
-            this.tabEditDesign.Controls.Add(this.pnlUpperEditDesign);
+            this.tabEditDesign.Controls.Add(this.pnlEditDesign);
             this.tabEditDesign.Location = new System.Drawing.Point(4, 22);
             this.tabEditDesign.Name = "tabEditDesign";
             this.tabEditDesign.Padding = new System.Windows.Forms.Padding(3);
@@ -374,18 +383,19 @@
             this.fctFRX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctFRX.CharHeight = 14;
             this.fctFRX.CharWidth = 8;
-            this.fctFRX.CommentPrefix = "--";
+            this.fctFRX.CommentPrefix = null;
             this.fctFRX.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctFRX.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctFRX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctFRX.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctFRX.IsReplaceMode = false;
             this.fctFRX.Language = FastColoredTextBoxNS.Language.XML;
-            this.fctFRX.LeftBracket = '(';
+            this.fctFRX.LeftBracket = '<';
+            this.fctFRX.LeftBracket2 = '(';
             this.fctFRX.Location = new System.Drawing.Point(3, 56);
             this.fctFRX.Name = "fctFRX";
             this.fctFRX.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctFRX.RightBracket = ')';
+            this.fctFRX.RightBracket = '>';
+            this.fctFRX.RightBracket2 = ')';
             this.fctFRX.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctFRX.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctFRX.ServiceColors")));
             this.fctFRX.Size = new System.Drawing.Size(1244, 435);
@@ -414,6 +424,7 @@
             this.hsSaveFRX.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSaveFRX.FlatAppearance.BorderSize = 0;
             this.hsSaveFRX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveFRX.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveFRX.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsSaveFRX.Image = global::FBXpert.Properties.Resources.floppy_x24;
             this.hsSaveFRX.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
@@ -426,6 +437,9 @@
             this.hsSaveFRX.MarkMode = false;
             this.hsSaveFRX.Name = "hsSaveFRX";
             this.hsSaveFRX.NonMarkedText = "Save";
+            this.hsSaveFRX.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveFRX.ShortcutNewline = false;
+            this.hsSaveFRX.ShowShortcut = false;
             this.hsSaveFRX.Size = new System.Drawing.Size(61, 53);
             this.hsSaveFRX.TabIndex = 91;
             this.hsSaveFRX.Text = "Save";
@@ -441,7 +455,6 @@
             this.hsSaveFRX.ToolTipIsBallon = false;
             this.hsSaveFRX.ToolTipOwnerDraw = false;
             this.hsSaveFRX.ToolTipReshowDelay = 100;
-            
             this.hsSaveFRX.ToolTipShowAlways = false;
             this.hsSaveFRX.ToolTipText = "Formular schließen";
             this.hsSaveFRX.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -453,7 +466,7 @@
             // tabPageXSD
             // 
             this.tabPageXSD.Controls.Add(this.fctXSD);
-            this.tabPageXSD.Controls.Add(this.pnlUpperXSD);
+            this.tabPageXSD.Controls.Add(this.pnlXSDUpper);
             this.tabPageXSD.Location = new System.Drawing.Point(4, 22);
             this.tabPageXSD.Name = "tabPageXSD";
             this.tabPageXSD.Padding = new System.Windows.Forms.Padding(3);
@@ -462,18 +475,230 @@
             this.tabPageXSD.Text = "FastReport Schema (XSD)";
             this.tabPageXSD.UseVisualStyleBackColor = true;
             // 
-            // pnlUpperEditDesign
+            // fctXSD
             // 
-            this.pnlUpperEditDesign.Controls.Add(this.hsDesignEdit);
-            this.pnlUpperEditDesign.Controls.Add(this.hsBlankReport);
-            this.pnlUpperEditDesign.Controls.Add(this.gpRepoertFileName);
-            this.pnlUpperEditDesign.Controls.Add(this.gbXMLData);
-            this.pnlUpperEditDesign.Controls.Add(this.dbDataSchema);
-            this.pnlUpperEditDesign.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperEditDesign.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperEditDesign.Name = "pnlUpperEditDesign";
-            this.pnlUpperEditDesign.Size = new System.Drawing.Size(1258, 150);
-            this.pnlUpperEditDesign.TabIndex = 99;
+            this.fctXSD.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctXSD.AutoIndentCharsPatterns = "";
+            this.fctXSD.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXSD.BackBrush = null;
+            this.fctXSD.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctXSD.CharHeight = 14;
+            this.fctXSD.CharWidth = 8;
+            this.fctXSD.CommentPrefix = null;
+            this.fctXSD.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctXSD.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctXSD.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXSD.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctXSD.IsReplaceMode = false;
+            this.fctXSD.Language = FastColoredTextBoxNS.Language.XML;
+            this.fctXSD.LeftBracket = '<';
+            this.fctXSD.LeftBracket2 = '(';
+            this.fctXSD.Location = new System.Drawing.Point(3, 56);
+            this.fctXSD.Name = "fctXSD";
+            this.fctXSD.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctXSD.RightBracket = '>';
+            this.fctXSD.RightBracket2 = ')';
+            this.fctXSD.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctXSD.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXSD.ServiceColors")));
+            this.fctXSD.Size = new System.Drawing.Size(1244, 435);
+            this.fctXSD.TabIndex = 6;
+            this.fctXSD.Zoom = 100;
+            // 
+            // pnlXSDUpper
+            // 
+            this.pnlXSDUpper.Controls.Add(this.hsSaveXSD);
+            this.pnlXSDUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXSDUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXSDUpper.Name = "pnlXSDUpper";
+            this.pnlXSDUpper.Size = new System.Drawing.Size(1244, 53);
+            this.pnlXSDUpper.TabIndex = 7;
+            // 
+            // hsSaveXSD
+            // 
+            this.hsSaveXSD.BackColor = System.Drawing.Color.Transparent;
+            this.hsSaveXSD.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveXSD.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveXSD.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSaveXSD.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSaveXSD.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSaveXSD.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSaveXSD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsSaveXSD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSaveXSD.FlatAppearance.BorderSize = 0;
+            this.hsSaveXSD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveXSD.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSaveXSD.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsSaveXSD.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.hsSaveXSD.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
+            this.hsSaveXSD.ImageToggleOnSelect = false;
+            this.hsSaveXSD.Location = new System.Drawing.Point(0, 0);
+            this.hsSaveXSD.Marked = false;
+            this.hsSaveXSD.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSaveXSD.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSaveXSD.MarkedText = "";
+            this.hsSaveXSD.MarkMode = false;
+            this.hsSaveXSD.Name = "hsSaveXSD";
+            this.hsSaveXSD.NonMarkedText = "Save";
+            this.hsSaveXSD.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXSD.ShortcutNewline = false;
+            this.hsSaveXSD.ShowShortcut = false;
+            this.hsSaveXSD.Size = new System.Drawing.Size(61, 53);
+            this.hsSaveXSD.TabIndex = 91;
+            this.hsSaveXSD.Text = "Save";
+            this.hsSaveXSD.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSaveXSD.ToolTipActive = false;
+            this.hsSaveXSD.ToolTipAutomaticDelay = 500;
+            this.hsSaveXSD.ToolTipAutoPopDelay = 5000;
+            this.hsSaveXSD.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSaveXSD.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSaveXSD.ToolTipFor4ContextMenu = true;
+            this.hsSaveXSD.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSaveXSD.ToolTipInitialDelay = 500;
+            this.hsSaveXSD.ToolTipIsBallon = false;
+            this.hsSaveXSD.ToolTipOwnerDraw = false;
+            this.hsSaveXSD.ToolTipReshowDelay = 100;
+            this.hsSaveXSD.ToolTipShowAlways = false;
+            this.hsSaveXSD.ToolTipText = "Formular schließen";
+            this.hsSaveXSD.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsSaveXSD.ToolTipTitle = "";
+            this.hsSaveXSD.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSaveXSD.UseVisualStyleBackColor = true;
+            this.hsSaveXSD.Click += new System.EventHandler(this.hsSaveXSD_Click);
+            // 
+            // tabPageXML
+            // 
+            this.tabPageXML.Controls.Add(this.fctXML);
+            this.tabPageXML.Controls.Add(this.pnlXMLUpper);
+            this.tabPageXML.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXML.Name = "tabPageXML";
+            this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageXML.Size = new System.Drawing.Size(1250, 494);
+            this.tabPageXML.TabIndex = 2;
+            this.tabPageXML.Text = "FastReport Datas (XML)";
+            this.tabPageXML.UseVisualStyleBackColor = true;
+            // 
+            // fctXML
+            // 
+            this.fctXML.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.fctXML.AutoIndentCharsPatterns = "";
+            this.fctXML.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXML.BackBrush = null;
+            this.fctXML.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctXML.CharHeight = 14;
+            this.fctXML.CharWidth = 8;
+            this.fctXML.CommentPrefix = null;
+            this.fctXML.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.fctXML.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.fctXML.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctXML.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctXML.IsReplaceMode = false;
+            this.fctXML.Language = FastColoredTextBoxNS.Language.XML;
+            this.fctXML.LeftBracket = '<';
+            this.fctXML.LeftBracket2 = '(';
+            this.fctXML.Location = new System.Drawing.Point(3, 56);
+            this.fctXML.Name = "fctXML";
+            this.fctXML.Paddings = new System.Windows.Forms.Padding(0);
+            this.fctXML.RightBracket = '>';
+            this.fctXML.RightBracket2 = ')';
+            this.fctXML.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.fctXML.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXML.ServiceColors")));
+            this.fctXML.Size = new System.Drawing.Size(1244, 435);
+            this.fctXML.TabIndex = 8;
+            this.fctXML.Zoom = 100;
+            // 
+            // pnlXMLUpper
+            // 
+            this.pnlXMLUpper.Controls.Add(this.hsSaveXML);
+            this.pnlXMLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLUpper.Name = "pnlXMLUpper";
+            this.pnlXMLUpper.Size = new System.Drawing.Size(1244, 53);
+            this.pnlXMLUpper.TabIndex = 9;
+            // 
+            // hsSaveXML
+            // 
+            this.hsSaveXML.BackColor = System.Drawing.Color.Transparent;
+            this.hsSaveXML.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveXML.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSaveXML.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSaveXML.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSaveXML.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSaveXML.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSaveXML.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsSaveXML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSaveXML.FlatAppearance.BorderSize = 0;
+            this.hsSaveXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSaveXML.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSaveXML.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsSaveXML.Image = global::FBXpert.Properties.Resources.floppy_x24;
+            this.hsSaveXML.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
+            this.hsSaveXML.ImageToggleOnSelect = false;
+            this.hsSaveXML.Location = new System.Drawing.Point(0, 0);
+            this.hsSaveXML.Marked = false;
+            this.hsSaveXML.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSaveXML.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSaveXML.MarkedText = "";
+            this.hsSaveXML.MarkMode = false;
+            this.hsSaveXML.Name = "hsSaveXML";
+            this.hsSaveXML.NonMarkedText = "Save";
+            this.hsSaveXML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXML.ShortcutNewline = false;
+            this.hsSaveXML.ShowShortcut = false;
+            this.hsSaveXML.Size = new System.Drawing.Size(61, 53);
+            this.hsSaveXML.TabIndex = 91;
+            this.hsSaveXML.Text = "Save";
+            this.hsSaveXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSaveXML.ToolTipActive = false;
+            this.hsSaveXML.ToolTipAutomaticDelay = 500;
+            this.hsSaveXML.ToolTipAutoPopDelay = 5000;
+            this.hsSaveXML.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSaveXML.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSaveXML.ToolTipFor4ContextMenu = true;
+            this.hsSaveXML.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSaveXML.ToolTipInitialDelay = 500;
+            this.hsSaveXML.ToolTipIsBallon = false;
+            this.hsSaveXML.ToolTipOwnerDraw = false;
+            this.hsSaveXML.ToolTipReshowDelay = 100;
+            this.hsSaveXML.ToolTipShowAlways = false;
+            this.hsSaveXML.ToolTipText = "Formular schließen";
+            this.hsSaveXML.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsSaveXML.ToolTipTitle = "";
+            this.hsSaveXML.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSaveXML.UseVisualStyleBackColor = true;
+            this.hsSaveXML.Click += new System.EventHandler(this.hsSaveXML_Click);
+            // 
+            // pnlEditDesign
+            // 
+            this.pnlEditDesign.Controls.Add(this.hsDesignEdit);
+            this.pnlEditDesign.Controls.Add(this.hsBlankReport);
+            this.pnlEditDesign.Controls.Add(this.gpRepoertFileName);
+            this.pnlEditDesign.Controls.Add(this.gbXMLData);
+            this.pnlEditDesign.Controls.Add(this.dbDataSchema);
+            this.pnlEditDesign.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlEditDesign.Location = new System.Drawing.Point(3, 3);
+            this.pnlEditDesign.Name = "pnlEditDesign";
+            this.pnlEditDesign.Size = new System.Drawing.Size(1258, 150);
+            this.pnlEditDesign.TabIndex = 99;
             // 
             // hsDesignEdit
             // 
@@ -487,6 +712,7 @@
             this.hsDesignEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsDesignEdit.FlatAppearance.BorderSize = 0;
             this.hsDesignEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDesignEdit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsDesignEdit.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsDesignEdit.Image = global::FBXpert.Properties.Resources.documents_blue_x32;
             this.hsDesignEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -500,6 +726,9 @@
             this.hsDesignEdit.MarkMode = false;
             this.hsDesignEdit.Name = "hsDesignEdit";
             this.hsDesignEdit.NonMarkedText = "Edit report";
+            this.hsDesignEdit.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDesignEdit.ShortcutNewline = false;
+            this.hsDesignEdit.ShowShortcut = false;
             this.hsDesignEdit.Size = new System.Drawing.Size(89, 55);
             this.hsDesignEdit.TabIndex = 94;
             this.hsDesignEdit.Text = "Edit report";
@@ -515,7 +744,6 @@
             this.hsDesignEdit.ToolTipIsBallon = false;
             this.hsDesignEdit.ToolTipOwnerDraw = false;
             this.hsDesignEdit.ToolTipReshowDelay = 100;
-            
             this.hsDesignEdit.ToolTipShowAlways = false;
             this.hsDesignEdit.ToolTipText = "";
             this.hsDesignEdit.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -536,6 +764,7 @@
             this.hsBlankReport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsBlankReport.FlatAppearance.BorderSize = 0;
             this.hsBlankReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsBlankReport.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsBlankReport.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsBlankReport.Image = global::FBXpert.Properties.Resources.documents_blue_x32;
             this.hsBlankReport.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -549,6 +778,9 @@
             this.hsBlankReport.MarkMode = false;
             this.hsBlankReport.Name = "hsBlankReport";
             this.hsBlankReport.NonMarkedText = "Blank report";
+            this.hsBlankReport.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsBlankReport.ShortcutNewline = false;
+            this.hsBlankReport.ShowShortcut = false;
             this.hsBlankReport.Size = new System.Drawing.Size(89, 56);
             this.hsBlankReport.TabIndex = 95;
             this.hsBlankReport.Text = "Blank report";
@@ -564,7 +796,6 @@
             this.hsBlankReport.ToolTipIsBallon = false;
             this.hsBlankReport.ToolTipOwnerDraw = false;
             this.hsBlankReport.ToolTipReshowDelay = 100;
-            
             this.hsBlankReport.ToolTipShowAlways = false;
             this.hsBlankReport.ToolTipText = "";
             this.hsBlankReport.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -608,6 +839,7 @@
             this.hsEditXMLData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsEditXMLData.FlatAppearance.BorderSize = 0;
             this.hsEditXMLData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsEditXMLData.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsEditXMLData.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsEditXMLData.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsEditXMLData.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -620,6 +852,9 @@
             this.hsEditXMLData.MarkMode = false;
             this.hsEditXMLData.Name = "hsEditXMLData";
             this.hsEditXMLData.NonMarkedText = "";
+            this.hsEditXMLData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditXMLData.ShortcutNewline = false;
+            this.hsEditXMLData.ShowShortcut = false;
             this.hsEditXMLData.Size = new System.Drawing.Size(28, 21);
             this.hsEditXMLData.TabIndex = 90;
             this.hsEditXMLData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -634,7 +869,6 @@
             this.hsEditXMLData.ToolTipIsBallon = false;
             this.hsEditXMLData.ToolTipOwnerDraw = false;
             this.hsEditXMLData.ToolTipReshowDelay = 100;
-            
             this.hsEditXMLData.ToolTipShowAlways = false;
             this.hsEditXMLData.ToolTipText = "Drucken";
             this.hsEditXMLData.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -656,6 +890,7 @@
             this.hsLoadXMLDataFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadXMLDataFile.FlatAppearance.BorderSize = 0;
             this.hsLoadXMLDataFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadXMLDataFile.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadXMLDataFile.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsLoadXMLDataFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadXMLDataFile.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -668,6 +903,9 @@
             this.hsLoadXMLDataFile.MarkMode = false;
             this.hsLoadXMLDataFile.Name = "hsLoadXMLDataFile";
             this.hsLoadXMLDataFile.NonMarkedText = "";
+            this.hsLoadXMLDataFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadXMLDataFile.ShortcutNewline = false;
+            this.hsLoadXMLDataFile.ShowShortcut = false;
             this.hsLoadXMLDataFile.Size = new System.Drawing.Size(28, 21);
             this.hsLoadXMLDataFile.TabIndex = 88;
             this.hsLoadXMLDataFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -682,7 +920,6 @@
             this.hsLoadXMLDataFile.ToolTipIsBallon = false;
             this.hsLoadXMLDataFile.ToolTipOwnerDraw = false;
             this.hsLoadXMLDataFile.ToolTipReshowDelay = 100;
-            
             this.hsLoadXMLDataFile.ToolTipShowAlways = false;
             this.hsLoadXMLDataFile.ToolTipText = "Drucken";
             this.hsLoadXMLDataFile.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -726,6 +963,7 @@
             this.hsEditXSDData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsEditXSDData.FlatAppearance.BorderSize = 0;
             this.hsEditXSDData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsEditXSDData.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsEditXSDData.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsEditXSDData.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsEditXSDData.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -738,6 +976,9 @@
             this.hsEditXSDData.MarkMode = false;
             this.hsEditXSDData.Name = "hsEditXSDData";
             this.hsEditXSDData.NonMarkedText = "";
+            this.hsEditXSDData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsEditXSDData.ShortcutNewline = false;
+            this.hsEditXSDData.ShowShortcut = false;
             this.hsEditXSDData.Size = new System.Drawing.Size(28, 21);
             this.hsEditXSDData.TabIndex = 90;
             this.hsEditXSDData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -752,7 +993,6 @@
             this.hsEditXSDData.ToolTipIsBallon = false;
             this.hsEditXSDData.ToolTipOwnerDraw = false;
             this.hsEditXSDData.ToolTipReshowDelay = 100;
-            
             this.hsEditXSDData.ToolTipShowAlways = false;
             this.hsEditXSDData.ToolTipText = "Drucken";
             this.hsEditXSDData.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -774,6 +1014,7 @@
             this.hsLoadSchemaFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsLoadSchemaFile.FlatAppearance.BorderSize = 0;
             this.hsLoadSchemaFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLoadSchemaFile.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsLoadSchemaFile.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsLoadSchemaFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadSchemaFile.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -786,6 +1027,9 @@
             this.hsLoadSchemaFile.MarkMode = false;
             this.hsLoadSchemaFile.Name = "hsLoadSchemaFile";
             this.hsLoadSchemaFile.NonMarkedText = "";
+            this.hsLoadSchemaFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSchemaFile.ShortcutNewline = false;
+            this.hsLoadSchemaFile.ShowShortcut = false;
             this.hsLoadSchemaFile.Size = new System.Drawing.Size(28, 21);
             this.hsLoadSchemaFile.TabIndex = 88;
             this.hsLoadSchemaFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -800,7 +1044,6 @@
             this.hsLoadSchemaFile.ToolTipIsBallon = false;
             this.hsLoadSchemaFile.ToolTipOwnerDraw = false;
             this.hsLoadSchemaFile.ToolTipReshowDelay = 100;
-            
             this.hsLoadSchemaFile.ToolTipShowAlways = false;
             this.hsLoadSchemaFile.ToolTipText = "Drucken";
             this.hsLoadSchemaFile.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -812,11 +1055,11 @@
             // tabPageDataSelect
             // 
             this.tabPageDataSelect.Controls.Add(this.gbCreateStatements);
-            this.tabPageDataSelect.Controls.Add(this.pnlUpperCreateStatements);
+            this.tabPageDataSelect.Controls.Add(this.pnlCreateStatementsUpper);
             this.tabPageDataSelect.Location = new System.Drawing.Point(4, 22);
             this.tabPageDataSelect.Name = "tabPageDataSelect";
             this.tabPageDataSelect.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDataSelect.Size = new System.Drawing.Size(1264, 662);
+            this.tabPageDataSelect.Size = new System.Drawing.Size(1264, 676);
             this.tabPageDataSelect.TabIndex = 0;
             this.tabPageDataSelect.Text = "Create data and design";
             this.tabPageDataSelect.UseVisualStyleBackColor = true;
@@ -828,7 +1071,7 @@
             this.gbCreateStatements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCreateStatements.Location = new System.Drawing.Point(3, 175);
             this.gbCreateStatements.Name = "gbCreateStatements";
-            this.gbCreateStatements.Size = new System.Drawing.Size(1258, 484);
+            this.gbCreateStatements.Size = new System.Drawing.Size(1258, 498);
             this.gbCreateStatements.TabIndex = 0;
             this.gbCreateStatements.TabStop = false;
             this.gbCreateStatements.Text = "Create statements";
@@ -841,7 +1084,7 @@
             this.pnlBottomCreateStatements.Controls.Add(this.hsAddStatement);
             this.pnlBottomCreateStatements.Controls.Add(this.hsRemoveStatement);
             this.pnlBottomCreateStatements.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottomCreateStatements.Location = new System.Drawing.Point(3, 425);
+            this.pnlBottomCreateStatements.Location = new System.Drawing.Point(3, 439);
             this.pnlBottomCreateStatements.Name = "pnlBottomCreateStatements";
             this.pnlBottomCreateStatements.Size = new System.Drawing.Size(1252, 56);
             this.pnlBottomCreateStatements.TabIndex = 2;
@@ -923,6 +1166,7 @@
             this.hsAddStatement.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsAddStatement.FlatAppearance.BorderSize = 0;
             this.hsAddStatement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddStatement.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsAddStatement.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsAddStatement.Image = global::FBXpert.Properties.Resources.plus_gn32x;
             this.hsAddStatement.ImageHover = global::FBXpert.Properties.Resources.plus_blue32x;
@@ -935,6 +1179,9 @@
             this.hsAddStatement.MarkMode = false;
             this.hsAddStatement.Name = "hsAddStatement";
             this.hsAddStatement.NonMarkedText = "";
+            this.hsAddStatement.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddStatement.ShortcutNewline = false;
+            this.hsAddStatement.ShowShortcut = false;
             this.hsAddStatement.Size = new System.Drawing.Size(68, 56);
             this.hsAddStatement.TabIndex = 87;
             this.hsAddStatement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -949,7 +1196,6 @@
             this.hsAddStatement.ToolTipIsBallon = false;
             this.hsAddStatement.ToolTipOwnerDraw = false;
             this.hsAddStatement.ToolTipReshowDelay = 100;
-            
             this.hsAddStatement.ToolTipShowAlways = false;
             this.hsAddStatement.ToolTipText = "";
             this.hsAddStatement.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -971,6 +1217,7 @@
             this.hsRemoveStatement.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRemoveStatement.FlatAppearance.BorderSize = 0;
             this.hsRemoveStatement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemoveStatement.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRemoveStatement.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsRemoveStatement.Image = global::FBXpert.Properties.Resources.minus_gn32x;
             this.hsRemoveStatement.ImageHover = global::FBXpert.Properties.Resources.minus_blau32x;
@@ -983,6 +1230,9 @@
             this.hsRemoveStatement.MarkMode = false;
             this.hsRemoveStatement.Name = "hsRemoveStatement";
             this.hsRemoveStatement.NonMarkedText = "";
+            this.hsRemoveStatement.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveStatement.ShortcutNewline = false;
+            this.hsRemoveStatement.ShowShortcut = false;
             this.hsRemoveStatement.Size = new System.Drawing.Size(63, 56);
             this.hsRemoveStatement.TabIndex = 89;
             this.hsRemoveStatement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -997,7 +1247,6 @@
             this.hsRemoveStatement.ToolTipIsBallon = false;
             this.hsRemoveStatement.ToolTipOwnerDraw = false;
             this.hsRemoveStatement.ToolTipReshowDelay = 100;
-            
             this.hsRemoveStatement.ToolTipShowAlways = false;
             this.hsRemoveStatement.ToolTipText = "";
             this.hsRemoveStatement.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1018,10 +1267,11 @@
             this.lvCreateStatements.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvCreateStatements.FullRowSelect = true;
             this.lvCreateStatements.GridLines = true;
+            this.lvCreateStatements.HideSelection = false;
             this.lvCreateStatements.Location = new System.Drawing.Point(3, 16);
             this.lvCreateStatements.MultiSelect = false;
             this.lvCreateStatements.Name = "lvCreateStatements";
-            this.lvCreateStatements.Size = new System.Drawing.Size(1252, 465);
+            this.lvCreateStatements.Size = new System.Drawing.Size(1252, 479);
             this.lvCreateStatements.TabIndex = 0;
             this.lvCreateStatements.UseCompatibleStateImageBehavior = false;
             this.lvCreateStatements.View = System.Windows.Forms.View.Details;
@@ -1042,17 +1292,17 @@
             this.colDataName.Text = "Data name";
             this.colDataName.Width = 254;
             // 
-            // pnlUpperCreateStatements
+            // pnlCreateStatementsUpper
             // 
-            this.pnlUpperCreateStatements.Controls.Add(this.gbNewDataXLS);
-            this.pnlUpperCreateStatements.Controls.Add(this.gbNewDataXML);
-            this.pnlUpperCreateStatements.Controls.Add(this.gbReportFileNew);
-            this.pnlUpperCreateStatements.Controls.Add(this.gbDesignOptions);
-            this.pnlUpperCreateStatements.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperCreateStatements.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperCreateStatements.Name = "pnlUpperCreateStatements";
-            this.pnlUpperCreateStatements.Size = new System.Drawing.Size(1258, 172);
-            this.pnlUpperCreateStatements.TabIndex = 1;
+            this.pnlCreateStatementsUpper.Controls.Add(this.gbNewDataXLS);
+            this.pnlCreateStatementsUpper.Controls.Add(this.gbNewDataXML);
+            this.pnlCreateStatementsUpper.Controls.Add(this.gbReportFileNew);
+            this.pnlCreateStatementsUpper.Controls.Add(this.gbDesignOptions);
+            this.pnlCreateStatementsUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCreateStatementsUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlCreateStatementsUpper.Name = "pnlCreateStatementsUpper";
+            this.pnlCreateStatementsUpper.Size = new System.Drawing.Size(1258, 172);
+            this.pnlCreateStatementsUpper.TabIndex = 1;
             // 
             // gbNewDataXLS
             // 
@@ -1090,6 +1340,7 @@
             this.hsDataFileNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsDataFileNew.FlatAppearance.BorderSize = 0;
             this.hsDataFileNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDataFileNew.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsDataFileNew.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsDataFileNew.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsDataFileNew.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -1102,6 +1353,9 @@
             this.hsDataFileNew.MarkMode = false;
             this.hsDataFileNew.Name = "hsDataFileNew";
             this.hsDataFileNew.NonMarkedText = "";
+            this.hsDataFileNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDataFileNew.ShortcutNewline = false;
+            this.hsDataFileNew.ShowShortcut = false;
             this.hsDataFileNew.Size = new System.Drawing.Size(28, 38);
             this.hsDataFileNew.TabIndex = 90;
             this.hsDataFileNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1116,7 +1370,6 @@
             this.hsDataFileNew.ToolTipIsBallon = false;
             this.hsDataFileNew.ToolTipOwnerDraw = false;
             this.hsDataFileNew.ToolTipReshowDelay = 100;
-            
             this.hsDataFileNew.ToolTipShowAlways = false;
             this.hsDataFileNew.ToolTipText = "Drucken";
             this.hsDataFileNew.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1138,6 +1391,7 @@
             this.hsXmlFileNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsXmlFileNew.FlatAppearance.BorderSize = 0;
             this.hsXmlFileNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsXmlFileNew.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsXmlFileNew.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsXmlFileNew.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsXmlFileNew.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1150,6 +1404,9 @@
             this.hsXmlFileNew.MarkMode = false;
             this.hsXmlFileNew.Name = "hsXmlFileNew";
             this.hsXmlFileNew.NonMarkedText = "";
+            this.hsXmlFileNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsXmlFileNew.ShortcutNewline = false;
+            this.hsXmlFileNew.ShowShortcut = false;
             this.hsXmlFileNew.Size = new System.Drawing.Size(28, 38);
             this.hsXmlFileNew.TabIndex = 88;
             this.hsXmlFileNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1164,7 +1421,6 @@
             this.hsXmlFileNew.ToolTipIsBallon = false;
             this.hsXmlFileNew.ToolTipOwnerDraw = false;
             this.hsXmlFileNew.ToolTipReshowDelay = 100;
-            
             this.hsXmlFileNew.ToolTipShowAlways = false;
             this.hsXmlFileNew.ToolTipText = "Drucken";
             this.hsXmlFileNew.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1209,6 +1465,7 @@
             this.hsReportSchemaFileNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsReportSchemaFileNew.FlatAppearance.BorderSize = 0;
             this.hsReportSchemaFileNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsReportSchemaFileNew.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsReportSchemaFileNew.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsReportSchemaFileNew.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsReportSchemaFileNew.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -1221,6 +1478,9 @@
             this.hsReportSchemaFileNew.MarkMode = false;
             this.hsReportSchemaFileNew.Name = "hsReportSchemaFileNew";
             this.hsReportSchemaFileNew.NonMarkedText = "";
+            this.hsReportSchemaFileNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsReportSchemaFileNew.ShortcutNewline = false;
+            this.hsReportSchemaFileNew.ShowShortcut = false;
             this.hsReportSchemaFileNew.Size = new System.Drawing.Size(28, 38);
             this.hsReportSchemaFileNew.TabIndex = 90;
             this.hsReportSchemaFileNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1235,7 +1495,6 @@
             this.hsReportSchemaFileNew.ToolTipIsBallon = false;
             this.hsReportSchemaFileNew.ToolTipOwnerDraw = false;
             this.hsReportSchemaFileNew.ToolTipReshowDelay = 100;
-            
             this.hsReportSchemaFileNew.ToolTipShowAlways = false;
             this.hsReportSchemaFileNew.ToolTipText = "Drucken";
             this.hsReportSchemaFileNew.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1257,6 +1516,7 @@
             this.hsSchemaFileNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsSchemaFileNew.FlatAppearance.BorderSize = 0;
             this.hsSchemaFileNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSchemaFileNew.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSchemaFileNew.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsSchemaFileNew.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsSchemaFileNew.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1269,6 +1529,9 @@
             this.hsSchemaFileNew.MarkMode = false;
             this.hsSchemaFileNew.Name = "hsSchemaFileNew";
             this.hsSchemaFileNew.NonMarkedText = "";
+            this.hsSchemaFileNew.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSchemaFileNew.ShortcutNewline = false;
+            this.hsSchemaFileNew.ShowShortcut = false;
             this.hsSchemaFileNew.Size = new System.Drawing.Size(28, 38);
             this.hsSchemaFileNew.TabIndex = 88;
             this.hsSchemaFileNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1283,7 +1546,6 @@
             this.hsSchemaFileNew.ToolTipIsBallon = false;
             this.hsSchemaFileNew.ToolTipOwnerDraw = false;
             this.hsSchemaFileNew.ToolTipReshowDelay = 100;
-            
             this.hsSchemaFileNew.ToolTipShowAlways = false;
             this.hsSchemaFileNew.ToolTipText = "Drucken";
             this.hsSchemaFileNew.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1328,6 +1590,7 @@
             this.hsReportFileNewEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsReportFileNewEdit.FlatAppearance.BorderSize = 0;
             this.hsReportFileNewEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsReportFileNewEdit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsReportFileNewEdit.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsReportFileNewEdit.Image = global::FBXpert.Properties.Resources.document_blue_x24;
             this.hsReportFileNewEdit.ImageHover = global::FBXpert.Properties.Resources.document_x24;
@@ -1340,6 +1603,9 @@
             this.hsReportFileNewEdit.MarkMode = false;
             this.hsReportFileNewEdit.Name = "hsReportFileNewEdit";
             this.hsReportFileNewEdit.NonMarkedText = "";
+            this.hsReportFileNewEdit.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsReportFileNewEdit.ShortcutNewline = false;
+            this.hsReportFileNewEdit.ShowShortcut = false;
             this.hsReportFileNewEdit.Size = new System.Drawing.Size(28, 35);
             this.hsReportFileNewEdit.TabIndex = 89;
             this.hsReportFileNewEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1354,7 +1620,6 @@
             this.hsReportFileNewEdit.ToolTipIsBallon = false;
             this.hsReportFileNewEdit.ToolTipOwnerDraw = false;
             this.hsReportFileNewEdit.ToolTipReshowDelay = 100;
-            
             this.hsReportFileNewEdit.ToolTipShowAlways = false;
             this.hsReportFileNewEdit.ToolTipText = "Drucken";
             this.hsReportFileNewEdit.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1376,6 +1641,7 @@
             this.hsNewReportFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsNewReportFile.FlatAppearance.BorderSize = 0;
             this.hsNewReportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsNewReportFile.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsNewReportFile.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsNewReportFile.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsNewReportFile.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
@@ -1388,6 +1654,9 @@
             this.hsNewReportFile.MarkMode = false;
             this.hsNewReportFile.Name = "hsNewReportFile";
             this.hsNewReportFile.NonMarkedText = "";
+            this.hsNewReportFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsNewReportFile.ShortcutNewline = false;
+            this.hsNewReportFile.ShowShortcut = false;
             this.hsNewReportFile.Size = new System.Drawing.Size(28, 35);
             this.hsNewReportFile.TabIndex = 88;
             this.hsNewReportFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1402,7 +1671,6 @@
             this.hsNewReportFile.ToolTipIsBallon = false;
             this.hsNewReportFile.ToolTipOwnerDraw = false;
             this.hsNewReportFile.ToolTipReshowDelay = 100;
-            
             this.hsNewReportFile.ToolTipShowAlways = false;
             this.hsNewReportFile.ToolTipText = "Drucken";
             this.hsNewReportFile.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1444,6 +1712,7 @@
             this.hsCreateReportFiles.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreateReportFiles.FlatAppearance.BorderSize = 0;
             this.hsCreateReportFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreateReportFiles.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateReportFiles.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsCreateReportFiles.Image = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
             this.hsCreateReportFiles.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1457,6 +1726,9 @@
             this.hsCreateReportFiles.MarkMode = false;
             this.hsCreateReportFiles.Name = "hsCreateReportFiles";
             this.hsCreateReportFiles.NonMarkedText = "Create datas and report";
+            this.hsCreateReportFiles.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateReportFiles.ShortcutNewline = false;
+            this.hsCreateReportFiles.ShowShortcut = false;
             this.hsCreateReportFiles.Size = new System.Drawing.Size(147, 39);
             this.hsCreateReportFiles.TabIndex = 87;
             this.hsCreateReportFiles.Text = "Create datas and report";
@@ -1472,7 +1744,6 @@
             this.hsCreateReportFiles.ToolTipIsBallon = false;
             this.hsCreateReportFiles.ToolTipOwnerDraw = false;
             this.hsCreateReportFiles.ToolTipReshowDelay = 100;
-            
             this.hsCreateReportFiles.ToolTipShowAlways = false;
             this.hsCreateReportFiles.ToolTipText = "";
             this.hsCreateReportFiles.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1493,6 +1764,7 @@
             this.hsCreateDatas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCreateDatas.FlatAppearance.BorderSize = 0;
             this.hsCreateDatas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCreateDatas.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateDatas.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
             this.hsCreateDatas.Image = global::FBXpert.Properties.Resources.applications_execute_script_blue_22x;
             this.hsCreateDatas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1506,6 +1778,9 @@
             this.hsCreateDatas.MarkMode = false;
             this.hsCreateDatas.Name = "hsCreateDatas";
             this.hsCreateDatas.NonMarkedText = "Create datas only";
+            this.hsCreateDatas.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateDatas.ShortcutNewline = false;
+            this.hsCreateDatas.ShowShortcut = false;
             this.hsCreateDatas.Size = new System.Drawing.Size(151, 39);
             this.hsCreateDatas.TabIndex = 88;
             this.hsCreateDatas.Text = "Create datas only";
@@ -1521,7 +1796,6 @@
             this.hsCreateDatas.ToolTipIsBallon = false;
             this.hsCreateDatas.ToolTipOwnerDraw = false;
             this.hsCreateDatas.ToolTipReshowDelay = 100;
-            
             this.hsCreateDatas.ToolTipShowAlways = false;
             this.hsCreateDatas.ToolTipText = "";
             this.hsCreateDatas.ToolTipTextColor = System.Drawing.Color.Blue;
@@ -1567,206 +1841,6 @@
             this.report1.NeedRefresh = false;
             this.report1.ReportResourceString = resources.GetString("report1.ReportResourceString");
             // 
-            // fctXSD
-            // 
-            this.fctXSD.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctXSD.AutoIndentCharsPatterns = "";
-            this.fctXSD.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            this.fctXSD.BackBrush = null;
-            this.fctXSD.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctXSD.CharHeight = 14;
-            this.fctXSD.CharWidth = 8;
-            this.fctXSD.CommentPrefix = "--";
-            this.fctXSD.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctXSD.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctXSD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXSD.IsReplaceMode = false;
-            this.fctXSD.Language = FastColoredTextBoxNS.Language.XML;
-            this.fctXSD.LeftBracket = '(';
-            this.fctXSD.Location = new System.Drawing.Point(3, 56);
-            this.fctXSD.Name = "fctXSD";
-            this.fctXSD.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctXSD.RightBracket = ')';
-            this.fctXSD.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctXSD.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXSD.ServiceColors")));
-            this.fctXSD.Size = new System.Drawing.Size(1244, 435);
-            this.fctXSD.TabIndex = 6;
-            this.fctXSD.Zoom = 100;
-            // 
-            // pnlUpperXSD
-            // 
-            this.pnlUpperXSD.Controls.Add(this.hsSaveXSD);
-            this.pnlUpperXSD.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperXSD.Location = new System.Drawing.Point(3, 3);
-            this.pnlUpperXSD.Name = "pnlUpperXSD";
-            this.pnlUpperXSD.Size = new System.Drawing.Size(1244, 53);
-            this.pnlUpperXSD.TabIndex = 7;
-            // 
-            // hsSaveXSD
-            // 
-            this.hsSaveXSD.BackColor = System.Drawing.Color.Transparent;
-            this.hsSaveXSD.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSaveXSD.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSaveXSD.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSaveXSD.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSaveXSD.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSaveXSD.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSaveXSD.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsSaveXSD.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSaveXSD.FlatAppearance.BorderSize = 0;
-            this.hsSaveXSD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSaveXSD.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
-            this.hsSaveXSD.Image = global::FBXpert.Properties.Resources.floppy_x24;
-            this.hsSaveXSD.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
-            this.hsSaveXSD.ImageToggleOnSelect = false;
-            this.hsSaveXSD.Location = new System.Drawing.Point(0, 0);
-            this.hsSaveXSD.Marked = false;
-            this.hsSaveXSD.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSaveXSD.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSaveXSD.MarkedText = "";
-            this.hsSaveXSD.MarkMode = false;
-            this.hsSaveXSD.Name = "hsSaveXSD";
-            this.hsSaveXSD.NonMarkedText = "Save";
-            this.hsSaveXSD.Size = new System.Drawing.Size(61, 53);
-            this.hsSaveXSD.TabIndex = 91;
-            this.hsSaveXSD.Text = "Save";
-            this.hsSaveXSD.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSaveXSD.ToolTipActive = false;
-            this.hsSaveXSD.ToolTipAutomaticDelay = 500;
-            this.hsSaveXSD.ToolTipAutoPopDelay = 5000;
-            this.hsSaveXSD.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSaveXSD.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSaveXSD.ToolTipFor4ContextMenu = true;
-            this.hsSaveXSD.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSaveXSD.ToolTipInitialDelay = 500;
-            this.hsSaveXSD.ToolTipIsBallon = false;
-            this.hsSaveXSD.ToolTipOwnerDraw = false;
-            this.hsSaveXSD.ToolTipReshowDelay = 100;
-            
-            this.hsSaveXSD.ToolTipShowAlways = false;
-            this.hsSaveXSD.ToolTipText = "Formular schließen";
-            this.hsSaveXSD.ToolTipTextColor = System.Drawing.Color.Blue;
-            this.hsSaveXSD.ToolTipTitle = "";
-            this.hsSaveXSD.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSaveXSD.UseVisualStyleBackColor = true;
-            this.hsSaveXSD.Click += new System.EventHandler(this.hsSaveXSD_Click);
-            // 
-            // tabPageXML
-            // 
-            this.tabPageXML.Controls.Add(this.fctXML);
-            this.tabPageXML.Controls.Add(this.pnlXMLUpper);
-            this.tabPageXML.Location = new System.Drawing.Point(4, 22);
-            this.tabPageXML.Name = "tabPageXML";
-            this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXML.Size = new System.Drawing.Size(1250, 480);
-            this.tabPageXML.TabIndex = 2;
-            this.tabPageXML.Text = "FastReport Datas (XML)";
-            this.tabPageXML.UseVisualStyleBackColor = true;
-            // 
-            // fctXML
-            // 
-            this.fctXML.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.fctXML.AutoIndentCharsPatterns = "";
-            this.fctXML.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            this.fctXML.BackBrush = null;
-            this.fctXML.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fctXML.CharHeight = 14;
-            this.fctXML.CharWidth = 8;
-            this.fctXML.CommentPrefix = "--";
-            this.fctXML.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.fctXML.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctXML.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXML.IsReplaceMode = false;
-            this.fctXML.Language = FastColoredTextBoxNS.Language.XML;
-            this.fctXML.LeftBracket = '(';
-            this.fctXML.Location = new System.Drawing.Point(3, 56);
-            this.fctXML.Name = "fctXML";
-            this.fctXML.Paddings = new System.Windows.Forms.Padding(0);
-            this.fctXML.RightBracket = ')';
-            this.fctXML.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctXML.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXML.ServiceColors")));
-            this.fctXML.Size = new System.Drawing.Size(1244, 421);
-            this.fctXML.TabIndex = 8;
-            this.fctXML.Zoom = 100;
-            // 
-            // pnlXMLUpper
-            // 
-            this.pnlXMLUpper.Controls.Add(this.hsSaveXML);
-            this.pnlXMLUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXMLUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlXMLUpper.Name = "pnlXMLUpper";
-            this.pnlXMLUpper.Size = new System.Drawing.Size(1244, 53);
-            this.pnlXMLUpper.TabIndex = 9;
-            // 
-            // hsSaveXML
-            // 
-            this.hsSaveXML.BackColor = System.Drawing.Color.Transparent;
-            this.hsSaveXML.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSaveXML.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSaveXML.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSaveXML.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSaveXML.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSaveXML.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSaveXML.Dock = System.Windows.Forms.DockStyle.Left;
-            this.hsSaveXML.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSaveXML.FlatAppearance.BorderSize = 0;
-            this.hsSaveXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSaveXML.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
-            this.hsSaveXML.Image = global::FBXpert.Properties.Resources.floppy_x24;
-            this.hsSaveXML.ImageHover = global::FBXpert.Properties.Resources.floppy2_x24;
-            this.hsSaveXML.ImageToggleOnSelect = false;
-            this.hsSaveXML.Location = new System.Drawing.Point(0, 0);
-            this.hsSaveXML.Marked = false;
-            this.hsSaveXML.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSaveXML.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSaveXML.MarkedText = "";
-            this.hsSaveXML.MarkMode = false;
-            this.hsSaveXML.Name = "hsSaveXML";
-            this.hsSaveXML.NonMarkedText = "Save";
-            this.hsSaveXML.Size = new System.Drawing.Size(61, 53);
-            this.hsSaveXML.TabIndex = 91;
-            this.hsSaveXML.Text = "Save";
-            this.hsSaveXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSaveXML.ToolTipActive = false;
-            this.hsSaveXML.ToolTipAutomaticDelay = 500;
-            this.hsSaveXML.ToolTipAutoPopDelay = 5000;
-            this.hsSaveXML.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSaveXML.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSaveXML.ToolTipFor4ContextMenu = true;
-            this.hsSaveXML.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSaveXML.ToolTipInitialDelay = 500;
-            this.hsSaveXML.ToolTipIsBallon = false;
-            this.hsSaveXML.ToolTipOwnerDraw = false;
-            this.hsSaveXML.ToolTipReshowDelay = 100;
-            
-            this.hsSaveXML.ToolTipShowAlways = false;
-            this.hsSaveXML.ToolTipText = "Formular schließen";
-            this.hsSaveXML.ToolTipTextColor = System.Drawing.Color.Blue;
-            this.hsSaveXML.ToolTipTitle = "";
-            this.hsSaveXML.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSaveXML.UseVisualStyleBackColor = true;
-            this.hsSaveXML.Click += new System.EventHandler(this.hsSaveXML_Click);
-            // 
             // ReportDesignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1774,13 +1848,13 @@
             this.ClientSize = new System.Drawing.Size(1272, 754);
             this.Controls.Add(this.tabDesignControl);
             this.Controls.Add(this.pnlAllDesignUpper);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReportDesignForm";
             this.Text = "ReportDesignForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReportDesignForm_FormClosing);
             this.Load += new System.EventHandler(this.ReportDesignForm_Load);
-            this.pnlUpper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
             this.gpRepoertFileName.ResumeLayout(false);
             this.tabDesignControl.ResumeLayout(false);
             this.tabEditDesign.ResumeLayout(false);
@@ -1789,7 +1863,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.fctFRX)).EndInit();
             this.pnlFRXUpper.ResumeLayout(false);
             this.tabPageXSD.ResumeLayout(false);
-            this.pnlUpperEditDesign.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctXSD)).EndInit();
+            this.pnlXSDUpper.ResumeLayout(false);
+            this.tabPageXML.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fctXML)).EndInit();
+            this.pnlXMLUpper.ResumeLayout(false);
+            this.pnlEditDesign.ResumeLayout(false);
             this.gbXMLData.ResumeLayout(false);
             this.dbDataSchema.ResumeLayout(false);
             this.tabPageDataSelect.ResumeLayout(false);
@@ -1801,7 +1880,7 @@
             this.gbDateName.PerformLayout();
             this.gbStatement.ResumeLayout(false);
             this.gbStatement.PerformLayout();
-            this.pnlUpperCreateStatements.ResumeLayout(false);
+            this.pnlCreateStatementsUpper.ResumeLayout(false);
             this.gbNewDataXLS.ResumeLayout(false);
             this.gbNewDataXLS.PerformLayout();
             this.gbNewDataXML.ResumeLayout(false);
@@ -1811,22 +1890,17 @@
             this.gbDesignOptions.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.report1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fctXSD)).EndInit();
-            this.pnlUpperXSD.ResumeLayout(false);
-            this.tabPageXML.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fctXML)).EndInit();
-            this.pnlXMLUpper.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.TabControl tabDesignControl;
         private System.Windows.Forms.TabPage tabPageDataSelect;
         private System.Windows.Forms.TabPage tabEditDesign;
-        private System.Windows.Forms.Panel pnlUpperCreateStatements;
+        private System.Windows.Forms.Panel pnlCreateStatementsUpper;
         private SeControlsLib.HotSpot hsCreateReportFiles;
         private System.Windows.Forms.GroupBox gbCreateStatements;
         private System.Windows.Forms.ListView lvCreateStatements;
@@ -1880,12 +1954,12 @@
         private System.Windows.Forms.TabControl tabControlEditDesign;
         private System.Windows.Forms.TabPage tabPageFRX;
         private System.Windows.Forms.TabPage tabPageXSD;
-        private System.Windows.Forms.Panel pnlUpperEditDesign;
+        private System.Windows.Forms.Panel pnlEditDesign;
         private FastColoredTextBoxNS.FastColoredTextBox fctFRX;
         private System.Windows.Forms.Panel pnlFRXUpper;
         private SeControlsLib.HotSpot hsSaveFRX;
         private FastColoredTextBoxNS.FastColoredTextBox fctXSD;
-        private System.Windows.Forms.Panel pnlUpperXSD;
+        private System.Windows.Forms.Panel pnlXSDUpper;
         private SeControlsLib.HotSpot hsSaveXSD;
         private System.Windows.Forms.TabPage tabPageXML;
         private FastColoredTextBoxNS.FastColoredTextBox fctXML;

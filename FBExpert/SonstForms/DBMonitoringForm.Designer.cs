@@ -34,7 +34,7 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DBMonitoringForm));
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.gbTick = new System.Windows.Forms.GroupBox();
             this.txtTick = new System.Windows.Forms.TextBox();
             this.cbTick = new System.Windows.Forms.CheckBox();
@@ -49,7 +49,7 @@
             this.bsMonConnections = new System.Windows.Forms.BindingSource(this.components);
             this.dsMonConnections = new System.Data.DataSet();
             this.dataTable5 = new System.Data.DataTable();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMonitorConnectionsUpper = new System.Windows.Forms.Panel();
             this.hsCloseConnection = new SeControlsLib.HotSpot();
             this.cbAllConnections = new System.Windows.Forms.CheckBox();
             this.cbRefreshActiveConnections = new System.Windows.Forms.CheckBox();
@@ -60,7 +60,7 @@
             this.colOPEN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTYPE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gbTick.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlMain.SuspendLayout();
@@ -69,22 +69,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsMonConnections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsMonConnections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnlMonitorConnectionsUpper.SuspendLayout();
             this.tabPageConnections.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.gbTick);
-            this.pnlUpper.Controls.Add(this.lblTableName);
-            this.pnlUpper.Controls.Add(this.hsRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(765, 44);
-            this.pnlUpper.TabIndex = 2;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.gbTick);
+            this.pnlFormUpper.Controls.Add(this.lblTableName);
+            this.pnlFormUpper.Controls.Add(this.hsRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(765, 44);
+            this.pnlFormUpper.TabIndex = 2;
             // 
             // gbTick
             // 
@@ -134,6 +134,7 @@
             // 
             this.hsRefresh.BackColor = System.Drawing.Color.Transparent;
             this.hsRefresh.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRefresh.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsRefresh.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsRefresh.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsRefresh.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -142,6 +143,7 @@
             this.hsRefresh.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefresh.FlatAppearance.BorderSize = 0;
             this.hsRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefresh.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefresh.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefresh.Image = global::FBXpert.Properties.Resources.view_refresh32x;
             this.hsRefresh.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_32x;
@@ -154,7 +156,9 @@
             this.hsRefresh.MarkMode = false;
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
-            
+            this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShortcutNewline = false;
+            this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 44);
             this.hsRefresh.TabIndex = 1;
             this.hsRefresh.ToolTipActive = false;
@@ -168,7 +172,6 @@
             this.hsRefresh.ToolTipIsBallon = false;
             this.hsRefresh.ToolTipOwnerDraw = false;
             this.hsRefresh.ToolTipReshowDelay = 100;
-            
             this.hsRefresh.ToolTipShowAlways = false;
             this.hsRefresh.ToolTipText = "";
             this.hsRefresh.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -181,6 +184,7 @@
             // 
             this.hsClose.BackColor = System.Drawing.Color.Transparent;
             this.hsClose.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClose.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsClose.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsClose.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsClose.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -189,6 +193,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -202,7 +207,9 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
-            
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 44);
             this.hsClose.TabIndex = 0;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -217,7 +224,6 @@
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -258,7 +264,7 @@
             // tabPageMonitorConnections
             // 
             this.tabPageMonitorConnections.Controls.Add(this.dgvMonConnections);
-            this.tabPageMonitorConnections.Controls.Add(this.panel1);
+            this.tabPageMonitorConnections.Controls.Add(this.pnlMonitorConnectionsUpper);
             this.tabPageMonitorConnections.Location = new System.Drawing.Point(4, 22);
             this.tabPageMonitorConnections.Name = "tabPageMonitorConnections";
             this.tabPageMonitorConnections.Padding = new System.Windows.Forms.Padding(3);
@@ -289,13 +295,13 @@
             this.dgvMonConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMonConnections.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvMonConnections.EnableHeadersVisualStyles = false;
-            this.dgvMonConnections.Location = new System.Drawing.Point(3, 34);
+            this.dgvMonConnections.Location = new System.Drawing.Point(3, 54);
             this.dgvMonConnections.MultiSelect = false;
             this.dgvMonConnections.Name = "dgvMonConnections";
             this.dgvMonConnections.ReadOnly = true;
             this.dgvMonConnections.RowHeadersVisible = false;
             this.dgvMonConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvMonConnections.Size = new System.Drawing.Size(751, 334);
+            this.dgvMonConnections.Size = new System.Drawing.Size(751, 314);
             this.dgvMonConnections.TabIndex = 24;
             // 
             // bsMonConnections
@@ -313,23 +319,24 @@
             // 
             this.dataTable5.TableName = "Table";
             // 
-            // panel1
+            // pnlMonitorConnectionsUpper
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.hsCloseConnection);
-            this.panel1.Controls.Add(this.cbAllConnections);
-            this.panel1.Controls.Add(this.cbRefreshActiveConnections);
-            this.panel1.Controls.Add(this.hsRefreshDependenciesTo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(751, 31);
-            this.panel1.TabIndex = 23;
+            this.pnlMonitorConnectionsUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMonitorConnectionsUpper.Controls.Add(this.hsCloseConnection);
+            this.pnlMonitorConnectionsUpper.Controls.Add(this.cbAllConnections);
+            this.pnlMonitorConnectionsUpper.Controls.Add(this.cbRefreshActiveConnections);
+            this.pnlMonitorConnectionsUpper.Controls.Add(this.hsRefreshDependenciesTo);
+            this.pnlMonitorConnectionsUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMonitorConnectionsUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlMonitorConnectionsUpper.Name = "pnlMonitorConnectionsUpper";
+            this.pnlMonitorConnectionsUpper.Size = new System.Drawing.Size(751, 51);
+            this.pnlMonitorConnectionsUpper.TabIndex = 23;
             // 
             // hsCloseConnection
             // 
             this.hsCloseConnection.BackColor = System.Drawing.Color.Transparent;
             this.hsCloseConnection.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsCloseConnection.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsCloseConnection.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsCloseConnection.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsCloseConnection.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -338,6 +345,7 @@
             this.hsCloseConnection.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsCloseConnection.FlatAppearance.BorderSize = 0;
             this.hsCloseConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCloseConnection.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCloseConnection.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsCloseConnection.Image = global::FBXpert.Properties.Resources.cross_red_x20;
             this.hsCloseConnection.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -351,8 +359,10 @@
             this.hsCloseConnection.MarkMode = false;
             this.hsCloseConnection.Name = "hsCloseConnection";
             this.hsCloseConnection.NonMarkedText = "Close all Connections";
-            
-            this.hsCloseConnection.Size = new System.Drawing.Size(150, 31);
+            this.hsCloseConnection.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCloseConnection.ShortcutNewline = false;
+            this.hsCloseConnection.ShowShortcut = false;
+            this.hsCloseConnection.Size = new System.Drawing.Size(150, 51);
             this.hsCloseConnection.TabIndex = 7;
             this.hsCloseConnection.Text = "Close all Connections";
             this.hsCloseConnection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -367,7 +377,6 @@
             this.hsCloseConnection.ToolTipIsBallon = false;
             this.hsCloseConnection.ToolTipOwnerDraw = false;
             this.hsCloseConnection.ToolTipReshowDelay = 100;
-            
             this.hsCloseConnection.ToolTipShowAlways = false;
             this.hsCloseConnection.ToolTipText = "";
             this.hsCloseConnection.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -381,7 +390,7 @@
             this.cbAllConnections.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbAllConnections.Location = new System.Drawing.Point(499, 0);
             this.cbAllConnections.Name = "cbAllConnections";
-            this.cbAllConnections.Size = new System.Drawing.Size(119, 31);
+            this.cbAllConnections.Size = new System.Drawing.Size(119, 51);
             this.cbAllConnections.TabIndex = 6;
             this.cbAllConnections.Text = "All connections";
             this.cbAllConnections.UseVisualStyleBackColor = true;
@@ -395,7 +404,7 @@
             this.cbRefreshActiveConnections.Dock = System.Windows.Forms.DockStyle.Right;
             this.cbRefreshActiveConnections.Location = new System.Drawing.Point(618, 0);
             this.cbRefreshActiveConnections.Name = "cbRefreshActiveConnections";
-            this.cbRefreshActiveConnections.Size = new System.Drawing.Size(88, 31);
+            this.cbRefreshActiveConnections.Size = new System.Drawing.Size(88, 51);
             this.cbRefreshActiveConnections.TabIndex = 5;
             this.cbRefreshActiveConnections.Text = "Auto Refresh";
             this.cbRefreshActiveConnections.UseVisualStyleBackColor = true;
@@ -404,6 +413,7 @@
             // 
             this.hsRefreshDependenciesTo.BackColor = System.Drawing.Color.Transparent;
             this.hsRefreshDependenciesTo.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshDependenciesTo.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsRefreshDependenciesTo.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsRefreshDependenciesTo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsRefreshDependenciesTo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -412,6 +422,7 @@
             this.hsRefreshDependenciesTo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsRefreshDependenciesTo.FlatAppearance.BorderSize = 0;
             this.hsRefreshDependenciesTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshDependenciesTo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsRefreshDependenciesTo.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsRefreshDependenciesTo.Image = global::FBXpert.Properties.Resources.view_refresh22x;
             this.hsRefreshDependenciesTo.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
@@ -424,8 +435,10 @@
             this.hsRefreshDependenciesTo.MarkMode = false;
             this.hsRefreshDependenciesTo.Name = "hsRefreshDependenciesTo";
             this.hsRefreshDependenciesTo.NonMarkedText = "";
-            
-            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(45, 31);
+            this.hsRefreshDependenciesTo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependenciesTo.ShortcutNewline = false;
+            this.hsRefreshDependenciesTo.ShowShortcut = false;
+            this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(45, 51);
             this.hsRefreshDependenciesTo.TabIndex = 2;
             this.hsRefreshDependenciesTo.ToolTipActive = false;
             this.hsRefreshDependenciesTo.ToolTipAutomaticDelay = 500;
@@ -438,7 +451,6 @@
             this.hsRefreshDependenciesTo.ToolTipIsBallon = false;
             this.hsRefreshDependenciesTo.ToolTipOwnerDraw = false;
             this.hsRefreshDependenciesTo.ToolTipReshowDelay = 100;
-            
             this.hsRefreshDependenciesTo.ToolTipShowAlways = false;
             this.hsRefreshDependenciesTo.ToolTipText = "";
             this.hsRefreshDependenciesTo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -470,6 +482,7 @@
             this.lvConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvConnections.FullRowSelect = true;
             this.lvConnections.GridLines = true;
+            this.lvConnections.HideSelection = false;
             this.lvConnections.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
@@ -506,14 +519,14 @@
             this.ClientSize = new System.Drawing.Size(765, 459);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DBMonitoringForm";
             this.Text = "DBMonitoringForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DBMonitoringForm_FormClosing);
             this.Load += new System.EventHandler(this.DBMonitoringForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gbTick.ResumeLayout(false);
             this.gbTick.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
@@ -523,8 +536,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsMonConnections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsMonConnections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable5)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlMonitorConnectionsUpper.ResumeLayout(false);
+            this.pnlMonitorConnectionsUpper.PerformLayout();
             this.tabPageConnections.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -532,7 +545,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Label lblTableName;
         private SeControlsLib.HotSpot hsRefresh;
         private SeControlsLib.HotSpot hsClose;
@@ -545,7 +558,7 @@
         private System.Windows.Forms.BindingSource bsMonConnections;
         private System.Data.DataSet dsMonConnections;
         private System.Data.DataTable dataTable5;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMonitorConnectionsUpper;
         private SeControlsLib.HotSpot hsRefreshDependenciesTo;
         private System.Windows.Forms.GroupBox gbTick;
         private System.Windows.Forms.CheckBox cbTick;

@@ -83,18 +83,22 @@ namespace FBXpert
 
         public void Set()
         {
-            
-            if (info.Length > 0)
-                rtbInfo.Rtf = info.ToString() + post;
-            else rtbInfo.Rtf = "";
+            rtbInfo.Rtf = (info.Length > 0) ? $@"{info}{post}" : String.Empty;
         }
 
         public void SetTitle(string title)
         {
             this.Text = title;
         }
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlGStatUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void DatabaseStatisticsForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             RefreshStatistics();
             TableStatistics();
@@ -110,7 +114,7 @@ namespace FBXpert
                  this.AddLine(str);
             }
             this.Set();
-            this.SetTitle("Statistics for " + dbReg.Alias);
+            this.SetTitle($@"Statistics for {dbReg.Alias}");
         }
 
         private void hsRefreshDatabases_Click(object sender, EventArgs e)

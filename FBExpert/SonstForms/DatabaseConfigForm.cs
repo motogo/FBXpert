@@ -324,12 +324,17 @@ namespace FBExpert
             SetServerUIVisiblies();
             DoEvent = true;
         }
-             
+
+        public void SetControlSizes()
+        {
+           pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+
         private void DatabaseConfigForm_Load(object sender, EventArgs e)
         {  
             oldserver = _dbReg.Server;
-            
-            
+            SetControlSizes();
+
             FormDesign.SetFormLeft(this);
             LanguageChanged();                
             ShowCaptions();
@@ -381,8 +386,7 @@ namespace FBExpert
         {
             string _funcStr = "Connect()";
             pnlConnectState.BackColor = System.Drawing.Color.Yellow;
-            Application.DoEvents();
-            //EditToData();  
+            Application.DoEvents();  
             string lfText = string.Empty;
             try
             {

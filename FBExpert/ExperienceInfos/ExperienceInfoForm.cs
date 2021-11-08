@@ -128,8 +128,15 @@ namespace SQLView
             return ok;
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlLocalExperienceInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlExyperienceInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void ExperienceInfoForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             
             UserStart();

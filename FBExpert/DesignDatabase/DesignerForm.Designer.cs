@@ -53,7 +53,7 @@
             this.pnlDBObjectsCenter = new System.Windows.Forms.Panel();
             this.selDBObjects = new SEListBox.SEListBox();
             this.pnlDBObjectsUpper = new System.Windows.Forms.Panel();
-            this.pnlDatabaseDesignUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlUpper.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,7 +65,7 @@
             this.tabPage3.SuspendLayout();
             this.pnlDatas.SuspendLayout();
             this.pnlDBObjectsCenter.SuspendLayout();
-            this.pnlDatabaseDesignUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUpper
@@ -110,6 +110,7 @@
             this.hsSaveDesign.Name = "hsSaveDesign";
             this.hsSaveDesign.NonMarkedText = "";
             this.hsSaveDesign.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveDesign.ShortcutNewline = false;
             this.hsSaveDesign.ShowShortcut = false;
             this.hsSaveDesign.Size = new System.Drawing.Size(45, 26);
             this.hsSaveDesign.TabIndex = 9;
@@ -170,6 +171,7 @@
             this.hsRefreshStruktur.Name = "hsRefreshStruktur";
             this.hsRefreshStruktur.NonMarkedText = "";
             this.hsRefreshStruktur.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshStruktur.ShortcutNewline = false;
             this.hsRefreshStruktur.ShowShortcut = false;
             this.hsRefreshStruktur.Size = new System.Drawing.Size(45, 26);
             this.hsRefreshStruktur.TabIndex = 7;
@@ -240,6 +242,7 @@
             this.hsZoomMinus.Name = "hsZoomMinus";
             this.hsZoomMinus.NonMarkedText = "";
             this.hsZoomMinus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomMinus.ShortcutNewline = false;
             this.hsZoomMinus.ShowShortcut = false;
             this.hsZoomMinus.Size = new System.Drawing.Size(45, 14);
             this.hsZoomMinus.TabIndex = 5;
@@ -289,6 +292,7 @@
             this.hsZoomPlus.Name = "hsZoomPlus";
             this.hsZoomPlus.NonMarkedText = "";
             this.hsZoomPlus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomPlus.ShortcutNewline = false;
             this.hsZoomPlus.ShowShortcut = false;
             this.hsZoomPlus.Size = new System.Drawing.Size(45, 13);
             this.hsZoomPlus.TabIndex = 4;
@@ -338,6 +342,7 @@
             this.hsZoomDesingMinus.Name = "hsZoomDesingMinus";
             this.hsZoomDesingMinus.NonMarkedText = "";
             this.hsZoomDesingMinus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomDesingMinus.ShortcutNewline = false;
             this.hsZoomDesingMinus.ShowShortcut = false;
             this.hsZoomDesingMinus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomDesingMinus.TabIndex = 3;
@@ -387,6 +392,7 @@
             this.hsZoomCanvasPlus.Name = "hsZoomCanvasPlus";
             this.hsZoomCanvasPlus.NonMarkedText = "";
             this.hsZoomCanvasPlus.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsZoomCanvasPlus.ShortcutNewline = false;
             this.hsZoomCanvasPlus.ShowShortcut = false;
             this.hsZoomCanvasPlus.Size = new System.Drawing.Size(45, 26);
             this.hsZoomCanvasPlus.TabIndex = 2;
@@ -436,6 +442,7 @@
             this.hsAddNewTable.Name = "hsAddNewTable";
             this.hsAddNewTable.NonMarkedText = "New Table";
             this.hsAddNewTable.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddNewTable.ShortcutNewline = false;
             this.hsAddNewTable.ShowShortcut = false;
             this.hsAddNewTable.Size = new System.Drawing.Size(86, 26);
             this.hsAddNewTable.TabIndex = 1;
@@ -476,10 +483,10 @@
             this.tabCtrlDesign.Controls.Add(this.tabXMLDefinition);
             this.tabCtrlDesign.Controls.Add(this.tabPage3);
             this.tabCtrlDesign.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabCtrlDesign.Location = new System.Drawing.Point(0, 34);
+            this.tabCtrlDesign.Location = new System.Drawing.Point(0, 50);
             this.tabCtrlDesign.Name = "tabCtrlDesign";
             this.tabCtrlDesign.SelectedIndex = 0;
-            this.tabCtrlDesign.Size = new System.Drawing.Size(1269, 637);
+            this.tabCtrlDesign.Size = new System.Drawing.Size(1269, 621);
             this.tabCtrlDesign.TabIndex = 4;
             // 
             // tabStruktur
@@ -490,7 +497,7 @@
             this.tabStruktur.Location = new System.Drawing.Point(4, 22);
             this.tabStruktur.Name = "tabStruktur";
             this.tabStruktur.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStruktur.Size = new System.Drawing.Size(1261, 611);
+            this.tabStruktur.Size = new System.Drawing.Size(1261, 595);
             this.tabStruktur.TabIndex = 0;
             this.tabStruktur.Text = "Struktur";
             this.tabStruktur.UseVisualStyleBackColor = true;
@@ -503,7 +510,7 @@
             this.tabXMLDefinition.Location = new System.Drawing.Point(4, 22);
             this.tabXMLDefinition.Name = "tabXMLDefinition";
             this.tabXMLDefinition.Padding = new System.Windows.Forms.Padding(3);
-            this.tabXMLDefinition.Size = new System.Drawing.Size(1261, 611);
+            this.tabXMLDefinition.Size = new System.Drawing.Size(1261, 595);
             this.tabXMLDefinition.TabIndex = 1;
             this.tabXMLDefinition.Text = "Definition";
             this.tabXMLDefinition.UseVisualStyleBackColor = true;
@@ -515,7 +522,7 @@
             this.pnlXMLDefinitionCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlXMLDefinitionCenter.Location = new System.Drawing.Point(3, 37);
             this.pnlXMLDefinitionCenter.Name = "pnlXMLDefinitionCenter";
-            this.pnlXMLDefinitionCenter.Size = new System.Drawing.Size(1255, 571);
+            this.pnlXMLDefinitionCenter.Size = new System.Drawing.Size(1255, 555);
             this.pnlXMLDefinitionCenter.TabIndex = 0;
             // 
             // xmlEditDefinition
@@ -531,7 +538,7 @@
             this.xmlEditDefinition.Margin = new System.Windows.Forms.Padding(0);
             this.xmlEditDefinition.MinimumSize = new System.Drawing.Size(200, 100);
             this.xmlEditDefinition.Name = "xmlEditDefinition";
-            this.xmlEditDefinition.Size = new System.Drawing.Size(1255, 571);
+            this.xmlEditDefinition.Size = new System.Drawing.Size(1255, 555);
             this.xmlEditDefinition.StatusBarVisible = false;
             this.xmlEditDefinition.TabIndex = 0;
             this.xmlEditDefinition.Load += new System.EventHandler(this.xmlEditDefinition_Load);
@@ -552,7 +559,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1261, 611);
+            this.tabPage3.Size = new System.Drawing.Size(1261, 595);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -565,7 +572,7 @@
             this.pnlDatas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDatas.Location = new System.Drawing.Point(3, 3);
             this.pnlDatas.Name = "pnlDatas";
-            this.pnlDatas.Size = new System.Drawing.Size(1255, 605);
+            this.pnlDatas.Size = new System.Drawing.Size(1255, 589);
             this.pnlDatas.TabIndex = 0;
             // 
             // pnlDBObjectsCenter
@@ -575,7 +582,7 @@
             this.pnlDBObjectsCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDBObjectsCenter.Location = new System.Drawing.Point(0, 40);
             this.pnlDBObjectsCenter.Name = "pnlDBObjectsCenter";
-            this.pnlDBObjectsCenter.Size = new System.Drawing.Size(1255, 565);
+            this.pnlDBObjectsCenter.Size = new System.Drawing.Size(1255, 549);
             this.pnlDBObjectsCenter.TabIndex = 1;
             this.pnlDBObjectsCenter.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDBObjectsCenter_Paint);
             // 
@@ -627,14 +634,14 @@
             this.pnlDBObjectsUpper.Size = new System.Drawing.Size(1255, 40);
             this.pnlDBObjectsUpper.TabIndex = 0;
             // 
-            // pnlDatabaseDesignUpper
+            // pnlFormUpper
             // 
-            this.pnlDatabaseDesignUpper.Controls.Add(this.hsClose);
-            this.pnlDatabaseDesignUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDatabaseDesignUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlDatabaseDesignUpper.Name = "pnlDatabaseDesignUpper";
-            this.pnlDatabaseDesignUpper.Size = new System.Drawing.Size(1269, 34);
-            this.pnlDatabaseDesignUpper.TabIndex = 5;
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1269, 50);
+            this.pnlFormUpper.TabIndex = 5;
             // 
             // hsClose
             // 
@@ -663,8 +670,9 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(45, 34);
+            this.hsClose.Size = new System.Drawing.Size(45, 50);
             this.hsClose.TabIndex = 3;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -692,7 +700,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1269, 671);
             this.Controls.Add(this.tabCtrlDesign);
-            this.Controls.Add(this.pnlDatabaseDesignUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Name = "DatabaseDesignForm";
             this.Text = "DesignerForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DesignerForm_FormClosing);
@@ -710,7 +718,7 @@
             this.tabPage3.ResumeLayout(false);
             this.pnlDatas.ResumeLayout(false);
             this.pnlDBObjectsCenter.ResumeLayout(false);
-            this.pnlDatabaseDesignUpper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -737,7 +745,7 @@
         private System.Windows.Forms.Panel pnlDBObjectsCenter;
         private System.Windows.Forms.Panel pnlDBObjectsUpper;
         private SEListBox.SEListBox selDBObjects;
-        private System.Windows.Forms.Panel pnlDatabaseDesignUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private SeControlsLib.HotSpot hsClose;
         private SeControlsLib.HotSpot hsRefreshStruktur;
         private System.Windows.Forms.CheckBox cbDebug;

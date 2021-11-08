@@ -84,8 +84,15 @@ namespace FBXpert.SonstForms
             ExportAllViewsSQL();
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+
+        }
+
         private void ExportProceduresScriptForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath, "Procedures");
         }

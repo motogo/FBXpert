@@ -112,7 +112,7 @@ namespace FBExpert
             this.pnlConnectState = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.pnlFormName = new System.Windows.Forms.Panel();
             this.lblFormName = new System.Windows.Forms.Label();
             this.hsGlobalApplicationSettings = new SeControlsLib.HotSpot();
@@ -156,7 +156,7 @@ namespace FBExpert
             this.panel1.SuspendLayout();
             this.gbDatenbankAlias.SuspendLayout();
             this.gbLivettime.SuspendLayout();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlFormName.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1361,17 +1361,17 @@ namespace FBExpert
             // 
             // pnlUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.pnlFormName);
-            this.pnlUpper.Controls.Add(this.hsGlobalApplicationSettings);
-            this.pnlUpper.Controls.Add(this.hsClone);
-            this.pnlUpper.Controls.Add(this.hsSave);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(758, 51);
-            this.pnlUpper.TabIndex = 3;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.pnlFormName);
+            this.pnlFormUpper.Controls.Add(this.hsGlobalApplicationSettings);
+            this.pnlFormUpper.Controls.Add(this.hsClone);
+            this.pnlFormUpper.Controls.Add(this.hsSave);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(758, 51);
+            this.pnlFormUpper.TabIndex = 3;
             // 
             // pnlFormName
             // 
@@ -1604,7 +1604,7 @@ namespace FBExpert
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 632);
             this.Controls.Add(this.pnlCenter);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DatabaseConfigForm";
@@ -1668,7 +1668,7 @@ namespace FBExpert
             this.gbDatenbankAlias.PerformLayout();
             this.gbLivettime.ResumeLayout(false);
             this.gbLivettime.PerformLayout();
-            this.pnlUpper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
             this.pnlFormName.ResumeLayout(false);
             this.pnlFormName.PerformLayout();
             this.ResumeLayout(false);
@@ -1734,7 +1734,7 @@ namespace FBExpert
         private System.Windows.Forms.GroupBox gbConnectionString;
         private System.Windows.Forms.TextBox txtConnectionString;
         private System.Windows.Forms.GroupBox gbVersion;
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Label lblFormName;
         private SeControlsLib.HotSpot hsClose;
         private System.Windows.Forms.GroupBox gbDBNamespace;

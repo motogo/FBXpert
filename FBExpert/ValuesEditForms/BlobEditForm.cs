@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FBXpert.Globals;
+using System;
 using System.Windows.Forms;
 
 namespace FBXpert.ValuesEditForms
@@ -10,6 +11,13 @@ namespace FBXpert.ValuesEditForms
             InitializeComponent();        
             this.Text = $@"Binary Editor, Data = {info}";   
             this.label3.Text = $@"HEX ->{datatype}";
+        }
+
+        public void SetControlSizes()
+        {
+          
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+           
         }
         public void SetBytes(Byte[] values)
         {
@@ -61,6 +69,11 @@ namespace FBXpert.ValuesEditForms
         private void hotSpot1_Click(object sender, EventArgs e)
         {
              OpenInAnotherApp(bv.GetBytes(), "somename.doc");
+        }
+
+        private void BlobEditForm_Load(object sender, EventArgs e)
+        {
+            SetControlSizes();
         }
     }
 }

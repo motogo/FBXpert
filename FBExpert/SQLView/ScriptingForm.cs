@@ -166,9 +166,17 @@ namespace FBXpert.SQLView
             hsLifeTime.Text = lifeTime;
             return (lifeTime != "-1");
         }
+        public void SetControlSizes()
+        {
+
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlUpperSQL.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlCommandsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
 
         private void DefaultForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormEvents.DisableEvents(this, $@"DefaultForm_Load(object {sender}, EventArgs e)");
             FormDesign.SetFormLeft(this);
             ofdSQL.InitialDirectory = DBStaticData.ChangeToFullPath(AppSettingsClass.Instance.PathSettings.ScriptingPath);

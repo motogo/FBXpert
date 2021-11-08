@@ -32,8 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DBUserManagementForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.gbTick = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.txtTick = new System.Windows.Forms.TextBox();
             this.cbTick = new System.Windows.Forms.CheckBox();
             this.lblTableName = new System.Windows.Forms.Label();
@@ -82,9 +83,9 @@
             this.cbRefreshActiveConnections = new System.Windows.Forms.CheckBox();
             this.hsRefreshDependenciesTo = new SeControlsLib.HotSpot();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gbTick.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageMonitorConnections.SuspendLayout();
@@ -105,21 +106,20 @@
             this.gbFirstName.SuspendLayout();
             this.gbUserName.SuspendLayout();
             this.pnlUsersUpper.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.gbTick);
-            this.pnlUpper.Controls.Add(this.lblTableName);
-            this.pnlUpper.Controls.Add(this.hsRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1750, 45);
-            this.pnlUpper.TabIndex = 2;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.gbTick);
+            this.pnlFormUpper.Controls.Add(this.lblTableName);
+            this.pnlFormUpper.Controls.Add(this.hsRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1750, 45);
+            this.pnlFormUpper.TabIndex = 2;
             // 
             // gbTick
             // 
@@ -132,6 +132,16 @@
             this.gbTick.TabIndex = 3;
             this.gbTick.TabStop = false;
             this.gbTick.Text = "Refresh Intervall (s)";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtTick);
+            this.panel1.Controls.Add(this.cbTick);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(106, 22);
+            this.panel1.TabIndex = 4;
             // 
             // txtTick
             // 
@@ -191,6 +201,7 @@
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
             this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShortcutNewline = false;
             this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 45);
             this.hsRefresh.TabIndex = 1;
@@ -242,6 +253,7 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 45);
             this.hsClose.TabIndex = 0;
@@ -344,6 +356,7 @@
             this.fctSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctSQL.IsReplaceMode = false;
             this.fctSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctSQL.LeftBracket = '(';
@@ -402,6 +415,7 @@
             this.hsLoadSQL.Name = "hsLoadSQL";
             this.hsLoadSQL.NonMarkedText = "Load SQL";
             this.hsLoadSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadSQL.ShortcutNewline = false;
             this.hsLoadSQL.ShowShortcut = false;
             this.hsLoadSQL.Size = new System.Drawing.Size(96, 41);
             this.hsLoadSQL.TabIndex = 9;
@@ -454,6 +468,7 @@
             this.hsSaveSQL.Name = "hsSaveSQL";
             this.hsSaveSQL.NonMarkedText = "Save SQL";
             this.hsSaveSQL.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSQL.ShortcutNewline = false;
             this.hsSaveSQL.ShowShortcut = false;
             this.hsSaveSQL.Size = new System.Drawing.Size(93, 41);
             this.hsSaveSQL.TabIndex = 8;
@@ -506,6 +521,7 @@
             this.hsExecute.Name = "hsExecute";
             this.hsExecute.NonMarkedText = "Execute";
             this.hsExecute.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsExecute.ShortcutNewline = false;
             this.hsExecute.ShowShortcut = false;
             this.hsExecute.Size = new System.Drawing.Size(67, 41);
             this.hsExecute.TabIndex = 1;
@@ -640,6 +656,7 @@
             this.hotSpot1.Name = "hotSpot1";
             this.hotSpot1.NonMarkedText = "Execute";
             this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot1.ShortcutNewline = false;
             this.hotSpot1.ShowShortcut = false;
             this.hotSpot1.Size = new System.Drawing.Size(67, 49);
             this.hotSpot1.TabIndex = 9;
@@ -884,6 +901,7 @@
             this.hsClearData.Name = "hsClearData";
             this.hsClearData.NonMarkedText = "Execute";
             this.hsClearData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearData.ShortcutNewline = false;
             this.hsClearData.ShowShortcut = false;
             this.hsClearData.Size = new System.Drawing.Size(79, 49);
             this.hsClearData.TabIndex = 9;
@@ -937,6 +955,7 @@
             this.hsUpdateUser.Name = "hsUpdateUser";
             this.hsUpdateUser.NonMarkedText = "Execute";
             this.hsUpdateUser.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateUser.ShortcutNewline = false;
             this.hsUpdateUser.ShowShortcut = false;
             this.hsUpdateUser.Size = new System.Drawing.Size(79, 49);
             this.hsUpdateUser.TabIndex = 8;
@@ -990,6 +1009,7 @@
             this.hsDropUser.Name = "hsDropUser";
             this.hsDropUser.NonMarkedText = "Execute";
             this.hsDropUser.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDropUser.ShortcutNewline = false;
             this.hsDropUser.ShowShortcut = false;
             this.hsDropUser.Size = new System.Drawing.Size(67, 49);
             this.hsDropUser.TabIndex = 7;
@@ -1043,6 +1063,7 @@
             this.hsAddUser.Name = "hsAddUser";
             this.hsAddUser.NonMarkedText = "Execute";
             this.hsAddUser.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddUser.ShortcutNewline = false;
             this.hsAddUser.ShowShortcut = false;
             this.hsAddUser.Size = new System.Drawing.Size(67, 49);
             this.hsAddUser.TabIndex = 6;
@@ -1107,6 +1128,7 @@
             this.hsRefreshDependenciesTo.Name = "hsRefreshDependenciesTo";
             this.hsRefreshDependenciesTo.NonMarkedText = "";
             this.hsRefreshDependenciesTo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshDependenciesTo.ShortcutNewline = false;
             this.hsRefreshDependenciesTo.ShowShortcut = false;
             this.hsRefreshDependenciesTo.Size = new System.Drawing.Size(45, 49);
             this.hsRefreshDependenciesTo.TabIndex = 2;
@@ -1134,16 +1156,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txtTick);
-            this.panel1.Controls.Add(this.cbTick);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 16);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(106, 22);
-            this.panel1.TabIndex = 4;
-            // 
             // DBUserManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1151,15 +1163,17 @@
             this.ClientSize = new System.Drawing.Size(1750, 726);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DBUserManagementForm";
             this.Text = "DBUserManagementForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DBUserManagementForm_FormClosing);
             this.Load += new System.EventHandler(this.DBUserManagementForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.gbTick.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMonitorConnections.ResumeLayout(false);
@@ -1190,15 +1204,13 @@
             this.gbUserName.PerformLayout();
             this.pnlUsersUpper.ResumeLayout(false);
             this.pnlUsersUpper.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Label lblTableName;
         private SeControlsLib.HotSpot hsRefresh;
         private SeControlsLib.HotSpot hsClose;

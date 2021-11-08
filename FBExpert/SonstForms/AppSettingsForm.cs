@@ -79,9 +79,17 @@ namespace FBXpert.SonstForms
             AppSettingsClass.Instance.SQLVariables.InitialTerminator = txtSQLInitialTerminator.Text;
         }
 
-
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDatabseDefaultsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlPathSettingsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLVariablesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void AppSettingsForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             this.Text = $@"App settings file:{AppSettingsClass.Instance.Path}";
             DataToEdit();

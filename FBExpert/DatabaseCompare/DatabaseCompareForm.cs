@@ -17,8 +17,6 @@ namespace FBXpert.SonstForms
     public partial class DatabaseCompareFrom : Form
     {
         private readonly NotifiesClass _localNotify = new NotifiesClass();
-        //private readonly DBRegistrationClass _dbReg;
-        //private readonly DatabaseDesignClass _ddc = new DatabaseDesignClass();        
         private List<int> _findlstForward;
         private List<int> _findlstReverse;
         private int _aktSelectedLineForward;
@@ -29,8 +27,6 @@ namespace FBXpert.SonstForms
         {
             InitializeComponent();
             MdiParent = parent;
-            //_dbReg = reg;
-           
             LanguageClass.Instance.RegisterChangeNotifiy(LanguageChanged);
         }
         
@@ -43,7 +39,7 @@ namespace FBXpert.SonstForms
         {                      
             gbFoundLinesForward.Text = LanguageClass.Instance.GetString("FoundLines");
             gbSearchCodeForward.Text = LanguageClass.Instance.GetString("SEARCH");
-            tabPageObjects.Text = LanguageClass.Instance.GetString("OBJECTS");
+            tabPageObjects.Text      = LanguageClass.Instance.GetString("OBJECTS");
         }
        
         private void hsClose_Click(object sender, EventArgs e)
@@ -140,7 +136,7 @@ namespace FBXpert.SonstForms
             var ddc = new DatabaseDesignClass
             {
                 Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(db),
-                Views  = StaticTreeClass.Instance().GetViewObjects(db)                
+                Views  = StaticTreeClass.Instance().GetViewObjects(db)
             };
 
             var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
@@ -185,16 +181,21 @@ namespace FBXpert.SonstForms
             }
             this.Cursor = Cursors.Default;
         }
-      
+
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height     = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+        }
         private void DatabaseCompareFrom_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             LanguageChanged();
             hsSearchDownForward.Enabled = false;
             hsSearchUpForward.Enabled = false;
             hsSeachForward.Enabled = txtSearchCodeForward.TextLength > 0;
-            
-          //  fbdSourcePath.SelectedPath = AppSettingsClass.Instance.PathSettings.DesignClassesOutputPath;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
             {
@@ -208,7 +209,7 @@ namespace FBXpert.SonstForms
             lblCaption.Text = $@"Database compare";
             Text = "Database compare";
         }
-                
+
         private bool TableFieldsEqual(TableFieldClass tcf1, TableFieldClass tcf2)
         {
             return ((tcf1.Domain.FieldType == tcf2.Domain.FieldType) && (tcf1.Domain.Length == tcf2.Domain.Length) &&

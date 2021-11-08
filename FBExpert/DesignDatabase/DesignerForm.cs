@@ -541,8 +541,13 @@ namespace FBXDesigns
 
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void DesignerForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             CreateDesignObjects();
             ShowAllObjects();

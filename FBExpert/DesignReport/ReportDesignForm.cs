@@ -251,8 +251,18 @@ namespace FBXpert.SonstForms
             tabControlEditDesign.SelectedTab =  tabPageXSD;                     
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFRXUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXSDUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlAllDesignUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlCreateStatementsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void ReportDesignForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             LoadUserDesign();         
         }

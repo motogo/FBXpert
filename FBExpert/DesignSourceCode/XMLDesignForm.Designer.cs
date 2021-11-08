@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XmlDesignForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.lblCaption = new System.Windows.Forms.Label();
             this.hsRefresh = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
@@ -46,15 +46,15 @@
             this.tsTextSearch = new System.Windows.Forms.ToolStripTextBox();
             this.tsmiSearchNext = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSearchFirst = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlUpperSourceCode = new System.Windows.Forms.Panel();
+            this.pnlSourceCodeUpper = new System.Windows.Forms.Panel();
             this.hsSave = new SeControlsLib.HotSpot();
             this.gbFoundLines = new System.Windows.Forms.GroupBox();
             this.cbFoundLines = new System.Windows.Forms.ComboBox();
             this.gbSearchCode = new System.Windows.Forms.GroupBox();
             this.txtSearchCode = new System.Windows.Forms.TextBox();
+            this.hsSearch = new SeControlsLib.HotSpot();
             this.hsSearchDown = new SeControlsLib.HotSpot();
             this.hsSearchUp = new SeControlsLib.HotSpot();
-            this.hsSearch = new SeControlsLib.HotSpot();
             this.gbDBObjets = new System.Windows.Forms.GroupBox();
             this.selDBObjects = new SEListBox.SEListBox();
             this.gbExportProgress = new System.Windows.Forms.GroupBox();
@@ -65,7 +65,7 @@
             this.hsCreateCVS = new SeControlsLib.HotSpot();
             this.hsSaveSourceCodes = new SeControlsLib.HotSpot();
             this.xmlEditStruktur = new XMLSimlpeEdit.XMLEditSimpleUserControl();
-            this.pnlXML_UPPER = new System.Windows.Forms.Panel();
+            this.pnlXMLUpper = new System.Windows.Forms.Panel();
             this.gbSourceCode = new System.Windows.Forms.GroupBox();
             this.txtSourceCodePath = new System.Windows.Forms.TextBox();
             this.hsSelectPath = new SeControlsLib.HotSpot();
@@ -89,21 +89,21 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fbdSourcePath = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageXML.SuspendLayout();
             this.pnlSourceCode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctSource)).BeginInit();
             this.cmsSourceCode.SuspendLayout();
-            this.pnlUpperSourceCode.SuspendLayout();
+            this.pnlSourceCodeUpper.SuspendLayout();
             this.gbFoundLines.SuspendLayout();
             this.gbSearchCode.SuspendLayout();
             this.gbDBObjets.SuspendLayout();
             this.gbExportProgress.SuspendLayout();
             this.pnlDBObjectsParameters.SuspendLayout();
             this.pnlUpperDBObjects.SuspendLayout();
-            this.pnlXML_UPPER.SuspendLayout();
+            this.pnlXMLUpper.SuspendLayout();
             this.gbSourceCode.SuspendLayout();
             this.tabPageMessages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctMessages)).BeginInit();
@@ -114,17 +114,17 @@
             this.gbPrimaryFieldType.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsRefresh);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1601, 42);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.lblCaption);
+            this.pnlFormUpper.Controls.Add(this.hsRefresh);
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1601, 42);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // lblCaption
             // 
@@ -163,6 +163,7 @@
             this.hsRefresh.Name = "hsRefresh";
             this.hsRefresh.NonMarkedText = "";
             this.hsRefresh.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefresh.ShortcutNewline = false;
             this.hsRefresh.ShowShortcut = false;
             this.hsRefresh.Size = new System.Drawing.Size(45, 42);
             this.hsRefresh.TabIndex = 3;
@@ -213,6 +214,7 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 42);
             this.hsClose.TabIndex = 2;
@@ -273,7 +275,7 @@
             this.tabPageXML.Controls.Add(this.pnlSourceCode);
             this.tabPageXML.Controls.Add(this.gbDBObjets);
             this.tabPageXML.Controls.Add(this.xmlEditStruktur);
-            this.tabPageXML.Controls.Add(this.pnlXML_UPPER);
+            this.tabPageXML.Controls.Add(this.pnlXMLUpper);
             this.tabPageXML.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageXML.ImageIndex = 8;
             this.tabPageXML.Location = new System.Drawing.Point(4, 23);
@@ -287,11 +289,11 @@
             // pnlSourceCode
             // 
             this.pnlSourceCode.Controls.Add(this.fctSource);
-            this.pnlSourceCode.Controls.Add(this.pnlUpperSourceCode);
+            this.pnlSourceCode.Controls.Add(this.pnlSourceCodeUpper);
             this.pnlSourceCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSourceCode.Location = new System.Drawing.Point(864, 64);
+            this.pnlSourceCode.Location = new System.Drawing.Point(864, 53);
             this.pnlSourceCode.Name = "pnlSourceCode";
-            this.pnlSourceCode.Size = new System.Drawing.Size(726, 582);
+            this.pnlSourceCode.Size = new System.Drawing.Size(726, 593);
             this.pnlSourceCode.TabIndex = 6;
             // 
             // fctSource
@@ -332,7 +334,7 @@
             this.fctSource.RightBracket2 = '}';
             this.fctSource.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSource.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSource.ServiceColors")));
-            this.fctSource.Size = new System.Drawing.Size(726, 526);
+            this.fctSource.Size = new System.Drawing.Size(726, 537);
             this.fctSource.TabIndex = 3;
             this.fctSource.Zoom = 100;
             this.fctSource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctb_KeyDown);
@@ -366,20 +368,19 @@
             this.tsmiSearchFirst.Size = new System.Drawing.Size(160, 22);
             this.tsmiSearchFirst.Text = "Search first";
             // 
-            // pnlUpperSourceCode
+            // pnlSourceCodeUpper
             // 
-            this.pnlUpperSourceCode.Controls.Add(this.hsSave);
-            this.pnlUpperSourceCode.Controls.Add(this.gbFoundLines);
-            this.pnlUpperSourceCode.Controls.Add(this.gbSearchCode);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSearch);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSearchDown);
-            this.pnlUpperSourceCode.Controls.Add(this.hsSearchUp);
-            
-            this.pnlUpperSourceCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpperSourceCode.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpperSourceCode.Name = "pnlUpperSourceCode";
-            this.pnlUpperSourceCode.Size = new System.Drawing.Size(726, 56);
-            this.pnlUpperSourceCode.TabIndex = 4;
+            this.pnlSourceCodeUpper.Controls.Add(this.hsSave);
+            this.pnlSourceCodeUpper.Controls.Add(this.gbFoundLines);
+            this.pnlSourceCodeUpper.Controls.Add(this.gbSearchCode);
+            this.pnlSourceCodeUpper.Controls.Add(this.hsSearch);
+            this.pnlSourceCodeUpper.Controls.Add(this.hsSearchDown);
+            this.pnlSourceCodeUpper.Controls.Add(this.hsSearchUp);
+            this.pnlSourceCodeUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSourceCodeUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlSourceCodeUpper.Name = "pnlSourceCodeUpper";
+            this.pnlSourceCodeUpper.Size = new System.Drawing.Size(726, 56);
+            this.pnlSourceCodeUpper.TabIndex = 4;
             // 
             // hsSave
             // 
@@ -396,8 +397,8 @@
             this.hsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSave.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSave.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
-            this.hsSave.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
+            this.hsSave.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
+            this.hsSave.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSave.ImageToggleOnSelect = true;
             this.hsSave.Location = new System.Drawing.Point(0, 0);
             this.hsSave.Marked = false;
@@ -408,6 +409,7 @@
             this.hsSave.Name = "hsSave";
             this.hsSave.NonMarkedText = "";
             this.hsSave.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSave.ShortcutNewline = false;
             this.hsSave.ShowShortcut = false;
             this.hsSave.Size = new System.Drawing.Size(37, 56);
             this.hsSave.TabIndex = 11;
@@ -477,6 +479,57 @@
             this.txtSearchCode.Text = "get";
             this.txtSearchCode.TextChanged += new System.EventHandler(this.txtSearchCode_TextChanged);
             // 
+            // hsSearch
+            // 
+            this.hsSearch.BackColor = System.Drawing.Color.Transparent;
+            this.hsSearch.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsSearch.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsSearch.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsSearch.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsSearch.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsSearch.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsSearch.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsSearch.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsSearch.FlatAppearance.BorderSize = 0;
+            this.hsSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsSearch.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsSearch.Image = global::FBXpert.Properties.Resources.lupe24x;
+            this.hsSearch.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
+            this.hsSearch.ImageToggleOnSelect = true;
+            this.hsSearch.Location = new System.Drawing.Point(591, 0);
+            this.hsSearch.Marked = false;
+            this.hsSearch.MarkedColor = System.Drawing.Color.Teal;
+            this.hsSearch.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsSearch.MarkedText = "";
+            this.hsSearch.MarkMode = false;
+            this.hsSearch.Name = "hsSearch";
+            this.hsSearch.NonMarkedText = "";
+            this.hsSearch.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearch.ShortcutNewline = false;
+            this.hsSearch.ShowShortcut = false;
+            this.hsSearch.Size = new System.Drawing.Size(45, 56);
+            this.hsSearch.TabIndex = 6;
+            this.hsSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsSearch.ToolTipActive = false;
+            this.hsSearch.ToolTipAutomaticDelay = 500;
+            this.hsSearch.ToolTipAutoPopDelay = 5000;
+            this.hsSearch.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsSearch.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsSearch.ToolTipFor4ContextMenu = true;
+            this.hsSearch.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsSearch.ToolTipInitialDelay = 500;
+            this.hsSearch.ToolTipIsBallon = false;
+            this.hsSearch.ToolTipOwnerDraw = false;
+            this.hsSearch.ToolTipReshowDelay = 100;
+            this.hsSearch.ToolTipShowAlways = false;
+            this.hsSearch.ToolTipText = "";
+            this.hsSearch.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsSearch.ToolTipTitle = "";
+            this.hsSearch.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsSearch.UseVisualStyleBackColor = false;
+            this.hsSearch.Click += new System.EventHandler(this.hsSeach_Click);
+            // 
             // hsSearchDown
             // 
             this.hsSearchDown.BackColor = System.Drawing.Color.Transparent;
@@ -495,7 +548,7 @@
             this.hsSearchDown.Image = global::FBXpert.Properties.Resources.go_down22x;
             this.hsSearchDown.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
             this.hsSearchDown.ImageToggleOnSelect = true;
-            this.hsSearchDown.Location = new System.Drawing.Point(591, 0);
+            this.hsSearchDown.Location = new System.Drawing.Point(636, 0);
             this.hsSearchDown.Marked = false;
             this.hsSearchDown.MarkedColor = System.Drawing.Color.Teal;
             this.hsSearchDown.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -504,6 +557,7 @@
             this.hsSearchDown.Name = "hsSearchDown";
             this.hsSearchDown.NonMarkedText = "";
             this.hsSearchDown.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchDown.ShortcutNewline = false;
             this.hsSearchDown.ShowShortcut = false;
             this.hsSearchDown.Size = new System.Drawing.Size(45, 56);
             this.hsSearchDown.TabIndex = 8;
@@ -545,7 +599,7 @@
             this.hsSearchUp.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.hsSearchUp.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
             this.hsSearchUp.ImageToggleOnSelect = true;
-            this.hsSearchUp.Location = new System.Drawing.Point(636, 0);
+            this.hsSearchUp.Location = new System.Drawing.Point(681, 0);
             this.hsSearchUp.Marked = false;
             this.hsSearchUp.MarkedColor = System.Drawing.Color.Teal;
             this.hsSearchUp.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -554,6 +608,7 @@
             this.hsSearchUp.Name = "hsSearchUp";
             this.hsSearchUp.NonMarkedText = "";
             this.hsSearchUp.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchUp.ShortcutNewline = false;
             this.hsSearchUp.ShowShortcut = false;
             this.hsSearchUp.Size = new System.Drawing.Size(45, 56);
             this.hsSearchUp.TabIndex = 7;
@@ -577,56 +632,6 @@
             this.hsSearchUp.UseVisualStyleBackColor = false;
             this.hsSearchUp.Click += new System.EventHandler(this.hsSearchUp_Click);
             // 
-            // hsSeach
-            // 
-            this.hsSearch.BackColor = System.Drawing.Color.Transparent;
-            this.hsSearch.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsSearch.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsSearch.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsSearch.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsSearch.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsSearch.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsSearch.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsSearch.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsSearch.FlatAppearance.BorderSize = 0;
-            this.hsSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsSearch.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSearch.Image = global::FBXpert.Properties.Resources.lupe24x;
-            this.hsSearch.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
-            this.hsSearch.ImageToggleOnSelect = true;
-            this.hsSearch.Location = new System.Drawing.Point(681, 0);
-            this.hsSearch.Marked = false;
-            this.hsSearch.MarkedColor = System.Drawing.Color.Teal;
-            this.hsSearch.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsSearch.MarkedText = "";
-            this.hsSearch.MarkMode = false;
-            this.hsSearch.Name = "hsSeach";
-            this.hsSearch.NonMarkedText = "";
-            this.hsSearch.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsSearch.ShowShortcut = false;
-            this.hsSearch.Size = new System.Drawing.Size(45, 56);
-            this.hsSearch.TabIndex = 6;
-            this.hsSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsSearch.ToolTipActive = false;
-            this.hsSearch.ToolTipAutomaticDelay = 500;
-            this.hsSearch.ToolTipAutoPopDelay = 5000;
-            this.hsSearch.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsSearch.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsSearch.ToolTipFor4ContextMenu = true;
-            this.hsSearch.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsSearch.ToolTipInitialDelay = 500;
-            this.hsSearch.ToolTipIsBallon = false;
-            this.hsSearch.ToolTipOwnerDraw = false;
-            this.hsSearch.ToolTipReshowDelay = 100;
-            this.hsSearch.ToolTipShowAlways = false;
-            this.hsSearch.ToolTipText = "";
-            this.hsSearch.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsSearch.ToolTipTitle = "";
-            this.hsSearch.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsSearch.UseVisualStyleBackColor = false;
-            this.hsSearch.Click += new System.EventHandler(this.hsSeach_Click);
-            // 
             // gbDBObjets
             // 
             this.gbDBObjets.Controls.Add(this.selDBObjects);
@@ -634,9 +639,9 @@
             this.gbDBObjets.Controls.Add(this.pnlDBObjectsParameters);
             this.gbDBObjets.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbDBObjets.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbDBObjets.Location = new System.Drawing.Point(628, 64);
+            this.gbDBObjets.Location = new System.Drawing.Point(628, 53);
             this.gbDBObjets.Name = "gbDBObjets";
-            this.gbDBObjets.Size = new System.Drawing.Size(236, 582);
+            this.gbDBObjets.Size = new System.Drawing.Size(236, 593);
             this.gbDBObjets.TabIndex = 5;
             this.gbDBObjets.TabStop = false;
             this.gbDBObjets.Text = "DB objects";
@@ -645,7 +650,7 @@
             // 
             this.selDBObjects.AlloweColumnFilterIndexChange = false;
             this.selDBObjects.AllowMultipleChecks = false;
-            this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle1;
+            this.selDBObjects.AlternatingListEntriesDefaultCellStyle = dataGridViewCellStyle3;
             this.selDBObjects.AutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.selDBObjects.AutoSizeModeCheck = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.selDBObjects.AutoSizeModeID = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -655,13 +660,13 @@
             this.selDBObjects.CheckOnSelect = false;
             this.selDBObjects.CheckVisible = true;
             this.selDBObjects.CheckWith = 32;
-            this.selDBObjects.ColumnFilterIndex = 1;
+            this.selDBObjects.ColumnFilterIndex = 2;
             this.selDBObjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.selDBObjects.FilterText = "";
             this.selDBObjects.IDVisible = false;
             this.selDBObjects.IDWith = 32;
             this.selDBObjects.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
+            this.selDBObjects.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
             this.selDBObjects.Location = new System.Drawing.Point(3, 124);
             this.selDBObjects.MarkingColor = System.Drawing.Color.LightGreen;
             this.selDBObjects.Name = "selDBObjects";
@@ -670,7 +675,7 @@
             this.selDBObjects.ShowCellToolTips = true;
             this.selDBObjects.ShowCountInTitle = true;
             this.selDBObjects.ShowSelection = true;
-            this.selDBObjects.Size = new System.Drawing.Size(230, 455);
+            this.selDBObjects.Size = new System.Drawing.Size(230, 466);
             this.selDBObjects.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
             this.selDBObjects.SQLKonjunktion = "AND";
             this.selDBObjects.TabIndex = 4;
@@ -732,7 +737,7 @@
             this.pnlUpperDBObjects.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpperDBObjects.Location = new System.Drawing.Point(0, 0);
             this.pnlUpperDBObjects.Name = "pnlUpperDBObjects";
-            this.pnlUpperDBObjects.Size = new System.Drawing.Size(230, 56);
+            this.pnlUpperDBObjects.Size = new System.Drawing.Size(230, 50);
             this.pnlUpperDBObjects.TabIndex = 7;
             // 
             // hsCreateCVS
@@ -750,11 +755,11 @@
             this.hsCreateCVS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsCreateCVS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateCVS.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsCreateCVS.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
+            this.hsCreateCVS.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsCreateCVS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsCreateCVS.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
+            this.hsCreateCVS.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsCreateCVS.ImageToggleOnSelect = true;
-            this.hsCreateCVS.Location = new System.Drawing.Point(127, 0);
+            this.hsCreateCVS.Location = new System.Drawing.Point(125, 0);
             this.hsCreateCVS.Marked = false;
             this.hsCreateCVS.MarkedColor = System.Drawing.Color.Teal;
             this.hsCreateCVS.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -763,8 +768,9 @@
             this.hsCreateCVS.Name = "hsCreateCVS";
             this.hsCreateCVS.NonMarkedText = "Create CSV";
             this.hsCreateCVS.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateCVS.ShortcutNewline = false;
             this.hsCreateCVS.ShowShortcut = false;
-            this.hsCreateCVS.Size = new System.Drawing.Size(99, 56);
+            this.hsCreateCVS.Size = new System.Drawing.Size(99, 50);
             this.hsCreateCVS.TabIndex = 7;
             this.hsCreateCVS.Text = "Create CSV";
             this.hsCreateCVS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -802,9 +808,9 @@
             this.hsSaveSourceCodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsSaveSourceCodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveSourceCodes.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSaveSourceCodes.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
+            this.hsSaveSourceCodes.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
             this.hsSaveSourceCodes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsSaveSourceCodes.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
+            this.hsSaveSourceCodes.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSaveSourceCodes.ImageToggleOnSelect = true;
             this.hsSaveSourceCodes.Location = new System.Drawing.Point(0, 0);
             this.hsSaveSourceCodes.Marked = false;
@@ -815,8 +821,9 @@
             this.hsSaveSourceCodes.Name = "hsSaveSourceCodes";
             this.hsSaveSourceCodes.NonMarkedText = "Create sourcecode";
             this.hsSaveSourceCodes.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveSourceCodes.ShortcutNewline = false;
             this.hsSaveSourceCodes.ShowShortcut = false;
-            this.hsSaveSourceCodes.Size = new System.Drawing.Size(127, 56);
+            this.hsSaveSourceCodes.Size = new System.Drawing.Size(125, 50);
             this.hsSaveSourceCodes.TabIndex = 6;
             this.hsSaveSourceCodes.Text = "Create sourcecode";
             this.hsSaveSourceCodes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -849,27 +856,27 @@
             this.xmlEditStruktur.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xmlEditStruktur.KeyName = "XmlFile";
             this.xmlEditStruktur.LastXmlDirKey = "LastXmlDir";
-            this.xmlEditStruktur.Location = new System.Drawing.Point(3, 64);
+            this.xmlEditStruktur.Location = new System.Drawing.Point(3, 53);
             this.xmlEditStruktur.Margin = new System.Windows.Forms.Padding(0);
             this.xmlEditStruktur.MinimumSize = new System.Drawing.Size(200, 100);
             this.xmlEditStruktur.Name = "xmlEditStruktur";
-            this.xmlEditStruktur.Size = new System.Drawing.Size(625, 582);
+            this.xmlEditStruktur.Size = new System.Drawing.Size(625, 593);
             this.xmlEditStruktur.StatusBarVisible = false;
             this.xmlEditStruktur.TabIndex = 2;
             // 
-            // pnlXML_UPPER
+            // pnlXMLUpper
             // 
-            this.pnlXML_UPPER.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlXML_UPPER.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlXML_UPPER.Controls.Add(this.gbSourceCode);
-            this.pnlXML_UPPER.Controls.Add(this.hsCreateClasses);
-            this.pnlXML_UPPER.Controls.Add(this.hsSaveXML);
-            this.pnlXML_UPPER.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlXML_UPPER.Location = new System.Drawing.Point(3, 3);
-            this.pnlXML_UPPER.Name = "pnlXML_UPPER";
-            this.pnlXML_UPPER.Size = new System.Drawing.Size(1587, 61);
-            this.pnlXML_UPPER.TabIndex = 1;
-            this.pnlXML_UPPER.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlXML_UPPER_Paint);
+            this.pnlXMLUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlXMLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlXMLUpper.Controls.Add(this.gbSourceCode);
+            this.pnlXMLUpper.Controls.Add(this.hsCreateClasses);
+            this.pnlXMLUpper.Controls.Add(this.hsSaveXML);
+            this.pnlXMLUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlXMLUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlXMLUpper.Name = "pnlXMLUpper";
+            this.pnlXMLUpper.Size = new System.Drawing.Size(1587, 50);
+            this.pnlXMLUpper.TabIndex = 1;
+            this.pnlXMLUpper.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlXML_UPPER_Paint);
             // 
             // gbSourceCode
             // 
@@ -919,6 +926,7 @@
             this.hsSelectPath.Name = "hsSelectPath";
             this.hsSelectPath.NonMarkedText = "";
             this.hsSelectPath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSelectPath.ShortcutNewline = false;
             this.hsSelectPath.ShowShortcut = false;
             this.hsSelectPath.Size = new System.Drawing.Size(65, 30);
             this.hsSelectPath.TabIndex = 4;
@@ -957,8 +965,8 @@
             this.hsCreateClasses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsCreateClasses.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsCreateClasses.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsCreateClasses.Image = global::FBXpert.Properties.Resources.applications_system;
-            this.hsCreateClasses.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_32x;
+            this.hsCreateClasses.Image = global::FBXpert.Properties.Resources.applications_system_22x;
+            this.hsCreateClasses.ImageHover = global::FBXpert.Properties.Resources.applications_system_blue_22x;
             this.hsCreateClasses.ImageToggleOnSelect = true;
             this.hsCreateClasses.Location = new System.Drawing.Point(45, 0);
             this.hsCreateClasses.Marked = false;
@@ -969,8 +977,9 @@
             this.hsCreateClasses.Name = "hsCreateClasses";
             this.hsCreateClasses.NonMarkedText = "";
             this.hsCreateClasses.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCreateClasses.ShortcutNewline = false;
             this.hsCreateClasses.ShowShortcut = false;
-            this.hsCreateClasses.Size = new System.Drawing.Size(45, 57);
+            this.hsCreateClasses.Size = new System.Drawing.Size(45, 46);
             this.hsCreateClasses.TabIndex = 5;
             this.hsCreateClasses.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsCreateClasses.ToolTipActive = false;
@@ -1007,8 +1016,8 @@
             this.hsSaveXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsSaveXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsSaveXML.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsSaveXML.Image = global::FBXpert.Properties.Resources.data_export_blue_x32;
-            this.hsSaveXML.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x32;
+            this.hsSaveXML.Image = global::FBXpert.Properties.Resources.data_export_blue_x24;
+            this.hsSaveXML.ImageHover = global::FBXpert.Properties.Resources.data_export_gn_x24;
             this.hsSaveXML.ImageToggleOnSelect = true;
             this.hsSaveXML.Location = new System.Drawing.Point(0, 0);
             this.hsSaveXML.Marked = false;
@@ -1019,8 +1028,9 @@
             this.hsSaveXML.Name = "hsSaveXML";
             this.hsSaveXML.NonMarkedText = "";
             this.hsSaveXML.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveXML.ShortcutNewline = false;
             this.hsSaveXML.ShowShortcut = false;
-            this.hsSaveXML.Size = new System.Drawing.Size(45, 57);
+            this.hsSaveXML.Size = new System.Drawing.Size(45, 46);
             this.hsSaveXML.TabIndex = 4;
             this.hsSaveXML.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsSaveXML.ToolTipActive = false;
@@ -1134,6 +1144,7 @@
             this.hsClearMessages.Name = "hsClearMessages";
             this.hsClearMessages.NonMarkedText = "Clear";
             this.hsClearMessages.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearMessages.ShortcutNewline = false;
             this.hsClearMessages.ShowShortcut = false;
             this.hsClearMessages.Size = new System.Drawing.Size(45, 42);
             this.hsClearMessages.TabIndex = 1;
@@ -1298,15 +1309,15 @@
             this.ClientSize = new System.Drawing.Size(1601, 741);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "XmlDesignForm";
             this.Text = "XMLDesignForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XMLDesignForm_FormClosing);
             this.Load += new System.EventHandler(this.XMLDesignForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
+            this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageXML.ResumeLayout(false);
@@ -1314,7 +1325,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fctSource)).EndInit();
             this.cmsSourceCode.ResumeLayout(false);
             this.cmsSourceCode.PerformLayout();
-            this.pnlUpperSourceCode.ResumeLayout(false);
+            this.pnlSourceCodeUpper.ResumeLayout(false);
             this.gbFoundLines.ResumeLayout(false);
             this.gbSearchCode.ResumeLayout(false);
             this.gbSearchCode.PerformLayout();
@@ -1323,7 +1334,7 @@
             this.pnlDBObjectsParameters.ResumeLayout(false);
             this.pnlDBObjectsParameters.PerformLayout();
             this.pnlUpperDBObjects.ResumeLayout(false);
-            this.pnlXML_UPPER.ResumeLayout(false);
+            this.pnlXMLUpper.ResumeLayout(false);
             this.gbSourceCode.ResumeLayout(false);
             this.gbSourceCode.PerformLayout();
             this.tabPageMessages.ResumeLayout(false);
@@ -1341,7 +1352,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlLower;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsRefresh;
@@ -1355,7 +1366,7 @@
         private FastColoredTextBoxNS.FastColoredTextBox fctMessages;
         private System.Windows.Forms.Panel pnlMessagesUpper;
         private SeControlsLib.HotSpot hsClearMessages;
-        private System.Windows.Forms.Panel pnlXML_UPPER;
+        private System.Windows.Forms.Panel pnlXMLUpper;
         private System.Windows.Forms.Label lblCaption;
         private XMLSimlpeEdit.XMLEditSimpleUserControl xmlEditStruktur;
         private SeControlsLib.HotSpot hsCreateClasses;
@@ -1378,7 +1389,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchFirst;
         private System.Windows.Forms.Panel pnlSourceCode;
-        private System.Windows.Forms.Panel pnlUpperSourceCode;
+        private System.Windows.Forms.Panel pnlSourceCodeUpper;
         private SeControlsLib.HotSpot hsSearch;
         private SeControlsLib.HotSpot hsSearchUp;
         private System.Windows.Forms.GroupBox gbSearchCode;

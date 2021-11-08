@@ -33,7 +33,7 @@
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.fctInfo = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.flpUpper = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpFormUpper = new System.Windows.Forms.FlowLayoutPanel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.hsFindPattern = new SeControlsLib.HotSpot();
             this.gbSearchPattern = new System.Windows.Forms.GroupBox();
@@ -41,17 +41,17 @@
             this.gbNavigate = new System.Windows.Forms.GroupBox();
             this.hsSearchLast = new SeControlsLib.HotSpot();
             this.hsFindNext = new SeControlsLib.HotSpot();
+            this.label1 = new System.Windows.Forms.Label();
             this.hsPrev = new SeControlsLib.HotSpot();
             this.hsSearchNextFromStart = new SeControlsLib.HotSpot();
             this.gbSearchAttributes = new System.Windows.Forms.GroupBox();
             this.ckWholeWords = new System.Windows.Forms.CheckBox();
             this.ckCaseSensitive = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.hsSaveText = new SeControlsLib.HotSpot();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pnlCenter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctInfo)).BeginInit();
-            this.flpUpper.SuspendLayout();
+            this.flpFormUpper.SuspendLayout();
             this.gbSearchPattern.SuspendLayout();
             this.gbNavigate.SuspendLayout();
             this.gbSearchAttributes.SuspendLayout();
@@ -69,7 +69,7 @@
             // pnlCenter
             // 
             this.pnlCenter.Controls.Add(this.fctInfo);
-            this.pnlCenter.Controls.Add(this.flpUpper);
+            this.pnlCenter.Controls.Add(this.flpFormUpper);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCenter.Location = new System.Drawing.Point(0, 0);
             this.pnlCenter.Name = "pnlCenter";
@@ -109,19 +109,19 @@
             this.fctInfo.TabIndex = 0;
             this.fctInfo.Zoom = 100;
             // 
-            // flpUpper
+            // flpFormUpper
             // 
-            this.flpUpper.Controls.Add(this.hsClose);
-            this.flpUpper.Controls.Add(this.hsFindPattern);
-            this.flpUpper.Controls.Add(this.gbSearchPattern);
-            this.flpUpper.Controls.Add(this.gbNavigate);
-            this.flpUpper.Controls.Add(this.gbSearchAttributes);
-            this.flpUpper.Controls.Add(this.hsSaveText);
-            this.flpUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flpUpper.Location = new System.Drawing.Point(0, 0);
-            this.flpUpper.Name = "flpUpper";
-            this.flpUpper.Size = new System.Drawing.Size(1248, 56);
-            this.flpUpper.TabIndex = 1;
+            this.flpFormUpper.Controls.Add(this.hsClose);
+            this.flpFormUpper.Controls.Add(this.hsFindPattern);
+            this.flpFormUpper.Controls.Add(this.gbSearchPattern);
+            this.flpFormUpper.Controls.Add(this.gbNavigate);
+            this.flpFormUpper.Controls.Add(this.gbSearchAttributes);
+            this.flpFormUpper.Controls.Add(this.hsSaveText);
+            this.flpFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.flpFormUpper.Name = "flpFormUpper";
+            this.flpFormUpper.Size = new System.Drawing.Size(1248, 56);
+            this.flpFormUpper.TabIndex = 1;
             // 
             // hsClose
             // 
@@ -149,6 +149,7 @@
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 46);
             this.hsClose.TabIndex = 2;
@@ -198,6 +199,7 @@
             this.hsFindPattern.Name = "hsFindPattern";
             this.hsFindPattern.NonMarkedText = "";
             this.hsFindPattern.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsFindPattern.ShortcutNewline = false;
             this.hsFindPattern.ShowShortcut = false;
             this.hsFindPattern.Size = new System.Drawing.Size(45, 46);
             this.hsFindPattern.TabIndex = 3;
@@ -280,6 +282,7 @@
             this.hsSearchLast.Name = "hsSearchLast";
             this.hsSearchLast.NonMarkedText = "";
             this.hsSearchLast.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchLast.ShortcutNewline = false;
             this.hsSearchLast.ShowShortcut = false;
             this.hsSearchLast.Size = new System.Drawing.Size(37, 24);
             this.hsSearchLast.TabIndex = 9;
@@ -329,6 +332,7 @@
             this.hsFindNext.Name = "hsFindNext";
             this.hsFindNext.NonMarkedText = "";
             this.hsFindNext.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsFindNext.ShortcutNewline = false;
             this.hsFindNext.ShowShortcut = false;
             this.hsFindNext.Size = new System.Drawing.Size(38, 24);
             this.hsFindNext.TabIndex = 5;
@@ -351,6 +355,15 @@
             this.hsFindNext.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsFindNext.UseVisualStyleBackColor = false;
             this.hsFindNext.Click += new System.EventHandler(this.hsFindNext_Click);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(81, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // hsPrev
             // 
@@ -378,6 +391,7 @@
             this.hsPrev.Name = "hsPrev";
             this.hsPrev.NonMarkedText = "";
             this.hsPrev.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsPrev.ShortcutNewline = false;
             this.hsPrev.ShowShortcut = false;
             this.hsPrev.Size = new System.Drawing.Size(38, 24);
             this.hsPrev.TabIndex = 6;
@@ -427,6 +441,7 @@
             this.hsSearchNextFromStart.Name = "hsSearchNextFromStart";
             this.hsSearchNextFromStart.NonMarkedText = "";
             this.hsSearchNextFromStart.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSearchNextFromStart.ShortcutNewline = false;
             this.hsSearchNextFromStart.ShowShortcut = false;
             this.hsSearchNextFromStart.Size = new System.Drawing.Size(38, 24);
             this.hsSearchNextFromStart.TabIndex = 8;
@@ -483,15 +498,6 @@
             this.ckCaseSensitive.UseVisualStyleBackColor = true;
             this.ckCaseSensitive.CheckedChanged += new System.EventHandler(this.ckCaseSensitive_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(81, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // hsSaveText
             // 
             this.hsSaveText.BackColor = System.Drawing.Color.Transparent;
@@ -518,6 +524,7 @@
             this.hsSaveText.Name = "hsSaveText";
             this.hsSaveText.NonMarkedText = "";
             this.hsSaveText.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsSaveText.ShortcutNewline = false;
             this.hsSaveText.ShowShortcut = false;
             this.hsSaveText.Size = new System.Drawing.Size(45, 46);
             this.hsSaveText.TabIndex = 10;
@@ -559,7 +566,7 @@
             this.Load += new System.EventHandler(this.TextInfoForm_Load);
             this.pnlCenter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctInfo)).EndInit();
-            this.flpUpper.ResumeLayout(false);
+            this.flpFormUpper.ResumeLayout(false);
             this.gbSearchPattern.ResumeLayout(false);
             this.gbSearchPattern.PerformLayout();
             this.gbNavigate.ResumeLayout(false);
@@ -575,7 +582,7 @@
         private SeControlsLib.HotSpot hsClose;
         private FastColoredTextBoxNS.FastColoredTextBox fctInfo;
         private SeControlsLib.HotSpot hsFindPattern;
-        private System.Windows.Forms.FlowLayoutPanel flpUpper;
+        private System.Windows.Forms.FlowLayoutPanel flpFormUpper;
         private System.Windows.Forms.GroupBox gbSearchPattern;
         private System.Windows.Forms.TextBox txtSearchPattern;
         private SeControlsLib.HotSpot hsFindNext;

@@ -86,8 +86,15 @@ namespace FBXpert
             this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Monitoring");
         }
 
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlUsersUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
         private void DBUserManagementForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             ShowCaptions();
             RefreshUsers();

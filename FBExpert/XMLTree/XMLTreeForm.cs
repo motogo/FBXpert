@@ -25,9 +25,13 @@ namespace FBXpert.KonfigurationForms
 	    }
 
         private string xmlFile = String.Empty;
-
-        private void PFADEForm_Load(object sender, EventArgs e)
+        public void SetControlSizes()
         {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+        private void XMLTreeForm_Load(object sender, EventArgs e)
+        {
+            SetControlSizes();
             FormDesign.SetFormLeft(this);
             if (string.IsNullOrEmpty(xmlFile)) return;
             FileInfo fi = new FileInfo(xmlFile);

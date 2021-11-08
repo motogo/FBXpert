@@ -2,6 +2,7 @@
 using BasicFormClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
+using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FormInterfaces;
 using SEMessageBoxLibrary;
@@ -15,74 +16,77 @@ namespace FBXpert
     public partial class BackupForm : IEditForm
     {
         
-        private DBRegistrationClass DBReg = null;
+        private DBRegistrationClass dbRegOrg = null;
+        private DBRegistrationClass _dbReg = null;
+        private int n = 0;
         public BackupForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
             this.MdiParent = parent;            
-            DBReg = drc;
-            _dbReg = DBReg.Clone();
+            dbRegOrg = drc;
+            _dbReg = dbRegOrg.Clone();
+        }
+
+        public void  EditToData()
+        {
+
         }
                              
         private void hsClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-                
+        public void SetControlSizes()
+        {
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlBackupUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlRestoreUpper.Height = AppSizeConstants.UpperFormBandHeight;
+        }
+        public bool TestOpen(DBRegistrationClass dbReg)
+        {
+            string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
+            string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
+            _dbReg.Server = server;
+            _dbReg.DatabasePath = path;
+            string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
+            string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString, (int)_dbReg.Version >= (int)eDBVersion.FB3_32);
+            hsLifeTime.ToolTipActive = true;
+            hsLifeTime.ToolTipText = connectionString;
+            hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);
+            hsLifeTime.Text = lifeTime;
+            return (lifeTime != "-1");
+        }
+
         private void BackupForm_Load(object sender, EventArgs e)
         {
+            SetControlSizes();
+            AppStaticFunctionsClass.GetDatabases(cbConnection, dbRegOrg);
+            TestOpen(dbRegOrg);
+
+            txtBackupLocation.Text = dbRegOrg.DatabasePath.ToLower().Replace(".fdb",".fbk");
+            txtRestoreLocation.Text = dbRegOrg.DatabasePath.ToLower().Replace(".fdb", ".fbk");
+            txtRestoreDestinationDatabasePath.Text = dbRegOrg.DatabasePath;
+
             FormDesign.SetFormLeft(this);
             ShowCaptions();
-            DataToEdit();           
         }
 
         public void ShowCaptions()
         {
-            lblCaption.Text = $@"Database Backup/Restore:{DBReg.Alias}";
-            this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Database Backup/Restore");
+            this.Text = DevelopmentClass.Instance().GetDBInfo(dbRegOrg, "Database Backup/Restore");
         }
-
-        private DBRegistrationClass _dbReg = null;
 
         public void DataToEdit()
         {            
-            txtRestoreDestinationDatabasePath.Text = DBReg.DatabasePath;
-            txtBackupSourceDatabasePath.Text = DBReg.DatabasePath;
-
-            if(DBReg.ConnectionType == eConnectionType.embedded)
-            {                
-                rbEmbedded.Checked = true;
-                txtServer.Text = "";
-            }            
-            else
-            {
-                rbRemote.Checked = true;
-                txtServer.Text = DBReg.Server;
-            }
-        }
-
-        
-        public void EditToData()
-        {                       
-            if(rbEmbedded.Checked)
-            {                
-                _dbReg.ConnectionType = eConnectionType.embedded;
-            }
-            else if(rbRemote.Checked)
-            {                
-                _dbReg.ConnectionType = eConnectionType.server;
-                _dbReg.Server = txtServer.Text;
-            }
-            _dbReg.DatabasePath = txtBackupSourceDatabasePath.Text;
-            
+          //DontRemove    
         }
 
         private void hsBackup_Click(object sender, EventArgs e)
         {            
             n = 0;
             lvBackupMessage.Items.Clear();
-            EditToData();
-            
+         
+            _dbReg = (DBRegistrationClass) cbConnection.SelectedItem;
             string cns = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var bu = new BackupClass(cns);
             var lf = new List<FirebirdSql.Data.Services.FbBackupFile>();
@@ -138,10 +142,7 @@ namespace FBXpert
             {
                 Console.WriteLine(ex.Message);
             }
-}
-
-        int n = 0;
-        
+        }
         private void Backup_ServiceOutput(object sender, FirebirdSql.Data.Services.ServiceOutputEventArgs e)
         {
             n++;
@@ -184,15 +185,15 @@ namespace FBXpert
             n = 0;
             var ca = new ConnectionAttributes
             {
-                Server = DBReg.Server,
+                Server = dbRegOrg.Server,
                 //SE  ca.Client = DRC.Client;
                 DatabasePath = txtRestoreDestinationDatabasePath.Text,
-                Password = DBReg.Password,
-                User = DBReg.User,
-                ConnectionType = DBReg.ConnectionType,
-                CharSet = DBReg.CharSet,
-                PacketSize = DBReg.PacketSize,
-                Port = DBReg.Port
+                Password = dbRegOrg.Password,
+                User = dbRegOrg.User,
+                ConnectionType = dbRegOrg.ConnectionType,
+                CharSet = dbRegOrg.CharSet,
+                PacketSize = dbRegOrg.PacketSize,
+                Port = dbRegOrg.Port
             };
 
             string connstr = ConnectionStrings.Instance.MakeConnectionString(ca);
@@ -298,9 +299,11 @@ namespace FBXpert
         
         private void hsLoadBackupFile_Click(object sender, EventArgs e)
         {
-            ofdBackup.InitialDirectory = DBReg.DatabasePath;
+            
+            FileInfo fi = new FileInfo(txtBackupLocation.Text);
+            ofdBackup.InitialDirectory = fi.DirectoryName;
             String guidstr = Guid.NewGuid().ToString();
-            ofdBackup.FileName = $@"{DBReg.Alias.Replace(" ","")}_{guidstr}.fbk";
+            ofdBackup.FileName = $@"{dbRegOrg.Alias.Replace(" ","")}_{guidstr}.fbk";
             ofdBackup.Title = "Backupfile";
             if(ofdBackup.ShowDialog() == DialogResult.OK)
             {
@@ -310,7 +313,8 @@ namespace FBXpert
 
         private void hsLoadRestoreFile_Click(object sender, EventArgs e)
         {
-            ofdRestore.InitialDirectory = DBReg.DatabasePath;
+            FileInfo fi = new FileInfo(txtRestoreLocation.Text);
+            ofdRestore.InitialDirectory = fi.DirectoryName;
             ofdRestore.Title = "Restore to...";
             ofdRestore.FileName = "Database.fbd";
             if (ofdRestore.ShowDialog() == DialogResult.OK)
@@ -321,7 +325,8 @@ namespace FBXpert
 
         private void hotSpot1_Click(object sender, EventArgs e)
         {
-            ofdRestoreFromDatabase.InitialDirectory = DBReg.DatabasePath;            
+            FileInfo fi = new FileInfo(txtRestoreDestinationDatabasePath.Text);
+            ofdRestoreFromDatabase.InitialDirectory = fi.DirectoryName;            
             ofdRestoreFromDatabase.Title = "Restore from Database";
             
             if (ofdRestoreFromDatabase.ShowDialog() == DialogResult.OK)
@@ -337,48 +342,6 @@ namespace FBXpert
             {
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExceptionCaption","DatabaseFileExistsNoCreate",  SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation,null,null);
                 rbReplaceDatabase.Checked = true;
-            }
-        }
-
-        private void rbLocal_CheckedChanged(object sender, EventArgs e)
-        {
-            rbCheckedChanged();            
-        }
-
-        private void rbRemote_CheckedChanged(object sender, EventArgs e)
-        {
-            rbCheckedChanged();            
-        }
-        private void rbCheckedChanged()
-        {
-            if(rbRemote.Checked)
-            {
-                txtServer.Enabled = true;
-                txtServer.Text = DBReg.Server;
-            }
-            else if(rbEmbedded.Checked)
-            {
-                txtServer.Enabled = false;
-                txtServer.Text = "";
-            }
-            
-            EditToData();
-            txtBackupSourceDatabasePath.Text = _dbReg.DatabasePath;
-        }
-
-        private void rbEmbedded_CheckedChanged(object sender, EventArgs e)
-        {
-            rbCheckedChanged();            
-        }
-
-        private void hsChooseDatabase_Click(object sender, EventArgs e)
-        {
-            ofdDatabase.InitialDirectory = DBReg.DatabasePath;
-            ofdDatabase.FileName = txtBackupSourceDatabasePath.Text;
-            ofdDatabase.Title = "Databasefile";
-            if (ofdDatabase.ShowDialog() == DialogResult.OK)
-            {
-                txtBackupSourceDatabasePath.Text = ofdDatabase.FileName;
             }
         }
     }  

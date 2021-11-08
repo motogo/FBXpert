@@ -9,7 +9,7 @@ namespace SQLView
     /// </summary>
     partial class ExperienceInfoForm : BasicNormalFormClass
     {
-        private System.Windows.Forms.Panel pnl_upper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnl_center;
 
 
@@ -35,7 +35,7 @@ namespace SQLView
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExperienceInfoForm));
-            this.pnl_upper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.gbDatabase = new System.Windows.Forms.GroupBox();
             this.txtDatabase = new System.Windows.Forms.TextBox();
@@ -59,6 +59,7 @@ namespace SQLView
             this.hsInsertExperienceInfo = new SeControlsLib.HotSpot();
             this.flpExperienceInfoUpper = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPageLocalExperience = new System.Windows.Forms.TabPage();
+            this.dgvLocalExperienceInfo = new System.Windows.Forms.DataGridView();
             this.pnlLocalExperienceInfoUpper = new System.Windows.Forms.Panel();
             this.fctLocalExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
             this.gbLocalExperienceInfoKey = new System.Windows.Forms.GroupBox();
@@ -68,15 +69,14 @@ namespace SQLView
             this.hsClearLocalExperienceInfo = new SeControlsLib.HotSpot();
             this.hsRefreshLocalExperienceInfo = new SeControlsLib.HotSpot();
             this.hsInsertLoaclExperienceInfo = new SeControlsLib.HotSpot();
-            this.flpLocalExperienceInfo = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpLocalExperienceInfoUpper = new System.Windows.Forms.FlowLayoutPanel();
             this.gbLocalDatabase = new System.Windows.Forms.GroupBox();
             this.txtLocalDatabase = new System.Windows.Forms.TextBox();
             this.hsLoadLocalDatabasePath = new SeControlsLib.HotSpot();
-            this.dgvLocalExperienceInfo = new System.Windows.Forms.DataGridView();
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.helpMain = new System.Windows.Forms.HelpProvider();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pnl_upper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.gbDatabase.SuspendLayout();
             this.pnl_center.SuspendLayout();
             this.tcSQLCONTROL.SuspendLayout();
@@ -88,24 +88,24 @@ namespace SQLView
             this.gbExperienceInfoKey.SuspendLayout();
             this.flpExperienceInfoUpper.SuspendLayout();
             this.tabPageLocalExperience.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).BeginInit();
             this.pnlLocalExperienceInfoUpper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctLocalExperienceInfo)).BeginInit();
             this.gbLocalExperienceInfoKey.SuspendLayout();
-            this.flpLocalExperienceInfo.SuspendLayout();
+            this.flpLocalExperienceInfoUpper.SuspendLayout();
             this.gbLocalDatabase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnl_upper
+            // pnlUpperForm
             // 
-            this.pnl_upper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnl_upper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_upper.Controls.Add(this.hsClose);
-            this.pnl_upper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_upper.Location = new System.Drawing.Point(0, 0);
-            this.pnl_upper.Name = "pnl_upper";
-            this.pnl_upper.Size = new System.Drawing.Size(1604, 49);
-            this.pnl_upper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlUpperForm";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1604, 49);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsClose
             // 
@@ -134,6 +134,7 @@ namespace SQLView
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 47);
             this.hsClose.TabIndex = 26;
@@ -171,9 +172,9 @@ namespace SQLView
             // txtDatabase
             // 
             this.txtDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDatabase.Location = new System.Drawing.Point(3, 16);
+            this.txtDatabase.Location = new System.Drawing.Point(3, 18);
             this.txtDatabase.Name = "txtDatabase";
-            this.txtDatabase.Size = new System.Drawing.Size(555, 20);
+            this.txtDatabase.Size = new System.Drawing.Size(555, 22);
             this.txtDatabase.TabIndex = 1;
             // 
             // hsLoadDatabasePath
@@ -194,7 +195,7 @@ namespace SQLView
             this.hsLoadDatabasePath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadDatabasePath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadDatabasePath.ImageToggleOnSelect = true;
-            this.hsLoadDatabasePath.Location = new System.Drawing.Point(558, 16);
+            this.hsLoadDatabasePath.Location = new System.Drawing.Point(558, 18);
             this.hsLoadDatabasePath.Marked = false;
             this.hsLoadDatabasePath.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadDatabasePath.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -203,8 +204,9 @@ namespace SQLView
             this.hsLoadDatabasePath.Name = "hsLoadDatabasePath";
             this.hsLoadDatabasePath.NonMarkedText = "";
             this.hsLoadDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadDatabasePath.ShortcutNewline = false;
             this.hsLoadDatabasePath.ShowShortcut = false;
-            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 28);
+            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 26);
             this.hsLoadDatabasePath.TabIndex = 3;
             this.hsLoadDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadDatabasePath.ToolTipActive = false;
@@ -341,7 +343,6 @@ namespace SQLView
             this.fctExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctExperienceInfo.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctExperienceInfo.IsReplaceMode = false;
             this.fctExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctExperienceInfo.LeftBracket = '(';
@@ -399,6 +400,7 @@ namespace SQLView
             this.hsUpdateExperienceInfo.Name = "hsUpdateExperienceInfo";
             this.hsUpdateExperienceInfo.NonMarkedText = "Execute";
             this.hsUpdateExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateExperienceInfo.ShortcutNewline = false;
             this.hsUpdateExperienceInfo.ShowShortcut = false;
             this.hsUpdateExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsUpdateExperienceInfo.TabIndex = 41;
@@ -450,6 +452,7 @@ namespace SQLView
             this.hsDeleteExperienceInfo.Name = "hsDeleteExperienceInfo";
             this.hsDeleteExperienceInfo.NonMarkedText = "Execute";
             this.hsDeleteExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDeleteExperienceInfo.ShortcutNewline = false;
             this.hsDeleteExperienceInfo.ShowShortcut = false;
             this.hsDeleteExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsDeleteExperienceInfo.TabIndex = 40;
@@ -510,6 +513,7 @@ namespace SQLView
             this.hsClearExperienceInfoFields.Name = "hsClearExperienceInfoFields";
             this.hsClearExperienceInfoFields.NonMarkedText = "Clear Fields";
             this.hsClearExperienceInfoFields.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearExperienceInfoFields.ShortcutNewline = false;
             this.hsClearExperienceInfoFields.ShowShortcut = false;
             this.hsClearExperienceInfoFields.Size = new System.Drawing.Size(75, 45);
             this.hsClearExperienceInfoFields.TabIndex = 37;
@@ -561,6 +565,7 @@ namespace SQLView
             this.hsRefreshExperienceInfo.Name = "hsRefreshExperienceInfo";
             this.hsRefreshExperienceInfo.NonMarkedText = "Refresh";
             this.hsRefreshExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshExperienceInfo.ShortcutNewline = false;
             this.hsRefreshExperienceInfo.ShowShortcut = false;
             this.hsRefreshExperienceInfo.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshExperienceInfo.TabIndex = 33;
@@ -612,6 +617,7 @@ namespace SQLView
             this.hsInsertExperienceInfo.Name = "hsInsertExperienceInfo";
             this.hsInsertExperienceInfo.NonMarkedText = "Execute";
             this.hsInsertExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInsertExperienceInfo.ShortcutNewline = false;
             this.hsInsertExperienceInfo.ShowShortcut = false;
             this.hsInsertExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsInsertExperienceInfo.TabIndex = 28;
@@ -649,8 +655,7 @@ namespace SQLView
             // 
             this.tabPageLocalExperience.Controls.Add(this.dgvLocalExperienceInfo);
             this.tabPageLocalExperience.Controls.Add(this.pnlLocalExperienceInfoUpper);
-            this.tabPageLocalExperience.Controls.Add(this.flpLocalExperienceInfo);
-            
+            this.tabPageLocalExperience.Controls.Add(this.flpLocalExperienceInfoUpper);
             this.tabPageLocalExperience.Location = new System.Drawing.Point(4, 23);
             this.tabPageLocalExperience.Name = "tabPageLocalExperience";
             this.tabPageLocalExperience.Padding = new System.Windows.Forms.Padding(3);
@@ -658,6 +663,21 @@ namespace SQLView
             this.tabPageLocalExperience.TabIndex = 11;
             this.tabPageLocalExperience.Text = "Local Experience";
             this.tabPageLocalExperience.UseVisualStyleBackColor = true;
+            // 
+            // dgvLocalExperienceInfo
+            // 
+            this.dgvLocalExperienceInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvLocalExperienceInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvLocalExperienceInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLocalExperienceInfo.ContextMenuStrip = this.cmdExperienceInfo;
+            this.dgvLocalExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLocalExperienceInfo.Location = new System.Drawing.Point(3, 168);
+            this.dgvLocalExperienceInfo.Name = "dgvLocalExperienceInfo";
+            this.dgvLocalExperienceInfo.RowHeadersVisible = false;
+            this.dgvLocalExperienceInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLocalExperienceInfo.Size = new System.Drawing.Size(1588, 450);
+            this.dgvLocalExperienceInfo.TabIndex = 42;
+            this.dgvLocalExperienceInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLocalExperienceInfo_CellMouseClick);
             // 
             // pnlLocalExperienceInfoUpper
             // 
@@ -692,6 +712,7 @@ namespace SQLView
             this.fctLocalExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctLocalExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctLocalExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctLocalExperienceInfo.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctLocalExperienceInfo.IsReplaceMode = false;
             this.fctLocalExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctLocalExperienceInfo.LeftBracket = '(';
@@ -749,6 +770,7 @@ namespace SQLView
             this.hsUpdateLocalExperienceInfo.Name = "hsUpdateLocalExperienceInfo";
             this.hsUpdateLocalExperienceInfo.NonMarkedText = "Execute";
             this.hsUpdateLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateLocalExperienceInfo.ShortcutNewline = false;
             this.hsUpdateLocalExperienceInfo.ShowShortcut = false;
             this.hsUpdateLocalExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsUpdateLocalExperienceInfo.TabIndex = 41;
@@ -800,6 +822,7 @@ namespace SQLView
             this.hsDeleteLocalData.Name = "hsDeleteLocalData";
             this.hsDeleteLocalData.NonMarkedText = "Execute";
             this.hsDeleteLocalData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDeleteLocalData.ShortcutNewline = false;
             this.hsDeleteLocalData.ShowShortcut = false;
             this.hsDeleteLocalData.Size = new System.Drawing.Size(79, 45);
             this.hsDeleteLocalData.TabIndex = 40;
@@ -860,6 +883,7 @@ namespace SQLView
             this.hsClearLocalExperienceInfo.Name = "hsClearLocalExperienceInfo";
             this.hsClearLocalExperienceInfo.NonMarkedText = "Clear Fields";
             this.hsClearLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearLocalExperienceInfo.ShortcutNewline = false;
             this.hsClearLocalExperienceInfo.ShowShortcut = false;
             this.hsClearLocalExperienceInfo.Size = new System.Drawing.Size(75, 45);
             this.hsClearLocalExperienceInfo.TabIndex = 37;
@@ -911,6 +935,7 @@ namespace SQLView
             this.hsRefreshLocalExperienceInfo.Name = "hsRefreshLocalExperienceInfo";
             this.hsRefreshLocalExperienceInfo.NonMarkedText = "Refresh";
             this.hsRefreshLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshLocalExperienceInfo.ShortcutNewline = false;
             this.hsRefreshLocalExperienceInfo.ShowShortcut = false;
             this.hsRefreshLocalExperienceInfo.Size = new System.Drawing.Size(89, 45);
             this.hsRefreshLocalExperienceInfo.TabIndex = 33;
@@ -962,6 +987,7 @@ namespace SQLView
             this.hsInsertLoaclExperienceInfo.Name = "hsInsertLoaclExperienceInfo";
             this.hsInsertLoaclExperienceInfo.NonMarkedText = "Execute";
             this.hsInsertLoaclExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsInsertLoaclExperienceInfo.ShortcutNewline = false;
             this.hsInsertLoaclExperienceInfo.ShowShortcut = false;
             this.hsInsertLoaclExperienceInfo.Size = new System.Drawing.Size(79, 45);
             this.hsInsertLoaclExperienceInfo.TabIndex = 28;
@@ -986,14 +1012,14 @@ namespace SQLView
             this.hsInsertLoaclExperienceInfo.UseVisualStyleBackColor = false;
             this.hsInsertLoaclExperienceInfo.Click += new System.EventHandler(this.hsInsertLoaclExperienceInfo_Click);
             // 
-            // flpLocalExperienceInfo
+            // flpLocalExperienceInfoUpper
             // 
-            this.flpLocalExperienceInfo.Controls.Add(this.gbLocalDatabase);
-            this.flpLocalExperienceInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flpLocalExperienceInfo.Location = new System.Drawing.Point(3, 3);
-            this.flpLocalExperienceInfo.Name = "flpLocalExperienceInfo";
-            this.flpLocalExperienceInfo.Size = new System.Drawing.Size(1588, 54);
-            this.flpLocalExperienceInfo.TabIndex = 46;
+            this.flpLocalExperienceInfoUpper.Controls.Add(this.gbLocalDatabase);
+            this.flpLocalExperienceInfoUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpLocalExperienceInfoUpper.Location = new System.Drawing.Point(3, 3);
+            this.flpLocalExperienceInfoUpper.Name = "flpLocalExperienceInfoUpper";
+            this.flpLocalExperienceInfoUpper.Size = new System.Drawing.Size(1588, 54);
+            this.flpLocalExperienceInfoUpper.TabIndex = 46;
             // 
             // gbLocalDatabase
             // 
@@ -1009,9 +1035,9 @@ namespace SQLView
             // txtLocalDatabase
             // 
             this.txtLocalDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLocalDatabase.Location = new System.Drawing.Point(3, 16);
+            this.txtLocalDatabase.Location = new System.Drawing.Point(3, 18);
             this.txtLocalDatabase.Name = "txtLocalDatabase";
-            this.txtLocalDatabase.Size = new System.Drawing.Size(555, 20);
+            this.txtLocalDatabase.Size = new System.Drawing.Size(555, 22);
             this.txtLocalDatabase.TabIndex = 1;
             // 
             // hsLoadLocalDatabasePath
@@ -1032,7 +1058,7 @@ namespace SQLView
             this.hsLoadLocalDatabasePath.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
             this.hsLoadLocalDatabasePath.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadLocalDatabasePath.ImageToggleOnSelect = true;
-            this.hsLoadLocalDatabasePath.Location = new System.Drawing.Point(558, 16);
+            this.hsLoadLocalDatabasePath.Location = new System.Drawing.Point(558, 18);
             this.hsLoadLocalDatabasePath.Marked = false;
             this.hsLoadLocalDatabasePath.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadLocalDatabasePath.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1041,8 +1067,9 @@ namespace SQLView
             this.hsLoadLocalDatabasePath.Name = "hsLoadLocalDatabasePath";
             this.hsLoadLocalDatabasePath.NonMarkedText = "";
             this.hsLoadLocalDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadLocalDatabasePath.ShortcutNewline = false;
             this.hsLoadLocalDatabasePath.ShowShortcut = false;
-            this.hsLoadLocalDatabasePath.Size = new System.Drawing.Size(45, 28);
+            this.hsLoadLocalDatabasePath.Size = new System.Drawing.Size(45, 26);
             this.hsLoadLocalDatabasePath.TabIndex = 3;
             this.hsLoadLocalDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadLocalDatabasePath.ToolTipActive = false;
@@ -1063,21 +1090,6 @@ namespace SQLView
             this.hsLoadLocalDatabasePath.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hsLoadLocalDatabasePath.UseVisualStyleBackColor = false;
             this.hsLoadLocalDatabasePath.Click += new System.EventHandler(this.hsLoadLocalDatabasePath_Click);
-            // 
-            // dgvLocalExperienceInfo
-            // 
-            this.dgvLocalExperienceInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvLocalExperienceInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvLocalExperienceInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLocalExperienceInfo.ContextMenuStrip = this.cmdExperienceInfo;
-            this.dgvLocalExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLocalExperienceInfo.Location = new System.Drawing.Point(3, 3);
-            this.dgvLocalExperienceInfo.Name = "dgvLocalExperienceInfo";
-            this.dgvLocalExperienceInfo.RowHeadersVisible = false;
-            this.dgvLocalExperienceInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLocalExperienceInfo.Size = new System.Drawing.Size(1588, 615);
-            this.dgvLocalExperienceInfo.TabIndex = 42;
-            this.dgvLocalExperienceInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLocalExperienceInfo_CellMouseClick);
             // 
             // ilTabControl
             // 
@@ -1115,7 +1127,8 @@ namespace SQLView
             // 
             this.ClientSize = new System.Drawing.Size(1604, 699);
             this.Controls.Add(this.pnl_center);
-            this.Controls.Add(this.pnl_upper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpMain.SetHelpKeyword(this, "Workflow Bestellung");
             this.helpMain.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.helpMain.SetHelpString(this, "");
@@ -1127,7 +1140,7 @@ namespace SQLView
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExperienceInfoForm_FormClosing);
             this.Load += new System.EventHandler(this.ExperienceInfoForm_Load);
             this.Enter += new System.EventHandler(this.ExperienceInfoForm_Enter);
-            this.pnl_upper.ResumeLayout(false);
+            this.pnlFormUpper.ResumeLayout(false);
             this.gbDatabase.ResumeLayout(false);
             this.gbDatabase.PerformLayout();
             this.pnl_center.ResumeLayout(false);
@@ -1141,14 +1154,14 @@ namespace SQLView
             this.gbExperienceInfoKey.PerformLayout();
             this.flpExperienceInfoUpper.ResumeLayout(false);
             this.tabPageLocalExperience.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).EndInit();
             this.pnlLocalExperienceInfoUpper.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctLocalExperienceInfo)).EndInit();
             this.gbLocalExperienceInfoKey.ResumeLayout(false);
             this.gbLocalExperienceInfoKey.PerformLayout();
-            this.flpLocalExperienceInfo.ResumeLayout(false);
+            this.flpLocalExperienceInfoUpper.ResumeLayout(false);
             this.gbLocalDatabase.ResumeLayout(false);
             this.gbLocalDatabase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1189,7 +1202,7 @@ namespace SQLView
         private SeControlsLib.HotSpot hsRefreshLocalExperienceInfo;
         private SeControlsLib.HotSpot hsInsertLoaclExperienceInfo;
         private Panel pnlLocalExperienceInfoUpper;
-        private FlowLayoutPanel flpLocalExperienceInfo;
+        private FlowLayoutPanel flpLocalExperienceInfoUpper;
         private FlowLayoutPanel flpExperienceInfoUpper;
         private GroupBox gbLocalDatabase;
         private TextBox txtLocalDatabase;

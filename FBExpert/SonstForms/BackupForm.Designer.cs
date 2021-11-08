@@ -34,8 +34,7 @@ namespace FBXpert
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackupForm));
-            this.pnlUpper = new System.Windows.Forms.Panel();
-            this.lblCaption = new System.Windows.Forms.Label();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
@@ -52,14 +51,6 @@ namespace FBXpert
             this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.gbConnectionType = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtBackupSourceDatabasePath = new System.Windows.Forms.TextBox();
-            this.hsChooseDatabase = new SeControlsLib.HotSpot();
-            this.rbEmbedded = new System.Windows.Forms.RadioButton();
-            this.gbServer = new System.Windows.Forms.GroupBox();
-            this.txtServer = new System.Windows.Forms.TextBox();
-            this.rbRemote = new System.Windows.Forms.RadioButton();
             this.cbUseLocalhost = new System.Windows.Forms.CheckBox();
             this.cbBackupExpand = new System.Windows.Forms.CheckBox();
             this.cbBackupOldDescriptions = new System.Windows.Forms.CheckBox();
@@ -77,7 +68,10 @@ namespace FBXpert
             this.gbBackupLocation = new System.Windows.Forms.GroupBox();
             this.txtBackupLocation = new System.Windows.Forms.TextBox();
             this.hsLoadBackupFile = new SeControlsLib.HotSpot();
-            this.pnlFieldUpper = new System.Windows.Forms.Panel();
+            this.pnlBackupUpper = new System.Windows.Forms.Panel();
+            this.hsLifeTime = new SeControlsLib.HotSpot();
+            this.bnConnection = new System.Windows.Forms.GroupBox();
+            this.cbConnection = new System.Windows.Forms.ComboBox();
             this.hsBackup = new SeControlsLib.HotSpot();
             this.tabPageRestore = new System.Windows.Forms.TabPage();
             this.pnRestoreCenter = new System.Windows.Forms.Panel();
@@ -114,7 +108,7 @@ namespace FBXpert
             this.pnlRestoreUpper = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtRestoreDestinationDatabasePath = new System.Windows.Forms.TextBox();
-            this.hotSpot1 = new SeControlsLib.HotSpot();
+            this.hsRestorDatabaseLocation = new SeControlsLib.HotSpot();
             this.hsRestore = new SeControlsLib.HotSpot();
             this.dsDependenciesFrom = new System.Data.DataSet();
             this.dataTable6 = new System.Data.DataTable();
@@ -123,7 +117,7 @@ namespace FBXpert
             this.ofdRestore = new System.Windows.Forms.OpenFileDialog();
             this.ofdRestoreFromDatabase = new System.Windows.Forms.OpenFileDialog();
             this.ofdDatabase = new System.Windows.Forms.OpenFileDialog();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
             this.tabPageBackup.SuspendLayout();
@@ -131,12 +125,10 @@ namespace FBXpert
             this.gbBackupLog.SuspendLayout();
             this.gbBackupOptions.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.gbConnectionType.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.gbServer.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.gbBackupLocation.SuspendLayout();
-            this.pnlFieldUpper.SuspendLayout();
+            this.pnlBackupUpper.SuspendLayout();
+            this.bnConnection.SuspendLayout();
             this.tabPageRestore.SuspendLayout();
             this.pnRestoreCenter.SuspendLayout();
             this.gbRestoreLog.SuspendLayout();
@@ -156,26 +148,15 @@ namespace FBXpert
             ((System.ComponentModel.ISupportInitialize)(this.bsDependenciesFrom)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.lblCaption);
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(1276, 42);
-            this.pnlUpper.TabIndex = 0;
-            // 
-            // lblCaption
-            // 
-            this.lblCaption.AutoSize = true;
-            this.lblCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaption.Location = new System.Drawing.Point(95, 10);
-            this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(89, 20);
-            this.lblCaption.TabIndex = 4;
-            this.lblCaption.Text = "lblCaption";
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(1340, 45);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsClose
             // 
@@ -204,8 +185,9 @@ namespace FBXpert
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
             this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
             this.hsClose.ShowShortcut = false;
-            this.hsClose.Size = new System.Drawing.Size(45, 42);
+            this.hsClose.Size = new System.Drawing.Size(45, 45);
             this.hsClose.TabIndex = 1;
             this.hsClose.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsClose.ToolTipActive = false;
@@ -231,18 +213,18 @@ namespace FBXpert
             // 
             this.pnlLower.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlLower.Location = new System.Drawing.Point(0, 648);
+            this.pnlLower.Location = new System.Drawing.Point(0, 698);
             this.pnlLower.Name = "pnlLower";
-            this.pnlLower.Size = new System.Drawing.Size(1276, 32);
+            this.pnlLower.Size = new System.Drawing.Size(1340, 34);
             this.pnlLower.TabIndex = 1;
             // 
             // pnlCenter
             // 
             this.pnlCenter.Controls.Add(this.tabControlFields);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCenter.Location = new System.Drawing.Point(0, 42);
+            this.pnlCenter.Location = new System.Drawing.Point(0, 45);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(1276, 606);
+            this.pnlCenter.Size = new System.Drawing.Size(1340, 653);
             this.pnlCenter.TabIndex = 2;
             // 
             // tabControlFields
@@ -253,17 +235,17 @@ namespace FBXpert
             this.tabControlFields.Location = new System.Drawing.Point(0, 0);
             this.tabControlFields.Name = "tabControlFields";
             this.tabControlFields.SelectedIndex = 0;
-            this.tabControlFields.Size = new System.Drawing.Size(1276, 606);
+            this.tabControlFields.Size = new System.Drawing.Size(1340, 653);
             this.tabControlFields.TabIndex = 18;
             // 
             // tabPageBackup
             // 
             this.tabPageBackup.Controls.Add(this.pnlFieldsCenter);
-            this.tabPageBackup.Controls.Add(this.pnlFieldUpper);
-            this.tabPageBackup.Location = new System.Drawing.Point(4, 22);
+            this.tabPageBackup.Controls.Add(this.pnlBackupUpper);
+            this.tabPageBackup.Location = new System.Drawing.Point(4, 23);
             this.tabPageBackup.Name = "tabPageBackup";
             this.tabPageBackup.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBackup.Size = new System.Drawing.Size(1268, 580);
+            this.tabPageBackup.Size = new System.Drawing.Size(1332, 626);
             this.tabPageBackup.TabIndex = 0;
             this.tabPageBackup.Text = "Backup";
             this.tabPageBackup.UseVisualStyleBackColor = true;
@@ -275,9 +257,9 @@ namespace FBXpert
             this.pnlFieldsCenter.Controls.Add(this.gbBackupLog);
             this.pnlFieldsCenter.Controls.Add(this.gbBackupOptions);
             this.pnlFieldsCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 46);
+            this.pnlFieldsCenter.Location = new System.Drawing.Point(3, 53);
             this.pnlFieldsCenter.Name = "pnlFieldsCenter";
-            this.pnlFieldsCenter.Size = new System.Drawing.Size(1262, 531);
+            this.pnlFieldsCenter.Size = new System.Drawing.Size(1326, 570);
             this.pnlFieldsCenter.TabIndex = 2;
             // 
             // gbBackupLog
@@ -286,7 +268,7 @@ namespace FBXpert
             this.gbBackupLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbBackupLog.Location = new System.Drawing.Point(617, 0);
             this.gbBackupLog.Name = "gbBackupLog";
-            this.gbBackupLog.Size = new System.Drawing.Size(641, 527);
+            this.gbBackupLog.Size = new System.Drawing.Size(705, 566);
             this.gbBackupLog.TabIndex = 9;
             this.gbBackupLog.TabStop = false;
             this.gbBackupLog.Text = "Log";
@@ -302,9 +284,9 @@ namespace FBXpert
             this.lvBackupMessage.FullRowSelect = true;
             this.lvBackupMessage.GridLines = true;
             this.lvBackupMessage.HideSelection = false;
-            this.lvBackupMessage.Location = new System.Drawing.Point(3, 16);
+            this.lvBackupMessage.Location = new System.Drawing.Point(3, 18);
             this.lvBackupMessage.Name = "lvBackupMessage";
-            this.lvBackupMessage.Size = new System.Drawing.Size(635, 508);
+            this.lvBackupMessage.Size = new System.Drawing.Size(699, 545);
             this.lvBackupMessage.TabIndex = 2;
             this.lvBackupMessage.UseCompatibleStateImageBehavior = false;
             this.lvBackupMessage.View = System.Windows.Forms.View.Details;
@@ -331,7 +313,7 @@ namespace FBXpert
             this.gbBackupOptions.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbBackupOptions.Location = new System.Drawing.Point(0, 0);
             this.gbBackupOptions.Name = "gbBackupOptions";
-            this.gbBackupOptions.Size = new System.Drawing.Size(617, 527);
+            this.gbBackupOptions.Size = new System.Drawing.Size(617, 566);
             this.gbBackupOptions.TabIndex = 10;
             this.gbBackupOptions.TabStop = false;
             this.gbBackupOptions.Text = "Backup Files";
@@ -345,9 +327,9 @@ namespace FBXpert
             this.lvBackup.FullRowSelect = true;
             this.lvBackup.GridLines = true;
             this.lvBackup.HideSelection = false;
-            this.lvBackup.Location = new System.Drawing.Point(3, 16);
+            this.lvBackup.Location = new System.Drawing.Point(3, 18);
             this.lvBackup.Name = "lvBackup";
-            this.lvBackup.Size = new System.Drawing.Size(611, 144);
+            this.lvBackup.Size = new System.Drawing.Size(611, 153);
             this.lvBackup.TabIndex = 0;
             this.lvBackup.UseCompatibleStateImageBehavior = false;
             this.lvBackup.View = System.Windows.Forms.View.Details;
@@ -364,7 +346,6 @@ namespace FBXpert
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.gbConnectionType);
             this.groupBox6.Controls.Add(this.cbUseLocalhost);
             this.groupBox6.Controls.Add(this.cbBackupExpand);
             this.groupBox6.Controls.Add(this.cbBackupOldDescriptions);
@@ -380,145 +361,18 @@ namespace FBXpert
             this.groupBox6.Controls.Add(this.hsRemoveBackupFile);
             this.groupBox6.Controls.Add(this.gbBackupLocation);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(3, 160);
+            this.groupBox6.Location = new System.Drawing.Point(3, 171);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(611, 364);
+            this.groupBox6.Size = new System.Drawing.Size(611, 392);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
-            // 
-            // gbConnectionType
-            // 
-            this.gbConnectionType.Controls.Add(this.groupBox2);
-            this.gbConnectionType.Controls.Add(this.rbEmbedded);
-            this.gbConnectionType.Controls.Add(this.gbServer);
-            this.gbConnectionType.Controls.Add(this.rbRemote);
-            this.gbConnectionType.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbConnectionType.Location = new System.Drawing.Point(3, 217);
-            this.gbConnectionType.Name = "gbConnectionType";
-            this.gbConnectionType.Size = new System.Drawing.Size(605, 144);
-            this.gbConnectionType.TabIndex = 24;
-            this.gbConnectionType.TabStop = false;
-            this.gbConnectionType.Text = "Database Connectiontype";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtBackupSourceDatabasePath);
-            this.groupBox2.Controls.Add(this.hsChooseDatabase);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 100);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(599, 41);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Databasepath";
-            // 
-            // txtBackupSourceDatabasePath
-            // 
-            this.txtBackupSourceDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBackupSourceDatabasePath.Location = new System.Drawing.Point(3, 16);
-            this.txtBackupSourceDatabasePath.Name = "txtBackupSourceDatabasePath";
-            this.txtBackupSourceDatabasePath.Size = new System.Drawing.Size(564, 20);
-            this.txtBackupSourceDatabasePath.TabIndex = 1;
-            // 
-            // hsChooseDatabase
-            // 
-            this.hsChooseDatabase.BackColor = System.Drawing.Color.Transparent;
-            this.hsChooseDatabase.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsChooseDatabase.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsChooseDatabase.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsChooseDatabase.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsChooseDatabase.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsChooseDatabase.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsChooseDatabase.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hsChooseDatabase.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsChooseDatabase.FlatAppearance.BorderSize = 0;
-            this.hsChooseDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsChooseDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsChooseDatabase.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsChooseDatabase.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hsChooseDatabase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hsChooseDatabase.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hsChooseDatabase.ImageToggleOnSelect = false;
-            this.hsChooseDatabase.Location = new System.Drawing.Point(567, 16);
-            this.hsChooseDatabase.Marked = false;
-            this.hsChooseDatabase.MarkedColor = System.Drawing.Color.Teal;
-            this.hsChooseDatabase.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsChooseDatabase.MarkedText = "";
-            this.hsChooseDatabase.MarkMode = false;
-            this.hsChooseDatabase.Name = "hsChooseDatabase";
-            this.hsChooseDatabase.NonMarkedText = "";
-            this.hsChooseDatabase.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsChooseDatabase.ShowShortcut = false;
-            this.hsChooseDatabase.Size = new System.Drawing.Size(29, 22);
-            this.hsChooseDatabase.TabIndex = 4;
-            this.hsChooseDatabase.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsChooseDatabase.ToolTipActive = false;
-            this.hsChooseDatabase.ToolTipAutomaticDelay = 500;
-            this.hsChooseDatabase.ToolTipAutoPopDelay = 5000;
-            this.hsChooseDatabase.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsChooseDatabase.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsChooseDatabase.ToolTipFor4ContextMenu = true;
-            this.hsChooseDatabase.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsChooseDatabase.ToolTipInitialDelay = 500;
-            this.hsChooseDatabase.ToolTipIsBallon = false;
-            this.hsChooseDatabase.ToolTipOwnerDraw = false;
-            this.hsChooseDatabase.ToolTipReshowDelay = 100;
-            this.hsChooseDatabase.ToolTipShowAlways = false;
-            this.hsChooseDatabase.ToolTipText = "";
-            this.hsChooseDatabase.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsChooseDatabase.ToolTipTitle = "";
-            this.hsChooseDatabase.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsChooseDatabase.UseVisualStyleBackColor = false;
-            this.hsChooseDatabase.Click += new System.EventHandler(this.hsChooseDatabase_Click);
-            // 
-            // rbEmbedded
-            // 
-            this.rbEmbedded.AutoSize = true;
-            this.rbEmbedded.Location = new System.Drawing.Point(18, 67);
-            this.rbEmbedded.Name = "rbEmbedded";
-            this.rbEmbedded.Size = new System.Drawing.Size(76, 17);
-            this.rbEmbedded.TabIndex = 8;
-            this.rbEmbedded.TabStop = true;
-            this.rbEmbedded.Text = "Embedded";
-            this.rbEmbedded.UseVisualStyleBackColor = true;
-            this.rbEmbedded.CheckedChanged += new System.EventHandler(this.rbEmbedded_CheckedChanged);
-            // 
-            // gbServer
-            // 
-            this.gbServer.Controls.Add(this.txtServer);
-            this.gbServer.Location = new System.Drawing.Point(101, 43);
-            this.gbServer.Name = "gbServer";
-            this.gbServer.Size = new System.Drawing.Size(199, 41);
-            this.gbServer.TabIndex = 7;
-            this.gbServer.TabStop = false;
-            this.gbServer.Text = "Server";
-            // 
-            // txtServer
-            // 
-            this.txtServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtServer.Location = new System.Drawing.Point(3, 16);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(193, 20);
-            this.txtServer.TabIndex = 1;
-            // 
-            // rbRemote
-            // 
-            this.rbRemote.AutoSize = true;
-            this.rbRemote.Location = new System.Drawing.Point(18, 43);
-            this.rbRemote.Name = "rbRemote";
-            this.rbRemote.Size = new System.Drawing.Size(62, 17);
-            this.rbRemote.TabIndex = 2;
-            this.rbRemote.TabStop = true;
-            this.rbRemote.Text = "Remote";
-            this.rbRemote.UseVisualStyleBackColor = true;
-            this.rbRemote.CheckedChanged += new System.EventHandler(this.rbRemote_CheckedChanged);
             // 
             // cbUseLocalhost
             // 
             this.cbUseLocalhost.AutoSize = true;
-            this.cbUseLocalhost.Location = new System.Drawing.Point(187, 194);
+            this.cbUseLocalhost.Location = new System.Drawing.Point(187, 223);
             this.cbUseLocalhost.Name = "cbUseLocalhost";
-            this.cbUseLocalhost.Size = new System.Drawing.Size(132, 17);
+            this.cbUseLocalhost.Size = new System.Drawing.Size(146, 18);
             this.cbUseLocalhost.TabIndex = 23;
             this.cbUseLocalhost.Text = "Use localhost account";
             this.cbUseLocalhost.UseVisualStyleBackColor = true;
@@ -526,9 +380,9 @@ namespace FBXpert
             // cbBackupExpand
             // 
             this.cbBackupExpand.AutoSize = true;
-            this.cbBackupExpand.Location = new System.Drawing.Point(188, 171);
+            this.cbBackupExpand.Location = new System.Drawing.Point(188, 198);
             this.cbBackupExpand.Name = "cbBackupExpand";
-            this.cbBackupExpand.Size = new System.Drawing.Size(188, 17);
+            this.cbBackupExpand.Size = new System.Drawing.Size(209, 18);
             this.cbBackupExpand.TabIndex = 22;
             this.cbBackupExpand.Text = "Creates an uncompressed backup";
             this.cbBackupExpand.UseVisualStyleBackColor = true;
@@ -536,9 +390,9 @@ namespace FBXpert
             // cbBackupOldDescriptions
             // 
             this.cbBackupOldDescriptions.AutoSize = true;
-            this.cbBackupOldDescriptions.Location = new System.Drawing.Point(6, 194);
+            this.cbBackupOldDescriptions.Location = new System.Drawing.Point(6, 223);
             this.cbBackupOldDescriptions.Name = "cbBackupOldDescriptions";
-            this.cbBackupOldDescriptions.Size = new System.Drawing.Size(103, 17);
+            this.cbBackupOldDescriptions.Size = new System.Drawing.Size(116, 18);
             this.cbBackupOldDescriptions.TabIndex = 19;
             this.cbBackupOldDescriptions.Text = "Old Descriptions";
             this.cbBackupOldDescriptions.UseVisualStyleBackColor = true;
@@ -546,9 +400,9 @@ namespace FBXpert
             // cbBackupLimbo
             // 
             this.cbBackupLimbo.AutoSize = true;
-            this.cbBackupLimbo.Location = new System.Drawing.Point(6, 125);
+            this.cbBackupLimbo.Location = new System.Drawing.Point(6, 149);
             this.cbBackupLimbo.Name = "cbBackupLimbo";
-            this.cbBackupLimbo.Size = new System.Drawing.Size(151, 17);
+            this.cbBackupLimbo.Size = new System.Drawing.Size(175, 18);
             this.cbBackupLimbo.TabIndex = 21;
             this.cbBackupLimbo.Text = "Ignores limbo transactions ";
             this.cbBackupLimbo.UseVisualStyleBackColor = true;
@@ -556,9 +410,9 @@ namespace FBXpert
             // cbBackupConvert
             // 
             this.cbBackupConvert.AutoSize = true;
-            this.cbBackupConvert.Location = new System.Drawing.Point(188, 148);
+            this.cbBackupConvert.Location = new System.Drawing.Point(188, 173);
             this.cbBackupConvert.Name = "cbBackupConvert";
-            this.cbBackupConvert.Size = new System.Drawing.Size(219, 17);
+            this.cbBackupConvert.Size = new System.Drawing.Size(257, 18);
             this.cbBackupConvert.TabIndex = 20;
             this.cbBackupConvert.Text = "Converts external tables to internal tables";
             this.cbBackupConvert.UseVisualStyleBackColor = true;
@@ -566,12 +420,11 @@ namespace FBXpert
             // cbBackupTransportable
             // 
             this.cbBackupTransportable.AutoSize = true;
-            this.cbBackupTransportable.Location = new System.Drawing.Point(188, 102);
+            this.cbBackupTransportable.Location = new System.Drawing.Point(188, 124);
             this.cbBackupTransportable.Name = "cbBackupTransportable";
-            this.cbBackupTransportable.Size = new System.Drawing.Size(428, 17);
+            this.cbBackupTransportable.Size = new System.Drawing.Size(412, 18);
             this.cbBackupTransportable.TabIndex = 18;
-            this.cbBackupTransportable.Text = "Creates a transportable backup (transportable between platforms and server versio" +
-    "ns)";
+            this.cbBackupTransportable.Text = "Creates a transportable backup between platforms and server versions";
             this.cbBackupTransportable.UseVisualStyleBackColor = true;
             // 
             // cbBackupGarbageCollect
@@ -579,9 +432,9 @@ namespace FBXpert
             this.cbBackupGarbageCollect.AutoSize = true;
             this.cbBackupGarbageCollect.Checked = true;
             this.cbBackupGarbageCollect.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBackupGarbageCollect.Location = new System.Drawing.Point(6, 171);
+            this.cbBackupGarbageCollect.Location = new System.Drawing.Point(6, 198);
             this.cbBackupGarbageCollect.Name = "cbBackupGarbageCollect";
-            this.cbBackupGarbageCollect.Size = new System.Drawing.Size(155, 17);
+            this.cbBackupGarbageCollect.Size = new System.Drawing.Size(174, 18);
             this.cbBackupGarbageCollect.TabIndex = 17;
             this.cbBackupGarbageCollect.Text = "Perform garbage collection ";
             this.cbBackupGarbageCollect.UseVisualStyleBackColor = true;
@@ -603,7 +456,7 @@ namespace FBXpert
             this.hsAddBackupFile.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddBackupFile.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsAddBackupFile.ImageToggleOnSelect = true;
-            this.hsAddBackupFile.Location = new System.Drawing.Point(9, 10);
+            this.hsAddBackupFile.Location = new System.Drawing.Point(9, 11);
             this.hsAddBackupFile.Marked = false;
             this.hsAddBackupFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsAddBackupFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -612,8 +465,9 @@ namespace FBXpert
             this.hsAddBackupFile.Name = "hsAddBackupFile";
             this.hsAddBackupFile.NonMarkedText = "";
             this.hsAddBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddBackupFile.ShortcutNewline = false;
             this.hsAddBackupFile.ShowShortcut = false;
-            this.hsAddBackupFile.Size = new System.Drawing.Size(45, 32);
+            this.hsAddBackupFile.Size = new System.Drawing.Size(45, 34);
             this.hsAddBackupFile.TabIndex = 11;
             this.hsAddBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddBackupFile.ToolTipActive = false;
@@ -638,9 +492,9 @@ namespace FBXpert
             // cbBackupIgnoreChecksum
             // 
             this.cbBackupIgnoreChecksum.AutoSize = true;
-            this.cbBackupIgnoreChecksum.Location = new System.Drawing.Point(6, 148);
+            this.cbBackupIgnoreChecksum.Location = new System.Drawing.Point(6, 173);
             this.cbBackupIgnoreChecksum.Name = "cbBackupIgnoreChecksum";
-            this.cbBackupIgnoreChecksum.Size = new System.Drawing.Size(142, 17);
+            this.cbBackupIgnoreChecksum.Size = new System.Drawing.Size(158, 18);
             this.cbBackupIgnoreChecksum.TabIndex = 16;
             this.cbBackupIgnoreChecksum.Text = "Ignores checksum errors";
             this.cbBackupIgnoreChecksum.UseVisualStyleBackColor = true;
@@ -648,9 +502,9 @@ namespace FBXpert
             // cbBackupMetatdataOnly
             // 
             this.cbBackupMetatdataOnly.AutoSize = true;
-            this.cbBackupMetatdataOnly.Location = new System.Drawing.Point(188, 125);
+            this.cbBackupMetatdataOnly.Location = new System.Drawing.Point(188, 149);
             this.cbBackupMetatdataOnly.Name = "cbBackupMetatdataOnly";
-            this.cbBackupMetatdataOnly.Size = new System.Drawing.Size(187, 17);
+            this.cbBackupMetatdataOnly.Size = new System.Drawing.Size(210, 18);
             this.cbBackupMetatdataOnly.TabIndex = 15;
             this.cbBackupMetatdataOnly.Text = "Only backs up metadata (schema)";
             this.cbBackupMetatdataOnly.UseVisualStyleBackColor = true;
@@ -660,9 +514,9 @@ namespace FBXpert
             this.cbBackupDisableTriggers.AutoSize = true;
             this.cbBackupDisableTriggers.Checked = true;
             this.cbBackupDisableTriggers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBackupDisableTriggers.Location = new System.Drawing.Point(6, 102);
+            this.cbBackupDisableTriggers.Location = new System.Drawing.Point(6, 124);
             this.cbBackupDisableTriggers.Name = "cbBackupDisableTriggers";
-            this.cbBackupDisableTriggers.Size = new System.Drawing.Size(102, 17);
+            this.cbBackupDisableTriggers.Size = new System.Drawing.Size(114, 18);
             this.cbBackupDisableTriggers.TabIndex = 14;
             this.cbBackupDisableTriggers.Text = "Disable Triggers";
             this.cbBackupDisableTriggers.UseVisualStyleBackColor = true;
@@ -670,9 +524,9 @@ namespace FBXpert
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.txtBackupFileSize);
-            this.groupBox7.Location = new System.Drawing.Point(504, 53);
+            this.groupBox7.Location = new System.Drawing.Point(504, 57);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(101, 40);
+            this.groupBox7.Size = new System.Drawing.Size(101, 43);
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Filesize (kb)";
@@ -680,9 +534,9 @@ namespace FBXpert
             // txtBackupFileSize
             // 
             this.txtBackupFileSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBackupFileSize.Location = new System.Drawing.Point(3, 16);
+            this.txtBackupFileSize.Location = new System.Drawing.Point(3, 18);
             this.txtBackupFileSize.Name = "txtBackupFileSize";
-            this.txtBackupFileSize.Size = new System.Drawing.Size(95, 20);
+            this.txtBackupFileSize.Size = new System.Drawing.Size(95, 22);
             this.txtBackupFileSize.TabIndex = 1;
             this.txtBackupFileSize.Text = "4096";
             // 
@@ -703,7 +557,7 @@ namespace FBXpert
             this.hsRemoveBackupFile.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveBackupFile.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
             this.hsRemoveBackupFile.ImageToggleOnSelect = true;
-            this.hsRemoveBackupFile.Location = new System.Drawing.Point(57, 10);
+            this.hsRemoveBackupFile.Location = new System.Drawing.Point(57, 11);
             this.hsRemoveBackupFile.Marked = false;
             this.hsRemoveBackupFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsRemoveBackupFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -712,8 +566,9 @@ namespace FBXpert
             this.hsRemoveBackupFile.Name = "hsRemoveBackupFile";
             this.hsRemoveBackupFile.NonMarkedText = "";
             this.hsRemoveBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveBackupFile.ShortcutNewline = false;
             this.hsRemoveBackupFile.ShowShortcut = false;
-            this.hsRemoveBackupFile.Size = new System.Drawing.Size(45, 32);
+            this.hsRemoveBackupFile.Size = new System.Drawing.Size(45, 34);
             this.hsRemoveBackupFile.TabIndex = 12;
             this.hsRemoveBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveBackupFile.ToolTipActive = false;
@@ -739,9 +594,9 @@ namespace FBXpert
             // 
             this.gbBackupLocation.Controls.Add(this.txtBackupLocation);
             this.gbBackupLocation.Controls.Add(this.hsLoadBackupFile);
-            this.gbBackupLocation.Location = new System.Drawing.Point(6, 48);
+            this.gbBackupLocation.Location = new System.Drawing.Point(6, 52);
             this.gbBackupLocation.Name = "gbBackupLocation";
-            this.gbBackupLocation.Size = new System.Drawing.Size(492, 48);
+            this.gbBackupLocation.Size = new System.Drawing.Size(492, 52);
             this.gbBackupLocation.TabIndex = 2;
             this.gbBackupLocation.TabStop = false;
             this.gbBackupLocation.Text = "Backup Location";
@@ -749,9 +604,9 @@ namespace FBXpert
             // txtBackupLocation
             // 
             this.txtBackupLocation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBackupLocation.Location = new System.Drawing.Point(3, 16);
+            this.txtBackupLocation.Location = new System.Drawing.Point(3, 18);
             this.txtBackupLocation.Name = "txtBackupLocation";
-            this.txtBackupLocation.Size = new System.Drawing.Size(457, 20);
+            this.txtBackupLocation.Size = new System.Drawing.Size(457, 22);
             this.txtBackupLocation.TabIndex = 0;
             this.txtBackupLocation.Text = "D:\\temp\\test.fbk";
             // 
@@ -774,7 +629,7 @@ namespace FBXpert
             this.hsLoadBackupFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsLoadBackupFile.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadBackupFile.ImageToggleOnSelect = false;
-            this.hsLoadBackupFile.Location = new System.Drawing.Point(460, 16);
+            this.hsLoadBackupFile.Location = new System.Drawing.Point(460, 18);
             this.hsLoadBackupFile.Marked = false;
             this.hsLoadBackupFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadBackupFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -783,8 +638,9 @@ namespace FBXpert
             this.hsLoadBackupFile.Name = "hsLoadBackupFile";
             this.hsLoadBackupFile.NonMarkedText = "";
             this.hsLoadBackupFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadBackupFile.ShortcutNewline = false;
             this.hsLoadBackupFile.ShowShortcut = false;
-            this.hsLoadBackupFile.Size = new System.Drawing.Size(29, 29);
+            this.hsLoadBackupFile.Size = new System.Drawing.Size(29, 31);
             this.hsLoadBackupFile.TabIndex = 3;
             this.hsLoadBackupFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadBackupFile.ToolTipActive = false;
@@ -806,16 +662,95 @@ namespace FBXpert
             this.hsLoadBackupFile.UseVisualStyleBackColor = false;
             this.hsLoadBackupFile.Click += new System.EventHandler(this.hsLoadBackupFile_Click);
             // 
-            // pnlFieldUpper
+            // pnlBackupUpper
             // 
-            this.pnlFieldUpper.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlFieldUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlFieldUpper.Controls.Add(this.hsBackup);
-            this.pnlFieldUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFieldUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlFieldUpper.Name = "pnlFieldUpper";
-            this.pnlFieldUpper.Size = new System.Drawing.Size(1262, 43);
-            this.pnlFieldUpper.TabIndex = 1;
+            this.pnlBackupUpper.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBackupUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlBackupUpper.Controls.Add(this.hsLifeTime);
+            this.pnlBackupUpper.Controls.Add(this.bnConnection);
+            this.pnlBackupUpper.Controls.Add(this.hsBackup);
+            this.pnlBackupUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlBackupUpper.Location = new System.Drawing.Point(3, 3);
+            this.pnlBackupUpper.Name = "pnlBackupUpper";
+            this.pnlBackupUpper.Size = new System.Drawing.Size(1326, 50);
+            this.pnlBackupUpper.TabIndex = 1;
+            // 
+            // hsLifeTime
+            // 
+            this.hsLifeTime.BackColor = System.Drawing.Color.OrangeRed;
+            this.hsLifeTime.BackColorHover = System.Drawing.Color.OrangeRed;
+            this.hsLifeTime.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsLifeTime.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsLifeTime.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsLifeTime.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsLifeTime.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsLifeTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsLifeTime.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.hsLifeTime.FlatAppearance.BorderSize = 2;
+            this.hsLifeTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsLifeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsLifeTime.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsLifeTime.Image = null;
+            this.hsLifeTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsLifeTime.ImageHover = null;
+            this.hsLifeTime.ImageToggleOnSelect = true;
+            this.hsLifeTime.Location = new System.Drawing.Point(987, 0);
+            this.hsLifeTime.Marked = true;
+            this.hsLifeTime.MarkedColor = System.Drawing.Color.Lime;
+            this.hsLifeTime.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsLifeTime.MarkedText = "";
+            this.hsLifeTime.MarkMode = true;
+            this.hsLifeTime.Name = "hsLifeTime";
+            this.hsLifeTime.NonMarkedText = "";
+            this.hsLifeTime.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLifeTime.ShortcutNewline = false;
+            this.hsLifeTime.ShowShortcut = false;
+            this.hsLifeTime.Size = new System.Drawing.Size(87, 46);
+            this.hsLifeTime.TabIndex = 36;
+            this.hsLifeTime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsLifeTime.ToolTipActive = false;
+            this.hsLifeTime.ToolTipAutomaticDelay = 500;
+            this.hsLifeTime.ToolTipAutoPopDelay = 5000;
+            this.hsLifeTime.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsLifeTime.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsLifeTime.ToolTipFor4ContextMenu = true;
+            this.hsLifeTime.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsLifeTime.ToolTipInitialDelay = 500;
+            this.hsLifeTime.ToolTipIsBallon = false;
+            this.hsLifeTime.ToolTipOwnerDraw = false;
+            this.hsLifeTime.ToolTipReshowDelay = 100;
+            this.hsLifeTime.ToolTipShowAlways = false;
+            this.hsLifeTime.ToolTipText = "";
+            this.hsLifeTime.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsLifeTime.ToolTipTitle = "";
+            this.hsLifeTime.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsLifeTime.UseVisualStyleBackColor = false;
+            // 
+            // bnConnection
+            // 
+            this.bnConnection.Controls.Add(this.cbConnection);
+            this.bnConnection.Dock = System.Windows.Forms.DockStyle.Left;
+            this.bnConnection.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bnConnection.Location = new System.Drawing.Point(139, 0);
+            this.bnConnection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bnConnection.Name = "bnConnection";
+            this.bnConnection.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bnConnection.Size = new System.Drawing.Size(848, 46);
+            this.bnConnection.TabIndex = 5;
+            this.bnConnection.TabStop = false;
+            this.bnConnection.Text = "Use connection";
+            // 
+            // cbConnection
+            // 
+            this.cbConnection.BackColor = System.Drawing.SystemColors.Info;
+            this.cbConnection.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbConnection.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbConnection.FormattingEnabled = true;
+            this.cbConnection.Location = new System.Drawing.Point(3, 19);
+            this.cbConnection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbConnection.Name = "cbConnection";
+            this.cbConnection.Size = new System.Drawing.Size(842, 22);
+            this.cbConnection.TabIndex = 0;
             // 
             // hsBackup
             // 
@@ -845,11 +780,11 @@ namespace FBXpert
             this.hsBackup.Name = "hsBackup";
             this.hsBackup.NonMarkedText = "Run Backup";
             this.hsBackup.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsBackup.ShortcutNewline = false;
             this.hsBackup.ShowShortcut = false;
-            this.hsBackup.Size = new System.Drawing.Size(111, 39);
+            this.hsBackup.Size = new System.Drawing.Size(139, 46);
             this.hsBackup.TabIndex = 1;
             this.hsBackup.Text = "Run Backup";
-            this.hsBackup.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.hsBackup.ToolTipActive = false;
             this.hsBackup.ToolTipAutomaticDelay = 500;
             this.hsBackup.ToolTipAutoPopDelay = 5000;
@@ -874,10 +809,10 @@ namespace FBXpert
             this.tabPageRestore.Controls.Add(this.pnRestoreCenter);
             this.tabPageRestore.Controls.Add(this.dgvDependenciesTo);
             this.tabPageRestore.Controls.Add(this.pnlRestoreUpper);
-            this.tabPageRestore.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRestore.Location = new System.Drawing.Point(4, 23);
             this.tabPageRestore.Name = "tabPageRestore";
             this.tabPageRestore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRestore.Size = new System.Drawing.Size(1268, 580);
+            this.tabPageRestore.Size = new System.Drawing.Size(1332, 626);
             this.tabPageRestore.TabIndex = 1;
             this.tabPageRestore.Text = "Restore";
             this.tabPageRestore.UseVisualStyleBackColor = true;
@@ -889,9 +824,9 @@ namespace FBXpert
             this.pnRestoreCenter.Controls.Add(this.gbRestoreLog);
             this.pnRestoreCenter.Controls.Add(this.gbRestoreFiles);
             this.pnRestoreCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnRestoreCenter.Location = new System.Drawing.Point(3, 48);
+            this.pnRestoreCenter.Location = new System.Drawing.Point(3, 51);
             this.pnRestoreCenter.Name = "pnRestoreCenter";
-            this.pnRestoreCenter.Size = new System.Drawing.Size(1262, 529);
+            this.pnRestoreCenter.Size = new System.Drawing.Size(1326, 572);
             this.pnRestoreCenter.TabIndex = 23;
             // 
             // gbRestoreLog
@@ -900,7 +835,7 @@ namespace FBXpert
             this.gbRestoreLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRestoreLog.Location = new System.Drawing.Point(617, 0);
             this.gbRestoreLog.Name = "gbRestoreLog";
-            this.gbRestoreLog.Size = new System.Drawing.Size(641, 525);
+            this.gbRestoreLog.Size = new System.Drawing.Size(705, 568);
             this.gbRestoreLog.TabIndex = 9;
             this.gbRestoreLog.TabStop = false;
             this.gbRestoreLog.Text = "Log";
@@ -916,9 +851,9 @@ namespace FBXpert
             this.lvRestoreMessage.FullRowSelect = true;
             this.lvRestoreMessage.GridLines = true;
             this.lvRestoreMessage.HideSelection = false;
-            this.lvRestoreMessage.Location = new System.Drawing.Point(3, 16);
+            this.lvRestoreMessage.Location = new System.Drawing.Point(3, 18);
             this.lvRestoreMessage.Name = "lvRestoreMessage";
-            this.lvRestoreMessage.Size = new System.Drawing.Size(635, 506);
+            this.lvRestoreMessage.Size = new System.Drawing.Size(699, 547);
             this.lvRestoreMessage.TabIndex = 1;
             this.lvRestoreMessage.UseCompatibleStateImageBehavior = false;
             this.lvRestoreMessage.View = System.Windows.Forms.View.Details;
@@ -945,7 +880,7 @@ namespace FBXpert
             this.gbRestoreFiles.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbRestoreFiles.Location = new System.Drawing.Point(0, 0);
             this.gbRestoreFiles.Name = "gbRestoreFiles";
-            this.gbRestoreFiles.Size = new System.Drawing.Size(617, 525);
+            this.gbRestoreFiles.Size = new System.Drawing.Size(617, 568);
             this.gbRestoreFiles.TabIndex = 14;
             this.gbRestoreFiles.TabStop = false;
             this.gbRestoreFiles.Text = "Restore Files";
@@ -959,9 +894,9 @@ namespace FBXpert
             this.lvRestore.FullRowSelect = true;
             this.lvRestore.GridLines = true;
             this.lvRestore.HideSelection = false;
-            this.lvRestore.Location = new System.Drawing.Point(3, 16);
+            this.lvRestore.Location = new System.Drawing.Point(3, 18);
             this.lvRestore.Name = "lvRestore";
-            this.lvRestore.Size = new System.Drawing.Size(611, 255);
+            this.lvRestore.Size = new System.Drawing.Size(611, 277);
             this.lvRestore.TabIndex = 0;
             this.lvRestore.UseCompatibleStateImageBehavior = false;
             this.lvRestore.View = System.Windows.Forms.View.Details;
@@ -990,18 +925,18 @@ namespace FBXpert
             this.gbRestoreOptions.Controls.Add(this.hsRemoveRestoreFile);
             this.gbRestoreOptions.Controls.Add(this.gbRestoreFileName);
             this.gbRestoreOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbRestoreOptions.Location = new System.Drawing.Point(3, 271);
+            this.gbRestoreOptions.Location = new System.Drawing.Point(3, 295);
             this.gbRestoreOptions.Name = "gbRestoreOptions";
-            this.gbRestoreOptions.Size = new System.Drawing.Size(611, 251);
+            this.gbRestoreOptions.Size = new System.Drawing.Size(611, 270);
             this.gbRestoreOptions.TabIndex = 15;
             this.gbRestoreOptions.TabStop = false;
             // 
             // cbRestoreInvidualCommit
             // 
             this.cbRestoreInvidualCommit.AutoSize = true;
-            this.cbRestoreInvidualCommit.Location = new System.Drawing.Point(183, 226);
+            this.cbRestoreInvidualCommit.Location = new System.Drawing.Point(183, 243);
             this.cbRestoreInvidualCommit.Name = "cbRestoreInvidualCommit";
-            this.cbRestoreInvidualCommit.Size = new System.Drawing.Size(155, 17);
+            this.cbRestoreInvidualCommit.Size = new System.Drawing.Size(175, 18);
             this.cbRestoreInvidualCommit.TabIndex = 20;
             this.cbRestoreInvidualCommit.Text = "Put commit after each table";
             this.cbRestoreInvidualCommit.UseVisualStyleBackColor = true;
@@ -1009,9 +944,9 @@ namespace FBXpert
             // cbRestoreNoVaildy
             // 
             this.cbRestoreNoVaildy.AutoSize = true;
-            this.cbRestoreNoVaildy.Location = new System.Drawing.Point(183, 203);
+            this.cbRestoreNoVaildy.Location = new System.Drawing.Point(183, 219);
             this.cbRestoreNoVaildy.Name = "cbRestoreNoVaildy";
-            this.cbRestoreNoVaildy.Size = new System.Drawing.Size(193, 17);
+            this.cbRestoreNoVaildy.Size = new System.Drawing.Size(224, 18);
             this.cbRestoreNoVaildy.TabIndex = 19;
             this.cbRestoreNoVaildy.Text = "Does not restore validity constraints";
             this.cbRestoreNoVaildy.UseVisualStyleBackColor = true;
@@ -1020,18 +955,18 @@ namespace FBXpert
             // 
             this.gbCreateReplace.Controls.Add(this.rbCreateDatabase);
             this.gbCreateReplace.Controls.Add(this.rbReplaceDatabase);
-            this.gbCreateReplace.Location = new System.Drawing.Point(6, 105);
+            this.gbCreateReplace.Location = new System.Drawing.Point(6, 113);
             this.gbCreateReplace.Name = "gbCreateReplace";
-            this.gbCreateReplace.Size = new System.Drawing.Size(160, 74);
+            this.gbCreateReplace.Size = new System.Drawing.Size(160, 80);
             this.gbCreateReplace.TabIndex = 18;
             this.gbCreateReplace.TabStop = false;
             // 
             // rbCreateDatabase
             // 
             this.rbCreateDatabase.AutoSize = true;
-            this.rbCreateDatabase.Location = new System.Drawing.Point(6, 42);
+            this.rbCreateDatabase.Location = new System.Drawing.Point(6, 45);
             this.rbCreateDatabase.Name = "rbCreateDatabase";
-            this.rbCreateDatabase.Size = new System.Drawing.Size(126, 17);
+            this.rbCreateDatabase.Size = new System.Drawing.Size(141, 18);
             this.rbCreateDatabase.TabIndex = 1;
             this.rbCreateDatabase.Text = "Create new database";
             this.rbCreateDatabase.UseVisualStyleBackColor = true;
@@ -1041,9 +976,9 @@ namespace FBXpert
             // 
             this.rbReplaceDatabase.AutoSize = true;
             this.rbReplaceDatabase.Checked = true;
-            this.rbReplaceDatabase.Location = new System.Drawing.Point(6, 19);
+            this.rbReplaceDatabase.Location = new System.Drawing.Point(6, 20);
             this.rbReplaceDatabase.Name = "rbReplaceDatabase";
-            this.rbReplaceDatabase.Size = new System.Drawing.Size(114, 17);
+            this.rbReplaceDatabase.Size = new System.Drawing.Size(125, 18);
             this.rbReplaceDatabase.TabIndex = 0;
             this.rbReplaceDatabase.TabStop = true;
             this.rbReplaceDatabase.Text = "Replace Database";
@@ -1054,9 +989,9 @@ namespace FBXpert
             this.cbRestoreUseAllSpace.AutoSize = true;
             this.cbRestoreUseAllSpace.Checked = true;
             this.cbRestoreUseAllSpace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRestoreUseAllSpace.Location = new System.Drawing.Point(183, 180);
+            this.cbRestoreUseAllSpace.Location = new System.Drawing.Point(183, 194);
             this.cbRestoreUseAllSpace.Name = "cbRestoreUseAllSpace";
-            this.cbRestoreUseAllSpace.Size = new System.Drawing.Size(275, 17);
+            this.cbRestoreUseAllSpace.Size = new System.Drawing.Size(318, 18);
             this.cbRestoreUseAllSpace.TabIndex = 17;
             this.cbRestoreUseAllSpace.Text = "Use all space (database pages will be filled to 100 %)";
             this.cbRestoreUseAllSpace.UseVisualStyleBackColor = true;
@@ -1064,9 +999,9 @@ namespace FBXpert
             // cbRestoreNoShadows
             // 
             this.cbRestoreNoShadows.AutoSize = true;
-            this.cbRestoreNoShadows.Location = new System.Drawing.Point(183, 157);
+            this.cbRestoreNoShadows.Location = new System.Drawing.Point(183, 169);
             this.cbRestoreNoShadows.Name = "cbRestoreNoShadows";
-            this.cbRestoreNoShadows.Size = new System.Drawing.Size(266, 17);
+            this.cbRestoreNoShadows.Size = new System.Drawing.Size(301, 18);
             this.cbRestoreNoShadows.TabIndex = 16;
             this.cbRestoreNoShadows.Text = "Not create shadows that are defined in the backup";
             this.cbRestoreNoShadows.UseVisualStyleBackColor = true;
@@ -1074,9 +1009,9 @@ namespace FBXpert
             // cbRestoreMetatdataOnly
             // 
             this.cbRestoreMetatdataOnly.AutoSize = true;
-            this.cbRestoreMetatdataOnly.Location = new System.Drawing.Point(183, 134);
+            this.cbRestoreMetatdataOnly.Location = new System.Drawing.Point(183, 144);
             this.cbRestoreMetatdataOnly.Name = "cbRestoreMetatdataOnly";
-            this.cbRestoreMetatdataOnly.Size = new System.Drawing.Size(186, 17);
+            this.cbRestoreMetatdataOnly.Size = new System.Drawing.Size(213, 18);
             this.cbRestoreMetatdataOnly.TabIndex = 15;
             this.cbRestoreMetatdataOnly.Text = "Only restores metadata (schema). ";
             this.cbRestoreMetatdataOnly.UseVisualStyleBackColor = true;
@@ -1086,9 +1021,9 @@ namespace FBXpert
             this.cbRestoreNoIndices.AutoSize = true;
             this.cbRestoreNoIndices.Checked = true;
             this.cbRestoreNoIndices.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRestoreNoIndices.Location = new System.Drawing.Point(183, 111);
+            this.cbRestoreNoIndices.Location = new System.Drawing.Point(183, 120);
             this.cbRestoreNoIndices.Name = "cbRestoreNoIndices";
-            this.cbRestoreNoIndices.Size = new System.Drawing.Size(169, 17);
+            this.cbRestoreNoIndices.Size = new System.Drawing.Size(193, 18);
             this.cbRestoreNoIndices.TabIndex = 14;
             this.cbRestoreNoIndices.Text = "Restore all indexes as inactive";
             this.cbRestoreNoIndices.UseVisualStyleBackColor = true;
@@ -1096,9 +1031,9 @@ namespace FBXpert
             // gbRestoreFileSize
             // 
             this.gbRestoreFileSize.Controls.Add(this.txtRestoreFileSize);
-            this.gbRestoreFileSize.Location = new System.Drawing.Point(504, 53);
+            this.gbRestoreFileSize.Location = new System.Drawing.Point(504, 57);
             this.gbRestoreFileSize.Name = "gbRestoreFileSize";
-            this.gbRestoreFileSize.Size = new System.Drawing.Size(101, 40);
+            this.gbRestoreFileSize.Size = new System.Drawing.Size(101, 43);
             this.gbRestoreFileSize.TabIndex = 13;
             this.gbRestoreFileSize.TabStop = false;
             this.gbRestoreFileSize.Text = "Filesize (kb)";
@@ -1106,9 +1041,9 @@ namespace FBXpert
             // txtRestoreFileSize
             // 
             this.txtRestoreFileSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRestoreFileSize.Location = new System.Drawing.Point(3, 16);
+            this.txtRestoreFileSize.Location = new System.Drawing.Point(3, 18);
             this.txtRestoreFileSize.Name = "txtRestoreFileSize";
-            this.txtRestoreFileSize.Size = new System.Drawing.Size(95, 20);
+            this.txtRestoreFileSize.Size = new System.Drawing.Size(95, 22);
             this.txtRestoreFileSize.TabIndex = 1;
             this.txtRestoreFileSize.Text = "4096";
             // 
@@ -1129,7 +1064,7 @@ namespace FBXpert
             this.hsAddRestoreFile.Image = global::FBXpert.Properties.Resources.plus_gn22x;
             this.hsAddRestoreFile.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsAddRestoreFile.ImageToggleOnSelect = true;
-            this.hsAddRestoreFile.Location = new System.Drawing.Point(9, 9);
+            this.hsAddRestoreFile.Location = new System.Drawing.Point(9, 10);
             this.hsAddRestoreFile.Marked = false;
             this.hsAddRestoreFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsAddRestoreFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1138,8 +1073,9 @@ namespace FBXpert
             this.hsAddRestoreFile.Name = "hsAddRestoreFile";
             this.hsAddRestoreFile.NonMarkedText = "";
             this.hsAddRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddRestoreFile.ShortcutNewline = false;
             this.hsAddRestoreFile.ShowShortcut = false;
-            this.hsAddRestoreFile.Size = new System.Drawing.Size(45, 32);
+            this.hsAddRestoreFile.Size = new System.Drawing.Size(45, 34);
             this.hsAddRestoreFile.TabIndex = 11;
             this.hsAddRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsAddRestoreFile.ToolTipActive = false;
@@ -1178,7 +1114,7 @@ namespace FBXpert
             this.hsRemoveRestoreFile.Image = global::FBXpert.Properties.Resources.minus_gn24x;
             this.hsRemoveRestoreFile.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
             this.hsRemoveRestoreFile.ImageToggleOnSelect = true;
-            this.hsRemoveRestoreFile.Location = new System.Drawing.Point(57, 9);
+            this.hsRemoveRestoreFile.Location = new System.Drawing.Point(57, 10);
             this.hsRemoveRestoreFile.Marked = false;
             this.hsRemoveRestoreFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsRemoveRestoreFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1187,8 +1123,9 @@ namespace FBXpert
             this.hsRemoveRestoreFile.Name = "hsRemoveRestoreFile";
             this.hsRemoveRestoreFile.NonMarkedText = "";
             this.hsRemoveRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemoveRestoreFile.ShortcutNewline = false;
             this.hsRemoveRestoreFile.ShowShortcut = false;
-            this.hsRemoveRestoreFile.Size = new System.Drawing.Size(45, 32);
+            this.hsRemoveRestoreFile.Size = new System.Drawing.Size(45, 34);
             this.hsRemoveRestoreFile.TabIndex = 12;
             this.hsRemoveRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsRemoveRestoreFile.ToolTipActive = false;
@@ -1214,9 +1151,9 @@ namespace FBXpert
             // 
             this.gbRestoreFileName.Controls.Add(this.txtRestoreLocation);
             this.gbRestoreFileName.Controls.Add(this.hsLoadRestoreFile);
-            this.gbRestoreFileName.Location = new System.Drawing.Point(6, 48);
+            this.gbRestoreFileName.Location = new System.Drawing.Point(6, 52);
             this.gbRestoreFileName.Name = "gbRestoreFileName";
-            this.gbRestoreFileName.Size = new System.Drawing.Size(492, 48);
+            this.gbRestoreFileName.Size = new System.Drawing.Size(492, 52);
             this.gbRestoreFileName.TabIndex = 2;
             this.gbRestoreFileName.TabStop = false;
             this.gbRestoreFileName.Text = "Restore Location";
@@ -1224,9 +1161,9 @@ namespace FBXpert
             // txtRestoreLocation
             // 
             this.txtRestoreLocation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRestoreLocation.Location = new System.Drawing.Point(3, 16);
+            this.txtRestoreLocation.Location = new System.Drawing.Point(3, 18);
             this.txtRestoreLocation.Name = "txtRestoreLocation";
-            this.txtRestoreLocation.Size = new System.Drawing.Size(457, 20);
+            this.txtRestoreLocation.Size = new System.Drawing.Size(457, 22);
             this.txtRestoreLocation.TabIndex = 0;
             this.txtRestoreLocation.Text = "D:\\temp\\test.fbk";
             // 
@@ -1249,7 +1186,7 @@ namespace FBXpert
             this.hsLoadRestoreFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.hsLoadRestoreFile.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
             this.hsLoadRestoreFile.ImageToggleOnSelect = false;
-            this.hsLoadRestoreFile.Location = new System.Drawing.Point(460, 16);
+            this.hsLoadRestoreFile.Location = new System.Drawing.Point(460, 18);
             this.hsLoadRestoreFile.Marked = false;
             this.hsLoadRestoreFile.MarkedColor = System.Drawing.Color.Teal;
             this.hsLoadRestoreFile.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1258,8 +1195,9 @@ namespace FBXpert
             this.hsLoadRestoreFile.Name = "hsLoadRestoreFile";
             this.hsLoadRestoreFile.NonMarkedText = "";
             this.hsLoadRestoreFile.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsLoadRestoreFile.ShortcutNewline = false;
             this.hsLoadRestoreFile.ShowShortcut = false;
-            this.hsLoadRestoreFile.Size = new System.Drawing.Size(29, 29);
+            this.hsLoadRestoreFile.Size = new System.Drawing.Size(29, 31);
             this.hsLoadRestoreFile.TabIndex = 3;
             this.hsLoadRestoreFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadRestoreFile.ToolTipActive = false;
@@ -1294,7 +1232,7 @@ namespace FBXpert
             this.dgvDependenciesTo.DataSource = this.bsDependenciesTo;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1303,13 +1241,13 @@ namespace FBXpert
             this.dgvDependenciesTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDependenciesTo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvDependenciesTo.EnableHeadersVisualStyles = false;
-            this.dgvDependenciesTo.Location = new System.Drawing.Point(3, 48);
+            this.dgvDependenciesTo.Location = new System.Drawing.Point(3, 51);
             this.dgvDependenciesTo.MultiSelect = false;
             this.dgvDependenciesTo.Name = "dgvDependenciesTo";
             this.dgvDependenciesTo.ReadOnly = true;
             this.dgvDependenciesTo.RowHeadersVisible = false;
             this.dgvDependenciesTo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDependenciesTo.Size = new System.Drawing.Size(1262, 529);
+            this.dgvDependenciesTo.Size = new System.Drawing.Size(1326, 572);
             this.dgvDependenciesTo.TabIndex = 22;
             // 
             // bsDependenciesTo
@@ -1336,16 +1274,16 @@ namespace FBXpert
             this.pnlRestoreUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlRestoreUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlRestoreUpper.Name = "pnlRestoreUpper";
-            this.pnlRestoreUpper.Size = new System.Drawing.Size(1262, 45);
+            this.pnlRestoreUpper.Size = new System.Drawing.Size(1326, 48);
             this.pnlRestoreUpper.TabIndex = 21;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtRestoreDestinationDatabasePath);
-            this.groupBox1.Controls.Add(this.hotSpot1);
+            this.groupBox1.Controls.Add(this.hsRestorDatabaseLocation);
             this.groupBox1.Location = new System.Drawing.Point(186, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(492, 38);
+            this.groupBox1.Size = new System.Drawing.Size(572, 41);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Database Location";
@@ -1353,62 +1291,63 @@ namespace FBXpert
             // txtRestoreDestinationDatabasePath
             // 
             this.txtRestoreDestinationDatabasePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRestoreDestinationDatabasePath.Location = new System.Drawing.Point(3, 16);
+            this.txtRestoreDestinationDatabasePath.Location = new System.Drawing.Point(3, 18);
             this.txtRestoreDestinationDatabasePath.Name = "txtRestoreDestinationDatabasePath";
-            this.txtRestoreDestinationDatabasePath.Size = new System.Drawing.Size(457, 20);
+            this.txtRestoreDestinationDatabasePath.Size = new System.Drawing.Size(537, 22);
             this.txtRestoreDestinationDatabasePath.TabIndex = 0;
             this.txtRestoreDestinationDatabasePath.Text = "D:\\temp\\test.fbk";
             // 
-            // hotSpot1
+            // hsRestorDatabaseLocation
             // 
-            this.hotSpot1.BackColor = System.Drawing.Color.Transparent;
-            this.hotSpot1.BackColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot1.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hotSpot1.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hotSpot1.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hotSpot1.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hotSpot1.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hotSpot1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hotSpot1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hotSpot1.FlatAppearance.BorderSize = 0;
-            this.hotSpot1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hotSpot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hotSpot1.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hotSpot1.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
-            this.hotSpot1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.hotSpot1.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
-            this.hotSpot1.ImageToggleOnSelect = false;
-            this.hotSpot1.Location = new System.Drawing.Point(460, 16);
-            this.hotSpot1.Marked = false;
-            this.hotSpot1.MarkedColor = System.Drawing.Color.Teal;
-            this.hotSpot1.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hotSpot1.MarkedText = "";
-            this.hotSpot1.MarkMode = false;
-            this.hotSpot1.Name = "hotSpot1";
-            this.hotSpot1.NonMarkedText = "";
-            this.hotSpot1.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hotSpot1.ShowShortcut = false;
-            this.hotSpot1.Size = new System.Drawing.Size(29, 19);
-            this.hotSpot1.TabIndex = 3;
-            this.hotSpot1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hotSpot1.ToolTipActive = false;
-            this.hotSpot1.ToolTipAutomaticDelay = 500;
-            this.hotSpot1.ToolTipAutoPopDelay = 5000;
-            this.hotSpot1.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hotSpot1.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hotSpot1.ToolTipFor4ContextMenu = true;
-            this.hotSpot1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hotSpot1.ToolTipInitialDelay = 500;
-            this.hotSpot1.ToolTipIsBallon = false;
-            this.hotSpot1.ToolTipOwnerDraw = false;
-            this.hotSpot1.ToolTipReshowDelay = 100;
-            this.hotSpot1.ToolTipShowAlways = false;
-            this.hotSpot1.ToolTipText = "";
-            this.hotSpot1.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hotSpot1.ToolTipTitle = "";
-            this.hotSpot1.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hotSpot1.UseVisualStyleBackColor = false;
-            this.hotSpot1.Click += new System.EventHandler(this.hotSpot1_Click);
+            this.hsRestorDatabaseLocation.BackColor = System.Drawing.Color.Transparent;
+            this.hsRestorDatabaseLocation.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRestorDatabaseLocation.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsRestorDatabaseLocation.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsRestorDatabaseLocation.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsRestorDatabaseLocation.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsRestorDatabaseLocation.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsRestorDatabaseLocation.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hsRestorDatabaseLocation.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsRestorDatabaseLocation.FlatAppearance.BorderSize = 0;
+            this.hsRestorDatabaseLocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRestorDatabaseLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsRestorDatabaseLocation.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsRestorDatabaseLocation.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hsRestorDatabaseLocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hsRestorDatabaseLocation.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hsRestorDatabaseLocation.ImageToggleOnSelect = false;
+            this.hsRestorDatabaseLocation.Location = new System.Drawing.Point(540, 18);
+            this.hsRestorDatabaseLocation.Marked = false;
+            this.hsRestorDatabaseLocation.MarkedColor = System.Drawing.Color.Teal;
+            this.hsRestorDatabaseLocation.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsRestorDatabaseLocation.MarkedText = "";
+            this.hsRestorDatabaseLocation.MarkMode = false;
+            this.hsRestorDatabaseLocation.Name = "hsRestorDatabaseLocation";
+            this.hsRestorDatabaseLocation.NonMarkedText = "";
+            this.hsRestorDatabaseLocation.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRestorDatabaseLocation.ShortcutNewline = false;
+            this.hsRestorDatabaseLocation.ShowShortcut = false;
+            this.hsRestorDatabaseLocation.Size = new System.Drawing.Size(29, 20);
+            this.hsRestorDatabaseLocation.TabIndex = 3;
+            this.hsRestorDatabaseLocation.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsRestorDatabaseLocation.ToolTipActive = false;
+            this.hsRestorDatabaseLocation.ToolTipAutomaticDelay = 500;
+            this.hsRestorDatabaseLocation.ToolTipAutoPopDelay = 5000;
+            this.hsRestorDatabaseLocation.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsRestorDatabaseLocation.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsRestorDatabaseLocation.ToolTipFor4ContextMenu = true;
+            this.hsRestorDatabaseLocation.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsRestorDatabaseLocation.ToolTipInitialDelay = 500;
+            this.hsRestorDatabaseLocation.ToolTipIsBallon = false;
+            this.hsRestorDatabaseLocation.ToolTipOwnerDraw = false;
+            this.hsRestorDatabaseLocation.ToolTipReshowDelay = 100;
+            this.hsRestorDatabaseLocation.ToolTipShowAlways = false;
+            this.hsRestorDatabaseLocation.ToolTipText = "";
+            this.hsRestorDatabaseLocation.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsRestorDatabaseLocation.ToolTipTitle = "";
+            this.hsRestorDatabaseLocation.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsRestorDatabaseLocation.UseVisualStyleBackColor = false;
+            this.hsRestorDatabaseLocation.Click += new System.EventHandler(this.hotSpot1_Click);
             // 
             // hsRestore
             // 
@@ -1438,8 +1377,9 @@ namespace FBXpert
             this.hsRestore.Name = "hsRestore";
             this.hsRestore.NonMarkedText = "Run Restore";
             this.hsRestore.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRestore.ShortcutNewline = false;
             this.hsRestore.ShowShortcut = false;
-            this.hsRestore.Size = new System.Drawing.Size(105, 41);
+            this.hsRestore.Size = new System.Drawing.Size(105, 44);
             this.hsRestore.TabIndex = 2;
             this.hsRestore.Text = "Run Restore";
             this.hsRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1505,18 +1445,18 @@ namespace FBXpert
             // 
             // BackupForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 680);
+            this.ClientSize = new System.Drawing.Size(1340, 732);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BackupForm";
             this.Text = "BackupForm";
             this.Load += new System.EventHandler(this.BackupForm_Load);
-            this.pnlUpper.ResumeLayout(false);
-            this.pnlUpper.PerformLayout();
+            this.pnlFormUpper.ResumeLayout(false);
             this.pnlCenter.ResumeLayout(false);
             this.tabControlFields.ResumeLayout(false);
             this.tabPageBackup.ResumeLayout(false);
@@ -1525,17 +1465,12 @@ namespace FBXpert
             this.gbBackupOptions.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.gbConnectionType.ResumeLayout(false);
-            this.gbConnectionType.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.gbServer.ResumeLayout(false);
-            this.gbServer.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.gbBackupLocation.ResumeLayout(false);
             this.gbBackupLocation.PerformLayout();
-            this.pnlFieldUpper.ResumeLayout(false);
+            this.pnlBackupUpper.ResumeLayout(false);
+            this.bnConnection.ResumeLayout(false);
             this.tabPageRestore.ResumeLayout(false);
             this.pnRestoreCenter.ResumeLayout(false);
             this.gbRestoreLog.ResumeLayout(false);
@@ -1564,7 +1499,7 @@ namespace FBXpert
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlLower;
         private System.Windows.Forms.Panel pnlCenter;
         private SeControlsLib.HotSpot hsClose;
@@ -1572,7 +1507,7 @@ namespace FBXpert
         private System.Windows.Forms.TabPage tabPageBackup;
         private System.Windows.Forms.Panel pnlFieldsCenter;
         private System.Windows.Forms.GroupBox gbBackupLog;
-        private System.Windows.Forms.Panel pnlFieldUpper;
+        private System.Windows.Forms.Panel pnlBackupUpper;
         private SeControlsLib.HotSpot hsBackup;
         private System.Windows.Forms.TabPage tabPageRestore;
         private System.Windows.Forms.DataGridView dgvDependenciesTo;
@@ -1639,19 +1574,13 @@ namespace FBXpert
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtRestoreDestinationDatabasePath;
-        private SeControlsLib.HotSpot hotSpot1;
+        private SeControlsLib.HotSpot hsRestorDatabaseLocation;
         private System.Windows.Forms.OpenFileDialog ofdRestore;
-        private System.Windows.Forms.Label lblCaption;
         private System.Windows.Forms.OpenFileDialog ofdRestoreFromDatabase;
         private System.Windows.Forms.CheckBox cbUseLocalhost;
-        private System.Windows.Forms.GroupBox gbConnectionType;
-        private System.Windows.Forms.RadioButton rbEmbedded;
-        private System.Windows.Forms.GroupBox gbServer;
-        private System.Windows.Forms.TextBox txtServer;
-        private System.Windows.Forms.RadioButton rbRemote;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtBackupSourceDatabasePath;
-        private SeControlsLib.HotSpot hsChooseDatabase;
         private System.Windows.Forms.OpenFileDialog ofdDatabase;
+        private System.Windows.Forms.GroupBox bnConnection;
+        private System.Windows.Forms.ComboBox cbConnection;
+        private SeControlsLib.HotSpot hsLifeTime;
     }
 }

@@ -29,29 +29,30 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpInfoForm));
-            this.pnlUpper = new System.Windows.Forms.Panel();
+            this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsClose = new SeControlsLib.HotSpot();
             this.pnlLower = new System.Windows.Forms.Panel();
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.rtbInfo = new System.Windows.Forms.RichTextBox();
-            this.pnlUpper.SuspendLayout();
+            this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpper
+            // pnlFormUpper
             // 
-            this.pnlUpper.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlUpper.Controls.Add(this.hsClose);
-            this.pnlUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlUpper.Name = "pnlUpper";
-            this.pnlUpper.Size = new System.Drawing.Size(715, 46);
-            this.pnlUpper.TabIndex = 0;
+            this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFormUpper.Controls.Add(this.hsClose);
+            this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
+            this.pnlFormUpper.Name = "pnlFormUpper";
+            this.pnlFormUpper.Size = new System.Drawing.Size(715, 46);
+            this.pnlFormUpper.TabIndex = 0;
             // 
             // hsClose
             // 
             this.hsClose.BackColor = System.Drawing.Color.Transparent;
             this.hsClose.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClose.BorderColorHover = System.Drawing.Color.Transparent;
             this.hsClose.ContextMenuEdges = SeControlsLib.Edge.Center;
             this.hsClose.ContextMenuXDirection = SeControlsLib.XDirection.Right;
             this.hsClose.ContextMenuYDirection = SeControlsLib.YDirection.Down;
@@ -60,6 +61,7 @@
             this.hsClose.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.hsClose.FlatAppearance.BorderSize = 0;
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.none;
             this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_left_blue32x;
@@ -72,6 +74,9 @@
             this.hsClose.MarkMode = false;
             this.hsClose.Name = "hsClose";
             this.hsClose.NonMarkedText = "";
+            this.hsClose.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClose.ShortcutNewline = false;
+            this.hsClose.ShowShortcut = false;
             this.hsClose.Size = new System.Drawing.Size(45, 46);
             this.hsClose.TabIndex = 2;
             this.hsClose.ToolTipActive = false;
@@ -85,7 +90,6 @@
             this.hsClose.ToolTipIsBallon = false;
             this.hsClose.ToolTipOwnerDraw = false;
             this.hsClose.ToolTipReshowDelay = 100;
-            
             this.hsClose.ToolTipShowAlways = false;
             this.hsClose.ToolTipText = "";
             this.hsClose.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
@@ -132,11 +136,12 @@
             this.ClientSize = new System.Drawing.Size(715, 375);
             this.Controls.Add(this.pnlCenter);
             this.Controls.Add(this.pnlLower);
-            this.Controls.Add(this.pnlUpper);
+            this.Controls.Add(this.pnlFormUpper);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HelpInfoForm";
             this.Text = "HelpInfoForm";
-            this.pnlUpper.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.HelpInfoForm_Load);
+            this.pnlFormUpper.ResumeLayout(false);
             this.pnlCenter.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -144,7 +149,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlUpper;
+        private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnlLower;
         private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.RichTextBox rtbInfo;
