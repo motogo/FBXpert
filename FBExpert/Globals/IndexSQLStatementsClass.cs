@@ -2,6 +2,9 @@
 using DBBasicClassLibrary;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
+using FBXpertLib.SQLStatements;
 using System;
 using System.Text;
 

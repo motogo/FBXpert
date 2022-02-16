@@ -4,6 +4,8 @@ using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using MessageLibrary.SendMessages;
 using System;

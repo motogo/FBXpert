@@ -32,8 +32,13 @@
     {
         public static readonly string VAR = "VAR";
         public static readonly string TIME = "TIME";
-        public static readonly string DATE= "DATE";
+        public static readonly string DATE = "DATE";
         public static readonly string BLOBKey = "<BLOB>";
 
+    }
+    public static class HelpIDS
+    {
+        public static readonly int MainPage = 1;
+        public static readonly int ReportDesigner = 32;
     }
 }

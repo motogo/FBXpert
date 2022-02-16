@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B119D5B8-E396-4251-900D-14F848BC2557}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FBXpertLib</RootNamespace>
+    <AssemblyName>FBXpertLib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="APPHelpLibrary">
+      <HintPath>..\..\SELibrariesSource\APPHelpLibrary\bin\Debug\APPHelpLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicClassLibrary">
+      <HintPath>..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\Library452\BasicClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicFormClassLibrary">
+      <HintPath>..\..\SELibrariesSource\BasicFormClassLibrary\bin\Debug\BasicFormClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DBBasicClassLibrary">
+      <HintPath>..\..\SELibrariesSource\DBBasicClassLibrary\MainSource\bin\Debug\DBBasicClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>..\..\SELibrariesSource\FastColoredTextBox\FastColoredTextBox\bin\Debug\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="fastJSON, Version=2.1.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FastJson\output\net40\fastJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport">
+      <HintPath>..\..\FastReport\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=8.5.3.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibrariesSource\packages\Firebird\FirebirdSql.Data.FirebirdClient.8.5.3\lib\net48\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FormularUtils">
+      <HintPath>..\..\SELibrariesSource\FormularUtils\Source\bin\Debug\FormularUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteDB">
+      <HintPath>..\packages\LiteDB.5.0.1\lib\net45\LiteDB.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageFormLibrary">
+      <HintPath>..\..\SELibrariesSource\MessageFormLibrary\bin\Debug\MessageFormLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageLibrary">
+      <HintPath>..\..\SELibrariesSource\MessageLibrary\MainSource\bin\Debug\MessageLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="NullableComboBox">
+      <HintPath>..\..\SELibrariesSource\NullableComboBox\bin\Debug\NullableComboBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SECaptionEditBox">
+      <HintPath>..\..\SELibrariesSource\SECaptionEditBox\bin\Debug\SECaptionEditBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SEDateTimeRangeControl">
+      <HintPath>..\..\SELibrariesSource\SEDateTimeRangeControl\bin\Debug\SEDateTimeRangeControl.dll</HintPath>
+    </Reference>
+    <Reference Include="SEHotSpot">
+      <HintPath>..\..\SELibrariesSource\SEHotSpot\bin\Debug\SEHotSpot.dll</HintPath>
+    </Reference>
+    <Reference Include="SEListBox, Version=2021.1.16.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SELibrariesSource\SEListBox\Dev\bin\Debug\SEListBox.dll</HintPath>
+    </Reference>
+    <Reference Include="SEMessageBoxLibrary">
+      <HintPath>..\..\SELibrariesSource\SEMessageBoxLibrary\bin\Debug\SEMessageBoxLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SESpaltenEditor">
+      <HintPath>..\..\SELibrariesSource\SESpaltenEditor\bin\Debug\SESpaltenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedStorage">
+      <HintPath>..\..\SELibrariesSource\SharedStorage\bin\Debug\SharedStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="SpezialfilterBox">
+      <HintPath>..\..\SELibrariesSource\SpezialfilterBox\bin\Debug\SpezialfilterBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataClasses\ChecksClass.cs" />
+    <Compile Include="DataClasses\ConstraintsClass.cs" />
+    <Compile Include="DataClasses\CreateDLLClass.cs" />
+    <Compile Include="DataClasses\DatabaseDesignClass.cs" />
+    <Compile Include="DataClasses\DataClassFactory.cs" />
+    <Compile Include="DataClasses\DataObjectClass.cs" />
+    <Compile Include="DataClasses\DependencyClass.cs" />
+    <Compile Include="DataClasses\DomainClass.cs" />
+    <Compile Include="DataClasses\ExperienceInfoClass.cs" />
+    <Compile Include="DataClasses\ForgeignKeyClass.cs" />
+    <Compile Include="DataClasses\FunctionsClass.cs" />
+    <Compile Include="DataClasses\GeneratorClass.cs" />
+    <Compile Include="DataClasses\IndexClass.cs" />
+    <Compile Include="DataClasses\NotNullsClass.cs" />
+    <Compile Include="DataClasses\PrimayrKeyClass.cs" />
+    <Compile Include="DataClasses\ProcedureClass.cs" />
+    <Compile Include="DataClasses\RoleClass.cs" />
+    <Compile Include="DataClasses\SQLHistoryClass.cs" />
+    <Compile Include="DataClasses\SQLPatterns.cs" />
+    <Compile Include="DataClasses\SQLStatements.cs" />
+    <Compile Include="DataClasses\TableClass.cs" />
+    <Compile Include="DataClasses\TableFieldClass.cs" />
+    <Compile Include="DataClasses\TriggerClass.cs" />
+    <Compile Include="DataClasses\TypeClass.cs" />
+    <Compile Include="DataClasses\TypesClass.cs" />
+    <Compile Include="DataClasses\UniquesClass.cs" />
+    <Compile Include="DataClasses\ViewClass.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetDatabaseObjects\GetObjectsClass.cs" />
+    <Compile Include="Globals\AppSettingsClass.cs" />
+    <Compile Include="Globals\Constants.cs" />
+    <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
+    <Compile Include="Globals\DatabaseDefinitions.cs" />
+    <Compile Include="Globals\DBRegistrationClass.cs" />
+    <Compile Include="Globals\DomainSQLStatementsClass.cs" />
+    <Compile Include="Globals\EnumClass.cs" />
+    <Compile Include="Globals\ErrorCodes.cs" />
+    <Compile Include="Globals\IndexSQLStatementsClass.cs" />
+    <Compile Include="Globals\SQLStatementsBase.cs" />
+    <Compile Include="Globals\StaticFunctionsClass.cs" />
+    <Compile Include="Globals\StaticTreeClass.cs" />
+    <Compile Include="Globals\StaticVariablesClass.cs" />
+    <Compile Include="MiscClasses\AutocompleteClass.cs" />
+    <Compile Include="MiscClasses\SearchFastColorTextboxClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SQLViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLViewForm.designer.cs">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLViewLastRunClass.cs" />
+    <Compile Include="ValuesEditForms\DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValuesEditForms\DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ValuesEditForms\SelectDefaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValuesEditForms\SelectDefaultForm.Designer.cs">
+      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLViewForm.resx">
+      <DependentUpon>SQLViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValuesEditForms\DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValuesEditForms\SelectDefaultForm.resx">
+      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ampel_green_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ampel_green_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ampel_red_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_32x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_32x2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications_system2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_22x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_22x2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applications-execute-script_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appointment_new_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\augewatch_2_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\augewatch_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\augewatchoff_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bin_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bin_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar01_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera_photo_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera_photo_flash_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\console_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\console_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\console2_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross_red_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_gn_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_gn_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_export_gn_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_import_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_import_gn_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_add_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_arrow_r_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_erase_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_gr_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_gr_24x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_logon_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_logon2_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database_replication_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\de.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_information_lightning_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dialog_information_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_blue_x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documents_plus_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_up32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_mode_px24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_mode_px241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_plus_gray_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_plus_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_select_all_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_select_all_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_undo_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_XML_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_XML_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edn_edit_px24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\floppy_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\floppy2_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_closed_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_open_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font_x242.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font2_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font2_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_less32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more_2_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more_2_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_indent_more24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_text_direction_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_text_direction_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_down_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_down_red32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_down22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_left_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_left_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next_blue24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_next32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_previous22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_previous32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_up_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_up_blue22x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_up_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_up_gn22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go_up_gn22x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-down-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-first_blue24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-first_green24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-last_blue24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-last_green24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_blue_x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_blue_x221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_gn_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_about_gn_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_browser_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_browser_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_browser_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help_browser_blue_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_22x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link_2_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupe2_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupe24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Matrix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media_playlist_repeat_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media_playlist_repeat_blue_x221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\media_playlist_repeat_light_blue_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_blau32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_blue24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_gn24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_gn32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\N0_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\N1_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nichts_x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoGo_22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NULL_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_gn32x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\on_gn_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PDF_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PDF_blue_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_blue22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_blue32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_gn22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_gn32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preferences_system_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preferences_system_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer_2_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seewp_bl24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seewp_ge22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_blue_x241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_blue_x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sql_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SQL_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sweep_bl24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sweep_bl24x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sweep_ge24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sweep_ge24x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system_search_blue_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table_blue_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table_select_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree_expanded1_x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_down32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_blue_x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_insert_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh_2_22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh_2_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh22x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_refresh32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\waiting.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\waiting1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\waiting2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\windows_lightblue_x22.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -2,6 +2,7 @@
 using DBBasicClassLibrary;
 using FBExpert;
 using FBXpert.ValuesEditForms;
+using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;

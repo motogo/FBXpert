@@ -2,6 +2,7 @@
 using DBBasicClassLibrary;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
 
 namespace FBXpert.SQLStatements
 {

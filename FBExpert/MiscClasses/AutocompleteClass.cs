@@ -3,6 +3,9 @@ using FBExpert;
 using FBExpert.DataClasses;
 using System.Collections.Generic;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
+using FBXpertLib;
+using FBExpertLib.DataClasses;
 
 namespace FBXpert.MiscClasses
 {

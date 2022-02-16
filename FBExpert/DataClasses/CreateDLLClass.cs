@@ -2,6 +2,8 @@
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SQLStatements;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using System;
 using System.Collections.Generic;
 using System.Text;

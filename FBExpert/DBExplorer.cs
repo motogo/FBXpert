@@ -2,12 +2,14 @@
 using DBBasicClassLibrary;
 using FBExpert;
 using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXDesigns;
-using FBXpert.DataClasses;
-using FBXpert.Globals;
 using FBXpert.SonstForms;
-using FBXpert.SQLStatements;
 using FBXpert.SQLView;
+using FBXpertLib;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
+using FBXpertLib.SQLStatements;
 using MessageFormLibrary;
 using SEMessageBoxLibrary;
 using SQLView;
@@ -1126,9 +1128,22 @@ namespace FBXpert
         }
 
         private void SqlExplorer(DBRegistrationClass drc, List<TableClass> actTables)
-        {                                   
-            var sf = new SQLViewForm1(drc, actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);                      
-            sf.Show();            
+        {
+            // var sf = new SQLViewForm1(drc, actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);         
+            var drc2 = new FBXpertLib.Globals.DBRegistrationClass();
+            drc2.Alias = drc.Alias;
+            drc2.DatabasePath = drc.DatabasePath;
+            drc2.ConnectionType = drc.ConnectionType;
+            drc2.User = drc.User;
+            drc2.Password = drc.Password;
+            drc2.Server = drc.Server;
+            drc2.Port = drc.Port;
+            drc2.Pooling = drc.Pooling;
+            drc2.CharSet = drc.CharSet;
+           // var dblist = DatabaseDefinitions.Instance.Databases.ToArray();
+           
+            var sf2 = new SQLViewForm2(drc2, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
+            sf2.Show();            
         }
 
         private void ExperienceInfos(DBRegistrationClass drc, List<TableClass> actTables)
@@ -1360,7 +1375,7 @@ namespace FBXpert
             {
                 string fdb = dbReg.DatabasePath;
                 FileInfo fi = new FileInfo(fdb);
-                if (fi.Exists)
+                if (fi.Directory.Exists)
                 {
                     Process.Start("explorer.exe", fi.DirectoryName);
                 }

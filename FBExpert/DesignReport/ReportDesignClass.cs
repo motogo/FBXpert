@@ -1,6 +1,7 @@
 ﻿using DBBasicClassLibrary;
 using FastReport.Data;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using SEMessageBoxLibrary;
 using System;
@@ -8,13 +9,12 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace FBXpert.DesignReport
-{
-
-
+{ 
     public class ReportDesignClass
     {
 
         private List<DBBasicClassLibrary.ReportSqlCommands> _dataObjects = new List<DBBasicClassLibrary.ReportSqlCommands>();
+        private List<DBBasicClassLibrary.ReportValuesGroups> _valueObjects = new List<DBBasicClassLibrary.ReportValuesGroups>();
         private string _datafile;
         private string _schemafile;
         private string _title;
@@ -22,6 +22,7 @@ namespace FBXpert.DesignReport
         private string _reportfile;
 
         public List<DBBasicClassLibrary.ReportSqlCommands> DataObjects { get => _dataObjects; set => _dataObjects = value; }
+        public List<DBBasicClassLibrary.ReportValuesGroups> ValueObjects { get => _valueObjects; set => _valueObjects = value; }
         public string Datafile { get => _datafile; set => _datafile = value; }
         public string Schemafile { get => _schemafile; set => _schemafile = value; }
         public string Title { get => _title; set => _title = value; }
@@ -47,20 +48,37 @@ namespace FBXpert.DesignReport
                 };
                 foreach (var rsql in _dataObjects)
                 {
-                    var sql = rsql.cmd;
-                    adapter.SelectCommand = new FbCommand(sql, dataConnection);
+                    
+                        var sql = rsql.cmd;
+                        adapter.SelectCommand = new FbCommand(sql, dataConnection);
 
-                    adapter.Fill(ds);
-                    ds2.Tables.Add(ds.Tables[0].Clone());
-                    ds2.Tables[ds2.Tables.Count - 1].TableName = rsql.caption;
+                        adapter.Fill(ds);
+                        ds2.Tables.Add(ds.Tables[0].Clone());
+                        ds2.Tables[ds2.Tables.Count - 1].TableName = rsql.caption;
 
-                    foreach (DataRow dr in ds.Tables[0].Rows)
-                    {
-                        object[] arr = dr.ItemArray;
-                        ds2.Tables[ds2.Tables.Count - 1].Rows.Add(arr);
-                    }
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            object[] arr = dr.ItemArray;
+                            ds2.Tables[ds2.Tables.Count - 1].Rows.Add(arr);
+                        }
                 }
 
+                foreach (ReportValuesGroups vob in _valueObjects)
+                {
+                    DataTable dt = new DataTable();
+                    dt.TableName = vob.group;
+                    foreach (ReportValues rv in vob.vals)
+                    {
+                        DataColumn col = new DataColumn();
+                        col.ColumnName = rv.caption;
+                        col.DataType = rv.valtype;
+
+                        dt.Columns.Add(col);//.AddRange(new System.Data.DataColumn[] { col });
+                        DataRow dr = dt.NewRow();
+                        dt.Rows.Add(rv.val);
+                    }
+                    ds2.Tables.Add(dt);
+                }
 
                 ds2.WriteXml(_datafile);
                 ds2.WriteXmlSchema(_schemafile);
@@ -80,7 +98,7 @@ namespace FBXpert.DesignReport
             {                
                     var dorg = new XmlDataConnection();
                     var ddict = new Dictionary();
-
+                
                     dorg.Alias = "Tables";
                     dorg.Name = "Tables";
                     dorg.Parent = ddict;
@@ -97,7 +115,7 @@ namespace FBXpert.DesignReport
                 rpt.NeedRefresh = true;
                 rpt.DoublePass = true;
                 rpt.AutoFillDataSet = true;
-                rpt.FileName = "test.frx";
+                rpt.FileName = this.Reportfile;
                 rpt.Design(FbXpertMainForm.Instance());     
                 return rpt.FileName;
             }

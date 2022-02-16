@@ -7,6 +7,8 @@ using FBXpert.Globals;
 using System.Diagnostics;
 using System.IO;
 using Initialization;
+using FBXpertLib.Globals;
+using FBXpertLib;
 
 namespace FBXpert
 {

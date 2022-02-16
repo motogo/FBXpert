@@ -46,7 +46,6 @@
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageDatabases = new System.Windows.Forms.TabPage();
-            this.pnlSourceCode = new System.Windows.Forms.Panel();
             this.tabControlResults = new System.Windows.Forms.TabControl();
             this.tabPageForward = new System.Windows.Forms.TabPage();
             this.fctSourceForward = new FastColoredTextBoxNS.FastColoredTextBox();
@@ -113,11 +112,12 @@
             this.ilTabControl = new System.Windows.Forms.ImageList(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.fbdSourcePath = new System.Windows.Forms.FolderBrowserDialog();
+            this.scCenter = new System.Windows.Forms.SplitContainer();
+            this.hsRefreshObjects = new SeControlsLib.HotSpot();
             this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDatabases.SuspendLayout();
-            this.pnlSourceCode.SuspendLayout();
             this.tabControlResults.SuspendLayout();
             this.tabPageForward.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctSourceForward)).BeginInit();
@@ -140,6 +140,11 @@
             this.pnlUpperObjects2.SuspendLayout();
             this.gbDBObjets2.SuspendLayout();
             this.pnlUpperObjects1.SuspendLayout();
+            this.pnlMessagesUpper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scCenter)).BeginInit();
+            this.scCenter.Panel1.SuspendLayout();
+            this.scCenter.Panel2.SuspendLayout();
+            this.scCenter.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFormUpper
@@ -298,8 +303,7 @@
             // 
             // tabPageDatabases
             // 
-            this.tabPageDatabases.Controls.Add(this.pnlSourceCode);
-            this.tabPageDatabases.Controls.Add(this.pnlDatabases);
+            this.tabPageDatabases.Controls.Add(this.scCenter);
             this.tabPageDatabases.Controls.Add(this.pnlXMLUpper);
             this.tabPageDatabases.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageDatabases.ImageIndex = 1;
@@ -311,15 +315,6 @@
             this.tabPageDatabases.Text = "Databases to compare";
             this.tabPageDatabases.UseVisualStyleBackColor = true;
             // 
-            // pnlSourceCode
-            // 
-            this.pnlSourceCode.Controls.Add(this.tabControlResults);
-            this.pnlSourceCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSourceCode.Location = new System.Drawing.Point(406, 54);
-            this.pnlSourceCode.Name = "pnlSourceCode";
-            this.pnlSourceCode.Size = new System.Drawing.Size(817, 812);
-            this.pnlSourceCode.TabIndex = 6;
-            // 
             // tabControlResults
             // 
             this.tabControlResults.Controls.Add(this.tabPageForward);
@@ -328,7 +323,7 @@
             this.tabControlResults.Location = new System.Drawing.Point(0, 0);
             this.tabControlResults.Name = "tabControlResults";
             this.tabControlResults.SelectedIndex = 0;
-            this.tabControlResults.Size = new System.Drawing.Size(817, 812);
+            this.tabControlResults.Size = new System.Drawing.Size(807, 812);
             this.tabControlResults.TabIndex = 5;
             // 
             // tabPageForward
@@ -338,7 +333,7 @@
             this.tabPageForward.Location = new System.Drawing.Point(4, 22);
             this.tabPageForward.Name = "tabPageForward";
             this.tabPageForward.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageForward.Size = new System.Drawing.Size(809, 786);
+            this.tabPageForward.Size = new System.Drawing.Size(799, 786);
             this.tabPageForward.TabIndex = 0;
             this.tabPageForward.Text = "Forward";
             this.tabPageForward.UseVisualStyleBackColor = true;
@@ -380,7 +375,7 @@
             this.fctSourceForward.RightBracket = ')';
             this.fctSourceForward.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctSourceForward.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctSourceForward.ServiceColors")));
-            this.fctSourceForward.Size = new System.Drawing.Size(803, 721);
+            this.fctSourceForward.Size = new System.Drawing.Size(793, 721);
             this.fctSourceForward.TabIndex = 3;
             this.fctSourceForward.WordWrap = true;
             this.fctSourceForward.Zoom = 100;
@@ -442,7 +437,7 @@
             this.pnlUpperSourceCodeForward.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpperSourceCodeForward.Location = new System.Drawing.Point(3, 3);
             this.pnlUpperSourceCodeForward.Name = "pnlUpperSourceCodeForward";
-            this.pnlUpperSourceCodeForward.Size = new System.Drawing.Size(803, 59);
+            this.pnlUpperSourceCodeForward.Size = new System.Drawing.Size(793, 59);
             this.pnlUpperSourceCodeForward.TabIndex = 4;
             // 
             // gbFoundLinesForward
@@ -452,7 +447,7 @@
             this.gbFoundLinesForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbFoundLinesForward.Location = new System.Drawing.Point(0, 0);
             this.gbFoundLinesForward.Name = "gbFoundLinesForward";
-            this.gbFoundLinesForward.Size = new System.Drawing.Size(468, 59);
+            this.gbFoundLinesForward.Size = new System.Drawing.Size(458, 59);
             this.gbFoundLinesForward.TabIndex = 10;
             this.gbFoundLinesForward.TabStop = false;
             this.gbFoundLinesForward.Text = "FoundLines";
@@ -464,7 +459,7 @@
             this.cbFoundLinesForward.FormattingEnabled = true;
             this.cbFoundLinesForward.Location = new System.Drawing.Point(3, 16);
             this.cbFoundLinesForward.Name = "cbFoundLinesForward";
-            this.cbFoundLinesForward.Size = new System.Drawing.Size(462, 21);
+            this.cbFoundLinesForward.Size = new System.Drawing.Size(452, 21);
             this.cbFoundLinesForward.TabIndex = 0;
             this.cbFoundLinesForward.SelectedIndexChanged += new System.EventHandler(this.cbFoundLinesForeward_SelectedIndexChanged);
             // 
@@ -473,7 +468,7 @@
             this.gbSearchCodeForward.Controls.Add(this.txtSearchCodeForward);
             this.gbSearchCodeForward.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbSearchCodeForward.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbSearchCodeForward.Location = new System.Drawing.Point(468, 0);
+            this.gbSearchCodeForward.Location = new System.Drawing.Point(458, 0);
             this.gbSearchCodeForward.Name = "gbSearchCodeForward";
             this.gbSearchCodeForward.Size = new System.Drawing.Size(200, 59);
             this.gbSearchCodeForward.TabIndex = 9;
@@ -509,7 +504,7 @@
             this.hsSearchDownForward.Image = global::FBXpert.Properties.Resources.go_down22x;
             this.hsSearchDownForward.ImageHover = global::FBXpert.Properties.Resources.go_down_blue_22x;
             this.hsSearchDownForward.ImageToggleOnSelect = true;
-            this.hsSearchDownForward.Location = new System.Drawing.Point(668, 0);
+            this.hsSearchDownForward.Location = new System.Drawing.Point(658, 0);
             this.hsSearchDownForward.Marked = false;
             this.hsSearchDownForward.MarkedColor = System.Drawing.Color.Teal;
             this.hsSearchDownForward.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -560,7 +555,7 @@
             this.hsSearchUpForward.Image = global::FBXpert.Properties.Resources.go_up_gn22x;
             this.hsSearchUpForward.ImageHover = global::FBXpert.Properties.Resources.go_up_blue22x;
             this.hsSearchUpForward.ImageToggleOnSelect = true;
-            this.hsSearchUpForward.Location = new System.Drawing.Point(713, 0);
+            this.hsSearchUpForward.Location = new System.Drawing.Point(703, 0);
             this.hsSearchUpForward.Marked = false;
             this.hsSearchUpForward.MarkedColor = System.Drawing.Color.Teal;
             this.hsSearchUpForward.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -611,7 +606,7 @@
             this.hsSeachForward.Image = global::FBXpert.Properties.Resources.lupe24x;
             this.hsSeachForward.ImageHover = global::FBXpert.Properties.Resources.lupe2_24x;
             this.hsSeachForward.ImageToggleOnSelect = true;
-            this.hsSeachForward.Location = new System.Drawing.Point(758, 0);
+            this.hsSeachForward.Location = new System.Drawing.Point(748, 0);
             this.hsSeachForward.Marked = false;
             this.hsSeachForward.MarkedColor = System.Drawing.Color.Teal;
             this.hsSeachForward.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -914,10 +909,10 @@
             // 
             this.pnlDatabases.Controls.Add(this.gbDatabase2);
             this.pnlDatabases.Controls.Add(this.gbDatabase1);
-            this.pnlDatabases.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlDatabases.Location = new System.Drawing.Point(3, 54);
+            this.pnlDatabases.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDatabases.Location = new System.Drawing.Point(0, 0);
             this.pnlDatabases.Name = "pnlDatabases";
-            this.pnlDatabases.Size = new System.Drawing.Size(403, 812);
+            this.pnlDatabases.Size = new System.Drawing.Size(405, 812);
             this.pnlDatabases.TabIndex = 10;
             // 
             // gbDatabase2
@@ -926,9 +921,9 @@
             this.gbDatabase2.Controls.Add(this.pnlUpperDatabase2);
             this.gbDatabase2.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbDatabase2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbDatabase2.Location = new System.Drawing.Point(203, 0);
+            this.gbDatabase2.Location = new System.Drawing.Point(212, 0);
             this.gbDatabase2.Name = "gbDatabase2";
-            this.gbDatabase2.Size = new System.Drawing.Size(200, 812);
+            this.gbDatabase2.Size = new System.Drawing.Size(193, 812);
             this.gbDatabase2.TabIndex = 7;
             this.gbDatabase2.TabStop = false;
             this.gbDatabase2.Text = "Database 2";
@@ -947,14 +942,14 @@
             this.slbDatabase2.CheckOnSelect = false;
             this.slbDatabase2.CheckVisible = false;
             this.slbDatabase2.CheckWith = 32;
-            this.slbDatabase2.ColumnFilterIndex = 1;
+            this.slbDatabase2.ColumnFilterIndex = 2;
             this.slbDatabase2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.slbDatabase2.FilterText = "";
             this.slbDatabase2.IDVisible = false;
-            this.slbDatabase2.IDWith = 32;
+            this.slbDatabase2.IDWith = 50;
             this.slbDatabase2.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.slbDatabase2.ListEntriesDefaultCellStyle = dataGridViewCellStyle2;
-            this.slbDatabase2.Location = new System.Drawing.Point(3, 58);
+            this.slbDatabase2.Location = new System.Drawing.Point(3, 36);
             this.slbDatabase2.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDatabase2.Name = "slbDatabase2";
             this.slbDatabase2.SelectedIndex = -1;
@@ -962,7 +957,7 @@
             this.slbDatabase2.ShowCellToolTips = true;
             this.slbDatabase2.ShowCountInTitle = true;
             this.slbDatabase2.ShowSelection = true;
-            this.slbDatabase2.Size = new System.Drawing.Size(194, 751);
+            this.slbDatabase2.Size = new System.Drawing.Size(187, 773);
             this.slbDatabase2.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
             this.slbDatabase2.SQLKonjunktion = "AND";
             this.slbDatabase2.TabIndex = 4;
@@ -979,7 +974,7 @@
             this.pnlUpperDatabase2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpperDatabase2.Location = new System.Drawing.Point(3, 16);
             this.pnlUpperDatabase2.Name = "pnlUpperDatabase2";
-            this.pnlUpperDatabase2.Size = new System.Drawing.Size(194, 42);
+            this.pnlUpperDatabase2.Size = new System.Drawing.Size(187, 20);
             this.pnlUpperDatabase2.TabIndex = 8;
             // 
             // gbDatabase1
@@ -990,7 +985,7 @@
             this.gbDatabase1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDatabase1.Location = new System.Drawing.Point(0, 0);
             this.gbDatabase1.Name = "gbDatabase1";
-            this.gbDatabase1.Size = new System.Drawing.Size(200, 812);
+            this.gbDatabase1.Size = new System.Drawing.Size(184, 812);
             this.gbDatabase1.TabIndex = 8;
             this.gbDatabase1.TabStop = false;
             this.gbDatabase1.Text = "Database 1";
@@ -1009,14 +1004,14 @@
             this.slbDatabase1.CheckOnSelect = false;
             this.slbDatabase1.CheckVisible = false;
             this.slbDatabase1.CheckWith = 32;
-            this.slbDatabase1.ColumnFilterIndex = 1;
+            this.slbDatabase1.ColumnFilterIndex = 2;
             this.slbDatabase1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.slbDatabase1.FilterText = "";
             this.slbDatabase1.IDVisible = false;
             this.slbDatabase1.IDWith = 32;
             this.slbDatabase1.ItemFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.slbDatabase1.ListEntriesDefaultCellStyle = dataGridViewCellStyle4;
-            this.slbDatabase1.Location = new System.Drawing.Point(3, 58);
+            this.slbDatabase1.Location = new System.Drawing.Point(3, 36);
             this.slbDatabase1.MarkingColor = System.Drawing.Color.LightGreen;
             this.slbDatabase1.Name = "slbDatabase1";
             this.slbDatabase1.SelectedIndex = -1;
@@ -1024,7 +1019,7 @@
             this.slbDatabase1.ShowCellToolTips = true;
             this.slbDatabase1.ShowCountInTitle = true;
             this.slbDatabase1.ShowSelection = true;
-            this.slbDatabase1.Size = new System.Drawing.Size(194, 751);
+            this.slbDatabase1.Size = new System.Drawing.Size(178, 773);
             this.slbDatabase1.SortDirection = System.ComponentModel.ListSortDirection.Ascending;
             this.slbDatabase1.SQLKonjunktion = "AND";
             this.slbDatabase1.TabIndex = 4;
@@ -1041,10 +1036,10 @@
             this.pnlUpperDatabase1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlUpperDatabase1.Location = new System.Drawing.Point(3, 16);
             this.pnlUpperDatabase1.Name = "pnlUpperDatabase1";
-            this.pnlUpperDatabase1.Size = new System.Drawing.Size(194, 42);
+            this.pnlUpperDatabase1.Size = new System.Drawing.Size(178, 20);
             this.pnlUpperDatabase1.TabIndex = 8;
             // 
-            // pnlXML_UPPER
+            // pnlXMLUpper
             // 
             this.pnlXMLUpper.BackColor = System.Drawing.SystemColors.Control;
             this.pnlXMLUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -1064,7 +1059,7 @@
             this.pnlXMLUpper.Controls.Add(this.hsSaveResults);
             this.pnlXMLUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlXMLUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlXMLUpper.Name = "pnlXML_UPPER";
+            this.pnlXMLUpper.Name = "pnlXMLUpper";
             this.pnlXMLUpper.Size = new System.Drawing.Size(1220, 51);
             this.pnlXMLUpper.TabIndex = 1;
             // 
@@ -1366,7 +1361,7 @@
             this.slbDbObjects2.CheckOnSelect = false;
             this.slbDbObjects2.CheckVisible = true;
             this.slbDbObjects2.CheckWith = 32;
-            this.slbDbObjects2.ColumnFilterIndex = 1;
+            this.slbDbObjects2.ColumnFilterIndex = 2;
             this.slbDbObjects2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.slbDbObjects2.FilterText = "";
             this.slbDbObjects2.IDVisible = false;
@@ -1544,7 +1539,7 @@
             this.slbDbObjects1.CheckOnSelect = false;
             this.slbDbObjects1.CheckVisible = true;
             this.slbDbObjects1.CheckWith = 32;
-            this.slbDbObjects1.ColumnFilterIndex = 1;
+            this.slbDbObjects1.ColumnFilterIndex = 2;
             this.slbDbObjects1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.slbDbObjects1.FilterText = "";
             this.slbDbObjects1.IDVisible = false;
@@ -1691,6 +1686,7 @@
             // 
             this.pnlMessagesUpper.BackColor = System.Drawing.SystemColors.Control;
             this.pnlMessagesUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlMessagesUpper.Controls.Add(this.hsRefreshObjects);
             this.pnlMessagesUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMessagesUpper.Location = new System.Drawing.Point(3, 3);
             this.pnlMessagesUpper.Name = "pnlMessagesUpper";
@@ -1712,6 +1708,80 @@
             this.saveFileDialog1.Filter = "Text|*.txt|All|*.*";
             this.saveFileDialog1.Title = "Save compare results";
             // 
+            // scCenter
+            // 
+            this.scCenter.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.scCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scCenter.Location = new System.Drawing.Point(3, 54);
+            this.scCenter.Name = "scCenter";
+            // 
+            // scCenter.Panel1
+            // 
+            this.scCenter.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scCenter.Panel1.Controls.Add(this.pnlDatabases);
+            // 
+            // scCenter.Panel2
+            // 
+            this.scCenter.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scCenter.Panel2.Controls.Add(this.tabControlResults);
+            this.scCenter.Size = new System.Drawing.Size(1220, 812);
+            this.scCenter.SplitterDistance = 405;
+            this.scCenter.SplitterWidth = 8;
+            this.scCenter.TabIndex = 11;
+            this.scCenter.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scCenter_SplitterMoved);
+            // 
+            // hsRefreshObjects
+            // 
+            this.hsRefreshObjects.BackColor = System.Drawing.Color.Transparent;
+            this.hsRefreshObjects.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshObjects.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsRefreshObjects.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsRefreshObjects.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsRefreshObjects.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsRefreshObjects.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsRefreshObjects.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsRefreshObjects.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsRefreshObjects.FlatAppearance.BorderSize = 0;
+            this.hsRefreshObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRefreshObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsRefreshObjects.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsRefreshObjects.Image = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hsRefreshObjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.hsRefreshObjects.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.hsRefreshObjects.ImageToggleOnSelect = false;
+            this.hsRefreshObjects.Location = new System.Drawing.Point(0, 0);
+            this.hsRefreshObjects.Marked = false;
+            this.hsRefreshObjects.MarkedColor = System.Drawing.Color.Teal;
+            this.hsRefreshObjects.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsRefreshObjects.MarkedText = "";
+            this.hsRefreshObjects.MarkMode = false;
+            this.hsRefreshObjects.Name = "hsRefreshObjects";
+            this.hsRefreshObjects.NonMarkedText = "Refresh";
+            this.hsRefreshObjects.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRefreshObjects.ShortcutNewline = false;
+            this.hsRefreshObjects.ShowShortcut = false;
+            this.hsRefreshObjects.Size = new System.Drawing.Size(116, 42);
+            this.hsRefreshObjects.TabIndex = 29;
+            this.hsRefreshObjects.Text = "Refresh";
+            this.hsRefreshObjects.ToolTipActive = false;
+            this.hsRefreshObjects.ToolTipAutomaticDelay = 500;
+            this.hsRefreshObjects.ToolTipAutoPopDelay = 5000;
+            this.hsRefreshObjects.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsRefreshObjects.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsRefreshObjects.ToolTipFor4ContextMenu = true;
+            this.hsRefreshObjects.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsRefreshObjects.ToolTipInitialDelay = 500;
+            this.hsRefreshObjects.ToolTipIsBallon = false;
+            this.hsRefreshObjects.ToolTipOwnerDraw = false;
+            this.hsRefreshObjects.ToolTipReshowDelay = 100;
+            this.hsRefreshObjects.ToolTipShowAlways = false;
+            this.hsRefreshObjects.ToolTipText = "";
+            this.hsRefreshObjects.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsRefreshObjects.ToolTipTitle = "";
+            this.hsRefreshObjects.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsRefreshObjects.UseVisualStyleBackColor = false;
+            this.hsRefreshObjects.Click += new System.EventHandler(this.hsRefreshObjects_Click);
+            // 
             // DatabaseCompareFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1725,12 +1795,13 @@
             this.Name = "DatabaseCompareFrom";
             this.Text = "DatabaseCompareFrom";
             this.Load += new System.EventHandler(this.DatabaseCompareFrom_Load);
+          
+            this.Resize += new System.EventHandler(this.DatabaseCompareFrom_Resize);
             this.pnlFormUpper.ResumeLayout(false);
             this.pnlFormUpper.PerformLayout();
             this.pnlCenter.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageDatabases.ResumeLayout(false);
-            this.pnlSourceCode.ResumeLayout(false);
             this.tabControlResults.ResumeLayout(false);
             this.tabPageForward.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fctSourceForward)).EndInit();
@@ -1756,6 +1827,11 @@
             this.pnlUpperObjects2.ResumeLayout(false);
             this.gbDBObjets2.ResumeLayout(false);
             this.pnlUpperObjects1.ResumeLayout(false);
+            this.pnlMessagesUpper.ResumeLayout(false);
+            this.scCenter.Panel1.ResumeLayout(false);
+            this.scCenter.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scCenter)).EndInit();
+            this.scCenter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1785,7 +1861,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsSourceCode;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiSearchFirst;
-        private System.Windows.Forms.Panel pnlSourceCode;
         private System.Windows.Forms.Panel pnlUpperSourceCodeForward;
         private SeControlsLib.HotSpot hsSeachForward;
         private SeControlsLib.HotSpot hsSearchUpForward;
@@ -1837,5 +1912,7 @@
         private SeControlsLib.HotSpot hsSearchUpReverse;
         private SeControlsLib.HotSpot hsSeachReverse;
         private FastColoredTextBoxNS.FastColoredTextBox fctSourceReverse;
+        private System.Windows.Forms.SplitContainer scCenter;
+        private SeControlsLib.HotSpot hsRefreshObjects;
     }
 }

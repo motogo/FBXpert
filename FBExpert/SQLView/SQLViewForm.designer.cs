@@ -7,7 +7,7 @@ namespace SQLView
     /// <summary>
     /// Zusammenfassende Beschreibung für WinForm
     /// </summary>
-    partial class SQLViewForm1 : BasicNormalFormClass
+    public partial class SQLViewForm1 : BasicNormalFormClass
     {
         private System.Windows.Forms.Panel pnlFormUpper;
         private System.Windows.Forms.Panel pnl_center;

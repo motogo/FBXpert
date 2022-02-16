@@ -3,6 +3,7 @@ using DBBasicClassLibrary;
 using Enums;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
 using System;
 using System.Text;
 

@@ -1,8 +1,10 @@
-﻿using BasicClassLibrary;
+﻿using APPHelpLibrary;
+using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBXpert.DesignReport;
 using FBXpert.Globals;
 using FBXpert.KonfigurationForms;
+using FBXpertLib.Globals;
 using Initialization;
 using SEMessageBoxLibrary;
 using SharedStorages;
@@ -92,12 +94,12 @@ namespace FBXpert.SonstForms
 
                 foreach (ReportSqlCommands scmd in _mw.SqlCommands)
                 {
-                    AddItem(scmd.cmd,scmd.caption);
+                    AddSQLItem(scmd.cmd,scmd.caption);
                 }
 
-                if (lvCreateStatements.Items.Count > 0)
+                if (folSQL.Items.Count > 0)
                 {
-                    lvCreateStatements.Items[0].Selected = true;
+                   folSQL.Items[0].Selected = true;
                 }
             }
             catch (Exception ex)
@@ -114,9 +116,8 @@ namespace FBXpert.SonstForms
                 _mw.XmlDataFileName = cbXMLFile.Text;
                 _mw.XsdSchemaFileName = cbXSDFile.Text;
                 _mw.SqlCommands = new List<ReportSqlCommands>();
-                foreach (ListViewItem lvi in lvCreateStatements.Items)
+                foreach (ReportSqlCommands rcmd in folSQL.Objects)
                 {
-                    ReportSqlCommands rcmd = lvi.Tag as ReportSqlCommands;
                     _mw.SqlCommands.Add(rcmd);
                 }
                 _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
@@ -124,59 +125,170 @@ namespace FBXpert.SonstForms
                 _ss.AddOrUpdate(Name, _mw);                
             }
         }
-       
-        private void AddItem(string statement, string dataname)
+
+        private BrightIdeasSoftware.OLVColumn colFieldname;
+        private BrightIdeasSoftware.OLVColumn colFieldType;
+        private BrightIdeasSoftware.OLVColumn colFieldValue;
+        private BrightIdeasSoftware.OLVColumn colValuesGroupName;
+
+        private BrightIdeasSoftware.OLVColumn colSQLCaption;
+        private BrightIdeasSoftware.OLVColumn colSQLCommand;
+        private BrightIdeasSoftware.OLVColumn colSQLDone;
+       // private BrightIdeasSoftware.OLVColumn colSQLGroupName;
+
+        public void MakeSQLFieldGrid()
         {
-            string[] itm = {"",statement, dataname};
-            var lvi = new ListViewItem(itm)
-            {
-                Tag = new ReportSqlCommands()
-                {
-                    caption = dataname,
-                    cmd = statement
-                },
-                Checked = true
-            };
-            lvCreateStatements.Items.Add(lvi);            
+            colSQLCommand = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colSQLDone = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            //colSQLGroupName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colSQLCaption = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+
+            colSQLDone.Text = "chk";
+            colSQLDone.TextAlign = HorizontalAlignment.Center;
+            colSQLDone.CheckBoxes = true;
+
+            colSQLCommand.Text = "SQL";
+          //  colSQLGroupName.Text = "Group";
+
+            colSQLCommand.Width = 250;
+            colSQLDone.Width = 100;
+            
+          //  colSQLGroupName.Width = 120;
+            colSQLCaption.Text = "Caption";
+            colSQLCaption.Width = 120;
+
+            folSQL.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            colSQLDone,
+            colSQLCommand,
+            colSQLCaption
+     //       colSQLGroupName
+            });
+
+            folSQL.CellEditUseWholeCell = false;
+            folSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            folSQL.HideSelection = false;
+            folSQL.Location = new System.Drawing.Point(0, 0);
+            folSQL.Name = "fastObjectListView1";
+            folSQL.ShowGroups = false;
+            folSQL.TabIndex = 4;
+            folSQL.UseCompatibleStateImageBehavior = false;
+            folSQL.View = System.Windows.Forms.View.Details;
+            folSQL.VirtualMode = true;
         }
 
-        private void ItemToEdit(ListViewItem lvi)
+
+        public void MakeFieldGrid()
         {
-            var oitm = (ReportSqlCommands) lvi?.Tag;
+            colFieldname        = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldType        = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colValuesGroupName  = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldValue       = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+
+            colFieldType.Text       = "Type";
+            colFieldType.TextAlign  = HorizontalAlignment.Center;
+
+            colFieldname.Text       = "Bezeichnung";
+            colValuesGroupName.Text = "Group";
+            colFieldValue.Text      = "Value";
+                        
+            colFieldname.Width          = 250;
+            colFieldType.Width          = 100;
+            colValuesGroupName.Width    = 250;
+            colFieldValue.Width         = 120;
+            
+
+            folValues.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            colFieldname,
+            colFieldType,
+            colFieldValue,
+            colValuesGroupName
+            });
+
+            folValues.CellEditUseWholeCell = false;
+            folValues.Dock = System.Windows.Forms.DockStyle.Fill;
+            folValues.HideSelection = false;
+            folValues.Location = new System.Drawing.Point(0, 0);
+            folValues.Name = "fastObjectListView1";
+            folValues.ShowGroups = false;
+            folValues.TabIndex = 4;
+            folValues.UseCompatibleStateImageBehavior = false;
+            folValues.View = System.Windows.Forms.View.Details;
+            folValues.VirtualMode = true;
+        }
+
+        //Getters (Formatierungen, Zuweisungen der Objektvariablen zu dem ObjektListView
+        private void SetupColumns()
+        {
+            colFieldname.AspectGetter       = delegate (object x) { return ((ReportValues)x).caption; };
+            colValuesGroupName.AspectGetter = delegate (object x) { return ((ReportValues)x).group; };
+            colFieldType.AspectGetter       = delegate (object x) { return ((ReportValues)x).valtype; };
+            colFieldValue.AspectGetter      = delegate (object x) { return ((ReportValues)x).val; };
+        }
+        private void SetupSQLColumns()
+        {
+            colSQLCommand.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x).caption; };
+            colSQLCaption.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x).cmd; };
+            //colSQLDone.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x)..valtype; };
+            //colSQLGroupName.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x).group; };
+            
+        }
+
+        private void AddSQLItem(string statement, string dataname)
+        {
+
+            var obj = new ReportSqlCommands()
+            {
+                caption = dataname,
+                cmd = statement
+               
+            };
+            
+            folSQL.AddObject(obj);
+        }
+
+        private void ItemToEdit(ReportSqlCommands oitm)
+        {
             txtDataName.Text = oitm?.caption;
             txtStatement.Text = oitm?.cmd;
+        }
+        private void ValuesItemToEdit(ReportValues oitm)
+        {
+           txtValueCaption.Text = oitm.caption;
+           txtValueGroup.Text = oitm.group;
+           txtValueWert.Text = oitm.val;
+           cbValuesTypes.SelectedItem = oitm.valtype;
         }
 
         private void hsAddStatement_Click(object sender, EventArgs e)
         {
-            AddItem(txtStatement.Text, txtDataName.Text);
-        }
-
-        private void lvCreateStatements_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListViewItem lvi=null;
-            if (lvCreateStatements.SelectedItems.Count > 0)
-            {
-                lvi = lvCreateStatements.SelectedItems[0];
-            }
-            ItemToEdit(lvi);
+             AddSQLItem(txtStatement.Text, txtDataName.Text);
         }
 
         private void hsRemoveStatement_Click(object sender, EventArgs e)
         {
-            if (lvCreateStatements.SelectedItems.Count > 0)
-            {
-                lvCreateStatements.SelectedItems[0].Remove();
-            }
+            
+
+            if (folSQL.SelectedObject == null) return;
+            var tfc = (ReportSqlCommands)folSQL.SelectedObject;
+            folSQL.RemoveObject(tfc);
+
         }
        
         private void hsCreateReportFiles_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(txtXMLDataFileNew.Text))
+            {
+                long ticksnow = DateTimeFunctions.GetSecFromTicksNow();
+                txtXMLDataFileNew.Text = $@"{ApplicationPathClass.Instance.ApplicationReportPath}\ReportDataFile_{DateTimeFunctions.GetSecFromTicksNow()}.xml";
+                txtXSDSchemaFileNew.Text = $@"{ApplicationPathClass.Instance.ApplicationReportPath}\ReportSchemaFile_{DateTimeFunctions.GetSecFromTicksNow()}.xml";
+                txtReportFileNameNew.Text = $@"{ApplicationPathClass.Instance.ApplicationReportPath}\Report_{DateTimeFunctions.GetSecFromTicksNow()}.frx";
+                cbReportFile.Text = $@"{ApplicationPathClass.Instance.ApplicationReportPath}\Report_{DateTimeFunctions.GetSecFromTicksNow()}.frx";
+            }
             var rpt = new ReportDesignClass
             {
                 Datafile = txtXMLDataFileNew.Text,
                 Schemafile = txtXSDSchemaFileNew.Text,
-                Reportfile = cbReportFile.Text
+                Reportfile = txtReportFileNameNew.Text
             };
 
             bool createFiles = true;
@@ -190,10 +302,22 @@ namespace FBXpert.SonstForms
 
             if (createFiles)
             {
-                foreach (ListViewItem lvi in lvCreateStatements.Items)
+                foreach (var ob in folSQL.Objects)
                 {
-                    if (!lvi.Checked) continue;
-                    rpt.DataObjects.Add(lvi.Tag as ReportSqlCommands);
+                    ReportSqlCommands rv = (ReportSqlCommands)ob;
+                    rpt.DataObjects.Add(rv);
+                }
+                foreach (var ob in folValues.Objects)
+                {
+                    ReportValues rv = (ReportValues)ob;
+                    var rvg = rpt.ValueObjects.Find(x => x.group == rv.group);
+                    if (rvg == null)
+                    {
+                        rvg = new ReportValuesGroups();
+                        rvg.group = rv.group;
+                        rpt.ValueObjects.Add(rvg);
+                    }
+                    rvg.vals.Add(rv);
                 }
                 rpt.CreateReportDatas(_dbReg);
             }                            
@@ -222,7 +346,6 @@ namespace FBXpert.SonstForms
         {
             // ofdReportFile.InitialDirectory = PfadClass.Instance().EDVPfad;
             if (ofdReportFile.ShowDialog() != DialogResult.OK) return;
-            
             AddCbReportFileText(ofdReportFile.FileName); 
             fctFRX.OpenFile(ofdReportFile.FileName);
             tabControlEditDesign.SelectedTab =  tabPageFRX;            
@@ -253,18 +376,34 @@ namespace FBXpert.SonstForms
 
         public void SetControlSizes()
         {
+            MakeFieldGrid();
+            MakeSQLFieldGrid();
+            SetupColumns();
+            SetupSQLColumns();
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlFRXUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlXMLUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlXSDUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlAllDesignUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlCreateStatementsUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlCreateStatementsUpper.Height = 172;
         }
         private void ReportDesignForm_Load(object sender, EventArgs e)
         {
+            SetValuesTypes();
             SetControlSizes();
             FormDesign.SetFormLeft(this);
             LoadUserDesign();         
+        }
+
+        private void SetValuesTypes()
+        {
+            cbValuesTypes.Items.Clear();
+            cbValuesTypes.Items.Add(typeof(string));
+            cbValuesTypes.Items.Add(typeof(int));
+            cbValuesTypes.Items.Add(typeof(double));
+            cbValuesTypes.Items.Add(typeof(DateTime));
+            cbValuesTypes.Items.Add(typeof(bool));
+            cbValuesTypes.SelectedIndex = 0;
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -303,10 +442,11 @@ namespace FBXpert.SonstForms
 
             if (createFiles)
             {
-                foreach (ListViewItem lvi in lvCreateStatements.Items)
+                foreach (ReportSqlCommands lvi in folSQL.Objects)
                 {
-                    if (!lvi.Checked) continue;
-                    rpt.DataObjects.Add(lvi.Tag as ReportSqlCommands);
+                    //if (!lvi.Checked) continue;
+                    
+                    rpt.DataObjects.Add(lvi);
                 }
                 rpt.CreateReportDatas(_dbReg);
             }            
@@ -412,6 +552,104 @@ namespace FBXpert.SonstForms
             if(saveFileDialog.ShowDialog() != DialogResult.OK) return;
             
             fctFRX.SaveToFile(saveFileDialog.FileName,Encoding.UTF8);            
+        }
+
+        private void hsAddValueObject_Click(object sender, EventArgs e)
+        {
+            ReportValues reportValues = new ReportValues();
+            reportValues.group = txtValueGroup.Text;
+            reportValues.caption = txtValueCaption.Text;
+           
+            reportValues.valtype = (Type) cbValuesTypes.SelectedItem;
+            if(reportValues.valtype == typeof(int))
+            {
+                int? val = StaticFunctionsClass.ToIntDef(txtValueWert.Text, null);
+                if (val == null)
+                {
+                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null,new object[] {txtValueWert.Text.Trim(), typeof(int) });
+                    return;
+                }
+                reportValues.val = val.ToString();
+                
+            }
+            else if (reportValues.valtype == typeof(double))
+            {
+                double? val = StaticFunctionsClass.ToDoubleDef(txtValueWert.Text, null);
+                if(val == null)
+                {
+                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] {txtValueWert.Text.Trim(), typeof(double) });
+                    return;
+                }
+                reportValues.val = val.ToString();
+            }
+            else if (reportValues.valtype == typeof(DateTime))
+            {
+                try
+                {
+                    var dateTime = DateTime.Parse(txtValueWert.Text.Trim());
+                }
+                catch (FormatException)
+                {
+                    SEMessageBox.ShowDialog("FormatError",$@"IsNotAValidFormat",SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] {txtValueWert.Text.Trim(), typeof(DateTime) });
+                    return;
+                }
+                reportValues.val = txtValueWert.Text;
+            }
+            else
+            {
+                reportValues.val = txtValueWert.Text;
+            }
+            bool objectExists = false;
+            foreach(var itm in folValues.Objects)
+            {
+                var rv = (ReportValues)itm;
+                if((rv.caption == reportValues.caption)&&(rv.group == reportValues.group))
+                {
+                    objectExists = true;
+                    break;
+                }
+            }
+            if (objectExists)
+            {
+                SEMessageBox.ShowDialog("ItemsExists", $@"ListAlreadyContainsGroupName", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] { reportValues.group, reportValues.caption });
+                return;
+            }
+            folValues.AddObject(reportValues);
+        }
+
+        private void hsRemovevALUEoBJECT_Click(object sender, EventArgs e)
+        {
+            if (folValues.SelectedObject == null) return;
+            var tfc = (ReportValues)folValues.SelectedObject;
+            folValues.RemoveObject(tfc);
+        }
+
+        private void hsCLearValues_Click(object sender, EventArgs e)
+        {
+            folValues.SetObjects(null, false);
+        }
+
+        
+        private void hsHelp_Click(object sender, EventArgs e)
+        {
+            ApplicationHelp.Instance.ShowHelp(HelpIDS.ReportDesigner);
+        }
+
+        private void hsClearSQLList_Click(object sender, EventArgs e)
+        {
+            folSQL.SetObjects(null, false);
+        }
+
+        private void folSQL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReportSqlCommands obj = folSQL.SelectedObject as ReportSqlCommands;
+            ItemToEdit(obj);
+        }
+
+        private void folValues_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ReportValues obj = (ReportValues) folValues.SelectedObject;
+            ValuesItemToEdit(obj);
         }
     }
 }

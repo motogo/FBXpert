@@ -1,6 +1,8 @@
 ﻿using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using System;
 using System.Windows.Forms;
 

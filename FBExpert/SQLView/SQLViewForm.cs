@@ -1,11 +1,12 @@
 using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
-using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXpert;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
@@ -24,7 +25,7 @@ namespace SQLView
     /// <summary>
     /// Zusammenfassende Beschreibung für WinForm
     /// </summary>
-    partial class SQLViewForm1 : INormalForm
+    public partial class SQLViewForm1 : INormalForm
     {
         private HistoryMode _history;
         private SQLCommandsClass _sqLcommand = null;

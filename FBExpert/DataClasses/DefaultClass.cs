@@ -1,4 +1,5 @@
 ﻿using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 
 namespace FBXpert.DataClasses
 {

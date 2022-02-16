@@ -59,10 +59,14 @@ namespace FBXpert
             this.tsmiEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiJapanese = new System.Windows.Forms.ToolStripMenuItem();
             this.lblLastLoadedDefinition = new System.Windows.Forms.Label();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAbout = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.cmsView.SuspendLayout();
             this.cmsNotifications.SuspendLayout();
             this.cmsUtilities.SuspendLayout();
+            this.cmsAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -71,7 +75,8 @@ namespace FBXpert
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiShowWindows,
             this.tsmiNotifications,
-            this.tsmiUtilities});
+            this.tsmiUtilities,
+            this.tsmiAbout});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.MdiWindowListItem = this.tsmiShowWindows;
             this.mnuMain.Name = "mnuMain";
@@ -94,7 +99,6 @@ namespace FBXpert
             this.toolStripSeparator1,
             this.tsmiExit});
             this.cmsView.Name = "contextMenuStrip1";
-            this.cmsView.OwnerItem = this.tsmiShowWindows;
             this.cmsView.Size = new System.Drawing.Size(142, 36);
             this.cmsView.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
@@ -125,7 +129,6 @@ namespace FBXpert
             this.tsmiNotes,
             this.tsmiErrors});
             this.cmsNotifications.Name = "contextMenuStrip1";
-            this.cmsNotifications.OwnerItem = this.tsmiNotifications;
             this.cmsNotifications.Size = new System.Drawing.Size(123, 48);
             this.cmsNotifications.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsNotifications_ItemClicked);
             // 
@@ -169,7 +172,6 @@ namespace FBXpert
             this.tsmiEnglish,
             this.tsmiJapanese});
             this.cmsUtilities.Name = "contextMenuStrip1";
-            this.cmsUtilities.OwnerItem = this.tsmiUtilities;
             this.cmsUtilities.Size = new System.Drawing.Size(190, 334);
             this.cmsUtilities.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip2_ItemClicked);
             // 
@@ -269,22 +271,45 @@ namespace FBXpert
             this.tsmiJapanese.Size = new System.Drawing.Size(189, 26);
             this.tsmiJapanese.Text = "Japanisch (TEST)";
             // 
-            // lblLastLoadedDfinition
+            // lblLastLoadedDefinition
             // 
             this.lblLastLoadedDefinition.AutoSize = true;
-            this.lblLastLoadedDefinition.Location = new System.Drawing.Point(384, 9);
-            this.lblLastLoadedDefinition.Name = "lblLastLoadedDfinition";
-            this.lblLastLoadedDefinition.Size = new System.Drawing.Size(101, 13);
+            this.lblLastLoadedDefinition.Location = new System.Drawing.Point(486, 9);
+            this.lblLastLoadedDefinition.Name = "lblLastLoadedDefinition";
+            this.lblLastLoadedDefinition.Size = new System.Drawing.Size(117, 14);
             this.lblLastLoadedDefinition.TabIndex = 5;
             this.lblLastLoadedDefinition.Text = "lastLoadedDefintion";
             // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.DropDown = this.cmsAbout;
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(52, 24);
+            this.tsmiAbout.Text = "About";
+            // 
+            // cmsAbout
+            // 
+            this.cmsAbout.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsAbout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiHelp});
+            this.cmsAbout.Name = "contextMenuStrip1";
+            this.cmsAbout.Size = new System.Drawing.Size(100, 26);
+            this.cmsAbout.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsAbout_ItemClicked);
+            // 
+            // tsmiHelp
+            // 
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(99, 22);
+            this.tsmiHelp.Text = "Help";
+            // 
             // FbXpertMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 636);
+            this.ClientSize = new System.Drawing.Size(1113, 685);
             this.Controls.Add(this.lblLastLoadedDefinition);
             this.Controls.Add(this.mnuMain);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuMain;
@@ -298,6 +323,7 @@ namespace FBXpert
             this.cmsView.ResumeLayout(false);
             this.cmsNotifications.ResumeLayout(false);
             this.cmsUtilities.ResumeLayout(false);
+            this.cmsAbout.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,6 +357,9 @@ namespace FBXpert
         private System.Windows.Forms.ToolStripMenuItem tsmiEnglish;
         private System.Windows.Forms.ToolStripMenuItem tsmiJapanese;
         private System.Windows.Forms.Label lblLastLoadedDefinition;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
+        private System.Windows.Forms.ContextMenuStrip cmsAbout;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
     }
 }
 

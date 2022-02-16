@@ -43,32 +43,36 @@ namespace SQLView
             this.pnl_center = new System.Windows.Forms.Panel();
             this.tcSQLCONTROL = new System.Windows.Forms.TabControl();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
+            this.scExperienceInfo = new System.Windows.Forms.SplitContainer();
+            this.gbExperienceInfoText = new System.Windows.Forms.GroupBox();
             this.dgvExperienceInfo = new System.Windows.Forms.DataGridView();
             this.cmdExperienceInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExperienceInfoToSQL = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteExperienceInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlExyperienceInfoUpper = new System.Windows.Forms.Panel();
-            this.fctExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.gbExperienceInfoKey = new System.Windows.Forms.GroupBox();
-            this.hsUpdateExperienceInfo = new SeControlsLib.HotSpot();
-            this.hsDeleteExperienceInfo = new SeControlsLib.HotSpot();
+            this.gbExperienceIInfoKey = new System.Windows.Forms.GroupBox();
             this.txtExperienceKeyCode = new System.Windows.Forms.TextBox();
+            this.fctExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.flpExperienceInfoCenter = new System.Windows.Forms.FlowLayoutPanel();
             this.hsClearExperienceInfoFields = new SeControlsLib.HotSpot();
+            this.hsUpdateExperienceInfo = new SeControlsLib.HotSpot();
             this.hsRefreshExperienceInfo = new SeControlsLib.HotSpot();
             this.hsInsertExperienceInfo = new SeControlsLib.HotSpot();
+            this.hsDeleteExperienceInfo = new SeControlsLib.HotSpot();
             this.flpExperienceInfoUpper = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPageLocalExperience = new System.Windows.Forms.TabPage();
+            this.scLocalExperience = new System.Windows.Forms.SplitContainer();
+            this.gbLocalExperienceValue = new System.Windows.Forms.GroupBox();
             this.dgvLocalExperienceInfo = new System.Windows.Forms.DataGridView();
-            this.pnlLocalExperienceInfoUpper = new System.Windows.Forms.Panel();
-            this.fctLocalExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.gbLocalExperienceInfoKey = new System.Windows.Forms.GroupBox();
-            this.hsUpdateLocalExperienceInfo = new SeControlsLib.HotSpot();
-            this.hsDeleteLocalData = new SeControlsLib.HotSpot();
+            this.gbLocalExperienceCenter = new System.Windows.Forms.GroupBox();
             this.txtLocalExperienceKeyCode = new System.Windows.Forms.TextBox();
+            this.fctLocalExperienceInfo = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.flpLocalExperienceInfoCenter = new System.Windows.Forms.FlowLayoutPanel();
             this.hsClearLocalExperienceInfo = new SeControlsLib.HotSpot();
+            this.hsUpdateLocalExperienceInfo = new SeControlsLib.HotSpot();
             this.hsRefreshLocalExperienceInfo = new SeControlsLib.HotSpot();
             this.hsInsertLoaclExperienceInfo = new SeControlsLib.HotSpot();
+            this.hsDeleteLocalData = new SeControlsLib.HotSpot();
             this.flpLocalExperienceInfoUpper = new System.Windows.Forms.FlowLayoutPanel();
             this.gbLocalDatabase = new System.Windows.Forms.GroupBox();
             this.txtLocalDatabase = new System.Windows.Forms.TextBox();
@@ -81,29 +85,39 @@ namespace SQLView
             this.pnl_center.SuspendLayout();
             this.tcSQLCONTROL.SuspendLayout();
             this.tabPageInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scExperienceInfo)).BeginInit();
+            this.scExperienceInfo.Panel1.SuspendLayout();
+            this.scExperienceInfo.Panel2.SuspendLayout();
+            this.scExperienceInfo.SuspendLayout();
+            this.gbExperienceInfoText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).BeginInit();
             this.cmdExperienceInfo.SuspendLayout();
-            this.pnlExyperienceInfoUpper.SuspendLayout();
+            this.gbExperienceIInfoKey.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctExperienceInfo)).BeginInit();
-            this.gbExperienceInfoKey.SuspendLayout();
+            this.flpExperienceInfoCenter.SuspendLayout();
             this.flpExperienceInfoUpper.SuspendLayout();
             this.tabPageLocalExperience.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scLocalExperience)).BeginInit();
+            this.scLocalExperience.Panel1.SuspendLayout();
+            this.scLocalExperience.Panel2.SuspendLayout();
+            this.scLocalExperience.SuspendLayout();
+            this.gbLocalExperienceValue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).BeginInit();
-            this.pnlLocalExperienceInfoUpper.SuspendLayout();
+            this.gbLocalExperienceCenter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctLocalExperienceInfo)).BeginInit();
-            this.gbLocalExperienceInfoKey.SuspendLayout();
+            this.flpLocalExperienceInfoCenter.SuspendLayout();
             this.flpLocalExperienceInfoUpper.SuspendLayout();
             this.gbLocalDatabase.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlUpperForm
+            // pnlFormUpper
             // 
             this.pnlFormUpper.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlFormUpper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFormUpper.Controls.Add(this.hsClose);
             this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
-            this.pnlFormUpper.Name = "pnlUpperForm";
+            this.pnlFormUpper.Name = "pnlFormUpper";
             this.pnlFormUpper.Size = new System.Drawing.Size(1604, 49);
             this.pnlFormUpper.TabIndex = 0;
             // 
@@ -164,7 +178,7 @@ namespace SQLView
             this.gbDatabase.Controls.Add(this.hsLoadDatabasePath);
             this.gbDatabase.Location = new System.Drawing.Point(3, 3);
             this.gbDatabase.Name = "gbDatabase";
-            this.gbDatabase.Size = new System.Drawing.Size(606, 47);
+            this.gbDatabase.Size = new System.Drawing.Size(606, 48);
             this.gbDatabase.TabIndex = 29;
             this.gbDatabase.TabStop = false;
             this.gbDatabase.Text = "Info Database File";
@@ -206,7 +220,7 @@ namespace SQLView
             this.hsLoadDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLoadDatabasePath.ShortcutNewline = false;
             this.hsLoadDatabasePath.ShowShortcut = false;
-            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 26);
+            this.hsLoadDatabasePath.Size = new System.Drawing.Size(45, 27);
             this.hsLoadDatabasePath.TabIndex = 3;
             this.hsLoadDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadDatabasePath.ToolTipActive = false;
@@ -253,8 +267,7 @@ namespace SQLView
             // 
             // tabPageInfo
             // 
-            this.tabPageInfo.Controls.Add(this.dgvExperienceInfo);
-            this.tabPageInfo.Controls.Add(this.pnlExyperienceInfoUpper);
+            this.tabPageInfo.Controls.Add(this.scExperienceInfo);
             this.tabPageInfo.Controls.Add(this.flpExperienceInfoUpper);
             this.tabPageInfo.Location = new System.Drawing.Point(4, 23);
             this.tabPageInfo.Name = "tabPageInfo";
@@ -264,6 +277,40 @@ namespace SQLView
             this.tabPageInfo.Text = "ExperienceInfo";
             this.tabPageInfo.UseVisualStyleBackColor = true;
             // 
+            // scExperienceInfo
+            // 
+            this.scExperienceInfo.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.scExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scExperienceInfo.Location = new System.Drawing.Point(3, 57);
+            this.scExperienceInfo.Name = "scExperienceInfo";
+            // 
+            // scExperienceInfo.Panel1
+            // 
+            this.scExperienceInfo.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scExperienceInfo.Panel1.Controls.Add(this.gbExperienceInfoText);
+            this.scExperienceInfo.Panel1.Controls.Add(this.gbExperienceIInfoKey);
+            // 
+            // scExperienceInfo.Panel2
+            // 
+            this.scExperienceInfo.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scExperienceInfo.Panel2.Controls.Add(this.fctExperienceInfo);
+            this.scExperienceInfo.Panel2.Controls.Add(this.flpExperienceInfoCenter);
+            this.scExperienceInfo.Size = new System.Drawing.Size(1588, 561);
+            this.scExperienceInfo.SplitterDistance = 527;
+            this.scExperienceInfo.SplitterWidth = 8;
+            this.scExperienceInfo.TabIndex = 44;
+            // 
+            // gbExperienceInfoText
+            // 
+            this.gbExperienceInfoText.Controls.Add(this.dgvExperienceInfo);
+            this.gbExperienceInfoText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbExperienceInfoText.Location = new System.Drawing.Point(0, 48);
+            this.gbExperienceInfoText.Name = "gbExperienceInfoText";
+            this.gbExperienceInfoText.Size = new System.Drawing.Size(527, 513);
+            this.gbExperienceInfoText.TabIndex = 43;
+            this.gbExperienceInfoText.TabStop = false;
+            this.gbExperienceInfoText.Text = "Text";
+            // 
             // dgvExperienceInfo
             // 
             this.dgvExperienceInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -271,11 +318,11 @@ namespace SQLView
             this.dgvExperienceInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExperienceInfo.ContextMenuStrip = this.cmdExperienceInfo;
             this.dgvExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvExperienceInfo.Location = new System.Drawing.Point(3, 164);
+            this.dgvExperienceInfo.Location = new System.Drawing.Point(3, 18);
             this.dgvExperienceInfo.Name = "dgvExperienceInfo";
             this.dgvExperienceInfo.RowHeadersVisible = false;
             this.dgvExperienceInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExperienceInfo.Size = new System.Drawing.Size(1588, 454);
+            this.dgvExperienceInfo.Size = new System.Drawing.Size(521, 492);
             this.dgvExperienceInfo.TabIndex = 24;
             this.dgvExperienceInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvExperienceInfo_CellMouseClick);
             this.dgvExperienceInfo.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvExperienceInfo_ColumnHeaderMouseClick);
@@ -309,16 +356,25 @@ namespace SQLView
             this.tsmiDeleteExperienceInfo.Size = new System.Drawing.Size(140, 22);
             this.tsmiDeleteExperienceInfo.Text = "Delete entry";
             // 
-            // pnlExyperienceInfoUpper
+            // gbExperienceIInfoKey
             // 
-            this.pnlExyperienceInfoUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlExyperienceInfoUpper.Controls.Add(this.fctExperienceInfo);
-            this.pnlExyperienceInfoUpper.Controls.Add(this.gbExperienceInfoKey);
-            this.pnlExyperienceInfoUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlExyperienceInfoUpper.Location = new System.Drawing.Point(3, 57);
-            this.pnlExyperienceInfoUpper.Name = "pnlExyperienceInfoUpper";
-            this.pnlExyperienceInfoUpper.Size = new System.Drawing.Size(1588, 107);
-            this.pnlExyperienceInfoUpper.TabIndex = 25;
+            this.gbExperienceIInfoKey.Controls.Add(this.txtExperienceKeyCode);
+            this.gbExperienceIInfoKey.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbExperienceIInfoKey.Location = new System.Drawing.Point(0, 0);
+            this.gbExperienceIInfoKey.Name = "gbExperienceIInfoKey";
+            this.gbExperienceIInfoKey.Size = new System.Drawing.Size(527, 48);
+            this.gbExperienceIInfoKey.TabIndex = 42;
+            this.gbExperienceIInfoKey.TabStop = false;
+            this.gbExperienceIInfoKey.Text = "Key";
+            // 
+            // txtExperienceKeyCode
+            // 
+            this.txtExperienceKeyCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtExperienceKeyCode.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExperienceKeyCode.Location = new System.Drawing.Point(3, 18);
+            this.txtExperienceKeyCode.Name = "txtExperienceKeyCode";
+            this.txtExperienceKeyCode.Size = new System.Drawing.Size(521, 22);
+            this.txtExperienceKeyCode.TabIndex = 39;
             // 
             // fctExperienceInfo
             // 
@@ -336,7 +392,7 @@ namespace SQLView
             this.fctExperienceInfo.AutoIndentCharsPatterns = "";
             this.fctExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctExperienceInfo.BackBrush = null;
-            this.fctExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.fctExperienceInfo.CharHeight = 14;
             this.fctExperienceInfo.CharWidth = 8;
             this.fctExperienceInfo.CommentPrefix = "--";
@@ -346,145 +402,30 @@ namespace SQLView
             this.fctExperienceInfo.IsReplaceMode = false;
             this.fctExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctExperienceInfo.LeftBracket = '(';
-            this.fctExperienceInfo.Location = new System.Drawing.Point(427, 0);
+            this.fctExperienceInfo.Location = new System.Drawing.Point(82, 0);
             this.fctExperienceInfo.Name = "fctExperienceInfo";
             this.fctExperienceInfo.Paddings = new System.Windows.Forms.Padding(0);
             this.fctExperienceInfo.RightBracket = ')';
             this.fctExperienceInfo.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctExperienceInfo.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctExperienceInfo.ServiceColors")));
-            this.fctExperienceInfo.Size = new System.Drawing.Size(1157, 103);
+            this.fctExperienceInfo.Size = new System.Drawing.Size(971, 561);
             this.fctExperienceInfo.TabIndex = 41;
             this.fctExperienceInfo.Zoom = 100;
             this.fctExperienceInfo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtExperienceInfo_KeyDown);
             // 
-            // gbExperienceInfoKey
+            // flpExperienceInfoCenter
             // 
-            this.gbExperienceInfoKey.Controls.Add(this.hsUpdateExperienceInfo);
-            this.gbExperienceInfoKey.Controls.Add(this.hsDeleteExperienceInfo);
-            this.gbExperienceInfoKey.Controls.Add(this.txtExperienceKeyCode);
-            this.gbExperienceInfoKey.Controls.Add(this.hsClearExperienceInfoFields);
-            this.gbExperienceInfoKey.Controls.Add(this.hsRefreshExperienceInfo);
-            this.gbExperienceInfoKey.Controls.Add(this.hsInsertExperienceInfo);
-            this.gbExperienceInfoKey.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbExperienceInfoKey.Location = new System.Drawing.Point(0, 0);
-            this.gbExperienceInfoKey.Name = "gbExperienceInfoKey";
-            this.gbExperienceInfoKey.Size = new System.Drawing.Size(427, 103);
-            this.gbExperienceInfoKey.TabIndex = 40;
-            this.gbExperienceInfoKey.TabStop = false;
-            this.gbExperienceInfoKey.Text = "Info";
-            // 
-            // hsUpdateExperienceInfo
-            // 
-            this.hsUpdateExperienceInfo.BackColor = System.Drawing.Color.Transparent;
-            this.hsUpdateExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsUpdateExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsUpdateExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsUpdateExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsUpdateExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsUpdateExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsUpdateExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsUpdateExperienceInfo.FlatAppearance.BorderSize = 0;
-            this.hsUpdateExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsUpdateExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsUpdateExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsUpdateExperienceInfo.Image = global::FBXpert.Properties.Resources.ok_gn22x;
-            this.hsUpdateExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsUpdateExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
-            this.hsUpdateExperienceInfo.ImageToggleOnSelect = true;
-            this.hsUpdateExperienceInfo.Location = new System.Drawing.Point(340, 19);
-            this.hsUpdateExperienceInfo.Marked = false;
-            this.hsUpdateExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
-            this.hsUpdateExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsUpdateExperienceInfo.MarkedText = "";
-            this.hsUpdateExperienceInfo.MarkMode = false;
-            this.hsUpdateExperienceInfo.Name = "hsUpdateExperienceInfo";
-            this.hsUpdateExperienceInfo.NonMarkedText = "Execute";
-            this.hsUpdateExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsUpdateExperienceInfo.ShortcutNewline = false;
-            this.hsUpdateExperienceInfo.ShowShortcut = false;
-            this.hsUpdateExperienceInfo.Size = new System.Drawing.Size(79, 45);
-            this.hsUpdateExperienceInfo.TabIndex = 41;
-            this.hsUpdateExperienceInfo.Text = "Update";
-            this.hsUpdateExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsUpdateExperienceInfo.ToolTipActive = false;
-            this.hsUpdateExperienceInfo.ToolTipAutomaticDelay = 500;
-            this.hsUpdateExperienceInfo.ToolTipAutoPopDelay = 5000;
-            this.hsUpdateExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsUpdateExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsUpdateExperienceInfo.ToolTipFor4ContextMenu = true;
-            this.hsUpdateExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsUpdateExperienceInfo.ToolTipInitialDelay = 500;
-            this.hsUpdateExperienceInfo.ToolTipIsBallon = false;
-            this.hsUpdateExperienceInfo.ToolTipOwnerDraw = false;
-            this.hsUpdateExperienceInfo.ToolTipReshowDelay = 100;
-            this.hsUpdateExperienceInfo.ToolTipShowAlways = false;
-            this.hsUpdateExperienceInfo.ToolTipText = "";
-            this.hsUpdateExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsUpdateExperienceInfo.ToolTipTitle = "";
-            this.hsUpdateExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsUpdateExperienceInfo.UseVisualStyleBackColor = false;
-            this.hsUpdateExperienceInfo.Click += new System.EventHandler(this.hsUpdateExperienceInfo_Click);
-            // 
-            // hsDeleteExperienceInfo
-            // 
-            this.hsDeleteExperienceInfo.BackColor = System.Drawing.Color.Transparent;
-            this.hsDeleteExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsDeleteExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsDeleteExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsDeleteExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsDeleteExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsDeleteExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsDeleteExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsDeleteExperienceInfo.FlatAppearance.BorderSize = 0;
-            this.hsDeleteExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsDeleteExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsDeleteExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsDeleteExperienceInfo.Image = global::FBXpert.Properties.Resources.minus_gn24x;
-            this.hsDeleteExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsDeleteExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
-            this.hsDeleteExperienceInfo.ImageToggleOnSelect = true;
-            this.hsDeleteExperienceInfo.Location = new System.Drawing.Point(255, 19);
-            this.hsDeleteExperienceInfo.Marked = false;
-            this.hsDeleteExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
-            this.hsDeleteExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsDeleteExperienceInfo.MarkedText = "";
-            this.hsDeleteExperienceInfo.MarkMode = false;
-            this.hsDeleteExperienceInfo.Name = "hsDeleteExperienceInfo";
-            this.hsDeleteExperienceInfo.NonMarkedText = "Execute";
-            this.hsDeleteExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsDeleteExperienceInfo.ShortcutNewline = false;
-            this.hsDeleteExperienceInfo.ShowShortcut = false;
-            this.hsDeleteExperienceInfo.Size = new System.Drawing.Size(79, 45);
-            this.hsDeleteExperienceInfo.TabIndex = 40;
-            this.hsDeleteExperienceInfo.Text = "Delete";
-            this.hsDeleteExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsDeleteExperienceInfo.ToolTipActive = false;
-            this.hsDeleteExperienceInfo.ToolTipAutomaticDelay = 500;
-            this.hsDeleteExperienceInfo.ToolTipAutoPopDelay = 5000;
-            this.hsDeleteExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsDeleteExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsDeleteExperienceInfo.ToolTipFor4ContextMenu = true;
-            this.hsDeleteExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsDeleteExperienceInfo.ToolTipInitialDelay = 500;
-            this.hsDeleteExperienceInfo.ToolTipIsBallon = false;
-            this.hsDeleteExperienceInfo.ToolTipOwnerDraw = false;
-            this.hsDeleteExperienceInfo.ToolTipReshowDelay = 100;
-            this.hsDeleteExperienceInfo.ToolTipShowAlways = false;
-            this.hsDeleteExperienceInfo.ToolTipText = "";
-            this.hsDeleteExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsDeleteExperienceInfo.ToolTipTitle = "";
-            this.hsDeleteExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsDeleteExperienceInfo.UseVisualStyleBackColor = false;
-            this.hsDeleteExperienceInfo.Click += new System.EventHandler(this.hsDeleteExpierenceInfo_Click);
-            // 
-            // txtExperienceKeyCode
-            // 
-            this.txtExperienceKeyCode.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtExperienceKeyCode.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExperienceKeyCode.Location = new System.Drawing.Point(3, 78);
-            this.txtExperienceKeyCode.Name = "txtExperienceKeyCode";
-            this.txtExperienceKeyCode.Size = new System.Drawing.Size(421, 22);
-            this.txtExperienceKeyCode.TabIndex = 39;
+            this.flpExperienceInfoCenter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpExperienceInfoCenter.Controls.Add(this.hsClearExperienceInfoFields);
+            this.flpExperienceInfoCenter.Controls.Add(this.hsUpdateExperienceInfo);
+            this.flpExperienceInfoCenter.Controls.Add(this.hsRefreshExperienceInfo);
+            this.flpExperienceInfoCenter.Controls.Add(this.hsInsertExperienceInfo);
+            this.flpExperienceInfoCenter.Controls.Add(this.hsDeleteExperienceInfo);
+            this.flpExperienceInfoCenter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpExperienceInfoCenter.Location = new System.Drawing.Point(0, 0);
+            this.flpExperienceInfoCenter.Name = "flpExperienceInfoCenter";
+            this.flpExperienceInfoCenter.Size = new System.Drawing.Size(82, 561);
+            this.flpExperienceInfoCenter.TabIndex = 42;
             // 
             // hsClearExperienceInfoFields
             // 
@@ -504,7 +445,7 @@ namespace SQLView
             this.hsClearExperienceInfoFields.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsClearExperienceInfoFields.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearExperienceInfoFields.ImageToggleOnSelect = true;
-            this.hsClearExperienceInfoFields.Location = new System.Drawing.Point(90, 19);
+            this.hsClearExperienceInfoFields.Location = new System.Drawing.Point(3, 3);
             this.hsClearExperienceInfoFields.Marked = false;
             this.hsClearExperienceInfoFields.MarkedColor = System.Drawing.Color.Teal;
             this.hsClearExperienceInfoFields.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -515,7 +456,7 @@ namespace SQLView
             this.hsClearExperienceInfoFields.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearExperienceInfoFields.ShortcutNewline = false;
             this.hsClearExperienceInfoFields.ShowShortcut = false;
-            this.hsClearExperienceInfoFields.Size = new System.Drawing.Size(75, 45);
+            this.hsClearExperienceInfoFields.Size = new System.Drawing.Size(67, 45);
             this.hsClearExperienceInfoFields.TabIndex = 37;
             this.hsClearExperienceInfoFields.Text = "Clear";
             this.hsClearExperienceInfoFields.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -538,6 +479,58 @@ namespace SQLView
             this.hsClearExperienceInfoFields.UseVisualStyleBackColor = false;
             this.hsClearExperienceInfoFields.Click += new System.EventHandler(this.hsClearExperienceInfoFields_Click);
             // 
+            // hsUpdateExperienceInfo
+            // 
+            this.hsUpdateExperienceInfo.BackColor = System.Drawing.Color.Transparent;
+            this.hsUpdateExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsUpdateExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsUpdateExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsUpdateExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsUpdateExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsUpdateExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsUpdateExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsUpdateExperienceInfo.FlatAppearance.BorderSize = 0;
+            this.hsUpdateExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUpdateExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsUpdateExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsUpdateExperienceInfo.Image = global::FBXpert.Properties.Resources.ok_gn22x;
+            this.hsUpdateExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsUpdateExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
+            this.hsUpdateExperienceInfo.ImageToggleOnSelect = true;
+            this.hsUpdateExperienceInfo.Location = new System.Drawing.Point(3, 54);
+            this.hsUpdateExperienceInfo.Marked = false;
+            this.hsUpdateExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
+            this.hsUpdateExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsUpdateExperienceInfo.MarkedText = "";
+            this.hsUpdateExperienceInfo.MarkMode = false;
+            this.hsUpdateExperienceInfo.Name = "hsUpdateExperienceInfo";
+            this.hsUpdateExperienceInfo.NonMarkedText = "Execute";
+            this.hsUpdateExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateExperienceInfo.ShortcutNewline = false;
+            this.hsUpdateExperienceInfo.ShowShortcut = false;
+            this.hsUpdateExperienceInfo.Size = new System.Drawing.Size(67, 45);
+            this.hsUpdateExperienceInfo.TabIndex = 41;
+            this.hsUpdateExperienceInfo.Text = "Update";
+            this.hsUpdateExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsUpdateExperienceInfo.ToolTipActive = false;
+            this.hsUpdateExperienceInfo.ToolTipAutomaticDelay = 500;
+            this.hsUpdateExperienceInfo.ToolTipAutoPopDelay = 5000;
+            this.hsUpdateExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsUpdateExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsUpdateExperienceInfo.ToolTipFor4ContextMenu = true;
+            this.hsUpdateExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsUpdateExperienceInfo.ToolTipInitialDelay = 500;
+            this.hsUpdateExperienceInfo.ToolTipIsBallon = false;
+            this.hsUpdateExperienceInfo.ToolTipOwnerDraw = false;
+            this.hsUpdateExperienceInfo.ToolTipReshowDelay = 100;
+            this.hsUpdateExperienceInfo.ToolTipShowAlways = false;
+            this.hsUpdateExperienceInfo.ToolTipText = "";
+            this.hsUpdateExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsUpdateExperienceInfo.ToolTipTitle = "";
+            this.hsUpdateExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsUpdateExperienceInfo.UseVisualStyleBackColor = false;
+            this.hsUpdateExperienceInfo.Click += new System.EventHandler(this.hsUpdateExperienceInfo_Click);
+            // 
             // hsRefreshExperienceInfo
             // 
             this.hsRefreshExperienceInfo.BackColor = System.Drawing.Color.Transparent;
@@ -556,7 +549,7 @@ namespace SQLView
             this.hsRefreshExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRefreshExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.hsRefreshExperienceInfo.ImageToggleOnSelect = true;
-            this.hsRefreshExperienceInfo.Location = new System.Drawing.Point(171, 19);
+            this.hsRefreshExperienceInfo.Location = new System.Drawing.Point(3, 105);
             this.hsRefreshExperienceInfo.Marked = false;
             this.hsRefreshExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
             this.hsRefreshExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -567,7 +560,7 @@ namespace SQLView
             this.hsRefreshExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshExperienceInfo.ShortcutNewline = false;
             this.hsRefreshExperienceInfo.ShowShortcut = false;
-            this.hsRefreshExperienceInfo.Size = new System.Drawing.Size(89, 45);
+            this.hsRefreshExperienceInfo.Size = new System.Drawing.Size(67, 45);
             this.hsRefreshExperienceInfo.TabIndex = 33;
             this.hsRefreshExperienceInfo.Text = "Refresh";
             this.hsRefreshExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -608,7 +601,7 @@ namespace SQLView
             this.hsInsertExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsInsertExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsInsertExperienceInfo.ImageToggleOnSelect = true;
-            this.hsInsertExperienceInfo.Location = new System.Drawing.Point(6, 19);
+            this.hsInsertExperienceInfo.Location = new System.Drawing.Point(3, 156);
             this.hsInsertExperienceInfo.Marked = false;
             this.hsInsertExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
             this.hsInsertExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -619,7 +612,7 @@ namespace SQLView
             this.hsInsertExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsInsertExperienceInfo.ShortcutNewline = false;
             this.hsInsertExperienceInfo.ShowShortcut = false;
-            this.hsInsertExperienceInfo.Size = new System.Drawing.Size(79, 45);
+            this.hsInsertExperienceInfo.Size = new System.Drawing.Size(70, 45);
             this.hsInsertExperienceInfo.TabIndex = 28;
             this.hsInsertExperienceInfo.Text = "Add";
             this.hsInsertExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -642,6 +635,58 @@ namespace SQLView
             this.hsInsertExperienceInfo.UseVisualStyleBackColor = false;
             this.hsInsertExperienceInfo.Click += new System.EventHandler(this.hsInserExperienceInfo_Click);
             // 
+            // hsDeleteExperienceInfo
+            // 
+            this.hsDeleteExperienceInfo.BackColor = System.Drawing.Color.Transparent;
+            this.hsDeleteExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsDeleteExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsDeleteExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsDeleteExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsDeleteExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsDeleteExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsDeleteExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsDeleteExperienceInfo.FlatAppearance.BorderSize = 0;
+            this.hsDeleteExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDeleteExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsDeleteExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsDeleteExperienceInfo.Image = global::FBXpert.Properties.Resources.minus_gn24x;
+            this.hsDeleteExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsDeleteExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
+            this.hsDeleteExperienceInfo.ImageToggleOnSelect = true;
+            this.hsDeleteExperienceInfo.Location = new System.Drawing.Point(3, 207);
+            this.hsDeleteExperienceInfo.Marked = false;
+            this.hsDeleteExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
+            this.hsDeleteExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsDeleteExperienceInfo.MarkedText = "";
+            this.hsDeleteExperienceInfo.MarkMode = false;
+            this.hsDeleteExperienceInfo.Name = "hsDeleteExperienceInfo";
+            this.hsDeleteExperienceInfo.NonMarkedText = "Execute";
+            this.hsDeleteExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDeleteExperienceInfo.ShortcutNewline = false;
+            this.hsDeleteExperienceInfo.ShowShortcut = false;
+            this.hsDeleteExperienceInfo.Size = new System.Drawing.Size(67, 45);
+            this.hsDeleteExperienceInfo.TabIndex = 40;
+            this.hsDeleteExperienceInfo.Text = "Delete";
+            this.hsDeleteExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsDeleteExperienceInfo.ToolTipActive = false;
+            this.hsDeleteExperienceInfo.ToolTipAutomaticDelay = 500;
+            this.hsDeleteExperienceInfo.ToolTipAutoPopDelay = 5000;
+            this.hsDeleteExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsDeleteExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsDeleteExperienceInfo.ToolTipFor4ContextMenu = true;
+            this.hsDeleteExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsDeleteExperienceInfo.ToolTipInitialDelay = 500;
+            this.hsDeleteExperienceInfo.ToolTipIsBallon = false;
+            this.hsDeleteExperienceInfo.ToolTipOwnerDraw = false;
+            this.hsDeleteExperienceInfo.ToolTipReshowDelay = 100;
+            this.hsDeleteExperienceInfo.ToolTipShowAlways = false;
+            this.hsDeleteExperienceInfo.ToolTipText = "";
+            this.hsDeleteExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsDeleteExperienceInfo.ToolTipTitle = "";
+            this.hsDeleteExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsDeleteExperienceInfo.UseVisualStyleBackColor = false;
+            this.hsDeleteExperienceInfo.Click += new System.EventHandler(this.hsDeleteExpierenceInfo_Click);
+            // 
             // flpExperienceInfoUpper
             // 
             this.flpExperienceInfoUpper.Controls.Add(this.gbDatabase);
@@ -653,8 +698,7 @@ namespace SQLView
             // 
             // tabPageLocalExperience
             // 
-            this.tabPageLocalExperience.Controls.Add(this.dgvLocalExperienceInfo);
-            this.tabPageLocalExperience.Controls.Add(this.pnlLocalExperienceInfoUpper);
+            this.tabPageLocalExperience.Controls.Add(this.scLocalExperience);
             this.tabPageLocalExperience.Controls.Add(this.flpLocalExperienceInfoUpper);
             this.tabPageLocalExperience.Location = new System.Drawing.Point(4, 23);
             this.tabPageLocalExperience.Name = "tabPageLocalExperience";
@@ -664,6 +708,40 @@ namespace SQLView
             this.tabPageLocalExperience.Text = "Local Experience";
             this.tabPageLocalExperience.UseVisualStyleBackColor = true;
             // 
+            // scLocalExperience
+            // 
+            this.scLocalExperience.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.scLocalExperience.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scLocalExperience.Location = new System.Drawing.Point(3, 57);
+            this.scLocalExperience.Name = "scLocalExperience";
+            // 
+            // scLocalExperience.Panel1
+            // 
+            this.scLocalExperience.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scLocalExperience.Panel1.Controls.Add(this.gbLocalExperienceValue);
+            this.scLocalExperience.Panel1.Controls.Add(this.gbLocalExperienceCenter);
+            // 
+            // scLocalExperience.Panel2
+            // 
+            this.scLocalExperience.Panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scLocalExperience.Panel2.Controls.Add(this.fctLocalExperienceInfo);
+            this.scLocalExperience.Panel2.Controls.Add(this.flpLocalExperienceInfoCenter);
+            this.scLocalExperience.Size = new System.Drawing.Size(1588, 561);
+            this.scLocalExperience.SplitterDistance = 528;
+            this.scLocalExperience.SplitterWidth = 8;
+            this.scLocalExperience.TabIndex = 48;
+            // 
+            // gbLocalExperienceValue
+            // 
+            this.gbLocalExperienceValue.Controls.Add(this.dgvLocalExperienceInfo);
+            this.gbLocalExperienceValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbLocalExperienceValue.Location = new System.Drawing.Point(0, 48);
+            this.gbLocalExperienceValue.Name = "gbLocalExperienceValue";
+            this.gbLocalExperienceValue.Size = new System.Drawing.Size(528, 513);
+            this.gbLocalExperienceValue.TabIndex = 44;
+            this.gbLocalExperienceValue.TabStop = false;
+            this.gbLocalExperienceValue.Text = "Text";
+            // 
             // dgvLocalExperienceInfo
             // 
             this.dgvLocalExperienceInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -671,23 +749,33 @@ namespace SQLView
             this.dgvLocalExperienceInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLocalExperienceInfo.ContextMenuStrip = this.cmdExperienceInfo;
             this.dgvLocalExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLocalExperienceInfo.Location = new System.Drawing.Point(3, 168);
+            this.dgvLocalExperienceInfo.Location = new System.Drawing.Point(3, 18);
             this.dgvLocalExperienceInfo.Name = "dgvLocalExperienceInfo";
             this.dgvLocalExperienceInfo.RowHeadersVisible = false;
             this.dgvLocalExperienceInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLocalExperienceInfo.Size = new System.Drawing.Size(1588, 450);
+            this.dgvLocalExperienceInfo.Size = new System.Drawing.Size(522, 492);
             this.dgvLocalExperienceInfo.TabIndex = 42;
             this.dgvLocalExperienceInfo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLocalExperienceInfo_CellMouseClick);
             // 
-            // pnlLocalExperienceInfoUpper
+            // gbLocalExperienceCenter
             // 
-            this.pnlLocalExperienceInfoUpper.Controls.Add(this.fctLocalExperienceInfo);
-            this.pnlLocalExperienceInfoUpper.Controls.Add(this.gbLocalExperienceInfoKey);
-            this.pnlLocalExperienceInfoUpper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLocalExperienceInfoUpper.Location = new System.Drawing.Point(3, 57);
-            this.pnlLocalExperienceInfoUpper.Name = "pnlLocalExperienceInfoUpper";
-            this.pnlLocalExperienceInfoUpper.Size = new System.Drawing.Size(1588, 111);
-            this.pnlLocalExperienceInfoUpper.TabIndex = 45;
+            this.gbLocalExperienceCenter.Controls.Add(this.txtLocalExperienceKeyCode);
+            this.gbLocalExperienceCenter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbLocalExperienceCenter.Location = new System.Drawing.Point(0, 0);
+            this.gbLocalExperienceCenter.Name = "gbLocalExperienceCenter";
+            this.gbLocalExperienceCenter.Size = new System.Drawing.Size(528, 48);
+            this.gbLocalExperienceCenter.TabIndex = 43;
+            this.gbLocalExperienceCenter.TabStop = false;
+            this.gbLocalExperienceCenter.Text = "Key";
+            // 
+            // txtLocalExperienceKeyCode
+            // 
+            this.txtLocalExperienceKeyCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLocalExperienceKeyCode.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLocalExperienceKeyCode.Location = new System.Drawing.Point(3, 18);
+            this.txtLocalExperienceKeyCode.Name = "txtLocalExperienceKeyCode";
+            this.txtLocalExperienceKeyCode.Size = new System.Drawing.Size(522, 22);
+            this.txtLocalExperienceKeyCode.TabIndex = 39;
             // 
             // fctLocalExperienceInfo
             // 
@@ -705,7 +793,7 @@ namespace SQLView
             this.fctLocalExperienceInfo.AutoIndentCharsPatterns = "";
             this.fctLocalExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctLocalExperienceInfo.BackBrush = null;
-            this.fctLocalExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fctLocalExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.fctLocalExperienceInfo.CharHeight = 14;
             this.fctLocalExperienceInfo.CharWidth = 8;
             this.fctLocalExperienceInfo.CommentPrefix = "--";
@@ -716,145 +804,30 @@ namespace SQLView
             this.fctLocalExperienceInfo.IsReplaceMode = false;
             this.fctLocalExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctLocalExperienceInfo.LeftBracket = '(';
-            this.fctLocalExperienceInfo.Location = new System.Drawing.Point(427, 0);
+            this.fctLocalExperienceInfo.Location = new System.Drawing.Point(80, 0);
             this.fctLocalExperienceInfo.Name = "fctLocalExperienceInfo";
             this.fctLocalExperienceInfo.Paddings = new System.Windows.Forms.Padding(0);
             this.fctLocalExperienceInfo.RightBracket = ')';
             this.fctLocalExperienceInfo.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctLocalExperienceInfo.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctLocalExperienceInfo.ServiceColors")));
-            this.fctLocalExperienceInfo.Size = new System.Drawing.Size(1161, 111);
+            this.fctLocalExperienceInfo.Size = new System.Drawing.Size(972, 561);
             this.fctLocalExperienceInfo.TabIndex = 44;
             this.fctLocalExperienceInfo.Zoom = 100;
             this.fctLocalExperienceInfo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fctLocalExperienceInfo_KeyDown);
             // 
-            // gbLocalExperienceInfoKey
+            // flpLocalExperienceInfoCenter
             // 
-            this.gbLocalExperienceInfoKey.Controls.Add(this.hsUpdateLocalExperienceInfo);
-            this.gbLocalExperienceInfoKey.Controls.Add(this.hsDeleteLocalData);
-            this.gbLocalExperienceInfoKey.Controls.Add(this.txtLocalExperienceKeyCode);
-            this.gbLocalExperienceInfoKey.Controls.Add(this.hsClearLocalExperienceInfo);
-            this.gbLocalExperienceInfoKey.Controls.Add(this.hsRefreshLocalExperienceInfo);
-            this.gbLocalExperienceInfoKey.Controls.Add(this.hsInsertLoaclExperienceInfo);
-            this.gbLocalExperienceInfoKey.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbLocalExperienceInfoKey.Location = new System.Drawing.Point(0, 0);
-            this.gbLocalExperienceInfoKey.Name = "gbLocalExperienceInfoKey";
-            this.gbLocalExperienceInfoKey.Size = new System.Drawing.Size(427, 111);
-            this.gbLocalExperienceInfoKey.TabIndex = 43;
-            this.gbLocalExperienceInfoKey.TabStop = false;
-            this.gbLocalExperienceInfoKey.Text = "Local Info";
-            // 
-            // hsUpdateLocalExperienceInfo
-            // 
-            this.hsUpdateLocalExperienceInfo.BackColor = System.Drawing.Color.Transparent;
-            this.hsUpdateLocalExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsUpdateLocalExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsUpdateLocalExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsUpdateLocalExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsUpdateLocalExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsUpdateLocalExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsUpdateLocalExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsUpdateLocalExperienceInfo.FlatAppearance.BorderSize = 0;
-            this.hsUpdateLocalExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsUpdateLocalExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsUpdateLocalExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsUpdateLocalExperienceInfo.Image = global::FBXpert.Properties.Resources.ok_gn22x;
-            this.hsUpdateLocalExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsUpdateLocalExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
-            this.hsUpdateLocalExperienceInfo.ImageToggleOnSelect = true;
-            this.hsUpdateLocalExperienceInfo.Location = new System.Drawing.Point(340, 19);
-            this.hsUpdateLocalExperienceInfo.Marked = false;
-            this.hsUpdateLocalExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
-            this.hsUpdateLocalExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsUpdateLocalExperienceInfo.MarkedText = "";
-            this.hsUpdateLocalExperienceInfo.MarkMode = false;
-            this.hsUpdateLocalExperienceInfo.Name = "hsUpdateLocalExperienceInfo";
-            this.hsUpdateLocalExperienceInfo.NonMarkedText = "Execute";
-            this.hsUpdateLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsUpdateLocalExperienceInfo.ShortcutNewline = false;
-            this.hsUpdateLocalExperienceInfo.ShowShortcut = false;
-            this.hsUpdateLocalExperienceInfo.Size = new System.Drawing.Size(79, 45);
-            this.hsUpdateLocalExperienceInfo.TabIndex = 41;
-            this.hsUpdateLocalExperienceInfo.Text = "Update";
-            this.hsUpdateLocalExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsUpdateLocalExperienceInfo.ToolTipActive = false;
-            this.hsUpdateLocalExperienceInfo.ToolTipAutomaticDelay = 500;
-            this.hsUpdateLocalExperienceInfo.ToolTipAutoPopDelay = 5000;
-            this.hsUpdateLocalExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsUpdateLocalExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsUpdateLocalExperienceInfo.ToolTipFor4ContextMenu = true;
-            this.hsUpdateLocalExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsUpdateLocalExperienceInfo.ToolTipInitialDelay = 500;
-            this.hsUpdateLocalExperienceInfo.ToolTipIsBallon = false;
-            this.hsUpdateLocalExperienceInfo.ToolTipOwnerDraw = false;
-            this.hsUpdateLocalExperienceInfo.ToolTipReshowDelay = 100;
-            this.hsUpdateLocalExperienceInfo.ToolTipShowAlways = false;
-            this.hsUpdateLocalExperienceInfo.ToolTipText = "";
-            this.hsUpdateLocalExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsUpdateLocalExperienceInfo.ToolTipTitle = "";
-            this.hsUpdateLocalExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsUpdateLocalExperienceInfo.UseVisualStyleBackColor = false;
-            this.hsUpdateLocalExperienceInfo.Click += new System.EventHandler(this.hsUpdateLocalExperienceInfo_Click);
-            // 
-            // hsDeleteLocalData
-            // 
-            this.hsDeleteLocalData.BackColor = System.Drawing.Color.Transparent;
-            this.hsDeleteLocalData.BackColorHover = System.Drawing.Color.Transparent;
-            this.hsDeleteLocalData.BorderColorHover = System.Drawing.Color.Transparent;
-            this.hsDeleteLocalData.ContextMenuEdges = SeControlsLib.Edge.Center;
-            this.hsDeleteLocalData.ContextMenuXDirection = SeControlsLib.XDirection.Right;
-            this.hsDeleteLocalData.ContextMenuYDirection = SeControlsLib.YDirection.Down;
-            this.hsDeleteLocalData.DefaultButtonMode = SeControlsLib.BtnMode.Context;
-            this.hsDeleteLocalData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.hsDeleteLocalData.FlatAppearance.BorderSize = 0;
-            this.hsDeleteLocalData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hsDeleteLocalData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hsDeleteLocalData.HoverStyle = SeControlsLib.frameStyle.none;
-            this.hsDeleteLocalData.Image = global::FBXpert.Properties.Resources.minus_gn24x;
-            this.hsDeleteLocalData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.hsDeleteLocalData.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
-            this.hsDeleteLocalData.ImageToggleOnSelect = true;
-            this.hsDeleteLocalData.Location = new System.Drawing.Point(255, 19);
-            this.hsDeleteLocalData.Marked = false;
-            this.hsDeleteLocalData.MarkedColor = System.Drawing.Color.Teal;
-            this.hsDeleteLocalData.MarkedStyle = SeControlsLib.frameStyle.filled;
-            this.hsDeleteLocalData.MarkedText = "";
-            this.hsDeleteLocalData.MarkMode = false;
-            this.hsDeleteLocalData.Name = "hsDeleteLocalData";
-            this.hsDeleteLocalData.NonMarkedText = "Execute";
-            this.hsDeleteLocalData.Shortcut = BasicClassLibrary.Shortcut.None;
-            this.hsDeleteLocalData.ShortcutNewline = false;
-            this.hsDeleteLocalData.ShowShortcut = false;
-            this.hsDeleteLocalData.Size = new System.Drawing.Size(79, 45);
-            this.hsDeleteLocalData.TabIndex = 40;
-            this.hsDeleteLocalData.Text = "Delete";
-            this.hsDeleteLocalData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.hsDeleteLocalData.ToolTipActive = false;
-            this.hsDeleteLocalData.ToolTipAutomaticDelay = 500;
-            this.hsDeleteLocalData.ToolTipAutoPopDelay = 5000;
-            this.hsDeleteLocalData.ToolTipBackColor = System.Drawing.SystemColors.Info;
-            this.hsDeleteLocalData.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
-            this.hsDeleteLocalData.ToolTipFor4ContextMenu = true;
-            this.hsDeleteLocalData.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
-            this.hsDeleteLocalData.ToolTipInitialDelay = 500;
-            this.hsDeleteLocalData.ToolTipIsBallon = false;
-            this.hsDeleteLocalData.ToolTipOwnerDraw = false;
-            this.hsDeleteLocalData.ToolTipReshowDelay = 100;
-            this.hsDeleteLocalData.ToolTipShowAlways = false;
-            this.hsDeleteLocalData.ToolTipText = "";
-            this.hsDeleteLocalData.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
-            this.hsDeleteLocalData.ToolTipTitle = "";
-            this.hsDeleteLocalData.ToolTipTitleColor = System.Drawing.Color.Blue;
-            this.hsDeleteLocalData.UseVisualStyleBackColor = false;
-            this.hsDeleteLocalData.Click += new System.EventHandler(this.hsDeleteLocalData_Click);
-            // 
-            // txtLocalExperienceKeyCode
-            // 
-            this.txtLocalExperienceKeyCode.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtLocalExperienceKeyCode.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLocalExperienceKeyCode.Location = new System.Drawing.Point(3, 86);
-            this.txtLocalExperienceKeyCode.Name = "txtLocalExperienceKeyCode";
-            this.txtLocalExperienceKeyCode.Size = new System.Drawing.Size(421, 22);
-            this.txtLocalExperienceKeyCode.TabIndex = 39;
+            this.flpLocalExperienceInfoCenter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpLocalExperienceInfoCenter.Controls.Add(this.hsClearLocalExperienceInfo);
+            this.flpLocalExperienceInfoCenter.Controls.Add(this.hsUpdateLocalExperienceInfo);
+            this.flpLocalExperienceInfoCenter.Controls.Add(this.hsRefreshLocalExperienceInfo);
+            this.flpLocalExperienceInfoCenter.Controls.Add(this.hsInsertLoaclExperienceInfo);
+            this.flpLocalExperienceInfoCenter.Controls.Add(this.hsDeleteLocalData);
+            this.flpLocalExperienceInfoCenter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpLocalExperienceInfoCenter.Location = new System.Drawing.Point(0, 0);
+            this.flpLocalExperienceInfoCenter.Name = "flpLocalExperienceInfoCenter";
+            this.flpLocalExperienceInfoCenter.Size = new System.Drawing.Size(80, 561);
+            this.flpLocalExperienceInfoCenter.TabIndex = 45;
             // 
             // hsClearLocalExperienceInfo
             // 
@@ -874,7 +847,7 @@ namespace SQLView
             this.hsClearLocalExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsClearLocalExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
             this.hsClearLocalExperienceInfo.ImageToggleOnSelect = true;
-            this.hsClearLocalExperienceInfo.Location = new System.Drawing.Point(90, 19);
+            this.hsClearLocalExperienceInfo.Location = new System.Drawing.Point(3, 3);
             this.hsClearLocalExperienceInfo.Marked = false;
             this.hsClearLocalExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
             this.hsClearLocalExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -885,7 +858,7 @@ namespace SQLView
             this.hsClearLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsClearLocalExperienceInfo.ShortcutNewline = false;
             this.hsClearLocalExperienceInfo.ShowShortcut = false;
-            this.hsClearLocalExperienceInfo.Size = new System.Drawing.Size(75, 45);
+            this.hsClearLocalExperienceInfo.Size = new System.Drawing.Size(66, 45);
             this.hsClearLocalExperienceInfo.TabIndex = 37;
             this.hsClearLocalExperienceInfo.Text = "Clear";
             this.hsClearLocalExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -908,6 +881,58 @@ namespace SQLView
             this.hsClearLocalExperienceInfo.UseVisualStyleBackColor = false;
             this.hsClearLocalExperienceInfo.Click += new System.EventHandler(this.hsClearLocalExperienceInfo_Click);
             // 
+            // hsUpdateLocalExperienceInfo
+            // 
+            this.hsUpdateLocalExperienceInfo.BackColor = System.Drawing.Color.Transparent;
+            this.hsUpdateLocalExperienceInfo.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsUpdateLocalExperienceInfo.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsUpdateLocalExperienceInfo.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsUpdateLocalExperienceInfo.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsUpdateLocalExperienceInfo.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsUpdateLocalExperienceInfo.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsUpdateLocalExperienceInfo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsUpdateLocalExperienceInfo.FlatAppearance.BorderSize = 0;
+            this.hsUpdateLocalExperienceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsUpdateLocalExperienceInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsUpdateLocalExperienceInfo.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsUpdateLocalExperienceInfo.Image = global::FBXpert.Properties.Resources.ok_gn22x;
+            this.hsUpdateLocalExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsUpdateLocalExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.ok_blue22x;
+            this.hsUpdateLocalExperienceInfo.ImageToggleOnSelect = true;
+            this.hsUpdateLocalExperienceInfo.Location = new System.Drawing.Point(3, 54);
+            this.hsUpdateLocalExperienceInfo.Marked = false;
+            this.hsUpdateLocalExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
+            this.hsUpdateLocalExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsUpdateLocalExperienceInfo.MarkedText = "";
+            this.hsUpdateLocalExperienceInfo.MarkMode = false;
+            this.hsUpdateLocalExperienceInfo.Name = "hsUpdateLocalExperienceInfo";
+            this.hsUpdateLocalExperienceInfo.NonMarkedText = "Execute";
+            this.hsUpdateLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsUpdateLocalExperienceInfo.ShortcutNewline = false;
+            this.hsUpdateLocalExperienceInfo.ShowShortcut = false;
+            this.hsUpdateLocalExperienceInfo.Size = new System.Drawing.Size(69, 45);
+            this.hsUpdateLocalExperienceInfo.TabIndex = 41;
+            this.hsUpdateLocalExperienceInfo.Text = "Update";
+            this.hsUpdateLocalExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsUpdateLocalExperienceInfo.ToolTipActive = false;
+            this.hsUpdateLocalExperienceInfo.ToolTipAutomaticDelay = 500;
+            this.hsUpdateLocalExperienceInfo.ToolTipAutoPopDelay = 5000;
+            this.hsUpdateLocalExperienceInfo.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsUpdateLocalExperienceInfo.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsUpdateLocalExperienceInfo.ToolTipFor4ContextMenu = true;
+            this.hsUpdateLocalExperienceInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsUpdateLocalExperienceInfo.ToolTipInitialDelay = 500;
+            this.hsUpdateLocalExperienceInfo.ToolTipIsBallon = false;
+            this.hsUpdateLocalExperienceInfo.ToolTipOwnerDraw = false;
+            this.hsUpdateLocalExperienceInfo.ToolTipReshowDelay = 100;
+            this.hsUpdateLocalExperienceInfo.ToolTipShowAlways = false;
+            this.hsUpdateLocalExperienceInfo.ToolTipText = "";
+            this.hsUpdateLocalExperienceInfo.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsUpdateLocalExperienceInfo.ToolTipTitle = "";
+            this.hsUpdateLocalExperienceInfo.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsUpdateLocalExperienceInfo.UseVisualStyleBackColor = false;
+            this.hsUpdateLocalExperienceInfo.Click += new System.EventHandler(this.hsUpdateLocalExperienceInfo_Click);
+            // 
             // hsRefreshLocalExperienceInfo
             // 
             this.hsRefreshLocalExperienceInfo.BackColor = System.Drawing.Color.Transparent;
@@ -926,7 +951,7 @@ namespace SQLView
             this.hsRefreshLocalExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsRefreshLocalExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
             this.hsRefreshLocalExperienceInfo.ImageToggleOnSelect = true;
-            this.hsRefreshLocalExperienceInfo.Location = new System.Drawing.Point(171, 19);
+            this.hsRefreshLocalExperienceInfo.Location = new System.Drawing.Point(3, 105);
             this.hsRefreshLocalExperienceInfo.Marked = false;
             this.hsRefreshLocalExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
             this.hsRefreshLocalExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -937,7 +962,7 @@ namespace SQLView
             this.hsRefreshLocalExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsRefreshLocalExperienceInfo.ShortcutNewline = false;
             this.hsRefreshLocalExperienceInfo.ShowShortcut = false;
-            this.hsRefreshLocalExperienceInfo.Size = new System.Drawing.Size(89, 45);
+            this.hsRefreshLocalExperienceInfo.Size = new System.Drawing.Size(69, 45);
             this.hsRefreshLocalExperienceInfo.TabIndex = 33;
             this.hsRefreshLocalExperienceInfo.Text = "Refresh";
             this.hsRefreshLocalExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -978,7 +1003,7 @@ namespace SQLView
             this.hsInsertLoaclExperienceInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.hsInsertLoaclExperienceInfo.ImageHover = global::FBXpert.Properties.Resources.plus_blue22x;
             this.hsInsertLoaclExperienceInfo.ImageToggleOnSelect = true;
-            this.hsInsertLoaclExperienceInfo.Location = new System.Drawing.Point(6, 19);
+            this.hsInsertLoaclExperienceInfo.Location = new System.Drawing.Point(3, 156);
             this.hsInsertLoaclExperienceInfo.Marked = false;
             this.hsInsertLoaclExperienceInfo.MarkedColor = System.Drawing.Color.Teal;
             this.hsInsertLoaclExperienceInfo.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -989,7 +1014,7 @@ namespace SQLView
             this.hsInsertLoaclExperienceInfo.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsInsertLoaclExperienceInfo.ShortcutNewline = false;
             this.hsInsertLoaclExperienceInfo.ShowShortcut = false;
-            this.hsInsertLoaclExperienceInfo.Size = new System.Drawing.Size(79, 45);
+            this.hsInsertLoaclExperienceInfo.Size = new System.Drawing.Size(69, 45);
             this.hsInsertLoaclExperienceInfo.TabIndex = 28;
             this.hsInsertLoaclExperienceInfo.Text = "Add";
             this.hsInsertLoaclExperienceInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1012,6 +1037,58 @@ namespace SQLView
             this.hsInsertLoaclExperienceInfo.UseVisualStyleBackColor = false;
             this.hsInsertLoaclExperienceInfo.Click += new System.EventHandler(this.hsInsertLoaclExperienceInfo_Click);
             // 
+            // hsDeleteLocalData
+            // 
+            this.hsDeleteLocalData.BackColor = System.Drawing.Color.Transparent;
+            this.hsDeleteLocalData.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsDeleteLocalData.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsDeleteLocalData.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsDeleteLocalData.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsDeleteLocalData.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsDeleteLocalData.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsDeleteLocalData.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsDeleteLocalData.FlatAppearance.BorderSize = 0;
+            this.hsDeleteLocalData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsDeleteLocalData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsDeleteLocalData.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsDeleteLocalData.Image = global::FBXpert.Properties.Resources.minus_gn24x;
+            this.hsDeleteLocalData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.hsDeleteLocalData.ImageHover = global::FBXpert.Properties.Resources.minus_blue24x;
+            this.hsDeleteLocalData.ImageToggleOnSelect = true;
+            this.hsDeleteLocalData.Location = new System.Drawing.Point(3, 207);
+            this.hsDeleteLocalData.Marked = false;
+            this.hsDeleteLocalData.MarkedColor = System.Drawing.Color.Teal;
+            this.hsDeleteLocalData.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsDeleteLocalData.MarkedText = "";
+            this.hsDeleteLocalData.MarkMode = false;
+            this.hsDeleteLocalData.Name = "hsDeleteLocalData";
+            this.hsDeleteLocalData.NonMarkedText = "Execute";
+            this.hsDeleteLocalData.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsDeleteLocalData.ShortcutNewline = false;
+            this.hsDeleteLocalData.ShowShortcut = false;
+            this.hsDeleteLocalData.Size = new System.Drawing.Size(69, 45);
+            this.hsDeleteLocalData.TabIndex = 40;
+            this.hsDeleteLocalData.Text = "Delete";
+            this.hsDeleteLocalData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsDeleteLocalData.ToolTipActive = false;
+            this.hsDeleteLocalData.ToolTipAutomaticDelay = 500;
+            this.hsDeleteLocalData.ToolTipAutoPopDelay = 5000;
+            this.hsDeleteLocalData.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsDeleteLocalData.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsDeleteLocalData.ToolTipFor4ContextMenu = true;
+            this.hsDeleteLocalData.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsDeleteLocalData.ToolTipInitialDelay = 500;
+            this.hsDeleteLocalData.ToolTipIsBallon = false;
+            this.hsDeleteLocalData.ToolTipOwnerDraw = false;
+            this.hsDeleteLocalData.ToolTipReshowDelay = 100;
+            this.hsDeleteLocalData.ToolTipShowAlways = false;
+            this.hsDeleteLocalData.ToolTipText = "";
+            this.hsDeleteLocalData.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsDeleteLocalData.ToolTipTitle = "";
+            this.hsDeleteLocalData.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsDeleteLocalData.UseVisualStyleBackColor = false;
+            this.hsDeleteLocalData.Click += new System.EventHandler(this.hsDeleteLocalData_Click);
+            // 
             // flpLocalExperienceInfoUpper
             // 
             this.flpLocalExperienceInfoUpper.Controls.Add(this.gbLocalDatabase);
@@ -1027,7 +1104,7 @@ namespace SQLView
             this.gbLocalDatabase.Controls.Add(this.hsLoadLocalDatabasePath);
             this.gbLocalDatabase.Location = new System.Drawing.Point(3, 3);
             this.gbLocalDatabase.Name = "gbLocalDatabase";
-            this.gbLocalDatabase.Size = new System.Drawing.Size(606, 47);
+            this.gbLocalDatabase.Size = new System.Drawing.Size(606, 48);
             this.gbLocalDatabase.TabIndex = 30;
             this.gbLocalDatabase.TabStop = false;
             this.gbLocalDatabase.Text = "Info Local Database File";
@@ -1069,7 +1146,7 @@ namespace SQLView
             this.hsLoadLocalDatabasePath.Shortcut = BasicClassLibrary.Shortcut.None;
             this.hsLoadLocalDatabasePath.ShortcutNewline = false;
             this.hsLoadLocalDatabasePath.ShowShortcut = false;
-            this.hsLoadLocalDatabasePath.Size = new System.Drawing.Size(45, 26);
+            this.hsLoadLocalDatabasePath.Size = new System.Drawing.Size(45, 27);
             this.hsLoadLocalDatabasePath.TabIndex = 3;
             this.hsLoadLocalDatabasePath.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.hsLoadLocalDatabasePath.ToolTipActive = false;
@@ -1146,19 +1223,29 @@ namespace SQLView
             this.pnl_center.ResumeLayout(false);
             this.tcSQLCONTROL.ResumeLayout(false);
             this.tabPageInfo.ResumeLayout(false);
+            this.scExperienceInfo.Panel1.ResumeLayout(false);
+            this.scExperienceInfo.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scExperienceInfo)).EndInit();
+            this.scExperienceInfo.ResumeLayout(false);
+            this.gbExperienceInfoText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvExperienceInfo)).EndInit();
             this.cmdExperienceInfo.ResumeLayout(false);
-            this.pnlExyperienceInfoUpper.ResumeLayout(false);
+            this.gbExperienceIInfoKey.ResumeLayout(false);
+            this.gbExperienceIInfoKey.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctExperienceInfo)).EndInit();
-            this.gbExperienceInfoKey.ResumeLayout(false);
-            this.gbExperienceInfoKey.PerformLayout();
+            this.flpExperienceInfoCenter.ResumeLayout(false);
             this.flpExperienceInfoUpper.ResumeLayout(false);
             this.tabPageLocalExperience.ResumeLayout(false);
+            this.scLocalExperience.Panel1.ResumeLayout(false);
+            this.scLocalExperience.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scLocalExperience)).EndInit();
+            this.scLocalExperience.ResumeLayout(false);
+            this.gbLocalExperienceValue.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalExperienceInfo)).EndInit();
-            this.pnlLocalExperienceInfoUpper.ResumeLayout(false);
+            this.gbLocalExperienceCenter.ResumeLayout(false);
+            this.gbLocalExperienceCenter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fctLocalExperienceInfo)).EndInit();
-            this.gbLocalExperienceInfoKey.ResumeLayout(false);
-            this.gbLocalExperienceInfoKey.PerformLayout();
+            this.flpLocalExperienceInfoCenter.ResumeLayout(false);
             this.flpLocalExperienceInfoUpper.ResumeLayout(false);
             this.gbLocalDatabase.ResumeLayout(false);
             this.gbLocalDatabase.PerformLayout();
@@ -1176,13 +1263,11 @@ namespace SQLView
         private TextBox txtDatabase;
         private SeControlsLib.HotSpot hsLoadDatabasePath;
         private TabPage tabPageInfo;
-        private Panel pnlExyperienceInfoUpper;
         private SeControlsLib.HotSpot hsClearExperienceInfoFields;
         private SeControlsLib.HotSpot hsRefreshExperienceInfo;
         private SeControlsLib.HotSpot hsInsertExperienceInfo;
         private DataGridView dgvExperienceInfo;
         private TextBox txtExperienceKeyCode;
-        private GroupBox gbExperienceInfoKey;
         private SeControlsLib.HotSpot hsDeleteExperienceInfo;
         private ContextMenuStrip cmdExperienceInfo;
         private ToolStripMenuItem tsmiExperienceInfoToSQL;
@@ -1194,18 +1279,24 @@ namespace SQLView
         private TabPage tabPageLocalExperience;
         private DataGridView dgvLocalExperienceInfo;
         private FastColoredTextBoxNS.FastColoredTextBox fctLocalExperienceInfo;
-        private GroupBox gbLocalExperienceInfoKey;
         private SeControlsLib.HotSpot hsUpdateLocalExperienceInfo;
         private SeControlsLib.HotSpot hsDeleteLocalData;
         private TextBox txtLocalExperienceKeyCode;
         private SeControlsLib.HotSpot hsClearLocalExperienceInfo;
         private SeControlsLib.HotSpot hsRefreshLocalExperienceInfo;
         private SeControlsLib.HotSpot hsInsertLoaclExperienceInfo;
-        private Panel pnlLocalExperienceInfoUpper;
         private FlowLayoutPanel flpLocalExperienceInfoUpper;
         private FlowLayoutPanel flpExperienceInfoUpper;
         private GroupBox gbLocalDatabase;
         private TextBox txtLocalDatabase;
         private SeControlsLib.HotSpot hsLoadLocalDatabasePath;
+        private SplitContainer scLocalExperience;
+        private GroupBox gbLocalExperienceValue;
+        private GroupBox gbLocalExperienceCenter;
+        private SplitContainer scExperienceInfo;
+        private GroupBox gbExperienceIInfoKey;
+        private GroupBox gbExperienceInfoText;
+        private FlowLayoutPanel flpExperienceInfoCenter;
+        private FlowLayoutPanel flpLocalExperienceInfoCenter;
     }
 }

@@ -1,10 +1,11 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBExpert;
-using FBExpert.DataClasses;
-using FBXpert.Globals;
-using FBXpert.SQLStatements;
+using FBExpertLib.DataClasses;
 using FBXpert.SQLView;
+using FBXpertLib;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
+using FBXpertLib.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using MessageFormLibrary;
 using System;

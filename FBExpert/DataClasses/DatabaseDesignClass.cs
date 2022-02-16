@@ -1,6 +1,7 @@
 ﻿using BasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
 using SEListBox;
 using System;
 using System.Collections.Generic;

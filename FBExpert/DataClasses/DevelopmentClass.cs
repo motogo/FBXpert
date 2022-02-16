@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
 
 namespace FBExpert.DataClasses
 {

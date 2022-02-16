@@ -7,6 +7,8 @@ using System.Windows.Forms;
 namespace FBXpert.Globals
 {
     [Serializable]
+
+    
     public class DBRegistrationClass : ConnectionAttributes
     {        
         public int Position;

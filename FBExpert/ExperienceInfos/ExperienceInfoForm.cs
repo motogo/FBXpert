@@ -2,10 +2,13 @@ using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FormInterfaces;
 using Initialization;
 using SEMessageBoxLibrary;
@@ -131,8 +134,10 @@ namespace SQLView
         public void SetControlSizes()
         {
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlLocalExperienceInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlExyperienceInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            flpLocalExperienceInfoCenter.Width = 80;
+            flpExperienceInfoCenter.Width = 80;
+
+            
         }
         private void ExperienceInfoForm_Load(object sender, EventArgs e)
         {
@@ -157,8 +162,7 @@ namespace SQLView
             {
                 _dbfile = dbfile;
                 exp = new ExperienceInfoClass(dbfile);
-                exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
-                exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                RefreshExperienceInfo();
                 txtDatabase.Text = _dbfile;
             }
             catch// (Exception ex)
@@ -173,8 +177,7 @@ namespace SQLView
             {
                 _dblocalfile = dbfile;
                 explocal = new ExperienceInfoClass(_dblocalfile);
-                explocal.ExperienceInfoRefresh(dgvLocalExperienceInfo, txtLocalExperienceKeyCode.Text);
-                explocal.SortGrid(dgvLocalExperienceInfo, ExperienceInfoClass.SelColInx);
+                RefreshLocalExperienceInfo();
                 txtLocalDatabase.Text = _dblocalfile;
             }
             catch// (Exception ex)

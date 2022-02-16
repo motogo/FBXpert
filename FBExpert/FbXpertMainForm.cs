@@ -1,12 +1,14 @@
-﻿using BasicClassLibrary;
+﻿using APPHelpLibrary;
+using BasicClassLibrary;
 using BasicForms;
 using FBExpert;
-using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXDesigns;
-using FBXpert.DataClasses;
-using FBXpert.Globals;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
+using FBXpertLib;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using Initialization;
 using MessageFormLibrary;
 using SELanguage;
@@ -82,6 +84,7 @@ namespace FBXpert
             string appfile = appSettingsFile;
             if (File.Exists(appfile))
             {
+                //AppSettingsClass.Instance.GetSettings(appfile);
                 AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
                 appset.Path = appfile;
                 AppSettingsClass.Instance.Load(appset);
@@ -257,6 +260,7 @@ namespace FBXpert
         private void FBXpertMainForm_Load(object sender, EventArgs e)
         {
             //   LanguageClass.Instance.InitEmbedded(this,"FBXpert.Languages","Language","de");
+            
             ProgramAttributes.Instance.Init(System.Reflection.Assembly.GetExecutingAssembly());
             LanguageClass.Instance.InitFile(this.GetType().Assembly, $@"{ApplicationPathClass.Instance.ApplicationPath}\Languages\","Language",".","de");
             LanguageClass.Instance.OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
@@ -265,7 +269,7 @@ namespace FBXpert
             
             
             this.Text = $@"{ProgramAttributes.Instance.GetAppName()} V {ProgramAttributes.Instance.GetAppVersion()}";
-
+            ApplicationHelp.Instance.Init(this, "FBXpert_de.chm");
             Application.DoEvents();
             
             FBXInfo.Instance.MdiParent = this;
@@ -336,6 +340,15 @@ namespace FBXpert
             TestForm tf = new TestForm();
             tf.MdiParent = this;
             tf.Show();
+        }
+
+        private void cmsAbout_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem == tsmiHelp)
+            {
+               
+                ApplicationHelp.Instance.ShowHelp(1);
+            }
         }
     }
 }

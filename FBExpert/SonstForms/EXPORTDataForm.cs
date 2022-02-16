@@ -1,8 +1,12 @@
 ﻿using BasicClassLibrary;
 using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FormInterfaces;
 using MessageFormLibrary;
 using SEListBox;

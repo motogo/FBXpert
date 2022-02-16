@@ -7,6 +7,8 @@ using System;
 using System.Data.Common;
 using System.Windows.Forms;
 using FBXpert.Globals;
+using FBXpertLib.Globals;
+using FBExpertLib.DataClasses;
 
 namespace FBExpert
 {

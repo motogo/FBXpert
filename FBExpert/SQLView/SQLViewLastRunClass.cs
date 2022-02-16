@@ -1,4 +1,5 @@
 using FBXpert.DataClasses;
+using FBXpertLib.DataClasses;
 using System;
 using System.IO;
 using System.Windows.Forms;

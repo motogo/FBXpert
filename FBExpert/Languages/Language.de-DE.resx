@@ -459,4 +459,16 @@
   <data name="Indicies" xml:space="preserve">
     <value>Indicies</value>
   </data>
+  <data name="FormatError" xml:space="preserve">
+    <value>Format Fehler</value>
+  </data>
+  <data name="IsNotAValidFormat" xml:space="preserve">
+    <value>{0} ist kein gültiges {1} Format</value>
+  </data>
+  <data name="ItemsExists" xml:space="preserve">
+    <value>Eintrag existiert bereits</value>
+  </data>
+  <data name="ListAlreadyContainsGroupName" xml:space="preserve">
+    <value>List already contains group {0} and name {1}</value>
+  </data>
 </root>

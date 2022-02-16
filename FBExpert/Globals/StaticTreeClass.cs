@@ -5,6 +5,7 @@ using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.SQLStatements;
+using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;

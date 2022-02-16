@@ -4,6 +4,8 @@ using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FormInterfaces;
 using SEMessageBoxLibrary;
 using System;

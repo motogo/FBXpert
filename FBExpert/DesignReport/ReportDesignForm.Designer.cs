@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportDesignForm));
             this.pnlFormUpper = new System.Windows.Forms.Panel();
+            this.hsHelp = new SeControlsLib.HotSpot();
             this.hsClose = new SeControlsLib.HotSpot();
             this.gpRepoertFileName = new System.Windows.Forms.GroupBox();
             this.cbReportFile = new System.Windows.Forms.ComboBox();
@@ -63,20 +64,31 @@
             this.hsEditXSDData = new SeControlsLib.HotSpot();
             this.hsLoadSchemaFile = new SeControlsLib.HotSpot();
             this.tabPageDataSelect = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageSQL = new System.Windows.Forms.TabPage();
             this.gbCreateStatements = new System.Windows.Forms.GroupBox();
+            this.folSQL = new BrightIdeasSoftware.FastObjectListView();
             this.pnlBottomCreateStatements = new System.Windows.Forms.Panel();
-            this.gbType = new System.Windows.Forms.GroupBox();
-            this.rbSQLType = new System.Windows.Forms.RadioButton();
             this.gbDateName = new System.Windows.Forms.GroupBox();
             this.txtDataName = new System.Windows.Forms.TextBox();
             this.gbStatement = new System.Windows.Forms.GroupBox();
             this.txtStatement = new System.Windows.Forms.TextBox();
             this.hsAddStatement = new SeControlsLib.HotSpot();
             this.hsRemoveStatement = new SeControlsLib.HotSpot();
-            this.lvCreateStatements = new System.Windows.Forms.ListView();
-            this.colCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colSQL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colDataName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPageVALUES = new System.Windows.Forms.TabPage();
+            this.folValues = new BrightIdeasSoftware.FastObjectListView();
+            this.flpValuesLower = new System.Windows.Forms.FlowLayoutPanel();
+            this.gbValueCaption = new System.Windows.Forms.GroupBox();
+            this.txtValueCaption = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtValueWert = new System.Windows.Forms.TextBox();
+            this.gbValueGroup = new System.Windows.Forms.GroupBox();
+            this.txtValueGroup = new System.Windows.Forms.TextBox();
+            this.gbValueType = new System.Windows.Forms.GroupBox();
+            this.cbValuesTypes = new System.Windows.Forms.ComboBox();
+            this.hsAddValueObject = new SeControlsLib.HotSpot();
+            this.hsRemovevALUEoBJECT = new SeControlsLib.HotSpot();
+            this.hsCLearValues = new SeControlsLib.HotSpot();
             this.pnlCreateStatementsUpper = new System.Windows.Forms.Panel();
             this.gbNewDataXLS = new System.Windows.Forms.GroupBox();
             this.txtXMLDataFileNew = new System.Windows.Forms.TextBox();
@@ -100,6 +112,7 @@
             this.pnlAllDesignUpper = new System.Windows.Forms.Panel();
             this.report1 = new FastReport.Report();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.hsClearSQLList = new SeControlsLib.HotSpot();
             this.pnlFormUpper.SuspendLayout();
             this.gpRepoertFileName.SuspendLayout();
             this.tabDesignControl.SuspendLayout();
@@ -118,11 +131,20 @@
             this.gbXMLData.SuspendLayout();
             this.dbDataSchema.SuspendLayout();
             this.tabPageDataSelect.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPageSQL.SuspendLayout();
             this.gbCreateStatements.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.folSQL)).BeginInit();
             this.pnlBottomCreateStatements.SuspendLayout();
-            this.gbType.SuspendLayout();
             this.gbDateName.SuspendLayout();
             this.gbStatement.SuspendLayout();
+            this.tabPageVALUES.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.folValues)).BeginInit();
+            this.flpValuesLower.SuspendLayout();
+            this.gbValueCaption.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.gbValueGroup.SuspendLayout();
+            this.gbValueType.SuspendLayout();
             this.pnlCreateStatementsUpper.SuspendLayout();
             this.gbNewDataXLS.SuspendLayout();
             this.gbNewDataXML.SuspendLayout();
@@ -135,12 +157,64 @@
             // pnlFormUpper
             // 
             this.pnlFormUpper.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pnlFormUpper.Controls.Add(this.hsHelp);
             this.pnlFormUpper.Controls.Add(this.hsClose);
             this.pnlFormUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFormUpper.Location = new System.Drawing.Point(0, 0);
             this.pnlFormUpper.Name = "pnlFormUpper";
             this.pnlFormUpper.Size = new System.Drawing.Size(1272, 42);
             this.pnlFormUpper.TabIndex = 0;
+            // 
+            // hsHelp
+            // 
+            this.hsHelp.BackColor = System.Drawing.Color.Transparent;
+            this.hsHelp.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsHelp.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsHelp.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsHelp.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsHelp.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsHelp.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.hsHelp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsHelp.FlatAppearance.BorderSize = 0;
+            this.hsHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsHelp.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsHelp.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsHelp.Image = global::FBXpert.Properties.Resources.help_browser_22x;
+            this.hsHelp.ImageHover = global::FBXpert.Properties.Resources.help_browser_blue_22x;
+            this.hsHelp.ImageToggleOnSelect = false;
+            this.hsHelp.Location = new System.Drawing.Point(45, 0);
+            this.hsHelp.Marked = false;
+            this.hsHelp.MarkedColor = System.Drawing.Color.Teal;
+            this.hsHelp.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsHelp.MarkedText = "";
+            this.hsHelp.MarkMode = false;
+            this.hsHelp.Name = "hsHelp";
+            this.hsHelp.NonMarkedText = "";
+            this.hsHelp.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsHelp.ShortcutNewline = false;
+            this.hsHelp.ShowShortcut = false;
+            this.hsHelp.Size = new System.Drawing.Size(45, 42);
+            this.hsHelp.TabIndex = 91;
+            this.hsHelp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsHelp.ToolTipActive = false;
+            this.hsHelp.ToolTipAutomaticDelay = 500;
+            this.hsHelp.ToolTipAutoPopDelay = 5000;
+            this.hsHelp.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsHelp.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsHelp.ToolTipFor4ContextMenu = true;
+            this.hsHelp.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsHelp.ToolTipInitialDelay = 500;
+            this.hsHelp.ToolTipIsBallon = false;
+            this.hsHelp.ToolTipOwnerDraw = false;
+            this.hsHelp.ToolTipReshowDelay = 100;
+            this.hsHelp.ToolTipShowAlways = false;
+            this.hsHelp.ToolTipText = "Formular schließen";
+            this.hsHelp.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsHelp.ToolTipTitle = "";
+            this.hsHelp.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsHelp.UseVisualStyleBackColor = true;
+            this.hsHelp.Click += new System.EventHandler(this.hsHelp_Click);
             // 
             // hsClose
             // 
@@ -157,7 +231,7 @@
             this.hsClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hsClose.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hsClose.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
-            this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous32x;
+            this.hsClose.Image = global::FBXpert.Properties.Resources.go_previous22x;
             this.hsClose.ImageHover = global::FBXpert.Properties.Resources.go_previous22x;
             this.hsClose.ImageToggleOnSelect = false;
             this.hsClose.Location = new System.Drawing.Point(0, 0);
@@ -325,7 +399,7 @@
             this.tabDesignControl.Location = new System.Drawing.Point(0, 52);
             this.tabDesignControl.Name = "tabDesignControl";
             this.tabDesignControl.SelectedIndex = 0;
-            this.tabDesignControl.Size = new System.Drawing.Size(1272, 702);
+            this.tabDesignControl.Size = new System.Drawing.Size(1272, 655);
             this.tabDesignControl.TabIndex = 1;
             // 
             // tabEditDesign
@@ -335,7 +409,7 @@
             this.tabEditDesign.Location = new System.Drawing.Point(4, 22);
             this.tabEditDesign.Name = "tabEditDesign";
             this.tabEditDesign.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditDesign.Size = new System.Drawing.Size(1264, 676);
+            this.tabEditDesign.Size = new System.Drawing.Size(1264, 629);
             this.tabEditDesign.TabIndex = 1;
             this.tabEditDesign.Text = "Edit design";
             this.tabEditDesign.UseVisualStyleBackColor = true;
@@ -349,7 +423,7 @@
             this.tabControlEditDesign.Location = new System.Drawing.Point(3, 153);
             this.tabControlEditDesign.Name = "tabControlEditDesign";
             this.tabControlEditDesign.SelectedIndex = 0;
-            this.tabControlEditDesign.Size = new System.Drawing.Size(1258, 520);
+            this.tabControlEditDesign.Size = new System.Drawing.Size(1258, 473);
             this.tabControlEditDesign.TabIndex = 100;
             // 
             // tabPageFRX
@@ -359,7 +433,7 @@
             this.tabPageFRX.Location = new System.Drawing.Point(4, 22);
             this.tabPageFRX.Name = "tabPageFRX";
             this.tabPageFRX.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFRX.Size = new System.Drawing.Size(1250, 494);
+            this.tabPageFRX.Size = new System.Drawing.Size(1250, 447);
             this.tabPageFRX.TabIndex = 0;
             this.tabPageFRX.Text = "FastReport Design (FRX)";
             this.tabPageFRX.UseVisualStyleBackColor = true;
@@ -398,7 +472,7 @@
             this.fctFRX.RightBracket2 = ')';
             this.fctFRX.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctFRX.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctFRX.ServiceColors")));
-            this.fctFRX.Size = new System.Drawing.Size(1244, 435);
+            this.fctFRX.Size = new System.Drawing.Size(1244, 388);
             this.fctFRX.TabIndex = 4;
             this.fctFRX.Zoom = 100;
             // 
@@ -470,7 +544,7 @@
             this.tabPageXSD.Location = new System.Drawing.Point(4, 22);
             this.tabPageXSD.Name = "tabPageXSD";
             this.tabPageXSD.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXSD.Size = new System.Drawing.Size(1250, 494);
+            this.tabPageXSD.Size = new System.Drawing.Size(1250, 447);
             this.tabPageXSD.TabIndex = 1;
             this.tabPageXSD.Text = "FastReport Schema (XSD)";
             this.tabPageXSD.UseVisualStyleBackColor = true;
@@ -489,7 +563,7 @@
         '\'',
         '\''};
             this.fctXSD.AutoIndentCharsPatterns = "";
-            this.fctXSD.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXSD.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXSD.BackBrush = null;
             this.fctXSD.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXSD.CharHeight = 14;
@@ -498,7 +572,6 @@
             this.fctXSD.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXSD.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXSD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXSD.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXSD.IsReplaceMode = false;
             this.fctXSD.Language = FastColoredTextBoxNS.Language.XML;
             this.fctXSD.LeftBracket = '<';
@@ -510,7 +583,7 @@
             this.fctXSD.RightBracket2 = ')';
             this.fctXSD.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXSD.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXSD.ServiceColors")));
-            this.fctXSD.Size = new System.Drawing.Size(1244, 435);
+            this.fctXSD.Size = new System.Drawing.Size(1244, 388);
             this.fctXSD.TabIndex = 6;
             this.fctXSD.Zoom = 100;
             // 
@@ -582,7 +655,7 @@
             this.tabPageXML.Location = new System.Drawing.Point(4, 22);
             this.tabPageXML.Name = "tabPageXML";
             this.tabPageXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXML.Size = new System.Drawing.Size(1250, 494);
+            this.tabPageXML.Size = new System.Drawing.Size(1250, 447);
             this.tabPageXML.TabIndex = 2;
             this.tabPageXML.Text = "FastReport Datas (XML)";
             this.tabPageXML.UseVisualStyleBackColor = true;
@@ -601,7 +674,7 @@
         '\'',
         '\''};
             this.fctXML.AutoIndentCharsPatterns = "";
-            this.fctXML.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXML.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXML.BackBrush = null;
             this.fctXML.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXML.CharHeight = 14;
@@ -610,7 +683,6 @@
             this.fctXML.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXML.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXML.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXML.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXML.IsReplaceMode = false;
             this.fctXML.Language = FastColoredTextBoxNS.Language.XML;
             this.fctXML.LeftBracket = '<';
@@ -622,7 +694,7 @@
             this.fctXML.RightBracket2 = ')';
             this.fctXML.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXML.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXML.ServiceColors")));
-            this.fctXML.Size = new System.Drawing.Size(1244, 435);
+            this.fctXML.Size = new System.Drawing.Size(1244, 388);
             this.fctXML.TabIndex = 8;
             this.fctXML.Zoom = 100;
             // 
@@ -1054,68 +1126,99 @@
             // 
             // tabPageDataSelect
             // 
-            this.tabPageDataSelect.Controls.Add(this.gbCreateStatements);
+            this.tabPageDataSelect.Controls.Add(this.tabControl1);
             this.tabPageDataSelect.Controls.Add(this.pnlCreateStatementsUpper);
             this.tabPageDataSelect.Location = new System.Drawing.Point(4, 22);
             this.tabPageDataSelect.Name = "tabPageDataSelect";
             this.tabPageDataSelect.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDataSelect.Size = new System.Drawing.Size(1264, 676);
+            this.tabPageDataSelect.Size = new System.Drawing.Size(1264, 629);
             this.tabPageDataSelect.TabIndex = 0;
             this.tabPageDataSelect.Text = "Create data and design";
             this.tabPageDataSelect.UseVisualStyleBackColor = true;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPageSQL);
+            this.tabControl1.Controls.Add(this.tabPageVALUES);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(3, 175);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1258, 451);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tabPageSQL
+            // 
+            this.tabPageSQL.Controls.Add(this.gbCreateStatements);
+            this.tabPageSQL.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSQL.Name = "tabPageSQL";
+            this.tabPageSQL.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSQL.Size = new System.Drawing.Size(1250, 425);
+            this.tabPageSQL.TabIndex = 0;
+            this.tabPageSQL.Text = "SQL";
+            this.tabPageSQL.UseVisualStyleBackColor = true;
+            // 
             // gbCreateStatements
             // 
+            this.gbCreateStatements.Controls.Add(this.folSQL);
             this.gbCreateStatements.Controls.Add(this.pnlBottomCreateStatements);
-            this.gbCreateStatements.Controls.Add(this.lvCreateStatements);
             this.gbCreateStatements.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbCreateStatements.Location = new System.Drawing.Point(3, 175);
+            this.gbCreateStatements.Location = new System.Drawing.Point(3, 3);
             this.gbCreateStatements.Name = "gbCreateStatements";
-            this.gbCreateStatements.Size = new System.Drawing.Size(1258, 498);
+            this.gbCreateStatements.Size = new System.Drawing.Size(1244, 419);
             this.gbCreateStatements.TabIndex = 0;
             this.gbCreateStatements.TabStop = false;
             this.gbCreateStatements.Text = "Create statements";
             // 
+            // folSQL
+            // 
+            this.folSQL.AllowColumnReorder = true;
+            this.folSQL.AlternateRowBackColor = System.Drawing.Color.LightGray;
+            this.folSQL.CellEditUseWholeCell = false;
+            this.folSQL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folSQL.FullRowSelect = true;
+            this.folSQL.GridLines = true;
+            this.folSQL.HeaderWordWrap = true;
+            this.folSQL.HideSelection = false;
+            this.folSQL.Location = new System.Drawing.Point(3, 16);
+            this.folSQL.MultiSelect = false;
+            this.folSQL.Name = "folSQL";
+            this.folSQL.PersistentCheckBoxes = false;
+            this.folSQL.SelectAllOnControlA = false;
+            this.folSQL.SelectColumnsMenuStaysOpen = false;
+            this.folSQL.SelectColumnsOnRightClick = false;
+            this.folSQL.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
+            this.folSQL.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.folSQL.SelectedForeColor = System.Drawing.SystemColors.Info;
+            this.folSQL.ShowGroups = false;
+            this.folSQL.Size = new System.Drawing.Size(1238, 344);
+            this.folSQL.TabIndex = 6;
+            this.folSQL.UseAlternatingBackColors = true;
+            this.folSQL.UseCompatibleStateImageBehavior = false;
+            this.folSQL.UseHotControls = false;
+            this.folSQL.UseOverlays = false;
+            this.folSQL.View = System.Windows.Forms.View.Details;
+            this.folSQL.VirtualMode = true;
+            this.folSQL.SelectedIndexChanged += new System.EventHandler(this.folSQL_SelectedIndexChanged);
+            // 
             // pnlBottomCreateStatements
             // 
-            this.pnlBottomCreateStatements.Controls.Add(this.gbType);
+            this.pnlBottomCreateStatements.Controls.Add(this.hsClearSQLList);
             this.pnlBottomCreateStatements.Controls.Add(this.gbDateName);
             this.pnlBottomCreateStatements.Controls.Add(this.gbStatement);
             this.pnlBottomCreateStatements.Controls.Add(this.hsAddStatement);
             this.pnlBottomCreateStatements.Controls.Add(this.hsRemoveStatement);
             this.pnlBottomCreateStatements.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottomCreateStatements.Location = new System.Drawing.Point(3, 439);
+            this.pnlBottomCreateStatements.Location = new System.Drawing.Point(3, 360);
             this.pnlBottomCreateStatements.Name = "pnlBottomCreateStatements";
-            this.pnlBottomCreateStatements.Size = new System.Drawing.Size(1252, 56);
+            this.pnlBottomCreateStatements.Size = new System.Drawing.Size(1238, 56);
             this.pnlBottomCreateStatements.TabIndex = 2;
-            // 
-            // gbType
-            // 
-            this.gbType.Controls.Add(this.rbSQLType);
-            this.gbType.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbType.Location = new System.Drawing.Point(1020, 0);
-            this.gbType.Name = "gbType";
-            this.gbType.Size = new System.Drawing.Size(96, 56);
-            this.gbType.TabIndex = 92;
-            this.gbType.TabStop = false;
-            this.gbType.Text = "Type";
-            // 
-            // rbSQLType
-            // 
-            this.rbSQLType.AutoSize = true;
-            this.rbSQLType.Location = new System.Drawing.Point(11, 20);
-            this.rbSQLType.Name = "rbSQLType";
-            this.rbSQLType.Size = new System.Drawing.Size(46, 17);
-            this.rbSQLType.TabIndex = 0;
-            this.rbSQLType.TabStop = true;
-            this.rbSQLType.Text = "SQL";
-            this.rbSQLType.UseVisualStyleBackColor = true;
             // 
             // gbDateName
             // 
             this.gbDateName.Controls.Add(this.txtDataName);
             this.gbDateName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbDateName.Location = new System.Drawing.Point(820, 0);
+            this.gbDateName.Location = new System.Drawing.Point(587, 0);
             this.gbDateName.Name = "gbDateName";
             this.gbDateName.Size = new System.Drawing.Size(200, 56);
             this.gbDateName.TabIndex = 91;
@@ -1138,7 +1241,7 @@
             this.gbStatement.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbStatement.Location = new System.Drawing.Point(0, 0);
             this.gbStatement.Name = "gbStatement";
-            this.gbStatement.Size = new System.Drawing.Size(820, 56);
+            this.gbStatement.Size = new System.Drawing.Size(587, 56);
             this.gbStatement.TabIndex = 90;
             this.gbStatement.TabStop = false;
             this.gbStatement.Text = "SQL data statement";
@@ -1149,7 +1252,7 @@
             this.txtStatement.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStatement.Location = new System.Drawing.Point(3, 16);
             this.txtStatement.Name = "txtStatement";
-            this.txtStatement.Size = new System.Drawing.Size(814, 23);
+            this.txtStatement.Size = new System.Drawing.Size(581, 23);
             this.txtStatement.TabIndex = 0;
             this.txtStatement.Text = "select * from tartikel";
             // 
@@ -1171,7 +1274,7 @@
             this.hsAddStatement.Image = global::FBXpert.Properties.Resources.plus_gn32x;
             this.hsAddStatement.ImageHover = global::FBXpert.Properties.Resources.plus_blue32x;
             this.hsAddStatement.ImageToggleOnSelect = false;
-            this.hsAddStatement.Location = new System.Drawing.Point(1121, 0);
+            this.hsAddStatement.Location = new System.Drawing.Point(1107, 0);
             this.hsAddStatement.Marked = false;
             this.hsAddStatement.MarkedColor = System.Drawing.Color.Teal;
             this.hsAddStatement.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1222,7 +1325,7 @@
             this.hsRemoveStatement.Image = global::FBXpert.Properties.Resources.minus_gn32x;
             this.hsRemoveStatement.ImageHover = global::FBXpert.Properties.Resources.minus_blau32x;
             this.hsRemoveStatement.ImageToggleOnSelect = false;
-            this.hsRemoveStatement.Location = new System.Drawing.Point(1189, 0);
+            this.hsRemoveStatement.Location = new System.Drawing.Point(1175, 0);
             this.hsRemoveStatement.Marked = false;
             this.hsRemoveStatement.MarkedColor = System.Drawing.Color.Teal;
             this.hsRemoveStatement.MarkedStyle = SeControlsLib.frameStyle.filled;
@@ -1255,42 +1358,289 @@
             this.hsRemoveStatement.UseVisualStyleBackColor = false;
             this.hsRemoveStatement.Click += new System.EventHandler(this.hsRemoveStatement_Click);
             // 
-            // lvCreateStatements
+            // tabPageVALUES
             // 
-            this.lvCreateStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lvCreateStatements.CheckBoxes = true;
-            this.lvCreateStatements.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colCheck,
-            this.colSQL,
-            this.colDataName});
-            this.lvCreateStatements.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCreateStatements.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvCreateStatements.FullRowSelect = true;
-            this.lvCreateStatements.GridLines = true;
-            this.lvCreateStatements.HideSelection = false;
-            this.lvCreateStatements.Location = new System.Drawing.Point(3, 16);
-            this.lvCreateStatements.MultiSelect = false;
-            this.lvCreateStatements.Name = "lvCreateStatements";
-            this.lvCreateStatements.Size = new System.Drawing.Size(1252, 479);
-            this.lvCreateStatements.TabIndex = 0;
-            this.lvCreateStatements.UseCompatibleStateImageBehavior = false;
-            this.lvCreateStatements.View = System.Windows.Forms.View.Details;
-            this.lvCreateStatements.SelectedIndexChanged += new System.EventHandler(this.lvCreateStatements_SelectedIndexChanged);
+            this.tabPageVALUES.Controls.Add(this.folValues);
+            this.tabPageVALUES.Controls.Add(this.flpValuesLower);
+            this.tabPageVALUES.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVALUES.Name = "tabPageVALUES";
+            this.tabPageVALUES.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVALUES.Size = new System.Drawing.Size(1250, 425);
+            this.tabPageVALUES.TabIndex = 1;
+            this.tabPageVALUES.Text = "Values";
+            this.tabPageVALUES.UseVisualStyleBackColor = true;
             // 
-            // colCheck
+            // folValues
             // 
-            this.colCheck.Text = "Chk";
-            this.colCheck.Width = 20;
+            this.folValues.AllowColumnReorder = true;
+            this.folValues.AlternateRowBackColor = System.Drawing.Color.LightGray;
+            this.folValues.CellEditUseWholeCell = false;
+            this.folValues.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folValues.FullRowSelect = true;
+            this.folValues.GridLines = true;
+            this.folValues.HeaderWordWrap = true;
+            this.folValues.HideSelection = false;
+            this.folValues.Location = new System.Drawing.Point(3, 3);
+            this.folValues.MultiSelect = false;
+            this.folValues.Name = "folValues";
+            this.folValues.PersistentCheckBoxes = false;
+            this.folValues.SelectAllOnControlA = false;
+            this.folValues.SelectColumnsMenuStaysOpen = false;
+            this.folValues.SelectColumnsOnRightClick = false;
+            this.folValues.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
+            this.folValues.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.folValues.SelectedForeColor = System.Drawing.SystemColors.Info;
+            this.folValues.ShowGroups = false;
+            this.folValues.Size = new System.Drawing.Size(1244, 353);
+            this.folValues.TabIndex = 5;
+            this.folValues.UseAlternatingBackColors = true;
+            this.folValues.UseCompatibleStateImageBehavior = false;
+            this.folValues.UseHotControls = false;
+            this.folValues.UseOverlays = false;
+            this.folValues.View = System.Windows.Forms.View.Details;
+            this.folValues.VirtualMode = true;
+            this.folValues.SelectedIndexChanged += new System.EventHandler(this.folValues_SelectedIndexChanged);
             // 
-            // colSQL
+            // flpValuesLower
             // 
-            this.colSQL.Text = "SQL data statement";
-            this.colSQL.Width = 740;
+            this.flpValuesLower.Controls.Add(this.gbValueCaption);
+            this.flpValuesLower.Controls.Add(this.groupBox2);
+            this.flpValuesLower.Controls.Add(this.gbValueGroup);
+            this.flpValuesLower.Controls.Add(this.gbValueType);
+            this.flpValuesLower.Controls.Add(this.hsAddValueObject);
+            this.flpValuesLower.Controls.Add(this.hsRemovevALUEoBJECT);
+            this.flpValuesLower.Controls.Add(this.hsCLearValues);
+            this.flpValuesLower.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpValuesLower.Location = new System.Drawing.Point(3, 356);
+            this.flpValuesLower.Name = "flpValuesLower";
+            this.flpValuesLower.Size = new System.Drawing.Size(1244, 66);
+            this.flpValuesLower.TabIndex = 4;
             // 
-            // colDataName
+            // gbValueCaption
             // 
-            this.colDataName.Text = "Data name";
-            this.colDataName.Width = 254;
+            this.gbValueCaption.Controls.Add(this.txtValueCaption);
+            this.gbValueCaption.Location = new System.Drawing.Point(3, 3);
+            this.gbValueCaption.Name = "gbValueCaption";
+            this.gbValueCaption.Size = new System.Drawing.Size(336, 56);
+            this.gbValueCaption.TabIndex = 90;
+            this.gbValueCaption.TabStop = false;
+            this.gbValueCaption.Text = "Value Bezeichnung";
+            // 
+            // txtValueCaption
+            // 
+            this.txtValueCaption.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtValueCaption.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValueCaption.Location = new System.Drawing.Point(3, 16);
+            this.txtValueCaption.Name = "txtValueCaption";
+            this.txtValueCaption.Size = new System.Drawing.Size(330, 23);
+            this.txtValueCaption.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtValueWert);
+            this.groupBox2.Location = new System.Drawing.Point(345, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 56);
+            this.groupBox2.TabIndex = 91;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Value Wert";
+            // 
+            // txtValueWert
+            // 
+            this.txtValueWert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtValueWert.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValueWert.Location = new System.Drawing.Point(3, 16);
+            this.txtValueWert.Name = "txtValueWert";
+            this.txtValueWert.Size = new System.Drawing.Size(194, 23);
+            this.txtValueWert.TabIndex = 1;
+            // 
+            // gbValueGroup
+            // 
+            this.gbValueGroup.Controls.Add(this.txtValueGroup);
+            this.gbValueGroup.Location = new System.Drawing.Point(551, 3);
+            this.gbValueGroup.Name = "gbValueGroup";
+            this.gbValueGroup.Size = new System.Drawing.Size(200, 56);
+            this.gbValueGroup.TabIndex = 93;
+            this.gbValueGroup.TabStop = false;
+            this.gbValueGroup.Text = "Gruppe";
+            // 
+            // txtValueGroup
+            // 
+            this.txtValueGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtValueGroup.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValueGroup.Location = new System.Drawing.Point(3, 16);
+            this.txtValueGroup.Name = "txtValueGroup";
+            this.txtValueGroup.Size = new System.Drawing.Size(194, 23);
+            this.txtValueGroup.TabIndex = 1;
+            this.txtValueGroup.Text = "reportheader";
+            // 
+            // gbValueType
+            // 
+            this.gbValueType.Controls.Add(this.cbValuesTypes);
+            this.gbValueType.Location = new System.Drawing.Point(757, 3);
+            this.gbValueType.Name = "gbValueType";
+            this.gbValueType.Size = new System.Drawing.Size(135, 56);
+            this.gbValueType.TabIndex = 94;
+            this.gbValueType.TabStop = false;
+            this.gbValueType.Text = "String";
+            // 
+            // cbValuesTypes
+            // 
+            this.cbValuesTypes.FormattingEnabled = true;
+            this.cbValuesTypes.Location = new System.Drawing.Point(8, 22);
+            this.cbValuesTypes.Name = "cbValuesTypes";
+            this.cbValuesTypes.Size = new System.Drawing.Size(121, 21);
+            this.cbValuesTypes.TabIndex = 0;
+            // 
+            // hsAddValueObject
+            // 
+            this.hsAddValueObject.BackColor = System.Drawing.Color.Transparent;
+            this.hsAddValueObject.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsAddValueObject.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsAddValueObject.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsAddValueObject.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsAddValueObject.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsAddValueObject.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsAddValueObject.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsAddValueObject.FlatAppearance.BorderSize = 0;
+            this.hsAddValueObject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsAddValueObject.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsAddValueObject.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsAddValueObject.Image = global::FBXpert.Properties.Resources.plus_gn32x;
+            this.hsAddValueObject.ImageHover = global::FBXpert.Properties.Resources.plus_blue32x;
+            this.hsAddValueObject.ImageToggleOnSelect = false;
+            this.hsAddValueObject.Location = new System.Drawing.Point(898, 3);
+            this.hsAddValueObject.Marked = false;
+            this.hsAddValueObject.MarkedColor = System.Drawing.Color.Teal;
+            this.hsAddValueObject.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsAddValueObject.MarkedText = "";
+            this.hsAddValueObject.MarkMode = false;
+            this.hsAddValueObject.Name = "hsAddValueObject";
+            this.hsAddValueObject.NonMarkedText = "";
+            this.hsAddValueObject.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsAddValueObject.ShortcutNewline = false;
+            this.hsAddValueObject.ShowShortcut = false;
+            this.hsAddValueObject.Size = new System.Drawing.Size(68, 56);
+            this.hsAddValueObject.TabIndex = 87;
+            this.hsAddValueObject.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsAddValueObject.ToolTipActive = false;
+            this.hsAddValueObject.ToolTipAutomaticDelay = 500;
+            this.hsAddValueObject.ToolTipAutoPopDelay = 5000;
+            this.hsAddValueObject.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsAddValueObject.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsAddValueObject.ToolTipFor4ContextMenu = true;
+            this.hsAddValueObject.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsAddValueObject.ToolTipInitialDelay = 500;
+            this.hsAddValueObject.ToolTipIsBallon = false;
+            this.hsAddValueObject.ToolTipOwnerDraw = false;
+            this.hsAddValueObject.ToolTipReshowDelay = 100;
+            this.hsAddValueObject.ToolTipShowAlways = false;
+            this.hsAddValueObject.ToolTipText = "";
+            this.hsAddValueObject.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsAddValueObject.ToolTipTitle = "";
+            this.hsAddValueObject.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsAddValueObject.UseVisualStyleBackColor = false;
+            this.hsAddValueObject.Click += new System.EventHandler(this.hsAddValueObject_Click);
+            // 
+            // hsRemovevALUEoBJECT
+            // 
+            this.hsRemovevALUEoBJECT.BackColor = System.Drawing.Color.Transparent;
+            this.hsRemovevALUEoBJECT.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsRemovevALUEoBJECT.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsRemovevALUEoBJECT.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsRemovevALUEoBJECT.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsRemovevALUEoBJECT.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsRemovevALUEoBJECT.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsRemovevALUEoBJECT.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsRemovevALUEoBJECT.FlatAppearance.BorderSize = 0;
+            this.hsRemovevALUEoBJECT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsRemovevALUEoBJECT.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsRemovevALUEoBJECT.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsRemovevALUEoBJECT.Image = global::FBXpert.Properties.Resources.minus_gn32x;
+            this.hsRemovevALUEoBJECT.ImageHover = global::FBXpert.Properties.Resources.minus_blau32x;
+            this.hsRemovevALUEoBJECT.ImageToggleOnSelect = false;
+            this.hsRemovevALUEoBJECT.Location = new System.Drawing.Point(972, 3);
+            this.hsRemovevALUEoBJECT.Marked = false;
+            this.hsRemovevALUEoBJECT.MarkedColor = System.Drawing.Color.Teal;
+            this.hsRemovevALUEoBJECT.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsRemovevALUEoBJECT.MarkedText = "";
+            this.hsRemovevALUEoBJECT.MarkMode = false;
+            this.hsRemovevALUEoBJECT.Name = "hsRemovevALUEoBJECT";
+            this.hsRemovevALUEoBJECT.NonMarkedText = "";
+            this.hsRemovevALUEoBJECT.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsRemovevALUEoBJECT.ShortcutNewline = false;
+            this.hsRemovevALUEoBJECT.ShowShortcut = false;
+            this.hsRemovevALUEoBJECT.Size = new System.Drawing.Size(63, 56);
+            this.hsRemovevALUEoBJECT.TabIndex = 89;
+            this.hsRemovevALUEoBJECT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsRemovevALUEoBJECT.ToolTipActive = false;
+            this.hsRemovevALUEoBJECT.ToolTipAutomaticDelay = 500;
+            this.hsRemovevALUEoBJECT.ToolTipAutoPopDelay = 5000;
+            this.hsRemovevALUEoBJECT.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsRemovevALUEoBJECT.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsRemovevALUEoBJECT.ToolTipFor4ContextMenu = true;
+            this.hsRemovevALUEoBJECT.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsRemovevALUEoBJECT.ToolTipInitialDelay = 500;
+            this.hsRemovevALUEoBJECT.ToolTipIsBallon = false;
+            this.hsRemovevALUEoBJECT.ToolTipOwnerDraw = false;
+            this.hsRemovevALUEoBJECT.ToolTipReshowDelay = 100;
+            this.hsRemovevALUEoBJECT.ToolTipShowAlways = false;
+            this.hsRemovevALUEoBJECT.ToolTipText = "";
+            this.hsRemovevALUEoBJECT.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsRemovevALUEoBJECT.ToolTipTitle = "";
+            this.hsRemovevALUEoBJECT.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsRemovevALUEoBJECT.UseVisualStyleBackColor = false;
+            this.hsRemovevALUEoBJECT.Click += new System.EventHandler(this.hsRemovevALUEoBJECT_Click);
+            // 
+            // hsCLearValues
+            // 
+            this.hsCLearValues.BackColor = System.Drawing.Color.Transparent;
+            this.hsCLearValues.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsCLearValues.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsCLearValues.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsCLearValues.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsCLearValues.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsCLearValues.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsCLearValues.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsCLearValues.FlatAppearance.BorderSize = 0;
+            this.hsCLearValues.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsCLearValues.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsCLearValues.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsCLearValues.Image = global::FBXpert.Properties.Resources.sweep_ge24x1;
+            this.hsCLearValues.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsCLearValues.ImageToggleOnSelect = false;
+            this.hsCLearValues.Location = new System.Drawing.Point(1041, 3);
+            this.hsCLearValues.Marked = false;
+            this.hsCLearValues.MarkedColor = System.Drawing.Color.Teal;
+            this.hsCLearValues.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsCLearValues.MarkedText = "";
+            this.hsCLearValues.MarkMode = false;
+            this.hsCLearValues.Name = "hsCLearValues";
+            this.hsCLearValues.NonMarkedText = "";
+            this.hsCLearValues.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsCLearValues.ShortcutNewline = false;
+            this.hsCLearValues.ShowShortcut = false;
+            this.hsCLearValues.Size = new System.Drawing.Size(63, 56);
+            this.hsCLearValues.TabIndex = 95;
+            this.hsCLearValues.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsCLearValues.ToolTipActive = false;
+            this.hsCLearValues.ToolTipAutomaticDelay = 500;
+            this.hsCLearValues.ToolTipAutoPopDelay = 5000;
+            this.hsCLearValues.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsCLearValues.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsCLearValues.ToolTipFor4ContextMenu = true;
+            this.hsCLearValues.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsCLearValues.ToolTipInitialDelay = 500;
+            this.hsCLearValues.ToolTipIsBallon = false;
+            this.hsCLearValues.ToolTipOwnerDraw = false;
+            this.hsCLearValues.ToolTipReshowDelay = 100;
+            this.hsCLearValues.ToolTipShowAlways = false;
+            this.hsCLearValues.ToolTipText = "";
+            this.hsCLearValues.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsCLearValues.ToolTipTitle = "";
+            this.hsCLearValues.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsCLearValues.UseVisualStyleBackColor = false;
+            this.hsCLearValues.Click += new System.EventHandler(this.hsCLearValues_Click);
             // 
             // pnlCreateStatementsUpper
             // 
@@ -1841,11 +2191,61 @@
             this.report1.NeedRefresh = false;
             this.report1.ReportResourceString = resources.GetString("report1.ReportResourceString");
             // 
+            // hsClearSQLList
+            // 
+            this.hsClearSQLList.BackColor = System.Drawing.Color.Transparent;
+            this.hsClearSQLList.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsClearSQLList.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsClearSQLList.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsClearSQLList.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsClearSQLList.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsClearSQLList.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsClearSQLList.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsClearSQLList.FlatAppearance.BorderSize = 0;
+            this.hsClearSQLList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsClearSQLList.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsClearSQLList.HoverStyle = SeControlsLib.frameStyle.thinRectangle;
+            this.hsClearSQLList.Image = global::FBXpert.Properties.Resources.sweep_ge24x1;
+            this.hsClearSQLList.ImageHover = global::FBXpert.Properties.Resources.seewp_bl24x;
+            this.hsClearSQLList.ImageToggleOnSelect = false;
+            this.hsClearSQLList.Location = new System.Drawing.Point(1021, 0);
+            this.hsClearSQLList.Marked = false;
+            this.hsClearSQLList.MarkedColor = System.Drawing.Color.Teal;
+            this.hsClearSQLList.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsClearSQLList.MarkedText = "";
+            this.hsClearSQLList.MarkMode = false;
+            this.hsClearSQLList.Name = "hsClearSQLList";
+            this.hsClearSQLList.NonMarkedText = "";
+            this.hsClearSQLList.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsClearSQLList.ShortcutNewline = false;
+            this.hsClearSQLList.ShowShortcut = false;
+            this.hsClearSQLList.Size = new System.Drawing.Size(63, 56);
+            this.hsClearSQLList.TabIndex = 96;
+            this.hsClearSQLList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsClearSQLList.ToolTipActive = false;
+            this.hsClearSQLList.ToolTipAutomaticDelay = 500;
+            this.hsClearSQLList.ToolTipAutoPopDelay = 5000;
+            this.hsClearSQLList.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsClearSQLList.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsClearSQLList.ToolTipFor4ContextMenu = true;
+            this.hsClearSQLList.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsClearSQLList.ToolTipInitialDelay = 500;
+            this.hsClearSQLList.ToolTipIsBallon = false;
+            this.hsClearSQLList.ToolTipOwnerDraw = false;
+            this.hsClearSQLList.ToolTipReshowDelay = 100;
+            this.hsClearSQLList.ToolTipShowAlways = false;
+            this.hsClearSQLList.ToolTipText = "";
+            this.hsClearSQLList.ToolTipTextColor = System.Drawing.Color.Blue;
+            this.hsClearSQLList.ToolTipTitle = "";
+            this.hsClearSQLList.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsClearSQLList.UseVisualStyleBackColor = false;
+            this.hsClearSQLList.Click += new System.EventHandler(this.hsClearSQLList_Click);
+            // 
             // ReportDesignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 754);
+            this.ClientSize = new System.Drawing.Size(1272, 707);
             this.Controls.Add(this.tabDesignControl);
             this.Controls.Add(this.pnlAllDesignUpper);
             this.Controls.Add(this.pnlFormUpper);
@@ -1872,14 +2272,25 @@
             this.gbXMLData.ResumeLayout(false);
             this.dbDataSchema.ResumeLayout(false);
             this.tabPageDataSelect.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageSQL.ResumeLayout(false);
             this.gbCreateStatements.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.folSQL)).EndInit();
             this.pnlBottomCreateStatements.ResumeLayout(false);
-            this.gbType.ResumeLayout(false);
-            this.gbType.PerformLayout();
             this.gbDateName.ResumeLayout(false);
             this.gbDateName.PerformLayout();
             this.gbStatement.ResumeLayout(false);
             this.gbStatement.PerformLayout();
+            this.tabPageVALUES.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.folValues)).EndInit();
+            this.flpValuesLower.ResumeLayout(false);
+            this.gbValueCaption.ResumeLayout(false);
+            this.gbValueCaption.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.gbValueGroup.ResumeLayout(false);
+            this.gbValueGroup.PerformLayout();
+            this.gbValueType.ResumeLayout(false);
             this.pnlCreateStatementsUpper.ResumeLayout(false);
             this.gbNewDataXLS.ResumeLayout(false);
             this.gbNewDataXLS.PerformLayout();
@@ -1903,10 +2314,6 @@
         private System.Windows.Forms.Panel pnlCreateStatementsUpper;
         private SeControlsLib.HotSpot hsCreateReportFiles;
         private System.Windows.Forms.GroupBox gbCreateStatements;
-        private System.Windows.Forms.ListView lvCreateStatements;
-        private System.Windows.Forms.ColumnHeader colCheck;
-        private System.Windows.Forms.ColumnHeader colSQL;
-        private System.Windows.Forms.ColumnHeader colDataName;
         private System.Windows.Forms.Panel pnlBottomCreateStatements;
         private System.Windows.Forms.GroupBox gbDateName;
         private System.Windows.Forms.TextBox txtDataName;
@@ -1932,8 +2339,6 @@
         private System.Windows.Forms.Panel pnlAllDesignUpper;
         private SeControlsLib.HotSpot hsCreateDatas;
         private FastReport.Report report1;
-        private System.Windows.Forms.GroupBox gbType;
-        private System.Windows.Forms.RadioButton rbSQLType;
         private System.Windows.Forms.GroupBox gbNewDataXML;
         private System.Windows.Forms.TextBox txtXSDSchemaFileNew;
         private SeControlsLib.HotSpot hsReportSchemaFileNew;
@@ -1966,5 +2371,24 @@
         private System.Windows.Forms.Panel pnlXMLUpper;
         private SeControlsLib.HotSpot hsSaveXML;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageSQL;
+        private System.Windows.Forms.TabPage tabPageVALUES;
+        private System.Windows.Forms.GroupBox gbValueGroup;
+        private System.Windows.Forms.TextBox txtValueGroup;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtValueWert;
+        private System.Windows.Forms.GroupBox gbValueCaption;
+        private System.Windows.Forms.TextBox txtValueCaption;
+        private SeControlsLib.HotSpot hsAddValueObject;
+        private SeControlsLib.HotSpot hsRemovevALUEoBJECT;
+        private System.Windows.Forms.FlowLayoutPanel flpValuesLower;
+        private System.Windows.Forms.GroupBox gbValueType;
+        private BrightIdeasSoftware.FastObjectListView folValues;
+        private SeControlsLib.HotSpot hsCLearValues;
+        private SeControlsLib.HotSpot hsHelp;
+        private System.Windows.Forms.ComboBox cbValuesTypes;
+        private BrightIdeasSoftware.FastObjectListView folSQL;
+        private SeControlsLib.HotSpot hsClearSQLList;
     }
 }

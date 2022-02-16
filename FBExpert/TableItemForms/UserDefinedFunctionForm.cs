@@ -2,9 +2,13 @@
 using DBBasicClassLibrary;
 using FBExpert;
 using FBExpert.DataClasses;
+using FBExpertLib.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpert.MiscClasses;
+using FBXpertLib;
+using FBXpertLib.DataClasses;
+using FBXpertLib.Globals;
 using FormInterfaces;
 using System;
 using System.Collections.Generic;

@@ -77,9 +77,12 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="APPHelpLibrary">
+      <HintPath>..\..\SELibrariesSource\APPHelpLibrary\bin\Debug\APPHelpLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="BasicClassLibrary, Version=2.21.3.31, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\BasicClassLibrary\bin\Debug\Library452\BasicClassLibrary.dll</HintPath>
@@ -113,6 +116,9 @@
     </Reference>
     <Reference Include="FBXDesigns">
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
+    </Reference>
+    <Reference Include="FBXpertLib">
+      <HintPath>..\FBXpertLib\bin\Debug\FBXpertLib.dll</HintPath>
     </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=8.5.3.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -156,10 +162,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SEHotSpot\bin\Debug\SEHotSpot.dll</HintPath>
     </Reference>
-    <Reference Include="SELibraries, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\SELibraries\bin\Debug\SELibraries.dll</HintPath>
-    </Reference>
     <Reference Include="SEListBox, Version=2017.11.6.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SEListBox\Dev\bin\Debug\SEListBox.dll</HintPath>
@@ -170,6 +172,9 @@
     <Reference Include="SESpaltenEditor, Version=2020.2.12.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\SESpaltenEditor\bin\Debug\SESpaltenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedStorage">
+      <HintPath>..\..\SELibrariesSource\SharedStorage\bin\Debug\SharedStorage.dll</HintPath>
     </Reference>
     <Reference Include="SpezialfilterBox, Version=2020.12.18.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -207,17 +212,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses\ChecksClass.cs" />
-    <Compile Include="DataClasses\DatabaseDesignClass.cs" />
     <Compile Include="DataClasses\DBDataTypes.cs" />
-    <Compile Include="DataClasses\DependencyClass.cs" />
-    <Compile Include="DataClasses\ExperienceInfoClass.cs" />
     <Compile Include="DataClasses\ExportClass.cs" />
-    <Compile Include="DataClasses\NotNullsClass.cs" />
-    <Compile Include="DataClasses\PrimayrKeyClass.cs" />
-    <Compile Include="DataClasses\SQLHistoryClass.cs" />
-    <Compile Include="DataClasses\SQLPatterns.cs" />
-    <Compile Include="DataClasses\UniquesClass.cs" />
     <Compile Include="DesignDatabase\DesignerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,12 +246,7 @@
       <DependentUpon>ExperienceInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Globals\ConstraintsSQLStatementsClass.cs" />
-    <Compile Include="Globals\DomainSQLStatementsClass.cs" />
-    <Compile Include="Globals\ErrorCodes.cs" />
     <Compile Include="Globals\FormDesign.cs" />
-    <Compile Include="Globals\IndexSQLStatementsClass.cs" />
-    <Compile Include="Globals\SQLStatementsBase.cs" />
     <Compile Include="Globals\WorkerClass.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -449,8 +440,6 @@
     <Compile Include="XMLTree\XMLTreeForm.designer.cs">
       <DependentUpon>XMLTreeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globals\Constants.cs" />
-    <Compile Include="Globals\StaticFunctionsClass.cs" />
     <Compile Include="MiscClasses\AutocompleteClass.cs" />
     <Compile Include="ProgressClockForm.cs">
       <SubType>Form</SubType>
@@ -494,7 +483,6 @@
     <Compile Include="SonstForms\FBXInfo.Designer.cs">
       <DependentUpon>FBXInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataClasses\CreateDLLClass.cs" />
     <Compile Include="SonstForms\DatabaseConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,26 +490,10 @@
       <DependentUpon>DatabaseConfigForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\CommandClass.cs" />
-    <Compile Include="DataClasses\ConstraintsClass.cs" />
     <Compile Include="DataClasses\DatabaseinfoClass.cs" />
     <Compile Include="DataClasses\EncodingClass.cs" />
-    <Compile Include="DataClasses\ForgeignKeyClass.cs" />
-    <Compile Include="DataClasses\SQLStatements.cs" />
-    <Compile Include="DataClasses\TypesClass.cs" />
-    <Compile Include="Globals\AppSettingsClass.cs" />
-    <Compile Include="DataClasses\DataClassFactory.cs" />
-    <Compile Include="DataClasses\DataObjectClass.cs" />
     <Compile Include="DataClasses\DefaultClass.cs" />
     <Compile Include="DataClasses\DevelopmentClass.cs" />
-    <Compile Include="DataClasses\DomainClass.cs" />
-    <Compile Include="DataClasses\EnumClass.cs" />
-    <Compile Include="DataClasses\FunctionsClass.cs" />
-    <Compile Include="DataClasses\GeneratorClass.cs" />
-    <Compile Include="DataClasses\IndexClass.cs" />
-    <Compile Include="DataClasses\ProcedureClass.cs" />
-    <Compile Include="DataClasses\RoleClass.cs" />
-    <Compile Include="DataClasses\TriggerClass.cs" />
-    <Compile Include="DataClasses\TypeClass.cs" />
     <Compile Include="TableItemForms\ForeignKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -552,7 +524,6 @@
     <Compile Include="DBExplorer.Designer.cs">
       <DependentUpon>DBExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globals\DBRegistrationClass.cs" />
     <Compile Include="DesignReport\ReportDesignForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -592,19 +563,13 @@
       <DependentUpon>SelectDefaultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLView\SQLViewLastRunClass.cs" />
-    <Compile Include="Globals\DatabaseDefinitions.cs" />
     <Compile Include="Globals\StaticPaintClass.cs" />
-    <Compile Include="Globals\StaticTreeClass.cs" />
-    <Compile Include="Globals\StaticVariablesClass.cs" />
-    <Compile Include="DataClasses\TableClass.cs" />
-    <Compile Include="DataClasses\TableFieldClass.cs" />
     <Compile Include="TableItemForms\TableFieldForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TableItemForms\TableFieldForm.Designer.cs">
       <DependentUpon>TableFieldForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataClasses\ViewClass.cs" />
     <Compile Include="TableItemForms\TABLEManageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -633,6 +598,8 @@
     <None Include="Resources\augewatchoff_x24.png" />
     <None Include="Resources\help_about_blue_x16.png" />
     <None Include="Resources\nichts_x22.png" />
+    <None Include="Resources\sweep_bl24x1.png" />
+    <None Include="Resources\sweep_ge24x1.png" />
     <Content Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -640,7 +607,6 @@
     <None Include="Resources\preferences_system_blue_x24.png" />
     <None Include="Resources\view_insert_24x.png" />
     <None Include="Resources\Matrix.png" />
-    <None Include="FBXpert_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Resources\tree_expanded1_x24.png" />
     <EmbeddedResource Include="DesignDatabase\DesignerForm.resx">
