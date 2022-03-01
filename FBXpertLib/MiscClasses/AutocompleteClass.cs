@@ -1,10 +1,7 @@
 ﻿using FastColoredTextBoxNS;
-using FBExpertLib.DataClasses;
-using FBXpertLib.GetDatabaseObjects;
-using FBXpertLib.Globals;
 using System.Collections.Generic;
 
-namespace FBXpertLib.MiscClasses
+namespace FBXpertLib
 {
     public class AutocompleteClass
     {
@@ -354,9 +351,9 @@ namespace FBXpertLib.MiscClasses
         {
             //create autocomplete popup menu
          
-            actTables               = StaticTreeClass.Instance().GetAllNonSystemTableObjects(_dbReg);
-            actSystemTables         = StaticTreeClass.Instance().GetAllSystemTableObjects(_dbReg);
-            actViews                = StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            actTables               = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
+            actSystemTables         = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
+            actViews                = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
 
             _popupMenu = new AutocompleteMenu(_txtBox)
             {
@@ -500,9 +497,7 @@ namespace FBXpertLib.MiscClasses
             {
                 words.AddRange(DatabaseTables(actTables));
                 words.AddRange(DatabaseTableFields(actTables));
-            }
-
-            //if (systemtables != null) words.AddRange(DatabaseSystemTables(systemtables));                      
+            } 
         }
 
         public void AddAutocompleteForViews(Dictionary<string,ViewClass> views)
@@ -530,8 +525,26 @@ namespace FBXpertLib.MiscClasses
                 words.AddRange(DatabaseTables(actTables));            
                 words.AddRange(DatabaseTableFields(actTables));
             }
-                                   
         }
+
+        public void AddAutocompleteForTables(List<TableClass> tables)
+        {
+            if (tables != null)
+            {
+                actTables = new Dictionary<string, TableClass>();
+                foreach (var table in tables)
+                {
+                    actTables.Add(table.Name, table);
+                }
+            }
+
+            if (actTables != null)
+            {
+                words.AddRange(DatabaseTables(actTables));
+                words.AddRange(DatabaseTableFields(actTables));
+            }
+        }
+
         public void RefreshNewAutocompleteForTable(string tablename)
         {
             //create autocomplete popup menu

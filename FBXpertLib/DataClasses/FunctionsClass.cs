@@ -1,9 +1,9 @@
-﻿using FBExpertLib.DataClasses;
+﻿
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     /*
     public class FunctionClass : DataObjectClass

@@ -1,4 +1,3 @@
-using FBXpertLib.DataClasses;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -6,7 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 
-namespace Initialization
+namespace FBXpertLib
 {
     /// <summary>
     /// Zusammenfassende Beschreibung für Class

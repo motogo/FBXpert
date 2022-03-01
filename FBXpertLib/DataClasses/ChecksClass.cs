@@ -1,6 +1,6 @@
-﻿using FBExpertLib.DataClasses;
+﻿
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     public class ChecksClass : ConstraintsClass
     {

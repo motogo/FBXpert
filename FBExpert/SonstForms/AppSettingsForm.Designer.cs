@@ -104,6 +104,14 @@ namespace FBXpert.SonstForms
             this.hotSpot1 = new SeControlsLib.HotSpot();
             this.ofdFiles = new System.Windows.Forms.OpenFileDialog();
             this.fbdPath = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabPageMisc = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.hotSpot3 = new SeControlsLib.HotSpot();
+            this.pnlMiscCenter = new System.Windows.Forms.Panel();
+            this.hsWriteDefaultDatabaseConfig = new SeControlsLib.HotSpot();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.hotSpot4 = new SeControlsLib.HotSpot();
             this.pnlFormUpper.SuspendLayout();
             this.pnlCenter.SuspendLayout();
             this.tabControlFields.SuspendLayout();
@@ -142,6 +150,10 @@ namespace FBXpert.SonstForms
             this.gbDefaultPacketSize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDefaultPacketSize)).BeginInit();
             this.pnlDatabseDefaultsUpper.SuspendLayout();
+            this.tabPageMisc.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.pnlMiscCenter.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFormUpper
@@ -274,6 +286,7 @@ namespace FBXpert.SonstForms
             this.tabControlFields.Controls.Add(this.tabPageFieldEdit);
             this.tabControlFields.Controls.Add(this.tabSQLVariables);
             this.tabControlFields.Controls.Add(this.tabDatabaseDefaults);
+            this.tabControlFields.Controls.Add(this.tabPageMisc);
             this.tabControlFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlFields.Location = new System.Drawing.Point(0, 0);
             this.tabControlFields.Name = "tabControlFields";
@@ -1480,6 +1493,212 @@ namespace FBXpert.SonstForms
             this.hotSpot1.ToolTipTitleColor = System.Drawing.Color.Blue;
             this.hotSpot1.UseVisualStyleBackColor = false;
             // 
+            // tabPageMisc
+            // 
+            this.tabPageMisc.Controls.Add(this.pnlMiscCenter);
+            this.tabPageMisc.Controls.Add(this.panel1);
+            this.tabPageMisc.Location = new System.Drawing.Point(4, 23);
+            this.tabPageMisc.Name = "tabPageMisc";
+            this.tabPageMisc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMisc.Size = new System.Drawing.Size(923, 482);
+            this.tabPageMisc.TabIndex = 4;
+            this.tabPageMisc.Text = "Misc";
+            this.tabPageMisc.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.hotSpot3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(917, 50);
+            this.panel1.TabIndex = 2;
+            // 
+            // hotSpot3
+            // 
+            this.hotSpot3.BackColor = System.Drawing.Color.Transparent;
+            this.hotSpot3.BackColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot3.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot3.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hotSpot3.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hotSpot3.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hotSpot3.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hotSpot3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hotSpot3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hotSpot3.FlatAppearance.BorderSize = 0;
+            this.hotSpot3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hotSpot3.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hotSpot3.Image = global::FBXpert.Properties.Resources.view_refresh22x;
+            this.hotSpot3.ImageHover = global::FBXpert.Properties.Resources.view_refresh_2_22x;
+            this.hotSpot3.ImageToggleOnSelect = true;
+            this.hotSpot3.Location = new System.Drawing.Point(868, 0);
+            this.hotSpot3.Marked = false;
+            this.hotSpot3.MarkedColor = System.Drawing.Color.Teal;
+            this.hotSpot3.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hotSpot3.MarkedText = "";
+            this.hotSpot3.MarkMode = false;
+            this.hotSpot3.Name = "hotSpot3";
+            this.hotSpot3.NonMarkedText = "";
+            this.hotSpot3.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot3.ShortcutNewline = false;
+            this.hotSpot3.ShowShortcut = false;
+            this.hotSpot3.Size = new System.Drawing.Size(45, 46);
+            this.hotSpot3.TabIndex = 3;
+            this.hotSpot3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hotSpot3.ToolTipActive = false;
+            this.hotSpot3.ToolTipAutomaticDelay = 500;
+            this.hotSpot3.ToolTipAutoPopDelay = 5000;
+            this.hotSpot3.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hotSpot3.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hotSpot3.ToolTipFor4ContextMenu = true;
+            this.hotSpot3.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hotSpot3.ToolTipInitialDelay = 500;
+            this.hotSpot3.ToolTipIsBallon = false;
+            this.hotSpot3.ToolTipOwnerDraw = false;
+            this.hotSpot3.ToolTipReshowDelay = 100;
+            this.hotSpot3.ToolTipShowAlways = false;
+            this.hotSpot3.ToolTipText = "";
+            this.hotSpot3.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hotSpot3.ToolTipTitle = "";
+            this.hotSpot3.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hotSpot3.UseVisualStyleBackColor = false;
+            // 
+            // pnlMiscCenter
+            // 
+            this.pnlMiscCenter.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMiscCenter.Controls.Add(this.groupBox1);
+            this.pnlMiscCenter.Controls.Add(this.hsWriteDefaultDatabaseConfig);
+            this.pnlMiscCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMiscCenter.Location = new System.Drawing.Point(3, 53);
+            this.pnlMiscCenter.Name = "pnlMiscCenter";
+            this.pnlMiscCenter.Size = new System.Drawing.Size(917, 426);
+            this.pnlMiscCenter.TabIndex = 3;
+            // 
+            // hsWriteDefaultDatabaseConfig
+            // 
+            this.hsWriteDefaultDatabaseConfig.BackColor = System.Drawing.Color.Transparent;
+            this.hsWriteDefaultDatabaseConfig.BackColorHover = System.Drawing.Color.Transparent;
+            this.hsWriteDefaultDatabaseConfig.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hsWriteDefaultDatabaseConfig.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hsWriteDefaultDatabaseConfig.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hsWriteDefaultDatabaseConfig.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hsWriteDefaultDatabaseConfig.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hsWriteDefaultDatabaseConfig.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hsWriteDefaultDatabaseConfig.FlatAppearance.BorderSize = 0;
+            this.hsWriteDefaultDatabaseConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hsWriteDefaultDatabaseConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hsWriteDefaultDatabaseConfig.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hsWriteDefaultDatabaseConfig.Image = global::FBXpert.Properties.Resources.preferences_system_x24;
+            this.hsWriteDefaultDatabaseConfig.ImageHover = global::FBXpert.Properties.Resources.preferences_system_blue_x24;
+            this.hsWriteDefaultDatabaseConfig.ImageToggleOnSelect = true;
+            this.hsWriteDefaultDatabaseConfig.Location = new System.Drawing.Point(19, 21);
+            this.hsWriteDefaultDatabaseConfig.Marked = false;
+            this.hsWriteDefaultDatabaseConfig.MarkedColor = System.Drawing.Color.Teal;
+            this.hsWriteDefaultDatabaseConfig.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hsWriteDefaultDatabaseConfig.MarkedText = "";
+            this.hsWriteDefaultDatabaseConfig.MarkMode = false;
+            this.hsWriteDefaultDatabaseConfig.Name = "hsWriteDefaultDatabaseConfig";
+            this.hsWriteDefaultDatabaseConfig.NonMarkedText = "";
+            this.hsWriteDefaultDatabaseConfig.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hsWriteDefaultDatabaseConfig.ShortcutNewline = false;
+            this.hsWriteDefaultDatabaseConfig.ShowShortcut = false;
+            this.hsWriteDefaultDatabaseConfig.Size = new System.Drawing.Size(168, 58);
+            this.hsWriteDefaultDatabaseConfig.TabIndex = 2;
+            this.hsWriteDefaultDatabaseConfig.Text = "Write default Databaseconfig";
+            this.hsWriteDefaultDatabaseConfig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.hsWriteDefaultDatabaseConfig.ToolTipActive = false;
+            this.hsWriteDefaultDatabaseConfig.ToolTipAutomaticDelay = 500;
+            this.hsWriteDefaultDatabaseConfig.ToolTipAutoPopDelay = 5000;
+            this.hsWriteDefaultDatabaseConfig.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hsWriteDefaultDatabaseConfig.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hsWriteDefaultDatabaseConfig.ToolTipFor4ContextMenu = true;
+            this.hsWriteDefaultDatabaseConfig.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hsWriteDefaultDatabaseConfig.ToolTipInitialDelay = 500;
+            this.hsWriteDefaultDatabaseConfig.ToolTipIsBallon = false;
+            this.hsWriteDefaultDatabaseConfig.ToolTipOwnerDraw = false;
+            this.hsWriteDefaultDatabaseConfig.ToolTipReshowDelay = 100;
+            this.hsWriteDefaultDatabaseConfig.ToolTipShowAlways = false;
+            this.hsWriteDefaultDatabaseConfig.ToolTipText = "";
+            this.hsWriteDefaultDatabaseConfig.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hsWriteDefaultDatabaseConfig.ToolTipTitle = "";
+            this.hsWriteDefaultDatabaseConfig.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hsWriteDefaultDatabaseConfig.UseVisualStyleBackColor = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.hotSpot4);
+            this.groupBox1.Location = new System.Drawing.Point(208, 36);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(640, 52);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Config Path and File";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(3, 18);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(576, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "D:\\\\temp\\\\default.json";
+            // 
+            // hotSpot4
+            // 
+            this.hotSpot4.BackColor = System.Drawing.Color.Transparent;
+            this.hotSpot4.BackColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot4.BorderColorHover = System.Drawing.Color.Transparent;
+            this.hotSpot4.ContextMenuEdges = SeControlsLib.Edge.Center;
+            this.hotSpot4.ContextMenuXDirection = SeControlsLib.XDirection.Right;
+            this.hotSpot4.ContextMenuYDirection = SeControlsLib.YDirection.Down;
+            this.hotSpot4.DefaultButtonMode = SeControlsLib.BtnMode.Context;
+            this.hotSpot4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hotSpot4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.hotSpot4.FlatAppearance.BorderSize = 0;
+            this.hotSpot4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hotSpot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hotSpot4.HoverStyle = SeControlsLib.frameStyle.none;
+            this.hotSpot4.Image = global::FBXpert.Properties.Resources.folder_closed_22x;
+            this.hotSpot4.ImageHover = global::FBXpert.Properties.Resources.folder_open_22x;
+            this.hotSpot4.ImageToggleOnSelect = false;
+            this.hotSpot4.Location = new System.Drawing.Point(579, 18);
+            this.hotSpot4.Marked = false;
+            this.hotSpot4.MarkedColor = System.Drawing.Color.Teal;
+            this.hotSpot4.MarkedStyle = SeControlsLib.frameStyle.filled;
+            this.hotSpot4.MarkedText = "";
+            this.hotSpot4.MarkMode = false;
+            this.hotSpot4.Name = "hotSpot4";
+            this.hotSpot4.NonMarkedText = "...";
+            this.hotSpot4.Shortcut = BasicClassLibrary.Shortcut.None;
+            this.hotSpot4.ShortcutNewline = false;
+            this.hotSpot4.ShowShortcut = false;
+            this.hotSpot4.Size = new System.Drawing.Size(58, 31);
+            this.hotSpot4.TabIndex = 3;
+            this.hotSpot4.Text = "...";
+            this.hotSpot4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.hotSpot4.ToolTipActive = false;
+            this.hotSpot4.ToolTipAutomaticDelay = 500;
+            this.hotSpot4.ToolTipAutoPopDelay = 5000;
+            this.hotSpot4.ToolTipBackColor = System.Drawing.SystemColors.Info;
+            this.hotSpot4.ToolTipFont = new System.Drawing.Font("Comic Sans MS", 9F);
+            this.hotSpot4.ToolTipFor4ContextMenu = true;
+            this.hotSpot4.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.hotSpot4.ToolTipInitialDelay = 500;
+            this.hotSpot4.ToolTipIsBallon = false;
+            this.hotSpot4.ToolTipOwnerDraw = false;
+            this.hotSpot4.ToolTipReshowDelay = 100;
+            this.hotSpot4.ToolTipShowAlways = false;
+            this.hotSpot4.ToolTipText = "";
+            this.hotSpot4.ToolTipTextColor = System.Drawing.SystemColors.InfoText;
+            this.hotSpot4.ToolTipTitle = "";
+            this.hotSpot4.ToolTipTitleColor = System.Drawing.Color.Blue;
+            this.hotSpot4.UseVisualStyleBackColor = false;
+            // 
             // AppSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -1548,6 +1767,11 @@ namespace FBXpert.SonstForms
             this.gbDefaultPacketSize.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numDefaultPacketSize)).EndInit();
             this.pnlDatabseDefaultsUpper.ResumeLayout(false);
+            this.tabPageMisc.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.pnlMiscCenter.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1627,5 +1851,13 @@ namespace FBXpert.SonstForms
         private System.Windows.Forms.NumericUpDown numDefaultPacketSize;
         private System.Windows.Forms.GroupBox gbOpenDatabasesCount;
         private System.Windows.Forms.NumericUpDown numOpenDatabaseCount;
+        private System.Windows.Forms.TabPage tabPageMisc;
+        private System.Windows.Forms.Panel pnlMiscCenter;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private SeControlsLib.HotSpot hotSpot4;
+        private SeControlsLib.HotSpot hsWriteDefaultDatabaseConfig;
+        private System.Windows.Forms.Panel panel1;
+        private SeControlsLib.HotSpot hotSpot3;
     }
 }

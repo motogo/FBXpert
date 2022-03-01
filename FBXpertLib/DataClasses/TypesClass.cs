@@ -1,7 +1,6 @@
-﻿using FBExpertLib.DataClasses;
-using System;
+﻿using System;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
 
     public static class TypeConvert

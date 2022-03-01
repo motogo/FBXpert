@@ -35,8 +35,8 @@ namespace SQLView
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLViewForm1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFormUpper = new System.Windows.Forms.Panel();
             this.hsLifeTime = new SeControlsLib.HotSpot();
             this.bnConnection = new System.Windows.Forms.GroupBox();
@@ -674,7 +674,6 @@ namespace SQLView
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -700,7 +699,7 @@ namespace SQLView
             this.tsmiExecuteLastSucessfullCommand,
             this.tsmiInsertPK});
             this.cmsSQLText.Name = "cmsText";
-            this.cmsSQLText.Size = new System.Drawing.Size(249, 142);
+            this.cmsSQLText.Size = new System.Drawing.Size(249, 164);
             this.cmsSQLText.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsSQLText_ItemClicked);
             // 
             // tsmiDDLCopyToClipboard
@@ -1209,22 +1208,22 @@ namespace SQLView
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Khaki;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResults.AutoGenerateColumns = false;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.ContextMenuStrip = this.cmdDATA;
             this.dgvResults.DataSource = this.bsResults;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.EnableHeadersVisualStyles = false;
             this.dgvResults.Location = new System.Drawing.Point(3, 56);
@@ -2628,7 +2627,6 @@ namespace SQLView
             this.fctPlan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctPlan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctPlan.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctPlan.IsReplaceMode = false;
             this.fctPlan.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctPlan.LeftBracket = '(';
@@ -2711,7 +2709,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLData.AutoIndentCharsPatterns = "";
-            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLData.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXMLData.BackBrush = null;
             this.fctXMLData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLData.CharHeight = 14;
@@ -2720,7 +2718,6 @@ namespace SQLView
             this.fctXMLData.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLData.IsReplaceMode = false;
             this.fctXMLData.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLData.LeftBracket = '(';
@@ -3220,10 +3217,10 @@ namespace SQLView
             // 
             this.tabPageXMLScheme.Controls.Add(this.fctXMLScheme);
             this.tabPageXMLScheme.Controls.Add(this.pnlXMLSchemeUpper);
-            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 23);
+            this.tabPageXMLScheme.Location = new System.Drawing.Point(4, 22);
             this.tabPageXMLScheme.Name = "tabPageXMLScheme";
             this.tabPageXMLScheme.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 588);
+            this.tabPageXMLScheme.Size = new System.Drawing.Size(1580, 589);
             this.tabPageXMLScheme.TabIndex = 1;
             this.tabPageXMLScheme.Text = "XML-Schema";
             this.tabPageXMLScheme.UseVisualStyleBackColor = true;
@@ -3242,7 +3239,7 @@ namespace SQLView
         '\'',
         '\''};
             this.fctXMLScheme.AutoIndentCharsPatterns = "";
-            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctXMLScheme.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.fctXMLScheme.BackBrush = null;
             this.fctXMLScheme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.fctXMLScheme.CharHeight = 14;
@@ -3251,7 +3248,6 @@ namespace SQLView
             this.fctXMLScheme.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctXMLScheme.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctXMLScheme.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctXMLScheme.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctXMLScheme.IsReplaceMode = false;
             this.fctXMLScheme.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctXMLScheme.LeftBracket = '(';
@@ -3261,7 +3257,7 @@ namespace SQLView
             this.fctXMLScheme.RightBracket = ')';
             this.fctXMLScheme.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctXMLScheme.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fctXMLScheme.ServiceColors")));
-            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 534);
+            this.fctXMLScheme.Size = new System.Drawing.Size(1574, 535);
             this.fctXMLScheme.TabIndex = 9;
             this.fctXMLScheme.Zoom = 100;
             // 
@@ -3658,7 +3654,7 @@ namespace SQLView
         '\'',
         '\''};
             this.txtExperienceInfo.AutoIndentCharsPatterns = "";
-            this.txtExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtExperienceInfo.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.txtExperienceInfo.BackBrush = null;
             this.txtExperienceInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.txtExperienceInfo.CharHeight = 14;
@@ -3667,6 +3663,7 @@ namespace SQLView
             this.txtExperienceInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtExperienceInfo.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtExperienceInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtExperienceInfo.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.txtExperienceInfo.IsReplaceMode = false;
             this.txtExperienceInfo.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtExperienceInfo.LeftBracket = '(';

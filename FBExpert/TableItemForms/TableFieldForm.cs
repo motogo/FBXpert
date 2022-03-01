@@ -2,13 +2,12 @@
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
 using FBXpert;
+using FBXpert.Globals;
+using FBXpertLib;
 using StateClasses;
 using System;
 using System.Data.Common;
 using System.Windows.Forms;
-using FBXpert.Globals;
-using FBXpertLib.Globals;
-using FBExpertLib.DataClasses;
 
 namespace FBExpert
 {

@@ -1,14 +1,8 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBExpert;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using FormInterfaces;
 using System;
 using System.Collections.Generic;
@@ -19,29 +13,28 @@ namespace FBXpert
 {
     public partial class UserDefinedFunctionForm : IEditForm
     {
-        UserDefinedFunctionClass UserDefinedFunctionObject = null;
-        UserDefinedFunctionClass OldUserDefinedFunctionObject = null;
-        DBRegistrationClass _dbReg = null;
-        AutocompleteClass ac = null;
-        
-        NotifiesClass _localNotify = new NotifiesClass();
-        int messages_count = 0;
-        int error_count = 0;
+        private UserDefinedFunctionClass UserDefinedFunctionObject = null;
+        private UserDefinedFunctionClass OldUserDefinedFunctionObject = null;
+        private DBRegistrationClass _dbReg = null;
+        private AutocompleteClass ac = null;
+        private NotifiesClass _localNotify = new NotifiesClass();
+        private int messages_count = 0;
+        private int error_count = 0;
         
         public UserDefinedFunctionForm(Form parent, DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cm,StateClasses.EditStateClass.eBearbeiten mode)
         {
             InitializeComponent();
             this.MdiParent = parent;
-            
-            
+
             try
             {
                 BearbeitenMode = mode;
-               
                 if(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
-                {                    
-                    UserDefinedFunctionObject = new UserDefinedFunctionClass();
-                    UserDefinedFunctionObject.Name = "NEW_UserDefinedFunction";
+                {
+                    UserDefinedFunctionObject = new UserDefinedFunctionClass
+                    {
+                        Name = "NEW_UserDefinedFunction"
+                    };
                 }
                 else
                 {
@@ -57,7 +50,6 @@ namespace FBXpert
             _dbReg = dbReg;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
-            
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
@@ -69,7 +61,6 @@ namespace FBXpert
 
         private void Notify_OnRaiseErrorHandler(object sender, MessageEventArgs k)
         {
-           
             fctMessages.CurrentLineColor = System.Drawing.Color.Red;
             fctMessages.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} ERROR  {k.Meldung}");
             fctMessages.ScrollLeft();
@@ -77,13 +68,10 @@ namespace FBXpert
 
         public void MakeSQL()
         {                        
-            SQLScript = StaticTreeClass.Instance().MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject,OldUserDefinedFunctionObject,true);            
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject,OldUserDefinedFunctionObject,true);            
             SQLToUI(SQLScript);
             ShowCaptions();
-           
         }
-
-        
 
         public List<string> SQLScript = new List<string>();
 
@@ -95,8 +83,6 @@ namespace FBXpert
                fctSQL.AppendText(str + Environment.NewLine);
             }
         }
-
-        
 
         private void hsClose_Click(object sender, EventArgs e)
         {
@@ -132,6 +118,7 @@ namespace FBXpert
                 lvi.Tag = pci;
             }
         }
+        
         public void EditToData()
         {
             
@@ -180,6 +167,7 @@ namespace FBXpert
 
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;            
         }
+        
         private void hsSave_Click(object sender, EventArgs e)
         {            
             Create();

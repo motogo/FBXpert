@@ -1,13 +1,10 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBXpertLib.DataClasses;
-using FBXpertLib.GetDatabaseObjects;
-using FBXpertLib.Globals;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
 
     public class DefaultConnectionClass : ConnectionAttributes

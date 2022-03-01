@@ -2,13 +2,10 @@
 using BasicClassLibrary;
 using BasicForms;
 using FBExpert;
-using FBExpertLib.DataClasses;
 using FBXDesigns;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using Initialization;
 using MessageFormLibrary;
 using SELanguage;
@@ -80,14 +77,29 @@ namespace FBXpert
             
             LanguageClass.Instance.RegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
             NotificationsForm.Instance().SetMDIForm(this);
-
+            //SEMessageBox.ShowDialog("#FBXpert", $@"#FbXpertMainForm", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);
             string appfile = appSettingsFile;
             if (File.Exists(appfile))
             {
                 //AppSettingsClass.Instance.GetSettings(appfile);
-                AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
-                appset.Path = appfile;
-                AppSettingsClass.Instance.Load(appset);
+                try
+                {
+                    AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
+                    appset.Path = appfile;
+                    AppSettingsClass.Instance.Load(appset);
+                }
+                catch(Exception ex)
+                {
+                    if(SEMessageBox.ShowDialog( "#Load AppSettings", $@"#App Settings cannot be loaded, do you want to use default settings", FormStartPosition.CenterScreen, SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Exclamation) == SEDialogResult.Yes)
+                    {
+                        appfile = AppSettingsClass.Instance.SaveDefaultSettings();
+                        
+                        AppSettingsClass appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile)) as AppSettingsClass;
+                        appset.Path = appfile;
+                        AppSettingsClass.Instance.Load(appset);
+                    }
+
+                }
             }
             else
             {
@@ -260,7 +272,7 @@ namespace FBXpert
         private void FBXpertMainForm_Load(object sender, EventArgs e)
         {
             //   LanguageClass.Instance.InitEmbedded(this,"FBXpert.Languages","Language","de");
-            
+            //SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "#FBXpert", "#FBXpertMainForm_Load", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);
             ProgramAttributes.Instance.Init(System.Reflection.Assembly.GetExecutingAssembly());
             LanguageClass.Instance.InitFile(this.GetType().Assembly, $@"{ApplicationPathClass.Instance.ApplicationPath}\Languages\","Language",".","de");
             LanguageClass.Instance.OnRaiseLanguageExceptionHandler += FbXpertMainForm_OnRaiseLanguageExceptionHandler;
@@ -332,7 +344,8 @@ namespace FBXpert
             FormOnClosing = true;
             DatabaseDefinitions.Instance.SerializeCurrent("Definition data changed");
             LanguageClass.Instance.UnRegisterChangeNotifiy(FBXpertMainForm_OnRaiseLanguageChangedHandler);
-            Application.Exit();
+            
+          //  Application.Exit();
         }
 
         private void testMToolStripMenuItem_Click(object sender, EventArgs e)
@@ -349,6 +362,11 @@ namespace FBXpert
                
                 ApplicationHelp.Instance.ShowHelp(1);
             }
+        }
+
+        private void FbXpertMainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AppSettingsClass.Instance.SaveSettings(false);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FBXpert.Globals;
-using FBXpertLib.Globals;
+﻿using FBXpertLib;
 using System;
 using System.Text;
 using System.Windows.Forms;

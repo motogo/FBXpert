@@ -1,7 +1,7 @@
-﻿using FBExpertLib.DataClasses;
+﻿
 
-namespace FBXpertLib.DataClasses
-{
+namespace FBXpertLib
+{ 
     public class DependencyClass : DataObjectClass
     {
         public string DependOnName { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace FBXpertLib.Globals
+﻿namespace FBXpertLib
 {
 
     public static class SQLConstants

@@ -1,13 +1,9 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using FormInterfaces;
 using System;
 using System.Collections.Generic;
@@ -107,8 +103,8 @@ namespace FBXpert
         public void MakeSQL()
         {
             SQLScript = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) 
-                ? StaticTreeClass.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true)
-                : StaticTreeClass.Instance().MakeSQLCreateFunction(FunctionObject,true);
+                ? StaticDatabaseObjects.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true)
+                : StaticDatabaseObjects.Instance().MakeSQLCreateFunction(FunctionObject,true);
             
             SQLToUI(SQLScript);
             ShowCaptions();

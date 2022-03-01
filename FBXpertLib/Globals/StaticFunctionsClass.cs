@@ -1,12 +1,13 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
+using FBXpertLib.ValuesEditForms;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FBXpertLib.Globals
+namespace FBXpertLib
 {
     public class SqlStack
     {
@@ -360,19 +361,15 @@ namespace FBXpertLib.Globals
         public static void GetDatabases(ComboBox cbConnection, DBRegistrationClass regDB)
         {
             cbConnection.Items.Clear();
+            int inx = 0;
             foreach (var dbr in DatabaseDefinitions.Instance.Databases)
             {
                 cbConnection.Items.Add(dbr);
+                if(dbr.Alias == regDB.Alias) inx = cbConnection.Items.Count - 1;
             }
+            cbConnection.SelectedIndex = inx;
             
-            /*
-            if (FbXpertMainForm.Instance().ActRegistrationObject != null)
-            {
-                int n = cbConnection.FindString(regDB.ToString());
-                cbConnection.SelectedIndex = n;
-            }
-            */
-            if(cbConnection.SelectedIndex < 0 && cbConnection.Items.Count > 0)
+            if (cbConnection.SelectedIndex < 0 && cbConnection.Items.Count > 0)
             {
                 cbConnection.SelectedIndex = 0;
             }
@@ -424,13 +421,12 @@ namespace FBXpertLib.Globals
                 blob = BitConverter.GetBytes(((DateTime)v).Ticks);
                 typestr += "as Ticks (100ns)";
             }
-            /*
+            
             BlobEditForm bef = new BlobEditForm(typestr, $@"Field:{tableName}->{FieldName}");
             bef.SetBytes(blob);
             bef.ShowDialog();
             blob = null;
             GC.Collect();
-            */
         }
     }
 }

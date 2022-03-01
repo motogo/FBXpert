@@ -1,13 +1,11 @@
 ﻿using BasicClassLibrary;
-using FBExpertLib.DataClasses;
-using FBXpertLib.Globals;
 using SEListBox;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using static System.String;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     public enum eLogicalType {TEXT=0,NUMBER=1,POINTNUMBER=2,DATE=3,TIMESTAMP=4,NULLABLEPOINTER=5,BOOL=6,BINARY=7,NONE=8};
 

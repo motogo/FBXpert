@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
     public class DataObjectClass : ICloneable, IEnumerable
     {

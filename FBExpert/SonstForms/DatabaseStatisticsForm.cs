@@ -1,14 +1,12 @@
-﻿using FBExpert;
+﻿using FBXpert.Globals;
+using FBXpertLib;
+using Initialization;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using FBXpert.Globals;
 using System.Diagnostics;
 using System.IO;
-using Initialization;
-using FBXpertLib.Globals;
-using FBXpertLib;
+using System.Text;
+using System.Windows.Forms;
 
 namespace FBXpert
 {
@@ -107,7 +105,7 @@ namespace FBXpert
         }
         private void RefreshStatistics()
         {
-            List<string> data = StaticTreeClass.Instance().GetDatabaseStatistics(dbReg);
+            List<string> data = StaticDatabaseObjects.Instance().GetDatabaseStatistics(dbReg);
             rtbInfo.Clear();
             info.Clear();
             info.Append(pre);

@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBXpert", "FBExpert\FBXpert
 	ProjectSection(ProjectDependencies) = postProject
 		{6A096634-8C85-42B8-BA7E-88BFDDD49B1B} = {6A096634-8C85-42B8-BA7E-88BFDDD49B1B}
 		{D977B63B-BF1D-4586-B769-DC9D88F304B9} = {D977B63B-BF1D-4586-B769-DC9D88F304B9}
+		{B119D5B8-E396-4251-900D-14F848BC2557} = {B119D5B8-E396-4251-900D-14F848BC2557}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBDiagrammClass", "FBDiagrammLib\FBDiagrammClass\FBDiagrammClass.csproj", "{D977B63B-BF1D-4586-B769-DC9D88F304B9}"
@@ -260,8 +261,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
-		RESX_NeutralResourcesLanguage = de-DE
 		RESX_PrefixTranslations = False
+		RESX_NeutralResourcesLanguage = de-DE
+		SolutionGuid = {894ECD34-B955-44A9-8545-5735F67EF0E6}
 	EndGlobalSection
 EndGlobal

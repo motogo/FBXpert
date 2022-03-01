@@ -1,12 +1,11 @@
-﻿using FBXpertLib.DataClasses;
-using LiteDB;
+﻿using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     // Basic example
     public class History

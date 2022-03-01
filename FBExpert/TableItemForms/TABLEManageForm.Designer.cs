@@ -685,7 +685,7 @@ namespace FBExpert
             this.toolStripSeparator3,
             this.tsmiReadBLOB});
             this.cmdDATA.Name = "cmsText";
-            this.cmdDATA.Size = new System.Drawing.Size(189, 262);
+            this.cmdDATA.Size = new System.Drawing.Size(189, 284);
             this.cmdDATA.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmdDATA_ItemClicked);
             // 
             // tsmiSpaltenEdit
@@ -1266,7 +1266,6 @@ namespace FBExpert
             this.fctTableCreateDLL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctTableCreateDLL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctTableCreateDLL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctTableCreateDLL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctTableCreateDLL.IsReplaceMode = false;
             this.fctTableCreateDLL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctTableCreateDLL.LeftBracket = '(';
@@ -2423,14 +2422,14 @@ namespace FBExpert
             // 
             this.dataTable6.TableName = "Table";
             // 
-            // pnlDependenciesUpper
+            // pnlDependenciesFromUpper
             // 
             this.pnlDependenciesFromUpper.BackColor = System.Drawing.SystemColors.Control;
             this.pnlDependenciesFromUpper.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlDependenciesFromUpper.Controls.Add(this.hsRefreshDependenciesFrom);
             this.pnlDependenciesFromUpper.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDependenciesFromUpper.Location = new System.Drawing.Point(3, 3);
-            this.pnlDependenciesFromUpper.Name = "pnlDependenciesUpper";
+            this.pnlDependenciesFromUpper.Name = "pnlDependenciesFromUpper";
             this.pnlDependenciesFromUpper.Size = new System.Drawing.Size(1293, 43);
             this.pnlDependenciesFromUpper.TabIndex = 21;
             // 
@@ -2533,7 +2532,6 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -2683,7 +2681,6 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';

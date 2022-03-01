@@ -1,12 +1,9 @@
 ﻿using BasicClassLibrary;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using FormInterfaces;
 using MessageFormLibrary;
 using SEListBox;
@@ -54,15 +51,15 @@ namespace FBExpert
                              
             DBReg = drc;
             
-            var viewobjects = StaticTreeClass.Instance().GetViewObjects(DBReg);
-            var tableObjects = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
-            var domainObjects = StaticTreeClass.Instance().GetDomainObjects(DBReg);
-            var generatorObjects = StaticTreeClass.Instance().GetGeneratorObjects(DBReg);
-            var indecesObjects = StaticTreeClass.Instance().GetIndecesObjects(DBReg);
-            var triggerObjects = StaticTreeClass.Instance().GetTriggerObjects(DBReg);
-            //var procedureObjects = StaticTreeClass.Instance().GetAllProcedureObjects(DBReg);
-            var procedureObjects = StaticTreeClass.Instance().GetProcedureObjects(DBReg);
-            var functionObjects = StaticTreeClass.Instance().GetInternalFunctionObjects(DBReg);
+            var viewobjects = StaticDatabaseObjects.Instance().GetViewObjects(DBReg);
+            var tableObjects = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
+            var domainObjects = StaticDatabaseObjects.Instance().GetDomainObjects(DBReg);
+            var generatorObjects = StaticDatabaseObjects.Instance().GetGeneratorObjects(DBReg);
+            var indecesObjects = StaticDatabaseObjects.Instance().GetIndecesObjects(DBReg);
+            var triggerObjects = StaticDatabaseObjects.Instance().GetTriggerObjects(DBReg);
+            //var procedureObjects = StaticDatabaseObjects.Instance().GetAllProcedureObjects(DBReg);
+            var procedureObjects = StaticDatabaseObjects.Instance().GetProcedureObjects(DBReg);
+            var functionObjects = StaticDatabaseObjects.Instance().GetInternalFunctionObjects(DBReg);
             if (tableObjects.Count <= 0) return;
            
             foreach (var tc in tableObjects.Values)

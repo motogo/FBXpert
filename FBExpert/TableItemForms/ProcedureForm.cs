@@ -1,14 +1,9 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBExpert;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using FormInterfaces;
 using System;
 using System.Collections.Generic;
@@ -107,7 +102,7 @@ namespace FBXpert
         {            
             var SQLScript = new List<string>();
             SQLScript.Clear();            
-            SQLScript = StaticTreeClass.Instance().MakeSQLCreateProcedure(_procedureObject,true);
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLCreateProcedure(_procedureObject,true);
             SQLToUI(SQLScript);  
             return SQLScript.Count;
         }
@@ -125,7 +120,7 @@ namespace FBXpert
         {           
             var SQLScript = new List<string>();
             SQLScript.Clear();            
-            SQLScript = StaticTreeClass.Instance().MakeSQLAlterProcedure(_procedureObject,_procedureObjectOld, true);
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(_procedureObject,_procedureObjectOld, true);
             SQLToUI(SQLScript);
             return SQLScript.Count;
         }

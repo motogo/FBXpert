@@ -1,8 +1,4 @@
-﻿using FBExpertLib.DataClasses;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 

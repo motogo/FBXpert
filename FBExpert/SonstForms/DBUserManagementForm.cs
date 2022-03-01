@@ -2,16 +2,13 @@
 using BasicForms;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using MessageLibrary.SendMessages;
 using System;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 

@@ -1,6 +1,6 @@
 ﻿using BasicClassLibrary;
 using FBXpert.Globals;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using SEMessageBoxLibrary;
 using System;
 using System.ComponentModel;

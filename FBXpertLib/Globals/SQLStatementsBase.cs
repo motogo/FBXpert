@@ -1,9 +1,7 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 
-namespace FBXpertLib.SQLStatements
+namespace FBXpertLib
 {
     public class SQLStatementsBase
     {

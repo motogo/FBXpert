@@ -1,7 +1,6 @@
 ﻿using DBBasicClassLibrary;
 using FastReport.Data;
-using FBXpert.Globals;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using SEMessageBoxLibrary;
 using System;
@@ -9,7 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 
 namespace FBXpert.DesignReport
-{ 
+{
     public class ReportDesignClass
     {
 

@@ -2,14 +2,11 @@
 using DBBasicClassLibrary;
 using FBExpert;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXDesigns;
 using FBXpert.SonstForms;
 using FBXpert.SQLView;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
+using FBXpertLib.SQLView;
 using MessageFormLibrary;
 using SEMessageBoxLibrary;
 using SQLView;
@@ -83,7 +80,7 @@ namespace FBXpert
             int cnt = 0;
             foreach(TreeNode tn in treeView1.Nodes)
             {
-                DBRegistrationClass dbreg = (DBRegistrationClass) tn.Tag;
+                var dbreg = (DBRegistrationClass) tn.Tag;
                 if (dbreg.Active)
                 {
                     string connectionString = ConnectionStrings.Instance.MakeConnectionString(dbreg);
@@ -182,85 +179,85 @@ namespace FBXpert
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadIndex)
             {
-                StaticTreeClass.Instance().RefreshTableIndicesFromOneTable(_actRegNode, treeView1.SelectedNode);
+                StaticTreeNodesClass.Instance().RefreshTableIndicesFromOneTable(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllIndex)
             {
-                StaticTreeClass.Instance().RefreshAllIndicies(_actRegNode, treeView1.SelectedNode);
+                StaticTreeNodesClass.Instance().RefreshAllIndicies(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadConstraits)
             {
-                StaticTreeClass.Instance().RefreshConstraints(_actRegNode, treeView1.SelectedNode);
+                StaticTreeNodesClass.Instance().RefreshConstraints(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllConstraits)
             {
-                StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(_actRegNode, treeView1.SelectedNode);
+                StaticTreeNodesClass.Instance().RefreshConstraintsFromTableNodes(_actRegNode, treeView1.SelectedNode);
             }
             else if (k.Key.ToString() ==  StaticVariablesClass.ReloadGenerators)
             {
-                StaticTreeClass.Instance().RefreshGenerators(_actRegNode);
+                StaticTreeNodesClass.Instance().RefreshGenerators(_actRegNode);
             }            
             else if (k.Key.ToString() == StaticVariablesClass.ReloadProcedures)
             {
-                StaticTreeClass.Instance().RefreshProcedures(_actRegNode);
+                StaticTreeNodesClass.Instance().RefreshProcedures(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadFunctions)
             {
-                StaticTreeClass.Instance().RefreshInternalFunctions(_actRegNode);
+                StaticTreeNodesClass.Instance().RefreshInternalFunctions(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadDomains)
             {
-                StaticTreeClass.Instance().RefreshDomains(_actRegNode);
+                StaticTreeNodesClass.Instance().RefreshDomains(_actRegNode);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadViews)
             {
-                var regNode = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
+                var regNode = StaticTreeNodesClass.Instance().FindPrevDBNode(_tnSelected);
                 if (regNode != null)
                 {
                     var tn = k.Data as TreeNode;
-                    StaticTreeClass.Instance().RefreshView(regNode, tn);
+                    StaticTreeNodesClass.Instance().RefreshView(regNode, tn);
                 }
                 else if(_actRegNode != null)
                 {
-                    StaticTreeClass.Instance().RefreshAllViews(_actRegNode);
+                    StaticTreeNodesClass.Instance().RefreshAllViews(_actRegNode);
                 }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllViews)
             {
-                var nd = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
+                var nd = StaticTreeNodesClass.Instance().FindPrevDBNode(_tnSelected);
                 if (nd != null)
                 {
                     
                     NotificationsForm.Instance().Show(Width + 4, 40);
-                    StaticTreeClass.Instance().RefreshAllViews(nd);
+                    StaticTreeNodesClass.Instance().RefreshAllViews(nd);
                 }
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadTable)
             {                
-                var nd = StaticTreeClass.Instance().FindPrevTableNode(_tnSelected);
+                var nd = StaticTreeNodesClass.Instance().FindPrevTableNode(_tnSelected);
                 if(nd != null)
                 {
-                    StaticTreeClass.Instance().RefreshTable(_actRegNode, nd);
+                    StaticTreeNodesClass.Instance().RefreshTable(_actRegNode, nd);
                 }
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllTables)
             {
-                var nd = StaticTreeClass.Instance().FindPrevTableGroupNode(_tnSelected);
+                var nd = StaticTreeNodesClass.Instance().FindPrevTableGroupNode(_tnSelected);
                 if (nd != null)
                 {
                     NotificationsForm.Instance().Show();
-                    StaticTreeClass.Instance().RefreshNonSystemTables(nd);
+                    StaticTreeNodesClass.Instance().RefreshNonSystemTables(nd);
                 }
                 NotificationsForm.Instance().Hide();
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadForeignKeys)
-            {                
-                StaticTreeClass.Instance().RefreshForeignKeys4OneTable(_actRegNode, _tnSelected);
+            {
+                StaticTreeNodesClass.Instance().RefreshForeignKeys4OneTable(_actRegNode, _tnSelected);
             }
             else if (k.Key.ToString() == StaticVariablesClass.ReloadAllForeignKeys)
             {
-                StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(_actRegNode, _tnSelected);
+                StaticTreeNodesClass.Instance().RefreshForeignKeysFromTableNodes(_actRegNode, _tnSelected);
             }
         }
 
@@ -283,39 +280,39 @@ namespace FBXpert
                 _actSystemTables.Clear();
                 NotifiesClass.Instance.AddToINFO($@"Open Database {dbReg.Alias}");
                            
-                var tb = StaticTreeClass.Instance().RefreshNonSystemTables(regNode);
-                _actViews = StaticTreeClass.Instance().RefreshAllViews(regNode);
+                var tb = StaticTreeNodesClass.Instance().RefreshNonSystemTables(regNode);
+                _actViews = StaticTreeNodesClass.Instance().RefreshAllViews(regNode);
 
                 if (tb != null)
                 {
-                    _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(tb);
+                    _actTables = StaticTreeNodesClass.Instance().GetTableObjectsFromNode(tb);
                     if (_actTables != null)
                     {
-                        StaticTreeClass.Instance().RefreshDomains(regNode);
-                        StaticTreeClass.Instance().RefreshPrimaryKeysFromTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshForeignKeysFromTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshConstraintsFromTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshTriggersFromTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshAllIndicies(regNode, null);
-                        StaticTreeClass.Instance().RefreshDependenciesFromTableNodes(regNode);
-                        StaticTreeClass.Instance().RefreshProcedures(regNode);
-                        StaticTreeClass.Instance().RefreshInternalFunctions(regNode);
-                        StaticTreeClass.Instance().RefreshUserDefinedFunctions(regNode);
-                        StaticTreeClass.Instance().RefreshGenerators(regNode);
-                        StaticTreeClass.Instance().RefreshRoles(regNode);
+                        StaticTreeNodesClass.Instance().RefreshDomains(regNode);
+                        StaticTreeNodesClass.Instance().RefreshPrimaryKeysFromTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshForeignKeysFromTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshConstraintsFromTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshTriggersFromTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshAllIndicies(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshDependenciesFromTableNodes(regNode);
+                        StaticTreeNodesClass.Instance().RefreshProcedures(regNode);
+                        StaticTreeNodesClass.Instance().RefreshInternalFunctions(regNode);
+                        StaticTreeNodesClass.Instance().RefreshUserDefinedFunctions(regNode);
+                        StaticTreeNodesClass.Instance().RefreshGenerators(regNode);
+                        StaticTreeNodesClass.Instance().RefreshRoles(regNode);
                     }
                 }
 
-                var tbs = StaticTreeClass.Instance().RefreshSystemTables(regNode);
+                var tbs = StaticTreeNodesClass.Instance().RefreshSystemTables(regNode);
                 if (tbs != null)
                 {
-                    _actSystemTables = StaticTreeClass.Instance().GetSystemTableObjectsFromNode(tbs);
+                    _actSystemTables = StaticTreeNodesClass.Instance().GetSystemTableObjectsFromNode(tbs);
                     if (_actSystemTables != null)
                     {
-                        StaticTreeClass.Instance().RefreshSystemDomains(regNode);
-                        StaticTreeClass.Instance().RefreshPrimaryKeysFromSystemTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshSystemTriggersFromTableNodes(regNode, null);
-                        StaticTreeClass.Instance().RefreshAllSystemIndicies(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshSystemDomains(regNode);
+                        StaticTreeNodesClass.Instance().RefreshPrimaryKeysFromSystemTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshSystemTriggersFromTableNodes(regNode, null);
+                        StaticTreeNodesClass.Instance().RefreshAllSystemIndicies(regNode, null);
                     }
                 }
 
@@ -774,7 +771,7 @@ namespace FBXpert
             int cmsLeft = this.Left+this.Width+4;
             int cmsTop  = Cursor.Position.Y;
             var tnn = e.Node.Tag.GetType();
-            var t = StaticTreeClass.Instance().FindPrevDBNode(e.Node);
+            var t = StaticTreeNodesClass.Instance().FindPrevDBNode(e.Node);
 
             if (tnn == typeof(DBRegistrationClass))
             {                
@@ -1104,33 +1101,33 @@ namespace FBXpert
             
             if (!DatabaseDefinitions.Instance.IsRegistration(e.Node))
             {
-               _actRegNode = StaticTreeClass.Instance().FindPrevDBNode(_tnSelected);
+               _actRegNode = StaticTreeNodesClass.Instance().FindPrevDBNode(_tnSelected);
             }
         }
 
         public List<TableClass> GetActTableNode(TreeNode parent, string keyStr)
         {            
-            var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
-            return StaticTreeClass.Instance().GetTableObjectsFromNode(newActTableNode);
+            var newActTableNode = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
+            return StaticTreeNodesClass.Instance().GetTableObjectsFromNode(newActTableNode);
         }
         public List<ViewClass> GetActViewNode(TreeNode parent, string keyStr)
         {
-            var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
-            return StaticTreeClass.Instance().GetViewObjectsFromNode(newActTableNode);
+            var newActTableNode = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
+            return StaticTreeNodesClass.Instance().GetViewObjectsFromNode(newActTableNode);
         }
 
         public void SetActTableNode(TreeNode parent, string keyStr)
         {
-            var newActTableNode = StaticTreeClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
+            var newActTableNode = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(parent, keyStr);
             if (_actTableNode == newActTableNode) return;
-            _actTables = StaticTreeClass.Instance().GetTableObjectsFromNode(newActTableNode);
+            _actTables = StaticTreeNodesClass.Instance().GetTableObjectsFromNode(newActTableNode);
             _actTableNode = newActTableNode;
         }
 
         private void SqlExplorer(DBRegistrationClass drc, List<TableClass> actTables)
         {
             // var sf = new SQLViewForm1(drc, actTables, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);         
-            var drc2 = new FBXpertLib.Globals.DBRegistrationClass();
+            var drc2 = new DBRegistrationClass();
             drc2.Alias = drc.Alias;
             drc2.DatabasePath = drc.DatabasePath;
             drc2.ConnectionType = drc.ConnectionType;
@@ -1154,7 +1151,7 @@ namespace FBXpert
 
         private void cmsMainGroupItems_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {            
-            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1.SelectedNode);
             if (tnReg == null) return;
             if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
             
@@ -1397,7 +1394,7 @@ namespace FBXpert
         {
             if ((_tnSelected.Tag == null) || (string.IsNullOrEmpty(_tnSelected.Text))) return;
 
-            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1.SelectedNode);
                 
             if ((tnReg == null) || (!(tnReg.Tag is DBRegistrationClass dbReg))) return;
 
@@ -1532,7 +1529,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiEditConstraint)
             {                           
                 var constraintObject = _tnSelected.Tag as ConstraintsClass;
-                TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
+                TableClass tableObject = (TableClass)StaticTreeNodesClass.Instance().FindPrevTableNode(_tnSelected).Tag;
                 var cf = new ConstraintsForm(MdiParent, tableObject, _actTables,dbReg, constraintObject)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eEdit
@@ -1640,7 +1637,7 @@ namespace FBXpert
                     if (ri.commandDone)
                     {
                         fkc.IsActive = true;
-                        _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                        _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                     }
                     Application.DoEvents();
                 }                                
@@ -1785,7 +1782,7 @@ namespace FBXpert
                  else
                  {
                     tc.IsActive = true;
-                    _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                    _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                  }
                  Cursor = Cursors.Default;
                  Application.DoEvents();
@@ -1805,7 +1802,7 @@ namespace FBXpert
                  else
                  {
                     tc.IsActive = false;
-                    _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
+                    _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Inactive;
                  }
                  Cursor = Cursors.Default;
                  Application.DoEvents();
@@ -1820,13 +1817,13 @@ namespace FBXpert
                  if (ri.commandDone) 
                  {                   
                     tc.IsActive = false;
-                    _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
+                    _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Inactive;
                  }
                  var ria = IndexSQLStatementsClass.Instance.ActivateIndex(tc.Name,dbReg, NotifiesClass.Instance);
                  if (ria.commandDone) 
                  {                   
                     tc.IsActive = true;
-                    _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                    _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                  }
                  Cursor = Cursors.Default;
                  Application.DoEvents();                               
@@ -1879,7 +1876,7 @@ namespace FBXpert
 
         public void SearchInViews(TreeNode tnviews)
         {
-            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1.SelectedNode);
             if (tnReg == null) return;
             if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
 
@@ -1901,7 +1898,7 @@ namespace FBXpert
         }
         public void SearchInTables(TreeNode tntables)
         {
-            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1.SelectedNode);
             if (tnReg == null) return;
             if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
 
@@ -1930,7 +1927,7 @@ namespace FBXpert
 
         private void cmsGroup2Items_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {            
-            var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1.SelectedNode);
+            var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1.SelectedNode);
             if (tnReg == null) return;
             if (!(tnReg.Tag is DBRegistrationClass dbReg)) return;
 
@@ -1971,7 +1968,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiNewConstraint)
             {     
-                TableClass tableObject = (TableClass) StaticTreeClass.Instance().FindPrevTableNode(_tnSelected).Tag;
+                TableClass tableObject = (TableClass)StaticTreeNodesClass.Instance().FindPrevTableNode(_tnSelected).Tag;
                 var tmf = new ConstraintsForm(MdiParent,tableObject,_actTables, dbReg, null)
                 {
                     BearbeitenMode = EditStateClass.eBearbeiten.eInsert
@@ -2057,7 +2054,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiActivateAllIndeces)
             {
                 TreeNode nd = treeView1.SelectedNode;
-                var Index = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
+                var Index = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
                 int i = 0;
                 Cursor = Cursors.WaitCursor;
                 while(Index != null)
@@ -2071,7 +2068,7 @@ namespace FBXpert
                          if (ri.commandDone) 
                          {
                             inxObject.IsActive = true;
-                            _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                            _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                          }                         
                          Application.DoEvents();
                     }
@@ -2083,7 +2080,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiRecreateAllIndex)
             {
                 TreeNode nd = treeView1.SelectedNode;
-                var Index = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
+                var Index = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
                 int i = 0;
                 Cursor = Cursors.WaitCursor;
                 while(Index != null)
@@ -2097,13 +2094,13 @@ namespace FBXpert
                          if (ris.commandDone) 
                          {
                             inxObject.IsActive = false;
-                            _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
+                            _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Inactive;
                          }
                          var ria = IndexSQLStatementsClass.Instance.ActivateIndex(inxObject.Name,dbReg, NotifiesClass.Instance);
                          if (ria.commandDone) 
                          {
                             inxObject.IsActive = true;
-                            _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                            _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                          }                         
                          Application.DoEvents();
                     }
@@ -2115,7 +2112,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiDeactivateAllIndeces)
             {
                 TreeNode nd = treeView1.SelectedNode;
-                var Index = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
+                var Index = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.IndicesKeyStr);
                 int i = 0;
                 Cursor = Cursors.WaitCursor;
                 while(Index != null)
@@ -2129,7 +2126,7 @@ namespace FBXpert
                          if (ri.commandDone) 
                          {
                             inxObject.IsActive = false;
-                            _tnSelected.ForeColor = StaticTreeClass.Instance().Inactive;
+                            _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Inactive;
                          }                       
                          Application.DoEvents();
                     }
@@ -2141,7 +2138,7 @@ namespace FBXpert
             else if (e.ClickedItem == tsmiActivcateAllFK)
             {
                 TreeNode nd = treeView1.SelectedNode;
-                var FK = StaticTreeClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.ForeignKeyStr);
+                var FK = StaticTreeNodesClass.Instance().FindFirstNodeInAllNodes(nd, StaticVariablesClass.ForeignKeyStr);
                 int i = 0;
                 Cursor = Cursors.WaitCursor;
                 while (FK != null)
@@ -2155,7 +2152,7 @@ namespace FBXpert
                         if (ri.commandDone)
                         {
                             fkObject.IsActive = true;
-                            _tnSelected.ForeColor = StaticTreeClass.Instance().Active;
+                            _tnSelected.ForeColor = StaticDatabaseObjects.Instance().Active;
                         }
                         Application.DoEvents();
                     }
@@ -2175,7 +2172,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiExportAllProceduresScript)
             {
-                var allprocedures = StaticTreeClass.Instance().GetProcedureObjects(dbReg);
+                var allprocedures = StaticDatabaseObjects.Instance().GetProcedureObjects(dbReg);
                 var evs = new ExportProceduresScriptForm(MdiParent);
                 
                 evs.dbReg = dbReg;
@@ -2185,7 +2182,7 @@ namespace FBXpert
             }
             else if (e.ClickedItem == tsmiExportAllFunctionsScript)
             {
-                var allprocedures = StaticTreeClass.Instance().GetFunctionObjects(dbReg);
+                var allprocedures = StaticDatabaseObjects.Instance().GetFunctionObjects(dbReg);
                 var evs = new ExportFunctionsScriptForm(MdiParent);
                 
                 evs.dbReg = dbReg;
@@ -2330,21 +2327,21 @@ namespace FBXpert
                 {
                     case Keys.Up:
                     {
-                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
+                        var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
                         if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                             DatabaseDefinitions.Instance.MoveUp(treeView1);                    
                         break;
                     }
                     case Keys.Down:
                     {
-                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
+                        var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1?.SelectedNode);                                        
                         if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                             DatabaseDefinitions.Instance.MoveDown(treeView1);                    
                         break;
                     }
                     case Keys.O:
                     {                    
-                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                    
+                        var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1?.SelectedNode);                    
                         if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                         { 
                             cmsDatabase.Close();
@@ -2356,7 +2353,7 @@ namespace FBXpert
                     }
                     case Keys.C:
                     {
-                        var tnReg = StaticTreeClass.Instance().GetRegNode(treeView1?.SelectedNode);                   
+                        var tnReg = StaticTreeNodesClass.Instance().GetRegNode(treeView1?.SelectedNode);                   
                         if (DatabaseDefinitions.Instance.IsRegistration(tnReg))
                         {
                             CloseDatabase(tnReg);
@@ -2406,7 +2403,7 @@ namespace FBXpert
             if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "StartDefinitionChangeCaption", "StartDefinitionChange", FormStartPosition.CenterScreen, SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Question, null, p) != SEDialogResult.Yes) return;            
             AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = fi2.DirectoryName;
             AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = fi2.Name;
-            AppSettingsClass.Instance.SaveSettings();
+            AppSettingsClass.Instance.SaveSettings(false);
         }
        
         private void DbExplorerForm_SizeChanged(object sender, EventArgs e)
@@ -2421,7 +2418,8 @@ namespace FBXpert
 
         private void hsExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+
+            FbXpertMainForm.Instance().Close();
         }
 
         private void DbExplorerForm_Enter(object sender, EventArgs e)
@@ -2431,7 +2429,7 @@ namespace FBXpert
 
         private void DbExplorerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            AppSettingsClass.Instance.SaveSettings();
+           
         }
 
         private void hsGetOpenConnections_Click(object sender, EventArgs e)

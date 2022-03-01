@@ -1,8 +1,5 @@
-﻿using FBExpertLib.DataClasses;
-using FBXpert.Globals;
+﻿using FBXpert.Globals;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,14 +52,14 @@ namespace FBXpert.SonstForms
                     if (ckAlterProcedure.Checked)
                     {
                         string fna = Path.Combine(path, $@"{procedure.Name}_alter.sql");
-                        List<string> txt = StaticTreeClass.Instance().MakeSQLAlterProcedure(procedure,procedure, true);
+                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(procedure,procedure, true);
                         File.WriteAllLines(fna, txt);
                         progressBar1.Value++;
                     }
                     if (ckCreateProcedure.Checked)
                     {
                         string fnc = Path.Combine(path, $@"{procedure.Name}_create.sql");
-                        List<string> txt = StaticTreeClass.Instance().MakeSQLCreateProcedure(procedure, true);
+                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLCreateProcedure(procedure, true);
                         File.WriteAllLines(fnc, txt);
                         progressBar1.Value++;
                     }

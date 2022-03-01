@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows.Forms;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
     public enum eParameterTypDirection {din=1, dout=0 };
     public class ParameterClass : DomainClass

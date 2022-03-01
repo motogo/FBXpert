@@ -1,10 +1,9 @@
 ﻿using DBBasicClassLibrary;
-using FBXpertLib.DataClasses;
 using Initialization;
 using System;
 using System.Windows.Forms;
 
-namespace FBXpertLib.Globals
+namespace FBXpertLib
 {
     [Serializable]
     public class DBRegistrationClass : ConnectionAttributes

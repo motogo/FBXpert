@@ -1,9 +1,8 @@
 ﻿using BasicClassLibrary;
-using FBXpertLib.DataClasses;
 using Initialization;
 using System.Text;
 
-namespace FBXpertLib.Globals
+namespace FBXpertLib
 {
     public static class StaticVariablesClass
     {

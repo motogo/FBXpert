@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace FBXpert
+namespace FBXpertLib
 {
     public partial class SelectDefaultForm : Form
     {

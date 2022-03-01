@@ -1,8 +1,7 @@
-﻿using FBXpertLib.DataClasses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
     public class TableClass : DataObjectClass
     {

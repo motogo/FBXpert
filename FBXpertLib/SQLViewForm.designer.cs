@@ -2,7 +2,7 @@ using BasicForms;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace SQLView
+namespace FBXpertLib.SQLView
 {
     /// <summary>
     /// Zusammenfassende Beschreibung für WinForm

@@ -1,12 +1,8 @@
 using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
-using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.MiscClasses;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
@@ -20,7 +16,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-namespace SQLView
+namespace FBXpertLib.SQLView
 {
     /// <summary>
     /// Zusammenfassende Beschreibung für WinForm
@@ -39,7 +35,7 @@ namespace SQLView
                
         
         private readonly List<string> _obcmd = new List<string>();
-        List<TableClass> _tables = null;
+       
         eSort _lastSort = eSort.DESC;
         string lastSuccessfulCommand = string.Empty;
         string lastCommand = string.Empty;
@@ -541,8 +537,8 @@ namespace SQLView
         public void SetAutocompeteObjects()
         {
           
-            var tables = StaticTreeClass.Instance().GetAllNonSystemTableObjects(_dbrRegLocal);
-            var views = StaticTreeClass.Instance().GetViewObjects(_dbrRegLocal);
+            var tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbrRegLocal);
+            var views = StaticDatabaseObjects.Instance().GetViewObjects(_dbrRegLocal);
             ac = new AutocompleteClass(txtSQL, _dbRegOrg);
             ac.CreateAutocompleteForDatabase();
             ac.AddAutocompleteForSQL();

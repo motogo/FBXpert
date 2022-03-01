@@ -1,7 +1,6 @@
-﻿using FBXpertLib.DataClasses;
-using System;
+﻿using System;
 
-namespace FBXpertLib.SQLStatements
+namespace FBXpertLib
 {
 
     public class DomainSQLStatementsClass : SQLStatementsBase

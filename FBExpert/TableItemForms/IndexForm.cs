@@ -2,13 +2,8 @@
 using DBBasicClassLibrary;
 using Enums;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using System;
@@ -71,7 +66,7 @@ namespace FBXpert
             
             _tables = tables;
             
-            _tableObject = StaticTreeClass.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
+            _tableObject = StaticDatabaseObjects.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
             _orgTableObject = _tableObject;
             
             FillSortingToCombo();
@@ -102,7 +97,7 @@ namespace FBXpert
             
             _tables = tables;
             
-           // _tableObject = StaticTreeClass.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
+           // _tableObject = StaticDatabaseObjects.Instance().GetTableObjectForIndexForm(_dbReg, TableName);              
             _orgTableObject = _tableObject;
             
             FillSortingToCombo();

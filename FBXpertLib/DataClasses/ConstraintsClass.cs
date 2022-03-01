@@ -1,7 +1,6 @@
-﻿using FBExpertLib.DataClasses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     public class ConstraintsClass : DataObjectClass
     {

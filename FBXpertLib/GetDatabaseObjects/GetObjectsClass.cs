@@ -1,10 +1,6 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using Enums;
-using FBExpertLib.DataClasses;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
@@ -13,7 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Transactions;
 
-namespace FBXpertLib.GetDatabaseObjects
+namespace FBXpertLib
 {
 
     public static class GetTableFieldsInx

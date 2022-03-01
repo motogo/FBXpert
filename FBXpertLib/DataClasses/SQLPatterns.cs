@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FBXpertLib.SQLStatements
+namespace FBXpertLib
 {
     public static class SQLPatterns
     {

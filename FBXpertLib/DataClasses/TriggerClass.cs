@@ -1,7 +1,6 @@
-﻿using FBXpertLib.DataClasses;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
     public class TriggerClass : DataObjectClass
     {

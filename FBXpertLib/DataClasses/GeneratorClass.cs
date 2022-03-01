@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace FBExpertLib.DataClasses
+namespace FBXpertLib
 {
     public class GeneratorClass : DataObjectClass
     {

@@ -1,4 +1,4 @@
-﻿namespace FBExpertLib.DataClasses
+﻿namespace FBXpertLib
 {
     public class TypeClass : DataObjectClass
     {

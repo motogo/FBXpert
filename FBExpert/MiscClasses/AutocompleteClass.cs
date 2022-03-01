@@ -167,7 +167,7 @@ namespace FBXpert.MiscClasses
         public string[] DatabaseTableFields(string table)
         {
             var words = new List<string>();
-            var actTable = StaticTreeClass.Instance().GetTableObjectFromName(_dbReg, table);            
+            var actTable = StaticDatabaseObjects.Instance().GetTableObjectFromName(_dbReg, table);            
             foreach (var tcf in actTable.Fields.Values)
             {
                 words.Add(tcf.Name);
@@ -178,7 +178,7 @@ namespace FBXpert.MiscClasses
         public string[] DatabaseViewFields(string view)
         {
             var words = new List<string>();
-            var actViewFields = StaticTreeClass.Instance().GetViewFieldObjects(_dbReg, view);
+            var actViewFields = StaticDatabaseObjects.Instance().GetViewFieldObjects(_dbReg, view);
             foreach (var tcf in actViewFields.Values)
             {
                 words.Add(tcf.Name);
@@ -188,7 +188,7 @@ namespace FBXpert.MiscClasses
 
         public string[] DatabaseTableFields()
         {            
-            var actTables = StaticTreeClass.Instance().GetAllNonSystemTableObjects(_dbReg);
+            var actTables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
             return (DatabaseTableFields(actTables));
         }
         public string[] DatabaseTableFields(Dictionary<string,TableClass> actTables)
@@ -206,7 +206,7 @@ namespace FBXpert.MiscClasses
 
         public string[] DatabaseViewFields()
         {
-            var actViews = StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            var actViews = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
             return DatabaseViewFields(actViews);
         }
 
@@ -225,7 +225,7 @@ namespace FBXpert.MiscClasses
         
         public string[] DatabaseTables()
         {           
-            var actTables = StaticTreeClass.Instance().GetAllNonSystemTableObjects(_dbReg);
+            var actTables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
             return DatabaseTables(actTables);
         }
 
@@ -242,7 +242,7 @@ namespace FBXpert.MiscClasses
 
         public string[] DatabaseSystemTables()
         {           
-            var actTables = StaticTreeClass.Instance().GetAllSystemTableObjects(_dbReg);
+            var actTables = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
             return DatabaseSystemTables(actTables);
         }
 
@@ -259,7 +259,7 @@ namespace FBXpert.MiscClasses
 
         public string[] DatabaseSystemTableFields()
         {
-            var actSystemTables = StaticTreeClass.Instance().GetAllSystemTableObjects(_dbReg);
+            var actSystemTables = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
             return DatabaseSystemTableFields(actSystemTables);
         }
 
@@ -277,7 +277,7 @@ namespace FBXpert.MiscClasses
         }
         public string[] DatabaseViews()
         {            
-            var actViews = StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            var actViews = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
             return DatabaseViews(actViews);
         }
 
@@ -351,9 +351,9 @@ namespace FBXpert.MiscClasses
         {
             //create autocomplete popup menu
 
-            actTables             = StaticTreeClass.Instance().GetAllNonSystemTableObjects(_dbReg);
-            actSystemTables = StaticTreeClass.Instance().GetAllSystemTableObjects(_dbReg);
-            actViews               = StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            actTables             = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
+            actSystemTables     = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
+            actViews               = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
 
             _popupMenu = new AutocompleteMenu(_txtBox)
             {
@@ -404,8 +404,8 @@ namespace FBXpert.MiscClasses
                     actTables.Add(table.Name,table);
                 }
             }
-            actSystemTables = systemtables; // StaticTreeClass.Instance().GetSystemTableObjects(_dbReg);
-            actViews               = views; // StaticTreeClass.Instance().GetViewObjects(_dbReg);
+            actSystemTables = systemtables; // StaticDatabaseObjects.Instance().GetSystemTableObjects(_dbReg);
+            actViews               = views; // StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
             
             _popupMenu = new AutocompleteMenu(_txtBox)            
             {

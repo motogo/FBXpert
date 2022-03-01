@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace FBXpert.ValuesEditForms
+namespace FBXpertLib.ValuesEditForms
 {
     public partial class BlobEditForm : Form
     {

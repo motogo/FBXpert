@@ -1,11 +1,7 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBExpertLib.DataClasses;
 using FBXpert.SQLView;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using MessageFormLibrary;
 using System;
@@ -954,7 +950,7 @@ namespace FBXpert.DataClasses
             _allTableContent = new List<string>();         
             int n = 0;
            
-            var tlst = StaticTreeClass.Instance().GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);                                           
+            var tlst = StaticDatabaseObjects.Instance().GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);                                           
             _bgw.ReportProgress(n++, tlst);    
             
         }
@@ -983,7 +979,7 @@ namespace FBXpert.DataClasses
         {            
             var alltables = e.Argument as List<ViewClass>;
             _allViewContent = new List<string>();                       
-            var vlst = StaticTreeClass.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);            
+            var vlst = StaticDatabaseObjects.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);            
             if(vlst != null) _bgw.ReportProgress(1, vlst);
         }
 
@@ -1087,7 +1083,7 @@ namespace FBXpert.DataClasses
         {           
             var obj = e.Argument as Dictionary<string,PrimaryKeyClass>;
             _allPKConstraintsContent = new List<string>();            
-            var tlst = StaticTreeClass.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1135,7 +1131,7 @@ namespace FBXpert.DataClasses
 
             var obj = e.Argument as Dictionary<string,ForeignKeyClass>;
             _allFKConstraintsContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             if(tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
@@ -1182,7 +1178,7 @@ namespace FBXpert.DataClasses
         {            
             var allIndeces = e.Argument as Dictionary<string,IndexClass>;
             _allIndexContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1229,7 +1225,7 @@ namespace FBXpert.DataClasses
         {            
             var allTriggers = e.Argument as Dictionary<string,TriggerClass>;
             _allTriggerContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1276,7 +1272,7 @@ namespace FBXpert.DataClasses
         {            
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1323,7 +1319,7 @@ namespace FBXpert.DataClasses
         {            
             var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
             _allProcedureDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1371,7 +1367,7 @@ namespace FBXpert.DataClasses
         {            
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1418,7 +1414,7 @@ namespace FBXpert.DataClasses
         {            
             var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
             _allFunctionDefinitionContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1466,7 +1462,7 @@ namespace FBXpert.DataClasses
         {            
             var allDomain = e.Argument as Dictionary<string,DomainClass>;
             _allDomainContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1513,7 +1509,7 @@ namespace FBXpert.DataClasses
         {
             var allGenerator = e.Argument as Dictionary<string,GeneratorClass>;
             _allGeneratorContent = new List<string>();
-            var tlst = StaticTreeClass.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
             _bgw.ReportProgress(1, tlst);
         }
 

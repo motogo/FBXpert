@@ -1,7 +1,7 @@
 ﻿using Enums;
 using System;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
     public enum eAppType { Konfiguration = 0, Anwendung = 1 }
     public enum HistoryMode { NoHistory, AddToHistory };

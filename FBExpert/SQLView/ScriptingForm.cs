@@ -1,13 +1,8 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
-using FBExpert;
 using FBExpert.DataClasses;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using FirebirdSql.Data.FirebirdClient;
 using SEMessageBoxLibrary;
 using System;

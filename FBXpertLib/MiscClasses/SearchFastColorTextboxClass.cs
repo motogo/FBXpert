@@ -1,12 +1,8 @@
 ﻿using FastColoredTextBoxNS;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FBXpertLib.MiscClasses
+namespace FBXpertLib
 {
     public class SearchListItem
     {

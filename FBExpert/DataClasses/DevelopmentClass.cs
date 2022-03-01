@@ -1,8 +1,7 @@
-﻿using System;
+﻿using FBXpertLib;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using FBXpert.Globals;
-using FBXpertLib.Globals;
 
 namespace FBExpert.DataClasses
 {
@@ -19,7 +18,6 @@ namespace FBExpert.DataClasses
                 // lock (_lock_this)
                 {
                     _instance = new DevelopmentClass();
-
                 }
             }
             
@@ -28,11 +26,11 @@ namespace FBExpert.DataClasses
 
         public string CopyRight()
         {
-            return Application.ProductVersion + " Copyright " + Application.CompanyName + " 2017 " + Environment.MachineName;
+            return $@"{Application.ProductVersion} Copyright {Application.CompanyName} 2017 {Environment.MachineName}";
         }
         public string CopyRight(string formname)
         {
-            return formname + " " + Application.ProductVersion + " Copyright " + Application.CompanyName + " 2017 " + Environment.MachineName;
+            return $@"{formname} { Application.ProductVersion} Copyright {Application.CompanyName} 2017 {Environment.MachineName}";
         }
         public string GetComputername()
         {

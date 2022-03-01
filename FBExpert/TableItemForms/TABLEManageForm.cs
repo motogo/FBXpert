@@ -3,15 +3,10 @@ using BrightIdeasSoftware;
 using DBBasicClassLibrary;
 using Enums;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
@@ -240,8 +235,8 @@ namespace FBExpert
         private void hsClose_Click(object sender, EventArgs e)
         {
             if ((_dbReg != null) && (!string.IsNullOrEmpty(_tnSelected.Text)))
-            {                
-                StaticTreeClass.Instance().UpdateTableNodes(_tnSelected, _tableObject, _dbReg);                
+            {
+                StaticTreeNodesClass.Instance().UpdateTableNodes(_tnSelected, _tableObject, _dbReg);                
             }
             
             Close();
@@ -736,7 +731,7 @@ namespace FBExpert
                                 TableFieldClass tfc = new TableFieldClass();
                                 //string TabName = dread.GetValue(GetTableFieldsInx.TableNameInx).ToString().Trim();
                                 tfc.Name = dread.GetValue(GetTableFieldsInx.FieldNameInx).ToString().Trim();
-                                StaticTreeClass.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
+                                StaticDatabaseObjects.Instance().GetConstraintsObjectsForTable(eConstraintType.NOTNULL, _tableObject, _dbReg);
                                 tfc.Domain.Length = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldLengthInx).ToString().Trim(), 0);
                                 tfc.Domain.FieldType = dread.GetValue(GetTableFieldsInx.FieldTypeInx).ToString().Trim();
                                 tfc.Domain.SubTypeNumber = StaticFunctionsClass.ToIntDef(dread.GetValue(GetTableFieldsInx.FieldSubTypeInx).ToString().Trim(), 0);
@@ -1269,7 +1264,7 @@ namespace FBExpert
                 _tableObject.ForeignKeys.TryGetValue(SelectedFKConstraintName,out ForeignKeyClass uc);
                 _constraintObject = uc;
 
-                Dictionary<string,TableClass> allTables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
+                Dictionary<string,TableClass> allTables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
 
                 var _tables = new List<TableClass>();
                 foreach(var tab in allTables.Values)
@@ -2025,7 +2020,7 @@ namespace FBExpert
                 SpaltenEdit();
             }
             if (dgvResults.CurrentCell == null) return;
-            if (dgvResults.CurrentCell.Value.GetType() == typeof(System.DBNull)) return;
+          //  if (dgvResults.CurrentCell.Value.GetType() == typeof(System.DBNull)) return;
             if (e.ClickedItem == tsmiSetToNULL)
             {
                 dgvResults.BeginEdit(false);

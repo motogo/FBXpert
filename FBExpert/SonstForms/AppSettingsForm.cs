@@ -1,7 +1,6 @@
 ﻿using BasicClassLibrary;
 using FBXpert.Globals;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using System;
 using System.Windows.Forms;
 
@@ -100,7 +99,7 @@ namespace FBXpert.SonstForms
         private void SaveAppSettings()
         {
             EditToData();
-            AppSettingsClass.Instance.SaveSettings();
+            AppSettingsClass.Instance.SaveSettings(true);
         }
       
         private void hsSave_Click(object sender, EventArgs e)

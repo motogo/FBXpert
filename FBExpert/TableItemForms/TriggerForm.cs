@@ -2,12 +2,8 @@
 using DBBasicClassLibrary;
 using Enums;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
+using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using System;

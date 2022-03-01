@@ -2,14 +2,9 @@
 using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
 using FastColoredTextBoxNS;
-using FBExpert;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using Initialization;
 using SEListBox;
 using SEMessageBoxLibrary;
@@ -96,9 +91,9 @@ namespace FBXpert.SonstForms
         
         public void RefreshXml()
         {
-            _ddc.Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
-            _ddc.Views  = StaticTreeClass.Instance().GetViewObjects(_dbReg);
-            StaticTreeClass.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
+            _ddc.Tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
+            _ddc.Views  = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
+            StaticDatabaseObjects.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
             _ddc.Database = _dbReg;
             var fs = new FileStream(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml", FileMode.Create);
             var serializer = new ConfigurationContainer().Create();

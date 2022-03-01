@@ -1,12 +1,9 @@
 using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
-using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;

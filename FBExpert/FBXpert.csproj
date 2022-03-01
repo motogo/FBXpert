@@ -245,8 +245,8 @@
     <Compile Include="ExperienceInfos\ExperienceInfoForm.designer.cs">
       <DependentUpon>ExperienceInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals\FormDesign.cs" />
+    <Compile Include="Globals\StaticTreeNodesClass.cs" />
     <Compile Include="Globals\WorkerClass.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -271,7 +271,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="MiscClasses\SearchFastColorTextboxClass.cs" />
     <Compile Include="SonstForms\BinariesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -440,7 +439,6 @@
     <Compile Include="XMLTree\XMLTreeForm.designer.cs">
       <DependentUpon>XMLTreeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MiscClasses\AutocompleteClass.cs" />
     <Compile Include="ProgressClockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -492,7 +490,6 @@
     <Compile Include="DataClasses\CommandClass.cs" />
     <Compile Include="DataClasses\DatabaseinfoClass.cs" />
     <Compile Include="DataClasses\EncodingClass.cs" />
-    <Compile Include="DataClasses\DefaultClass.cs" />
     <Compile Include="DataClasses\DevelopmentClass.cs" />
     <Compile Include="TableItemForms\ForeignKeyForm.cs">
       <SubType>Form</SubType>
@@ -511,12 +508,6 @@
     </Compile>
     <Compile Include="TableItemForms\ProcedureForm.Designer.cs">
       <DependentUpon>ProcedureForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ValuesEditForms\DateTimeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ValuesEditForms\DateTimeForm.Designer.cs">
-      <DependentUpon>DateTimeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DBExplorer.cs">
       <SubType>Form</SubType>
@@ -556,13 +547,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValuesEditForms\SelectDefaultForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ValuesEditForms\SelectDefaultForm.Designer.cs">
-      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SQLView\SQLViewLastRunClass.cs" />
     <Compile Include="Globals\StaticPaintClass.cs" />
     <Compile Include="TableItemForms\TableFieldForm.cs">
       <SubType>Form</SubType>
@@ -771,9 +755,6 @@
     <EmbeddedResource Include="TableItemForms\ProcedureForm.resx">
       <DependentUpon>ProcedureForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ValuesEditForms\DateTimeForm.resx">
-      <DependentUpon>DateTimeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DBExplorer.resx">
       <DependentUpon>DBExplorer.cs</DependentUpon>
     </EmbeddedResource>
@@ -802,9 +783,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ValuesEditForms\SelectDefaultForm.resx">
-      <DependentUpon>SelectDefaultForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TableItemForms\TableFieldForm.resx">
       <DependentUpon>TableFieldForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1169,6 +1147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="config\" />
+    <Folder Include="MiscClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

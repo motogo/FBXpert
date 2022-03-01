@@ -1,5 +1,4 @@
-﻿using FBXpertLib.Globals;
-using Initialization;
+﻿using Initialization;
 using StateClasses;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,7 @@
 ﻿using BasicClassLibrary;
 using FastColoredTextBoxNS;
-using FBExpertLib.DataClasses;
 using FBXpert.Globals;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using SEListBox;
 using System;
 using System.Collections.Generic;
@@ -83,12 +80,12 @@ namespace FBXpert.SonstForms
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(db),
-                Views = StaticTreeClass.Instance().GetViewObjects(db)
+                Tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(db),
+                Views = StaticDatabaseObjects.Instance().GetViewObjects(db)
             };
-            var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
-            var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
-            var functions = StaticTreeClass.Instance().GetFunctionObjects(db);
+            var generators = StaticDatabaseObjects.Instance().GetGeneratorObjects(db);
+            var procedures = StaticDatabaseObjects.Instance().GetProcedureObjects(db);
+            var functions = StaticDatabaseObjects.Instance().GetFunctionObjects(db);
 
             slbDbObjects1.ClearItems();
             if (ddc.Tables != null)
@@ -136,13 +133,13 @@ namespace FBXpert.SonstForms
             var db = dbR.Clone();
             var ddc = new DatabaseDesignClass
             {
-                Tables = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(db),
-                Views = StaticTreeClass.Instance().GetViewObjects(db)
+                Tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(db),
+                Views = StaticDatabaseObjects.Instance().GetViewObjects(db)
             };
 
-            var generators = StaticTreeClass.Instance().GetGeneratorObjects(db);
-            var procedures = StaticTreeClass.Instance().GetProcedureObjects(db);
-            var functions = StaticTreeClass.Instance().GetFunctionObjects(db);
+            var generators = StaticDatabaseObjects.Instance().GetGeneratorObjects(db);
+            var procedures = StaticDatabaseObjects.Instance().GetProcedureObjects(db);
+            var functions = StaticDatabaseObjects.Instance().GetFunctionObjects(db);
 
             slbDbObjects2.ClearItems();
             if (ddc.Tables != null)

@@ -1,12 +1,10 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using Enums;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
 using System;
 using System.Text;
 
-namespace FBXpertLib.SQLStatements
+namespace FBXpertLib
 {
     public class ConstraintsSQLStatementsClass : SQLStatementsBase
     {

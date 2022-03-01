@@ -1,13 +1,8 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert.Globals;
-using FBXpert.MiscClasses;
 using FBXpertLib;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
-using FBXpertLib.SQLStatements;
 using FormInterfaces;
 using System;
 using System.Collections.Generic;
@@ -397,7 +392,7 @@ namespace FBXpert
             cbSourceTableFields.Items.Clear();
             if (SourceTableName.Length > 0)
             {
-                var DestFds = StaticTreeClass.Instance().GetTableObjectFromName(_dbReg, SourceTableName).Fields;
+                var DestFds = StaticDatabaseObjects.Instance().GetTableObjectFromName(_dbReg, SourceTableName).Fields;
                 foreach (TableFieldClass dstr in DestFds.Values)
                 {                    
                     cbSourceTableFields.Items.Add(dstr.Name);                    

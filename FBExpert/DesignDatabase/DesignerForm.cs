@@ -1,10 +1,8 @@
 ﻿using BasicClassLibrary;
 using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
-using FBExpertLib.DataClasses;
 using FBXpert.Globals;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using Initialization;
 using MessageLibrary.SendMessages;
 using SEListBox;

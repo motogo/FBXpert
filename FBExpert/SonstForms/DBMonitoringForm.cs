@@ -1,10 +1,8 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
-using FBXpert.DataClasses;
 using FBXpert.Globals;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Windows.Forms;

@@ -1,7 +1,5 @@
-﻿using FBExpertLib.DataClasses;
-using FBXpert.Globals;
-using FBXpertLib.DataClasses;
-using FBXpertLib.Globals;
+﻿using FBXpert.Globals;
+using FBXpertLib;
 using System;
 using System.Collections.Generic;
 using System.IO;

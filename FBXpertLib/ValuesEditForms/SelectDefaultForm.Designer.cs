@@ -1,4 +1,4 @@
-﻿namespace FBXpert
+﻿namespace FBXpertLib
 {
     partial class SelectDefaultForm
     {

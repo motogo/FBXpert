@@ -4,7 +4,7 @@ using DBBasicClassLibrary;
 using FBXpert.DesignReport;
 using FBXpert.Globals;
 using FBXpert.KonfigurationForms;
-using FBXpertLib.Globals;
+using FBXpertLib;
 using Initialization;
 using SEMessageBoxLibrary;
 using SharedStorages;

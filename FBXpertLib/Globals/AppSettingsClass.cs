@@ -1,9 +1,9 @@
-﻿using FBXpertLib.Globals;
-using Initialization;
+﻿using Initialization;
+using SEMessageBoxLibrary;
 using System;
 using System.IO;
 
-namespace FBXpertLib.DataClasses
+namespace FBXpertLib
 {
 
     public class BehavierSettingsClass
@@ -28,8 +28,6 @@ namespace FBXpertLib.DataClasses
     [Serializable]
     public class SQLVariablesClass
     {
-
-        
         public string InitialTerminator = StaticVariablesClass.InitialTerminator;
         public string AlternativeTerminator = StaticVariablesClass.AlternativeTerminator;
         public string SingleLineComment = StaticVariablesClass.SingleLineComment;
@@ -85,11 +83,7 @@ namespace FBXpertLib.DataClasses
     public sealed class AppSettingsClass
     {
         public string Path = string.Empty;
-        //private static readonly object _lock_this = new object();
-       // private static volatile AppSettingsClass instance = null;
-
-        
-
+      
         private static readonly Lazy<AppSettingsClass> lazy = new Lazy<AppSettingsClass>(() => new AppSettingsClass());
         public static AppSettingsClass Instance
         {
@@ -97,15 +91,8 @@ namespace FBXpertLib.DataClasses
             {
                 return lazy.Value;
             }
-            
         }
 
-        public void GetSettings(string appfile)
-        {
-            fastJSON.JSON.ToJSON(appfile);
-            //var appset = fastJSON.JSON.ToObject(File.ReadAllText(appfile));
-            //Load((AppSettingsClass)appset);
-        }
         public AppSettingsClass()
         {
             //CodeSettings = new CodeSettingsClass();
@@ -115,8 +102,6 @@ namespace FBXpertLib.DataClasses
             BehavierSettings = new BehavierSettingsClass();
             Stamp = DateTime.Now;
         }
-
-        
 
         public void Load(AppSettingsClass appSettings)
         {
@@ -150,7 +135,7 @@ namespace FBXpertLib.DataClasses
             */
         }
 
-        public void SaveSettings()
+        public void SaveSettings(bool showdialog)
         {
             fastJSON.JSON.Parameters.UseExtensions = true;
             AppSettingsClass appsetting = new AppSettingsClass();
@@ -170,12 +155,65 @@ namespace FBXpertLib.DataClasses
             appsetting.Path = this.Path;
             appsetting.Stamp = DateTime.Now;
             
+            
+            
+            if (string.IsNullOrEmpty(appsetting.Path))
+            {
+                appsetting.Path = $@"{ApplicationPathClass.Instance.ApplicationPath}\config\DefaultAppSettings.json";
+            }
             string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
-
-            File.WriteAllText(appsetting.Path, jsonText);
+            if (showdialog)
+            {
+                if (SEMessageBox.ShowDialog("#AppSettings", $@"#AppSettings write to:{appsetting.Path}", SEMessageBoxButtons.YesNo, SEMessageBoxIcon.Information) == SEDialogResult.Yes)
+                {
+                    File.WriteAllText(appsetting.Path, jsonText);
+                }
+            }
+            else
+            {
+                File.WriteAllText(appsetting.Path, jsonText);
+            }
             //File.WriteAllText("D:\\temp\\settings.json", jsonText);
         }
-        
+
+        public string SaveDefaultSettings()
+        {
+            fastJSON.JSON.Parameters.UseExtensions = true;
+            AppSettingsClass appsetting = new AppSettingsClass();
+
+            appsetting.PathSettings = this.PathSettings;
+            //appsetting.CodeSettings = this.CodeSettings;
+            appsetting.DatabaseSettings = this.DatabaseSettings;
+            appsetting.BehavierSettings = this.BehavierSettings;
+
+            appsetting.PathSettings.DatabasesConfigPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\data\";
+            appsetting.PathSettings.DatabaseConfigFile = $@"DatabaseDefinitions.xml";
+            appsetting.PathSettings.TempPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\temp\";
+            appsetting.PathSettings.ScriptingPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\scripts\";
+            appsetting.PathSettings.SQLHistoryPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\sqlhistroy\";
+            appsetting.PathSettings.InfoPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\info\";
+            appsetting.PathSettings.SQLExportPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\SQL\";
+            appsetting.PathSettings.ExportPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\export\";
+            appsetting.Path = $@"{ApplicationPathClass.Instance.ApplicationPath}\config\AppSettings.json";
+            appsetting.Stamp = DateTime.Now;
+
+
+            if (File.Exists(appsetting.Path))
+            {
+                if (SEMessageBox.ShowDialog("#AppSettings exists", $@"#Do you want to override exiosting Appsettings, may you loose information", SEMessageBoxButtons.YesNo, SEMessageBoxIcon.Information) == SEDialogResult.Yes)
+                {
+                    string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
+                    File.WriteAllText(appsetting.Path, jsonText);
+                }
+            }
+            else
+            {
+                string jsonText = fastJSON.JSON.ToNiceJSON(appsetting);
+                File.WriteAllText(appsetting.Path, jsonText);
+            }
+            return appsetting.Path;
+        }
+
 
         public DateTime Stamp;
         //public CodeSettingsClass CodeSettings;

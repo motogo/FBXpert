@@ -58,10 +58,10 @@ namespace FBXpert
             this.tsmiGerman = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiJapanese = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblLastLoadedDefinition = new System.Windows.Forms.Label();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAbout = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLastLoadedDefinition = new System.Windows.Forms.Label();
             this.mnuMain.SuspendLayout();
             this.cmsView.SuspendLayout();
             this.cmsNotifications.SuspendLayout();
@@ -99,6 +99,7 @@ namespace FBXpert
             this.toolStripSeparator1,
             this.tsmiExit});
             this.cmsView.Name = "contextMenuStrip1";
+            this.cmsView.OwnerItem = this.tsmiShowWindows;
             this.cmsView.Size = new System.Drawing.Size(142, 36);
             this.cmsView.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
@@ -129,6 +130,7 @@ namespace FBXpert
             this.tsmiNotes,
             this.tsmiErrors});
             this.cmsNotifications.Name = "contextMenuStrip1";
+            this.cmsNotifications.OwnerItem = this.tsmiNotifications;
             this.cmsNotifications.Size = new System.Drawing.Size(123, 48);
             this.cmsNotifications.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsNotifications_ItemClicked);
             // 
@@ -172,6 +174,7 @@ namespace FBXpert
             this.tsmiEnglish,
             this.tsmiJapanese});
             this.cmsUtilities.Name = "contextMenuStrip1";
+            this.cmsUtilities.OwnerItem = this.tsmiUtilities;
             this.cmsUtilities.Size = new System.Drawing.Size(190, 334);
             this.cmsUtilities.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip2_ItemClicked);
             // 
@@ -271,15 +274,6 @@ namespace FBXpert
             this.tsmiJapanese.Size = new System.Drawing.Size(189, 26);
             this.tsmiJapanese.Text = "Japanisch (TEST)";
             // 
-            // lblLastLoadedDefinition
-            // 
-            this.lblLastLoadedDefinition.AutoSize = true;
-            this.lblLastLoadedDefinition.Location = new System.Drawing.Point(486, 9);
-            this.lblLastLoadedDefinition.Name = "lblLastLoadedDefinition";
-            this.lblLastLoadedDefinition.Size = new System.Drawing.Size(117, 14);
-            this.lblLastLoadedDefinition.TabIndex = 5;
-            this.lblLastLoadedDefinition.Text = "lastLoadedDefintion";
-            // 
             // tsmiAbout
             // 
             this.tsmiAbout.DropDown = this.cmsAbout;
@@ -293,6 +287,7 @@ namespace FBXpert
             this.cmsAbout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiHelp});
             this.cmsAbout.Name = "contextMenuStrip1";
+            this.cmsAbout.OwnerItem = this.tsmiAbout;
             this.cmsAbout.Size = new System.Drawing.Size(100, 26);
             this.cmsAbout.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsAbout_ItemClicked);
             // 
@@ -301,6 +296,15 @@ namespace FBXpert
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(99, 22);
             this.tsmiHelp.Text = "Help";
+            // 
+            // lblLastLoadedDefinition
+            // 
+            this.lblLastLoadedDefinition.AutoSize = true;
+            this.lblLastLoadedDefinition.Location = new System.Drawing.Point(486, 9);
+            this.lblLastLoadedDefinition.Name = "lblLastLoadedDefinition";
+            this.lblLastLoadedDefinition.Size = new System.Drawing.Size(117, 14);
+            this.lblLastLoadedDefinition.TabIndex = 5;
+            this.lblLastLoadedDefinition.Text = "lastLoadedDefintion";
             // 
             // FbXpertMainForm
             // 
@@ -317,6 +321,7 @@ namespace FBXpert
             this.Text = "FBXpert";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FBXpertMainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FbXpertMainForm_FormClosed);
             this.Load += new System.EventHandler(this.FBXpertMainForm_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();

@@ -1,11 +1,9 @@
 ﻿using BasicClassLibrary;
 using DBBasicClassLibrary;
 using FBExpert.DataClasses;
-using FBExpertLib.DataClasses;
 using FBXpert;
 using FBXpert.Globals;
 using FBXpertLib;
-using FBXpertLib.Globals;
 using FormInterfaces;
 using SEListBox;
 using System;
@@ -46,7 +44,7 @@ namespace FBExpert
 
             DBReg = drc;
 
-            var tableObjects = StaticTreeClass.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
+            var tableObjects = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
 
             if (tableObjects.Count <= 0) return;
 

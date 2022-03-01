@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace FBXpertLib.Globals
+namespace FBXpertLib
 {
     public  class ErrorCodes
     {
