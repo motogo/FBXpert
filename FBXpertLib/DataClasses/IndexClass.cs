@@ -12,7 +12,7 @@ namespace FBXpertLib
         public string RelationName = string.Empty;
         public CheckState State = CheckState.Unchecked;
         public eSort SortDirection = eSort.NONE;
-        public Dictionary<string,FieldClass> RelationFields = new Dictionary<string,FieldClass>();
+        public Dictionary<string, FieldClass> RelationFields = new Dictionary<string, FieldClass>();
     }
     public class IndexGroupClass : DataObjectClass
     {

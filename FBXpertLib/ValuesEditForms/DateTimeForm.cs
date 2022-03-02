@@ -9,10 +9,10 @@ namespace FBXpertLib
         {
             InitializeComponent();
             Value = dt;
-           // this.MdiParent = parent;
+            // this.MdiParent = parent;
         }
 
-     
+
 
 
         public DateTime Value
@@ -54,7 +54,7 @@ namespace FBXpertLib
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

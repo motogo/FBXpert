@@ -1,7 +1,7 @@
 ﻿using BasicForms;
+using FBXpert;
 using System.Drawing;
 using System.Windows.Forms;
-using FBXpert;
 
 namespace FBExpert
 {
@@ -27,7 +27,7 @@ namespace FBExpert
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            if (!firsttab) 
+            if (!firsttab)
             {
                 e.Graphics.FillRectangle(controlBrush, frm.ClientRectangle);
                 firsttab = true;

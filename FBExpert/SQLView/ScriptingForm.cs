@@ -18,10 +18,10 @@ namespace FBXpert.SQLView
     {
         private DBRegistrationClass _actScriptingDbReg;
         private FileInfo _fi;
-        private string _lastDirectory;                     
+        private string _lastDirectory;
         private AutocompleteClass _ac;
-        
-        private readonly NotifiesClass _notifies = new NotifiesClass();     
+
+        private readonly NotifiesClass _notifies = new NotifiesClass();
         private DBBasicClassLibrary.SQLScriptingClass _sql = null;
 
         public ScriptingForm(DBRegistrationClass drc)
@@ -32,8 +32,8 @@ namespace FBXpert.SQLView
             _actScriptingDbReg = drc;
             _lastDirectory = AppSettingsClass.Instance.PathSettings.ScriptingPath;
             _notifies.Register4Info(FormMeldungRaised);
-            _notifies.Register4Error(FormErrorRaised);                   
-            
+            _notifies.Register4Error(FormErrorRaised);
+
             fcbSQL.Clear();
             fcbSQL.SelectionStart = 0;
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
@@ -49,9 +49,9 @@ namespace FBXpert.SQLView
             _lastDirectory = AppSettingsClass.Instance.PathSettings.ScriptingPath;
             _notifies.Register4Info(FormMeldungRaised);
             _notifies.Register4Error(FormErrorRaised);
-                     
-            fcbSQL.Clear();            
-            fcbSQL.SelectionStart = 0;           
+
+            fcbSQL.Clear();
+            fcbSQL.SelectionStart = 0;
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             foreach (string str in script)
@@ -60,7 +60,7 @@ namespace FBXpert.SQLView
                 {
                     if (str.EndsWith(Environment.NewLine))
                     {
-                       this.AppendSql(str);
+                        this.AppendSql(str);
                     }
                     else
                     {
@@ -70,17 +70,17 @@ namespace FBXpert.SQLView
                 else
                 {
                     this.AppendSql(Environment.NewLine);
-                }                
+                }
             }
         }
-                
+
         public void FormMeldungRaised(object sender, MessageEventArgs e)
         {
-           fcbNotify.AppendText(e.Meldung);
+            fcbNotify.AppendText(e.Meldung);
         }
         public void ScriptInfoRaised(object sender, MessageEventArgs e)
         {
-            if(e.Data.GetType() == typeof(SCRIPTCommandClass))
+            if (e.Data.GetType() == typeof(SCRIPTCommandClass))
             {
                 var sc = (SCRIPTCommandClass)e.Data;
                 fcbNotify.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} {e.Meldung}->{e.Key}->{sc.CommandType}->done in {sc.Costs} ms{Environment.NewLine}");
@@ -93,42 +93,42 @@ namespace FBXpert.SQLView
 
         public void EventMeldungRaised(object sender, MessageEventArgs e)
         {
-           if(e.Key.ToString() == StaticVariablesClass.CommandDone)
-           {
-               if(pbProgress.Value >= pbProgress.Maximum) pbProgress.Value = 0;
-               pbProgress.Value++;
-               lblGauge.Text = $@"Progress execute commands (done:{pbProgress.Value})";                               
-               Application.DoEvents();  
+            if (e.Key.ToString() == StaticVariablesClass.CommandDone)
+            {
+                if (pbProgress.Value >= pbProgress.Maximum) pbProgress.Value = 0;
+                pbProgress.Value++;
+                lblGauge.Text = $@"Progress execute commands (done:{pbProgress.Value})";
+                Application.DoEvents();
 
-               var cc = (DBBasicClassLibrary.SCRIPTCommandClass) e.Data;
-               ListViewItem lvi = lvCommands.FindItemWithText(cc.GUID);
-               if(lvi != null)
-               {
-                   lvi.SubItems[3].Text = cc.Costs.ToString();
-               }
-           }
-           else if(e.Key.ToString() == StaticVariablesClass.CommandPrepared)
-           {
-               var cdc = (DBBasicClassLibrary.SCRIPTCommandClass) e.Data;
-               string cmdtxt =  SQLCommand.RemoveNotNeccessaryCharsStatic(cdc.CommandText);
-               string[] cols = {cdc.GUID.ToString(),cmdtxt,cdc.CommandType.ToString(),"" };
-               ListViewItem lvi = new ListViewItem(cols);               
-               lvi.Text = cdc.GUID;
-               lvi.Tag = cdc;
-               lvCommands.Items.Add(lvi);    
-               lvCommands.Items[lvCommands.Items.Count - 1].EnsureVisible();
-               gbCommandsDone.Text = $@"Commands:{lvCommands.Items.Count}";
-           }
-           else if(e.Key.ToString() == StaticVariablesClass.AddCommandLine)
-           {                
-               pbProgress.Value++;
-               lblGauge.Text = $@"Progress prepare commands (done:{pbProgress.Value})";                               
-               Application.DoEvents();        
-           }           
+                var cc = (DBBasicClassLibrary.SCRIPTCommandClass)e.Data;
+                ListViewItem lvi = lvCommands.FindItemWithText(cc.GUID);
+                if (lvi != null)
+                {
+                    lvi.SubItems[3].Text = cc.Costs.ToString();
+                }
+            }
+            else if (e.Key.ToString() == StaticVariablesClass.CommandPrepared)
+            {
+                var cdc = (DBBasicClassLibrary.SCRIPTCommandClass)e.Data;
+                string cmdtxt = SQLCommand.RemoveNotNeccessaryCharsStatic(cdc.CommandText);
+                string[] cols = { cdc.GUID.ToString(), cmdtxt, cdc.CommandType.ToString(), "" };
+                ListViewItem lvi = new ListViewItem(cols);
+                lvi.Text = cdc.GUID;
+                lvi.Tag = cdc;
+                lvCommands.Items.Add(lvi);
+                lvCommands.Items[lvCommands.Items.Count - 1].EnsureVisible();
+                gbCommandsDone.Text = $@"Commands:{lvCommands.Items.Count}";
+            }
+            else if (e.Key.ToString() == StaticVariablesClass.AddCommandLine)
+            {
+                pbProgress.Value++;
+                lblGauge.Text = $@"Progress prepare commands (done:{pbProgress.Value})";
+                Application.DoEvents();
+            }
         }
 
         public void FormErrorRaised(object sender, MessageEventArgs e)
-        {            
+        {
             fcbNotify.AppendText($@"{e.Meldung}{ Environment.NewLine}");
         }
 
@@ -182,10 +182,10 @@ namespace FBXpert.SQLView
             TestOpen(_actScriptingDbReg);
             ShowCaptions();
             Anzeige();
-            SetFilesVibibilies();    
+            SetFilesVibibilies();
             tabScripting.SelectedTab = tabSQL;
-            
-            if(fcbSQL.Lines.Count > 0) fcbSQL.Enabled = true;
+
+            if (fcbSQL.Lines.Count > 0) fcbSQL.Enabled = true;
             hsRunSQLDirect.Enabled = false;
             hsPrepareCommands.Enabled = fcbSQL.LinesCount > 0;
             //  SEHotSpot.Controller.Instance().SetHookForm(this);
@@ -202,16 +202,16 @@ namespace FBXpert.SQLView
                 cbConnection.Items.Add(dbr);
             }
             if (FbXpertMainForm.Instance().ActRegistrationObject != null)
-            {                
-               int n = cbConnection.FindString(FbXpertMainForm.Instance().ActRegistrationObject.ToString());
-               cbConnection.SelectedIndex = n;
+            {
+                int n = cbConnection.FindString(FbXpertMainForm.Instance().ActRegistrationObject.ToString());
+                cbConnection.SelectedIndex = n;
             }
         }
-        
+
         public void ShowCaptions()
         {
             lblCaption.Text = "Scripting";
-            Text = DevelopmentClass.Instance().GetDBInfo(_actScriptingDbReg,"Scripting");
+            Text = DevelopmentClass.Instance().GetDBInfo(_actScriptingDbReg, "Scripting");
         }
 
         private void Save()
@@ -219,12 +219,12 @@ namespace FBXpert.SQLView
             sfSQL.InitialDirectory = _lastDirectory;
             if (sfSQL.ShowDialog() == DialogResult.OK)
             {
-                fcbSQL.SaveToFile(sfSQL.FileName,Encoding.UTF8);
+                fcbSQL.SaveToFile(sfSQL.FileName, Encoding.UTF8);
             }
         }
 
         private void hsSave_Click(object sender, EventArgs e)
-        {            
+        {
             Save();
         }
 
@@ -236,32 +236,32 @@ namespace FBXpert.SQLView
         private void LoadSingleFile()
         {
             ofdSQL.InitialDirectory = _lastDirectory;
-            if (ofdSQL.ShowDialog() != DialogResult.OK) return;            
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
             fcbSQL.Clear();
-            Cursor = Cursors.WaitCursor;            
+            Cursor = Cursors.WaitCursor;
             var fi = new FileInfo(ofdSQL.FileName);
             _lastDirectory = fi.DirectoryName;
             gbSQL.Text = fi.FullName;
-            
-            fcbSQL.BeginUpdate();                       
+
+            fcbSQL.BeginUpdate();
             fcbSQL.OpenFile(ofdSQL.FileName, Encoding.UTF8);
-            fcbSQL.EndUpdate();                
+            fcbSQL.EndUpdate();
             Cursor = Cursors.Default;
-            
-            Anzeige();            
+
+            Anzeige();
         }
 
         public void Anzeige()
         {
-           gbSQLText.Text = $@"SQL number of lines:{fcbSQL.Lines.Count}";
+            gbSQLText.Text = $@"SQL number of lines:{fcbSQL.Lines.Count}";
         }
-        
+
         public void BeginUpdate()
         {
             fcbSQL.BeginUpdate();
             fcbSQL.Enabled = false;
         }
-        
+
         public void EndUpdate()
         {
             fcbSQL.EndUpdate();
@@ -272,29 +272,29 @@ namespace FBXpert.SQLView
         {
             fcbSQL.AppendText(sql);
         }
-        
+
         public void ClearSql()
         {
             fcbSQL.Clear();
         }
-        
+
         private void hsMakeExecutableCommands_Click(object sender, EventArgs e)
-        {           
+        {
             if (lvFiles.Items.Count <= 0) return;
-                                    
+
             Cursor = Cursors.WaitCursor;
             foreach (ListViewItem lvi in lvFiles.SelectedItems)
             {
-                var fi = (FileInfo) lvi.Tag;
+                var fi = (FileInfo)lvi.Tag;
                 if (fi == null) continue;
-                gbSQL.Text = fi.FullName;                            
-                Application.DoEvents();                                
-                ExecuteCommandsFromFile(fi.FullName);                                
+                gbSQL.Text = fi.FullName;
+                Application.DoEvents();
+                ExecuteCommandsFromFile(fi.FullName);
             }
             Cursor = Cursors.Default;
-            Application.DoEvents();                    
+            Application.DoEvents();
         }
-                      
+
         private FbConnection CreateConnection(string sqlCmd, FbConnection fbConn)
         {
             /*
@@ -302,31 +302,31 @@ namespace FBXpert.SQLView
             */
             string sql = sqlCmd.ToUpper();
             string location = "D:\\Data\\test111.FDB";
-           
+
             string user = "SYSDBA";
             string password = "masterkey";
-                        
+
             int inx = sql.IndexOf("CONNECT ", StringComparison.Ordinal);
             if (inx >= 0)
             {
                 string cmd3 = sqlCmd.Substring(inx + 8);
                 int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
-                string arg  = cmd3.Substring(0, inx2);
+                string arg = cmd3.Substring(0, inx2);
 
                 int inx3 = arg.IndexOf(":\\", StringComparison.Ordinal);
                 int inx4 = arg.IndexOf(":", StringComparison.Ordinal);
                 if (inx4 < inx3)
                 {
                     //server
-                  
+
                     location = arg.Substring(inx4 + 1);
                     location = location.Replace("'", "");
                 }
                 else
                 {
                     //nur dateipfad
-                  
-                    location = arg.Replace("'", ""); 
+
+                    location = arg.Replace("'", "");
                 }
             }
 
@@ -336,16 +336,16 @@ namespace FBXpert.SQLView
                 var cmd3 = sqlCmd.Substring(inx + 5);
                 int inx2 = cmd3.IndexOf(" ", StringComparison.Ordinal);
                 var arg = cmd3.Substring(0, inx2);
-                user = arg.Replace("'", ""); 
+                user = arg.Replace("'", "");
             }
 
             inx = sql.IndexOf("PASSWORD ", StringComparison.Ordinal);
             if (inx >= 0)
             {
                 var cmd3 = sqlCmd.Substring(inx + 9);
-                
+
                 var arg = cmd3.Substring(0);
-                password = arg.Replace("'", ""); 
+                password = arg.Replace("'", "");
             }
 
             var drc = new DBRegistrationClass
@@ -374,7 +374,7 @@ namespace FBXpert.SQLView
 
         private FbConnection IsCreateDatabaseOrConnect(string cmd, FbConnection fbcon)
         {
-            
+
             FbConnection useCon = fbcon;
             string cmd1 = cmd.Trim();
 
@@ -391,89 +391,89 @@ namespace FBXpert.SQLView
             string cmd2 = cmd1.ToUpper();
             if (cmd2.StartsWith("CREATE DATABASE"))
             {
-                DBProviderSet.CreateDatabase(cmd1,null);
+                DBProviderSet.CreateDatabase(cmd1, null);
                 return useCon;
             }
-            else if(cmd2.StartsWith("CONNECT"))
+            else if (cmd2.StartsWith("CONNECT"))
             {
-                useCon = CreateConnection(cmd1,fbcon);
+                useCon = CreateConnection(cmd1, fbcon);
                 return useCon;
-            }           
+            }
             return null;
         }
-               
+
         private void RunSingleCommand(DBBasicClassLibrary.SCRIPTCommandClass command)
-        {            
+        {
             _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()}->{command.CommandType}->Executing");
             Application.DoEvents();
-            
+
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(ScriptInfoRaised);
             _sql.ScriptNotify.Register4Error(ScriptErrorRaised);
-            _sql.Commands.Clear();                                            
+            _sql.Commands.Clear();
             FbConnection fbConn = null;
             FbCommand fbCmd = null;
             bool connOpen = false;
-           
+
             if (_actScriptingDbReg.DatabasePath.Length > 0)
-            {              
+            {
                 try
                 {
                     fbConn = new FbConnection(_connstr);
                     fbConn.Open();
                     connOpen = fbConn.State == System.Data.ConnectionState.Open;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Enabled = false;                        
-                    object[] param = {ex.Message};
-                    SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExceptionCaption","ErrorWhileOpeningDatabase",  SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation,null,param);
+                    Enabled = false;
+                    object[] param = { ex.Message };
+                    SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DatabaseExceptionCaption", "ErrorWhileOpeningDatabase", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, param);
                     Enabled = true;
                     BringToFront();
                 }
-            }                
-            
+            }
+
             if (connOpen)
-            {      
+            {
                 var sw = new Stopwatch();
-                sw.Start();                                
-                FbConnection usedCon = IsCreateDatabaseOrConnect(command.CommandText,fbConn);
-                if(usedCon != null)
+                sw.Start();
+                FbConnection usedCon = IsCreateDatabaseOrConnect(command.CommandText, fbConn);
+                if (usedCon != null)
                 {
                     //Create database oder connect database
-                    fbConn = usedCon;                
+                    fbConn = usedCon;
                 }
                 else // kein create oder connect, voreingestellte connetion wird verwended
-                {                                       
+                {
                     fbCmd = new FbCommand(command.CommandText, fbConn);
-                    fbCmd.Transaction = fbConn.BeginTransaction();                                                                          
+                    fbCmd.Transaction = fbConn.BeginTransaction();
                     try
-                    {                                                                
-                        if(command.CommandType == SQLCommandType.commit)
+                    {
+                        if (command.CommandType == SQLCommandType.commit)
                         {
-                            fbCmd.Transaction.Commit();                       
+                            fbCmd.Transaction.Commit();
                         }
                         else
                         {
-                           fbCmd.ExecuteNonQuery(); 
-                           if(fbCmd.Transaction!= null) fbCmd.Transaction.Commit(); 
-                        }          
-                        
+                            fbCmd.ExecuteNonQuery();
+                            if (fbCmd.Transaction != null) fbCmd.Transaction.Commit();
+                        }
+
                     }
                     catch (Exception ex)
                     {
-                        if(fbCmd.Transaction != null)
+                        if (fbCmd.Transaction != null)
                         {
-                           fbCmd.Transaction.Rollback();                           
+                            fbCmd.Transaction.Rollback();
                         }
                         fbCmd.Transaction = null;
-                        _notifies?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"Command error {fbCmd.CommandText}", ex));                            
+                        _notifies?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"Command error {fbCmd.CommandText}", ex));
                     }
-                    
-                }                                                                                                                                 
+
+                }
                 if (connOpen) fbConn.Close();
-                sw.Stop();                                
+                sw.Stop();
                 Cursor = Cursors.Default;
                 _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()}->{command.CommandType}->done in {sw.ElapsedMilliseconds} ms");
                 Application.DoEvents();
@@ -484,21 +484,21 @@ namespace FBXpert.SQLView
                 Application.DoEvents();
             }
         }
-                              
+
         private void PrepareCommandsFromSQL()
-        {            
+        {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
-            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");            
+            _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             if (cbClearBeforePreparing.Checked)
-            {                               
+            {
                 lvCommands.Items.Clear();
             }
-            pbProgress.Maximum = fcbSQL.Lines.Count;;
+            pbProgress.Maximum = fcbSQL.Lines.Count; ;
             pbProgress.Minimum = 0;
             pbProgress.Value = 0;
-            _sql.PrepareCommands(fcbSQL.Lines,cbClearBeforePreparing.Checked);       
-            int clearAfter = StaticFunctionsClass.ToIntDef(txtClear.Text, 1000);                   
+            _sql.PrepareCommands(fcbSQL.Lines, cbClearBeforePreparing.Checked);
+            int clearAfter = StaticFunctionsClass.ToIntDef(txtClear.Text, 1000);
         }
         private void PrepareCommandsFromFile(string fn)
         {
@@ -516,47 +516,47 @@ namespace FBXpert.SQLView
         private void ExecuteCommandsFromFile(string filename)
         {
             var fi = new FileInfo(filename);
-            if(!fi.Exists) return;
-            
+            if (!fi.Exists) return;
+
             var content = new StringBuilder();
             _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} Prepare executing script in file {filename}");
-            Application.DoEvents();            
+            Application.DoEvents();
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_actScriptingDbReg);
             _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(EventMeldungRaised);
             _sql.Commands.Clear();
-                                                            
+
             int lineCount = 0;
             int clearAfter = StaticFunctionsClass.ToIntDef(txtClear.Text, 1000);
-                                             
+
             fcbCommands.Clear();
-            fcbCommands.BeginUpdate();            
+            fcbCommands.BeginUpdate();
             content.Clear();
             long mx = fi.Length / 20;
-            pbProgress.Maximum = (int) mx;
+            pbProgress.Maximum = (int)mx;
             pbProgress.Minimum = 0;
             pbProgress.Value = 0;
 
             using (var sr = new StreamReader(fi.FullName, Encoding.Default))
-            {  
-                if(pbProgress.Maximum >= pbProgress.Minimum) pbProgress.Value = 0;
+            {
+                if (pbProgress.Maximum >= pbProgress.Minimum) pbProgress.Value = 0;
                 var startDt = DateTime.Now;
                 while (!sr.EndOfStream)
                 {
-                    string str = sr.ReadLine();                                                               
+                    string str = sr.ReadLine();
                     bool cmdeady = _sql.AddCommandLine($@"{str}{Environment.NewLine}");
-                    if (!cmdeady) continue;                                        
+                    if (!cmdeady) continue;
                     lineCount++;
-                    var returnList =_sql.RunPreparedCommands();                                    
-                    _sql.Commands.Clear();                       
+                    var returnList = _sql.RunPreparedCommands();
+                    _sql.Commands.Clear();
                 }
-                fcbCommands.EndUpdate();                                        
-                Cursor = Cursors.Default;                
+                fcbCommands.EndUpdate();
+                Cursor = Cursors.Default;
                 _notifies?.AddToINFO($@"{StaticFunctionsClass.DateTimeNowStr()} Preparing done {lineCount.ToString()} commands");
                 Application.DoEvents();
-            }            
+            }
         }
-                                        
+
         private void cmsSQLText_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == tsmiDDLCopyToClipboard)
@@ -565,23 +565,23 @@ namespace FBXpert.SQLView
             }
             else if (e.ClickedItem == tsmiDDLPaste)
             {
-                if ((fcbSQL.SelectionStart < 0)||(fcbSQL.SelectionStart >= fcbSQL.Text.Length)) fcbSQL.Text = fcbSQL.Text.Insert(0, Clipboard.GetText());
-                else fcbSQL.Text =  fcbSQL.Text.Insert(fcbSQL.SelectionStart, Clipboard.GetText());
-            }            
-        }                       
+                if ((fcbSQL.SelectionStart < 0) || (fcbSQL.SelectionStart >= fcbSQL.Text.Length)) fcbSQL.Text = fcbSQL.Text.Insert(0, Clipboard.GetText());
+                else fcbSQL.Text = fcbSQL.Text.Insert(fcbSQL.SelectionStart, Clipboard.GetText());
+            }
+        }
 
         private void hsLoad_Click(object sender, EventArgs e)
         {
             ofdSQL.InitialDirectory = _lastDirectory;
             if (ofdSQL.ShowDialog() == DialogResult.OK)
             {
-               foreach(string fn in ofdSQL.FileNames)
-               {
+                foreach (string fn in ofdSQL.FileNames)
+                {
                     txtSQLLocation.Text = fn;
                     _fi = new FileInfo(fn);
-                    int fLength = (int) (_fi.Length / 1024);
+                    int fLength = (int)(_fi.Length / 1024);
                     txtFileSize.Text = fLength.ToString();
-                     StaticFunctionsClass.ToIntDef(txtFileSize.Text.Trim(), 0);
+                    StaticFunctionsClass.ToIntDef(txtFileSize.Text.Trim(), 0);
                     string[] obarr = { txtSQLLocation.Text, fLength.ToString() };
                     var lvi = new ListViewItem(obarr)
                     {
@@ -589,8 +589,8 @@ namespace FBXpert.SQLView
                     };
                     lvFiles.Items.Add(lvi);
                 }
-               
-               _lastDirectory = _fi.DirectoryName;
+
+                _lastDirectory = _fi.DirectoryName;
             }
         }
 
@@ -610,7 +610,7 @@ namespace FBXpert.SQLView
             if (lvFiles.SelectedItems.Count <= 0) return;
             lvFiles.SelectedItems[0].Remove();
         }
-       
+
         private void hsClearCmds_Click(object sender, EventArgs e)
         {
             fcbCommands.Clear();
@@ -622,10 +622,10 @@ namespace FBXpert.SQLView
         }
 
         private void hsPrepareCommands_Click(object sender, EventArgs e)
-        {                                 
+        {
             tabScripting.SelectedTab = tabPagePreparedCommands;
             PrepareCommandsFromSQL();
-            lvCommands.Items[0].Selected = true; 
+            lvCommands.Items[0].Selected = true;
         }
 
         private void txtSQLLocation_TextChanged(object sender, EventArgs e)
@@ -645,11 +645,11 @@ namespace FBXpert.SQLView
             if (lvFiles.SelectedItems.Count <= 0) return;
             var lvi = lvFiles.SelectedItems[0];
             if (lvi == null) return;
-            
+
             var fii = (FileInfo)lvi.Tag;
             txtSQLLocation.Text = fii.FullName;
         }
-       
+
         private void cbConnection_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (FormEvents.IsActive(this, "cbConnection_SelectedIndexChanged->" + ((Control)sender).Name.ToString()))
@@ -660,7 +660,7 @@ namespace FBXpert.SQLView
                 _ac = new AutocompleteClass(fcbSQL, _actScriptingDbReg);
                 _ac.RefreshAutocompleteForDatabase();
                 _ac.AssignToObject(fcbCommands);
-            }  
+            }
         }
 
         private void fcbSQL_KeyDown(object sender, KeyEventArgs e)
@@ -679,7 +679,7 @@ namespace FBXpert.SQLView
 
         private void tabScripting_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabScripting.SelectedTab == tabPageFiles)
+            if (tabScripting.SelectedTab == tabPageFiles)
             {
                 hsRunSQLDirect.Enabled = (lvFiles.SelectedItems.Count > 0);
                 hsPrepareCommands.Enabled = false;
@@ -700,36 +700,36 @@ namespace FBXpert.SQLView
 
         private void lvCommands_SelectedIndexChanged(object sender, EventArgs e)
         {
-           fcbCommands.Text = string.Empty;
-           if(lvCommands.SelectedItems.Count > 0)
-           {
-               //KeyValuePair<string,SCRIPTCommandClass> dc = (KeyValuePair<string,SCRIPTCommandClass>) lvCommands.SelectedItems[0].Tag;           
+            fcbCommands.Text = string.Empty;
+            if (lvCommands.SelectedItems.Count > 0)
+            {
+                //KeyValuePair<string,SCRIPTCommandClass> dc = (KeyValuePair<string,SCRIPTCommandClass>) lvCommands.SelectedItems[0].Tag;           
 
-               var dc =  (DBBasicClassLibrary.SCRIPTCommandClass) lvCommands.SelectedItems[0].Tag;         
-               fcbCommands.Text = dc.CommandText;
-           }
-           Application.DoEvents();
+                var dc = (DBBasicClassLibrary.SCRIPTCommandClass)lvCommands.SelectedItems[0].Tag;
+                fcbCommands.Text = dc.CommandText;
+            }
+            Application.DoEvents();
         }
 
         private void hsRunActualCommand_Click(object sender, EventArgs e)
         {
-            if(lvCommands.SelectedItems.Count > 0)
+            if (lvCommands.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvCommands.SelectedItems[0];
                 //var cc = (KeyValuePair<string,DBBasicClassLibrary.SCRIPTCommandClass>) lvi.Tag;
-                var cc = (DBBasicClassLibrary.SCRIPTCommandClass) lvi.Tag;
+                var cc = (DBBasicClassLibrary.SCRIPTCommandClass)lvi.Tag;
                 RunSingleCommand(cc);
             }
         }
 
         private void hsRunAllCommands_Click(object sender, EventArgs e)
-        {           
+        {
             pbProgress.Maximum = _sql.CommandsCount;
             pbProgress.Minimum = 0;
             pbProgress.Value = 0;
             _sql.ScriptNotify.Register4Info(ScriptInfoRaised);
             _sql.ScriptNotify.Register4Error(ScriptErrorRaised);
-            _sql.RunPreparedCommands();            
+            _sql.RunPreparedCommands();
         }
 
         private void hsRunSQLDirect_Click(object sender, EventArgs e)
@@ -743,7 +743,7 @@ namespace FBXpert.SQLView
             {
                 foreach (ListViewItem lvi in lvFiles.SelectedItems)
                 {
-                    
+
                     //var cc = (KeyValuePair<string,DBBasicClassLibrary.SCRIPTCommandClass>) lvi.Tag;
                     FileInfo fi = (FileInfo)lvi.Tag;
                     PrepareCommandsFromFile(fi.FullName);

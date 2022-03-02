@@ -22,7 +22,7 @@ namespace FBXpert
             InitializeComponent();
             rtbInfo.Rtf = "";
             dbReg = drc;
-            if(parent != null)
+            if (parent != null)
             {
                 this.MdiParent = parent;
             }
@@ -52,7 +52,7 @@ namespace FBXpert
 
         public void AddBold(string line)
         {
-            info.Append(@" \b " + line + @" \b0 ");            
+            info.Append(@" \b " + line + @" \b0 ");
         }
 
         public void AddNewLine()
@@ -78,7 +78,7 @@ namespace FBXpert
 
         public void SetFontSize(int sz)
         {
-            info.Append(@"\fs "+sz.ToString()+" ");
+            info.Append(@"\fs " + sz.ToString() + " ");
         }
 
         public void Set()
@@ -111,7 +111,7 @@ namespace FBXpert
             info.Append(pre);
             foreach (string str in data)
             {
-                 this.AddLine(str);
+                this.AddLine(str);
             }
             this.Set();
             this.SetTitle($@"Statistics for {dbReg.Alias}");
@@ -131,15 +131,15 @@ namespace FBXpert
         {
             fctTableStatistics.Clear();
             string args = $"-u SYSDBA -p masterkey -r -d {dbReg.DatabasePath}";
-            ProcessStartInfo psi = new ProcessStartInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\FB302\Firebird\gstat.exe",args);            
+            ProcessStartInfo psi = new ProcessStartInfo($@"{ApplicationPathClass.Instance.ApplicationPath}\FB302\Firebird\gstat.exe", args);
             psi.RedirectStandardOutput = true;
             psi.UseShellExecute = false;
-            
+
             Process ps = new Process();
             ps.StartInfo = psi;
             ps.Start();
             StreamReader reader = ps.StandardOutput;
-            string output = reader.ReadToEnd();       
+            string output = reader.ReadToEnd();
             fctTableStatistics.AppendText(output);
 
             ps.WaitForExit();

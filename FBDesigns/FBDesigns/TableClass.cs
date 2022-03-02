@@ -1,6 +1,4 @@
 ﻿using BasicClassLibrary;
-using MessageLibrary;
-using SEListBox;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,7 +10,7 @@ namespace FBXDesigns
 
     public class Shape
     {
-        [DllImport("user32.dll")]        
+        [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out Point lpPoint);
 
         public Point Location;
@@ -28,10 +26,10 @@ namespace FBXDesigns
     {
         public object StartObject;
         public object EndObject;
-       
+
     }
 
-   
+
     public class UIDesignTableClass : Shape
     {
         public static bool debug = false;
@@ -50,11 +48,11 @@ namespace FBXDesigns
         private ToolStripMenuItem _tsmiResize;
         private readonly ActionClass _action;
 
-        public NotifiesClass TableNotify = new NotifiesClass();       
+        public NotifiesClass TableNotify = new NotifiesClass();
         public Control PForm;
         public List<ReferenzClass> LineList = new List<ReferenzClass>();
-       
-        
+
+
 
         private void InitializeComponent()
         {
@@ -65,7 +63,7 @@ namespace FBXDesigns
             _pnlTableBottomRight = new Panel();
             _pnlTableCaption = new Panel();
             _txtCaption = new TextBox();
-                  
+
             _cmsTable = new ContextMenuStrip();
             _tsmiMinimize = new ToolStripMenuItem();
             _tsmiClose = new ToolStripMenuItem();
@@ -76,7 +74,7 @@ namespace FBXDesigns
             _pnlTableCenter.SuspendLayout();
             _pnlTableBottom.SuspendLayout();
             _pnlTableCaption.SuspendLayout();
-                    
+
             // 
             // gbTable
             // 
@@ -111,27 +109,27 @@ namespace FBXDesigns
             _lvTableAttributes.TabIndex = 0;
             _lvTableAttributes.UseCompatibleStateImageBehavior = false;
             _lvTableAttributes.View = View.Details;
-            _lvTableAttributes.MouseMove += Form_MouseMove;            
+            _lvTableAttributes.MouseMove += Form_MouseMove;
             _lvTableAttributes.MouseClick += PnlTableBottom_MouseClick;
-             System.Windows.Forms.ColumnHeader colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            System.Windows.Forms.ColumnHeader colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             colName.Text = "Attribute";
-            _lvTableAttributes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {colName});
-            
+            _lvTableAttributes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { colName });
+
 
 
             // 
             // pnlTableBottom
             // 
-            
+
             _pnlTableBottom.Dock = DockStyle.Bottom;
             _pnlTableBottom.Controls.Add(_pnlTableBottomRight);
             _pnlTableBottom.Location = new Point(3, 183);
-          
+
             _pnlTableBottom.Name = "_pnlTableBottom";
             _pnlTableBottom.Size = new Size(176, 12);
             _pnlTableBottom.TabIndex = 1;
             _pnlTableBottom.MouseMove += Form_MouseMove;
-          
+
 
             // 
             // pnlTableBottom
@@ -140,7 +138,7 @@ namespace FBXDesigns
             _pnlTableBottomRight.Dock = DockStyle.Right;
             _pnlTableBottomRight.Location = new Point(3, 183);
             _pnlTableBottomRight.BackColor = Color.Green;
-         
+
             _pnlTableBottomRight.Name = "_pnlTableBottom";
             _pnlTableBottomRight.Size = new Size(14, 12);
             _pnlTableBottomRight.TabIndex = 1;
@@ -152,7 +150,7 @@ namespace FBXDesigns
             // pnlTableCaption
             // 
             _pnlTableCaption.Controls.Add(_txtCaption);
-            
+
             _pnlTableCaption.Dock = DockStyle.Top;
             _pnlTableCaption.Location = new Point(3, 16);
             _pnlTableCaption.Name = "_pnlTableCaption";
@@ -195,7 +193,7 @@ namespace FBXDesigns
             // 
             // tsmiClose
             // 
-            _tsmiClose.Image =  Properties.Resources.cross_red_x16;
+            _tsmiClose.Image = Properties.Resources.cross_red_x16;
             _tsmiClose.ImageAlign = ContentAlignment.MiddleLeft;
             _tsmiClose.TextAlign = ContentAlignment.MiddleRight;
             _tsmiClose.Name = "_tsmiClose";
@@ -282,29 +280,29 @@ namespace FBXDesigns
                     break;
             }
         }
-               
+
         private void Table_MouseMove(object sender, MouseEventArgs e)
-        {            
+        {
             if (_action.hotspot == sender)
             {
                 switch (_action.action)
                 {
                     case eAction.OnMove:
-                    {
-                        if(debug) Debug.WriteLine("Table_MouseMove onmove");
-                        Point pt = GetCursorPosition();
-                        _action.DrawMoveRectangle(pt);
-                        //DrawMove(pt);
-                        break;
-                    }
+                        {
+                            if (debug) Debug.WriteLine("Table_MouseMove onmove");
+                            Point pt = GetCursorPosition();
+                            _action.DrawMoveRectangle(pt);
+                            //DrawMove(pt);
+                            break;
+                        }
                     case eAction.OnResize:
-                    {
-                        Point pt = GetCursorPosition();
+                        {
+                            Point pt = GetCursorPosition();
 
-                        if (debug) Debug.WriteLine("Table_MouseMove onresize");
-                        _action.DrawResize(pt);
-                        break;
-                    }
+                            if (debug) Debug.WriteLine("Table_MouseMove onresize");
+                            _action.DrawResize(pt);
+                            break;
+                        }
                 }
             }
         }
@@ -357,16 +355,16 @@ namespace FBXDesigns
 
 
         private void MinimizeTable(object sender)
-        {            
-            _action.tabletype = (eTableType) _tsmiMinimize.Tag;
+        {
+            _action.tabletype = (eTableType)_tsmiMinimize.Tag;
             _tsmiMinimize.Image = _action.tabletype == eTableType.Minimized ? Properties.Resources.quadrat_gn16x : Properties.Resources.minus_gn16x;
-                                                    
-            _action.crtl =  (Control) sender;
+
+            _action.crtl = (Control)sender;
             _action.mainctrl = _gbTable;
             _action.parent = PForm;
             _action.DrawTable();
         }
-        
+
         private void PickTable(object sender)
         {
             //Move Table     
@@ -379,8 +377,8 @@ namespace FBXDesigns
             _action.hotspot = _pnlTableBottomRight;
             _action.parent = PForm;
             _action.action = eAction.OnMove;
-            _action.hotspot.BackColor = Color.Red;            
-            _action.DrawMoveRectangleStart(pt);                                                          
+            _action.hotspot.BackColor = Color.Red;
+            _action.DrawMoveRectangleStart(pt);
         }
 
         private void PickTable()
@@ -391,12 +389,12 @@ namespace FBXDesigns
             _pnlTableBottomRight.MouseMove += Table_MouseMove;
             Point pt = GetCursorPosition();
 
-            _action.action = eAction.OnMove;            
+            _action.action = eAction.OnMove;
             _action.crtl = _pnlTableBottomRight;
             _action.mainctrl = _gbTable;
             _action.parent = PForm;
-            _action.hotspot = _pnlTableBottomRight;           
-            _action.hotspot.BackColor = Color.Red;                      
+            _action.hotspot = _pnlTableBottomRight;
+            _action.hotspot.BackColor = Color.Red;
             _action.DrawMoveRectangleStart(pt);
         }
 
@@ -411,9 +409,9 @@ namespace FBXDesigns
             _action.parent = PForm;
             _action.hotspot = _pnlTableBottomRight;
             _action.action = eAction.OnResize;
-            _action.GetAbsolutePoint();                                
+            _action.GetAbsolutePoint();
             _action.FixLeftRectangle(_gbTable.Location);
-            _action.DrawResizeRectangle(pt);                                              
+            _action.DrawResizeRectangle(pt);
         }
 
         public void SetZoom(float zoom)
@@ -422,7 +420,7 @@ namespace FBXDesigns
         }
 
         public float GetZoom()
-        {            
+        {
             return _action != null ? (_action.AbsolutZoom) : 1;
         }
 
@@ -431,7 +429,7 @@ namespace FBXDesigns
             if (debug) Debug.WriteLine("ResizeTable");
             TableNotify?.AddToINFO("", "ACT_TABLE", this);
             Point pt = GetCursorPosition();
-            
+
             _action.action = eAction.OnResize;
             _action.ClearLastRectangle();
             _action.DrawResizeStart(pt);
@@ -444,16 +442,16 @@ namespace FBXDesigns
                 _tsmiMinimize.Tag = (eTableType)_tsmiMinimize.Tag == eTableType.Minimized ? eTableType.Autosize : eTableType.Minimized;
                 MinimizeTable(sender);
             }
-            else if(e.ClickedItem == _tsmiResize)
-            {                
+            else if (e.ClickedItem == _tsmiResize)
+            {
                 ResizeTable();
             }
-            else if(e.ClickedItem == _tsmiMove)
+            else if (e.ClickedItem == _tsmiMove)
             {
-                PickTable(sender);               
+                PickTable(sender);
             }
         }
-        
+
         public void Show()
         {
             _action.Show();
@@ -464,19 +462,19 @@ namespace FBXDesigns
             ListViewItem lvi = new ListViewItem(name);
             _lvTableAttributes.Items.Add(lvi);
         }
-        
-        public UIDesignTableClass(Control frm, string name, bool show = true, int x=50, int y=50) 
+
+        public UIDesignTableClass(Control frm, string name, bool show = true, int x = 50, int y = 50)
         {
-            Location = new Point(x,y);
+            Location = new Point(x, y);
             Name = name;
-            _action = new ActionClass {parent = frm};
+            _action = new ActionClass { parent = frm };
             _action.SetAbsoluteOffset(_absoluteOffset);
 
-            _action.action = eAction.None;            
+            _action.action = eAction.None;
             PForm = frm;
             PForm.MouseMove += Form_MouseMove;
             PForm.MouseUp += Form_MouseUp;
-            
+
             InitializeComponent();
             _pnlTableBottomRight.MouseUp += Form_MouseUp;
             _pnlTableBottomRight.MouseMove += Table_MouseMove;
@@ -489,11 +487,11 @@ namespace FBXDesigns
             _gbTable.Top = y;
             _gbTable.Text = "";
             _txtCaption.Text = name;
-            
+
             _action.last_local_position = _gbTable.Location;
             _action.last_local_dimensions = _gbTable.Size;
             _action.DrawLastMove();
-            
+
             if (show)
             {
                 _action.Show();

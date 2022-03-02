@@ -14,24 +14,24 @@ namespace FBXpertLib
     public class DatabaseDefinitions : ApplicationPathClass
     {
         public string Reason;
-      
+
         private EditStateClass.eDataState _dataState = EditStateClass.eDataState.UnSaved;
         public EditStateClass.eDataState DataState
         {
             get
-            { 
+            {
                 return _dataState;
             }
             set
             {
                 _dataState = value;
-            }            
-        } 
+            }
+        }
 
-        public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();  
+        public List<DBRegistrationClass> Databases = new List<DBRegistrationClass>();
         private DatabaseDefinitions()
         {
-           
+
         }
 
         private static readonly Lazy<DatabaseDefinitions> lazy = new Lazy<DatabaseDefinitions>(() => new DatabaseDefinitions());
@@ -42,18 +42,18 @@ namespace FBXpertLib
                 return lazy.Value;
             }
         }
-        
+
         public void MarkDatabasesActiv(bool active)
-        {                        
+        {
             foreach (var datab in Databases)
-            {                   
+            {
                 datab.Active = active;
             }
         }
 
         public bool IsRegistration(TreeNode nd)
         {
-            if(nd?.Tag == null) return false;
+            if (nd?.Tag == null) return false;
             return (nd.Tag.GetType() == typeof(DBRegistrationClass));
         }
 
@@ -63,11 +63,11 @@ namespace FBXpertLib
             foreach (TreeNode tn in tv.Nodes)
             {
                 if (tn == null) continue;
-                if (!(tn.Tag is DBRegistrationClass dbReg)) continue;                 
-                DBRegistrationClass dbreg = (DBRegistrationClass) tn.Tag;
-                Databases.Add(dbreg);               
+                if (!(tn.Tag is DBRegistrationClass dbReg)) continue;
+                DBRegistrationClass dbreg = (DBRegistrationClass)tn.Tag;
+                Databases.Add(dbreg);
             }
-        }        
+        }
 
         public void MoveUp(TreeView treeView)
         {
@@ -115,15 +115,15 @@ namespace FBXpertLib
         public int CountToOpen()
         {
             int n = 0;
-            foreach(var db in Databases)
+            foreach (var db in Databases)
             {
-                if(db.Active) n++;
+                if (db.Active) n++;
             }
             return n;
         }
-        
+
         public bool Deserialize(string FileName)
-        {            
+        {
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(DatabaseDefinitions));
@@ -131,9 +131,9 @@ namespace FBXpertLib
                 var reader = new XmlTextReader(fs);
                 var PF = (DatabaseDefinitions)serializer.Deserialize(reader);
                 reader.Close();
-                this.XMLName = FileName;             
+                this.XMLName = FileName;
                 this.Databases = PF.Databases;
-         //       this.OpenDatabaseCount = PF.OpenDatabaseCount;
+                //       this.OpenDatabaseCount = PF.OpenDatabaseCount;
 
                 int pos = 1;
                 foreach (DBRegistrationClass dbr in this.Databases)
@@ -151,16 +151,16 @@ namespace FBXpertLib
                     */
                     dbr.Position = pos++;
                 }
-                
+
                 if (PF.Reason == null) PF.Reason = "none";
                 this.Reason = PF.Reason;
                 DataState = EditStateClass.eDataState.Saved;
-                                               
+
             }
-            catch(Exception ex)
-            {                
+            catch (Exception ex)
+            {
                 Debug.WriteLine(ex.Message);
-            //    SEMessageBox.ShowMDIDialog(this, "DatabaseConfigurationCaption","CannotLoadDatabaseConfiguration",SEMessageBoxButtons.OK,SEMessageBoxIcon.Exclamation,null,new object[]{ Environment.NewLine, FileName });                  
+                //    SEMessageBox.ShowMDIDialog(this, "DatabaseConfigurationCaption","CannotLoadDatabaseConfiguration",SEMessageBoxButtons.OK,SEMessageBoxIcon.Exclamation,null,new object[]{ Environment.NewLine, FileName });                  
                 return false;
             }
             finally
@@ -169,12 +169,12 @@ namespace FBXpertLib
             }
             return true;
         }
-            
+
         public void SerializeCurrent(string reason)
         {
             if (this.XMLName == null) return;
             //if (File.Exists(this.XMLName)) File.Delete(this.XMLName);
-            Stream writer = new FileStream(this.XMLName, FileMode.Create);                        
+            Stream writer = new FileStream(this.XMLName, FileMode.Create);
             var serializer = new XmlSerializer(typeof(DatabaseDefinitions));
             var q1 = new XmlQualifiedName("", "");
             XmlQualifiedName[] names = { q1 };
@@ -191,8 +191,8 @@ namespace FBXpertLib
         public void Serialize(string fn, string reason)
         {
             this.XMLName = fn;
-            SerializeCurrent(reason);            
+            SerializeCurrent(reason);
         }
-        
+
     }
 }

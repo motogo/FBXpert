@@ -8,7 +8,7 @@ namespace FBXpertLib
 {
     public class ConstraintsSQLStatementsClass : SQLStatementsBase
     {
-        
+
 
         private static readonly Lazy<ConstraintsSQLStatementsClass> lazy = new Lazy<ConstraintsSQLStatementsClass>(() => new ConstraintsSQLStatementsClass());
         public static ConstraintsSQLStatementsClass Instance
@@ -22,29 +22,29 @@ namespace FBXpertLib
 
         private ConstraintsSQLStatementsClass()
         {
-           
+
         }
 
-        
+
 
         public string GetConstraintsByTypeNotNull()
         {
             return GetConstraintsByTypeNotNull(Version);
         }
         public string GetConstraintsByTypeNotNull(eDBVersion version)
-        {                      
+        {
             var sb = new StringBuilder();
             sb.Append($@"select ");
-            sb.Append($@"rc.rdb$constraint_name,"); 
-            sb.Append($@"rc.rdb$constraint_type,"); 
-            sb.Append($@"rc.rdb$relation_name,"); 
-            sb.Append($@"rc.rdb$deferrable,"); 
-            sb.Append($@"rc.rdb$initially_deferred,"); 
+            sb.Append($@"rc.rdb$constraint_name,");
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
             sb.Append($@"rc.rdb$index_name,");
             sb.Append($@"cc.rdb$trigger_name,");
-            sb.Append($@"rfc.rdb$const_name_uq,"); 
-            sb.Append($@"rfc.rdb$match_option,"); 
-            sb.Append($@"rfc.rdb$update_rule,"); 
+            sb.Append($@"rfc.rdb$const_name_uq,");
+            sb.Append($@"rfc.rdb$match_option,");
+            sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
             sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
@@ -57,19 +57,19 @@ namespace FBXpertLib
             return GetConstraintsByTypeUnique(Version);
         }
         public string GetConstraintsByTypeUnique(eDBVersion version)
-        {            
+        {
             var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
-            sb.Append($@"rc.rdb$constraint_type,"); 
-            sb.Append($@"rc.rdb$relation_name,"); 
-            sb.Append($@"rc.rdb$deferrable,"); 
-            sb.Append($@"rc.rdb$initially_deferred,"); 
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
             sb.Append($@"rc.rdb$index_name,");
             sb.Append($@"ins.rdb$field_name,");
-            sb.Append($@"rfc.rdb$const_name_uq,"); 
-            sb.Append($@"rfc.rdb$match_option,"); 
-            sb.Append($@"rfc.rdb$update_rule,"); 
+            sb.Append($@"rfc.rdb$const_name_uq,");
+            sb.Append($@"rfc.rdb$match_option,");
+            sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
             sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
@@ -83,19 +83,19 @@ namespace FBXpertLib
             return GetConstraintsByTypePrimaryKey(Version);
         }
         public string GetConstraintsByTypePrimaryKey(eDBVersion version)
-        {            
-            var sb = new StringBuilder(); 
+        {
+            var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
-            sb.Append($@"rc.rdb$constraint_type,"); 
-            sb.Append($@"rc.rdb$relation_name,"); 
-            sb.Append($@"rc.rdb$deferrable,"); 
-            sb.Append($@"rc.rdb$initially_deferred,"); 
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
             sb.Append($@"rc.rdb$index_name,");
             sb.Append($@"ins.rdb$field_name,");
-            sb.Append($@"rfc.rdb$const_name_uq,"); 
-            sb.Append($@"rfc.rdb$match_option,"); 
-            sb.Append($@"rfc.rdb$update_rule,"); 
+            sb.Append($@"rfc.rdb$const_name_uq,");
+            sb.Append($@"rfc.rdb$match_option,");
+            sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
             sb.Append($@"LEFT JOIN rdb$check_constraints cc ON cc.rdb$constraint_name = rc.rdb$constraint_name ");
@@ -111,8 +111,8 @@ namespace FBXpertLib
         }
         public string GetTableConstraintsByType(eDBVersion version, string ContraintsType, string TableName)
         {
-            
-            var sb = new StringBuilder(); 
+
+            var sb = new StringBuilder();
             /*
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,"); 
@@ -156,15 +156,15 @@ namespace FBXpertLib
             return GetAllTableConstraintsByTypeNonSystemTables(Version, ContraintsType);
         }
         public string GetAllTableConstraintsByTypeNonSystemTables(eDBVersion version, eConstraintType ContraintsType)
-        {            
-            
-            var sb = new StringBuilder(); 
+        {
+
+            var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
-            sb.Append($@"rc.rdb$constraint_type,"); 
-            sb.Append($@"rc.rdb$relation_name,"); 
-            sb.Append($@"rc.rdb$deferrable,"); 
-            sb.Append($@"rc.rdb$initially_deferred,"); 
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
             sb.Append($@"rc.rdb$index_name,");
             sb.Append($@"cc.rdb$trigger_name,");
             sb.Append($@"rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule,");
@@ -223,19 +223,19 @@ namespace FBXpertLib
             return sb.ToString();
         }
         public string GetAllTableConstraintsByTypeSystemTables(eDBVersion version, eConstraintType ContraintsType)
-        {            
-            var sb = new StringBuilder();  
+        {
+            var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
-            sb.Append($@"rc.rdb$constraint_type,"); 
-            sb.Append($@"rc.rdb$relation_name,"); 
-            sb.Append($@"rc.rdb$deferrable,"); 
-            sb.Append($@"rc.rdb$initially_deferred,"); 
+            sb.Append($@"rc.rdb$constraint_type,");
+            sb.Append($@"rc.rdb$relation_name,");
+            sb.Append($@"rc.rdb$deferrable,");
+            sb.Append($@"rc.rdb$initially_deferred,");
             sb.Append($@"rc.rdb$index_name,");
             sb.Append($@"cc.rdb$trigger_name,");
             sb.Append($@"rfc.rdb$const_name_uq,");
-            sb.Append($@"rfc.rdb$match_option,"); 
-            sb.Append($@"rfc.rdb$update_rule,"); 
+            sb.Append($@"rfc.rdb$match_option,");
+            sb.Append($@"rfc.rdb$update_rule,");
             sb.Append($@"rfc.rdb$delete_rule,");
             sb.Append($@"inx.rdb$field_name,inx.rdb$field_position ");
             sb.Append($@"from rdb$relation_constraints rc ");
@@ -251,8 +251,8 @@ namespace FBXpertLib
             return GetSystemTableConstraintsByType(Version, ContraintsType);
         }
         public string GetSystemTableConstraintsByType(eDBVersion version, eConstraintType ContraintsType)
-        {            
-            var sb = new StringBuilder(); 
+        {
+            var sb = new StringBuilder();
             sb.Append($@"select rc.rdb$constraint_name, rc.rdb$constraint_type, rc.rdb$relation_name, rc.rdb$deferrable, rc.rdb$initially_deferred, rc.rdb$index_name,");
             sb.Append($@"cc.rdb$trigger_name,");
             sb.Append($@"rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule,");
@@ -273,8 +273,8 @@ namespace FBXpertLib
         }
 
         public string GetTableCheckConstraints(eDBVersion version, string TableName)
-        {            
-            var sb = new StringBuilder(); 
+        {
+            var sb = new StringBuilder();
             sb.Append($@"select rc.rdb$constraint_name, rc.rdb$constraint_type, rc.rdb$relation_name, rc.rdb$deferrable, rc.rdb$initially_deferred, rc.rdb$index_name,");
             sb.Append($@"tr.rdb$trigger_name,tr.rdb$trigger_source,rfc.rdb$const_name_uq, rfc.rdb$match_option, rfc.rdb$update_rule, rfc.rdb$delete_rule ");
             sb.Append($@"from rdb$relation_constraints rc ");
@@ -289,10 +289,10 @@ namespace FBXpertLib
         {
             return GetAllTableCheckConstraintsNonSystem(Version);
         }
-        
+
         public string GetAllTableCheckConstraintsNonSystem(eDBVersion version)
-        {            
-            var sb = new StringBuilder(); 
+        {
+            var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
             sb.Append($@"rc.rdb$constraint_type,");
@@ -315,7 +315,7 @@ namespace FBXpertLib
         }
 
         public string GetAllTableCheckConstraintsSystem(eDBVersion version)
-        {           
+        {
             var sb = new StringBuilder();
             sb.Append($@"select ");
             sb.Append($@"rc.rdb$constraint_name,");
@@ -338,9 +338,9 @@ namespace FBXpertLib
             return sb.ToString();
         }
 
-        public SQLCommandsReturnInfoClass DropNotNullConstraint(string name,string tablename,string fieldname, DBRegistrationClass dbReg, NotifiesClass notify)
+        public SQLCommandsReturnInfoClass DropNotNullConstraint(string name, string tablename, string fieldname, DBRegistrationClass dbReg, NotifiesClass notify)
         {
-            string cmd = SQLPatterns.DropNotNullConstraintPattern.Replace(SQLPatterns.FieldKey, fieldname).Replace(SQLPatterns.TableKey,tablename);
+            string cmd = SQLPatterns.DropNotNullConstraintPattern.Replace(SQLPatterns.FieldKey, fieldname).Replace(SQLPatterns.TableKey, tablename);
             return ExecSql(cmd, dbReg, notify);
         }
         public SQLCommandsReturnInfoClass DropPrimaryKeyConstraint(string name, string tablename, string fieldname, DBRegistrationClass dbReg, NotifiesClass notify)

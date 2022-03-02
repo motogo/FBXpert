@@ -3,7 +3,7 @@
 namespace FBXpertLib
 {
     public class DomainClass : DataObjectClass
-    {        
+    {
         public int Length;
         public int TypeNumber;
         public int SubTypeNumber;
@@ -22,7 +22,7 @@ namespace FBXpertLib
         {
             set
             {
-                 _defaultValue = value;
+                _defaultValue = value;
             }
             get
             {

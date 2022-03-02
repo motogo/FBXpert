@@ -15,20 +15,20 @@ namespace FBXpertLib
             localNotify = locNotify;
             _key = key;
             cbDefaults.Items.Clear();
-            foreach(string s in items)
+            foreach (string s in items)
             {
                 cbDefaults.Items.Add(s);
             }
-            
+
 
             cbDefaults.SelectedIndex = 0;
         }
 
-       
+
 
         private void hsOK_Click(object sender, EventArgs e)
         {
-            localNotify.Notify.RaiseInfo("SelectDefaultForm->hsOK", _key,cbDefaults.Text);
+            localNotify.Notify.RaiseInfo("SelectDefaultForm->hsOK", _key, cbDefaults.Text);
             Close();
         }
 

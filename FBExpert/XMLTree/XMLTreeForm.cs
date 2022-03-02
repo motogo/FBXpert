@@ -10,20 +10,20 @@ namespace FBXpert.KonfigurationForms
     /// Zusammenfassende Beschreibung für WinForm
     /// </summary>
     partial class XMLTreeForm : System.Windows.Forms.Form
-	{
+    {
         public bool TreeChanged = false;
-		public XMLTreeForm(string XMLfile)
-		{
-			InitializeComponent();
+        public XMLTreeForm(string XMLfile)
+        {
+            InitializeComponent();
             xmlFile = XMLfile;
         }
 
-	    public XMLTreeForm(Form mdiParent, string XMLfile)
-	    {
-	        InitializeComponent();
-	        MdiParent = mdiParent;
-	        xmlFile = XMLfile;
-	    }
+        public XMLTreeForm(Form mdiParent, string XMLfile)
+        {
+            InitializeComponent();
+            MdiParent = mdiParent;
+            xmlFile = XMLfile;
+        }
 
         private string xmlFile = String.Empty;
         public void SetControlSizes()
@@ -49,14 +49,14 @@ namespace FBXpert.KonfigurationForms
 
         private void hsReload_Click(object sender, EventArgs e)
         {
-           /* 
-            FileInfo fi = new FileInfo(PfadClass.Instance().XMLName);
-            if (fi.Exists)
-            {
-                PfadClass.Instance().Deserialize(fi.FullName);
-                xmlEdit.LoadXmlFromFile(fi.FullName);
-            }
-            */
+            /* 
+             FileInfo fi = new FileInfo(PfadClass.Instance().XMLName);
+             if (fi.Exists)
+             {
+                 PfadClass.Instance().Deserialize(fi.FullName);
+                 xmlEdit.LoadXmlFromFile(fi.FullName);
+             }
+             */
         }
     }
 }

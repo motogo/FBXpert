@@ -16,30 +16,30 @@ namespace FBXpert
         {
 
         }
-       
+
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void UUIDForm_MouseMove(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void UUIDForm_Load(object sender, EventArgs e)

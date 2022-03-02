@@ -14,7 +14,7 @@ namespace FBXpert
 {
     public partial class ConstraintsForm : IEditForm
     {
-        
+
         DBRegistrationClass _dbReg = null;
         string ConstraintName = string.Empty;
         string TableName = string.Empty;
@@ -23,29 +23,29 @@ namespace FBXpert
         NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
         ConstraintsClass _constraintObject = null;
-       
+
         string NewConstraintName = string.Empty;
         string OldConstraintName = string.Empty;
-       
+
         string _newTableName = String.Empty;
         TableClass _tableObject;
         List<TableClass> _tables = null;
-        bool DataFilled = false;        
+        bool DataFilled = false;
         public List<string> SQLScript = new List<string>();
-      
-        public ConstraintsForm(Form parent, TableClass tableObject,List<TableClass> tables, DBRegistrationClass dbReg, ConstraintsClass constraintObject)
+
+        public ConstraintsForm(Form parent, TableClass tableObject, List<TableClass> tables, DBRegistrationClass dbReg, ConstraintsClass constraintObject)
         {
             InitializeComponent();
             this.MdiParent = parent;
-            
+
             _dbReg = dbReg;
             _tables = tables;
             _constraintObject = constraintObject;
             OldConstraintName = _constraintObject.Name;
             _tableObject = tableObject;
-            _constraintObject.TableName = _tableObject.Name;            
+            _constraintObject.TableName = _tableObject.Name;
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;                               
+            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
         }
 
         public void EditToData()
@@ -53,16 +53,16 @@ namespace FBXpert
 
         }
 
-       
+
         public void RegisterNotify(NotifyInfos.RaiseNotifyHandler infoN)
         {
-           _localNotify.Notify.OnRaiseInfoHandler += infoN;
+            _localNotify.Notify.OnRaiseInfoHandler += infoN;
         }
 
         public void ShowCaptions()
         {
             if (_constraintObject != null)
-            { 
+            {
                 lblTableName.Text = $@"Constraints: {_constraintObject.Name}";
             }
             else
@@ -77,8 +77,8 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
-           
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
+
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
@@ -89,7 +89,7 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
             fctMessages.AppendText($@"ERROR {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -100,7 +100,7 @@ namespace FBXpert
         public void ShowUI()
         {
             gbUsingIndex.Visible = !rbPrimaryKey.Checked;
-            if(rbChecks.Checked)
+            if (rbChecks.Checked)
             {
                 gbChecksCode.Visible = true;
                 gbUsingIndex.Visible = false;
@@ -124,7 +124,7 @@ namespace FBXpert
             }
             ShowCaptions();
         }
-                
+
         public void SQLToUI()
         {
             fctSQL.Clear();
@@ -188,23 +188,23 @@ namespace FBXpert
                 }
 
                 if (rbUnique.Checked)
-                {                    
+                {
                     sb.Append(") USING INDEX " + txtINDEXName.Text);
                 }
-                else if ((rbPrimaryKey.Checked)||(rbForeignkey.Checked))
+                else if ((rbPrimaryKey.Checked) || (rbForeignkey.Checked))
                 {
                     StringBuilder sbfk = new StringBuilder();
                     sbfk.Append($@") REFERENCES {_tableObject.Name}");
-                    if(!string.IsNullOrEmpty(_tableObject.primary_constraint.FieldNamesString()))
+                    if (!string.IsNullOrEmpty(_tableObject.primary_constraint.FieldNamesString()))
                     {
                         sbfk.Append($@"({_tableObject.primary_constraint.FieldNamesString()}");
                     }
-                    if(!string.IsNullOrEmpty(txtINDEXName.Text))
+                    if (!string.IsNullOrEmpty(txtINDEXName.Text))
                     {
                         sbfk.Append($@") USING INDEX {txtINDEXName.Text}");
                     }
 
-                    sb.Append(sbfk);   
+                    sb.Append(sbfk);
                     sb.Append(");");
                 }
             }
@@ -215,7 +215,7 @@ namespace FBXpert
         }
 
         public void MakeSQOAlter()
-        {           
+        {
             SQLScript.Clear();
             StringBuilder sb = new StringBuilder();
             /*
@@ -235,7 +235,7 @@ namespace FBXpert
             CHECK(ID = 123hh)
             */
             sb.Append($@"DROP CONSTRAINT {OldConstraintName};{Environment.NewLine}");
-            
+
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}");
 
             sb.Append($@"ALTER TABLE {_tableObject.Name} ADD CONSTRAINT {NewConstraintName}");
@@ -243,7 +243,7 @@ namespace FBXpert
             {
                 sb.Append(" UNIQUE (");
             }
-            else if(rbPrimaryKey.Checked)
+            else if (rbPrimaryKey.Checked)
             {
                 sb.Append(" PRIMARY KEY (");
             }
@@ -251,7 +251,7 @@ namespace FBXpert
             {
                 sb.Append(" FOREIGN KEY (");
             }
-            else if(rbChecks.Checked)
+            else if (rbChecks.Checked)
             {
                 sb.Append(" CHECK(");
             }
@@ -280,25 +280,25 @@ namespace FBXpert
 
                 if (rbUnique.Checked)
                 {
-                    sb.Append($@") USING INDEX {txtINDEXName.Text}");                    
+                    sb.Append($@") USING INDEX {txtINDEXName.Text}");
                 }
                 else if (rbForeignkey.Checked)
                 {
                     StringBuilder sbfk = new StringBuilder();
                     sbfk.Append($@") REFERENCES {_tableObject.Name}");
-                    if(!string.IsNullOrEmpty(_tableObject.primary_constraint.FieldNamesString()))
+                    if (!string.IsNullOrEmpty(_tableObject.primary_constraint.FieldNamesString()))
                     {
                         sbfk.Append($@"({_tableObject.primary_constraint.FieldNamesString()}");
                     }
-                    if(!string.IsNullOrEmpty(txtINDEXName.Text))
+                    if (!string.IsNullOrEmpty(txtINDEXName.Text))
                     {
                         sbfk.Append($@") USING INDEX {txtINDEXName.Text}");
                     }
 
-                    sb.Append(sbfk);   
+                    sb.Append(sbfk);
                     sb.Append(");");
                 }
-                else if ((rbPrimaryKey.Checked)||(rbForeignkey.Checked))
+                else if ((rbPrimaryKey.Checked) || (rbForeignkey.Checked))
                 {
                     sb.Append(");");
                 }
@@ -315,7 +315,7 @@ namespace FBXpert
         }
 
         public void DataToEdit()
-        {           
+        {
             cbFields.Items.Clear();
             cbFields.Items.AddRange(_tableObject.Fields.Values.ToArray());
             lvFields.Items.Clear();
@@ -326,7 +326,7 @@ namespace FBXpert
                 ListViewItem lvi = new ListViewItem(st);
                 lvFields.Items.Add(lvi);
             }
-            
+
             txtConstraintName.Text = _constraintObject.Name;
             rbUnique.Checked = (_constraintObject.ConstraintType == eConstraintType.UNIQUE);
             rbForeignkey.Checked = (_constraintObject.ConstraintType == eConstraintType.FOREIGNKEY);
@@ -338,11 +338,11 @@ namespace FBXpert
 
         public void SetUIControls()
         {
-            if(rbUnique.Checked)
+            if (rbUnique.Checked)
             {
 
             }
-            else if(rbPrimaryKey.Checked)
+            else if (rbPrimaryKey.Checked)
             {
 
             }
@@ -351,51 +351,51 @@ namespace FBXpert
                 //NotNull
             }
         }
-        
+
         private void ConstraintsForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
             DataToEdit();
             OldConstraintName = txtConstraintName.Text.Trim();
-            NewConstraintName = OldConstraintName;            
+            NewConstraintName = OldConstraintName;
             MakeSQL();
             SetAutocompeteObjects(_tables);
         }
-       
+
         public void SetAutocompeteObjects(List<TableClass> tables)
         {
             ac = new AutocompleteClass(fctSQL, _dbReg);
             ac.CreateAutocompleteForDatabase();
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);   
+            ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
-        
+
         private void Create()
-        {                                   
+        {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
-            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr,AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines); 
-            
-            var riFailure = riList.Find(x=>x.commandDone == false);                                    
+            var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+
+            var riFailure = riList.Find(x => x.commandDone == false);
             OldConstraintName = NewConstraintName;
             if (DataFilled) MakeSQL();
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            string info = (riFailure==null) 
-                ? $@"Constraint {_dbReg.Alias}->{_constraintObject.TableName}->{_constraintObject.Name} updated." 
+            string info = (riFailure == null)
+                ? $@"Constraint {_dbReg.Alias}->{_constraintObject.TableName}->{_constraintObject.Name} updated."
                 : $@"Constraint {_dbReg.Alias}->{_constraintObject.TableName}->{_constraintObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);                              
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadIndex, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
         }
-       
+
         private void ConstraintNameChanged(object sender, EventArgs e)
         {
             NewConstraintName = txtConstraintName.Text.Trim();
-            ConstraintEditChanged();            
+            ConstraintEditChanged();
         }
         private void ConstraintEditChanged(object sender, EventArgs e)
         {
@@ -403,13 +403,13 @@ namespace FBXpert
         }
 
         private void ConstraintEditChanged()
-        {            
+        {
             if (DataFilled)
             {
                 MakeSQL();
             }
         }
-        
+
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvFields.SelectedItems.Count > 0)
@@ -456,24 +456,24 @@ namespace FBXpert
 
         private void hsCreate_Click(object sender, EventArgs e)
         {
-             Create();
+            Create();
         }
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-            if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);       
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName);      
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
 
         private void ConstraintsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadConstraintsKeysForTable, $@"->Proc:{Name}->Close");
         }
-    }    
+    }
 }

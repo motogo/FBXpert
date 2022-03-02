@@ -18,7 +18,7 @@ namespace FBXpertLib
         public int InOutTyp = 0;
     }
     */
-    public enum eFunctionType {intern=1, userdefined=0 };
+    public enum eFunctionType { intern = 1, userdefined = 0 };
     public class FunctionClass : DataObjectClass
     {
         public List<string> Source = new List<string>();
@@ -55,7 +55,7 @@ namespace FBXpertLib
             {
                 sb.AppendLine($@"    {pi.RawType}");
             }
-            sb.AppendLine($@"AS"); 
+            sb.AppendLine($@"AS");
 
             foreach (string str in Source)
             {
@@ -77,7 +77,7 @@ namespace FBXpertLib
         public string ModuleType = string.Empty;
         public string EntryPoint = string.Empty;
     }
-    
+
 
     public class FunctionGroupClass : DataObjectClass
     {

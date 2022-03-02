@@ -21,9 +21,9 @@ namespace FBXpert
         {
             this.dsHistory = new System.Data.DataSet();
             this.dtSUCCESS = new System.Data.DataTable();
-            this.dtFAILED  = new System.Data.DataTable();
+            this.dtFAILED = new System.Data.DataTable();
 
-            
+
 
 
             // 

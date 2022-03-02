@@ -13,10 +13,10 @@ namespace FBXpertLib
     [Serializable]
     public class CodeSettingsClass
     {
-        
-        public eSourceCodePrimaryKeyType SourceCodePrimaryKeyType= eSourceCodePrimaryKeyType.GeneratorInteger;
-        public string SourceCodeNamespace = "ProjectDatas";  
-        public string SourceCodeOutputPath= "";       
+
+        public eSourceCodePrimaryKeyType SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
+        public string SourceCodeNamespace = "ProjectDatas";
+        public string SourceCodeOutputPath = "";
 
         public CodeSettingsClass()
         {
@@ -43,14 +43,14 @@ namespace FBXpertLib
         }
         public string GetNewLineString()
         {
-            return NewLine.Replace(Environment.NewLine, "<NewLine>" );
+            return NewLine.Replace(Environment.NewLine, "<NewLine>");
         }
-        
+
         public void SetNewLine(string nline)
         {
-            NewLine = nline.Replace("<NewLine>",Environment.NewLine);
+            NewLine = nline.Replace("<NewLine>", Environment.NewLine);
         }
-        
+
         public SQLVariablesClass()
         {
 
@@ -69,8 +69,8 @@ namespace FBXpertLib
     }
     public class PathSettingsClass
     {
-        public string ScriptingPath=string.Empty;
-        public string TempPath=string.Empty;
+        public string ScriptingPath = string.Empty;
+        public string TempPath = string.Empty;
         public string InfoPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\Info";
         public string ExportPath = string.Empty;
         public string SQLExportPath = string.Empty;
@@ -83,7 +83,7 @@ namespace FBXpertLib
     public sealed class AppSettingsClass
     {
         public string Path = string.Empty;
-      
+
         private static readonly Lazy<AppSettingsClass> lazy = new Lazy<AppSettingsClass>(() => new AppSettingsClass());
         public static AppSettingsClass Instance
         {
@@ -105,24 +105,24 @@ namespace FBXpertLib
 
         public void Load(AppSettingsClass appSettings)
         {
-            
-            
+
+
 
             this.Stamp = appSettings.Stamp;
             //this.CodeSettings = appSettings.CodeSettings;
-            this.SQLVariables = appSettings.SQLVariables;   
+            this.SQLVariables = appSettings.SQLVariables;
             this.DatabaseSettings = appSettings.DatabaseSettings;
             this.PathSettings = appSettings.PathSettings;
             this.BehavierSettings = appSettings.BehavierSettings;
 
             this.Path = appSettings.Path;
-            this.PathSettings.ScriptingPath         = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ScriptingPath);
-            this.PathSettings.TempPath              = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.TempPath);
-            this.PathSettings.DatabasesConfigPath   = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
-            this.PathSettings.SQLExportPath         = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLExportPath);
-            this.PathSettings.InfoPath              = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.InfoPath);
-            this.PathSettings.SQLHistoryPath        = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLHistoryPath);
-            this.PathSettings.ExportPath            = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ExportPath);
+            this.PathSettings.ScriptingPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ScriptingPath);
+            this.PathSettings.TempPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.TempPath);
+            this.PathSettings.DatabasesConfigPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.DatabasesConfigPath);
+            this.PathSettings.SQLExportPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLExportPath);
+            this.PathSettings.InfoPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.InfoPath);
+            this.PathSettings.SQLHistoryPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.SQLHistoryPath);
+            this.PathSettings.ExportPath = ApplicationPathClass.Instance.GetFullPath(appSettings.PathSettings.ExportPath);
 
 
 
@@ -146,17 +146,17 @@ namespace FBXpertLib
             appsetting.BehavierSettings = this.BehavierSettings;
 
             appsetting.PathSettings.DatabasesConfigPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.DatabasesConfigPath);
-            appsetting.PathSettings.TempPath            = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.TempPath);
-            appsetting.PathSettings.ScriptingPath       = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ScriptingPath);
-            appsetting.PathSettings.SQLHistoryPath      = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLHistoryPath);
-            appsetting.PathSettings.InfoPath            = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.InfoPath);
-            appsetting.PathSettings.SQLExportPath       = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLExportPath);
-            appsetting.PathSettings.ExportPath          = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ExportPath);
+            appsetting.PathSettings.TempPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.TempPath);
+            appsetting.PathSettings.ScriptingPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ScriptingPath);
+            appsetting.PathSettings.SQLHistoryPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLHistoryPath);
+            appsetting.PathSettings.InfoPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.InfoPath);
+            appsetting.PathSettings.SQLExportPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.SQLExportPath);
+            appsetting.PathSettings.ExportPath = ApplicationPathClass.Instance.GetAppBegriff(this.PathSettings.ExportPath);
             appsetting.Path = this.Path;
             appsetting.Stamp = DateTime.Now;
-            
-            
-            
+
+
+
             if (string.IsNullOrEmpty(appsetting.Path))
             {
                 appsetting.Path = $@"{ApplicationPathClass.Instance.ApplicationPath}\config\DefaultAppSettings.json";
@@ -186,7 +186,7 @@ namespace FBXpertLib
             appsetting.DatabaseSettings = this.DatabaseSettings;
             appsetting.BehavierSettings = this.BehavierSettings;
 
-            appsetting.PathSettings.DatabasesConfigPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\data\";
+            appsetting.PathSettings.DatabasesConfigPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\config\";
             appsetting.PathSettings.DatabaseConfigFile = $@"DatabaseDefinitions.xml";
             appsetting.PathSettings.TempPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\temp\";
             appsetting.PathSettings.ScriptingPath = $@"{ApplicationPathClass.Instance.ApplicationPath}\scripts\";

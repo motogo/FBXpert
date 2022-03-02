@@ -25,9 +25,9 @@ namespace FBXpertLib
             FLOAT FLOAT
             */
 
-            if ((DBType == "LONG")&& (length == 4))
-            {                 
-                return "INTEGER";                
+            if ((DBType == "LONG") && (length == 4))
+            {
+                return "INTEGER";
             }
             else if ((DBType == "SHORT") && (length == 2))
             {
@@ -49,15 +49,15 @@ namespace FBXpertLib
             {
                 return $@"VARCHAR({length})";
             }
-            else if ((DBType =="TIMESTAMP")&&(length == 8))
+            else if ((DBType == "TIMESTAMP") && (length == 8))
             {
                 return "TIMESTAMP";
             }
-            else if (DBType == "TIME") 
+            else if (DBType == "TIME")
             {
                 return "TIME";
             }
-            else if (DBType == "DATE") 
+            else if (DBType == "DATE")
             {
                 return "DATE";
             }
@@ -92,9 +92,9 @@ namespace FBXpertLib
             FLOAT FLOAT
             */
 
-            if ((DBType == "LONG")&& (length == 4))
-            {                 
-                return "INTEGER";                
+            if ((DBType == "LONG") && (length == 4))
+            {
+                return "INTEGER";
             }
             else if ((DBType == "SHORT") && (length == 2))
             {
@@ -106,7 +106,7 @@ namespace FBXpertLib
             }
             else if (DBType.StartsWith("VARYING"))
             {
-                return "VARCHAR("+length.ToString()+")";
+                return "VARCHAR(" + length.ToString() + ")";
             }
             else if (DBType.StartsWith("TEXT"))
             {
@@ -116,15 +116,15 @@ namespace FBXpertLib
             {
                 return "CSTRING(" + length.ToString() + ")";
             }
-            else if ((DBType =="TIMESTAMP")&&(length == 8))
+            else if ((DBType == "TIMESTAMP") && (length == 8))
             {
                 return "TIMESTAMP";
             }
-            else if (DBType == "TIME") 
+            else if (DBType == "TIME")
             {
                 return "TIME";
             }
-            else if (DBType == "DATE") 
+            else if (DBType == "DATE")
             {
                 return "DATE";
             }
@@ -142,21 +142,21 @@ namespace FBXpertLib
 
         public static string DatabaseTOcsharpTypeAsString(DomainClass domain)
         {
-          //NotNull CHanged
+            //NotNull CHanged
             if (domain.FieldType == "LONG")
             {
                 return (domain.NotNull) ? "int" : "int?";
             }
             else if (domain.RawType == "BIGINT")
-            {                
+            {
                 return (domain.NotNull) ? "BigInteger" : "BigInteger?";
             }
             else if (domain.FieldType == "INT64")
             {
-                return (domain.NotNull) ? "long"  : "long?";
+                return (domain.NotNull) ? "long" : "long?";
             }
             else if (domain.FieldType == "FLOAT")
-            {                
+            {
                 return (domain.NotNull) ? "float" : "float?";
             }
             else if (domain.FieldType == "SHORT")
@@ -189,13 +189,13 @@ namespace FBXpertLib
             }
             else if (domain.FieldType.StartsWith("BLOB"))
             {
-                return (domain.SubTypeNumber == (int) eBlobSubType.TEXT) ? "string" : "byte[]";
+                return (domain.SubTypeNumber == (int)eBlobSubType.TEXT) ? "string" : "byte[]";
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
             {
                 return (domain.NotNull) ? "double" : "double?";
             }
-            return $@"RawType_ToCSharpType_Error->{domain.RawType}"; 
+            return $@"RawType_ToCSharpType_Error->{domain.RawType}";
         }
 
         public static string DatabaseTOcsharpValueTypeAsString(DomainClass domain)
@@ -209,7 +209,7 @@ namespace FBXpertLib
                 return "int";
             }
             else if (domain.FieldType == "FLOAT")
-            {                
+            {
                 return "float";
             }
             else if (domain.FieldType == "SHORT")
@@ -245,7 +245,7 @@ namespace FBXpertLib
                 return "byte[]";
             }
             else if (domain.FieldType.StartsWith("DOUBLE"))
-            {            
+            {
                 return "double";
             }
 
@@ -356,7 +356,7 @@ namespace FBXpertLib
             {
                 return eLogicalType.BINARY;
             }
-            
+
             return eLogicalType.NONE;
         }
 
@@ -381,14 +381,14 @@ namespace FBXpertLib
                 return (domain.NotNull) ? "0.0" : "null";
             }
             else if (ltyp == eLogicalType.BOOL)
-            {               
+            {
                 return "false";
             }
             else if (ltyp == eLogicalType.BINARY)
             {
                 return "null";
             }
-            
+
             return "ToDefaultEmpty_TypeError_" + domain.FieldType;
         }
 
@@ -424,5 +424,5 @@ namespace FBXpertLib
         }
     }
 
- 
+
 }

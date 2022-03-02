@@ -16,9 +16,9 @@ namespace FBXpert
     {
         ForeignKeyClass ForeignKeyObject = null;
         DBRegistrationClass _dbReg = null;
-        
+
         List<TableClass> _tables = null;
-        
+
         public NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
         int messages_count = 0;
@@ -28,7 +28,7 @@ namespace FBXpert
         string FKName = string.Empty;
         int NewNr = 0;
         ForeignKeyClass _foreignKeys;
-        public ForeignKeyForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, string tableName,ForeignKeyClass foreignKeys, int newNr)
+        public ForeignKeyForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, string tableName, ForeignKeyClass foreignKeys, int newNr)
         {
             InitializeComponent();
             this.MdiParent = parent;
@@ -39,8 +39,8 @@ namespace FBXpert
             TableName = tableName;
             DataFilled = false;
             _dbReg = dbReg;
-           
-                
+
+
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
         }
@@ -50,7 +50,7 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
             fctMessages.AppendText("INFO  " + k.Meldung);
             tabPageMessages.Text = sb.ToString();
@@ -62,8 +62,8 @@ namespace FBXpert
             StringBuilder sb = new StringBuilder();
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
-            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung, _dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
@@ -71,18 +71,18 @@ namespace FBXpert
 
         public void SetControlSizes()
         {
-            pnlMessagesUpper.Height             = AppSizeConstants.UpperFormBandHeight;
-            pnlFieldUpper.Height                = AppSizeConstants.UpperFormBandHeight;
-            pnlMessagesUpper.Height             = AppSizeConstants.UpperFormBandHeight;
-            pnlInfoUpper.Height                 = AppSizeConstants.UpperFormBandHeight;
-            pnlProcedureAttributesUpper.Height  = AppSizeConstants.UpperFormBandHeight;
-            pnlSQLUpper.Height                  = AppSizeConstants.UpperFormBandHeight;
-            pnlFormUpper.Height                 = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlProcedureAttributesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
         }
 
         public void MakeSQL()
         {
-            
+
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
             {
                 MakeSQLAlter();
@@ -94,7 +94,7 @@ namespace FBXpert
             ShowCaptions();
             hsSave.Enabled = (txtConstraintName.Text.Length > 0);
         }
-        
+
         public List<string> SQLScript = new List<string>();
 
         public void SQLToUI()
@@ -102,7 +102,7 @@ namespace FBXpert
             fctSQL.Clear();
             foreach (string str in SQLScript)
             {
-               fctSQL.AppendText(str + Environment.NewLine);
+                fctSQL.AppendText(str + Environment.NewLine);
             }
         }
 
@@ -130,7 +130,7 @@ namespace FBXpert
             sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " ADD CONSTRAINT " + ForeignKeyObject.Name + " FOREIGN KEY(");
             int ix = 0;
             foreach (FieldClass rstr in ForeignKeyObject.SourceFields.Values)
-            {                
+            {
                 sb.Append(rstr.Name);
                 if (ix < ForeignKeyObject.SourceFields.Count - 1)
                 {
@@ -160,9 +160,9 @@ namespace FBXpert
                 sb.Append(" USING INDEX " + txtIndexName.Text.Trim());
             }
             */
-            if(!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
+            if (!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
             {
-                if(!(ForeignKeyObject.Sorting == eSort.ASC))
+                if (!(ForeignKeyObject.Sorting == eSort.ASC))
                 {
                     sb.Append($@"){Environment.NewLine}USING {ForeignKeyObject.Sorting} INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
                 }
@@ -180,7 +180,7 @@ namespace FBXpert
 
 
         public void MakeSQLAlter()
-        {           
+        {
             SQLScript.Clear();
             StringBuilder sb = new StringBuilder();
             /*
@@ -220,7 +220,7 @@ namespace FBXpert
                     sb.Append(",");
                 }
             }
-            sb.Append(")");     
+            sb.Append(")");
             /*
             if(txtIndexName.Text.Trim().Length > 0)
             {
@@ -229,9 +229,9 @@ namespace FBXpert
             }
             */
 
-            if(!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
+            if (!string.IsNullOrEmpty(ForeignKeyObject.IndexName))
             {
-                if(!(ForeignKeyObject.Sorting == eSort.ASC))
+                if (!(ForeignKeyObject.Sorting == eSort.ASC))
                 {
                     sb.Append($@"){Environment.NewLine}USING {ForeignKeyObject.Sorting} INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
                 }
@@ -240,10 +240,10 @@ namespace FBXpert
                     sb.Append($@"){Environment.NewLine}USING INDEX {ForeignKeyObject.IndexName};{Environment.NewLine}");
                 }
             }
-            sb.Append(";");  
+            sb.Append(";");
             sb.Append(Environment.NewLine);
             sb.Append($@"{SQLPatterns.Commit}");
-            SQLScript.Add(sb.ToString());           
+            SQLScript.Add(sb.ToString());
             SQLToUI();
         }
 
@@ -254,25 +254,25 @@ namespace FBXpert
 
         public void SetEnables()
         {
-            if(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
+            if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
             {
-                txtConstraintName.Enabled = true;               
+                txtConstraintName.Enabled = true;
             }
             else
             {
-                txtConstraintName.Enabled = true;               
+                txtConstraintName.Enabled = true;
             }
         }
 
         public void FillPrimaryKey()
-        {           
-            TableClass tb = (TableClass)cbDestinationTable.SelectedItem;            
+        {
+            TableClass tb = (TableClass)cbDestinationTable.SelectedItem;
             txtPrimaryKey.Text = (tb?.primary_constraint != null) ? tb.primary_constraint.Name : string.Empty;
-            txtIndexName.Text  = (tb?.primary_constraint != null) ? tb.primary_constraint.IndexName : string.Empty;
+            txtIndexName.Text = (tb?.primary_constraint != null) ? tb.primary_constraint.IndexName : string.Empty;
         }
 
         public void UpdateDestFieldList()
-        {            
+        {
             int n = 0;
             lvDestFields.Items.Clear();
             foreach (FieldClass str in ForeignKeyObject.DestFields.Values)
@@ -308,30 +308,30 @@ namespace FBXpert
             if (lvSourceFields.Items.Count > 0)
             {
                 ListViewItem lvi = lvSourceFields.Items[0];
-               cbSourceTableFields.Text = lvi.Tag as string;
+                cbSourceTableFields.Text = lvi.Tag as string;
             }
         }
 
 
         public void DataToEdit()
-        {            
+        {
             TableClass destTable = _tables.Find(x => x.Name == ForeignKeyObject.DestTableName);
             TableClass sourceTable = _tables.Find(x => x.Name == ForeignKeyObject.SourceTableName);
             FillDestFields(ForeignKeyObject.DestTableName);
             FillSourceFields(ForeignKeyObject.SourceTableName);
             //GetSourceFieldsFromTableObject(ForeignKeyObject.SourceTableName);
 
-            txtConstraintName.Text  = ForeignKeyObject.Name;
-            cbSourceTable.Text      = ForeignKeyObject.SourceTableName;
+            txtConstraintName.Text = ForeignKeyObject.Name;
+            cbSourceTable.Text = ForeignKeyObject.SourceTableName;
             cbDestinationTable.Text = ForeignKeyObject.DestTableName;
 
             UpdateDestFieldList();
             UpdateSourceFieldList();
-            FillPrimaryKey();                        
+            FillPrimaryKey();
         }
-        
+
         public void EditToData()
-        {                      
+        {
             //Foreign key existiert
             //ForeignKeyObject.FieldName = cbSourceTableFieldNames.Text.Trim();
 
@@ -342,14 +342,14 @@ namespace FBXpert
             foreach (ListViewItem lvi in lvSourceFields.Items)
             {
                 string str = lvi.Tag as string;
-                ForeignKeyObject.SourceFields.Add(str,new FieldClass(str));
+                ForeignKeyObject.SourceFields.Add(str, new FieldClass(str));
             }
 
             ForeignKeyObject.DestFields.Clear();
             foreach (ListViewItem lvi in lvDestFields.Items)
             {
                 string str = lvi.Tag as string;
-                ForeignKeyObject.DestFields.Add(str,new FieldClass(str));
+                ForeignKeyObject.DestFields.Add(str, new FieldClass(str));
             }
             //    ForeignKeyObject.FieldName = cbSourceTableFieldNames.Text;            
         }
@@ -361,16 +361,16 @@ namespace FBXpert
             cbDestinationTableFields.Items.Clear();
             if (DestTableName.Length > 0)
             {
-                TableClass DestTab = _tables.Find(x=>x.Name == DestTableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
-                Dictionary<string,TableFieldClass> DestFds = DestTab.Fields;                                
-                foreach (TableFieldClass dstr in  DestFds.Values)
-                {                  
+                TableClass DestTab = _tables.Find(x => x.Name == DestTableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
+                Dictionary<string, TableFieldClass> DestFds = DestTab.Fields;
+                foreach (TableFieldClass dstr in DestFds.Values)
+                {
                     if (DestTab.IsPrimary(dstr.Name))
                     {
                         cbDestinationTableFields.Items.Add(dstr.Name);
                     }
                 }
-            }            
+            }
         }
 
         public void FillSourceFields(string TableName)
@@ -381,8 +381,8 @@ namespace FBXpert
                 TableClass Tab = _tables.Find(x => x.Name == TableName);//  StaticTreeClass.Instance().GetTableObjectFromName(DRC, DestTableName);
                 var Fds = Tab.Fields;
                 foreach (TableFieldClass dstr in Fds.Values)
-                {                  
-                    cbSourceTableFields.Items.Add(dstr.Name);                    
+                {
+                    cbSourceTableFields.Items.Add(dstr.Name);
                 }
             }
         }
@@ -394,11 +394,11 @@ namespace FBXpert
             {
                 var DestFds = StaticDatabaseObjects.Instance().GetTableObjectFromName(_dbReg, SourceTableName).Fields;
                 foreach (TableFieldClass dstr in DestFds.Values)
-                {                    
-                    cbSourceTableFields.Items.Add(dstr.Name);                    
+                {
+                    cbSourceTableFields.Items.Add(dstr.Name);
                 }
             }
-          //  cbSourceTableFieldNames.Text = ForeignKeyObject.FieldName;
+            //  cbSourceTableFieldNames.Text = ForeignKeyObject.FieldName;
         }
         public void FillCombo()
         {
@@ -423,25 +423,25 @@ namespace FBXpert
                 //Existierenter FK
                 cbSourceTable.Text = ForeignKeyObject.SourceTableName;
                 cbDestinationTable.Text = ForeignKeyObject.DestTableName;
-                txtConstraintName.Text =  "FK_NEW";
+                txtConstraintName.Text = "FK_NEW";
             }
             else
             {
                 //Neuer FK
                 ForeignKeyObject = new ForeignKeyClass();
-                ForeignKeyObject.Name               = txtConstraintName.Text;
-                ForeignKeyObject.DestTableName      = cbDestinationTable.Text.Trim();
-                ForeignKeyObject.SourceTableName    = cbSourceTable.Text.Trim();
+                ForeignKeyObject.Name = txtConstraintName.Text;
+                ForeignKeyObject.DestTableName = cbDestinationTable.Text.Trim();
+                ForeignKeyObject.SourceTableName = cbSourceTable.Text.Trim();
 
                 //GetSourceFieldsFromTableObject(ForeignKeyObject.SourceTableName);
 
                 FillDestFields(ForeignKeyObject.DestTableName);
                 FillSourceFields(ForeignKeyObject.SourceTableName);
-                
-                if (cbSourceTable.Items.Count > 0)              cbSourceTable.SelectedIndex = 0;
-                if (cbDestinationTable.Items.Count > 0)         cbDestinationTable.SelectedIndex = 0;
-                if (cbSourceTableFields.Items.Count > 0)        cbSourceTableFields.SelectedIndex = 0;
-                if (cbDestinationTableFields.Items.Count > 0)   cbDestinationTableFields.SelectedIndex = 0;
+
+                if (cbSourceTable.Items.Count > 0) cbSourceTable.SelectedIndex = 0;
+                if (cbDestinationTable.Items.Count > 0) cbDestinationTable.SelectedIndex = 0;
+                if (cbSourceTableFields.Items.Count > 0) cbSourceTableFields.SelectedIndex = 0;
+                if (cbDestinationTableFields.Items.Count > 0) cbDestinationTableFields.SelectedIndex = 0;
             }
         }
 
@@ -452,24 +452,24 @@ namespace FBXpert
             DataFilled = false;
 
             FillCombo();
-            
+
             ForeignKeyObject = GetFK(FKName);
             txtConstraintName.Text = $@"FK_{TableName}_{NewNr}";
             UpdateForeignKeyObject();
             old_constraint_name = ForeignKeyObject.Name;
             SetEnables();
-            DataToEdit();                        
+            DataToEdit();
 
             SetAutocompeteObjects(_tables);
 
             DataFilled = true;
-            if(!string.IsNullOrEmpty(TableName)) 
+            if (!string.IsNullOrEmpty(TableName))
             {
                 cbSourceTable.Text = TableName;
             }
             MakeSQL();
             splitContainer1.SplitterDistance = 500;
-            txtConstraintName.Enabled = !(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);            
+            txtConstraintName.Enabled = !(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);
         }
 
         public void SetAutocompeteObjects(List<TableClass> tables)
@@ -508,35 +508,35 @@ namespace FBXpert
                 MakeSQL();
             }
         }
-        
+
         private void Create()
-        {               
+        {
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone == false);      
-            
-            if(riFailure==null) 
-            {                
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
+
+            if (riFailure == null)
+            {
                 old_constraint_name = txtConstraintName.Text;
-               
+
             }
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            string info = (riFailure==null) 
-                ? $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} updated." 
-                : $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadAllForeignKeys,$@"->Proc:{Name}->Create");
+            string info = (riFailure == null)
+                ? $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} updated."
+                : $@"Foreign key for {_dbReg.Alias}->{ForeignKeyObject.SourceTableName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadAllForeignKeys, $@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
 
 
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
-            
+
         }
         private void hsSave_Click(object sender, EventArgs e)
-        {            
+        {
             Create();
         }
 
@@ -544,12 +544,12 @@ namespace FBXpert
         {
             fctMessages.Clear();
         }
-            
+
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
             if (saveSQLFile.ShowDialog() == DialogResult.OK)
             {
-               fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
+                fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
             }
         }
 
@@ -564,40 +564,40 @@ namespace FBXpert
         private void hsAddField_Click(object sender, EventArgs e)
         {
             string[] s = new string[2];
-            
+
             s[0] = (lvDestFields.Items.Count + 1).ToString();
             s[1] = cbDestinationTableFields.Text.Trim();
             ListViewItem lvi = new ListViewItem(s);
             lvi.Tag = s[1];
             ListViewItem lvi2 = lvDestFields.FindItemWithText(s[1]);
-            if(lvi2 == null)
+            if (lvi2 == null)
             {
                 lvDestFields.Items.Add(lvi);
                 EditChanged();
             }
-            
+
         }
 
         public ForeignKeyClass GetFK(string fkname)
         {
             if (fkname.Length <= 0) return null;
-            foreach(TableClass tb in _tables)
+            foreach (TableClass tb in _tables)
             {
-                if (tb.ForeignKeys == null) continue;                
-                if(!tb.ForeignKeys.ContainsKey(fkname)) continue;                
+                if (tb.ForeignKeys == null) continue;
+                if (!tb.ForeignKeys.ContainsKey(fkname)) continue;
                 if (tb.ForeignKeys.TryGetValue(fkname, out ForeignKeyClass fkc))
                 {
                     return fkc;
-                }                                 
+                }
             }
             return null;
         }
 
         private void hsRemoveField_Click(object sender, EventArgs e)
         {
-            if (lvDestFields.SelectedItems == null) return;            
+            if (lvDestFields.SelectedItems == null) return;
             lvDestFields.SelectedItems[0].Remove();
-            EditChanged();               
+            EditChanged();
         }
 
         private void cbSourceTable_SelectedIndexChanged(object sender, EventArgs e)
@@ -606,7 +606,7 @@ namespace FBXpert
             {
                 TableClass tc = (TableClass)cbSourceTable.SelectedItem;
                 ForeignKeyObject.SourceTableName = tc.Name;
-                DataToEdit();                
+                DataToEdit();
             }
         }
 
@@ -623,7 +623,7 @@ namespace FBXpert
 
         private void txtConstraintName_TextChanged(object sender, EventArgs e)
         {
-             
+
             if (!DataFilled) return;
 
             // ForeignKeyObject = GetFK(txtConstraintName.Text.Trim());                
@@ -632,7 +632,7 @@ namespace FBXpert
             ForeignKeyObject.Name = txtConstraintName.Text.Trim();
             MakeSQL();
         }
-        
+
 
         private void cbPrimaryKey_TextChanged(object sender, EventArgs e)
         {
@@ -658,7 +658,7 @@ namespace FBXpert
             string[] s = new string[2];
 
             s[0] = (lvSourceFields.Items.Count + 1).ToString();
-            s[1] = cbSourceTableFields.Text.Trim(); 
+            s[1] = cbSourceTableFields.Text.Trim();
             ListViewItem lvi = new ListViewItem(s);
             lvi.Tag = s[1];
             ListViewItem lvi2 = lvSourceFields.FindItemWithText(s[1]);
@@ -671,7 +671,7 @@ namespace FBXpert
 
         private void cbPrimaryKey_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void txtIndexName_TextChanged(object sender, EventArgs e)
@@ -693,9 +693,9 @@ namespace FBXpert
 
         private void ForeignKeyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
 
-           _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadForeignKeysForTable, $@"->Form:{Name}->Reload");
+
+            _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadForeignKeysForTable, $@"->Form:{Name}->Reload");
         }
 
         private void hsNew_Click(object sender, EventArgs e)

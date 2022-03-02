@@ -11,14 +11,14 @@ namespace FBXpert
 {
     public partial class DBMonitoringForm : Form
     {
-       
-       
+
+
         DBRegistrationClass DBReg = null;
         public DBMonitoringForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
             DBReg = drc;
-            this.MdiParent = parent;                       
+            this.MdiParent = parent;
         }
 
         public void GetConnections()
@@ -29,7 +29,7 @@ namespace FBXpert
                 string[] cn = new string[3];
                 cn[0] = c.ConnName;
                 cn[1] = "open";
-                if(c.ConnectionIsClosed())
+                if (c.ConnectionIsClosed())
                 {
                     cn[1] = "closed";
                 }
@@ -44,11 +44,11 @@ namespace FBXpert
         {
             GetConnections();
             try
-            { 
-                string cmd_index = SQLStatementsClass.Instance.GetMonitorConnections(DBReg.Version,cbAllConnections.Checked );
+            {
+                string cmd_index = SQLStatementsClass.Instance.GetMonitorConnections(DBReg.Version, cbAllConnections.Checked);
                 dsMonConnections.Clear();
                 dgvMonConnections.AutoGenerateColumns = true;
-                
+
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 var ds = new FbDataAdapter(cmd_index, con);
                 ds.Fill(dsMonConnections);
@@ -57,9 +57,9 @@ namespace FBXpert
                 return dsMonConnections.Tables[0].Rows.Count;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));                      
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));
             }
             bsMonConnections.DataMember = "Table";
             return dsMonConnections.Tables[0].Rows.Count;
@@ -92,7 +92,7 @@ namespace FBXpert
 
         private void DBMonitoringForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 
         private void txtTick_TextChanged(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace FBXpert
 
         private void cbTick_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbTick.Checked)
+            if (cbTick.Checked)
             {
                 int tk = StaticFunctionsClass.ToIntDef(txtTick.Text, 0);
                 if (tk > 0)
@@ -123,7 +123,7 @@ namespace FBXpert
 
         public void AutoRefresh()
         {
-            if(cbRefreshActiveConnections.Checked)
+            if (cbRefreshActiveConnections.Checked)
             {
                 RefreshMonitorConnections();
             }

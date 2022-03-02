@@ -8,7 +8,7 @@ namespace FBXpertLib
         private string _name;
         public DataObjectClass()
         {
-        
+
         }
         public DataObjectClass(string name)
         {

@@ -8,16 +8,16 @@ namespace FBXpert.ValuesEditForms
     {
         public BlobEditForm(string datatype, string info)
         {
-            InitializeComponent();        
-            this.Text = $@"Binary Editor, Data = {info}";   
+            InitializeComponent();
+            this.Text = $@"Binary Editor, Data = {info}";
             this.label3.Text = $@"HEX ->{datatype}";
         }
 
         public void SetControlSizes()
         {
-          
+
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
-           
+
         }
         public void SetBytes(Byte[] values)
         {
@@ -25,7 +25,7 @@ namespace FBXpert.ValuesEditForms
         }
         public void SetFileBytes(string fn)
         {
-             bv.SetFile(fn); 
+            bv.SetFile(fn);
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -42,9 +42,9 @@ namespace FBXpert.ValuesEditForms
         }
 
         private void hsPDF_Click(object sender, EventArgs e)
-        {         
+        {
             OpenInAnotherApp(bv.GetBytes(), "somename.pdf");
-        }       
+        }
 
         private void hsText_Click(object sender, EventArgs e)
         {
@@ -58,7 +58,7 @@ namespace FBXpert.ValuesEditForms
 
         private void pnlCenter_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void hsShowAsImage_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace FBXpert.ValuesEditForms
 
         private void hotSpot1_Click(object sender, EventArgs e)
         {
-             OpenInAnotherApp(bv.GetBytes(), "somename.doc");
+            OpenInAnotherApp(bv.GetBytes(), "somename.doc");
         }
 
         private void BlobEditForm_Load(object sender, EventArgs e)

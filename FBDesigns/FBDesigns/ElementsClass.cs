@@ -16,11 +16,11 @@ namespace FBXDesigns
         }
         public UIDesignTableClass AddTable()
         {
-           return AddTable(false);            
+            return AddTable(false);
         }
         public UIDesignTableClass AddTable(bool show)
         {
-            UIDesignTableClass tb = new UIDesignTableClass(ctrl,"test",show);
+            UIDesignTableClass tb = new UIDesignTableClass(ctrl, "test", show);
             Tables.Add(tb);
             return tb;
 

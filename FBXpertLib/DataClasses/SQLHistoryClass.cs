@@ -27,7 +27,7 @@ namespace FBXpertLib
         bool asc = true;
         public SQLHistoryClass(string dbName, string dbLocation)
         {
-            DatabaseName = dbName.Replace(" ","_");
+            DatabaseName = dbName.Replace(" ", "_");
             DatabaseLocation = dbLocation;
         }
         private List<History> GetAll(string dbn, bool success, bool failed)
@@ -104,8 +104,8 @@ namespace FBXpertLib
         }
 
         public List<History> DisplayPresetData(string dbn, bool success, bool failed)
-        {                      
-            return GetAll(dbn,success,failed);
+        {
+            return GetAll(dbn, success, failed);
         }
 
         public List<T> Sort_List<T>(string sortDirection, string sortExpression, List<T> data)
@@ -129,16 +129,16 @@ namespace FBXpertLib
 
         public void HistoryRefresh(DataGridView dgv, bool succeeded, bool failed, bool all)
         {
-            string dbn = all ? string.Empty : DatabaseName;                        
-            dgv.DataSource = DisplayPresetData(dbn, succeeded, failed);           
-            dgv.Columns[0].Visible = false;            
+            string dbn = all ? string.Empty : DatabaseName;
+            dgv.DataSource = DisplayPresetData(dbn, succeeded, failed);
+            dgv.Columns[0].Visible = false;
         }
         public object GetDynamicSortProperty(object item, string propName)
         {
             //Use reflection to get order type
             return item.GetType().GetProperty(propName).GetValue(item, null);
         }
-        
+
         public void SwapSortGrid(DataGridView grid, int ColumnIndex)
         {
             List<History> list = grid.DataSource as List<History>;
@@ -161,7 +161,7 @@ namespace FBXpertLib
             List<History> SortedList = list;
             string cnn = grid.Columns[ColumnIndex].Name;
             string direction = asc ? "Ascending" : "Descending";
-            
+
 
             SortedList = Sort_List(direction, cnn, list);
             grid.DataSource = null;
@@ -177,7 +177,7 @@ namespace FBXpertLib
             List<History> SortedList = list;
             string cnn = grid.Columns[ColumnIndex].Name;
             string direction = asc ? "Ascending" : "Descending";
-           
+
 
             SortedList = Sort_List(direction, cnn, list);
             grid.DataSource = null;
@@ -203,7 +203,7 @@ namespace FBXpertLib
             return count;
         }
         public bool DeleteHistoryEntry(int id)
-        {            
+        {
             using (var db = new LiteDatabase(DatabaseLocation))
             {
                 // Get customer collection
@@ -215,7 +215,7 @@ namespace FBXpertLib
                 var r = historys.Find(x => x.Id == id);
                 */
                 return historys.Delete(id);
-            }            
+            }
         }
         public bool InsertHistory(string sql, eSQLHistoryType historyType)
         {

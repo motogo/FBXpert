@@ -25,20 +25,20 @@ namespace FBXpert
         int messages_count = 0;
         int error_count = 0;
         bool DoEvents = false;
-        public FunctionForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, TreeNode tn, ContextMenuStrip cm,StateClasses.EditStateClass.eBearbeiten mode)
+        public FunctionForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, TreeNode tn, ContextMenuStrip cm, StateClasses.EditStateClass.eBearbeiten mode)
         {
             InitializeComponent();
             this.MdiParent = parent;
             Cm = cm;
             Tn = tn;
             _tables = tables;
-            
+
             try
             {
                 BearbeitenMode = mode;
-               
-                if(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
-                {                    
+
+                if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
+                {
                     FunctionObject = new FunctionClass();
                     FunctionObject.Name = "NEW_FUNCTION";
                 }
@@ -47,20 +47,20 @@ namespace FBXpert
                     FunctionObject = (FunctionClass)tn.Tag;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            OldFunctionObject = (FunctionClass) FunctionObject.Clone();
-                                   
+            OldFunctionObject = (FunctionClass)FunctionObject.Clone();
+
             _dbReg = dbReg;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
-           
+
             cbDatatype.Items.Clear();
-                        
+
             DBTypeList dbList = new DBTypeList();
-            foreach(DBDataTypes dt in dbList.Values)
+            foreach (DBDataTypes dt in dbList.Values)
             {
                 cbDatatype.Items.Add(dt);
             }
@@ -86,9 +86,9 @@ namespace FBXpert
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0) sb.Append($@"Errors ({error_count})");
-            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung, _dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
-            
+
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -102,16 +102,16 @@ namespace FBXpert
 
         public void MakeSQL()
         {
-            SQLScript = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit) 
-                ? StaticDatabaseObjects.Instance().MakeSQLAlterFunction(FunctionObject,OldFunctionObject,true)
-                : StaticDatabaseObjects.Instance().MakeSQLCreateFunction(FunctionObject,true);
-            
+            SQLScript = (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
+                ? StaticDatabaseObjects.Instance().MakeSQLAlterFunction(FunctionObject, OldFunctionObject, true)
+                : StaticDatabaseObjects.Instance().MakeSQLCreateFunction(FunctionObject, true);
+
             SQLToUI(SQLScript);
             ShowCaptions();
             hsCreate.Enabled = (txtFuncName.Text.Length > 0);
         }
 
-        
+
 
         public List<string> SQLScript = new List<string>();
 
@@ -120,11 +120,11 @@ namespace FBXpert
             fctSQL.Clear();
             foreach (string str in SQLScript)
             {
-               fctSQL.AppendText(str + Environment.NewLine);
+                fctSQL.AppendText(str + Environment.NewLine);
             }
         }
 
-        
+
 
         private void hsClose_Click(object sender, EventArgs e)
         {
@@ -133,20 +133,20 @@ namespace FBXpert
 
         public void SetEnables()
         {
-           txtFuncName.Enabled = true;      
+            txtFuncName.Enabled = true;
         }
 
         public void DataToEdit()
         {
             DoEvents = false;
-            txtFuncName.Text = FunctionObject.Name;                       
-            fctGenDescription.Text = FunctionObject.Description;            
+            txtFuncName.Text = FunctionObject.Name;
+            fctGenDescription.Text = FunctionObject.Description;
             lvFields.Items.Clear();
             for (int i = 0; i < FunctionObject.ParameterIn.Count; i++)
-            {                
+            {
                 var pc = FunctionObject.ParameterIn[i];
-                string[] columns = { "IN",pc.Name,pc.RawType };
-                var lvi = new ListViewItem(columns);               
+                string[] columns = { "IN", pc.Name, pc.RawType };
+                var lvi = new ListViewItem(columns);
                 var pci = new ParameterListItem();
                 pci.direction = eParameterTypDirection.din;
                 pci.pc = pc;
@@ -155,34 +155,34 @@ namespace FBXpert
             }
 
             for (int i = 0; i < FunctionObject.ParameterOut.Count; i++)
-            {                
+            {
                 var pc = FunctionObject.ParameterOut[i];
-                string[] columns = {"OUT",pc.Name,pc.RawType };
+                string[] columns = { "OUT", pc.Name, pc.RawType };
                 var lvi = new ListViewItem(columns);
                 var pci = new ParameterListItem();
                 pci.direction = eParameterTypDirection.dout;
                 pci.pc = pc;
-                lvi.Tag = pci;               
+                lvi.Tag = pci;
                 lvFields.Items.Add(lvi);
             }
 
             for (int i = 0; i < FunctionObject.Source.Count; i++)
             {
-               fcbFunctionDefinitionSQL.AppendText($@"{FunctionObject.Source[i]}{Environment.NewLine}");
+                fcbFunctionDefinitionSQL.AppendText($@"{FunctionObject.Source[i]}{Environment.NewLine}");
             }
             DoEvents = true;
         }
         public void EditToData()
         {
-            
+
         }
-               
+
         private void FunctionForm_Load(object sender, EventArgs e)
         {
             SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
-            SetEnables();            
+            SetEnables();
             MakeSQL();
             SetAutocompeteObjects(_tables);
         }
@@ -198,17 +198,17 @@ namespace FBXpert
 
         public void ShowCaptions()
         {
-            lblCaption.Text = (FunctionObject != null) ? $@"Function:{FunctionObject.Name}" : "Function";            
+            lblCaption.Text = (FunctionObject != null) ? $@"Function:{FunctionObject.Name}" : "Function";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Function");
         }
 
         private void txtGenName_TextChanged(object sender, EventArgs e)
         {
             if (!DoEvents) return;
-            
+
             FunctionObject.Name = txtFuncName.Text.Trim();
-            if(BearbeitenMode != StateClasses.EditStateClass.eBearbeiten.eInsert) BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
-            MakeSQL();               
+            if (BearbeitenMode != StateClasses.EditStateClass.eBearbeiten.eInsert) BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
+            MakeSQL();
         }
 
         private void fctGenDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -219,27 +219,27 @@ namespace FBXpert
         }
 
         private void Create()
-        {                                    
+        {
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
             _sql.ScriptNotify.Register4Info(Notify_OnRaiseInfoHandler);
             _sql.ScriptNotify.Register4Error(Notify_OnRaiseErrorHandler);
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone == false);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-            
-            string info = (riFailure==null) 
-                ? $@"Function {_dbReg.Alias}->{FunctionObject.Name} updated." 
-                : $@"Function {_dbReg.Alias}->{FunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadFunctions,$@"->Proc:{Name}->Create");
+
+            string info = (riFailure == null)
+                ? $@"Function {_dbReg.Alias}->{FunctionObject.Name} updated."
+                : $@"Function {_dbReg.Alias}->{FunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadFunctions, $@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
 
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
-            
+
         }
         private void hsSave_Click(object sender, EventArgs e)
-        {            
+        {
             Create();
         }
 
@@ -250,27 +250,27 @@ namespace FBXpert
 
         private void cmsParameters_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem == tsmiAddInputParameter)
+            if (e.ClickedItem == tsmiAddInputParameter)
             {
 
             }
-            else if(e.ClickedItem == tsmiAddOutputParameter)
+            else if (e.ClickedItem == tsmiAddOutputParameter)
             {
 
             }
-            else if(e.ClickedItem == tsmiDropParameter)
+            else if (e.ClickedItem == tsmiDropParameter)
             {
 
             }
         }
-      
+
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvFields.SelectedItems.Count <= 0) return;
-            
+
             var lvi = lvFields.SelectedItems[0];
             if (lvi == null) return;
-            
+
             var pc = lvi.Tag as ParameterListItem;
             txtDatatypeLength.Text = pc.pc.Length.ToString();
             txtParameter.Text = pc.pc.Name;
@@ -286,19 +286,19 @@ namespace FBXpert
             {
                 rbVAR.Checked = true;
             }
-            txtParameter.Enabled = !rbOUT.Checked;                                  
+            txtParameter.Enabled = !rbOUT.Checked;
         }
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);              
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if (ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName);               
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
 
         private void hsNew_Click(object sender, EventArgs e)
@@ -315,7 +315,7 @@ namespace FBXpert
 
             FunctionObject.ParameterOut.Add(pc);
             pc = new ParameterClass();
-            
+
             pc.Name = "XX";
             pc.RawType = "INTEGER";
             pc.FieldType = "LONG";
@@ -324,7 +324,7 @@ namespace FBXpert
             pc.Precision = 0;
             FunctionObject.ParameterIn.Add(pc);
             FunctionObject.Description = "";
-            OldFunctionObject = (FunctionClass) FunctionObject.Clone();
+            OldFunctionObject = (FunctionClass)FunctionObject.Clone();
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             DataToEdit();
             MakeSQL();

@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace FBXpertLib
 {
-    public enum eParameterTypDirection {din=1, dout=0 };
+    public enum eParameterTypDirection { din = 1, dout = 0 };
     public class ParameterClass : DomainClass
     {
         public int Position = 0;
-     //   public int InOutTyp = 0;
+        //   public int InOutTyp = 0;
     }
     public class ProcedureClass : DataObjectClass
     {
@@ -22,7 +22,7 @@ namespace FBXpertLib
         {
             var sb = new StringBuilder();
             sb.AppendLine("<STARTPARAMS>");
-            foreach(var pi in ParameterIn)
+            foreach (var pi in ParameterIn)
             {
                 sb.AppendLine($@"ParameterIN :{pi.Name}->{ pi.RawType}->Length: {pi.Length})");
             }

@@ -13,20 +13,20 @@ using System.Windows.Forms;
 namespace FBXpert
 {
     public partial class PrimaryKeyForm : IEditForm
-    {        
+    {
         private readonly DBRegistrationClass _dbReg = null;
         private int _messagesCount = 0;
         private int _errorCount = 0;
         private readonly NotifiesClass _localNotify = new NotifiesClass();
-      //  private AutocompleteClass _ac = null;
+        //  private AutocompleteClass _ac = null;
         private TableClass _tableObject = null;
         private readonly List<TableClass> _tables;
         private string _oldIndexName = string.Empty;
-        private bool _dataFilled = false;        
+        private bool _dataFilled = false;
         private string _newIndexName = string.Empty;
 
         public List<string> SQLScript = new List<string>();
-        
+
 
         public PrimaryKeyForm(Form parent, List<TableClass> tables, TableClass tableObject, DBRegistrationClass dbReg)
         {
@@ -42,60 +42,60 @@ namespace FBXpert
                     primary_constraint = new PrimaryKeyClass
                     {
                         Name = "NEW_PK",
-                        FieldNames = new Dictionary<string,string> {{"ID","ID"}},
+                        FieldNames = new Dictionary<string, string> { { "ID", "ID" } },
                         Sorting = eSort.ASC
                     }
                 };
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             }
-            else if(tableObject.primary_constraint == null)
+            else if (tableObject.primary_constraint == null)
             {
                 //Tabelle hatte noch keine PK
                 tableObject.primary_constraint = new PrimaryKeyClass
                 {
                     Name = "NEW_PK",
-                    FieldNames = new Dictionary<string,string> {{"ID","ID"}},
+                    FieldNames = new Dictionary<string, string> { { "ID", "ID" } },
                     Sorting = eSort.ASC
                 };
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             }
             else
-            {                
+            {
                 BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
             }
             _tableObject = tableObject;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
-            
+
             _tables = tables;
 
 
-           
-            FillTablesToCombo();                        
+
+            FillTablesToCombo();
             FillSortingToCombo();
             FillTableFieldsToCombo();
-            
+
             if (tableObject == null)
             {
                 _tableObject = cbSourceTable.SelectedItem as TableClass;
                 if (_tableObject.primary_constraint == null)
-                {                 
+                {
                     _tableObject.primary_constraint = new PrimaryKeyClass();
                     _tableObject.primary_constraint.Name = "NEW_PK";
-                    _tableObject.primary_constraint.FieldNames = new Dictionary<string,string>();
-                    _tableObject.primary_constraint.FieldNames.Add(cbFields.Items[0].ToString(),cbFields.Items[0].ToString());
-                    _tableObject.primary_constraint.Sorting = eSort.ASC;                    
+                    _tableObject.primary_constraint.FieldNames = new Dictionary<string, string>();
+                    _tableObject.primary_constraint.FieldNames.Add(cbFields.Items[0].ToString(), cbFields.Items[0].ToString());
+                    _tableObject.primary_constraint.Sorting = eSort.ASC;
                 }
-            }           
-            DataToEdit();            
+            }
+            DataToEdit();
         }
-               
+
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
             StringBuilder sb = new StringBuilder();
             _messagesCount++;
             if (_messagesCount > 0) sb.Append($@"Messages ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"Errors ({_errorCount})");
+            if (_errorCount > 0) sb.Append($@"Errors ({_errorCount})");
 
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -107,7 +107,7 @@ namespace FBXpert
             var sb = new StringBuilder();
             _errorCount++;
             if (_messagesCount > 0) sb.Append($@"Messages ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"Errors ({_errorCount})");
+            if (_errorCount > 0) sb.Append($@"Errors ({_errorCount})");
 
             fctMessages.AppendText($@"ERROR {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -115,7 +115,7 @@ namespace FBXpert
         }
 
         public void MakeSQL()
-        {            
+        {
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit)
             {
                 MakeSQOAlter();
@@ -129,7 +129,7 @@ namespace FBXpert
 
         public void EditToData()
         {
-            if(_tableObject.primary_constraint == null)
+            if (_tableObject.primary_constraint == null)
             {
                 _tableObject.primary_constraint = new PrimaryKeyClass();
             }
@@ -139,10 +139,10 @@ namespace FBXpert
             eSort es = (eSort)cbSorting.Items[cbSorting.SelectedIndex];
             _tableObject.primary_constraint.Sorting = es;
             foreach (ListViewItem lvi in lvFields.Items)
-            {                
-                _tableObject.primary_constraint.FieldNames.Add(lvi.Text,lvi.Text);
+            {
+                _tableObject.primary_constraint.FieldNames.Add(lvi.Text, lvi.Text);
             }
-        }                
+        }
 
         public void SQLToUI()
         {
@@ -177,9 +177,9 @@ namespace FBXpert
                 sb.Append(st);
                 firstdone = true;
             }
-            if(!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
+            if (!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
             {
-                if(!(_tableObject.primary_constraint.Sorting == eSort.ASC))
+                if (!(_tableObject.primary_constraint.Sorting == eSort.ASC))
                 {
                     sb.Append($@"){Environment.NewLine}USING {_tableObject.primary_constraint.Sorting} INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
                 }
@@ -199,7 +199,7 @@ namespace FBXpert
         }
 
         public void MakeSQOAlter()
-        {           
+        {
             SQLScript.Clear();
             StringBuilder sb = new StringBuilder();
             /*
@@ -216,21 +216,21 @@ namespace FBXpert
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}{Environment.NewLine}");
 
             sb.Append($@"ALTER TABLE {_tableObject.Name} ADD CONSTRAINT {_tableObject.primary_constraint.Name} PRIMARY KEY (");
-            
+
             bool firstdone = false;
-            foreach(string  st in _tableObject.primary_constraint.FieldNames.Values)
+            foreach (string st in _tableObject.primary_constraint.FieldNames.Values)
             {
-                if(firstdone)
+                if (firstdone)
                 {
                     sb.Append(",");
-                }                
+                }
                 sb.Append(st);
                 firstdone = true;
             }
-            
-            if(!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
+
+            if (!string.IsNullOrEmpty(_tableObject.primary_constraint.IndexName))
             {
-                if(!(_tableObject.primary_constraint.Sorting == eSort.ASC))
+                if (!(_tableObject.primary_constraint.Sorting == eSort.ASC))
                 {
                     sb.Append($@"){Environment.NewLine}USING {_tableObject.primary_constraint.Sorting} INDEX {_tableObject.primary_constraint.IndexName};{Environment.NewLine}");
                 }
@@ -276,7 +276,7 @@ namespace FBXpert
             cbSorting.Items.Add(eSort.DESC);
         }
 
-        
+
         public void FillTablesToCombo()
         {
             cbSourceTable.Items.Clear();
@@ -289,7 +289,7 @@ namespace FBXpert
             if (!string.IsNullOrEmpty(_tableObject.Name))
             {
                 int inx = cbSourceTable.FindStringExact(_tableObject.Name);
-                cbSourceTable.SelectedIndex = inx; 
+                cbSourceTable.SelectedIndex = inx;
             }
             else
             {
@@ -306,19 +306,19 @@ namespace FBXpert
             var fields = tab.Fields;
             foreach (var dstr in fields.Values)
             {
-                cbFields.Items.Add(dstr.Name);  
+                cbFields.Items.Add(dstr.Name);
             }
         }
 
         public void DataToEdit()
         {
-           txtPKName.Text   = _tableObject.primary_constraint.Name;
-           txtUsingIndex.Text = _tableObject.primary_constraint.IndexName;
-                                                      
-           if(cbFields.Items.Count > 0) cbFields.SelectedIndex = 0;           
-           cbSorting.SelectedItem  = _tableObject.primary_constraint.Sorting;
-                       
-           FillObjectToConstraintFields();
+            txtPKName.Text = _tableObject.primary_constraint.Name;
+            txtUsingIndex.Text = _tableObject.primary_constraint.IndexName;
+
+            if (cbFields.Items.Count > 0) cbFields.SelectedIndex = 0;
+            cbSorting.SelectedItem = _tableObject.primary_constraint.Sorting;
+
+            FillObjectToConstraintFields();
         }
 
         public void SetControlSizes()
@@ -328,7 +328,7 @@ namespace FBXpert
             pnlDependenciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
-         
+
         }
         private void PrimaryKeyForm_Load(object sender, EventArgs e)
         {
@@ -349,7 +349,7 @@ namespace FBXpert
             ac.CreateAutocompleteForDatabase();
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);                        
+            ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
 
@@ -374,55 +374,55 @@ namespace FBXpert
             int inx = cbFields.FindString(lvi.Text);
             cbFields.SelectedIndex = inx;
         }
-        
+
         private void Create()
         {
             var dataSet1 = new DataSet();
             dataSet1.Clear();
-                        
+
             // var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);             
-            var riFailure = riList.Find(x=>x.commandDone == false);                                    
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
 
             _oldIndexName = _newIndexName;
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            
-            string info = (riFailure==null) 
-                ? $@"PrimaryKey {_dbReg.Alias}->{_newIndexName} updated." 
+
+            string info = (riFailure == null)
+                ? $@"PrimaryKey {_dbReg.Alias}->{_newIndexName} updated."
                 : $@"PrimaryKey {_dbReg.Alias}->{_newIndexName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);  
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadIndex, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
         }
 
         private void hsAddField_Click(object sender, EventArgs e)
         {
-            string fieldName = cbFields.SelectedItem.ToString();            
-            _tableObject.primary_constraint.FieldNames.Add(fieldName,fieldName);
+            string fieldName = cbFields.SelectedItem.ToString();
+            _tableObject.primary_constraint.FieldNames.Add(fieldName, fieldName);
             FillObjectToConstraintFields();
             MakeSQL();
         }
-        
+
         private void hsRemoveField_Click(object sender, EventArgs e)
         {
             string fieldName = cbFields.SelectedItem.ToString();
 
-            if(_tableObject.primary_constraint.FieldNames.ContainsKey(fieldName)) _tableObject.primary_constraint.FieldNames.Remove(fieldName);
+            if (_tableObject.primary_constraint.FieldNames.ContainsKey(fieldName)) _tableObject.primary_constraint.FieldNames.Remove(fieldName);
 
-            FillObjectToConstraintFields();            
+            FillObjectToConstraintFields();
             if (_dataFilled) MakeSQL();
         }
-        
+
         private void cbSourceTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_dataFilled || (cbSourceTable.SelectedItem == null)) return;
             var tc = (TableClass)cbSourceTable.SelectedItem;
             _tableObject = tc;
-               
+
             FillTableFieldsToCombo();
             DataToEdit();
             if (!_dataFilled) return;
@@ -450,10 +450,10 @@ namespace FBXpert
             _tableObject.primary_constraint.Name = txtPKName.Text;
             MakeSQL();
         }
-                    
+
         private void hsCreate_Click(object sender, EventArgs e)
         {
-             Create();
+            Create();
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
@@ -468,10 +468,10 @@ namespace FBXpert
         {
             if (saveSQLFile.ShowDialog() == DialogResult.OK)
             {
-               fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
+                fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
             }
         }
-        
+
         private void txtUsingIndex_TextChanged(object sender, EventArgs e)
         {
             if (!_dataFilled) return;

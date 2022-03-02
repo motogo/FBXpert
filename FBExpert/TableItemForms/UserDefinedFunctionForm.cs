@@ -20,8 +20,8 @@ namespace FBXpert
         private NotifiesClass _localNotify = new NotifiesClass();
         private int messages_count = 0;
         private int error_count = 0;
-        
-        public UserDefinedFunctionForm(Form parent, DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cm,StateClasses.EditStateClass.eBearbeiten mode)
+
+        public UserDefinedFunctionForm(Form parent, DBRegistrationClass dbReg, TreeNode tn, ContextMenuStrip cm, StateClasses.EditStateClass.eBearbeiten mode)
         {
             InitializeComponent();
             this.MdiParent = parent;
@@ -29,7 +29,7 @@ namespace FBXpert
             try
             {
                 BearbeitenMode = mode;
-                if(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
+                if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
                 {
                     UserDefinedFunctionObject = new UserDefinedFunctionClass
                     {
@@ -41,12 +41,12 @@ namespace FBXpert
                     UserDefinedFunctionObject = (UserDefinedFunctionClass)tn.Tag;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            OldUserDefinedFunctionObject = (UserDefinedFunctionClass) UserDefinedFunctionObject.Clone();
-                                   
+            OldUserDefinedFunctionObject = (UserDefinedFunctionClass)UserDefinedFunctionObject.Clone();
+
             _dbReg = dbReg;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
@@ -54,7 +54,7 @@ namespace FBXpert
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
-            fctMessages.CurrentLineColor = System.Drawing.Color.Blue;            
+            fctMessages.CurrentLineColor = System.Drawing.Color.Blue;
             fctMessages.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} INFO  {k.Meldung}");
             fctMessages.ScrollLeft();
         }
@@ -67,8 +67,8 @@ namespace FBXpert
         }
 
         public void MakeSQL()
-        {                        
-            SQLScript = StaticDatabaseObjects.Instance().MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject,OldUserDefinedFunctionObject,true);            
+        {
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLDeclareUserDefinedFunction(UserDefinedFunctionObject, OldUserDefinedFunctionObject, true);
             SQLToUI(SQLScript);
             ShowCaptions();
         }
@@ -80,7 +80,7 @@ namespace FBXpert
             fctSQL.Clear();
             foreach (string str in SQLScript)
             {
-               fctSQL.AppendText(str + Environment.NewLine);
+                fctSQL.AppendText(str + Environment.NewLine);
             }
         }
 
@@ -91,26 +91,26 @@ namespace FBXpert
 
         public void SetEnables()
         {
-           
+
         }
 
         public void DataToEdit()
-        {            
+        {
             for (int i = 0; i < UserDefinedFunctionObject.ParameterIn.Count; i++)
-            {                
+            {
                 var pc = UserDefinedFunctionObject.ParameterIn[i];
-                string[] columns = { "IN",pc.Name,pc.RawType };
-                var lvi = new ListViewItem(columns);               
+                string[] columns = { "IN", pc.Name, pc.RawType };
+                var lvi = new ListViewItem(columns);
                 var pci = new ParameterListItem();
                 pci.direction = eParameterTypDirection.din;
                 pci.pc = pc;
-                lvi.Tag = pci;              
+                lvi.Tag = pci;
             }
 
             for (int i = 0; i < UserDefinedFunctionObject.ParameterOut.Count; i++)
-            {                
+            {
                 var pc = UserDefinedFunctionObject.ParameterOut[i];
-                string[] columns = {"OUT",pc.Name,pc.RawType };
+                string[] columns = { "OUT", pc.Name, pc.RawType };
                 var lvi = new ListViewItem(columns);
                 var pci = new ParameterListItem();
                 pci.direction = eParameterTypDirection.dout;
@@ -118,17 +118,17 @@ namespace FBXpert
                 lvi.Tag = pci;
             }
         }
-        
+
         public void EditToData()
         {
-            
+
         }
 
         public void SetControlSizes()
         {
-            pnlFormUpper.Height     = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlSQLUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+            pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
         }
 
         private void UserDefinedFunctionForm_Load(object sender, EventArgs e)
@@ -136,7 +136,7 @@ namespace FBXpert
             SetControlSizes();
             FormDesign.SetFormLeft(this);
             DataToEdit();
-            SetEnables();            
+            SetEnables();
             MakeSQL();
             ac = new AutocompleteClass(fctSQL, _dbReg);
             ac.RefreshAutocompleteForUserDefinedFunction();
@@ -144,35 +144,35 @@ namespace FBXpert
 
         public void ShowCaptions()
         {
-            lblCaption.Text = (UserDefinedFunctionObject != null) ? $@"UserDefinedFunction:{UserDefinedFunctionObject.Name}" : "UserDefinedFunction";            
+            lblCaption.Text = (UserDefinedFunctionObject != null) ? $@"UserDefinedFunction:{UserDefinedFunctionObject.Name}" : "UserDefinedFunction";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit UserDefinedFunction");
         }
-        
+
         private void Create()
         {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
 
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone == false);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-            
-            string info = (riFailure==null) 
-                ? $@"Constraint {_dbReg.Alias}->{UserDefinedFunctionObject.Name} updated." 
-                : $@"Constraint {_dbReg.Alias}->{UserDefinedFunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadUserDefinedFunctions,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);     
 
-            BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;            
+            string info = (riFailure == null)
+                ? $@"Constraint {_dbReg.Alias}->{UserDefinedFunctionObject.Name} updated."
+                : $@"Constraint {_dbReg.Alias}->{UserDefinedFunctionObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadUserDefinedFunctions, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
+
+            BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
         }
-        
+
         private void hsSave_Click(object sender, EventArgs e)
-        {            
+        {
             Create();
         }
-      
+
         private void hsNew_Click(object sender, EventArgs e)
         {
             UserDefinedFunctionObject = new UserDefinedFunctionClass();
@@ -187,7 +187,7 @@ namespace FBXpert
 
             UserDefinedFunctionObject.ParameterOut.Add(pc);
             pc = new ParameterClass();
-            
+
             pc.Name = "XX";
             pc.RawType = "INTEGER";
             pc.FieldType = "LONG";
@@ -196,7 +196,7 @@ namespace FBXpert
             pc.Precision = 0;
             UserDefinedFunctionObject.ParameterIn.Add(pc);
             UserDefinedFunctionObject.Description = "";
-            OldUserDefinedFunctionObject = (UserDefinedFunctionClass) UserDefinedFunctionObject.Clone();
+            OldUserDefinedFunctionObject = (UserDefinedFunctionClass)UserDefinedFunctionObject.Clone();
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             DataToEdit();
             MakeSQL();
@@ -219,21 +219,21 @@ namespace FBXpert
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone == false);      
-            var riOk = riList.Find(x=>x.commandDone == true);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
+            var riOk = riList.Find(x => x.commandDone == true);
             long costs = AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
-            
+
             var sb = new StringBuilder();
-            if(riFailure != null)
-            {                
+            if (riFailure != null)
+            {
                 messages_count++;
                 if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-                if (error_count > 0)    sb.Append($@"Errors ({error_count})");           
+                if (error_count > 0) sb.Append($@"Errors ({error_count})");
             }
-                                   
+
             tabPageMessages.Text = sb.ToString();
-            fctMessages.ScrollLeft();            
+            fctMessages.ScrollLeft();
             lblUsedMs.Text = costs.ToString();
         }
     }

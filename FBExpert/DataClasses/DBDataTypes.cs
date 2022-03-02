@@ -29,7 +29,7 @@ namespace FBXpert.DataClasses
         {
             get
             {
-               return Caption;
+                return Caption;
             }
         }
 
@@ -241,11 +241,11 @@ namespace FBXpert.DataClasses
 
     class DBTypeList
     {
-        
+
         public List<DBDataTypes> Values = new List<DBDataTypes>();
         public DBTypeList()
         {
-            
+
             Values.Add(new DBVarchar());
             Values.Add(new DBInteger());
             Values.Add(new DBSmallInt());
@@ -258,5 +258,5 @@ namespace FBXpert.DataClasses
         }
 
     }
-    
+
 }

@@ -2,7 +2,7 @@
 {
 
     public class PrimaryKeyClass : ConstraintsClass
-    {        
+    {
         public PrimaryKeyClass()
         {
             ConstraintType = eConstraintType.PRIMARYKEY;
@@ -15,7 +15,7 @@
         public override string ToString()
         {
             return Name;
-            
+
         }
     }
 }

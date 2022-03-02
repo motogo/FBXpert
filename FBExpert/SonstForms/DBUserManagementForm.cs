@@ -30,23 +30,23 @@ namespace FBXpert
 
         private void ErrorRaised(object sender, MessageEventArgs k)
         {
-            
+
         }
 
         private void InfoRaised(object sender, MessageEventArgs k)
         {
-            
+
         }
 
         public void GetConnections()
         {
-           
-           
+
+
         }
         public bool DataOK()
         {
             int ok = 0;
-            
+
             SetDefaultColor();
             ok += FormularUtilsClass.Instance.MarkTextBoxWhenTextEmpty(txtPassword);
             ok += FormularUtilsClass.Instance.MarkTextBoxWhenTextEmpty(txtUserName);
@@ -57,11 +57,11 @@ namespace FBXpert
         {
             GetConnections();
             try
-            { 
+            {
                 string cmd = SQLStatementsClass.Instance.GetUsers(DBReg.Version);
                 dsMonConnections.Clear();
                 dgvMonConnections.AutoGenerateColumns = true;
-                
+
                 var con = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(DBReg));
                 var ds = new FbDataAdapter(cmd, con);
                 ds.Fill(dsMonConnections);
@@ -70,9 +70,9 @@ namespace FBXpert
                 return dsMonConnections.Tables[0].Rows.Count;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                 NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));
+                NotifiesClass.Instance.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshMonitorConnections()", ex));
             }
             bsUsers.DataMember = "Table";
             return dsMonConnections.Tables[0].Rows.Count;
@@ -106,7 +106,7 @@ namespace FBXpert
 
         private void DBUserManagementForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 
         private void txtTick_TextChanged(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace FBXpert
 
         private void cbTick_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbTick.Checked)
+            if (cbTick.Checked)
             {
                 int tk = StaticFunctionsClass.ToIntDef(txtTick.Text, 0);
                 if (tk > 0)
@@ -137,7 +137,7 @@ namespace FBXpert
 
         public void AutoRefresh()
         {
-            if(cbRefreshActiveConnections.Checked)
+            if (cbRefreshActiveConnections.Checked)
             {
                 RefreshUsers();
             }
@@ -168,7 +168,7 @@ namespace FBXpert
             RefreshUsers();
         }
 
-        enum ePlugin {Srp=0, Legacy_UserManager =1}
+        enum ePlugin { Srp = 0, Legacy_UserManager = 1 }
         class UserData
         {
             public string username { set; get; }
@@ -188,7 +188,7 @@ namespace FBXpert
         {
             try
             {
-                DataRowView ob = (DataRowView) bsUsers.Current;
+                DataRowView ob = (DataRowView)bsUsers.Current;
                 if (ob != null)
                 {
                     userData.username = ob.Row["SEC$USER_NAME"].ToString().Trim();
@@ -197,15 +197,15 @@ namespace FBXpert
                     userData.lastname = ob.Row["SEC$LAST_NAME"].ToString().Trim();
 
                     var oba = ob.Row["SEC$ACTIVE"];
-                    Type ts =oba.GetType();
-                    userData.active = ts == typeof(System.DBNull) ? false : (bool) oba;
+                    Type ts = oba.GetType();
+                    userData.active = ts == typeof(System.DBNull) ? false : (bool)oba;
 
                     oba = ob.Row["SEC$ADMIN"];
                     ts = oba.GetType();
-                    userData.admin = ts == typeof(System.DBNull) ? false : (bool) oba;
+                    userData.admin = ts == typeof(System.DBNull) ? false : (bool)oba;
 
                     string pluginStr = ob.Row["SEC$PLUGIN"].ToString().Trim();
-                    if(pluginStr == ePlugin.Srp.ToString())
+                    if (pluginStr == ePlugin.Srp.ToString())
                     {
                         userData.plugin = ePlugin.Srp;
                     }
@@ -260,7 +260,7 @@ namespace FBXpert
             fctSQL.Text = string.Empty;
             ePlugin pl = (rbLegacy.Checked) ? ePlugin.Legacy_UserManager : ePlugin.Srp;
             string cmd = $@"CREATE USER {txtUserName.Text} ";
-            if(txtFirstName.Text.Length > 0)
+            if (txtFirstName.Text.Length > 0)
             {
                 cmd += $@"FIRSTNAME '{txtFirstName.Text}' ";
             }
@@ -284,7 +284,7 @@ namespace FBXpert
             cmd += $@"USING PLUGIN {pl.ToString()} ";
             if (rbIsAdmin.Checked)
             {
-              cmd += "GRANT ADMIN ROLE";
+                cmd += "GRANT ADMIN ROLE";
             }
             cmd += ";";
             cmd += Environment.NewLine;
@@ -307,7 +307,7 @@ namespace FBXpert
 
             var riList = _sql.ExecuteCommands(fctSQL.Lines);
             var riFailure = riList.Find(x => x.commandDone == false);
-            
+
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
             _localNotify.Notify.RaiseInfo("info", StaticVariablesClass.ReloadFields);
@@ -329,7 +329,7 @@ namespace FBXpert
         {
             hsExecute.Enabled = false;
             hsSaveSQL.Enabled = false;
-            if(DataOK())
+            if (DataOK())
             {
                 DropUserSQL();
                 hsExecute.Enabled = true;
@@ -346,7 +346,7 @@ namespace FBXpert
             ePlugin pl = (rbLegacy.Checked) ? ePlugin.Legacy_UserManager : ePlugin.Srp;
             string cmd = $@"DROP USER {txtUserName.Text} ";
             cmd += $@"USING PLUGIN {pl};";
-            
+
             cmd += Environment.NewLine;
             cmd += Environment.NewLine;
             cmd += "COMMIT;";
@@ -355,7 +355,7 @@ namespace FBXpert
 
         private void hsUpdateUser_Click(object sender, EventArgs e)
         {
-            
+
             hsExecute.Enabled = false;
             hsSaveSQL.Enabled = false;
             if (DataOK())
@@ -415,7 +415,7 @@ namespace FBXpert
         {
             FormularUtilsClass.Instance.SetTextToDefaultColor(txtPassword);
             FormularUtilsClass.Instance.SetTextToDefaultColor(txtUserName);
-            
+
         }
 
         private void hsClearData_Click(object sender, EventArgs e)
@@ -444,7 +444,7 @@ namespace FBXpert
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
-                if(con.State != ConnectionState.Open) con.Close();
+                if (con.State != ConnectionState.Open) con.Close();
                 con.Open();
                 Thread.Sleep(100);
                 if (con.State == ConnectionState.Open)
@@ -454,9 +454,9 @@ namespace FBXpert
                     con.Close();
                     txtOpenResult.Text = "succeeded";
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 pnlConnectState.BackColor = System.Drawing.Color.Red;
                 txtOpenResult.Text = ex.Message;

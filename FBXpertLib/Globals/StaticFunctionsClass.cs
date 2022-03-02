@@ -18,7 +18,7 @@ namespace FBXpertLib
         public SqlStack(int istart, int iend, int ilevel, string s)
         {
             inxStart = istart;
-            inxEnd   = iend;
+            inxEnd = iend;
             level = ilevel;
         }
     };
@@ -36,7 +36,7 @@ namespace FBXpertLib
         }
         public static string FormatTab(int lvl)
         {
-            return String.Format(Frm(lvl), "","");
+            return String.Format(Frm(lvl), "", "");
         }
         public static string BlockStart(int i)
         {
@@ -49,7 +49,7 @@ namespace FBXpertLib
         }
     }
 
-    public static class AppStaticFunctionsClass
+    public class AppStaticFunctionsClass
     {
         public static string getErrorPosText(string errorstring)
         {
@@ -365,10 +365,10 @@ namespace FBXpertLib
             foreach (var dbr in DatabaseDefinitions.Instance.Databases)
             {
                 cbConnection.Items.Add(dbr);
-                if(dbr.Alias == regDB.Alias) inx = cbConnection.Items.Count - 1;
+                if (dbr.Alias == regDB.Alias) inx = cbConnection.Items.Count - 1;
             }
             cbConnection.SelectedIndex = inx;
-            
+
             if (cbConnection.SelectedIndex < 0 && cbConnection.Items.Count > 0)
             {
                 cbConnection.SelectedIndex = 0;
@@ -421,7 +421,7 @@ namespace FBXpertLib
                 blob = BitConverter.GetBytes(((DateTime)v).Ticks);
                 typestr += "as Ticks (100ns)";
             }
-            
+
             BlobEditForm bef = new BlobEditForm(typestr, $@"Field:{tableName}->{FieldName}");
             bef.SetBytes(blob);
             bef.ShowDialog();

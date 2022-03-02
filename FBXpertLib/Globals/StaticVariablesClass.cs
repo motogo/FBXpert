@@ -1,18 +1,21 @@
 ﻿using BasicClassLibrary;
 using Initialization;
-using System.Text;
 
 namespace FBXpertLib
 {
-    public static class StaticVariablesClass
+    public class StaticVariablesClass
     {
-        public static object FbRelationTypeIndex { get; internal set; }
-
-        public static string ToMark(bool ft)
+        // public static object FbRelationTypeIndex { get; internal set; }
+        /*
+         public static string ToMark(bool ft)
+         {
+             return ft ? "*" : "";
+         }
+         */
+        public StaticVariablesClass()
         {
-            return ft ? "*" : "";
+
         }
-        
         public static eConstraintType GetConstraintType(string ct)
         {
             switch (ct.ToUpper())
@@ -30,7 +33,7 @@ namespace FBXpertLib
 
         public static string CompleteRawType(string name, int length)
         {
-            if(name.ToUpper().StartsWith("VARCHAR"))
+            if (name.ToUpper().StartsWith("VARCHAR"))
             {
                 return ($@"VARCHAR({length})");
             }
@@ -44,18 +47,18 @@ namespace FBXpertLib
             {
                 case "LONG":
                     return "INTEGER"; //HE
-                    
+
                 case "INT64":
                     return "BIGINT"; //HE
-                    
-                case "TIMESTAMP":                    
+
+                case "TIMESTAMP":
                 case "TIMESTAMP WITH TIMEZONE":
                     return "TIMESTAMP"; //HE
 
                 case "TIME":
                     return "TIME";
                 default:
-                    if ((name == "VARYING")||(name.StartsWith("ISO"))||(name.StartsWith("UTF")) || (name.StartsWith("ASCII")) || (name.StartsWith("TEXT")))
+                    if ((name == "VARYING") || (name.StartsWith("ISO")) || (name.StartsWith("UTF")) || (name.StartsWith("ASCII")) || (name.StartsWith("TEXT")))
                     {
                         return "VARCHAR(" + length + ")";
                     }
@@ -83,7 +86,7 @@ namespace FBXpertLib
                     {
                         return "BLOB";
                     }
-                    
+
 
                     break;
             }
@@ -91,12 +94,12 @@ namespace FBXpertLib
             return "UNDEFINED";
         }
 
-        
+
         public static string ConvertRawTypeToRawName(string name)
-        {            
-            if (name.StartsWith("VARCHAR")|| name.StartsWith("TEXT"))
+        {
+            if (name.StartsWith("VARCHAR") || name.StartsWith("TEXT"))
             {
-                return ("VARCHAR");                
+                return ("VARCHAR");
             }
             else if (name.StartsWith("INT64"))
             {
@@ -106,7 +109,7 @@ namespace FBXpertLib
             {
                 return ("BOOLEAN");
             }
-            
+
             else if (name.StartsWith("BLOB"))
             {
                 return ("BLOB");
@@ -119,7 +122,7 @@ namespace FBXpertLib
             {
                 return ("NUMERIC");
             }
-            else if (name.StartsWith("INTEGER")|| name.StartsWith("LONG"))
+            else if (name.StartsWith("INTEGER") || name.StartsWith("LONG"))
             {
                 return ("INTEGER");
             }
@@ -149,12 +152,12 @@ namespace FBXpertLib
             }
             return "";
         }
-       
+
         public static string ConvertRawNameToRawType(string name)
-        {            
-            if (name.StartsWith("VARCHAR")|| name.StartsWith("TEXT"))
+        {
+            if (name.StartsWith("VARCHAR") || name.StartsWith("TEXT"))
             {
-                return ("VARYING");                
+                return ("VARYING");
             }
             else if (name.StartsWith("BIGINT"))
             {
@@ -168,7 +171,7 @@ namespace FBXpertLib
             {
                 return ("BOOLEAN");
             }
-            
+
             else if (name.StartsWith("BLOB"))
             {
                 return ("BLOB");
@@ -211,7 +214,7 @@ namespace FBXpertLib
             }
             return "";
         }
-
+        /*
         public static int GetRawTypeLength(string name)
         {
             if (!name.StartsWith("VARCHAR")) return 0;
@@ -221,12 +224,12 @@ namespace FBXpertLib
             string nstr = name.Substring(pos1, pos2 - pos1);
             return int.Parse(nstr);
         }
-
+        */
         public static bool HasRawLength(string name)
         {
             return name.StartsWith("VARCHAR");
         }
-
+        /*
         public static int ConvertRawTypeToPrecision(string name)
         {
             if (!name.StartsWith("NUMERIC")) return 0;
@@ -237,7 +240,8 @@ namespace FBXpertLib
             return int.Parse(nstr);
 
         }
-
+        */
+        /*
         public static Encoding ConvertTextToEncoding(string enc)
         {
             if (enc.ToUpper() == "NONE")
@@ -254,7 +258,7 @@ namespace FBXpertLib
 
             return Encoding.Default;
         }
-        
+        */
         public const string TablesKeyStr = "TABLES";
         public const string SystemTablesKeyStr = "SYSTEM_TABLES";
         public const string ViewsKeyGroupStr = "VIEWS_GROUP";
@@ -280,10 +284,10 @@ namespace FBXpertLib
         public const string GeneratorsKeyGroupStr = "GENERATORS_GROUP";
         public const string ProceduresKeyStr = "PROCEDURES";
         public const string ProceduresKeyGroupStr = "PROCEDURES_GROUP";
-        
-        public const string FunctionsKeyStr = "FUNCTIONS";        
+
+        public const string FunctionsKeyStr = "FUNCTIONS";
         public const string FunctionsKeyGroupStr = "FUNCTIONS_GROUP";
-        public const string UserDefinedFunctionsKeyStr = "USER_DEFINED_FUNCTIONS";        
+        public const string UserDefinedFunctionsKeyStr = "USER_DEFINED_FUNCTIONS";
         public const string UserDefinedFunctionsKeyGroupStr = "USER_DEFINED_FUNCTIONS_GROUP";
 
         public const string TriggersKeyStr = "TRIGGERS";
@@ -337,52 +341,85 @@ namespace FBXpertLib
         public const string DependenciesFromProceduresKeyStr = "DEPENDENCYFROMPROCEDURES";
         public const string DependenciesFromProceduresKeyGroupStr = "DEPENDENCYFROMPROCEDURES_GROUP";
 
-        public static readonly string ExportPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\exports";
-        public static readonly string ScriptPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\scripts";
-        public static readonly string ReportPath            = $@"{ApplicationPathClass.Instance.ApplicationPath}\reports";
-        public static readonly string SQLExportPath         = $@"{ApplicationPathClass.Instance.ApplicationPath}\exports\\sql";
-        public static readonly string ExperienceInfoPath    = $@"{ApplicationPathClass.Instance.ApplicationPath}\info";
-        public static readonly string ExperienceInfoFile    = "InfoExpierenceData.db";
-        public static readonly string InitialTerminator = ";";
-        public static readonly string AlternativeTerminator = "~";
-        public static readonly string SingleLineComment = "--";
-        public static readonly string CommentStart = "/*";
-        public static readonly string CommentEnd = "*/";
-        public static readonly string Collation = "NONE";
-        public static readonly string NullStr = "null";
-        public static readonly int SQLSkipForSelect = 1000;
-        public static readonly int SQLMaxRowForSelect = 0;
+        public static string ExportPath
+        {
+            get
+            {
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\exports";
+            }
+        }
+        public static string ScriptPath
+        {
+            get
+            {
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\scripts";
+            }
+        }
+        public static string ReportPath
+        {
+            get
+            {
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\reports";
+            }
+        }
+        public static string SQLExportPath
+        {
+            get
+            {
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\exports\\sql";
+            }
+        }
+        public static string ExperienceInfoPath
+        {
+            get
+            {
+                return $@"{ApplicationPathClass.Instance.ApplicationPath}\info";
+            }
+        }
 
-        public static readonly string UNIQUEStr = "UNIQUE";
-        public static readonly string CREATEStr = "CREATE";
 
-        public static readonly string DatabaseConfigDataSaved = "CONFIG_DATA_SAVED";
-        public static readonly string ReloadIndex = "RELOAD_INDEX";
-        public static readonly string ReloadAllIndex = "RELOAD_ALL_INDEX";
-        public static readonly string ReloadConstraits = "RELOAD_CONSTRAINTS";
-        public static readonly string ReloadAllConstraits = "RELOAD_ALL_CONSTRAINTS";
-        public static readonly string ReloadForeignKeys = "RELOAD_FOREIGNKEYS";
-        public static readonly string ReloadForeignKeysForTable = "RELOAD_TABLE_FOREIGNKEYS";
-        public static readonly string ReloadConstraintsKeysForTable = "RELOAD_CONTRAINTS_FOREIGNKEYS";
-        public static readonly string ReloadAllForeignKeys = "RELOAD_ALL_FOREIGNKEYS";
-        public static readonly string ReloadAllViews = "RELOAD_ALL_VIEWS";
-        public static readonly string ReloadViews = "RELOAD_VIEWS";
-        public static readonly string ReloadDomains = "RELOAD_DOMAINS";
-        public static readonly string ReloadFunctions = "RELOAD_FUNCTIONS";
-        public static readonly string ReloadUserDefinedFunctions = "RELOAD_USER_DEFINED_FUNCTIONS";
-        public static readonly string ReloadGenerators = "RELOAD_GENERATORS";
-        public static readonly string ReloadProcedures = "RELOAD_PROCEDURES";
-        public static readonly string ReloadAllTables = "RELOAD_ALL_TABLES";
-        public static readonly string ReloadTable = "RELOAD_TABLE";
-        public static readonly string ReloadFields = "RELOAD_FIELDS";
-        public static readonly string ReloadTriggers = "RELOAD_TRIGGERS";
-        public static readonly string StartLoadDatabases = "START_LOAD_DATABASES";
-        public static readonly string EndLoadDatabases = "END_LOAD_DATABASES";
-        public static readonly string CommandDone = "COMMAND_DONE";
-        public static readonly string CommandPrepared = "COMMAND_PREPARED";
-        public static readonly string AddCommandLine = "ADD_COMMAND_LINE";
-        public static readonly string ClearNotifies = "CLEAR_NOTIFIES";
-        public static readonly string ShowDatabaseStatistics = "SHOW_DATABASE_STATISTICS";
+
+        public const string ExperienceInfoFile = "InfoExpierenceData.db";
+        public const string InitialTerminator = ";";
+        public const string AlternativeTerminator = "~";
+        public const string SingleLineComment = "--";
+        public const string CommentStart = "/*";
+        public const string CommentEnd = "*/";
+        public const string Collation = "NONE";
+        public const string NullStr = "null";
+        public const int SQLSkipForSelect = 1000;
+        public const int SQLMaxRowForSelect = 0;
+
+        public const string UNIQUEStr = "UNIQUE";
+        public const string CREATEStr = "CREATE";
+
+        public const string DatabaseConfigDataSaved = "CONFIG_DATA_SAVED";
+        public const string ReloadIndex = "RELOAD_INDEX";
+        public const string ReloadAllIndex = "RELOAD_ALL_INDEX";
+        public const string ReloadConstraits = "RELOAD_CONSTRAINTS";
+        public const string ReloadAllConstraits = "RELOAD_ALL_CONSTRAINTS";
+        public const string ReloadForeignKeys = "RELOAD_FOREIGNKEYS";
+        public const string ReloadForeignKeysForTable = "RELOAD_TABLE_FOREIGNKEYS";
+        public const string ReloadConstraintsKeysForTable = "RELOAD_CONTRAINTS_FOREIGNKEYS";
+        public const string ReloadAllForeignKeys = "RELOAD_ALL_FOREIGNKEYS";
+        public const string ReloadAllViews = "RELOAD_ALL_VIEWS";
+        public const string ReloadViews = "RELOAD_VIEWS";
+        public const string ReloadDomains = "RELOAD_DOMAINS";
+        public const string ReloadFunctions = "RELOAD_FUNCTIONS";
+        public const string ReloadUserDefinedFunctions = "RELOAD_USER_DEFINED_FUNCTIONS";
+        public const string ReloadGenerators = "RELOAD_GENERATORS";
+        public const string ReloadProcedures = "RELOAD_PROCEDURES";
+        public const string ReloadAllTables = "RELOAD_ALL_TABLES";
+        public const string ReloadTable = "RELOAD_TABLE";
+        public const string ReloadFields = "RELOAD_FIELDS";
+        public const string ReloadTriggers = "RELOAD_TRIGGERS";
+        public const string StartLoadDatabases = "START_LOAD_DATABASES";
+        public const string EndLoadDatabases = "END_LOAD_DATABASES";
+        public const string CommandDone = "COMMAND_DONE";
+        public const string CommandPrepared = "COMMAND_PREPARED";
+        public const string AddCommandLine = "ADD_COMMAND_LINE";
+        public const string ClearNotifies = "CLEAR_NOTIFIES";
+        public const string ShowDatabaseStatistics = "SHOW_DATABASE_STATISTICS";
 
 
 

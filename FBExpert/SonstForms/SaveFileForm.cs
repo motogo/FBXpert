@@ -10,8 +10,8 @@ namespace FBXpert
         public SaveFileForm()
         {
             InitializeComponent();
-          
-         
+
+
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -19,14 +19,14 @@ namespace FBXpert
             Close();
         }
 
-        
-       
+
+
 
         DialogResult dres = DialogResult.None;
         private void hsSelectFolder_Click(object sender, EventArgs e)
         {
             dres = sfdFile.ShowDialog();
-            if(dres == DialogResult.OK)
+            if (dres == DialogResult.OK)
             {
                 fname = sfdFile.FileName;
                 txtFileName.Text = fname;
@@ -57,17 +57,17 @@ namespace FBXpert
         {
             set
             {
-               gbFileName.Text = value;
+                gbFileName.Text = value;
             }
         }
 
-      
+
 
         string fname = string.Empty;
         public string FileName
         {
             get
-            {                
+            {
                 return fname;
             }
             set
@@ -80,7 +80,7 @@ namespace FBXpert
         {
             FormDesign.SetFormLeft(this);
             fname = string.Empty;
-            
+
         }
 
         private void hsClose_Click_1(object sender, EventArgs e)

@@ -31,56 +31,56 @@ namespace SEDiagramms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         ActionClass Action = ActionClass.Instance();
 
         private void ssTable_MouseDown(object sender, MouseEventArgs e)
         {
-         /*   
-            if (e.Button == MouseButtons.Right)
-            {
-                //Move Table
-                Control c = (Control)sender;
-                diffx = c.Width - e.X;
-                diffy = c.Height - e.Y;
-                cwidth = c.Width + 16;
-                cheight = c.Parent.Parent.Height-c.Height;
-                if ((diffx > 0) && (diffx < 32))
-                {
-                    Action.crtl = (Control)sender;
-                    Action.mainctrl = Action.crtl.Parent.Parent;
-                    Action.parent = this;
-                    Action.action = eAction.OnMove;
-                    Action.crtl.BackColor = Color.AliceBlue;
-                }
-            }
-            else if(e.Button == MouseButtons.Left)
-            {
-                //Resize Table
-                Control c = (Control)sender;
-                diffx = c.Width - e.X;
-                diffy = c.Height - e.Y;
-                cwidth = c.Width + 16;
-                cheight = c.Parent.Parent.Height - c.Height;
-                if ((diffx > 0) && (diffx < 32))
-                {
-                    Action.crtl = (Control)sender;
-                    Action.mainctrl = Action.crtl.Parent.Parent;
-                    Action.parent = this;
-                    Action.action = eAction.OnResize;
-                    Action.crtl.BackColor = Color.AliceBlue;
-                }
-            }
-            */
+            /*   
+               if (e.Button == MouseButtons.Right)
+               {
+                   //Move Table
+                   Control c = (Control)sender;
+                   diffx = c.Width - e.X;
+                   diffy = c.Height - e.Y;
+                   cwidth = c.Width + 16;
+                   cheight = c.Parent.Parent.Height-c.Height;
+                   if ((diffx > 0) && (diffx < 32))
+                   {
+                       Action.crtl = (Control)sender;
+                       Action.mainctrl = Action.crtl.Parent.Parent;
+                       Action.parent = this;
+                       Action.action = eAction.OnMove;
+                       Action.crtl.BackColor = Color.AliceBlue;
+                   }
+               }
+               else if(e.Button == MouseButtons.Left)
+               {
+                   //Resize Table
+                   Control c = (Control)sender;
+                   diffx = c.Width - e.X;
+                   diffy = c.Height - e.Y;
+                   cwidth = c.Width + 16;
+                   cheight = c.Parent.Parent.Height - c.Height;
+                   if ((diffx > 0) && (diffx < 32))
+                   {
+                       Action.crtl = (Control)sender;
+                       Action.mainctrl = Action.crtl.Parent.Parent;
+                       Action.parent = this;
+                       Action.action = eAction.OnResize;
+                       Action.crtl.BackColor = Color.AliceBlue;
+                   }
+               }
+               */
         }
 
-        
+
 
         private void ssTable_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
 
 
             /*
@@ -140,7 +140,7 @@ namespace SEDiagramms
         private void gbTable_MouseHover(object sender, EventArgs e)
         {
             Point pt = GetCursorPosition();
-          //  int xmin = pt.X - gbTable = pt.X - this.Left -  + 8;
+            //  int xmin = pt.X - gbTable = pt.X - this.Left -  + 8;
             //gbTable.Top = pt.Y - this.Top - gbTable.Top - 20;
         }
 
@@ -151,7 +151,7 @@ namespace SEDiagramms
 
         private void hsPickTable_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void button1_MouseClick(object sender, MouseEventArgs e)
@@ -159,13 +159,13 @@ namespace SEDiagramms
 
         }
 
-       
+
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
 
-           
+
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,12 +191,12 @@ namespace SEDiagramms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-           
+
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-           
+
         }
         double fakt = 1;
         private void trackBar3_Scroll(object sender, EventArgs e)
@@ -209,7 +209,7 @@ namespace SEDiagramms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            float z = (float) StaticFunctionsClass.ToDoubleDef(textBox1.Text, 1.0);
+            float z = (float)StaticFunctionsClass.ToDoubleDef(textBox1.Text, 1.0);
 
             DatabaseDesignForm.Instance.SetZoom(z);
         }

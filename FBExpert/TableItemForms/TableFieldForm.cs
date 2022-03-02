@@ -16,7 +16,7 @@ namespace FBExpert
         TableFieldClass FieldObject = null;
         string TabName = string.Empty;
         DBRegistrationClass DBReg = null;
-        public TableFieldForm(DBRegistrationClass dbReg, Form parent,  TableFieldClass fieldsObject, string tabName)
+        public TableFieldForm(DBRegistrationClass dbReg, Form parent, TableFieldClass fieldsObject, string tabName)
         {
             InitializeComponent();
             DBReg = dbReg;
@@ -36,21 +36,21 @@ namespace FBExpert
             {
                 lblTableName.Text = "Edit Table Field";
             }
-            this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Edit Table Field");            
+            this.Text = DevelopmentClass.Instance().GetDBInfo(DBReg, "Edit Table Field");
         }
 
         public void DataToEdit()
         {
-            txtFieldName.Text       = FieldObject.Name;
-            txtFieldLength.Text     = FieldObject.Domain.Length.ToString();
-            txtFieldType.Text       = FieldObject.Domain.FieldType.ToString();
-            txtFieldRawType.Text    = FieldObject.Domain.RawType.ToString();
-            txtDomain.Text          = FieldObject.Domain.Name;
-            txtFieldScale.Text      = FieldObject.Domain.Scale.ToString();
-            fctDescription.Text     = FieldObject.Domain.Description;
-            txtFieldCharSet.Text    = FieldObject.Domain.CharSet;
-            txtFieldCollate.Text    = FieldObject.Domain.Collate;
-            cbNotNull.Checked = FieldObject.Domain.NotNull;            
+            txtFieldName.Text = FieldObject.Name;
+            txtFieldLength.Text = FieldObject.Domain.Length.ToString();
+            txtFieldType.Text = FieldObject.Domain.FieldType.ToString();
+            txtFieldRawType.Text = FieldObject.Domain.RawType.ToString();
+            txtDomain.Text = FieldObject.Domain.Name;
+            txtFieldScale.Text = FieldObject.Domain.Scale.ToString();
+            fctDescription.Text = FieldObject.Domain.Description;
+            txtFieldCharSet.Text = FieldObject.Domain.CharSet;
+            txtFieldCollate.Text = FieldObject.Domain.Collate;
+            cbNotNull.Checked = FieldObject.Domain.NotNull;
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -64,13 +64,13 @@ namespace FBExpert
         {
             string cmd0 = "SELECT RDB$FIELDS.RDB$FIELD_NAME,RDB$FIELDS.RDB$CHARACTER_LENGTH,RDB$FIELDS.RDB$FIELD_SCALE,RDB$FIELD_PRECISION,RDB$FIELDS.RDB$FIELD_TYPE,RDB$FIELDS.RDB$DESCRIPTION,RDB$TYPES.RDB$TYPE_NAME FROM RDB$FIELDS";
             string cmd1 = "LEFT JOIN RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FIELDS.RDB$FIELD_TYPE";
-            string where = "WHERE RDB$FIELDS.RDB$FIELD_NAME = '" + FieldObject.Domain+ "' AND RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'";
-            string cmd = cmd0 + " " + cmd1 + " " +where+";";
+            string where = "WHERE RDB$FIELDS.RDB$FIELD_NAME = '" + FieldObject.Domain + "' AND RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'";
+            string cmd = cmd0 + " " + cmd1 + " " + where + ";";
 
             ConnectionClass cc = ConnectionPoolClass.Instance.GetConnection("C1");
             cc.ShowExceptionMode = MessageLibrary.ShowError.no;
             DbDataReader dr = cc.ExecuteQuery(cmd, false);
-            
+
             if (dr != null)
             {
                 if (cc.HasRows())
@@ -79,14 +79,14 @@ namespace FBExpert
                     while (cc.Read())
                     {
                         DomainObject = DataClassFactory.GetDataClass(StaticVariablesClass.DomainsKeyStr) as DomainClass;
-                        DomainObject.Name           = cc.GetValue(0).ToString().Trim();
-                        DomainObject.Length         = StaticFunctionsClass.ToIntDef(cc.GetValue(1).ToString().Trim(), 0);
-                        DomainObject.Scale          = StaticFunctionsClass.ToIntDef(cc.GetValue(2).ToString().Trim(), 0);
-                        DomainObject.Precision      = StaticFunctionsClass.ToIntDef(cc.GetValue(3).ToString().Trim(), 0);
-                        DomainObject.TypeNumber     = StaticFunctionsClass.ToIntDef(cc.GetValue(4).ToString().Trim(), 0);
-                        DomainObject.FieldType      = cc.GetValue(6).ToString().Trim();
-                        DomainObject.RawType        = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(DomainObject.FieldType, DomainObject.Length);
-                        DomainObject.Description    = cc.GetValue(5).ToString().Trim();
+                        DomainObject.Name = cc.GetValue(0).ToString().Trim();
+                        DomainObject.Length = StaticFunctionsClass.ToIntDef(cc.GetValue(1).ToString().Trim(), 0);
+                        DomainObject.Scale = StaticFunctionsClass.ToIntDef(cc.GetValue(2).ToString().Trim(), 0);
+                        DomainObject.Precision = StaticFunctionsClass.ToIntDef(cc.GetValue(3).ToString().Trim(), 0);
+                        DomainObject.TypeNumber = StaticFunctionsClass.ToIntDef(cc.GetValue(4).ToString().Trim(), 0);
+                        DomainObject.FieldType = cc.GetValue(6).ToString().Trim();
+                        DomainObject.RawType = StaticVariablesClass.ConvertINTERNALType_TO_SQLType(DomainObject.FieldType, DomainObject.Length);
+                        DomainObject.Description = cc.GetValue(5).ToString().Trim();
                         n++;
                     }
                 }
@@ -97,7 +97,7 @@ namespace FBExpert
         private void hsEditDomain_Click(object sender, EventArgs e)
         {
             RefreshDomain();
-            DomainForm df = new DomainForm(FbXpertMainForm.Instance(), DBReg,  DomainObject);
+            DomainForm df = new DomainForm(FbXpertMainForm.Instance(), DBReg, DomainObject);
             df.SetBearbeitenMode(EditStateClass.eBearbeiten.eEdit);
             df.Show();
         }
@@ -110,7 +110,7 @@ namespace FBExpert
             string cmd_index0 = "SELECT RDB$INDICES.RDB$INDEX_NAME as Name,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE as FieldType";
             string cmd_index1 = "FROM RDB$INDICES";
             string cmd_index2 = "LEFT JOIN RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDICES.RDB$INDEX_NAME";
-            string cmd_index_where = "WHERE RDB$INDICES.RDB$RELATION_NAME = '" +TabName + "'";
+            string cmd_index_where = "WHERE RDB$INDICES.RDB$RELATION_NAME = '" + TabName + "'";
 
             string cmd_index = cmd_index0 + " " + cmd_index1 + " " + cmd_index2 + " " + cmd_index_where + ";";
 
@@ -130,7 +130,7 @@ namespace FBExpert
             
             sb.Append(";");
             */
-           
+
 
             cc.FillDataset(cmd_index, dataSet1);
             cc.CloseReader();
@@ -169,7 +169,7 @@ namespace FBExpert
         private void hsNewDomain_Click(object sender, EventArgs e)
         {
             RefreshDomain();
-            DomainForm df = new DomainForm(FbXpertMainForm.Instance(), DBReg,  DomainObject);
+            DomainForm df = new DomainForm(FbXpertMainForm.Instance(), DBReg, DomainObject);
             df.SetNew();
             df.Show();
         }
@@ -199,9 +199,9 @@ namespace FBExpert
 
         public void SetControlSizes()
         {
-           pnlIndiciesUpper.Height  = AppSizeConstants.UpperFormBandHeight;
-           pnlDomainUpper.Height    = AppSizeConstants.UpperFormBandHeight;
-           pnlFormUpper.Height      = AppSizeConstants.UpperFormBandHeight;
+            pnlIndiciesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlDomainUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
         }
         private void TableFieldForm_Load(object sender, EventArgs e)
         {
@@ -211,9 +211,9 @@ namespace FBExpert
             GetConstraints();
         }
 
-        
-           
 
-   
-}
+
+
+
+    }
 }

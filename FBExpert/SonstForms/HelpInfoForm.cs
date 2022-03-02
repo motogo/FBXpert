@@ -41,7 +41,7 @@ namespace FBXpert
 
         public void AddBold(string line)
         {
-            info.Append(@" \b " + line + @" \b0 ");            
+            info.Append(@" \b " + line + @" \b0 ");
         }
 
         public void AddNewLine()
@@ -67,12 +67,12 @@ namespace FBXpert
 
         public void SetFontSize(int sz)
         {
-            info.Append(@"\fs "+sz.ToString()+" ");
+            info.Append(@"\fs " + sz.ToString() + " ");
         }
 
         public void Set()
         {
-            
+
             if (info.Length > 0)
                 rtbInfo.Rtf = info.ToString() + post;
             else rtbInfo.Rtf = "";

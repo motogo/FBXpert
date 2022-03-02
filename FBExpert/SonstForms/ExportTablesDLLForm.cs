@@ -26,20 +26,20 @@ namespace FBXpert.SonstForms
             int n = 0;
             if (ckCreateAlterTable.Checked) n++;
             if (ckCreateTableDLL.Checked) n++;
-            progressBar1.Maximum = Tables.Count*n;
+            progressBar1.Maximum = Tables.Count * n;
             string path = Path.Combine(txtSQLExportPath.Text);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             if (!Directory.Exists(path)) return;
             if (ckDeleteAllFiles.Checked)
             {
-                string[] fls = Directory.GetFiles(path,"*.sql");
+                string[] fls = Directory.GetFiles(path, "*.sql");
                 foreach (string fn in fls)
                 {
                     try
                     {
                         File.Delete(fn);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -93,7 +93,7 @@ namespace FBXpert.SonstForms
         {
             SetControlSizes();
             FormDesign.SetFormLeft(this);
-            txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath,"Tables");
+            txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath, "Tables");
         }
 
         private void hsInitialSQLExportPath_Click(object sender, EventArgs e)

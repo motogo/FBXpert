@@ -26,20 +26,20 @@ namespace FBXpert.SonstForms
             int n = 0;
             if (ckCreateProcedure.Checked) n++;
             if (ckAlterProcedure.Checked) n++;
-            progressBar1.Maximum = procedures.Count*n;
+            progressBar1.Maximum = procedures.Count * n;
             string path = Path.Combine(txtSQLExportPath.Text);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             if (!Directory.Exists(path)) return;
             if (ckDeleteAllFiles.Checked)
             {
-                string[] fls = Directory.GetFiles(path,"*.sql");
+                string[] fls = Directory.GetFiles(path, "*.sql");
                 foreach (string fn in fls)
                 {
                     try
                     {
                         File.Delete(fn);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -52,7 +52,7 @@ namespace FBXpert.SonstForms
                     if (ckAlterProcedure.Checked)
                     {
                         string fna = Path.Combine(path, $@"{procedure.Name}_alter.sql");
-                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(procedure,procedure, true);
+                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(procedure, procedure, true);
                         File.WriteAllLines(fna, txt);
                         progressBar1.Value++;
                     }

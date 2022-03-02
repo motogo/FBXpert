@@ -20,26 +20,26 @@ namespace FBExpert
         NotifiesClass _localNotify = new NotifiesClass();
         NotifiesClass _localTableNotify = null;
         int _errorCount = 0;
-        int _messagesCount = 0;       
+        int _messagesCount = 0;
         bool _dataFilled = false;
-      
-        public CreateNewTableForm(DBRegistrationClass dbReg, Form parent,  NotifiesClass lnotify)
+
+        public CreateNewTableForm(DBRegistrationClass dbReg, Form parent, NotifiesClass lnotify)
         {
             InitializeComponent();
             MdiParent = parent;
             _dbReg = dbReg;
-           
-        
+
+
             _tableObject = new TableClass();
             _tableObject.Name = "NEW_TABLE";
-            
+
             _fieldObject = new TableFieldClass();
             _fieldObject.Name = "ID";
             //_fieldObject.RawType = "INTEGER";
             _fieldObject.Domain.Name = "ID";
             _fieldObject.Domain.RawType = "INTEGER";
             _localTableNotify = lnotify;
-                                    
+
             _dataFilled = false;
             DataToEdit();
             cbPrimaryKey.Enabled = true;
@@ -47,12 +47,12 @@ namespace FBExpert
             _localNotify.Notify.OnRaiseInfoHandler += new NotifyInfos.RaiseNotifyHandler(InfoRaised);
             _localNotify.Notify.OnRaiseErrorHandler += new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
         }
-      
-        public void  DataToEdit()
+
+        public void DataToEdit()
         {
             txtTableName.Text = _tableObject.Name;
             txtFieldName.Text = _fieldObject.Name;
-            txtLength.Text    = _fieldObject.Domain.Length.ToString();            
+            txtLength.Text = _fieldObject.Domain.Length.ToString();
         }
 
         public void EditToData()
@@ -65,8 +65,8 @@ namespace FBExpert
             var sb = new StringBuilder();
             _errorCount++;
             if (_messagesCount > 0) sb.Append($@"{LanguageClass.Instance.GetString("MESSAGES")} ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
-                       
+            if (_errorCount > 0) sb.Append($@"{LanguageClass.Instance.GetString("ERRORS")} ({_errorCount})");
+
             fctMessages.AppendText("ERROR " + k.Meldung);
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
@@ -86,8 +86,8 @@ namespace FBExpert
 
         private void TableInfoRaised(object sender, MessageEventArgs k)
         {
-            if(k.Key.ToString() != "SELECT_DEFAULTS") return;            
-            txtDefault.Text = (string) k.Data;                            
+            if (k.Key.ToString() != "SELECT_DEFAULTS") return;
+            txtDefault.Text = (string)k.Data;
         }
 
         public void SetVisible()
@@ -95,21 +95,21 @@ namespace FBExpert
             int left = gbTypes.Left;
             bool varchar = (cbTypes.Text == "VARCHAR");
             bool numeric = (cbTypes.Text == ("NUMERIC") || (cbTypes.Text.StartsWith("DOUBLE")));
-            bool zahl    = (cbTypes.Text == ("INTEGER") || (cbTypes.Text.StartsWith("SMALLINT")));
-            
-            gbTextProperties.Visible = ((varchar)|| (zahl));               
-                        
+            bool zahl = (cbTypes.Text == ("INTEGER") || (cbTypes.Text.StartsWith("SMALLINT")));
+
+            gbTextProperties.Visible = ((varchar) || (zahl));
+
             gbPrecisionProperties.Visible = numeric;
-                       
+
             // DATE, TIMESTAMP
             gbPrecisionProperties.Visible = (numeric || varchar || zahl);
-            gbTextProperties.Visible      = (numeric || varchar || zahl);
+            gbTextProperties.Visible = (numeric || varchar || zahl);
         }
-     
-        public void MakeSQL(bool force=false)
-        {                       
-            MakeSQLNew(force);                
-            ShowCaptions();            
+
+        public void MakeSQL(bool force = false)
+        {
+            MakeSQLNew(force);
+            ShowCaptions();
         }
 
         public bool IsSameType(TableFieldClass fo, string type, string fieldlength, string fieldprec, string fieldscale)
@@ -119,7 +119,7 @@ namespace FBExpert
             return (st1 == st2);
         }
 
-        public string GetTypeString(string type, string fieldlength, string fieldprec, string fieldscale )
+        public string GetTypeString(string type, string fieldlength, string fieldprec, string fieldscale)
         {
             var sb = new StringBuilder();
             if (type == "VARCHAR")
@@ -131,10 +131,10 @@ namespace FBExpert
                     sb.Append($@"VARCHAR({length})");
                 }
                 else
-                {                    
+                {
                     length = StaticFunctionsClass.ToIntDef(fieldlength, 0);
                     sb.Append($@"VARCHAR({length})");
-                }                
+                }
             }
             else if (type == "NUMERIC")
             {
@@ -148,7 +148,7 @@ namespace FBExpert
                 else
                 {
                     txtPrecisionLength.Text = "1";
-                    txtScale.Text = "0";                   
+                    txtScale.Text = "0";
                     sb.Append($@"NUMERIC(1,0)");
                 }
             }
@@ -162,24 +162,24 @@ namespace FBExpert
         public void MakeSQLNew(bool force = false)
         {
             DomainClass Domain = null;
-           
-            if ((cbDOMAIN.SelectedItem != null)&&(cbDOMAIN.Text.Length > 0))
+
+            if ((cbDOMAIN.SelectedItem != null) && (cbDOMAIN.Text.Length > 0))
             {
                 Domain = cbDOMAIN.SelectedItem as DomainClass;
             }
-            
-            if(Domain == null) tabControlFld.SelectedTab = tabPageField;
-                
-            bool usefieldtype =  tabControlFld.SelectedTab == tabPageField; 
+
+            if (Domain == null) tabControlFld.SelectedTab = tabPageField;
+
+            bool usefieldtype = tabControlFld.SelectedTab == tabPageField;
 
             SQLScript.Clear();
             var sb = new StringBuilder();
 
             sb.Append($@"CREATE TABLE {_tableObject.Name}{Environment.NewLine}({Environment.NewLine}    {txtFieldName.Text} ");
-            
+
             if (!usefieldtype)
             {
-                string cmd = (Domain != null) 
+                string cmd = (Domain != null)
                     ? $@"{Domain.Name}"
                     : $@"{cbDOMAIN.Text}";
                 sb.Append(cmd);
@@ -190,13 +190,13 @@ namespace FBExpert
                 }
 
                 if (cbPrimaryKey.Checked)
-                {               
+                {
                     sb.Append(" PRIMARY KEY");
                 }
-                
-                
-                cmd = (Domain != null) 
-                    ? $@"{Environment.NewLine}    /* raw:{Domain.RawType} intern:[{Domain.FieldType}] */" 
+
+
+                cmd = (Domain != null)
+                    ? $@"{Environment.NewLine}    /* raw:{Domain.RawType} intern:[{Domain.FieldType}] */"
                     : $@"{Environment.NewLine}    /* {GetTypeString(cbTypes.Text, txtLength.Text, txtPrecisionLength.Text, txtScale.Text)} */";
                 sb.Append(cmd);
             }
@@ -215,19 +215,19 @@ namespace FBExpert
                     if (cbCollate.Text.Length > 0)
                     {
                         sb.Append($@" COLLATE {cbCollate.Text}");
-                    }                    
+                    }
                 }
-                
+
                 if (txtDefault.Text.Length > 0)
                 {
                     sb.Append($@" DEFAULT {txtDefault.Text.Trim()}");
                 }
 
                 if (cbPrimaryKey.Checked)
-                {               
+                {
                     sb.Append(" PRIMARY KEY");
                 }
-                
+
                 if (cbNotNull.Checked)
                 {
                     sb.Append(" NOT NULL");
@@ -240,12 +240,12 @@ namespace FBExpert
             sb.Clear();
 
             //COMMENT ON COLUMN TADRESSEN.TTT IS '  rrrrrrrrrrrrrrrr'
-            if(fctDescription.Text.Length > 0)
+            if (fctDescription.Text.Length > 0)
             {
                 sb.Clear();
                 sb.Append($@"COMMENT ON COLUMN {_tableObject.Name}.{txtFieldName.Text.Trim()} IS '{fctDescription.Text}';");
                 SQLScript.Add(sb.ToString());
-                SQLScript.Add(SQLPatterns.Commit);               
+                SQLScript.Add(SQLPatterns.Commit);
             }
 
             SQLToUI();
@@ -256,38 +256,38 @@ namespace FBExpert
         public void SQLToUI()
         {
             fctSQL.Clear();
-            foreach(string str in SQLScript)
+            foreach (string str in SQLScript)
             {
-               fctSQL.AppendText(str+Environment.NewLine);
+                fctSQL.AppendText(str + Environment.NewLine);
             }
         }
-        
-       
+
+
         public void FillCombos()
         {
             var domains = StaticDatabaseObjects.Instance().GetDomainObjects(_dbReg);
             cbDOMAIN.Items.Clear();
-            foreach(DomainClass domain in domains.Values)
+            foreach (DomainClass domain in domains.Values)
             {
-              cbDOMAIN.Items.Add(domain);
+                cbDOMAIN.Items.Add(domain);
             }
             cbDOMAIN.Text = "";
         }
 
         void FieldDataToEdit()
         {
-            txtFieldName.Text       = _fieldObject.Name;
-            fctDescription.Text     = _fieldObject.Description;
-            cbPrimaryKey.Checked    = _tableObject.IsPrimary(_fieldObject.Name); 
-            cbNotNull.Checked       = _tableObject.IsNotNull(_fieldObject.Name);
+            txtFieldName.Text = _fieldObject.Name;
+            fctDescription.Text = _fieldObject.Description;
+            cbPrimaryKey.Checked = _tableObject.IsPrimary(_fieldObject.Name);
+            cbNotNull.Checked = _tableObject.IsNotNull(_fieldObject.Name);
         }
         void DomainDataToEdit(DomainClass Domain)
         {
-            txtLength.Text          = Domain.Length.ToString();
-            txtScale.Text           = Domain.Scale.ToString();
+            txtLength.Text = Domain.Length.ToString();
+            txtScale.Text = Domain.Scale.ToString();
             txtPrecisionLength.Text = Domain.Precision.ToString();
-            cbDOMAIN.Text           = Domain.Name;
-            cbTypes.Text            = StaticVariablesClass.ConvertRawTypeToRawName(Domain.FieldType);
+            cbDOMAIN.Text = Domain.Name;
+            cbTypes.Text = StaticVariablesClass.ConvertRawTypeToRawName(Domain.FieldType);
             cbCharSet.Text = (Domain.CharSet == null) ? "NONE" : Domain.CharSet;
             cbCollate.Text = (Domain.Collate == null) ? "NONE" : Domain.Collate;
         }
@@ -296,96 +296,96 @@ namespace FBExpert
             FormDesign.SetFormLeft(this);
 
             _dataFilled = false;
-                      
+
             FillCombos();
-            
+
             SetVisible();
             _dataFilled = true;
-            MakeSQL(true);         
+            MakeSQL(true);
         }
 
         public void ShowCaptions()
         {
             if (BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eInsert)
             {
-                lblCaption.Text = (_fieldObject != null) ? $@"Edit Table Field:{_fieldObject.Name}" : lblCaption.Text = "Edit Table Field";                
+                lblCaption.Text = (_fieldObject != null) ? $@"Edit Table Field:{_fieldObject.Name}" : lblCaption.Text = "Edit Table Field";
             }
             else
             {
-                lblCaption.Text = (_fieldObject != null) ? $@"New Table Field:{_fieldObject.Name}" : lblCaption.Text = "Edit Table Field";                                
+                lblCaption.Text = (_fieldObject != null) ? $@"New Table Field:{_fieldObject.Name}" : lblCaption.Text = "Edit Table Field";
             }
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Table Field");
         }
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;             
+            if (!_dataFilled) return;
             SetVisible();
-            MakeSQL();               
+            MakeSQL();
         }
 
         private void hsCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-        
+
         private void txtFieldName_TextChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;                                    
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;                       
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void cbCharSet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;            
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void cbCollate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;            
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void txtPrecisionLength_TextChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;                      
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void txtScale_TextChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;                       
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
-              
+
         private void hsSave_Click(object sender, EventArgs e)
-        { 
+        {
         }
 
         private void Create()
-        {             
+        {
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);                   
-            var riFailure = riList.Find(x=>x.commandDone == false);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            
-            string info = (riFailure==null) 
-                ? $@"Table {_dbReg.Alias}->{_tableObject.Name} updated." 
+
+            string info = (riFailure == null)
+                ? $@"Table {_dbReg.Alias}->{_tableObject.Name} updated."
                 : $@"Table {_dbReg.Alias}->{_tableObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadTable,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);   
-            
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadTable, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
+
         }
 
         private void hsClearMessages_Click(object sender, EventArgs e)
@@ -400,44 +400,44 @@ namespace FBExpert
             var df = new DomainForm(this.MdiParent, _dbReg, _fieldObject.Domain);
             df.Show();
         }
-       
+
         private void cbNotNull_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;                        
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
 
         private void cbPrimaryKey_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;            
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
-        
+
         private void hsSelectDefault_Click(object sender, EventArgs e)
         {
-            var sd = new SelectDefaultForm(this.MdiParent,_localTableNotify, "SELECT_DEFAULTS",StaticVariablesClass.DefaultVariables);
+            var sd = new SelectDefaultForm(this.MdiParent, _localTableNotify, "SELECT_DEFAULTS", StaticVariablesClass.DefaultVariables);
             sd.Show();
         }
 
         private void txtDefault_TextChanged(object sender, EventArgs e)
         {
-            if(!_dataFilled) return;            
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
-       
+
         private void fctDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            if (!_dataFilled) return;            
-            MakeSQL();               
+            if (!_dataFilled) return;
+            MakeSQL();
         }
-        
+
         private void cbDOMAIN_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;            
+            if (!_dataFilled) return;
             var domain = cbDOMAIN.SelectedItem as DomainClass;
-            DomainDataToEdit(domain);                                            
+            DomainDataToEdit(domain);
             SetVisible();
-            MakeSQL();               
+            MakeSQL();
         }
 
         private void hsNewDomain_Click(object sender, EventArgs e)
@@ -449,23 +449,23 @@ namespace FBExpert
 
         private void cbUSEAlwaysDomain_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;             
+            if (!_dataFilled) return;
             SetVisible();
-            MakeSQL();               
+            MakeSQL();
         }
-        
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if((tabControlFld.SelectedTab == tabPageDomain)&&(cbDOMAIN.Text.Length <= 0)&&(cbDOMAIN.Items.Count > 0))
-            {                
-                cbDOMAIN.SelectedIndex = 0;               
-            }            
+            if ((tabControlFld.SelectedTab == tabPageDomain) && (cbDOMAIN.Text.Length <= 0) && (cbDOMAIN.Items.Count > 0))
+            {
+                cbDOMAIN.SelectedIndex = 0;
+            }
             MakeSQLNew();
         }
 
         private void txtTableName_TextChanged(object sender, EventArgs e)
         {
-            if (!_dataFilled) return;    
+            if (!_dataFilled) return;
             _tableObject.Name = txtTableName.Text;
             MakeSQLNew();
         }
@@ -477,14 +477,14 @@ namespace FBExpert
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-               if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
-               fctSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);       
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName); 
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
     }
 }

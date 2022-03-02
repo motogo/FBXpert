@@ -1057,10 +1057,10 @@ namespace FBXpert.SonstForms
             RepaintDatabases();
         }
 
-        
+
         private void hsRefreshObjects_Click(object sender, EventArgs e)
         {
             GetDatabaseObjects();
         }
     }
-    }
+}

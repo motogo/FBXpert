@@ -20,7 +20,7 @@ namespace FBExpert.DataClasses
                     _instance = new DevelopmentClass();
                 }
             }
-            
+
             return (_instance);
         }
 
@@ -44,16 +44,16 @@ namespace FBExpert.DataClasses
         }
 
         public string GetDBInfo(DBRegistrationClass dbReg)
-        {           
-            if (dbReg == null) return CopyRight() + " Database:null";            
+        {
+            if (dbReg == null) return CopyRight() + " Database:null";
             return $"{CopyRight()} DB:{dbReg.Alias} ({dbReg.Server}:{dbReg.DatabasePath}";
         }
 
         public string GetDBInfo(DBRegistrationClass dbReg, string formname)
-        {           
+        {
             if (dbReg == null) return formname + "  Database:null";
-            
-            return $"{formname} DB:{dbReg.Alias} ({dbReg.Server}:{dbReg.DatabasePath})";            
+
+            return $"{formname} DB:{dbReg.Alias} ({dbReg.Server}:{dbReg.DatabasePath})";
         }
     }
 }

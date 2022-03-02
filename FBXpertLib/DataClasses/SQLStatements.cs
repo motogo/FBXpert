@@ -10,7 +10,7 @@ namespace FBXpertLib
     {
         private SQLStatementsClass()
         {
-           
+
         }
 
         private static readonly Lazy<SQLStatementsClass> lazy = new Lazy<SQLStatementsClass>(() => new SQLStatementsClass());
@@ -24,9 +24,9 @@ namespace FBXpertLib
 
         public SQLCommandsReturnInfoClass DropConstraint(string name, DBRegistrationClass dbReg, NotifiesClass notify)
         {
-              string cmd =  SQLPatterns.DropConstraintPattern.Replace(SQLPatterns.ConstraintKey, name);
-           
-              return ExecSql(cmd, dbReg,notify);  
+            string cmd = SQLPatterns.DropConstraintPattern.Replace(SQLPatterns.ConstraintKey, name);
+
+            return ExecSql(cmd, dbReg, notify);
         }
 
         public SQLCommandsReturnInfoClass DropTableConstraint(string tableName, string constraintName, DBRegistrationClass dbReg, NotifiesClass notify)
@@ -42,17 +42,17 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.FROM} RDB$RELATIONS ");
             if (version >= eDBVersion.FB3_32)
-            {                
+            {
                 sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.Table}) ");
-                sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') ");                               
+                sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') ");
             }
             else
-            {                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') ");            
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') ");
             }
             sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%IBE$%') ");
-            sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%MON$%') "); 
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NA RIGHT OUTER JOIN ME;");                
+            sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%MON$%') ");
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NA RIGHT OUTER JOIN ME;");
             return sb.ToString();
         }
 
@@ -81,12 +81,12 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.FROM} RDB$RELATIONS ");
             if (version >= eDBVersion.FB3_32)
-            {                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.Table}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{TableName}');");                               
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.Table}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{TableName}');");
             }
             else
-            {             
-                sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{TableName}';");                                
+            {
+                sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{TableName}';");
             }
             return sb.ToString();
         }
@@ -106,15 +106,15 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$FIELDS ON RDB$FIELDS.RDB$FIELD_NAME = RDB$RELATION_FIELDS.RDB$FIELD_SOURCE ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FIELDS.RDB$FIELD_TYPE ");
             if (version >= eDBVersion.FB3_32)
-            {                                                                                                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");                                
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             }
             else
-            {                                                                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%')  {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");                
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%')  {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             }
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME,RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
-            return sb.ToString();            
+            return sb.ToString();
         }
 
         public string RefreshView(eDBVersion version, string viewname)
@@ -127,12 +127,12 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$RELATIONS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_FIELDS ON RDB$RELATION_FIELDS.RDB$RELATION_NAME = RDB$RELATIONS.RDB$RELATION_NAME ");
             if (version >= eDBVersion.FB3_32)
-            {                                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{viewname}') ");                            
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{viewname}') ");
             }
             else
-            {                        
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{viewname}') ");                                
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME = '{viewname}') ");
             }
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME,RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             return sb.ToString();
@@ -148,25 +148,25 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$RELATIONS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_FIELDS ON RDB$RELATION_FIELDS.RDB$RELATION_NAME = RDB$RELATIONS.RDB$RELATION_NAME ");
             if (version >= eDBVersion.FB3_32)
-            {                                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) ");                
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View}) ");
             }
             else
-            {                                
-                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) ");                
+            {
+                sb.Append($@"{SQLConstants.WHERE} (RDB$RELATIONS.RDB$VIEW_SOURCE {SQLConstants.IS} NOT null) ");
             }
-            sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME =  '{vname}') ");                                
+            sb.Append($@"AND (RDB$RELATIONS.RDB$RELATION_NAME =  '{vname}') ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME,RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             return sb.ToString();
         }
-        
+
         public string RefreshNonSystemGeneratorsItems(eDBVersion version)
         {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$GENERATORS.RDB$GENERATOR_NAME,");
             if (version >= eDBVersion.FB3_32)
-            {                
+            {
                 sb.Append($@"RDB$GENERATORS.RDB$INITIAL_VALUE,");
                 sb.Append($@"RDB$GENERATORS.RDB$GENERATOR_INCREMENT,");
                 sb.Append($@"RDB$GENERATORS.RDB$DESCRIPTION ");
@@ -188,7 +188,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$GENERATORS.RDB$GENERATOR_NAME,");
             if (version >= eDBVersion.FB3_32)
-            {                                
+            {
                 sb.Append($@"RDB$GENERATORS.RDB$INITIAL_VALUE,");
                 sb.Append($@"RDB$GENERATORS.RDB$GENERATOR_INCREMENT,");
                 sb.Append($@"RDB$GENERATORS.RDB$DESCRIPTION ");
@@ -206,13 +206,13 @@ namespace FBXpertLib
 
         public string RefreshRoles(eDBVersion version)
         {
-            var sb = new StringBuilder();            
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$ROLES.RDB$ROLE_NAME ");
             sb.Append($@"{SQLConstants.FROM} RDB$ROLES;");
             return sb.ToString();
         }
-               
+
         public string RefreshNonSystemTriggers(eDBVersion version)
         {
             var sb = new StringBuilder();
@@ -222,10 +222,10 @@ namespace FBXpertLib
             sb.Append($@"RDB$TRIGGERS.RDB$TRIGGER_INACTIVE,");
             sb.Append($@"RDB$TRIGGERS.RDB$TRIGGER_TYPE ");
             sb.Append($@"{SQLConstants.FROM} RDB$TRIGGERS ");
-            sb.Append($@"{SQLConstants.WHERE} RDB$TRIGGERS.RDB$SYSTEM_FLAG = 0 {SQLConstants.AND} RDB$TRIGGERS.RDB$TRIGGER_NAME {SQLConstants.NOT_LIKE} '%$%';");            
+            sb.Append($@"{SQLConstants.WHERE} RDB$TRIGGERS.RDB$SYSTEM_FLAG = 0 {SQLConstants.AND} RDB$TRIGGERS.RDB$TRIGGER_NAME {SQLConstants.NOT_LIKE} '%$%';");
             return sb.ToString();
         }
-        
+
         public string RefreshSystemTriggers(eDBVersion version)
         {
             var sb = new StringBuilder();
@@ -239,7 +239,7 @@ namespace FBXpertLib
         }
 
         public string RefreshInternalFunctionsItems(eDBVersion version)
-        {            
+        {
             var sb = new StringBuilder();
             if (version >= eDBVersion.FB3_32)
             {
@@ -258,7 +258,7 @@ namespace FBXpertLib
                 sb.Append($@"RDB$PROCEDURES.RDB$SYSTEM_FLAG,");
                 sb.Append($@"RDB$PROCEDURES.RDB$PROCEDURE_SOURCE ");
                 sb.Append($@"{SQLConstants.FROM} RDB$PROCEDURES;");
-            }            
+            }
             return sb.ToString();
         }
 
@@ -276,7 +276,7 @@ namespace FBXpertLib
                 sb.Append($@"{SQLConstants.FROM} RDB$FUNCTIONS WHERE RDB$FUNCTIONS.RDB$ENTRYPOINT {SQLConstants.IS} NOT null;");
             }
             else
-            {                
+            {
                 sb.Append($@"{SQLConstants.SELECT} ");
                 sb.Append($@"RDB$FUNCTIONS.RDB$FUNCTION_NAME,");
                 sb.Append($@"RDB$FUNCTIONS.RDB$FUNCTION_TYPE,");
@@ -291,7 +291,7 @@ namespace FBXpertLib
         public string RefreshProcedureItems(eDBVersion version)
         {
             var sb = new StringBuilder();
-            sb.Append($@"{SQLConstants.SELECT} RDB$PROCEDURES.RDB$PROCEDURE_NAME,RDB$PROCEDURES.RDB$PROCEDURE_SOURCE {SQLConstants.FROM} RDB$PROCEDURES;");            
+            sb.Append($@"{SQLConstants.SELECT} RDB$PROCEDURES.RDB$PROCEDURE_NAME,RDB$PROCEDURES.RDB$PROCEDURE_SOURCE {SQLConstants.FROM} RDB$PROCEDURES;");
             return sb.ToString();
         }
 
@@ -311,7 +311,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName}' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
-            
+
             return sb.ToString();
         }
 
@@ -331,12 +331,12 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName}' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
-            
+
             return sb.ToString();
         }
 
         public string GetAllTablePrimaryKeys(eDBVersion version)
-        {            
+        {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$INDICES.RDB$RELATION_NAME,RDB$RELATION_CONSTRAINTS.rdb$constraint_name {SQLConstants.AS} Constraint_Name,RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE {SQLConstants.AS} Constraint_Type,");
             sb.Append($@"RDB$INDEX_SEGMENTS.RDB$FIELD_NAME {SQLConstants.AS} FieldName,RDB$INDICES.RDB$DESCRIPTION {SQLConstants.AS} Index_Description,(RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1) {SQLConstants.AS} Field_Position ");
@@ -344,15 +344,15 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDICES ON RDB$INDICES.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.WHERE} (RDB$INDICES.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'PRIMARY KEY') ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
             return sb.ToString();
         }
-        
+
         public string GetAllTableForeignKeys(eDBVersion version, eTableType tableType, string tableName = "")
         {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
-            
+
             sb.Append($@"RDB$INDICES.RDB$RELATION_NAME {SQLConstants.AS} Relation_name,");
             sb.Append($@"RDB$INDICES.RDB$INDEX_INACTIVE {SQLConstants.AS} Is_Inactive,");
             sb.Append($@"fkc.rdb$constraint_name {SQLConstants.AS} Constraint_Name,");
@@ -378,19 +378,19 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISF ON fkc.rdb$index_name = ISF.rdb$index_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISP ON pkc.rdb$index_name = ISP.rdb$index_name ");
             string cmd;
-            if(tableName.Length > 0)
+            if (tableName.Length > 0)
             {
                 cmd = $@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName.ToUpper()}' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
             }
             else
             {
-                cmd = (tableType == eTableType.withoutsystem) 
-                    ? $@"{SQLConstants.WHERE} RDB$INDICES.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' " 
-                    : $@"{SQLConstants.WHERE} RDB$INDICES.RDB$RELATION_NAME like '%$%' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' "; 
+                cmd = (tableType == eTableType.withoutsystem)
+                    ? $@"{SQLConstants.WHERE} RDB$INDICES.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%$%' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' "
+                    : $@"{SQLConstants.WHERE} RDB$INDICES.RDB$RELATION_NAME like '%$%' {SQLConstants.AND} fkc.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
             }
             sb.Append(cmd);
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
-         
+
             return sb.ToString();
         }
 
@@ -398,7 +398,7 @@ namespace FBXpertLib
         {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
-            
+
             sb.Append($@"RDB$INDICES.RDB$RELATION_NAME,");
             sb.Append($@"RDB$INDICES.RDB$INDEX_INACTIVE,");
             sb.Append($@"fkc.rdb$constraint_name {SQLConstants.AS} Constraint_Name,");
@@ -421,15 +421,15 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS pkc ON pkc.RDB$INDEX_NAME = RDB$INDICES.RDB$FOREIGN_KEY ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISF ON fkc.rdb$index_name = ISF.rdb$index_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$INDEX_SEGMENTS ISP ON pkc.rdb$index_name = ISP.rdb$index_name ");
-           
-             string  cmd = $@"{SQLConstants.WHERE} UPPER(fkc.rdb$constraint_name) = '{foreignKey.ToUpper()}' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
-            
+
+            string cmd = $@"{SQLConstants.WHERE} UPPER(fkc.rdb$constraint_name) = '{foreignKey.ToUpper()}' {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'FOREIGN KEY' ";
+
             sb.Append(cmd);
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;");
-         
+
             return sb.ToString();
         }
-       
+
         public string GetTableTriggers(eDBVersion version, string tableName)
         {
             var sb = new StringBuilder();
@@ -441,12 +441,12 @@ namespace FBXpertLib
             sb.Append($@"RDB$TRIGGERS.RDB$TRIGGER_TYPE ");
             sb.Append($@"{SQLConstants.FROM} RDB$TRIGGERS ");
             sb.Append($@"{SQLConstants.WHERE} RDB$TRIGGERS.RDB$RELATION_NAME = '{tableName}' {SQLConstants.AND} RDB$TRIGGERS.RDB$SYSTEM_FLAG = 0 {SQLConstants.AND} RDB$TRIGGERS.RDB$TRIGGER_NAME {SQLConstants.NOT_LIKE} '%$%';");
-            
+
             return sb.ToString();
         }
 
         public string GetAllTableTriggersNonSystemTables(eDBVersion version)
-        {           
+        {
             var sb = new StringBuilder();
 
             sb.Append($@"{SQLConstants.SELECT} ");
@@ -479,7 +479,7 @@ namespace FBXpertLib
 
             return sb.ToString();
         }
-                       
+
         public string GetFieldDependencies(eDBVersion version, string tableName, string fieldName)
         {
             var sb = new StringBuilder();
@@ -489,7 +489,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{tableName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME = '{fieldName}' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
+
             return sb.ToString();
         }
 
@@ -521,7 +521,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE = {(int)onTYPE} {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
+
             return sb.ToString();
         }
 
@@ -552,10 +552,10 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} RDB$DEPENDENCIES.RDB$DEPENDED_ON_TYPE = {(int)onTYPE} {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE,RDB$DEPENDENCIES.RDB$FIELD_NAME,RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME;");
-            
+
             return sb.ToString();
         }
-              
+
         #endregion
 
 
@@ -569,7 +569,7 @@ namespace FBXpertLib
             sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType, RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{tableName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
+
             return sb.ToString();
         }
 
@@ -596,7 +596,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{viewName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
+
             return sb.ToString();
         }
 
@@ -610,7 +610,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{viewName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
-            
+
             return sb.ToString();
         }
 
@@ -635,9 +635,9 @@ namespace FBXpertLib
 
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FIELDS.RDB$FIELD_TYPE ");
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATION_NAME = '{viewName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             return sb.ToString();
-        }                
+        }
 
         public string GetTableUniques(eDBVersion version, string tableName)
         {
@@ -652,7 +652,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_FIELDS ON RDB$RELATION_FIELDS.rdb$field_position = (RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION + 1)  {SQLConstants.AND} RDB$INDEX_SEGMENTS.RDB$FIELD_NAME = RDB$RELATION_FIELDS.rdb$field_name ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$RELATION_CONSTRAINTS ON RDB$RELATION_CONSTRAINTS.RDB$INDEX_NAME = RDB$INDEX_SEGMENTS.RDB$INDEX_NAME ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$INDICES.RDB$RELATION_NAME) = '{tableName}' {SQLConstants.AND}  RDB$INDICES.RDB$UNIQUE_FLAG > 0 {SQLConstants.AND} RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_TYPE = 'UNIQUE' ");
-            sb.Append($@"{SQLConstants.GROUP_BY} RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$index_type,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive;");            
+            sb.Append($@"{SQLConstants.GROUP_BY} RDB$INDICES.RDB$INDEX_NAME,RDB$INDEX_SEGMENTS.RDB$FIELD_NAME,RDB$INDICES.rdb$index_type,RDB$INDICES.rdb$unique_flag,RDB$INDICES.rdb$index_inactive;");
             return sb.ToString();
         }
 
@@ -660,12 +660,12 @@ namespace FBXpertLib
         {
             var sb = new StringBuilder();
             if (version >= eDBVersion.FB3_32)
-            {           
+            {
                 sb.Append($@"{SQLConstants.SELECT} ");
                 sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_NAME,");
                 sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_POSITION,");
-              
+
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME,");
 
                 sb.Append($@"RDB$FIELDS.RDB$FIELD_SUB_TYPE,");
@@ -717,14 +717,14 @@ namespace FBXpertLib
 
         public string GetTableFields(eDBVersion version, string tableName)
         {
-            var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));            
+            var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{tableName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
             sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
-            
+
             return sb.ToString();
         }
 
-        
+
 
         public string GetAllNonSystemTableFields(eDBVersion version)
         {
@@ -744,7 +744,7 @@ namespace FBXpertLib
 
 
         public string GetAllSystemTableFields(eDBVersion version)
-        {      
+        {
             var sb = new StringBuilder(GetAllTables_Fields_Cmd(version));
             if (version >= eDBVersion.FB3_32)
             {
@@ -756,23 +756,23 @@ namespace FBXpertLib
                 sb.Append($@"{SQLConstants.WHERE} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' {SQLConstants.AND}  RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.LIKE} '%$%' ");
                 sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME,RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             }
-            return  sb.ToString();               
+            return sb.ToString();
         }
-        
+
         public string GetProcedureAttributes(eDBVersion version, string procName)
-        {            
+        {
             var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$PROCEDURE_PARAMETERS.RDB$PARAMETER_NAME,RDB$PROCEDURE_PARAMETERS.RDB$PARAMETER_TYPE,RDB$PROCEDURE_PARAMETERS.RDB$PARAMETER_NUMBER,");
             sb.Append($@"RDB$FIELDS.rdb$field_type,RDB$FIELDS.RDB$CHARACTER_LENGTH,RDB$FIELDS.rdb$field_precision,RDB$FIELDS.rdb$field_scale,RDB$TYPES.RDB$TYPE_NAME ");
             sb.Append($@"{SQLConstants.FROM} RDB$PROCEDURE_PARAMETERS ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} rdb$fields ON RDB$FIELDS.rdb$field_name = RDB$PROCEDURE_PARAMETERS.rdb$field_source ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FIELDS.RDB$FIELD_TYPE ");
-            sb.Append($@"{SQLConstants.WHERE} RDB$PROCEDURE_PARAMETERS.RDB$PROCEDURE_NAME = '{procName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'"); 
+            sb.Append($@"{SQLConstants.WHERE} RDB$PROCEDURE_PARAMETERS.RDB$PROCEDURE_NAME = '{procName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'");
             return sb.ToString();
         }
-        
+
         public string GetFunctionsArguments(eDBVersion version, string procName)
-        {            
+        {
             var sb = new StringBuilder();
             if (version >= eDBVersion.FB3_32)
             {
@@ -790,7 +790,7 @@ namespace FBXpertLib
                 sb.Append($@"{SQLConstants.WHERE} RDB$FUNCTION_ARGUMENTS.RDB$FUNCTION_NAME = '{procName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'");
             }
             else
-            {                
+            {
                 sb.Append($@"{SQLConstants.SELECT} ");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$FUNCTION_NAME,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$ARGUMENT_POSITION,");
@@ -799,7 +799,7 @@ namespace FBXpertLib
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.rdb$field_precision,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.rdb$field_scale,");
                 sb.Append($@"RDB$TYPES.RDB$TYPE_NAME ");
-                sb.Append($@"{SQLConstants.FROM} RDB$FUNCTION_ARGUMENTS "); 
+                sb.Append($@"{SQLConstants.FROM} RDB$FUNCTION_ARGUMENTS ");
                 sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$TYPES ON RDB$TYPES.RDB$TYPE = RDB$FUNCTION_ARGUMENTS.rdb$field_type ");
                 sb.Append($@"{SQLConstants.WHERE} RDB$FUNCTION_ARGUMENTS.RDB$FUNCTION_NAME = 'GET_RECHPOSCOUNT' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE'");
 
@@ -808,11 +808,11 @@ namespace FBXpertLib
         }
 
         public string GetUserDefinedFunctionsAttributes(eDBVersion version, string procName)
-        {            
-            var sb = new StringBuilder();      
+        {
+            var sb = new StringBuilder();
             if (version >= eDBVersion.FB3_32)
             {
-                sb.Append($@"{SQLConstants.SELECT} ");               
+                sb.Append($@"{SQLConstants.SELECT} ");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$ARGUMENT_POSITION,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$MECHANISM,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$FIELD_TYPE,");
@@ -829,7 +829,7 @@ namespace FBXpertLib
             }
             else
             {
-                sb.Append($@"{SQLConstants.SELECT} ");            
+                sb.Append($@"{SQLConstants.SELECT} ");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$ARGUMENT_POSITION,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$MECHANISM,");
                 sb.Append($@"RDB$FUNCTION_ARGUMENTS.RDB$FIELD_TYPE,");
@@ -847,24 +847,24 @@ namespace FBXpertLib
             return sb.ToString();
         }
 
-        
+
         public string GetDepentenciesGenerators(eDBVersion version, string generatorName)
-        {            
-            var sb = new StringBuilder();   
+        {
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME {SQLConstants.AS} DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE ");
             sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{generatorName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
             return sb.ToString();
         }
-        
+
         public string GetDepentenciesProcedures(eDBVersion version, string procedureName)
         {
-            var sb = new StringBuilder();   
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.AS} Field ,RDB$DEPENDENCIES.RDB$DEPENDENT_NAME {SQLConstants.AS} DepentTo,CASE RDB$DEPENDENCIES.RDB$DEPENDENT_TYPE ");
             sb.Append($@"{EnumClass.Instance.GetDependenciesTypeSQLCase()} {SQLConstants.AS}  DependentType {SQLConstants.FROM} RDB$DEPENDENCIES ");
             sb.Append($@"{SQLConstants.WHERE} UPPER(RDB$DEPENDENCIES.RDB$DEPENDED_ON_NAME) = '{procedureName}' {SQLConstants.AND} RDB$DEPENDENCIES.RDB$FIELD_NAME {SQLConstants.IS} {SQLConstants.NOT_NULL} ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$DEPENDENCIES.RDB$DEPENDENT_NAME,RDB$DEPENDENCIES.RDB$FIELD_NAME;");
             return sb.ToString();
         }
 
@@ -873,9 +873,9 @@ namespace FBXpertLib
             string cmd = $@"SELECT * FROM SEC$USERS";
             return cmd;
         }
-        public string GetMonitorConnections(eDBVersion version,bool allConnections)
-        {            
-            var sb = new StringBuilder();             
+        public string GetMonitorConnections(eDBVersion version, bool allConnections)
+        {
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"MON$TRANSACTIONS.MON$STAT_ID {SQLConstants.AS} StatID,");
             sb.Append($@"MON$ATTACHMENTS.MON$REMOTE_PID {SQLConstants.AS} PID,");
@@ -903,23 +903,23 @@ namespace FBXpertLib
             {
                 sb.Append($@" WHERE MON$TRANSACTIONS.MON$ATTACHMENT_ID = CURRENT_CONNECTION");
             }
-            sb.Append($@" ORDER BY MON$ATTACHMENTS.MON$ATTACHMENT_ID;");            
+            sb.Append($@" ORDER BY MON$ATTACHMENTS.MON$ATTACHMENT_ID;");
             return sb.ToString();
         }
-        
+
         public string GetForRefreshXML(eDBVersion version)
-        {            
-            var sb = new StringBuilder();    
+        {
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} RDB$RELATIONS.RDB$RELATION_NAME,RDB$RELATIONS.RDB$RELATION_TYPE {SQLConstants.FROM} RDB$RELATIONS ");
             sb.Append($@"{SQLConstants.WHERE} ((RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.Table}) OR (RDB$RELATIONS.RDB$RELATION_TYPE = {(int)FBRelationTypeIndex.View})) {SQLConstants.AND} ");
             sb.Append($@"(RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%RDB$%') {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%MON$%') {SQLConstants.AND} (RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.NOT_LIKE} '%IBE$%') ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATIONS.RDB$RELATION_NAME;");
             return sb.ToString();
         }
 
         public string GetFieldsForRefreshXML(eDBVersion version, string viewName)
-        {            
-            var sb = new StringBuilder();    
+        {
+            var sb = new StringBuilder();
             sb.Append($@"{SQLConstants.SELECT} ");
             sb.Append($@"RDB$RELATIONS.RDB$RELATION_NAME {SQLConstants.AS} FieldName,");
             sb.Append($@"RDB$RELATION_FIELDS.RDB$FIELD_NAME,");
@@ -941,7 +941,7 @@ namespace FBXpertLib
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$CHARACTER_SETS ON RDB$FIELDS.RDB$CHARACTER_SET_ID = RDB$CHARACTER_SETS.RDB$CHARACTER_SET_ID ");
             sb.Append($@"{SQLConstants.LEFT_JOIN} RDB$COLLATIONS ON RDB$FIELDS.RDB$COLLATION_ID = RDB$COLLATIONS.RDB$COLLATION_ID  {SQLConstants.AND} RDB$CHARACTER_SETS.RDB$CHARACTER_SET_ID = RDB$COLLATIONS.RDB$CHARACTER_SET_ID ");
             sb.Append($@"{SQLConstants.WHERE} RDB$RELATIONS.RDB$RELATION_NAME = '{viewName}' {SQLConstants.AND} RDB$TYPES.RDB$FIELD_NAME = 'RDB$FIELD_TYPE' ");
-            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");            
+            sb.Append($@"{SQLConstants.ORDER_BY} RDB$RELATION_FIELDS.RDB$FIELD_POSITION;");
             return sb.ToString();
         }
     }

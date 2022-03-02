@@ -46,13 +46,6 @@ namespace FBXpert
         
         public static FbXpertMainForm Instance()
         {
-            /*
-            if (_instance != null) return (_instance);
-            lock (_lock_this)
-            {
-                _instance = new FbXpertMainForm($@"{ApplicationPathClass.Instance.ApplicationPath}\config\AppSettings.json");        
-            }
-            */
             return (_instance);
         }
         

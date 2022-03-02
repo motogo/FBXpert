@@ -4,8 +4,8 @@ using System.Windows.Forms;
 namespace FBXDesigns
 {
 
-    public enum eAction {None=0, OnResize = 1, OnMove = 2  };
-    public enum eTableType {Autosize = 0, Minimized = 1, Maximized= 2 };
+    public enum eAction { None = 0, OnResize = 1, OnMove = 2 };
+    public enum eTableType { Autosize = 0, Minimized = 1, Maximized = 2 };
     public class ActionClass
     {
         public Control crtl;
@@ -22,7 +22,7 @@ namespace FBXDesigns
 
         private static readonly object _lock_this = new object();
         private static volatile ActionClass instance = null;
-      
+
         public static ActionClass Instance()
         {
             if (instance == null)
@@ -50,10 +50,10 @@ namespace FBXDesigns
         {
             action = eAction.None;
             crtl = null;
-            mainctrl = null;            
+            mainctrl = null;
             parent = null;
             hotspot = null;
-       }
+        }
 
         public void Show()
         {
@@ -65,12 +65,12 @@ namespace FBXDesigns
         {
             mainctrl.Visible = false;
         }
-               
+
         public Size last_local_dimensions = new Size(0, 0);
-        
+
         public void DrawMoveRectangle(Point pt)
         {
-            DrawMoveRectangle(pt, new Point(0, 0));                     
+            DrawMoveRectangle(pt, new Point(0, 0));
         }
 
         Point pth;
@@ -87,15 +87,15 @@ namespace FBXDesigns
             {
                 mainctrl.BringToFront();
                 SetTableHeight(mainctrl, tabletype);
-                
+
                 Point ptl = mainctrl.PointToClient(pt);
-                
-                int left = mainctrl.Left + ptl.X - mainctrl.Width - pth.X+3+hotspot.Width; 
-                int top = mainctrl.Top + ptl.Y - mainctrl.Height - pth.Y+3+hotspot.Height; 
+
+                int left = mainctrl.Left + ptl.X - mainctrl.Width - pth.X + 3 + hotspot.Width;
+                int top = mainctrl.Top + ptl.Y - mainctrl.Height - pth.Y + 3 + hotspot.Height;
 
                 Point location = new Point(left, top);
-                
-                Size dims = new Size(mainctrl.Size.Width,mainctrl.Size.Height);
+
+                Size dims = new Size(mainctrl.Size.Width, mainctrl.Size.Height);
                 dims.Width++;
                 dims.Height++;
 
@@ -106,16 +106,16 @@ namespace FBXDesigns
                 //Pen penBackground = new Pen(Color.Red);
 
                 g.DrawRectangle(penBackground, last_local_position.X, last_local_position.Y, last_local_dimensions.Width, last_local_dimensions.Height);
-                
+
                 last_local_position = location;
-                last_local_dimensions = dims;               
-                g.DrawRectangle(pen, location.X, location.Y,dims.Width, dims.Height);
+                last_local_dimensions = dims;
+                g.DrawRectangle(pen, location.X, location.Y, dims.Width, dims.Height);
             }
-        }        
+        }
 
         public Point GetAbsolutePoint()
         {
-            return mainctrl.PointToScreen(Point.Empty);            
+            return mainctrl.PointToScreen(Point.Empty);
         }
 
         public Point GetLocalPointPoint()
@@ -126,58 +126,58 @@ namespace FBXDesigns
         public void FixLeftRectangle(Point pt)
         {
             SetTableHeight(mainctrl, tabletype);
-            last_local_position = pt;            
+            last_local_position = pt;
         }
 
         public void DrawResizeRectangle(Point pt)
-        {           
-                if (mainctrl != null)
-                {
-                    Point p = GetAbsolutePoint();
-                    Point ptl = mainctrl.PointToClient(pt);
-                    SetTableHeight(mainctrl, tabletype);
-                    int width  = ptl.X  + (hotspot.Height / 2);  
-                    int height = ptl.Y + (hotspot.Height / 2);  
-                    Size dims = new Size(width, height);
-                    Graphics g = parent.CreateGraphics();
-                    Pen pen = new Pen(Color.Black);
-                    Pen penBackground = new Pen(parent.BackColor);
+        {
+            if (mainctrl != null)
+            {
+                Point p = GetAbsolutePoint();
+                Point ptl = mainctrl.PointToClient(pt);
+                SetTableHeight(mainctrl, tabletype);
+                int width = ptl.X + (hotspot.Height / 2);
+                int height = ptl.Y + (hotspot.Height / 2);
+                Size dims = new Size(width, height);
+                Graphics g = parent.CreateGraphics();
+                Pen pen = new Pen(Color.Black);
+                Pen penBackground = new Pen(parent.BackColor);
 
-                    g.DrawRectangle(penBackground, last_local_position.X, last_local_position.Y, last_local_dimensions.Width, last_local_dimensions.Height);
+                g.DrawRectangle(penBackground, last_local_position.X, last_local_position.Y, last_local_dimensions.Width, last_local_dimensions.Height);
 
-                    last_local_dimensions = dims;
-                    
-                    g.DrawRectangle(pen, last_local_position.X, last_local_position.Y, dims.Width, dims.Height);                    
-                }            
-        }
-        
-        public void ClearLastRectangle()
-        {          
-                if (mainctrl != null)
-                {                    
-                    Graphics g = parent.CreateGraphics();
-                    Pen pen = new Pen(Color.Black);
-                    Pen penBackground = new Pen(parent.BackColor);
-                    g.DrawRectangle(penBackground, last_local_position.X, last_local_position.Y, last_local_dimensions.Width, last_local_dimensions.Height);
+                last_local_dimensions = dims;
+
+                g.DrawRectangle(pen, last_local_position.X, last_local_position.Y, dims.Width, dims.Height);
             }
-            
+        }
+
+        public void ClearLastRectangle()
+        {
+            if (mainctrl != null)
+            {
+                Graphics g = parent.CreateGraphics();
+                Pen pen = new Pen(Color.Black);
+                Pen penBackground = new Pen(parent.BackColor);
+                g.DrawRectangle(penBackground, last_local_position.X, last_local_position.Y, last_local_dimensions.Width, last_local_dimensions.Height);
+            }
+
         }
 
         public void SetTableHeight(Control ctrl, eTableType tt)
         {
-            if(tt == eTableType.Minimized)
+            if (tt == eTableType.Minimized)
             {
                 ctrl.Height = 56;
             }
-            else if(tt == eTableType.Autosize)
+            else if (tt == eTableType.Autosize)
             {
-               // ctrl.Height = 256;
+                // ctrl.Height = 256;
             }
             else
             {
-               // ctrl.Height = 512;
+                // ctrl.Height = 512;
             }
-            
+
         }
 
         public double zoom_fkt = 1;
@@ -191,18 +191,18 @@ namespace FBXDesigns
         }
 
         public void MoveToPosAsAbsolute(Point pt)
-        {            
-                if (mainctrl != null)
-                {
-                    Point p = GetAbsolutePoint();
-                    Point ptl = mainctrl.PointToClient(pt);
-                    SetTableHeight(mainctrl, tabletype);
+        {
+            if (mainctrl != null)
+            {
+                Point p = GetAbsolutePoint();
+                Point ptl = mainctrl.PointToClient(pt);
+                SetTableHeight(mainctrl, tabletype);
 
-                    int left = mainctrl.Left + ptl.X + (hotspot.Width/2); // + (pt.X - p.X) - mainctrl.Width + 8;
-                    int top = mainctrl.Top + ptl.Y - (hotspot.Height/2);  // + (pt.Y - p.Y) - mainctrl.Height + form_frame_height;
-                    Point p_local = new Point(left,top);
-                    MoveToPosAsLocal(p_local);                    
-                }            
+                int left = mainctrl.Left + ptl.X + (hotspot.Width / 2); // + (pt.X - p.X) - mainctrl.Width + 8;
+                int top = mainctrl.Top + ptl.Y - (hotspot.Height / 2);  // + (pt.Y - p.Y) - mainctrl.Height + form_frame_height;
+                Point p_local = new Point(left, top);
+                MoveToPosAsLocal(p_local);
+            }
         }
 
         public Point last_local_position = new Point(0, 0);
@@ -210,13 +210,13 @@ namespace FBXDesigns
         public void MoveToPosAsLocal(Point pt)
         {
             if (mainctrl != null)
-            {                                
+            {
                 mainctrl.Left = (int)(pt.X);
                 mainctrl.Top = (int)(pt.Y);
                 mainctrl.Width = (int)(last_local_dimensions.Width);
                 mainctrl.Height = (int)(last_local_dimensions.Height);
 
-                last_local_position = pt;                
+                last_local_position = pt;
                 hotspot.BackColor = Color.Green;
                 mainctrl.Invalidate();
             }
@@ -224,18 +224,18 @@ namespace FBXDesigns
 
         public void DrawLastMove()
         {
-                DrawLastTable();
-                if (mainctrl != null)
-                {                
-                    hotspot.BackColor = Color.Green;
-                    mainctrl.Invalidate();
-                }
-            
+            DrawLastTable();
+            if (mainctrl != null)
+            {
+                hotspot.BackColor = Color.Green;
+                mainctrl.Invalidate();
+            }
+
         }
         public float AbsolutZoom = 1;
         public void Zoom(float zm)
         {
-           
+
             if ((mainctrl.Height * zm) > 32)
             {
                 zoom = zm;
@@ -251,22 +251,22 @@ namespace FBXDesigns
         }
 
         public void DrawTable()
-        {            
-                if (mainctrl != null)
-                {
-                    SetTableHeight(mainctrl, tabletype);
-                    mainctrl.Invalidate();
-                }            
+        {
+            if (mainctrl != null)
+            {
+                SetTableHeight(mainctrl, tabletype);
+                mainctrl.Invalidate();
+            }
         }
 
         public void DrawLastTable()
         {
             if (mainctrl != null)
             {
-                mainctrl.Left = (int) (last_local_position.X);
-                mainctrl.Top = (int) (last_local_position.Y);
-                mainctrl.Width = (int) (last_local_dimensions.Width);
-                mainctrl.Height = (int) (last_local_dimensions.Height);
+                mainctrl.Left = (int)(last_local_position.X);
+                mainctrl.Top = (int)(last_local_position.Y);
+                mainctrl.Width = (int)(last_local_dimensions.Width);
+                mainctrl.Height = (int)(last_local_dimensions.Height);
 
                 mainctrl.Invalidate();
             }
@@ -279,10 +279,10 @@ namespace FBXDesigns
         }
 
         public void DrawResize(Point pt)
-        {            
+        {
             if (action == eAction.OnResize)
             {
-                DrawResizeAsAbsolute(pt);                
+                DrawResizeAsAbsolute(pt);
             }
         }
 
@@ -312,17 +312,17 @@ namespace FBXDesigns
         }
 
         public void DrawResizeAsLocal(Size pt)
-        {           
-             if (mainctrl != null)
-             {
-                 mainctrl.BringToFront();
-                 hotspot.BackColor = Color.Red;                    
-                 mainctrl.Width = (int)(pt.Width);
-                 mainctrl.Height = (int)(pt.Height);
-                 mainctrl.Left = (int) (last_local_position.X);
-                 mainctrl.Top = (int)(last_local_position.Y);
-                 last_local_dimensions = mainctrl.Size;
-             }                
+        {
+            if (mainctrl != null)
+            {
+                mainctrl.BringToFront();
+                hotspot.BackColor = Color.Red;
+                mainctrl.Width = (int)(pt.Width);
+                mainctrl.Height = (int)(pt.Height);
+                mainctrl.Left = (int)(last_local_position.X);
+                mainctrl.Top = (int)(last_local_position.Y);
+                last_local_dimensions = mainctrl.Size;
+            }
         }
     }
 }

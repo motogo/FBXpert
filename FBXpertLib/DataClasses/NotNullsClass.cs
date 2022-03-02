@@ -2,7 +2,7 @@
 {
 
     public class NotNullsClass : ConstraintsClass
-    {        
+    {
         public NotNullsClass()
         {
             ConstraintType = eConstraintType.NOTNULL;

@@ -1,7 +1,7 @@
 ﻿
 
 namespace FBXpertLib
-{ 
+{
     public class DependencyClass : DataObjectClass
     {
         public string DependOnName { get; set; }
@@ -9,7 +9,7 @@ namespace FBXpertLib
         public eDependencies Type { get; set; }
         public eDependencies TypeOn { get; set; }
     }
-    
+
     public class DependencyGroupClass : DataObjectClass
     {
         public override string ToString()

@@ -20,7 +20,7 @@ namespace FBXpert
         private TreeNode _tn = null;
         private ContextMenuStrip _cm = null;
         private NotifiesClass _localNotify = new NotifiesClass();
-        
+
         private AutocompleteClass _ac = null;
         private int _messagesCount = 0;
         private int _errorCount = 0;
@@ -44,34 +44,34 @@ namespace FBXpert
                 }
                 else
                 {
-                   _procedureObject = (ProcedureClass)tn.Tag;
+                    _procedureObject = (ProcedureClass)tn.Tag;
                 }
             }
             catch
             {
-               
+
             }
-            _procedureObjectOld = (ProcedureClass) _procedureObject.Clone();
-            
+            _procedureObjectOld = (ProcedureClass)_procedureObject.Clone();
+
             _dbReg = dbReg;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             cbDatatype.Items.Clear();
 
             DBTypeList dbList = new DBTypeList();
-            foreach(DBDataTypes dt in dbList.Values)
+            foreach (DBDataTypes dt in dbList.Values)
             {
                 cbDatatype.Items.Add(dt);
             }
             _doEvents = true;
         }
-        
+
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
             var sb = new StringBuilder();
             _messagesCount++;
             if (_messagesCount > 0) sb.Append($@"Messages ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"Errors ({_errorCount})");
+            if (_errorCount > 0) sb.Append($@"Errors ({_errorCount})");
 
             fctMessages.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -83,7 +83,7 @@ namespace FBXpert
             var sb = new StringBuilder();
             _errorCount++;
             if (_messagesCount > 0) sb.Append($@"{StaticFunctionsClass.DateTimeNowStr()} Messages ({_messagesCount}) ");
-            if (_errorCount > 0)    sb.Append($@"{StaticFunctionsClass.DateTimeNowStr()} Errors ({_errorCount})");
+            if (_errorCount > 0) sb.Append($@"{StaticFunctionsClass.DateTimeNowStr()} Errors ({_errorCount})");
 
             fctMessages.AppendText($@"ERROR {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -97,13 +97,13 @@ namespace FBXpert
             ShowCaptions();
             hsCreate.Enabled = (_procedureObject.Name.Length > 0);
         }
-        
+
         private int MakeSQLNew()
-        {            
+        {
             var SQLScript = new List<string>();
-            SQLScript.Clear();            
-            SQLScript = StaticDatabaseObjects.Instance().MakeSQLCreateProcedure(_procedureObject,true);
-            SQLToUI(SQLScript);  
+            SQLScript.Clear();
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLCreateProcedure(_procedureObject, true);
+            SQLToUI(SQLScript);
             return SQLScript.Count;
         }
 
@@ -112,15 +112,15 @@ namespace FBXpert
             fctSQL.Clear();
             foreach (string str in SQLScript)
             {
-               fctSQL.AppendText($@"{str}{Environment.NewLine}");
+                fctSQL.AppendText($@"{str}{Environment.NewLine}");
             }
         }
-     
+
         private int MakeSQLAlter()
-        {           
+        {
             var SQLScript = new List<string>();
-            SQLScript.Clear();            
-            SQLScript = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(_procedureObject,_procedureObjectOld, true);
+            SQLScript.Clear();
+            SQLScript = StaticDatabaseObjects.Instance().MakeSQLAlterProcedure(_procedureObject, _procedureObjectOld, true);
             SQLToUI(SQLScript);
             return SQLScript.Count;
         }
@@ -132,51 +132,51 @@ namespace FBXpert
 
         public void SetEnables()
         {
-          txtProcName.Enabled = true;   
+            txtProcName.Enabled = true;
         }
 
         public void DataToEdit()
         {
             _doEvents = false;
-            txtProcName.Text = _procedureObject.Name;                       
+            txtProcName.Text = _procedureObject.Name;
             fctGenDescription.Text = _procedureObject.Description;
-            
+
             lvFields.Items.Clear();
             for (int i = 0; i < _procedureObject.ParameterIn.Count; i++)
-            {                
+            {
                 var pc = _procedureObject.ParameterIn[i];
-                string[] columns = { "IN",pc.Name,pc.RawType };
+                string[] columns = { "IN", pc.Name, pc.RawType };
                 var lvi = new ListViewItem(columns);
 
                 var pci = new ParameterListItem();
                 pci.pc = pc;
                 pci.direction = eParameterTypDirection.din;
-                lvi.Tag = pci;               
+                lvi.Tag = pci;
                 lvFields.Items.Add(lvi);
             }
 
             for (int i = 0; i < _procedureObject.ParameterOut.Count; i++)
-            {                
+            {
                 var pc = _procedureObject.ParameterOut[i];
-                string[] columns = {"OUT",pc.Name,pc.RawType };
+                string[] columns = { "OUT", pc.Name, pc.RawType };
                 var lvi = new ListViewItem(columns);
                 var pci = new ParameterListItem();
                 pci.pc = pc;
                 pci.direction = eParameterTypDirection.dout;
-                lvi.Tag = pci;               
+                lvi.Tag = pci;
                 lvFields.Items.Add(lvi);
             }
 
             for (int i = 0; i < _procedureObject.Source.Count; i++)
             {
-               fcbProcedureDefinitionSQL.AppendText($@"{_procedureObject.Source[i]}{Environment.NewLine}");
+                fcbProcedureDefinitionSQL.AppendText($@"{_procedureObject.Source[i]}{Environment.NewLine}");
             }
             _doEvents = true;
         }
 
         public void EditToData()
         {
-            
+
         }
         public void SetControlSizes()
         {
@@ -190,8 +190,8 @@ namespace FBXpert
         {
             SetControlSizes();
             FormDesign.SetFormLeft(this);
-            DataToEdit();            
-            SetEnables();            
+            DataToEdit();
+            SetEnables();
             MakeSQL();
             SetAutocompeteObjects(_tables);
         }
@@ -205,47 +205,47 @@ namespace FBXpert
             ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
-            
+
         public void ShowCaptions()
-        {                            
-            lblProcedureName.Text = $@"Procedure: {_procedureObject.Name}";                
+        {
+            lblProcedureName.Text = $@"Procedure: {_procedureObject.Name}";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Procedure");
         }
 
         private void txtGenName_TextChanged(object sender, EventArgs e)
         {
-            if (!_doEvents) return;            
+            if (!_doEvents) return;
             _procedureObject.Name = txtProcName.Text.Trim();
-            if(BearbeitenMode != StateClasses.EditStateClass.eBearbeiten.eInsert) BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
-            MakeSQL();               
+            if (BearbeitenMode != StateClasses.EditStateClass.eBearbeiten.eInsert) BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
+            MakeSQL();
         }
 
         private void fctGenDescription_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            if (!_doEvents) return;            
+            if (!_doEvents) return;
             _procedureObject.Description = fctGenDescription.Text;
-            MakeSQL();               
+            MakeSQL();
         }
-       
+
         private void Create()
-        {                                                         
+        {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
 
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
             var riFailure = riList.Find(x => x.commandDone == false);
-            string info = (riFailure==null) 
-                ? $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} updated." 
+            string info = (riFailure == null)
+                ? $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} updated."
                 : $@"Procedure {_dbReg.Alias}->{_procedureObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadProcedures,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);  
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadProcedures, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
         }
 
         private void hsCreate_Click(object sender, EventArgs e)
-        {            
+        {
             Create();
         }
 
@@ -256,15 +256,15 @@ namespace FBXpert
 
         private void cmsParameters_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem == tsmiAddInputParameter)
+            if (e.ClickedItem == tsmiAddInputParameter)
             {
 
             }
-            else if(e.ClickedItem == tsmiAddOutputParameter)
+            else if (e.ClickedItem == tsmiAddOutputParameter)
             {
 
             }
-            else if(e.ClickedItem == tsmiDropParameter)
+            else if (e.ClickedItem == tsmiDropParameter)
             {
 
             }
@@ -282,10 +282,10 @@ namespace FBXpert
 
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvFields.SelectedItems.Count <= 0) return;            
+            if (lvFields.SelectedItems.Count <= 0) return;
             var lvi = lvFields.SelectedItems[0];
             if (lvi == null) return;
-            
+
             var pc = lvi.Tag as ParameterListItem;
             txtDatatypeLength.Text = pc.pc.Length.ToString();
             txtParameter.Text = pc.pc.Name;
@@ -300,19 +300,19 @@ namespace FBXpert
             else
             {
                 rbVAR.Checked = true;
-            }                        
+            }
         }
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);              
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if (ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName);               
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
 
         private void hsNew_Click(object sender, EventArgs e)
@@ -339,7 +339,7 @@ namespace FBXpert
             pc.Precision = 0;
             _procedureObject.ParameterIn.Add(pc);
 
-            _procedureObjectOld = (ProcedureClass) _procedureObject.Clone();
+            _procedureObjectOld = (ProcedureClass)_procedureObject.Clone();
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eInsert;
             DataToEdit();
             MakeSQL();

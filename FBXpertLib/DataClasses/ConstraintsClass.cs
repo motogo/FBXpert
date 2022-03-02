@@ -5,7 +5,7 @@ namespace FBXpertLib
     public class ConstraintsClass : DataObjectClass
     {
         public string TableName { get; set; }
-        public Dictionary<string,string> FieldNames { get; set; }
+        public Dictionary<string, string> FieldNames { get; set; }
         public string IndexName { get; set; }
         public string TriggerName { get; set; }
         public string Source { get; set; }
@@ -14,14 +14,14 @@ namespace FBXpertLib
         public eConstraintType ConstraintType { get; set; }
         public ConstraintsClass()
         {
-            FieldNames = new Dictionary<string,string>();
+            FieldNames = new Dictionary<string, string>();
         }
-        public string FieldNamesString(string seperatetBy=",")
+        public string FieldNamesString(string seperatetBy = ",")
         {
             string str = string.Empty;
-            foreach(string fn in FieldNames.Values)
+            foreach (string fn in FieldNames.Values)
             {
-                str += string.IsNullOrEmpty(str) ? fn : $@",{fn}"; 
+                str += string.IsNullOrEmpty(str) ? fn : $@",{fn}";
             }
             return str;
         }

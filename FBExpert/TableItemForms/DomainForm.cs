@@ -18,7 +18,7 @@ namespace FBExpert
     public partial class DomainForm : IEditForm
     {
         DomainClass DomainObject = null;
-        
+
         DBRegistrationClass _dbReg = null;
         AutocompleteClass ac = null;
         NotifiesClass _localNotify = new NotifiesClass();
@@ -35,31 +35,31 @@ namespace FBExpert
             this.MdiParent = parent;
             _dbReg = dbReg;
             _tables = tables;
-            DomainClass tc = (DomainClass)tn.Tag;     
-            if(tc == null)
+            DomainClass tc = (DomainClass)tn.Tag;
+            if (tc == null)
             {
                 DomainObject = new DomainClass();
-                DomainObject.Name           = "NEW_DOMAIN";
-                DomainObject.NotNull        = false;
-                DomainObject.FieldType      = "INTEGER";
-                DomainObject.CharSet        = "NONE";
-                DomainObject.Collate        = "NONE";
-                DomainObject.DefaultValue   = string.Empty;
-                DomainObject.Check          = string.Empty;
+                DomainObject.Name = "NEW_DOMAIN";
+                DomainObject.NotNull = false;
+                DomainObject.FieldType = "INTEGER";
+                DomainObject.CharSet = "NONE";
+                DomainObject.Collate = "NONE";
+                DomainObject.DefaultValue = string.Empty;
+                DomainObject.Check = string.Empty;
             }
             else
             {
-               DomainObject = tc;
+                DomainObject = tc;
             }
 
-            
+
             Cm = cm;
             Tn = tn;
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
             _localTableNotify.Register4Info(TableInfoRaised);
         }
-        public DomainForm(Form parent, DBRegistrationClass dbReg,  DomainClass domainObject)
+        public DomainForm(Form parent, DBRegistrationClass dbReg, DomainClass domainObject)
         {
             InitializeComponent();
             this.MdiParent = parent;
@@ -74,8 +74,8 @@ namespace FBExpert
         private void TableInfoRaised(object sender, MessageEventArgs k)
         {
             if (k.Key.ToString() == "CHECK")
-              txtCheck.Text = (string)k.Data;
-            
+                txtCheck.Text = (string)k.Data;
+
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
@@ -83,7 +83,7 @@ namespace FBExpert
             var sb = new StringBuilder();
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -95,10 +95,10 @@ namespace FBExpert
             var sb = new StringBuilder();
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
-            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung, _dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
-            
+
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -107,7 +107,7 @@ namespace FBExpert
         public override void FormLoadFirst()
         {
             base.FormLoadFirst();
-            ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);            
+            ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
         }
 
@@ -138,30 +138,30 @@ namespace FBExpert
             }
         }
 
-       
+
         bool DataFilled = false;
 
         public void MakeSQLNew()
-        {            
+        {
             SQLScript.Clear();
             cbCollate.Enabled = true;
             var sb = new StringBuilder();
-           
+
             sb.Append($@"CREATE DOMAIN {txtName.Text} AS ");
             sb.Append($@"{StaticVariablesClass.CompleteRawType(cbTypes.Text.Trim(), StaticFunctionsClass.ToIntDef(txtLength.Text.Trim(), 0))}");
-            if(cbCharSet.Enabled)
+            if (cbCharSet.Enabled)
             {
                 if (cbCharSet.Text != "NONE")
                 {
                     sb.Append($@" CHARACTER SET {cbCharSet.Text}");
                 }
             }
-            if(cbCollate.Enabled)
+            if (cbCollate.Enabled)
             {
                 if (cbCollate.Text != "NONE")
                 {
                     sb.Append($@" COLLATE {cbCollate.Text}");
-                }            
+                }
             }
             if (!string.IsNullOrEmpty(txtDefault.Text))
             {
@@ -171,9 +171,9 @@ namespace FBExpert
             sb.AppendLine($@";");
             sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}");
 
-            if(ckNotNullCheck.Checked)
-            {                
-                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK ({txtCheck}"); 
+            if (ckNotNullCheck.Checked)
+            {
+                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK ({txtCheck}");
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
 
@@ -186,7 +186,7 @@ namespace FBExpert
             SQLScript.Add(sb.ToString());
             SQLToUI();
         }
-        
+
         public void MakeSQOAlter()
         {
             SQLScript.Clear();
@@ -198,9 +198,9 @@ namespace FBExpert
                 sb.Append($@"ALTER DOMAIN {DomainObject.Name} TO {txtName.Text};");
                 sb.Append($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
-           
-            sb.Append($@"ALTER DOMAIN {txtName.Text} TYPE {StaticVariablesClass.CompleteRawType(cbTypes.Text.Trim(), StaticFunctionsClass.ToIntDef(txtLength.Text.Trim(),0))}");   
-            if(cbCharSet.Enabled)
+
+            sb.Append($@"ALTER DOMAIN {txtName.Text} TYPE {StaticVariablesClass.CompleteRawType(cbTypes.Text.Trim(), StaticFunctionsClass.ToIntDef(txtLength.Text.Trim(), 0))}");
+            if (cbCharSet.Enabled)
             {
                 if (cbCharSet.Text != "NONE")
                 {
@@ -209,28 +209,28 @@ namespace FBExpert
             }
             sb.AppendLine($@";");
             sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
-            
+
             if (txtDefault.Text != DomainObject._defaultValue)
             {
-                string defstr = (cbTypes.Text.IndexOf("CHAR") >= 0)   ? $@"'{txtDefault.Text}'" : txtDefault.Text ;
-                string cmd    = string.IsNullOrEmpty(txtDefault.Text) ? $@"ALTER DOMAIN {txtName.Text} SET DEFAULT NULL;" : $@"ALTER DOMAIN {txtName.Text} SET DEFAULT {defstr};";
-                sb.AppendLine(cmd);                
+                string defstr = (cbTypes.Text.IndexOf("CHAR") >= 0) ? $@"'{txtDefault.Text}'" : txtDefault.Text;
+                string cmd = string.IsNullOrEmpty(txtDefault.Text) ? $@"ALTER DOMAIN {txtName.Text} SET DEFAULT NULL;" : $@"ALTER DOMAIN {txtName.Text} SET DEFAULT {defstr};";
+                sb.AppendLine(cmd);
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
 
-            if(txtCheck.Text.Length > 0)
+            if (txtCheck.Text.Length > 0)
             {
-                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */"); 
-                if(ckNotNullCheck.Checked)
+                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */");
+                if (ckNotNullCheck.Checked)
                 {
                     sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK ({txtCheck.Text}); /* adds not null flag to domain */");
                 }
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
-            else if(ckNotNullCheck.Checked == DomainObject.NotNull)
+            else if (ckNotNullCheck.Checked == DomainObject.NotNull)
             {
-                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */"); 
-                if(ckNotNullCheck.Checked)
+                sb.AppendLine($@"ALTER DOMAIN {txtName.Text} DROP CONSTRAINT; /* drop check constraint */");
+                if (ckNotNullCheck.Checked)
                 {
                     sb.AppendLine($@"ALTER DOMAIN {txtName.Text} ADD CONSTRAINT CHECK (VALUE IS NOT NULL); /* adds not null flag to domain */");
                 }
@@ -239,10 +239,10 @@ namespace FBExpert
 
             if (fctDescription.Text != DomainObject.Description)
             {
-                sb.AppendLine($@"COMMENT ON DOMAIN {txtName.Text} IS '{fctDescription.Text}';");                
+                sb.AppendLine($@"COMMENT ON DOMAIN {txtName.Text} IS '{fctDescription.Text}';");
                 sb.AppendLine($@"{SQLPatterns.Commit}{Environment.NewLine}");
             }
-                        
+
             SQLScript.Add(sb.ToString());
             SQLToUI();
         }
@@ -250,7 +250,7 @@ namespace FBExpert
 
         public List<string> SQLScript = new List<string>();
 
-        
+
 
         public void SetBearbeitenMode(EditStateClass.eBearbeiten bea)
         {
@@ -264,13 +264,13 @@ namespace FBExpert
 
         private void ClearEdit()
         {
-            txtName.Text        = "NEW_DOMAINNAME";
-            cbTypes.Text        = "INTEGER";
-            txtCheck.Text       = string.Empty;
-            ckNotNullCheck.Checked   = false;
-            txtDefault.Text     = string.Empty;
-            cbCharSet.Text      = _dbReg.CharSet;
-            cbCollate.Text      = _dbReg.Collation;
+            txtName.Text = "NEW_DOMAINNAME";
+            cbTypes.Text = "INTEGER";
+            txtCheck.Text = string.Empty;
+            ckNotNullCheck.Checked = false;
+            txtDefault.Text = string.Empty;
+            cbCharSet.Text = _dbReg.CharSet;
+            cbCollate.Text = _dbReg.Collation;
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -281,9 +281,9 @@ namespace FBExpert
         public void RefreshTypes()
         {
             cbTypes.Items.Clear();
-                        
+
             DBTypeList dbList = new DBTypeList();
-            foreach(DBDataTypes dt in dbList.Values)
+            foreach (DBDataTypes dt in dbList.Values)
             {
                 cbTypes.Items.Add(dt);
             }
@@ -300,53 +300,53 @@ namespace FBExpert
 
         public void SetCombo()
         {
-            RefreshTypes();            
+            RefreshTypes();
         }
 
         public void DataToEdit()
-        {            
-            txtName.Text        = DomainObject.Name;
+        {
+            txtName.Text = DomainObject.Name;
             fctDescription.Text = DomainObject.Description;
             SearchType();
-            txtLength.Text      = DomainObject.Length.ToString();
-            txtDefault.Text     = DomainObject.DefaultValue.StartsWith("default") ? DomainObject.DefaultValue.Substring(7).Trim() : DomainObject.DefaultValue.Trim();
-            cbCharSet.Text      = DomainObject.CharSet.Length > 0 ? DomainObject.CharSet : "NONE";
-            cbCollate.Text      = DomainObject.Collate.Length > 0 ? DomainObject.Collate : "NONE";
-            txtCheck.Text       = DomainObject.Check;
-            ckNotNullCheck.Checked   = DomainObject.NotNull;
+            txtLength.Text = DomainObject.Length.ToString();
+            txtDefault.Text = DomainObject.DefaultValue.StartsWith("default") ? DomainObject.DefaultValue.Substring(7).Trim() : DomainObject.DefaultValue.Trim();
+            cbCharSet.Text = DomainObject.CharSet.Length > 0 ? DomainObject.CharSet : "NONE";
+            cbCollate.Text = DomainObject.Collate.Length > 0 ? DomainObject.Collate : "NONE";
+            txtCheck.Text = DomainObject.Check;
+            ckNotNullCheck.Checked = DomainObject.NotNull;
             SetControlsEnabled();
             MakeSQL();
         }
         public void EditToData()
         {
-            DomainObject.FieldType    = cbTypes.Text;
-            DomainObject.Description  = fctDescription.Text;
+            DomainObject.FieldType = cbTypes.Text;
+            DomainObject.Description = fctDescription.Text;
             DomainObject.DefaultValue = txtDefault.Text;
-            DomainObject.NotNull      = ckNotNullCheck.Checked;
-            DomainObject.CharSet      = cbCharSet.Text;
-            DomainObject.Collate      = cbCollate.Text;
+            DomainObject.NotNull = ckNotNullCheck.Checked;
+            DomainObject.CharSet = cbCharSet.Text;
+            DomainObject.Collate = cbCollate.Text;
         }
 
         private void hsRefresh_Click(object sender, EventArgs e)
         {
-           
+
         }
 
-        
+
         private void Create()
-        {            
+        {
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
 
-            var riList =_sql.ExecuteCommands(fctSQL.Lines);
-            var riFailure = riList.Find(x=>x.commandDone == false);
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+            var riFailure = riList.Find(x => x.commandDone == false);
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            string info = (riFailure==null) 
-                ? $@"Domain {_dbReg.Alias}->{DomainObject.Name} updated." 
+            string info = (riFailure == null)
+                ? $@"Domain {_dbReg.Alias}->{DomainObject.Name} updated."
                 : $@"Domain {_dbReg.Alias}->{DomainObject.Name} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors";
-                                            
+
             //DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadDomains,$@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
             EditToData();
@@ -393,18 +393,18 @@ namespace FBExpert
             fcbExamples.AppendText($@"ALTER DOMAIN domain <domainname> ADD CONSTRAINT CHECK (VALUE IS NOT NULLl); /* add not null flag to domain */{Environment.NewLine}");
             fcbExamples.AppendText($@"ALTER DOMAIN <domainname> DROP CONSTRAINT; /* drop check constraint */){Environment.NewLine}");
         }
-        
+
         public void ShowCaptions()
         {
             lblTableName.Text = (DomainObject != null) ? $"Domain: {DomainObject.Name}" : "Domain";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Edit Domain");
         }
-                  
+
         public void SetNew()
         {
             SetBearbeitenMode(EditStateClass.eBearbeiten.eInsert);
-            ClearEdit();                        
-            txtName.Select();            
+            ClearEdit();
+            txtName.Select();
             MakeSQL();
         }
 
@@ -415,13 +415,13 @@ namespace FBExpert
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            if(!DataFilled) return;
+            if (!DataFilled) return;
             MakeSQL();
         }
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
-            if(!DataFilled) return;
+            if (!DataFilled) return;
             MakeSQL();
         }
 
@@ -435,7 +435,7 @@ namespace FBExpert
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!DataFilled) return;
-            if(cbTypes.Text.IndexOf("CHAR") >= 0) 
+            if (cbTypes.Text.IndexOf("CHAR") >= 0)
             {
                 cbCharSet.Text = _dbReg.CharSet;
                 cbCollate.Text = _dbReg.Collation;
@@ -459,7 +459,7 @@ namespace FBExpert
         private void hotSpot1_Click(object sender, EventArgs e)
         {
             Create();
-        }       
+        }
 
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)
         {
@@ -475,20 +475,20 @@ namespace FBExpert
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-            if(saveSQLFile.ShowDialog() != DialogResult.OK) return;            
-               fctSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);       
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName); 
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
 
         private void txtDefault_TextChanged(object sender, EventArgs e)
         {
-            if(!DataFilled) return;
-            MakeSQL();  
+            if (!DataFilled) return;
+            MakeSQL();
         }
 
         private void cbCharSet_SelectedIndexChanged(object sender, EventArgs e)
@@ -506,16 +506,15 @@ namespace FBExpert
         private void txtCheck_TextChanged(object sender, EventArgs e)
         {
             if (!DataFilled) return;
-            ckNotNullCheck.Enabled = (txtCheck.Text.Length > 0 );
+            ckNotNullCheck.Enabled = (txtCheck.Text.Length > 0);
             MakeSQL();
         }
 
         private void hsSelectDefault_Click(object sender, EventArgs e)
         {
-            
+
             SelectDefaultForm sd = new SelectDefaultForm(this.MdiParent, _localTableNotify, "CHECK", StaticVariablesClass.DefaultCheckVariables);
             sd.Show();
         }
     }
 }
- 

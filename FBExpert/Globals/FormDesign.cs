@@ -12,7 +12,7 @@ namespace FBXpert.Globals
                 if (frm.Left < left) frm.Left = left + 2;
                 return;
             }
-            if(frm.Left < 0) frm.Left = 0;
+            if (frm.Left < 0) frm.Left = 0;
         }
     }
 }

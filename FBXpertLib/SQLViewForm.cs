@@ -2,7 +2,6 @@ using BasicClassLibrary;
 using BasicForms;
 using DBBasicClassLibrary;
 using FBXpert;
-using FBXpertLib;
 using FirebirdSql.Data.FirebirdClient;
 using FormInterfaces;
 using Initialization;
@@ -32,10 +31,10 @@ namespace FBXpertLib.SQLView
         private string _cmd = string.Empty;
         private int _cmdDone = 0;
         private int _cmdError = 0;
-               
-        
+
+
         private readonly List<string> _obcmd = new List<string>();
-       
+
         eSort _lastSort = eSort.DESC;
         string lastSuccessfulCommand = string.Empty;
         string lastCommand = string.Empty;
@@ -48,18 +47,25 @@ namespace FBXpertLib.SQLView
             MdiParent = mdiParent;
             _dbRegOrg = ca;
             _dbrRegLocal = _dbRegOrg.Clone();
-           
-            
+
+
             _appDesign = appDesign;
             _developDesign = developDesign;
             InitializeComponent();
             FormEvents.ClearEvents(this);
             if (cbErrors.Checked) SQLnotify.Register4Error(ErrorRaised);
             if (cbMeldungen.Checked) SQLnotify.Register4Info(InfoRaised);
-                        
+
             _sqLcommand = new SQLCommandsClass(_dbrRegLocal);
             _sqLcommand.Notify.Register4Info(InfoRaised);
             _sqLcommand.Notify.Register4Error(ErrorRaised);
+            bool openok = TestOpen(_dbrRegLocal);
+            if (!openok)
+            {
+                SEMessageBox.ShowDialog("#Database Error", "#Databsase is not opened, check password", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);
+                Close();
+                return;
+            }
 
             History();
             ClearDevelopDesign(_developDesign);
@@ -78,12 +84,12 @@ namespace FBXpertLib.SQLView
 
         private void LanguageChanged()
         {
-            tabHistory.Text                 = $@"{LanguageClass.Instance.GetString("History")} ({dgvSQLHistory.Rows.Count})";
-            hsClearHistory.Text             = LanguageClass.Instance.GetString("DeleteHistory");
-            hsExecuteHistorySelected.Text   = LanguageClass.Instance.GetString("EXECUTE_SQL");
-            hsRunSQL.Text                   = LanguageClass.Instance.GetString("EXECUTE_SQL");
-            hsRefreshHistory.Text           = LanguageClass.Instance.GetString("REFRESH");
-            hsPageRefresh.Text              = LanguageClass.Instance.GetString("REFRESH");
+            tabHistory.Text = $@"{LanguageClass.Instance.GetString("History")} ({dgvSQLHistory.Rows.Count})";
+            hsClearHistory.Text = LanguageClass.Instance.GetString("DeleteHistory");
+            hsExecuteHistorySelected.Text = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsRunSQL.Text = LanguageClass.Instance.GetString("EXECUTE_SQL");
+            hsRefreshHistory.Text = LanguageClass.Instance.GetString("REFRESH");
+            hsPageRefresh.Text = LanguageClass.Instance.GetString("REFRESH");
         }
 
 
@@ -103,7 +109,7 @@ namespace FBXpertLib.SQLView
             {
                 _cmdDone++;
                 tabMELDUNG.Text = $@"Messages ({_cmdDone})";
-                
+
                 if (rbMeldAppend.Checked)
                 {
                     rtfMELDUNG.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} {k.Meldung}");
@@ -153,7 +159,7 @@ namespace FBXpertLib.SQLView
             }
         }
 
-        
+
 
         private string HistoryFile
         {
@@ -168,14 +174,14 @@ namespace FBXpertLib.SQLView
             if (toHistory != HistoryMode.AddToHistory) return false;
             bool ok = false;
             try
-            {                
+            {
                 var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.succeeded);
                 sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
                 lastCommand = cmd;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SQLnotify.AddToERROR(ex.Message);
             }
@@ -185,14 +191,14 @@ namespace FBXpertLib.SQLView
         private ExperienceInfo AddToInfo(string keycode, string info)
         {
             ExperienceInfo data = null;
-            
+
             try
             {
                 var sh = new ExperienceInfoClass($@"{AppSettingsClass.Instance.PathSettings.InfoPath}");
-                data = sh.InsertExperienceInfo(keycode,info);
+                data = sh.InsertExperienceInfo(keycode, info);
                 sh.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 sh.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
-              
+
             }
             catch (Exception ex)
             {
@@ -228,10 +234,10 @@ namespace FBXpertLib.SQLView
             {
                 var sh = new SQLHistoryClass(_dbRegOrg.Alias, HistoryFile);
                 ok = sh.InsertHistory(cmd, eSQLHistoryType.failed);
-                sh.HistoryRefresh(dgvSQLHistory,   cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
+                sh.HistoryRefresh(dgvSQLHistory, cbSQLsucceded.Checked, cbSQLfailed.Checked, cbAllHistory.Checked);
                 sh.SortGrid(dgvSQLHistory, 1);
-            }            
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 SQLnotify.AddToERROR(ex.Message);
             }
@@ -260,7 +266,7 @@ namespace FBXpertLib.SQLView
         {
             dsResults.Clear();
             dgvResults.AutoGenerateColumns = true;
-         
+
             var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, cmds, true);
             if (ri.commandDone)
             {
@@ -324,7 +330,7 @@ namespace FBXpertLib.SQLView
         {
             if (txtSQL.Text.Length <= 0) return 0;
             if (ckClearExportListBeforeExecute.Checked) fctXMLData.Clear();
-            
+
             System.IO.StreamWriter file = null;
             doExport = true;
             if (ckExportToFile.Checked)
@@ -474,7 +480,7 @@ namespace FBXpertLib.SQLView
         }
 
         public bool TestOpen(DBRegistrationClass dbReg)
-        {            
+        {
             string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
             string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
 
@@ -487,6 +493,10 @@ namespace FBXpertLib.SQLView
             hsLifeTime.ToolTipText = connectionString;
             hsLifeTime.Marked = !string.IsNullOrEmpty(lifeTime);
             hsLifeTime.Text = lifeTime;
+            if (lifeTime == "-1")
+            {
+                hsLifeTime.BackColor = Color.Red;
+            }
             return (lifeTime != "-1");
         }
 
@@ -510,17 +520,15 @@ namespace FBXpertLib.SQLView
         {
             FormEvents.DisableEvents(this, $@"SQLViewForm_Load(object {sender}, EventArgs e)");
             SetControlSizes();
-          //  FormDesign.SetFormLeft(this);
+
             txtSQL.Clear();
             UserStart();
-           
+
             EditMode(cbEditMode.Checked);
             AppStaticFunctionsClass.GetDatabases(cbConnection, _dbrRegLocal);
-            
-            this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
-            //txtDatabase.Text = _dbrRegLocal.GetFullDatabasePath();
 
-            TestOpen(_dbrRegLocal);
+            this.Text = $@"SQLView for {_dbrRegLocal.Alias}";
+
             hsBreak.Enabled = false;
 
             LoadHistory(_lastSort);
@@ -532,11 +540,12 @@ namespace FBXpertLib.SQLView
 
             SetAutocompeteObjects();
             FormEvents.EnableEvents(this);
+
         }
 
         public void SetAutocompeteObjects()
         {
-          
+
             var tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbrRegLocal);
             var views = StaticDatabaseObjects.Instance().GetViewObjects(_dbrRegLocal);
             ac = new AutocompleteClass(txtSQL, _dbRegOrg);
@@ -574,7 +583,7 @@ namespace FBXpertLib.SQLView
             try
             {
                 exp = new ExperienceInfoClass($@"{AppSettingsClass.Instance.PathSettings.InfoPath}\InfoExpierenceData.db");
-                exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+                exp.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                 exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                 //dgvExperienceInfo.Columns[(int)ExperienceInfoInx.Id].Visible = false;
             }
@@ -620,7 +629,7 @@ namespace FBXpertLib.SQLView
         private void FillScript()
         {
             string strcmd;
-            
+
             string[] strarr = (string[])txtSQL.Lines;
             txtSQL.Clear();
 
@@ -629,7 +638,7 @@ namespace FBXpertLib.SQLView
             foreach (string str in strarr)
             {
                 tpos = str.IndexOf("SET TERM");
-                
+
                 strcmd = str.Trim();
                 if (strcmd.EndsWith(";"))
                 {
@@ -773,13 +782,13 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 }
                 _globalCon.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SQLnotify.AddToERROR(ex.Message);
             }
         }
 
-       
+
 
         private void RunSQLFromFile()
         {
@@ -799,9 +808,9 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             pbRunSQL.Value = 0;
             pbRunSQL.Maximum = (int)fi.Length;
             hsBreak.Enabled = true;
-           // string connectionstr = ConnectionStrings.Instance.MakeConnectionString(_dbRegOrg);
+            // string connectionstr = ConnectionStrings.Instance.MakeConnectionString(_dbRegOrg);
             string[] strarr = File.ReadAllLines(fi.FullName);
-            
+
             var ri = _sqLcommand.ExecuteCommandsAddToDataset(dsResults, strarr, true);
             dsResults = ri.dataSet;
 
@@ -834,7 +843,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void cbTestlauf_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cbErrors_CheckedChanged(object sender, EventArgs e)
@@ -932,10 +941,13 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             stopwatch.Stop();
             txtUsedTime.Text = stopwatch.ElapsedMilliseconds.ToString();
             EditMode(cbEditMode.Checked);
-            tabRESULT.Text = (dsResults.Tables.Count > 0) ? $@"Results ({dsResults.Tables[0].Rows.Count})" : $@"Results (0)";
+            if (dsResults != null)
+            {
+                tabRESULT.Text = (dsResults.Tables.Count > 0) ? $@"Results ({dsResults.Tables[0].Rows.Count})" : $@"Results (0)";
 
-            RefreshHistory();
-            dgvResults.Visible = true;
+                RefreshHistory();
+                dgvResults.Visible = true;
+            }
         }
 
         private void hsClearText_Click(object sender, EventArgs e)
@@ -1085,7 +1097,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 tcSQLCONTROL.SelectedTab = tabSQLTEXT;
                 ExecuteSQL(HistoryMode.NoHistory);
             }
-            else if(e.ClickedItem == tsmiInsertPK)
+            else if (e.ClickedItem == tsmiInsertPK)
             {
                 //int s = txtSQL.Selection.Start;
                 txtSQL.InsertText(" PRIMARY KEY NOT NULL");
@@ -1492,8 +1504,8 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         {
             try
             {
-               exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
-               exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                exp.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
+                exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
             }
             catch (Exception ex)
             {
@@ -1516,8 +1528,8 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void DgvSQLHistory_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView grid = sender as DataGridView;
-            sh.SwapSortGrid(grid, e.ColumnIndex);           
-        }        
+            sh.SwapSortGrid(grid, e.ColumnIndex);
+        }
         private void CbAllHistory_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -1568,13 +1580,13 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             }
             else if (e.ClickedItem == tsmiHistoryExecuteSQL)
             {
-                ExecuteHistorySelected();                
+                ExecuteHistorySelected();
             }
         }
 
         private void SQLViewForm1_Enter(object sender, EventArgs e)
         {
-          //  SEHotSpot.Controller.Instance().SetHookForm(this);
+            //  SEHotSpot.Controller.Instance().SetHookForm(this);
         }
 
         private void hsClearHistory_Click(object sender, EventArgs e)
@@ -1588,7 +1600,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
 
         private void ckShowResults_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
         ExperienceInfo ExData = new ExperienceInfo();
         private void hotSpot5_Click(object sender, EventArgs e)
@@ -1631,7 +1643,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
         private void ExperienceDataToEdit()
         {
             txtExperienceKeyCode.Text = ExData.KeyCode;
-            txtExperienceInfo.Text = ExData.Info; 
+            txtExperienceInfo.Text = ExData.Info;
         }
 
         private void ExperienceEditToData()
@@ -1663,9 +1675,9 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             {
                 try
                 {
-                   exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
-                   
-                   exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
+                    exp.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
+
+                    exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                 }
                 catch (Exception ex)
                 {
@@ -1679,7 +1691,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             if (e.ClickedItem == tsmiDeleteExperienceInfo)
             {
                 int n = 0;
-                foreach (DataGridViewRow dr in  dgvExperienceInfo.SelectedRows)
+                foreach (DataGridViewRow dr in dgvExperienceInfo.SelectedRows)
                 {
                     if (exp.DeleteExperienceInfoEntry((int)dr.Cells[0].Value)) n++;
                 }
@@ -1687,7 +1699,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                 {
                     try
                     {
-                        exp.ExperienceInfoRefresh(dgvExperienceInfo,txtExperienceKeyCode.Text);
+                        exp.ExperienceInfoRefresh(dgvExperienceInfo, txtExperienceKeyCode.Text);
                         exp.SortGrid(dgvExperienceInfo, ExperienceInfoClass.SelColInx);
                     }
                     catch (Exception ex)
@@ -1709,7 +1721,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
                     txtSQL.AppendText($@"{sql}{Environment.NewLine}");
                 }
             }
-            
+
         }
 
         private void hsUpdateExperienceInfo_Click(object sender, EventArgs e)
@@ -1778,7 +1790,7 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             if (e.ClickedItem == tsmiSetToNULL)
             {
                 dgvResults.BeginEdit(false);
-                dgvResults.CurrentCell.Value =  (dgvResults.CurrentCell.ValueType == typeof(System.String))  ? dgvResults.CurrentCell.DefaultNewRowValue : System.DBNull.Value;
+                dgvResults.CurrentCell.Value = (dgvResults.CurrentCell.ValueType == typeof(System.String)) ? dgvResults.CurrentCell.DefaultNewRowValue : System.DBNull.Value;
                 dgvResults.EndEdit();
                 dgvResults.InvalidateCell(dgvResults.CurrentCell);
             }

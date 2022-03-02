@@ -91,7 +91,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\BasicFormClassLibrary\bin\Debug\BasicFormClassLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="DBBasicClassLibrary, Version=2018.3.22.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DBBasicClassLibrary, Version=2021.2.22.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SELibrariesSource\DBBasicClassLibrary\MainSource\bin\Debug\DBBasicClassLibrary.dll</HintPath>
     </Reference>
@@ -117,12 +117,13 @@
     <Reference Include="FBXDesigns">
       <HintPath>..\FBXpertLibs\FBXDesigns.dll</HintPath>
     </Reference>
-    <Reference Include="FBXpertLib">
+    <Reference Include="FBXpertLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\FBXpertLib\bin\Debug\FBXpertLib.dll</HintPath>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=8.5.3.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.10.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SELibrariesSource\packages\Firebird\FirebirdSql.Data.FirebirdClient.8.5.3\lib\net48\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <HintPath>..\..\SELibrariesSource\packages\Firebird\FirebirdSql.Data.FirebirdClient.7.10.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="FormularUtils, Version=2017.11.21.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1146,7 +1147,6 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="config\" />
     <Folder Include="MiscClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

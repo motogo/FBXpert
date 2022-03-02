@@ -16,15 +16,15 @@ using System.Windows.Forms;
 namespace FBXpert.DataClasses
 {
     class ExportClass
-    {        
+    {
         private System.Windows.Forms.DataGridViewTextBoxColumn colPOS;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExportFieldName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colExportActive;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colExportWhere;
-        
+
         private DataSet _dsTableContent;
         private DBRegistrationClass _dbReg;
-               
+
         private System.Windows.Forms.ColumnHeader colFIELDPOSITION;
         private System.Windows.Forms.ColumnHeader colTYPE;
         private System.Windows.Forms.ColumnHeader colLENGTH;
@@ -50,12 +50,12 @@ namespace FBXpert.DataClasses
         {
             return _exportInfo;
         }
-        
+
         public void Init(DBRegistrationClass dbReg, NotifiesClass localNotifies)
         {
             _dbReg = dbReg;
             _localNotify = localNotifies;
-            
+
             this.colFIELDPOSITION = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFIELDNAME = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTYPE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -74,7 +74,7 @@ namespace FBXpert.DataClasses
             this.colDOMAINDEFAULTVALUE = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-           
+
             // 
             // colFIELDPOSITION
             // 
@@ -172,13 +172,13 @@ namespace FBXpert.DataClasses
             // dgvResults
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Khaki;
-            
+
 
             this.colPOS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExportFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExportActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colExportWhere = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            
+
             // 
             // colPOS
             // 
@@ -206,14 +206,14 @@ namespace FBXpert.DataClasses
             this.colExportWhere.Name = "colExportWhere";
             this.colExportWhere.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colExportWhere.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colExportWhere.Width = 24;            
+            this.colExportWhere.Width = 24;
         }
 
         public string TestForValidation(string txt)
         {
             string cmd = txt.Replace(" ,", ",");
             cmd = cmd.Replace(", ", ",");
-            int changed = 0;                                
+            int changed = 0;
             string[] arr = cmd.Split(',');
             for (int i = 0; i < arr.Length; i++)
             {
@@ -221,7 +221,7 @@ namespace FBXpert.DataClasses
                 int n = arrcmd.IndexOf("'", 1);
                 if ((n > -1) && (n < arrcmd.Length - 1))
                 {
-                    arrcmd = arrcmd.Insert(n, "'");                    
+                    arrcmd = arrcmd.Insert(n, "'");
                     arr[i] = arrcmd;
                     changed++;
                 }
@@ -229,7 +229,7 @@ namespace FBXpert.DataClasses
 
             if (changed > 0)
             {
-                var sb = new StringBuilder();               
+                var sb = new StringBuilder();
                 bool first = true;
                 foreach (string str in arr)
                 {
@@ -239,9 +239,9 @@ namespace FBXpert.DataClasses
                     }
                     sb.Append(str);
                     first = false;
-                }                    
+                }
                 return sb.ToString();
-            }            
+            }
             return cmd;
         }
 
@@ -251,7 +251,7 @@ namespace FBXpert.DataClasses
             StringBuilder cols = new StringBuilder();
             foreach (var tcf in tableObject.Fields.Values)
             {
-                if (tcf.State != CheckState.Checked) continue;                
+                if (tcf.State != CheckState.Checked) continue;
                 if (first)
                 {
                     cols.Append(tcf.Name);
@@ -260,81 +260,81 @@ namespace FBXpert.DataClasses
                 {
                     cols.Append(", " + tcf.Name);
                 }
-                first = false;                   
+                first = false;
             }
             return cols.ToString();
         }
-         public int RefreshDataCount = 0;
-        public string RefreshDatas(TableClass tableObject,string cols)
-        {            
+        public int RefreshDataCount = 0;
+        public string RefreshDatas(TableClass tableObject, string cols)
+        {
             RefreshDataCount = 0;
             _dsTableContent.Clear();
             if ((string.IsNullOrEmpty(tableObject.Name)) || (string.IsNullOrEmpty(cols))) return string.Empty;
-            
+
             string cmd = $@"{SQLConstants.SELECT} {cols} FROM {tableObject.Name}";
-            
+
             _dsTableContent.Tables.Clear(); //[0].Columns.Clear();
-                                    
+
             if ((_dataConnection != null) && (_dataConnection.State != System.Data.ConnectionState.Closed)) _dataConnection.Close();
-            
-            using(var c = new TransactionScope())
+
+            using (var c = new TransactionScope())
             {
-                using(var _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg)))
+                using (var _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg)))
                 {
-                     _dataConnection.Open();                                
-                     if(tableObject.primary_constraint != null)
-                     {
-                         bool frst = true;
-                         string fstr = "(";
-                         foreach(string fname in tableObject.primary_constraint.FieldNames.Values)
-                         {
-                             fstr += (frst) ? fname : $@",{fname}";                            
-                             frst = false;
-                         }
-                         fstr += ")";
-                         cmd +=  " ORDER BY " + fstr;
-                     }
-            
-                     var ds = new FbDataAdapter(cmd, _dataConnection);
-                     try
-                     {
-                         RefreshDataCount = ds.Fill(_dsTableContent);
-                     }
-                     catch(OutOfMemoryException ex)
-                     {
-                        
+                    _dataConnection.Open();
+                    if (tableObject.primary_constraint != null)
+                    {
+                        bool frst = true;
+                        string fstr = "(";
+                        foreach (string fname in tableObject.primary_constraint.FieldNames.Values)
+                        {
+                            fstr += (frst) ? fname : $@",{fname}";
+                            frst = false;
+                        }
+                        fstr += ")";
+                        cmd += " ORDER BY " + fstr;
+                    }
+
+                    var ds = new FbDataAdapter(cmd, _dataConnection);
+                    try
+                    {
+                        RefreshDataCount = ds.Fill(_dsTableContent);
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+
                         return ex.Message;
-                     }
-                     finally
-                     {
+                    }
+                    finally
+                    {
                         _dataConnection.Close();
-                     }
+                    }
                 }
                 c.Complete();
-            }               
+            }
             return string.Empty;
         }
-       
-        
 
-        public Dictionary<string,string> ExportForInsertUpdate(eCreateMode createMode,TableClass tableObject, string cols)
+
+
+        public Dictionary<string, string> ExportForInsertUpdate(eCreateMode createMode, TableClass tableObject, string cols)
         {
-            var sb = new StringBuilder();                                   
+            var sb = new StringBuilder();
             int i = 0;
-            var lst = new Dictionary<string,string>();
+            var lst = new Dictionary<string, string>();
             foreach (DataRow dr in _dsTableContent.Tables[0].Rows)
             {
                 string tablename = tableObject.Name;
                 string scmd = string.Empty;
                 bool first = true;
-                sb.Clear();                
-                
+                sb.Clear();
+
                 string cmdpattern = (createMode == eCreateMode.recreate) ? SQLPatterns.UpdateInsertPattern : SQLPatterns.InsertPattern;
-                                
+
                 foreach (var tcf in tableObject.Fields)
                 {
                     if (tcf.Value.State != CheckState.Checked) continue;
-                    
+
                     string valuestr = dr[tcf.Value.Name].ToString();
 
                     if (tcf.Value.Domain.FieldType.StartsWith("VAR"))
@@ -346,10 +346,10 @@ namespace FBXpert.DataClasses
                         scmd = (valuestr.Length <= 0) ? "null" : $@"'{valuestr}'";
                     }
                     else if (tcf.Value.Domain.FieldType.StartsWith("DATE"))
-                    {                        
+                    {
                         scmd = (valuestr.Length <= 0) ? "null" : $@"'{valuestr}'";
                         int inx = scmd.IndexOf(" ");
-                        if(inx > 6)
+                        if (inx > 6)
                         {
                             scmd = $@"{scmd.Remove(inx)}'";
                         }
@@ -367,27 +367,27 @@ namespace FBXpert.DataClasses
                     {
                         sb.Append($@", {scmd}");
                     }
-                    first = false;                       
+                    first = false;
                 }
 
                 cmdpattern = cmdpattern.Replace("#REPLACE_TABLE", tablename);
-                cmdpattern = cmdpattern.Replace("#REPLACE_COLUMNS", cols);                
+                cmdpattern = cmdpattern.Replace("#REPLACE_COLUMNS", cols);
                 cmdpattern = cmdpattern.Replace("#REPLACE_VALUES", sb.ToString());
                 i++;
-                lst.Add(i.ToString(),cmdpattern+";");
-                
-            }            
-            return lst;        
+                lst.Add(i.ToString(), cmdpattern + ";");
+
+            }
+            return lst;
         }
     }
-  
+
     class ExportWorkers
     {
         private NotifiesClass _localNotify = null;
         public DBRegistrationClass AktDBReg = null;
         private System.ComponentModel.BackgroundWorker _bgw = new System.ComponentModel.BackgroundWorker();
-        
-        public List<string> _allDatabaseContent = null;        
+
+        public List<string> _allDatabaseContent = null;
         public List<string> _allTableContent = null;
         private List<string> _allPKConstraintsContent = null;
         private List<string> _allFKConstraintsContent = null;
@@ -424,22 +424,22 @@ namespace FBXpert.DataClasses
             this._bgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoTableDataWork);
             this._bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressTableDataChanged);
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunTableDataWorkerCompleted);
-                                
+
         }
-        
+
 
         public List<TableClass> alltables = null;
         public List<ViewClass> allviews = null;
-        public Dictionary<string,PrimaryKeyClass> allPKConstraints = null;
-        public Dictionary<string,ForeignKeyClass> allFKConstraints = null;
-        public Dictionary<string,DomainClass> allDomains = null;
-        public Dictionary<string,GeneratorClass> allGenerator = null;
-        public Dictionary<string,TriggerClass> allTrigger = null;
-        public Dictionary<string,ProcedureClass> allProcedures = null;
-        public Dictionary<string,FunctionClass> allFunctions = null;
-        public Dictionary<string,IndexClass> allIndeces = null;
+        public Dictionary<string, PrimaryKeyClass> allPKConstraints = null;
+        public Dictionary<string, ForeignKeyClass> allFKConstraints = null;
+        public Dictionary<string, DomainClass> allDomains = null;
+        public Dictionary<string, GeneratorClass> allGenerator = null;
+        public Dictionary<string, TriggerClass> allTrigger = null;
+        public Dictionary<string, ProcedureClass> allProcedures = null;
+        public Dictionary<string, FunctionClass> allFunctions = null;
+        public Dictionary<string, IndexClass> allIndeces = null;
         private StreamWriter _sw = null;
-       
+
 
 
         public void WaitForWorker()
@@ -453,10 +453,10 @@ namespace FBXpert.DataClasses
 
         #region TableData
         public void StartworkerGetTableData(List<TableClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
-        {   
-            if(allobjects?.Count <= 0) return;
+        {
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-            SQLDirectoryName = sqlDirectoryName; 
+            SQLDirectoryName = sqlDirectoryName;
             SQLFileName = sqlFileName;
             WaitForWorker();
 
@@ -474,11 +474,11 @@ namespace FBXpert.DataClasses
             {
                 if (SQLDirectoryName != null)
                 {
-                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLDirectoryName}");                    
+                    _localNotify?.AddToINFO($@"Writing tables SQL data to {SQLDirectoryName}");
                 }
-            } 
-            
-            _bgw.RunWorkerAsync(allobjects);               
+            }
+
+            _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoTableDataWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -503,81 +503,81 @@ namespace FBXpert.DataClasses
                 _allTableContent.Add($@"/* ********* Connect Database for {AktDBReg.Alias} ********** */");
             }
 
-           
+
             foreach (var str in allTableList)
             {
                 Application.DoEvents();
-                
+
                 if (str.State != CheckState.Checked) continue;
-                
-             
-                                    
+
+
+
                 _bgw.ReportProgress(n++, $@"Reading data for {str.Name}...");
 
-                ec.Init(AktDBReg,_localNotify);
-                
+                ec.Init(AktDBReg, _localNotify);
+
                 string cols = ec.GetTableColumns(str);
                 if (string.IsNullOrEmpty(cols)) return;
-                                    
-               string donestr = ec.RefreshDatas(str, cols);
-               if(donestr.Length > 0)
-               {                    
-                   _bgw.ReportProgress(n++, $@"ERROR reading data:{donestr}");
-                   _bgw.CancelAsync();
+
+                string donestr = ec.RefreshDatas(str, cols);
+                if (donestr.Length > 0)
+                {
+                    _bgw.ReportProgress(n++, $@"ERROR reading data:{donestr}");
+                    _bgw.CancelAsync();
                     break;
-               }
-               int datacount = ec.RefreshDataCount;
-                
-                Dictionary<string,string> lst = ec.ExportForInsertUpdate(CreateMode, str, cols);
-                foreach(string obj in lst.Values)
+                }
+                int datacount = ec.RefreshDataCount;
+
+                Dictionary<string, string> lst = ec.ExportForInsertUpdate(CreateMode, str, cols);
+                foreach (string obj in lst.Values)
                 {
                     _allTableContent.Add(obj);
                 }
-               
+
                 _allTableContent.Add($@"/* {str.Name} */{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
-                
 
-                if(CommitAfterStatement)
+
+                if (CommitAfterStatement)
                 {
-                    _allTableContent.Add($@"{SQLPatterns.Commit}{Environment.NewLine}");                    
+                    _allTableContent.Add($@"{SQLPatterns.Commit}{Environment.NewLine}");
                 }
-                
 
-                if(WriteToFile   != eSQLFileWriteMode.none)
+
+                if (WriteToFile != eSQLFileWriteMode.none)
                 {
                     try
                     {
-                        if(WriteToFile == eSQLFileWriteMode.seperated)
+                        if (WriteToFile == eSQLFileWriteMode.seperated)
                         {
                             _sw = null;
-                            _sw = new StreamWriter(SQLDirectoryName+"\\"+str+".sql", false, CharSet.encoding);
+                            _sw = new StreamWriter(SQLDirectoryName + "\\" + str + ".sql", false, CharSet.encoding);
                         }
                         foreach (string wstr in _allTableContent)
                         {
                             _sw.WriteLine(wstr);
                         }
-                        if(WriteToFile == eSQLFileWriteMode.seperated)
+                        if (WriteToFile == eSQLFileWriteMode.seperated)
                         {
-                            if(_sw != null) _sw.Close();
+                            if (_sw != null) _sw.Close();
                         }
                     }
-                    catch(Exception ex)
-                    {                       
-                        _bgw.ReportProgress(1,$@"ERROR write to file {str.Name}, {ex.Message}");     
+                    catch (Exception ex)
+                    {
+                        _bgw.ReportProgress(1, $@"ERROR write to file {str.Name}, {ex.Message}");
                     }
                 }
-                _bgw.ReportProgress(1,$@"Done for {str.Name} ({datacount}) datarows");                                          
+                _bgw.ReportProgress(1, $@"Done for {str.Name} ({datacount}) datarows");
             }
         }
 
         private void bgw_ProgressTableDataChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {            
-            var ec = (string) e.UserState;
+        {
+            var ec = (string)e.UserState;
             if (ec == null) return;
-                        
+
             try
             {
-                if(ec.StartsWith("ERROR"))
+                if (ec.StartsWith("ERROR"))
                 {
                     _localNotify?.AddToERROR(ec);
                 }
@@ -588,30 +588,30 @@ namespace FBXpert.DataClasses
             }
             catch (Exception ex)
             {
-                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"ExportClass->bgw_ProgressTableDataChanged->ec:{ec}", ex));                                                   
+                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"ExportClass->bgw_ProgressTableDataChanged->ec:{ec}", ex));
             }
-                             
+
         }
-        
+
         private void bgw_RunTableDataWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             //NotificationsForm.Instance().Close();
             if (WriteToFile != eSQLFileWriteMode.none)
             {
-                if(_sw != null) _sw.Close();
-                _localNotify?.AddToINFO(_allTableContent.Count.ToString() + " lines written to file");                
+                if (_sw != null) _sw.Close();
+                _localNotify?.AddToINFO(_allTableContent.Count.ToString() + " lines written to file");
             }
 
-            if (!ShowScripting) return;                        
-            ScriptingForm sc = new ScriptingForm(AktDBReg,_allTableContent);
+            if (!ShowScripting) return;
+            ScriptingForm sc = new ScriptingForm(AktDBReg, _allTableContent);
             sc.BeginUpdate();
             sc.Show();
-            Application.DoEvents();                                  
+            Application.DoEvents();
         }
         #endregion
 
-        
-      
+
+
         public void MakeScript()
         {
             var sc = new ScriptingForm(AktDBReg);
@@ -638,45 +638,45 @@ namespace FBXpert.DataClasses
             //Descriptions-Comments
 
 
-            if(_allDatabaseContent != null)
+            if (_allDatabaseContent != null)
             {
                 foreach (string str in _allDatabaseContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            if(_allDomainContent != null)
+            if (_allDomainContent != null)
             {
                 foreach (string str in _allDomainContent)
-            {
-                  sc.AppendSql(str + Environment.NewLine);
+                {
+                    sc.AppendSql(str + Environment.NewLine);
+                }
             }
-            }   
-            if(_allGeneratorContent != null)
+            if (_allGeneratorContent != null)
             {
                 foreach (string str in _allGeneratorContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allFunctionDefinitionContent != null)
+            if (_allFunctionDefinitionContent != null)
             {
                 foreach (string str in _allFunctionDefinitionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allProcedureDefinitionContent != null)
+            if (_allProcedureDefinitionContent != null)
             {
                 foreach (string str in _allProcedureDefinitionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allTableContent != null)
+            if (_allTableContent != null)
             {
                 foreach (string str in _allTableContent)
                 {
@@ -703,61 +703,61 @@ namespace FBXpert.DataClasses
                     }
                 }
             }
-            if(_allPKConstraintsContent != null)
+            if (_allPKConstraintsContent != null)
             {
                 foreach (string str in _allPKConstraintsContent)
-            {
+                {
                     sc.AppendSql(str + Environment.NewLine);
+                }
             }
-            }
-            if(_allFKConstraintsContent != null)
+            if (_allFKConstraintsContent != null)
             {
                 foreach (string str in _allFKConstraintsContent)
-            {
+                {
                     sc.AppendSql(str + Environment.NewLine);
+                }
             }
-            }
-            if(_allIndexContent != null)
+            if (_allIndexContent != null)
             {
                 foreach (string str in _allIndexContent)
-            {
-                   sc.AppendSql(str + Environment.NewLine);
+                {
+                    sc.AppendSql(str + Environment.NewLine);
+                }
             }
-            }
-            if(_allTriggerContent != null)
+            if (_allTriggerContent != null)
             {
                 foreach (string str in _allTriggerContent)
                 {
-                   sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-                    
-            if(_allViewContent != null)
+
+            if (_allViewContent != null)
             {
                 foreach (string str in _allViewContent)
                 {
-                   sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allFunctionContent != null)
+            if (_allFunctionContent != null)
             {
                 foreach (string str in _allFunctionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            
-            if(_allProcedureContent != null)
+
+            if (_allProcedureContent != null)
             {
                 foreach (string str in _allProcedureContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            
 
-            sc.EndUpdate();  
+
+            sc.EndUpdate();
         }
 
         public void MakeFiles()
@@ -768,7 +768,7 @@ namespace FBXpert.DataClasses
             Application.DoEvents();
             int n = 0;
             sc.ClearSql();
-             
+
             //Domains
             //Generators
             //StoredProcedures Head
@@ -786,45 +786,45 @@ namespace FBXpert.DataClasses
             //Descriptions-Comments
 
 
-            if(_allDatabaseContent != null)
+            if (_allDatabaseContent != null)
             {
                 foreach (string str in _allDatabaseContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            if(_allDomainContent != null)
+            if (_allDomainContent != null)
             {
                 foreach (string str in _allDomainContent)
-            {
-                  sc.AppendSql(str + Environment.NewLine);
+                {
+                    sc.AppendSql(str + Environment.NewLine);
+                }
             }
-            }   
-            if(_allGeneratorContent != null)
+            if (_allGeneratorContent != null)
             {
                 foreach (string str in _allGeneratorContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allFunctionDefinitionContent != null)
+            if (_allFunctionDefinitionContent != null)
             {
                 foreach (string str in _allFunctionDefinitionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allProcedureDefinitionContent != null)
+            if (_allProcedureDefinitionContent != null)
             {
                 foreach (string str in _allProcedureDefinitionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allTableContent != null)
+            if (_allTableContent != null)
             {
                 foreach (string str in _allTableContent)
                 {
@@ -851,68 +851,68 @@ namespace FBXpert.DataClasses
                     }
                 }
             }
-            if(_allPKConstraintsContent != null)
+            if (_allPKConstraintsContent != null)
             {
                 foreach (string str in _allPKConstraintsContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            if(_allFKConstraintsContent != null)
+            if (_allFKConstraintsContent != null)
             {
                 foreach (string str in _allFKConstraintsContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            if(_allIndexContent != null)
+            if (_allIndexContent != null)
             {
                 foreach (string str in _allIndexContent)
                 {
-                       sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            if(_allTriggerContent != null)
+            if (_allTriggerContent != null)
             {
                 foreach (string str in _allTriggerContent)
                 {
-                   sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-                    
-            if(_allViewContent != null)
+
+            if (_allViewContent != null)
             {
                 foreach (string str in _allViewContent)
                 {
-                   sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
 
-            if(_allFunctionContent != null)
+            if (_allFunctionContent != null)
             {
                 foreach (string str in _allFunctionContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            
-            if(_allProcedureContent != null)
+
+            if (_allProcedureContent != null)
             {
                 foreach (string str in _allProcedureContent)
                 {
-                        sc.AppendSql(str + Environment.NewLine);
+                    sc.AppendSql(str + Environment.NewLine);
                 }
             }
-            
 
-            sc.EndUpdate();  
+
+            sc.EndUpdate();
         }
 
 
         #region TableStructure
         public void StartworkerGetTableStructure(List<TableClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
-        {        
-            if(allobjects?.Count <= 0) return;
+        {
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -927,37 +927,37 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetTableStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO($@"Creating table structure AlterInsert SQL for {DBReg.Alias}");
-            
+
             if (SQLDirectoryName != null)
             {
                 NotifiesClass.Instance.AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
-            } 
-            
-            _bgw.RunWorkerAsync(allobjects);            
+            }
+
+            _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            List<TableClass> tb = (List<TableClass>) e.Argument;
-            Dictionary<string,TableClass> alltables = new Dictionary<string, TableClass>();
-            foreach(var itm in tb)
+            List<TableClass> tb = (List<TableClass>)e.Argument;
+            Dictionary<string, TableClass> alltables = new Dictionary<string, TableClass>();
+            foreach (var itm in tb)
             {
-                alltables.Add(itm.Name,itm);
+                alltables.Add(itm.Name, itm);
             }
-            
-            _allTableContent = new List<string>();         
+
+            _allTableContent = new List<string>();
             int n = 0;
-           
-            var tlst = StaticDatabaseObjects.Instance().GetAllTablesAlterInsertSQL(AktDBReg, alltables,CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);                                           
-            _bgw.ReportProgress(n++, tlst);    
-            
+
+            var tlst = StaticDatabaseObjects.Instance().GetAllTablesAlterInsertSQL(AktDBReg, alltables, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
+            _bgw.ReportProgress(n++, tlst);
+
         }
 
         private void bgw_ProgressGetTableStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            foreach(var obj in e.UserState as List<string>)
+            foreach (var obj in e.UserState as List<string>)
             {
                 _allTableContent.Add(obj);
             }
@@ -965,22 +965,22 @@ namespace FBXpert.DataClasses
 
         private void bgw_RunWorkerGetTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-           // NotificationsForm.Instance().Close();
+            // NotificationsForm.Instance().Close();
             if (WriteToFile != eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");               
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL table structure {_allTableContent.Count} lines to file");
             }
-            
+
             _bgw.CancelAsync();
         }
         #endregion
 
         private void bgw_DoGetViewStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
+        {
             var alltables = e.Argument as List<ViewClass>;
-            _allViewContent = new List<string>();                       
-            var vlst = StaticDatabaseObjects.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables,CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding);            
-            if(vlst != null) _bgw.ReportProgress(1, vlst);
+            _allViewContent = new List<string>();
+            var vlst = StaticDatabaseObjects.Instance().GetAllViewsAlterInsertSQL(AktDBReg, alltables, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
+            if (vlst != null) _bgw.ReportProgress(1, vlst);
         }
 
         private void bgw_ProgressGetViewStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -990,13 +990,13 @@ namespace FBXpert.DataClasses
 
         private void bgw_RunWorkerGetViewStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            
+
         }
 
         #region DatabaseStructure
         public void StartworkerGetDatabaseStructure(DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
-        {        
-           
+        {
+
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1006,25 +1006,25 @@ namespace FBXpert.DataClasses
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            this._bgw.DoWork                += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoGetDatabaseStructureWork);
-            this._bgw.ProgressChanged       += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetDatabaseStructureChanged);
-            this._bgw.RunWorkerCompleted    += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDatabaseStructureCompleted);
+            this._bgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoGetDatabaseStructureWork);
+            this._bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetDatabaseStructureChanged);
+            this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDatabaseStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
-            NotifiesClass.Instance.AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");            
+
+            NotifiesClass.Instance.AddToINFO($@"Creating Database structure AlterInsert SQL for {DBReg.Alias}");
             if (WriteToFile == eSQLFileWriteMode.all)
             {
                 NotifiesClass.Instance.AddToINFO($@"Writing SQL data to {SQLDirectoryName}");
             }
-            
-            _bgw.RunWorkerAsync();            
+
+            _bgw.RunWorkerAsync();
         }
 
         private void bgw_DoGetDatabaseStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
+        {
             var dbReg = AktDBReg;
-            _allDatabaseContent = new List<string>();                     
+            _allDatabaseContent = new List<string>();
             if (CreateDatabaseStatement)
             {
                 _allDatabaseContent.Add($@"/* ********* Create Database for {AktDBReg.Alias} ********** */{Environment.NewLine}");
@@ -1035,29 +1035,29 @@ namespace FBXpert.DataClasses
             {
                 _allDatabaseContent.Add($@"/* ********* Connect Database for {AktDBReg.Alias} ********** */{Environment.NewLine}");
                 _allDatabaseContent.Add($@"CONNECT '{dbReg.Server}:{dbReg.DatabasePath}' USER '{dbReg.User}' PASSWORD '{dbReg.Password}';");
-            }                        
+            }
         }
 
         private void bgw_ProgressGetDatabaseStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {      
-            
+        {
+
         }
 
         private void bgw_RunWorkerGetDatabaseStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {           
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");                
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL Database structure {_allDatabaseContent.Count} lines to file");
             }
-            
+
             _bgw.CancelAsync();
         }
         #endregion
 
         #region PKTableStructure
-        public void StartworkerGetPKTableStructure(Dictionary<string,PrimaryKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetPKTableStructure(Dictionary<string, PrimaryKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1072,19 +1072,19 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetPKTableStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
-            
-                       
-            _bgw.RunWorkerAsync(allobjects);            
+
+
+            _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetPKTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {           
-            var obj = e.Argument as Dictionary<string,PrimaryKeyClass>;
-            _allPKConstraintsContent = new List<string>();            
-            var tlst = StaticDatabaseObjects.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
-            if(tlst != null) _bgw.ReportProgress(1, tlst);
+        {
+            var obj = e.Argument as Dictionary<string, PrimaryKeyClass>;
+            _allPKConstraintsContent = new List<string>();
+            var tlst = StaticDatabaseObjects.Instance().GetAllPKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
+            if (tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
         private void bgw_ProgressGetPKTableStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -1094,19 +1094,19 @@ namespace FBXpert.DataClasses
 
         private void bgw_RunWorkerGetPKTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-           
+
             if (WriteToFile == eSQLFileWriteMode.all)
             {
                 NotifiesClass.Instance.AddToINFO($@"Writing SQL primary key structure {_allPKConstraintsContent.Count} lines to {SQLDirectoryName}");
-                
-            }           
+
+            }
         }
         #endregion
 
         #region FKTableStructure
-        public void StartworkerGetFKTableStructure(Dictionary<string,ForeignKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetFKTableStructure(Dictionary<string, ForeignKeyClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1120,19 +1120,19 @@ namespace FBXpert.DataClasses
             this._bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressGetFKTableStructureChanged);
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFKTableStructureCompleted);
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating table structure AlterInsert SQL for " + DBReg.Alias);
-                        
+
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetFKTableStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
+        {
 
-            var obj = e.Argument as Dictionary<string,ForeignKeyClass>;
+            var obj = e.Argument as Dictionary<string, ForeignKeyClass>;
             _allFKConstraintsContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
-            if(tlst != null) _bgw.ReportProgress(1, tlst);
+            var tlst = StaticDatabaseObjects.Instance().GetAllFKTablesAlterInsertSQL(AktDBReg, obj, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
+            if (tlst != null) _bgw.ReportProgress(1, tlst);
         }
 
         private void bgw_ProgressGetFKTableStructureChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -1141,18 +1141,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFKTableStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL foreign key structure {_allFKConstraintsContent.Count} lines to {SQLDirectoryName}");            
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL foreign key structure {_allFKConstraintsContent.Count} lines to {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region IndexStructure
-        public void StartworkerGetIndecesStructure(Dictionary<string,IndexClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetIndecesStructure(Dictionary<string, IndexClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1167,18 +1167,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetIndecesStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating index structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetIndecesStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allIndeces = e.Argument as Dictionary<string,IndexClass>;
+        {
+            var allIndeces = e.Argument as Dictionary<string, IndexClass>;
             _allIndexContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllIndecesAlterInsertSQL(AktDBReg, allIndeces, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1188,18 +1188,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetIndecesStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {           
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL index structure {_allIndexContent.Count} lines to {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL index structure {_allIndexContent.Count} lines to {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region TriggerStructure
-        public void StartworkerGetTriggerStructure(Dictionary<string,TriggerClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetTriggerStructure(Dictionary<string, TriggerClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1214,18 +1214,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetTriggerStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating trigger structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetTriggerStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allTriggers = e.Argument as Dictionary<string,TriggerClass>;
+        {
+            var allTriggers = e.Argument as Dictionary<string, TriggerClass>;
             _allTriggerContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllTriggersAlterInsertSQL(AktDBReg, allTriggers, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1235,18 +1235,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetTriggerStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL trigger structure {_allTriggerContent.Count} lines to file {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region ProcedureStructure
-        public void StartworkerGetProcedureStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetProcedureStructure(Dictionary<string, ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1261,18 +1261,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetProcedureStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetProcedureStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
+        {
+            var allProcedures = e.Argument as Dictionary<string, ProcedureClass>;
             _allProcedureContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement, true, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1282,18 +1282,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetProcedureStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureContent.Count} lines to {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region ProcedureDefinitionStructure
-        public void StartworkerGetProcedureDefinitionStructure(Dictionary<string,ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetProcedureDefinitionStructure(Dictionary<string, ProcedureClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1308,18 +1308,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetProcedureDefinitionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating procedure structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetProcedureDefinitionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allProcedures = e.Argument as Dictionary<string,ProcedureClass>;
+        {
+            var allProcedures = e.Argument as Dictionary<string, ProcedureClass>;
             _allProcedureDefinitionContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllProcedureAlterInsertSQL(AktDBReg, allProcedures, CreateMode, CommitAfterStatement, false, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1329,19 +1329,19 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetProcedureDefinitionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL procedure structure {_allProcedureDefinitionContent.Count} lines to file {SQLDirectoryName}");
+            }
         }
         #endregion
 
 
         #region FunctionStructure
-        public void StartworkerGetFunctionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetFunctionStructure(Dictionary<string, FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1356,18 +1356,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFunctionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating function structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetFunctionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
+        {
+            var allFunctions = e.Argument as Dictionary<string, FunctionClass>;
             _allFunctionContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,true,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement, true, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1377,18 +1377,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFunctionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionContent.Count} lines to {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region FunctionDefinitionStructure
-        public void StartworkerGetFunctionDefinitionStructure(Dictionary<string,FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetFunctionDefinitionStructure(Dictionary<string, FunctionClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1403,18 +1403,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetFunctionDefinitionStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating function structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetFunctionDefinitionStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allFunctions = e.Argument as Dictionary<string,FunctionClass>;
+        {
+            var allFunctions = e.Argument as Dictionary<string, FunctionClass>;
             _allFunctionDefinitionContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement,false,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllFunctionAlterInsertSQL(AktDBReg, allFunctions, CreateMode, CommitAfterStatement, false, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1424,18 +1424,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetFunctionDefinitionStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL function structure {_allFunctionDefinitionContent.Count} lines to {SQLDirectoryName}");
+            }
         }
         #endregion
-        
+
         #region DomainStructure
-        public void StartworkerGetDomainStructure(Dictionary<string,DomainClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetDomainStructure(Dictionary<string, DomainClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1450,19 +1450,19 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetDomainStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating domain structure SQL for " + DBReg.Alias);
-            
+
 
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetDomainStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {            
-            var allDomain = e.Argument as Dictionary<string,DomainClass>;
+        {
+            var allDomain = e.Argument as Dictionary<string, DomainClass>;
             _allDomainContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllDomainAlterInsertSQL(AktDBReg, allDomain, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1472,18 +1472,18 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetDomainStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL domain structure {_allDomainContent.Count} lines to file {SQLDirectoryName}");                
-            }            
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL domain structure {_allDomainContent.Count} lines to file {SQLDirectoryName}");
+            }
         }
         #endregion
 
         #region DomainStructure
-        public void StartworkerGetGeneratorStructure(Dictionary<string,GeneratorClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
+        public void StartworkerGetGeneratorStructure(Dictionary<string, GeneratorClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
             SQLDirectoryName = sqlDirectoryName; SQLFileName = sqlFileName;
             WaitForWorker();
@@ -1498,18 +1498,18 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetGeneratorStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating generator structure SQL for " + DBReg.Alias);
-            
+
 
             _bgw.RunWorkerAsync(allobjects);
         }
 
         private void bgw_DoGetGeneratorStructureWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            var allGenerator = e.Argument as Dictionary<string,GeneratorClass>;
+            var allGenerator = e.Argument as Dictionary<string, GeneratorClass>;
             _allGeneratorContent = new List<string>();
-            var tlst = StaticDatabaseObjects.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement,SQLDirectoryName,SQLFileName,WriteToFile,CharSet.encoding); 
+            var tlst = StaticDatabaseObjects.Instance().GetAllGeneratorAlterInsertSQL(AktDBReg, allGenerator, CreateMode, CommitAfterStatement, SQLDirectoryName, SQLFileName, WriteToFile, CharSet.encoding);
             _bgw.ReportProgress(1, tlst);
         }
 
@@ -1519,10 +1519,10 @@ namespace FBXpert.DataClasses
         }
 
         private void bgw_RunWorkerGetGeneratorStructureCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (WriteToFile == eSQLFileWriteMode.all)
             {
-                NotifiesClass.Instance.AddToINFO($@"Writing SQL generator structure {_allGeneratorContent.Count} lines to {SQLDirectoryName}");         
+                NotifiesClass.Instance.AddToINFO($@"Writing SQL generator structure {_allGeneratorContent.Count} lines to {SQLDirectoryName}");
             }
         }
         #endregion
@@ -1530,9 +1530,9 @@ namespace FBXpert.DataClasses
         #region ViewStructure
         public void StartworkerGetViewStructure(List<ViewClass> allobjects, DBRegistrationClass DBReg, string sqlDirectoryName, string sqlFileName)
         {
-            if(allobjects?.Count <= 0) return;
+            if (allobjects?.Count <= 0) return;
             AktDBReg = DBReg;
-           
+
             SQLDirectoryName = sqlDirectoryName;
             SQLFileName = sqlFileName;
 
@@ -1548,14 +1548,14 @@ namespace FBXpert.DataClasses
             this._bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerGetViewStructureCompleted);
 
             NotificationsForm.Instance().Show();
-            
+
             NotifiesClass.Instance.AddToINFO("Creating view structure SQL for " + DBReg.Alias);
-            
-                        
+
+
             _bgw.RunWorkerAsync(allobjects);
         }
 
-        
+
         #endregion
     }
 }

@@ -40,7 +40,7 @@ namespace FBXpert.SonstForms
             _localNotify.Register4Error(ErrorRaised);
             LanguageClass.Instance.RegisterChangeNotifiy(LanguageChanged);
         }
-        
+
         private void LanguageChanged(object sender, LanguageChangedEventArgs k)
         {
             LanguageChanged();
@@ -48,35 +48,35 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {
-            gbExportProgress.Text   = LanguageClass.Instance.GetString("PROGRESS");
-            hsSaveSourceCodes.Text  = LanguageClass.Instance.GetString("CreateSourcecode");
-            gbSourceCode.Text       = LanguageClass.Instance.GetString("SourcecodePath");
-            gbFoundLines.Text       = LanguageClass.Instance.GetString("FoundLines");
-            gbSearchCode.Text       = LanguageClass.Instance.GetString("SEARCH");
-            object[] param = {_messagesCount, _errorCount};
-            tabPageMessages.Text            = LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR", param);
-            tabPageCreateAttributes.Text    = LanguageClass.Instance.GetString("SETTINGS");
-            hsClearMessages.Text            = LanguageClass.Instance.GetString("CLEAR_ENTRIES");
+            gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS");
+            hsSaveSourceCodes.Text = LanguageClass.Instance.GetString("CreateSourcecode");
+            gbSourceCode.Text = LanguageClass.Instance.GetString("SourcecodePath");
+            gbFoundLines.Text = LanguageClass.Instance.GetString("FoundLines");
+            gbSearchCode.Text = LanguageClass.Instance.GetString("SEARCH");
+            object[] param = { _messagesCount, _errorCount };
+            tabPageMessages.Text = LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR", param);
+            tabPageCreateAttributes.Text = LanguageClass.Instance.GetString("SETTINGS");
+            hsClearMessages.Text = LanguageClass.Instance.GetString("CLEAR_ENTRIES");
         }
 
         private void ErrorRaised(object sender, MessageEventArgs k)
         {
             fctMessages.CurrentLineColor = Color.Red;
-            fctMessages.AppendText(k.Meldung);         
-            _errorCount++;            
+            fctMessages.AppendText(k.Meldung);
+            _errorCount++;
             fctMessages.ScrollLeft();
-            
-            object[] param = {_messagesCount, _errorCount};
+
+            object[] param = { _messagesCount, _errorCount };
             tabPageMessages.Text = LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR", param);
         }
 
         private void InfoRaised(object sender, MessageEventArgs k)
         {
             fctMessages.CurrentLineColor = Color.Blue;
-            fctMessages.AppendText(k.Meldung);            
-            _messagesCount++;            
+            fctMessages.AppendText(k.Meldung);
+            _messagesCount++;
             fctMessages.ScrollLeft();
-            tabPageMessages.Text = Format(LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR"),_messagesCount,_errorCount);
+            tabPageMessages.Text = Format(LanguageClass.Instance.GetString("MESSAGES_INFO_ERROR"), _messagesCount, _errorCount);
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -88,21 +88,21 @@ namespace FBXpert.SonstForms
         {
             RefreshXml();
         }
-        
+
         public void RefreshXml()
         {
             _ddc.Tables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(_dbReg);
-            _ddc.Views  = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
+            _ddc.Views = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
             StaticDatabaseObjects.Instance().GetAllTablePrimaryKeyObjects(_dbReg, _ddc.Tables);
             _ddc.Database = _dbReg;
             var fs = new FileStream(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml", FileMode.Create);
             var serializer = new ConfigurationContainer().Create();
-            var xml = serializer.Serialize(fs,_ddc);
+            var xml = serializer.Serialize(fs, _ddc);
 
             fs.Close();
             xmlEditStruktur.LoadXmlFromFile(ApplicationPathClass.Instance.ApplicationPath + "\\temp\\tmp.xml");
         }
-        
+
         private void hsSave_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = @"XML|*.xml|All|*.*";
@@ -113,11 +113,11 @@ namespace FBXpert.SonstForms
 
         public void SetControlSizes()
         {
-            pnlFormUpper.Height         = AppSizeConstants.UpperFormBandHeight;
-            pnlMessagesUpper.Height     = AppSizeConstants.UpperFormBandHeight;
-            pnlXMLUpper.Height          = AppSizeConstants.UpperFormBandHeight;
-            pnlSourceCodeUpper.Height   = AppSizeConstants.UpperFormBandHeight;
-            pnlUpperDBObjects.Height    = AppSizeConstants.UpperFormBandHeight;
+            pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlXMLUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlSourceCodeUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlUpperDBObjects.Height = AppSizeConstants.UpperFormBandHeight;
         }
         private void XMLDesignForm_Load(object sender, EventArgs e)
         {
@@ -125,15 +125,15 @@ namespace FBXpert.SonstForms
             FormDesign.SetFormLeft(this);
             LanguageChanged();
             hsSearchDown.Enabled = false;
-            hsSearchUp.Enabled   = false;
-            hsSearch.Enabled                   = txtSearchCode.TextLength > 0;           
-            fbdSourcePath.SelectedPath         = _dbReg.CodeSettings.SourceCodeOutputPath;
-            txtSourceCodePath.Text             = _dbReg.CodeSettings.SourceCodeOutputPath;
+            hsSearchUp.Enabled = false;
+            hsSearch.Enabled = txtSearchCode.TextLength > 0;
+            fbdSourcePath.SelectedPath = _dbReg.CodeSettings.SourceCodeOutputPath;
+            txtSourceCodePath.Text = _dbReg.CodeSettings.SourceCodeOutputPath;
             rbGenerateInrWithGenerator.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GeneratorInteger;
-            rbGenerateGUID.Checked             = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID;
-            rbGenerateOID.Checked              = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID;
-            rbGUIDHEXGeneration.Checked        = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID;
-            txtDBNamespace.Text                = _dbReg.CodeSettings.SourceCodeNamespace;
+            rbGenerateGUID.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.GUID;
+            rbGenerateOID.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.UUID;
+            rbGUIDHEXGeneration.Checked = _dbReg.CodeSettings.SourceCodePrimaryKeyType == eSourceCodePrimaryKeyType.HEXGUID;
+            txtDBNamespace.Text = _dbReg.CodeSettings.SourceCodeNamespace;
             ShowCaptions();
             if (DbExplorerForm.Instance().Visible)
             {
@@ -148,29 +148,29 @@ namespace FBXpert.SonstForms
             lblCaption.Text = $@"Database Designer:{_dbReg.Alias}";
             Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Database Designer");
         }
-        
+
         private void hsClearMessages_Click(object sender, EventArgs e)
         {
             fctMessages.Clear();
         }
 
         private void hsCreateClasses_Click(object sender, EventArgs e)
-        {            
+        {
             FillDBObjects();
         }
 
         private void FillDBObjects()
-        {                    
-            var fs = new FileStream(xmlEditStruktur.originalXmlFile, FileMode.Open);                     
+        {
+            var fs = new FileStream(xmlEditStruktur.originalXmlFile, FileMode.Open);
             var serializer = new ConfigurationContainer().Create();
-            var ddc = (DatabaseDesignClass) serializer.Deserialize<DatabaseDesignClass>(fs);
-            fs.Close();           
+            var ddc = (DatabaseDesignClass)serializer.Deserialize<DatabaseDesignClass>(fs);
+            fs.Close();
             fctSource.Clear();
             selDBObjects.ClearItems();
 
             foreach (var tc in ddc.Tables.Values)
             {
-                foreach(var fld in tc.Fields)
+                foreach (var fld in tc.Fields)
                 {
                     if (fld.Value.Domain.RawType.Length > 0) continue;
                 }
@@ -185,22 +185,22 @@ namespace FBXpert.SonstForms
             }
 
             foreach (var tc in ddc.Tables.Values)
-            {                
+            {
                 selDBObjects.Add(tc.Name, CheckState.Checked, tc);
             }
 
             foreach (var tc in ddc.Views.Values)
-            {             
+            {
                 selDBObjects.Add(tc.Name, CheckState.Checked, tc);
             }
 
             foreach (var tc in ddc.Tables.Values)
-            {             
+            {
                 selDBObjects.Add($@"Cb{tc.Name}", CheckState.Checked, tc);
             }
 
             foreach (var tc in ddc.Views.Values)
-            {             
+            {
                 selDBObjects.Add($@"Cb{tc.Name}", CheckState.Checked, tc);
             }
             if (selDBObjects.ItemDatas.Count > 0)
@@ -229,19 +229,19 @@ namespace FBXpert.SonstForms
             {
                 CodeFactory.Instance().CodeCreateAttribute.PrimaryFieldType = eCodePrimaryFieldType.GenGUIDHEX;
             }
-            CodeFactory.Instance().CodeCreateAttribute.CodeNamespace = txtDBNamespace.Text.Trim();                        
+            CodeFactory.Instance().CodeCreateAttribute.CodeNamespace = txtDBNamespace.Text.Trim();
         }
         private string MakeGlobalCode()
         {
             var items = selDBObjects.CheckedItemDatas;
-            return CodeFactory.Instance().MakeGlobalCode(items,0);            
+            return CodeFactory.Instance().MakeGlobalCode(items, 0);
         }
 
         private string MakeSourceCode(object ob)
         {
             var st = Empty;
             UpdateCodeAttributes();
-            
+
             if (ob.GetType() == typeof(TableClass))
             {
                 var tc = ob as TableClass;
@@ -261,13 +261,13 @@ namespace FBXpert.SonstForms
             UpdateCodeAttributes();
             if (ob.GetType() == typeof(TableClass))
             {
-                var tc = ob as TableClass;                
-                st = CodeFactory.Instance().CreateDesignForCbTable(0, tc);               
+                var tc = ob as TableClass;
+                st = CodeFactory.Instance().CreateDesignForCbTable(0, tc);
             }
             else if (ob.GetType() == typeof(ViewClass))
             {
-                var tc = ob as ViewClass;                
-                st = CodeFactory.Instance().CreateDesignForCbTable(0, tc);                
+                var tc = ob as ViewClass;
+                st = CodeFactory.Instance().CreateDesignForCbTable(0, tc);
             }
             return st;
         }
@@ -280,7 +280,7 @@ namespace FBXpert.SonstForms
             fctSource.Clear();
             if (selDBObjects.SelectedIndex < 0) return;
             var itm = selDBObjects.ItemDatas[selDBObjects.SelectedIndex];
-                        
+
             var source = itm.Text.StartsWith("Cb") ? MakeCbSourceCode(itm.Object) : MakeSourceCode(itm.Object);
 
             if (source.Length > 0)
@@ -298,9 +298,9 @@ namespace FBXpert.SonstForms
 
         private void hsSaveSourceCodes_Click(object sender, EventArgs e)
         {
-            if(!Directory.Exists(txtSourceCodePath.Text))
+            if (!Directory.Exists(txtSourceCodePath.Text))
             {
-                object[] p = { txtSourceCodePath.Text, Environment.NewLine };               
+                object[] p = { txtSourceCodePath.Text, Environment.NewLine };
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DirectoryNotExists", "DirectoryNotExistsParam", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
                 return;
             }
@@ -308,10 +308,10 @@ namespace FBXpert.SonstForms
             pbExport.Minimum = 0;
             pbExport.Value = 0;
             pbExport.Maximum = items.Count;
-            if(ckDeleteOldSourceFiles.Checked)
+            if (ckDeleteOldSourceFiles.Checked)
             {
                 string[] files = Directory.GetFiles(txtSourceCodePath.Text);
-                foreach(string file in files)
+                foreach (string file in files)
                 {
                     try
                     {
@@ -333,14 +333,14 @@ namespace FBXpert.SonstForms
                     File.WriteAllText($@"{txtSourceCodePath.Text}\DBGlobalFunctionsClass.cs", gsource);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                 _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"hsSaveSourceCodes_Click", ex));                          
+                _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"hsSaveSourceCodes_Click", ex));
             }
 
 
-            foreach(var itm in items)
-            {                
+            foreach (var itm in items)
+            {
                 var source = itm.Text.StartsWith("Cb") ? MakeCbSourceCode(itm.Object) : MakeSourceCode(itm.Object);
 
                 try
@@ -351,24 +351,24 @@ namespace FBXpert.SonstForms
                         File.WriteAllText($@"{txtSourceCodePath.Text}\{itm.Text}Class.cs", source);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                     _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"hsSaveSourceCodes_Click", ex));                          
+                    _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"hsSaveSourceCodes_Click", ex));
                 }
-                
+
                 pbExport.Value++;
-                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
+                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS") + $@" ({pbExport.Value}/{pbExport.Maximum})";
                 Application.DoEvents();
             }
-            
+
         }
 
         private void XMLDesignForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _dbReg.CodeSettings.SourceCodeOutputPath = txtSourceCodePath.Text;
-            if(rbGenerateInrWithGenerator.Checked)      _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
-            else if(rbGenerateGUID.Checked)             _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GUID;
-            else if(rbGUIDHEXGeneration.Checked)        _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
+            if (rbGenerateInrWithGenerator.Checked) _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GeneratorInteger;
+            else if (rbGenerateGUID.Checked) _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.GUID;
+            else if (rbGUIDHEXGeneration.Checked) _dbReg.CodeSettings.SourceCodePrimaryKeyType = eSourceCodePrimaryKeyType.HEXGUID;
             _dbReg.CodeSettings.SourceCodeNamespace = txtDBNamespace.Text;
         }
 
@@ -376,16 +376,16 @@ namespace FBXpert.SonstForms
         {
             _codeAttributesChanged = true;
         }
-        
+
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             if (!_codeAttributesChanged) return;
             object[] param = { Environment.NewLine };
             _codeAttributesChanged = false;
         }
-        
+
         private void cmsSourceCode_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {            
+        {
             if (e.ClickedItem == tsmiSearchFirst)
             {
                 string srch = @"^.*\b(get|#endregion|three)\b.*$";
@@ -398,7 +398,7 @@ namespace FBXpert.SonstForms
                 fctSource.Selection.Start = pl;
                 fctSource.Selection.End = ple;
                 fctSource.Invalidate();
-                  
+
                 _aktSelectedLine = 0;
             }
             else if (e.ClickedItem == tsmiSearchNext)
@@ -423,7 +423,7 @@ namespace FBXpert.SonstForms
             fctSource.Selection.End = ple;
             fctSource.Invalidate();
         }
-        
+
         public void RefreshAutocomplete(DataObjectClass obj)
         {
             //create autocomplete popup menu
@@ -443,16 +443,16 @@ namespace FBXpert.SonstForms
 
             if (obj.GetType() == typeof(TableClass))
             {
-                var tc = (TableClass) obj;                            
+                var tc = (TableClass)obj;
                 foreach (var tcf in tc.Fields)
                 {
                     words.Add(tcf.Value.Name);
-                    words.Add(tc.Name+"."+tcf.Value.Name);
+                    words.Add(tc.Name + "." + tcf.Value.Name);
                 }
             }
             else if (obj.GetType() == typeof(ViewClass))
             {
-                var tc = (ViewClass) obj;                
+                var tc = (ViewClass)obj;
                 foreach (var tcf in tc.Fields.Values)
                 {
                     words.Add(tcf.Name);
@@ -467,7 +467,7 @@ namespace FBXpert.SonstForms
         }
 
         public void AutocompleteSample()
-        {           
+        {
             //create autocomplete popup menu
             _popupMenu = new AutocompleteMenu(fctSource)
             {
@@ -475,7 +475,7 @@ namespace FBXpert.SonstForms
             };
 
             //generate words
-            var randomWords = new List<string>();            
+            var randomWords = new List<string>();
             //set words as autocomplete source
             _popupMenu.Items.SetAutocompleteItems(randomWords);
             //size of popupmenu
@@ -486,7 +486,7 @@ namespace FBXpert.SonstForms
         private void fctb_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData != (Keys.K | Keys.Control)) return;
-           
+
             _popupMenu.Show(true);
             e.Handled = true;
         }
@@ -494,7 +494,7 @@ namespace FBXpert.SonstForms
         private void hsSeach_Click(object sender, EventArgs e)
         {
             AutocompleteSample();
-            var srch = @"^.*\b("+txtSearchCode.Text+@")\b.*$";
+            var srch = @"^.*\b(" + txtSearchCode.Text + @")\b.*$";
             _findlst = fctSource.FindLines(srch, RegexOptions.Multiline);
             _aktSelectedLine = 0;
             cbFoundLines.Items.Clear();
@@ -509,7 +509,7 @@ namespace FBXpert.SonstForms
                     Line = ln + 1,
                     Text = fctSource.Lines[ln].Trim()
                 };
-                cbFoundLines.Items.Add(so); 
+                cbFoundLines.Items.Add(so);
             }
 
             cbFoundLines.SelectedIndex = cbFoundLines.Items.Count > 0 ? 0 : -1;
@@ -545,7 +545,7 @@ namespace FBXpert.SonstForms
         private void cbFoundLines_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbFoundLines.SelectedIndex < 0) return;
-            var ob = (CbSearchObject)cbFoundLines.Items[cbFoundLines.SelectedIndex]; 
+            var ob = (CbSearchObject)cbFoundLines.Items[cbFoundLines.SelectedIndex];
             SelectLine(ob.LineIndex);
             _aktSelectedLine = ob.LineIndex;
         }
@@ -559,54 +559,54 @@ namespace FBXpert.SonstForms
             var sb = new StringBuilder();
             sb.Append($@"DBNAME;LINKTYPE;LINKART;OBJTYPE_A;OBJ_A;OBJ_A_FIELD;OBJTYPE_B;OBJ_B;OBJ_B_FIELD;STAT;NR{Environment.NewLine}");
             int n = 0;
-            string dbname = _dbReg.Alias.Replace(" ","_");
-            foreach(var itm in items)
-            {                               
-                if(itm.Object.GetType() == typeof(TableClass)&&(!itm.Text.StartsWith("Cb")))
+            string dbname = _dbReg.Alias.Replace(" ", "_");
+            foreach (var itm in items)
+            {
+                if (itm.Object.GetType() == typeof(TableClass) && (!itm.Text.StartsWith("Cb")))
                 {
-                    var obj = (TableClass) itm.Object;
-                    foreach(var field in obj.Fields)
+                    var obj = (TableClass)itm.Object;
+                    foreach (var field in obj.Fields)
                     {
-                        if(field.Value.Name.EndsWith("_ID"))
+                        if (field.Value.Name.EndsWith("_ID"))
                         {
-                            string tabname = field.Value.Name.Substring(0,field.Value.Name.Length-3);
+                            string tabname = field.Value.Name.Substring(0, field.Value.Name.Length - 3);
                             sb.Append($@"{dbname};LOGICAL;TT;TABLE;{tabname};ID;TABLE;{obj.Name};{field.Value.Name};1;{n++}{Environment.NewLine}");
                         }
                     }
                 }
-                else if(itm.Object.GetType() == typeof(ViewClass)&&(!itm.Text.StartsWith("Cb")))
+                else if (itm.Object.GetType() == typeof(ViewClass) && (!itm.Text.StartsWith("Cb")))
                 {
-                    var obj = (ViewClass) itm.Object;
-                    foreach(var field in obj.Fields)
+                    var obj = (ViewClass)itm.Object;
+                    foreach (var field in obj.Fields)
                     {
-                        if(field.Value.Name.EndsWith("__ID"))
+                        if (field.Value.Name.EndsWith("__ID"))
                         {
-                            string tabname = field.Value.Name.Substring(0,field.Value.Name.Length-4);
+                            string tabname = field.Value.Name.Substring(0, field.Value.Name.Length - 4);
                             sb.Append($@"{dbname};LOGICAL;TV;TABLE;{tabname};ID;VIEW;{obj.Name};{field.Value.Name};2;{n++}{Environment.NewLine}");
                         }
                     }
                 }
 
                 pbExport.Value++;
-                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS")+$@" ({pbExport.Value}/{pbExport.Maximum})";               
+                gbExportProgress.Text = LanguageClass.Instance.GetString("PROGRESS") + $@" ({pbExport.Value}/{pbExport.Maximum})";
                 Application.DoEvents();
-            } 
+            }
             fctSource.Text = sb.ToString();
         }
 
         private void hsSave_Click_1(object sender, EventArgs e)
         {
-            if(saveFileDialog2.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                fctSource.SaveToFile(saveFileDialog2.FileName,Encoding.UTF8);
+                fctSource.SaveToFile(saveFileDialog2.FileName, Encoding.UTF8);
             }
-        }       
+        }
 
         private void tabPageCreateAttributes_Leave(object sender, EventArgs e)
         {
-            if(_codeAttributesChanged) FillDBObjects();
+            if (_codeAttributesChanged) FillDBObjects();
         }
-        
+
         private void tabPageCreateAttributes_Enter(object sender, EventArgs e)
         {
             _codeAttributesChanged = false;

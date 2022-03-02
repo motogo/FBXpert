@@ -38,7 +38,7 @@ namespace FBXpert
             Random rd = new Random();
             hdirection = rd.Next(3);
             vdirection = rd.Next(3);
-            duration = rd.Next((FbXpertMainForm.Instance().Width+ FbXpertMainForm.Instance().Height)/4);
+            duration = rd.Next((FbXpertMainForm.Instance().Width + FbXpertMainForm.Instance().Height) / 4);
             aktduro = 0;
 
 
@@ -47,7 +47,7 @@ namespace FBXpert
         private void timer1_Tick(object sender, EventArgs e)
         {
             aktduro++;
-            if ((this.Left > 280 ) && ((this.Left + this.Width) < FbXpertMainForm.Instance().Width))
+            if ((this.Left > 280) && ((this.Left + this.Width) < FbXpertMainForm.Instance().Width))
             {
                 this.Left += hdirection - 1;
             }
@@ -119,7 +119,7 @@ namespace FBXpert
 
         private void pictureBox1_Validated(object sender, EventArgs e)
         {
-           
+
         }
 
         private void FBXInfo_Paint(object sender, PaintEventArgs e)
@@ -129,7 +129,7 @@ namespace FBXpert
 
         private void FBXInfo_MdiChildActivate(object sender, EventArgs e)
         {
-             this.SendToBack();
+            this.SendToBack();
         }
     }
 }

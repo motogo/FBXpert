@@ -6,7 +6,7 @@ namespace FBXpertLib
     public class AutocompleteClass
     {
         private AutocompleteMenu _popupMenu;
-        private FastColoredTextBox _txtBox=null;
+        private FastColoredTextBox _txtBox = null;
         private DBRegistrationClass _dbReg;
         public AutocompleteClass(FastColoredTextBox txt, DBRegistrationClass dbReg)
         {
@@ -15,7 +15,7 @@ namespace FBXpertLib
         }
 
         public AutocompleteClass(DBRegistrationClass dbReg)
-        {            
+        {
             _dbReg = dbReg;
         }
 
@@ -93,7 +93,7 @@ namespace FBXpertLib
 
         public string[] TableSqlCommands()
         {
-            var words = new List<string> {"CREATE TABLE ", "RECREATE TABLE ", "CREATE GLOBAL TEMPORARY TABLE"};
+            var words = new List<string> { "CREATE TABLE ", "RECREATE TABLE ", "CREATE GLOBAL TEMPORARY TABLE" };
             return words.ToArray();
         }
 
@@ -154,7 +154,7 @@ namespace FBXpertLib
         }
         public string[] ViewSqlCommands()
         {
-            var words = new List<string> {"CREATE VIEW ", "CREATE OR ALTER VIEW "};
+            var words = new List<string> { "CREATE VIEW ", "CREATE OR ALTER VIEW " };
             return words.ToArray();
         }
 
@@ -162,12 +162,12 @@ namespace FBXpertLib
         {
             var words = new List<string>();
             var go = new GetObjectsClass();
-            var actTable = go.GetTableObjectFromName(_dbReg, table);            
+            var actTable = go.GetTableObjectFromName(_dbReg, table);
             foreach (var tcf in actTable.Fields.Values)
             {
                 words.Add(tcf.Name);
-            } 
-            
+            }
+
             return words.ToArray();
         }
 
@@ -180,7 +180,7 @@ namespace FBXpertLib
             {
                 words.Add(tcf.Name);
             }
-            
+
             return words.ToArray();
         }
         /*
@@ -190,11 +190,11 @@ namespace FBXpertLib
             return (DatabaseTableFields(actTables));
         }
         */
-        public string[] DatabaseTableFields(Dictionary<string,TableClass> actTables)
+        public string[] DatabaseTableFields(Dictionary<string, TableClass> actTables)
         {
-            var words = new List<string>();           
+            var words = new List<string>();
             foreach (var obj in actTables.Values)
-            {                
+            {
                 foreach (var tcf in obj.Fields.Values)
                 {
                     words.Add($@"{obj.Name}.{tcf.Name}");
@@ -209,11 +209,11 @@ namespace FBXpertLib
             return DatabaseViewFields(actViews);
         }
         */
-        public string[] DatabaseViewFields(Dictionary<string,ViewClass> actViews)
+        public string[] DatabaseViewFields(Dictionary<string, ViewClass> actViews)
         {
             var words = new List<string>();
             foreach (var obj in actViews.Values)
-            {                
+            {
                 foreach (ViewFieldClass tcf in obj.Fields.Values)
                 {
                     words.Add($@"{obj.Name}.{tcf.Name}");
@@ -228,10 +228,10 @@ namespace FBXpertLib
             return DatabaseTables(actTables);
         }
         */
-        public string[] DatabaseTables(Dictionary<string,TableClass> actTables)
+        public string[] DatabaseTables(Dictionary<string, TableClass> actTables)
         {
             var words = new List<string>();
-           
+
             foreach (TableClass obj in actTables.Values)
             {
                 words.Add(obj.Name);
@@ -245,10 +245,10 @@ namespace FBXpertLib
             return DatabaseSystemTables(actTables);
         }
         */
-        public string[] DatabaseSystemTables(Dictionary<string,SystemTableClass> actTables)
+        public string[] DatabaseSystemTables(Dictionary<string, SystemTableClass> actTables)
         {
             var words = new List<string>();
-            
+
             foreach (TableClass obj in actTables.Values)
             {
                 words.Add(obj.Name);
@@ -262,11 +262,11 @@ namespace FBXpertLib
             return DatabaseSystemTableFields(actSystemTables);
         }
         */
-        public string[] DatabaseSystemTableFields(Dictionary<string,SystemTableClass> actSystemTables)
+        public string[] DatabaseSystemTableFields(Dictionary<string, SystemTableClass> actSystemTables)
         {
             var words = new List<string>();
             foreach (var obj in actSystemTables.Values)
-            {                
+            {
                 foreach (var tcf in obj.Fields.Values)
                 {
                     words.Add($@"{obj.Name}.{tcf.Name}");
@@ -281,9 +281,9 @@ namespace FBXpertLib
             return DatabaseViews(actViews);
         }
         */
-        public string[] DatabaseViews(Dictionary<string,ViewClass> actViews)
+        public string[] DatabaseViews(Dictionary<string, ViewClass> actViews)
         {
-            var words = new List<string>();            
+            var words = new List<string>();
             foreach (var obj in actViews.Values)
             {
                 words.Add(obj.Name);
@@ -298,9 +298,9 @@ namespace FBXpertLib
             words.AddRange(DatabaseViews(actViews));
             words.AddRange(DatabaseSystemTables(actSystemTables));
 
-            if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
-            if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
-            if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
+            if (actTables != null) words.AddRange(DatabaseTableFields(actTables));
+            if (actViews != null) words.AddRange(DatabaseViewFields(actViews));
+            if (actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
             AssignToObject(_txtBox);
             /*
                 _popupMenu = new AutocompleteMenu(_txtBox)
@@ -318,9 +318,9 @@ namespace FBXpertLib
         }
 
         List<string> words = new List<string>();
-        Dictionary<string,TableClass> actTables;             
-        Dictionary<string,SystemTableClass> actSystemTables;
-        Dictionary<string,ViewClass> actViews;
+        Dictionary<string, TableClass> actTables;
+        Dictionary<string, SystemTableClass> actSystemTables;
+        Dictionary<string, ViewClass> actViews;
         public void AssignToObject(FastColoredTextBox txtBox)
         {
             if (txtBox == null) return;
@@ -335,10 +335,10 @@ namespace FBXpertLib
             words.AddRange(DatabaseViews(actViews));
             words.AddRange(DatabaseSystemTables(actSystemTables));
 
-            if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
-            if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
-            if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
-           
+            if (actTables != null) words.AddRange(DatabaseTableFields(actTables));
+            if (actViews != null) words.AddRange(DatabaseViewFields(actViews));
+            if (actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -350,10 +350,10 @@ namespace FBXpertLib
         public void RefreshAutocompleteForDatabase()
         {
             //create autocomplete popup menu
-         
-            actTables               = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
-            actSystemTables         = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
-            actViews                = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
+
+            actTables = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjects(_dbReg);
+            actSystemTables = StaticDatabaseObjects.Instance().GetAllSystemTableObjects(_dbReg);
+            actViews = StaticDatabaseObjects.Instance().GetViewObjects(_dbReg);
 
             _popupMenu = new AutocompleteMenu(_txtBox)
             {
@@ -366,10 +366,10 @@ namespace FBXpertLib
             words.AddRange(DatabaseViews(actViews));
             words.AddRange(DatabaseSystemTables(actSystemTables));
 
-            if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
-            if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
-            if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
-           
+            if (actTables != null) words.AddRange(DatabaseTableFields(actTables));
+            if (actViews != null) words.AddRange(DatabaseViewFields(actViews));
+            if (actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -377,11 +377,11 @@ namespace FBXpertLib
             //size of popupmenu
             _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
             _popupMenu.Items.Width = 400;
-            
+
         }
         public void SetTextBox()
         {
-            _popupMenu = new AutocompleteMenu(_txtBox)            
+            _popupMenu = new AutocompleteMenu(_txtBox)
             {
                 MinFragmentLength = 1
             };
@@ -393,36 +393,36 @@ namespace FBXpertLib
             words.AddRange(ProcedureSqlCommands());
         }
 
-        public void RefreshAutocompleteForDatabase(List<TableClass> tables, Dictionary<string,SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
+        public void RefreshAutocompleteForDatabase(List<TableClass> tables, Dictionary<string, SystemTableClass> systemtables, Dictionary<string, ViewClass> views)
         {
             //create autocomplete popup menu
 
-            if(tables != null)
+            if (tables != null)
             {
                 actTables = new Dictionary<string, TableClass>();
-                foreach(var table in tables)
+                foreach (var table in tables)
                 {
-                    actTables.Add(table.Name,table);
+                    actTables.Add(table.Name, table);
                 }
             }
             actSystemTables = systemtables; // StaticTreeClass.Instance().GetSystemTableObjects(_dbReg);
-            actViews               = views; // StaticTreeClass.Instance().GetViewObjects(_dbReg);
-            
-            _popupMenu = new AutocompleteMenu(_txtBox)            
+            actViews = views; // StaticTreeClass.Instance().GetViewObjects(_dbReg);
+
+            _popupMenu = new AutocompleteMenu(_txtBox)
             {
                 MinFragmentLength = 1
             };
-            
+
             words = new List<string>();
             words.AddRange(SqlCommands());
-            if(actTables != null)  words.AddRange(DatabaseTables(actTables));
-            if(actViews != null) words.AddRange(DatabaseViews(actViews));
-            if(actSystemTables != null) words.AddRange(DatabaseSystemTables(actSystemTables));
+            if (actTables != null) words.AddRange(DatabaseTables(actTables));
+            if (actViews != null) words.AddRange(DatabaseViews(actViews));
+            if (actSystemTables != null) words.AddRange(DatabaseSystemTables(actSystemTables));
 
-            if(actTables != null) words.AddRange(DatabaseTableFields(actTables));
-            if(actViews != null) words.AddRange(DatabaseViewFields(actViews));
-            if(actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
-           
+            if (actTables != null) words.AddRange(DatabaseTableFields(actTables));
+            if (actViews != null) words.AddRange(DatabaseViewFields(actViews));
+            if (actSystemTables != null) words.AddRange(DatabaseSystemTableFields(actSystemTables));
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -437,13 +437,13 @@ namespace FBXpertLib
             //create autocomplete popup menu            
             _dbReg = dbReg;
             _txtBox = txt;
-            _popupMenu = new AutocompleteMenu(_txtBox)            
+            _popupMenu = new AutocompleteMenu(_txtBox)
             {
                 MinFragmentLength = 1
             };
-            
+
             words = new List<string>();
-                                   
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -455,14 +455,14 @@ namespace FBXpertLib
         public void CreateAutocompleteForDatabase()
         {
             //create autocomplete popup menu            
-            
-            _popupMenu = new AutocompleteMenu(_txtBox)            
+
+            _popupMenu = new AutocompleteMenu(_txtBox)
             {
                 MinFragmentLength = 1
             };
-            
+
             words = new List<string>();
-                                   
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -474,12 +474,12 @@ namespace FBXpertLib
 
         public void Activate()
         {
-              _popupMenu.Items.SetAutocompleteItems(words);
+            _popupMenu.Items.SetAutocompleteItems(words);
         }
 
         public void AddAutocompleteForSQL()
-        { 
-             words.AddRange(SqlCommands());
+        {
+            words.AddRange(SqlCommands());
         }
 
         public void AddAutocompleteForSystemtables(List<SystemTableClass> systemtables)
@@ -497,32 +497,32 @@ namespace FBXpertLib
             {
                 words.AddRange(DatabaseTables(actTables));
                 words.AddRange(DatabaseTableFields(actTables));
-            } 
+            }
         }
 
-        public void AddAutocompleteForViews(Dictionary<string,ViewClass> views)
-        {                        
-            if(views != null)
+        public void AddAutocompleteForViews(Dictionary<string, ViewClass> views)
+        {
+            if (views != null)
             {
-                words.AddRange(DatabaseViews(views));            
+                words.AddRange(DatabaseViews(views));
                 words.AddRange(DatabaseViewFields(views));
-            }            
+            }
         }
 
-        public void AddAutocompleteForTables(Dictionary<string,TableClass> tables)
-        {            
-            if(tables != null)
+        public void AddAutocompleteForTables(Dictionary<string, TableClass> tables)
+        {
+            if (tables != null)
             {
                 actTables = new Dictionary<string, TableClass>();
-                foreach(var table in tables.Values)
+                foreach (var table in tables.Values)
                 {
-                    actTables.Add(table.Name,table);
+                    actTables.Add(table.Name, table);
                 }
             }
-                       
-            if(actTables != null) 
+
+            if (actTables != null)
             {
-                words.AddRange(DatabaseTables(actTables));            
+                words.AddRange(DatabaseTables(actTables));
                 words.AddRange(DatabaseTableFields(actTables));
             }
         }
@@ -548,14 +548,14 @@ namespace FBXpertLib
         public void RefreshNewAutocompleteForTable(string tablename)
         {
             //create autocomplete popup menu
-          
+
             _popupMenu = new AutocompleteMenu(_txtBox);
             _popupMenu.MinFragmentLength = 1;
 
             var words = new List<string>();
             words.AddRange(TableSqlCommands());
             words.AddRange(DatabaseTableFields(tablename));
-                            
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -567,21 +567,21 @@ namespace FBXpertLib
         public void AddTables(string tablename)
         {
             TableClass actTable = null;
-            actTables.TryGetValue(tablename,out actTable);
-            if(actTable != null)
+            actTables.TryGetValue(tablename, out actTable);
+            if (actTable != null)
             {
                 foreach (var tcf in actTable.Fields.Values)
                 {
                     words.Add(tcf.Name);
-                }                
-            }   
+                }
+            }
         }
 
         public void RefreshAutocompleteForTable(string tablename)
         {
             //create autocomplete popup menu
-            
-            
+
+
             _popupMenu = new AutocompleteMenu(_txtBox);
             _popupMenu.MinFragmentLength = 1;
 
@@ -589,14 +589,14 @@ namespace FBXpertLib
             words.AddRange(TableSqlCommands());
 
             AddTables(tablename);
-            
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
             //size of popupmenu
             _popupMenu.Items.MaximumSize = new System.Drawing.Size(400, 500);
             _popupMenu.Items.Width = 400;
-            
+
         }
 
         public void RefreshNewAutocompleteForView(string viewname)
@@ -609,7 +609,7 @@ namespace FBXpertLib
             var words = new List<string>();
             words.AddRange(ViewSqlCommands());
             words.AddRange(DatabaseViewFields(viewname));
-            
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -630,7 +630,7 @@ namespace FBXpertLib
 
             ViewClass actView = null;
             actViews.TryGetValue(viewname, out actView);
-            if(actView != null)
+            if (actView != null)
             {
                 foreach (var tcf in actView.Fields.Values)
                 {
@@ -654,7 +654,7 @@ namespace FBXpertLib
 
             var words = new List<string>();
             words.AddRange(FunctionSqlCommands());
-                       
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -672,7 +672,7 @@ namespace FBXpertLib
 
             var words = new List<string>();
             words.AddRange(FunctionSqlCommands());
-                       
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -690,7 +690,7 @@ namespace FBXpertLib
 
             var words = new List<string>();
             words.AddRange(ProcedureSqlCommands());
-            
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;
@@ -708,7 +708,7 @@ namespace FBXpertLib
 
             var words = new List<string>();
             words.AddRange(TriggerSqlCommands());
-            
+
             _popupMenu.SearchPattern = @"[\w\.$]";
             _popupMenu.Items.SetAutocompleteItems(words);
             _popupMenu.AllowTabKey = true;

@@ -10,7 +10,7 @@ namespace FBXpert
         private readonly Form _parent;
         private readonly Graphics _graphics = null;
         private Rectangle _clockRect = new Rectangle(0, 0, 100, 100);
-        private readonly Pen _clockPen = new Pen(Color.Blue,3);
+        private readonly Pen _clockPen = new Pen(Color.Blue, 3);
 
         private readonly System.Windows.Forms.Timer _clockTimer = new System.Windows.Forms.Timer();
         public int Minimum { get; set; }
@@ -44,7 +44,7 @@ namespace FBXpert
             _clockTimer.Interval = 100;
             DrawEmptyClock();
             bool started = true;
-            while(started)
+            while (started)
             {
                 try
                 {
@@ -73,8 +73,8 @@ namespace FBXpert
         private void NextTick()
         {
             Brush br = new SolidBrush(Color.Lime);
-            _graphics.FillPie(br,_clockRect, Minimum, Value++);
-            if(Value > Maximum)
+            _graphics.FillPie(br, _clockRect, Minimum, Value++);
+            if (Value > Maximum)
             {
                 Value = Minimum;
                 _graphics.FillPie(new SolidBrush(pictureBox1.BackColor), _clockRect, 0, 360);

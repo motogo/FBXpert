@@ -22,7 +22,7 @@ namespace FBXpert.SonstForms
             InitializeComponent();
             this.MdiParent = parent;
             _dbReg = drc;
-            txtRestoreFile.Text = _dbReg.DatabasePath.ToLower().Replace("fbd","fbk");
+            txtRestoreFile.Text = _dbReg.DatabasePath.ToLower().Replace("fbd", "fbk");
         }
 
         private void hsClose_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace FBXpert.SonstForms
             //string serverTypeStr = (_dbReg.ConnectionType == eConnectionType.embedded) ? "" : $@"{_dbReg.Server}: : ";
             txtGFIXParameters.Text = $"-user {txtGFIXUser.Text} -password **** -validate \"{_dbReg.GetFullDatabasePath4Connsection()}\"";
         }
-        
+
         private void MakeGSTATParameters()
         {
             var cmd = new StringBuilder();
@@ -58,37 +58,37 @@ namespace FBXpert.SonstForms
                 cmd.Append(" -h");
             }
             else
-            { 
-                if(cbGSTATAnalyzeAverageRecords.Checked)
-                { 
-                  cmd.Append(" -r");
+            {
+                if (cbGSTATAnalyzeAverageRecords.Checked)
+                {
+                    cmd.Append(" -r");
                 }
 
-                if(cbGSTATAnalyzeDataPages.Checked)
+                if (cbGSTATAnalyzeDataPages.Checked)
                 {
                     cmd.Append(" -d");
                 }
 
-                if(cbGSTATAnalyzeIndexLeafPages.Checked)
+                if (cbGSTATAnalyzeIndexLeafPages.Checked)
                 {
                     cmd.Append(" -i");
                 }
 
-                if(cbGSTATAnalyzeSystemRelations.Checked)
+                if (cbGSTATAnalyzeSystemRelations.Checked)
                 {
                     cmd.Append(" -s");
                 }
 
-                if(cbGSTATAnalyzeDatasAndIndexPages.Checked)
+                if (cbGSTATAnalyzeDatasAndIndexPages.Checked)
                 {
                     cmd.Append(" -a");
-                }                
+                }
             }
             cmd.Append($" \"{ _dbReg.GetFullDatabasePath4Connsection()}\"");
 
             if (!cbGSTATAnalyzeHeaderOnly.Checked)
             {
-                if(cbGSTATTablename.Checked)
+                if (cbGSTATTablename.Checked)
                 {
                     cmd.Append($@" -t {txtGSTATTablename.Text}");
                 }
@@ -99,8 +99,8 @@ namespace FBXpert.SonstForms
         void MakeVERSIONParameters()
         {
             var cmd = new StringBuilder();
-            cmd.Append($"-user {txtGBAKUser.Text} -password ****  -z");     
-            cmd.Append($" \"{_dbReg.GetFullDatabasePath4Connsection()}\""); 
+            cmd.Append($"-user {txtGBAKUser.Text} -password ****  -z");
+            cmd.Append($" \"{_dbReg.GetFullDatabasePath4Connsection()}\"");
             txtGBAKParameters.Text = cmd.ToString();
         }
 
@@ -113,9 +113,9 @@ namespace FBXpert.SonstForms
             {
                 cmd.Append(" -V");
             }
-            
-            if(txtServerLocation.Text.Length > 0)
-            { 
+
+            if (txtServerLocation.Text.Length > 0)
+            {
                 cmd.Append($@" {txtServerLocation.Text}:{txtDatabaseLocation.Text} {txtBackupLocation.Text} ");
             }
             else
@@ -179,7 +179,7 @@ namespace FBXpert.SonstForms
             //            -validate {serverTypeStr}{_dbReg.DatabasePath}";            
         }
         void MakeRestoreParameters()
-        {           
+        {
             var cmd = new StringBuilder();
             cmd.Append($@" -C"); //Restore
             if (cbRestoreReportActions.Checked)
@@ -250,13 +250,13 @@ namespace FBXpert.SonstForms
         }
 
         private void hsRUN_Click(object sender, EventArgs e)
-        {           
-            DoISQL();            
+        {
+            DoISQL();
         }
         private void DoISQL()
-        {                                
-            var fi = new FileInfo($@"{_dbReg.GetFirebirdBinaryPath()}\isql.exe");   
-            if(!fi.Exists)
+        {
+            var fi = new FileInfo($@"{_dbReg.GetFirebirdBinaryPath()}\isql.exe");
+            if (!fi.Exists)
             {
                 object[] p = { fi.FullName, Environment.NewLine };
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "FileNotExists", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
@@ -264,23 +264,23 @@ namespace FBXpert.SonstForms
             }
 
             //string arg = txtISQLPassword.Text.Replace("****",_dbReg.Password);
-            var psi = new ProcessStartInfo(fi.FullName,txtISQLParameters.Text.Replace("****", _dbReg.Password));                            
-                            
-            psi.RedirectStandardOutput  = false;
-            psi.RedirectStandardError   = false;
-            psi.UseShellExecute         = true;
-            psi.CreateNoWindow          = false;
+            var psi = new ProcessStartInfo(fi.FullName, txtISQLParameters.Text.Replace("****", _dbReg.Password));
+
+            psi.RedirectStandardOutput = false;
+            psi.RedirectStandardError = false;
+            psi.UseShellExecute = true;
+            psi.CreateNoWindow = false;
 
             var ps = new Process();
             ps.StartInfo = psi;
-            ps.Start();           
+            ps.Start();
             ps.WaitForExit();
-                        
-          //  fctISQLOutput.AppendText(ps.StandardOutput.ReadToEnd());            
-          //  fctISQLOutput.AppendText(ps.StandardError.ReadToEnd());
 
-            ps.Close();            
-        }        
+            //  fctISQLOutput.AppendText(ps.StandardOutput.ReadToEnd());            
+            //  fctISQLOutput.AppendText(ps.StandardError.ReadToEnd());
+
+            ps.Close();
+        }
         private void DoGFIX()
         {
             FileInfo fi = new FileInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gfix.exe");
@@ -292,8 +292,8 @@ namespace FBXpert.SonstForms
             }
 
             fctGFIXOutput.Clear();
-            string args = txtGFIXParameters.Text.Replace("****",_dbReg.Password);
-            var psi = new ProcessStartInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gfix.exe",args);            
+            string args = txtGFIXParameters.Text.Replace("****", _dbReg.Password);
+            var psi = new ProcessStartInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gfix.exe", args);
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
@@ -303,14 +303,14 @@ namespace FBXpert.SonstForms
             ps.StartInfo = psi;
             ps.Start();
             ps.WaitForExit();
-            
-            fctGFIXOutput.AppendText(ps.StandardOutput.ReadToEnd());                
+
+            fctGFIXOutput.AppendText(ps.StandardOutput.ReadToEnd());
             fctGFIXOutput.AppendText(ps.StandardError.ReadToEnd());
 
             ps.Close();
-            fctGFIXOutput.AppendText($@"{Environment.NewLine}End of GFIX{Environment.NewLine}");            
+            fctGFIXOutput.AppendText($@"{Environment.NewLine}End of GFIX{Environment.NewLine}");
         }
-        
+
         private void DoGBAK()
         {
             FileInfo fi = new FileInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gbak.exe");
@@ -321,27 +321,27 @@ namespace FBXpert.SonstForms
                 return;
             }
             fctGBAKOutput.Clear();
-            string args = txtGBAKParameters.Text.Replace("****",_dbReg.Password);
-            var psi = new ProcessStartInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gbak.exe",args);            
+            string args = txtGBAKParameters.Text.Replace("****", _dbReg.Password);
+            var psi = new ProcessStartInfo($@"{_dbReg.GetFirebirdBinaryPath()}\gbak.exe", args);
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
             fctGBAKOutput.AppendText($@"Starting of GBAK{Environment.NewLine}");
-            
-            backgroundWorker1 = new BackgroundWorker();            
+
+            backgroundWorker1 = new BackgroundWorker();
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.RunWorkerAsync(); 
-            
+            backgroundWorker1.RunWorkerAsync();
+
             ps = new Process();
             ps.StartInfo = psi;
             ps.EnableRaisingEvents = true;
             ps.Exited += Ps_Exited;
-            
+
             ps.Start();
             sw = new StreamWatcher(ps.StandardOutput.BaseStream);
             sw.MessageAvailable += Sw_MessageAvailable;
@@ -352,7 +352,7 @@ namespace FBXpert.SonstForms
         private void Ps_Exited(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
-            if(sw != null)
+            if (sw != null)
                 sw.MessageAvailable -= Sw_MessageAvailable;
             if (sw_error != null)
                 sw_error.MessageAvailable -= Sw_MessageAvailable;
@@ -360,47 +360,47 @@ namespace FBXpert.SonstForms
             sw = null;
             sw_error = null;
             ps = null;
-        }        
+        }
 
         private void DoGSTAT()
         {
             fctGSTATOutput.Clear();
             fctGSTATOutput.AppendText($@"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} Starting of GSTAT{Environment.NewLine}");
-            
-            string args = txtGSTATParameters.Text.Replace("****",_dbReg.Password); 
+
+            string args = txtGSTATParameters.Text.Replace("****", _dbReg.Password);
             string binfile = $@"{_dbReg.GetFirebirdBinaryPath()}\gstat.exe";
             FileInfo fi = new FileInfo(binfile);
-            if(!fi.Exists)
+            if (!fi.Exists)
             {
                 object[] p = { fi.FullName, Environment.NewLine };
                 SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "FileNotExists", FormStartPosition.CenterScreen, SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, p);
                 return;
             }
-            var psi = new ProcessStartInfo(binfile,args);
-            psi.RedirectStandardOutput  = true;
-            psi.RedirectStandardError   = true;
-            psi.UseShellExecute         = false;
-            psi.CreateNoWindow          = true;
-             
+            var psi = new ProcessStartInfo(binfile, args);
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+
             var ps = new Process();
             ps.StartInfo = psi;
             ps.Start();
-            
+
             fctGSTATOutput.AppendText(ps.StandardOutput.ReadToEnd());
             fctGSTATOutput.AppendText(ps.StandardError.ReadToEnd());
 
             ps.WaitForExit();
             ps.Close();
-            
+
             fctGSTATOutput.AppendText("END of statistics");
         }
 
         private void Sw_MessageAvailable(object sender, MessageAvailableEventArgs e)
         {
-            if((!backgroundWorker1.CancellationPending)&&(backgroundWorker1.IsBusy))
-            {              
-              backgroundWorker1.ReportProgress(0,e.MessageString);
-            }           
+            if ((!backgroundWorker1.CancellationPending) && (backgroundWorker1.IsBusy))
+            {
+                backgroundWorker1.ReportProgress(0, e.MessageString);
+            }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -409,15 +409,15 @@ namespace FBXpert.SonstForms
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {            
+        {
             while (!backgroundWorker1.CancellationPending)
             {
-               Application.DoEvents();               
+                Application.DoEvents();
             }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {   
+        {
             int l = e.UserState.ToString().Length;
             fctGBAKOutput.AppendText(e.UserState.ToString());
             fctGBAKOutput.SelectionStart = fctGBAKOutput.TextLength;
@@ -428,17 +428,17 @@ namespace FBXpert.SonstForms
         private void BinariesForm_Load(object sender, EventArgs e)
         {
             FormDesign.SetFormLeft(this);
-            txtISQLUser.Text         = _dbReg.User;
-            txtISQLPassword.Text     = _dbReg.Password;
-            txtGBAKUser.Text         = _dbReg.User;
-            txtGBAKPassword.Text     = _dbReg.Password;
-            txtISQLUser.Text         = _dbReg.User;
-            txtISQLPassword.Text     = _dbReg.Password;
-            txtGSTATUser.Text        = _dbReg.User;
-            txtGSTATPassword.Text    = _dbReg.Password;
-            txtGFIXUser.Text         = _dbReg.User;
-            txtGFIXPassword.Text     = _dbReg.Password;
-            txtServerLocation.Text   = _dbReg.GetServerLocation();
+            txtISQLUser.Text = _dbReg.User;
+            txtISQLPassword.Text = _dbReg.Password;
+            txtGBAKUser.Text = _dbReg.User;
+            txtGBAKPassword.Text = _dbReg.Password;
+            txtISQLUser.Text = _dbReg.User;
+            txtISQLPassword.Text = _dbReg.Password;
+            txtGSTATUser.Text = _dbReg.User;
+            txtGSTATPassword.Text = _dbReg.Password;
+            txtGFIXUser.Text = _dbReg.User;
+            txtGFIXPassword.Text = _dbReg.Password;
+            txtServerLocation.Text = _dbReg.GetServerLocation();
             txtDatabaseLocation.Text = _dbReg.DatabasePath;
 
             LanguageChanged();
@@ -453,11 +453,11 @@ namespace FBXpert.SonstForms
 
         private void LanguageChanged()
         {
-          tabPageRestore.Text = LanguageClass.Instance.GetString("DatabaseRestore");
-          tabPageBackup.Text  = LanguageClass.Instance.GetString("DatabaseBackup");
-          tabPageVersion.Text = LanguageClass.Instance.GetString("DatabaseVersion");
-        }              
-              
+            tabPageRestore.Text = LanguageClass.Instance.GetString("DatabaseRestore");
+            tabPageBackup.Text = LanguageClass.Instance.GetString("DatabaseBackup");
+            tabPageVersion.Text = LanguageClass.Instance.GetString("DatabaseVersion");
+        }
+
         private void cbRestore_CheckedChanged(object sender, EventArgs e)
         {
             MakeRestoreParameters();
@@ -639,7 +639,7 @@ namespace FBXpert.SonstForms
         }
 
         private void HsRunGFIX_Click(object sender, EventArgs e)
-        {                                                         
+        {
             DoGFIX();
         }
 
@@ -655,7 +655,7 @@ namespace FBXpert.SonstForms
 
         private void HsLoadDatabaseFile_Click(object sender, EventArgs e)
         {
-            if(ofdDatabase.ShowDialog() == DialogResult.OK)
+            if (ofdDatabase.ShowDialog() == DialogResult.OK)
             {
                 txtDatabaseLocation.Text = ofdDatabase.FileName;
             }
@@ -665,7 +665,7 @@ namespace FBXpert.SonstForms
         {
             if (ofdBackup.ShowDialog() == DialogResult.OK)
             {
-               txtBackupLocation.Text = ofdBackup.FileName;
+                txtBackupLocation.Text = ofdBackup.FileName;
             }
         }
 
@@ -676,11 +676,11 @@ namespace FBXpert.SonstForms
 
         private void TabGBAK_Enter(object sender, EventArgs e)
         {
-            if(tabControlGBAK.SelectedTab == tabPageBackup)
+            if (tabControlGBAK.SelectedTab == tabPageBackup)
             {
                 MakeBackupParameters();
             }
-            else if(tabControlGBAK.SelectedTab == tabPageRestore)
+            else if (tabControlGBAK.SelectedTab == tabPageRestore)
             {
                 MakeRestoreParameters();
             }
@@ -692,7 +692,7 @@ namespace FBXpert.SonstForms
 
         private void HotSpot5_Click(object sender, EventArgs e)
         {
-            if(ofdBackup.ShowDialog() == DialogResult.OK)
+            if (ofdBackup.ShowDialog() == DialogResult.OK)
             {
                 txtRestoreFile.Text = ofdBackup.FileName;
             }

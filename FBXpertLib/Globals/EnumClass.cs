@@ -6,46 +6,46 @@ namespace FBXpertLib
     public enum eAppType { Konfiguration = 0, Anwendung = 1 }
     public enum HistoryMode { NoHistory, AddToHistory };
     public enum FBRelationTypeIndex { Table = 0, View = 1 };
-    
+
     public enum eRegState { none = 0, create = 1, update = 2, delete = 3 };
     public enum eTableType { withoutsystem = 0, system = 1 };
     public enum eObjectState { none = 0, is_checked = 1 };
     public enum eCreateMode { create = 0, recreate = 1, drop = 2 };
     public enum eSQLFileWriteMode { none = 0, all = 1, seperated = 2 };
-    public enum eSourceCodePrimaryKeyType{GeneratorInteger=0, UUID=1, GUID=2, HEXGUID=3, none=4 };
+    public enum eSourceCodePrimaryKeyType { GeneratorInteger = 0, UUID = 1, GUID = 2, HEXGUID = 3, none = 4 };
 
-    public enum eSQLHistoryType {failed=0, succeeded=1 }
-      
+    public enum eSQLHistoryType { failed = 0, succeeded = 1 }
+
     public enum eDependencies
     {
         [EnumDescription("Table")]
-        TABLE =0,
+        TABLE = 0,
         [EnumDescription("View")]
-        VIEW =1,
+        VIEW = 1,
         [EnumDescription("Trigger")]
-        TRIGGER =2,
+        TRIGGER = 2,
         [EnumDescription("Computed")]
-        COMPUTED =3,
+        COMPUTED = 3,
         [EnumDescription("Validation")]
-        VALIDATION =4,
+        VALIDATION = 4,
         [EnumDescription("Procedure")]
-        PROCEDURE =5,
+        PROCEDURE = 5,
         [EnumDescription("Expression")]
-        EXPRESSION =6,
+        EXPRESSION = 6,
         [EnumDescription("Exception Index")]
-        EXCEPTIONINDEX =7,
+        EXCEPTIONINDEX = 7,
         [EnumDescription("User")]
-        USER =8,
+        USER = 8,
         [EnumDescription("Field")]
-        FIELD =9,
+        FIELD = 9,
         [EnumDescription("Index")]
-        INDEX =10,
+        INDEX = 10,
         [EnumDescription("Generator")]
-        GENERATOR =14,
+        GENERATOR = 14,
         [EnumDescription("UDF")]
-        UDF =15,
+        UDF = 15,
         [EnumDescription("NONE")]
-        NONE =16
+        NONE = 16
     };
 
     public enum eSort
@@ -85,15 +85,15 @@ namespace FBXpertLib
     public enum eDBVersion
     {
         [EnumDescription("FB25_32")]
-        FB25_32 =250,
+        FB25_32 = 250,
         [EnumDescription("FB3_32")]
         FB3_32 = 300,
         [EnumDescription("FB4_32")]
-        FB4_32 = 400,        
+        FB4_32 = 400,
         [EnumDescription("FB25_64")]
-        FB25_64 =251,
+        FB25_64 = 251,
         [EnumDescription("FB3_64")]
-        FB3_64 = 301,        
+        FB3_64 = 301,
         [EnumDescription("FB4_64")]
         FB4_64 = 401
     };
@@ -158,18 +158,18 @@ namespace FBXpertLib
         ROLES = 11,
         KEYS = 12,
         RULES = 13,
-        GENERATORS =9,
-        TABLES=3,
-        FIELDS=14,
-        INDEX=10,
-        VIEW=4,
-        DOMAIN=8,
-        PROCEDURE=9,
-        FUNCTION=7,
-        TRIGGERS=19,
-        CHECK=20,
-        DEPENDENCYTO=21,
-        DEPENDENCYFROM=22,
+        GENERATORS = 9,
+        TABLES = 3,
+        FIELDS = 14,
+        INDEX = 10,
+        VIEW = 4,
+        DOMAIN = 8,
+        PROCEDURE = 9,
+        FUNCTION = 7,
+        TRIGGERS = 19,
+        CHECK = 20,
+        DEPENDENCYTO = 21,
+        DEPENDENCYFROM = 22,
         DEPENDENCY = 5,
         DATABASE_INACTIVE = 1,
         DATABASE_ACTIVE = 2

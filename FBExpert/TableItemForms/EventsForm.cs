@@ -23,25 +23,25 @@ namespace FBExpert
         int messages_count = 0;
         int error_count = 0;
         FbRemoteEvent revent = null;
-       
+
         public EventsForm(Form parent, DBRegistrationClass dbReg)
         {
             InitializeComponent();
             this.MdiParent = parent;
             _dbReg = dbReg;
-           
+
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
 
             string cn = ConnectionStrings.Instance.MakeConnectionString(dbReg);
-            revent = new FbRemoteEvent(cn);                     
+            revent = new FbRemoteEvent(cn);
             revent.RemoteEventCounts += Revent_RemoteEventCounts;
         }
 
         public void RefreshLanguageText()
         {
-            lblTableName.Text = LanguageClass.Instance.GetString("EVENTS_TRACKING");   
-            this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, LanguageClass.Instance.GetString("EVENTS_TRACKING")); 
+            lblTableName.Text = LanguageClass.Instance.GetString("EVENTS_TRACKING");
+            this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, LanguageClass.Instance.GetString("EVENTS_TRACKING"));
             hsSaveTRACKING.Text = LanguageClass.Instance.GetString("SAVE_TRACKING");
             hsLoadTRACKING.Text = LanguageClass.Instance.GetString("LOAD_TRACKING");
         }
@@ -51,13 +51,13 @@ namespace FBExpert
             fctSQL.AppendText($@"{Environment.NewLine}{StaticFunctionsClass.DateTimeNowStr()} Event occured ->{e.Name}->{e.Counts}");
         }
 
-        public EventsForm(Form parent, DBRegistrationClass dbReg,  DomainClass domainObject)
+        public EventsForm(Form parent, DBRegistrationClass dbReg, DomainClass domainObject)
         {
             InitializeComponent();
             this.MdiParent = parent;
             _dbReg = dbReg;
             _localNotify.Notify.OnRaiseErrorHandler += Notify_OnRaiseErrorHandler;
-            _localNotify.Notify.OnRaiseInfoHandler  += Notify_OnRaiseInfoHandler;           
+            _localNotify.Notify.OnRaiseInfoHandler += Notify_OnRaiseInfoHandler;
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
@@ -65,7 +65,7 @@ namespace FBExpert
             var sb = new StringBuilder();
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
             fctMessages.AppendText($@"INFO  {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
@@ -77,8 +77,8 @@ namespace FBExpert
             var sb = new StringBuilder();
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
-            if (error_count > 0)    sb.Append($@"Errors ({error_count})");
-            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            if (error_count > 0) sb.Append($@"Errors ({error_count})");
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung, _dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
@@ -99,13 +99,13 @@ namespace FBExpert
         {
             get
             {
-                return($@"{_dbReg.Alias.Replace(" ","_")}_{Name}");
+                return ($@"{_dbReg.Alias.Replace(" ", "_")}_{Name}");
             }
         }
 
         [Serializable]
         class MerkeWerte
-        {           
+        {
             public string cbEventName;
         };
 
@@ -125,7 +125,7 @@ namespace FBExpert
                 cbEvents.Text = _mw.cbEventName;
             }
             catch (Exception ex)
-            {                                                                                                              
+            {
                 SendMessageClass.Instance.SendAllErrors($@"{SharedName}->LoadUserDesign()->{ex.Message}");
             }
         }
@@ -133,7 +133,7 @@ namespace FBExpert
         private void SaveUserDesign()
         {
             if ((_mw != null) && (_ss != null))
-            {     
+            {
                 try
                 {
                     _mw.cbEventName = cbEvents.Text;
@@ -141,7 +141,7 @@ namespace FBExpert
                     _ss.StorageName = SharedName;
                     _ss.AddOrUpdate(SharedName, _mw);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     SendMessageClass.Instance.SendAllErrors($@"{SharedName}->SaveUserDesign()->{ex.Message}");
                 }
@@ -155,32 +155,32 @@ namespace FBExpert
 
         public void SetCombo()
         {
-           cbEvents.Items.Clear();
-           foreach(TriggerClass tc in triggers.Values)
-           {
-                if(tc.Source.Contains("_EVENT"))
+            cbEvents.Items.Clear();
+            foreach (TriggerClass tc in triggers.Values)
+            {
+                if (tc.Source.Contains("_EVENT"))
                 {
                     //POST_EVENT 'new_user'; 
-                    int inx1 = tc.Source.IndexOf("_EVENT")+6;
-                    int inx2 = tc.Source.IndexOf(";",inx1);
-                    string cmd = tc.Source.Substring(inx1,inx2-inx1).Trim().Replace("'","");
+                    int inx1 = tc.Source.IndexOf("_EVENT") + 6;
+                    int inx2 = tc.Source.IndexOf(";", inx1);
+                    string cmd = tc.Source.Substring(inx1, inx2 - inx1).Trim().Replace("'", "");
                     cbEvents.Items.Add(cmd);
                 }
-           }
-           if(cbEvents.Items.Count > 0) cbEvents.SelectedIndex = 0;
+            }
+            if (cbEvents.Items.Count > 0) cbEvents.SelectedIndex = 0;
         }
 
         public void DataToEdit()
-        {     
-        
+        {
+
         }
-        
+
         public void EditToData()
         {
 
         }
 
-        Dictionary<string,TriggerClass> triggers = null;
+        Dictionary<string, TriggerClass> triggers = null;
 
         private void EventsForm_Load(object sender, EventArgs e)
         {
@@ -196,7 +196,7 @@ namespace FBExpert
             Restart();
         }
         AutocompleteClass ac;
-        public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables, Dictionary<string,ViewClass> views)
+        public void SetAutocompeteObjects(List<TableClass> tables, List<SystemTableClass> systemtables, Dictionary<string, ViewClass> views)
         {
             ac = new AutocompleteClass(fctSQL, _dbReg);
             ac.CreateAutocompleteForDatabase();
@@ -206,22 +206,22 @@ namespace FBExpert
             ac.AddAutocompleteForViews(views);
             ac.Activate();
         }
-               
+
         private void fctSQL_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == (Keys.K | Keys.Control))
             {
-                if(ac != null) ac.Show();
+                if (ac != null) ac.Show();
                 e.Handled = true;
             }
         }
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-            
-            if(saveTRACKINGFile.ShowDialog() != DialogResult.OK) return;            
-               fctSQL.SaveToFile(saveTRACKINGFile.FileName,Encoding.UTF8);       
-               
+
+            if (saveTRACKINGFile.ShowDialog() != DialogResult.OK) return;
+            fctSQL.SaveToFile(saveTRACKINGFile.FileName, Encoding.UTF8);
+
             /*
                string cn = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
                FbConnection connection = new FbConnection(cn);
@@ -242,13 +242,13 @@ namespace FBExpert
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if(ofdTRACKING.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdTRACKING.FileName); 
+            if (ofdTRACKING.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdTRACKING.FileName);
         }
 
         private void hsAddField_Click(object sender, EventArgs e)
         {
-            string[] cols = {cbEvents.Text};
+            string[] cols = { cbEvents.Text };
             ListViewItem lvi = new ListViewItem(cols);
             lvEvents.Items.Add(lvi);
             Restart();
@@ -264,12 +264,12 @@ namespace FBExpert
             fctSQL.AppendText($@"{StaticFunctionsClass.DateTimeNowStr()} Event tracking stopped...{Environment.NewLine}");
             hsTracking.Marked = false;
             var events = new List<string>();
-            foreach(ListViewItem lvi in lvEvents.Items)
+            foreach (ListViewItem lvi in lvEvents.Items)
             {
-                if(string.IsNullOrEmpty(lvi.Text)) continue;
+                if (string.IsNullOrEmpty(lvi.Text)) continue;
                 events.Add(lvi.Text);
             }
-            if(events.Count > 0)
+            if (events.Count > 0)
             {
                 revent.CancelEvents();
                 revent.QueueEvents(events.ToArray());
@@ -284,7 +284,7 @@ namespace FBExpert
 
         private void hsTracking_Click(object sender, EventArgs e)
         {
-            if(hsTracking.Marked)
+            if (hsTracking.Marked)
             {
                 Restart();
             }
@@ -300,4 +300,3 @@ namespace FBExpert
         }
     }
 }
- 

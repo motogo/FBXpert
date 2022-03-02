@@ -37,8 +37,8 @@ namespace FBXpertLib
 
         public bool CaseSensitivity
         {
-            set=> caseSensitivity = value;
-            get=> caseSensitivity;
+            set => caseSensitivity = value;
+            get => caseSensitivity;
         }
 
         public int ActualItemIndex
@@ -60,13 +60,13 @@ namespace FBXpertLib
             set => searchPattern = value;
             get => searchPattern;
         }
-       
+
         public void NewSearchPattern(string searchp)
         {
             SearchPattern = searchp;
             doNewSearch = true;
         }
-        
+
         public void BookmarkAll()
         {
             fctInfo.BookmarkColor = bookmarkColor;
@@ -124,7 +124,7 @@ namespace FBXpertLib
             searchList = new List<SearchListItem>();
             if (SearchPattern.Length <= 0) return searchList;
             bookmarkList = FindBookmarks();
-            
+
             searchListInx = -1;
             while (searchInxOld < fctInfo.Text.Length)
             {
@@ -140,7 +140,7 @@ namespace FBXpertLib
                     {
                         searchInx = (caseSensitivity) ? subs.IndexOf(SearchPattern) : subs.ToLower().IndexOf(SearchPattern.ToLower());
                     }
-                    
+
                     if (searchInx < 0) return searchList;
 
                     searchInxOld = (wholeWord) ? searchInx + searchInxOld + 1 : searchInx + searchInxOld;
@@ -155,7 +155,7 @@ namespace FBXpertLib
                 else
                 {
                     string subs = fctInfo.Text.Substring(searchInxOld + 1);
-                    
+
                     if (wholeWord)
                     {
                         //searchInx = (caseSensitivity) ? subs.IndexOf($@" {SearchPattern} ") : subs.ToLower().IndexOf($@" {SearchPattern} ".ToLower());
@@ -183,18 +183,18 @@ namespace FBXpertLib
         public List<int> FindBookmarks()
         {
 
-            List<int>  searchList = new List<int>();
+            List<int> searchList = new List<int>();
             if (SearchPattern.Length <= 0) return searchList;
             searchListInx = -1;
-            for(int i = 0; i < fctInfo.LinesCount; i++)
+            for (int i = 0; i < fctInfo.LinesCount; i++)
             {
                 string line = fctInfo.Lines[i];
                 bool found = false;
                 if (wholeWord)
                 {
-                    found = (CaseSensitivity) 
-                        ? line.Contains($@" {SearchPattern} ") 
-                        || line.Contains($@" {SearchPattern},") 
+                    found = (CaseSensitivity)
+                        ? line.Contains($@" {SearchPattern} ")
+                        || line.Contains($@" {SearchPattern},")
                         || line.Contains($@" {SearchPattern}.")
                         || line.Contains($@",{SearchPattern} ")
                         || line.Contains($@".{SearchPattern} ")
@@ -203,8 +203,8 @@ namespace FBXpertLib
                         || line.Contains($@",{SearchPattern}.")
                         || line.Contains($@".{SearchPattern},")
 
-                        : line.ToLower().Contains(SearchPattern.ToLower()) 
-                        || line.ToLower().Contains($@" {SearchPattern},".ToLower()) 
+                        : line.ToLower().Contains(SearchPattern.ToLower())
+                        || line.ToLower().Contains($@" {SearchPattern},".ToLower())
                         || line.ToLower().Contains($@" {SearchPattern}.".ToLower())
                         || line.ToLower().Contains($@",{SearchPattern} ".ToLower())
                         || line.ToLower().Contains($@".{SearchPattern} ".ToLower())
@@ -228,7 +228,7 @@ namespace FBXpertLib
         public void GoToNext()
         {
             if (SearchPattern.Length <= 0) return;
-            if(searchList?.Count <=0) return;
+            if (searchList?.Count <= 0) return;
             if (doNewSearch)
             {
                 GoToFirst();
@@ -236,7 +236,7 @@ namespace FBXpertLib
             }
             else
             {
-                if (searchListInx >= searchList.Count-1) return;
+                if (searchListInx >= searchList.Count - 1) return;
                 SearchListItem n = searchList[++searchListInx];
                 fctInfo.SelectionStart = n.pos;
                 fctInfo.SelectionLength = n.length;
@@ -269,7 +269,7 @@ namespace FBXpertLib
         {
             actItemInx = -1;
             if (SearchPattern.Length <= 0) return;
-            if ((searchList?.Count <= 0)&&(!doNewSearch)) return;
+            if ((searchList?.Count <= 0) && (!doNewSearch)) return;
             fctInfo.SelectionStart = 0;
             searchInxOld = 0;
             searchListInx = -1;
@@ -279,7 +279,7 @@ namespace FBXpertLib
                 doNewSearch = false;
                 BookmarkAll();
             }
-            
+
             GoToNext();
         }
 
@@ -298,7 +298,7 @@ namespace FBXpertLib
                 BookmarkAll();
             }
             searchListInx = searchList.Count - 1;
-           
+
             SearchListItem n = searchList[searchListInx];
             fctInfo.SelectionStart = n.pos;
             fctInfo.SelectionLength = n.length;

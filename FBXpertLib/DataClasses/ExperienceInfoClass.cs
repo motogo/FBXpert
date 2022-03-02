@@ -20,7 +20,7 @@ namespace FBXpertLib
         public bool IsActive { get; set; }
     }
 
-    public enum ExperienceInfoInx {Id=0, Stamp=1,KeyCode =2, Info =3, IsActive =4};
+    public enum ExperienceInfoInx { Id = 0, Stamp = 1, KeyCode = 2, Info = 3, IsActive = 4 };
 
     public class ExperienceInfoClass
     {
@@ -29,12 +29,12 @@ namespace FBXpertLib
         private string schemaName = "ExperienceInfo";
         private string DatabaseLocation = string.Empty;
         private bool asc = true;
-        
+
         public ExperienceInfoClass(string dbLocation)
         {
             DatabaseLocation = dbLocation;
         }
-        
+
         public ExperienceInfoClass()
         {
 
@@ -89,9 +89,9 @@ namespace FBXpertLib
 
         public void ExperienceInfoRefresh(DataGridView dgv, string keycode)
         {
-         
+
             dgv.DataSource = DisplayPresetData(keycode);
-         //   dgv.Columns[0].Visible = false;
+            //   dgv.Columns[0].Visible = false;
         }
         public object GetDynamicSortProperty(object item, string propName)
         {
@@ -155,7 +155,7 @@ namespace FBXpertLib
                 var ExperienceInfos = db.GetCollection<ExperienceInfo>(schemaName);
                 ExperienceInfos.EnsureIndex(x => x.KeyCode);
                 ExperienceInfos.EnsureIndex(x => x.Stamp);
-               
+
 
                 var r = ExperienceInfos.Find(x => x.KeyCode == keycode);
                 count = r.Count();
@@ -194,7 +194,7 @@ namespace FBXpertLib
                         KeyCode = keycode,
                         Stamp = DateTime.Now,
                         Info = sql,
-                       
+
                         IsActive = true
                     };
 
@@ -211,7 +211,7 @@ namespace FBXpertLib
         public bool UpdateExperienceInfo(ExperienceInfo data)
         {
             // Open database (or create if not exits)
-            
+
             using (var db = new LiteDatabase(DatabaseLocation))
             {
                 var ExperienceInfos = db.GetCollection<ExperienceInfo>(schemaName);

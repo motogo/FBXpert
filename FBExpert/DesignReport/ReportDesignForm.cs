@@ -20,7 +20,7 @@ namespace FBXpert.SonstForms
     {
         private readonly DBRegistrationClass _dbReg;
 
-        NotifiesClass _notifies=null;
+        NotifiesClass _notifies = null;
         public ReportDesignForm(Form parent, DBRegistrationClass dbReg, NotifiesClass notifies)
         {
             InitializeComponent();
@@ -49,28 +49,28 @@ namespace FBXpert.SonstForms
         private void AddCbReportFileText(string txt)
         {
             int inx = cbReportFile.FindStringExact(txt);
-            if(inx < 0)
+            if (inx < 0)
             {
                 cbReportFile.Items.Add(txt);
-            }            
+            }
             cbReportFile.Text = txt;
         }
         private void AddCbXSDFileText(string txt)
         {
             int inx = cbXSDFile.FindStringExact(txt);
-            if(inx < 0)
+            if (inx < 0)
             {
                 cbXSDFile.Items.Add(txt);
-            }            
+            }
             cbXSDFile.Text = txt;
         }
         private void AddCbXMLFileText(string txt)
         {
             int inx = cbXMLFile.FindStringExact(txt);
-            if(inx < 0)
+            if (inx < 0)
             {
                 cbXMLFile.Items.Add(txt);
-            }            
+            }
             cbXMLFile.Text = txt;
         }
 
@@ -84,27 +84,27 @@ namespace FBXpert.SonstForms
                 var mw2 = (MerkeWerte)_ss[Name];
                 if (mw2 == null) return;
                 _mw = mw2;
-                
+
                 AddCbXMLFileText(_mw.XmlDataFileName);
-                if(!string.IsNullOrEmpty(_mw.XmlDataFileName)) fctXML.OpenFile(_mw.XmlDataFileName);
+                if (!string.IsNullOrEmpty(_mw.XmlDataFileName)) fctXML.OpenFile(_mw.XmlDataFileName);
                 AddCbXSDFileText(_mw.XsdSchemaFileName);
-                if(!string.IsNullOrEmpty(_mw.XsdSchemaFileName)) fctXSD.OpenFile(_mw.XsdSchemaFileName);
+                if (!string.IsNullOrEmpty(_mw.XsdSchemaFileName)) fctXSD.OpenFile(_mw.XsdSchemaFileName);
                 AddCbReportFileText(_mw.ReportFileName);
-                if(!string.IsNullOrEmpty(_mw.ReportFileName)) fctFRX.OpenFile(_mw.ReportFileName);
+                if (!string.IsNullOrEmpty(_mw.ReportFileName)) fctFRX.OpenFile(_mw.ReportFileName);
 
                 foreach (ReportSqlCommands scmd in _mw.SqlCommands)
                 {
-                    AddSQLItem(scmd.cmd,scmd.caption);
+                    AddSQLItem(scmd.cmd, scmd.caption);
                 }
 
                 if (folSQL.Items.Count > 0)
                 {
-                   folSQL.Items[0].Selected = true;
+                    folSQL.Items[0].Selected = true;
                 }
             }
             catch (Exception ex)
             {
-                _notifies?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> LoadUserDesign()", ex));                                                                                                                  
+                _notifies?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> LoadUserDesign()", ex));
             }
         }
 
@@ -122,7 +122,7 @@ namespace FBXpert.SonstForms
                 }
                 _ss.SharedFolder = ApplicationPathClass.Instance.GetFullPath(Application.UserAppDataPath);
                 _ss.StorageName = Name;
-                _ss.AddOrUpdate(Name, _mw);                
+                _ss.AddOrUpdate(Name, _mw);
             }
         }
 
@@ -134,7 +134,7 @@ namespace FBXpert.SonstForms
         private BrightIdeasSoftware.OLVColumn colSQLCaption;
         private BrightIdeasSoftware.OLVColumn colSQLCommand;
         private BrightIdeasSoftware.OLVColumn colSQLDone;
-       // private BrightIdeasSoftware.OLVColumn colSQLGroupName;
+        // private BrightIdeasSoftware.OLVColumn colSQLGroupName;
 
         public void MakeSQLFieldGrid()
         {
@@ -148,12 +148,12 @@ namespace FBXpert.SonstForms
             colSQLDone.CheckBoxes = true;
 
             colSQLCommand.Text = "SQL";
-          //  colSQLGroupName.Text = "Group";
+            //  colSQLGroupName.Text = "Group";
 
             colSQLCommand.Width = 250;
             colSQLDone.Width = 100;
-            
-          //  colSQLGroupName.Width = 120;
+
+            //  colSQLGroupName.Width = 120;
             colSQLCaption.Text = "Caption";
             colSQLCaption.Width = 120;
 
@@ -179,23 +179,23 @@ namespace FBXpert.SonstForms
 
         public void MakeFieldGrid()
         {
-            colFieldname        = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            colFieldType        = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            colValuesGroupName  = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            colFieldValue       = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldname = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colValuesGroupName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            colFieldValue = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
 
-            colFieldType.Text       = "Type";
-            colFieldType.TextAlign  = HorizontalAlignment.Center;
+            colFieldType.Text = "Type";
+            colFieldType.TextAlign = HorizontalAlignment.Center;
 
-            colFieldname.Text       = "Bezeichnung";
+            colFieldname.Text = "Bezeichnung";
             colValuesGroupName.Text = "Group";
-            colFieldValue.Text      = "Value";
-                        
-            colFieldname.Width          = 250;
-            colFieldType.Width          = 100;
-            colValuesGroupName.Width    = 250;
-            colFieldValue.Width         = 120;
-            
+            colFieldValue.Text = "Value";
+
+            colFieldname.Width = 250;
+            colFieldType.Width = 100;
+            colValuesGroupName.Width = 250;
+            colFieldValue.Width = 120;
+
 
             folValues.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             colFieldname,
@@ -219,10 +219,10 @@ namespace FBXpert.SonstForms
         //Getters (Formatierungen, Zuweisungen der Objektvariablen zu dem ObjektListView
         private void SetupColumns()
         {
-            colFieldname.AspectGetter       = delegate (object x) { return ((ReportValues)x).caption; };
+            colFieldname.AspectGetter = delegate (object x) { return ((ReportValues)x).caption; };
             colValuesGroupName.AspectGetter = delegate (object x) { return ((ReportValues)x).group; };
-            colFieldType.AspectGetter       = delegate (object x) { return ((ReportValues)x).valtype; };
-            colFieldValue.AspectGetter      = delegate (object x) { return ((ReportValues)x).val; };
+            colFieldType.AspectGetter = delegate (object x) { return ((ReportValues)x).valtype; };
+            colFieldValue.AspectGetter = delegate (object x) { return ((ReportValues)x).val; };
         }
         private void SetupSQLColumns()
         {
@@ -230,7 +230,7 @@ namespace FBXpert.SonstForms
             colSQLCaption.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x).cmd; };
             //colSQLDone.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x)..valtype; };
             //colSQLGroupName.AspectGetter = delegate (object x) { return ((ReportSqlCommands)x).group; };
-            
+
         }
 
         private void AddSQLItem(string statement, string dataname)
@@ -240,9 +240,9 @@ namespace FBXpert.SonstForms
             {
                 caption = dataname,
                 cmd = statement
-               
+
             };
-            
+
             folSQL.AddObject(obj);
         }
 
@@ -253,30 +253,30 @@ namespace FBXpert.SonstForms
         }
         private void ValuesItemToEdit(ReportValues oitm)
         {
-           txtValueCaption.Text = oitm.caption;
-           txtValueGroup.Text = oitm.group;
-           txtValueWert.Text = oitm.val;
-           cbValuesTypes.SelectedItem = oitm.valtype;
+            txtValueCaption.Text = oitm.caption;
+            txtValueGroup.Text = oitm.group;
+            txtValueWert.Text = oitm.val;
+            cbValuesTypes.SelectedItem = oitm.valtype;
         }
 
         private void hsAddStatement_Click(object sender, EventArgs e)
         {
-             AddSQLItem(txtStatement.Text, txtDataName.Text);
+            AddSQLItem(txtStatement.Text, txtDataName.Text);
         }
 
         private void hsRemoveStatement_Click(object sender, EventArgs e)
         {
-            
+
 
             if (folSQL.SelectedObject == null) return;
             var tfc = (ReportSqlCommands)folSQL.SelectedObject;
             folSQL.RemoveObject(tfc);
 
         }
-       
+
         private void hsCreateReportFiles_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtXMLDataFileNew.Text))
+            if (string.IsNullOrEmpty(txtXMLDataFileNew.Text))
             {
                 long ticksnow = DateTimeFunctions.GetSecFromTicksNow();
                 txtXMLDataFileNew.Text = $@"{ApplicationPathClass.Instance.ApplicationReportPath}\ReportDataFile_{DateTimeFunctions.GetSecFromTicksNow()}.xml";
@@ -294,10 +294,10 @@ namespace FBXpert.SonstForms
             bool createFiles = true;
             if (File.Exists(rpt.Datafile) || File.Exists(rpt.Schemafile))
             {
-                object[] param = { rpt.Datafile,rpt.Schemafile,Environment.NewLine };                    
-                var dResult = SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileExistsCaption", "ReportDataFilesExisits",SEMessageBoxButtons.YesNoCancel, SEMessageBoxIcon.Exclamation, null, param);
+                object[] param = { rpt.Datafile, rpt.Schemafile, Environment.NewLine };
+                var dResult = SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileExistsCaption", "ReportDataFilesExisits", SEMessageBoxButtons.YesNoCancel, SEMessageBoxIcon.Exclamation, null, param);
                 if (dResult == SEDialogResult.Cancel) return;
-                createFiles =  (dResult == SEDialogResult.Yes);
+                createFiles = (dResult == SEDialogResult.Yes);
             }
 
             if (createFiles)
@@ -320,7 +320,7 @@ namespace FBXpert.SonstForms
                     rvg.vals.Add(rv);
                 }
                 rpt.CreateReportDatas(_dbReg);
-            }                            
+            }
             txtReportFileNameNew.Text = rpt.CreateDesignFp(new FastReport.Report());
         }
 
@@ -346,32 +346,32 @@ namespace FBXpert.SonstForms
         {
             // ofdReportFile.InitialDirectory = PfadClass.Instance().EDVPfad;
             if (ofdReportFile.ShowDialog() != DialogResult.OK) return;
-            AddCbReportFileText(ofdReportFile.FileName); 
+            AddCbReportFileText(ofdReportFile.FileName);
             fctFRX.OpenFile(ofdReportFile.FileName);
-            tabControlEditDesign.SelectedTab =  tabPageFRX;            
+            tabControlEditDesign.SelectedTab = tabPageFRX;
         }
 
         private void hsLoadXMLDataFile_Click(object sender, EventArgs e)
         {
             // ofdXMLDataFile.InitialDirectory = PfadClass.Instance().ReportDataPfad;
             if (ofdXMLDataFile.ShowDialog() != DialogResult.OK) return;
-            
+
             AddCbXMLFileText(ofdXMLDataFile.FileName);
             fctXML.OpenFile(ofdXMLDataFile.FileName);
-            tabControlEditDesign.SelectedTab =  tabPageXML;
+            tabControlEditDesign.SelectedTab = tabPageXML;
             if (cbXSDFile.Text.Length >= 1) return;
-            
+
             AddCbXSDFileText(cbXMLFile.Text.ToUpper().Replace(@".XML", @".XSD"));
-            fctXSD.OpenFile(cbXMLFile.Text);                      
+            fctXSD.OpenFile(cbXMLFile.Text);
         }
 
         private void hsLoadSchemaFile_Click(object sender, EventArgs e)
-        {           
+        {
             if (ofdXSDSchemaFile.ShowDialog() != DialogResult.OK) return;
-            
+
             AddCbXSDFileText(ofdXSDSchemaFile.FileName);
             fctXSD.OpenFile(ofdXSDSchemaFile.FileName);
-            tabControlEditDesign.SelectedTab =  tabPageXSD;                     
+            tabControlEditDesign.SelectedTab = tabPageXSD;
         }
 
         public void SetControlSizes()
@@ -392,7 +392,7 @@ namespace FBXpert.SonstForms
             SetValuesTypes();
             SetControlSizes();
             FormDesign.SetFormLeft(this);
-            LoadUserDesign();         
+            LoadUserDesign();
         }
 
         private void SetValuesTypes()
@@ -410,20 +410,20 @@ namespace FBXpert.SonstForms
         {
             Close();
         }
-              
+
         private bool DataFilesExisting => (!string.IsNullOrEmpty(cbXMLFile.Text)) && (!string.IsNullOrEmpty(cbXSDFile.Text)) &&
                                       (File.Exists(cbXMLFile.Text)) && (File.Exists(cbXSDFile.Text));
-       
+
         private void ReportDesignForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveUserDesign();
-        }      
+        }
 
         private void hsCreateDatas_Click(object sender, EventArgs e)
         {
             var rpt = new ReportDesignClass
             {
-                Datafile   = txtXMLDataFileNew.Text,
+                Datafile = txtXMLDataFileNew.Text,
                 Schemafile = txtXSDSchemaFileNew.Text,
                 Reportfile = cbReportFile.Text
             };
@@ -432,7 +432,7 @@ namespace FBXpert.SonstForms
             if (File.Exists(rpt.Datafile) || File.Exists(rpt.Schemafile))
             {
                 object[] param = { rpt.Datafile, rpt.Schemafile, Environment.NewLine };
-            
+
                 createFiles =
 
                 (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileExistsCaption", "ReportDataFilesExists",
@@ -445,16 +445,16 @@ namespace FBXpert.SonstForms
                 foreach (ReportSqlCommands lvi in folSQL.Objects)
                 {
                     //if (!lvi.Checked) continue;
-                    
+
                     rpt.DataObjects.Add(lvi);
                 }
                 rpt.CreateReportDatas(_dbReg);
-            }            
+            }
             rpt.EditDesignFp(report1);
         }
 
         private void hsDesignEdit_Click_1(object sender, EventArgs e)
-        {            
+        {
             if (DataFilesExisting && !string.IsNullOrEmpty(cbReportFile.Text) && File.Exists(cbReportFile.Text))
             {
                 var rpt = report1; // new FastReport.Report();
@@ -464,64 +464,64 @@ namespace FBXpert.SonstForms
                 {
                     XmlFile = cbXMLFile.Text,
                     XsdFile = cbXSDFile.Text,
-                    ConnectionString = string.Format("XsdFile={1};XmlFile={0}", cbXMLFile.Text,cbXSDFile.Text)
+                    ConnectionString = string.Format("XsdFile={1};XmlFile={0}", cbXMLFile.Text, cbXSDFile.Text)
                 };
 
                 rpt.Dictionary.AddChild(dorg);
                 rpt.Design(false);
-                
+
                 if (File.Exists(cbReportFile.Text)) return;
                 rpt.Save(cbReportFile.Text);
             }
             else
             {
                 object[] param = { cbReportFile.Text, Environment.NewLine };
-                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "ReportFilesNotExists",SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, param);
-            }            
+                SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "FileNotExistsCaption", "ReportFilesNotExists", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, param);
+            }
         }
 
         private void hsNewReportFile_Click(object sender, EventArgs e)
         {
             if (ofdReportFile.ShowDialog() != DialogResult.OK) return;
-            
-            txtReportFileNameNew.Text = ofdReportFile.FileName;            
+
+            txtReportFileNameNew.Text = ofdReportFile.FileName;
         }
 
         private void hsXmlFileNew_Click(object sender, EventArgs e)
         {
             if (ofdXMLDataFile.ShowDialog() != DialogResult.OK) return;
-            
+
             txtXMLDataFileNew.Text = ofdXMLDataFile.FileName;
             if (txtXSDSchemaFileNew.Text.Length >= 1) return;
-            
-            txtXSDSchemaFileNew.Text = cbXMLFile.Text.ToUpper().Replace(@".XML", @".XSD");                        
+
+            txtXSDSchemaFileNew.Text = cbXMLFile.Text.ToUpper().Replace(@".XML", @".XSD");
         }
 
         private void hsSchemaFileNew_Click(object sender, EventArgs e)
         {
             if (ofdXSDSchemaFile.ShowDialog() != DialogResult.OK) return;
-            
-            txtXSDSchemaFileNew.Text =  ofdXSDSchemaFile.FileName;              
+
+            txtXSDSchemaFileNew.Text = ofdXSDSchemaFile.FileName;
         }
 
         private void hsDataFileNew_Click(object sender, EventArgs e)
-        {             
-             new XMLTreeForm(txtXMLDataFileNew.Text).Show();            
+        {
+            new XMLTreeForm(txtXMLDataFileNew.Text).Show();
         }
 
         private void hsReportSchemaFileNew_Click(object sender, EventArgs e)
-        {            
-             new XMLTreeForm(txtXSDSchemaFileNew.Text).Show();            
+        {
+            new XMLTreeForm(txtXSDSchemaFileNew.Text).Show();
         }
 
         private void hsReportFileNewEdit_Click(object sender, EventArgs e)
         {
-            new XMLTreeForm(txtReportFileNameNew.Text).Show();            
+            new XMLTreeForm(txtReportFileNameNew.Text).Show();
         }
 
         private void hsBlankReport_Click(object sender, EventArgs e)
         {
-            new FastReport.Report().Design(this.MdiParent);            
+            new FastReport.Report().Design(this.MdiParent);
         }
 
         private void hsSaveFRX_Click(object sender, EventArgs e)
@@ -529,9 +529,9 @@ namespace FBXpert.SonstForms
             saveFileDialog.Title = "Save FastReport definition file";
             saveFileDialog.Filter = "*.frx|FastReport";
             saveFileDialog.DefaultExt = "*.frx";
-            if(saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            
-            fctFRX.SaveToFile(saveFileDialog.FileName,Encoding.UTF8);            
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            fctFRX.SaveToFile(saveFileDialog.FileName, Encoding.UTF8);
         }
 
         private void hsSaveXSD_Click(object sender, EventArgs e)
@@ -539,9 +539,9 @@ namespace FBXpert.SonstForms
             saveFileDialog.Title = "Save FastReport scheme file";
             saveFileDialog.Filter = "*.xsd|FastReportScheme";
             saveFileDialog.DefaultExt = "*.xsd";
-            if(saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            
-            fctFRX.SaveToFile(saveFileDialog.FileName,Encoding.UTF8);            
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            fctFRX.SaveToFile(saveFileDialog.FileName, Encoding.UTF8);
         }
 
         private void hsSaveXML_Click(object sender, EventArgs e)
@@ -549,9 +549,9 @@ namespace FBXpert.SonstForms
             saveFileDialog.Title = "Save FastReport data file";
             saveFileDialog.Filter = "*.xml|FastReportData";
             saveFileDialog.DefaultExt = "*.xml";
-            if(saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            
-            fctFRX.SaveToFile(saveFileDialog.FileName,Encoding.UTF8);            
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            fctFRX.SaveToFile(saveFileDialog.FileName, Encoding.UTF8);
         }
 
         private void hsAddValueObject_Click(object sender, EventArgs e)
@@ -559,25 +559,25 @@ namespace FBXpert.SonstForms
             ReportValues reportValues = new ReportValues();
             reportValues.group = txtValueGroup.Text;
             reportValues.caption = txtValueCaption.Text;
-           
-            reportValues.valtype = (Type) cbValuesTypes.SelectedItem;
-            if(reportValues.valtype == typeof(int))
+
+            reportValues.valtype = (Type)cbValuesTypes.SelectedItem;
+            if (reportValues.valtype == typeof(int))
             {
                 int? val = StaticFunctionsClass.ToIntDef(txtValueWert.Text, null);
                 if (val == null)
                 {
-                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null,new object[] {txtValueWert.Text.Trim(), typeof(int) });
+                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] { txtValueWert.Text.Trim(), typeof(int) });
                     return;
                 }
                 reportValues.val = val.ToString();
-                
+
             }
             else if (reportValues.valtype == typeof(double))
             {
                 double? val = StaticFunctionsClass.ToDoubleDef(txtValueWert.Text, null);
-                if(val == null)
+                if (val == null)
                 {
-                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] {txtValueWert.Text.Trim(), typeof(double) });
+                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] { txtValueWert.Text.Trim(), typeof(double) });
                     return;
                 }
                 reportValues.val = val.ToString();
@@ -590,7 +590,7 @@ namespace FBXpert.SonstForms
                 }
                 catch (FormatException)
                 {
-                    SEMessageBox.ShowDialog("FormatError",$@"IsNotAValidFormat",SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] {txtValueWert.Text.Trim(), typeof(DateTime) });
+                    SEMessageBox.ShowDialog("FormatError", $@"IsNotAValidFormat", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation, null, new object[] { txtValueWert.Text.Trim(), typeof(DateTime) });
                     return;
                 }
                 reportValues.val = txtValueWert.Text;
@@ -600,10 +600,10 @@ namespace FBXpert.SonstForms
                 reportValues.val = txtValueWert.Text;
             }
             bool objectExists = false;
-            foreach(var itm in folValues.Objects)
+            foreach (var itm in folValues.Objects)
             {
                 var rv = (ReportValues)itm;
-                if((rv.caption == reportValues.caption)&&(rv.group == reportValues.group))
+                if ((rv.caption == reportValues.caption) && (rv.group == reportValues.group))
                 {
                     objectExists = true;
                     break;
@@ -629,7 +629,7 @@ namespace FBXpert.SonstForms
             folValues.SetObjects(null, false);
         }
 
-        
+
         private void hsHelp_Click(object sender, EventArgs e)
         {
             ApplicationHelp.Instance.ShowHelp(HelpIDS.ReportDesigner);
@@ -648,7 +648,7 @@ namespace FBXpert.SonstForms
 
         private void folValues_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ReportValues obj = (ReportValues) folValues.SelectedObject;
+            ReportValues obj = (ReportValues)folValues.SelectedObject;
             ValuesItemToEdit(obj);
         }
     }

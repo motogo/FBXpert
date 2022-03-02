@@ -21,7 +21,7 @@ namespace FBXpert
             Close();
         }
 
-        public  string SearchPattern
+        public string SearchPattern
         {
             set => txtSearchPattern.Text = value;
             get => txtSearchPattern.Text;
@@ -29,7 +29,7 @@ namespace FBXpert
 
         public void Set(string txt)
         {
-            fctInfo.Text = txt; 
+            fctInfo.Text = txt;
         }
         public void Append(string txt)
         {
@@ -61,7 +61,7 @@ namespace FBXpert
         {
             SearchFCT.GoToNext();
             ShowLabel();
-            
+
         }
 
         private void hsPrev_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace FBXpert
             SearchFCT.GoToFirst();
             ShowLabel();
         }
-       
+
 
         private void hsSearchLast_Click(object sender, EventArgs e)
         {
@@ -107,7 +107,7 @@ namespace FBXpert
             SetControlSizes();
             gbNavigate.Enabled = false;
             FindPattern();
-            
+
         }
         private void FindPattern()
         {
@@ -138,14 +138,14 @@ namespace FBXpert
         {
             if (txtSearchPattern.Text.Length <= 0) return;
             SearchFCT.NewSearchPattern(txtSearchPattern.Text);
-            SearchFCT.WholeWord =  ckWholeWords.Checked;
+            SearchFCT.WholeWord = ckWholeWords.Checked;
             SearchFCT.GoToFirst();
             ShowLabel();
         }
 
         private void txtSearchPattern_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 FindPattern();
             }

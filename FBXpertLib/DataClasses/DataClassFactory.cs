@@ -11,13 +11,13 @@ namespace FBXpertLib
     {
         public string Collation = "NONE";
         public string Role = string.Empty;
-        
+
         public DefaultConnectionClass()
         {
 
         }
-        
-    }   
+
+    }
     public static class DataClassFactory
     {
         public static DataObjectClass GetDataClass(string name)
@@ -32,12 +32,12 @@ namespace FBXpertLib
                 case StaticVariablesClass.FieldsKeyStr: return new TableFieldClass();
                 case StaticVariablesClass.RolesKeyStr: return new RoleClass();
                 case StaticVariablesClass.IndicesKeyStr: return new IndexClass();
-                
+
                 case StaticVariablesClass.DomainsKeyStr: return new DomainClass();
                 case "TYPE": return new TypeClass();
                 case StaticVariablesClass.FunctionsKeyStr: return new FunctionClass();
                 case StaticVariablesClass.UserDefinedFunctionsKeyStr: return new UserDefinedFunctionClass();
-                case StaticVariablesClass.ForeignKeyStr : return new ForeignKeyClass();
+                case StaticVariablesClass.ForeignKeyStr: return new ForeignKeyClass();
                 case StaticVariablesClass.PrimaryKeyStr: return new PrimaryKeyClass();
                 case StaticVariablesClass.UniquesKeyStr: return new UniquesClass();
                 case StaticVariablesClass.NotNullKeyStr: return new NotNullsClass();
@@ -45,12 +45,12 @@ namespace FBXpertLib
                 case StaticVariablesClass.ConstraintsKeyStr: return new ConstraintsClass();
                 case StaticVariablesClass.DependenciesKeyStr: return new DependencyClass();
             }
-            
+
             return null;
         }
         public static string GetTooltip(string name, object obj)
         {
-            if(obj == null) return "Object -> NULL";
+            if (obj == null) return "Object -> NULL";
             if (name == StaticVariablesClass.FieldsKeyStr)
             {
                 TableFieldClass fld = (TableFieldClass)obj;
@@ -103,7 +103,7 @@ namespace FBXpertLib
         public static string GetTooltipParent(string name, object obj)
         {
             if (obj == null) return "Object -> NULL";
- 
+
             if (name == StaticVariablesClass.ForeignKeyStr)
             {
                 return $@"This foreign key has relation to {((DataObjectClass)obj).Name}";
@@ -143,7 +143,7 @@ namespace FBXpertLib
 
         public static Color GetColor(string name, object obj)
         {
-            if ((name == StaticVariablesClass.IndicesKeyStr)|| (name == StaticVariablesClass.SystemIndicesKeyStr))
+            if ((name == StaticVariablesClass.IndicesKeyStr) || (name == StaticVariablesClass.SystemIndicesKeyStr))
             {
                 IndexClass fc = (IndexClass)obj;
                 Color ForeColor = fc.IsActive ? AppColors.Active : AppColors.Inactive;
@@ -181,12 +181,12 @@ namespace FBXpertLib
             if (node != null)
             {
                 node.Tag = obj;
-                node.Text =  (obj != null) 
-                    ? (obj.GetType() == typeof(DBRegistrationClass)) ? ((DBRegistrationClass)obj).GetCaption() : text 
+                node.Text = (obj != null)
+                    ? (obj.GetType() == typeof(DBRegistrationClass)) ? ((DBRegistrationClass)obj).GetCaption() : text
                     : "object -> null";
 
             }
-            
+
             return node;
         }
         public static TreeNode GetNewNode(string name, string text, object obj)
@@ -199,13 +199,13 @@ namespace FBXpertLib
             }
             return node;
         }
-        
+
         public static TreeNode GetNewNode(string name, string text)
         {
             TreeNode node = GetNewNode(name);
             if (node != null)
             {
-                node.Text= text;
+                node.Text = text;
             }
             return node;
         }
@@ -232,7 +232,7 @@ namespace FBXpertLib
                         ImageIndex = (int)eImageIndex.PROCEDURE
                     };
                     return node;
-               case StaticVariablesClass.ProceduresKeyStr:
+                case StaticVariablesClass.ProceduresKeyStr:
                     node = new TreeNode()
                     {
                         Name = name.ToUpper(),
@@ -265,7 +265,7 @@ namespace FBXpertLib
                     node = new TreeNode()
                     {
                         Name = name.ToUpper(),
-            
+
                         Text = "Foreign Keys",
                         Tag = new ForeignKeyGroupClass(),
                         ImageIndex = (int)eImageIndex.KEYS
@@ -275,7 +275,7 @@ namespace FBXpertLib
                     node = new TreeNode()
                     {
                         Name = name.ToUpper(),
-                        Text = "Primary Keys",                        
+                        Text = "Primary Keys",
                         Tag = new PrimaryKeyGroupClass(),
                         ImageIndex = (int)eImageIndex.PRIMARYKEY
                     };
@@ -341,10 +341,10 @@ namespace FBXpertLib
                     {
                         Text = "Field",
                         Tag = new TableFieldClass(),
-                        Name = name.ToUpper(),                        
+                        Name = name.ToUpper(),
                         ImageIndex = (int)eImageIndex.FIELDS
                     };
-                    
+
                     return node;
                 case StaticVariablesClass.FieldsKeyGroupStr:
 
@@ -374,7 +374,7 @@ namespace FBXpertLib
                     {
                         Text = "Fields",
                         Name = name.ToUpper(),
-                        Tag = new  ViewFieldGroupClass(),
+                        Tag = new ViewFieldGroupClass(),
                         ImageIndex = (int)eImageIndex.FIELDS
                     };
 
@@ -384,7 +384,7 @@ namespace FBXpertLib
                     {
                         Text = "Uniques",
                         Name = name.ToUpper(),
-                        Tag = new  UniqueConstraintsGroupClass(),
+                        Tag = new UniqueConstraintsGroupClass(),
                         ImageIndex = (int)eImageIndex.UNIQUE
                     };
                     return node;
@@ -672,7 +672,7 @@ namespace FBXpertLib
                         Tag = new TriggerGroupClass(),
                         ImageIndex = (int)eImageIndex.TRIGGERS
                     };
-                    
+
                     return node;
                 case StaticVariablesClass.TriggersKeyStr:
                     node = new TreeNode()
@@ -690,7 +690,7 @@ namespace FBXpertLib
                         Text = "System Triggers",
                         Name = name.ToUpper(),
                         Tag = new TriggerGroupClass(),
-                        
+
                         ImageIndex = (int)eImageIndex.TRIGGERS
                     };
 

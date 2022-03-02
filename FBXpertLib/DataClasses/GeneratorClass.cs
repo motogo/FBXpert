@@ -6,7 +6,7 @@ namespace FBXpertLib
     {
         public long Value;
         public long InitValue;
-        
+
         public string Description;
         public CheckState State = CheckState.Unchecked;
     }

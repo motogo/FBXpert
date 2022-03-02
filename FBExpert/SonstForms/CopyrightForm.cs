@@ -6,7 +6,7 @@ namespace FBXpert.SonstForms
 {
     public partial class CopyrightForm : Form
     {
-        private static CopyrightForm _instance;       
+        private static CopyrightForm _instance;
         public static CopyrightForm Instance(Form parent)
         {
             if (_instance != null) return (_instance);
@@ -14,13 +14,13 @@ namespace FBXpert.SonstForms
             {
                 MdiParent = parent
             };
-            LanguageClass.Instance.RegisterChangeNotifiy(CopyrightForm_OnRaiseLanguageChangedHandler);            
+            LanguageClass.Instance.RegisterChangeNotifiy(CopyrightForm_OnRaiseLanguageChangedHandler);
             return (_instance);
         }
 
         private static void CopyrightForm_OnRaiseLanguageChangedHandler(object sender, LanguageChangedEventArgs k)
         {
-           
+
         }
 
         protected CopyrightForm()
@@ -37,8 +37,8 @@ namespace FBXpert.SonstForms
         private void CopyrightForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _instance = null;
-          //  this.Hide();
-           // e.Cancel = true;
+            //  this.Hide();
+            // e.Cancel = true;
         }
     }
 }

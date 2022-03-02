@@ -32,7 +32,7 @@ namespace FBXpertLib
         public static int FieldDescriptionInx = 14;
         public static int FieldDomainDescriptionInx = 15;
 
-        
+
     }
 
     public static class AppColors

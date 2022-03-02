@@ -26,20 +26,20 @@ namespace FBXpert.SonstForms
             int n = 0;
             if (ckCreateFunction.Checked) n++;
             if (ckAlterFunction.Checked) n++;
-            progressBar1.Maximum = Functions.Count*n;
+            progressBar1.Maximum = Functions.Count * n;
             string path = Path.Combine(txtSQLExportPath.Text);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             if (!Directory.Exists(path)) return;
             if (ckDeleteAllFiles.Checked)
             {
-                string[] fls = Directory.GetFiles(path,"*.sql");
+                string[] fls = Directory.GetFiles(path, "*.sql");
                 foreach (string fn in fls)
                 {
                     try
                     {
                         File.Delete(fn);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -52,7 +52,7 @@ namespace FBXpert.SonstForms
                     if (ckAlterFunction.Checked)
                     {
                         string fna = Path.Combine(path, $@"{Function.Name}_alter.sql");
-                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLAlterFunction(Function,Function, true);
+                        List<string> txt = StaticDatabaseObjects.Instance().MakeSQLAlterFunction(Function, Function, true);
                         File.WriteAllLines(fna, txt);
                         progressBar1.Value++;
                     }
@@ -85,13 +85,13 @@ namespace FBXpert.SonstForms
         public void SetControlSizes()
         {
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
-         
+
         }
         private void ExportFunctionsScriptForm_Load(object sender, EventArgs e)
         {
             SetControlSizes();
             FormDesign.SetFormLeft(this);
-            txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath,"Functions");
+            txtSQLExportPath.Text = Path.Combine(AppSettingsClass.Instance.PathSettings.SQLExportPath, "Functions");
         }
 
         private void hsInitialSQLExportPath_Click(object sender, EventArgs e)

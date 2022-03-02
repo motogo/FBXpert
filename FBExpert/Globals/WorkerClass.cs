@@ -11,9 +11,9 @@ namespace FBXpert.Globals
             this.CancelAsync();
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            while(this.CancellationPending)
+            while (this.CancellationPending)
             {
-                if(sw.ElapsedMilliseconds > timeout)
+                if (sw.ElapsedMilliseconds > timeout)
                 {
                     sw.Stop();
                     return false;
@@ -22,13 +22,13 @@ namespace FBXpert.Globals
             sw.Stop();
             return true;
         }
-        public bool CancellingDone(int timeout=5000)
+        public bool CancellingDone(int timeout = 5000)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            while(this.CancellationPending||this.IsBusy)
+            while (this.CancellationPending || this.IsBusy)
             {
-                if(sw.ElapsedMilliseconds > timeout) 
+                if (sw.ElapsedMilliseconds > timeout)
                 {
                     sw.Stop();
                     return false;

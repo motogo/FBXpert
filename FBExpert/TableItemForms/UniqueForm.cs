@@ -15,32 +15,32 @@ namespace FBXpert
 {
     public partial class UniqueForm : IEditForm
     {
-        
+
         DBRegistrationClass _dbReg = null;
         string IndexName = string.Empty;
-        
+
         int messages_count = 0;
         int error_count = 0;
         NotifiesClass _localNotify = new NotifiesClass();
         AutocompleteClass ac = null;
 
-        ContextMenuStrip Cm=null;
-        ContextMenuStrip CmGroup=null;
+        ContextMenuStrip Cm = null;
+        ContextMenuStrip CmGroup = null;
         //TreeNode Tn=null;
         NotNullsClass NotNullObject = null;
         List<TableClass> _tables = new List<TableClass>();
         TableClass OrgTable = null;
-        public UniqueForm(Form parent,  DBRegistrationClass dbReg,List<TableClass> tables , NotNullsClass notnullObject, ContextMenuStrip cmGroup, ContextMenuStrip cm)
+        public UniqueForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, NotNullsClass notnullObject, ContextMenuStrip cmGroup, ContextMenuStrip cm)
         {
             InitializeComponent();
             this.MdiParent = parent;
-            
+
             _dbReg = dbReg;
             _tables = tables;
             Cm = cm;
             CmGroup = cmGroup;
-           
-            if(notnullObject == null)
+
+            if (notnullObject == null)
             {
                 NotNullObject = new NotNullsClass();
                 NotNullObject.Name = "NEW_CNSTR";
@@ -48,19 +48,19 @@ namespace FBXpert
             }
             else
             {
-               
+
                 NotNullObject = notnullObject;
             }
-            OrgTable = tables.Find(X=>X.Name == notnullObject.TableName);
+            OrgTable = tables.Find(X => X.Name == notnullObject.TableName);
             NotNullObject.TableName = OrgTable.Name;
-            
+
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
         }
 
         public void ShowCaptions()
         {
-            lblTableName.Text = (NotNullObject != null) ? $@"NotNullConstraint: {NotNullObject.Name}" : "NotNullConstraint";            
+            lblTableName.Text = (NotNullObject != null) ? $@"NotNullConstraint: {NotNullObject.Name}" : "NotNullConstraint";
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Manage Constraints");
         }
 
@@ -82,9 +82,9 @@ namespace FBXpert
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0) sb.Append($@"Errors ({error_count})");
-            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung,_dbReg);
+            string errStr = AppStaticFunctionsClass.GetErrorCodeString(k.Meldung, _dbReg);
             fctMessages.AppendText($@"ERROR {errStr}");
-            
+
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
@@ -92,9 +92,9 @@ namespace FBXpert
 
         public void ShowUI()
         {
-           
-            
-            
+
+
+
         }
 
         public void MakeSQL()
@@ -111,7 +111,7 @@ namespace FBXpert
             ShowCaptions();
         }
 
-        
+
 
         bool DataFilled = false;
 
@@ -132,7 +132,7 @@ namespace FBXpert
 
                 FbCommand fcmd = new FbCommand(cmd_index, con);
                 var dread = fcmd.ExecuteReader();
-                
+
                 if (dread.HasRows)
                 {
                     while (dread.Read())
@@ -140,7 +140,7 @@ namespace FBXpert
                         //TableName = dread.GetValue(0).ToString().Trim();
                         IndexColumnName = dread.GetValue(2).ToString().Trim();
                         Unique = StaticFunctionsClass.ToIntDef(dread.GetValue(3).ToString().Trim(), 0);
-                      
+
                         string[] lv = new string[1];
                         lv[0] = IndexColumnName;
                     }
@@ -150,7 +150,7 @@ namespace FBXpert
             }
             catch (Exception ex)
             {
-              _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->UniqueForm->RefreshIndices()->" + ex.Message);
+                _localNotify?.AddToERROR(StaticFunctionsClass.DateTimeNowStr() + "->UniqueForm->RefreshIndices()->" + ex.Message);
             }
         }
 
@@ -168,14 +168,14 @@ namespace FBXpert
         public void MakeSQLNew()
         {
             SQLScript.Clear();
-            
+
             SQLToUI();
         }
 
         public void MakeSQOAlter()
-        {           
+        {
             SQLScript.Clear();
-            
+
             SQLToUI();
         }
 
@@ -186,11 +186,11 @@ namespace FBXpert
 
         public void DataToEdit()
         {
-           
+
             cbTable.Items.Clear();
             cbTable.Items.AddRange(_tables.ToArray());
 
-           
+
             cbTable.Text = NotNullObject.TableName;
             TableClass tc = cbTable.SelectedItem as TableClass;
             cbFields.Items.Clear();
@@ -203,9 +203,9 @@ namespace FBXpert
                 ListViewItem lvi = new ListViewItem(st);
                 lvFields.Items.Add(lvi);
             }
-            
+
             txtConstraintName.Text = NotNullObject.Name;
-           
+
             txtINDEXName.Text = NotNullObject.IndexName;
             DataFilled = true;
 
@@ -219,7 +219,7 @@ namespace FBXpert
 
         public void SetUIControls()
         {
-            
+
         }
 
         string OldConstraintName = string.Empty;
@@ -241,7 +241,7 @@ namespace FBXpert
             DataToEdit();
             OldConstraintName = txtConstraintName.Text.Trim();
             NewConstraintName = OldConstraintName;
-            
+
             //RefreshDependenciesTo();
             MakeSQL();
             SetAutocompeteObjects(_tables);
@@ -253,7 +253,7 @@ namespace FBXpert
             ac.CreateAutocompleteForDatabase();
             ac.AddProcedureCommands();
             ac.AddAutocompleteForSQL();
-            ac.AddAutocompleteForTables(tables);                        
+            ac.AddAutocompleteForTables(tables);
             ac.Activate();
         }
 
@@ -265,7 +265,7 @@ namespace FBXpert
 
         private void hotSpot2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Create()
@@ -275,21 +275,21 @@ namespace FBXpert
             //var _sql = new SQLScriptingClass(_dbReg,"SCRIPT",_localNotify);
             string _connstr = ConnectionStrings.Instance.MakeConnectionString(_dbReg);
             var _sql = new DBBasicClassLibrary.SQLScriptingClass(_connstr, AppSettingsClass.Instance.SQLVariables.GetNewLine(), AppSettingsClass.Instance.SQLVariables.CommentStart, AppSettingsClass.Instance.SQLVariables.CommentEnd, AppSettingsClass.Instance.SQLVariables.SingleLineComment, "SCRIPT");
-            var riList =_sql.ExecuteCommands(fctSQL.Lines); 
-          
-            var riFailure = riList.Find(x=>x.commandDone == false);                                    
-             OldConstraintName = NewConstraintName;
+            var riList = _sql.ExecuteCommands(fctSQL.Lines);
+
+            var riFailure = riList.Find(x => x.commandDone == false);
+            OldConstraintName = NewConstraintName;
             if (DataFilled) MakeSQL();
 
             AppStaticFunctionsClass.SendResultNotify(riList, _localNotify);
 
-            
-            string info = (riFailure==null) 
-                ? $@"NotNull {_dbReg.Alias}->{NewConstraintName} updated." 
+
+            string info = (riFailure == null)
+                ? $@"NotNull {_dbReg.Alias}->{NewConstraintName} updated."
                 : $@"NotNull {_dbReg.Alias}->{NewConstraintName} not updated !!!{Environment.NewLine}{riFailure.nErrors} errors, last error:{riFailure.lastError}";
-                                            
-            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info,StaticVariablesClass.ReloadIndex,$@"->Proc:{Name}->Create");
-            _localNotify.Notify.RaiseInfo(info);  
+
+            DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadIndex, $@"->Proc:{Name}->Create");
+            _localNotify.Notify.RaiseInfo(info);
         }
 
         string NewConstraintName = string.Empty;
@@ -306,7 +306,7 @@ namespace FBXpert
         {
             NewTableName = cbTable.Text;
             if (DataFilled)
-            {                
+            {
                 MakeSQL();
             }
         }
@@ -322,7 +322,7 @@ namespace FBXpert
             }
         }
 
-       
+
 
         private void lvFields_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -365,7 +365,7 @@ namespace FBXpert
         }
 
         private void rbCheckedChanged(object sender, EventArgs e)
-        {           
+        {
             if (DataFilled)
             {
                 MakeSQL();
@@ -394,20 +394,20 @@ namespace FBXpert
 
         private void hsCreate_Click(object sender, EventArgs e)
         {
-             Create();
+            Create();
         }
 
         private void hsSaveSQL_Click(object sender, EventArgs e)
         {
-             if(saveSQLFile.ShowDialog() != DialogResult.OK) return;
-            
-             fctSQL.SaveToFile(saveSQLFile.FileName,Encoding.UTF8);       
+            if (saveSQLFile.ShowDialog() != DialogResult.OK) return;
+
+            fctSQL.SaveToFile(saveSQLFile.FileName, Encoding.UTF8);
         }
 
         private void hsLoadSQL_Click(object sender, EventArgs e)
         {
-            if(ofdSQL.ShowDialog() != DialogResult.OK) return;            
-            fctSQL.OpenFile(ofdSQL.FileName);      
+            if (ofdSQL.ShowDialog() != DialogResult.OK) return;
+            fctSQL.OpenFile(ofdSQL.FileName);
         }
-    }    
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace FBXpert.DataClasses
+﻿namespace FBXpert.DataClasses
 {
     public class EncodingClass
     {
@@ -14,6 +12,6 @@ namespace FBXpert.DataClasses
         {
             encoding = enc;
         }
-        
+
     }
 }

@@ -1140,6 +1140,7 @@ namespace FBXpert
            // var dblist = DatabaseDefinitions.Instance.Databases.ToArray();
            
             var sf2 = new SQLViewForm2(drc2, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
+            if (sf2.IsDisposed) return;
             sf2.Show();            
         }
 

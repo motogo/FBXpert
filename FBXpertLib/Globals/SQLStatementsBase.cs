@@ -5,25 +5,25 @@ namespace FBXpertLib
 {
     public class SQLStatementsBase
     {
-    
-        public  eDBVersion Version = eDBVersion.FB3_32;
-        
-        
+
+        public eDBVersion Version = eDBVersion.FB3_32;
+
+
 
         public SQLStatementsBase()
         {
-           
+
         }
 
-        
-        public SQLCommandsReturnInfoClass ExecSql( string cmd, DBRegistrationClass DBReg, NotifiesClass localNotify)
+
+        public SQLCommandsReturnInfoClass ExecSql(string cmd, DBRegistrationClass DBReg, NotifiesClass localNotify)
         {
             var SQLcommand = new SQLCommandsClass(DBReg);
             SQLcommand.SetEncoding("NONE");
-            var ri = SQLcommand.ExecuteCommand(cmd,true);
+            var ri = SQLcommand.ExecuteCommand(cmd, true);
             if (!ri.commandDone)
             {
-                string errorStr  = AppStaticFunctionsClass.GetErrorCodeString(ri.lastError,DBReg);                
+                string errorStr = AppStaticFunctionsClass.GetErrorCodeString(ri.lastError, DBReg);
                 localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"FieldForm->ExecuteCommand", $@"{cmd}->{errorStr}"));
             }
             else
@@ -33,5 +33,5 @@ namespace FBXpertLib
             return ri;
         }
     }
-   
+
 }

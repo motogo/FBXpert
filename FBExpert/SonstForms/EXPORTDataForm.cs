@@ -16,11 +16,11 @@ using System.Windows.Forms;
 namespace FBExpert
 {
     public partial class EXPORTDataForm : INormalForm
-    {                      
+    {
         TableClass TableObject = null;
-        
-        DBRegistrationClass DBReg = null;        
-        NotifiesList Notifies=new NotifiesList();                
+
+        DBRegistrationClass DBReg = null;
+        NotifiesList Notifies = new NotifiesList();
         NotifiesClass localNotify = null;
         string PkColumnName = string.Empty;
         string cmd = string.Empty;
@@ -35,7 +35,7 @@ namespace FBExpert
         {
             DBReg = drc;
         }
-       
+
         public EXPORTDataForm(Form parent, DBRegistrationClass drc)
         {
             InitializeComponent();
@@ -48,9 +48,9 @@ namespace FBExpert
             };
             localNotify.Register4Info(InfoRaised);
             localNotify.Register4Error(ErrorRaised);
-                             
+
             DBReg = drc;
-            
+
             var viewobjects = StaticDatabaseObjects.Instance().GetViewObjects(DBReg);
             var tableObjects = StaticDatabaseObjects.Instance().GetAllNonSystemTableObjectsComplete(DBReg);
             var domainObjects = StaticDatabaseObjects.Instance().GetDomainObjects(DBReg);
@@ -61,10 +61,10 @@ namespace FBExpert
             var procedureObjects = StaticDatabaseObjects.Instance().GetProcedureObjects(DBReg);
             var functionObjects = StaticDatabaseObjects.Instance().GetInternalFunctionObjects(DBReg);
             if (tableObjects.Count <= 0) return;
-           
+
             foreach (var tc in tableObjects.Values)
             {
-               selTables.Add(tc.ToString(), CheckState.Unchecked, tc);
+                selTables.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
 
             selTables.CheckChecks();
@@ -87,53 +87,53 @@ namespace FBExpert
 
             foreach (var tc in domainObjects.Values)
             {
-                if ((tc.ToString().StartsWith("RDB$"))|| (tc.ToString().StartsWith("SEC$")) || (tc.ToString().StartsWith("MON$"))) continue;                
-                selDomains.Add(tc.ToString(), CheckState.Unchecked, tc);                   
+                if ((tc.ToString().StartsWith("RDB$")) || (tc.ToString().StartsWith("SEC$")) || (tc.ToString().StartsWith("MON$"))) continue;
+                selDomains.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
 
             selDomains.CheckChecks();
 
             foreach (var tc in generatorObjects.Values)
             {
-                if ((tc.ToString().StartsWith("RDB$")) || (tc.ToString().StartsWith("SEC$")) || (tc.ToString().StartsWith("MON$"))) continue;                
-                selGenerators.Add(tc.ToString(), CheckState.Unchecked, tc);                   
+                if ((tc.ToString().StartsWith("RDB$")) || (tc.ToString().StartsWith("SEC$")) || (tc.ToString().StartsWith("MON$"))) continue;
+                selGenerators.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
             selGenerators.CheckChecks();
 
 
             foreach (var tc in triggerObjects.Values)
-            {                
-                selTriggerStructure.Add(tc.ToString(), CheckState.Unchecked, tc);                
+            {
+                selTriggerStructure.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
 
             selTriggerStructure.CheckChecks();
-            
+
 
             foreach (var tc in indecesObjects.Values)
-            {                
-                selIndeces.Add(tc.ToString(), CheckState.Unchecked, tc);                
+            {
+                selIndeces.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
 
             selIndeces.CheckChecks();
 
             foreach (var tc in procedureObjects.Values)
-            {                
-                selProceduresStructure.Add(tc.ToString(), CheckState.Unchecked, tc);                
+            {
+                selProceduresStructure.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
             selProceduresStructure.CheckChecks();
 
             foreach (var tc in functionObjects.Values)
-            {                
-                selFunctionsStructure.Add(tc.ToString(), CheckState.Unchecked, tc);                
+            {
+                selFunctionsStructure.Add(tc.ToString(), CheckState.Unchecked, tc);
             }
             selFunctionsStructure.CheckChecks();
-            
+
             var itm = selTables.ItemDatas[0] as ItemDataClass;
             TableObject = itm.Object as TableClass;
 
             selExportStructureList.AllowMultipleChecks = true;
 
-            selExportStructureList.Add("Domains", CheckState.Checked,new DomainClass());
+            selExportStructureList.Add("Domains", CheckState.Checked, new DomainClass());
             selExportStructureList.Add("UDFs", CheckState.Checked, new UserDefinedFunctionClass());
             selExportStructureList.Add("Generators", CheckState.Checked, new GeneratorClass());
             selExportStructureList.Add("Procedures", CheckState.Checked, new ProcedureClass());
@@ -155,7 +155,7 @@ namespace FBExpert
             selExportStructureList.Add("View descriptions", CheckState.Checked, new object());
             selExportStructureList.Add("View field descriptions", CheckState.Checked, new object());
             selExportStructureList.Add("Index descriptions", CheckState.Checked, new object());
-            selExportStructureList.Add("Trigger descriptions", CheckState.Checked, new object());                                                
+            selExportStructureList.Add("Trigger descriptions", CheckState.Checked, new object());
             selExportStructureList.Add("Procedure parameter descriptions", CheckState.Checked, new object());
         }
 
@@ -168,12 +168,12 @@ namespace FBExpert
         {
             throw new NotImplementedException();
         }
-        
+
         private void hsClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-        
+
         public void ShowCaptions()
         {
             lblTableName.Text = (TableObject != null) ? $@"Export Table: {TableObject.Name}" : "Export Table";
@@ -184,7 +184,7 @@ namespace FBExpert
         {
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlTableUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlUpperExportStructureObjects.Height = AppSizeConstants.UpperFormBandHeight+44;
+            pnlUpperExportStructureObjects.Height = AppSizeConstants.UpperFormBandHeight + 44;
             pnlStructureObjectsUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlTableFieldsUpper.Height = AppSizeConstants.UpperFormBandHeight;
         }
@@ -203,7 +203,7 @@ namespace FBExpert
             cbCharSet.Items.Add(new EncodingClass(Encoding.ASCII));
             cbCharSet.Items.Add(new EncodingClass(Encoding.Default));
             cbCharSet.Items.Add(new EncodingClass(Encoding.Unicode));
-            
+
             cbCharSet.SelectedIndex = 0;
             gbCharset.Enabled = cbExportToFile.Checked;
             gbFileName.Enabled = cbExportToFile.Checked;
@@ -211,27 +211,27 @@ namespace FBExpert
 
             ClearDevelopDesign(FbXpertMainForm.Instance().DevelopDesign);
             SetDesign(FbXpertMainForm.Instance().AppDesign);
-            
+
         }
-                            
+
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             firsttab = StaticPaintClass.TabControl_DrawItem(this, e, sender, firsttab);
         }
-        
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             firsttab = false;
-            if(tabControl.SelectedTab == tabTableExports)
+            if (tabControl.SelectedTab == tabTableExports)
             {
                 hsExportTable.Text = "Export Tables";
             }
-            else if(tabControl.SelectedTab == tabExtExports)
+            else if (tabControl.SelectedTab == tabExtExports)
             {
                 hsExportTable.Text = "Export Extented";
             }
         }
-       
+
         private void hsExport_Click(object sender, EventArgs e)
         {
             var ew = new ExportWorkers(NotifiesClass.Instance)
@@ -241,68 +241,68 @@ namespace FBExpert
             ew.alltables.Clear();
             ew.AktDBReg = DBReg;
             ew.ShowScripting = cbViewInScript.Checked;
-            if(ckWriteFileForEVeryObject.Checked)
+            if (ckWriteFileForEVeryObject.Checked)
             {
-              ew.WriteToFile = eSQLFileWriteMode.seperated;
+                ew.WriteToFile = eSQLFileWriteMode.seperated;
             }
-            else if(cbObjectExportToFile.Checked)
+            else if (cbObjectExportToFile.Checked)
             {
-              ew.WriteToFile = eSQLFileWriteMode.all;
+                ew.WriteToFile = eSQLFileWriteMode.all;
             }
-            
+
             if (ew.WriteToFile != eSQLFileWriteMode.none)
             {
                 if ((txtFileName.Text.IndexOf(".", StringComparison.Ordinal)) < 0) txtFileName.Text += ".sql";
-                
+
                 ew.SQLDirectoryName = txtExportDirectory.Text;
                 ew.SQLFileName = txtFileName.Text;
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
-            }            
+            }
             else
             {
                 ew.SQLDirectoryName = string.Empty;
                 ew.SQLFileName = string.Empty;
             }
 
-          
-            for(int i = 0; i <  selTables.ItemDatas.Count; i++)
+
+            for (int i = 0; i < selTables.ItemDatas.Count; i++)
             {
                 var itm = selTables.ItemDatas[i] as ItemDataClass;
                 var tc = itm.Object as TableClass;
                 tc.State = selTables.GetItemCheckState(i);
-                if (tc.State != CheckState.Checked) continue;                                 
-                ew.alltables.Add(tc);                                    
+                if (tc.State != CheckState.Checked) continue;
+                ew.alltables.Add(tc);
             }
-          
+
             ew.StartworkerGetTableData(ew.alltables, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
         }
-        
+
         private void EXPORTDataForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
             if (localNotify == null) return;
-            
+
             localNotify.Notify.OnRaiseInfoHandler -= new NotifyInfos.RaiseNotifyHandler(InfoRaised);
             localNotify.Notify.OnRaiseErrorHandler -= new NotifyInfos.RaiseNotifyHandler(ErrorRaised);
-            localNotify = null;               
+            localNotify = null;
         }
-                                            
+
         public TableFieldClass FindField(string fname)
         {
             foreach (TableFieldClass str in TableObject.Fields.Values)
             {
-                if(str.Name == fname) return str;                   
+                if (str.Name == fname) return str;
             }
             return null;
         }
-        
-        
+
+
         private void hsCheckAllTables_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
             Application.DoEvents();
-           
-            selTables.CheckChecks();            
+
+            selTables.CheckChecks();
             for (int i = 0; i < selTables.ItemDatas.Count; i++)
             {
                 var itm = selTables.ItemDatas[i] as ItemDataClass;
@@ -310,11 +310,11 @@ namespace FBExpert
                 selFields.ClearItems();
                 foreach (var fld in tc.Fields.Values)
                 {
-                    selFields.Add(fld.ToString(),fld.State,fld);
+                    selFields.Add(fld.ToString(), fld.State, fld);
                 }
-                selFields.CheckChecks();               
-            }                       
-                    
+                selFields.CheckChecks();
+            }
+
         }
 
         private void hsUncheckAlltables_Click(object sender, EventArgs e)
@@ -339,7 +339,7 @@ namespace FBExpert
 
         private void hsCheckAllTableFields_Click(object sender, EventArgs e)
         {
-            selFields.CheckChecks();            
+            selFields.CheckChecks();
         }
 
         private void hsUncheckAllTableFields_Click(object sender, EventArgs e)
@@ -361,11 +361,11 @@ namespace FBExpert
             }
             */
         }
-        
+
         private void hsFileSelect_Click(object sender, EventArgs e)
         {
-           
-           // sfdFile.InitialDirectory = di.FullName;
+
+            // sfdFile.InitialDirectory = di.FullName;
             if (sfdFile.ShowDialog() == DialogResult.OK)
             {
                 txtFileName.Text = sfdFile.FileName;
@@ -475,16 +475,16 @@ namespace FBExpert
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selStructureTables.CheckChecks();            
+            selStructureTables.CheckChecks();
         }
 
         private void hsUnselectStructureObjects_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selStructureTables.ClearChecks();            
+            selStructureTables.ClearChecks();
         }
-        
+
         private void hsExportStructure_Click(object sender, EventArgs e)
         {
             var ew = new ExportWorkers(NotifiesClass.Instance)
@@ -505,13 +505,13 @@ namespace FBExpert
             ew.allDomains = new Dictionary<string, DomainClass>();
             ew.allDomains.Clear();
 
-            ew.allGenerator = new Dictionary<string,GeneratorClass>();
+            ew.allGenerator = new Dictionary<string, GeneratorClass>();
             ew.allGenerator.Clear();
 
-            ew.allTrigger = new Dictionary<string,TriggerClass>();
+            ew.allTrigger = new Dictionary<string, TriggerClass>();
             ew.allTrigger.Clear();
 
-            ew.allIndeces = new Dictionary<string,IndexClass>();
+            ew.allIndeces = new Dictionary<string, IndexClass>();
             ew.allIndeces.Clear();
 
             ew.allProcedures = new Dictionary<string, ProcedureClass>();
@@ -520,42 +520,42 @@ namespace FBExpert
             ew.allFunctions = new Dictionary<string, FunctionClass>();
             ew.allFunctions.Clear();
 
-            ew.AktDBReg             = DBReg;
-            ew.ShowScripting        = cbViewObjectScript.Checked;
-            ew.WriteToFile          = eSQLFileWriteMode.none;
-            ew.SQLDirectoryName     = string.Empty;
-            ew.SQLFileName          = string.Empty;
+            ew.AktDBReg = DBReg;
+            ew.ShowScripting = cbViewObjectScript.Checked;
+            ew.WriteToFile = eSQLFileWriteMode.none;
+            ew.SQLDirectoryName = string.Empty;
+            ew.SQLFileName = string.Empty;
 
-            if(ckWriteFileForEVeryObject.Checked)
+            if (ckWriteFileForEVeryObject.Checked)
             {
-              ew.WriteToFile = eSQLFileWriteMode.seperated;
+                ew.WriteToFile = eSQLFileWriteMode.seperated;
             }
-            else if(cbObjectExportToFile.Checked)
+            else if (cbObjectExportToFile.Checked)
             {
-              ew.WriteToFile = eSQLFileWriteMode.all;
+                ew.WriteToFile = eSQLFileWriteMode.all;
             }
 
-            ew.CommitAfterStatement         = cbStructureCommit.Checked;
-            ew.CreateConnectionStatement    = cbStructureConnectiionStatement.Checked;
-            ew.CreateDatabaseStatement      = cbStructureCreateDatabaseStatement.Checked;
-            ew.CreateMode                   = (rbCREATEObject.Checked) ? eCreateMode.create : eCreateMode.recreate;
-                                         
+            ew.CommitAfterStatement = cbStructureCommit.Checked;
+            ew.CreateConnectionStatement = cbStructureConnectiionStatement.Checked;
+            ew.CreateDatabaseStatement = cbStructureCreateDatabaseStatement.Checked;
+            ew.CreateMode = (rbCREATEObject.Checked) ? eCreateMode.create : eCreateMode.recreate;
+
             if (ew.WriteToFile != eSQLFileWriteMode.none)
             {
                 if ((txtFileName.Text.IndexOf(".")) < 0) txtFileName.Text += ".sql";
-                
+
                 ew.SQLDirectoryName = txtExportDirectory.Text;
                 ew.SQLFileName = txtFileName.Text;
                 ew.CharSet = cbCharSet.SelectedItem as EncodingClass;
-            }                        
-            
-            
+            }
+
+
             ew.StartworkerGetDatabaseStructure(DBReg, ew.SQLDirectoryName, ew.SQLFileName);
 
             foreach (var itm in selExportStructureList.CheckedItemDatasNotNulls)
-            {                
+            {
                 if (itm.Object.GetType() == typeof(TableClass))
-                {                    
+                {
                     ew.alltables.AddRange(ExportTableStructure(ew));
                     ew.StartworkerGetTableStructure(ew.alltables, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
@@ -593,31 +593,31 @@ namespace FBExpert
                 {
                     ExportTriggerStructure(ew);
                     ew.StartworkerGetTriggerStructure(ew.allTrigger, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
-                }                                
+                }
                 else if (itm.Object.GetType() == typeof(ProcedureClass))
                 {
                     ExportProcedureStructure(ew);
                     ew.StartworkerGetProcedureDefinitionStructure(ew.allProcedures, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
-                   
+
                     ew.StartworkerGetProcedureStructure(ew.allProcedures, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
-                } 
+                }
                 else if (itm.Object.GetType() == typeof(FunctionClass))
                 {
                     ExportFunctionStructure(ew);
                     ew.StartworkerGetFunctionDefinitionStructure(ew.allFunctions, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
-                   
+
                     ew.StartworkerGetFunctionStructure(ew.allFunctions, DBReg, ew.SQLDirectoryName, ew.SQLFileName);
                 }
             }
 
             ew.WaitForWorker();
 
-            if(ew.ShowScripting)
+            if (ew.ShowScripting)
             {
-              ew.MakeScript();
+                ew.MakeScript();
             }
             NotificationsForm.Instance().Close();
-            
+
         }
 
         private List<TableClass> ExportTableStructure(ExportWorkers ew)
@@ -625,14 +625,14 @@ namespace FBExpert
             var allt = new List<TableClass>();
             for (int i = 0; i < selStructureTables.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selStructureTables.ItemDatas[i];
+                var itm = (ItemDataClass)selStructureTables.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;                
-                if (tc?.GetType() != typeof(TableClass)) continue;                
-                var ttc = (TableClass) tc;                
-                ttc.State = selStructureTables.GetItemCheckState(i);                
-                if (ttc.State != CheckState.Checked) continue;                                                                                                                                                                
-                allt.Add(ttc);             
+                var tc = (DataObjectClass)itm.Object;
+                if (tc?.GetType() != typeof(TableClass)) continue;
+                var ttc = (TableClass)tc;
+                ttc.State = selStructureTables.GetItemCheckState(i);
+                if (ttc.State != CheckState.Checked) continue;
+                allt.Add(ttc);
             }
             return allt;
         }
@@ -642,14 +642,14 @@ namespace FBExpert
             var allv = new List<ViewClass>();
             for (var i = 0; i < selStructureViews.ItemDatas.Count; i++)
             {
-                var itm = (ItemDataClass) selStructureViews.ItemDatas[i];
+                var itm = (ItemDataClass)selStructureViews.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;
-                if (tc?.GetType() != typeof(ViewClass)) continue;                                                                
-                var tvc = (ViewClass) tc;
-                tvc.State = selStructureViews.GetItemCheckState(i);                
-                if (tvc.State != CheckState.Checked)  continue;                
-                allv.Add(tvc);                                                                                        
+                var tc = (DataObjectClass)itm.Object;
+                if (tc?.GetType() != typeof(ViewClass)) continue;
+                var tvc = (ViewClass)tc;
+                tvc.State = selStructureViews.GetItemCheckState(i);
+                if (tvc.State != CheckState.Checked) continue;
+                allv.Add(tvc);
             }
             return allv;
         }
@@ -658,14 +658,14 @@ namespace FBExpert
         {
             for (var i = 0; i < selDomains.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selDomains.ItemDatas[i];
-                if (itm == null) continue;                
-                var tc = itm.Object as DataObjectClass;                
-                if (tc?.GetType() != typeof(DomainClass)) continue;                
-                var tdc = tc as DomainClass;                
-                tdc.State = selDomains.GetItemCheckState(i);                
-                if (tdc.State != CheckState.Checked) continue;                                                     
-                ew.allDomains.Add(tdc.Name,tdc);                                                                                              
+                var itm = (ItemDataClass)selDomains.ItemDatas[i];
+                if (itm == null) continue;
+                var tc = itm.Object as DataObjectClass;
+                if (tc?.GetType() != typeof(DomainClass)) continue;
+                var tdc = tc as DomainClass;
+                tdc.State = selDomains.GetItemCheckState(i);
+                if (tdc.State != CheckState.Checked) continue;
+                ew.allDomains.Add(tdc.Name, tdc);
             }
         }
 
@@ -673,14 +673,14 @@ namespace FBExpert
         {
             for (var i = 0; i < selGenerators.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selGenerators.ItemDatas[i];
+                var itm = (ItemDataClass)selGenerators.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;                
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(GeneratorClass)) continue;
-                var tgc = (GeneratorClass) tc;                
+                var tgc = (GeneratorClass)tc;
                 tgc.State = selGenerators.GetItemCheckState(i);
-                if (tgc.State != CheckState.Checked) continue;               
-                ew.allGenerator.Add(tgc.Name,tgc);                                                                  
+                if (tgc.State != CheckState.Checked) continue;
+                ew.allGenerator.Add(tgc.Name, tgc);
             }
         }
 
@@ -688,14 +688,14 @@ namespace FBExpert
         {
             for (int i = 0; i < selTriggerStructure.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selTriggerStructure.ItemDatas[i];
+                var itm = (ItemDataClass)selTriggerStructure.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;               
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(TriggerClass)) continue;
-                var ttc = (TriggerClass) tc;                
-                ttc.State = selTriggerStructure.GetItemCheckState(i);              
-                if (ttc.State != CheckState.Checked) continue;                                
-                ew.allTrigger.Add(ttc.Name,ttc);                                
+                var ttc = (TriggerClass)tc;
+                ttc.State = selTriggerStructure.GetItemCheckState(i);
+                if (ttc.State != CheckState.Checked) continue;
+                ew.allTrigger.Add(ttc.Name, ttc);
             }
         }
 
@@ -703,14 +703,14 @@ namespace FBExpert
         {
             for (int i = 0; i < selProceduresStructure.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selProceduresStructure.ItemDatas[i];
+                var itm = (ItemDataClass)selProceduresStructure.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;               
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(ProcedureClass)) continue;
-                var ttc = (ProcedureClass) tc;                
-                ttc.State = selProceduresStructure.GetItemCheckState(i);              
-                if (ttc.State != CheckState.Checked) continue;                                
-                ew.allProcedures.Add(ttc.Name,ttc);                                
+                var ttc = (ProcedureClass)tc;
+                ttc.State = selProceduresStructure.GetItemCheckState(i);
+                if (ttc.State != CheckState.Checked) continue;
+                ew.allProcedures.Add(ttc.Name, ttc);
             }
         }
 
@@ -718,14 +718,14 @@ namespace FBExpert
         {
             for (int i = 0; i < selFunctionsStructure.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selFunctionsStructure.ItemDatas[i];
+                var itm = (ItemDataClass)selFunctionsStructure.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;               
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(FunctionClass)) continue;
-                var ttc = (FunctionClass) tc;                
-                ttc.State = selFunctionsStructure.GetItemCheckState(i);              
-                if (ttc.State != CheckState.Checked) continue;                                
-                ew.allFunctions.Add(ttc.Name,ttc);                                
+                var ttc = (FunctionClass)tc;
+                ttc.State = selFunctionsStructure.GetItemCheckState(i);
+                if (ttc.State != CheckState.Checked) continue;
+                ew.allFunctions.Add(ttc.Name, ttc);
             }
         }
 
@@ -735,14 +735,14 @@ namespace FBExpert
         {
             for (var i = 0; i < selIndeces.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selIndeces.ItemDatas[i];
+                var itm = (ItemDataClass)selIndeces.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;                
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(IndexClass)) continue;
-                var tci = (IndexClass) tc;                
+                var tci = (IndexClass)tc;
                 tci.State = selIndeces.GetItemCheckState(i);
-                if (tci.State != CheckState.Checked) continue;                                 
-                ew.allIndeces.Add(tci.Name,tci);                             
+                if (tci.State != CheckState.Checked) continue;
+                ew.allIndeces.Add(tci.Name, tci);
             }
         }
 
@@ -750,14 +750,14 @@ namespace FBExpert
         {
             for (var i = 0; i < selStructureTables.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selStructureTables.ItemDatas[i];
+                var itm = (ItemDataClass)selStructureTables.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = (DataObjectClass) itm.Object;                
+                var tc = (DataObjectClass)itm.Object;
                 if (tc?.GetType() != typeof(TableClass)) continue;
-                var ttc = (TableClass) tc;               
+                var ttc = (TableClass)tc;
                 ttc.State = selStructureTables.GetItemCheckState(i);
-                if ((ttc.State != CheckState.Checked) || (ttc.primary_constraint == null)) continue;                    
-                ew.allPKConstraints.Add(ttc.Name,ttc.primary_constraint);                                                       
+                if ((ttc.State != CheckState.Checked) || (ttc.primary_constraint == null)) continue;
+                ew.allPKConstraints.Add(ttc.Name, ttc.primary_constraint);
             }
         }
 
@@ -765,38 +765,38 @@ namespace FBExpert
         {
             for (var i = 0; i < selStructureTables.ItemDatasNotNulls.Count; i++)
             {
-                var itm = (ItemDataClass) selStructureTables.ItemDatas[i];
+                var itm = (ItemDataClass)selStructureTables.ItemDatas[i];
                 if (itm == null) continue;
-                var tc = itm.Object as DataObjectClass;                
+                var tc = itm.Object as DataObjectClass;
                 if (tc?.GetType() != typeof(TableClass)) continue;
-                var tcc = (TableClass) tc;                
+                var tcc = (TableClass)tc;
                 tcc.State = selStructureTables.GetItemCheckState(i);
-                if ((tcc.State != CheckState.Checked)|| (tcc.ForeignKeys == null)) continue;
+                if ((tcc.State != CheckState.Checked) || (tcc.ForeignKeys == null)) continue;
                 foreach (var fk in tcc.ForeignKeys.Values)
                 {
-                    if (fk == null) continue;                        
-                    ew.allFKConstraints.Add(fk.Name,fk);                                                                                                   
-                }                             
+                    if (fk == null) continue;
+                    ew.allFKConstraints.Add(fk.Name, fk);
+                }
             }
         }
-        
+
         private void hsSelectAllViews_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selStructureViews.CheckChecks();            
+            selStructureViews.CheckChecks();
         }
 
         private void hsUnselectAllViews_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selStructureViews.ClearChecks();            
+            selStructureViews.ClearChecks();
         }
-        
+
         private void selStructureTables_SelectItem(object sender, SEListBox.SelectItemEventArgs e)
         {
-            int i = e.RowIndex;            
+            int i = e.RowIndex;
         }
 
         private void SelectAllTableFields()
@@ -834,23 +834,23 @@ namespace FBExpert
             if (itm.Check == CheckState.Checked) ob.State = CheckState.Unchecked;
             else ob.State = CheckState.Checked;
         }
-        
+
         private void selTables_ItemCheckChanged(object sender, SEListBox.CheckItemEventArgs e)
-        {            
+        {
             var itm = selTables.ItemDatas[e.RowIndex] as ItemDataClass;
             var tc = itm.Object as TableClass;
             selFields.ClearItems();
             foreach (var fld in tc.Fields.Values)
             {
                 selFields.Add(fld.ToString(), itm.Check, fld);
-            }           
+            }
         }
 
         private void selFields_ItemCheckChanged(object sender, CheckItemEventArgs e)
-        {            
+        {
             var itm = selFields.ItemDatas[e.RowIndex] as ItemDataClass;
             var tc = itm.Object as TableFieldClass;
-            tc.State = itm.Check;            
+            tc.State = itm.Check;
         }
 
         private void hotSpot4_Click_1(object sender, EventArgs e)
@@ -887,19 +887,19 @@ namespace FBExpert
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selExportStructureList.CheckChecks();      
+            selExportStructureList.CheckChecks();
         }
 
         private void hotSpot15_Click(object sender, EventArgs e)
         {
             Thread.Sleep(20);
             Application.DoEvents();
-            selExportStructureList.ClearChecks();      
+            selExportStructureList.ClearChecks();
         }
 
         private void hsExportFolder_Click(object sender, EventArgs e)
         {
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtExportDirectory.Text = folderBrowserDialog1.SelectedPath;
             }

@@ -7,13 +7,13 @@ using System.Windows.Forms;
 namespace FBXpert.SonstForms
 {
     public partial class AppSettingsForm
-    {                   
+    {
         public AppSettingsForm(Form parent)
         {
             InitializeComponent();
-            MdiParent = parent;            
-        }        
-       
+            MdiParent = parent;
+        }
+
         private void hsClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -21,7 +21,7 @@ namespace FBXpert.SonstForms
 
         public void SetEnables()
         {
-            
+
         }
 
         public void DataToEdit()
@@ -54,13 +54,13 @@ namespace FBXpert.SonstForms
         public void EditToData()
         {
             AppSettingsClass.Instance.Stamp = DateTime.Now;
-            AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize = (int) numDefaultPacketSize.Value;
-            AppSettingsClass.Instance.DatabaseSettings.DefaultPort = (int) numDefaultPort.Value;
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPacketSize = (int)numDefaultPacketSize.Value;
+            AppSettingsClass.Instance.DatabaseSettings.DefaultPort = (int)numDefaultPort.Value;
             AppSettingsClass.Instance.DatabaseSettings.DefaultPassword = txtDefaultPassword.Text;
             AppSettingsClass.Instance.DatabaseSettings.DefaultUser = txtDefaulUser.Text;
             AppSettingsClass.Instance.DatabaseSettings.OpenDatabaseCount = (int)numOpenDatabaseCount.Value;
             AppSettingsClass.Instance.PathSettings.DatabasesConfigPath = txtDatabasesConfigPath.Text;
-           
+
             AppSettingsClass.Instance.PathSettings.TempPath = txtTemporaryPath.Text;
             AppSettingsClass.Instance.PathSettings.ScriptingPath = txtScriptingPath.Text;
             AppSettingsClass.Instance.PathSettings.DatabaseConfigFile = txtDatabasesConfigFile.Text;
@@ -93,7 +93,7 @@ namespace FBXpert.SonstForms
             FormDesign.SetFormLeft(this);
             this.Text = $@"App settings file:{AppSettingsClass.Instance.Path}";
             DataToEdit();
-            SetEnables();            
+            SetEnables();
         }
 
         private void SaveAppSettings()
@@ -101,12 +101,12 @@ namespace FBXpert.SonstForms
             EditToData();
             AppSettingsClass.Instance.SaveSettings(true);
         }
-      
+
         private void hsSave_Click(object sender, EventArgs e)
         {
             EditToData();
             SaveAppSettings();
-        }        
+        }
 
         private void hsScriptingPath_Click(object sender, EventArgs e)
         {
@@ -127,14 +127,14 @@ namespace FBXpert.SonstForms
             fbdPath.SelectedPath = txtDatabasesConfigPath.Text;
             if (fbdPath.ShowDialog() == DialogResult.OK)
             {
-              txtDatabasesConfigPath.Text = fbdPath.SelectedPath;
+                txtDatabasesConfigPath.Text = fbdPath.SelectedPath;
             }
         }
 
         private void hsDatabaseConfigFile_Click(object sender, EventArgs e)
         {
             ofdFiles.InitialDirectory = txtDatabasesConfigPath.Text;
-            if(ofdFiles.ShowDialog() == DialogResult.OK)
+            if (ofdFiles.ShowDialog() == DialogResult.OK)
             {
                 txtDatabasesConfigFile.Text = ofdFiles.FileName;
             }
