@@ -149,10 +149,10 @@ namespace FBXpert
 
         private void NotifyInf_DBExplorer(object sender, MessageEventArgs k)
         {                   
-            var typ = k.Key.GetType();
+            var typ = k.Data?.GetType();
             if (typ == typeof(DBRegistrationClass))
             {
-                RemakeDatabaseTree(k.Key as DBRegistrationClass);
+                RemakeDatabaseTree(k.Data as DBRegistrationClass);
             }
             else if (k.Key.ToString() == StaticVariablesClass.DatabaseConfigDataSaved)
             {
@@ -367,7 +367,7 @@ namespace FBXpert
         {
             try
             {
-                DbExlorerNotify.Notify.RaiseInfo(Name+"->OpenActiveDatabases", StaticVariablesClass.StartLoadDatabases);
+                DbExlorerNotify.Notify.RaiseInfo($@"{Name}->OpenActiveDatabases", StaticVariablesClass.StartLoadDatabases);
                 tsmiCreateXMLDesign.Enabled = false;
                 SetCmsForDatabase(false);
                 treeView1.BeginUpdate();
@@ -378,7 +378,7 @@ namespace FBXpert
                     ReadDatabaseMetadata(nd);
                 }
                 treeView1.EndUpdate();
-                DbExlorerNotify.Notify.RaiseInfo(Name+"->OpenActiveDatabases", StaticVariablesClass.EndLoadDatabases);
+                DbExlorerNotify.Notify.RaiseInfo($@"{Name}->OpenActiveDatabases", StaticVariablesClass.EndLoadDatabases);
             }
             catch
             {
@@ -1205,11 +1205,10 @@ namespace FBXpert
                 Application.DoEvents();
                 ReadDatabaseMetadata(tnReg);
                 DatabaseDefinitions.Instance.DataState = EditStateClass.eDataState.UnSaved;
-                
             }
             else if (e.ClickedItem == tsmiStatistics)
             {
-                DbExlorerNotify.Notify.RaiseInfo("DBExplorer", "SHOW_DATABASE_STATISTICS", dbReg);
+                DbExlorerNotify.Notify.RaiseInfo("DBExplorer", StaticVariablesClass.ShowDatabaseStatistics, dbReg);
             }
             else if (e.ClickedItem == tsmiCreateXMLDesign)
             {
