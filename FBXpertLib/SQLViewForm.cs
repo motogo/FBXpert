@@ -62,7 +62,8 @@ namespace FBXpertLib.SQLView
             bool openok = TestOpen(_dbrRegLocal);
             if (!openok)
             {
-                SEMessageBox.ShowDialog("#Database Error", "#Databsase is not opened, check password", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);
+                string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal);
+                SEMessageBox.ShowDialog("#Database Error", $@"#Database is not opened.{Environment.NewLine}CONNECTION:{connectionString}{Environment.NewLine}check password", SEMessageBoxButtons.OK, SEMessageBoxIcon.Exclamation);
                 Close();
                 return;
             }
@@ -481,12 +482,16 @@ namespace FBXpertLib.SQLView
 
         public bool TestOpen(DBRegistrationClass dbReg)
         {
+            /*
             string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
             string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
 
             _sqLcommand.ReplaceConnection(server, path);
             _dbrRegLocal.Server = server;
             _dbrRegLocal.DatabasePath = path;
+            */
+            var conatt = (ConnectionAttributes)dbReg;
+            _sqLcommand.ReplaceConnection(conatt);
             string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal);
             string lifeTime = AppStaticFunctionsClass.GetLifetime(connectionString, (int)_dbrRegLocal.Version >= (int)eDBVersion.FB3_32);
             hsLifeTime.ToolTipActive = true;
@@ -516,6 +521,8 @@ namespace FBXpertLib.SQLView
             pnlPerformanceUpper.Height = AppSizeConstants.UpperFormBandHeight;
         }
 
+
+
         private void SQLViewForm_Load(object sender, EventArgs e)
         {
             FormEvents.DisableEvents(this, $@"SQLViewForm_Load(object {sender}, EventArgs e)");
@@ -537,12 +544,39 @@ namespace FBXpertLib.SQLView
             txtRowHeight.Text = dgvResults.RowTemplate.Height.ToString();
             txtSQL.Focus();
             SetEncoding();
+            if (tables.Count <= 0)
+            {
+                SetAutocompeteObjects();
+            }
+            else
+            {
+                SetAutocompeteObjects(tables,views);
+            }
 
-            SetAutocompeteObjects();
             FormEvents.EnableEvents(this);
 
         }
 
+        public Dictionary<string, TableClass> tables = new Dictionary<string, TableClass>();
+        public Dictionary<string, ViewClass> views = new Dictionary<string, ViewClass>();
+
+
+        public void SetAutocompeteObjects(Dictionary<string, TableClass> tables, Dictionary<string, ViewClass> views)
+        {
+            ac = new AutocompleteClass(txtSQL, _dbRegOrg);
+            ac.CreateAutocompleteForDatabase();
+            ac.AddAutocompleteForSQL();
+            ac.AddAutocompleteForTables(tables);
+            ac.AddAutocompleteForViews(views);
+            ac.Activate();
+
+            rt = new AutocompleteClass(txtExperienceInfo, _dbRegOrg);
+            rt.CreateAutocompleteForDatabase();
+            rt.AddAutocompleteForSQL();
+            rt.AddAutocompleteForTables(tables);
+            rt.AddAutocompleteForViews(views);
+            rt.Activate();
+        }
         public void SetAutocompeteObjects()
         {
 
@@ -1850,8 +1884,15 @@ CON> WHERE T.MON$ATTACHMENT_ID = CURRENT_CONNECTION;
             if (FormEvents.IsActive(this, "cbConnection_SelectedIndexChan->" + ((Control)sender).Name.ToString()))
             {
                 if (cbConnection.SelectedItem == null) return;
-                _dbrRegLocal = (DBRegistrationClass)cbConnection.SelectedItem;
-                TestOpen(_dbrRegLocal);
+                var dbrSelect = (DBRegistrationClass)cbConnection.SelectedItem;
+                if (_dbrRegLocal.Alias != dbrSelect.Alias)
+                {
+                    _dbrRegLocal = dbrSelect;
+                    tables.Clear();
+                    views.Clear();
+                }
+                if (TestOpen(_dbrRegLocal))
+                    SetAutocompeteObjects();
             }
         }
     }

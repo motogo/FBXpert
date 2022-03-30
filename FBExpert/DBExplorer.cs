@@ -1137,10 +1137,24 @@ namespace FBXpert
             drc2.Port = drc.Port;
             drc2.Pooling = drc.Pooling;
             drc2.CharSet = drc.CharSet;
+            drc2.ClientLibrary = drc.ClientLibrary;
+            drc2.Dialect = drc.Dialect;
+            drc2.Collation = drc.Collation;
+            drc2.PacketSize = drc.PacketSize;
+            drc2.Version = drc.Version;
+            drc2.Pooling = drc.Pooling;
            // var dblist = DatabaseDefinitions.Instance.Databases.ToArray();
            
             var sf2 = new SQLViewForm2(drc2, FbXpertMainForm.Instance(), FbXpertMainForm.Instance().AppDesign, FbXpertMainForm.Instance().DevelopDesign);
             if (sf2.IsDisposed) return;
+
+            Dictionary<string, TableClass> tlb  = new Dictionary<string, TableClass>();
+            foreach(TableClass t in actTables)
+            {
+                tlb.Add(t.Name, t);
+            }
+            sf2.tables = tlb;
+            sf2.views = _actViews;
             sf2.Show();            
         }
 
@@ -2367,10 +2381,16 @@ namespace FBXpert
 
         private void hsLoadDefinition_Click(object sender, EventArgs e)
         {
-            var fi = new FileInfo($@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}");
-            ofdLoadDefinition.InitialDirectory = fi.DirectoryName;
-            ofdLoadDefinition.FileName = fi.Name;
-            
+            try
+            {
+                var fi = new FileInfo($@"{AppSettingsClass.Instance.PathSettings.DatabasesConfigPath}\{AppSettingsClass.Instance.PathSettings.DatabaseConfigFile}");
+                ofdLoadDefinition.InitialDirectory = fi.DirectoryName;
+                ofdLoadDefinition.FileName = fi.Name;
+            }
+            catch
+            {
+
+            }
             if (ofdLoadDefinition.ShowDialog() != DialogResult.OK) return;
 
             var fi2 = new FileInfo(ofdLoadDefinition.FileName);

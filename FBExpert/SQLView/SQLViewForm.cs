@@ -473,12 +473,15 @@ namespace SQLView
             txtSQL.SaveToFile(sfdSQL.FileName, Encoding.UTF8);
         }
 
+        
+
+
         public bool TestOpen(DBRegistrationClass dbReg)
         {            
             string server = dbReg.MakeServerFromText(dbReg.DatabasePath);
             string path = dbReg.MakeDatabasepathFromText(dbReg.DatabasePath);
-
-            _sqLcommand.ReplaceConnection(server, path);
+            var conatt = (ConnectionAttributes)dbReg;
+            _sqLcommand.ReplaceConnection(conatt);
             _dbrRegLocal.Server = server;
             _dbrRegLocal.DatabasePath = path;
             string connectionString = ConnectionStrings.Instance.MakeConnectionString(_dbrRegLocal);
