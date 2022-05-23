@@ -890,7 +890,7 @@ namespace FBXpertLib
             sb.Append(AppStrings.Format(lvl + 1, "/// </summary>" + Nl));
             sb.Append(AppStrings.Format(lvl + 1, "///" + Nl));
             sb.Append(AppStrings.Format(lvl + 1, "[Serializable]" + Nl));
-            sb.Append(AppStrings.Format(lvl + 1, $@"public class {tc.Name}Class : TDataBasis{Nl}"));
+            sb.Append(AppStrings.Format(lvl + 1, $@"public sealed class {tc.Name}Class : TDataBasis{Nl}"));
             sb.Append(AppStrings.BlockStart(lvl + 1));
             sb.Append(Nl);
 
@@ -903,9 +903,9 @@ namespace FBXpertLib
             sb.Append(AppStrings.Format(lvl + 2, "public static string CsvEndLineSeperator = \";\";" + Nl));
             sb.Append(Nl);
 
-            sb.Append(AppStrings.Format(lvl + 2, "#region class TDataClass" + Nl));
+            sb.Append(AppStrings.Format(lvl + 2, "#region sealed class TDataClass" + Nl));
             sb.Append(AppStrings.Format(lvl + 2, "[Serializable]" + Nl));
-            sb.Append(AppStrings.Format(lvl + 2, "public class TDataClass : TMainData" + Nl));
+            sb.Append(AppStrings.Format(lvl + 2, "public sealed class TDataClass : TMainData" + Nl));
             sb.Append(AppStrings.BlockStart(lvl + 2));
             sb.Append(AppStrings.Format(lvl + 3, "public DisplayMembers DisplayMemberDef = new DisplayMembers(((int)eTDataClass.NO_FIELD) - 1);" + Nl));
             sb.Append(Nl);
@@ -1221,7 +1221,7 @@ namespace FBXpertLib
             sb.Append(AppStrings.Format(lvl + 1, $@"/// als Objekte darstellt und verwaltet.{Nl}"));
             sb.Append(AppStrings.Format(lvl + 1, $@"/// </summary>{Nl}"));
             sb.Append(AppStrings.Format(lvl + 1, $@"///{Nl}"));
-            sb.Append(AppStrings.Format(lvl + 1, $@"public class Cb{tc.Name}Class : SELibraries.WindowsForms.cbMainClass{Nl}"));
+            sb.Append(AppStrings.Format(lvl + 1, $@"public sealed class Cb{tc.Name}Class : SELibraries.WindowsForms.cbMainClass{Nl}"));
             sb.Append(AppStrings.BlockStart(lvl + 1));
             sb.Append(AppStrings.Format(lvl + 2, $@"private {tc.Name}Class DATA = new {tc.Name}Class(ConnectionPoolClass.Instance.GetConnection(GlobalsCon.MainCon));{Nl}"));
             sb.Append(Nl);

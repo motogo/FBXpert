@@ -254,7 +254,7 @@ namespace FBExpert
             if ((_connectionDataChanged) || (_dbReg.State != eRegState.update))
             {                
                 NotifiesClass.Instance.Notify.RaiseInfo($@"Configuration saved for {_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);
-                DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{_dbReg.Alias}->Proc:{Name}->SaveConfig",  StaticVariablesClass.DatabaseConfigDataSaved,(object) _dbReg);                
+                DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo($@"{_dbReg.Alias}->Proc:{Name}->SaveConfig", StaticVariablesClass.DatabaseConfigDataSaved, (object) _dbReg);                
                 _connectionDataChanged = false;
             }
 

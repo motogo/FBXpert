@@ -685,7 +685,7 @@ namespace FBExpert
             this.toolStripSeparator3,
             this.tsmiReadBLOB});
             this.cmdDATA.Name = "cmsText";
-            this.cmdDATA.Size = new System.Drawing.Size(189, 284);
+            this.cmdDATA.Size = new System.Drawing.Size(189, 262);
             this.cmdDATA.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmdDATA_ItemClicked);
             // 
             // tsmiSpaltenEdit
@@ -1266,6 +1266,7 @@ namespace FBExpert
             this.fctTableCreateDLL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctTableCreateDLL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctTableCreateDLL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctTableCreateDLL.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctTableCreateDLL.IsReplaceMode = false;
             this.fctTableCreateDLL.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctTableCreateDLL.LeftBracket = '(';
@@ -2532,6 +2533,7 @@ namespace FBExpert
             this.fctMessages.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctMessages.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fctMessages.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctMessages.IsReplaceMode = false;
             this.fctMessages.Language = FastColoredTextBoxNS.Language.SQL;
             this.fctMessages.LeftBracket = '(';
@@ -2681,6 +2683,7 @@ namespace FBExpert
             this.fcbExport.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fcbExport.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fcbExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fcbExport.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fcbExport.IsReplaceMode = false;
             this.fcbExport.Language = FastColoredTextBoxNS.Language.SQL;
             this.fcbExport.LeftBracket = '(';
@@ -3190,9 +3193,9 @@ namespace FBExpert
             // gnUsedTime
             // 
             this.gnUsedTime.Controls.Add(this.txtUsedTime);
-            this.gnUsedTime.Location = new System.Drawing.Point(371, 4);
+            this.gnUsedTime.Location = new System.Drawing.Point(308, 4);
             this.gnUsedTime.Name = "gnUsedTime";
-            this.gnUsedTime.Size = new System.Drawing.Size(116, 44);
+            this.gnUsedTime.Size = new System.Drawing.Size(179, 44);
             this.gnUsedTime.TabIndex = 7;
             this.gnUsedTime.TabStop = false;
             this.gnUsedTime.Text = "Used time (ms)";
@@ -3204,7 +3207,7 @@ namespace FBExpert
             this.txtUsedTime.Location = new System.Drawing.Point(3, 18);
             this.txtUsedTime.Name = "txtUsedTime";
             this.txtUsedTime.ReadOnly = true;
-            this.txtUsedTime.Size = new System.Drawing.Size(110, 22);
+            this.txtUsedTime.Size = new System.Drawing.Size(173, 22);
             this.txtUsedTime.TabIndex = 0;
             this.txtUsedTime.Text = "0";
             // 

@@ -471,4 +471,7 @@
   <data name="ListAlreadyContainsGroupName" xml:space="preserve">
     <value>List already contains group {0} and name {1}</value>
   </data>
+  <data name="DoYouWantToCreateDirectory" xml:space="preserve">
+    <value>Möchten Sie das Verzeichnis anlegen</value>
+  </data>
 </root>

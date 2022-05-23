@@ -21,6 +21,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -910,6 +911,58 @@ namespace FBExpert
             }
 
         }
+
+        private async Task<DataSet> RefreshDatasAsync(FbConnection _dataConnection, TableClass _tableObject1, DBRegistrationClass _dbReg, DataSet dsTableContent1, string cmd)
+        {
+            if (string.IsNullOrEmpty(_tableObject.Name)) return null;
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            await Task.Run(() =>
+            {
+                
+               
+
+               
+
+              //  long.TryParse(txtMaxRows.Text.Trim(), out long maxRows);
+
+                int errorsCnt = 0;
+               // int errorsAllowed = StaticFunctionsClass.ToIntDef(txtMaxAllowedErrors.Text, 0);
+                //GetDataWorker.ReportProgress(1, "Reading...");
+
+                if (_dataConnection?.State != System.Data.ConnectionState.Closed) _dataConnection?.Close();
+
+                _dataConnection = new FbConnection(ConnectionStrings.Instance.MakeConnectionString(_dbReg));
+                _dataConnection.Open();
+
+               
+                dsTableContent = new DataSet();
+
+               
+
+                
+                    try
+                    {
+                       // if (this.GetDataWorker.CancellationPending) return;
+                       
+                        string cmd2 = $@"SELECT {cmd.Trim()}";
+                        var ds = new FbDataAdapter(cmd2, _dataConnection);
+                        int cnt = ds.Fill(dsTableContent);
+                     stopwatch.Stop();
+                    
+                    }
+                    catch (Exception ex)
+                    {
+                      //  _localNotify?.AddToERROR(AppStaticFunctionsClass.GetFormattedError($@"{Name}-> RefreshDatas({cmd}) -> {_dbReg.Alias}", ex));
+                        errorsCnt++;
+
+                       
+                    }
+                
+            });
+            return dsTableContent;
+        }
+
+       
         public void RefreshDatas(string cmd)
         {           
            if (string.IsNullOrEmpty(_tableObject.Name)) return;
@@ -1675,6 +1728,7 @@ namespace FBExpert
         private void hsRefreshData_Click(object sender, EventArgs e)
         {
             RefreshTableData();
+        
         }
         
         private void TABLEManageForm_Load(object sender, EventArgs e)
@@ -1814,9 +1868,13 @@ namespace FBExpert
             else RefreshStruct();
         }
 
+      
+
         private void hsRefreshAll_Click_1(object sender, EventArgs e)
         {
-            RefreshFields();            
+            RefreshFields();
+            RefreshDatas(_cmd);
+           
         }
 
         private void hsDropField_Click(object sender, EventArgs e)
@@ -1877,7 +1935,7 @@ namespace FBExpert
         
         private void bwGetData_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            string timedone = stopwatch.ElapsedMilliseconds.ToString();
+            string timedone = $@"done: {stopwatch.ElapsedMilliseconds}";
             bsTableContent.DataSource = dsTableContent;
             dgvResults.DataSource = bsTableContent;
             hsRefreshData.Enabled = true;
@@ -1891,7 +1949,7 @@ namespace FBExpert
             gridStore.RestoreGridDesign();
             ActivateGrid();
             stopwatch.Stop();
-            timedone += $@" / {stopwatch.ElapsedMilliseconds}";
+            timedone += $@" / final:{stopwatch.ElapsedMilliseconds}";
             txtUsedTime.Text = timedone;
         }
 

@@ -1386,6 +1386,15 @@ namespace FBXpert
             {
                 string fdb = dbReg.DatabasePath;
                 FileInfo fi = new FileInfo(fdb);
+                if (!fi.Directory.Exists)
+                {
+                    if (SEMessageBox.ShowMDIDialog(FbXpertMainForm.Instance(), "DirectoryNotExists", "DoYouWantToCreateDirectory", FormStartPosition.CenterScreen,
+                        SEMessageBoxButtons.NoYes, SEMessageBoxIcon.Question) == SEDialogResult.Yes)
+                    {
+                        fi.Directory.Create();
+                        fi = new FileInfo(fdb);
+                    }
+                }
                 if (fi.Directory.Exists)
                 {
                     Process.Start("explorer.exe", fi.DirectoryName);
