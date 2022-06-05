@@ -10,6 +10,7 @@
     <RootNamespace>FBXDesigns</RootNamespace>
     <AssemblyName>FBXDesigns</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+	<LangVersion>preview</LangVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>

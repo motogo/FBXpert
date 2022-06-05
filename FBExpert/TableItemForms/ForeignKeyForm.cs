@@ -14,20 +14,18 @@ namespace FBXpert
 {
     public partial class ForeignKeyForm : IEditForm
     {
-        ForeignKeyClass ForeignKeyObject = null;
-        DBRegistrationClass _dbReg = null;
-
-        List<TableClass> _tables = null;
-
-        public NotifiesClass _localNotify = new NotifiesClass();
-        AutocompleteClass ac = null;
-        int messages_count = 0;
-        int error_count = 0;
-        bool DataFilled = false;
-        string TableName = string.Empty;
-        string FKName = string.Empty;
-        int NewNr = 0;
-        ForeignKeyClass _foreignKeys;
+        private ForeignKeyClass ForeignKeyObject = null;
+        private readonly DBRegistrationClass _dbReg = null;
+        private readonly List<TableClass> _tables = null;
+        public NotifiesClass _localNotify = new();
+        private AutocompleteClass ac = null;
+        private int messages_count = 0;
+        private int error_count = 0;
+        private bool DataFilled = false;
+        private readonly string TableName = string.Empty;
+        private string FKName = string.Empty;
+        private int NewNr = 0;
+        private readonly ForeignKeyClass _foreignKeys;
         public ForeignKeyForm(Form parent, DBRegistrationClass dbReg, List<TableClass> tables, string tableName, ForeignKeyClass foreignKeys, int newNr)
         {
             InitializeComponent();
@@ -39,27 +37,25 @@ namespace FBXpert
             TableName = tableName;
             DataFilled = false;
             _dbReg = dbReg;
-
-
             _localNotify.Register4Error(Notify_OnRaiseErrorHandler);
             _localNotify.Register4Info(Notify_OnRaiseInfoHandler);
         }
 
         private void Notify_OnRaiseInfoHandler(object sender, MessageEventArgs k)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             messages_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0) sb.Append($@"Errors ({error_count})");
 
-            fctMessages.AppendText("INFO  " + k.Meldung);
+            fctMessages.AppendText($@"INFO {k.Meldung}");
             tabPageMessages.Text = sb.ToString();
             fctMessages.ScrollLeft();
         }
 
         private void Notify_OnRaiseErrorHandler(object sender, MessageEventArgs k)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             error_count++;
             if (messages_count > 0) sb.Append($@"Messages ({messages_count}) ");
             if (error_count > 0) sb.Append($@"Errors ({error_count})");
@@ -75,9 +71,10 @@ namespace FBXpert
             pnlFieldUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlMessagesUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlInfoUpper.Height = AppSizeConstants.UpperFormBandHeight;
-            pnlProcedureAttributesUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            pnlProcedureAttributesUpper.Height = 550;
             pnlSQLUpper.Height = AppSizeConstants.UpperFormBandHeight;
             pnlFormUpper.Height = AppSizeConstants.UpperFormBandHeight;
+            splitContainer1.SplitterDistance = 580;
         }
 
         public void MakeSQL()
@@ -95,7 +92,7 @@ namespace FBXpert
             hsSave.Enabled = (txtConstraintName.Text.Length > 0);
         }
 
-        public List<string> SQLScript = new List<string>();
+        public List<string> SQLScript = new();
 
         public void SQLToUI()
         {
@@ -109,8 +106,8 @@ namespace FBXpert
         public void MakeSQLDrop()
         {
             SQLScript.Clear();
-            StringBuilder sb = new StringBuilder();
-            sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " DROP CONSTRAINT " + ForeignKeyObject.Name);
+            StringBuilder sb = new();
+            sb.Append($@"ALTER TABLE {ForeignKeyObject.SourceTableName.Trim()} DROP CONSTRAINT {ForeignKeyObject.Name}");
             sb.Append(";");
             sb.Append(Environment.NewLine);
             sb.Append(SQLPatterns.Commit);
@@ -121,13 +118,13 @@ namespace FBXpert
         public void MakeSQLNew()
         {
             SQLScript.Clear();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             /*
             ALTER TABLE TDOK_TART ADD CONSTRAINT FK_TDOK_TART_1 FOREIGN KEY(TDOKUMENT_ID) REFERENCES TDOKUMENT(ID)
             */
 
-            sb.Append("ALTER TABLE " + ForeignKeyObject.SourceTableName.Trim() + " ADD CONSTRAINT " + ForeignKeyObject.Name + " FOREIGN KEY(");
+            sb.Append($@"ALTER TABLE {ForeignKeyObject.SourceTableName.Trim()} ADD CONSTRAINT {ForeignKeyObject.Name} FOREIGN KEY(");
             int ix = 0;
             foreach (FieldClass rstr in ForeignKeyObject.SourceFields.Values)
             {
@@ -143,7 +140,7 @@ namespace FBXpert
 
             //+ ForeignKeyObject.FieldName +
 
-            sb.Append(") REFERENCES " + ForeignKeyObject.DestTableName + "(");
+            sb.Append($@") REFERENCES {ForeignKeyObject.DestTableName}(");
             for (int i = 0; i < ForeignKeyObject.DestFields.Count; i++)
             {
                 string rstr = ForeignKeyObject.DestFields.ElementAt(i).Value.Name;
@@ -182,7 +179,7 @@ namespace FBXpert
         public void MakeSQLAlter()
         {
             SQLScript.Clear();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             /*
             ALTER TABLE TACTION DROP CONSTRAINT FK_TACTION_1
             
@@ -280,8 +277,10 @@ namespace FBXpert
                 string[] s = new string[2];
                 s[0] = (++n).ToString();
                 s[1] = str.Name;
-                ListViewItem lvi = new ListViewItem(s);
-                lvi.Tag = s[1];
+                ListViewItem lvi = new(s)
+                {
+                    Tag = s[1]
+                };
                 lvDestFields.Items.Add(lvi);
             }
 
@@ -300,8 +299,10 @@ namespace FBXpert
                 string[] s = new string[2];
                 s[0] = (++n).ToString();
                 s[1] = str.Name;
-                ListViewItem lvi = new ListViewItem(s);
-                lvi.Tag = s[1];
+                ListViewItem lvi = new(s)
+                {
+                    Tag = s[1]
+                };
                 lvSourceFields.Items.Add(lvi);
             }
 
@@ -428,10 +429,12 @@ namespace FBXpert
             else
             {
                 //Neuer FK
-                ForeignKeyObject = new ForeignKeyClass();
-                ForeignKeyObject.Name = txtConstraintName.Text;
-                ForeignKeyObject.DestTableName = cbDestinationTable.Text.Trim();
-                ForeignKeyObject.SourceTableName = cbSourceTable.Text.Trim();
+                ForeignKeyObject = new()
+                {
+                    Name = txtConstraintName.Text,
+                    DestTableName = cbDestinationTable.Text.Trim(),
+                    SourceTableName = cbSourceTable.Text.Trim()
+                };
 
                 //GetSourceFieldsFromTableObject(ForeignKeyObject.SourceTableName);
 
@@ -468,7 +471,7 @@ namespace FBXpert
                 cbSourceTable.Text = TableName;
             }
             MakeSQL();
-            splitContainer1.SplitterDistance = 500;
+            
             txtConstraintName.Enabled = !(BearbeitenMode == StateClasses.EditStateClass.eBearbeiten.eEdit);
         }
 
@@ -493,8 +496,6 @@ namespace FBXpert
             }
             this.Text = DevelopmentClass.Instance().GetDBInfo(_dbReg, "Foreign Key");
         }
-
-
         private void edit_TextChanged(object sender, EventArgs e)
         {
             //EditChanged();
@@ -531,9 +532,7 @@ namespace FBXpert
             DbExplorerForm.Instance().DbExlorerNotify.Notify.RaiseInfo(info, StaticVariablesClass.ReloadAllForeignKeys, $@"->Proc:{Name}->Create");
             _localNotify.Notify.RaiseInfo(info);
 
-
             BearbeitenMode = StateClasses.EditStateClass.eBearbeiten.eEdit;
-
         }
         private void hsSave_Click(object sender, EventArgs e)
         {
@@ -567,15 +566,16 @@ namespace FBXpert
 
             s[0] = (lvDestFields.Items.Count + 1).ToString();
             s[1] = cbDestinationTableFields.Text.Trim();
-            ListViewItem lvi = new ListViewItem(s);
-            lvi.Tag = s[1];
+            ListViewItem lvi = new(s)
+            {
+                Tag = s[1]
+            };
             ListViewItem lvi2 = lvDestFields.FindItemWithText(s[1]);
             if (lvi2 == null)
             {
                 lvDestFields.Items.Add(lvi);
                 EditChanged();
             }
-
         }
 
         public ForeignKeyClass GetFK(string fkname)
@@ -633,7 +633,6 @@ namespace FBXpert
             MakeSQL();
         }
 
-
         private void cbPrimaryKey_TextChanged(object sender, EventArgs e)
         {
             EditChanged();
@@ -659,19 +658,16 @@ namespace FBXpert
 
             s[0] = (lvSourceFields.Items.Count + 1).ToString();
             s[1] = cbSourceTableFields.Text.Trim();
-            ListViewItem lvi = new ListViewItem(s);
-            lvi.Tag = s[1];
+            ListViewItem lvi = new(s)
+            {
+                Tag = s[1]
+            };
             ListViewItem lvi2 = lvSourceFields.FindItemWithText(s[1]);
             if (lvi2 == null)
             {
                 lvSourceFields.Items.Add(lvi);
                 EditChanged();
             }
-        }
-
-        private void cbPrimaryKey_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void txtIndexName_TextChanged(object sender, EventArgs e)
@@ -693,8 +689,6 @@ namespace FBXpert
 
         private void ForeignKeyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-
             _localNotify.Notify.RaiseInfo("", StaticVariablesClass.ReloadForeignKeysForTable, $@"->Form:{Name}->Reload");
         }
 

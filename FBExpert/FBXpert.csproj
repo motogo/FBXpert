@@ -10,6 +10,7 @@
     <RootNamespace>FBXpert</RootNamespace>
     <AssemblyName>FBXpert</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+	<LangVersion>preview</LangVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
